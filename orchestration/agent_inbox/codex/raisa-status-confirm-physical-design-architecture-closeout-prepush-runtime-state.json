@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_publish_the_accepted_status_confirm_physical_design_architecture_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and now records Continuity 262 / Compass 244 with the physical-design architecture accepted at exact source 826aad11c29007b13eaa377e3f7ea494cc82ce70. The next exact tranche is the provider-free unmounted status-confirm physical schema-and-transaction scaffold implementation.",
+    "current_authority_allocation": "GPT Sol owns Extra High material-architecture acceptance, closeout, task-branch publication and autonomous continuation. No subagent or external worker was used. No provider, ADC or credential action occurred.",
+    "active_plan_and_acceptance": "The exact eleven source hashes, database-owned BIGINT revision, seven-phase cutover, five-field private receipt, canonical-byte delivery and ordered transaction contract pass 91 hostile mutations, 16 focused tests and the final 413-test architecture/status-lineage/API/register/Compass/baton packet. The closeout, Sol acceptance, Yuri paired summary, Continuity 262 and Compass 244 are prepared. implementation_authorized remains false at source.",
+    "protected_evidence_boundaries": "Only exact allowlisted non-protected sources were used and AER-0292 discovery restrictions were observed. No application/model/migration/service/route edit or import, executable DDL, database/SQL/real lock, provider/ADC/credential action, product/patient data, watcher/event, product command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and all unrelated untracked paths remain preserved and excluded. Explicit-path staging only applies.",
+    "git_refs_and_worktree": "Source HEAD is 826aad11c29007b13eaa377e3f7ea494cc82ce70; origin task remains the prior published fad85e038b7168c3323075024dba7f9d5709eff5 pending closeout. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Eight bounded tracked paths are modified and five bounded closeout paths are among 521 preserved untracked paths, including five docs/branding paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_physical_design_architecture_closeout_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Acceptance, continuity, baton and publication gates are ready."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier was selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker was selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport was not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

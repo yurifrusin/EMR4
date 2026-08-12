@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 261,
+  "graph_revision": 262,
   "harvests": [],
   "nodes": [
     {
@@ -16812,6 +16812,84 @@
         "The exact additive state-version, private-receipt and ordered transaction design has not been selected.",
         "Migration/backfill, ORM/service composition, mounted-route parity and PostgreSQL behavior remain unproved.",
         "Providers, credentials, product/patient data, watchers/events, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-confirm-physical-design-architecture",
+      "title": "Provider-free unmounted status-confirm physical-design architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "826aad11c29007b13eaa377e3f7ea494cc82ce70",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-status-confirm-physical-representability-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted design is authored-synthetic, provider-free and unmounted; implementation_authorized is false at its source.",
+          "It selects database-owned state versioning, versioned private receipts, exact response bytes and one ordered transaction without executing any of them.",
+          "Application edits, executable DDL, database execution, routes, providers, product data and commands remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-physical-design-architecture",
+          "source": "docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact additive state-version, private-receipt and ordered-transaction design and hand off only to an unmounted scaffold implementation."
+        }
+      ],
+      "claim_scope": [
+        "PostgreSQL owns a positive BIGINT appointment revision with a cutover baseline of one and a synchronous before-update invariant.",
+        "A versioned private receipt adds five nullable-for-legacy fields; legacy rows are never inferred as replayable v1 receipts.",
+        "Initial and replay delivery use exact stored canonical bytes after integrity verification while the public OpenAPI envelope remains unchanged.",
+        "One bounded READ COMMITTED transaction locks practice, appointment and idempotency record in order and checks current authority before classification or disclosure.",
+        "All eleven hashes, 91 hostile mutations and 16 focused tests pass; no mounted or database behavior is claimed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/physical-design-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/physical-design-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/provider-free-unmounted-architecture-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-design-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-physical-design-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_design_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_design_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_status_confirm_physical_design_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No ORM model, migration, service helper or route embodies the accepted physical design.",
+        "Executable DDL, PostgreSQL catalogue/trigger/lock behavior and mounted-route parity remain unproved.",
+        "Product/patient data, providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

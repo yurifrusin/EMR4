@@ -249,10 +249,17 @@ and ordered-lock surfaces. That exact-file review now passes at source
 end. It confirms no admissible appointment state version, thirteen existing
 receipt primitives plus four additive gaps, and one idempotency-row lock that
 does not implement the accepted practice/appointment/idempotency order. The
-next bounded gate is a provider-free unmounted physical-design architecture.
-Physical source edits, migration/backfill execution, route/database
-implementation, providers, watchers, events, commands, kernel runtime and
-schedule fencing remain closed.
+provider-free unmounted physical-design architecture now also passes at exact
+source `826aad11c29007b13eaa377e3f7ea494cc82ce70`. It selects a PostgreSQL-owned
+positive `BIGINT` appointment revision, seven-phase cutover baseline, five-field
+versioned private receipt, opaque 32-byte session HMAC, exact stored canonical
+response bytes and one bounded `READ COMMITTED`
+practice/appointment/idempotency transaction. Legacy receipts remain
+non-replayable under the new contract and the public response is unchanged.
+The next bounded gate is a provider-free unmounted physical
+schema-and-transaction scaffold implementation. Database/migration execution,
+route mounting, product data, providers, watchers, events, commands, deployment
+and schedule fencing remain closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 261 / Compass 243. The exact-file status-confirm physical representability review passes: all three domains are feasible only through additive change. An unmounted physical-design architecture is next; implementation, database execution and product authority remain closed.
+> EMR4 is at Continuity 262 / Compass 244. The unmounted status-confirm physical-design architecture passes with one database-owned revision, versioned exact-byte private receipt and ordered transaction. An unmounted scaffold implementation is next; database and route execution remain closed.
 
 ## North star
 
@@ -296,26 +296,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Twenty-four schedules and 88 hostile mutations pass in pure memory; a read-only physical representability review is next. Lineage parent: `raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture`.
 140. **Establish physical feasibility before selecting any additive schema or transaction design — Provider-free read-only status-confirm physical representability review**
    All three domains are representable with additive change; implementation remains unadmitted and an unmounted physical-design architecture is next. Lineage parent: `raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal`.
+141. **Freeze the physical source-of-truth and race boundary before any runtime edit — Provider-free unmounted status-confirm physical-design architecture**
+   One exact additive database-owned version, private receipt and ordered transaction design passes; implementation remains unmounted. Lineage parent: `raisa-provider-free-read-only-status-confirm-physical-representability-review`.
 
 ## Current position
 
-**The status safety kernel is physically feasible but its additive design remains unselected — Provider-free read-only status-confirm physical representability review**
+**The status safety kernel now has one exact physical design but no runtime embodiment — Provider-free unmounted status-confirm physical-design architecture**
 
-**Why this proof came next:** The pure rehearsal proved semantic behavior, allowing exact source inspection to separate existing primitives from physical gaps.
+**Why this proof came next:** The prior exact-file review proved additive feasibility, allowing material schema, receipt and lock decisions to be frozen without implementation.
 
-State version, private receipt and ordered locks are each representable with additive change; no current end-to-end implementation is claimed.
+Database-owned revisioning, versioned exact-byte receipts and the ordered transaction are selected and hostile-tested; all executable surfaces remain closed.
 
 ### What this unlocks
 
-- Freeze a provider-free unmounted status-confirm physical-design architecture.
-- Select the exact additive state-version, private receipt and ordered transaction contract without editing source.
-- Keep implementation and database execution behind later evidence gates.
+- Implement a provider-free unmounted status-confirm physical schema-and-transaction scaffold.
+- Lower only the exact model, inert migration and unmounted helper contract under deterministic static tests.
+- Keep database and route execution behind later evidence gates.
 
 ### What it does not solve
 
-- Column type/default/backfill, migration revision, constraint form or byte storage.
-- Practice query, lock strength/wait policy, isolation level, deadlock recovery or exception mapping.
-- ORM/service composition, mounted-route behavior, PostgreSQL execution or restart/unknown-commit recovery.
+- Executable Alembic lowering, ORM/service correctness or mounted-route behavior.
+- PostgreSQL catalogue, trigger, lock-wait, deadlock, rollback, restart or unknown-commit behavior.
 - Provider/credential activity, patient/product data, watchers/events, product commands, deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
@@ -383,9 +384,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, status protocol, adapter, convergence architecture and rehearsal contracts.
-- Freeze the provider-free unmounted physical-design architecture before any model, migration, service or route edit.
-- Keep database execution, raw-route change, create schedule fencing, providers, product data, commands and protected integration separately gated.
+- Preserve the accepted source-owned-truth, status protocol, convergence rehearsal and physical representability findings.
+- Implement only the exact provider-free unmounted physical schema-and-transaction scaffold before any executable database or route proof.
+- Keep database execution, mounted routes, providers, product data, commands and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -574,6 +575,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted status-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring or a mounted route.
 - The status-confirm physical representability review proves additive feasibility, not a selected schema, transaction design, migration or mounted implementation.
 - The status-confirm convergence rehearsal proves pure in-memory state-machine behavior, not physical storage, mounted routes or PostgreSQL semantics.
 - The status-confirm convergence architecture proves closed design coherence, not physical state-version storage, route integration or PostgreSQL behavior.
@@ -1068,6 +1070,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-closeout.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md`
@@ -1185,6 +1189,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-source-specific-durability-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
@@ -1416,6 +1421,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-source-specific-durability-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-postcompaction-receipt.json`
@@ -1427,6 +1434,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-physical-design-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
@@ -1732,6 +1740,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/physical-design-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/physical-design-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-design-architecture/provider-free-unmounted-architecture-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/provider-free-architecture-evidence.json`
@@ -2011,6 +2022,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-design-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-representability-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
@@ -2106,4 +2118,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 243; continuity graph revision 261._
+_Compass map revision 244; continuity graph revision 262._

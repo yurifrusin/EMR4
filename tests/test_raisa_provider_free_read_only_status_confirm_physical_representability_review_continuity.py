@@ -14,7 +14,7 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_representability_review_is_the_accepted_current_position() -> None:
+def test_representability_review_remains_an_accepted_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
@@ -22,7 +22,7 @@ def test_representability_review_is_the_accepted_current_position() -> None:
     assert graph["graph_revision"] >= 261
     assert compass["map_revision"] >= 243
     assert compass["source_graph_revision"] == graph["graph_revision"]
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
     assert node["status"] == "accepted"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
@@ -70,24 +70,12 @@ def test_contract_incident_acceptance_and_mailbox_are_bound() -> None:
     )
 
 
-def test_next_direction_is_unmounted_physical_design_architecture() -> None:
-    compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    joined = " ".join(current["unlocks"] + current["does_not_solve"]).lower()
-    for phrase in (
-        "provider-free unmounted status-confirm physical-design architecture",
-        "state-version",
-        "private receipt",
-        "ordered transaction",
-        "column type/default/backfill",
-        "migration revision",
-        "lock strength/wait policy",
-        "mounted-route behavior",
-        "postgresql execution",
-        "provider/credential",
-        "patient/product",
-        "product commands",
-        "pages",
-        "protected-ref",
-    ):
-        assert phrase in joined
+def test_physical_design_descendant_builds_on_the_review() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    child = next(
+        item
+        for item in graph["nodes"]
+        if item["id"]
+        == "raisa-provider-free-unmounted-status-confirm-physical-design-architecture"
+    )
+    assert child["relationships"] == [{"node_id": NODE_ID, "relation": "builds_on"}]
