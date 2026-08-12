@@ -71,6 +71,13 @@ from app.services.diary.outcomes import (
     assert_outcome_matches_state,
     classify_booking_outcome,
 )
+from app.services.diary.shadow_instrumentation import (
+    RAW_COMPAT_CREATE_SHADOW_ADAPTER_ID,
+    RAW_COMPAT_DELETE_SHADOW_ADAPTER_ID,
+    RAW_COMPAT_STATUS_SHADOW_ADAPTER_ID,
+    RAW_COMPAT_UPDATE_SHADOW_ADAPTER_ID,
+    shadow_instrumentation_runtime,
+)
 from app.services.diary.confirm_actions import (
     verify_signed_confirmation_evidence_block,
     DiaryConfirmAction,
@@ -1080,13 +1087,15 @@ def create_appointment(
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_create")
     for k, v in headers.items():
         response.headers[k] = v
-    return _create_appointment_from_body(
+    result = _create_appointment_from_body(
         body,
         db,
         current_user,
         confirmed_warnings=body.confirmed_warnings,
         audit_evidence=audit_evidence,
     )
+    shadow_instrumentation_runtime.try_stage(RAW_COMPAT_CREATE_SHADOW_ADAPTER_ID)
+    return result
 
 
 @router.post("/proposals/create", response_model=AppointmentCreateProposalOut)
@@ -5275,10 +5284,12 @@ def update_appointment(
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_update")
     for k, v in headers.items():
         response.headers[k] = v
-    return _apply_appointment_update(
+    result = _apply_appointment_update(
         appointment_id, body, db, current_user,
         audit_evidence=audit_evidence,
     )
+    shadow_instrumentation_runtime.try_stage(RAW_COMPAT_UPDATE_SHADOW_ADAPTER_ID)
+    return result
 
 
 @router.get("/{appointment_id}/checkin-defaults", response_model=AppointmentCheckinDefaults)
@@ -5393,13 +5404,15 @@ def update_appointment_status(
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_status")
     for k, v in headers.items():
         response.headers[k] = v
-    return _apply_appointment_status_update(
+    result = _apply_appointment_status_update(
         appointment_id=appointment_id,
         body=body,
         db=db,
         current_user=current_user,
         audit_evidence=audit_evidence,
     )
+    shadow_instrumentation_runtime.try_stage(RAW_COMPAT_STATUS_SHADOW_ADAPTER_ID)
+    return result
 
 
 def _appointment_delete_command_payload(command: AppointmentDeleteCommand) -> dict[str, object]:
@@ -5588,6 +5601,7 @@ def cancel_appointment(
         current_user=current_user,
         audit_evidence=audit_evidence,
     )
+    shadow_instrumentation_runtime.try_stage(RAW_COMPAT_DELETE_SHADOW_ADAPTER_ID)
 
 
 @router.post(

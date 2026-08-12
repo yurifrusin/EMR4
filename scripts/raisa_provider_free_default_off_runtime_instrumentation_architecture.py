@@ -77,6 +77,12 @@ EXPECTED_ROUTES = {
         "future_stage_rewrite": "retain_implicit_none_after_stage",
     },
 }
+SCAFFOLD_STAGE_CONSTANTS = {
+    "raw_compat_create": "RAW_COMPAT_CREATE_SHADOW_ADAPTER_ID",
+    "raw_compat_update": "RAW_COMPAT_UPDATE_SHADOW_ADAPTER_ID",
+    "raw_compat_status": "RAW_COMPAT_STATUS_SHADOW_ADAPTER_ID",
+    "raw_compat_delete": "RAW_COMPAT_DELETE_SHADOW_ADAPTER_ID",
+}
 EXPECTED_PROJECTION_FIELDS = [
     "schema_version", "architecture_generation_digest", "route_adapter_id",
     "canonical_operation_id", "practice_scope_digest", "actor_digest", "actor_role",
@@ -168,6 +174,76 @@ def _handler_result_form(node: ast.FunctionDef | ast.AsyncFunctionDef, helper: s
     return "other"
 
 
+def _call_name(call: ast.Call) -> str | None:
+    if isinstance(call.func, ast.Name):
+        return call.func.id
+    return None
+
+
+def _authorized_scaffold_handler(
+    node: ast.FunctionDef | ast.AsyncFunctionDef,
+    *,
+    adapter_id: str,
+    helper: str,
+) -> bool:
+    """Recognize only the accepted dormant descendant of an original route seam."""
+    helper_indexes: list[int] = []
+    stage_indexes: list[int] = []
+    return_indexes: list[int] = []
+    for index, statement in enumerate(node.body):
+        if isinstance(statement, ast.Assign) and isinstance(statement.value, ast.Call):
+            if _call_name(statement.value) == helper:
+                if not (
+                    len(statement.targets) == 1
+                    and isinstance(statement.targets[0], ast.Name)
+                    and statement.targets[0].id == "result"
+                ):
+                    return False
+                helper_indexes.append(index)
+        elif isinstance(statement, ast.Expr) and isinstance(statement.value, ast.Call):
+            if _call_name(statement.value) == helper:
+                helper_indexes.append(index)
+            call = statement.value
+            if (
+                isinstance(call.func, ast.Attribute)
+                and isinstance(call.func.value, ast.Name)
+                and call.func.value.id == "shadow_instrumentation_runtime"
+                and call.func.attr == "try_stage"
+            ):
+                if not (
+                    len(call.args) == 1
+                    and isinstance(call.args[0], ast.Name)
+                    and call.args[0].id == SCAFFOLD_STAGE_CONSTANTS[adapter_id]
+                    and not call.keywords
+                ):
+                    return False
+                stage_indexes.append(index)
+        elif isinstance(statement, ast.Return):
+            return_indexes.append(index)
+
+    if len(helper_indexes) != 1 or len(stage_indexes) != 1:
+        return False
+    helper_index = helper_indexes[0]
+    stage_index = stage_indexes[0]
+    if adapter_id == "raw_compat_delete":
+        return not return_indexes and stage_index == helper_index + 1
+    return (
+        len(return_indexes) == 1
+        and stage_index == helper_index + 1
+        and return_indexes[0] == stage_index + 1
+        and isinstance(node.body[return_indexes[0]].value, ast.Name)
+        and node.body[return_indexes[0]].value.id == "result"
+    )
+
+
+def _scaffold_descendant_present() -> bool:
+    return (
+        (ROOT / "app/services/diary/shadow_instrumentation.py").is_file()
+        and (ROOT / "app/middleware/shadow_instrumentation.py").is_file()
+        and "ShadowAfterSendMiddleware" in MAIN_PATH.read_text(encoding="utf-8")
+    )
+
+
 def source_errors(packet: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     functions = _functions(ROUTE_SOURCE_PATH)
@@ -185,16 +261,21 @@ def source_errors(packet: dict[str, Any]) -> list[str]:
         if handler is None or helper is None:
             errors.append(f"route_function_missing:{adapter_id}")
             continue
-        if (handler.lineno, handler.end_lineno) != (
-            expected["handler_line_start"], expected["handler_line_end"]
-        ):
-            errors.append(f"handler_lines_changed:{adapter_id}")
-        if (helper.lineno, helper.end_lineno) != (
-            expected["helper_line_start"], expected["helper_line_end"]
-        ):
-            errors.append(f"helper_lines_changed:{adapter_id}")
-        if _handler_result_form(handler, expected["command_helper"]) != expected["current_result_form"]:
-            errors.append(f"handler_result_form_changed:{adapter_id}")
+        original_shape = (
+            (handler.lineno, handler.end_lineno)
+            == (expected["handler_line_start"], expected["handler_line_end"])
+            and (helper.lineno, helper.end_lineno)
+            == (expected["helper_line_start"], expected["helper_line_end"])
+            and _handler_result_form(handler, expected["command_helper"])
+            == expected["current_result_form"]
+        )
+        scaffold_shape = _authorized_scaffold_handler(
+            handler,
+            adapter_id=adapter_id,
+            helper=expected["command_helper"],
+        )
+        if not original_shape and not scaffold_shape:
+            errors.append(f"handler_not_original_or_authorized_scaffold:{adapter_id}")
         helper_calls = _called_names(helper)
         if "_write_audit" not in helper_calls or "commit" not in helper_calls:
             errors.append(f"helper_audit_commit_missing:{adapter_id}")
@@ -215,7 +296,12 @@ def source_errors(packet: dict[str, Any]) -> list[str]:
         errors.append("raw_compat_default_changed")
     main_text = MAIN_PATH.read_text(encoding="utf-8")
     cors_registration = "app.add_middleware(\n    CORSMiddleware"
-    if main_text.find("app.add_middleware(ErrorHandlerMiddleware)") > main_text.find(cors_registration):
+    error_index = main_text.find("app.add_middleware(ErrorHandlerMiddleware)")
+    cors_index = main_text.find(cors_registration)
+    shadow_index = main_text.find("app.add_middleware(\n    ShadowAfterSendMiddleware")
+    original_middleware = 0 <= error_index < cors_index and shadow_index == -1
+    scaffold_middleware = 0 <= error_index < cors_index < shadow_index
+    if not original_middleware and not scaffold_middleware:
         errors.append("middleware_order_changed")
     return errors
 
@@ -228,11 +314,20 @@ def semantic_errors(packet: dict[str, Any], *, verify_source_files: bool = False
     if bindings != EXPECTED_SOURCES:
         errors.append("source_bindings_mismatch")
     if verify_source_files:
+        live_source_errors = source_errors(packet)
+        scaffold_descendant = _scaffold_descendant_present() and not live_source_errors
         for path, digest in EXPECTED_SOURCES.items():
             source = ROOT / path
-            if not source.is_file() or _hash(source) != digest:
+            authorized_mutable_path = scaffold_descendant and path in {
+                "app/routers/appointments.py",
+                "app/main.py",
+            }
+            if (
+                not source.is_file()
+                or (_hash(source) != digest and not authorized_mutable_path)
+            ):
                 errors.append(f"source_file_hash_mismatch:{path}")
-        errors.extend(source_errors(packet))
+        errors.extend(live_source_errors)
 
     inventory = packet["source_inventory"]
     route_rows = {row["adapter_id"]: row for row in inventory["route_seams"]}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_globally_disabled_runtime_instrumentation_scaffold_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan implements an immutable structurally unenableable generation, typed context/digest/projection/cell/offer seams, a disabled-first route stage and an outer ASGI finalizer. The four raw routes pass only an imported closed adapter constant after helper success. Seventeen tranche tests and 169 focused scaffold, route, API Spine, architecture, shadow, convergence and conditional-admission tests pass, including exact response/audit parity and zero context, projection, digest, cell or offer work on the disabled application path.",
+    "current_authority_allocation": "GPT Sol owns this source-coupled implementation and deterministic verification under Yuri's standing uninterrupted-development authority and the EMR4 API Steward boundary. No subagent, external verifier or provider/model worker was used. The authenticated Sydney Vertex Bernie ADC remains unused because this tranche is provider-free.",
+    "git_refs_and_worktree": "Candidate parent HEAD and origin task are b74c0821fc8c819910756a354245c32b5a0a7f82. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602, and required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Before this runtime-state file the worktree contains only the bounded tracked edits plus 519 preserved untracked files including five docs/branding files and the task's ten then-untracked owned files. Candidate staging will use explicit paths only.",
+    "live_handover_current_baton": "AGENTS.md was reread completely for this tranche. At Continuity 251 / Compass 233 it accepts source-bound runtime-instrumentation architecture ed52950f451af88892a8f469157ecf8c8567da81 and directs the provider-free globally-disabled typed scaffold as the next dependency-satisfied implementation.",
+    "protected_evidence_boundaries": "No enabled generation, practice or route exists; there is no context provider, digest key, observer, adapter invocation, sink, queue, thread, persistence, retention, monitoring, operational database/source/watcher/event/provider/network access, product/patient/clinical/free-text data, kernel invocation, command expansion, deployment, release, Pages or protected-ref movement. The accepted architecture packet keeps its immutable original source hashes; its validator now accepts only its original sources or this exact dormant descendant route and middleware shape. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

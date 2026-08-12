@@ -4,8 +4,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.graphql.router import graphql_router
 from app.middleware.error_handler import ErrorHandlerMiddleware
+from app.middleware.shadow_instrumentation import ShadowAfterSendMiddleware
 from app.routers import application_auth, auth, consultation, search, patients, clinical, letters, appointments, diary, diary_events, bernie_dev, practice, practice_administration
 from app.config import settings
+from app.services.diary.shadow_instrumentation import shadow_instrumentation_runtime
 
 app = FastAPI(title="EMR4 Centaur API", version="0.1.0")
 
@@ -17,6 +19,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["Deprecation"],
+)
+app.add_middleware(
+    ShadowAfterSendMiddleware,
+    runtime=shadow_instrumentation_runtime,
 )
 
 os.makedirs("static/audio", exist_ok=True)

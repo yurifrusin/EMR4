@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_implement_the_provider_free_globally_disabled_runtime_instrumentation_scaffold",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted source-bound architecture requires typed immutable-generation reading, a safe server-owned request-context seam, an exact minimized projection factory, a same-request single-assignment cell and an outer post-final-send offer_nowait boundary. This scaffold must remain globally disabled with empty practice and route allowlists and no observer or sink; disabled execution must perform zero context, projection, digest or handoff work and preserve exact authored-synthetic behavior of all four raw routes.",
+    "current_authority_allocation": "GPT Sol owns narrow plan derivation, tightly coupled implementation, deterministic verification and acceptance under Yuri's standing uninterrupted-development authority and the EMR4 API Steward rules. No subagent or external provider/model worker is selected before the source-coupled disabled scaffold has deterministic evidence. Authenticated Sydney Vertex Bernie ADC is acknowledged and unused because provider calls are forbidden.",
+    "git_refs_and_worktree": "After fresh origin fetch, task HEAD and origin task align at b74c0821fc8c819910756a354245c32b5a0a7f82. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. The tracked tree is clean and exactly 508 untracked files are preserved before this runtime-state file: the earlier 506-file set plus the preceding closeout pre-push receipt/state pair, including five docs/branding files. Explicit-path staging only applies.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after the preceding closeout. At Continuity 251 / Compass 233 it accepts exact runtime-instrumentation architecture source ed52950f451af88892a8f469157ecf8c8567da81 and names the provider-free globally-disabled typed instrumentation scaffold as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "The tranche may edit only the narrow application scaffold, the exact four raw route seams, outer ASGI registration, disposable authored-synthetic tests and its plan/evidence/lifecycle artifacts. It may not enable any global/practice/route setting; attach an observer, adapter or sink; retain diagnostic data; access operational database/source/watcher/event/provider/network or credentials; use real product/patient/person/clinical/free-text data; invoke a kernel or expand command authority; deploy, release, rebuild Pages or move protected refs. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
