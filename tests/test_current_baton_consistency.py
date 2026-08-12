@@ -7,7 +7,10 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-status-confirm-physical-design-architecture"
+NODE_ID = (
+    "raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-"
+    "scaffold"
+)
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -22,10 +25,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 262
+    assert graph["graph_revision"] == 263
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 244
-    assert compass["source_graph_revision"] == 262
+    assert compass["map_revision"] == 245
+    assert compass["source_graph_revision"] == 263
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -35,16 +38,17 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 262 / Compass 244" in current
-    assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in current
-    assert "`implementation_authorized` false" in current
-    assert "PostgreSQL-owned positive `BIGINT` appointment revision" in current
-    assert "seven-phase cutover baseline" in current
-    assert "five nullable-for-legacy versioned private-receipt fields" in current
-    assert "32-byte domain-separated session HMAC" in current
-    assert "exact stored canonical response bytes" in current
-    assert "target and two current-authority checks precede classification" in current
-    assert "91 hostile mutations" in current
+    assert "Continuity 263 / Compass 245" in current
+    assert "b36b8a455b70d8bc3e99b5e5dd84a8237375ff3c" in current
+    assert "runtime authority false" in current
+    assert "positive database-owned `BIGINT` appointment version" in current
+    assert "inert seven-phase migration" in current
+    assert "five nullable-for-legacy private receipt fields" in current
+    assert "raw 32-byte domain-separated session HMACs" in current
+    assert "Exact canonical response bytes" in current
+    assert "authority-first `READ COMMITTED` transaction seam" in current
+    assert "80 hostile mutations" in current
+    assert "274-test current descendant packet" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -68,13 +72,13 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "Provider-free unmounted status-confirm physical schema-and-transaction scaffold implementation" in next_work
-    assert "appointment-model change" in next_work
-    assert "one inert Alembic migration" in next_work
-    assert "unmounted backend service/helper seam" in next_work
-    assert "canonical-byte/session-digest helpers" in next_work
-    assert "without mounting or calling a route" in next_work
-    assert "product/patient data" in next_work
+    assert "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal" in next_work
+    assert "exact migration `w2x3y4z5a6b7`" in next_work
+    assert "owned empty disposable PostgreSQL instance" in next_work
+    assert "exact columns, constraints, function, trigger and Alembic head" in next_work
+    assert "transactionally rolled-back authored-synthetic invariant probes" in next_work
+    assert "route mounting/calling" in next_work
+    assert "patient/product data" in next_work
     assert "provider/ADC/credential/browser authorization" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -109,22 +113,24 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted status-confirm physical schema-and-transaction scaffold implementation",
-        "appointment-model change",
-        "one inert alembic migration",
-        "unmounted backend service/helper seam",
-        "canonical-byte/session-digest helpers",
-        "without mounting or calling a route",
-        "executing migration/database/sql/real locks",
-        "product/patient data",
+        "provider-free disposable postgresql status-confirm scaffold parse/catalogue rehearsal",
+        "exact migration `w2x3y4z5a6b7`",
+        "owned empty disposable postgresql instance",
+        "exact columns, constraints, function, trigger and alembic head",
+        "transactionally rolled-back authored-synthetic invariant probes",
+        "no existing/product database",
+        "durable data",
+        "route mounting/calling",
+        "application command",
+        "patient/product data",
         "provider/adc/credential/browser authorization",
-        "watcher/event or product-command authority",
+        "watcher/event authority",
         "docs/branding/",
-        "deploy",
-        "releasing",
+        "deployment",
+        "release",
         "pages",
-        "protected ref",
-        "freeze exact owned paths and hashes before edits",
-        "search content only in exact allowlisted non-protected files",
+        "protected-ref movement",
+        "freeze the executable/environment/port/ownership/cleanup contract before start",
+        "explicit-path staging only",
     ):
         assert phrase in next_work

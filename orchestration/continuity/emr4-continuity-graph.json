@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 262,
+  "graph_revision": 263,
   "harvests": [],
   "nodes": [
     {
@@ -16889,6 +16889,91 @@
       "unresolved_gates": [
         "No ORM model, migration, service helper or route embodies the accepted physical design.",
         "Executable DDL, PostgreSQL catalogue/trigger/lock behavior and mounted-route parity remain unproved.",
+        "Product/patient data, providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold",
+      "title": "Provider-free unmounted status-confirm physical schema-and-transaction scaffold",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b36b8a455b70d8bc3e99b5e5dd84a8237375ff3c",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-confirm-physical-design-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted source is an authored-synthetic, provider-free, unmounted scaffold with runtime authority false.",
+          "It maps the exact schema and supplies inert DDL plus pure helpers and a future transaction composition seam.",
+          "Migration/database/SQL execution, real locks, routes, providers, product data and commands remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-physical-schema-transaction-scaffold",
+          "source": "docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact unmounted mapping, inert migration, pure receipt helpers and authority-first transaction seam; hand off only to a disposable PostgreSQL parse/catalogue rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "The ORM maps one positive database-owned BIGINT revision and five nullable-for-legacy private receipt fields with conditional v1 constraints.",
+        "One inert seven-phase migration lowers the cutover and synchronous before-update trigger without execution.",
+        "Pure helpers produce exact canonical response bytes, raw domain-separated 32-byte session HMACs and constant-time integrity decisions.",
+        "The unmounted seam composes one bounded READ COMMITTED practice, appointment and idempotency lock order with two authority checks and conflict-safe insertion.",
+        "Sixteen bindings, 80 hostile mutations, 11 focused tests and 274 current descendant tests pass; public OpenAPI remains unchanged."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-schema-transaction-scaffold.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-physical-schema-transaction-scaffold-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-preacceptance-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold_continuity.py"
+        ],
+        "artifacts": [
+          "app/models/appointments.py",
+          "app/services/appointment_status_physical.py",
+          "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py",
+          "scripts/raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+          "scripts/raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "PostgreSQL has not parsed or installed the migration and exact catalogues/trigger behavior remain unproved.",
+        "No real lock, transaction, rollback, concurrency, restart, unknown-commit or route behavior has run.",
         "Product/patient data, providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed."
       ]
     }

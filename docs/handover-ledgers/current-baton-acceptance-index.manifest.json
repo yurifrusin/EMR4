@@ -21,6 +21,7 @@
     "Agent Execution Surface AES-C5 acceptance",
     "Context Fabric CF-D1 concurrency rehearsal acceptance",
     "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
+    "Provider-free unmounted status-confirm physical schema-and-transaction scaffold acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -28,10 +29,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 170102,
-  "ledger_line_count": 142,
+  "ledger_byte_count": 173434,
+  "ledger_line_count": 145,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "4f6eb9e4892634ea7368481a3e318047bb09d6ef1a5265966e1169a08d8c078f",
+  "ledger_sha256": "541f5a663e37fbbf06e4c3e596dd7ef1cf45c7526cec0ba886a01198d933a8fe",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -158,14 +159,17 @@
     "Codebase conformance repair acceptance",
     "Agent Execution Surface AES-C0 acceptance",
     "Agent Execution Surface AES-C1 acceptance",
-    "Agent Execution Surface AES-C2 acceptance"
+    "Agent Execution Surface AES-C2 acceptance",
+    "Provider-free unmounted status-confirm runtime convergence rehearsal acceptance",
+    "Provider-free read-only status-confirm physical representability review acceptance",
+    "Provider-free unmounted status-confirm physical-design architecture acceptance"
   ],
-  "moved_row_count": 126,
+  "moved_row_count": 129,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 70062,
-  "source_agents_git_blob_sha1": "b4442726a7d8281f2b15d51a581a7cbdad4bdbac",
-  "source_agents_line_count": 494,
+  "source_agents_byte_count": 76220,
+  "source_agents_git_blob_sha1": "13d3a7b4f05154367c242920c07e2af64ca618a6",
+  "source_agents_line_count": 490,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "cd979a5e9fe971eca62bea13f87689245b21725b66841e2fa48b536cd9a2a5dc",
-  "source_git_head": "018099dd6c5f0502121360732feb602252eb34cc"
+  "source_agents_sha256": "3a80771fdd52f7c238cb61822489445577fd6b89faf1fa9dee7c78fadbfe899a",
+  "source_git_head": "b36b8a455b70d8bc3e99b5e5dd84a8237375ff3c"
 }

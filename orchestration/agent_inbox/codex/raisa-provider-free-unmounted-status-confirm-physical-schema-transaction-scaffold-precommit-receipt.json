@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "accept_and_close_the_verified_provider_free_unmounted_status_confirm_physical_schema_and_transaction_scaffold",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen exact-path plan lowers the accepted architecture into one additive model edit, one inert Alembic descendant, one unmounted helper seam and deterministic evidence. The exact validator passes 16 bindings and 80 of 80 hostile mutations; Ruff passes; the focused scaffold passes 11 of 11 and the current descendant/convergence/register/baton/source-state packet passes 274 of 274. Historical predecessor builders that intentionally pin the old model hash and require the new fields to be absent are immutable prior evidence, not descendant rerun gates.",
+    "current_authority_allocation": "GPT Sol performed and reviewed this tightly coupled material security/transaction lowering at Extra High and owns acceptance. No subagent or external worker was used. No provider, ADC, credential or browser authorization occurred.",
+    "git_refs_and_worktree": "Source commit b36b8a455b70d8bc3e99b5e5dd84a8237375ff3c is on codex/ariadne-bernie-davida-parallel-seam and preserves required 648c8ec9805af63729264ea9c22fd695f062a741 as an ancestor. Origin task remains a30db2e8bfcb6b067b55985cabf2e6200906f182 pending closeout. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean and all 516 untracked paths, including five docs/branding paths, are preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely before planning at published HEAD a30db2e8bfcb6b067b55985cabf2e6200906f182. Continuity 262 / Compass 244 authorized only the provider-free unmounted physical schema-and-transaction scaffold next.",
+    "protected_evidence_boundaries": "Only exact allowlisted non-protected files were read or searched, plus the single frozen Alembic head identifier check. No protected artifact, patient/product data, provider/ADC/credential/browser authorization, migration/database/SQL execution, real lock, route mount/call, watcher/event, product command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and unrelated untracked paths remain preserved and excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
