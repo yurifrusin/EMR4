@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 257,
+  "graph_revision": 258,
   "harvests": [],
   "nodes": [
     {
@@ -16499,6 +16499,84 @@
         "Lock order, server session ingress, terminal behavior and stored-receipt delivery remain unmounted review questions.",
         "The review may inspect exact non-protected files but may not edit or execute the route or database.",
         "Create schedule fencing, operational data, providers, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review",
+      "title": "Provider-free read-only status-confirm runtime-gap admission review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "426ccbbd26a2ab0bfb70c65d7adce113f0239f3a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The review is provider-free, read-only and limited to eleven exact hash-bound non-protected source files.",
+          "Its accepted verdict is not_admitted: seven blocking gaps, two partial gaps and zero satisfied dimensions.",
+          "No application edit/import, route/database execution, provider, credential, product data, command or runtime opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-runtime-gap-not-admitted-verdict",
+          "source": "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the finite nine-dimension gap review and require an unmounted convergence architecture before runtime implementation."
+        }
+      ],
+      "claim_scope": [
+        "The current route passes its existing behavior contracts but is not admitted unchanged to the stricter status transaction kernel.",
+        "Seven blockers cover lock order, current authority/session, status-only discrimination, terminal policy, exact warnings, audit correlation and authority-first replay disclosure.",
+        "Two partial gaps cover session/source-version evidence and canonical initial/replay stored-receipt delivery.",
+        "The result is exact-file structural admission evidence, not a runtime safety or database concurrency proof."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md",
+          "docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_status_confirm_runtime_gap_admission_review.py",
+          "tests/test_raisa_provider_free_read_only_status_confirm_runtime_gap_admission_review_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_status_confirm_runtime_gap_admission_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The provider-free unmounted status-confirm runtime convergence architecture has not yet been frozen or accepted.",
+        "No route edit, database execution, runtime kernel, raw-route change or create schedule fence is authorised.",
+        "Provider/credential activity, product/patient data, watchers/events, commands, deployment, production, release, Pages and protected refs remain closed."
       ]
     }
   ],

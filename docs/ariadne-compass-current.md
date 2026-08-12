@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 257 / Compass 239. The provider-free unmounted status-confirm kernel adapter contract passes; the read-only runtime-gap admission review is next.
+> EMR4 is at Continuity 258 / Compass 240. The read-only status-confirm runtime-gap review passes with the existing route not admitted unchanged: seven blockers and two partial gaps now define a finite provider-free unmounted convergence-architecture tranche.
 
 ## North star
 
@@ -288,24 +288,29 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The closed protocol proves authority, lock, replay and atomic receipt behavior without an effectful surface. Lineage parent: `raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair`.
 136. **Freeze the pure status-confirm boundary before runtime admission — Provider-free unmounted status-confirm kernel adapter contract**
    The adapter proves exact authority-first input and stored-receipt output mappings without executing an effect. Lineage parent: `raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal`.
+137. **Prevent premature runtime convergence by resolving exact route-to-kernel gaps — Provider-free read-only status-confirm runtime-gap admission review**
+   The exact current route is not admitted unchanged: seven blockers and two partial gaps define one finite unmounted convergence-architecture handoff. Lineage parent: `raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract`.
 
 ## Current position
 
-**Pure status-confirm adapter frozen; read-only runtime-gap review next — Provider-free unmounted status-confirm kernel adapter contract**
+**Exact route-to-kernel gaps frozen before runtime convergence — Provider-free read-only status-confirm runtime-gap admission review**
 
-**Why this proof came next:** The route/kernel seam can now be assessed against an exact effect-free transformation.
+**Why this proof came next:** The pure adapter passes, so the next safe step was to compare its contract with the current route without opening application or database authority.
 
-Fifteen cases, eight mappings and thirty-seven hostile mutations prove the closed adapter contract.
+The review passes with a not_admitted verdict: seven blockers, two partial gaps, 15 structural assertions and 37 hostile rejections.
 
 ### What this unlocks
 
-- Inspect exact lock-order and server-session ingress gaps without executing the route.
-- Assess terminal-policy parity and stored-receipt delivery prerequisites before runtime planning.
+- Freeze a provider-free unmounted status-confirm runtime convergence architecture over the finite nine-dimension gap set.
+- Preserve current signed evidence, atomic mutation/audit/idempotency staging and stored replay while moving them behind authority-first locks.
+- Continue under standing authority without editing or executing the route or database.
 
 ### What it does not solve
 
-- Status route integration, database execution, raw-route convergence or create schedule fencing.
-- Operational data, providers, commands, deployment, Pages or protected refs.
+- Route implementation, database concurrency or a mounted transaction kernel.
+- Raw compatibility-route removal or create schedule-conflict fencing.
+- Provider/credential activity, patient/product data, watchers/events or product commands.
+- Deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -372,10 +377,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Run the provider-free read-only status-confirm runtime-gap admission review.
-- Inspect only exact non-protected lock, session, terminal and receipt-delivery sources.
-- Keep the status route and database unedited and unexecuted during review.
-- Select and prove a database-owned create schedule fence before create convergence.
+- Preserve the accepted source-owned-truth and status transaction-kernel contracts.
+- Freeze the provider-free unmounted status-confirm runtime convergence architecture before any route or database implementation.
+- Keep create schedule fencing, raw-route changes, providers, product data, runtime commands and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -564,6 +568,7 @@ Prerequisites:
 
 ## Map limits
 
+- The status-confirm runtime-gap review is structural exact-file evidence; it does not prove runtime locking, database concurrency or route safety under the stricter kernel.
 - Waiting-area union input and terminal status re-transition remain fail-closed.
 - Adapter success does not authorise an application route, database transaction or command.
 - Terminal status re-transition remains policy-deferred and fail-closed.
@@ -998,6 +1003,9 @@ Prerequisites:
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md`
+- `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md`
+- `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md`
+- `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
@@ -1142,6 +1150,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
@@ -1374,6 +1383,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md`
@@ -1657,6 +1669,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
@@ -1956,6 +1971,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2047,4 +2063,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 239; continuity graph revision 257._
+_Compass map revision 240; continuity graph revision 258._

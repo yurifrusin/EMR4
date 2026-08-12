@@ -22,14 +22,15 @@ def _node(graph: dict, node_id: str = NODE_ID) -> dict:
     return matches[0]
 
 
-def test_status_protocol_is_the_current_continuity_position() -> None:
+def test_status_protocol_remains_an_accepted_continuity_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 256
-    assert compass["map_revision"] == 238
-    assert compass["source_graph_revision"] == 256
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert graph["graph_revision"] >= 256
+    assert compass["map_revision"] >= 238
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
     node = _node(graph)
+    assert node["status"] == "accepted"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
 
@@ -61,19 +62,18 @@ def test_node_keeps_the_protocol_unmounted_and_effect_free() -> None:
         assert phrase in joined
 
 
-def test_compass_names_the_pure_status_adapter_contract_next() -> None:
+def test_status_protocol_preserves_its_pure_adapter_handoff() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
+    node = _node(graph)
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
     joined = " ".join(
-        [current["strategic_role"], current["why_now"], current["outcome"]]
-        + current["unlocks"]
-        + current["does_not_solve"]
+        [journey["strategic_role"], journey["outcome"]]
+        + node["unresolved_gates"]
     ).lower()
-    assert "pure adapter contract next" in joined
-    assert "signed-confirmation-envelope" in joined
-    assert "terminal parity" in joined
+    assert "status-confirm kernel adapter contract is next" in joined
+    assert "terminal-transition parity" in joined
     assert "post-commit receipt serialization" in joined
-    assert "continuity 256 / compass 238" in compass["orientation_statement"].lower()
 
 
 def test_evidence_binds_packet_acceptance_and_yuri_summary() -> None:

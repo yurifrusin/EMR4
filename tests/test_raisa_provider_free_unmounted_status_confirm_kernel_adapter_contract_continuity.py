@@ -18,14 +18,15 @@ def _node(graph: dict) -> dict:
     return matches[0]
 
 
-def test_adapter_is_the_current_continuity_position() -> None:
+def test_adapter_remains_an_accepted_continuity_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 257
-    assert compass["map_revision"] == 239
-    assert compass["source_graph_revision"] == 257
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert graph["graph_revision"] >= 257
+    assert compass["map_revision"] >= 239
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
     node = _node(graph)
+    assert node["status"] == "accepted"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
 
@@ -49,20 +50,20 @@ def test_adapter_remains_unmounted_and_status_only() -> None:
         assert phrase in joined
 
 
-def test_compass_names_read_only_runtime_gap_review_next() -> None:
+def test_adapter_preserves_its_read_only_runtime_gap_handoff() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
+    node = _node(graph)
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
     joined = " ".join(
-        [current["strategic_role"], current["why_now"], current["outcome"]]
-        + current["unlocks"]
-        + current["does_not_solve"]
+        [journey["strategic_role"], journey["outcome"]]
+        + node["unresolved_gates"]
     ).lower()
-    assert "read-only runtime-gap review next" in joined
-    assert "lock-order" in joined
-    assert "server-session ingress" in joined
-    assert "terminal-policy parity" in joined
+    assert "read-only status-confirm runtime-gap admission review is next" in joined
+    assert "lock order" in joined
+    assert "server session ingress" in joined
+    assert "terminal behavior" in joined
     assert "stored-receipt delivery" in joined
-    assert "continuity 257 / compass 239" in compass["orientation_statement"].lower()
 
 
 def test_evidence_binds_adapter_packet_acceptance_and_yuri_summary() -> None:

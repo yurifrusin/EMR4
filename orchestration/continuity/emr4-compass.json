@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 239,
+  "map_revision": 240,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 257,
-  "orientation_statement": "EMR4 is at Continuity 257 / Compass 239. The provider-free unmounted status-confirm kernel adapter contract passes; the read-only runtime-gap admission review is next.",
+  "source_graph_revision": 258,
+  "orientation_statement": "EMR4 is at Continuity 258 / Compass 240. The read-only status-confirm runtime-gap review passes with the existing route not admitted unchanged: seven blockers and two partial gaps now define a finite provider-free unmounted convergence-architecture tranche.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2414,33 +2414,55 @@
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review",
+      "lineage_parent": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
+      "strategic_role": "Prevent premature runtime convergence by resolving exact route-to-kernel gaps",
+      "outcome": "The exact current route is not admitted unchanged: seven blockers and two partial gaps define one finite unmounted convergence-architecture handoff.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md",
+        "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md",
+        "docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json",
+        "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json",
+        "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
-    "strategic_role": "Pure status-confirm adapter frozen; read-only runtime-gap review next",
-    "why_now": "The route/kernel seam can now be assessed against an exact effect-free transformation.",
-    "outcome": "Fifteen cases, eight mappings and thirty-seven hostile mutations prove the closed adapter contract.",
+    "node_id": "raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review",
+    "strategic_role": "Exact route-to-kernel gaps frozen before runtime convergence",
+    "why_now": "The pure adapter passes, so the next safe step was to compare its contract with the current route without opening application or database authority.",
+    "outcome": "The review passes with a not_admitted verdict: seven blockers, two partial gaps, 15 structural assertions and 37 hostile rejections.",
     "unlocks": [
-      "Inspect exact lock-order and server-session ingress gaps without executing the route.",
-      "Assess terminal-policy parity and stored-receipt delivery prerequisites before runtime planning."
+      "Freeze a provider-free unmounted status-confirm runtime convergence architecture over the finite nine-dimension gap set.",
+      "Preserve current signed evidence, atomic mutation/audit/idempotency staging and stored replay while moving them behind authority-first locks.",
+      "Continue under standing authority without editing or executing the route or database."
     ],
     "does_not_solve": [
-      "Status route integration, database execution, raw-route convergence or create schedule fencing.",
-      "Operational data, providers, commands, deployment, Pages or protected refs."
+      "Route implementation, database concurrency or a mounted transaction kernel.",
+      "Raw compatibility-route removal or create schedule-conflict fencing.",
+      "Provider/credential activity, patient/product data, watchers/events or product commands.",
+      "Deployment, production, release, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md",
-      "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md",
-      "docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json",
-      "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
+      "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md",
+      "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md",
+      "docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json",
+      "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md"
     ]
   },
   "decision_horizon": [
@@ -2536,10 +2558,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Run the provider-free read-only status-confirm runtime-gap admission review.",
-        "Inspect only exact non-protected lock, session, terminal and receipt-delivery sources.",
-        "Keep the status route and database unedited and unexecuted during review.",
-        "Select and prove a database-owned create schedule fence before create convergence."
+        "Preserve the accepted source-owned-truth and status transaction-kernel contracts.",
+        "Freeze the provider-free unmounted status-confirm runtime convergence architecture before any route or database implementation.",
+        "Keep create schedule fencing, raw-route changes, providers, product data, runtime commands and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -2997,7 +3018,18 @@
         "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md",
+        "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md",
+        "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md",
+        "docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json",
+        "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json",
+        "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md"
       ]
     },
     {
@@ -3842,6 +3874,7 @@
     }
   ],
   "map_limits": [
+    "The status-confirm runtime-gap review is structural exact-file evidence; it does not prove runtime locking, database concurrency or route safety under the stricter kernel.",
     "Waiting-area union input and terminal status re-transition remain fail-closed.",
     "Adapter success does not authorise an application route, database transaction or command.",
     "Terminal status re-transition remains policy-deferred and fail-closed.",

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_push_the_provider_free_read_only_status_confirm_runtime_gap_admission_review_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact source 426ccbbd26a2ab0bfb70c65d7adce113f0239f3a passes as raisa_provider_free_read_only_status_confirm_runtime_gap_admission_review_pass with verdict not_admitted. Seven blockers and two partial gaps are frozen. Eleven focused, 39 exact route/API and 126 bounded status-lineage/API/baton tests pass; fifteen structural assertions and 37 hostile mutations pass. Four descendant-hostile historical continuity assertions were narrowed to immutable ancestry and journey evidence.",
+    "current_authority_allocation": "GPT Sol retains review integration and closeout ownership under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent, external worker or provider is selected. Yuri's authenticated Google state and the Browser-skill future ADC handling agreement do not authorize or cause credential or provider activity in this tranche.",
+    "git_refs_and_worktree": "Task HEAD is exact review source 426ccbbd26a2ab0bfb70c65d7adce113f0239f3a while origin task remains 1a26b49c0c3af84e8e8d2b6456268b7fff0d25f6 before closeout push. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Eight tracked closeout paths and 521 untracked paths, including five docs/branding paths and five intended closeout paths, precede this receipt pair.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now has SHA-256 49ed3fd268fb5c34be4c1d0a859f6cbb3d888be07990b06864622d1da548bd62. Its 71.3 KB / 486-line live baton binds Continuity 258 / Compass 240, the accepted not_admitted review verdict and the provider-free unmounted convergence-architecture handoff.",
+    "protected_evidence_boundaries": "AER-0291 exact-file control remained in force. The elapsed terminal guard was not executed. A broad collection probe encountered an unrelated existing integration-test collection error and is not acceptance evidence. No app import/edit, route/database execution, provider call, credential/browser authorization, product/patient data, runtime, command, deployment, release, Pages or protected-ref authority opened. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
