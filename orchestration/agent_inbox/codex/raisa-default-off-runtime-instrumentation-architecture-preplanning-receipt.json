@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_default_off_runtime_instrumentation_architecture_for_four_raw_appointment_route_seams",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted eighteen-case shadow rehearsal and its plan, design, closeout and Sol acceptance were reread. The next narrow gate is architecture only: identify exact post-result seams for the four raw appointment routes, freeze immutable default-off global/practice/route/generation controls, a minimized projection constructor, one-way bounded handoff, dependency exclusions, exception containment and a static proof obligation before any route edit or runtime observer can be considered.",
+    "current_authority_allocation": "GPT Sol owns route-seam inspection, architecture freezing, deterministic static proof and acceptance under Yuri's standing uninterrupted-development authority and the EMR4 API Steward rules. This serial architecture tranche remains Sol-owned with no subagent, external worker or provider verifier. Yuri's authenticated Sydney Vertex Bernie ADC and standing model choice are acknowledged but unused because no provider call is permitted.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at 42e3f9a6df86210be2e7a3709118ad53ba496e98. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. The tracked tree is clean and exactly 506 untracked files are preserved before this preplanning pair: the prior 504-file set plus the shadow-rehearsal pre-push receipt/state pair, including five docs/branding files. Explicit-path staging only applies.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the shadow-rehearsal closeout. At Continuity 250 / Compass 232 it accepts exact rehearsal source 47b5f09ecf35225da25812ba87bb656a1094fc7e and names the separately reviewed default-off runtime-instrumentation architecture plan as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "This tranche may read exact repository source for the four raw route functions and their direct local dependencies. It may add only plan/design/threat, source-hashed static architecture contract/schema, validator/tests, receipts and closeout artifacts. It may not edit, import or execute an application route; start FastAPI or PostgreSQL; create a runtime hook, feature flag, thread, process, queue, sink, persistence, retention or aggregation; access a database, source, watcher, event, provider, network, credential, IAM, metadata, product, patient, clinical, financial or free-text data; invoke the kernel; issue a command/write; deploy, release, rebuild Pages, open protected evidence or move protected refs. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/default-off-runtime-instrumentation-architecture.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "status",
+    "source_head",
+    "source_bindings",
+    "claim_boundary",
+    "source_inventory",
+    "primary_completion",
+    "generation_configuration",
+    "request_context",
+    "route_staging_phase",
+    "post_response_finalizer",
+    "projection",
+    "diagnostic_record",
+    "capability_modules",
+    "forbidden_feedback_edges",
+    "future_implementation_gate",
+    "future_evidence_sequence",
+    "effect_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.default-off-runtime-instrumentation-architecture.v1"},
+    "artifact_kind": {"const": "provider_free_source_bound_static_architecture_contract"},
+    "status": {"const": "frozen_no_application_edit_or_runtime"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {"type": "array", "minItems": 10, "maxItems": 10, "items": {"$ref": "#/$defs/sourceBinding"}},
+    "claim_boundary": {"$ref": "#/$defs/falseMap13"},
+    "source_inventory": {"$ref": "#/$defs/sourceInventory"},
+    "primary_completion": {"$ref": "#/$defs/primaryCompletion"},
+    "generation_configuration": {"$ref": "#/$defs/generationConfiguration"},
+    "request_context": {"$ref": "#/$defs/requestContext"},
+    "route_staging_phase": {"$ref": "#/$defs/routeStage"},
+    "post_response_finalizer": {"$ref": "#/$defs/finalizer"},
+    "projection": {"$ref": "#/$defs/projection"},
+    "diagnostic_record": {"$ref": "#/$defs/diagnosticRecord"},
+    "capability_modules": {"$ref": "#/$defs/capabilityModules"},
+    "forbidden_feedback_edges": {"type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true, "items": {"type": "string"}},
+    "future_implementation_gate": {"type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true, "items": {"type": "string"}},
+    "future_evidence_sequence": {"type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": {"type": "string"}},
+    "effect_boundary": {"$ref": "#/$defs/falseMap11"}
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "falseMap13": {
+      "type": "object", "additionalProperties": false,
+      "required": ["application_source_edited", "application_route_imported_or_executed", "middleware_or_dependency_added", "runtime_instrumentation_created", "database_or_source_accessed", "event_or_watcher_consumed", "provider_or_network_used", "credential_or_digest_key_accessed", "product_or_patient_data_used", "kernel_or_command_invoked", "command_or_write_performed", "deployment_or_release_performed", "protected_ref_moved"],
+      "properties": {
+        "application_source_edited": {"const": false}, "application_route_imported_or_executed": {"const": false}, "middleware_or_dependency_added": {"const": false}, "runtime_instrumentation_created": {"const": false}, "database_or_source_accessed": {"const": false}, "event_or_watcher_consumed": {"const": false}, "provider_or_network_used": {"const": false}, "credential_or_digest_key_accessed": {"const": false}, "product_or_patient_data_used": {"const": false}, "kernel_or_command_invoked": {"const": false}, "command_or_write_performed": {"const": false}, "deployment_or_release_performed": {"const": false}, "protected_ref_moved": {"const": false}
+      }
+    },
+    "sourceInventory": {
+      "type": "object", "additionalProperties": false,
+      "required": ["route_module", "router_prefix", "raw_compat_helper", "route_seams", "shared_route_facts"],
+      "properties": {
+        "route_module": {"const": "app/routers/appointments.py"},
+        "router_prefix": {"const": "/api/v1/appointments"},
+        "raw_compat_helper": {"$ref": "#/$defs/rawCompatHelper"},
+        "route_seams": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/routeSeam"}},
+        "shared_route_facts": {"$ref": "#/$defs/sharedRouteFacts"}
+      }
+    },
+    "rawCompatHelper": {
+      "type": "object", "additionalProperties": false,
+      "required": ["function", "line_start", "line_end", "setting", "default", "shadow_authority"],
+      "properties": {"function": {"type": "string"}, "line_start": {"type": "integer"}, "line_end": {"type": "integer"}, "setting": {"type": "string"}, "default": {"type": "string"}, "shadow_authority": {"const": false}}
+    },
+    "routeSeam": {
+      "type": "object", "additionalProperties": false,
+      "required": ["adapter_id", "family_id", "method", "path", "canonical_operation_id", "handler", "handler_line_start", "handler_line_end", "decorator", "command_helper", "helper_line_start", "helper_line_end", "success_status", "response_model", "current_result_form", "future_stage_rewrite"],
+      "properties": {
+        "adapter_id": {"type": "string", "pattern": "^raw_compat_"}, "family_id": {"enum": ["appointment_create", "appointment_update", "appointment_status", "appointment_delete"]}, "method": {"enum": ["POST", "PUT", "PATCH", "DELETE"]}, "path": {"type": "string", "pattern": "^/api/v1/appointments"}, "canonical_operation_id": {"type": "string", "pattern": "^confirmAppointment"}, "handler": {"type": "string"}, "handler_line_start": {"type": "integer", "minimum": 1}, "handler_line_end": {"type": "integer", "minimum": 1}, "decorator": {"type": "string"}, "command_helper": {"type": "string"}, "helper_line_start": {"type": "integer", "minimum": 1}, "helper_line_end": {"type": "integer", "minimum": 1}, "success_status": {"enum": [200, 201, 204]}, "response_model": {"type": "string"}, "current_result_form": {"type": "string"}, "future_stage_rewrite": {"type": "string"}
+      }
+    },
+    "sharedRouteFacts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["authenticated_user_dependency", "request_parameter_present", "server_session_reference_present", "server_correlation_reference_present", "shadow_setting_present", "shadow_middleware_present", "current_user_middleware_order"],
+      "properties": {"authenticated_user_dependency": {"type": "string"}, "request_parameter_present": {"const": false}, "server_session_reference_present": {"const": false}, "server_correlation_reference_present": {"const": false}, "shadow_setting_present": {"const": false}, "shadow_middleware_present": {"const": false}, "current_user_middleware_order": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string"}}}
+    },
+    "primaryCompletion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["route_helper_success_proves", "route_helper_success_does_not_prove", "route_stage_primary_state", "handoff_primary_state", "route_local_observer_call_permitted", "post_send_handoff_required"],
+      "properties": {"route_helper_success_proves": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"type": "string"}}, "route_helper_success_does_not_prove": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"type": "string"}}, "route_stage_primary_state": {"type": "string"}, "handoff_primary_state": {"type": "string"}, "route_local_observer_call_permitted": {"const": false}, "post_send_handoff_required": {"const": true}}
+    },
+    "generationConfiguration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["model", "amendment", "required_status", "global_default", "practice_allowlist_default", "route_allowlist_default", "digest_key_reference_default", "database_or_network_lookup", "separate_from_setting", "raw_compat_setting_shadow_authority", "external_disable_latch", "missing_unknown_stale_or_revoked", "enablement_authority_granted"],
+      "properties": {"model": {"type": "string"}, "amendment": {"type": "string"}, "required_status": {"type": "string"}, "global_default": {"const": "disabled"}, "practice_allowlist_default": {"type": "array", "maxItems": 0}, "route_allowlist_default": {"type": "array", "maxItems": 0}, "digest_key_reference_default": {"type": "null"}, "database_or_network_lookup": {"const": false}, "separate_from_setting": {"type": "string"}, "raw_compat_setting_shadow_authority": {"const": false}, "external_disable_latch": {"type": "string"}, "missing_unknown_stale_or_revoked": {"type": "string"}, "enablement_authority_granted": {"const": false}}
+    },
+    "requestContext": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "required_fields", "provenance", "missing_context", "bearer_token_hashing", "inbound_correlation_authority", "actor_practice_session_synthesis", "direct_identifier_fallback"],
+      "properties": {"type": {"const": "ServerOwnedShadowRequestContext"}, "required_fields": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"type": "string"}}, "provenance": {"type": "string"}, "missing_context": {"type": "string"}, "bearer_token_hashing": {"const": "forbidden"}, "inbound_correlation_authority": {"const": "forbidden"}, "actor_practice_session_synthesis": {"const": "forbidden"}, "direct_identifier_fallback": {"const": "forbidden"}}
+    },
+    "routeStage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "stage_point", "admission_order", "global_disabled_short_circuit_before_raw_input_read", "input_read_before_full_admission", "output", "request_cell", "adapter_invoked", "observer_invoked", "sink_invoked", "return_channel", "failure", "retry"],
+      "properties": {"type": {"const": "ShadowRouteStage"}, "stage_point": {"type": "string"}, "admission_order": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": {"type": "string"}}, "global_disabled_short_circuit_before_raw_input_read": {"const": true}, "input_read_before_full_admission": {"const": false}, "output": {"type": "string"}, "request_cell": {"type": "string"}, "adapter_invoked": {"const": false}, "observer_invoked": {"const": false}, "sink_invoked": {"const": false}, "return_channel": {"const": "none"}, "failure": {"type": "string"}, "retry": {"const": false}}
+    },
+    "finalizer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "mount", "message_trigger", "send_order", "cell_operation", "offer_port", "offer_awaited", "offer_result_channel", "retry", "failure", "no_cell", "send_callable_passed_to_offer", "response_material_passed_to_offer"],
+      "properties": {"type": {"const": "ShadowAfterSendFinalizer"}, "mount": {"type": "string"}, "message_trigger": {"type": "string"}, "send_order": {"type": "string"}, "cell_operation": {"type": "string"}, "offer_port": {"const": "offer_nowait"}, "offer_awaited": {"const": false}, "offer_result_channel": {"const": "none"}, "retry": {"const": false}, "failure": {"type": "string"}, "no_cell": {"type": "string"}, "send_callable_passed_to_offer": {"const": false}, "response_material_passed_to_offer": {"const": false}}
+    },
+    "projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "identity_encoding", "allowed_fields", "free_text_inputs", "response_inputs", "request_shape_derivation", "command_digest_derivation", "raw_input_retention", "digest_key_exposed", "forbidden_inputs"],
+      "properties": {"type": {"const": "ShadowRouteProjection"}, "identity_encoding": {"type": "string"}, "allowed_fields": {"type": "array", "minItems": 24, "maxItems": 24, "uniqueItems": true, "items": {"type": "string"}}, "free_text_inputs": {"type": "array", "maxItems": 0}, "response_inputs": {"type": "array", "maxItems": 0}, "request_shape_derivation": {"type": "string"}, "command_digest_derivation": {"type": "string"}, "raw_input_retention": {"const": false}, "digest_key_exposed": {"const": false}, "forbidden_inputs": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": {"type": "string"}}}
+    },
+    "diagnosticRecord": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowed_fields", "authority", "command_outcome", "audit_or_truth_record", "persistence_selected"],
+      "properties": {"allowed_fields": {"type": "array", "minItems": 15, "maxItems": 15, "uniqueItems": true, "items": {"type": "string"}}, "authority": {"type": "string"}, "command_outcome": {"const": false}, "audit_or_truth_record": {"const": false}, "persistence_selected": {"const": false}}
+    },
+    "capabilityModules": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generation_reader", "route_stage", "after_send_finalizer", "downstream_observer"],
+      "properties": {"generation_reader": {"$ref": "#/$defs/capability"}, "route_stage": {"$ref": "#/$defs/capability"}, "after_send_finalizer": {"$ref": "#/$defs/capability"}, "downstream_observer": {"$ref": "#/$defs/capability"}}
+    },
+    "capability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowed", "forbidden"],
+      "properties": {"allowed": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}, "forbidden": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string"}}}
+    },
+    "falseMap11": {
+      "type": "object", "additionalProperties": false,
+      "required": ["application_edit", "runtime_import_or_execution", "configuration_or_middleware_change", "request_context_created", "projection_built_from_product_data", "queue_or_sink_created", "database_read_or_write", "provider_or_network", "kernel_or_command", "response_or_audit_change", "deployment_or_release"],
+      "properties": {"application_edit": {"const": false}, "runtime_import_or_execution": {"const": false}, "configuration_or_middleware_change": {"const": false}, "request_context_created": {"const": false}, "projection_built_from_product_data": {"const": false}, "queue_or_sink_created": {"const": false}, "database_read_or_write": {"const": false}, "provider_or_network": {"const": false}, "kernel_or_command": {"const": false}, "response_or_audit_change": {"const": false}, "deployment_or_release": {"const": false}}
+    }
+  }
+}

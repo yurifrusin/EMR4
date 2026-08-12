@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "candidate_precommit",
+  "planned_action": "commit_the_source_bound_default_off_runtime_instrumentation_architecture_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at this tranche boundary. Continuity 250 / Compass 232 accepts the authored-synthetic shadow rehearsal and names this separately reviewed default-off runtime-instrumentation architecture as the next dependency-satisfied work.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled provider-free static architecture under Yuri's standing uninterrupted-development authority and the EMR4 API Steward rules. No subagent, provider verifier or external worker is allocated; Sydney Vertex Bernie ADC remains authenticated and deliberately unused.",
+    "active_plan_and_acceptance": "The frozen plan and contract bind the exact four raw appointment route seams to a two-phase design: route-local single-assignment staging after helper success and one no-return offer only after the original final ASGI response-body send succeeds. Immutable configuration defaults globally disabled, missing server-owned session/correlation context denies staging, and the exact 24-field projection plus 15-field diagnostic record have no response, transaction, audit, kernel or client feedback edge.",
+    "protected_evidence_boundaries": "This candidate contains static documents, a closed JSON contract/schema, a source-reading validator and tests only. It edits, imports and executes no application route and creates no middleware, configuration, request context, runtime hook, feature flag, thread, process, queue, sink, persistence or retention. It accesses no database/source/watcher/event/provider/network/credential/product/patient/free-text data and performs no kernel call, command/write, deployment, release, Pages rebuild or protected-ref movement.",
+    "git_refs_and_worktree": "Local HEAD and origin task remain aligned at 42e3f9a6df86210be2e7a3709118ad53ba496e98. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Before this pair there are 515 untracked files: nine owned candidate files plus the exact 506-file preserved baseline (path-list SHA-256 3295a2d400aea7b86518af912331c107c1b44144b4f414e41496c60e22150754), including five docs/branding files. Explicit-path staging only applies."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "default_off_runtime_instrumentation_architecture_candidate_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The source-bound architecture contract and all sixty hostile mutations pass."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned or permitted for this serial tranche."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external veto is selected for provider-free source-bound static proof."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The tightly coupled route-seam architecture remains Sol-owned under the worker-lane economy rule."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

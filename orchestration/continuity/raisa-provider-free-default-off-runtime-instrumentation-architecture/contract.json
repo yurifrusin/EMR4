@@ -1,0 +1,352 @@
+{
+  "schema_version": "emr4.default-off-runtime-instrumentation-architecture.v1",
+  "artifact_kind": "provider_free_source_bound_static_architecture_contract",
+  "status": "frozen_no_application_edit_or_runtime",
+  "source_head": "42e3f9a6df86210be2e7a3709118ad53ba496e98",
+  "source_bindings": [
+    {"path": "app/routers/appointments.py", "sha256": "ca6261323cb58a27c585a9d9fa851fc9ec4064d8a0f5a0441a9e696b13bd0b09"},
+    {"path": "app/config.py", "sha256": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e"},
+    {"path": "app/dependencies.py", "sha256": "d44f777f742074f0ee4717d599d7ee71dd6343c7096c87793149c727c1c4b0a9"},
+    {"path": "app/main.py", "sha256": "dedcb8fe3eb3f76a915d2303da45d404a42fd926e687a73cb30245c744132130"},
+    {"path": "app/middleware/error_handler.py", "sha256": "d63ec6a2ec76d00cb9bdcb8dd74edcaee52034837cc94db158e8529a358f7ef7"},
+    {"path": "tests/test_appointment_raw_compat.py", "sha256": "af448fa32bd420bf134e09a7e72f107ca9bbec1c75c986f3494d96dbccdb972b"},
+    {"path": "docs/api-spine/legacy-compatibility-write-deprecation-map.md", "sha256": "82044925cbe06caf94a7c1ece8bdefe8e41aa05988015973aa72d8be2e2f6aa3"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json", "sha256": "1a4f7c4bc552a24594b2375d3f4773fe2770773b5b4d84418a10187f9ab72389"},
+    {"path": "docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-closeout.md", "sha256": "2a290dad9d6410421c44a62f0c575422bc417b541f534c866c304ee7e0dcbb7d"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json", "sha256": "4453e92d7656832d19eafecbf47bbcf6e363bb5d980b5f6bac4b58dcda978c41"}
+  ],
+  "claim_boundary": {
+    "application_source_edited": false,
+    "application_route_imported_or_executed": false,
+    "middleware_or_dependency_added": false,
+    "runtime_instrumentation_created": false,
+    "database_or_source_accessed": false,
+    "event_or_watcher_consumed": false,
+    "provider_or_network_used": false,
+    "credential_or_digest_key_accessed": false,
+    "product_or_patient_data_used": false,
+    "kernel_or_command_invoked": false,
+    "command_or_write_performed": false,
+    "deployment_or_release_performed": false,
+    "protected_ref_moved": false
+  },
+  "source_inventory": {
+    "route_module": "app/routers/appointments.py",
+    "router_prefix": "/api/v1/appointments",
+    "raw_compat_helper": {
+      "function": "_raw_compat_evidence_and_headers",
+      "line_start": 277,
+      "line_end": 299,
+      "setting": "appointment_raw_compat_mode",
+      "default": "audit",
+      "shadow_authority": false
+    },
+    "route_seams": [
+      {
+        "adapter_id": "raw_compat_create",
+        "family_id": "appointment_create",
+        "method": "POST",
+        "path": "/api/v1/appointments",
+        "canonical_operation_id": "confirmAppointmentCreateProposal",
+        "handler": "create_appointment",
+        "handler_line_start": 1074,
+        "handler_line_end": 1089,
+        "decorator": "router.post('', response_model=AppointmentOut, status_code=status.HTTP_201_CREATED)",
+        "command_helper": "_create_appointment_from_body",
+        "helper_line_start": 936,
+        "helper_line_end": 1011,
+        "success_status": 201,
+        "response_model": "AppointmentOut",
+        "current_result_form": "direct_helper_return",
+        "future_stage_rewrite": "assign_local_result_stage_then_return_same_object"
+      },
+      {
+        "adapter_id": "raw_compat_update",
+        "family_id": "appointment_update",
+        "method": "PUT",
+        "path": "/api/v1/appointments/{appointment_id}",
+        "canonical_operation_id": "confirmAppointmentUpdateProposal",
+        "handler": "update_appointment",
+        "handler_line_start": 5268,
+        "handler_line_end": 5281,
+        "decorator": "router.put('/{appointment_id}', response_model=AppointmentOut)",
+        "command_helper": "_apply_appointment_update",
+        "helper_line_start": 5138,
+        "helper_line_end": 5264,
+        "success_status": 200,
+        "response_model": "AppointmentOut",
+        "current_result_form": "direct_helper_return",
+        "future_stage_rewrite": "assign_local_result_stage_then_return_same_object"
+      },
+      {
+        "adapter_id": "raw_compat_status",
+        "family_id": "appointment_status",
+        "method": "PATCH",
+        "path": "/api/v1/appointments/{appointment_id}/status",
+        "canonical_operation_id": "confirmAppointmentStatusProposal",
+        "handler": "update_appointment_status",
+        "handler_line_start": 5386,
+        "handler_line_end": 5402,
+        "decorator": "router.patch('/{appointment_id}/status', response_model=AppointmentOut)",
+        "command_helper": "_apply_appointment_status_update",
+        "helper_line_start": 2871,
+        "helper_line_end": 2908,
+        "success_status": 200,
+        "response_model": "AppointmentOut",
+        "current_result_form": "direct_helper_return",
+        "future_stage_rewrite": "assign_local_result_stage_then_return_same_object"
+      },
+      {
+        "adapter_id": "raw_compat_delete",
+        "family_id": "appointment_delete",
+        "method": "DELETE",
+        "path": "/api/v1/appointments/{appointment_id}",
+        "canonical_operation_id": "confirmAppointmentDeleteProposal",
+        "handler": "cancel_appointment",
+        "handler_line_start": 5574,
+        "handler_line_end": 5590,
+        "decorator": "router.delete('/{appointment_id}', status_code=status.HTTP_204_NO_CONTENT)",
+        "command_helper": "_apply_appointment_delete",
+        "helper_line_start": 5532,
+        "helper_line_end": 5570,
+        "success_status": 204,
+        "response_model": "none",
+        "current_result_form": "helper_call_then_implicit_none",
+        "future_stage_rewrite": "retain_implicit_none_after_stage"
+      }
+    ],
+    "shared_route_facts": {
+      "authenticated_user_dependency": "require_role_via_get_current_user",
+      "request_parameter_present": false,
+      "server_session_reference_present": false,
+      "server_correlation_reference_present": false,
+      "shadow_setting_present": false,
+      "shadow_middleware_present": false,
+      "current_user_middleware_order": ["CORSMiddleware", "ErrorHandlerMiddleware"]
+    }
+  },
+  "primary_completion": {
+    "route_helper_success_proves": [
+      "mutation_and_domain_checks_completed",
+      "mutation_audit_appended",
+      "database_commit_completed",
+      "logical_return_value_available"
+    ],
+    "route_helper_success_does_not_prove": [
+      "response_model_serialized",
+      "response_headers_finalized_by_all_middleware",
+      "response_body_bytes_sent"
+    ],
+    "route_stage_primary_state": "transaction_audit_and_logical_result_complete_response_not_yet_serialized",
+    "handoff_primary_state": "final_asgi_response_body_frame_successfully_sent",
+    "route_local_observer_call_permitted": false,
+    "post_send_handoff_required": true
+  },
+  "generation_configuration": {
+    "model": "immutable_process_start_generation",
+    "amendment": "new_generation_and_static_review",
+    "required_status": "current",
+    "global_default": "disabled",
+    "practice_allowlist_default": [],
+    "route_allowlist_default": [],
+    "digest_key_reference_default": null,
+    "database_or_network_lookup": false,
+    "separate_from_setting": "appointment_raw_compat_mode",
+    "raw_compat_setting_shadow_authority": false,
+    "external_disable_latch": "monotonic_false_to_true_disable_only",
+    "missing_unknown_stale_or_revoked": "disabled_no_stage",
+    "enablement_authority_granted": false
+  },
+  "request_context": {
+    "type": "ServerOwnedShadowRequestContext",
+    "required_fields": [
+      "practice_id",
+      "actor_id",
+      "actor_role",
+      "authenticated_session_reference",
+      "server_correlation_reference"
+    ],
+    "provenance": "server_created_and_authenticated_only",
+    "missing_context": "disabled_no_stage",
+    "bearer_token_hashing": "forbidden",
+    "inbound_correlation_authority": "forbidden",
+    "actor_practice_session_synthesis": "forbidden",
+    "direct_identifier_fallback": "forbidden"
+  },
+  "route_staging_phase": {
+    "type": "ShadowRouteStage",
+    "stage_point": "after_command_helper_success_before_route_return",
+    "admission_order": [
+      "read_immutable_generation",
+      "global_enabled_short_circuit",
+      "generation_current",
+      "external_disable_clear",
+      "safe_server_context_present",
+      "practice_digest_allowlisted",
+      "exact_route_allowlisted",
+      "digest_key_reference_available",
+      "build_minimized_projection",
+      "single_assignment_request_cell_store"
+    ],
+    "global_disabled_short_circuit_before_raw_input_read": true,
+    "input_read_before_full_admission": false,
+    "output": "ShadowRouteProjection_or_empty",
+    "request_cell": "single_assignment_same_request_scope",
+    "adapter_invoked": false,
+    "observer_invoked": false,
+    "sink_invoked": false,
+    "return_channel": "none",
+    "failure": "contain_and_leave_cell_empty",
+    "retry": false
+  },
+  "post_response_finalizer": {
+    "type": "ShadowAfterSendFinalizer",
+    "mount": "outermost_user_asgi_middleware_around_existing_cors_and_error_stack",
+    "message_trigger": "http.response.body_with_more_body_false",
+    "send_order": "await_original_send_success_before_handoff",
+    "cell_operation": "atomic_take_and_clear_at_most_once",
+    "offer_port": "offer_nowait",
+    "offer_awaited": false,
+    "offer_result_channel": "none",
+    "retry": false,
+    "failure": "contain_after_response_send",
+    "no_cell": "no_operation",
+    "send_callable_passed_to_offer": false,
+    "response_material_passed_to_offer": false
+  },
+  "projection": {
+    "type": "ShadowRouteProjection",
+    "identity_encoding": "domain_separated_versioned_hmac",
+    "allowed_fields": [
+      "schema_version",
+      "architecture_generation_digest",
+      "route_adapter_id",
+      "canonical_operation_id",
+      "practice_scope_digest",
+      "actor_digest",
+      "actor_role",
+      "session_digest",
+      "purpose",
+      "target_shape",
+      "target_digest",
+      "conflict_domain_digest",
+      "command_digest",
+      "precondition_present",
+      "precondition_version",
+      "precondition_digest",
+      "confirmation_present",
+      "confirmation_mode",
+      "confirmation_reference_digest",
+      "idempotency_present",
+      "idempotency_key_digest",
+      "canonicalization_version",
+      "correlation_digest",
+      "request_shape_digest"
+    ],
+    "free_text_inputs": [],
+    "response_inputs": [],
+    "request_shape_derivation": "allowlisted_field_names_and_closed_type_labels_only",
+    "command_digest_derivation": "allowlisted_non_free_text_structural_values_only",
+    "raw_input_retention": false,
+    "digest_key_exposed": false,
+    "forbidden_inputs": [
+      "appointment_reason_free_text",
+      "appointment_note_free_text",
+      "raw_request_body",
+      "raw_response_body",
+      "response_headers",
+      "bearer_token",
+      "credential",
+      "database_value_after_stage",
+      "mutation_receipt",
+      "audit_receipt"
+    ]
+  },
+  "diagnostic_record": {
+    "allowed_fields": [
+      "schema_version",
+      "architecture_generation_digest",
+      "configuration_digest",
+      "route_adapter_id",
+      "canonical_operation_id",
+      "practice_scope_digest",
+      "correlation_digest",
+      "request_shape_digest",
+      "adapter_result",
+      "gap_codes",
+      "mismatch_field_codes",
+      "comparison_class",
+      "timing_category",
+      "overflow_category",
+      "recorded_at"
+    ],
+    "authority": "diagnostic_only_non_authoritative_lossy",
+    "command_outcome": false,
+    "audit_or_truth_record": false,
+    "persistence_selected": false
+  },
+  "capability_modules": {
+    "generation_reader": {
+      "allowed": ["immutable_generation_snapshot", "external_disable_latch"],
+      "forbidden": ["database", "network", "provider", "credential_value", "command"]
+    },
+    "route_stage": {
+      "allowed": ["generation_reader", "server_request_context", "digest_port", "request_cell"],
+      "forbidden": ["observer", "adapter", "sink", "database", "transaction", "response_writer", "audit_writer", "event", "kernel", "command"]
+    },
+    "after_send_finalizer": {
+      "allowed": ["request_cell", "offer_nowait_port"],
+      "forbidden": ["route_handler", "database", "transaction", "response_body", "response_headers", "send_callable_to_offer", "audit_writer", "event", "kernel", "command"]
+    },
+    "downstream_observer": {
+      "allowed": ["shadow_projection", "pure_adapter", "pure_comparator", "diagnostic_record_builder"],
+      "forbidden": ["route_handler", "request", "response", "database", "source", "audit_writer", "event", "kernel", "command"]
+    }
+  },
+  "forbidden_feedback_edges": [
+    "shadow_to_request_admission",
+    "shadow_to_authorization",
+    "shadow_to_http_status",
+    "shadow_to_response_body",
+    "shadow_to_response_headers",
+    "shadow_to_transaction",
+    "shadow_to_mutation",
+    "shadow_to_mutation_audit",
+    "shadow_to_retry",
+    "shadow_to_latency_budget",
+    "shadow_to_kernel_eligibility",
+    "shadow_to_client_behavior"
+  ],
+  "future_implementation_gate": [
+    "provider_free_globally_disabled_typed_scaffold",
+    "source_ast_and_import_dependency_proof",
+    "disabled_path_zero_context_digest_and_handoff_calls",
+    "authored_synthetic_live_local_route_byte_parity",
+    "commit_audit_and_error_path_parity",
+    "final_asgi_send_before_offer_order_proof",
+    "single_assignment_take_clear_and_failure_containment",
+    "complete_owned_runtime_cleanup"
+  ],
+  "future_evidence_sequence": [
+    "provider_free_default_off_instrumentation_scaffold",
+    "ordinary_and_fallback_client_proposal_confirm_parity",
+    "raw_status_kernel_convergence",
+    "raw_delete_kernel_convergence",
+    "raw_update_kernel_convergence",
+    "create_schedule_fence_selection_and_proof",
+    "raw_create_kernel_convergence"
+  ],
+  "effect_boundary": {
+    "application_edit": false,
+    "runtime_import_or_execution": false,
+    "configuration_or_middleware_change": false,
+    "request_context_created": false,
+    "projection_built_from_product_data": false,
+    "queue_or_sink_created": false,
+    "database_read_or_write": false,
+    "provider_or_network": false,
+    "kernel_or_command": false,
+    "response_or_audit_change": false,
+    "deployment_or_release": false
+  }
+}
