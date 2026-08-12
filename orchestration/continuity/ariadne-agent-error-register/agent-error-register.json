@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 254,
+  "register_revision": 255,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11513,6 +11513,87 @@
           "docs/ariadne-agent-error-correction-register-revision-254.md",
           "orchestration/harness_settings/evidence_led_workflow.yaml",
           "scripts/ariadne_verifier_worktree_preflight.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0287",
+      "attempt_id": "cf-d2-workflow-fluidity-final-review-predispatch-001",
+      "observed_on": "2026-08-12",
+      "tranche": "ariadne-cf-d2-workflow-incident-diagnosis",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every predispatch runtime state must use configured adapter-observation methods and include the complete configured worker-slot inventory before a reviewer can be dispatched.",
+      "observed_error": "The first final-review runtime state used unconfigured command_preflight for antigravity_cli_print and listed a synthetic Gemini slot instead of the mandatory configured deepseek-flash-workers inventory. Orchestrator preflight returned revision_required with both exact reasons, worker_dispatch_permitted false and no admitted review dispatch.",
+      "detection_method": "The deterministic preflight rejected the state before external review. Comparison with a known passing verifier predispatch state identified configured agy_cli_observation and the required inactive deepseek-flash-workers inventory; a distinct v2 state then passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-predispatch-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-predispatch-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-255.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.runtime_state_config_vocabulary_or_inventory_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected state and receipt, create a distinct v2 state with configured agy_cli_observation and the required inactive deepseek-flash-workers inventory, and admit no dispatch until v2 passes.",
+        "prevention_control": "Generate adapter method and worker-slot selections from the configured runtime schema or a known-good typed builder rather than composing those enumerations from prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-predispatch-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-predispatch-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-255.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0288",
+      "attempt_id": "cf-d2-workflow-fluidity-final-review-001",
+      "observed_on": "2026-08-12",
+      "tranche": "ariadne-cf-d2-workflow-incident-diagnosis",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-antigravity-command-schema",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "dispatch",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The structured verifier schema must be admitted by the configured provider dialect while exact command identity, argv order and zero-exit release remain enforced by deterministic local admission.",
+      "observed_error": "The new command-results schema described its fixed-length tuple only with prefixItems. Antigravity authenticated and started a fresh conversation, but the provider rejected GenerateContent at HTTP 400 because command_results.items was missing. No model review, repository command, candidate mutation or review receipt resulted; the clean worktree remained at the exact candidate.",
+      "detection_method": "The Antigravity CLI exited one with empty terminal stderr. Its local non-PHI CLI log exposed the exact provider admission error: GenerateContentRequest tool-schema command_results.items missing field. Repository inspection confirmed the generated schema had prefixItems but no items.",
+      "evidence_paths": [
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "docs/ariadne-cf-d2-workflow-incident-diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-255.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.provider_tool_schema_dialect_not_prevalidated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace tuple-only prefixItems with a provider-admissible uniform items schema and retain exact ID, argv, order and exit-code matching in admit_command_results after structured output returns.",
+        "prevention_control": "Provider-facing structured schemas must include the provider dialect's required array items form. Express only transport-admissible shape externally and enforce stronger tuple exactness at the deterministic local release boundary.",
+        "evidence_paths": [
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "docs/ariadne-agent-error-correction-register-revision-255.md"
         ]
       },
       "status": "corrected"

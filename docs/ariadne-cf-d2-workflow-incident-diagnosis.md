@@ -55,6 +55,18 @@ ID into a nonexistent full SHA. Git rejected it before worktree creation;
 AER-0286 now requires exact identities to be copied from `git rev-parse` and
 reverified by worktree preflight rather than reconstructed from memory.
 
+The first final-review dispatch exposed two further examples of the same
+structural problem. Its initial runtime state used an unconfigured adapter
+probe method and omitted a mandatory inactive worker-slot inventory; local
+preflight rejected it before dispatch (AER-0287). After correction, the new
+tuple-shaped command-results schema reached Antigravity but the provider
+rejected it at HTTP 400 because its tool-schema dialect requires an explicit
+array `items` field (AER-0288). The repaired schema uses a provider-admissible
+uniform item envelope while the local evidence gate retains exact command ID,
+argv, order and exit-code enforcement. Neither event weakens a hard boundary,
+but both confirm that machine vocabularies and transport dialects should be
+validated locally at the earliest representable point.
+
 During this diagnosis, intuitive receipt event `pre_plan` was rejected because
 the configured value is `pre_sprint_planning`. This is the fifth recurrence of
 the same vocabulary mismatch and is preserved as AER-0285. The repeated advice
@@ -113,6 +125,8 @@ all worked here.
 - Receipt event values become CLI-discoverable.
 - Candidate identities are resolved and reverified by Git, never manually
   expanded from short display IDs.
+- Provider-facing schemas express only the shape the provider can admit;
+  stronger exactness remains a deterministic local release condition.
 - A second same-coordinate failure after a correction is an automatic stop or
   programme-direction change, not an invitation to nest another recovery.
 

@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini_36_flash_high_veto_over_the_exact_evidence_led_workflow_repair_candidate_after_local_runtime_state_vocabulary_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md has been fully rehydrated. CF-D2 is stopped and unproved; the authorized active tranche is its repository-only workflow incident diagnosis and fluidity repair.",
+    "current_authority_allocation": "GPT Sol is conductor and integrator. Exactly one fresh Gemini 3.6 Flash/high Antigravity project may perform the final read-only veto in plan mode; no implementation worker, database runtime or provider product lane is authorized.",
+    "active_plan_and_acceptance": "The first predispatch state was rejected before dispatch because it used an unconfigured adapter probe method and omitted the configured DeepSeek slot inventory. This v2 corrects only those local fields. The candidate remains unchanged; a pass requires no P0-P2 issue and nine exact ordered manifest commands all returning zero.",
+    "protected_evidence_boundaries": "The review is repository-local and read-only. It authorizes no provider or product call, database/Docker runtime, patient/clinical/product data, credential/IAM access, executable product tool or command, deployment, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Candidate 6f28bb802ff15f63944ad4a968f04cc13bf0107a is the literal git rev-parse result. Clean review worktree C:/Users/sarashera/EMR4-worktrees/r190 on codex/cf-d2-workflow-fluidity-repair-gemini-review was independently preflighted at that exact HEAD. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_workflow_fluidity_final_review_corrected_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Candidate committed, exact Git identity resolved, clean review worktree preflight passed and structured command manifest admission passed."]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh-project read-only dispatch is prepared for the configured Gemini model."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": ["orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-review-worktree-preflight.json", "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-final-review-command-manifest-admission.json"],
+  "assigned_agent_ids": []
+}

@@ -74,19 +74,25 @@ def structured_decision_schema(
                 "type": "array",
                 "minItems": len(commands),
                 "maxItems": len(commands),
-                "prefixItems": [
-                    {
-                        "type": "object",
-                        "additionalProperties": False,
-                        "required": ["id", "argv", "exit_code"],
-                        "properties": {
-                            "id": {"const": command["id"]},
-                            "argv": {"const": command["argv"]},
-                            "exit_code": {"type": "integer"},
+                # The provider tool-schema dialect requires an explicit `items`
+                # schema and does not admit tuple-only `prefixItems`. Exact id,
+                # argv and ordering remain enforced locally by
+                # `admit_command_results` after structured output returns.
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": ["id", "argv", "exit_code"],
+                    "properties": {
+                        "id": {"enum": [command["id"] for command in commands]},
+                        "argv": {
+                            "type": "array",
+                            "minItems": 1,
+                            "maxItems": 128,
+                            "items": {"type": "string"},
                         },
-                    }
-                    for command in commands
-                ],
+                        "exit_code": {"type": "integer"},
+                    },
+                },
             },
         },
     }

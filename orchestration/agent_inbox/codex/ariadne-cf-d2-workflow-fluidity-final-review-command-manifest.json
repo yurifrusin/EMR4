@@ -1,0 +1,99 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-r190-flow",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_verifier_execution_policy.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-r190-register",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/ariadne_evidence_gate.py",
+        "scripts/ariadne_antigravity.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "format",
+        "--check",
+        "scripts/ariadne_evidence_gate.py",
+        "scripts/ariadne_antigravity.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/ariadne_evidence_gate.py",
+        "scripts/ariadne_antigravity.py",
+        "scripts/ariadne_orchestrator_preflight.py"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b..6f28bb802ff15f63944ad4a968f04cc13bf0107a"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

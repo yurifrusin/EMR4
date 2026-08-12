@@ -244,7 +244,16 @@ def test_antigravity_manifest_schema_and_parser_bind_exact_command_results() -> 
     )
 
     assert schema["required"] == ["decision", "review", "command_results"]
-    assert schema["properties"]["command_results"]["minItems"] == 3
+    command_results_schema = schema["properties"]["command_results"]
+    assert command_results_schema["minItems"] == 3
+    assert command_results_schema["maxItems"] == 3
+    assert "prefixItems" not in command_results_schema
+    assert command_results_schema["items"]["properties"]["id"] == {
+        "enum": ["C01", "C02", "C03"]
+    }
+    assert command_results_schema["items"]["properties"]["argv"]["items"] == {
+        "type": "string"
+    }
     assert "BOUND COMMAND MANIFEST" in command[command.index("-p") + 1]
 
     envelope = {

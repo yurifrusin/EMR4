@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 254
+    assert register["register_revision"] == 255
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 287)
+        f"AER-{index:04d}" for index in range(1, 289)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 187
+    assert len(agent_incidents) == 188
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 286
+    assert report["incident_count"] == 288
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2764,6 +2764,32 @@ def test_aer_0286_forbids_manual_short_sha_expansion() -> None:
     assert "git rev-parse" in incident["correction"]["prevention_control"]
 
 
+def test_aer_0287_preserves_failed_predispatch_state_and_v2_correction() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0287"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["status"] == "corrected"
+    assert "worker-slot" in incident["correction"]["prevention_control"]
+
+
+def test_aer_0288_keeps_provider_shape_and_local_exactness_separate() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0288"]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["stage"] == "dispatch"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["causal_claim_level"] == "observation_only"
+    assert incident["status"] == "corrected"
+    assert (
+        "deterministic local release boundary"
+        in incident["correction"]["prevention_control"]
+    )
+
+
 def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0184"]
 
@@ -2777,28 +2803,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 254
-    assert report["incident_count"] == 286
+    assert report["register_revision"] == 255
+    assert report["incident_count"] == 288
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 187,
+        "agent_behavior": 188,
         "harness": 36,
-        "repository": 54,
+        "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 32,
         "evidence_misreport": 36,
         "harness_failure": 36,
-        "output_contract_violation": 80,
+        "output_contract_violation": 81,
         "read_only_violation": 3,
         "reasoning_claim_error": 36,
-        "repository_defect": 54,
+        "repository_defect": 55,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 95,
-        "canonical_unchanged": 164,
+        "accepted_candidate_changed": 96,
+        "canonical_unchanged": 165,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(

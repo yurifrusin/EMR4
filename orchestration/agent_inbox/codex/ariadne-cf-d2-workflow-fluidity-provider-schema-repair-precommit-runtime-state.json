@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_locally_verified_provider_schema_repair_and_immutable_failed_review_dispatch_evidence_before_one_fresh_exact_head_retry",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md is fully rehydrated. CF-D2 remains stopped and unproved; only the repository-local workflow incident diagnosis and fluidity repair is active.",
+    "current_authority_allocation": "GPT Sol owns the contained correction, exact candidate commit and final acceptance. The first Gemini review transport reached schema admission but produced no review; one fresh exact-HEAD retry may occur only after the corrected candidate is committed and re-preflighted.",
+    "active_plan_and_acceptance": "AER-0287 preserves a fail-closed local predispatch-state rejection. AER-0288 preserves HTTP 400 provider schema rejection caused by tuple-only prefixItems. The repair supplies provider-required array items while the deterministic local gate retains exact command ID, argv, ordering and zero-exit admission. All 274 focused workflow/register tests pass.",
+    "protected_evidence_boundaries": "No model review or repository command resulted from the failed provider-schema admission. No database/Docker, patient/clinical/product data, product/provider tool, credential/IAM, deployment, release, Pages or protected-ref operation is authorized. docs/branding and unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "The active branch is codex/ariadne-bernie-davida-parallel-seam at 6f28bb802ff15f63944ad4a968f04cc13bf0107a with only the bounded schema repair, revision-255 evidence and failed-dispatch artifacts pending. Review worktree r190 remains clean at that same exact HEAD. Required resumed HEAD remains an ancestor; local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_workflow_provider_schema_repair_precommit_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["The provider admission error was isolated from the local CLI log; the corrected schema and exact local admission tests pass."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The first fresh project stopped at provider schema admission with no review result; no retry occurs before commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
