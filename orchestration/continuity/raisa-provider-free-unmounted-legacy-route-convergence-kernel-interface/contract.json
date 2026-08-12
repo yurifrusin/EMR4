@@ -14,11 +14,11 @@
     },
     {
       "path": "docs/api-spine/legacy-compatibility-write-deprecation-map.md",
-      "sha256": "82044925cbe06caf94a7c1ece8bdefe8e41aa05988015973aa72d8be2e2f6aa3"
+      "sha256": "ca7325d4d68dedf5705424dddd4a5ed53cf4395fd2ea4915a0ae633caae64ed7"
     },
     {
       "path": "docs/api-spine/raw-compat-consumer-signal-readiness.md",
-      "sha256": "3862aa7823ad2015213f65ce23d3eac59eb6f1a6c354fa30e0d3136b77f9ab9b"
+      "sha256": "ca1dfb4bc69e09424cb8f1717faef9fdc1daa125bef5bc39b01d2c3f0226365e"
     },
     {
       "path": "docs/api-spine/openapi/appointment-commands.yaml",

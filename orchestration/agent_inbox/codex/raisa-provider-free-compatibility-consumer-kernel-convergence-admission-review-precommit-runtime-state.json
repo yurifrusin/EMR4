@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_compatibility_consumer_and_kernel_convergence_admission_review_source",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely before this tranche. Continuity 253 / Compass 235 accepts native Diary proposal-confirm parity and authorizes this read-only compatibility-consumer and kernel-convergence admission review.",
+    "current_authority_allocation": "GPT Sol completed the tightly coupled provider-free static inventory and deterministic validation under Yuri's standing uninterrupted-development authority and the EMR4 API Steward rules. No subagent, external worker or provider was used; Sydney Vertex Bernie ADC remained unused.",
+    "active_plan_and_acceptance": "The source-bound inventory finds zero committed product/runtime/import/recovery/migration/operational raw HTTP consumers, 126 direct conformance call expressions in 21 test/review files, four separate direct database fixture obligations and unknown external consumers. Status confirm-first is selected, but the full legacy baseline first needs a test-only temporal/idempotency readiness repair. Seven tranche tests, 167 dependency validators, 184 current behavior tests and the canonical 191-test profile pass. The broad 311-test collection has 45 classified stale-harness failures that remain explicit and do not weaken current temporal or idempotency controls.",
+    "protected_evidence_boundaries": "The source commit changes only static plans/findings/threat evidence, deterministic census validation and hash-only source bindings through accepted static contracts. It changes no route, application behavior, kernel, adapter, schedule fence, shadow enablement, observer/sink, database/source/watcher/event, product/patient data, provider, command, deployment, release, Pages or protected ref. docs/branding and all unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain 3be9a06cbe24d388ccf49631dbd54321fe3a9319 before the source commit. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 and required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Ten tracked files have intentional hash-only edits and exactly 520 untracked files are preserved before this runtime-state file, including five docs/branding files. Explicit-path staging only applies."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "compatibility_consumer_kernel_convergence_admission_review_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the source-bound inventory, preservation matrix, first-slice choice and validation."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier was selected for this provider-free read-only review."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker was selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport was not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

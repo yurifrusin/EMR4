@@ -30,7 +30,7 @@ PARENT_CONTRACT_PATH = (
 
 EXPECTED_SOURCE_HEAD = "a433eb68b5c40dd61fb4b6cf23c9af09cb0270ef"
 EXPECTED_SOURCES = {
-    "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json": "4fd0062641fd8181cc4920e8b9708f379e4d9b8d6ab48c2092654ddb0f0b911d",
+    "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json": "abe1e35032ca5a979ac187b45adffc498897e341d185b65c8e0eb6b094cfb582",
     "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md": "3321764f4ea663b96c348167dbdb186c4af9c020d905104d0341b8fa7ba6ddd5",
     "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md": "73c3c6ca7c254b6c38000b16d829b1a5d731977d22a3b18c0ad379b584437292",
     "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md": "ed84a15d101b3bc6cb616b6955d4054dc42d8e9827118f319ba9e4d72ebbea53",

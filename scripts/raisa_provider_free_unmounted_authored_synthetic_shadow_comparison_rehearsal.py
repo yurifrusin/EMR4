@@ -41,13 +41,13 @@ SCHEMA_PATH = (
 
 EXPECTED_SOURCE_HEAD = "fb899b26966c1a171528306ae5ab49b80bacc947"
 EXPECTED_SOURCE_BINDINGS = {
-    "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json": "1a4f7c4bc552a24594b2375d3f4773fe2770773b5b4d84418a10187f9ab72389",
+    "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json": "bbef6febf7046521dbc7112d25cfa7984c4acaa3a059872abd0bf183aecc2c81",
     "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-plan.md": "e1199e1902fa776c8b965567d4b6ba1aae10fbb13ba45e6c9a93073a3d6971bc",
     "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture.md": "04aeb534c025ad48f498cfe89e09ccbb62b04da14f3331827fe82e384cf8c97e",
     "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-closeout.md": "639490e15e6ccfec146cc5b48c22bf167b66c1cd24b4fcdfe071f67636baf2ae",
     "orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-sol-acceptance.md": "fbc47ae99c3e9dcf629a5af772d95aa131b5082cc04f5e5f2621f330b7feece0",
-    "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json": "7261a813562b2e01d5d91cb63e8576ec20a8764a7360e6f98fae14fb9a34d7d2",
-    "scripts/raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal.py": "4caf07c8e2763c992d00354750f62603d28aebddbeda633d10913181ab8c82e7",
+    "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json": "050ddc373b5ca7f1f00207122da653fd9bb5dae01c7b313a88fa529e6b640ddc",
+    "scripts/raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal.py": "bfe9d352c6c8cfd717e0edaee9b42279da4d53d18162d3a155c771ce4e398939",
     "orchestration/api_spine_adr.md": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e",
 }
 ARCHITECTURE_GENERATION_DIGEST = "syn-hmac-sha256-architecture-generation-001"

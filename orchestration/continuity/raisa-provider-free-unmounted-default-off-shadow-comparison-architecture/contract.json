@@ -4,11 +4,11 @@
   "status": "frozen_no_runtime_behavior_change",
   "source_head": "71e240218b1adf1214fff87b542a9d0f6764230e",
   "source_bindings": [
-    {"path": "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json", "sha256": "7261a813562b2e01d5d91cb63e8576ec20a8764a7360e6f98fae14fb9a34d7d2"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json", "sha256": "050ddc373b5ca7f1f00207122da653fd9bb5dae01c7b313a88fa529e6b640ddc"},
     {"path": "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-plan.md", "sha256": "91b3be0c756443bbe8b4b2fe5fe5a11bc61358b8f74db9eda36a33fc67786c27"},
     {"path": "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-design.md", "sha256": "a1e700ae24a7b6143357edc7d84a325d8492c39b70abf0d887a962f601b430f0"},
     {"path": "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-closeout.md", "sha256": "b84b6816038aa0177df3485acafe0a93acb3cedaec2fb3f337510d9fe089b0b6"},
-    {"path": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json", "sha256": "4fd0062641fd8181cc4920e8b9708f379e4d9b8d6ab48c2092654ddb0f0b911d"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json", "sha256": "abe1e35032ca5a979ac187b45adffc498897e341d185b65c8e0eb6b094cfb582"},
     {"path": "orchestration/api_spine_adr.md", "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"}
   ],
   "claim_boundary": {

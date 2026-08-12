@@ -6,7 +6,7 @@
   "source_bindings": [
     {
       "path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json",
-      "sha256": "1a4f7c4bc552a24594b2375d3f4773fe2770773b5b4d84418a10187f9ab72389"
+      "sha256": "bbef6febf7046521dbc7112d25cfa7984c4acaa3a059872abd0bf183aecc2c81"
     },
     {
       "path": "docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-plan.md",
@@ -26,11 +26,11 @@
     },
     {
       "path": "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json",
-      "sha256": "7261a813562b2e01d5d91cb63e8576ec20a8764a7360e6f98fae14fb9a34d7d2"
+      "sha256": "050ddc373b5ca7f1f00207122da653fd9bb5dae01c7b313a88fa529e6b640ddc"
     },
     {
       "path": "scripts/raisa_provider_free_unmounted_pure_route_adapter_differential_rehearsal.py",
-      "sha256": "4caf07c8e2763c992d00354750f62603d28aebddbeda633d10913181ab8c82e7"
+      "sha256": "bfe9d352c6c8cfd717e0edaee9b42279da4d53d18162d3a155c771ce4e398939"
     },
     {
       "path": "orchestration/api_spine_adr.md",

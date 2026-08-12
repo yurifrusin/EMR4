@@ -30,11 +30,11 @@ PARENT_PATH = (
 
 EXPECTED_SOURCE_HEAD = "71e240218b1adf1214fff87b542a9d0f6764230e"
 EXPECTED_SOURCES = {
-    "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json": "7261a813562b2e01d5d91cb63e8576ec20a8764a7360e6f98fae14fb9a34d7d2",
+    "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json": "050ddc373b5ca7f1f00207122da653fd9bb5dae01c7b313a88fa529e6b640ddc",
     "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-plan.md": "91b3be0c756443bbe8b4b2fe5fe5a11bc61358b8f74db9eda36a33fc67786c27",
     "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-design.md": "a1e700ae24a7b6143357edc7d84a325d8492c39b70abf0d887a962f601b430f0",
     "docs/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal-closeout.md": "b84b6816038aa0177df3485acafe0a93acb3cedaec2fb3f337510d9fe089b0b6",
-    "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json": "4fd0062641fd8181cc4920e8b9708f379e4d9b8d6ab48c2092654ddb0f0b911d",
+    "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json": "abe1e35032ca5a979ac187b45adffc498897e341d185b65c8e0eb6b094cfb582",
     "orchestration/api_spine_adr.md": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e",
 }
 EXPECTED_ROUTES = {

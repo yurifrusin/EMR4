@@ -6,7 +6,7 @@
   "source_bindings": [
     {
       "path": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
-      "sha256": "4fd0062641fd8181cc4920e8b9708f379e4d9b8d6ab48c2092654ddb0f0b911d"
+      "sha256": "abe1e35032ca5a979ac187b45adffc498897e341d185b65c8e0eb6b094cfb582"
     },
     {
       "path": "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md",

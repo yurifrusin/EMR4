@@ -34,10 +34,10 @@ EXPECTED_SOURCES = {
     "app/main.py": "dedcb8fe3eb3f76a915d2303da45d404a42fd926e687a73cb30245c744132130",
     "app/middleware/error_handler.py": "d63ec6a2ec76d00cb9bdcb8dd74edcaee52034837cc94db158e8529a358f7ef7",
     "tests/test_appointment_raw_compat.py": "af448fa32bd420bf134e09a7e72f107ca9bbec1c75c986f3494d96dbccdb972b",
-    "docs/api-spine/legacy-compatibility-write-deprecation-map.md": "82044925cbe06caf94a7c1ece8bdefe8e41aa05988015973aa72d8be2e2f6aa3",
-    "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json": "1a4f7c4bc552a24594b2375d3f4773fe2770773b5b4d84418a10187f9ab72389",
+    "docs/api-spine/legacy-compatibility-write-deprecation-map.md": "ca7325d4d68dedf5705424dddd4a5ed53cf4395fd2ea4915a0ae633caae64ed7",
+    "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json": "bbef6febf7046521dbc7112d25cfa7984c4acaa3a059872abd0bf183aecc2c81",
     "docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-closeout.md": "2a290dad9d6410421c44a62f0c575422bc417b541f534c866c304ee7e0dcbb7d",
-    "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json": "4453e92d7656832d19eafecbf47bbcf6e363bb5d980b5f6bac4b58dcda978c41",
+    "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json": "1e325571d66c683aca319b7efa19654105c88b19f19315a3a7db788d35edc2a9",
 }
 EXPECTED_ROUTES = {
     "raw_compat_create": {

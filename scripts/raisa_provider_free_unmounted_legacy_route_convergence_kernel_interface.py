@@ -24,8 +24,8 @@ EXPECTED_SOURCE_HEAD = "4af9966928b9d453eed372f158e566185aaad5da"
 EXPECTED_SOURCES = {
     "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-architecture.md": "71cbddbc880cb906c25d410314e7981311446274f3f1b5355f6759cc1521a0e7",
     "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md": "ed84a15d101b3bc6cb616b6955d4054dc42d8e9827118f319ba9e4d72ebbea53",
-    "docs/api-spine/legacy-compatibility-write-deprecation-map.md": "82044925cbe06caf94a7c1ece8bdefe8e41aa05988015973aa72d8be2e2f6aa3",
-    "docs/api-spine/raw-compat-consumer-signal-readiness.md": "3862aa7823ad2015213f65ce23d3eac59eb6f1a6c354fa30e0d3136b77f9ab9b",
+    "docs/api-spine/legacy-compatibility-write-deprecation-map.md": "ca7325d4d68dedf5705424dddd4a5ed53cf4395fd2ea4915a0ae633caae64ed7",
+    "docs/api-spine/raw-compat-consumer-signal-readiness.md": "ca1dfb4bc69e09424cb8f1717faef9fdc1daa125bef5bc39b01d2c3f0226365e",
     "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
     "orchestration/api_spine_appointment_idempotency_policy_packet.md": "174efcc3dd275275a3c161982ac8ab9d4df245525e850907fefcf846d845c574",
     "orchestration/api_spine_appointment_idempotency_confirmation_family_checkpoint.md": "dc3f3c2f503e34f8862ca6870e37adc427df412018c68b03ecfe134aefe9e5d8",

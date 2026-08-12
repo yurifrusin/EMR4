@@ -1,0 +1,222 @@
+{
+  "schema_version": "raisa.compatibility_consumer_kernel_convergence_admission.v1",
+  "source_head": "3be9a06cbe24d388ccf49631dbd54321fe3a9319",
+  "source_bindings": {
+    "app/routers/appointments.py": "74c812765b9d7ab46d8c30098ae2951b3457bd2d",
+    "app/schemas/appointments.py": "dca4a5b312dd4b0ee7f58f8b7be8e9d5e132bb6f",
+    "app/services/appointment_idempotency.py": "519128b280b95e4d7f2f0342c905ae5311398988",
+    "docs/diary/diary.js": "b6d1990487e0c529849932e399685fcfd762d6f4",
+    "seed.py": "7737f30c9e2697bb3b47ab35fc2bbe774d1350d7"
+  },
+  "route_families": [
+    {
+      "family": "create",
+      "method": "POST",
+      "path": "/api/v1/appointments",
+      "handler": "create_appointment",
+      "success_status": 201,
+      "success_body": "AppointmentOut",
+      "audit_action": "create",
+      "audit_tag": "raw_compat_create",
+      "direct_test_call_expressions": 51,
+      "kernel_eligible_now": false,
+      "additional_gate": "database_owned_schedule_domain_fence"
+    },
+    {
+      "family": "update",
+      "method": "PUT",
+      "path": "/api/v1/appointments/{appointment_id}",
+      "handler": "update_appointment",
+      "success_status": 200,
+      "success_body": "AppointmentOut",
+      "audit_action": "update",
+      "audit_tag": "raw_compat_update",
+      "direct_test_call_expressions": 20,
+      "kernel_eligible_now": false,
+      "additional_gate": "schedule_domain_and_target_serialization"
+    },
+    {
+      "family": "status",
+      "method": "PATCH",
+      "path": "/api/v1/appointments/{appointment_id}/status",
+      "handler": "update_appointment_status",
+      "success_status": 200,
+      "success_body": "AppointmentOut",
+      "audit_action": "status_change",
+      "audit_tag": "raw_compat_status",
+      "direct_test_call_expressions": 40,
+      "kernel_eligible_now": false,
+      "additional_gate": "status_confirm_transaction_kernel_foundation"
+    },
+    {
+      "family": "delete",
+      "method": "DELETE",
+      "path": "/api/v1/appointments/{appointment_id}",
+      "handler": "cancel_appointment",
+      "success_status": 204,
+      "success_body": "empty",
+      "audit_action": "delete",
+      "audit_tag": "raw_compat_delete",
+      "direct_test_call_expressions": 15,
+      "kernel_eligible_now": false,
+      "additional_gate": "explicit_destructive_confirmation_and_response_adaptation"
+    }
+  ],
+  "consumer_census": {
+    "native_diary_raw_call_expressions": 0,
+    "other_product_runtime_raw_http_consumers": [],
+    "import_raw_http_consumers": [],
+    "recovery_raw_http_consumers": [],
+    "migration_raw_http_consumers": [],
+    "operational_script_raw_http_consumers": [],
+    "executable_conformance": {
+      "direct_call_expression_count": 126,
+      "tracked_file_count": 21,
+      "files": [
+        "review/test_raw_status_terminal_rollback_guard.py",
+        "tests/test_appointment_audit.py",
+        "tests/test_appointment_audit_warning_summary.py",
+        "tests/test_appointment_conflicts.py",
+        "tests/test_appointment_patient_link.py",
+        "tests/test_appointment_raw_compat.py",
+        "tests/test_appointment_raw_temporal_guard.py",
+        "tests/test_appointment_status_mutations.py",
+        "tests/test_booking_create_edit.py",
+        "tests/test_booking_patient_flow.py",
+        "tests/test_break_overlap_contract.py",
+        "tests/test_cancelled_appointment_review.py",
+        "tests/test_location_scoped_diary.py",
+        "tests/test_noshow_dna_status_contract.py",
+        "tests/test_nurse_practitioner.py",
+        "tests/test_raisa_provider_free_globally_disabled_runtime_instrumentation_scaffold.py",
+        "tests/test_reason_code_backend.py",
+        "tests/test_slots.py",
+        "tests/test_waiting_area_checkin_contract.py",
+        "tests/test_waiting_area_checkin_defaults.py",
+        "tests/test_waiting_area_contract.py"
+      ],
+      "broad_ordinary_collection": {
+        "test_count": 311,
+        "passed": 266,
+        "failed": 45,
+        "failure_classification": {
+          "past_or_elapsed_time_fixture": 33,
+          "missing_required_proposal_idempotency_header": 12
+        },
+        "stale_files": [
+          "tests/test_booking_create_edit.py",
+          "tests/test_booking_patient_flow.py",
+          "tests/test_break_overlap_contract.py",
+          "tests/test_location_scoped_diary.py",
+          "tests/test_noshow_dna_status_contract.py",
+          "tests/test_nurse_practitioner.py",
+          "tests/test_reason_code_backend.py",
+          "tests/test_slots.py"
+        ]
+      },
+      "current_behavior_baseline": {
+        "test_count": 184,
+        "passed": 184,
+        "failed": 0
+      }
+    },
+    "direct_database_non_route_obligations": [
+      {
+        "path": "seed.py",
+        "classification": "development_bootstrap_fixture"
+      },
+      {
+        "path": "scripts/bernie_meta_grid_live_local_harness.py",
+        "classification": "authored_synthetic_acceptance_fixture"
+      },
+      {
+        "path": "scripts/model_required_bureau_a4_live_local_acceptance.py",
+        "classification": "authored_synthetic_acceptance_fixture"
+      },
+      {
+        "path": "scripts/bernie_stage2_database_acceptance.py",
+        "classification": "authored_synthetic_database_acceptance_fixture"
+      }
+    ],
+    "external_consumer_posture": "unknown_without_operational_observation"
+  },
+  "common_current_behavior": {
+    "auth_dependency": "require_role_mutating_appointment_roles",
+    "tenant_lookup": "current_user_practice_scoped",
+    "default_raw_compat_mode": "audit",
+    "header_mode_value": "true; version=\"0\"",
+    "mutation_and_audit_commit_together": true,
+    "helper_commits_before_route_return": true,
+    "command_idempotency_key_required": false,
+    "completed_command_receipt_written": false,
+    "replay_semantics": false,
+    "backend_precondition_ingress": false,
+    "separate_confirmation_ingress": false,
+    "missing_control_groups": [
+      "backend_precondition_missing",
+      "confirmation_evidence_missing",
+      "idempotency_identity_missing"
+    ]
+  },
+  "parent_contract_source_rebind": {
+    "contract": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+    "semantic_contract_changed": false,
+    "root_bindings": [
+      {
+        "path": "docs/api-spine/legacy-compatibility-write-deprecation-map.md",
+        "prior_sha256": "82044925cbe06caf94a7c1ece8bdefe8e41aa05988015973aa72d8be2e2f6aa3",
+        "current_sha256": "ca7325d4d68dedf5705424dddd4a5ed53cf4395fd2ea4915a0ae633caae64ed7"
+      },
+      {
+        "path": "docs/api-spine/raw-compat-consumer-signal-readiness.md",
+        "prior_sha256": "3862aa7823ad2015213f65ce23d3eac59eb6f1a6c354fa30e0d3136b77f9ab9b",
+        "current_sha256": "ca1dfb4bc69e09424cb8f1717faef9fdc1daa125bef5bc39b01d2c3f0226365e"
+      }
+    ],
+    "cascade_artifacts": [
+      {
+        "path": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+        "prior_sha256": "4fd0062641fd8181cc4920e8b9708f379e4d9b8d6ab48c2092654ddb0f0b911d",
+        "current_sha256": "abe1e35032ca5a979ac187b45adffc498897e341d185b65c8e0eb6b094cfb582"
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json",
+        "prior_sha256": "7261a813562b2e01d5d91cb63e8576ec20a8764a7360e6f98fae14fb9a34d7d2",
+        "current_sha256": "050ddc373b5ca7f1f00207122da653fd9bb5dae01c7b313a88fa529e6b640ddc"
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json",
+        "prior_sha256": "1a4f7c4bc552a24594b2375d3f4773fe2770773b5b4d84418a10187f9ab72389",
+        "current_sha256": "bbef6febf7046521dbc7112d25cfa7984c4acaa3a059872abd0bf183aecc2c81"
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json",
+        "prior_sha256": "4453e92d7656832d19eafecbf47bbcf6e363bb5d980b5f6bac4b58dcda978c41",
+        "current_sha256": "1e325571d66c683aca319b7efa19654105c88b19f19315a3a7db788d35edc2a9"
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json",
+        "prior_sha256": "9181569a5abbc231106655690089d5878727b8ffd08bc9c79874e2a5cc876d2c",
+        "current_sha256": "9741129e9525328174c3a9f67e3f032678296796f8f1287388874cf816f2cefb"
+      }
+    ]
+  },
+  "selected_first_slice": {
+    "family": "status",
+    "slice": "provider_free_unmounted_status_transaction_kernel_protocol_rehearsal",
+    "confirm_first": true,
+    "raw_route_changed": false,
+    "canonical_lock_order": [
+      "practice",
+      "appointment",
+      "idempotency_record"
+    ],
+    "later_runtime_candidate": "status_confirm_only_before_any_raw_status_convergence",
+    "create_excluded": true
+  },
+  "next_dependency_gate": "provider_free_compatibility_conformance_harness_temporal_idempotency_readiness_repair",
+  "status_kernel_protocol_after_next_gate": true,
+  "route_retirement_ready": false,
+  "header_mode_rollout_ready": false,
+  "runtime_or_command_authority_granted": false
+}
