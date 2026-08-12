@@ -61,4 +61,3 @@ All identifiers use the `syn-` namespace. Digests are fixed non-secret labels,
 timestamps are fixed UTC values and the signing/authenticity fields are inert
 booleans or identifiers. No cryptography, route import, application model,
 database driver, network library or provider client is used.
-
