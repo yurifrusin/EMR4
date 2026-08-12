@@ -3,6 +3,8 @@
 Status: standing programme authority active by Yuri decisions on 2026-08-04
 and clarified on 2026-08-05.
 
+Timestamp requirement added: 2026-08-13T09:14:16+10:00 (Australia/Brisbane)
+
 An active verified sprint and every dependency-satisfied successor gate in the
 live accepted programme continue without another user permission request while
 their complete material boundaries are already frozen and no user-owned choice
@@ -111,6 +113,25 @@ durable automatic-resume checkpoint has been written. That checkpoint names the
 active sprint, completed and next executable stages, retry counters, and
 settings fingerprint.
 
+### Active-operation latch
+
+The durable machine-readable checkpoint is
+`orchestration/continuity/ariadne-active-operation-latch/current.json`. It is
+continuity evidence and never replaces the five authoritative rehydration
+sources. Every configured continuation receipt must include the exact validated
+latch and emit whether terminal handback is permitted.
+
+The chronologically latest prompt retained after compaction is not presumed to
+be the controlling objective. While the latch is `in_progress`, a side question
+or status request is answered and followed by resumption; an additive direction
+is merged and followed by resumption. Only an explicit pause or redirect, or an
+existing genuine user-attention condition, changes the active operation. A
+terminal response attempted while the latch forbids it is `revision_required`.
+
+The latch is updated at named tranche or checkpoint transitions, not every
+internal thought or command. This keeps the safeguard durable without restoring
+the ceremony that the evidence-led workflow removed.
+
 Every successful tranche closeout is followed by a concise lay summary naming
 the practical capability gained, the surfaces that remain deliberately closed,
 and any issue exposed or resolved by the work. The summary is delivered before
@@ -126,3 +147,7 @@ attention-required status. Mailbox delivery is committed on the task branch
 before publication and is linked from the conversation closeout. It is a
 durable reporting surface only: it cannot override the live baton, accepted
 plan, evidence boundary, user authority or Git state.
+
+Every newly authored tranche plan, threat-model delta, report, closeout, Sol
+acceptance and Yuri lay/technical summary carries both a `Date:` and an ISO 8601
+`Timestamp:` with the explicit Australia/Brisbane UTC offset near the top.

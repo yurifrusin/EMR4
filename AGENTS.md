@@ -14,8 +14,10 @@ At a new session, after conversation compaction/restoration, after a model/provi
 3. Restore the protected-evidence and user-decision boundaries in sections 5 and 6.
 4. Verify `git status`, `HEAD`, `master`, `handoff/current`, `origin/master`, and `origin/handoff/current`.
 5. Generate a fresh Ariadne orchestrator receipt naming all five sources: `live_handover_current_baton`, `current_authority_allocation`, `active_plan_and_acceptance`, `protected_evidence_boundaries`, and `git_refs_and_worktree`.
+6. Read and validate `orchestration/continuity/ariadne-active-operation-latch/current.json`. It is continuity evidence, not a sixth authority source. When it is `in_progress`, its checkpoint and next executable stage control resumption unless Yuri explicitly pauses or redirects, or an existing user-attention condition is genuinely present.
 
 A conversation summary is a continuity aid only. It is never authoritative for model allocation, provider transport, holdout rules, write authority, or user decision boundaries. `rehydrated_from_receipt: true` without the five named sources is insufficient and must return `revision_required`.
+The chronologically latest retained prompt is likewise evidence, not necessarily the controlling objective. A side question, status request or additive instruction does not replace an unfinished active operation: answer it in commentary as appropriate, merge any in-scope addition, then resume. While the latch is `in_progress`, a terminal final response is prohibited until the latch is validly changed to `complete`, `blocked`, `paused` or `replaced` under the accepted user-attention rules.
 Use a fresh chat context for each named tranche by default. The new context must repeat this full rehydration before acting; prior-chat memory never substitutes for the five sources. Durable decisions that must survive the handoff belong in this file and the active plan/evidence documents. The outgoing tranche must name its exact result, artifacts, unresolved gates, next tranche, and reasoning level.
 
 ## 3. Current Baton
@@ -274,6 +276,8 @@ or resolved. This report is a progress marker, not a handback or permission
 gate: when no user-attention condition above is active, begin the next planned
 tranche immediately after the report without waiting for acknowledgement.
 
+The durable active-operation latch is `orchestration/continuity/ariadne-active-operation-latch/current.json`. Update it at named tranche/checkpoint transitions, not internal microsteps, and copy its complete validated object into every configured continuation-event runtime state. Prompt recency alone never changes it: answer side/status questions then resume, merge additions then resume, and record explicit pause/redirect before terminal handback or replacement.
+
 Yuri's durable tranche mailbox is `orchestration/human_inbox/yuri/`. Before
 each task-branch closeout commit and publication, write one dated Markdown
 message there with paired lay and technical summaries, issues, deliberately
@@ -486,5 +490,6 @@ Before ending a material session:
 5. verify origin refs and a clean integration worktree; and
 6. send the non-PHI Pushover closeout ping with `scripts/notify_sprint_closeout.py`, stating whether the sprint engine is continuing or paused and the concrete next work or pause reason. After a successful continuing closeout ping, immediately perform the next tranche's fresh five-source rehydration and begin that already-authorised work; do not yield or end solely because the preceding tranche closed. Yield only for a genuine user-attention gate or an unavoidable fresh-context handoff, and resume the authorised next tranche without asking Yuri to repeat permission. Also send one compact non-PHI Pushover alert whenever work pauses at a genuine user-attention gate; do not ping for routine progress. Report delivery failure explicitly in-thread.
 7. commit a dated message to `orchestration/human_inbox/yuri/` and give Yuri the linked paired lay and technical closeout summary (capability gained, issues, deliberately closed surfaces, place in the Raisa direction and planned next tranche), then immediately continue to the next dependency-satisfied planned tranche unless his attention is genuinely required.
+8. put both `Date:` and an ISO 8601 `Timestamp:` with explicit `Australia/Brisbane` offset at the top of every newly authored tranche plan, threat-model delta, report, closeout, Sol acceptance and Yuri lay/technical summary.
 The user can say **"update the handover doc"** at any time to trigger a live baton refresh.
 *Compacted 2026-07-15 after LC4R8. Full predecessor integrity is enforced by `tests/test_agents_handover_archive.py`.*

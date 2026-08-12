@@ -15,7 +15,7 @@ def load_policy() -> dict:
 
 def test_continuation_is_default_without_active_execution_limits() -> None:
     policy = load_policy()
-    assert policy["schema_version"] == "ariadne.autonomous_continuation.v4"
+    assert policy["schema_version"] == "ariadne.autonomous_continuation.v5"
     assert policy["default_posture"] == "continue_without_user_permission"
     assert policy["execution_limits"]["enforcement"] == "inactive"
     assert policy["execution_limits"]["wall_clock_deadlines"] == "inactive"
@@ -91,6 +91,34 @@ def test_internal_checkpoint_cannot_end_the_task() -> None:
         lifecycle["accepted_gate_with_dependency_satisfied_successor_is_not_terminal"]
         is True
     )
+    latch = lifecycle["active_operation_latch"]
+    assert latch["state_file"] == (
+        "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    )
+    assert latch["required_at_every_configured_continuation_event"] is True
+    assert latch["chronological_last_prompt_is_controlling_authority"] is False
+    assert latch["side_question_behavior"] == "answer_then_resume"
+    assert latch["status_request_behavior"] == "answer_then_resume"
+    assert latch["scope_addition_behavior"] == "merge_then_resume"
+    assert latch["replacement_requires_explicit_pause_or_redirect"] is True
+    assert latch["in_progress_terminal_response_permitted"] is False
+
+
+def test_new_tranche_documents_require_brisbane_timestamp() -> None:
+    metadata = load_policy()["document_metadata"]
+    assert metadata["new_tranche_documents_require_date"] is True
+    assert (
+        metadata["new_tranche_documents_require_australia_brisbane_iso8601_timestamp"]
+        is True
+    )
+    assert set(metadata["applies_to"]) == {
+        "plan",
+        "threat_model_delta",
+        "report",
+        "closeout",
+        "sol_acceptance",
+        "yuri_lay_technical_summary",
+    }
 
 
 def test_standing_programme_authority_derives_exact_planned_boundaries() -> None:

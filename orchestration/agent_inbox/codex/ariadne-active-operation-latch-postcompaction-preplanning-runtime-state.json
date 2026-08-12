@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_ariadne_active_operation_latch_and_terminal_response_guard",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at task HEAD 17add9baf2cc3616f7ee4fb8eda3481e2eb13715. Continuity 268 / Compass 250 records the accepted unmounted status-confirm composition and the read-only route-mounting readiness re-review as the active next tranche.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. Yuri explicitly requested this workflow safeguard after the post-compaction continuation failure. The change is small, serial and tightly coupled to Ariadne continuity controls, so it remains Sol-owned with no subagent or external worker.",
+    "active_plan_and_acceptance": "The accepted status-confirm composition plan, closeout and Sol acceptance remain controlling for product work. Its next read-only re-review plan is frozen but temporarily suspended by Yuri's direct workflow-repair request. The safeguard tranche must preserve that exact checkpoint and resume it after closeout rather than restart or replace it.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. No protected evidence, historical Diary material, patient/product data, route/database execution, provider, credential, IAM, browser, network, deployment, release, Pages or protected-ref movement is authorised. All existing untracked files, including five docs/branding files and prior receipt pairs, remain preserved; only explicit-path staging is permitted.",
+    "git_refs_and_worktree": "Task HEAD, local task branch and origin task are 17add9baf2cc3616f7ee4fb8eda3481e2eb13715; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean with 518 preserved untracked status entries before this runtime-state file is added."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "postcompaction_active_operation_latch_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The compaction incident was reproduced from the durable summary and current baton without accessing protected evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected for this serial workflow safeguard."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external verifier is selected before deterministic local gates."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No mechanical worker packet is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

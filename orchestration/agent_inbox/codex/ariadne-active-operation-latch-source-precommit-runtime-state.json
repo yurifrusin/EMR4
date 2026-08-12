@@ -1,0 +1,117 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_ariadne_active_operation_latch_source_after_focused_and_canonical_repair_checks",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at task baseline 17add9baf2cc3616f7ee4fb8eda3481e2eb13715 and now contains the narrowly added active-operation precedence and timestamp rules while remaining below its 500-line compactness limit.",
+    "current_authority_allocation": "GPT Sol remains conductor and acceptance owner. Yuri directly requested this workflow safeguard and timestamp convention. No external worker, subagent or verifier was used for the small serial policy/code change.",
+    "active_plan_and_acceptance": "The frozen 2026-08-13 safeguard plan requires one exact latch, pure validator, receipt projection and terminal-response guard, while preserving the already frozen status-confirm route-mounting readiness re-review checkpoint. The current latch is in_progress and forbids terminal handback.",
+    "protected_evidence_boundaries": "No protected evidence, historical Diary, patient/product data, route/database runtime, provider, credential, IAM, browser, network, product tool/command, deployment, release, Pages or protected ref was accessed. Five docs/branding files and all unrelated untracked artifacts remain preserved. Explicit-path staging only applies.",
+    "git_refs_and_worktree": "Task HEAD remains 17add9baf2cc3616f7ee4fb8eda3481e2eb13715 before the source commit; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Focused latch/receipt/policy/handover tests pass after the only canonical failure, AGENTS.md line count 502, was mechanically compressed to 495 lines."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-postcompaction-active-operation-latch",
+    "active_tranche": "Ariadne post-compaction active-operation latch and terminal-response guard",
+    "objective": "Make unfinished authorised operation precedence durable and mechanically visible across compaction, then resume the exact status-confirm route-mounting readiness re-review checkpoint.",
+    "status": "in_progress",
+    "source_head": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
+    "authority_source": "Yuri's 2026-08-13 direct implementation request plus standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "latch schema, validator, continuation-receipt projection and timestamp policy implemented; focused tests pass",
+      "next_executable_stage": "run canonical verification and close out the workflow safeguard before resuming the status-confirm route-mounting readiness re-review",
+      "retry_counters": {
+        "implementation": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "protected_evidence_closed",
+      "patient_product_clinical_data_closed",
+      "provider_credential_iam_network_closed",
+      "route_database_command_runtime_closed",
+      "deployment_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "active_operation_latch_source_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Focused deterministic evidence and the canonical failure/repair are locally available."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier was selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker was selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude transport was not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -9,12 +9,15 @@ hard_controls:
   - exact_cleanup
   - exact_candidate_worktree_and_ref_binding
   - explicit_path_staging_and_protected_ref_closure
+  - active_operation_precedence_and_terminal_response_guard
 adaptive_flow:
   active_boundary_artifacts: one_plan_and_one_machine_contract
   external_review: one_final_risk_triggered_veto_unless_a_hard_boundary_is_ambiguous
   intermediate_deterministic_failure: repair_locally_before_external_dispatch
   receipt_rule: one_fresh_receipt_per_configured_continuation_event_not_per_internal_microstep
   same_coordinate_after_correction: stop_or_change_programme_direction
+  side_question_during_active_operation: answer_then_resume
+  status_request_during_active_operation: answer_then_resume
 diagnostic_decision:
   coordinate_is_not_assertion: true
   claim_levels: [observation_only, necessary_defect, exclusive_cause]

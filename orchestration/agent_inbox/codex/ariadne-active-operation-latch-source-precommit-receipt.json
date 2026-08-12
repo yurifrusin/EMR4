@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne post-compaction active-operation latch and terminal-response guard",
+    "completed_stage": "latch schema, validator, continuation-receipt projection and timestamp policy implemented; focused tests pass",
+    "next_executable_stage": "run canonical verification and close out the workflow safeguard before resuming the status-confirm route-mounting readiness re-review",
+    "operation_id": "ariadne-postcompaction-active-operation-latch",
+    "resume_after_compaction": true,
+    "source_head": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_ariadne_active_operation_latch_source_after_focused_and_canonical_repair_checks",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen 2026-08-13 safeguard plan requires one exact latch, pure validator, receipt projection and terminal-response guard, while preserving the already frozen status-confirm route-mounting readiness re-review checkpoint. The current latch is in_progress and forbids terminal handback.",
+    "current_authority_allocation": "GPT Sol remains conductor and acceptance owner. Yuri directly requested this workflow safeguard and timestamp convention. No external worker, subagent or verifier was used for the small serial policy/code change.",
+    "git_refs_and_worktree": "Task HEAD remains 17add9baf2cc3616f7ee4fb8eda3481e2eb13715 before the source commit; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Focused latch/receipt/policy/handover tests pass after the only canonical failure, AGENTS.md line count 502, was mechanically compressed to 495 lines.",
+    "live_handover_current_baton": "AGENTS.md was read completely at task baseline 17add9baf2cc3616f7ee4fb8eda3481e2eb13715 and now contains the narrowly added active-operation precedence and timestamp rules while remaining below its 500-line compactness limit.",
+    "protected_evidence_boundaries": "No protected evidence, historical Diary, patient/product data, route/database runtime, provider, credential, IAM, browser, network, product tool/command, deployment, release, Pages or protected ref was accessed. Five docs/branding files and all unrelated untracked artifacts remain preserved. Explicit-path staging only applies."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,4 +1,4 @@
-schema_version: ariadne.autonomous_continuation.v4
+schema_version: ariadne.autonomous_continuation.v5
 default_posture: continue_without_user_permission
 applies_when: [verified_sprint_is_active, failure_is_inside_existing_mandate, no_user_owned_decision_is_required]
 policy_decision:
@@ -121,7 +121,26 @@ task_lifecycle:
   next_step_known_is_not_terminal: true
   single_gate_closeout_is_not_terminal: true
   accepted_gate_with_dependency_satisfied_successor_is_not_terminal: true
+  active_operation_latch:
+    state_file: orchestration/continuity/ariadne-active-operation-latch/current.json
+    required_at_every_configured_continuation_event: true
+    chronological_last_prompt_is_controlling_authority: false
+    side_question_behavior: answer_then_resume
+    status_request_behavior: answer_then_resume
+    scope_addition_behavior: merge_then_resume
+    replacement_requires_explicit_pause_or_redirect: true
+    in_progress_terminal_response_permitted: false
 resume_checkpoint:
   required_for_platform_interruption: true
   must_name: [active_sprint, completed_stage, next_executable_stage, retry_counters, settings_fingerprint]
   automatic_resume_preferred: true
+document_metadata:
+  new_tranche_documents_require_date: true
+  new_tranche_documents_require_australia_brisbane_iso8601_timestamp: true
+  applies_to:
+    - plan
+    - threat_model_delta
+    - report
+    - closeout
+    - sol_acceptance
+    - yuri_lay_technical_summary

@@ -1,4 +1,4 @@
-schema_version: ariadne.orchestrator_requirements.v1
+schema_version: ariadne.orchestrator_requirements.v2
 continuation_events: &continuation_events
   - new_session
   - post_compaction
@@ -10,6 +10,13 @@ continuation_events: &continuation_events
   - pre_integration
   - pre_commit
   - pre_push
+active_operation_latch:
+  runtime_state_field: active_operation
+  required_events: *continuation_events
+  schema_version: ariadne.active_operation_latch.v1
+  current_state: orchestration/continuity/ariadne-active-operation-latch/current.json
+  chronological_last_prompt_is_authority: false
+  terminal_handback_requires_latch_permission: true
 required_adapter_observations: all_declared
 worker_slot_management:
   # This is an EMR4 profile choice. The receipt core is resource-neutral.
@@ -49,3 +56,6 @@ orchestrator_rules:
   - never_dispatch_when_slot_inventory_is_missing_or_stale
   - never_substitute_a_verified_assignment_without_conductor_replan_and_verifier_result
   - require_a_new_receipt_at_each_continuation_event
+  - require_valid_active_operation_latch_at_each_continuation_event
+  - never_treat_prompt_recency_alone_as_operation_replacement
+  - never_issue_terminal_handback_while_active_operation_forbids_it

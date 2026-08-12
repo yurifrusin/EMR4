@@ -46,6 +46,9 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
     assert receipt["rehydrated_from_receipt"] is True
     assert receipt["rehydration_sources"] == REQUIRED_SOURCES
     assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
+    assert receipt["active_operation"]["operation_id"] == "fixture-operation"
+    assert receipt["active_operation"]["status"] == "in_progress"
+    assert receipt["terminal_handback_permitted"] is False
 
 
 def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(
@@ -177,6 +180,39 @@ def test_every_configured_continuation_event_requires_and_emits_five_sources(
         assert receipt["rehydrated_from_receipt"] is True
         assert receipt["rehydration_sources"] == REQUIRED_SOURCES
         assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
+        assert receipt["active_operation"]["operation_id"] == "fixture-operation"
+        assert receipt["terminal_handback_permitted"] is False
+
+
+def test_every_continuation_event_fails_closed_without_active_operation_latch(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state.pop("active_operation")
+    for event in CONTINUATION_EVENTS:
+        runtime_state["continuation_event"] = event
+        path = tmp_path / f"{event}.json"
+        path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+        receipt = build_receipt(runtime_state_path=path)
+
+        assert receipt["status"] == "revision_required"
+        assert receipt["terminal_handback_permitted"] is None
+        assert "active_operation_latch_missing" in receipt["reasons"]
+
+
+def test_inconsistent_active_operation_latch_fails_closed(tmp_path: Path) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["active_operation"]["terminal_response"]["permitted"] = True
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert receipt["active_operation"] == {}
+    assert receipt["terminal_handback_permitted"] is None
+    assert "active_operation_latch_invalid" in receipt["reasons"]
 
 
 def test_named_source_without_evidence_fails_closed(tmp_path: Path):

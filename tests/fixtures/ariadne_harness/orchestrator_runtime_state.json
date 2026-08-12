@@ -28,6 +28,42 @@
     "protected_evidence_boundaries": "authored fixture protected boundaries",
     "git_refs_and_worktree": "authored fixture refs and clean worktree"
   },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "fixture-operation",
+    "active_tranche": "Fixture active tranche",
+    "objective": "Prove unfinished-operation precedence in the orchestrator receipt fixture.",
+    "status": "in_progress",
+    "source_head": "1111111111111111111111111111111111111111",
+    "authority_source": "authored fixture authority",
+    "checkpoint": {
+      "completed_stage": "fixture rehydration complete",
+      "next_executable_stage": "continue fixture execution",
+      "retry_counters": {
+        "fixture": 0
+      },
+      "settings_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "authored_fixture_boundaries"
+    ]
+  },
   "adapter_observations": [
     {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "deepcode_cli", "method": "deepcode_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
