@@ -13,7 +13,7 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_gap_review_is_the_accepted_current_position() -> None:
+def test_gap_review_remains_an_accepted_continuity_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
@@ -21,7 +21,7 @@ def test_gap_review_is_the_accepted_current_position() -> None:
     assert graph["graph_revision"] >= 258
     assert compass["map_revision"] >= 240
     assert compass["source_graph_revision"] == graph["graph_revision"]
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
     assert node["status"] == "accepted"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
 
@@ -68,22 +68,25 @@ def test_gap_review_evidence_and_mailbox_are_bound() -> None:
 
 
 def test_next_direction_remains_unmounted_and_non_executing() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
+    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
     joined = " ".join(
-        current["unlocks"] + current["does_not_solve"]
+        [journey["outcome"]] + node["unresolved_gates"]
     ).lower()
 
     assert "unmounted status-confirm runtime convergence architecture" in joined
     for phrase in (
-        "route implementation",
-        "database concurrency",
-        "raw compatibility-route",
+        "route edit",
+        "database execution",
+        "runtime kernel",
+        "raw-route change",
         "provider/credential",
-        "patient/product",
-        "product commands",
+        "product/patient",
+        "commands",
         "deployment",
         "pages",
-        "protected-ref",
+        "protected refs",
     ):
         assert phrase in joined

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 258,
+  "graph_revision": 259,
   "harvests": [],
   "nodes": [
     {
@@ -16577,6 +16577,84 @@
         "The provider-free unmounted status-confirm runtime convergence architecture has not yet been frozen or accepted.",
         "No route edit, database execution, runtime kernel, raw-route change or create schedule fence is authorised.",
         "Provider/credential activity, product/patient data, watchers/events, commands, deployment, production, release, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture",
+      "title": "Provider-free unmounted status-confirm runtime convergence architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b9cc57b6e607e5896e822abc7b632442df2f907e",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The architecture is provider-free, authored-synthetic and unmounted; implementation_authorized is false.",
+          "It closes nine design gaps through a status-only seam and one authority-first ordered transaction.",
+          "Physical version storage, migration, route/database execution, provider, product data and commands remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-runtime-convergence-architecture",
+          "source": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md",
+          "status": "accepted",
+          "summary": "Accept nine closed convergence decisions and hand off only to an unmounted in-memory rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "Status-only discrimination preserves waiting-area behavior outside the kernel.",
+        "Practice, appointment and idempotency locks precede current-authority recheck and replay/conflict disclosure.",
+        "Signed session/version/warning evidence, terminal deferral, atomic audit/receipt correlation and stored delivery are architecturally bound.",
+        "Twenty scenarios and 56 hostile mutations prove contract coherence, not runtime or PostgreSQL behavior."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md",
+          "docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/provider-free-architecture-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The provider-free unmounted status-confirm runtime convergence rehearsal has not yet executed.",
+        "Physical version storage, migration/backfill, ORM/service and route integration remain unselected and unproved.",
+        "Database execution, raw-route change, create schedule fencing, providers, product/patient data, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

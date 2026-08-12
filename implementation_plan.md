@@ -227,10 +227,16 @@ deliberately `not_admitted` unchanged. Seven blockers cover lock order,
 in-transaction current authority/session, status-only discrimination, terminal
 policy, exact warnings, durable audit/receipt correlation and authority-first
 replay disclosure; session/source-version evidence and canonical initial/replay
-receipt delivery are partial gaps. The next bounded gate is an unmounted
-convergence architecture over this finite set. It may freeze contracts but
-cannot edit or execute the route or database. No provider, watcher, event,
-command, kernel runtime or schedule fence opens in these gates.
+receipt delivery are partial gaps. The unmounted convergence architecture over
+this finite set now passes at exact source
+`b9cc57b6e607e5896e822abc7b632442df2f907e`: nine closed decisions, twenty
+scenarios and fifty-six hostile mutations bind status-only ingress,
+server-owned session/current authority, ordered locks, a semantic monotonic
+state version, exact warnings, terminal deferral, atomic audit/receipt
+correlation and stored initial/replay delivery. The next bounded gate is a pure
+provider-free unmounted in-memory rehearsal of that architecture. Physical
+version storage, migration/backfill, route/database implementation, providers,
+watchers, events, commands, kernel runtime and schedule fencing remain closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

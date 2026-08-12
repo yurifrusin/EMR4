@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_push_the_provider_free_unmounted_status_confirm_runtime_convergence_architecture_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and now has SHA-256 a3225a0fd7b013b0242322aaa0aa6c2aeeaf6fb2eabe3b31bbdebcedd16f36a6. Its 71.3 KB / 486-line live baton binds Continuity 259 / Compass 241, the accepted architecture and the provider-free unmounted convergence-rehearsal handoff.",
+    "current_authority_allocation": "GPT Sol retains architecture integration and closeout ownership under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent, external worker or provider is selected. Google authentication and browser-assisted ADC remain unused and outside this provider-free tranche.",
+    "active_plan_and_acceptance": "Exact source b9cc57b6e607e5896e822abc7b632442df2f907e passes as raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture_pass. Nine decisions, 20 scenarios and 56 hostile mutations pass. The focused packet passes 12/12, the source lineage 138/138 and the final Continuity-bound lineage 142/142. The first Continuity update rejected unsupported node kind architecture; the mechanical foundation-kind rebind passed without changing the contract or authority.",
+    "protected_evidence_boundaries": "AER-0291 exact-file control remained in force. No application source was searched, imported, edited or executed. No route/database/SQL/lock/migration, provider, credential/browser authorization, product/patient data, watcher/event, command, deployment, release, Pages or protected-ref authority opened. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies.",
+    "git_refs_and_worktree": "Task HEAD is exact architecture source b9cc57b6e607e5896e822abc7b632442df2f907e while origin task remains fca97097eeca5070ad41e403aed9413eee45ccba before closeout push. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Seven tracked closeout paths and 521 untracked paths, including five docs/branding paths and five intended closeout paths, precede this receipt pair."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_convergence_architecture_closeout_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["All deterministic bounded architecture and closeout gates pass."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier is selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
