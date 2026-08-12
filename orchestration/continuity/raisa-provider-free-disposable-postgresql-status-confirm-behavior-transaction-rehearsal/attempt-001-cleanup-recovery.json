@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "attempt_id": "status-confirm-btr-attempt-001",
+  "result": "pre_sql_container_profile_failure_recovered",
+  "failure_stage": "container_profile_verification",
+  "postgres_readiness_reached": false,
+  "migration_sql_executed": false,
+  "scenario_sql_executed": false,
+  "global_container_listing_used": false,
+  "exact_label_filtered_event_query_used": true,
+  "container_identity_sha256": "98c82a271288ba55435732bd20886ac942c8462491ca7d5305404650e283ae96",
+  "network_identity_sha256": "954300910e665c6d9443940c405130e89aa7f11655cb867973fc275fbbb3355e",
+  "owned_profile_verified": true,
+  "docker_published_port_present": false,
+  "fixed_container_loopback_capability_verified": true,
+  "container_removed_by_exact_id": true,
+  "container_exact_id_absence_verified": true,
+  "network_removed_by_exact_id": true,
+  "network_exact_id_absence_verified": true,
+  "unresolved_runtime_objects": 0
+}

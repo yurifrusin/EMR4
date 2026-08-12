@@ -1,0 +1,342 @@
+{
+  "schema_version": "raisa.status_confirm_behavior_transaction_evidence.v1",
+  "result": "raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction",
+  "source_head": "d4f637d6c2afadccc95d4b7ae8cfc1f522444133",
+  "contract_sha256": "bdc848e2033715eb110f3d55425e06894abbc3a492c0a35fea0a2daf2c55d19b",
+  "source_hashes": {
+    "docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md": "777798e27b226fb7a4adcdade185372cc816f7fd245d8fe7034427a3ae0f3ad2",
+    "orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md": "cfff73f8e8849ff16144a48a2e863f7c0a97f8222ac05c49209da767ac145c48",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json": "97243376111a2546a8bb36c7c615531d50e73ffdac92a2a179ec7747b448e2d8",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py": "9dbc172af43d1f858335d747def4c520643790b89646e2bfeef1a15124ab600d",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/models/tenancy.py": "6be0d9ab4fc33a8709268d2f2a4550b6063e3f3e4188349c5fe3b0b6acd14431",
+    "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py": "bfa72b627061b8e477903ec9fc2cfbb35a4970b26ab7115db18c3daef1d3696c",
+    "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-closeout.md": "2b379cbaefeac83a79a3776f78c58b48a94b4695de3356d56a57318a5ab594e7",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/rehearsal-packet.json": "18c5bf4f6b6c22ab310e1571f794598a4317ff32f9103445b9d23edc5d112918",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+  },
+  "hostile_mutations_rejected": 100,
+  "environment": {
+    "postgresql_major": 16,
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "network_internal": true,
+    "docker_published_ports": false,
+    "host_transport": "fixed_in_process_ipv4_loopback_relay",
+    "storage": "container_local_tmpfs"
+  },
+  "offline_sql": {
+    "range": "v1w2x3y4z5b6:w2x3y4z5a6b7",
+    "body_sha256": "d4fa44494a0ca933feae8f68c4d45ae84822134e76ad6103648091461260259d",
+    "body_bytes": 3166
+  },
+  "catalogue": {
+    "head": "w2x3y4z5a6b7",
+    "selected_constraints": 5,
+    "correlation_indexes": 2
+  },
+  "scenarios": [
+    {
+      "id": "BTR-S01",
+      "status": "passed",
+      "outcome": "new_command",
+      "appointment_version_before": 1,
+      "appointment_version_after": 2,
+      "audit_delta": 1,
+      "completed_receipt_delta": 1,
+      "disclosure_count": 1,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S02",
+      "status": "passed",
+      "outcome": "replay",
+      "appointment_version_before": 1,
+      "appointment_version_after": 2,
+      "audit_delta": 1,
+      "completed_receipt_delta": 1,
+      "disclosure_count": 1,
+      "authority_calls": 4,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update",
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S03",
+      "status": "passed",
+      "outcome": "conflict",
+      "appointment_version_before": 1,
+      "appointment_version_after": 2,
+      "audit_delta": 1,
+      "completed_receipt_delta": 1,
+      "disclosure_count": 1,
+      "authority_calls": 4,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update",
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S04",
+      "status": "passed",
+      "outcome": "conflict",
+      "appointment_version_before": 1,
+      "appointment_version_after": 2,
+      "audit_delta": 1,
+      "completed_receipt_delta": 1,
+      "disclosure_count": 1,
+      "authority_calls": 4,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update",
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S05",
+      "status": "passed",
+      "outcome": "in_progress_not_replayable",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S06",
+      "status": "passed",
+      "outcome": "legacy_receipt_not_replayable",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S07",
+      "status": "passed",
+      "outcome": "receipt_integrity_failure",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S08",
+      "status": "passed",
+      "outcome": "target_unavailable",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 0,
+      "statement_tokens": [
+        "practice_for_share"
+      ]
+    },
+    {
+      "id": "BTR-S09",
+      "status": "passed",
+      "outcome": "target_unavailable",
+      "appointment_version_before": null,
+      "appointment_version_after": null,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 0,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S10",
+      "status": "passed",
+      "outcome": "authority_revoked",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 1,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S11",
+      "status": "passed",
+      "outcome": "authority_revoked",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S12",
+      "status": "passed",
+      "outcome": "authority_revoked",
+      "appointment_version_before": 1,
+      "appointment_version_after": 2,
+      "audit_delta": 1,
+      "completed_receipt_delta": 1,
+      "disclosure_count": 1,
+      "authority_calls": 3,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update",
+        "practice_for_share",
+        "appointment_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S13",
+      "status": "passed",
+      "outcome": "scaffold_incomplete",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S14",
+      "status": "passed",
+      "outcome": "scaffold_incomplete",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S15",
+      "status": "passed",
+      "outcome": "scaffold_incomplete",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    },
+    {
+      "id": "BTR-S16",
+      "status": "passed",
+      "outcome": "outer_abort",
+      "appointment_version_before": 1,
+      "appointment_version_after": 1,
+      "audit_delta": 0,
+      "completed_receipt_delta": 0,
+      "disclosure_count": 0,
+      "authority_calls": 2,
+      "statement_tokens": [
+        "practice_for_share",
+        "appointment_for_update",
+        "idempotency_insert_on_conflict",
+        "idempotency_for_update"
+      ]
+    }
+  ],
+  "lifecycle": [
+    "contract_and_sources_verified",
+    "local_image_verified",
+    "owned_internal_network_verified",
+    "internal_container_profile_verified",
+    "postgresql_16_ready",
+    "transaction_schema_installed",
+    "fixed_loopback_relay_started",
+    "host_sqlalchemy_catalogue_verified",
+    "sixteen_serial_scenarios_verified",
+    "fixed_loopback_relay_stopped",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container": "container_absent",
+    "network": "network_absent",
+    "container_id_sha256": "66d0f1fa6d8ead5ee5004a873ac5a08e9a7ce973172e7c7eb4232c8e30d16014",
+    "network_id_sha256": "d433758c64e35fc813dda7b0c362c81af152d010a51a9c91e4b968e2aa2a5323"
+  },
+  "claim_boundary": "Exact serial unmounted SQLAlchemy/PostgreSQL behavior and selected rollback boundaries only; no route, product database, concurrency, restart, unknown commit, deployment or production claim."
+}

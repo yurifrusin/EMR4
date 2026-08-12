@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_provider_free_disposable_postgresql_status_confirm_behavior_transaction_pass_source",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD d4f637d6c2afadccc95d4b7ae8cfc1f522444133. Continuity 264 / Compass 246 names this exact provider-free disposable PostgreSQL behavior/transaction rehearsal as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol remains conductor, implementation, deterministic verifier, acceptance owner and task-branch publisher for this one serial disposable-database sequence. No subagent, provider worker or external verifier is selected.",
+    "active_plan_and_acceptance": "The frozen plan, threat delta, exact eleven-source contract and schemas were followed. Attempt 003 passed PostgreSQL 16 readiness, exact schema installation, host SQLAlchemy catalogue admission and all sixteen serial authored-synthetic scenarios; all 100 hostile mutations, 13 focused tests and 45 current seam/scaffold/API-contract tests pass. Attempts 001 and 002 stopped before scenario SQL and have exact cleanup recovery records.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain restored. Protected holdouts and historical Diary data remain sealed; AER-0292 exact-file-only access remains binding. No existing/product database, durable product data, mounted route, concurrency/restart/unknown-commit, patient/product data, provider/ADC/credential/browser action, watcher/event authority, deployment, production, release, Pages or protected-ref movement is authorized. docs/branding and every unrelated untracked path remain preserved; explicit-path staging only applies.",
+    "git_refs_and_worktree": "HEAD, task branch and origin task are d4f637d6c2afadccc95d4b7ae8cfc1f522444133; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean before explicit staging. There are 529 untracked paths including 5 docs/branding paths; 13 exact current-tranche paths plus this receipt pair are in scope and all others remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_behavior_transaction_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Exact pass evidence and cleanup were verified in the active task worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent is selected for this serial stateful proof."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed verifier is selected for deterministic local evidence."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected under the serial worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "raisa.status_confirm_behavior_transaction_evidence.v1",
+  "result": "rehearsal_failed",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction",
+  "source_head": "d4f637d6c2afadccc95d4b7ae8cfc1f522444133",
+  "lifecycle": [
+    "contract_and_sources_verified",
+    "local_image_verified",
+    "owned_internal_network_verified",
+    "internal_container_profile_verified",
+    "postgresql_16_ready",
+    "transaction_schema_installed",
+    "fixed_loopback_relay_started",
+    "fixed_loopback_relay_stopped",
+    "cleanup_verified"
+  ],
+  "failure": {
+    "stage": "harness",
+    "code": "unexpected_exception",
+    "detail_sha256": "1debc403a8d61317ed9fe482990a1a19ae6481f791cd1b25839a5c816d3da29b"
+  },
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container": "container_absent",
+    "network": "network_absent",
+    "container_id_sha256": "5b439c837196d2ac54a57cb18c5e3bab4c1106ef496c8f983322bd8c9c93092e",
+    "network_id_sha256": "cff3cdcbd2809e70ce0c80acc7c17e5ce1faf14bb066f792518e26ff2f302d27"
+  },
+  "claim_boundary": "Exact serial unmounted SQLAlchemy/PostgreSQL behavior and selected rollback boundaries only; no route, product database, concurrency, restart, unknown commit, deployment or production claim."
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "attempt_id": "status-confirm-btr-attempt-002",
+  "result": "pre_host_connection_driver_binding_failure_recovered",
+  "failure_stage": "host_sqlalchemy_driver_import",
+  "postgres_readiness_reached": true,
+  "migration_sql_executed": true,
+  "host_database_connection_reached": false,
+  "scenario_sql_executed": false,
+  "failure_exception_class": "ModuleNotFoundError",
+  "container_identity_sha256": "5b439c837196d2ac54a57cb18c5e3bab4c1106ef496c8f983322bd8c9c93092e",
+  "network_identity_sha256": "cff3cdcbd2809e70ce0c80acc7c17e5ce1faf14bb066f792518e26ff2f302d27",
+  "relay_stopped": true,
+  "container_removed_by_exact_id": true,
+  "container_exact_id_absence_verified": true,
+  "network_removed_by_exact_id": true,
+  "network_exact_id_absence_verified": true,
+  "unresolved_runtime_objects": 0
+}
