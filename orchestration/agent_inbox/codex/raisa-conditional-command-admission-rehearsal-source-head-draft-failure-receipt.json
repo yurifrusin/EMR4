@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.source_head_draft_failure_receipt.v1",
+  "incident_id": "AER-0289",
+  "attempt_id": "raisa-conditional-command-admission-rehearsal-closeout-draft-001",
+  "status": "revision_required_corrected_before_acceptance",
+  "displayed_short_head": "f465d6a6",
+  "rejected_inferred_full_head": "f465d6a6f1f55f86a31bb0d98a046abff95d7e57",
+  "exact_git_rev_parse_head": "f465d6a6536ea2e69eec8df2ed1c2f9f65c24f6c",
+  "exact_commit_object_verified": true,
+  "affected_draft_files": [
+    "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-sol-acceptance.md",
+    "orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md"
+  ],
+  "rejected_value_committed": false,
+  "rejected_value_published": false,
+  "runtime_or_external_action_under_rejected_value": false,
+  "correction": "Replace all draft occurrences with literal git rev-parse HEAD output and verify that object as a commit before acceptance, staging or publication."
+}

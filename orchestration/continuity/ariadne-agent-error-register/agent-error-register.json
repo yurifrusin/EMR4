@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 255,
+  "register_revision": 256,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11594,6 +11594,44 @@
           "scripts/ariadne_antigravity.py",
           "tests/test_ariadne_evidence_gate.py",
           "docs/ariadne-agent-error-correction-register-revision-255.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0289",
+      "attempt_id": "raisa-conditional-command-admission-rehearsal-closeout-draft-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-provider-free-unmounted-conditional-command-admission-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every forty-character Git source binding must be copied from literal git rev-parse output and verified as a commit before it enters closeout or acceptance evidence; a displayed short hash must never be expanded by inference.",
+      "observed_error": "While drafting three uncommitted closeout files, Sol inferred nonexistent f465d6a6f1f55f86a31bb0d98a046abff95d7e57 from displayed short HEAD f465d6a6 instead of first capturing the exact object identity.",
+      "detection_method": "Before acceptance, staging or publication, Sol ran git rev-parse HEAD, obtained exact f465d6a6536ea2e69eec8df2ed1c2f9f65c24f6c, verified that exact object as a commit and replaced all three draft occurrences.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-256.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no draft under the inferred value. Replace every occurrence with literal git rev-parse HEAD output f465d6a6536ea2e69eec8df2ed1c2f9f65c24f6c and verify that object as a commit before acceptance, staging or publication.",
+        "prevention_control": "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-256.md"
         ]
       },
       "status": "corrected"

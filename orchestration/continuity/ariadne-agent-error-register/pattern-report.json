@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "93bd0d7d59dd107d13256808600dca9b3c5fb91c1bb115e5f881a55fe9015b5f",
+  "canonical_register_sha256": "0ec6c33c41b6e41970370c237d65131dd4f58063769c816dd6e7237985cb7c94",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 96,
-      "canonical_unchanged": 165,
+      "canonical_unchanged": 166,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
       "command_scope_violation": 32,
-      "evidence_misreport": 36,
+      "evidence_misreport": 37,
       "harness_failure": 36,
       "output_contract_violation": 81,
       "read_only_violation": 3,
@@ -17,13 +17,13 @@
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 188,
+      "agent_behavior": 189,
       "harness": 36,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 107,
+      "low": 108,
       "material": 94,
       "moderate": 87
     },
@@ -37,7 +37,7 @@
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 137,
+      "codex-primary-orchestrator::orchestrator": 138,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -85,12 +85,12 @@
     },
     "by_role": {
       "implementer": 19,
-      "orchestrator": 218,
+      "orchestrator": 219,
       "verifier": 51
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 288,
+  "incident_count": 289,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -173,7 +173,7 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 9,
+      "incident_count": 10,
       "incident_ids": [
         "AER-0192",
         "AER-0196",
@@ -183,7 +183,8 @@
         "AER-0219",
         "AER-0241",
         "AER-0261",
-        "AER-0267"
+        "AER-0267",
+        "AER-0289"
       ],
       "origins": [
         "agent_behavior"
@@ -685,7 +686,7 @@
       ]
     }
   ],
-  "register_revision": 255,
+  "register_revision": 256,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-12"
 }

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "accept_close_commit_push_notify_and_continue_from_the_provider_free_unmounted_conditional_command_admission_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact source f465d6a6536ea2e69eec8df2ed1c2f9f65c24f6c passes 37 canonical scenarios, 19 structural rejections, all four operations, all eight outcomes, 32 hostile mutations and the 191-test canonical repository profile. Only committed plans a mutation and every effect_performed value is false. Closeout, acceptance, Yuri summary and Continuity/Compass evidence are prepared.",
+    "current_authority_allocation": "GPT Sol owns this small serial rehearsal, deterministic acceptance and task-branch closeout under standing uninterrupted authority. No implementation worker or external verifier was used because no accepted architecture meaning changed and deterministic evidence was complete.",
+    "git_refs_and_worktree": "Current task HEAD is literal git rev-parse output f465d6a6536ea2e69eec8df2ed1c2f9f65c24f6c; origin task is b9a94a90a21c532f7fda55f9d18ba00156b123b3 before closeout push. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Nine tracked closeout/register/lifecycle files and eight task-owned untracked closeout files existed before this paired receipt was generated, beside 496 preserved pre-existing untracked entries. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely and is updated to the acceptance-ready Continuity 246 / Compass 228 result. The 37-case conditional-command admission rehearsal is current and the provider-free unmounted legacy-route convergence map plus common kernel-interface design is next.",
+    "protected_evidence_boundaries": "The rehearsal used authored-synthetic identifiers and pure in-memory evaluation only. No protected holdout, docs/branding, historical Diary/PHI, patient/clinical/product data, route/database/source/watcher, real event, provider, credential/IAM, network, executable, command/write, deployment, release, Pages or protected ref was opened. The inferred-SHA draft failure was corrected before staging and is preserved as AER-0289."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

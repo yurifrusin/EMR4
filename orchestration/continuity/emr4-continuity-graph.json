@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 245,
+  "graph_revision": 246,
   "harvests": [],
   "nodes": [
     {
@@ -15556,6 +15556,83 @@
         "The legacy compatibility routes remain mounted and unchanged pending separate migration evidence.",
         "Durable Event and Cue Delivery remains deferred; restart, unknown-commit, rotation, retention and purge are unproved.",
         "Operational database/source/watcher access, patient/product/clinical data, provider tools, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-conditional-command-admission-rehearsal",
+      "title": "Provider-free unmounted conditional-command admission rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f465d6a6536ea2e69eec8df2ed1c2f9f65c24f6c",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-context-fabric-source-owned-truth-conditional-command-reorientation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is a provider-free pure in-memory authored-synthetic rehearsal.",
+          "It imports no route or database and performs no command, mutation, audit or receipt effect.",
+          "The next descendant remains provider-free, unmounted and design-only."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-conditional-command-admission-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact packet admission and eight-outcome precedence with planned effects only."
+        }
+      ],
+      "claim_scope": [
+        "Thirty-seven canonical cases cover four operations, eight outcomes and nineteen admission rejections.",
+        "All thirty-two hostile mutations fail closed.",
+        "Only committed plans a mutation; no effect is performed.",
+        "Create requires schedule-domain fencing and event evidence cannot assert truth or success.",
+        "Current authority precedes replay disclosure and other outcome evaluation."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md",
+          "docs/security/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_conditional_command_admission_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_conditional_command_admission_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json",
+          "scripts/raisa_provider_free_unmounted_conditional_command_admission_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No production token, cryptography, route, common kernel, database fence or persistent idempotency/audit is implemented.",
+        "Legacy compatibility routes remain mounted and unchanged.",
+        "Operational database/source/watcher access, real events, patient/product data, provider, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

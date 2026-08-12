@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 245 / Compass 227. The Context Fabric source-owned-truth and conditional-command reorientation passes. Events are acceleration hints, one logical watcher serves each event partition, and command correctness no longer depends on durable cue delivery. The next safe tranche is the provider-free unmounted conditional-command admission rehearsal.
+> EMR4 is at Continuity 246 / Compass 228. The provider-free unmounted conditional-command admission rehearsal passes all 37 canonical cases and 32 hostile mutations with zero effects. The next safe tranche is the legacy-route convergence map and common kernel-interface design.
 
 ## North star
 
@@ -264,26 +264,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Evidence-led gates now require discriminating observations and exact command results; CF-D2 remains unproved and the next programme direction requires Yuri's choice. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal`.
 124. **Move first-runtime correctness to source-owned conditional commands while keeping events as cue acceleration — Raisa Context Fabric source-owned truth and conditional commands**
    Architecture passes; durable cue delivery is deferred but retained, and the next safe tranche is an unmounted authored-synthetic admission rehearsal. Lineage parent: `ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair`.
+125. **Mechanically admit conditional-command packets and typed outcomes without runtime effects — Provider-free unmounted conditional-command admission rehearsal**
+   Rehearsal passes; the next safe tranche maps legacy and proposal/confirm routes onto one abstract backend kernel. Lineage parent: `raisa-context-fabric-source-owned-truth-conditional-command-reorientation`.
 
 ## Current position
 
-**Source-owned correctness architecture accepted; provider-free conditional-command admission rehearsal next — Raisa Context Fabric source-owned truth and conditional commands**
+**Conditional-command admission semantics proved; common kernel interface next — Provider-free unmounted conditional-command admission rehearsal**
 
-**Why this proof came next:** The stopped CF-D2 path exposed that durable cue delivery should improve timeliness and observability rather than sit inside the first runtime's correctness kernel.
+**Why this proof came next:** The accepted architecture required a mechanical proof that malformed packets stop and valid packets resolve to one non-ambiguous outcome before designing route convergence.
 
-Atomic conditional commands protect database truth even when a cue is delayed or missed, while durability remains a named later extension.
+Thirty-seven authored-synthetic cases and thirty-two attacks pass without a route, database, event or mutation.
 
 ### What this unlocks
 
-- Provider-free authored-synthetic admission scenarios for preconditions, lock plans and typed winner/loser outcomes.
-- A later route-convergence design after the common command kernel is mechanically admitted.
-- A future observability-first Durable Event and Cue Delivery programme without making events current truth.
+- Map all four raw compatibility routes and proposal/confirm replacements onto one abstract backend conditional-command interface.
+- Freeze route-specific confirmation and idempotency migration requirements without changing behavior.
 
 ### What it does not solve
 
-- Production precondition tokens, database schedule fencing or legacy-route behavior.
-- Restart-safe cue delivery, CF-D2, key rotation, retention/purge or operational watcher availability.
-- Patient/product/clinical data, executable tools, commands, deployment, Pages or protected-ref movement.
+- Production tokens, route implementation, database fencing, persistent idempotency or audit.
+- Durable cue delivery, CF-D2, patient/product data, provider tools, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
 
@@ -350,9 +350,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Run the provider-free unmounted conditional-command admission rehearsal.
-- Keep all route, database, watcher, product-data and command surfaces closed until their own descendants pass.
-- Return to Durable Event and Cue Delivery later through a fresh observability-first plan.
+- Freeze the provider-free unmounted legacy-route convergence map and common kernel-interface design.
+- Keep route/database behavior closed until a later implementation descendant has its own acceptance.
+- Retain Durable Event and Cue Delivery as a later observability-first extension.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -541,6 +541,7 @@ Prerequisites:
 
 ## Map limits
 
+- The conditional-command admission rehearsal is pure authored-synthetic evaluation; it does not prove route behavior, database serialization or persistent effects.
 - The source-owned-truth reorientation proves architecture only; it does not prove a runtime command kernel, database fence, watcher or durable cue delivery.
 - The workflow repair proves discriminating diagnostic and exact review admission controls; it does not prove the unresolved CF-D2 database behavior.
 - CF-D1 proves six fixed two-session database races, not crash/restart, unknown commit, arbitrary deadlock freedom, load, performance, more than two participants or operational availability.
@@ -693,6 +694,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-23.md`
 - `docs/ariadne-agent-error-correction-register-revision-233.md`
 - `docs/ariadne-agent-error-correction-register-revision-239.md`
+- `docs/ariadne-agent-error-correction-register-revision-256.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -952,6 +954,9 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md`
+- `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
@@ -1064,6 +1069,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md`
@@ -1213,6 +1219,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-codebase-conformance-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-current-operational-weave-review-count-reconciliation-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-sol-acceptance.md`
@@ -1530,6 +1538,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/acceptance-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/authored-synthetic-fresh-generation-packet.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal/fresh-generation-packet.schema.json`
@@ -1801,6 +1811,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
+- `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1891,4 +1902,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 227; continuity graph revision 245._
+_Compass map revision 228; continuity graph revision 246._
