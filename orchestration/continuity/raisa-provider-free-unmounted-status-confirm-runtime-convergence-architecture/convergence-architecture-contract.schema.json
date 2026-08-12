@@ -1,0 +1,727 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/status-confirm-runtime-convergence-architecture.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "implementation_authorized",
+    "source_bindings",
+    "architecture",
+    "scenario_defaults",
+    "scenarios",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.status_confirm_runtime_convergence_architecture.v1"
+    },
+    "result": {
+      "const": "raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture_pass"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_unmounted_architecture"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/source_binding"
+      }
+    },
+    "architecture": {
+      "$ref": "#/$defs/architecture"
+    },
+    "scenario_defaults": {
+      "$ref": "#/$defs/scenario_input"
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 18,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/scenario"
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "application_imported",
+        "application_edited",
+        "route_executed",
+        "database_driver_imported",
+        "database_executed",
+        "real_lock_acquired",
+        "provider_called",
+        "credential_or_browser_authorization_used",
+        "product_or_patient_data_used",
+        "command_executed"
+      ],
+      "properties": {
+        "application_imported": {
+          "const": false
+        },
+        "application_edited": {
+          "const": false
+        },
+        "route_executed": {
+          "const": false
+        },
+        "database_driver_imported": {
+          "const": false
+        },
+        "database_executed": {
+          "const": false
+        },
+        "real_lock_acquired": {
+          "const": false
+        },
+        "provider_called": {
+          "const": false
+        },
+        "credential_or_browser_authorization_used": {
+          "const": false
+        },
+        "product_or_patient_data_used": {
+          "const": false
+        },
+        "command_executed": {
+          "const": false
+        }
+      }
+    },
+    "next_candidate": {
+      "const": "provider_free_unmounted_status_confirm_runtime_convergence_rehearsal"
+    }
+  },
+  "$defs": {
+    "source_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_discriminator",
+        "server_authority_ingress",
+        "transaction_boundary",
+        "source_version",
+        "signed_evidence",
+        "warning_acknowledgement",
+        "terminal_policy",
+        "atomic_write_set",
+        "stored_receipt_delivery",
+        "decision_trace",
+        "outcome_vocabulary"
+      ],
+      "properties": {
+        "route_discriminator": {
+          "$ref": "#/$defs/route_discriminator"
+        },
+        "server_authority_ingress": {
+          "$ref": "#/$defs/server_authority_ingress"
+        },
+        "transaction_boundary": {
+          "$ref": "#/$defs/transaction_boundary"
+        },
+        "source_version": {
+          "$ref": "#/$defs/source_version"
+        },
+        "signed_evidence": {
+          "$ref": "#/$defs/signed_evidence"
+        },
+        "warning_acknowledgement": {
+          "$ref": "#/$defs/warning_acknowledgement"
+        },
+        "terminal_policy": {
+          "$ref": "#/$defs/terminal_policy"
+        },
+        "atomic_write_set": {
+          "$ref": "#/$defs/atomic_write_set"
+        },
+        "stored_receipt_delivery": {
+          "$ref": "#/$defs/stored_receipt_delivery"
+        },
+        "decision_trace": {
+          "type": "array",
+          "minItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "outcome_vocabulary": {
+          "type": "array",
+          "minItems": 9,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "route_discriminator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_intent",
+        "rejected_intents",
+        "discriminate_before_kernel_ingress",
+        "waiting_area_behavior_unchanged"
+      ],
+      "properties": {
+        "accepted_intent": {
+          "const": "update_appointment_status"
+        },
+        "rejected_intents": {
+          "const": [
+            "update_appointment_waiting_area"
+          ]
+        },
+        "discriminate_before_kernel_ingress": {
+          "const": true
+        },
+        "waiting_area_behavior_unchanged": {
+          "const": true
+        }
+      }
+    },
+    "server_authority_ingress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "server_owned_fields",
+        "transport_authority_accepted",
+        "opaque_session_binding",
+        "recheck_after_locks"
+      ],
+      "properties": {
+        "server_owned_fields": {
+          "const": [
+            "practice_id",
+            "actor_id",
+            "actor_role",
+            "active_user",
+            "session_binding_digest"
+          ]
+        },
+        "transport_authority_accepted": {
+          "const": false
+        },
+        "opaque_session_binding": {
+          "const": true
+        },
+        "recheck_after_locks": {
+          "const": true
+        }
+      }
+    },
+    "transaction_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "lock_order",
+        "unused_schedule_domain_rule",
+        "idempotency_disclosure_after_authority_recheck",
+        "single_transaction"
+      ],
+      "properties": {
+        "owner": {
+          "const": "backend_status_confirm_kernel"
+        },
+        "lock_order": {
+          "const": [
+            "practice",
+            "appointment",
+            "idempotency_record"
+          ]
+        },
+        "unused_schedule_domain_rule": {
+          "const": "skip_without_reordering"
+        },
+        "idempotency_disclosure_after_authority_recheck": {
+          "const": true
+        },
+        "single_transaction": {
+          "const": true
+        }
+      }
+    },
+    "source_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type",
+        "read_under_appointment_lock",
+        "increment_on_committed_appointment_state_change",
+        "physical_storage_deferred"
+      ],
+      "properties": {
+        "name": {
+          "const": "appointment_state_version"
+        },
+        "type": {
+          "const": "positive_monotonic_integer"
+        },
+        "read_under_appointment_lock": {
+          "const": true
+        },
+        "increment_on_committed_appointment_state_change": {
+          "const": true
+        },
+        "physical_storage_deferred": {
+          "const": true
+        }
+      }
+    },
+    "signed_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_bindings",
+        "verified_after_locked_recomputation",
+        "confirmation_distinct_from_freshness"
+      ],
+      "properties": {
+        "required_bindings": {
+          "const": [
+            "practice_id",
+            "target_appointment_id",
+            "actor_id",
+            "session_binding_digest",
+            "command",
+            "appointment_state_version",
+            "warning_codes",
+            "freshness_id"
+          ]
+        },
+        "verified_after_locked_recomputation": {
+          "const": true
+        },
+        "confirmation_distinct_from_freshness": {
+          "const": true
+        }
+      }
+    },
+    "warning_acknowledgement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comparison",
+        "reject_missing",
+        "reject_extra",
+        "reject_duplicate",
+        "reject_unknown"
+      ],
+      "properties": {
+        "comparison": {
+          "const": "exact_canonical_unique_set_equality"
+        },
+        "reject_missing": {
+          "const": true
+        },
+        "reject_extra": {
+          "const": true
+        },
+        "reject_duplicate": {
+          "const": true
+        },
+        "reject_unknown": {
+          "const": true
+        }
+      }
+    },
+    "terminal_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "terminal_statuses",
+        "different_target_outcome",
+        "effect_allowed",
+        "product_policy_invented"
+      ],
+      "properties": {
+        "terminal_statuses": {
+          "const": [
+            "Completed",
+            "Cancelled",
+            "DidNotAttend"
+          ]
+        },
+        "different_target_outcome": {
+          "const": "transition_policy_deferred"
+        },
+        "effect_allowed": {
+          "const": false
+        },
+        "product_policy_invented": {
+          "const": false
+        }
+      }
+    },
+    "atomic_write_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "members",
+        "completed_receipt_private_bindings",
+        "all_commit_or_rollback",
+        "effect_outcome"
+      ],
+      "properties": {
+        "members": {
+          "const": [
+            "appointment_mutation",
+            "attributable_audit",
+            "completed_receipt"
+          ]
+        },
+        "completed_receipt_private_bindings": {
+          "const": [
+            "operation_id",
+            "practice_id",
+            "target_appointment_id",
+            "actor_id",
+            "session_binding_digest",
+            "idempotency_key",
+            "request_digest",
+            "audit_log_id",
+            "pre_state_version",
+            "post_state_version",
+            "response_digest"
+          ]
+        },
+        "all_commit_or_rollback": {
+          "const": true
+        },
+        "effect_outcome": {
+          "const": "committed"
+        }
+      }
+    },
+    "stored_receipt_delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_public_response_fields",
+        "initial_response_source",
+        "replay_response_source",
+        "post_commit_failure_state",
+        "server_effect_retry",
+        "client_retry_requirement"
+      ],
+      "properties": {
+        "canonical_public_response_fields": {
+          "const": [
+            "appointment_id",
+            "status",
+            "status_reason_code",
+            "waiting_area_id",
+            "warning_codes"
+          ]
+        },
+        "initial_response_source": {
+          "const": "stored_canonical_receipt"
+        },
+        "replay_response_source": {
+          "const": "stored_canonical_receipt"
+        },
+        "post_commit_failure_state": {
+          "const": "delivery_unknown"
+        },
+        "server_effect_retry": {
+          "const": false
+        },
+        "client_retry_requirement": {
+          "const": "same_idempotency_key_and_request_digest"
+        }
+      }
+    },
+    "scenario_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent",
+        "server_authority_complete",
+        "session_binding",
+        "target",
+        "authority",
+        "evidence",
+        "proposal_version",
+        "current_version",
+        "current_status",
+        "requested_status",
+        "current_warning_codes",
+        "submitted_warning_codes",
+        "idempotency",
+        "failure_injection"
+      ],
+      "properties": {
+        "intent": {
+          "enum": [
+            "update_appointment_status",
+            "update_appointment_waiting_area"
+          ]
+        },
+        "server_authority_complete": {
+          "type": "boolean"
+        },
+        "session_binding": {
+          "enum": [
+            "exact",
+            "missing",
+            "mismatch"
+          ]
+        },
+        "target": {
+          "enum": [
+            "exists",
+            "absent"
+          ]
+        },
+        "authority": {
+          "enum": [
+            "current",
+            "revoked"
+          ]
+        },
+        "evidence": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        },
+        "proposal_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "current_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "current_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_warning_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "submitted_warning_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "idempotency": {
+          "enum": [
+            "absent",
+            "same_digest_completed",
+            "different_digest_completed"
+          ]
+        },
+        "failure_injection": {
+          "enum": [
+            "none",
+            "after_staged_audit",
+            "after_staged_receipt",
+            "after_commit_before_response"
+          ]
+        }
+      }
+    },
+    "scenario_overrides": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intent": {
+          "enum": [
+            "update_appointment_status",
+            "update_appointment_waiting_area"
+          ]
+        },
+        "server_authority_complete": {
+          "type": "boolean"
+        },
+        "session_binding": {
+          "enum": [
+            "exact",
+            "missing",
+            "mismatch"
+          ]
+        },
+        "target": {
+          "enum": [
+            "exists",
+            "absent"
+          ]
+        },
+        "authority": {
+          "enum": [
+            "current",
+            "revoked"
+          ]
+        },
+        "evidence": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        },
+        "proposal_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "current_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "current_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_warning_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "submitted_warning_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "idempotency": {
+          "enum": [
+            "absent",
+            "same_digest_completed",
+            "different_digest_completed"
+          ]
+        },
+        "failure_injection": {
+          "enum": [
+            "none",
+            "after_staged_audit",
+            "after_staged_receipt",
+            "after_commit_before_response"
+          ]
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "overrides",
+        "expected"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^sca-[0-9]{3}-[a-z0-9-]+$"
+        },
+        "overrides": {
+          "$ref": "#/$defs/scenario_overrides"
+        },
+        "expected": {
+          "$ref": "#/$defs/scenario_expected"
+        }
+      }
+    },
+    "scenario_expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "reason",
+        "effect_planned",
+        "receipt_disclosed",
+        "invocation_write_set",
+        "delivery_state",
+        "response_source"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effect_planned": {
+          "type": "boolean"
+        },
+        "receipt_disclosed": {
+          "type": "boolean"
+        },
+        "invocation_write_set": {
+          "enum": [
+            "none",
+            "all"
+          ]
+        },
+        "delivery_state": {
+          "enum": [
+            "not_applicable",
+            "delivered",
+            "delivery_unknown"
+          ]
+        },
+        "response_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

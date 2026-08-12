@@ -1,0 +1,528 @@
+{
+  "schema_version": "raisa.status_confirm_runtime_convergence_architecture.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture_pass",
+  "source_head": "fca97097eeca5070ad41e403aed9413eee45ccba",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_architecture",
+  "implementation_authorized": false,
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md",
+      "sha256": "5f3ccdf0b95151ef2013530e23e317b3aafcfa3d177ebc119a8ffe9400875806"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json",
+      "sha256": "e9aac014b2111a5c48563b1cf5386b734d9d95948d0157262d2db8d6cb71292a"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json",
+      "sha256": "54acf1b0b04e2387d64b778debedeb857204408dd4e7f4ea4922101b4ff260e1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json",
+      "sha256": "297e34fbd984baeb53892edf5bc67f3d4db15911fa83d0b59776b2d707bffc30"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json",
+      "sha256": "89140cc9f46dfb01cac2bcb9d0531be06b81d02b7d9ce0d779e8b456148f4144"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
+      "sha256": "2967703f8baf395439a6e2c88885074fefe9f4bea308c0294ba7e67c57b26633"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json",
+      "sha256": "962a6fa2ee82226df2975a7f3c82d3f445498ef727b3d5addf4b891a380f840c"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+    }
+  ],
+  "architecture": {
+    "route_discriminator": {
+      "accepted_intent": "update_appointment_status",
+      "rejected_intents": [
+        "update_appointment_waiting_area"
+      ],
+      "discriminate_before_kernel_ingress": true,
+      "waiting_area_behavior_unchanged": true
+    },
+    "server_authority_ingress": {
+      "server_owned_fields": [
+        "practice_id",
+        "actor_id",
+        "actor_role",
+        "active_user",
+        "session_binding_digest"
+      ],
+      "transport_authority_accepted": false,
+      "opaque_session_binding": true,
+      "recheck_after_locks": true
+    },
+    "transaction_boundary": {
+      "owner": "backend_status_confirm_kernel",
+      "lock_order": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "unused_schedule_domain_rule": "skip_without_reordering",
+      "idempotency_disclosure_after_authority_recheck": true,
+      "single_transaction": true
+    },
+    "source_version": {
+      "name": "appointment_state_version",
+      "type": "positive_monotonic_integer",
+      "read_under_appointment_lock": true,
+      "increment_on_committed_appointment_state_change": true,
+      "physical_storage_deferred": true
+    },
+    "signed_evidence": {
+      "required_bindings": [
+        "practice_id",
+        "target_appointment_id",
+        "actor_id",
+        "session_binding_digest",
+        "command",
+        "appointment_state_version",
+        "warning_codes",
+        "freshness_id"
+      ],
+      "verified_after_locked_recomputation": true,
+      "confirmation_distinct_from_freshness": true
+    },
+    "warning_acknowledgement": {
+      "comparison": "exact_canonical_unique_set_equality",
+      "reject_missing": true,
+      "reject_extra": true,
+      "reject_duplicate": true,
+      "reject_unknown": true
+    },
+    "terminal_policy": {
+      "terminal_statuses": [
+        "Completed",
+        "Cancelled",
+        "DidNotAttend"
+      ],
+      "different_target_outcome": "transition_policy_deferred",
+      "effect_allowed": false,
+      "product_policy_invented": false
+    },
+    "atomic_write_set": {
+      "members": [
+        "appointment_mutation",
+        "attributable_audit",
+        "completed_receipt"
+      ],
+      "completed_receipt_private_bindings": [
+        "operation_id",
+        "practice_id",
+        "target_appointment_id",
+        "actor_id",
+        "session_binding_digest",
+        "idempotency_key",
+        "request_digest",
+        "audit_log_id",
+        "pre_state_version",
+        "post_state_version",
+        "response_digest"
+      ],
+      "all_commit_or_rollback": true,
+      "effect_outcome": "committed"
+    },
+    "stored_receipt_delivery": {
+      "canonical_public_response_fields": [
+        "appointment_id",
+        "status",
+        "status_reason_code",
+        "waiting_area_id",
+        "warning_codes"
+      ],
+      "initial_response_source": "stored_canonical_receipt",
+      "replay_response_source": "stored_canonical_receipt",
+      "post_commit_failure_state": "delivery_unknown",
+      "server_effect_retry": false,
+      "client_retry_requirement": "same_idempotency_key_and_request_digest"
+    },
+    "decision_trace": [
+      "discriminate:status_only",
+      "ingress:server_authority",
+      "lock:practice",
+      "lock:appointment",
+      "lock:idempotency_record",
+      "recheck:current_authority",
+      "inspect:idempotency",
+      "recheck:appointment_state_version",
+      "recompute:warning_codes",
+      "verify:signed_confirmation",
+      "check:terminal_policy",
+      "stage:appointment_mutation",
+      "stage:attributable_audit",
+      "stage:completed_receipt",
+      "commit:atomic",
+      "render:stored_canonical_receipt"
+    ],
+    "outcome_vocabulary": [
+      "committed",
+      "idempotent_replay",
+      "stale_precondition",
+      "authority_revoked",
+      "confirmation_required",
+      "validation_rejected",
+      "idempotency_conflict",
+      "transition_policy_deferred",
+      "transaction_rolled_back"
+    ]
+  },
+  "scenario_defaults": {
+    "intent": "update_appointment_status",
+    "server_authority_complete": true,
+    "session_binding": "exact",
+    "target": "exists",
+    "authority": "current",
+    "evidence": "valid",
+    "proposal_version": 7,
+    "current_version": 7,
+    "current_status": "Booked",
+    "requested_status": "Arrived",
+    "current_warning_codes": [],
+    "submitted_warning_codes": [],
+    "idempotency": "absent",
+    "failure_injection": "none"
+  },
+  "scenarios": [
+    {
+      "id": "sca-001-clean-commit",
+      "overrides": {},
+      "expected": {
+        "outcome": "committed",
+        "reason": "status_change_committed",
+        "effect_planned": true,
+        "receipt_disclosed": true,
+        "invocation_write_set": "all",
+        "delivery_state": "delivered",
+        "response_source": "stored_canonical_receipt"
+      }
+    },
+    {
+      "id": "sca-002-waiting-area-discriminated",
+      "overrides": {
+        "intent": "update_appointment_waiting_area"
+      },
+      "expected": {
+        "outcome": "validation_rejected",
+        "reason": "unsupported_status_confirm_variant",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-003-server-authority-incomplete",
+      "overrides": {
+        "server_authority_complete": false
+      },
+      "expected": {
+        "outcome": "validation_rejected",
+        "reason": "server_authority_incomplete",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-004-session-missing",
+      "overrides": {
+        "session_binding": "missing"
+      },
+      "expected": {
+        "outcome": "validation_rejected",
+        "reason": "server_session_binding_required",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-005-target-absent",
+      "overrides": {
+        "target": "absent"
+      },
+      "expected": {
+        "outcome": "validation_rejected",
+        "reason": "target_not_found",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-006-authority-revoked",
+      "overrides": {
+        "authority": "revoked"
+      },
+      "expected": {
+        "outcome": "authority_revoked",
+        "reason": "current_authority_revoked",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-007-signed-evidence-invalid",
+      "overrides": {
+        "evidence": "invalid"
+      },
+      "expected": {
+        "outcome": "confirmation_required",
+        "reason": "signed_confirmation_evidence_invalid",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-008-session-binding-stale",
+      "overrides": {
+        "session_binding": "mismatch"
+      },
+      "expected": {
+        "outcome": "confirmation_required",
+        "reason": "signed_confirmation_session_mismatch",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-009-source-version-stale",
+      "overrides": {
+        "current_version": 8
+      },
+      "expected": {
+        "outcome": "stale_precondition",
+        "reason": "locked_source_version_mismatch",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-010-warning-missing",
+      "overrides": {
+        "current_warning_codes": [
+          "requires_reason"
+        ]
+      },
+      "expected": {
+        "outcome": "confirmation_required",
+        "reason": "warning_acknowledgement_mismatch",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-011-warning-extra",
+      "overrides": {
+        "submitted_warning_codes": [
+          "requires_reason"
+        ]
+      },
+      "expected": {
+        "outcome": "confirmation_required",
+        "reason": "warning_acknowledgement_mismatch",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-012-warning-duplicate",
+      "overrides": {
+        "current_warning_codes": [
+          "requires_reason"
+        ],
+        "submitted_warning_codes": [
+          "requires_reason",
+          "requires_reason"
+        ]
+      },
+      "expected": {
+        "outcome": "confirmation_required",
+        "reason": "warning_acknowledgement_mismatch",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-013-warning-unknown",
+      "overrides": {
+        "submitted_warning_codes": [
+          "unknown_warning"
+        ]
+      },
+      "expected": {
+        "outcome": "confirmation_required",
+        "reason": "warning_acknowledgement_mismatch",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-014-terminal-transition-deferred",
+      "overrides": {
+        "current_status": "Completed",
+        "current_warning_codes": [
+          "already_terminal"
+        ],
+        "submitted_warning_codes": [
+          "already_terminal"
+        ]
+      },
+      "expected": {
+        "outcome": "transition_policy_deferred",
+        "reason": "terminal_retransition_policy_deferred",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-015-same-digest-replay",
+      "overrides": {
+        "idempotency": "same_digest_completed"
+      },
+      "expected": {
+        "outcome": "idempotent_replay",
+        "reason": "stored_receipt_replay",
+        "effect_planned": false,
+        "receipt_disclosed": true,
+        "invocation_write_set": "none",
+        "delivery_state": "delivered",
+        "response_source": "stored_canonical_receipt"
+      }
+    },
+    {
+      "id": "sca-016-different-digest-conflict",
+      "overrides": {
+        "idempotency": "different_digest_completed"
+      },
+      "expected": {
+        "outcome": "idempotency_conflict",
+        "reason": "idempotency_key_reused_with_different_digest",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-017-post-commit-delivery-loss",
+      "overrides": {
+        "failure_injection": "after_commit_before_response"
+      },
+      "expected": {
+        "outcome": "committed",
+        "reason": "status_change_committed_delivery_unknown",
+        "effect_planned": true,
+        "receipt_disclosed": false,
+        "invocation_write_set": "all",
+        "delivery_state": "delivery_unknown",
+        "response_source": "stored_canonical_receipt"
+      }
+    },
+    {
+      "id": "sca-018-retry-after-delivery-loss",
+      "overrides": {
+        "idempotency": "same_digest_completed"
+      },
+      "expected": {
+        "outcome": "idempotent_replay",
+        "reason": "stored_receipt_replay",
+        "effect_planned": false,
+        "receipt_disclosed": true,
+        "invocation_write_set": "none",
+        "delivery_state": "delivered",
+        "response_source": "stored_canonical_receipt"
+      }
+    },
+    {
+      "id": "sca-019-audit-stage-failure",
+      "overrides": {
+        "failure_injection": "after_staged_audit"
+      },
+      "expected": {
+        "outcome": "transaction_rolled_back",
+        "reason": "atomic_write_set_rolled_back",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    },
+    {
+      "id": "sca-020-receipt-stage-failure",
+      "overrides": {
+        "failure_injection": "after_staged_receipt"
+      },
+      "expected": {
+        "outcome": "transaction_rolled_back",
+        "reason": "atomic_write_set_rolled_back",
+        "effect_planned": false,
+        "receipt_disclosed": false,
+        "invocation_write_set": "none",
+        "delivery_state": "not_applicable",
+        "response_source": null
+      }
+    }
+  ],
+  "forbidden": {
+    "application_imported": false,
+    "application_edited": false,
+    "route_executed": false,
+    "database_driver_imported": false,
+    "database_executed": false,
+    "real_lock_acquired": false,
+    "provider_called": false,
+    "credential_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "command_executed": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_runtime_convergence_rehearsal"
+}

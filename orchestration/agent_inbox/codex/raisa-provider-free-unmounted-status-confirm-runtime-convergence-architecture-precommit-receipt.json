@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_status_confirm_runtime_convergence_architecture_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen architecture binds nine exact accepted artifacts and closes the review's seven blockers plus two partial gaps at design level. Twenty authored-synthetic scenarios and 56 hostile mutations pass; the focused architecture packet passes 12/12 and the complete architecture/review/adapter/protocol/API/baton lineage passes 138/138. implementation_authorized remains false and the next candidate is an unmounted state-machine rehearsal.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled architecture, validation and acceptance work under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent, external worker or provider is selected. Google authentication remains unused.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain aligned at fca97097eeca5070ad41e403aed9413eee45ccba. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and review source 426ccbbd26a2ab0bfb70c65d7adce113f0239f3a are ancestors. Tracked state is clean; 526 untracked paths include ten intended architecture artifacts plus all preserved paths, with five docs/branding paths excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD fca97097eeca5070ad41e403aed9413eee45ccba and SHA-256 49ed3fd268fb5c34be4c1d0a859f6cbb3d888be07990b06864622d1da548bd62. Continuity 258 / Compass 240 names this provider-free unmounted architecture tranche next.",
+    "protected_evidence_boundaries": "AER-0291 exact-file control remained in force. No application source was searched, imported, edited or executed. No route, database, SQL, real lock, migration/backfill, provider, credential/browser authorization, product/patient data, watcher/event, command, deployment, release, Pages or protected-ref authority opened. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

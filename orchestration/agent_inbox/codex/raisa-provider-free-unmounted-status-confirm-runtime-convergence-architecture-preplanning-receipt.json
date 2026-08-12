@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_provider_free_unmounted_status_confirm_runtime_convergence_architecture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted review at source 426ccbbd26a2ab0bfb70c65d7adce113f0239f3a returns not_admitted with seven blockers and two partial gaps. The accepted adapter at 30a49015d23bfcf069be0af838df7091032a40be and transaction protocol at bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62 freeze status-only input, practice-appointment-idempotency lock order, authority-first disclosure, fail-closed terminal deferral, atomic mutation/audit/receipt and canonical stored delivery. The new tranche may freeze architecture and authored-synthetic evidence only.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled architecture and acceptance work under Yuri's standing uninterrupted-development authority and the EMR4 API Steward boundary. No subagent, external worker or provider is selected. Yuri's current Google authentication and future browser-assisted ADC preference do not authorize credential or provider activity in this provider-free tranche.",
+    "git_refs_and_worktree": "Task HEAD and origin task align at fca97097eeca5070ad41e403aed9413eee45ccba. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and review source 426ccbbd26a2ab0bfb70c65d7adce113f0239f3a are ancestors. Tracked state is clean and exactly 516 untracked paths, including five docs/branding paths, precede this state.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD fca97097eeca5070ad41e403aed9413eee45ccba and SHA-256 49ed3fd268fb5c34be4c1d0a859f6cbb3d888be07990b06864622d1da548bd62. Continuity 258 / Compass 240 names the provider-free unmounted status-confirm runtime convergence architecture next.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary material remain closed. AER-0291 exact-file control applies. The architecture must use only named accepted non-protected artifacts; no application-source search/import/edit, route or database execution, provider call, credential/browser action, product/patient data, watcher/event, command, deployment, release, Pages or protected-ref action is authorized. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

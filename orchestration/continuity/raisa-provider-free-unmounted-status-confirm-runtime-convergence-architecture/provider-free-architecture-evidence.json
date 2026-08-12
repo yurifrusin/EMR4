@@ -1,0 +1,462 @@
+{
+  "schema_version": "raisa.status_confirm_runtime_convergence_architecture_evidence.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture_pass",
+  "source_head": "fca97097eeca5070ad41e403aed9413eee45ccba",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_architecture",
+  "implementation_authorized": false,
+  "architecture_decisions": [
+    "route_discriminator",
+    "server_authority_ingress",
+    "transaction_boundary",
+    "source_version",
+    "signed_evidence",
+    "warning_acknowledgement",
+    "terminal_policy",
+    "atomic_write_set",
+    "stored_receipt_delivery"
+  ],
+  "source_hashes": {
+    "docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md": "5f3ccdf0b95151ef2013530e23e317b3aafcfa3d177ebc119a8ffe9400875806",
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json": "e9aac014b2111a5c48563b1cf5386b734d9d95948d0157262d2db8d6cb71292a",
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json": "54acf1b0b04e2387d64b778debedeb857204408dd4e7f4ea4922101b4ff260e1",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json": "297e34fbd984baeb53892edf5bc67f3d4db15911fa83d0b59776b2d707bffc30",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json": "89140cc9f46dfb01cac2bcb9d0531be06b81d02b7d9ce0d779e8b456148f4144",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json": "2967703f8baf395439a6e2c88885074fefe9f4bea308c0294ba7e67c57b26633",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json": "962a6fa2ee82226df2975a7f3c82d3f445498ef727b3d5addf4b891a380f840c",
+    "orchestration/api_spine_adr.md": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+  },
+  "scenario_count": 20,
+  "scenarios": [
+    {
+      "id": "sca-001-clean-commit",
+      "outcome": "committed",
+      "reason": "status_change_committed",
+      "effect_planned": true,
+      "receipt_disclosed": true,
+      "invocation_write_set": "all",
+      "delivery_state": "delivered",
+      "response_source": "stored_canonical_receipt",
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation",
+        "check:terminal_policy",
+        "stage:appointment_mutation",
+        "stage:attributable_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "render:stored_canonical_receipt"
+      ]
+    },
+    {
+      "id": "sca-002-waiting-area-discriminated",
+      "outcome": "validation_rejected",
+      "reason": "unsupported_status_confirm_variant",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only"
+      ]
+    },
+    {
+      "id": "sca-003-server-authority-incomplete",
+      "outcome": "validation_rejected",
+      "reason": "server_authority_incomplete",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority"
+      ]
+    },
+    {
+      "id": "sca-004-session-missing",
+      "outcome": "validation_rejected",
+      "reason": "server_session_binding_required",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority"
+      ]
+    },
+    {
+      "id": "sca-005-target-absent",
+      "outcome": "validation_rejected",
+      "reason": "target_not_found",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment"
+      ]
+    },
+    {
+      "id": "sca-006-authority-revoked",
+      "outcome": "authority_revoked",
+      "reason": "current_authority_revoked",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority"
+      ]
+    },
+    {
+      "id": "sca-007-signed-evidence-invalid",
+      "outcome": "confirmation_required",
+      "reason": "signed_confirmation_evidence_invalid",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation"
+      ]
+    },
+    {
+      "id": "sca-008-session-binding-stale",
+      "outcome": "confirmation_required",
+      "reason": "signed_confirmation_session_mismatch",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation"
+      ]
+    },
+    {
+      "id": "sca-009-source-version-stale",
+      "outcome": "stale_precondition",
+      "reason": "locked_source_version_mismatch",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version"
+      ]
+    },
+    {
+      "id": "sca-010-warning-missing",
+      "outcome": "confirmation_required",
+      "reason": "warning_acknowledgement_mismatch",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes"
+      ]
+    },
+    {
+      "id": "sca-011-warning-extra",
+      "outcome": "confirmation_required",
+      "reason": "warning_acknowledgement_mismatch",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes"
+      ]
+    },
+    {
+      "id": "sca-012-warning-duplicate",
+      "outcome": "confirmation_required",
+      "reason": "warning_acknowledgement_mismatch",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes"
+      ]
+    },
+    {
+      "id": "sca-013-warning-unknown",
+      "outcome": "confirmation_required",
+      "reason": "warning_acknowledgement_mismatch",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes"
+      ]
+    },
+    {
+      "id": "sca-014-terminal-transition-deferred",
+      "outcome": "transition_policy_deferred",
+      "reason": "terminal_retransition_policy_deferred",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation",
+        "check:terminal_policy"
+      ]
+    },
+    {
+      "id": "sca-015-same-digest-replay",
+      "outcome": "idempotent_replay",
+      "reason": "stored_receipt_replay",
+      "effect_planned": false,
+      "receipt_disclosed": true,
+      "invocation_write_set": "none",
+      "delivery_state": "delivered",
+      "response_source": "stored_canonical_receipt",
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "render:stored_canonical_receipt"
+      ]
+    },
+    {
+      "id": "sca-016-different-digest-conflict",
+      "outcome": "idempotency_conflict",
+      "reason": "idempotency_key_reused_with_different_digest",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency"
+      ]
+    },
+    {
+      "id": "sca-017-post-commit-delivery-loss",
+      "outcome": "committed",
+      "reason": "status_change_committed_delivery_unknown",
+      "effect_planned": true,
+      "receipt_disclosed": false,
+      "invocation_write_set": "all",
+      "delivery_state": "delivery_unknown",
+      "response_source": "stored_canonical_receipt",
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation",
+        "check:terminal_policy",
+        "stage:appointment_mutation",
+        "stage:attributable_audit",
+        "stage:completed_receipt",
+        "commit:atomic"
+      ]
+    },
+    {
+      "id": "sca-018-retry-after-delivery-loss",
+      "outcome": "idempotent_replay",
+      "reason": "stored_receipt_replay",
+      "effect_planned": false,
+      "receipt_disclosed": true,
+      "invocation_write_set": "none",
+      "delivery_state": "delivered",
+      "response_source": "stored_canonical_receipt",
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "render:stored_canonical_receipt"
+      ]
+    },
+    {
+      "id": "sca-019-audit-stage-failure",
+      "outcome": "transaction_rolled_back",
+      "reason": "atomic_write_set_rolled_back",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation",
+        "check:terminal_policy",
+        "stage:appointment_mutation",
+        "stage:attributable_audit",
+        "rollback:atomic"
+      ]
+    },
+    {
+      "id": "sca-020-receipt-stage-failure",
+      "outcome": "transaction_rolled_back",
+      "reason": "atomic_write_set_rolled_back",
+      "effect_planned": false,
+      "receipt_disclosed": false,
+      "invocation_write_set": "none",
+      "delivery_state": "not_applicable",
+      "response_source": null,
+      "trace": [
+        "discriminate:status_only",
+        "ingress:server_authority",
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_state_version",
+        "recompute:warning_codes",
+        "verify:signed_confirmation",
+        "check:terminal_policy",
+        "stage:appointment_mutation",
+        "stage:attributable_audit",
+        "stage:completed_receipt",
+        "rollback:atomic"
+      ]
+    }
+  ],
+  "hostile_mutations": {
+    "attempted": 56,
+    "rejected": 56
+  },
+  "forbidden": {
+    "application_imported": false,
+    "application_edited": false,
+    "route_executed": false,
+    "database_driver_imported": false,
+    "database_executed": false,
+    "real_lock_acquired": false,
+    "provider_called": false,
+    "credential_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "command_executed": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_runtime_convergence_rehearsal"
+}
