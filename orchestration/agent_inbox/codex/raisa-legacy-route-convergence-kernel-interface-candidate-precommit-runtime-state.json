@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_legacy_route_convergence_kernel_interface_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and names this provider-free unmounted legacy-route convergence plus kernel-interface design as the current next tranche. Its register row is updated to revision 257 after the preserved AER-0290 preplanning-event correction; the accepted Continuity 246 / Compass 228 result remains unchanged until this tranche closes.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled static API Spine design, deterministic acceptance and task-branch candidate commit under standing uninterrupted-development authority. The EMR4 API Steward rules were applied. No implementation worker or independent provider reviewer was used.",
+    "active_plan_and_acceptance": "One closed source-hashed contract maps exactly four raw, six proposal and five confirm routes onto one abstract conditional-command kernel. All raw routes remain not_kernel_eligible_now; separate confirmation, backend preconditions, command idempotency and attributable audit are mandatory. Forty-eight hostile mutations fail closed, 110 focused convergence/API Spine tests pass, the full agent-error register test passes and Ruff passes.",
+    "protected_evidence_boundaries": "The tranche used repository-local API contract documents and authored-synthetic inert objects only. It imported or changed no application route, accessed no database/source/event/watcher, used no provider/network/product/patient data/credential/IAM, performed no command/write/deployment/release/Pages/protected-ref action and did not touch docs/branding or unrelated untracked files.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at 4af9966928b9d453eed372f158e566185aaad5da. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602, and required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Four tracked task files and twelve task-owned untracked files sit beside exactly 498 preserved pre-existing untracked entries before this precommit pair is generated. Explicit-path staging only applies and docs/branding remains excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "legacy_route_convergence_kernel_interface_candidate_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the inert API Spine contract, validator, hostile mutations and focused tests."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent veto was risk-triggered before candidate commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The serial design remained Sol-owned under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

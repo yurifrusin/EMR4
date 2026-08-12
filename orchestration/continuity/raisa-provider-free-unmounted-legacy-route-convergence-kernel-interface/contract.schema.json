@@ -1,0 +1,467 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/legacy-route-convergence-kernel-interface.v1.json",
+  "title": "EMR4 legacy route convergence kernel interface contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "status",
+    "source_head",
+    "source_bindings",
+    "claim_boundary",
+    "kernel_interface",
+    "route_families",
+    "migration"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.legacy-route-convergence-kernel-interface.v1"
+    },
+    "artifact_kind": {
+      "const": "provider_free_unmounted_authored_synthetic_contract"
+    },
+    "status": {
+      "const": "frozen_no_runtime_behavior_change"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/source_binding"
+      }
+    },
+    "claim_boundary": {
+      "$ref": "#/$defs/claim_boundary"
+    },
+    "kernel_interface": {
+      "$ref": "#/$defs/kernel_interface"
+    },
+    "route_families": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/route_family"
+      }
+    },
+    "migration": {
+      "$ref": "#/$defs/migration"
+    }
+  },
+  "$defs": {
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unique_string_array": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/non_empty_string"
+      }
+    },
+    "source_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(docs|orchestration)/"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_behavior_changed",
+        "application_route_imported",
+        "database_or_source_accessed",
+        "event_or_watcher_consumed",
+        "provider_or_network_used",
+        "product_or_patient_data_used",
+        "command_or_write_performed",
+        "deployment_or_release_performed",
+        "protected_ref_moved"
+      ],
+      "properties": {
+        "route_behavior_changed": {
+          "const": false
+        },
+        "application_route_imported": {
+          "const": false
+        },
+        "database_or_source_accessed": {
+          "const": false
+        },
+        "event_or_watcher_consumed": {
+          "const": false
+        },
+        "provider_or_network_used": {
+          "const": false
+        },
+        "product_or_patient_data_used": {
+          "const": false
+        },
+        "command_or_write_performed": {
+          "const": false
+        },
+        "deployment_or_release_performed": {
+          "const": false
+        },
+        "protected_ref_moved": {
+          "const": false
+        }
+      }
+    },
+    "kernel_interface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_type",
+        "required_fields",
+        "outcomes",
+        "precedence",
+        "canonical_lock_order",
+        "unused_locks",
+        "only_first_effect_outcome",
+        "replay_effect",
+        "event_authority",
+        "context_frame_authority",
+        "audit_fields",
+        "audit_forbidden_material"
+      ],
+      "properties": {
+        "request_type": {
+          "const": "ConditionalAppointmentCommand"
+        },
+        "required_fields": {
+          "$ref": "#/$defs/unique_string_array"
+        },
+        "outcomes": {
+          "$ref": "#/$defs/unique_string_array"
+        },
+        "precedence": {
+          "$ref": "#/$defs/unique_string_array"
+        },
+        "canonical_lock_order": {
+          "$ref": "#/$defs/unique_string_array"
+        },
+        "unused_locks": {
+          "const": "skip_without_reordering"
+        },
+        "only_first_effect_outcome": {
+          "const": "committed"
+        },
+        "replay_effect": {
+          "const": "return_original_receipt_without_second_mutation_or_domain_audit"
+        },
+        "event_authority": {
+          "const": "never"
+        },
+        "context_frame_authority": {
+          "const": "never"
+        },
+        "audit_fields": {
+          "$ref": "#/$defs/unique_string_array"
+        },
+        "audit_forbidden_material": {
+          "$ref": "#/$defs/unique_string_array"
+        }
+      }
+    },
+    "raw_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "path",
+        "handler",
+        "adapter_id",
+        "current_confirmation",
+        "current_precondition",
+        "current_idempotency",
+        "current_audit_signal",
+        "kernel_execution_eligible_now"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "handler": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "adapter_id": {
+          "pattern": "^raw_compat_(create|update|status|delete)$",
+          "type": "string"
+        },
+        "current_confirmation": {
+          "const": "absent_or_unproven_backend_evidence"
+        },
+        "current_precondition": {
+          "const": "no_echoed_backend_precondition"
+        },
+        "current_idempotency": {
+          "const": "not_uniformly_command_enforced"
+        },
+        "current_audit_signal": {
+          "pattern": "^raw_compat_(create|update|status|delete)$",
+          "type": "string"
+        },
+        "kernel_execution_eligible_now": {
+          "const": false
+        }
+      }
+    },
+    "proposal_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "path",
+        "handler",
+        "classification",
+        "mutates_appointment"
+      ],
+      "properties": {
+        "method": {
+          "const": "POST"
+        },
+        "path": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "handler": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "classification": {
+          "enum": [
+            "proposal_command",
+            "proposal_command_variant",
+            "command_style_read_wrapper"
+          ]
+        },
+        "mutates_appointment": {
+          "const": false
+        }
+      }
+    },
+    "confirm_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "path",
+        "handler",
+        "classification",
+        "canonical_operation_id"
+      ],
+      "properties": {
+        "method": {
+          "const": "POST"
+        },
+        "path": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "handler": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "classification": {
+          "enum": [
+            "confirm_command",
+            "confirm_command_variant"
+          ]
+        },
+        "canonical_operation_id": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "kernel_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_shape",
+        "required_lock_plan",
+        "schedule_fence",
+        "confirmation",
+        "freshness",
+        "idempotency",
+        "audit",
+        "raw_convergence_gate"
+      ],
+      "properties": {
+        "target_shape": {
+          "enum": [
+            "null_appointment_target",
+            "existing_appointment_target"
+          ]
+        },
+        "required_lock_plan": {
+          "$ref": "#/$defs/unique_string_array"
+        },
+        "schedule_fence": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "confirmation": {
+          "enum": [
+            "separate_confirmation_required",
+            "separate_destructive_confirmation_required"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "idempotency": {
+          "const": "durable_same_operation_key_and_command_digest_required"
+        },
+        "audit": {
+          "const": "attributable_atomic_decision_and_commit_evidence_required"
+        },
+        "raw_convergence_gate": {
+          "pattern": "^blocked_until_",
+          "type": "string"
+        }
+      }
+    },
+    "route_family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family_id",
+        "canonical_operation_id",
+        "raw_route",
+        "proposal_routes",
+        "confirm_routes",
+        "kernel_target"
+      ],
+      "properties": {
+        "family_id": {
+          "enum": [
+            "appointment_create",
+            "appointment_update",
+            "appointment_status",
+            "appointment_delete"
+          ]
+        },
+        "canonical_operation_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "raw_route": {
+          "$ref": "#/$defs/raw_route"
+        },
+        "proposal_routes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/proposal_route"
+          }
+        },
+        "confirm_routes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/confirm_route"
+          }
+        },
+        "kernel_target": {
+          "$ref": "#/$defs/kernel_target"
+        }
+      }
+    },
+    "migration_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "step_id",
+        "order",
+        "depends_on",
+        "mode",
+        "behavior_change",
+        "required_evidence"
+      ],
+      "properties": {
+        "step_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 11
+        },
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        },
+        "mode": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "behavior_change": {
+          "type": "boolean"
+        },
+        "required_evidence": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_raw_compat_mode",
+        "header_mode_decision",
+        "steps"
+      ],
+      "properties": {
+        "current_raw_compat_mode": {
+          "const": "audit"
+        },
+        "header_mode_decision": {
+          "const": "blocked"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 11,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/migration_step"
+          }
+        }
+      }
+    }
+  }
+}

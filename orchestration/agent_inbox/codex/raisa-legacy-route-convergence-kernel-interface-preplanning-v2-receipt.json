@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_provider_free_unmounted_legacy_route_convergence_map_and_conditional_command_kernel_interface_design",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted source-owned-truth architecture, conditional-command admission plan/closeout, API Spine ADR/programme, legacy compatibility deprecation map, raw-consumer readiness, OpenAPI appointment command draft, alignment inventory and appointment idempotency policy/storage/checkpoint artifacts were read. The new plan must map four raw writes and their proposal/confirm families onto one abstract kernel while freezing confirmation, freshness, idempotency, audit, typed outcomes and a dependency-safe migration order without changing route behavior.",
+    "current_authority_allocation": "GPT Sol owns architecture, plan and acceptance under standing uninterrupted-development authority. The EMR4 API Steward rules apply. This serial, documentation-and-contract-only tranche remains Sol-owned unless a later deterministic result creates a genuine independent-veto surface.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at 4af9966928b9d453eed372f158e566185aaad5da. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. There are zero tracked or staged changes and exactly 500 preserved untracked entries before this distinct corrected preplanning state is generated; two are the immutable failed preplanning state/receipt. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and remains unchanged at the published Continuity 246 / Compass 228 conditional-command admission result. It names the provider-free unmounted legacy-route convergence map and conditional-command kernel-interface design as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "The tranche is provider-free, unmounted and authored-synthetic. It may read repository API contract documents and create inert design/contract/test artifacts only. It may not import or modify runtime routes, access a database/source/watcher/event, use product/patient/clinical data, credential/IAM, network/provider, executable capability, command/write, deployment, release, Pages, protected evidence or protected refs. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 256,
+  "register_revision": 257,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11632,6 +11632,51 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-conditional-command-admission-rehearsal-source-head-draft-failure-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-256.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0290",
+      "attempt_id": "raisa-legacy-route-convergence-kernel-interface-preplanning-001",
+      "observed_on": "2026-08-12",
+      "tranche": "raisa-legacy-route-convergence-kernel-interface-design",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne preplanning state must copy continuation_event exactly from the configured orchestrator-requirements vocabulary; preplanning uses pre_sprint_planning and descriptive phase prose belongs only in planned_action.",
+      "observed_error": "The first legacy-route convergence preplanning state repeated intuitive continuation_event pre_plan even though that exact mismatch was already recorded. The deterministic preflight returned revision_required with continuation_event_missing_or_unapproved, admitted no rehydration evidence and authorised no planning or dispatch. No route, database, provider, product data, network, command, protected ref or external worker was opened.",
+      "detection_method": "scripts.ariadne_orchestrator_preflight failed closed before any plan artifact was created. Direct readback of orchestration/harness_settings/orchestrator_requirements.yaml identified exact pre_sprint_planning, and the failed state and receipt were preserved before a distinct v2 state was prepared.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-257.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed state and receipt, enter AER-0290 before accepting any correction, and generate a distinct v2 receipt using exact configured pre_sprint_planning with the same five-source evidence and authority boundary. The v2 receipt passed before any plan artifact was created.",
+        "prevention_control": "Before every receipt state is written, invoke scripts.ariadne_orchestrator_preflight --list-continuation-events and select the event from that machine output; never rely on memory, prose or a previously corrected incident.",
+        "evidence_paths": [
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-257.md"
         ]
       },
       "status": "corrected"

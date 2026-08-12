@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_plan",
+  "planned_action": "freeze_the_provider_free_unmounted_legacy_route_convergence_map_and_conditional_command_kernel_interface_design",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and remains unchanged at the published Continuity 246 / Compass 228 conditional-command admission result. It names the provider-free unmounted legacy-route convergence map and conditional-command kernel-interface design as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol owns architecture, plan and acceptance under standing uninterrupted-development authority. The EMR4 API Steward rules apply. This serial, documentation-and-contract-only tranche remains Sol-owned unless a later deterministic result creates a genuine independent-veto surface.",
+    "active_plan_and_acceptance": "The accepted source-owned-truth architecture, conditional-command admission plan/closeout, API Spine ADR/programme, legacy compatibility deprecation map, raw-consumer readiness, OpenAPI appointment command draft, alignment inventory and appointment idempotency policy/storage/checkpoint artifacts were read. The new plan must map four raw writes and their proposal/confirm families onto one abstract kernel while freezing confirmation, freshness, idempotency, audit, typed outcomes and a dependency-safe migration order without changing route behavior.",
+    "protected_evidence_boundaries": "The tranche is provider-free, unmounted and authored-synthetic. It may read repository API contract documents and create inert design/contract/test artifacts only. It may not import or modify runtime routes, access a database/source/watcher/event, use product/patient/clinical data, credential/IAM, network/provider, executable capability, command/write, deployment, release, Pages, protected evidence or protected refs. docs/branding and every unrelated untracked file remain excluded.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at 4af9966928b9d453eed372f158e566185aaad5da. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. There are zero tracked or staged changes and exactly 498 preserved untracked entries before this new preplanning pair is generated. Explicit-path staging only applies and docs/branding remains excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "legacy_route_convergence_kernel_interface_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol is planning one inert API Spine convergence contract from accepted repository-local artifacts."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent veto is dispatched before deterministic evidence exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The tightly coupled design remains Sol-owned under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
