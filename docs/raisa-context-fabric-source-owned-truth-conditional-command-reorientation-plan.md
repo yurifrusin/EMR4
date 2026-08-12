@@ -90,4 +90,3 @@ After acceptance, the next safe descendant is a provider-free, unmounted
 conditional-command admission rehearsal. It may exercise authored-synthetic
 preconditions, locks, outcomes and legacy-route classifications only. It may
 not change a route, open a database, consume a real event or issue a command.
-

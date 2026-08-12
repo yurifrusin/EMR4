@@ -43,4 +43,3 @@ write authority.
 This delta authorizes no patient/product data, live route, database, migration,
 watcher, provider, credential, executable, command, deployment or protected-ref
 movement.
-
