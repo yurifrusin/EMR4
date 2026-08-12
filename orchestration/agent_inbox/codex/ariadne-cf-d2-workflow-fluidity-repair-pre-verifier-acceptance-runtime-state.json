@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_exact_reviewed_cf_d2_workflow_incident_diagnosis_and_fluidity_repair_without_relabelling_cf_d2_or_opening_another_durability_tranche",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md is fully rehydrated. The authorized workflow diagnosis follows the stopped, unproved CF-D2 recovery descendant at Continuity 243 / Compass 225.",
+    "current_authority_allocation": "GPT Sol owns final acceptance. Fresh Gemini 3.6 Flash/high provided one read-only veto over exact candidate 018099dd6c5f0502121360732feb602252eb34cc; its schema-constrained pass is advisory evidence and grants no Git, runtime or product authority.",
+    "active_plan_and_acceptance": "The frozen plan requires an evidence-backed diagnosis, hard/adaptive policy split, discriminating diagnostic gate, exact structured command admission, discoverable receipt vocabulary, focused verification and one clean exact-HEAD veto. Gemini reported no P0-P2 finding; all nine exact commands returned zero, including 46 workflow and 228 register tests.",
+    "protected_evidence_boundaries": "Acceptance is repository-only. CF-D2 remains stopped and unproved, attempt 003 remains ineligible, and key rotation/retention remains blocked. No database/Docker, patient/clinical/product data, provider/product tool, credential/IAM, command, deployment, release, Pages or protected-ref authority opens. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Reviewed source 018099dd6c5f0502121360732feb602252eb34cc is the current task-branch HEAD and exact clean review-worktree HEAD before and after review. Required resumed HEAD remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "cf_d2_workflow_fluidity_preacceptance_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the exact review receipt, command manifest digest, nine zero exit codes and unchanged Git state."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh exact-HEAD schema-constrained veto passed with no P0-P2 finding and a clean post-state."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": ["orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json"],
+  "assigned_agent_ids": []
+}

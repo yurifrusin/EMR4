@@ -35,12 +35,12 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         manifest["schema_version"] == "emr4.current_baton_acceptance_index_manifest.v1"
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
-    assert manifest["source_git_head"] == ("fed81847b4155d49cf997905e79cf31808ceb017")
+    assert manifest["source_git_head"] == ("018099dd6c5f0502121360732feb602252eb34cc")
     assert manifest["source_agents_sha256"] == (
-        "1bc06ec16ca338602f835b90d6552098e1beb9059fe3c554b96a2530627a620b"
+        "cd979a5e9fe971eca62bea13f87689245b21725b66841e2fa48b536cd9a2a5dc"
     )
-    assert manifest["source_agents_byte_count"] == 68291
-    assert manifest["source_agents_line_count"] == 493
+    assert manifest["source_agents_byte_count"] == 70062
+    assert manifest["source_agents_line_count"] == 494
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]

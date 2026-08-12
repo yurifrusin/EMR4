@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_exact_head_gemini_36_flash_high_veto_retry_after_provider_schema_admission_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 018099dd6c5f0502121360732feb602252eb34cc includes the provider-schema repair and AER-0287/0288. All 274 focused workflow/register tests pass. Review pass requires no P0-P2 issue and every one of nine exact ordered manifest commands returning zero through the local exact-result gate.",
+    "current_authority_allocation": "GPT Sol retains conductor, correction, acceptance and Git authority. One fresh Gemini 3.6 Flash/high Antigravity project receives read-only veto authority only. The prior conversation produced no review and transfers no conclusion.",
+    "git_refs_and_worktree": "Candidate 018099dd6c5f0502121360732feb602252eb34cc is literal git rev-parse output. Review worktree C:/Users/sarashera/EMR4-worktrees/r190 is clean on codex/cf-d2-workflow-fluidity-repair-gemini-review and independently preflighted at that exact HEAD. Required resumed HEAD remains an ancestor; local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md is fully rehydrated. CF-D2 remains stopped and unproved; the active repository-only workflow diagnosis and fluidity repair now awaits one final veto.",
+    "protected_evidence_boundaries": "The retry is repository-local and read-only. No database/Docker, patient/clinical/product data, provider tool, credential/IAM, product command, deployment, production, release, Pages or protected-ref operation is authorized. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

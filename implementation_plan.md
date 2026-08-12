@@ -162,7 +162,13 @@ This proves the selected serial behavior slice only; concurrency, crash
 restart, unknown-commit recovery, key rotation, retention execution, purge,
 performance and operational availability remain unproved. Applied migration,
 application behavior, operational database/source access and runtime remain
-closed.
+closed. CF-D1 subsequently proved the bounded two-session concurrency slice,
+but CF-D2 restart/unknown-commit and its recovery descendant stopped before any
+crash. The accepted workflow-incident diagnosis now separates hard safety
+controls from adaptive flow and requires distinct observations for every viable
+cause before another correction or retry. It does not prove CF-D2; key rotation
+and retention/purge remain blocked and the next independent programme direction
+requires Yuri's choice.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
@@ -642,10 +648,16 @@ generation rehearsal. The architecture-only provider-free default-off
   diagnostic failed at the same anchor coordinate. Both diagnostics used zero
   `SIGKILL` or restart and cleaned up exactly. Full attempt 003 is ineligible,
   so crash restart, unknown-commit recovery, key rotation, retention, purge,
-  performance and operational availability remain unproved. The next work is
-  Yuri's authorised independent workflow-incident diagnosis and bounded
-  repository-only fluidity repair, not another database run. Applied
-  migration, application wiring,
+  performance and operational availability remain unproved. Yuri's authorised
+  independent workflow-incident diagnosis and bounded repository-only fluidity
+  repair now pass at exact reviewed source
+  `018099dd6c5f0502121360732feb602252eb34cc`. Hard authority, data, effect,
+  stop, cleanup, claim and protected-ref controls remain intact; diagnostic
+  corrections and retries now require distinct observations for every viable
+  cause, and review commands/results are mechanically exact. This repair does
+  not reopen CF-D2. No automatic durability tranche remains dependency-
+  satisfied, so the next independent programme direction is a Yuri-owned
+  choice. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1

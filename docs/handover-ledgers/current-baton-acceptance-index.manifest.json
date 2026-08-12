@@ -20,6 +20,7 @@
     "Agent Execution Surface AES-C4 acceptance",
     "Agent Execution Surface AES-C5 acceptance",
     "Context Fabric CF-D1 concurrency rehearsal acceptance",
+    "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -30,7 +31,7 @@
   "ledger_byte_count": 170102,
   "ledger_line_count": 142,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "bd09563e3e175e31ca72276ec84031f8c0161edfbde198ec0a97e7e6f2b6b402",
+  "ledger_sha256": "4f6eb9e4892634ea7368481a3e318047bb09d6ef1a5265966e1169a08d8c078f",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -161,10 +162,10 @@
   ],
   "moved_row_count": 126,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 68291,
-  "source_agents_git_blob_sha1": "ec2e59110549ba89cfd568acadd95031faf12938",
-  "source_agents_line_count": 493,
+  "source_agents_byte_count": 70062,
+  "source_agents_git_blob_sha1": "b4442726a7d8281f2b15d51a581a7cbdad4bdbac",
+  "source_agents_line_count": 494,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "1bc06ec16ca338602f835b90d6552098e1beb9059fe3c554b96a2530627a620b",
-  "source_git_head": "fed81847b4155d49cf997905e79cf31808ceb017"
+  "source_agents_sha256": "cd979a5e9fe971eca62bea13f87689245b21725b66841e2fa48b536cd9a2a5dc",
+  "source_git_head": "018099dd6c5f0502121360732feb602252eb34cc"
 }

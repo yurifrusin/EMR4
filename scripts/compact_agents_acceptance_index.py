@@ -42,6 +42,7 @@ ACTIVE_LABELS = (
     "Agent Execution Surface AES-C4 acceptance",
     "Agent Execution Surface AES-C5 acceptance",
     "Context Fabric CF-D1 concurrency rehearsal acceptance",
+    "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",

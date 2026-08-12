@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_accepted_cf_d2_workflow_incident_closeout_continuity_compass_baton_and_paired_yuri_summary",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records accepted workflow result at Continuity 244 / Compass 226, preserves CF-D2 as stopped and names a genuine Yuri-owned programme fork as next.",
+    "current_authority_allocation": "GPT Sol owns acceptance, closeout, task-branch commit and task-branch push only. Gemini's exact-source veto passed; no worker remains active and no protected integration authority is open.",
+    "active_plan_and_acceptance": "Reviewed source 018099dd6c5f0502121360732feb602252eb34cc passes the frozen workflow plan. The exact nine-command veto passed with 46 workflow and 228 register tests; the final canonical fast profile passed 191 tests. Closeout, Sol acceptance, Continuity/Compass update and paired Yuri summary are prepared.",
+    "protected_evidence_boundaries": "CF-D2 attempt 003, key rotation/retention and all database/Docker runtime remain closed. No patient/clinical/product data, operational source/watcher, provider product call, credential/IAM, product command, deployment, production, release, Pages or protected-ref movement occurred. docs/branding and unrelated untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "The task branch remains at reviewed source 018099dd6c5f0502121360732feb602252eb34cc before the closeout-only commit. Required resumed HEAD remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; only explicit closeout paths will be staged."
+  },
+  "context_health": {
+    "agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "cf_d2_workflow_closeout_precommit_complete_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reconciled the review, closeout, 244/226 continuity state, live baton and exact protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh exact-source veto passed and the worktree remained clean."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek lease is open."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": ["orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json"],
+  "assigned_agent_ids": []
+}

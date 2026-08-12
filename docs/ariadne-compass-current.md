@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 243 / Compass 225. CF-D1 proves six exact provider-free authored-synthetic PostgreSQL 16 two-session races with bounded overlap, native replay, outer rollback, zero retry and exact cleanup. CF-D2 provider-free disposable restart and unknown-commit recovery is the next dependency-satisfied planned tranche under Yuri's standing authority.
+> EMR4 is at Continuity 244 / Compass 226. The CF-D2 workflow incident diagnosis and evidence-led fluidity repair pass, while CF-D2 itself remains stopped and unproved. No automatic durability tranche is dependency-satisfied; Yuri must select the next independent programme direction.
 
 ## North star
 
@@ -260,27 +260,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    AES-C5 passes one practice-scoped route read, one minimized Sydney Vertex call, deterministic no-command release, terminal accounting and complete cleanup; no AES-C6 is planned or authorized. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c4`.
 122. **Prove exact Context Fabric database behavior under six fixed two-session races — Raisa Context Fabric CF-D1 disposable PostgreSQL concurrency rehearsal**
    CF-D1 passes bounded overlap, exact winner/loser outcomes, native replay, outer rollback, whole-document evidence and cleanup without product or provider access. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c5`.
+123. **Repair diagnostic flow after stopped CF-D2 without weakening hard safety boundaries — Ariadne CF-D2 workflow incident diagnosis and fluidity repair**
+   Evidence-led gates now require discriminating observations and exact command results; CF-D2 remains unproved and the next programme direction requires Yuri's choice. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal`.
 
 ## Current position
 
-**Context Fabric CF-D1 concurrency evidence accepted — Raisa Context Fabric CF-D1 disposable PostgreSQL concurrency rehearsal**
+**Evidence-led workflow repair accepted; independent programme fork required — Ariadne CF-D2 workflow incident diagnosis and fluidity repair**
 
-**Why this proof came next:** Yuri selected the first post-AES programme descendant and standing authority continues through dependency-satisfied planned tranches.
+**Why this proof came next:** CF-D2 exhausted its bounded diagnostic path without discriminating the remaining anchor assertions, and Yuri requested a workflow incident diagnosis before choosing another direction.
 
-Six exact authored-synthetic two-session PostgreSQL races passed with bounded overlap, exact outcomes, no retry and complete owned cleanup.
+Hard safety gates remain intact while adaptive work now stops before nondiscriminating corrections or retries.
 
 ### What this unlocks
 
-- Freeze the narrowest CF-D2 provider-free disposable restart and unknown-commit recovery plan.
-- Separate definitely committed, definitely rolled back and genuinely indeterminate client observations without guessing success.
-- Require fresh five-source rehydration and a new evidence path before CF-D2 runtime.
+- Choose a separately valuable product or architecture direction without carrying CF-D2 ceremony into it.
+- If explicitly authorized later, design an observability-first CF-D2 architecture whose outcomes distinguish every viable assertion before runtime.
 
 ### What it does not solve
 
-- Crash/restart or unknown-commit recovery, arbitrary retry/deadlock/load behavior, performance or operational availability.
-- Key rotation, retention/purge, long-lived persistence, applied migration, application/API/Diary wiring or watchers/listeners.
-- Operational database/source access, real/product/patient/clinical data, providers, tools or commands.
-- Credential/IAM change, deployment, production, release, Pages or protected-ref movement.
+- The unresolved CF-D2 anchor-internal cause, crash/restart or unknown-commit recovery.
+- Key rotation, retention/purge, long-lived persistence or operational database wiring.
+- Patient/product/clinical data, provider tools, commands, deployment, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -339,7 +339,7 @@ Prerequisites:
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
-### Raisa Practice Context Fabric — active
+### Raisa Practice Context Fabric — blocked
 
 How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?
 
@@ -347,9 +347,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Serial durability, architecture-health repair, AES-C0 through AES-C5 and CF-D1 concurrency pass.
-- CF-D2 restart/unknown-commit recovery requires a fresh five-source rehydration and its own narrow fail-closed plan.
-- Keep operational database/source access, real data, providers, tools, commands, production and protected refs separately closed.
+- CF-D2 restart and unknown-commit recovery remains unproved and closed.
+- Yuri must choose an independent programme direction or explicitly authorize a new observability-first CF-D2 architecture.
+- Key rotation and retention/purge remain dependency-blocked.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -538,6 +538,7 @@ Prerequisites:
 
 ## Map limits
 
+- The workflow repair proves discriminating diagnostic and exact review admission controls; it does not prove the unresolved CF-D2 database behavior.
 - CF-D1 proves six fixed two-session database races, not crash/restart, unknown commit, arbitrary deadlock freedom, load, performance, more than two participants or operational availability.
 - AES-C5 proves one exact authored-synthetic application-route and brokered provider crossing with cleanup, not real-person or patient-data safety, production identity/RLS, reusable runtime, command safety or physical/sovereign processing.
 - AES-C4 proves one exact authored-synthetic brokered provider crossing and cleanup, not physical or sovereign processing, product-data safety, reusable runtime or command safety.
@@ -693,6 +694,9 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
+- `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md`
+- `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md`
+- `docs/ariadne-cf-d2-workflow-incident-diagnosis.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
 - `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md`
@@ -1075,6 +1079,7 @@ Prerequisites:
 - `docs/security/security-finding-register.json`
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
+- `orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
@@ -1107,6 +1112,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
@@ -1767,6 +1773,7 @@ Prerequisites:
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json`
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json`
 - `orchestration/harness_settings/autonomous_continuation.yaml`
+- `orchestration/harness_settings/evidence_led_workflow.yaml`
 - `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/harness_settings/python_source_state.json`
 - `orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md`
@@ -1779,6 +1786,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-architectural-health-conformance-review.md`
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-conformance-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1788,6 +1796,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/browser-acceptance-evidence.json`
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review-analysis.json`
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
+- `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
@@ -1868,4 +1877,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 225; continuity graph revision 243._
+_Compass map revision 226; continuity graph revision 244._

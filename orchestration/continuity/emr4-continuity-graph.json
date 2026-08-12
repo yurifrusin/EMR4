@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 243,
+  "graph_revision": 244,
   "harvests": [],
   "nodes": [
     {
@@ -15396,9 +15396,90 @@
         "Key rotation, retention/purge, arbitrary retry/deadlock/load behavior, long-lived persistence and operational availability remain unproved.",
         "No operational database/source, watcher/listener, real/product/patient/clinical data, provider, tool, command, deployment, production, release, Pages or protected-ref movement is opened."
       ]
+    },
+    {
+      "id": "ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair",
+      "title": "Ariadne CF-D2 workflow incident diagnosis and fluidity repair",
+      "kind": "maintenance",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "018099dd6c5f0502121360732feb602252eb34cc",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is a repository-only workflow maintenance result; it does not accept or reopen CF-D2.",
+          "Hard authority, data, effect, stop, cleanup, claim and protected-ref controls remain fail closed.",
+          "Adaptive flow may improvise inside a frozen boundary only while each retry creates discriminating evidence."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-cf-d2-workflow-incident-diagnosis-and-fluidity-repair",
+          "source": "docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the evidence-led workflow repair while leaving CF-D2 stopped and unproved."
+        }
+      ],
+      "claim_scope": [
+        "Workflow ceremony amplified genuine CF-D2 complexity by permitting corrections without distinct observations for all viable causes.",
+        "The repaired diagnostic gate rejects nondiscriminating retries and unsupported exclusive-cause claims.",
+        "The repaired verifier gate binds exact structured argv and admits pass only when every individual exit code is zero.",
+        "Receipt events and exact Git candidate identities are discoverable machine outputs rather than memory tasks.",
+        "CF-D2, crash/restart and unknown-commit recovery remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md"
+        ],
+        "findings": [
+          "docs/ariadne-cf-d2-workflow-incident-diagnosis.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_verifier_execution_policy.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_cf_d2_workflow_fluidity_repair_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/harness_settings/evidence_led_workflow.yaml",
+          "scripts/ariadne_evidence_gate.py",
+          "scripts/ariadne_cf_d2_workflow_fluidity_repair_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "CF-D2 attempt 003 and every further runtime probe remain ineligible without a new observability-first authority decision.",
+        "Key rotation and retention/purge remain dependency-blocked because CF-D2 did not pass.",
+        "No dependency-satisfied automatic programme tranche remains; Yuri must select the next independent direction.",
+        "Operational database/source access, real/product/patient/clinical data, provider tools, commands, deployment, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-11T00:00:00Z"
+  "updated_at": "2026-08-12T00:00:00Z"
 }

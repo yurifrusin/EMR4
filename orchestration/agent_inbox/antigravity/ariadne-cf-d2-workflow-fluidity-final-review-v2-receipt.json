@@ -1,0 +1,261 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r190",
+  "branch": "codex/cf-d2-workflow-fluidity-repair-gemini-review",
+  "head_before": "018099dd6c5f0502121360732feb602252eb34cc",
+  "head_after": "018099dd6c5f0502121360732feb602252eb34cc",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "a67b37a1a651c17fdbefd9d6e5cbf12c18ae6e0270e67b24a6b2b52112e25125",
+  "result": "# Ariadne CF-D2 Workflow Incident Diagnosis and Fluidity Repair \u2014 Independent Verification Review\n\n## Executive Summary\n\nIndependent verification of candidate `018099dd6c5f0502121360732feb602252eb34cc` against baseline `d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b` on branch `codex/cf-d2-workflow-fluidity-repair-gemini-review` in worktree `C:/Users/sarashera/EMR4-worktrees/r190` confirms that no P0, P1, or P2 defect exists.\n\nThe workflow repair accurately diagnoses the CF-D2 incident without overclaiming, separates hard safety controls from adaptive flow, mechanizes diagnostic hypothesis discrimination, fixes the provider tool-schema dialect (replacing tuple-only `prefixItems` with provider-admissible `items`), enforces strict local command-manifest verification, makes continuation events discoverable via CLI, and enforces machine-resolved Git commit identities.\n\nAll nine manifest commands executed in exact order with exit code 0, leaving the worktree completely clean at candidate HEAD `018099dd6c5f0502121360732feb602252eb34cc`.\n\n---\n\n## Detailed Evaluation against the Six Verification Criteria\n\n### 1. Diagnosis Distinction and Scope\n- [docs/ariadne-cf-d2-workflow-incident-diagnosis.md](file:///C:/Users/sarashera/EMR4-worktrees/r190/docs/ariadne-cf-d2-workflow-incident-diagnosis.md#L7-L24) explicitly distinguishes genuine PostgreSQL integration complexity from workflow amplification.\n- It clearly acknowledges that the underlying PostgreSQL anchor issue remains unproved and unresolved (`The unresolved PostgreSQL anchor cause remains unknown. This diagnosis is of the workflow incident, not a substitute database diagnosis.`).\n- It avoids claiming an unproved exclusive cause, fulfilling criterion 1.\n\n### 2. Hard Controls vs. Adaptive Flow\n- [evidence_led_workflow.yaml](file:///C:/Users/sarashera/EMR4-worktrees/r190/orchestration/harness_settings/evidence_led_workflow.yaml#L3-L28) cleanly separates `hard_controls` (rehydration, explicit authority/data/effect/stop/cleanup boundaries, protected evidence closure, immutable attempts, default denial, clean worktrees, protected ref closure) from `adaptive_flow` (single active plan/contract, single final risk-triggered veto, local repairs before dispatch, single receipt per continuation event).\n- Hard safety boundaries are strictly preserved while administrative friction is reduced.\n\n### 3. Hypothesis Discrimination and Command Enforcement in Evidence Gate\n- [scripts/ariadne_evidence_gate.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_evidence_gate.py#L187-L310) (`assess_diagnostic_packet`) evaluates hypothesis discrimination via `_observation_map`. If viable hypotheses do not yield distinct next observations, it returns `revision_required` with reason `correction_would_not_create_discriminating_evidence`.\n- `admit_command_results` ([scripts/ariadne_evidence_gate.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_evidence_gate.py#L142-L176)) enforces exact match on command length, command IDs, exact `argv` sequences, exact execution order, and requires exit code 0 for a `pass` decision. Substituted, reordered, or nonzero exit commands are rejected.\n\n### 4. Antigravity Provider Schema & Local Egress Enforcement\n- [scripts/ariadne_antigravity.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_antigravity.py#L81-L96) (`structured_decision_schema`) replaces tuple-only `prefixItems` with a uniform `items` object schema admissible by the Gemini API provider dialect.\n- Strict local validation (`admit_command_results` and `parse_structured_decision`) retains deterministic enforcement of command ID, exact `argv` array, ordering, and zero exit codes after structured response egress.\n\n### 5. Event Discovery and Machine-Resolved Git Identities\n- [scripts/ariadne_orchestrator_preflight.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_orchestrator_preflight.py#L30-L44) provides `--list-continuation-events` to expose the exact configured continuation event vocabulary directly from `orchestrator_requirements.yaml`.\n- [evidence_led_workflow.yaml](file:///C:/Users/sarashera/EMR4-worktrees/r190/orchestration/harness_settings/evidence_led_workflow.yaml#L41-L44) and [verifier_execution_policy.yaml](file:///C:/Users/sarashera/EMR4-worktrees/r190/orchestration/harness_settings/verifier_execution_policy.yaml) (along with AER-0286 in revision 254) require full SHA-256 commit IDs to be resolved with `git rev-parse HEAD` and reverified by worktree preflight rather than manually completed from memory.\n\n### 6. Backward Compatibility for Manifest-Free Callers\n- [scripts/ariadne_antigravity.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_antigravity.py#L62-L64) (`structured_decision_schema(command_manifest=None)`) and `parse_structured_decision` retain full compatibility for verifier calls that do not bind a command manifest.\n\n---\n\n## Command Manifest Execution Summary\n\n| Command ID | Structured Argv | Exit Code | Result |\n|---|---|---|---|\n| **C01** | `[\"git\", \"status\", \"--short\", \"--branch\"]` | 0 | `## codex/cf-d2-workflow-fluidity-repair-gemini-review` |\n| **C02** | `[\"git\", \"rev-parse\", \"HEAD\"]` | 0 | `018099dd6c5f0502121360732feb602252eb34cc` |\n| **C03** | `[\"python\", \"-m\", \"pytest\", \"-q\", ... (flow tests)]` | 0 | 46 passed |\n| **C04** | `[\"python\", \"-m\", \"pytest\", \"-q\", ... (register tests)]` | 0 | 228 passed |\n| **C05** | `[\"ruff\", \"check\", ...]` | 0 | All checks passed |\n| **C06** | `[\"ruff\", \"format\", \"--check\", ...]` | 0 | 8 files already formatted |\n| **C07** | `[\"python\", \"-m\", \"py_compile\", ...]` | 0 | Clean compilation |\n| **C08** | `[\"git\", \"diff\", \"--check\", \"d1e8d31e...018099dd...\"]` | 0 | No whitespace/conflict issues |\n| **C09** | `[\"git\", \"status\", \"--short\", \"--branch\"]` | 0 | Clean worktree at `codex/cf-d2-workflow-fluidity-repair-gemini-review` |\n\n---\n\n## State and Scope Verification\n\n- **Exact HEAD:** `018099dd6c5f0502121360732feb602252eb34cc`\n- **Branch:** `codex/cf-d2-workflow-fluidity-repair-gemini-review`\n- **Worktree Post-State:** Clean (zero untracked or modified files)\n- **Scope Note:** This pass accepts only the workflow fluidity repair. CF-D2 remains stopped and unproved; no database, product, network, or protected-ref authority is granted.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Ariadne CF-D2 Workflow Incident Diagnosis and Fluidity Repair \u2014 Independent Verification Review\n\n## Executive Summary\n\nIndependent verification of candidate `018099dd6c5f0502121360732feb602252eb34cc` against baseline `d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b` on branch `codex/cf-d2-workflow-fluidity-repair-gemini-review` in worktree `C:/Users/sarashera/EMR4-worktrees/r190` confirms that no P0, P1, or P2 defect exists.\n\nThe workflow repair accurately diagnoses the CF-D2 incident without overclaiming, separates hard safety controls from adaptive flow, mechanizes diagnostic hypothesis discrimination, fixes the provider tool-schema dialect (replacing tuple-only `prefixItems` with provider-admissible `items`), enforces strict local command-manifest verification, makes continuation events discoverable via CLI, and enforces machine-resolved Git commit identities.\n\nAll nine manifest commands executed in exact order with exit code 0, leaving the worktree completely clean at candidate HEAD `018099dd6c5f0502121360732feb602252eb34cc`.\n\n---\n\n## Detailed Evaluation against the Six Verification Criteria\n\n### 1. Diagnosis Distinction and Scope\n- [docs/ariadne-cf-d2-workflow-incident-diagnosis.md](file:///C:/Users/sarashera/EMR4-worktrees/r190/docs/ariadne-cf-d2-workflow-incident-diagnosis.md#L7-L24) explicitly distinguishes genuine PostgreSQL integration complexity from workflow amplification.\n- It clearly acknowledges that the underlying PostgreSQL anchor issue remains unproved and unresolved (`The unresolved PostgreSQL anchor cause remains unknown. This diagnosis is of the workflow incident, not a substitute database diagnosis.`).\n- It avoids claiming an unproved exclusive cause, fulfilling criterion 1.\n\n### 2. Hard Controls vs. Adaptive Flow\n- [evidence_led_workflow.yaml](file:///C:/Users/sarashera/EMR4-worktrees/r190/orchestration/harness_settings/evidence_led_workflow.yaml#L3-L28) cleanly separates `hard_controls` (rehydration, explicit authority/data/effect/stop/cleanup boundaries, protected evidence closure, immutable attempts, default denial, clean worktrees, protected ref closure) from `adaptive_flow` (single active plan/contract, single final risk-triggered veto, local repairs before dispatch, single receipt per continuation event).\n- Hard safety boundaries are strictly preserved while administrative friction is reduced.\n\n### 3. Hypothesis Discrimination and Command Enforcement in Evidence Gate\n- [scripts/ariadne_evidence_gate.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_evidence_gate.py#L187-L310) (`assess_diagnostic_packet`) evaluates hypothesis discrimination via `_observation_map`. If viable hypotheses do not yield distinct next observations, it returns `revision_required` with reason `correction_would_not_create_discriminating_evidence`.\n- `admit_command_results` ([scripts/ariadne_evidence_gate.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_evidence_gate.py#L142-L176)) enforces exact match on command length, command IDs, exact `argv` sequences, exact execution order, and requires exit code 0 for a `pass` decision. Substituted, reordered, or nonzero exit commands are rejected.\n\n### 4. Antigravity Provider Schema & Local Egress Enforcement\n- [scripts/ariadne_antigravity.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_antigravity.py#L81-L96) (`structured_decision_schema`) replaces tuple-only `prefixItems` with a uniform `items` object schema admissible by the Gemini API provider dialect.\n- Strict local validation (`admit_command_results` and `parse_structured_decision`) retains deterministic enforcement of command ID, exact `argv` array, ordering, and zero exit codes after structured response egress.\n\n### 5. Event Discovery and Machine-Resolved Git Identities\n- [scripts/ariadne_orchestrator_preflight.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_orchestrator_preflight.py#L30-L44) provides `--list-continuation-events` to expose the exact configured continuation event vocabulary directly from `orchestrator_requirements.yaml`.\n- [evidence_led_workflow.yaml](file:///C:/Users/sarashera/EMR4-worktrees/r190/orchestration/harness_settings/evidence_led_workflow.yaml#L41-L44) and [verifier_execution_policy.yaml](file:///C:/Users/sarashera/EMR4-worktrees/r190/orchestration/harness_settings/verifier_execution_policy.yaml) (along with AER-0286 in revision 254) require full SHA-256 commit IDs to be resolved with `git rev-parse HEAD` and reverified by worktree preflight rather than manually completed from memory.\n\n### 6. Backward Compatibility for Manifest-Free Callers\n- [scripts/ariadne_antigravity.py](file:///C:/Users/sarashera/EMR4-worktrees/r190/scripts/ariadne_antigravity.py#L62-L64) (`structured_decision_schema(command_manifest=None)`) and `parse_structured_decision` retain full compatibility for verifier calls that do not bind a command manifest.\n\n---\n\n## Command Manifest Execution Summary\n\n| Command ID | Structured Argv | Exit Code | Result |\n|---|---|---|---|\n| **C01** | `[\"git\", \"status\", \"--short\", \"--branch\"]` | 0 | `## codex/cf-d2-workflow-fluidity-repair-gemini-review` |\n| **C02** | `[\"git\", \"rev-parse\", \"HEAD\"]` | 0 | `018099dd6c5f0502121360732feb602252eb34cc` |\n| **C03** | `[\"python\", \"-m\", \"pytest\", \"-q\", ... (flow tests)]` | 0 | 46 passed |\n| **C04** | `[\"python\", \"-m\", \"pytest\", \"-q\", ... (register tests)]` | 0 | 228 passed |\n| **C05** | `[\"ruff\", \"check\", ...]` | 0 | All checks passed |\n| **C06** | `[\"ruff\", \"format\", \"--check\", ...]` | 0 | 8 files already formatted |\n| **C07** | `[\"python\", \"-m\", \"py_compile\", ...]` | 0 | Clean compilation |\n| **C08** | `[\"git\", \"diff\", \"--check\", \"d1e8d31e...018099dd...\"]` | 0 | No whitespace/conflict issues |\n| **C09** | `[\"git\", \"status\", \"--short\", \"--branch\"]` | 0 | Clean worktree at `codex/cf-d2-workflow-fluidity-repair-gemini-review` |\n\n---\n\n## State and Scope Verification\n\n- **Exact HEAD:** `018099dd6c5f0502121360732feb602252eb34cc`\n- **Branch:** `codex/cf-d2-workflow-fluidity-repair-gemini-review`\n- **Worktree Post-State:** Clean (zero untracked or modified files)\n- **Scope Note:** This pass accepts only the workflow fluidity repair. CF-D2 remains stopped and unproved; no database, product, network, or protected-ref authority is granted.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-r190-flow-v2",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_verifier_execution_policy.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-r190-register-v2",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/ariadne_evidence_gate.py",
+          "scripts/ariadne_antigravity.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_verifier_execution_policy.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "format",
+          "--check",
+          "scripts/ariadne_evidence_gate.py",
+          "scripts/ariadne_antigravity.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_verifier_execution_policy.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/ariadne_evidence_gate.py",
+          "scripts/ariadne_antigravity.py",
+          "scripts/ariadne_orchestrator_preflight.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b..018099dd6c5f0502121360732feb602252eb34cc"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "eacd8fe2a40e0445c5936449a55915f21be0c251ae1b60f7cf907dd41ff9e332",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-r190-flow-v2",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_verifier_execution_policy.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-r190-register-v2",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/ariadne_evidence_gate.py",
+        "scripts/ariadne_antigravity.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "format",
+        "--check",
+        "scripts/ariadne_evidence_gate.py",
+        "scripts/ariadne_antigravity.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/ariadne_evidence_gate.py",
+        "scripts/ariadne_antigravity.py",
+        "scripts/ariadne_orchestrator_preflight.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b..018099dd6c5f0502121360732feb602252eb34cc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}
