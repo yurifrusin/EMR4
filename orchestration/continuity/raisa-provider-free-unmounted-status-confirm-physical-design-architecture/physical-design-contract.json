@@ -1,0 +1,284 @@
+{
+  "schema_version": "raisa.status_confirm_physical_design_architecture.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_physical_design_architecture_pass",
+  "source_head": "fad85e038b7168c3323075024dba7f9d5709eff5",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_architecture",
+  "implementation_authorized": false,
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md",
+      "sha256": "a587fe03ee8a4a0b51ae1f17308c31dc9660bb96c17e3f508bbb2692b5339189"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md",
+      "sha256": "72997a4b0358b15201c36da976eff827fba49f4bd14de3b354dfa0eb4738d659"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json",
+      "sha256": "c255e52d5b2c8a90ad2e975b8b55d87b8248aa571811eb1ad3b1049a326e786d"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json",
+      "sha256": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+    },
+    {
+      "path": "app/models/appointments.py",
+      "sha256": "af00f7318da3f19732843c75b56721db89a3fa0c94b6e0feeb12a614850c4952"
+    },
+    {
+      "path": "app/services/appointment_idempotency.py",
+      "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"
+    },
+    {
+      "path": "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py",
+      "sha256": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a"
+    },
+    {
+      "path": "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py",
+      "sha256": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd"
+    },
+    {
+      "path": "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py",
+      "sha256": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+    }
+  ],
+  "api_boundary": {
+    "classification": "rest_openapi_status_confirm_command_security_audit_idempotency",
+    "operation_id": "confirmAppointmentStatusProposal",
+    "route_family": "status-confirm",
+    "public_response_schema_changed": false,
+    "private_receipt_fields_publicly_mapped": false,
+    "graphql_mutation_authority": false,
+    "event_command_authority": false
+  },
+  "appointment_state_version": {
+    "table": "appointments",
+    "column": "appointment_state_version",
+    "postgresql_type": "BIGINT",
+    "minimum": 1,
+    "maximum": 9223372036854775807,
+    "nullable_after_migration": false,
+    "insert_value": 1,
+    "increment_owner": "postgresql_before_update_trigger",
+    "submitted_value_policy": "replace_with_old_plus_one",
+    "increment_event": "every_committed_appointment_row_update_exactly_once",
+    "timestamp_substitution": false,
+    "overflow_outcome": "transaction_aborted",
+    "trigger_is_watcher_or_event": false
+  },
+  "migration_contract": {
+    "phases": [
+      "add_nullable_bigint_without_default",
+      "set_server_default_one_for_new_inserts",
+      "backfill_existing_nulls_to_cutover_baseline_one",
+      "add_not_valid_positive_range_check_validate_then_set_not_null",
+      "install_database_owned_before_update_trigger",
+      "prove_no_null_nonpositive_or_overrange_rows",
+      "expose_version_only_after_all_prior_phases"
+    ],
+    "historical_backfill_claim": "cutover_baseline_not_historical_revision_chronology",
+    "server_default_retained": true,
+    "runtime_before_completion": false,
+    "automatic_downgrade_after_first_v1_receipt": false,
+    "post_adoption_recovery": "forward_only"
+  },
+  "private_completed_receipt": {
+    "table": "appointment_command_idempotency",
+    "contract_version_column": "completed_receipt_version",
+    "contract_version": 1,
+    "additive_fields": [
+      {
+        "name": "completed_receipt_version",
+        "type": "SMALLINT",
+        "nullable_for_legacy": true
+      },
+      {
+        "name": "session_binding_digest",
+        "type": "BYTEA",
+        "nullable_for_legacy": true
+      },
+      {
+        "name": "pre_state_version",
+        "type": "BIGINT",
+        "nullable_for_legacy": true
+      },
+      {
+        "name": "post_state_version",
+        "type": "BIGINT",
+        "nullable_for_legacy": true
+      },
+      {
+        "name": "response_body_canonical_bytes",
+        "type": "BYTEA",
+        "nullable_for_legacy": true
+      }
+    ],
+    "legacy_backfill": "none",
+    "legacy_replay_outcome": "legacy_receipt_not_replayable",
+    "session_binding": {
+      "algorithm": "HMAC-SHA-256",
+      "stored_form": "32_raw_digest_bytes",
+      "domain_separator": "appointment-status-session:v1",
+      "message_fields": [
+        "practice_id",
+        "actor_user_id",
+        "authenticated_session_id"
+      ],
+      "raw_session_stored": false,
+      "secret_stored": false
+    },
+    "completed_v1_required_existing_fields": [
+      "practice_id",
+      "actor_user_id",
+      "actor_role",
+      "operation_id",
+      "route_family",
+      "idempotency_key_hash",
+      "request_body_hash",
+      "state",
+      "response_status_code",
+      "response_body_hash",
+      "response_body_json",
+      "result_kind",
+      "target_appointment_id",
+      "audit_log_id"
+    ],
+    "completed_v1_constraints": [
+      "operation_and_route_are_exact_status_confirm",
+      "all_five_additive_fields_are_non_null",
+      "session_binding_digest_has_exactly_32_bytes",
+      "pre_and_post_versions_are_positive",
+      "post_state_version_equals_pre_state_version_plus_one",
+      "canonical_response_bytes_are_nonempty",
+      "existing_target_audit_status_hash_json_and_result_fields_are_non_null"
+    ]
+  },
+  "canonical_response": {
+    "authoritative_storage": "response_body_canonical_bytes",
+    "jsonb_is_delivery_authority": false,
+    "fields_in_order": [
+      "appointment_id",
+      "status",
+      "status_reason_code",
+      "waiting_area_id",
+      "warning_codes"
+    ],
+    "encoding": "UTF-8",
+    "byte_order_mark": false,
+    "insignificant_whitespace": false,
+    "string_escaping": "RFC8259",
+    "nullable_encoding": "json_null",
+    "warning_order": "already_validated_canonical_order",
+    "extra_fields": false,
+    "digest": "lowercase_hex_sha256_of_exact_stored_bytes",
+    "digest_compare": "constant_time_before_replay",
+    "initial_delivery": "exact_receipt_byte_buffer_without_reserialization",
+    "replay_delivery": "exact_stored_bytes_without_reserialization",
+    "integrity_failure": "release_no_body_and_fail_closed"
+  },
+  "transaction_contract": {
+    "owner": "backend_status_confirm_kernel",
+    "isolation": "READ COMMITTED",
+    "single_transaction": true,
+    "locks": [
+      {
+        "resource": "practice",
+        "strength": "FOR SHARE",
+        "predicate": "practice_id"
+      },
+      {
+        "resource": "appointment",
+        "strength": "FOR UPDATE",
+        "predicate": "practice_id_and_appointment_id"
+      },
+      {
+        "resource": "idempotency_record",
+        "strength": "FOR UPDATE",
+        "predicate": "practice_actor_operation_and_hashed_key"
+      }
+    ],
+    "lock_wait": {
+      "policy": "positive_bounded_blocking",
+      "nowait": false,
+      "skip_locked": false,
+      "same_budget_for_all_locks": true,
+      "hidden_effect_retry": false
+    },
+    "decision_trace": [
+      "pretransaction_reject_invalid_or_non_status_ingress",
+      "lock_practice_or_stop",
+      "lock_practice_scoped_appointment_or_stop_before_idempotency_access",
+      "check_current_authority_before_idempotency_insert",
+      "lock_existing_idempotency_or_insert_target_bound_in_progress_row",
+      "recheck_current_authority_while_all_locks_held",
+      "classify_exact_operation_route_target_actor_role_request_and_session_bindings",
+      "replay_only_complete_integrity_valid_v1_receipt",
+      "for_new_command_recheck_locked_version_warnings_evidence_and_terminal_policy",
+      "stage_appointment_mutation_audit_and_completed_v1_receipt",
+      "require_post_version_equals_pre_version_plus_one",
+      "commit_atomic_write_set",
+      "deliver_exact_receipt_bytes"
+    ],
+    "idempotency_identity": [
+      "practice_id",
+      "actor_user_id",
+      "operation_id",
+      "idempotency_key_hash"
+    ],
+    "same_digest_replay_requires": [
+      "target_match",
+      "actor_role_match",
+      "request_digest_match",
+      "session_binding_digest_match",
+      "completed_receipt_version_one",
+      "stored_byte_digest_valid",
+      "current_authority"
+    ],
+    "non_disclosing_outcomes": [
+      "target_not_found",
+      "authority_revoked",
+      "idempotency_conflict",
+      "legacy_receipt_not_replayable",
+      "in_progress_not_replayable",
+      "receipt_integrity_failure",
+      "transaction_rolled_back"
+    ]
+  },
+  "failure_policy": {
+    "lock_timeout": "rollback_generic_transient_no_receipt_disclosure",
+    "deadlock": "rollback_generic_transient_no_receipt_disclosure",
+    "serialization_failure": "rollback_generic_transient_no_receipt_disclosure",
+    "connection_loss_before_commit": "outcome_unknown_client_retries_same_key",
+    "connection_loss_after_commit": "delivery_unknown_client_retries_same_key",
+    "server_effect_retry": false,
+    "atomic_write_set": [
+      "appointment_mutation",
+      "attributable_audit",
+      "completed_v1_receipt"
+    ]
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "application_model_migration_service_or_route_edited": false,
+    "application_or_database_module_imported": false,
+    "executable_ddl_or_sql_emitted": false,
+    "route_or_database_executed": false,
+    "real_transaction_or_lock_opened": false,
+    "provider_or_adc_used": false,
+    "credential_iam_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "watcher_or_event_authority_added": false,
+    "product_command_executed": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_physical_schema_and_transaction_scaffold_implementation"
+}

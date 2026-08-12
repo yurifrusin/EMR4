@@ -1,0 +1,387 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-status-confirm-physical-design-architecture-v1.json",
+  "title": "Raisa status-confirm physical-design architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "implementation_authorized",
+    "source_bindings",
+    "api_boundary",
+    "appointment_state_version",
+    "migration_contract",
+    "private_completed_receipt",
+    "canonical_response",
+    "transaction_contract",
+    "failure_policy",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.status_confirm_physical_design_architecture.v1"
+    },
+    "result": {
+      "const": "raisa_provider_free_unmounted_status_confirm_physical_design_architecture_pass"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_unmounted_architecture"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceBinding"
+      }
+    },
+    "api_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "operation_id",
+        "route_family",
+        "public_response_schema_changed",
+        "private_receipt_fields_publicly_mapped",
+        "graphql_mutation_authority",
+        "event_command_authority"
+      ],
+      "properties": {
+        "classification": {"type": "string", "minLength": 1},
+        "operation_id": {"type": "string", "minLength": 1},
+        "route_family": {"type": "string", "minLength": 1},
+        "public_response_schema_changed": {"type": "boolean"},
+        "private_receipt_fields_publicly_mapped": {"type": "boolean"},
+        "graphql_mutation_authority": {"type": "boolean"},
+        "event_command_authority": {"type": "boolean"}
+      }
+    },
+    "appointment_state_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "column",
+        "postgresql_type",
+        "minimum",
+        "maximum",
+        "nullable_after_migration",
+        "insert_value",
+        "increment_owner",
+        "submitted_value_policy",
+        "increment_event",
+        "timestamp_substitution",
+        "overflow_outcome",
+        "trigger_is_watcher_or_event"
+      ],
+      "properties": {
+        "table": {"type": "string", "minLength": 1},
+        "column": {"type": "string", "minLength": 1},
+        "postgresql_type": {"type": "string", "minLength": 1},
+        "minimum": {"type": "integer"},
+        "maximum": {"type": "integer"},
+        "nullable_after_migration": {"type": "boolean"},
+        "insert_value": {"type": "integer"},
+        "increment_owner": {"type": "string", "minLength": 1},
+        "submitted_value_policy": {"type": "string", "minLength": 1},
+        "increment_event": {"type": "string", "minLength": 1},
+        "timestamp_substitution": {"type": "boolean"},
+        "overflow_outcome": {"type": "string", "minLength": 1},
+        "trigger_is_watcher_or_event": {"type": "boolean"}
+      }
+    },
+    "migration_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phases",
+        "historical_backfill_claim",
+        "server_default_retained",
+        "runtime_before_completion",
+        "automatic_downgrade_after_first_v1_receipt",
+        "post_adoption_recovery"
+      ],
+      "properties": {
+        "phases": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "historical_backfill_claim": {"type": "string", "minLength": 1},
+        "server_default_retained": {"type": "boolean"},
+        "runtime_before_completion": {"type": "boolean"},
+        "automatic_downgrade_after_first_v1_receipt": {"type": "boolean"},
+        "post_adoption_recovery": {"type": "string", "minLength": 1}
+      }
+    },
+    "private_completed_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "contract_version_column",
+        "contract_version",
+        "additive_fields",
+        "legacy_backfill",
+        "legacy_replay_outcome",
+        "session_binding",
+        "completed_v1_required_existing_fields",
+        "completed_v1_constraints"
+      ],
+      "properties": {
+        "table": {"type": "string", "minLength": 1},
+        "contract_version_column": {"type": "string", "minLength": 1},
+        "contract_version": {"type": "integer", "minimum": 1},
+        "additive_fields": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/additiveField"}
+        },
+        "legacy_backfill": {"type": "string", "minLength": 1},
+        "legacy_replay_outcome": {"type": "string", "minLength": 1},
+        "session_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm",
+            "stored_form",
+            "domain_separator",
+            "message_fields",
+            "raw_session_stored",
+            "secret_stored"
+          ],
+          "properties": {
+            "algorithm": {"type": "string", "minLength": 1},
+            "stored_form": {"type": "string", "minLength": 1},
+            "domain_separator": {"type": "string", "minLength": 1},
+            "message_fields": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "raw_session_stored": {"type": "boolean"},
+            "secret_stored": {"type": "boolean"}
+          }
+        },
+        "completed_v1_required_existing_fields": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "completed_v1_constraints": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "canonical_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authoritative_storage",
+        "jsonb_is_delivery_authority",
+        "fields_in_order",
+        "encoding",
+        "byte_order_mark",
+        "insignificant_whitespace",
+        "string_escaping",
+        "nullable_encoding",
+        "warning_order",
+        "extra_fields",
+        "digest",
+        "digest_compare",
+        "initial_delivery",
+        "replay_delivery",
+        "integrity_failure"
+      ],
+      "properties": {
+        "authoritative_storage": {"type": "string", "minLength": 1},
+        "jsonb_is_delivery_authority": {"type": "boolean"},
+        "fields_in_order": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "encoding": {"type": "string", "minLength": 1},
+        "byte_order_mark": {"type": "boolean"},
+        "insignificant_whitespace": {"type": "boolean"},
+        "string_escaping": {"type": "string", "minLength": 1},
+        "nullable_encoding": {"type": "string", "minLength": 1},
+        "warning_order": {"type": "string", "minLength": 1},
+        "extra_fields": {"type": "boolean"},
+        "digest": {"type": "string", "minLength": 1},
+        "digest_compare": {"type": "string", "minLength": 1},
+        "initial_delivery": {"type": "string", "minLength": 1},
+        "replay_delivery": {"type": "string", "minLength": 1},
+        "integrity_failure": {"type": "string", "minLength": 1}
+      }
+    },
+    "transaction_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "isolation",
+        "single_transaction",
+        "locks",
+        "lock_wait",
+        "decision_trace",
+        "idempotency_identity",
+        "same_digest_replay_requires",
+        "non_disclosing_outcomes"
+      ],
+      "properties": {
+        "owner": {"type": "string", "minLength": 1},
+        "isolation": {"type": "string", "minLength": 1},
+        "single_transaction": {"type": "boolean"},
+        "locks": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/lock"}
+        },
+        "lock_wait": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "policy",
+            "nowait",
+            "skip_locked",
+            "same_budget_for_all_locks",
+            "hidden_effect_retry"
+          ],
+          "properties": {
+            "policy": {"type": "string", "minLength": 1},
+            "nowait": {"type": "boolean"},
+            "skip_locked": {"type": "boolean"},
+            "same_budget_for_all_locks": {"type": "boolean"},
+            "hidden_effect_retry": {"type": "boolean"}
+          }
+        },
+        "decision_trace": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 13,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "idempotency_identity": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "same_digest_replay_requires": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "non_disclosing_outcomes": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "failure_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lock_timeout",
+        "deadlock",
+        "serialization_failure",
+        "connection_loss_before_commit",
+        "connection_loss_after_commit",
+        "server_effect_retry",
+        "atomic_write_set"
+      ],
+      "properties": {
+        "lock_timeout": {"type": "string", "minLength": 1},
+        "deadlock": {"type": "string", "minLength": 1},
+        "serialization_failure": {"type": "string", "minLength": 1},
+        "connection_loss_before_commit": {"type": "string", "minLength": 1},
+        "connection_loss_after_commit": {"type": "string", "minLength": 1},
+        "server_effect_retry": {"type": "boolean"},
+        "atomic_write_set": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "minProperties": 13,
+      "maxProperties": 13,
+      "additionalProperties": {"const": false}
+    },
+    "next_candidate": {
+      "const": "provider_free_unmounted_status_confirm_physical_schema_and_transaction_scaffold_implementation"
+    }
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "additiveField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "nullable_for_legacy"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {"enum": ["SMALLINT", "BIGINT", "BYTEA"]},
+        "nullable_for_legacy": {"type": "boolean"}
+      }
+    },
+    "lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource", "strength", "predicate"],
+      "properties": {
+        "resource": {"enum": ["practice", "appointment", "idempotency_record"]},
+        "strength": {"enum": ["FOR SHARE", "FOR UPDATE"]},
+        "predicate": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

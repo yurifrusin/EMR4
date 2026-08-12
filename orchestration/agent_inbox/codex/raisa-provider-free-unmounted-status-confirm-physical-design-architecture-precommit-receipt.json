@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_verified_provider_free_unmounted_status_confirm_physical_design_architecture_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan selects a database-owned BIGINT appointment revision, seven-phase cutover, five-field versioned private receipt, exact stored canonical response bytes and one READ COMMITTED practice/appointment/idempotency transaction. Ninety-one of 91 hostile mutations, 16 focused tests and the 409-test status lineage/API/register/Compass/baton packet pass. implementation_authorized remains false.",
+    "current_authority_allocation": "GPT Sol performed the tightly coupled material architecture at Extra High and owns acceptance. No subagent or external worker was used. No provider, ADC or credential action occurred.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain fad85e038b7168c3323075024dba7f9d5709eff5. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; nine bounded source paths are among the preserved untracked paths, including all five docs/branding paths.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD fad85e038b7168c3323075024dba7f9d5709eff5. Continuity 261 / Compass 243 authorizes only the provider-free unmounted status-confirm physical-design architecture next.",
+    "protected_evidence_boundaries": "Only eleven exact non-protected source paths were read and hash-bound. AER-0292 directory-root content and filename-metadata discovery prohibitions were observed. No application/model/migration/service/route edit or import, executable DDL, database/SQL/real lock, provider/ADC/credential action, product/patient data, watcher/event, product command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

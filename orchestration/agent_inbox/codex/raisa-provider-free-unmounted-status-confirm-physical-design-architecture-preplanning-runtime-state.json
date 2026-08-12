@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_provider_free_unmounted_status_confirm_physical_design_architecture",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD fad85e038b7168c3323075024dba7f9d5709eff5. Continuity 261 / Compass 243 accepts the representability review and names only the provider-free unmounted status-confirm physical-design architecture next.",
+    "current_authority_allocation": "GPT Sol remains conductor, material-architecture owner, acceptance owner and task-branch publisher. The tranche is tightly coupled material architecture, so no subagent or external worker is selected. DeepSeek, Gemini and all provider lanes remain inactive.",
+    "active_plan_and_acceptance": "The exact representability-review plan, threat-model delta, closeout and Sol acceptance were read completely. All three domains are representable_with_additive_change while implementation_not_admitted remains binding. The next plan may select only state-version, private-receipt and ordered-transaction semantics without editing or executing application or database code.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. AER-0292 requires exact allowlisted non-protected file access and forbids directory-root content or filename-metadata discovery near protected evidence. No protected artifact, patient/product data, provider/credential, route/database/SQL/real lock, watcher/event, product command, deployment, production, release, Pages or protected-ref action is authorized. docs/branding and every unrelated untracked path remain preserved and excluded; explicit-path staging only applies.",
+    "git_refs_and_worktree": "Task HEAD and origin task are fad85e038b7168c3323075024dba7f9d5709eff5 on codex/ariadne-bernie-davida-parallel-seam, with required 648c8ec9805af63729264ea9c22fd695f062a741 confirmed as an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean and all 516 untracked paths, including five docs/branding paths, are preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_physical_design_architecture_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh five-source rehydration completed at the published closeout HEAD."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected for this tightly coupled architecture tranche."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier is selected before a deterministic architecture gate exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected for material design decisions."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

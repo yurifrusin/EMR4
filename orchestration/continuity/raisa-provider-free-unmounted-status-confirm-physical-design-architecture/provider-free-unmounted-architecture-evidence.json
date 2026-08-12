@@ -1,0 +1,56 @@
+{
+  "schema_version": "raisa.status_confirm_physical_design_architecture_evidence.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_physical_design_architecture_pass",
+  "source_head": "fad85e038b7168c3323075024dba7f9d5709eff5",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_architecture",
+  "implementation_authorized": false,
+  "source_hashes": {
+    "docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md": "a587fe03ee8a4a0b51ae1f17308c31dc9660bb96c17e3f508bbb2692b5339189",
+    "orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md": "72997a4b0358b15201c36da976eff827fba49f4bd14de3b354dfa0eb4738d659",
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json": "c255e52d5b2c8a90ad2e975b8b55d87b8248aa571811eb1ad3b1049a326e786d",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce",
+    "orchestration/api_spine_adr.md": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+    "app/models/appointments.py": "af00f7318da3f19732843c75b56721db89a3fa0c94b6e0feeb12a614850c4952",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a",
+    "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd",
+    "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+  },
+  "contract_fingerprint": "sha256:c2b0631a9595d16d413403d835080fcf2e9b76a1c40f672ea490dc3dfc175e25",
+  "architecture_facts": {
+    "appointment_state_version": "postgresql_bigint_trigger_owned",
+    "migration_phase_count": 7,
+    "receipt_additive_field_count": 5,
+    "legacy_receipts_replayable": false,
+    "session_binding_storage": "32_raw_hmac_sha256_bytes",
+    "response_delivery_authority": "stored_canonical_bytes",
+    "lock_order": [
+      "practice",
+      "appointment",
+      "idempotency_record"
+    ],
+    "authority_check_count": 2,
+    "public_response_schema_changed": false
+  },
+  "hostile_mutations": {
+    "attempted": 91,
+    "rejected": 91
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "application_model_migration_service_or_route_edited": false,
+    "application_or_database_module_imported": false,
+    "executable_ddl_or_sql_emitted": false,
+    "route_or_database_executed": false,
+    "real_transaction_or_lock_opened": false,
+    "provider_or_adc_used": false,
+    "credential_iam_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "watcher_or_event_authority_added": false,
+    "product_command_executed": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_physical_schema_and_transaction_scaffold_implementation"
+}
