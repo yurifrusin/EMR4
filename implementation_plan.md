@@ -185,16 +185,19 @@ remains a named later extension with one logical consumer per database event
 partition, optional externally fenced active/standby replicas, retained CF-D1
 evidence and any CF-D2 return gated by a fresh observability-first plan.
 
-The provider-free legacy-route sequence now also passes through a source-bound
-default-off runtime-instrumentation architecture. Four exact raw appointment
-route seams preserve the source-owned command result: route-local code may only
-stage one minimized projection after helper success, and a separate outer ASGI
-finalizer may offer it only after the original final response-body send
-succeeds. Immutable configuration is globally disabled with empty practice and
-route allowlists; missing server-owned session/correlation context denies. No
-observer, sink or runtime was created. The next bounded descendant is a
-globally-disabled typed scaffold with zero-work disabled-path and exact
-authored-synthetic route-parity proof before any enablement can be considered.
+The provider-free legacy-route sequence now also passes through its source-
+bound default-off runtime-instrumentation architecture and globally-disabled
+typed application scaffold. Four exact raw appointment routes call a disabled-
+first stage only after helper success and pass only one closed adapter constant;
+the outer ASGI middleware delegates directly without a cell or send wrapper.
+The only constructible generation is globally disabled with empty practice and
+route allowlists and no digest key, context provider, observer or sink. Exact
+authored-synthetic create/update/status/delete response, mutation, audit and
+failure parity passes with zero context, projection, digest, cell or offer work
+on the disabled path. The next bounded descendant inventories every ordinary
+and fallback Diary client raw-write call site and proves its proposal plus
+signed-confirm replacement before any compatibility route is removed or any
+raw-route kernel convergence begins.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

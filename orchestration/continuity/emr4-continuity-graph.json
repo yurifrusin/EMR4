@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 251,
+  "graph_revision": 252,
   "harvests": [],
   "nodes": [
     {
@@ -16023,6 +16023,84 @@
         "No request context, configuration, middleware, route hook, observer, queue, sink or persistence is implemented.",
         "Disabled-path route parity, ASGI ordering, request-cell lifecycle and failure isolation remain runtime-scaffold proof obligations.",
         "Practice enablement, operational data, kernel convergence, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold",
+      "title": "Provider-free globally-disabled runtime-instrumentation scaffold",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "410ea6dbbe28b94cfaa83ac5f6b586910c77aa6a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-runtime-instrumentation-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is a provider-free globally-disabled dormant application scaffold.",
+          "The only constructible generation has empty allowlists and no digest-key reference.",
+          "No context provider, observer, sink, product-data projection or command feedback exists."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-globally-disabled-runtime-instrumentation-scaffold",
+          "source": "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact dormant route and post-send scaffold wiring with zero-work disabled behavior."
+        }
+      ],
+      "claim_scope": [
+        "Enabled, allowlisted, key-bearing and stale generations are structurally rejected.",
+        "Four raw routes stage only after helper success and pass only a closed adapter constant.",
+        "The disabled route and middleware paths perform zero context, projection, digest, cell or offer work.",
+        "Authored-synthetic response, mutation and audit behavior remains equivalent across all four routes.",
+        "Seventeen tranche tests, 170 focused regressions and the canonical 191-test profile pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md",
+          "docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_globally_disabled_runtime_instrumentation_scaffold.py",
+          "tests/test_raisa_provider_free_globally_disabled_runtime_instrumentation_scaffold_continuity.py"
+        ],
+        "artifacts": [
+          "app/services/diary/shadow_instrumentation.py",
+          "app/middleware/shadow_instrumentation.py",
+          "scripts/raisa_provider_free_globally_disabled_runtime_instrumentation_scaffold_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No practice or route is enabled and no operational observer, sink, key custody or diagnostic output exists.",
+        "Ordinary and fallback Diary client proposal-confirm parity remains unproved.",
+        "Compatibility-route removal, raw-route kernel convergence, product data, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

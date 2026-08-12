@@ -18,13 +18,13 @@ def _node(graph: dict) -> dict:
     return matches[0]
 
 
-def test_runtime_instrumentation_architecture_is_current() -> None:
+def test_runtime_instrumentation_architecture_remains_accepted() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 251
-    assert compass["map_revision"] == 233
-    assert compass["source_graph_revision"] == 251
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert graph["graph_revision"] >= 251
+    assert compass["map_revision"] >= 233
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert any(row["node_id"] == NODE_ID for row in compass["journey"])
     node = _node(graph)
     assert node["kind"] == "foundation"
     assert node["status"] == "accepted"
@@ -46,17 +46,14 @@ def test_node_opens_no_runtime_authority() -> None:
         assert phrase in joined
 
 
-def test_compass_names_globally_disabled_scaffold_next() -> None:
+def test_compass_records_globally_disabled_scaffold_as_architecture_descendant() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
+    journey = next(row for row in compass["journey"] if row["node_id"] == NODE_ID)
     joined = " ".join(
-        [current["strategic_role"], current["why_now"], current["outcome"]]
-        + current["unlocks"] + current["does_not_solve"]
+        [journey["strategic_role"], journey["outcome"]]
     ).lower()
-    assert "globally-disabled typed scaffold next" in joined
-    assert "zero disabled-path reads/handoffs" in joined
-    assert "continuity 251 / compass 233" in compass["orientation_statement"].lower()
-    assert "60 hostile mutations" in compass["orientation_statement"]
+    assert "default-off mounting seam" in joined
+    assert "globally-disabled typed scaffold is next" in joined
 
 
 def test_evidence_binds_receipts_acceptance_and_yuri_summary() -> None:

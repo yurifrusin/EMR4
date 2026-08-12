@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 251 / Compass 233. The provider-free source-bound runtime-instrumentation architecture passes with four exact route seams, a two-phase post-final-send handoff and 60 hostile mutations rejected. The next safe tranche is the globally-disabled typed scaffold.
+> EMR4 is at Continuity 252 / Compass 234. The provider-free globally-disabled runtime-instrumentation scaffold passes with 17 tranche tests, zero disabled-path projection or handoff work and exact four-route authored-synthetic parity. Client proposal-confirm parity is next.
 
 ## North star
 
@@ -276,24 +276,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Eighteen pure cases pass with byte-identical primary results; runtime-instrumentation architecture review is next. Lineage parent: `raisa-provider-free-unmounted-default-off-shadow-comparison-architecture`.
 130. **Freeze an honest default-off mounting seam at the four raw routes — Provider-free default-off runtime-instrumentation architecture**
    Two-phase static architecture passes; the globally-disabled typed scaffold is next. Lineage parent: `raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal`.
+131. **Mount only the dormant fail-closed instrumentation shapes — Provider-free globally-disabled runtime-instrumentation scaffold**
+   Globally-disabled zero-work scaffold passes; client proposal-confirm parity is next. Lineage parent: `raisa-provider-free-default-off-runtime-instrumentation-architecture`.
 
 ## Current position
 
-**Default-off mounting architecture proved; globally-disabled typed scaffold next — Provider-free default-off runtime-instrumentation architecture**
+**Dormant instrumentation scaffold proved; client proposal-confirm parity next — Provider-free globally-disabled runtime-instrumentation scaffold**
 
-**Why this proof came next:** The pure shadow rehearsal and exact source seams now support the narrowest reversible implementation without enabling observation.
+**Why this proof came next:** The mounting seam is present but structurally unenableable, so client migration can proceed without opening observation.
 
-Four route-local staging seams and one post-final-send handoff boundary pass sixty hostile mutations with no runtime creation.
+Four raw routes and the outer ASGI boundary preserve authored-synthetic behavior with zero disabled-path work.
 
 ### What this unlocks
 
-- Implement immutable generation, safe request context, minimized projection, request cell and after-send interfaces in the disabled state.
-- Prove zero disabled-path reads/handoffs and exact four-route authored-synthetic behavioral parity.
+- Inventory every ordinary and fallback Diary raw-write call site.
+- Prove proposal and signed-confirm replacements while keeping compatibility routes mounted.
 
 ### What it does not solve
 
-- Practice enablement, observer/sink operation, persistence, monitoring, client migration or database fencing.
-- Durable cue delivery, CF-D2, patient/product data, providers, commands, deployment, Pages or protected refs.
+- Practice enablement, observer/sink operation, product data, diagnostic persistence or monitoring.
+- Compatibility removal, raw-route kernel convergence, deployment, Pages or protected refs.
 
 ## Continuity and authority
 
@@ -360,9 +362,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Implement only a globally-disabled typed instrumentation scaffold with no observer or sink.
-- Prove disabled-path zero projection/handoff plus exact authored-synthetic response, header, audit, commit and failure parity.
-- Then prove ordinary and fallback client proposal/confirm parity before raw-route kernel convergence.
+- Freeze the exact ordinary and fallback Diary client raw-write inventory.
+- Prove proposal plus signed-confirm parity before removing or blocking any compatibility route.
+- Then converge status, delete and update on the accepted backend kernel in order.
 - Select and prove a database-owned create schedule fence before create convergence.
 - Retain Durable Event and Cue Delivery as a later observability-first extension.
 
@@ -553,6 +555,7 @@ Prerequisites:
 
 ## Map limits
 
+- The runtime-instrumentation scaffold is structurally unenableable and has no context provider, key custody, observer, sink or operational output.
 - The runtime-instrumentation result is static architecture only; no request context, route hook, middleware, observer, queue, sink or persistence exists.
 - The shadow result is pure authored-synthetic evidence only; no route instrumentation, observer runtime, queue, sink or persistence exists.
 - The shadow result is static architecture only; no route hook, observer, queue, sink, persistence or runtime exists.
@@ -934,6 +937,9 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md`
+- `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
+- `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
+- `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
 - `docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md`
 - `docs/raisa-provider-free-office-lifecycle-observability-closeout.md`
@@ -1091,6 +1097,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
@@ -1309,6 +1316,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
@@ -1877,6 +1887,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
 - `orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--default-off-shadow-comparison-architecture.md`
+- `orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md`
 - `orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
@@ -1970,4 +1981,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 233; continuity graph revision 251._
+_Compass map revision 234; continuity graph revision 252._

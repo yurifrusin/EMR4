@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 233,
+  "map_revision": 234,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 251,
-  "orientation_statement": "EMR4 is at Continuity 251 / Compass 233. The provider-free source-bound runtime-instrumentation architecture passes with four exact route seams, a two-phase post-final-send handoff and 60 hostile mutations rejected. The next safe tranche is the globally-disabled typed scaffold.",
+  "source_graph_revision": 252,
+  "orientation_statement": "EMR4 is at Continuity 252 / Compass 234. The provider-free globally-disabled runtime-instrumentation scaffold passes with 17 tranche tests, zero disabled-path projection or handoff work and exact four-route authored-synthetic parity. Client proposal-confirm parity is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2310,32 +2310,46 @@
         "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-candidate-precommit-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold",
+      "lineage_parent": "raisa-provider-free-default-off-runtime-instrumentation-architecture",
+      "strategic_role": "Mount only the dormant fail-closed instrumentation shapes",
+      "outcome": "Globally-disabled zero-work scaffold passes; client proposal-confirm parity is next.",
+      "evidence": [
+        "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md",
+        "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md",
+        "docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md",
+        "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-default-off-runtime-instrumentation-architecture",
-    "strategic_role": "Default-off mounting architecture proved; globally-disabled typed scaffold next",
-    "why_now": "The pure shadow rehearsal and exact source seams now support the narrowest reversible implementation without enabling observation.",
-    "outcome": "Four route-local staging seams and one post-final-send handoff boundary pass sixty hostile mutations with no runtime creation.",
+    "node_id": "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold",
+    "strategic_role": "Dormant instrumentation scaffold proved; client proposal-confirm parity next",
+    "why_now": "The mounting seam is present but structurally unenableable, so client migration can proceed without opening observation.",
+    "outcome": "Four raw routes and the outer ASGI boundary preserve authored-synthetic behavior with zero disabled-path work.",
     "unlocks": [
-      "Implement immutable generation, safe request context, minimized projection, request cell and after-send interfaces in the disabled state.",
-      "Prove zero disabled-path reads/handoffs and exact four-route authored-synthetic behavioral parity."
+      "Inventory every ordinary and fallback Diary raw-write call site.",
+      "Prove proposal and signed-confirm replacements while keeping compatibility routes mounted."
     ],
     "does_not_solve": [
-      "Practice enablement, observer/sink operation, persistence, monitoring, client migration or database fencing.",
-      "Durable cue delivery, CF-D2, patient/product data, providers, commands, deployment, Pages or protected refs."
+      "Practice enablement, observer/sink operation, product data, diagnostic persistence or monitoring.",
+      "Compatibility removal, raw-route kernel convergence, deployment, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-plan.md",
-      "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture.md",
-      "docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json",
-      "orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json",
-      "docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-candidate-precommit-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md"
+      "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md",
+      "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md",
+      "docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md",
+      "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
     ]
   },
   "decision_horizon": [
@@ -2431,9 +2445,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Implement only a globally-disabled typed instrumentation scaffold with no observer or sink.",
-        "Prove disabled-path zero projection/handoff plus exact authored-synthetic response, header, audit, commit and failure parity.",
-        "Then prove ordinary and fallback client proposal/confirm parity before raw-route kernel convergence.",
+        "Freeze the exact ordinary and fallback Diary client raw-write inventory.",
+        "Prove proposal plus signed-confirm parity before removing or blocking any compatibility route.",
+        "Then converge status, delete and update on the accepted backend kernel in order.",
         "Select and prove a database-owned create schedule fence before create convergence.",
         "Retain Durable Event and Cue Delivery as a later observability-first extension."
       ],
@@ -2837,7 +2851,15 @@
         "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-candidate-precommit-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md"
+        "orchestration/human_inbox/yuri/2026-08-12--default-off-runtime-instrumentation-architecture.md",
+        "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md",
+        "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md",
+        "docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md",
+        "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
       ]
     },
     {
@@ -3682,6 +3704,7 @@
     }
   ],
   "map_limits": [
+    "The runtime-instrumentation scaffold is structurally unenableable and has no context provider, key custody, observer, sink or operational output.",
     "The runtime-instrumentation result is static architecture only; no request context, route hook, middleware, observer, queue, sink or persistence exists.",
     "The shadow result is pure authored-synthetic evidence only; no route instrumentation, observer runtime, queue, sink or persistence exists.",
     "The shadow result is static architecture only; no route hook, observer, queue, sink, persistence or runtime exists.",
