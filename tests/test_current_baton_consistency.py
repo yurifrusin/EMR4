@@ -7,7 +7,7 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal"
+NODE_ID = "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -22,10 +22,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 256
+    assert graph["graph_revision"] == 257
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 238
-    assert compass["source_graph_revision"] == 256
+    assert compass["map_revision"] == 239
+    assert compass["source_graph_revision"] == 257
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -35,14 +35,14 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 256 / Compass 238" in current
-    assert "bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62" in current
-    assert "Fifteen authored-synthetic decisions" in current
-    assert "eleven transaction schedules" in current
-    assert "37 rejected hostile mutations" in current
-    assert "practice -> appointment -> idempotency_record" in current
-    assert "mutation, audit and completed receipt commit or roll back together" in current
-    assert "policy-deferred" in current
+    assert "Continuity 257 / Compass 239" in current
+    assert "30a49015d23bfcf069be0af838df7091032a40be" in current
+    assert "Fifteen authored-synthetic admission cases" in current
+    assert "update_appointment_status" in current
+    assert "Eight mappings" in current
+    assert "37 hostile mutations" in current
+    assert "canonical stored receipt" in current
+    assert "AER-0291" in current
     assert "application tree is unchanged" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
@@ -61,12 +61,13 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "9c7444ecce69b51ca5cac80818e8997724a11f13" in relation
     assert "48c1821ad8b28c68204e70dea9972b6ba27e4dc1" in relation
     assert "bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62" in relation
-    assert "Provider-free unmounted status-confirm kernel adapter contract" in next_work
-    assert "exact pure transformation" in next_work
-    assert "signed confirmation envelope" in next_work
-    assert "fail-closed current terminal-transition parity" in next_work
-    assert "post-commit receipt serialization" in next_work
-    assert "Do not import or execute an application route" in next_work
+    assert "30a49015d23bfcf069be0af838df7091032a40be" in relation
+    assert "Provider-free read-only status-confirm runtime-gap admission review" in next_work
+    assert "lock order" in next_work
+    assert "server-owned session and current-authority ingress" in next_work
+    assert "fail-closed terminal behavior" in next_work
+    assert "stored-receipt delivery" in next_work
+    assert "must not edit or execute the route or database" in next_work
     assert "operational database/source/watcher/event access" in next_work
     assert "product/patient data" in next_work
     assert "observer/sink/persistence" in next_work
@@ -103,14 +104,14 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted status-confirm kernel adapter contract",
-        "exact pure transformation",
-        "signed confirmation envelope",
-        "current-authority and freshness binding",
-        "idempotency identity",
-        "typed result mapping",
-        "post-commit receipt serialization",
-        "do not import or execute an application route",
+        "provider-free read-only status-confirm runtime-gap admission review",
+        "exact non-protected files",
+        "lock order",
+        "server-owned session and current-authority ingress",
+        "fail-closed terminal behavior",
+        "warning/evidence/freshness parity",
+        "stored-receipt delivery",
+        "must not edit or execute the route or database",
         "operational database/source/watcher/event access",
         "product/patient data",
         "command expansion",
@@ -120,5 +121,6 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "deployment",
         "pages",
         "protected-ref movement",
+        "search content only in exact allowlisted non-protected files",
     ):
         assert phrase in next_work

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 238,
+  "map_revision": 239,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 256,
-  "orientation_statement": "EMR4 is at Continuity 256 / Compass 238. The provider-free unmounted status transaction-kernel protocol passes; the pure status-confirm kernel adapter contract is next.",
+  "source_graph_revision": 257,
+  "orientation_statement": "EMR4 is at Continuity 257 / Compass 239. The provider-free unmounted status-confirm kernel adapter contract passes; the read-only runtime-gap admission review is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2395,33 +2395,52 @@
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
+      "lineage_parent": "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal",
+      "strategic_role": "Freeze the pure status-confirm boundary before runtime admission",
+      "outcome": "The adapter proves exact authority-first input and stored-receipt output mappings without executing an effect.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md",
+        "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md",
+        "docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json",
+        "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal",
-    "strategic_role": "Status transaction semantics frozen; pure adapter contract next",
-    "why_now": "Authority, locking, rollback and replay are closed before any route can depend on them.",
-    "outcome": "Fifteen decisions, eleven schedules and thirty-seven hostile mutations prove the unmounted protocol.",
+    "node_id": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
+    "strategic_role": "Pure status-confirm adapter frozen; read-only runtime-gap review next",
+    "why_now": "The route/kernel seam can now be assessed against an exact effect-free transformation.",
+    "outcome": "Fifteen cases, eight mappings and thirty-seven hostile mutations prove the closed adapter contract.",
     "unlocks": [
-      "Freeze the pure signed-confirmation-envelope to status-kernel transformation.",
-      "Bind fail-closed terminal parity and post-commit receipt serialization without executing a route."
+      "Inspect exact lock-order and server-session ingress gaps without executing the route.",
+      "Assess terminal-policy parity and stored-receipt delivery prerequisites before runtime planning."
     ],
     "does_not_solve": [
-      "Status route integration, raw-route convergence or create schedule fencing.",
+      "Status route integration, database execution, raw-route convergence or create schedule fencing.",
       "Operational data, providers, commands, deployment, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md",
-      "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md",
-      "docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json",
-      "docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
+      "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md",
+      "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md",
+      "docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json",
+      "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
     ]
   },
   "decision_horizon": [
@@ -2517,9 +2536,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Freeze the provider-free unmounted status-confirm kernel adapter contract.",
-        "Preserve current fail-closed terminal-transition behavior until explicit policy acceptance.",
-        "Keep every application route outside the adapter contract.",
+        "Run the provider-free read-only status-confirm runtime-gap admission review.",
+        "Inspect only exact non-protected lock, session, terminal and receipt-delivery sources.",
+        "Keep the status route and database unedited and unexecuted during review.",
         "Select and prove a database-owned create schedule fence before create convergence."
       ],
       "boundary_changes": [],
@@ -2967,7 +2986,18 @@
         "orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md"
+        "orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md",
+        "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md",
+        "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md",
+        "docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json",
+        "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
       ]
     },
     {
@@ -3812,6 +3842,8 @@
     }
   ],
   "map_limits": [
+    "Waiting-area union input and terminal status re-transition remain fail-closed.",
+    "Adapter success does not authorise an application route, database transaction or command.",
     "Terminal status re-transition remains policy-deferred and fail-closed.",
     "Protocol schedule success does not authorise an application route, database transaction or command.",
     "Test-only clock and header repair grants no application or command authority.",

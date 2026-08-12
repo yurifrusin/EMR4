@@ -213,17 +213,18 @@ temporal/idempotency readiness repair also passes: the same 311-test collection
 moves from 266 pass / 45 classified harness failures to 311/311 through exactly
 eight test files, with the application tree and status-code assertions
 unchanged. The provider-free unmounted status transaction-kernel protocol now
-also passes at exact source `bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62`.
-Its fifteen decisions, eleven schedules and thirty-seven rejected hostile
-mutations bind authority-first receipt disclosure, the exact practice/
-appointment/idempotency lock subset, separate confirmation/freshness/
-idempotency, atomic mutation/audit/completed-receipt behavior and deterministic
-response-loss replay. Terminal re-transition remains effect-free and policy-
-deferred. The next bounded gate is a provider-free unmounted status-confirm
-kernel adapter contract: a pure mapping from the signed confirmation envelope
-to this protocol, including current fail-closed terminal parity and post-commit
-receipt serialization. No route, database, provider, watcher, event, command,
-kernel runtime or schedule fence opens in either unmounted tranche.
+passes at exact source `bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62`, and
+its pure status-confirm adapter descendant passes at exact source
+`30a49015d23bfcf069be0af838df7091032a40be`. Fifteen adapter cases admit only
+`update_appointment_status`; waiting-area input, missing authority/session,
+invalid evidence, stale state, warning drift and terminal re-transition stop
+without a request. Eight outcome mappings and thirty-seven hostile mutations
+bind current-authority/freshness/evidence parity and canonical stored-receipt
+delivery without another request after response loss. The next bounded gate is
+a provider-free read-only status-confirm runtime-gap admission review of exact
+non-protected lock, session-ingress, terminal and receipt-delivery sources. It
+may document gaps but cannot edit or execute the route or database. No provider,
+watcher, event, command, kernel runtime or schedule fence opens in these gates.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

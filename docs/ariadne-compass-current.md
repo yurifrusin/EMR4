@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 256 / Compass 238. The provider-free unmounted status transaction-kernel protocol passes; the pure status-confirm kernel adapter contract is next.
+> EMR4 is at Continuity 257 / Compass 239. The provider-free unmounted status-confirm kernel adapter contract passes; the read-only runtime-gap admission review is next.
 
 ## North star
 
@@ -286,23 +286,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    All 311 ordinary compatibility tests pass without application or assertion weakening. Lineage parent: `raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review`.
 135. **Freeze status transaction semantics before any adapter or runtime — Provider-free unmounted status transaction-kernel protocol rehearsal**
    The closed protocol proves authority, lock, replay and atomic receipt behavior without an effectful surface. Lineage parent: `raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair`.
+136. **Freeze the pure status-confirm boundary before runtime admission — Provider-free unmounted status-confirm kernel adapter contract**
+   The adapter proves exact authority-first input and stored-receipt output mappings without executing an effect. Lineage parent: `raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal`.
 
 ## Current position
 
-**Status transaction semantics frozen; pure adapter contract next — Provider-free unmounted status transaction-kernel protocol rehearsal**
+**Pure status-confirm adapter frozen; read-only runtime-gap review next — Provider-free unmounted status-confirm kernel adapter contract**
 
-**Why this proof came next:** Authority, locking, rollback and replay are closed before any route can depend on them.
+**Why this proof came next:** The route/kernel seam can now be assessed against an exact effect-free transformation.
 
-Fifteen decisions, eleven schedules and thirty-seven hostile mutations prove the unmounted protocol.
+Fifteen cases, eight mappings and thirty-seven hostile mutations prove the closed adapter contract.
 
 ### What this unlocks
 
-- Freeze the pure signed-confirmation-envelope to status-kernel transformation.
-- Bind fail-closed terminal parity and post-commit receipt serialization without executing a route.
+- Inspect exact lock-order and server-session ingress gaps without executing the route.
+- Assess terminal-policy parity and stored-receipt delivery prerequisites before runtime planning.
 
 ### What it does not solve
 
-- Status route integration, raw-route convergence or create schedule fencing.
+- Status route integration, database execution, raw-route convergence or create schedule fencing.
 - Operational data, providers, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
@@ -370,9 +372,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Freeze the provider-free unmounted status-confirm kernel adapter contract.
-- Preserve current fail-closed terminal-transition behavior until explicit policy acceptance.
-- Keep every application route outside the adapter contract.
+- Run the provider-free read-only status-confirm runtime-gap admission review.
+- Inspect only exact non-protected lock, session, terminal and receipt-delivery sources.
+- Keep the status route and database unedited and unexecuted during review.
 - Select and prove a database-owned create schedule fence before create convergence.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -562,6 +564,8 @@ Prerequisites:
 
 ## Map limits
 
+- Waiting-area union input and terminal status re-transition remain fail-closed.
+- Adapter success does not authorise an application route, database transaction or command.
 - Terminal status re-transition remains policy-deferred and fail-closed.
 - Protocol schedule success does not authorise an application route, database transaction or command.
 - Test-only clock and header repair grants no application or command authority.
@@ -1041,6 +1045,9 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-source-specific-durability-architecture-plan.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md`
@@ -1150,6 +1157,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-source-specific-durability-architecture-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
@@ -1372,11 +1380,14 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-source-specific-durability-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
@@ -1669,6 +1680,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/adapter-result.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/authored-synthetic-waiting-room-frame.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json`
@@ -1941,6 +1955,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2032,4 +2047,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 238; continuity graph revision 256._
+_Compass map revision 239; continuity graph revision 257._

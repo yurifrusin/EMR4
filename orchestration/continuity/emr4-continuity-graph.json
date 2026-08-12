@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 256,
+  "graph_revision": 257,
   "harvests": [],
   "nodes": [
     {
@@ -16417,6 +16417,87 @@
         "The provider-free unmounted status-confirm kernel adapter contract is next.",
         "Terminal-transition parity and post-commit receipt serialization must remain fail-closed in that pure contract.",
         "No status route imports or executes a kernel yet; raw status remains mounted and unchanged.",
+        "Create schedule fencing, operational data, providers, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract",
+      "title": "Provider-free unmounted status-confirm kernel adapter contract",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "30a49015d23bfcf069be0af838df7091032a40be",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is an authored-synthetic, provider-free and unmounted pure adapter contract.",
+          "It imports or executes no application route, database, provider, watcher, event or command.",
+          "AER-0291 is contained; protected-scope content was discarded and contributes no evidence."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-status-confirm-kernel-adapter-contract",
+          "source": "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the status-only adapter and keep every runtime surface closed."
+        }
+      ],
+      "claim_scope": [
+        "Fifteen admission cases admit only update_appointment_status and stop the waiting-area union variant.",
+        "Eight mappings bind shared kernel outcomes to typed route results without inventing policy.",
+        "All thirty-seven hostile mutations fail closed before a kernel request can be emitted.",
+        "Current authority and state are server-owned; signed evidence, freshness and warnings bind exactly.",
+        "Committed and replay outcomes serialize from one canonical stored receipt without another request.",
+        "Eleven focused, 59 dependency/API and canonical 191 fast-profile tests pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-plan.md",
+          "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-design.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract/adapter-evidence.json",
+          "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A provider-free read-only status-confirm runtime-gap admission review is next.",
+        "Lock order, server session ingress, terminal behavior and stored-receipt delivery remain unmounted review questions.",
+        "The review may inspect exact non-protected files but may not edit or execute the route or database.",
         "Create schedule fencing, operational data, providers, deployment, Pages and protected refs remain closed."
       ]
     }
