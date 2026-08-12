@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan reconciles the accepted five-field status projection with the current AppointmentConfirmStatusProposalOut API envelope before first receipt-v1 use. The new unmounted callable composes exact status-only admission, server-owned ingress, request/session digests, the accepted physical transaction factory, locked readmission, an injected atomic effect and exact stored-envelope delivery. Twelve authored-synthetic scenarios, 65 hostile mutations, 13 focused tests, 163 descendant-compatible status-confirm lineage tests and the canonical 191-test fast profile pass.",
+    "current_authority_allocation": "GPT Sol remains conductor, implementation owner, acceptance owner and task-branch publisher for this tightly coupled composition. No subagent or external worker was selected. The EMR4 API Steward boundary was applied to keep REST mutation authority backend-owned, GraphQL read-only and the service unmounted.",
+    "git_refs_and_worktree": "HEAD, the task branch and origin task remain 83db576fc2c95f513de38ae57d5b4b1ac6fe5027 before the source commit; required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named composition plan, threat delta, service, deterministic rehearsal, contract/schema/evidence, focused test and two receipt pairs are eligible for the source commit.",
+    "live_handover_current_baton": "AGENTS.md was read completely at task HEAD 83db576fc2c95f513de38ae57d5b4b1ac6fe5027. Continuity 267 / Compass 249 names this provider-free unmounted status-confirm composition rehearsal as the dependency-satisfied next tranche.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary data remain sealed. The rehearsal used authored-synthetic in-memory doubles only. No router imports the composition; no route or real database was called, no product/patient data, provider, ADC, credential, IAM, browser, network, deployment, release, Pages or protected ref was touched. Every unrelated untracked file and all five docs/branding files remain preserved. Explicit-path staging only is authorized."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

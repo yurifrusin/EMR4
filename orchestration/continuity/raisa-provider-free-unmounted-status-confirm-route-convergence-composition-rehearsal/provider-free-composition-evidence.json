@@ -1,0 +1,178 @@
+{
+  "canonical_response_projection": {
+    "appointment_id": "11111111-1111-4111-8111-111111111111",
+    "status": "Confirmed",
+    "status_reason_code": null,
+    "waiting_area_id": null,
+    "warning_codes": []
+  },
+  "canonical_response_sha256": "19fe3d993af63b758b5febacff4ab02d3c7a222bcda9c195342cae77e1fffd8f",
+  "forbidden": {
+    "credential_or_iam": false,
+    "deployment_or_release": false,
+    "external_tool_or_product_command": false,
+    "pages_or_protected_ref": false,
+    "product_or_patient_data": false,
+    "provider_or_network": false,
+    "real_database_or_source": false,
+    "route_mount_or_call": false
+  },
+  "hostile_mutations": {
+    "attempted": 65,
+    "rejected": 65
+  },
+  "implementation_authorized": false,
+  "mounted_route_imports_composition": false,
+  "next_candidate": "provider_free_read_only_status_confirm_route_mounting_readiness_rereview",
+  "result": "raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal_pass",
+  "scenario_count": 12,
+  "scenarios": [
+    {
+      "audit_count": 1,
+      "commit_count": 1,
+      "effect_count": 1,
+      "id": "src-001-clean-execute",
+      "passed": true,
+      "result_kind": "committed",
+      "rollback_count": 0,
+      "status_code": 200,
+      "stored_body_released": true
+    },
+    {
+      "audit_count": 1,
+      "byte_identical": true,
+      "commit_count": 1,
+      "effect_count": 1,
+      "id": "src-002-same-digest-replay",
+      "passed": true,
+      "result_kind": "replay",
+      "rollback_count": 0,
+      "status_code": 200,
+      "stored_body_released": true
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-003-different-digest-conflict",
+      "passed": true,
+      "result_kind": "error",
+      "rollback_count": 0,
+      "status_code": 409,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-004-authority-revoked",
+      "passed": true,
+      "result_kind": "error",
+      "rollback_count": 1,
+      "status_code": 403,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-005-target-unavailable",
+      "passed": true,
+      "result_kind": "error",
+      "rollback_count": 1,
+      "status_code": 404,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-006-incomplete-scaffold",
+      "passed": true,
+      "result_kind": "error",
+      "rollback_count": 1,
+      "status_code": 503,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-007-locked-generation-changed",
+      "passed": true,
+      "result_kind": "blocked",
+      "rollback_count": 1,
+      "status_code": 200,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-008-waiting-area-discriminated",
+      "passed": true,
+      "result_kind": "blocked",
+      "rollback_count": 0,
+      "status_code": 200,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-009-warning-mismatch",
+      "passed": true,
+      "result_kind": "blocked",
+      "rollback_count": 0,
+      "status_code": 200,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 0,
+      "commit_count": 0,
+      "effect_count": 0,
+      "id": "src-010-terminal-transition-deferred",
+      "passed": true,
+      "result_kind": "blocked",
+      "rollback_count": 0,
+      "status_code": 200,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 1,
+      "commit_count": 1,
+      "effect_count": 1,
+      "id": "src-011-corrupt-stored-bytes",
+      "passed": true,
+      "result_kind": "error",
+      "rollback_count": 1,
+      "status_code": 503,
+      "stored_body_released": false
+    },
+    {
+      "audit_count": 1,
+      "byte_identical": true,
+      "commit_count": 1,
+      "effect_count": 1,
+      "id": "src-012-response-loss-recovery",
+      "passed": true,
+      "result_kind": "replay",
+      "rollback_count": 0,
+      "status_code": 200,
+      "stored_body_released": true
+    }
+  ],
+  "schema_version": "raisa.status-confirm-route-composition-evidence.v1",
+  "source_hashes": {
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/routers/appointments.py": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb",
+    "app/schemas/appointments.py": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+    "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md": "cfc63d42c16de0c62ee19a6df7d29a374479c890bb52e7fd0c7398739a5fb933",
+    "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md": "aa2eab6fddc0f8394ea3950965d525222917506a04b0ef10ab22999e2e442363",
+    "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py": "a45b601a375c7dec7ee08e46be53e23991542cf9699a9ac75798c2e70d2865d8"
+  },
+  "source_head": "83db576fc2c95f513de38ae57d5b4b1ac6fe5027"
+}

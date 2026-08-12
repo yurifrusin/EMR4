@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_response": {
+      "required": [
+        "storage",
+        "json_matches_bytes",
+        "hash_matches_bytes",
+        "five_field_status_projection_is_response",
+        "initial_and_replay_byte_identical"
+      ],
+      "type": "object"
+    },
+    "composition_order": {
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "forbidden": {
+      "additionalProperties": {
+        "const": false
+      },
+      "type": "object"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "mode": {
+      "const": "provider_free_authored_synthetic_unmounted"
+    },
+    "next_candidate": {
+      "const": "provider_free_read_only_status_confirm_route_mounting_readiness_rereview"
+    },
+    "scenario_ids": {
+      "maxItems": 12,
+      "minItems": 12,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "raisa.status-confirm-route-composition-contract.v1"
+    },
+    "source_bindings": {
+      "maxItems": 9,
+      "minItems": 9,
+      "type": "array"
+    },
+    "source_head": {
+      "const": "83db576fc2c95f513de38ae57d5b4b1ac6fe5027"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_head",
+    "mode",
+    "source_bindings",
+    "composition_order",
+    "scenario_ids",
+    "canonical_response",
+    "implementation_authorized",
+    "forbidden",
+    "next_candidate"
+  ],
+  "type": "object"
+}

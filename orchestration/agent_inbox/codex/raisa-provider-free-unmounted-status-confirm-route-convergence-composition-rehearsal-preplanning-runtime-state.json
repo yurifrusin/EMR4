@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 83db576fc2c95f513de38ae57d5b4b1ac6fe5027. Continuity 267 / Compass 249 names the provider-free unmounted status-confirm route-convergence composition rehearsal as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture/acceptance owner, implementation owner and task-branch publisher. The composition is tightly coupled to accepted route, adapter and physical-seam contracts and remains Sol-owned under the worker-lane economy rule; no subagent, provider worker or external verifier is selected before deterministic evidence.",
+    "active_plan_and_acceptance": "The accepted route review at fb3772dea0c27a7572df00e1b9d5153f9165ccf3 records seven bounded composition blockers while preserving the accepted physical PostgreSQL proof. The accepted test-only repair at ec9aa1b1d2813b3e864b37f331ac6b587816610a restores all 125 current lineage checks. The prior convergence architecture, in-memory rehearsal, status-only adapter and physical seam define server-owned authority/session ingress, status-only discrimination, locked version/warning/terminal admission, atomic audit/private receipt correlation, canonical stored delivery and fail-closed outcome mapping.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain restored. Protected holdouts and historical Diary data remain sealed. This tranche is provider-free, authored-synthetic and unmounted. It may add an unmounted composition module and in-memory injected-double rehearsal but may not edit/mount/call a route, open a database or product data, execute a command/write, claim concurrency/restart/unknown-commit behavior, use provider/ADC/credentials/browser/network, deploy, release, move Pages or protected refs. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only applies.",
+    "git_refs_and_worktree": "HEAD, task branch and origin task are 83db576fc2c95f513de38ae57d5b4b1ac6fe5027; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean. There are 516 untracked paths including 5 docs/branding paths; only this receipt pair and the frozen composition artifacts will be in scope."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_route_composition_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Accepted route, adapter, physical-seam and rehearsal artifacts are available in the active task worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent is selected for this tightly coupled bounded composition."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["External review remains unselected pending deterministic evidence and risk assessment."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No mechanical worker packet is selected under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

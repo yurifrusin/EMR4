@@ -1,0 +1,85 @@
+{
+  "canonical_response": {
+    "five_field_status_projection_is_response": false,
+    "hash_matches_bytes": true,
+    "initial_and_replay_byte_identical": true,
+    "json_matches_bytes": true,
+    "storage": "complete_current_public_envelope_bytes"
+  },
+  "composition_order": [
+    "status_only_admission",
+    "server_owned_ingress",
+    "request_and_session_digests",
+    "physical_transaction",
+    "locked_readmission",
+    "atomic_effect_and_complete_envelope_receipt",
+    "stored_initial_or_replay_delivery"
+  ],
+  "forbidden": {
+    "credential_or_iam": false,
+    "deployment_or_release": false,
+    "external_tool_or_product_command": false,
+    "pages_or_protected_ref": false,
+    "product_or_patient_data": false,
+    "provider_or_network": false,
+    "real_database_or_source": false,
+    "route_mount_or_call": false
+  },
+  "implementation_authorized": false,
+  "mode": "provider_free_authored_synthetic_unmounted",
+  "next_candidate": "provider_free_read_only_status_confirm_route_mounting_readiness_rereview",
+  "scenario_ids": [
+    "src-001",
+    "src-002",
+    "src-003",
+    "src-004",
+    "src-005",
+    "src-006",
+    "src-007",
+    "src-008",
+    "src-009",
+    "src-010",
+    "src-011",
+    "src-012"
+  ],
+  "schema_version": "raisa.status-confirm-route-composition-contract.v1",
+  "source_bindings": [
+    {
+      "path": "app/routers/appointments.py",
+      "sha256": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb"
+    },
+    {
+      "path": "app/schemas/appointments.py",
+      "sha256": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+    },
+    {
+      "path": "app/services/appointment_idempotency.py",
+      "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"
+    },
+    {
+      "path": "app/services/appointment_status_physical.py",
+      "sha256": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b"
+    },
+    {
+      "path": "app/models/appointments.py",
+      "sha256": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915"
+    },
+    {
+      "path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py",
+      "sha256": "a45b601a375c7dec7ee08e46be53e23991542cf9699a9ac75798c2e70d2865d8"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md",
+      "sha256": "aa2eab6fddc0f8394ea3950965d525222917506a04b0ef10ab22999e2e442363"
+    },
+    {
+      "path": "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md",
+      "sha256": "cfc63d42c16de0c62ee19a6df7d29a374479c890bb52e7fd0c7398739a5fb933"
+    }
+  ],
+  "source_head": "83db576fc2c95f513de38ae57d5b4b1ac6fe5027"
+}
