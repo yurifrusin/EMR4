@@ -149,7 +149,10 @@ def test_status_proposal_confirm_persists_status_reason_code(
     proposal_resp = client.post(
         f"{APPT_URL}/proposals/status/{appt.id}",
         json={"status": "NoShow", "status_reason_code": "DID_NOT_ATTEND"},
-        headers=_auth(token),
+        headers={
+            **_auth(token),
+            "Idempotency-Key": f"reason-status-proposal-{appt.id}",
+        },
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     assert proposal_resp.json()["command"]["status_reason_code"] == "DID_NOT_ATTEND"
@@ -180,7 +183,10 @@ def test_delete_proposal_confirm_persists_status_reason_code_and_text_reason(
             "cancellation_reason": "Duplicate booking",
             "status_reason_code": "DUPLICATE_BOOKING",
         },
-        headers=_auth(token),
+        headers={
+            **_auth(token),
+            "Idempotency-Key": f"reason-delete-proposal-{appt.id}",
+        },
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     assert proposal_resp.json()["command"]["status_reason_code"] == "DUPLICATE_BOOKING"

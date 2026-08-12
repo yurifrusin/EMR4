@@ -62,7 +62,10 @@ def _propose_status(client, token, appt_id, new_status: str):
     return client.post(
         STATUS_URL.format(appt_id=appt_id),
         json={"status": new_status},
-        headers={"Authorization": f"Bearer {token}"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": f"noshow-dna-{appt_id}-{new_status.lower()}",
+        },
     )
 
 

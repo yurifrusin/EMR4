@@ -7,13 +7,19 @@ This tests the fix for the double-booking bug where the old implementation
 used exact start-time equality and therefore left overlapping slots "available".
 """
 
-from datetime import datetime
+from datetime import date, datetime, timedelta
 
 import pytest
 
 from tests.conftest import make_token
 
-MONDAY = datetime(2026, 6, 22)  # day portion only; time is irrelevant for ?date=
+def _next_weekday(weekday: int) -> date:
+    today = date.today()
+    days_ahead = (weekday - today.weekday()) % 7 or 7
+    return today + timedelta(days=days_ahead)
+
+
+MONDAY = _next_weekday(0)
 
 
 def _slots(client, token, practitioner_id, date=MONDAY):
@@ -27,7 +33,7 @@ def _slots(client, token, practitioner_id, date=MONDAY):
 
 
 def _create_appt(client, token, practitioner_id, patient_id, hour, minute, duration):
-    start = datetime(2026, 6, 22, hour, minute, 0)
+    start = datetime(MONDAY.year, MONDAY.month, MONDAY.day, hour, minute, 0)
     resp = client.post(
         "/api/v1/appointments",
         json={
@@ -58,9 +64,9 @@ def test_15min_booking_blocks_only_its_slot(client, receptionist_user, gp_user, 
     _create_appt(client, rec_token, practitioner.id, patient.id, 9, 0, 15)
 
     slots = _slots(client, gp_token, practitioner.id)
-    assert slots["2026-06-22T09:00"] is False, "09:00 should be unavailable"
-    assert slots["2026-06-22T09:15"] is True,  "09:15 should still be available"
-    assert slots["2026-06-22T09:30"] is True,  "09:30 should still be available"
+    assert slots[f"{MONDAY}T09:00"] is False, "09:00 should be unavailable"
+    assert slots[f"{MONDAY}T09:15"] is True,  "09:15 should still be available"
+    assert slots[f"{MONDAY}T09:30"] is True,  "09:30 should still be available"
 
 
 def test_30min_booking_blocks_two_slots(client, receptionist_user, gp_user, practitioner, patient, schedule):
@@ -71,9 +77,9 @@ def test_30min_booking_blocks_two_slots(client, receptionist_user, gp_user, prac
     _create_appt(client, rec_token, practitioner.id, patient.id, 9, 0, 30)
 
     slots = _slots(client, gp_token, practitioner.id)
-    assert slots["2026-06-22T09:00"] is False, "09:00 should be unavailable"
-    assert slots["2026-06-22T09:15"] is False, "09:15 overlaps 30-min booking — must be unavailable"
-    assert slots["2026-06-22T09:30"] is True,  "09:30 is after the booking ends — should be available"
+    assert slots[f"{MONDAY}T09:00"] is False, "09:00 should be unavailable"
+    assert slots[f"{MONDAY}T09:15"] is False, "09:15 overlaps 30-min booking — must be unavailable"
+    assert slots[f"{MONDAY}T09:30"] is True,  "09:30 is after the booking ends — should be available"
 
 
 def test_cancelled_booking_does_not_block_slots(client, receptionist_user, gp_user, practitioner, patient, schedule):
@@ -89,8 +95,8 @@ def test_cancelled_booking_does_not_block_slots(client, receptionist_user, gp_us
     )
 
     slots = _slots(client, gp_token, practitioner.id)
-    assert slots["2026-06-22T09:00"] is True,  "Cancelled booking should free 09:00"
-    assert slots["2026-06-22T09:15"] is True,  "Cancelled booking should free 09:15"
+    assert slots[f"{MONDAY}T09:00"] is True,  "Cancelled booking should free 09:00"
+    assert slots[f"{MONDAY}T09:15"] is True,  "Cancelled booking should free 09:15"
 
 
 def test_no_schedule_returns_empty_slots(client, gp_user, practitioner):

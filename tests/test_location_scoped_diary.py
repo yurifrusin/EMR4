@@ -10,7 +10,7 @@ Covers:
   - GET /appointments/waiting-room — location filter
   - GET /appointments/{id}/checkin-defaults — multi-location disambiguation
 """
-from datetime import date, time
+from datetime import date, time, timedelta
 
 import pytest
 
@@ -22,7 +22,13 @@ from app.models.diary import DiaryBreak, DiaryColumn, DiaryRoster, DiaryTemplate
 from app.models.tenancy import PracticeLocation
 from tests.conftest import make_token
 
-TUESDAY = date(2026, 6, 23)  # real Tuesday — fits Mon-Fri schedule
+def _next_weekday(weekday: int) -> date:
+    today = date.today()
+    days_ahead = (weekday - today.weekday()) % 7 or 7
+    return today + timedelta(days=days_ahead)
+
+
+TUESDAY = _next_weekday(1)
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────

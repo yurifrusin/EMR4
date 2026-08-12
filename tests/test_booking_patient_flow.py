@@ -35,9 +35,19 @@ from datetime import date, datetime, time, timezone
 import pytest
 
 from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
+from app.routers import appointments as appointments_router
 from tests.conftest import make_token
 
 TODAY = date.today()
+
+
+@pytest.fixture(autouse=True)
+def _freeze_clinic_clock(monkeypatch):
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda practice_tz: datetime.combine(TODAY, time(8), tzinfo=practice_tz),
+    )
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────

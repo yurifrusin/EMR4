@@ -5,15 +5,22 @@ Appointments that overlap a diary break are PERMITTED (soft block, not hard bloc
 The create/update response includes a breaks_overlap list so callers can surface a
 warning to reception staff. An empty list means no break conflict.
 
-THURSDAY = 2026-06-25 (a real Thursday; fits Mon-Fri schedule fixture).
+The fixture derives the next real Thursday so it continues to fit the Mon-Fri
+schedule without decaying into a past appointment.
 """
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 
 import pytest
 
 from tests.conftest import make_token
 
-THURSDAY = date(2026, 6, 25)
+def _next_weekday(weekday: int) -> date:
+    today = date.today()
+    days_ahead = (weekday - today.weekday()) % 7 or 7
+    return today + timedelta(days=days_ahead)
+
+
+THURSDAY = _next_weekday(3)
 
 
 def _start(hour: int, minute: int = 0) -> str:

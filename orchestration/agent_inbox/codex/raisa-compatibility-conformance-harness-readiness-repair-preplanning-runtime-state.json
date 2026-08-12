@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_provider_free_test_only_compatibility_conformance_harness_temporal_and_idempotency_readiness_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at SHA-256 2217aeee5eab4ec232af4c43cf7480d04f7acec1c8fd630de5ac89fd38b14568. Continuity 254 / Compass 236 accepts the compatibility-consumer admission review and names the test-only conformance-harness temporal/idempotency readiness repair as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol retains conductor, architecture, acceptance and integration ownership. This tightly coupled deterministic repair remains Sol-owned under Yuri's standing uninterrupted-development authority and the API Steward boundary; no subagent, external worker or provider is selected, and Sydney Vertex Bernie ADC remains unused.",
+    "active_plan_and_acceptance": "The accepted admission plan, finding, closeout and Sol acceptance were read. The exact broad baseline is 311 tests with 45 classified stale-harness failures in eight named test files: 33 past or elapsed appointment-time cases and 12 proposal calls missing the already-required non-empty Idempotency-Key. The frozen repair may change only deterministic test fixtures, clinic-local clocks/future-relative dates and those proposal headers, while preserving assertions and application behavior. Acceptance requires all 311 tests green before the unmounted status transaction-kernel protocol rehearsal begins.",
+    "protected_evidence_boundaries": "No application source, route response, route policy, expected semantic, temporal guard, proposal idempotency requirement, kernel runtime, raw-route behavior, schedule fence, shadow enablement, observer/sink/persistence, operational database/source/watcher/event access, product/patient data, provider call, credential, command expansion, deployment, production, release, Pages or protected ref may change. Protected holdouts remain unopened. docs/branding and all unrelated untracked files remain preserved and excluded; explicit-path staging only applies.",
+    "git_refs_and_worktree": "The branch is codex/ariadne-bernie-davida-parallel-seam. Task HEAD and origin task align at 712e9842297e5aee21c3b4acb061d439639bae04. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Tracked state is clean and exactly 514 untracked files, including five docs/branding files and the preceding closeout receipt pair, are preserved before this runtime-state file."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "compatibility_conformance_harness_readiness_repair_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the full five-source rehydration and exact Git/worktree verification for the test-only repair."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external verifier is selected for the deterministic test-only repair."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is selected for this tightly coupled eight-file repair."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

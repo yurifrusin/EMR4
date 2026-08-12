@@ -13,7 +13,7 @@ Verified here:
 - A nurse booking blocks that nurse slot without affecting the GP's slots
 - A nurse booking does not interfere with a GP booking at the same wall-clock time
 """
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 
 import pytest
 
@@ -27,7 +27,13 @@ from app.models.diary import DiaryColumn, DiaryRoster, DiaryTemplate, Room
 from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 
-MONDAY = date(2026, 6, 22)  # a Monday; slot tests use a fixed date
+def _next_weekday(weekday: int) -> date:
+    today = date.today()
+    days_ahead = (weekday - today.weekday()) % 7 or 7
+    return today + timedelta(days=days_ahead)
+
+
+MONDAY = _next_weekday(0)
 
 
 # ─── Local fixture: nurse practitioner ────────────────────────────────────────

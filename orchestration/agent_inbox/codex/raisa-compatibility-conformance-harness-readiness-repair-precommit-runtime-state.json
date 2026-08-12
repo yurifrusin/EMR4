@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_test_only_compatibility_conformance_harness_readiness_repair_source",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Continuity 254 / Compass 236 names this test-only temporal/idempotency readiness repair as the next dependency-satisfied tranche before status-kernel protocol work.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled deterministic repair, review, acceptance and integration under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent, external worker or provider was used; Sydney Vertex Bernie ADC remained unused.",
+    "active_plan_and_acceptance": "The frozen plan owns exactly eight test files. The exact pre-repair 311-test collection reproduced 266 pass / 45 fail, matching 33 temporal-fixture and 12 missing-proposal-header failures. Two same-day suites now freeze the clinic-local clock at 08:00, four schedule suites derive the next required weekday, one UTC fixture derives from the frozen date, and three proposal header source sites cover the 12 failing cases. The eight-file 128-test subset and the identical full 311-test collection pass. Two structural acceptance tests pass and prove the application tree and status-code assertion set unchanged.",
+    "protected_evidence_boundaries": "No application source, expected status, route behavior, safety control, kernel runtime, raw-route behavior, schedule fence, shadow enablement, observer/sink/persistence, operational database/source/watcher/event access, product/patient data, provider call, credential, command expansion, deployment, production, release, Pages or protected ref changed. Protected holdouts remain unopened. docs/branding and all unrelated untracked files remain preserved and excluded; explicit-path staging only applies.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain aligned at 712e9842297e5aee21c3b4acb061d439639bae04 before the source commit. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Exactly eight tracked test files are modified and 521 untracked files, including five docs/branding files and all prior receipt material, are preserved before this runtime-state file."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "compatibility_conformance_harness_readiness_repair_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reproduced the exact failure census, completed the frozen test-only repair and passed the identical 311-test collection."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external verifier was selected for the deterministic test-only repair."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker was selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport was not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

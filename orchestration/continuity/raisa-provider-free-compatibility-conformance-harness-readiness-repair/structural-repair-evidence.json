@@ -1,0 +1,41 @@
+{
+  "application_tree_unchanged": true,
+  "baseline_head": "712e9842297e5aee21c3b4acb061d439639bae04",
+  "changed_test_file_count": 8,
+  "file_sha256": {
+    "tests/test_booking_create_edit.py": "c336bf34fea0366c9fd4ab9415611e217045fb09b78951973a3ffb7d631fa750",
+    "tests/test_booking_patient_flow.py": "569ef8a8087aa0964bb6c3fe7f94588e8fb8c663e53649cda9a44046886dc529",
+    "tests/test_break_overlap_contract.py": "69cb08d13f9ffb5638b051526306e6bb6553eb56eb91e1ae23dc7738f1ee8bef",
+    "tests/test_location_scoped_diary.py": "2a67c7b1a8c731a2570964a116382468905607597efb147fca76d884394d2278",
+    "tests/test_noshow_dna_status_contract.py": "6bdf4b109a571e7cc31ddaa41e02f6349324e4baeb602e390bd897168a54a72e",
+    "tests/test_nurse_practitioner.py": "9e72563f1798af91f04fa1d74daa5128db9bca714e100db72c4d8dadc54b96f3",
+    "tests/test_reason_code_backend.py": "16c608d988d95d14c94b55cf3599185e7b36540bcd717f0e1fcf05b0c2d6591c",
+    "tests/test_slots.py": "718eb7b7f01a6325e4e1960c773a882eb01587b6845dcf0cca6925679a11c261"
+  },
+  "frozen_failure_classification": {
+    "missing_required_proposal_idempotency_header": 12,
+    "past_or_elapsed_time_fixture": 33
+  },
+  "future_weekday_fixture_count": 4,
+  "owned_test_files": [
+    "tests/test_booking_create_edit.py",
+    "tests/test_booking_patient_flow.py",
+    "tests/test_break_overlap_contract.py",
+    "tests/test_location_scoped_diary.py",
+    "tests/test_noshow_dna_status_contract.py",
+    "tests/test_nurse_practitioner.py",
+    "tests/test_reason_code_backend.py",
+    "tests/test_slots.py"
+  ],
+  "pre_repair_test_result": {
+    "failed": 45,
+    "passed": 266
+  },
+  "proposal_header_exercised_cases": 12,
+  "proposal_header_source_sites": 3,
+  "runtime_or_command_authority_granted": false,
+  "same_day_clock_fixture_count": 2,
+  "schema_version": "raisa.compatibility_conformance_harness_readiness_repair.v1",
+  "status": "structural_repair_pass",
+  "status_assertions_unchanged": true
+}

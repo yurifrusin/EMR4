@@ -34,9 +34,19 @@ from datetime import date, datetime, time, timezone
 import pytest
 
 from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
+from app.routers import appointments as appointments_router
 from tests.conftest import make_token
 
 TODAY = date.today()
+
+
+@pytest.fixture(autouse=True)
+def _freeze_clinic_clock(monkeypatch):
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda practice_tz: datetime.combine(TODAY, time(8), tzinfo=practice_tz),
+    )
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -140,7 +150,7 @@ def test_create_with_utc_start_time_returns_201(client, db, gp_user, practice, p
     body = {
         "patient_id": str(patient.id),
         "practitioner_id": str(practitioner.id),
-        "start_time": "2026-07-01T01:00:00+00:00",
+        "start_time": datetime.combine(TODAY, time(1), tzinfo=timezone.utc).isoformat(),
         "duration_minutes": 15,
     }
     resp = _post(client, token, body)
