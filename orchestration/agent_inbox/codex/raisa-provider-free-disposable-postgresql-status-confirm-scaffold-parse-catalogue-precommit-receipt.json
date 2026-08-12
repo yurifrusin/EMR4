@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_verified_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_source_packet",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and threat delta permit only offline Alembic SQL plus one exact locally cached, networkless, tmpfs-backed PostgreSQL 16 container. The rehearsal passes exact source/digest and 80 hostile-mutation gates, exact catalogue inspection, nine rolled-back authored-synthetic probes and verified captured-ID cleanup. No route, command or durable product state was opened.",
+    "current_authority_allocation": "GPT Sol remains conductor, implementation owner and task-branch publisher for this tightly coupled serial database rehearsal. No subagent, external worker or provider lane was selected; all evidence was deterministic and provider-free.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain 163e0403cc3f18ebb2fbd0e47e14d01abf2554b6 on codex/ariadne-bernie-davida-parallel-seam, with required 648c8ec9805af63729264ea9c22fd695f062a741 preserved as an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are zero tracked modifications and 527 preserved untracked paths, including five docs/branding paths; explicit-path staging only is authorized.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 163e0403cc3f18ebb2fbd0e47e14d01abf2554b6. Continuity 263 / Compass 245 names the provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal as the exact next descendant.",
+    "protected_evidence_boundaries": "Protected holdouts and historical diary data remained sealed; AER-0292 exact-file-only access remains binding. No existing/product database, patient/product data, provider/ADC/credential/browser authorization, route, watcher/event, product command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and all unrelated untracked paths remain preserved; only explicit tranche paths may be staged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

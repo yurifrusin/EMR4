@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_run_the_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 163e0403cc3f18ebb2fbd0e47e14d01abf2554b6. Continuity 263 / Compass 245 accepts the unmounted physical scaffold and names only its provider-free disposable PostgreSQL parse/catalogue rehearsal next.",
+    "current_authority_allocation": "GPT Sol remains conductor, material database-plan owner, acceptance owner and task-branch publisher. This is one tightly coupled disposable PostgreSQL sequence, so it remains Sol-owned under the worker-lane economy rule; no subagent or external worker is selected and every provider lane remains inactive.",
+    "active_plan_and_acceptance": "The exact scaffold plan, threat-model delta, contract, closeout and Sol acceptance were read completely. The next tranche may install only migration w2x3y4z5a6b7 into an owned empty disposable PostgreSQL instance, inspect exact catalogues, run authored-synthetic transactionally rolled-back invariant probes and clean up completely. Route mounting/calling, application commands, durable/product data and production remain closed.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts and historical diary data remain sealed. AER-0292 exact-file access remains binding. No existing/product database, patient/product data, provider/ADC/credential/browser authorization, route, watcher/event, product command, deployment, production, release, Pages or protected-ref action is authorized. docs/branding and every unrelated untracked path remain preserved and excluded; explicit-path staging only applies.",
+    "git_refs_and_worktree": "Task HEAD and origin task are 163e0403cc3f18ebb2fbd0e47e14d01abf2554b6 on codex/ariadne-bernie-davida-parallel-seam, with required 648c8ec9805af63729264ea9c22fd695f062a741 preserved as an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean and all 516 untracked paths, including five docs/branding paths, are preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_scaffold_parse_catalogue_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh five-source rehydration completed at the published scaffold closeout HEAD."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected for one serial disposable database sequence."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed independent review is selected before deterministic database evidence exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

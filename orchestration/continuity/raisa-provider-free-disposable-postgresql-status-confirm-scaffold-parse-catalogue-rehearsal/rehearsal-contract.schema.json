@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/status-confirm-scaffold-parse-catalogue-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "source_head", "evidence_label", "source_bindings", "alembic", "docker_profile", "catalogue", "probes", "cleanup", "forbidden", "next_candidate"],
+  "properties": {
+    "schema_version": {"const": "raisa.status_confirm_scaffold_parse_catalogue_rehearsal.v1"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal_pass"},
+    "source_head": {"const": "163e0403cc3f18ebb2fbd0e47e14d01abf2554b6"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue"},
+    "source_bindings": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}},
+    "alembic": {"type": "object"},
+    "docker_profile": {"type": "object"},
+    "catalogue": {"type": "object"},
+    "probes": {"type": "array", "minItems": 9, "maxItems": 9},
+    "cleanup": {"type": "object"},
+    "forbidden": {"type": "object"},
+    "next_candidate": {"const": "provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal"}
+  }
+}

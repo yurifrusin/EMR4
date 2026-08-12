@@ -1,0 +1,98 @@
+{
+  "schema_version": "raisa.status_confirm_scaffold_parse_catalogue_rehearsal.v1",
+  "result": "raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal_pass",
+  "source_head": "163e0403cc3f18ebb2fbd0e47e14d01abf2554b6",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue",
+  "source_bindings": [
+    {"path": "docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-closeout.md", "sha256": "f7e90fac3a470300be9b728668f55f459408e98c24e5c04e4ec281ae3632df1c"},
+    {"path": "orchestration/agent_inbox/codex/raisa-status-confirm-physical-schema-transaction-scaffold-sol-acceptance.md", "sha256": "3159e88b74163747a0bcb09e6075310c3517ddc9575d6bd1d16f2a62238ac3de"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.json", "sha256": "16301ce02d9cd764452f16c0a0dc467bf2182d6953883d214bb7a13b993c14a0"},
+    {"path": "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py", "sha256": "bfa72b627061b8e477903ec9fc2cfbb35a4970b26ab7115db18c3daef1d3696c"},
+    {"path": "app/models/appointments.py", "sha256": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915"},
+    {"path": "alembic.ini", "sha256": "8a70641ffa66bb1c228e16a62d8b7a2111810888819c9c662c17ea72e2d70b49"},
+    {"path": "alembic/env.py", "sha256": "5f8f7f752287ce47b507555c43065499fe797c37f724ed827c1d43ebfc5fe346"},
+    {"path": "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md", "sha256": "022ba49c8d3a12c3cf32df6f998b357dcb09b013908327d65e110618e2d8c8ab"}
+  ],
+  "alembic": {
+    "from_revision": "v1w2x3y4z5b6",
+    "to_revision": "w2x3y4z5a6b7",
+    "offline_range": "v1w2x3y4z5b6:w2x3y4z5a6b7",
+    "synthetic_url": "postgresql+psycopg://synthetic:synthetic@localhost/synthetic",
+    "strip_exact_outer_transaction_wrapper": true,
+    "psql_single_transaction": true
+  },
+  "docker_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "container_name_prefix": "emr4-status-confirm-pg16-catalogue-",
+    "harness_label": "status-confirm-pg16-catalogue-v1",
+    "data_destination": "/var/lib/postgresql/data",
+    "tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "memory_bytes": 536870912,
+    "nano_cpus": 1000000000,
+    "pids_limit": 128,
+    "restart_policy": "no",
+    "postgres_user": "emr4_scaffold",
+    "postgres_password": "status-confirm-authored-synthetic-only",
+    "postgres_database": "status_confirm_rehearsal",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "startup_timeout_seconds": 90,
+    "command_timeout_seconds": 30,
+    "total_timeout_seconds": 300,
+    "readiness_observations": 3
+  },
+  "catalogue": {
+    "head": "w2x3y4z5a6b7",
+    "columns": [
+      {"table": "appointments", "name": "appointment_state_version", "type": "int8", "nullable": false, "default": "1"},
+      {"table": "appointment_command_idempotency", "name": "completed_receipt_version", "type": "int2", "nullable": true, "default": null},
+      {"table": "appointment_command_idempotency", "name": "session_binding_digest", "type": "bytea", "nullable": true, "default": null},
+      {"table": "appointment_command_idempotency", "name": "pre_state_version", "type": "int8", "nullable": true, "default": null},
+      {"table": "appointment_command_idempotency", "name": "post_state_version", "type": "int8", "nullable": true, "default": null},
+      {"table": "appointment_command_idempotency", "name": "response_body_canonical_bytes", "type": "bytea", "nullable": true, "default": null}
+    ],
+    "constraints": [
+      "ck_appointments_state_version_positive",
+      "ck_appt_cmd_idem_receipt_version",
+      "ck_appt_cmd_idem_status_receipt_v1_complete"
+    ],
+    "function": "public.emr4_advance_appointment_state_version()",
+    "trigger": "trg_appointments_advance_state_version",
+    "cutover_version": 1,
+    "unexpected_function_count": 0,
+    "unexpected_trigger_count": 0
+  },
+  "probes": [
+    {"id": "default_insert", "expected": "1", "rolled_back": true},
+    {"id": "submitted_version_overwritten", "expected": "Arrived|2", "rolled_back": true},
+    {"id": "zero_insert_rejected", "sqlstate": "23514", "rolled_back": true},
+    {"id": "overflow_update_rejected", "sqlstate": "22003", "rolled_back": true},
+    {"id": "valid_receipt_v1", "expected": "1", "rolled_back": true},
+    {"id": "bad_digest_rejected", "sqlstate": "23514", "rolled_back": true},
+    {"id": "non_adjacent_versions_rejected", "sqlstate": "23514", "rolled_back": true},
+    {"id": "receipt_version_two_rejected", "sqlstate": "23514", "rolled_back": true},
+    {"id": "legacy_null_receipt_admitted", "expected": "t", "rolled_back": true}
+  ],
+  "cleanup": {
+    "target": "captured_container_id_only",
+    "ownership_reverification_required": true,
+    "post_remove_exact_id_absence_required": true,
+    "remove_image_volume_network_or_workspace": false
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "existing_or_product_database_used": false,
+    "host_database_url_used": false,
+    "external_network_or_image_pull_used": false,
+    "bind_or_named_volume_used": false,
+    "patient_product_or_protected_data_used": false,
+    "provider_adc_credentials_or_browser_used": false,
+    "route_service_helper_or_command_called": false,
+    "watcher_or_event_authority_added": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal"
+}
