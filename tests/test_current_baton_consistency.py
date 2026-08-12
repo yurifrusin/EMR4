@@ -8,7 +8,7 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold"
+    "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity"
 )
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
@@ -24,10 +24,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 252
+    assert graph["graph_revision"] == 253
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 234
-    assert compass["source_graph_revision"] == 252
+    assert compass["map_revision"] == 235
+    assert compass["source_graph_revision"] == 253
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -37,13 +37,15 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 252 / Compass 234" in current
-    assert "globally disabled" in current
-    assert "zero disabled-path context/projection/digest/cell/offer work" in current
-    assert "outer ASGI middleware delegates directly" in current
-    assert "All 170 focused tests" in current
-    assert "No context provider" in current
-    assert "410ea6dbbe28b94cfaa83ac5f6b586910c77aa6a" in current
+    assert "Continuity 253 / Compass 235" in current
+    assert "seven native Diary raw appointment mutation call sites" in current
+    assert "zero remain" in current
+    assert "fresh blocks override prior warning review" in current
+    assert "missing signed evidence fails closed" in current
+    assert "all 142 Diary browser tests" in current
+    assert "242 focused backend/API tests" in current
+    assert "remain mounted and unchanged" in current
+    assert "78cbcca756476fddfd0fda4b4d1241f195b21ab6" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -57,9 +59,10 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "47b5f09ecf35225da25812ba87bb656a1094fc7e" in relation
     assert "ed52950f451af88892a8f469157ecf8c8567da81" in relation
     assert "410ea6dbbe28b94cfaa83ac5f6b586910c77aa6a" in relation
-    assert "Provider-free ordinary/fallback Diary client proposal-confirm parity" in next_work
-    assert "exact inventory" in next_work
-    assert "Compatibility routes must remain mounted and unblocked" in next_work
+    assert "78cbcca756476fddfd0fda4b4d1241f195b21ab6" in relation
+    assert "Provider-free compatibility-consumer and kernel-convergence admission review" in next_work
+    assert "Inventory every remaining repository/system" in next_work
+    assert "Compatibility routes must remain mounted and unchanged" in next_work
     assert "operational database/source/watcher/event access" in next_work
     assert "product/patient data" in next_work
     assert "observer/sink/persistence" in next_work
@@ -96,12 +99,13 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free ordinary/fallback diary client proposal-confirm parity",
-        "compatibility routes must remain mounted and unblocked",
+        "provider-free compatibility-consumer and kernel-convergence admission review",
+        "compatibility routes must remain mounted and unchanged",
         "operational database/source/watcher/event access",
         "product/patient data",
         "command expansion",
         "observer/sink/persistence",
+        "no kernel implementation",
         "docs/branding/",
         "deployment",
         "pages",

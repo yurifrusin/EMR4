@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 234,
+  "map_revision": 235,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 252,
-  "orientation_statement": "EMR4 is at Continuity 252 / Compass 234. The provider-free globally-disabled runtime-instrumentation scaffold passes with 17 tranche tests, zero disabled-path projection or handoff work and exact four-route authored-synthetic parity. Client proposal-confirm parity is next.",
+  "source_graph_revision": 253,
+  "orientation_statement": "EMR4 is at Continuity 253 / Compass 235. Provider-free native Diary proposal-confirm parity passes with seven raw appointment mutation call sites reduced to zero, all 142 Diary browser tests and exact backend-route preservation. Compatibility-consumer and kernel-convergence admission review is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2326,30 +2326,48 @@
         "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity",
+      "lineage_parent": "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold",
+      "strategic_role": "Remove native raw fallbacks before compatibility-route convergence",
+      "outcome": "Seven native raw call sites are closed; compatibility-consumer and kernel-convergence admission review is next.",
+      "evidence": [
+        "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-plan.md",
+        "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-design.md",
+        "docs/security/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity/native-diary-raw-call-site-inventory.json",
+        "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold",
-    "strategic_role": "Dormant instrumentation scaffold proved; client proposal-confirm parity next",
-    "why_now": "The mounting seam is present but structurally unenableable, so client migration can proceed without opening observation.",
-    "outcome": "Four raw routes and the outer ASGI boundary preserve authored-synthetic behavior with zero disabled-path work.",
+    "node_id": "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity",
+    "strategic_role": "Native proposal-confirm parity proved; compatibility-consumer admission next",
+    "why_now": "The native Diary no longer selects raw appointment mutations, so remaining compatibility obligations can be examined without conflating them with ordinary product behavior.",
+    "outcome": "Seven raw client paths are replaced by fail-closed proposal plus signed-confirm flows while all backend compatibility routes remain mounted.",
     "unlocks": [
-      "Inventory every ordinary and fallback Diary raw-write call site.",
-      "Prove proposal and signed-confirm replacements while keeping compatibility routes mounted."
+      "Inventory remaining repository/system, import, recovery and migration consumers.",
+      "Freeze the exact first raw-route kernel-convergence implementation boundary without changing a route."
     ],
     "does_not_solve": [
-      "Practice enablement, observer/sink operation, product data, diagnostic persistence or monitoring.",
-      "Compatibility removal, raw-route kernel convergence, deployment, Pages or protected refs."
+      "External-consumer readiness, compatibility-route retirement or raw-route kernel convergence.",
+      "Create schedule fencing, shadow enablement, product data, deployment, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md",
-      "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md",
-      "docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md",
-      "docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
+      "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-plan.md",
+      "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-design.md",
+      "docs/security/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity/native-diary-raw-call-site-inventory.json",
+      "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
     ]
   },
   "decision_horizon": [
@@ -2445,9 +2463,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Freeze the exact ordinary and fallback Diary client raw-write inventory.",
-        "Prove proposal plus signed-confirm parity before removing or blocking any compatibility route.",
-        "Then converge status, delete and update on the accepted backend kernel in order.",
+        "Inventory every remaining repository/system compatibility-route consumer and import/recovery obligation.",
+        "Freeze exact behavior-preservation and observability requirements before any route implementation changes.",
+        "Select the narrowest status, delete or update kernel-convergence slice before create.",
         "Select and prove a database-owned create schedule fence before create convergence.",
         "Retain Durable Event and Cue Delivery as a later observability-first extension."
       ],
@@ -2859,7 +2877,16 @@
         "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md"
+        "orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md",
+        "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-plan.md",
+        "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-design.md",
+        "docs/security/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity/native-diary-raw-call-site-inventory.json",
+        "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
       ]
     },
     {
@@ -3704,6 +3731,7 @@
     }
   ],
   "map_limits": [
+    "Native-client parity does not identify external compatibility consumers or authorize route retirement or kernel convergence.",
     "The runtime-instrumentation scaffold is structurally unenableable and has no context provider, key custody, observer, sink or operational output.",
     "The runtime-instrumentation result is static architecture only; no request context, route hook, middleware, observer, queue, sink or persistence exists.",
     "The shadow result is pure authored-synthetic evidence only; no route instrumentation, observer runtime, queue, sink or persistence exists.",

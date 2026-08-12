@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 252,
+  "graph_revision": 253,
   "harvests": [],
   "nodes": [
     {
@@ -16101,6 +16101,88 @@
         "No practice or route is enabled and no operational observer, sink, key custody or diagnostic output exists.",
         "Ordinary and fallback Diary client proposal-confirm parity remains unproved.",
         "Compatibility-route removal, raw-route kernel convergence, product data, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity",
+      "title": "Provider-free ordinary/fallback Diary client proposal-confirm parity",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "78cbcca756476fddfd0fda4b4d1241f195b21ab6",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is provider-free native-client proposal-confirm parity.",
+          "The four backend raw compatibility routes remain mounted and unchanged.",
+          "No external-consumer, kernel-convergence or route-retirement authority is granted."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-ordinary-fallback-diary-client-proposal-confirm-parity",
+          "source": "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md",
+          "status": "accepted",
+          "summary": "Accept zero native raw appointment mutations with fail-closed proposal plus signed-confirm behavior."
+        }
+      ],
+      "claim_scope": [
+        "Exactly seven source-bound native raw call sites are inventoried and zero remain in the Diary client.",
+        "Every native proposal family sends an idempotency header and missing signed evidence fails closed.",
+        "Fresh blocks override earlier warning review and changed warning codes require renewed review.",
+        "Create/update follow-up status and delete-404 fallback use signed status confirmation.",
+        "Eight tranche, 142 Diary browser, 242 focused backend/API and canonical 191 fast-profile tests pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-design.md",
+          "docs/security/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_ordinary_fallback_diary_client_proposal_confirm_parity.py",
+          "review/test_diary_smoke.py",
+          "tests/test_raisa_provider_free_ordinary_fallback_diary_client_proposal_confirm_parity_continuity.py"
+        ],
+        "artifacts": [
+          "docs/diary/diary.js",
+          "docs/api-spine/raw-compat-consumer-signal-readiness.md",
+          "docs/api-spine/legacy-compatibility-write-deprecation-map.md",
+          "orchestration/continuity/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity/native-diary-raw-call-site-inventory.json",
+          "scripts/raisa_provider_free_ordinary_fallback_diary_client_proposal_confirm_parity_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "External, import, recovery and migration consumers of compatibility routes remain unidentified.",
+        "Create/update plus status remains two distinct committed commands with explicit partial-outcome reporting.",
+        "Compatibility-route retirement, raw-route kernel convergence and create schedule fencing remain closed.",
+        "Shadow enablement, product data, provider calls, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

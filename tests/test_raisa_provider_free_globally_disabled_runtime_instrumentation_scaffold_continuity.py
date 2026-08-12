@@ -18,13 +18,13 @@ def _node(graph: dict) -> dict:
     return matches[0]
 
 
-def test_globally_disabled_scaffold_is_current() -> None:
+def test_globally_disabled_scaffold_is_accepted_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 252
-    assert compass["map_revision"] == 234
-    assert compass["source_graph_revision"] == 252
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert graph["graph_revision"] == 253
+    assert compass["map_revision"] == 235
+    assert compass["source_graph_revision"] == 253
+    assert compass["current_position"]["node_id"] == "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity"
     node = _node(graph)
     assert node["kind"] == "foundation"
     assert node["status"] == "accepted"
@@ -52,18 +52,21 @@ def test_node_opens_no_runtime_observer_authority() -> None:
         assert phrase in joined
 
 
-def test_compass_names_client_parity_next() -> None:
+def test_compass_preserves_scaffold_journey_and_advances_after_client_parity() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
+    journey = [item for item in compass["journey"] if item["node_id"] == NODE_ID]
+    assert len(journey) == 1
+    assert "client proposal-confirm parity is next" in journey[0]["outcome"].lower()
     current = compass["current_position"]
     joined = " ".join(
         [current["strategic_role"], current["why_now"], current["outcome"]]
         + current["unlocks"]
         + current["does_not_solve"]
     ).lower()
-    assert "client proposal-confirm parity next" in joined
-    assert "keeping compatibility routes mounted" in joined
-    assert "continuity 252 / compass 234" in compass["orientation_statement"].lower()
-    assert "zero disabled-path projection or handoff work" in compass["orientation_statement"]
+    assert "native proposal-confirm parity proved" in joined
+    assert "all backend compatibility routes remain mounted" in joined
+    assert "continuity 253 / compass 235" in compass["orientation_statement"].lower()
+    assert "seven raw appointment mutation call sites reduced to zero" in compass["orientation_statement"]
 
 
 def test_evidence_binds_receipts_acceptance_and_yuri_summary() -> None:

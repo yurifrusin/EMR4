@@ -194,10 +194,21 @@ The only constructible generation is globally disabled with empty practice and
 route allowlists and no digest key, context provider, observer or sink. Exact
 authored-synthetic create/update/status/delete response, mutation, audit and
 failure parity passes with zero context, projection, digest, cell or offer work
-on the disabled path. The next bounded descendant inventories every ordinary
-and fallback Diary client raw-write call site and proves its proposal plus
-signed-confirm replacement before any compatibility route is removed or any
-raw-route kernel convergence begins.
+on the disabled path. The ordinary/fallback native Diary client descendant now
+also passes. Its exact inventory binds seven raw appointment mutation call
+sites and zero remain; create, update, drag/resize, status, waiting-area and
+delete gestures use the existing proposal plus signed-confirm families with
+client idempotency headers. Fresh blocks override prior warning review,
+warning-code drift requires renewed review and missing confirmation evidence
+has no raw fallback. Create/update follow-up status remains an explicit second
+committed command and reports a partial outcome if that status step fails. All
+four backend compatibility routes remain mounted and unchanged. The next
+bounded descendant is a provider-free, read-only compatibility-consumer and
+kernel-convergence admission review: inventory remaining repository/system,
+import, recovery and migration obligations, freeze exact behavior-preservation
+requirements and select the narrowest status, delete or update implementation
+slice before create. No route change, kernel implementation or schedule fence
+begins in that review.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

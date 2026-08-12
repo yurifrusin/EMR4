@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 252 / Compass 234. The provider-free globally-disabled runtime-instrumentation scaffold passes with 17 tranche tests, zero disabled-path projection or handoff work and exact four-route authored-synthetic parity. Client proposal-confirm parity is next.
+> EMR4 is at Continuity 253 / Compass 235. Provider-free native Diary proposal-confirm parity passes with seven raw appointment mutation call sites reduced to zero, all 142 Diary browser tests and exact backend-route preservation. Compatibility-consumer and kernel-convergence admission review is next.
 
 ## North star
 
@@ -278,24 +278,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Two-phase static architecture passes; the globally-disabled typed scaffold is next. Lineage parent: `raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal`.
 131. **Mount only the dormant fail-closed instrumentation shapes — Provider-free globally-disabled runtime-instrumentation scaffold**
    Globally-disabled zero-work scaffold passes; client proposal-confirm parity is next. Lineage parent: `raisa-provider-free-default-off-runtime-instrumentation-architecture`.
+132. **Remove native raw fallbacks before compatibility-route convergence — Provider-free ordinary/fallback Diary client proposal-confirm parity**
+   Seven native raw call sites are closed; compatibility-consumer and kernel-convergence admission review is next. Lineage parent: `raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold`.
 
 ## Current position
 
-**Dormant instrumentation scaffold proved; client proposal-confirm parity next — Provider-free globally-disabled runtime-instrumentation scaffold**
+**Native proposal-confirm parity proved; compatibility-consumer admission next — Provider-free ordinary/fallback Diary client proposal-confirm parity**
 
-**Why this proof came next:** The mounting seam is present but structurally unenableable, so client migration can proceed without opening observation.
+**Why this proof came next:** The native Diary no longer selects raw appointment mutations, so remaining compatibility obligations can be examined without conflating them with ordinary product behavior.
 
-Four raw routes and the outer ASGI boundary preserve authored-synthetic behavior with zero disabled-path work.
+Seven raw client paths are replaced by fail-closed proposal plus signed-confirm flows while all backend compatibility routes remain mounted.
 
 ### What this unlocks
 
-- Inventory every ordinary and fallback Diary raw-write call site.
-- Prove proposal and signed-confirm replacements while keeping compatibility routes mounted.
+- Inventory remaining repository/system, import, recovery and migration consumers.
+- Freeze the exact first raw-route kernel-convergence implementation boundary without changing a route.
 
 ### What it does not solve
 
-- Practice enablement, observer/sink operation, product data, diagnostic persistence or monitoring.
-- Compatibility removal, raw-route kernel convergence, deployment, Pages or protected refs.
+- External-consumer readiness, compatibility-route retirement or raw-route kernel convergence.
+- Create schedule fencing, shadow enablement, product data, deployment, Pages or protected refs.
 
 ## Continuity and authority
 
@@ -362,9 +364,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Freeze the exact ordinary and fallback Diary client raw-write inventory.
-- Prove proposal plus signed-confirm parity before removing or blocking any compatibility route.
-- Then converge status, delete and update on the accepted backend kernel in order.
+- Inventory every remaining repository/system compatibility-route consumer and import/recovery obligation.
+- Freeze exact behavior-preservation and observability requirements before any route implementation changes.
+- Select the narrowest status, delete or update kernel-convergence slice before create.
 - Select and prove a database-owned create schedule fence before create convergence.
 - Retain Durable Event and Cue Delivery as a later observability-first extension.
 
@@ -555,6 +557,7 @@ Prerequisites:
 
 ## Map limits
 
+- Native-client parity does not identify external compatibility consumers or authorize route retirement or kernel convergence.
 - The runtime-instrumentation scaffold is structurally unenableable and has no context provider, key custody, observer, sink or operational output.
 - The runtime-instrumentation result is static architecture only; no request context, route hook, middleware, observer, queue, sink or persistence exists.
 - The shadow result is pure authored-synthetic evidence only; no route instrumentation, observer runtime, queue, sink or persistence exists.
@@ -960,6 +963,9 @@ Prerequisites:
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md`
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md`
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md`
+- `docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md`
+- `docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-design.md`
+- `docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-plan.md`
 - `docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-bureau-memory-contract-plan.md`
@@ -1103,6 +1109,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-bureau-memory-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
@@ -1322,8 +1329,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-bureau-memory-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
@@ -1592,6 +1602,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity/native-diary-raw-call-site-inventory.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/context-fabric-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-bureau-memory-contract/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-current-operational-weave/operational-weave-contract.schema.json`
@@ -1889,6 +1900,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--default-off-shadow-comparison-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--globally-disabled-runtime-instrumentation-scaffold.md`
 - `orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md`
+- `orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -1981,4 +1993,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 234; continuity graph revision 252._
+_Compass map revision 235; continuity graph revision 253._
