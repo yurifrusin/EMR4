@@ -1,0 +1,40 @@
+{
+  "schema_version": "emr4.vertex_architecture_review_receipt.v1",
+  "candidate_head": "037eed060d4519f2f3d6721135143ecb6f70e358",
+  "decision": "pass",
+  "summary": "The candidate is internally consistent and addresses cue-only events, fenced watcher ownership, atomic conditional commands, creation schedule-domain fencing, distinct freshness/confirmation/idempotency/audit evidence, typed loser outcomes, compatibility-route convergence and deferred durable cue delivery. No P0-P2 defect was identified.",
+  "findings": [],
+  "provider": {
+    "project": "bernie-emr4-dev",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "model": "gemini-2.5-flash",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "http_status": 200,
+    "latency_ms": 18105,
+    "prompt_sha256": "sha256:d94d00cb57895b74774fac63436dd195a4f878dc4bdd4c4f886ad47374328b28",
+    "response_sha256": "sha256:6d1b7ce86507e64ed3cb2b5871f89ec83a6ee9aeba0bd417474a3e76d55ab17c",
+    "usage": {
+      "promptTokenCount": 9810,
+      "candidatesTokenCount": 234,
+      "thoughtsTokenCount": 3616,
+      "totalTokenCount": 13660
+    }
+  },
+  "deterministic_gate": {
+    "hostile_mutations_rejected": 28,
+    "focused_architecture_and_api_tests_passed": 53,
+    "canonical_fast_profile_tests_passed": 191,
+    "ruff_passed": true,
+    "maintained_python_source_count": 202,
+    "diary_javascript_syntax_passed": true,
+    "git_whitespace_passed": true
+  },
+  "authority": "read_only_advisory_veto_no_implementation_or_acceptance_authority",
+  "data_boundary": "ordinary_repository_architecture_no_phi_no_patient_or_product_data",
+  "tools_used": false,
+  "fallback_used": false,
+  "preceding_zero_call_receipt": "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-zero-call-receipt.json",
+  "claim_limit": "This receipt records one schema-constrained independent architecture review of the exact candidate. It does not prove runtime, database fencing, route behavior, watcher availability, restart recovery, patient-data safety, deployment or production suitability."
+}

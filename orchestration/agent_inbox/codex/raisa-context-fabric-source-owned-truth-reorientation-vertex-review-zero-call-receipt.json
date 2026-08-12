@@ -1,0 +1,30 @@
+{
+  "schema_version": "emr4.vertex_architecture_review_zero_call_receipt.v1",
+  "attempt_id": "raisa-source-owned-truth-reorientation-review-001",
+  "candidate_head": "037eed060d4519f2f3d6721135143ecb6f70e358",
+  "status": "stopped_before_provider_call",
+  "stage": "impersonated_adc_refresh",
+  "reason_code": "impersonated_adc_refresh_failed_reauthentication_required",
+  "provider": {
+    "project": "bernie-emr4-dev",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "model": "gemini-2.5-flash",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "binding_checks_before_refresh": {
+    "credential_type_impersonated": true,
+    "project_exact": true,
+    "target_service_account_exact": true,
+    "cloud_platform_scope_present": true
+  },
+  "provider_calls": 0,
+  "endpoint_contacted": false,
+  "model_output_received": false,
+  "fallback_used": false,
+  "raw_credential_or_token_recorded": false,
+  "data_boundary": "ordinary_repository_architecture_no_phi_no_patient_or_product_data",
+  "required_operator_action": "gcloud auth application-default login --impersonate-service-account=emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "claim_limit": "This receipt proves only that the exact impersonated ADC binding was discovered and its source credential required reauthentication before refresh. No Vertex request was sent, no provider result exists, and the architecture candidate is not independently accepted by this attempt."
+}

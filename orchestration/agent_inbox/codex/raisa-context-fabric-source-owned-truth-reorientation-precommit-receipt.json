@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "accept_close_commit_push_and_notify_the_context_fabric_source_owned_truth_reorientation_then_continue_to_the_provider_free_unmounted_conditional_command_admission_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact architecture candidate 037eed060d4519f2f3d6721135143ecb6f70e358 passes its closed contract, 28 hostile mutations, 53 focused tests and 191 canonical fast tests. One schema-constrained Sydney review returned HTTP 200 with no P0-P2 finding. Closeout, Sol acceptance, Yuri lay/technical summary, Continuity 245 / Compass 227 and lifecycle tests are prepared; the next provider-free unmounted admission rehearsal is named but not yet opened.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance, explicit-path task-branch closeout and uninterrupted continuation. One read-only Sydney Vertex gemini-2.5-flash veto has completed and passed; it has no implementation, acceptance, integration, runtime or Git authority. No other worker is assigned.",
+    "git_refs_and_worktree": "Current task HEAD is 037eed060d4519f2f3d6721135143ecb6f70e358 and origin task remains 0a5c9d336f7e7cba08fddb94ab0233e399474cb8 before closeout push. Local/origin master and local/origin handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 after fresh fetch. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Six tracked closeout/lifecycle files and task-owned untracked closeout evidence are pending explicit-path staging; the original 492 untracked paths remain preserved, docs/branding is excluded, and broad staging is forbidden.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now records the acceptance-ready Continuity 245 / Compass 227 result. The source-owned-truth reorientation is the current result; CF-D1 remains retained evidence, CF-D2 remains stopped and unproved, and the next safe descendant is the provider-free unmounted conditional-command admission rehearsal.",
+    "protected_evidence_boundaries": "No protected holdout, docs/branding, historical Diary/PHI, patient/clinical/product data, database/source/watcher, route behavior, migration, provider tool, credential/IAM mutation, executable, command/write, deployment, release, Pages or protected ref is opened. The review used ordinary repository architecture only. All pre-existing untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

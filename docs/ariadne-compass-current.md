@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 244 / Compass 226. The CF-D2 workflow incident diagnosis and evidence-led fluidity repair pass, while CF-D2 itself remains stopped and unproved. No automatic durability tranche is dependency-satisfied; Yuri must select the next independent programme direction.
+> EMR4 is at Continuity 245 / Compass 227. The Context Fabric source-owned-truth and conditional-command reorientation passes. Events are acceleration hints, one logical watcher serves each event partition, and command correctness no longer depends on durable cue delivery. The next safe tranche is the provider-free unmounted conditional-command admission rehearsal.
 
 ## North star
 
@@ -262,25 +262,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    CF-D1 passes bounded overlap, exact winner/loser outcomes, native replay, outer rollback, whole-document evidence and cleanup without product or provider access. Lineage parent: `raisa-agent-execution-surface-containment-gate-aes-c5`.
 123. **Repair diagnostic flow after stopped CF-D2 without weakening hard safety boundaries — Ariadne CF-D2 workflow incident diagnosis and fluidity repair**
    Evidence-led gates now require discriminating observations and exact command results; CF-D2 remains unproved and the next programme direction requires Yuri's choice. Lineage parent: `raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal`.
+124. **Move first-runtime correctness to source-owned conditional commands while keeping events as cue acceleration — Raisa Context Fabric source-owned truth and conditional commands**
+   Architecture passes; durable cue delivery is deferred but retained, and the next safe tranche is an unmounted authored-synthetic admission rehearsal. Lineage parent: `ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair`.
 
 ## Current position
 
-**Evidence-led workflow repair accepted; independent programme fork required — Ariadne CF-D2 workflow incident diagnosis and fluidity repair**
+**Source-owned correctness architecture accepted; provider-free conditional-command admission rehearsal next — Raisa Context Fabric source-owned truth and conditional commands**
 
-**Why this proof came next:** CF-D2 exhausted its bounded diagnostic path without discriminating the remaining anchor assertions, and Yuri requested a workflow incident diagnosis before choosing another direction.
+**Why this proof came next:** The stopped CF-D2 path exposed that durable cue delivery should improve timeliness and observability rather than sit inside the first runtime's correctness kernel.
 
-Hard safety gates remain intact while adaptive work now stops before nondiscriminating corrections or retries.
+Atomic conditional commands protect database truth even when a cue is delayed or missed, while durability remains a named later extension.
 
 ### What this unlocks
 
-- Choose a separately valuable product or architecture direction without carrying CF-D2 ceremony into it.
-- If explicitly authorized later, design an observability-first CF-D2 architecture whose outcomes distinguish every viable assertion before runtime.
+- Provider-free authored-synthetic admission scenarios for preconditions, lock plans and typed winner/loser outcomes.
+- A later route-convergence design after the common command kernel is mechanically admitted.
+- A future observability-first Durable Event and Cue Delivery programme without making events current truth.
 
 ### What it does not solve
 
-- The unresolved CF-D2 anchor-internal cause, crash/restart or unknown-commit recovery.
-- Key rotation, retention/purge, long-lived persistence or operational database wiring.
-- Patient/product/clinical data, provider tools, commands, deployment, Pages or protected-ref movement.
+- Production precondition tokens, database schedule fencing or legacy-route behavior.
+- Restart-safe cue delivery, CF-D2, key rotation, retention/purge or operational watcher availability.
+- Patient/product/clinical data, executable tools, commands, deployment, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -339,7 +342,7 @@ Prerequisites:
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
-### Raisa Practice Context Fabric — blocked
+### Raisa Practice Context Fabric — active
 
 How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?
 
@@ -347,9 +350,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- CF-D2 restart and unknown-commit recovery remains unproved and closed.
-- Yuri must choose an independent programme direction or explicitly authorize a new observability-first CF-D2 architecture.
-- Key rotation and retention/purge remain dependency-blocked.
+- Run the provider-free unmounted conditional-command admission rehearsal.
+- Keep all route, database, watcher, product-data and command surfaces closed until their own descendants pass.
+- Return to Durable Event and Cue Delivery later through a fresh observability-first plan.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -538,6 +541,7 @@ Prerequisites:
 
 ## Map limits
 
+- The source-owned-truth reorientation proves architecture only; it does not prove a runtime command kernel, database fence, watcher or durable cue delivery.
 - The workflow repair proves discriminating diagnostic and exact review admission controls; it does not prove the unresolved CF-D2 database behavior.
 - CF-D1 proves six fixed two-session database races, not crash/restart, unknown commit, arbitrary deadlock freedom, load, performance, more than two participants or operational availability.
 - AES-C5 proves one exact authored-synthetic application-route and brokered provider crossing with cleanup, not real-person or patient-data safety, production identity/RLS, reusable runtime, command safety or physical/sovereign processing.
@@ -872,6 +876,9 @@ Prerequisites:
 - `docs/raisa-context-fabric-durability-concurrency-attempt-001-launcher-failure-analysis.md`
 - `docs/raisa-context-fabric-durability-concurrency-attempt-002-marker-telemetry-analysis.md`
 - `docs/raisa-context-fabric-durability-concurrency-attempt-003-replay-vocabulary-analysis.md`
+- `docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-architecture.md`
+- `docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md`
+- `docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-plan.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
@@ -1033,6 +1040,7 @@ Prerequisites:
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
+- `docs/security/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-threat-model-delta.md`
 - `docs/security/raisa-dual-host-foundation-threat-model-delta.md`
 - `docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md`
 - `docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md`
@@ -1237,6 +1245,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-protected-path-enumeration-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-provenance-repair-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-rayleen-source-adapter-review-packet-count-reconciliation-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-zero-call-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-final-independent-review.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md`
@@ -1480,6 +1491,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-cloud-run-public-https-dev-host-deployment/partial-deployment-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-https-dev-host-readiness/final-residue-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-https-dev-host-readiness/local-container-browser-evidence.json`
+- `orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.json`
+- `orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.schema.json`
 - `orchestration/continuity/raisa-dual-host-foundation/feature-inventory.json`
 - `orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json`
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
@@ -1787,6 +1800,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--codebase-conformance-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1877,4 +1891,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 226; continuity graph revision 244._
+_Compass map revision 227; continuity graph revision 245._

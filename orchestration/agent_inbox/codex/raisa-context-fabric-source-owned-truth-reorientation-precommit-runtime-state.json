@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "accept_close_commit_push_and_notify_the_context_fabric_source_owned_truth_reorientation_then_continue_to_the_provider_free_unmounted_conditional_command_admission_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and now records the acceptance-ready Continuity 245 / Compass 227 result. The source-owned-truth reorientation is the current result; CF-D1 remains retained evidence, CF-D2 remains stopped and unproved, and the next safe descendant is the provider-free unmounted conditional-command admission rehearsal.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance, explicit-path task-branch closeout and uninterrupted continuation. One read-only Sydney Vertex gemini-2.5-flash veto has completed and passed; it has no implementation, acceptance, integration, runtime or Git authority. No other worker is assigned.",
+    "active_plan_and_acceptance": "The exact architecture candidate 037eed060d4519f2f3d6721135143ecb6f70e358 passes its closed contract, 28 hostile mutations, 53 focused tests and 191 canonical fast tests. One schema-constrained Sydney review returned HTTP 200 with no P0-P2 finding. Closeout, Sol acceptance, Yuri lay/technical summary, Continuity 245 / Compass 227 and lifecycle tests are prepared; the next provider-free unmounted admission rehearsal is named but not yet opened.",
+    "protected_evidence_boundaries": "No protected holdout, docs/branding, historical Diary/PHI, patient/clinical/product data, database/source/watcher, route behavior, migration, provider tool, credential/IAM mutation, executable, command/write, deployment, release, Pages or protected ref is opened. The review used ordinary repository architecture only. All pre-existing untracked files remain preserved and excluded.",
+    "git_refs_and_worktree": "Current task HEAD is 037eed060d4519f2f3d6721135143ecb6f70e358 and origin task remains 0a5c9d336f7e7cba08fddb94ab0233e399474cb8 before closeout push. Local/origin master and local/origin handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 after fresh fetch. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Six tracked closeout/lifecycle files and task-owned untracked closeout evidence are pending explicit-path staging; the original 492 untracked paths remain preserved, docs/branding is excluded, and broad staging is forbidden."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "source_owned_truth_reorientation_precommit_acceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed deterministic verification, admitted one independent review decision and prepared exact closeout evidence."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The user-selected Sydney Vertex lane supplied the independent advisory veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

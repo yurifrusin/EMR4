@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 244,
+  "graph_revision": 245,
   "harvests": [],
   "nodes": [
     {
@@ -15476,6 +15476,86 @@
         "Key rotation and retention/purge remain dependency-blocked because CF-D2 did not pass.",
         "No dependency-satisfied automatic programme tranche remains; Yuri must select the next independent direction.",
         "Operational database/source access, real/product/patient/clinical data, provider tools, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-context-fabric-source-owned-truth-conditional-command-reorientation",
+      "title": "Raisa Context Fabric source-owned truth and conditional commands",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "037eed060d4519f2f3d6721135143ecb6f70e358",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is repository-only architecture and changes no route, database, watcher or product behavior.",
+          "Authoritative source services own current truth and atomic conditional commands; Context Frames and events have no write authority.",
+          "The next descendant is authored-synthetic, provider-free and unmounted."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-source-owned-truth-conditional-command-reorientation",
+          "source": "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md",
+          "status": "accepted",
+          "summary": "Make command correctness independent of cue durability while retaining a named later Durable Event and Cue Delivery extension."
+        }
+      ],
+      "claim_scope": [
+        "Current truth and mutation serialization belong to authoritative source services.",
+        "Context Fabric frames remain read-only and expiring; events are acceleration hints requiring fresh authorised reads.",
+        "Freshness, confirmation, idempotency and audit are distinct command evidence.",
+        "Appointment create requires schedule-conflict-domain serialization and a final database invariant check.",
+        "One logical watcher serves each database event partition; future physical replicas are externally fenced active/standby.",
+        "CF-D1 is retained and CF-D2 may reopen only through a fresh observability-first plan."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-architecture.md",
+          "docs/security/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-zero-call-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_context_fabric_source_owned_truth_reorientation.py",
+          "tests/test_raisa_context_fabric_source_owned_truth_reorientation_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.json",
+          "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.schema.json",
+          "scripts/raisa_context_fabric_source_owned_truth_reorientation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No production precondition token, database schedule fence or common command kernel is implemented or proved.",
+        "The legacy compatibility routes remain mounted and unchanged pending separate migration evidence.",
+        "Durable Event and Cue Delivery remains deferred; restart, unknown-commit, rotation, retention and purge are unproved.",
+        "Operational database/source/watcher access, patient/product/clinical data, provider tools, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

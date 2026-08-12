@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 226,
+  "map_revision": 227,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 244,
-  "orientation_statement": "EMR4 is at Continuity 244 / Compass 226. The CF-D2 workflow incident diagnosis and evidence-led fluidity repair pass, while CF-D2 itself remains stopped and unproved. No automatic durability tranche is dependency-satisfied; Yuri must select the next independent programme direction.",
+  "source_graph_revision": 245,
+  "orientation_statement": "EMR4 is at Continuity 245 / Compass 227. The Context Fabric source-owned-truth and conditional-command reorientation passes. Events are acceleration hints, one logical watcher serves each event partition, and command correctness no longer depends on durable cue delivery. The next safe tranche is the provider-free unmounted conditional-command admission rehearsal.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2183,31 +2183,52 @@
         "orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md"
       ]
+    },
+    {
+      "node_id": "raisa-context-fabric-source-owned-truth-conditional-command-reorientation",
+      "lineage_parent": "ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair",
+      "strategic_role": "Move first-runtime correctness to source-owned conditional commands while keeping events as cue acceleration",
+      "outcome": "Architecture passes; durable cue delivery is deferred but retained, and the next safe tranche is an unmounted authored-synthetic admission rehearsal.",
+      "evidence": [
+        "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-plan.md",
+        "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-architecture.md",
+        "docs/security/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-threat-model-delta.md",
+        "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.json",
+        "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.schema.json",
+        "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-zero-call-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair",
-    "strategic_role": "Evidence-led workflow repair accepted; independent programme fork required",
-    "why_now": "CF-D2 exhausted its bounded diagnostic path without discriminating the remaining anchor assertions, and Yuri requested a workflow incident diagnosis before choosing another direction.",
-    "outcome": "Hard safety gates remain intact while adaptive work now stops before nondiscriminating corrections or retries.",
+    "node_id": "raisa-context-fabric-source-owned-truth-conditional-command-reorientation",
+    "strategic_role": "Source-owned correctness architecture accepted; provider-free conditional-command admission rehearsal next",
+    "why_now": "The stopped CF-D2 path exposed that durable cue delivery should improve timeliness and observability rather than sit inside the first runtime's correctness kernel.",
+    "outcome": "Atomic conditional commands protect database truth even when a cue is delayed or missed, while durability remains a named later extension.",
     "unlocks": [
-      "Choose a separately valuable product or architecture direction without carrying CF-D2 ceremony into it.",
-      "If explicitly authorized later, design an observability-first CF-D2 architecture whose outcomes distinguish every viable assertion before runtime."
+      "Provider-free authored-synthetic admission scenarios for preconditions, lock plans and typed winner/loser outcomes.",
+      "A later route-convergence design after the common command kernel is mechanically admitted.",
+      "A future observability-first Durable Event and Cue Delivery programme without making events current truth."
     ],
     "does_not_solve": [
-      "The unresolved CF-D2 anchor-internal cause, crash/restart or unknown-commit recovery.",
-      "Key rotation, retention/purge, long-lived persistence or operational database wiring.",
-      "Patient/product/clinical data, provider tools, commands, deployment, Pages or protected-ref movement."
+      "Production precondition tokens, database schedule fencing or legacy-route behavior.",
+      "Restart-safe cue delivery, CF-D2, key rotation, retention/purge or operational watcher availability.",
+      "Patient/product/clinical data, executable tools, commands, deployment, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md",
-      "docs/ariadne-cf-d2-workflow-incident-diagnosis.md",
-      "orchestration/harness_settings/evidence_led_workflow.yaml",
-      "scripts/ariadne_evidence_gate.py",
-      "docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md",
-      "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md",
-      "orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md"
+      "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-plan.md",
+      "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-architecture.md",
+      "docs/security/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-threat-model-delta.md",
+      "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.json",
+      "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.schema.json",
+      "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-zero-call-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md"
     ]
   },
   "decision_horizon": [
@@ -2299,13 +2320,13 @@
     {
       "id": "raisa-practice-context-fabric",
       "title": "Raisa Practice Context Fabric",
-      "status": "blocked",
+      "status": "active",
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "CF-D2 restart and unknown-commit recovery remains unproved and closed.",
-        "Yuri must choose an independent programme direction or explicitly authorize a new observability-first CF-D2 architecture.",
-        "Key rotation and retention/purge remain dependency-blocked."
+        "Run the provider-free unmounted conditional-command admission rehearsal.",
+        "Keep all route, database, watcher, product-data and command surfaces closed until their own descendants pass.",
+        "Return to Durable Event and Cue Delivery later through a fresh observability-first plan."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -2636,7 +2657,17 @@
         "docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md",
         "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md",
         "orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md"
+        "orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md",
+        "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-plan.md",
+        "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-architecture.md",
+        "docs/security/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-threat-model-delta.md",
+        "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.json",
+        "orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.schema.json",
+        "docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-source-owned-truth-reorientation-vertex-review-zero-call-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md"
       ]
     },
     {
@@ -3481,6 +3512,7 @@
     }
   ],
   "map_limits": [
+    "The source-owned-truth reorientation proves architecture only; it does not prove a runtime command kernel, database fence, watcher or durable cue delivery.",
     "The workflow repair proves discriminating diagnostic and exact review admission controls; it does not prove the unresolved CF-D2 database behavior.",
     "CF-D1 proves six fixed two-session database races, not crash/restart, unknown commit, arbitrary deadlock freedom, load, performance, more than two participants or operational availability.",
     "AES-C5 proves one exact authored-synthetic application-route and brokered provider crossing with cleanup, not real-person or patient-data safety, production identity/RLS, reusable runtime, command safety or physical/sovereign processing.",

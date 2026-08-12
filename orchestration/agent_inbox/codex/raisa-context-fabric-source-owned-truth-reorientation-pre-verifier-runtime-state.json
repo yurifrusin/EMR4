@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_read_only_sydney_vertex_gemini_25_architecture_veto_over_exact_candidate_037eed060d4519f2f3d6721135143ecb6f70e358",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. Continuity 244 / Compass 226 remains the authority baseline; CF-D1 is accepted evidence, CF-D2 and its recovery remain stopped and unproved, and the independent source-owned-truth reorientation is the selected programme direction.",
+    "current_authority_allocation": "GPT Sol owns architecture, deterministic verification, acceptance and task-branch integration. Yuri has selected the established keyless impersonated-ADC Sydney Vertex Bernie-project lane as the default model lane until otherwise decided. One read-only gemini-2.5-flash architecture veto may inspect only the ordinary authored repository packet after deterministic readiness; it receives no implementation, acceptance, runtime, product-data, command or Git authority.",
+    "active_plan_and_acceptance": "Exact candidate 037eed060d4519f2f3d6721135143ecb6f70e358 freezes source-owned truth, Context Fabric ephemerality, cue-only events, one logical watcher per partition, atomic conditional commands, separate freshness/confirmation/idempotency/audit evidence, schedule-domain fencing for create, typed loser outcomes, legacy-route convergence and a deferred observability-first Durable Event and Cue Delivery extension. The authored-synthetic contract passes 28 hostile mutations, 53 focused architecture/API tests and the 191-test canonical fast profile.",
+    "protected_evidence_boundaries": "The reviewer may receive only ordinary non-PHI architecture text, the closed JSON contract/schema and exact authored-synthetic deterministic results. No protected holdout, docs/branding, historical Diary/PHI, patient/clinical/product data, database/source/watcher, credential content, provider tool, executable, command, deployment, release or protected-ref action is available. The provider call uses no tools and has read-only advisory output.",
+    "git_refs_and_worktree": "Exact non-protected candidate HEAD is 037eed060d4519f2f3d6721135143ecb6f70e358 on codex/ariadne-bernie-davida-parallel-seam with clean tracked worktree and index. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. All pre-existing untracked files remain preserved and excluded; explicit-path staging only applies and docs/branding is never staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "source_owned_truth_reorientation_exact_candidate_deterministic_gate",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol produced and deterministically verified the exact architecture candidate."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Yuri selected the established Sydney Vertex lane instead of Antigravity for the review call."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

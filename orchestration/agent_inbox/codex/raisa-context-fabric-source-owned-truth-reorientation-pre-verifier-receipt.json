@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_read_only_sydney_vertex_gemini_25_architecture_veto_over_exact_candidate_037eed060d4519f2f3d6721135143ecb6f70e358",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 037eed060d4519f2f3d6721135143ecb6f70e358 freezes source-owned truth, Context Fabric ephemerality, cue-only events, one logical watcher per partition, atomic conditional commands, separate freshness/confirmation/idempotency/audit evidence, schedule-domain fencing for create, typed loser outcomes, legacy-route convergence and a deferred observability-first Durable Event and Cue Delivery extension. The authored-synthetic contract passes 28 hostile mutations, 53 focused architecture/API tests and the 191-test canonical fast profile.",
+    "current_authority_allocation": "GPT Sol owns architecture, deterministic verification, acceptance and task-branch integration. Yuri has selected the established keyless impersonated-ADC Sydney Vertex Bernie-project lane as the default model lane until otherwise decided. One read-only gemini-2.5-flash architecture veto may inspect only the ordinary authored repository packet after deterministic readiness; it receives no implementation, acceptance, runtime, product-data, command or Git authority.",
+    "git_refs_and_worktree": "Exact non-protected candidate HEAD is 037eed060d4519f2f3d6721135143ecb6f70e358 on codex/ariadne-bernie-davida-parallel-seam with clean tracked worktree and index. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. All pre-existing untracked files remain preserved and excluded; explicit-path staging only applies and docs/branding is never staged.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Continuity 244 / Compass 226 remains the authority baseline; CF-D1 is accepted evidence, CF-D2 and its recovery remain stopped and unproved, and the independent source-owned-truth reorientation is the selected programme direction.",
+    "protected_evidence_boundaries": "The reviewer may receive only ordinary non-PHI architecture text, the closed JSON contract/schema and exact authored-synthetic deterministic results. No protected holdout, docs/branding, historical Diary/PHI, patient/clinical/product data, database/source/watcher, credential content, provider tool, executable, command, deployment, release or protected-ref action is available. The provider call uses no tools and has read-only advisory output."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
