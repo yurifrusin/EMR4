@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 252,
+  "register_revision": 253,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-12",
@@ -11434,6 +11434,49 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0285",
+      "attempt_id": "cf-d2-workflow-incident-preplanning-001",
+      "observed_on": "2026-08-12",
+      "tranche": "ariadne-cf-d2-workflow-incident-diagnosis",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne preplanning state must select its continuation_event from the configured orchestrator-requirements vocabulary; phase prose belongs in planned_action and must not be abbreviated into a new machine event.",
+      "observed_error": "The first CF-D2 workflow-incident preplanning state used intuitive continuation_event pre_plan instead of configured pre_sprint_planning. The deterministic preflight returned revision_required with continuation_event_missing_or_unapproved, admitted no rehydration sources and authorised no planning or dispatch. No Docker, database, provider, product, network or external worker operation followed.",
+      "detection_method": "The receipt generator failed closed before planning. Direct readback of orchestration/harness_settings/orchestrator_requirements.yaml identified the canonical event, and a distinct v2 state with the same five-source boundary produced a passing receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-incident-diagnosis-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-incident-diagnosis-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-incident-diagnosis-preplanning-v2-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-incident-diagnosis-preplanning-v2-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-253.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed state and receipt, create a distinct v2 state using exact configured pre_sprint_planning with the same five-source evidence and boundaries, and admit no planning work until the v2 receipt passes.",
+        "prevention_control": "Expose the configured event vocabulary through the receipt CLI and require authors to select from that output; tests bind the discoverable list to orchestrator_requirements.yaml so event spelling is not a memory or prose task.",
+        "evidence_paths": [
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-incident-diagnosis-preplanning-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-253.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

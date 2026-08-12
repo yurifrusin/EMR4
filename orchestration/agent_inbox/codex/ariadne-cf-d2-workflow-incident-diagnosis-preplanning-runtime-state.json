@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_plan",
+  "planned_action": "derive_freeze_and_execute_the_repository_only_cf_d2_workflow_incident_diagnosis_and_bounded_evidence_led_fluidity_repair",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the CF-D2 recovery closeout. CF-D1 at Continuity 243 / Compass 225 remains the last accepted durability result; CF-D2 and its recovery descendant are stopped unproved, attempt 003 is ineligible and the next named tranche is the independent workflow-incident diagnosis and repository-only fluidity repair.",
+    "current_authority_allocation": "GPT Sol owns workflow diagnosis, architecture, acceptance, bounded implementation, tests and task-branch closeout under Yuri's standing uninterrupted-development authority. DeepSeek and native subagents are unassigned because the work is tightly coupled architecture/policy reconciliation. One final fresh Gemini 3.6 Flash/high veto is risk-triggered only after deterministic gates because workflow architecture changes; it receives no implementation, acceptance or Git authority.",
+    "active_plan_and_acceptance": "Yuri explicitly requested a post-CF-D2 incident diagnosis that asks whether excessive formality reduced fluidity and useful improvisation. The narrowest safe boundary is repository-only: diagnose the full CF-D2 evidence chain, preserve hard authority/privacy/evidence/ref controls, and add mechanical evidence-led gates for hypothesis discrimination, structured exact command manifests, module invocation and first-failure exit propagation. It cannot reopen CF-D2 runtime, key rotation or retention/purge.",
+    "protected_evidence_boundaries": "The tranche may read tracked ordinary workflow, plan, source, test, receipt and authored-synthetic failure evidence only. Protected holdouts, historical Diary/PHI, docs/branding, unrelated untracked files, operational database/source/watcher, Docker/database runtime, provider, real/product/patient/clinical data, credentials/IAM, executable product tool or command, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "The active task branch is codex/ariadne-bernie-davida-parallel-seam at d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b, seven commits ahead of origin with empty index and no tracked changes. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exactly 490 pre-existing untracked paths remain preserved; explicit-path staging only applies."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "cf_d2_workflow_incident_diagnosis_fresh_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol read the live handover, autonomous-continuation policy, verifier policy, error-register plan, stopped closeout, exact commit chronology and Git refs."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No verifier dispatch occurs before a deterministic candidate passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek implementation lease is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

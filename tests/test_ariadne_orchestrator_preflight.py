@@ -5,11 +5,16 @@ from pathlib import Path
 import pytest
 import yaml
 
-from scripts.ariadne_orchestrator_preflight import build_receipt
+from scripts.ariadne_orchestrator_preflight import (
+    build_receipt,
+    configured_continuation_events,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RUNTIME_STATE = ROOT / "tests" / "fixtures" / "ariadne_harness" / "orchestrator_runtime_state.json"
+RUNTIME_STATE = (
+    ROOT / "tests" / "fixtures" / "ariadne_harness" / "orchestrator_runtime_state.json"
+)
 REQUIRED_SOURCES = [
     "live_handover_current_baton",
     "current_authority_allocation",
@@ -19,12 +24,14 @@ REQUIRED_SOURCES = [
 ]
 CONTINUATION_EVENTS = yaml.safe_load(
     (
-        ROOT
-        / "orchestration"
-        / "harness_settings"
-        / "orchestrator_requirements.yaml"
+        ROOT / "orchestration" / "harness_settings" / "orchestrator_requirements.yaml"
     ).read_text(encoding="utf-8")
 )["continuation_events"]
+
+
+def test_receipt_cli_exposes_the_exact_configured_event_vocabulary() -> None:
+    assert configured_continuation_events() == tuple(CONTINUATION_EVENTS)
+    assert configured_continuation_events()[4] == "pre_sprint_planning"
 
 
 def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_workspace_evidence():
@@ -32,13 +39,18 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
 
     assert receipt["status"] == "passed"
     assert receipt["worker_dispatch_permitted"] is True
-    assert receipt["authority_boundary"] == "receipt_only_no_worker_control_or_integration_authority"
+    assert (
+        receipt["authority_boundary"]
+        == "receipt_only_no_worker_control_or_integration_authority"
+    )
     assert receipt["rehydrated_from_receipt"] is True
     assert receipt["rehydration_sources"] == REQUIRED_SOURCES
     assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
 
 
-def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(tmp_path: Path):
+def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(
+    tmp_path: Path,
+):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["worker_slots"][0]["stale_instance_ids"] = ["stale-deepseek-1"]
     path = tmp_path / "runtime-state.json"
@@ -48,7 +60,9 @@ def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(tmp_pa
 
     assert receipt["status"] == "revision_required"
     assert receipt["worker_dispatch_permitted"] is False
-    assert "stale_worker_resolution_required:deepseek-flash-workers" in receipt["reasons"]
+    assert (
+        "stale_worker_resolution_required:deepseek-flash-workers" in receipt["reasons"]
+    )
 
 
 def test_unassigned_platform_workspaces_do_not_block_sprint_planning(tmp_path: Path):
@@ -67,7 +81,11 @@ def test_unassigned_platform_workspaces_do_not_block_sprint_planning(tmp_path: P
 def test_assigned_agent_requires_clean_current_workspace_receipt(tmp_path: Path):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["assigned_agent_ids"] = ["claude"]
-    claude = next(item for item in runtime_state["workspace_receipts"] if item["agent_id"] == "claude")
+    claude = next(
+        item
+        for item in runtime_state["workspace_receipts"]
+        if item["agent_id"] == "claude"
+    )
     claude["at_handoff_current"] = False
     path = tmp_path / "runtime-state.json"
     path.write_text(json.dumps(runtime_state), encoding="utf-8")
@@ -78,7 +96,9 @@ def test_assigned_agent_requires_clean_current_workspace_receipt(tmp_path: Path)
     assert "workspace_not_at_handoff:claude" in receipt["reasons"]
 
 
-def test_context_health_requires_rehydration_for_unknown_context_before_integration(tmp_path: Path):
+def test_context_health_requires_rehydration_for_unknown_context_before_integration(
+    tmp_path: Path,
+):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["continuation_event"] = "pre_sprint_planning"
     runtime_state["planned_action"] = "integration"
@@ -96,7 +116,9 @@ def test_context_health_requires_rehydration_for_unknown_context_before_integrat
     assert "context_rehydration_required:orchestrator" in receipt["reasons"]
 
 
-def test_context_health_requires_a_new_continuation_when_provider_meter_is_critical(tmp_path: Path):
+def test_context_health_requires_a_new_continuation_when_provider_meter_is_critical(
+    tmp_path: Path,
+):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["continuation_event"] = "pre_sprint_planning"
     runtime_state["planned_action"] = "worker_dispatch"
@@ -168,15 +190,12 @@ def test_named_source_without_evidence_fails_closed(tmp_path: Path):
     assert receipt["status"] == "revision_required"
     assert receipt["rehydrated_from_receipt"] is False
     assert (
-        "rehydration_source_evidence_missing:"
-        "orchestrator:active_plan_and_acceptance"
+        "rehydration_source_evidence_missing:orchestrator:active_plan_and_acceptance"
     ) in receipt["reasons"]
 
 
 @pytest.mark.parametrize("malformed", [None, " ", [], [""], [1]])
-def test_malformed_source_evidence_fails_closed(
-    tmp_path: Path, malformed: object
-):
+def test_malformed_source_evidence_fails_closed(tmp_path: Path, malformed: object):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["source_evidence"]["active_plan_and_acceptance"] = malformed
     path = tmp_path / "runtime-state.json"
@@ -186,8 +205,7 @@ def test_malformed_source_evidence_fails_closed(
 
     assert receipt["status"] == "revision_required"
     assert (
-        "rehydration_source_evidence_missing:"
-        "orchestrator:active_plan_and_acceptance"
+        "rehydration_source_evidence_missing:orchestrator:active_plan_and_acceptance"
     ) in receipt["reasons"]
 
 
@@ -234,8 +252,7 @@ def test_duplicate_primary_session_source_prefix_fails_closed(tmp_path: Path):
 
     assert receipt["status"] == "revision_required"
     assert (
-        "rehydration_source_evidence_ambiguous:"
-        "orchestrator:active_plan_and_acceptance"
+        "rehydration_source_evidence_ambiguous:orchestrator:active_plan_and_acceptance"
     ) in receipt["reasons"]
 
 

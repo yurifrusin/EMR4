@@ -42,6 +42,12 @@ external_verifier:
     envelope_format: schema_constrained_json
     additional_properties: forbidden
     legacy_terminal_line_default: false
+    optional_command_manifest:
+      schema_version: ariadne.verifier-command-manifest.v1
+      representation: ordered_structured_argv
+      exact_results_required: true
+      pass_requires_every_exit_code_zero: true
+      manifest_digest_in_receipt: true
   postcondition:
     candidate_head: unchanged
     candidate_worktree: clean
@@ -108,6 +114,13 @@ dispatch_economy:
   dispatch_is_optional: true
   require_leverage_greater_than_packet_monitoring_and_recovery_cost: true
   keep_serial_tightly_coupled_or_small_work_sol_owned: true
+evidence_led_flow:
+  policy: evidence_led_workflow.yaml
+  one_active_boundary_and_one_final_risk_triggered_veto: true
+  coordinate_is_not_assertion: true
+  correction_requires_discriminating_next_observation: true
+  continuation_event_values_are_cli_discoverable: true
+  repeated_same_coordinate_after_correction: stop_or_change_programme_direction
 test_execution:
   repository_conftest_pytest: serial
   shared_postgresql_schema: serial

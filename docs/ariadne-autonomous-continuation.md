@@ -49,6 +49,37 @@ authority and independent readback. Protected evidence and real patient or
 clinical data remain separately governed safety boundaries, not ceremonial
 gate labels.
 
+## Evidence-led fluidity
+
+Autonomous continuation is not a requirement to maximize plans, receipts or
+external reviews. Hard authority, privacy, immutable-evidence, cleanup and Git
+boundaries stay exact; internal workflow selects the shortest evidence path
+that can distinguish the next decision.
+
+One tranche normally has one active boundary artifact and one final risk-
+triggered independent veto. Deterministic intermediate failures are repaired
+locally before external dispatch unless they expose an ambiguous hard boundary.
+A configured continuation event requires a fresh receipt, but an unchanged
+event does not acquire a new receipt for every internal diagnostic thought or
+prose revision.
+
+For diagnosis, a participant coordinate is not an assertion. An exclusive-
+cause claim requires exactly one viable hypothesis. When several hypotheses
+remain, the next bounded observation must give each a distinct outcome before
+a correction or runtime allowance is spent. A second same-coordinate failure
+after correction stops or changes programme direction rather than nesting
+another recovery ceremony.
+
+Verifier commands use an ordered structured argv manifest when exact command
+evidence matters. The admitted result must reproduce every ID and argv in
+order, and `pass` requires every individual exit code to be zero. Shell
+wrappers, compound commands and direct execution of package-dependent
+`scripts/*.py` files are excluded from that manifest. Receipt event values are
+discoverable with
+`python -m scripts.ariadne_orchestrator_preflight --list-continuation-events`.
+The machine-readable policy is
+`orchestration/harness_settings/evidence_led_workflow.yaml`.
+
 The machine-readable policy is
 `orchestration/harness_settings/autonomous_continuation.yaml`.
 

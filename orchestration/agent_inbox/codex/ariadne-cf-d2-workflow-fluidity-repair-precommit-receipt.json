@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_repository_only_cf_d2_workflow_incident_diagnosis_and_evidence_led_fluidity_repair_for_one_final_risk_triggered_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:b19353f7593b2fa063ce7075a383d78aa1e2a1f4210fa436bd3f197b72f90823",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan preserves hard authority/privacy/evidence/ref controls while adding three mechanical repairs: diagnostic hypothesis discrimination before correction, structured exact argv/result admission for optional Antigravity command manifests, and discoverable receipt-event vocabulary. The evidence gate retrospectively returns revision_required for the CF-D2 anchor correction because four viable hypotheses shared one non-discriminating observation. Forty-six focused workflow tests, all 225 register tests, Ruff, compilation, canonical fast 191 tests and whitespace pass.",
+    "current_authority_allocation": "GPT Sol owns the diagnosis, workflow architecture, implementation, deterministic acceptance and Git candidate commit. DeepSeek and native subagents are unassigned. A single fresh Gemini 3.6 Flash/high exact-HEAD veto is risk-triggered after this deterministic candidate commit and has no implementation, acceptance, integration or protected-ref authority.",
+    "git_refs_and_worktree": "The active branch is codex/ariadne-bernie-davida-parallel-seam based on d1e8d31e79d8af1f5e9fa4ea6b5e68f22aaa1e3b with only intentional diagnosis/repair tracked changes and named new artifacts pending and an empty index before explicit staging. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Pre-existing untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely for this tranche. CF-D1 at Continuity 243 / Compass 225 remains the last accepted durability result, CF-D2 is stopped unproved and the active next work is the independent workflow-incident diagnosis and repository-only fluidity repair.",
+    "protected_evidence_boundaries": "The candidate is repository-only and reads tracked ordinary workflow and authored-synthetic failure evidence. It performed no Docker/database runtime, CF-D2 attempt, provider, product/patient/clinical read, protected evidence access, credential/IAM action, executable product command, deployment, production, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved and excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

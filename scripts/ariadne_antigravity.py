@@ -10,6 +10,13 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
+
+from scripts.ariadne_evidence_gate import (
+    admit_command_results,
+    command_manifest_sha256,
+    load_command_manifest,
+)
 
 
 DEFAULT_MODEL = "gemini-3.6-flash-high"
@@ -46,6 +53,43 @@ REHYDRATION_SOURCES = {
     "protected_evidence_boundaries",
     "git_refs_and_worktree",
 }
+
+
+def structured_decision_schema(
+    command_manifest: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Build the exact verifier egress schema for the selected command gate."""
+    if command_manifest is None:
+        return STRUCTURED_DECISION_SCHEMA
+    commands = command_manifest["commands"]
+    return {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["decision", "review", "command_results"],
+        "properties": {
+            "decision": {"enum": ["pass", "revision_required"]},
+            "review": {"type": "string", "minLength": 1, "maxLength": 40000},
+            "command_results": {
+                "type": "array",
+                "minItems": len(commands),
+                "maxItems": len(commands),
+                "prefixItems": [
+                    {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": ["id", "argv", "exit_code"],
+                        "properties": {
+                            "id": {"const": command["id"]},
+                            "argv": {"const": command["argv"]},
+                            "exit_code": {"type": "integer"},
+                        },
+                    }
+                    for command in commands
+                ],
+            },
+        },
+    }
 
 
 @dataclass(frozen=True)
@@ -95,6 +139,7 @@ def build_command(
     model: str,
     os_sandbox: bool,
     structured_decision: bool = True,
+    command_manifest: dict[str, Any] | None = None,
 ) -> list[str]:
     if model not in MODELS:
         raise ValueError(f"unsupported Antigravity model: {model}")
@@ -107,6 +152,13 @@ def build_command(
         "Do not inspect or reuse any historical Antigravity project.\n\n"
         f"{packet}"
     )
+    if command_manifest is not None:
+        bound_packet += (
+            "\n\nBOUND COMMAND MANIFEST: Execute exactly these structured argv "
+            "commands in order. Do not substitute, widen, omit, wrap or combine "
+            "them. Return each exact id, argv and integer exit_code in "
+            f"command_results: {json.dumps(command_manifest, sort_keys=True)}"
+        )
     if structured_decision:
         bound_packet += (
             "\n\nSTRUCTURED OUTPUT OVERRIDE: Complete and wait for every command and "
@@ -138,7 +190,7 @@ def build_command(
                 "json",
                 "--json-schema",
                 json.dumps(
-                    STRUCTURED_DECISION_SCHEMA,
+                    structured_decision_schema(command_manifest),
                     separators=(",", ":"),
                     sort_keys=True,
                 ),
@@ -149,13 +201,19 @@ def build_command(
     return command
 
 
-def _as_structured_decision(value: object) -> dict[str, str] | None:
+def _as_structured_decision(
+    value: object,
+    command_manifest: dict[str, Any] | None = None,
+) -> dict[str, Any] | None:
     if isinstance(value, str):
         try:
             value = json.loads(value)
         except json.JSONDecodeError:
             return None
-    if not isinstance(value, dict) or set(value) != {"decision", "review"}:
+    expected_keys = {"decision", "review"}
+    if command_manifest is not None:
+        expected_keys.add("command_results")
+    if not isinstance(value, dict) or set(value) != expected_keys:
         return None
     decision = value.get("decision")
     review = value.get("review")
@@ -165,10 +223,23 @@ def _as_structured_decision(value: object) -> dict[str, str] | None:
         return None
     if DECISION_PATTERN.search(review):
         return None
-    return {"decision": decision, "review": review.strip()}
+    admitted: dict[str, Any] = {"decision": decision, "review": review.strip()}
+    if command_manifest is not None:
+        try:
+            admitted["command_results"] = admit_command_results(
+                manifest=command_manifest,
+                results=value["command_results"],
+                decision=decision,
+            )
+        except ValueError:
+            return None
+    return admitted
 
 
-def parse_structured_decision(stdout: str) -> dict[str, str]:
+def parse_structured_decision(
+    stdout: str,
+    command_manifest: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     try:
         root = json.loads(stdout)
     except json.JSONDecodeError as error:
@@ -176,13 +247,13 @@ def parse_structured_decision(stdout: str) -> dict[str, str]:
             "Antigravity structured output was not one JSON value"
         ) from error
 
-    candidates: list[dict[str, str]] = []
-    direct = _as_structured_decision(root)
+    candidates: list[dict[str, Any]] = []
+    direct = _as_structured_decision(root, command_manifest)
     if direct is not None:
         candidates.append(direct)
     if isinstance(root, dict):
         for key in ("structured_output", "result", "response", "output"):
-            candidate = _as_structured_decision(root.get(key))
+            candidate = _as_structured_decision(root.get(key), command_manifest)
             if candidate is not None:
                 candidates.append(candidate)
 
@@ -229,12 +300,20 @@ def run_worker(
     model: str,
     os_sandbox: bool,
     structured_decision: bool = True,
+    command_manifest_path: Path | None = None,
 ) -> dict:
     orchestrator_receipt_sha256 = admit_orchestrator_receipt(orchestrator_receipt_path)
+    if command_manifest_path is not None and not structured_decision:
+        raise ValueError("command manifests require structured verifier decisions")
     packet = packet_path.read_text(encoding="utf-8")
     if not packet.strip():
         raise ValueError("worker packet must not be empty")
     before = inspect_worktree(cwd, require_clean=True)
+    command_manifest = (
+        load_command_manifest(command_manifest_path)
+        if command_manifest_path is not None
+        else None
+    )
     canonical_model = LEGACY_MODEL_ALIASES.get(model, model)
     reasoning_effort = MODEL_EFFORTS.get(canonical_model)
     if reasoning_effort is None:
@@ -246,6 +325,7 @@ def run_worker(
             model=model,
             os_sandbox=os_sandbox,
             structured_decision=structured_decision,
+            command_manifest=command_manifest,
         ),
         cwd=before.root,
         capture_output=True,
@@ -265,7 +345,10 @@ def run_worker(
             "Antigravity verifier modified its read-only candidate worktree"
         )
     if structured_decision:
-        decision_envelope = parse_structured_decision(completed.stdout)
+        decision_envelope = parse_structured_decision(
+            completed.stdout,
+            command_manifest,
+        )
         decision = decision_envelope["decision"]
         result = decision_envelope["review"]
         decision_contract = "schema_constrained_json_v1"
@@ -300,6 +383,9 @@ def run_worker(
     }
     if decision_envelope is not None:
         receipt["decision_envelope"] = decision_envelope
+    if command_manifest is not None:
+        receipt["command_manifest_sha256"] = command_manifest_sha256(command_manifest)
+        receipt["command_results"] = decision_envelope["command_results"]
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     return receipt
@@ -313,6 +399,11 @@ def main() -> int:
     parser.add_argument("--cwd", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--orchestrator-receipt", type=Path, required=True)
+    parser.add_argument(
+        "--command-manifest",
+        type=Path,
+        help="Optional exact structured argv manifest bound into review egress.",
+    )
     parser.add_argument("--model", choices=sorted(MODELS), default=DEFAULT_MODEL)
     parser.add_argument(
         "--os-sandbox",
@@ -334,6 +425,11 @@ def main() -> int:
             model=args.model,
             os_sandbox=args.os_sandbox,
             structured_decision=not args.legacy_text_decision,
+            command_manifest_path=(
+                args.command_manifest.resolve()
+                if args.command_manifest is not None
+                else None
+            ),
         )
     except (OSError, ValueError, RuntimeError) as error:
         print(f"Antigravity transport failed: {error}", file=sys.stderr)

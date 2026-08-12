@@ -1,0 +1,15 @@
+{
+  "coordinate": "cfd2_r01_append_anchor_2",
+  "distinct_observations": [],
+  "reasons": [
+    "correction_would_not_create_discriminating_evidence"
+  ],
+  "schema_version": "ariadne.evidence-gate-decision.v1",
+  "status": "revision_required",
+  "viable_hypothesis_ids": [
+    "revision_argument",
+    "registry_barrier_generation_binding",
+    "baseline_anchor_and_lifecycle_consistency",
+    "prior_receipt_admission_and_digest_rederivation"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.diagnostic-decision-packet.v1",
+  "coordinate": "cfd2_r01_append_anchor_2",
+  "hypotheses": [
+    {
+      "id": "revision_argument",
+      "status": "viable",
+      "next_observation": "same_nonzero_null_sqlstate"
+    },
+    {
+      "id": "registry_barrier_generation_binding",
+      "status": "viable",
+      "next_observation": "same_nonzero_null_sqlstate"
+    },
+    {
+      "id": "baseline_anchor_and_lifecycle_consistency",
+      "status": "viable",
+      "next_observation": "same_nonzero_null_sqlstate"
+    },
+    {
+      "id": "prior_receipt_admission_and_digest_rederivation",
+      "status": "viable",
+      "next_observation": "same_nonzero_null_sqlstate"
+    }
+  ],
+  "proposed_claim": "necessary_defect",
+  "proposed_action": "correction",
+  "remaining_diagnostic_attempts": 1,
+  "remaining_corrections": 1
+}

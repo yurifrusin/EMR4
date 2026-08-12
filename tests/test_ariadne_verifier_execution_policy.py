@@ -22,6 +22,20 @@ def test_external_model_review_follows_every_deterministic_gate() -> None:
     assert policy["deterministic_gate"]["fail_closed_action"] == (
         "no_external_model_call"
     )
+    command_gate = policy["external_verifier"]["decision_contract"][
+        "optional_command_manifest"
+    ]
+    assert command_gate["representation"] == "ordered_structured_argv"
+    assert command_gate["exact_results_required"] is True
+    assert command_gate["pass_requires_every_exit_code_zero"] is True
+
+    evidence_flow = policy["evidence_led_flow"]
+    assert evidence_flow["policy"] == "evidence_led_workflow.yaml"
+    assert evidence_flow["coordinate_is_not_assertion"] is True
+    assert evidence_flow["correction_requires_discriminating_next_observation"]
+    assert evidence_flow["repeated_same_coordinate_after_correction"] == (
+        "stop_or_change_programme_direction"
+    )
     for gate in [
         "five_source_rehydration_receipt",
         "exact_authority_and_scope_packet",

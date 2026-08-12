@@ -1,0 +1,49 @@
+schema_version: ariadne.evidence_led_workflow.v1
+purpose: preserve_hard_safety_controls_while_making_diagnosis_and_review_evidence_led
+hard_controls:
+  - five_source_rehydration_at_configured_continuation_events
+  - explicit_authority_data_effect_stop_cleanup_and_claim_boundary
+  - protected_evidence_and_real_data_closure
+  - immutable_attempt_evidence
+  - default_denial_and_no_silent_fallback
+  - exact_cleanup
+  - exact_candidate_worktree_and_ref_binding
+  - explicit_path_staging_and_protected_ref_closure
+adaptive_flow:
+  active_boundary_artifacts: one_plan_and_one_machine_contract
+  external_review: one_final_risk_triggered_veto_unless_a_hard_boundary_is_ambiguous
+  intermediate_deterministic_failure: repair_locally_before_external_dispatch
+  receipt_rule: one_fresh_receipt_per_configured_continuation_event_not_per_internal_microstep
+  same_coordinate_after_correction: stop_or_change_programme_direction
+diagnostic_decision:
+  coordinate_is_not_assertion: true
+  claim_levels: [observation_only, necessary_defect, exclusive_cause]
+  exclusive_cause_requires_exactly_one_viable_hypothesis: true
+  diagnostic_requires_distinct_observation_for_every_viable_hypothesis: true
+  multi_hypothesis_correction_requires:
+    - claim_level_necessary_defect
+    - remaining_correction_budget
+    - remaining_diagnostic_attempt
+    - unique_post_correction_observation_for_every_viable_hypothesis
+  otherwise: stop_or_revision_required
+review_command_evidence:
+  representation: ordered_structured_argv
+  stable_command_ids: required
+  shell_wrappers: forbidden
+  compound_shell_commands: forbidden
+  repository_python_scripts: invoke_as_package_module
+  result_ids_and_argv_must_equal_manifest: true
+  pass_requires_every_exit_code_zero: true
+  manifest_digest_in_receipt: required_when_manifest_bound
+receipt_authoring:
+  configured_event_discovery_command: python -m scripts.ariadne_orchestrator_preflight --list-continuation-events
+  inferred_or_abbreviated_event_names: forbidden
+closed_surfaces:
+  - database_or_docker_runtime
+  - provider_or_external_retrieval
+  - real_product_patient_or_clinical_data
+  - protected_evidence
+  - credentials_or_iam
+  - executable_product_tool_or_command
+  - deployment_production_release_pages
+  - protected_refs
