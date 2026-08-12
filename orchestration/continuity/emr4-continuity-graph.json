@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 260,
+  "graph_revision": 261,
   "harvests": [],
   "nodes": [
     {
@@ -16733,6 +16733,85 @@
         "The physical representability of appointment_state_version, private receipts and the ordered lock boundary has not been reviewed.",
         "Migration/backfill, ORM/service composition, mounted-route parity and PostgreSQL behavior remain unselected and unproved.",
         "Raw-route change, create schedule fencing, providers, product/patient data, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-status-confirm-physical-representability-review",
+      "title": "Provider-free read-only status-confirm physical representability review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "530a1d479a48242df6985886acdbb796550e9093",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The review is provider-free, exact-file and read-only; overall_verdict is implementation_not_admitted.",
+          "State version, private receipt and ordered locks are representable only with additive change.",
+          "Physical design, migration, source edits, database execution, providers, product data and commands remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-physical-representability-review",
+          "source": "docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept three additive representability verdicts and hand off only to an unmounted physical-design architecture."
+        }
+      ],
+      "claim_scope": [
+        "The appointment model has no admissible monotonic state version; timestamp substitution is rejected.",
+        "The receipt model has thirteen useful primitives and four additive gaps; private correlation need not alter the public envelope.",
+        "The current service inserts then locks only the idempotency row; it does not implement the accepted three-lock order.",
+        "All eleven hashes, 46 hostile mutations and exact source observations pass; no implementation is admitted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/provider-free-read-only-review-evidence.json",
+          "orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-259.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-representability-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_status_confirm_physical_representability_review.py",
+          "tests/test_raisa_provider_free_read_only_status_confirm_physical_representability_review_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_status_confirm_physical_representability_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact additive state-version, private-receipt and ordered transaction design has not been selected.",
+        "Migration/backfill, ORM/service composition, mounted-route parity and PostgreSQL behavior remain unproved.",
+        "Providers, credentials, product/patient data, watchers/events, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

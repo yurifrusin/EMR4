@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 260 / Compass 242. The provider-free unmounted status-confirm convergence rehearsal passes all 24 schedules and 88 hostile mutations. A read-only physical representability review is next; source edits, database execution and product authority remain closed.
+> EMR4 is at Continuity 261 / Compass 243. The exact-file status-confirm physical representability review passes: all three domains are feasible only through additive change. An unmounted physical-design architecture is next; implementation, database execution and product authority remain closed.
 
 ## North star
 
@@ -294,27 +294,29 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Nine closed architecture decisions, 20 scenarios and 56 hostile mutations pass; an unmounted state-machine rehearsal is next. Lineage parent: `raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review`.
 139. **Prove the status command safety order before selecting physical representation — Provider-free unmounted status-confirm runtime convergence rehearsal**
    Twenty-four schedules and 88 hostile mutations pass in pure memory; a read-only physical representability review is next. Lineage parent: `raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture`.
+140. **Establish physical feasibility before selecting any additive schema or transaction design — Provider-free read-only status-confirm physical representability review**
+   All three domains are representable with additive change; implementation remains unadmitted and an unmounted physical-design architecture is next. Lineage parent: `raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal`.
 
 ## Current position
 
-**The status safety order executes coherently in memory but remains physically unrepresented — Provider-free unmounted status-confirm runtime convergence rehearsal**
+**The status safety kernel is physically feasible but its additive design remains unselected — Provider-free read-only status-confirm physical representability review**
 
-**Why this proof came next:** The accepted architecture was exact enough to challenge races, rollbacks and lost responses without opening runtime authority.
+**Why this proof came next:** The pure rehearsal proved semantic behavior, allowing exact source inspection to separate existing primitives from physical gaps.
 
-All 24 schedules and 88 hostile mutations pass with authority-first disclosure, atomic effects and stored receipt retry.
+State version, private receipt and ordered locks are each representable with additive change; no current end-to-end implementation is claimed.
 
 ### What this unlocks
 
-- Freeze exact non-protected sources for a provider-free read-only physical representability review.
-- Determine whether state version, private receipt correlation and ordered locks can be represented without weakening the contract.
-- Keep all source edits and execution behind a later evidence gate.
+- Freeze a provider-free unmounted status-confirm physical-design architecture.
+- Select the exact additive state-version, private receipt and ordered transaction contract without editing source.
+- Keep implementation and database execution behind later evidence gates.
 
 ### What it does not solve
 
-- Physical appointment-state version or private completed-receipt storage.
-- Migration/backfill, ORM/service composition, mounted-route behavior or PostgreSQL locking/concurrency.
-- Restart/unknown-commit operational recovery or waiting-area regression behavior.
-- Provider/credential activity, patient/product data, product commands, deployment, production, release, Pages or protected-ref movement.
+- Column type/default/backfill, migration revision, constraint form or byte storage.
+- Practice query, lock strength/wait policy, isolation level, deadlock recovery or exception mapping.
+- ORM/service composition, mounted-route behavior, PostgreSQL execution or restart/unknown-commit recovery.
+- Provider/credential activity, patient/product data, watchers/events, product commands, deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -381,9 +383,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, status protocol, adapter, runtime-gap and convergence contracts.
-- Run the provider-free read-only physical representability review before any model, migration, service or route edit.
-- Keep raw-route change, create schedule fencing, providers, product data, commands and protected integration separately gated.
+- Preserve the accepted source-owned-truth, status protocol, adapter, convergence architecture and rehearsal contracts.
+- Freeze the provider-free unmounted physical-design architecture before any model, migration, service or route edit.
+- Keep database execution, raw-route change, create schedule fencing, providers, product data, commands and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -572,6 +574,7 @@ Prerequisites:
 
 ## Map limits
 
+- The status-confirm physical representability review proves additive feasibility, not a selected schema, transaction design, migration or mounted implementation.
 - The status-confirm convergence rehearsal proves pure in-memory state-machine behavior, not physical storage, mounted routes or PostgreSQL semantics.
 - The status-confirm convergence architecture proves closed design coherence, not physical state-version storage, route integration or PostgreSQL behavior.
 - The status-confirm runtime-gap review is structural exact-file evidence; it does not prove runtime locking, database concurrency or route safety under the stricter kernel.
@@ -745,6 +748,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-239.md`
 - `docs/ariadne-agent-error-correction-register-revision-256.md`
 - `docs/ariadne-agent-error-correction-register-revision-257.md`
+- `docs/ariadne-agent-error-correction-register-revision-259.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -1009,6 +1013,8 @@ Prerequisites:
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md`
+- `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md`
+- `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md`
@@ -1161,6 +1167,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
@@ -1396,6 +1403,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md`
@@ -1418,6 +1427,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
@@ -1689,6 +1700,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/provider-free-read-only-review-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json`
@@ -1997,6 +2011,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-representability-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md`
@@ -2091,4 +2106,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 242; continuity graph revision 260._
+_Compass map revision 243; continuity graph revision 261._

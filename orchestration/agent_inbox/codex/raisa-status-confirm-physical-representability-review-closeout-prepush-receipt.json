@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_publish_the_accepted_status_confirm_physical_representability_review_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "All eleven exact source hashes, 46 hostile mutations, 14 focused tests, 232 register tests and the final 393-test review/register/lineage/continuity/Compass/API/baton packet pass. All three domains are representable_with_additive_change while overall_verdict remains implementation_not_admitted. The closeout, Sol acceptance, Yuri paired summary, Continuity 261 and Compass 243 are prepared.",
+    "current_authority_allocation": "GPT Sol owns acceptance, closeout, task-branch publication and autonomous continuation. No subagent or external worker was used. No provider or credential action occurred; the user's Google authentication and Bernie impersonation configuration remain unused by this tranche.",
+    "git_refs_and_worktree": "Source HEAD is 530a1d479a48242df6985886acdbb796550e9093; origin task remains the prior published 3af1af85cc3e6ee646f856a1ce6f306495741894 pending closeout. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Eight bounded tracked paths are modified and five bounded closeout paths are among 521 preserved untracked paths, including five docs/branding paths.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now records Continuity 261 / Compass 243 with the physical representability review accepted at exact source 530a1d479a48242df6985886acdbb796550e9093. The next exact tranche is the provider-free unmounted status-confirm physical-design architecture.",
+    "protected_evidence_boundaries": "AER-0292 records and corrects the preliminary protected filename-metadata scope breach; no protected content entered the review. No application/model/migration/service edit or import, route/database/SQL/real-lock execution, physical design, migration/backfill, provider, credential/browser authorization, product/patient data, watcher/event, product command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and all unrelated untracked paths remain preserved and excluded. Explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
