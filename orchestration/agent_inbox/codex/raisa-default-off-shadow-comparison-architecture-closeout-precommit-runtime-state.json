@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_default_off_shadow_comparison_architecture_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely, and the closeout draft advances the accepted default-off shadow-comparison architecture to Continuity 249 / Compass 231 while naming its provider-free unmounted authored-synthetic behavior rehearsal as next work.",
+    "current_authority_allocation": "GPT Sol owns final deterministic acceptance, continuity update, explicit-path task-branch commit and push under standing uninterrupted-development authority. The API Steward boundary remains controlling. No subagent, provider worker or external verifier was used.",
+    "active_plan_and_acceptance": "Exact candidate e1dca1c6dc5d3f3e241548f80a226e5bb776417f passes: four raw routes, four-way default-deny admission, sealed primary result, 24-field digest projection, 15-field diagnostic record, zero observer capabilities and twelve forbidden feedback edges. All 46 hostile mutations, 133 focused tests, 32 closeout/lifecycle tests and the canonical 191-test profile pass with Ruff, 202 maintained Python sources, Diary syntax and Git whitespace.",
+    "protected_evidence_boundaries": "The result remains provider-free, unmounted, static and authored-synthetic. It imported, invoked or changed no application route; created no observer/flag/queue/sink/persistence runtime; accessed no database/source/event/watcher; used no provider/network/product/patient data/credential/IAM; invoked no kernel/tool/command/write; and performed no deployment/release/Pages/protected-ref action. docs/branding and all unrelated untracked files remain untouched.",
+    "git_refs_and_worktree": "Task HEAD is exact candidate e1dca1c6dc5d3f3e241548f80a226e5bb776417f and origin task remains prior accepted closeout 71e240218b1adf1214fff87b542a9d0f6764230e until this closeout is committed and pushed. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Six tracked task files and five task-owned untracked closeout files sit beside exactly 502 preserved pre-existing untracked files before this receipt pair. Explicit-path staging only applies and docs/branding remains excluded."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "default_off_shadow_comparison_architecture_closeout_precommit", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol accepted exact candidate e1dca1c6 after focused, lifecycle and canonical verification."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external verifier was eligible inside this provider-free static tranche."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["The tightly coupled closeout remained Sol-owned under the worker-lane economy rule."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

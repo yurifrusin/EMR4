@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 248 / Compass 230. The provider-free unmounted pure route-adapter rehearsal maps nine complete candidates, rejects four current raw profiles with three exact gaps and contains all 45 hostile mutations. The next safe tranche is the default-off non-enforcing shadow-comparison architecture.
+> EMR4 is at Continuity 249 / Compass 231. The provider-free unmounted default-off shadow architecture freezes four-way denial, post-result one-way placement, digest minimization and twelve no-feedback edges; all 46 hostile mutations pass. The next safe tranche is its authored-synthetic shadow-comparison rehearsal.
 
 ## North star
 
@@ -270,23 +270,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Static convergence contract passes; pure authored-synthetic route-adapter differential rehearsal is next. Lineage parent: `raisa-provider-free-unmounted-conditional-command-admission-rehearsal`.
 127. **Prove route-specific envelopes preserve one conditional-command meaning — Provider-free unmounted pure route-adapter differential rehearsal**
    Pure differential rehearsal passes; a default-off non-enforcing shadow-comparison architecture is next. Lineage parent: `raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface`.
+128. **Freeze a diagnostic-only shadow boundary beside raw appointment routes — Provider-free unmounted default-off shadow-comparison architecture**
+   Static default-off architecture passes; authored-synthetic shadow behavior rehearsal is next. Lineage parent: `raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal`.
 
 ## Current position
 
-**Pure route mapping proved; inert shadow-comparison boundary next — Provider-free unmounted pure route-adapter differential rehearsal**
+**Default-off shadow boundary frozen; pure failure-isolation rehearsal next — Provider-free unmounted default-off shadow-comparison architecture**
 
-**Why this proof came next:** The common kernel and pure adapters now agree, so the next safe question is how to observe differences without influencing live behavior.
+**Why this proof came next:** The pure route adapters pass, so a diagnostic observer can now be rehearsed without granting it any command or response influence.
 
-Nine complete candidates map, four current raw profiles fail with three exact gaps, and all 45 hostile mutations are contained.
+Four-way default denial, post-result placement, digest minimization and twelve no-feedback edges pass all 46 hostile mutations.
 
 ### What this unlocks
 
-- Define a default-off non-enforcing route-local comparison record with minimized authored-synthetic fields.
-- Prove the observer cannot gate a request, mutate a response, invoke the kernel or affect a write.
+- Exercise disabled, admitted, exact-gap, divergence, timeout, overflow and observer/sink failure scenarios with authored-synthetic inputs.
+- Prove every scenario leaves the sealed primary result byte-for-byte unchanged and emits at most one minimized diagnostic record.
 
 ### What it does not solve
 
-- Application route wiring, HTTP compatibility, database fencing, persistent idempotency/audit or client migration.
+- Application hook or route wiring, production hashing, queue/sink persistence, latency isolation, client migration or database fencing.
 - Durable cue delivery, CF-D2, patient/product data, providers, commands, deployment, Pages or protected refs.
 
 ## Continuity and authority
@@ -354,9 +356,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Freeze a provider-free unmounted default-off non-enforcing shadow-comparison architecture.
-- Prove any future observer cannot gate, mutate or alter a route response before runtime wiring is considered.
-- Then prove ordinary and fallback client proposal/confirm parity before raw-route convergence.
+- Rehearse the default-off shadow boundary with authored-synthetic disabled, expected-gap, divergence, failure, timeout and overflow cases.
+- Keep all application route/runtime wiring closed until that pure behavior evidence passes.
+- Then separately review default-off runtime instrumentation before client proposal/confirm parity.
 - Select and prove a database-owned create schedule fence before create convergence.
 - Retain Durable Event and Cue Delivery as a later observability-first extension.
 
@@ -547,6 +549,7 @@ Prerequisites:
 
 ## Map limits
 
+- The shadow result is static architecture only; no route hook, observer, queue, sink, persistence or runtime exists.
 - The pure route-adapter result is authored-synthetic and inert; complete mapping does not grant current raw-route or runtime eligibility.
 - The legacy-route convergence result is a static contract only; every raw route remains mounted, unchanged and kernel-ineligible.
 - The conditional-command admission rehearsal is pure authored-synthetic evaluation; it does not prove route behavior, database serialization or persistent effects.
@@ -966,6 +969,9 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-closeout.md`
+- `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-plan.md`
+- `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
@@ -1085,6 +1091,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md`
@@ -1278,6 +1285,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-sol-recovery-lease.md`
+- `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-candidate-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-shadow-comparison-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
@@ -1563,6 +1573,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json`
@@ -1838,6 +1850,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-11--context-fabric-durability-concurrency-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--cf-d2-workflow-incident-diagnosis-and-fluidity-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-12--context-fabric-source-owned-truth-conditional-command-reorientation.md`
+- `orchestration/human_inbox/yuri/2026-08-12--default-off-shadow-comparison-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--legacy-route-convergence-kernel-interface.md`
 - `orchestration/human_inbox/yuri/2026-08-12--provider-free-unmounted-conditional-command-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
@@ -1931,4 +1944,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 230; continuity graph revision 248._
+_Compass map revision 231; continuity graph revision 249._

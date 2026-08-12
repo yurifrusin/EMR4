@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_default_off_shadow_comparison_architecture_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate e1dca1c6dc5d3f3e241548f80a226e5bb776417f passes: four raw routes, four-way default-deny admission, sealed primary result, 24-field digest projection, 15-field diagnostic record, zero observer capabilities and twelve forbidden feedback edges. All 46 hostile mutations, 133 focused tests, 32 closeout/lifecycle tests and the canonical 191-test profile pass with Ruff, 202 maintained Python sources, Diary syntax and Git whitespace.",
+    "current_authority_allocation": "GPT Sol owns final deterministic acceptance, continuity update, explicit-path task-branch commit and push under standing uninterrupted-development authority. The API Steward boundary remains controlling. No subagent, provider worker or external verifier was used.",
+    "git_refs_and_worktree": "Task HEAD is exact candidate e1dca1c6dc5d3f3e241548f80a226e5bb776417f and origin task remains prior accepted closeout 71e240218b1adf1214fff87b542a9d0f6764230e until this closeout is committed and pushed. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Six tracked task files and five task-owned untracked closeout files sit beside exactly 502 preserved pre-existing untracked files before this receipt pair. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely, and the closeout draft advances the accepted default-off shadow-comparison architecture to Continuity 249 / Compass 231 while naming its provider-free unmounted authored-synthetic behavior rehearsal as next work.",
+    "protected_evidence_boundaries": "The result remains provider-free, unmounted, static and authored-synthetic. It imported, invoked or changed no application route; created no observer/flag/queue/sink/persistence runtime; accessed no database/source/event/watcher; used no provider/network/product/patient data/credential/IAM; invoked no kernel/tool/command/write; and performed no deployment/release/Pages/protected-ref action. docs/branding and all unrelated untracked files remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
