@@ -7,7 +7,7 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture"
+NODE_ID = "raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -22,10 +22,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 259
+    assert graph["graph_revision"] == 260
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 241
-    assert compass["source_graph_revision"] == 259
+    assert compass["map_revision"] == 242
+    assert compass["source_graph_revision"] == 260
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -35,15 +35,14 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 259 / Compass 241" in current
-    assert "b9cc57b6e607e5896e822abc7b632442df2f907e" in current
-    assert "Nine closed decisions" in current
-    assert "seven blockers" in current
-    assert "two partial gaps" in current
-    assert "20 scenarios" in current
-    assert "56 hostile mutations" in current
-    assert "atomic mutation/audit/receipt correlation" in current
-    assert "stored canonical initial/replay delivery" in current
+    assert "Continuity 260 / Compass 242" in current
+    assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in current
+    assert "24 authored-synthetic pure in-memory schedules" in current
+    assert "Authority and target validity precede idempotency disclosure" in current
+    assert "three staged failure points roll back atomically" in current
+    assert "same/different-digest races produce one effect" in current
+    assert "response loss preserves one write set" in current
+    assert "88 hostile mutations" in current
     assert "`implementation_authorized` is false" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
@@ -65,15 +64,17 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "30a49015d23bfcf069be0af838df7091032a40be" in relation
     assert "426ccbbd26a2ab0bfb70c65d7adce113f0239f3a" in relation
     assert "b9cc57b6e607e5896e822abc7b632442df2f907e" in relation
-    assert "Provider-free unmounted status-confirm runtime convergence rehearsal" in next_work
-    assert "pure in-memory state machine" in next_work
-    assert "current-authority-first replay disclosure" in next_work
-    assert "exact evidence/warnings" in next_work
-    assert "stored-receipt retry" in next_work
-    assert "must not edit/import or execute an application route or database" in next_work
-    assert "operational database/source/watcher/event access" in next_work
+    assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
+    assert "Provider-free read-only status-confirm physical representability review" in next_work
+    assert "narrowest exact allowlist" in next_work
+    assert "`appointment_state_version`" in next_work
+    assert "private completed-receipt correlation" in next_work
+    assert "`practice -> appointment -> idempotency_record`" in next_work
+    assert "read and hash only those frozen sources" in next_work
+    assert "cannot edit/import or execute the application" in next_work
+    assert "choose a physical design, migration or backfill" in next_work
     assert "product/patient data" in next_work
-    assert "observer/sink/persistence" in next_work
+    assert "provider/credential/browser authorization" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -107,24 +108,23 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted status-confirm runtime convergence rehearsal",
-        "pure in-memory state machine",
-        "decision/lock ordering",
-        "current-authority-first replay disclosure",
-        "exact evidence/warnings",
-        "atomic rollback",
-        "stored-receipt retry",
-        "must not edit/import or execute an application route or database",
-        "cannot choose physical version storage, migration/backfill or orm/service wiring",
-        "operational database/source/watcher/event access",
+        "provider-free read-only status-confirm physical representability review",
+        "narrowest exact allowlist",
+        "appointment_state_version",
+        "private completed-receipt correlation",
+        "practice -> appointment -> idempotency_record",
+        "read and hash only those frozen sources",
+        "cannot edit/import or execute the application",
+        "choose a physical design, migration or backfill",
+        "database/sql/real lock",
         "product/patient data",
-        "provider/credential activity",
-        "command expansion",
-        "observer/sink/persistence",
+        "provider/credential/browser authorization",
+        "watcher/event or command authority",
         "docs/branding/",
-        "deployment",
+        "deploy",
+        "release",
         "pages",
-        "protected-ref movement",
+        "protected ref",
         "search content only in exact allowlisted non-protected files",
     ):
         assert phrase in next_work

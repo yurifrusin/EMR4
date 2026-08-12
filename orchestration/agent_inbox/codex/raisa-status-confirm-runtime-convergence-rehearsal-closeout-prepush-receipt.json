@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_publish_the_accepted_status_confirm_runtime_convergence_rehearsal_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact eight source hashes, 24 frozen schedules, 88 hostile mutations, 15 focused tests and final 139-test lineage/continuity/Compass/API/baton packet pass. The closeout, Sol acceptance, Yuri paired summary, Continuity 260 and Compass 242 are prepared. One stale historical Sprint 138 no-header assertion is explicitly disclosed and remains unmodified.",
+    "current_authority_allocation": "GPT Sol owns acceptance, closeout, task-branch publication and autonomous continuation. No subagent or external worker was used. No provider or credential action occurred; the user's Google authentication and Bernie impersonation configuration remain unused by this tranche.",
+    "git_refs_and_worktree": "Source HEAD is a1629f2441e2bdb350d00c6d6016e94123ff0d8d; origin task remains the prior published 0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc pending closeout. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Eight bounded tracked paths are modified and five bounded closeout paths are among 521 preserved untracked paths, including five docs/branding paths.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now records Continuity 260 / Compass 242 with the rehearsal result accepted at exact source a1629f2441e2bdb350d00c6d6016e94123ff0d8d. The next exact tranche is the provider-free read-only physical representability review.",
+    "protected_evidence_boundaries": "Protected evidence remains unopened. No application import/edit/execution, route, database, SQL, real lock, migration/backfill, provider, credential/browser authorization, product/patient data, watcher/event, product command, deployment, production, release, Pages or protected-ref action occurred. docs/branding and all unrelated untracked paths remain preserved and excluded. Explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

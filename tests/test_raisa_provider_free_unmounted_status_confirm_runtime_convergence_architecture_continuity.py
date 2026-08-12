@@ -14,7 +14,7 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_architecture_is_the_accepted_current_position() -> None:
+def test_architecture_remains_an_accepted_continuity_ancestor() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
@@ -22,7 +22,7 @@ def test_architecture_is_the_accepted_current_position() -> None:
     assert graph["graph_revision"] >= 259
     assert compass["map_revision"] >= 241
     assert compass["source_graph_revision"] == graph["graph_revision"]
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
     assert node["status"] == "accepted"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
@@ -68,21 +68,22 @@ def test_contract_acceptance_and_mailbox_are_bound() -> None:
     )
 
 
-def test_next_direction_is_an_unmounted_rehearsal() -> None:
+def test_architecture_handoff_remains_an_unmounted_rehearsal() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    joined = " ".join(current["unlocks"] + current["does_not_solve"]).lower()
+    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+    joined = " ".join([journey["outcome"]] + node["unresolved_gates"]).lower()
     for phrase in (
-        "provider-free unmounted in-memory convergence rehearsal",
-        "without a route or database",
+        "unmounted state-machine rehearsal",
         "physical version storage",
-        "mounted route behavior",
-        "postgresql locking/concurrency",
-        "raw compatibility-route",
-        "provider/credential",
-        "patient/product",
-        "product commands",
+        "route integration",
+        "database execution",
+        "raw-route change",
+        "providers",
+        "product/patient",
+        "commands",
         "pages",
-        "protected-ref",
+        "protected refs",
     ):
         assert phrase in joined

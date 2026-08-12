@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 259 / Compass 241. The provider-free unmounted status-confirm convergence architecture passes with nine closed decisions, 20 scenarios and 56 hostile rejections. An unmounted state-machine rehearsal is next; physical storage, route/database runtime and product authority remain closed.
+> EMR4 is at Continuity 260 / Compass 242. The provider-free unmounted status-confirm convergence rehearsal passes all 24 schedules and 88 hostile mutations. A read-only physical representability review is next; source edits, database execution and product authority remain closed.
 
 ## North star
 
@@ -292,26 +292,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The exact current route is not admitted unchanged: seven blockers and two partial gaps define one finite unmounted convergence-architecture handoff. Lineage parent: `raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract`.
 138. **Resolve the finite status route-to-kernel gaps before any runtime implementation — Provider-free unmounted status-confirm runtime convergence architecture**
    Nine closed architecture decisions, 20 scenarios and 56 hostile mutations pass; an unmounted state-machine rehearsal is next. Lineage parent: `raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review`.
+139. **Prove the status command safety order before selecting physical representation — Provider-free unmounted status-confirm runtime convergence rehearsal**
+   Twenty-four schedules and 88 hostile mutations pass in pure memory; a read-only physical representability review is next. Lineage parent: `raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture`.
 
 ## Current position
 
-**Status route-to-kernel convergence is coherent but remains unmounted — Provider-free unmounted status-confirm runtime convergence architecture**
+**The status safety order executes coherently in memory but remains physically unrepresented — Provider-free unmounted status-confirm runtime convergence rehearsal**
 
-**Why this proof came next:** The read-only review isolated a finite gap set, allowing one architecture to close it without opening application or database authority.
+**Why this proof came next:** The accepted architecture was exact enough to challenge races, rollbacks and lost responses without opening runtime authority.
 
-Status-only ingress, authority-first ordered locks, version/warning evidence, atomic audit/receipt and stored delivery now pass 20 scenarios and 56 hostile mutations.
+All 24 schedules and 88 hostile mutations pass with authority-first disclosure, atomic effects and stored receipt retry.
 
 ### What this unlocks
 
-- Run a provider-free unmounted in-memory convergence rehearsal over the exact architecture.
-- Prove rollback, response-loss recovery and authority-first replay disclosure without a route or database.
-- Keep physical version storage and runtime integration behind later evidence gates.
+- Freeze exact non-protected sources for a provider-free read-only physical representability review.
+- Determine whether state version, private receipt correlation and ordered locks can be represented without weakening the contract.
+- Keep all source edits and execution behind a later evidence gate.
 
 ### What it does not solve
 
-- Physical appointment-state version storage, migration/backfill or ORM/service design.
-- Mounted route behavior, PostgreSQL locking/concurrency or restart/unknown-commit recovery.
-- Raw compatibility-route removal or create schedule-conflict fencing.
+- Physical appointment-state version or private completed-receipt storage.
+- Migration/backfill, ORM/service composition, mounted-route behavior or PostgreSQL locking/concurrency.
+- Restart/unknown-commit operational recovery or waiting-area regression behavior.
 - Provider/credential activity, patient/product data, product commands, deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
@@ -379,8 +381,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, status protocol, adapter and runtime-gap review contracts.
-- Run the provider-free unmounted status-confirm convergence rehearsal before any physical storage or route implementation.
+- Preserve the accepted source-owned-truth, status protocol, adapter, runtime-gap and convergence contracts.
+- Run the provider-free read-only physical representability review before any model, migration, service or route edit.
 - Keep raw-route change, create schedule fencing, providers, product data, commands and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -570,6 +572,7 @@ Prerequisites:
 
 ## Map limits
 
+- The status-confirm convergence rehearsal proves pure in-memory state-machine behavior, not physical storage, mounted routes or PostgreSQL semantics.
 - The status-confirm convergence architecture proves closed design coherence, not physical state-version storage, route integration or PostgreSQL behavior.
 - The status-confirm runtime-gap review is structural exact-file evidence; it does not prove runtime locking, database concurrency or route safety under the stricter kernel.
 - Waiting-area union input and terminal status re-transition remain fail-closed.
@@ -1062,6 +1065,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md`
@@ -1174,6 +1179,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-source-specific-durability-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
@@ -1403,6 +1409,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
@@ -1410,6 +1419,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
@@ -1711,6 +1721,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/provider-free-architecture-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/provider-free-rehearsal-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/rehearsal-packet.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal/rehearsal-packet.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json`
@@ -1985,6 +1998,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--pure-route-adapter-differential-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-kernel-adapter-contract.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -2077,4 +2091,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 241; continuity graph revision 259._
+_Compass map revision 242; continuity graph revision 260._

@@ -234,9 +234,18 @@ scenarios and fifty-six hostile mutations bind status-only ingress,
 server-owned session/current authority, ordered locks, a semantic monotonic
 state version, exact warnings, terminal deferral, atomic audit/receipt
 correlation and stored initial/replay delivery. The next bounded gate is a pure
-provider-free unmounted in-memory rehearsal of that architecture. Physical
-version storage, migration/backfill, route/database implementation, providers,
-watchers, events, commands, kernel runtime and schedule fencing remain closed.
+provider-free unmounted in-memory rehearsal of that architecture. That
+rehearsal now passes at exact source
+`a1629f2441e2bdb350d00c6d6016e94123ff0d8d`: all twenty-four schedules
+reproduce their frozen outcomes and counts, three staged failure points roll
+back atomically, same/different-digest races produce one effect, revoked or
+removed callers receive no stored-result disclosure, response loss preserves
+one correlated write set plus exact retry, and all eighty-eight hostile
+mutations fail closed. The next bounded gate is a provider-free read-only
+physical representability review of the exact state-version, private receipt
+and ordered-lock surfaces. Physical version storage, migration/backfill,
+route/database implementation, providers, watchers, events, commands, kernel
+runtime and schedule fencing remain closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
