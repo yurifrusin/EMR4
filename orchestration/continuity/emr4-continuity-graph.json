@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 253,
+  "graph_revision": 254,
   "harvests": [],
   "nodes": [
     {
@@ -16183,6 +16183,84 @@
         "Create/update plus status remains two distinct committed commands with explicit partial-outcome reporting.",
         "Compatibility-route retirement, raw-route kernel convergence and create schedule fencing remain closed.",
         "Shadow enablement, product data, provider calls, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review",
+      "title": "Provider-free compatibility-consumer and kernel-convergence admission review",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "9c7444ecce69b51ca5cac80818e8997724a11f13",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is provider-free read-only/static admission evidence.",
+          "All four raw compatibility routes remain mounted and unchanged.",
+          "External consumers remain unknown and no retirement or header rollout is authorized."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-compatibility-consumer-kernel-convergence-admission-review",
+          "source": "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact consumer census, preservation matrix and status confirm-first direction."
+        }
+      ],
+      "claim_scope": [
+        "Zero committed product/runtime/import/recovery/migration/operational raw HTTP consumers are found.",
+        "Exactly 126 conformance call expressions remain in 21 test/review files and four direct database fixture obligations are separate.",
+        "External consumers remain unknown and all four routes stay mounted in default audit mode.",
+        "Status confirm-first is selected without changing raw status or implementing a kernel.",
+        "Seven tranche, 167 dependency, 184 current behavior and canonical 191 fast-profile tests pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md",
+          "docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--compatibility-consumer-kernel-convergence-admission-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-compatibility-consumer-kernel-convergence-admission-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_compatibility_consumer_kernel_convergence_admission_review.py",
+          "tests/test_raisa_provider_free_compatibility_consumer_kernel_convergence_admission_review_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json",
+          "scripts/raisa_provider_free_compatibility_consumer_kernel_convergence_admission_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Forty-five stale tests require a test-only temporal/idempotency readiness repair before status-kernel work.",
+        "External consumer readiness, route retirement and header-mode rollout remain unproved.",
+        "Kernel execution, raw convergence and create schedule fencing remain closed.",
+        "Product data, providers, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

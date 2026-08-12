@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 235,
+  "map_revision": 236,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 253,
-  "orientation_statement": "EMR4 is at Continuity 253 / Compass 235. Provider-free native Diary proposal-confirm parity passes with seven raw appointment mutation call sites reduced to zero, all 142 Diary browser tests and exact backend-route preservation. Compatibility-consumer and kernel-convergence admission review is next.",
+  "source_graph_revision": 254,
+  "orientation_statement": "EMR4 is at Continuity 254 / Compass 236. The provider-free compatibility-consumer admission review finds zero committed system raw-route callers, preserves unknown external consumers, selects status confirm-first and names a 45-test temporal/idempotency harness repair as the next gate.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2343,31 +2343,48 @@
         "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json",
         "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review",
+      "lineage_parent": "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity",
+      "strategic_role": "Separate real compatibility obligations from unknown external consumers before convergence",
+      "outcome": "Repository consumers are exactly classified; test-harness readiness repair is next before status-kernel protocol work.",
+      "evidence": [
+        "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md",
+        "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md",
+        "docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json",
+        "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-compatibility-consumer-kernel-convergence-admission-review-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--compatibility-consumer-kernel-convergence-admission-review.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity",
-    "strategic_role": "Native proposal-confirm parity proved; compatibility-consumer admission next",
-    "why_now": "The native Diary no longer selects raw appointment mutations, so remaining compatibility obligations can be examined without conflating them with ordinary product behavior.",
-    "outcome": "Seven raw client paths are replaced by fail-closed proposal plus signed-confirm flows while all backend compatibility routes remain mounted.",
+    "node_id": "raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review",
+    "strategic_role": "Compatibility obligations classified; conformance readiness next",
+    "why_now": "The native client is clean, and the remaining repository consumers can now be made trustworthy before status-kernel protocol work.",
+    "outcome": "Zero committed system callers, 126 conformance calls, four direct fixtures and unknown external consumers are distinguished without changing a route.",
     "unlocks": [
-      "Inventory remaining repository/system, import, recovery and migration consumers.",
-      "Freeze the exact first raw-route kernel-convergence implementation boundary without changing a route."
+      "Repair only stale test clocks and proposal idempotency headers.",
+      "Then rehearse status transaction-kernel semantics in a provider-free unmounted protocol."
     ],
     "does_not_solve": [
-      "External-consumer readiness, compatibility-route retirement or raw-route kernel convergence.",
-      "Create schedule fencing, shadow enablement, product data, deployment, Pages or protected refs."
+      "External-consumer readiness, route retirement, header-mode rollout or raw-route convergence.",
+      "Kernel runtime, create schedule fencing, product data, deployment, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-plan.md",
-      "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-design.md",
-      "docs/security/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity/native-diary-raw-call-site-inventory.json",
-      "docs/raisa-provider-free-ordinary-fallback-diary-client-proposal-confirm-parity-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json",
-      "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
+      "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md",
+      "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md",
+      "docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json",
+      "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-compatibility-consumer-kernel-convergence-admission-review-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-12--compatibility-consumer-kernel-convergence-admission-review.md"
     ]
   },
   "decision_horizon": [
@@ -2463,11 +2480,11 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Inventory every remaining repository/system compatibility-route consumer and import/recovery obligation.",
-        "Freeze exact behavior-preservation and observability requirements before any route implementation changes.",
-        "Select the narrowest status, delete or update kernel-convergence slice before create.",
-        "Select and prove a database-owned create schedule fence before create convergence.",
-        "Retain Durable Event and Cue Delivery as a later observability-first extension."
+        "Repair the 45 stale temporal/idempotency conformance tests without changing application behavior.",
+        "Prove all 311 ordinary compatibility tests green.",
+        "Rehearse the unmounted status transaction-kernel protocol before any runtime convergence.",
+        "Keep raw status unchanged until precondition, confirmation and idempotency ingress is accepted.",
+        "Select and prove a database-owned create schedule fence before create convergence."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -2886,7 +2903,16 @@
         "orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md",
         "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-provider-free-ordinary-fallback-client-proposal-confirm-parity-precommit-receipt.json",
-        "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md"
+        "orchestration/human_inbox/yuri/2026-08-12--ordinary-fallback-diary-client-proposal-confirm-parity.md",
+        "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md",
+        "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md",
+        "docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json",
+        "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-compatibility-consumer-kernel-convergence-admission-review-sol-acceptance.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json",
+        "orchestration/human_inbox/yuri/2026-08-12--compatibility-consumer-kernel-convergence-admission-review.md"
       ]
     },
     {
@@ -3731,6 +3757,8 @@
     }
   ],
   "map_limits": [
+    "Forty-five stale tests are a harness repair obligation, not authority to weaken temporal or idempotency controls.",
+    "Zero committed compatibility consumers does not prove absence of external consumers.",
     "Native-client parity does not identify external compatibility consumers or authorize route retirement or kernel convergence.",
     "The runtime-instrumentation scaffold is structurally unenableable and has no context provider, key custody, observer, sink or operational output.",
     "The runtime-instrumentation result is static architecture only; no request context, route hook, middleware, observer, queue, sink or persistence exists.",

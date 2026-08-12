@@ -202,13 +202,18 @@ client idempotency headers. Fresh blocks override prior warning review,
 warning-code drift requires renewed review and missing confirmation evidence
 has no raw fallback. Create/update follow-up status remains an explicit second
 committed command and reports a partial outcome if that status step fails. All
-four backend compatibility routes remain mounted and unchanged. The next
-bounded descendant is a provider-free, read-only compatibility-consumer and
-kernel-convergence admission review: inventory remaining repository/system,
-import, recovery and migration obligations, freeze exact behavior-preservation
-requirements and select the narrowest status, delete or update implementation
-slice before create. No route change, kernel implementation or schedule fence
-begins in that review.
+four backend compatibility routes remain mounted and unchanged. The subsequent
+provider-free compatibility-consumer and kernel-convergence admission review
+also passes. It finds zero committed product/runtime/import/recovery/migration/
+operational raw HTTP consumers, 126 conformance calls in 21 files, four direct
+database fixtures and an unknown external-consumer population. It freezes
+current response, audit, idempotency-gap and helper commit behavior and selects
+status confirm-first without changing raw status. A broad 311-test collection
+has 45 stale temporal/idempotency harness failures while a current 184-test
+behavior baseline passes. The next bounded gate is a test-only repair of those
+eight fixture files; after all 311 pass, the unmounted status transaction-kernel
+protocol rehearsal follows. No route change, kernel runtime or schedule fence
+begins before those gates pass.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
