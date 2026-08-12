@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract_binding", "fixture", "scenarios", "effect_boundary"],
+  "properties": {
+    "schema_version": {"const": "raisa.conditional_command_admission_rehearsal.v1"},
+    "contract_binding": {"$ref": "#/$defs/contractBinding"},
+    "fixture": {"$ref": "#/$defs/fixture"},
+    "scenarios": {
+      "type": "array",
+      "minItems": 30,
+      "maxItems": 50,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "effect_boundary": {"$ref": "#/$defs/effectBoundary"}
+  },
+  "$defs": {
+    "contractBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_id", "contract_sha256", "accepted_source_head"],
+      "properties": {
+        "contract_id": {"const": "raisa.context_fabric.source_owned_truth.conditional_commands.v1"},
+        "contract_sha256": {"const": "sha256:01f0e193d44cfadcfd105d5b824909b397d451dc195260c46f7da47a1fa2c81f"},
+        "accepted_source_head": {"const": "037eed060d4519f2f3d6721135143ecb6f70e358"}
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "token_version", "practice_id", "actor_or_session_id", "purpose_id", "appointment_id", "schedule_conflict_domain", "source_state_digest", "conflict_domain_digest", "issued_at", "expires_at", "current_time", "signing_key_id"],
+      "properties": {
+        "schema_version": {"const": "conditional-command-precondition.v1"},
+        "token_version": {"const": 1},
+        "practice_id": {"const": "syn-practice-01"},
+        "actor_or_session_id": {"const": "syn-session-01"},
+        "purpose_id": {"const": "syn-purpose-appointment-command"},
+        "appointment_id": {"const": "syn-appointment-01"},
+        "schedule_conflict_domain": {"const": "syn-schedule-practitioner-01-2026-08-13"},
+        "source_state_digest": {"const": "syn-source-rev-7"},
+        "conflict_domain_digest": {"const": "syn-conflict-rev-3"},
+        "issued_at": {"const": "2026-08-12T00:00:00Z"},
+        "expires_at": {"const": "2026-08-12T00:05:00Z"},
+        "current_time": {"const": "2026-08-12T00:02:00Z"},
+        "signing_key_id": {"const": "syn-signing-key-v1"}
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "operation", "token_authentic", "token_version_supported", "token_expired", "nonce_unused", "binding_variant", "target_shape", "lock_plan_variant", "event_evidence", "current_authority", "confirmation_required", "confirmation_valid", "idempotency_state", "source_state", "conflict_state", "target_exists", "schedule_conflict", "domain_valid", "expected_admission", "expected_outcome", "expected_reason_codes", "expected_planned_mutation"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^ccar-[0-9]{3}-[a-z0-9-]+$"},
+        "operation": {"enum": ["create", "update", "status", "delete"]},
+        "token_authentic": {"type": "boolean"},
+        "token_version_supported": {"type": "boolean"},
+        "token_expired": {"type": "boolean"},
+        "nonce_unused": {"type": "boolean"},
+        "binding_variant": {"enum": ["exact", "practice_mismatch", "actor_mismatch", "purpose_mismatch", "operation_mismatch", "target_mismatch", "conflict_domain_mismatch", "command_digest_mismatch"]},
+        "target_shape": {"enum": ["valid", "create_non_null", "noncreate_null"]},
+        "lock_plan_variant": {"enum": ["canonical", "missing_schedule_domain", "missing_appointment", "reordered", "extra_schedule_domain"]},
+        "event_evidence": {"enum": ["none", "asserts_current_truth", "asserts_command_success"]},
+        "current_authority": {"type": "boolean"},
+        "confirmation_required": {"type": "boolean"},
+        "confirmation_valid": {"type": "boolean"},
+        "idempotency_state": {"enum": ["absent", "same_digest", "different_digest"]},
+        "source_state": {"enum": ["matches", "stale"]},
+        "conflict_state": {"enum": ["matches", "stale"]},
+        "target_exists": {"type": "boolean"},
+        "schedule_conflict": {"type": "boolean"},
+        "domain_valid": {"type": "boolean"},
+        "expected_admission": {"enum": ["admitted", "admission_rejected"]},
+        "expected_outcome": {"type": ["string", "null"], "enum": [null, "committed", "idempotent_replay", "stale_precondition", "schedule_conflict", "authority_revoked", "confirmation_required", "validation_rejected", "idempotency_conflict"]},
+        "expected_reason_codes": {"type": "array", "uniqueItems": true, "items": {"enum": ["token_authenticity_invalid", "token_version_unsupported", "token_expired", "nonce_reused", "binding_practice_mismatch", "binding_actor_mismatch", "binding_purpose_mismatch", "binding_operation_mismatch", "binding_target_mismatch", "binding_conflict_domain_mismatch", "binding_command_digest_mismatch", "target_shape_invalid", "lock_plan_invalid", "event_cannot_assert_current_truth", "event_cannot_assert_command_success"]}},
+        "expected_planned_mutation": {"type": "boolean"}
+      }
+    },
+    "effectBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime_started", "database_opened", "route_imported", "event_consumed", "provider_calls", "command_executed", "mutation_performed", "audit_or_receipt_written", "patient_or_product_data"],
+      "properties": {
+        "runtime_started": {"const": false},
+        "database_opened": {"const": false},
+        "route_imported": {"const": false},
+        "event_consumed": {"const": false},
+        "provider_calls": {"const": 0},
+        "command_executed": {"const": false},
+        "mutation_performed": {"const": false},
+        "audit_or_receipt_written": {"const": false},
+        "patient_or_product_data": {"const": false}
+      }
+    }
+  }
+}
+

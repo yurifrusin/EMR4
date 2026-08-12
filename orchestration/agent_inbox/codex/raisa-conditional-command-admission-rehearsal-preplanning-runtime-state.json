@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_freeze_and_execute_the_provider_free_unmounted_authored_synthetic_conditional_command_admission_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding closeout. Continuity 245 / Compass 227 accepts the source-owned-truth reorientation and names the provider-free unmounted conditional-command admission rehearsal as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "GPT Sol owns the narrow plan, tightly coupled authored-synthetic rehearsal implementation, deterministic verification, acceptance and task-branch closeout under standing uninterrupted-development authority. No worker is assigned because the contract and simulator are small and serial. A final independent veto is risk-triggered only if the rehearsal materially changes the accepted architecture or exposes conflicting evidence; no provider call is otherwise authorised.",
+    "active_plan_and_acceptance": "The accepted v1 architecture contract requires backend-owned opaque preconditions; separate freshness, confirmation, idempotency and audit evidence; current-authority checks inside short transactions; canonical lock ordering; schedule-conflict-domain fencing for create; locked current rows for update/status/delete; exact committed/replay/loser outcomes; unchanged legacy routes; cue-only events; and no runtime/database/provider/command effect. The new plan must instantiate and challenge only those frozen semantics.",
+    "protected_evidence_boundaries": "Only newly authored synthetic identifiers, digests, timestamps, authority states, lock plans and outcome expectations may enter the rehearsal. Protected holdouts, docs/branding, historical Diary/PHI, patient/clinical/product data, real routes/events, database/source/watcher access, migrations, provider calls, credentials/IAM, network, executables, tools, commands/writes, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Task HEAD and origin task are exactly b9a94a90a21c532f7fda55f9d18ba00156b123b3 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and local/origin handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and reviewed architecture source 037eed060d4519f2f3d6721135143ecb6f70e358 are ancestors. The tracked worktree and index are clean; 496 untracked entries remain preserved and excluded, docs/branding is never staged, and only explicit-path staging is permitted."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "conditional_command_admission_rehearsal_complete_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol read the complete live handover, accepted plan, architecture, closeout, acceptance and exact contract and verified all named refs."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external veto is dispatched before deterministic rehearsal evidence exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The small serial rehearsal remains Sol-owned under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
