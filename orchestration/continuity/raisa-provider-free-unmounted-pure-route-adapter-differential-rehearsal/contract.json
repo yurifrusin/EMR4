@@ -1,0 +1,388 @@
+{
+  "schema_version": "emr4.pure-route-adapter-differential-rehearsal.v1",
+  "artifact_kind": "provider_free_unmounted_authored_synthetic_contract",
+  "status": "frozen_no_runtime_behavior_change",
+  "source_head": "a433eb68b5c40dd61fb4b6cf23c9af09cb0270ef",
+  "source_bindings": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+      "sha256": "4fd0062641fd8181cc4920e8b9708f379e4d9b8d6ab48c2092654ddb0f0b911d"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-plan.md",
+      "sha256": "3321764f4ea663b96c348167dbdb186c4af9c020d905104d0341b8fa7ba6ddd5"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface-design.md",
+      "sha256": "73c3c6ca7c254b6c38000b16d829b1a5d731977d22a3b18c0ad379b584437292"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md",
+      "sha256": "ed84a15d101b3bc6cb616b6955d4054dc42d8e9827118f319ba9e4d72ebbea53"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    }
+  ],
+  "claim_boundary": {
+    "route_behavior_changed": false,
+    "application_route_imported": false,
+    "database_or_source_accessed": false,
+    "event_or_watcher_consumed": false,
+    "provider_or_network_used": false,
+    "product_or_patient_data_used": false,
+    "kernel_command_executed": false,
+    "command_or_write_performed": false,
+    "deployment_or_release_performed": false,
+    "protected_ref_moved": false
+  },
+  "kernel_binding": {
+    "request_type": "ConditionalAppointmentCommand",
+    "candidate_schema_version": "emr4.conditional-appointment-command.v1",
+    "required_fields": [
+      "schema_version",
+      "canonical_operation_id",
+      "route_adapter_id",
+      "practice_id",
+      "actor_id",
+      "actor_role",
+      "session_id",
+      "purpose",
+      "target_appointment_id",
+      "conflict_domain_id",
+      "command_digest",
+      "precondition_version",
+      "precondition_digest",
+      "confirmation_mode",
+      "confirmation_reference",
+      "idempotency_key_digest",
+      "canonicalization_version",
+      "correlation_id"
+    ],
+    "provenance_only_fields": [
+      "route_adapter_id"
+    ],
+    "outcomes_preserved_but_not_evaluated": [
+      "committed",
+      "idempotent_replay",
+      "stale_precondition",
+      "schedule_conflict",
+      "authority_revoked",
+      "confirmation_required",
+      "validation_rejected",
+      "idempotency_conflict"
+    ],
+    "precedence_preserved_but_not_evaluated": [
+      "closed_structure_and_binding_admission",
+      "current_authority_before_receipt_disclosure",
+      "separate_confirmation_validation",
+      "idempotency_replay_or_conflict",
+      "source_and_conflict_domain_freshness",
+      "current_schedule_and_domain_invariants",
+      "atomic_mutation_audit_receipt_and_readback"
+    ],
+    "canonical_lock_order": [
+      "practice",
+      "schedule_domain",
+      "appointment",
+      "idempotency_record"
+    ],
+    "adapter_results": [
+      "candidate_mapped",
+      "adapter_rejected"
+    ],
+    "runtime_execution_authorized": false,
+    "command_outcome_emitted": false
+  },
+  "envelope_profiles": {
+    "confirm_complete": {
+      "input_shape": "confirm_envelope",
+      "sections": [
+        "principal",
+        "command",
+        "proposal_evidence",
+        "confirmation",
+        "idempotency",
+        "correlation_id"
+      ],
+      "missing_control_codes": []
+    },
+    "raw_current": {
+      "input_shape": "raw_envelope",
+      "sections": [
+        "request_context",
+        "mutation",
+        "correlation_id"
+      ],
+      "missing_control_codes": [
+        "backend_precondition_missing",
+        "confirmation_evidence_missing",
+        "idempotency_identity_missing"
+      ]
+    },
+    "raw_future_complete": {
+      "input_shape": "raw_envelope",
+      "sections": [
+        "request_context",
+        "mutation",
+        "conditional_controls",
+        "confirmation_evidence",
+        "command_identity",
+        "correlation_id"
+      ],
+      "missing_control_codes": []
+    }
+  },
+  "field_maps": {
+    "confirm_envelope": {
+      "practice_id": "principal.practice_id",
+      "actor_id": "principal.actor_id",
+      "actor_role": "principal.actor_role",
+      "session_id": "principal.session_id",
+      "purpose": "principal.purpose",
+      "target_appointment_id": "command.target_appointment_id",
+      "conflict_domain_id": "command.conflict_domain_id",
+      "command_digest": "command.command_digest",
+      "precondition_version": "proposal_evidence.precondition_version",
+      "precondition_digest": "proposal_evidence.precondition_digest",
+      "confirmation_mode": "confirmation.confirmation_mode",
+      "confirmation_reference": "confirmation.confirmation_reference",
+      "idempotency_key_digest": "idempotency.idempotency_key_digest",
+      "canonicalization_version": "idempotency.canonicalization_version",
+      "correlation_id": "correlation_id"
+    },
+    "raw_envelope": {
+      "practice_id": "request_context.practice_id",
+      "actor_id": "request_context.actor_id",
+      "actor_role": "request_context.actor_role",
+      "session_id": "request_context.session_id",
+      "purpose": "request_context.purpose",
+      "target_appointment_id": "mutation.target_appointment_id",
+      "conflict_domain_id": "mutation.conflict_domain_id",
+      "command_digest": "mutation.command_digest",
+      "precondition_version": "conditional_controls.precondition_version",
+      "precondition_digest": "conditional_controls.precondition_digest",
+      "confirmation_mode": "confirmation_evidence.confirmation_mode",
+      "confirmation_reference": "confirmation_evidence.confirmation_reference",
+      "idempotency_key_digest": "command_identity.idempotency_key_digest",
+      "canonicalization_version": "command_identity.canonicalization_version",
+      "correlation_id": "correlation_id"
+    }
+  },
+  "forbidden_caller_fields": [
+    "canonical_operation_id",
+    "route_adapter_id"
+  ],
+  "adapter_specs": [
+    {
+      "adapter_id": "proposal_confirm_create",
+      "family_id": "appointment_create",
+      "ingress_kind": "confirm",
+      "method": "POST",
+      "path": "/api/v1/appointments/proposals/create/confirm",
+      "canonical_operation_id": "confirmAppointmentCreateProposal",
+      "target_shape": "null_appointment_target",
+      "lock_plan": ["practice", "schedule_domain", "idempotency_record"],
+      "parent_route_posture": "preferred_confirm_ingress"
+    },
+    {
+      "adapter_id": "proposal_confirm_create_bernie",
+      "family_id": "appointment_create",
+      "ingress_kind": "confirm",
+      "method": "POST",
+      "path": "/api/v1/appointments/proposals/create/confirm-bernie",
+      "canonical_operation_id": "confirmAppointmentCreateProposal",
+      "target_shape": "null_appointment_target",
+      "lock_plan": ["practice", "schedule_domain", "idempotency_record"],
+      "parent_route_posture": "preferred_confirm_ingress_variant"
+    },
+    {
+      "adapter_id": "proposal_confirm_update",
+      "family_id": "appointment_update",
+      "ingress_kind": "confirm",
+      "method": "POST",
+      "path": "/api/v1/appointments/proposals/update/confirm",
+      "canonical_operation_id": "confirmAppointmentUpdateProposal",
+      "target_shape": "existing_appointment_target",
+      "lock_plan": ["practice", "schedule_domain", "appointment", "idempotency_record"],
+      "parent_route_posture": "preferred_confirm_ingress"
+    },
+    {
+      "adapter_id": "proposal_confirm_status",
+      "family_id": "appointment_status",
+      "ingress_kind": "confirm",
+      "method": "POST",
+      "path": "/api/v1/appointments/proposals/status-confirm",
+      "canonical_operation_id": "confirmAppointmentStatusProposal",
+      "target_shape": "existing_appointment_target",
+      "lock_plan": ["practice", "appointment", "idempotency_record"],
+      "parent_route_posture": "preferred_confirm_ingress"
+    },
+    {
+      "adapter_id": "proposal_confirm_delete",
+      "family_id": "appointment_delete",
+      "ingress_kind": "confirm",
+      "method": "POST",
+      "path": "/api/v1/appointments/proposals/delete-confirm",
+      "canonical_operation_id": "confirmAppointmentDeleteProposal",
+      "target_shape": "existing_appointment_target",
+      "lock_plan": ["practice", "appointment", "idempotency_record"],
+      "parent_route_posture": "preferred_confirm_ingress"
+    },
+    {
+      "adapter_id": "raw_compat_create",
+      "family_id": "appointment_create",
+      "ingress_kind": "raw",
+      "method": "POST",
+      "path": "/api/v1/appointments",
+      "canonical_operation_id": "confirmAppointmentCreateProposal",
+      "target_shape": "null_appointment_target",
+      "lock_plan": ["practice", "schedule_domain", "idempotency_record"],
+      "parent_route_posture": "current_raw_not_kernel_eligible"
+    },
+    {
+      "adapter_id": "raw_compat_update",
+      "family_id": "appointment_update",
+      "ingress_kind": "raw",
+      "method": "PUT",
+      "path": "/api/v1/appointments/{appointment_id}",
+      "canonical_operation_id": "confirmAppointmentUpdateProposal",
+      "target_shape": "existing_appointment_target",
+      "lock_plan": ["practice", "schedule_domain", "appointment", "idempotency_record"],
+      "parent_route_posture": "current_raw_not_kernel_eligible"
+    },
+    {
+      "adapter_id": "raw_compat_status",
+      "family_id": "appointment_status",
+      "ingress_kind": "raw",
+      "method": "PATCH",
+      "path": "/api/v1/appointments/{appointment_id}/status",
+      "canonical_operation_id": "confirmAppointmentStatusProposal",
+      "target_shape": "existing_appointment_target",
+      "lock_plan": ["practice", "appointment", "idempotency_record"],
+      "parent_route_posture": "current_raw_not_kernel_eligible"
+    },
+    {
+      "adapter_id": "raw_compat_delete",
+      "family_id": "appointment_delete",
+      "ingress_kind": "raw",
+      "method": "DELETE",
+      "path": "/api/v1/appointments/{appointment_id}",
+      "canonical_operation_id": "confirmAppointmentDeleteProposal",
+      "target_shape": "existing_appointment_target",
+      "lock_plan": ["practice", "appointment", "idempotency_record"],
+      "parent_route_posture": "current_raw_not_kernel_eligible"
+    }
+  ],
+  "authored_synthetic_intents": [
+    {
+      "intent_id": "syn-intent-create-001",
+      "family_id": "appointment_create",
+      "practice_id": "syn-practice-001",
+      "actor_id": "syn-actor-001",
+      "actor_role": "receptionist",
+      "session_id": "syn-session-create-001",
+      "purpose": "reception_one_booking_context",
+      "target_appointment_id": null,
+      "conflict_domain_id": "syn-schedule-domain-create-001",
+      "command_digest": "sha256:syn-command-create-001",
+      "precondition_version": "syn-precondition-v17",
+      "precondition_digest": "sha256:syn-precondition-create-001",
+      "confirmation_mode": "staff_explicit",
+      "confirmation_reference": "syn-confirmation-create-001",
+      "idempotency_key_digest": "sha256:syn-idempotency-create-001",
+      "canonicalization_version": "emr4.appointment-command.v1",
+      "correlation_id": "syn-correlation-create-001"
+    },
+    {
+      "intent_id": "syn-intent-update-001",
+      "family_id": "appointment_update",
+      "practice_id": "syn-practice-001",
+      "actor_id": "syn-actor-001",
+      "actor_role": "receptionist",
+      "session_id": "syn-session-update-001",
+      "purpose": "reception_one_booking_context",
+      "target_appointment_id": "syn-appointment-update-001",
+      "conflict_domain_id": "syn-schedule-domain-update-001",
+      "command_digest": "sha256:syn-command-update-001",
+      "precondition_version": "syn-precondition-v23",
+      "precondition_digest": "sha256:syn-precondition-update-001",
+      "confirmation_mode": "staff_explicit",
+      "confirmation_reference": "syn-confirmation-update-001",
+      "idempotency_key_digest": "sha256:syn-idempotency-update-001",
+      "canonicalization_version": "emr4.appointment-command.v1",
+      "correlation_id": "syn-correlation-update-001"
+    },
+    {
+      "intent_id": "syn-intent-status-001",
+      "family_id": "appointment_status",
+      "practice_id": "syn-practice-001",
+      "actor_id": "syn-actor-001",
+      "actor_role": "receptionist",
+      "session_id": "syn-session-status-001",
+      "purpose": "reception_one_waiting_area",
+      "target_appointment_id": "syn-appointment-status-001",
+      "conflict_domain_id": null,
+      "command_digest": "sha256:syn-command-status-001",
+      "precondition_version": "syn-precondition-v31",
+      "precondition_digest": "sha256:syn-precondition-status-001",
+      "confirmation_mode": "staff_explicit",
+      "confirmation_reference": "syn-confirmation-status-001",
+      "idempotency_key_digest": "sha256:syn-idempotency-status-001",
+      "canonicalization_version": "emr4.appointment-command.v1",
+      "correlation_id": "syn-correlation-status-001"
+    },
+    {
+      "intent_id": "syn-intent-delete-001",
+      "family_id": "appointment_delete",
+      "practice_id": "syn-practice-001",
+      "actor_id": "syn-actor-001",
+      "actor_role": "receptionist",
+      "session_id": "syn-session-delete-001",
+      "purpose": "reception_one_booking_context",
+      "target_appointment_id": "syn-appointment-delete-001",
+      "conflict_domain_id": null,
+      "command_digest": "sha256:syn-command-delete-001",
+      "precondition_version": "syn-precondition-v37",
+      "precondition_digest": "sha256:syn-precondition-delete-001",
+      "confirmation_mode": "staff_destructive_explicit",
+      "confirmation_reference": "syn-confirmation-delete-001",
+      "idempotency_key_digest": "sha256:syn-idempotency-delete-001",
+      "canonicalization_version": "emr4.appointment-command.v1",
+      "correlation_id": "syn-correlation-delete-001"
+    }
+  ],
+  "scenario_matrix": [
+    {"scenario_id": "rad-001-create-confirm", "adapter_id": "proposal_confirm_create", "intent_id": "syn-intent-create-001", "envelope_profile": "confirm_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-002-create-confirm-bernie", "adapter_id": "proposal_confirm_create_bernie", "intent_id": "syn-intent-create-001", "envelope_profile": "confirm_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-003-update-confirm", "adapter_id": "proposal_confirm_update", "intent_id": "syn-intent-update-001", "envelope_profile": "confirm_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-004-status-confirm", "adapter_id": "proposal_confirm_status", "intent_id": "syn-intent-status-001", "envelope_profile": "confirm_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-005-delete-confirm", "adapter_id": "proposal_confirm_delete", "intent_id": "syn-intent-delete-001", "envelope_profile": "confirm_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-006-create-raw-current", "adapter_id": "raw_compat_create", "intent_id": "syn-intent-create-001", "envelope_profile": "raw_current", "expected_adapter_result": "adapter_rejected", "expected_gap_codes": ["backend_precondition_missing", "confirmation_evidence_missing", "idempotency_identity_missing"]},
+    {"scenario_id": "rad-007-update-raw-current", "adapter_id": "raw_compat_update", "intent_id": "syn-intent-update-001", "envelope_profile": "raw_current", "expected_adapter_result": "adapter_rejected", "expected_gap_codes": ["backend_precondition_missing", "confirmation_evidence_missing", "idempotency_identity_missing"]},
+    {"scenario_id": "rad-008-status-raw-current", "adapter_id": "raw_compat_status", "intent_id": "syn-intent-status-001", "envelope_profile": "raw_current", "expected_adapter_result": "adapter_rejected", "expected_gap_codes": ["backend_precondition_missing", "confirmation_evidence_missing", "idempotency_identity_missing"]},
+    {"scenario_id": "rad-009-delete-raw-current", "adapter_id": "raw_compat_delete", "intent_id": "syn-intent-delete-001", "envelope_profile": "raw_current", "expected_adapter_result": "adapter_rejected", "expected_gap_codes": ["backend_precondition_missing", "confirmation_evidence_missing", "idempotency_identity_missing"]},
+    {"scenario_id": "rad-010-create-raw-future-complete", "adapter_id": "raw_compat_create", "intent_id": "syn-intent-create-001", "envelope_profile": "raw_future_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-011-update-raw-future-complete", "adapter_id": "raw_compat_update", "intent_id": "syn-intent-update-001", "envelope_profile": "raw_future_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-012-status-raw-future-complete", "adapter_id": "raw_compat_status", "intent_id": "syn-intent-status-001", "envelope_profile": "raw_future_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []},
+    {"scenario_id": "rad-013-delete-raw-future-complete", "adapter_id": "raw_compat_delete", "intent_id": "syn-intent-delete-001", "envelope_profile": "raw_future_complete", "expected_adapter_result": "candidate_mapped", "expected_gap_codes": []}
+  ],
+  "differential_groups": [
+    {"family_id": "appointment_create", "scenario_ids": ["rad-001-create-confirm", "rad-002-create-confirm-bernie", "rad-010-create-raw-future-complete"], "excluded_fields": ["route_adapter_id"]},
+    {"family_id": "appointment_update", "scenario_ids": ["rad-003-update-confirm", "rad-011-update-raw-future-complete"], "excluded_fields": ["route_adapter_id"]},
+    {"family_id": "appointment_status", "scenario_ids": ["rad-004-status-confirm", "rad-012-status-raw-future-complete"], "excluded_fields": ["route_adapter_id"]},
+    {"family_id": "appointment_delete", "scenario_ids": ["rad-005-delete-confirm", "rad-013-delete-raw-future-complete"], "excluded_fields": ["route_adapter_id"]}
+  ],
+  "effect_boundary": {
+    "application_import": false,
+    "runtime_adapter": false,
+    "kernel_invocation": false,
+    "current_authority_lookup": false,
+    "database_read_or_write": false,
+    "event_or_watcher": false,
+    "provider_or_network": false,
+    "command_or_mutation": false,
+    "runtime_execution_authority": false
+  }
+}

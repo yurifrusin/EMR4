@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_provider_free_unmounted_pure_route_adapter_differential_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted legacy-route convergence plan, design, source-hashed contract, closeout and Sol acceptance plus the conditional-command admission design, API Spine ADR/programme and API Steward checklist were read. The tranche must transform authored-synthetic confirm and complete hypothetical raw envelopes into the frozen ConditionalAppointmentCommand, prove semantic equivalence apart from ingress provenance, and reject current raw shapes with exact missing-control codes across create, update, status and delete.",
+    "current_authority_allocation": "GPT Sol owns plan, implementation, deterministic review and acceptance under Yuri's standing uninterrupted-development authority. The EMR4 API Steward rules apply. No native subagent or external verifier is allocated to this provider-free, tightly coupled pure-contract tranche.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at a433eb68b5c40dd61fb4b6cf23c9af09cb0270ef. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. There are zero tracked or staged changes and exactly 500 preserved untracked files before this new preplanning pair is generated. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the fresh task-window handoff. At Continuity 247 / Compass 229 it accepts the legacy-route convergence kernel interface and names the provider-free unmounted pure route-adapter differential rehearsal as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "The tranche is provider-free, unmounted and authored-synthetic. It may add only a pure adapter contract, fixtures, evaluator, deterministic tests and closeout continuity artifacts. It may not import or modify application routes; access a database, source, watcher or event; use provider, network, credential, IAM, product, patient, clinical or financial data; expose an executable tool; issue a command or write; deploy, release, rebuild Pages, open protected evidence or move protected refs. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

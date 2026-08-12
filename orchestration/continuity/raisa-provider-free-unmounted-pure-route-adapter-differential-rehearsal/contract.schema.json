@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/pure-route-adapter-differential-rehearsal.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "status",
+    "source_head",
+    "source_bindings",
+    "claim_boundary",
+    "kernel_binding",
+    "envelope_profiles",
+    "field_maps",
+    "forbidden_caller_fields",
+    "adapter_specs",
+    "authored_synthetic_intents",
+    "scenario_matrix",
+    "differential_groups",
+    "effect_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.pure-route-adapter-differential-rehearsal.v1"},
+    "artifact_kind": {"const": "provider_free_unmounted_authored_synthetic_contract"},
+    "status": {"const": "frozen_no_runtime_behavior_change"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/sourceBinding"}
+    },
+    "claim_boundary": {"$ref": "#/$defs/claimBoundary"},
+    "kernel_binding": {"$ref": "#/$defs/kernelBinding"},
+    "envelope_profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirm_complete", "raw_current", "raw_future_complete"],
+      "properties": {
+        "confirm_complete": {"$ref": "#/$defs/envelopeProfile"},
+        "raw_current": {"$ref": "#/$defs/envelopeProfile"},
+        "raw_future_complete": {"$ref": "#/$defs/envelopeProfile"}
+      }
+    },
+    "field_maps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirm_envelope", "raw_envelope"],
+      "properties": {
+        "confirm_envelope": {"$ref": "#/$defs/fieldMap"},
+        "raw_envelope": {"$ref": "#/$defs/fieldMap"}
+      }
+    },
+    "forbidden_caller_fields": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "canonical_operation_id"},
+        {"const": "route_adapter_id"}
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "adapter_specs": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {"$ref": "#/$defs/adapterSpec"}
+    },
+    "authored_synthetic_intents": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/syntheticIntent"}
+    },
+    "scenario_matrix": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "differential_groups": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/differentialGroup"}
+    },
+    "effect_boundary": {"$ref": "#/$defs/effectBoundary"}
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_behavior_changed",
+        "application_route_imported",
+        "database_or_source_accessed",
+        "event_or_watcher_consumed",
+        "provider_or_network_used",
+        "product_or_patient_data_used",
+        "kernel_command_executed",
+        "command_or_write_performed",
+        "deployment_or_release_performed",
+        "protected_ref_moved"
+      ],
+      "properties": {
+        "route_behavior_changed": {"const": false},
+        "application_route_imported": {"const": false},
+        "database_or_source_accessed": {"const": false},
+        "event_or_watcher_consumed": {"const": false},
+        "provider_or_network_used": {"const": false},
+        "product_or_patient_data_used": {"const": false},
+        "kernel_command_executed": {"const": false},
+        "command_or_write_performed": {"const": false},
+        "deployment_or_release_performed": {"const": false},
+        "protected_ref_moved": {"const": false}
+      }
+    },
+    "kernelBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_type",
+        "candidate_schema_version",
+        "required_fields",
+        "provenance_only_fields",
+        "outcomes_preserved_but_not_evaluated",
+        "precedence_preserved_but_not_evaluated",
+        "canonical_lock_order",
+        "adapter_results",
+        "runtime_execution_authorized",
+        "command_outcome_emitted"
+      ],
+      "properties": {
+        "request_type": {"const": "ConditionalAppointmentCommand"},
+        "candidate_schema_version": {"const": "emr4.conditional-appointment-command.v1"},
+        "required_fields": {"type": "array", "minItems": 18, "maxItems": 18, "items": {"type": "string"}, "uniqueItems": true},
+        "provenance_only_fields": {"type": "array", "prefixItems": [{"const": "route_adapter_id"}], "items": false},
+        "outcomes_preserved_but_not_evaluated": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string"}, "uniqueItems": true},
+        "precedence_preserved_but_not_evaluated": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "string"}, "uniqueItems": true},
+        "canonical_lock_order": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "string"}, "uniqueItems": true},
+        "adapter_results": {"type": "array", "prefixItems": [{"const": "candidate_mapped"}, {"const": "adapter_rejected"}], "items": false},
+        "runtime_execution_authorized": {"const": false},
+        "command_outcome_emitted": {"const": false}
+      }
+    },
+    "envelopeProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input_shape", "sections", "missing_control_codes"],
+      "properties": {
+        "input_shape": {"enum": ["confirm_envelope", "raw_envelope"]},
+        "sections": {"type": "array", "minItems": 3, "items": {"type": "string"}, "uniqueItems": true},
+        "missing_control_codes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "fieldMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "practice_id", "actor_id", "actor_role", "session_id", "purpose",
+        "target_appointment_id", "conflict_domain_id", "command_digest",
+        "precondition_version", "precondition_digest", "confirmation_mode",
+        "confirmation_reference", "idempotency_key_digest",
+        "canonicalization_version", "correlation_id"
+      ],
+      "properties": {
+        "practice_id": {"type": "string"},
+        "actor_id": {"type": "string"},
+        "actor_role": {"type": "string"},
+        "session_id": {"type": "string"},
+        "purpose": {"type": "string"},
+        "target_appointment_id": {"type": "string"},
+        "conflict_domain_id": {"type": "string"},
+        "command_digest": {"type": "string"},
+        "precondition_version": {"type": "string"},
+        "precondition_digest": {"type": "string"},
+        "confirmation_mode": {"type": "string"},
+        "confirmation_reference": {"type": "string"},
+        "idempotency_key_digest": {"type": "string"},
+        "canonicalization_version": {"type": "string"},
+        "correlation_id": {"type": "string"}
+      }
+    },
+    "adapterSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_id", "family_id", "ingress_kind", "method", "path", "canonical_operation_id", "target_shape", "lock_plan", "parent_route_posture"],
+      "properties": {
+        "adapter_id": {"type": "string", "minLength": 1},
+        "family_id": {"enum": ["appointment_create", "appointment_update", "appointment_status", "appointment_delete"]},
+        "ingress_kind": {"enum": ["confirm", "raw"]},
+        "method": {"enum": ["POST", "PUT", "PATCH", "DELETE"]},
+        "path": {"type": "string", "pattern": "^/api/v1/appointments"},
+        "canonical_operation_id": {"type": "string", "pattern": "^confirmAppointment"},
+        "target_shape": {"enum": ["null_appointment_target", "existing_appointment_target"]},
+        "lock_plan": {"type": "array", "minItems": 3, "maxItems": 4, "items": {"type": "string"}, "uniqueItems": true},
+        "parent_route_posture": {"enum": ["preferred_confirm_ingress", "preferred_confirm_ingress_variant", "current_raw_not_kernel_eligible"]}
+      }
+    },
+    "syntheticIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent_id", "family_id", "practice_id", "actor_id", "actor_role",
+        "session_id", "purpose", "target_appointment_id", "conflict_domain_id",
+        "command_digest", "precondition_version", "precondition_digest",
+        "confirmation_mode", "confirmation_reference", "idempotency_key_digest",
+        "canonicalization_version", "correlation_id"
+      ],
+      "properties": {
+        "intent_id": {"type": "string", "pattern": "^syn-"},
+        "family_id": {"enum": ["appointment_create", "appointment_update", "appointment_status", "appointment_delete"]},
+        "practice_id": {"type": "string", "pattern": "^syn-"},
+        "actor_id": {"type": "string", "pattern": "^syn-"},
+        "actor_role": {"const": "receptionist"},
+        "session_id": {"type": "string", "pattern": "^syn-"},
+        "purpose": {"type": "string", "minLength": 1},
+        "target_appointment_id": {"type": ["string", "null"], "pattern": "^syn-"},
+        "conflict_domain_id": {"type": ["string", "null"], "pattern": "^syn-"},
+        "command_digest": {"type": "string", "pattern": "^sha256:syn-"},
+        "precondition_version": {"type": "string", "pattern": "^syn-"},
+        "precondition_digest": {"type": "string", "pattern": "^sha256:syn-"},
+        "confirmation_mode": {"enum": ["staff_explicit", "staff_destructive_explicit"]},
+        "confirmation_reference": {"type": "string", "pattern": "^syn-"},
+        "idempotency_key_digest": {"type": "string", "pattern": "^sha256:syn-"},
+        "canonicalization_version": {"const": "emr4.appointment-command.v1"},
+        "correlation_id": {"type": "string", "pattern": "^syn-"}
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_id", "adapter_id", "intent_id", "envelope_profile", "expected_adapter_result", "expected_gap_codes"],
+      "properties": {
+        "scenario_id": {"type": "string", "pattern": "^rad-[0-9]{3}-"},
+        "adapter_id": {"type": "string", "minLength": 1},
+        "intent_id": {"type": "string", "pattern": "^syn-intent-"},
+        "envelope_profile": {"enum": ["confirm_complete", "raw_current", "raw_future_complete"]},
+        "expected_adapter_result": {"enum": ["candidate_mapped", "adapter_rejected"]},
+        "expected_gap_codes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "differentialGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family_id", "scenario_ids", "excluded_fields"],
+      "properties": {
+        "family_id": {"enum": ["appointment_create", "appointment_update", "appointment_status", "appointment_delete"]},
+        "scenario_ids": {"type": "array", "minItems": 2, "maxItems": 3, "items": {"type": "string", "pattern": "^rad-"}, "uniqueItems": true},
+        "excluded_fields": {"type": "array", "prefixItems": [{"const": "route_adapter_id"}], "items": false}
+      }
+    },
+    "effectBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["application_import", "runtime_adapter", "kernel_invocation", "current_authority_lookup", "database_read_or_write", "event_or_watcher", "provider_or_network", "command_or_mutation", "runtime_execution_authority"],
+      "properties": {
+        "application_import": {"const": false},
+        "runtime_adapter": {"const": false},
+        "kernel_invocation": {"const": false},
+        "current_authority_lookup": {"const": false},
+        "database_read_or_write": {"const": false},
+        "event_or_watcher": {"const": false},
+        "provider_or_network": {"const": false},
+        "command_or_mutation": {"const": false},
+        "runtime_execution_authority": {"const": false}
+      }
+    }
+  }
+}

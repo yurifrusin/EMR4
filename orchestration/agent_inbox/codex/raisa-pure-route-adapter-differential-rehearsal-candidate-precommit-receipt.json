@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_pure_route_adapter_differential_rehearsal_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan defines nine adapter identities, four synthetic intents and thirteen scenarios. Nine complete confirm/future-raw candidates map all eighteen fields; four current raw profiles reject with exactly backend_precondition_missing, confirmation_evidence_missing and idempotency_identity_missing. Four differential groups match on all seventeen semantic fields after excluding only route_adapter_id. All 45 hostile mutations, 119 focused adapter/kernel/admission/API Spine tests, Ruff and Git whitespace pass.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled pure adapter contract, implementation, deterministic review and task-branch commit under standing uninterrupted-development authority. The EMR4 API Steward checklist was applied. No subagent, provider worker or external verifier was used.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at a433eb68b5c40dd61fb4b6cf23c9af09cb0270ef. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Nine task-owned untracked files sit beside exactly 500 preserved pre-existing untracked files before this precommit pair is generated. There are no tracked or staged changes. Explicit-path staging only applies and docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely and names this provider-free unmounted pure route-adapter differential rehearsal as the current dependency-satisfied tranche at Continuity 247 / Compass 229. The baton remains unchanged until the candidate and closeout pass.",
+    "protected_evidence_boundaries": "The tranche remained provider-free, unmounted and authored-synthetic. It imported or changed no application route, accessed no database/source/event/watcher, used no network/provider/product/patient data/credential/IAM, executed no kernel command/tool/write, and performed no deployment/release/Pages/protected-ref action. docs/branding and every unrelated untracked file remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
