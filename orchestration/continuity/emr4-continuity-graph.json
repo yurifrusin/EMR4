@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 249,
+  "graph_revision": 250,
   "harvests": [],
   "nodes": [
     {
@@ -15867,6 +15867,84 @@
         "No application hook, observer, feature flag, queue, sink, persistence, retention or aggregation is implemented.",
         "No product hashing, latency/concurrency isolation, operational monitoring or rollback is proved.",
         "Database/source/watcher/event access, patient/product data, provider, commands, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal",
+      "title": "Provider-free unmounted authored-synthetic shadow-comparison rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "47b5f09ecf35225da25812ba87bb656a1094fc7e",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-default-off-shadow-comparison-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "This is provider-free, unmounted and authored-synthetic evidence.",
+          "It imports or executes no application route and creates no observer runtime.",
+          "Diagnostic loss is permitted; no shadow result has command, audit or response authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-authored-synthetic-shadow-comparison-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the eighteen-case no-feedback shadow rehearsal and its byte-identical primary-result proof."
+        }
+      ],
+      "claim_scope": [
+        "Six denied and twelve admitted cases cover all required shadow classifications and failures.",
+        "All four current raw adapters reproduce the exact three accepted gap codes.",
+        "All eighteen primary results remain byte-for-byte unchanged.",
+        "Ten record candidates produce nine exact minimized records, never more than one per scenario.",
+        "All fifty-one hostile evidence mutations fail closed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-design.md",
+          "docs/security/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--authored-synthetic-shadow-comparison-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_shadow_comparison_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_authored_synthetic_shadow_comparison_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json",
+          "scripts/raisa_provider_free_unmounted_authored_synthetic_shadow_comparison_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No application hook, route edit, feature runtime, thread, process, queue, sink, persistence, retention or monitoring exists.",
+        "Real route placement, dependency exclusion, product hashing, latency and backpressure remain unproved.",
+        "Database/source/watcher/event access, patient/product data, providers, commands, deployment, Pages and protected refs remain closed."
       ]
     }
   ],

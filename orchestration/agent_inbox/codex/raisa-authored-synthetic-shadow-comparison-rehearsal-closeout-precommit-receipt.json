@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_accepted_shadow_comparison_rehearsal_closeout_and_continuity_advance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen eighteen-case plan passes: six denied and twelve admitted cases, all four current raw gap profiles, unexpected gap/candidate, semantic equivalent/divergent candidate, observer failure, timeout, overflow and sink failure. All eighteen primary byte snapshots match, ten record candidates yield nine minimized records with a maximum of one, all 51 hostile mutations fail closed, 17 tranche and 209 focused tests pass, and the final canonical gate passes 191 tests plus Ruff, 202 maintained-source compilation, Diary syntax and whitespace. Continuity/lifecycle checks pass after one wording-only assertion correction and one handover line-wrap compaction.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance, closeout, task-branch commit/push and autonomous continuation. The API Steward boundary remains controlling. No subagent, external worker, provider reviewer or provider call was used; Yuri's authenticated Sydney Vertex Bernie ADC remains unused in this provider-free tranche.",
+    "git_refs_and_worktree": "Candidate HEAD is 47b5f09ecf35225da25812ba87bb656a1094fc7e. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602 and required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Excluding only five new closeout-owned files, the original 504 untracked-file set remains an exact match at SHA-256 c2c9fb1220c27422dc93ba5bcc07ee4c1663f736c5963e09efc1dc3674a096fc, including five docs/branding files and all pre-push receipts. Only explicit closeout paths will be staged.",
+    "live_handover_current_baton": "The live AGENTS.md was reread completely for this tranche and is now updated to the accepted authored-synthetic shadow rehearsal at Continuity 250 / Compass 232, exact candidate source 47b5f09ecf35225da25812ba87bb656a1094fc7e, with the separately reviewed default-off runtime-instrumentation architecture plan next.",
+    "protected_evidence_boundaries": "Acceptance remains provider-free, unmounted and authored-synthetic. No application route was imported, executed or modified; no runtime hook, feature flag, thread, process, queue, sink or persistence was created; no database, source, watcher, event, network, provider, credential, IAM, metadata, product, patient, clinical, financial or free-text data was accessed; no kernel, command/write, deployment, release, Pages rebuild or protected-ref movement occurred."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

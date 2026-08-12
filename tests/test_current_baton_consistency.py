@@ -8,7 +8,7 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-unmounted-default-off-shadow-comparison-architecture"
+    "raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal"
 )
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
@@ -24,10 +24,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 249
+    assert graph["graph_revision"] == 250
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 231
-    assert compass["source_graph_revision"] == 249
+    assert compass["map_revision"] == 232
+    assert compass["source_graph_revision"] == 250
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -37,12 +37,12 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 249 / Compass 231" in current
-    assert "Exactly four raw route adapters" in current
-    assert "defaults deny" in current
-    assert "All 46 hostile mutations" in current
-    assert "twelve response/command/client feedback edges" in current
-    assert "e1dca1c6dc5d3f3e241548f80a226e5bb776417f" in current
+    assert "Continuity 250 / Compass 232" in current
+    assert "Eighteen pure cases" in current
+    assert "six fail-closed admissions" in current
+    assert "All 51 hostile mutations" in current
+    assert "never more than one per case" in current
+    assert "47b5f09ecf35225da25812ba87bb656a1094fc7e" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -53,7 +53,8 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "47e08eada878d8f6dd2a9b100e706404d3594e5a" in relation
     assert "beb4e65cddf72437948d72e08dd18c2ea4f0c609" in relation
     assert "e1dca1c6dc5d3f3e241548f80a226e5bb776417f" in relation
-    assert "provider-free unmounted authored-synthetic shadow-comparison rehearsal" in next_work
+    assert "47b5f09ecf35225da25812ba87bb656a1094fc7e" in relation
+    assert "default-off runtime-instrumentation architecture plan" in next_work
     assert "database/source/watcher/event/provider" in next_work
     assert "product/patient data" in next_work
     assert "executable tool" in next_work
@@ -90,8 +91,8 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted",
-        "authored-synthetic shadow-comparison rehearsal",
+        "default-off runtime-instrumentation architecture plan",
+        "may read repository source",
         "database/source/watcher/event/provider",
         "product/patient data",
         "executable tool",
