@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 268 / Compass 250. The provider-free unmounted status-confirm composition and exact stored-envelope replay pass. A read-only route-mounting readiness re-review is next; mounted execution and product authority remain closed.
+> EMR4 is at Continuity 269 / Compass 251. The post-compaction active-operation latch passes and the provider-free read-only status-confirm route-mounting readiness re-review is in progress. Mounted execution and product authority remain closed.
 
 ## North star
 
@@ -315,14 +315,14 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 **The status-confirm safety path is composed off-route with exact stored-envelope replay — Provider-free unmounted status-confirm route-convergence composition rehearsal**
 
-**Why this proof came next:** The route admission review required composition before any mounting decision.
+**Why this proof came next:** The unmounted composition passes, and the workflow latch now preserves this exact readiness-review checkpoint across interruptions.
 
 The unmounted callable and response reconciliation pass all finite authored-synthetic checks.
 
 ### What this unlocks
 
-- Run a provider-free read-only status-confirm route-mounting readiness re-review.
-- Reclassify the seven prior blockers against exact composition source and name the narrowest remaining prerequisites.
+- Resume the provider-free read-only status-confirm route-mounting readiness re-review.
+- Reclassify the ten frozen dimensions and name only the narrowest remaining application adapters or route prerequisites.
 
 ### What it does not solve
 
@@ -786,6 +786,8 @@ Prerequisites:
 - `docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-plan.md`
+- `docs/ariadne-postcompaction-active-operation-latch-closeout.md`
+- `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
@@ -1140,6 +1142,7 @@ Prerequisites:
 - `docs/raisa-word-online-authenticated-companion-verification-closeout.md`
 - `docs/raisa-word-online-authenticated-companion-verification-plan.md`
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
+- `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/bernie-reception-one-bureau-runtime-ui-wiring-threat-model-delta.md`
 - `docs/security/bernie-reception-one-default-off-dual-planner-runtime-threat-model-delta.md`
 - `docs/security/bernie-reception-one-extended-proposal-runtime-threat-model-delta.md`
@@ -1280,6 +1283,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
@@ -1632,6 +1636,8 @@ Prerequisites:
 - `orchestration/api_spine_adr.md`
 - `orchestration/bernie_interaction_model.md`
 - `orchestration/bernie_release_gates.md`
+- `orchestration/continuity/ariadne-active-operation-latch/active-operation.schema.json`
+- `orchestration/continuity/ariadne-active-operation-latch/current.json`
 - `orchestration/continuity/ariadne-agent-error-register/agent-error-register.json`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
@@ -2092,6 +2098,7 @@ Prerequisites:
 - `orchestration/harness_settings/autonomous_continuation.yaml`
 - `orchestration/harness_settings/evidence_led_workflow.yaml`
 - `orchestration/harness_settings/operating_model.yaml`
+- `orchestration/harness_settings/orchestrator_requirements.yaml`
 - `orchestration/harness_settings/python_source_state.json`
 - `orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md`
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c0-architecture-contract.md`
@@ -2128,6 +2135,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-gap-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
+- `orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2137,6 +2145,8 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/browser-acceptance-evidence.json`
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review-analysis.json`
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
+- `orchestration_harness/active_operation.py`
+- `scripts/ariadne_active_operation_latch.py`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
@@ -2186,6 +2196,7 @@ Prerequisites:
 - `scripts/reception_one_receptionist_first_v6_isolation.py`
 - `scripts/reception_one_structured_source_plan_language.py`
 - `tests/test_api_spine_status_confirm_idempotency_preflight.py`
+- `tests/test_ariadne_active_operation_latch.py`
 - `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
@@ -2227,4 +2238,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 250; continuity graph revision 268._
+_Compass map revision 251; continuity graph revision 269._

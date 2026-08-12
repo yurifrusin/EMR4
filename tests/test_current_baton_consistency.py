@@ -12,6 +12,8 @@ NODE_ID = (
     "composition-rehearsal"
 )
 SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
+LATCH_NODE_ID = "ariadne-postcompaction-active-operation-latch"
+LATCH_SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -26,10 +28,11 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 268
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 250
-    assert compass["source_graph_revision"] == 268
+    assert graph["graph_revision"] == 269
+    assert graph["nodes"][-1]["id"] == LATCH_NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == LATCH_SOURCE_HEAD
+    assert compass["map_revision"] == 251
+    assert compass["source_graph_revision"] == 269
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -39,13 +42,15 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 268 / Compass 250" in current
+    assert "Continuity 269 / Compass 251" in current
+    assert "ariadne_postcompaction_active_operation_latch_pass" in current
+    assert LATCH_SOURCE_HEAD in current
     assert SOURCE_HEAD in current
-    assert "complete `AppointmentConfirmStatusProposalOut` envelope" in current
-    assert "five-field status projection" in current
-    assert "Initial and replay delivery are byte-identical" in current
-    assert "163 current lineage" in current
-    assert "191 canonical tests" in current
+    assert "prompt recency alone cannot replace unfinished work" in current
+    assert "in-progress terminal response fails closed" in current
+    assert "complete-envelope canonical replay" in current
+    assert "39 hostile latch mutations" in current
+    assert "193-test canonical profile" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert SOURCE_HEAD in relation
@@ -70,7 +75,10 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free read-only status-confirm route-mounting readiness re-review" in next_work
+    assert (
+        "provider-free read-only status-confirm route-mounting readiness re-review"
+        in next_work
+    )
     assert SOURCE_HEAD in next_work
     assert "seven prior composition blockers" in next_work
     assert "may inspect exact non-protected files" in next_work

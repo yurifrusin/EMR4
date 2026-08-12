@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-postcompaction-active-operation-latch",
-  "active_tranche": "Ariadne post-compaction active-operation latch and terminal-response guard",
-  "objective": "Make unfinished authorised operation precedence durable and mechanically visible across compaction, then resume the exact status-confirm route-mounting readiness re-review checkpoint.",
+  "operation_id": "raisa-status-confirm-route-mounting-readiness-rereview",
+  "active_tranche": "Provider-free read-only status-confirm route-mounting readiness re-review",
+  "objective": "Reclassify the original ten route-mounting dimensions against the accepted unmounted composition and identify only the narrowest remaining product adapter or route prerequisites.",
   "status": "in_progress",
-  "source_head": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
-  "authority_source": "Yuri's 2026-08-13 direct implementation request plus standing uninterrupted-development authority",
+  "source_head": "ac62a6f65612acb624f14b53ba86b1a9dbf72dab",
+  "authority_source": "AGENTS.md Current Baton next implementation plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "latch schema, validator, continuation-receipt projection and timestamp policy implemented; focused tests pass",
-    "next_executable_stage": "run canonical verification and close out the workflow safeguard before resuming the status-confirm route-mounting readiness re-review",
+    "completed_stage": "five-source rehydration and exact-source plan/threat boundary freeze complete; workflow latch interruption repaired and accepted",
+    "next_executable_stage": "inspect only the fourteen frozen sources and produce the deterministic ten-dimension readiness re-review",
     "retry_counters": {
-      "implementation": 0,
+      "review": 0,
       "verification": 0
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
