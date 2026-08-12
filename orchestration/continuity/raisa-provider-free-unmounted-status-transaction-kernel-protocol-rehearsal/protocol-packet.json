@@ -1,0 +1,978 @@
+{
+  "artifact_kind": "provider_free_unmounted_authored_synthetic_protocol",
+  "canonical_operation_id": "confirmAppointmentStatusProposal",
+  "decision_scenarios": [
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "committed",
+        "planned_effect": true,
+        "reason": "first_effect_planned",
+        "receipt_disclosed": false
+      },
+      "id": "stk-001-commit",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "idempotent_replay",
+        "planned_effect": false,
+        "reason": "same_digest_completed",
+        "receipt_disclosed": true
+      },
+      "id": "stk-002-replay",
+      "idempotency": "same_digest_completed",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "idempotency_conflict",
+        "planned_effect": false,
+        "reason": "same_key_different_digest",
+        "receipt_disclosed": false
+      },
+      "id": "stk-003-conflict",
+      "idempotency": "different_digest",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": false,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "authority_revoked",
+        "planned_effect": false,
+        "reason": "current_authority_revoked",
+        "receipt_disclosed": false
+      },
+      "id": "stk-004-authority-before-replay",
+      "idempotency": "same_digest_completed",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "stale",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "missing",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "confirmation_required",
+        "planned_effect": false,
+        "reason": "separate_confirmation_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "stk-005-confirmation-before-replay",
+      "idempotency": "same_digest_completed",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "stale_precondition",
+        "planned_effect": false,
+        "reason": "appointment_version_changed",
+        "receipt_disclosed": false
+      },
+      "id": "stk-006-stale",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "stale",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "target_not_found",
+        "receipt_disclosed": false
+      },
+      "id": "stk-007-target-missing",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "missing",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "transition_domain_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "stk-008-domain-invalid",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "invalid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "transition_policy_deferred",
+        "receipt_disclosed": false
+      },
+      "id": "stk-009-terminal-policy-deferred",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "policy_deferred"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "structure_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "stk-010-structure-rejected",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "invalid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "mismatch",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "stk-011-binding-rejected",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "lock_plan_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "stk-012-reordered-locks",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "idempotency_record",
+        "appointment"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": true,
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "lock_plan_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "stk-013-extra-schedule-lock",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "schedule_domain",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "warning_unacknowledged",
+      "current_authority": true,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "confirmation_required",
+        "planned_effect": false,
+        "reason": "warning_acknowledgement_missing",
+        "receipt_disclosed": false
+      },
+      "id": "stk-014-warning-unacknowledged",
+      "idempotency": "absent",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    },
+    {
+      "binding": "exact",
+      "confirmation": "valid",
+      "current_authority": false,
+      "expected": {
+        "admission": "admitted",
+        "outcome": "authority_revoked",
+        "planned_effect": false,
+        "reason": "current_authority_revoked",
+        "receipt_disclosed": false
+      },
+      "id": "stk-015-authority-before-conflict",
+      "idempotency": "different_digest",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "transition": "valid"
+    }
+  ],
+  "effect_boundary": {
+    "application_model_imported": false,
+    "application_route_imported": false,
+    "command_executed": false,
+    "database_driver_imported": false,
+    "database_or_source_opened": false,
+    "mutation_audit_or_receipt_written": false,
+    "product_or_patient_data_used": false,
+    "provider_or_network_used": false,
+    "real_lock_acquired": false,
+    "watcher_or_event_consumed": false
+  },
+  "global_lock_order": [
+    "practice",
+    "schedule_domain",
+    "appointment",
+    "idempotency_record"
+  ],
+  "outcome_vocabulary": [
+    "committed",
+    "idempotent_replay",
+    "stale_precondition",
+    "schedule_conflict",
+    "authority_revoked",
+    "confirmation_required",
+    "validation_rejected",
+    "idempotency_conflict"
+  ],
+  "review_questions": [
+    "terminal_status_retransition_warning_policy_deferred",
+    "post_commit_response_serialization_contract_not_yet_runtime_proven",
+    "ledger_first_runtime_helper_requires_future_lock_order_reconciliation"
+  ],
+  "schema_version": "raisa.status_transaction_kernel_protocol.v1",
+  "source_bindings": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json",
+      "sha256": "abe1e35032ca5a979ac187b45adffc498897e341d185b65c8e0eb6b094cfb582"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md",
+      "sha256": "ed84a15d101b3bc6cb616b6955d4054dc42d8e9827118f319ba9e4d72ebbea53"
+    },
+    {
+      "path": "docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md",
+      "sha256": "6863c1a7fef074d66d3c1870014f51b30e2dc8953e92e19642a2b86a4461218c"
+    },
+    {
+      "path": "docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md",
+      "sha256": "d1b202abfe234d91a002e1b75f3880eb74eef14a47a1dbf19d267c1c09a7d907"
+    }
+  ],
+  "status_lock_plan": [
+    "practice",
+    "appointment",
+    "idempotency_record"
+  ],
+  "transaction_schedules": [
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-001-clean-commit",
+      "injection": "none",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "audit_count": 0,
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-002-before-locks",
+      "injection": "before_locks",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "audit_count": 0,
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-003-after-mutation",
+      "injection": "after_staged_mutation",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "audit_count": 0,
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-004-after-audit",
+      "injection": "after_staged_audit",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "audit_count": 0,
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-005-after-receipt",
+      "injection": "after_staged_receipt",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-006-lost-response",
+      "injection": "after_commit_before_response",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed",
+          "idempotent_replay"
+        ],
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-007-retry",
+      "injection": "none",
+      "kind": "retry_after_lost_response",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed",
+          "idempotent_replay"
+        ],
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-008-same-digest",
+      "injection": "none",
+      "kind": "concurrent_same_digest",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed",
+          "idempotency_conflict"
+        ],
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-009-different-digest",
+      "injection": "none",
+      "kind": "concurrent_different_digest",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed",
+          "stale_precondition"
+        ],
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-010-stale-source",
+      "injection": "none",
+      "kind": "concurrent_stale_source",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Arrived",
+          "appointment_version": 8,
+          "audit_count": 1,
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-status-001"
+        },
+        "participant_results": [
+          "committed",
+          "authority_revoked"
+        ],
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "lock:idempotency_record",
+          "recheck:current_authority",
+          "inspect:idempotency",
+          "recheck:appointment_version",
+          "stage:appointment_mutation",
+          "stage:mutation_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response"
+        ]
+      },
+      "id": "sts-011-authority-loss",
+      "injection": "none",
+      "kind": "concurrent_authority_loss",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "lock:idempotency_record",
+        "recheck:current_authority",
+        "inspect:idempotency",
+        "recheck:appointment_version",
+        "stage:appointment_mutation",
+        "stage:mutation_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response"
+      ]
+    }
+  ],
+  "unused_lock_rule": "skip_schedule_domain_without_reordering"
+}

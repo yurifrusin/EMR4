@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_provider_free_unmounted_status_transaction_kernel_protocol_source_and_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and design bind the exact status profile to the global practice -> schedule_domain -> appointment -> idempotency_record order while skipping the unused schedule-domain lock, giving status the exact practice -> appointment -> idempotency_record lock plan. The generated packet passes 15 decision scenarios, 11 transaction schedules and 37 hostile mutations. Nine focused tests and Ruff pass. Parent functional contracts pass; four deliberately historical continuity-position assertions still pin revisions 246/247 rather than the live revision 255 and are classified as archival, not product failures.",
+    "current_authority_allocation": "GPT Sol retains conductor, architecture, implementation, testing, acceptance and integration ownership under Yuri's standing uninterrupted-development authority. The EMR4 API Steward boundary applies. No subagent, external worker or provider is selected; Sydney Vertex Bernie ADC remains unused.",
+    "git_refs_and_worktree": "The branch is codex/ariadne-bernie-davida-parallel-seam at 490cf1048d4a66183ccdbbe185a28f3c3609fdac, aligned with its origin. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Exactly 526 untracked paths, including five docs/branding paths, are preserved before this runtime-state file. Only the explicit status-protocol source/evidence/receipt paths are eligible for staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely at SHA-256 c0290bb5b9ff0f1eed41308d4e95c0ab405db12ccb34f1f47f24868d13be4358. Continuity 255 / Compass 237 names this provider-free unmounted status transaction-kernel protocol as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "All artifacts are authored-synthetic and unmounted. The tranche imports or executes no application route, model, database driver, source, watcher, event, provider, network, credential or command and performs no mutation, audit or receipt write. It grants no runtime kernel, raw-route change, create fence, observer, persistence, operational or patient/product data, deployment, production, release, Pages or protected-ref movement. Terminal re-transition remains policy_deferred and effect-free. docs/branding and every unrelated untracked file remain preserved and excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_provider_free_unmounted_status_transaction_kernel_protocol_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted harness plan/closeout/acceptance, conditional-command admission plan/design and legacy-route kernel-interface plan/design/contract were read. The status profile is confirm-first, existing-target only, with canonical full ordering practice -> schedule domain -> appointment -> idempotency record and the unused schedule-domain lock skipped. This tranche must freeze closed authored-synthetic state machines and transaction schedules for authority-first evaluation, separate confirmation, replay/conflict, source freshness, domain invariants, atomic mutation/audit/completed receipt, readback and typed loser outcomes. Terminal-status re-transition warning and post-commit response serialization remain explicit review questions.",
+    "current_authority_allocation": "GPT Sol retains conductor, architecture, acceptance and integration ownership. The tightly coupled unmounted protocol remains Sol-owned under Yuri's standing uninterrupted-development authority and the API Steward boundary; no subagent, external worker or provider is selected, and Sydney Vertex Bernie ADC remains unused.",
+    "git_refs_and_worktree": "The branch is codex/ariadne-bernie-davida-parallel-seam. Task HEAD and origin task align at 490cf1048d4a66183ccdbbe185a28f3c3609fdac. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Tracked state is clean and exactly 516 untracked files, including five docs/branding files and the prior closeout receipt pairs, are preserved before this runtime-state file.",
+    "live_handover_current_baton": "AGENTS.md was read completely at SHA-256 c0290bb5b9ff0f1eed41308d4e95c0ab405db12ccb34f1f47f24868d13be4358. Continuity 255 / Compass 237 accepts the 311/311 compatibility baseline and names the provider-free unmounted status transaction-kernel protocol rehearsal as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "The rehearsal may not import or execute an application route, model, database driver, source, watcher, event, provider, network, credential or command. It may perform no mutation, audit write or receipt write. No runtime kernel, raw-route change, create schedule fence, shadow enablement, observer/sink/persistence, operational data, product/patient data, deployment, production, release, Pages or protected-ref movement is authorised. Protected holdouts remain unopened. docs/branding and all unrelated untracked files remain preserved and excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

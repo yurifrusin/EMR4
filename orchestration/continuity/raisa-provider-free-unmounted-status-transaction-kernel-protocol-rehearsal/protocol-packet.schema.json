@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_kind": {
+      "const": "provider_free_unmounted_authored_synthetic_protocol"
+    },
+    "canonical_operation_id": {
+      "const": "confirmAppointmentStatusProposal"
+    },
+    "decision_scenarios": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "confirmation": {
+            "type": "string"
+          },
+          "current_authority": {
+            "type": "boolean"
+          },
+          "expected": {
+            "additionalProperties": false,
+            "properties": {
+              "admission": {
+                "enum": [
+                  "admitted",
+                  "admission_rejected"
+                ]
+              },
+              "outcome": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "planned_effect": {
+                "type": "boolean"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "receipt_disclosed": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "admission",
+              "outcome",
+              "reason",
+              "receipt_disclosed",
+              "planned_effect"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "pattern": "^stk-[0-9]{3}-",
+            "type": "string"
+          },
+          "idempotency": {
+            "type": "string"
+          },
+          "lock_plan": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source": {
+            "type": "string"
+          },
+          "structure": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "transition": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "structure",
+          "binding",
+          "lock_plan",
+          "current_authority",
+          "confirmation",
+          "idempotency",
+          "source",
+          "target",
+          "transition",
+          "expected"
+        ],
+        "type": "object"
+      },
+      "minItems": 15,
+      "type": "array"
+    },
+    "effect_boundary": {
+      "additionalProperties": false,
+      "maxProperties": 10,
+      "minProperties": 10,
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "const": false
+        }
+      },
+      "type": "object"
+    },
+    "global_lock_order": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "outcome_vocabulary": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "review_questions": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "raisa.status_transaction_kernel_protocol.v1"
+    },
+    "source_bindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "status_lock_plan": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "transaction_schedules": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "expected": {
+            "additionalProperties": false,
+            "properties": {
+              "durable_state": {
+                "additionalProperties": false,
+                "properties": {
+                  "appointment_status": {
+                    "type": "string"
+                  },
+                  "appointment_version": {
+                    "type": "integer"
+                  },
+                  "audit_count": {
+                    "type": "integer"
+                  },
+                  "completed_receipt_count": {
+                    "type": "integer"
+                  },
+                  "mutation_count": {
+                    "type": "integer"
+                  },
+                  "receipt_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "appointment_status",
+                  "appointment_version",
+                  "mutation_count",
+                  "audit_count",
+                  "completed_receipt_count",
+                  "receipt_id"
+                ],
+                "type": "object"
+              },
+              "participant_results": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "response_delivered": {
+                "type": "boolean"
+              },
+              "trace": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "durable_state",
+              "participant_results",
+              "response_delivered",
+              "trace"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "pattern": "^sts-[0-9]{3}-",
+            "type": "string"
+          },
+          "injection": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "lock_plan": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "participant_count": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "trace": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "injection",
+          "participant_count",
+          "lock_plan",
+          "trace",
+          "expected"
+        ],
+        "type": "object"
+      },
+      "minItems": 11,
+      "type": "array"
+    },
+    "unused_lock_rule": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "source_bindings",
+    "canonical_operation_id",
+    "global_lock_order",
+    "status_lock_plan",
+    "unused_lock_rule",
+    "outcome_vocabulary",
+    "decision_scenarios",
+    "transaction_schedules",
+    "review_questions",
+    "effect_boundary"
+  ],
+  "type": "object"
+}
