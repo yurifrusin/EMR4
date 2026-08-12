@@ -1,0 +1,389 @@
+{
+  "composition_source_head": "41f978ae9837cba50737cfb5f457ab62ac28dbdb",
+  "dimension_counts": {
+    "blocking_gap": 4,
+    "partial_gap": 2,
+    "satisfied": 4
+  },
+  "dimensions": [
+    {
+      "admission_blocker": false,
+      "change_from_first_review": "None.",
+      "citations": [
+        {
+          "line_end": 39,
+          "line_start": 39,
+          "path": "app/main.py"
+        },
+        {
+          "line_end": 2929,
+          "line_start": 2920,
+          "path": "app/routers/appointments.py"
+        }
+      ],
+      "classification": "satisfied",
+      "concrete_dependency_remains": false,
+      "dependency_type": "none",
+      "id": "literal_route_mounting",
+      "narrowest_prerequisite": "None.",
+      "observed_behavior": "The application still includes the appointments router and exposes POST /api/v1/appointments/proposals/status-confirm.",
+      "prior_classification": "satisfied",
+      "title": "Literal route mounting",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": false,
+      "change_from_first_review": "The composition now preserves the exact operation and route-family identity; the alias policy is unchanged.",
+      "citations": [
+        {
+          "line_end": 35,
+          "line_start": 24,
+          "path": "docs/api-spine/openapi/appointment-commands.yaml"
+        },
+        {
+          "line_end": 274,
+          "line_start": 254,
+          "path": "docs/api-spine/openapi/appointment-commands.yaml"
+        }
+      ],
+      "classification": "partial_gap",
+      "concrete_dependency_remains": true,
+      "dependency_type": "policy_decision",
+      "id": "canonical_api_identity",
+      "narrowest_prerequisite": "Defer the alias/migration choice until a separately authorised route tranche.",
+      "observed_behavior": "The composition preserves confirmAppointmentStatusProposal, while the mounted hyphenated path remains only a documented alias candidate for the canonical slash path.",
+      "prior_classification": "partial_gap",
+      "title": "Canonical API identity and current alias",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": false,
+      "change_from_first_review": "The exact unmounted composition prerequisite requested by the first review now exists and passed.",
+      "citations": [
+        {
+          "line_end": 398,
+          "line_start": 345,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 2945,
+          "line_start": 2931,
+          "path": "app/routers/appointments.py"
+        }
+      ],
+      "classification": "satisfied",
+      "concrete_dependency_remains": true,
+      "dependency_type": "route_integration",
+      "id": "physical_seam_composition",
+      "narrowest_prerequisite": "No further composition contract; later route integration must call the accepted composition without bypass.",
+      "observed_behavior": "The accepted unmounted composition defaults to status_confirm_locked_transaction and enters it with the exact admitted digest, session digest and callbacks; the mounted handler still uses the legacy sequence.",
+      "prior_classification": "blocking_gap",
+      "title": "Physical transaction-seam composition",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": true,
+      "change_from_first_review": "The injection contract exists; the concrete product adapter does not.",
+      "citations": [
+        {
+          "line_end": 68,
+          "line_start": 39,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 360,
+          "line_start": 345,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 2929,
+          "line_start": 2924,
+          "path": "app/routers/appointments.py"
+        }
+      ],
+      "classification": "blocking_gap",
+      "concrete_dependency_remains": true,
+      "dependency_type": "product_adapter",
+      "id": "current_authority_and_session",
+      "narrowest_prerequisite": "One unmounted application-owned ingress adapter deriving practice, actor, role and server session and supplying fail-closed current-authority checks with no client authority fields.",
+      "observed_behavior": "The composition accepts server-owned session and current-authority inputs and the physical seam rechecks authority, but no application-owned adapter derives a server session or supplies the current-authority callback from authenticated product state.",
+      "prior_classification": "blocking_gap",
+      "title": "Current authority and server-session ingress",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": true,
+      "change_from_first_review": "The composition consumes the accepted discriminator; an application-owned adapter remains absent.",
+      "citations": [
+        {
+          "line_end": 84,
+          "line_start": 81,
+          "path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py"
+        },
+        {
+          "line_end": 375,
+          "line_start": 352,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 2950,
+          "line_start": 2947,
+          "path": "app/routers/appointments.py"
+        }
+      ],
+      "classification": "blocking_gap",
+      "concrete_dependency_remains": true,
+      "dependency_type": "product_adapter",
+      "id": "status_only_discrimination",
+      "narrowest_prerequisite": "An unmounted application-owned admission adapter that admits only update_appointment_status/status and returns waiting-area commands to the unchanged legacy path.",
+      "observed_behavior": "The pure adapter rejects waiting-area variants and the composition accepts an injected admission adapter, but the product route still accepts the status/waiting-area union and does not own that discriminator.",
+      "prior_classification": "blocking_gap",
+      "title": "Status-only discrimination",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": true,
+      "change_from_first_review": "The locked re-admission mechanism exists; its application-owned state factory does not.",
+      "citations": [
+        {
+          "line_end": 423,
+          "line_start": 399,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 71,
+          "line_start": 71,
+          "path": "app/models/appointments.py"
+        },
+        {
+          "line_end": 107,
+          "line_start": 103,
+          "path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py"
+        }
+      ],
+      "classification": "blocking_gap",
+      "concrete_dependency_remains": true,
+      "dependency_type": "product_adapter",
+      "id": "locked_policy_admission",
+      "narrowest_prerequisite": "An unmounted locked-state factory that reconstructs exact source version, current fields, warnings and terminal policy solely from the locked appointment and server facts.",
+      "observed_behavior": "The composition re-runs admission against an injected locked-server mapping and rejects digest changes, but no product factory recomputes the accepted current-state, warning and terminal policy from the locked appointment.",
+      "prior_classification": "blocking_gap",
+      "title": "Locked source version, warnings and terminal policy",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": true,
+      "change_from_first_review": "The correlation contract is implemented inside the composition; the concrete status mutation/audit effect adapter is absent.",
+      "citations": [
+        {
+          "line_end": 331,
+          "line_start": 270,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 2917,
+          "line_start": 2880,
+          "path": "app/routers/appointments.py"
+        },
+        {
+          "line_end": 3055,
+          "line_start": 3048,
+          "path": "app/routers/appointments.py"
+        }
+      ],
+      "classification": "blocking_gap",
+      "concrete_dependency_remains": true,
+      "dependency_type": "product_adapter",
+      "id": "atomic_audit_private_receipt",
+      "narrowest_prerequisite": "An unmounted application-owned effect adapter that stages only the locked status mutation and attributable audit and returns that audit identity to the accepted composition.",
+      "observed_behavior": "The composition atomically binds target, audit identity, versions, session digest and canonical bytes, but its stage_effect is injected; the current product helper discards the audit identity and legacy completion omits the v1 fields.",
+      "prior_classification": "blocking_gap",
+      "title": "Atomic audit and private-receipt correlation",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": false,
+      "change_from_first_review": "The requested unmounted stored-receipt mapper now exists; only future transport delivery of those bytes remains.",
+      "citations": [
+        {
+          "line_end": 342,
+          "line_start": 334,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 450,
+          "line_start": 433,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 3057,
+          "line_start": 3038,
+          "path": "app/routers/appointments.py"
+        }
+      ],
+      "classification": "partial_gap",
+      "concrete_dependency_remains": true,
+      "dependency_type": "route_transport",
+      "id": "canonical_stored_delivery",
+      "narrowest_prerequisite": "A later route-transport adapter must deliver composition.stored_response_bytes for both committed and replay results without reserialization drift.",
+      "observed_behavior": "The composition validates and returns the same stored canonical bytes for execute and replay, while the current handler still returns a separately materialized response object.",
+      "prior_classification": "blocking_gap",
+      "title": "Canonical stored-receipt delivery",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": false,
+      "change_from_first_review": "The closed unmounted outcome mapper requested by the first review now exists and its twelve scenarios passed.",
+      "citations": [
+        {
+          "line_end": 466,
+          "line_start": 433,
+          "path": "app/services/appointment_status_composition.py"
+        },
+        {
+          "line_end": 156,
+          "line_start": 20,
+          "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json"
+        }
+      ],
+      "classification": "satisfied",
+      "concrete_dependency_remains": true,
+      "dependency_type": "route_integration",
+      "id": "physical_outcome_mapping",
+      "narrowest_prerequisite": "No new mapping contract; later integration must preserve the accepted mapping exactly.",
+      "observed_behavior": "The accepted composition closes execute, replay, conflict, revoked-authority, unavailable-target, incomplete-scaffold, locked-admission and integrity outcomes into public responses without route execution.",
+      "prior_classification": "blocking_gap",
+      "title": "Physical outcome to public response mapping",
+      "unmounted_prerequisite_exists": true
+    },
+    {
+      "admission_blocker": false,
+      "change_from_first_review": "None; the proof is consumed without reopening concurrency, restart or unknown-commit claims.",
+      "citations": [
+        {
+          "line_end": 20,
+          "line_start": 3,
+          "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json"
+        }
+      ],
+      "classification": "satisfied",
+      "concrete_dependency_remains": false,
+      "dependency_type": "none",
+      "id": "proved_physical_foundation",
+      "narrowest_prerequisite": "None.",
+      "observed_behavior": "The exact PostgreSQL 16 rehearsal remains accepted over sixteen serial authority, receipt, revocation and rollback scenarios with complete cleanup.",
+      "prior_classification": "satisfied",
+      "title": "Accepted physical durability foundation",
+      "unmounted_prerequisite_exists": true
+    }
+  ],
+  "forbidden": {
+    "app_import": false,
+    "command_or_write": false,
+    "database_or_source_execution": false,
+    "deployment_release_pages_or_protected_ref": false,
+    "product_or_patient_data": false,
+    "provider_network_or_credentials": false,
+    "route_edit_mount_or_call": false
+  },
+  "implementation_authorized": false,
+  "next_candidate": {
+    "database_execution": false,
+    "id": "provider_free_unmounted_status_confirm_product_adapter_rehearsal",
+    "route_mount_or_call": false,
+    "scope": [
+      "server_session_and_current_authority_ingress_adapter",
+      "status_only_admission_adapter",
+      "locked_state_policy_factory",
+      "atomic_status_effect_and_audit_identity_adapter"
+    ]
+  },
+  "review_mode": "provider_free_read_only_exact_file_text_only",
+  "schema_version": "raisa.status-confirm-route-mounting-readiness-rereview-contract.v1",
+  "source_assertions": {
+    "app/dependencies.py": [
+      "def get_current_user(",
+      "set_config('app.current_practice_id', :practice_id, true)",
+      "def require_role(*roles: UserRole):"
+    ],
+    "app/main.py": [
+      "app.include_router(appointments.router)"
+    ],
+    "app/models/appointments.py": [
+      "appointment_state_version = Column(BigInteger",
+      "completed_receipt_version = Column(SmallInteger",
+      "response_body_canonical_bytes = Column(LargeBinary"
+    ],
+    "app/routers/appointments.py": [
+      "\"/proposals/status-confirm\"",
+      "decision = claim_appointment_command(",
+      "complete_appointment_command(",
+      "return response_body"
+    ],
+    "app/schemas/appointments.py": [
+      "class AppointmentStatusProposalConfirmationIn",
+      "class AppointmentConfirmStatusProposalOut"
+    ],
+    "app/services/appointment_idempotency.py": [
+      "def claim_appointment_command(",
+      "def complete_appointment_command("
+    ],
+    "app/services/appointment_status_composition.py": [
+      "class StatusConfirmServerIngress:",
+      "def compose_status_confirm(",
+      "locked_server_factory",
+      "effect = stage_effect(decision, locked_request)",
+      "response_bytes = _validated_stored_response(decision)",
+      "transaction_factory: TransactionFactory = status_confirm_locked_transaction"
+    ],
+    "app/services/appointment_status_physical.py": [
+      "def status_confirm_locked_transaction(",
+      "current_authority",
+      "response_body_canonical_bytes"
+    ],
+    "docs/api-spine/openapi/appointment-commands.yaml": [
+      "current_backend_path: /appointments/proposals/status-confirm",
+      "canonical_openapi_path: /appointments/proposals/status/confirm",
+      "operationId: confirmAppointmentStatusProposal"
+    ],
+    "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md": [
+      "Provider-free unmounted status-confirm route-convergence composition rehearsal closeout",
+      "No model, migration, database constraint, route or API Spine schema changed."
+    ],
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json": [
+      "\"raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal_pass\"",
+      "\"sixteen_serial_scenarios_verified\""
+    ],
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-evidence.json": [
+      "\"mounted_legacy_route_not_admitted_for_physical_convergence\"",
+      "\"blocking_gap\": 7"
+    ],
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json": [
+      "\"raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal_pass\"",
+      "\"mounted_route_imports_composition\": false"
+    ],
+    "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py": [
+      "transport[\"proposal_intent\"] != \"update_appointment_status\"",
+      "transport[\"command\"][\"kind\"] != \"status\"",
+      "server[\"authority_current\"]"
+    ]
+  },
+  "source_hashes": {
+    "app/dependencies.py": "d44f777f742074f0ee4717d599d7ee71dd6343c7096c87793149c727c1c4b0a9",
+    "app/main.py": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/routers/appointments.py": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb",
+    "app/schemas/appointments.py": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "app/services/appointment_status_composition.py": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+    "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md": "517356cf818818fed927f0937c375d8594365034dba9e6b652e3942306111ab8",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json": "00b094830c5f1a0cea19be40cb6761ed5350b6b2ed3fecb53e37ae255333eadd",
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-evidence.json": "7577dfa31cc52ecdb194facca7fc8640116dfc66f412f7c9ae40cd30521b12f1",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json": "694d8bc0302feb9b8b99013634ab80b9b60ce0919759dad8f16c1a2382c3e306",
+    "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py": "a45b601a375c7dec7ee08e46be53e23991542cf9699a9ac75798c2e70d2865d8"
+  },
+  "source_head": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
+  "verdict": "composition_accepted_route_mounting_not_ready"
+}

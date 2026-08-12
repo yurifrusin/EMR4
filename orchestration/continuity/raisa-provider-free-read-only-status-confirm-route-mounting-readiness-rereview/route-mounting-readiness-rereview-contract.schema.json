@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "composition_source_head": {
+      "const": "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
+    },
+    "dimension_counts": {
+      "const": {
+        "blocking_gap": 4,
+        "partial_gap": 2,
+        "satisfied": 4
+      }
+    },
+    "dimensions": {
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "forbidden": {
+      "additionalProperties": {
+        "const": false
+      },
+      "minProperties": 7,
+      "type": "object"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "next_candidate": {
+      "type": "object"
+    },
+    "review_mode": {
+      "const": "provider_free_read_only_exact_file_text_only"
+    },
+    "schema_version": {
+      "const": "raisa.status-confirm-route-mounting-readiness-rereview-contract.v1"
+    },
+    "source_assertions": {
+      "maxProperties": 14,
+      "minProperties": 14,
+      "type": "object"
+    },
+    "source_hashes": {
+      "maxProperties": 14,
+      "minProperties": 14,
+      "type": "object"
+    },
+    "source_head": {
+      "const": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715"
+    },
+    "verdict": {
+      "const": "composition_accepted_route_mounting_not_ready"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_head",
+    "composition_source_head",
+    "review_mode",
+    "source_hashes",
+    "source_assertions",
+    "dimensions",
+    "dimension_counts",
+    "verdict",
+    "implementation_authorized",
+    "next_candidate",
+    "forbidden"
+  ],
+  "type": "object"
+}
