@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/status-confirm-runtime-convergence-rehearsal.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "implementation_authorized",
+    "source_bindings",
+    "architecture_binding",
+    "initial_state",
+    "schedules",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.status_confirm_runtime_convergence_rehearsal.v1"
+    },
+    "result": {
+      "const": "raisa_provider_free_unmounted_status_confirm_runtime_convergence_rehearsal_pass"
+    },
+    "source_head": {
+      "const": "0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc"
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_pure_in_memory"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/source_binding"
+      }
+    },
+    "architecture_binding": {
+      "$ref": "#/$defs/architecture_binding"
+    },
+    "initial_state": {
+      "$ref": "#/$defs/initial_state"
+    },
+    "schedules": {
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/schedule"
+      }
+    },
+    "forbidden": {
+      "$ref": "#/$defs/forbidden"
+    },
+    "next_candidate": {
+      "const": "provider_free_read_only_status_confirm_physical_representability_review"
+    }
+  },
+  "$defs": {
+    "source_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "architecture_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "lock_order", "effect_write_set", "response_source"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "lock_order": {"const": ["practice", "appointment", "idempotency_record"]},
+        "effect_write_set": {"const": ["appointment_mutation", "attributable_audit", "completed_receipt"]},
+        "response_source": {"const": "stored_canonical_receipt"}
+      }
+    },
+    "initial_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "practice_id", "appointment_id", "target_exists", "appointment_status",
+        "appointment_state_version", "actor_id", "actor_role",
+        "session_binding_digest", "authority_current", "mutation_count",
+        "audit_count", "receipt_count"
+      ],
+      "properties": {
+        "practice_id": {"type": "string", "minLength": 1},
+        "appointment_id": {"type": "string", "minLength": 1},
+        "target_exists": {"const": true},
+        "appointment_status": {"const": "Booked"},
+        "appointment_state_version": {"const": 7},
+        "actor_id": {"type": "string", "minLength": 1},
+        "actor_role": {"const": "Receptionist"},
+        "session_binding_digest": {"type": "string", "minLength": 1},
+        "authority_current": {"const": true},
+        "mutation_count": {"const": 0},
+        "audit_count": {"const": 0},
+        "receipt_count": {"const": 0}
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "expected"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^scr-[0-9]{3}-[a-z0-9-]+$"},
+        "kind": {
+          "enum": [
+            "clean_commit", "unsupported_variant", "server_authority_incomplete",
+            "session_missing", "target_absent", "authority_revoked",
+            "signed_evidence_invalid", "session_mismatch", "stale_version",
+            "warning_missing", "warning_extra", "warning_duplicate",
+            "warning_unknown", "terminal_retransition", "failure_after_mutation",
+            "failure_after_audit", "failure_after_receipt",
+            "response_loss_then_retry", "concurrent_same_digest",
+            "concurrent_different_digest", "authority_loss_while_waiting",
+            "source_change_while_waiting", "replay_after_authority_revoked",
+            "replay_after_target_removed"
+          ]
+        },
+        "expected": {"$ref": "#/$defs/expected"}
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "participant_outcomes", "target_exists", "appointment_status",
+        "appointment_state_version", "mutation_count", "audit_count",
+        "receipt_count", "disclosure_count"
+      ],
+      "properties": {
+        "participant_outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "target_exists": {"type": "boolean"},
+        "appointment_status": {"type": ["string", "null"]},
+        "appointment_state_version": {"type": ["integer", "null"], "minimum": 1},
+        "mutation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "audit_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "receipt_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "disclosure_count": {"type": "integer", "minimum": 0, "maximum": 2}
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "application_imported", "application_edited", "route_executed",
+        "database_driver_imported", "database_executed", "real_lock_acquired",
+        "provider_called", "credential_or_browser_authorization_used",
+        "product_or_patient_data_used", "command_executed"
+      ],
+      "properties": {
+        "application_imported": {"const": false},
+        "application_edited": {"const": false},
+        "route_executed": {"const": false},
+        "database_driver_imported": {"const": false},
+        "database_executed": {"const": false},
+        "real_lock_acquired": {"const": false},
+        "provider_called": {"const": false},
+        "credential_or_browser_authorization_used": {"const": false},
+        "product_or_patient_data_used": {"const": false},
+        "command_executed": {"const": false}
+      }
+    }
+  }
+}

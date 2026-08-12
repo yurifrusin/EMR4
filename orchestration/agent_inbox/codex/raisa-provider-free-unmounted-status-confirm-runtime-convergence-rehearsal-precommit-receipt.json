@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_verified_provider_free_unmounted_status_confirm_runtime_convergence_rehearsal_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan admits exactly 24 authored-synthetic schedules over the accepted architecture. The closed packet and schema validate, all 24 schedules reproduce their exact outcomes, 88 of 88 hostile mutations fail closed, Ruff passes, the 15-test focused file passes, and the current 108-test rehearsal/architecture/review/adapter/protocol/API/baton packet passes. One separately attempted historical Sprint 138 preflight assertion remains unmodified and fails because it expects the later accepted update route to lack its current Idempotency-Key header; it is excluded from the current contract gate and disclosed in closeout.",
+    "current_authority_allocation": "GPT Sol directly implemented and reviewed this tightly coupled pure in-memory state machine. No subagent or external worker was used, no provider was called, and the user's Google authentication and impersonation configuration were not exercised.",
+    "git_refs_and_worktree": "Before the source commit, task HEAD and origin task remain 0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; 527 untracked paths include the bounded rehearsal source set and five docs/branding paths, all preserved pending explicit-path staging.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction at published HEAD 0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc. Continuity 259 / Compass 241 authorizes only the provider-free unmounted status-confirm convergence rehearsal.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary material remain closed. AER-0291 exact-file control was preserved. The simulator imported no application or database module and opened no route, SQL, real lock, physical storage, migration, provider, credential/browser authorization, product/patient data, watcher/event, product command, deployment, release, Pages or protected-ref surface. docs/branding and unrelated untracked files remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

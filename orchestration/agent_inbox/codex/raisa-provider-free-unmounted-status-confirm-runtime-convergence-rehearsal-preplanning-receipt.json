@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_provider_free_unmounted_status_confirm_runtime_convergence_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted architecture at source b9cc57b6e607e5896e822abc7b632442df2f907e freezes status-only discrimination, server-owned session/current authority, practice-appointment-idempotency lock order, monotonic state version, exact signed warning evidence, terminal deferral, atomic mutation/audit/receipt correlation and stored canonical delivery. The rehearsal may implement only a pure authored-synthetic in-memory state machine over these exact decisions.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled pure in-memory rehearsal under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent, external worker or provider is selected. Current Google authentication remains unused.",
+    "git_refs_and_worktree": "Task HEAD and origin task align at 0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and architecture source b9cc57b6e607e5896e822abc7b632442df2f907e are ancestors. Tracked state is clean and exactly 516 untracked paths, including five docs/branding paths, precede this state.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD 0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc and SHA-256 a3225a0fd7b013b0242322aaa0aa6c2aeeaf6fb2eabe3b31bbdebcedd16f36a6. Continuity 259 / Compass 241 names the provider-free unmounted convergence rehearsal next.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary material remain closed. AER-0291 exact-file control applies. No application-source search/import/edit, route/database/SQL/real-lock execution, physical schema/migration/backfill, provider call, credential/browser action, product/patient data, watcher/event, command, deployment, release, Pages or protected-ref action is authorized. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

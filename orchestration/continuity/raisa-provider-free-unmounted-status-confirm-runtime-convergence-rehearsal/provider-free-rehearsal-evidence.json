@@ -1,0 +1,1200 @@
+{
+  "schema_version": "raisa.status_confirm_runtime_convergence_rehearsal_evidence.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_runtime_convergence_rehearsal_pass",
+  "source_head": "0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc",
+  "evidence_label": "authored_synthetic_provider_free_pure_in_memory",
+  "implementation_authorized": false,
+  "source_hashes": {
+    "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-plan.md": "b2a645e11c28e625d13458d25cd6d6d959059897feef5f58c919ca5628e398f1",
+    "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md": "aa2eab6fddc0f8394ea3950965d525222917506a04b0ef10ab22999e2e442363",
+    "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md": "b5be8112872ec870f5c889a92e2be85a09833ac72d240fd5fd7144641d5638ee",
+    "orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md": "c726c94fd635727f9359ea5f707d6a4395317a7658ae795d24c99fc93c6340a5",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.schema.json": "634f143c4dd6e29e9c796cd9c03a7ae4e91b8565ffa6e68f05ca5a8193a98fbf",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/provider-free-architecture-evidence.json": "8e88d44b888eae461cfdbc4c0a8357e7cf60fffc9c93ee8d7436b0a4c023a750",
+    "scripts/raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture.py": "bddcd4120a24a5b733e1bbe6b7028d3a4f0424ba560ef47cd1a34d109034505d"
+  },
+  "architecture_binding": {
+    "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json",
+    "sha256": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce",
+    "lock_order": [
+      "practice",
+      "appointment",
+      "idempotency_record"
+    ],
+    "effect_write_set": [
+      "appointment_mutation",
+      "attributable_audit",
+      "completed_receipt"
+    ],
+    "response_source": "stored_canonical_receipt"
+  },
+  "schedule_count": 24,
+  "schedules": [
+    {
+      "id": "scr-001-clean-commit",
+      "kind": "clean_commit",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-002-waiting-area",
+      "kind": "unsupported_variant",
+      "participants": [
+        {
+          "outcome": "validation_rejected",
+          "trace": [
+            "discriminate:status_only"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "validation_rejected"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-003-server-authority",
+      "kind": "server_authority_incomplete",
+      "participants": [
+        {
+          "outcome": "validation_rejected",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "validation_rejected"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-004-session-missing",
+      "kind": "session_missing",
+      "participants": [
+        {
+          "outcome": "validation_rejected",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "validation_rejected"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-005-target-absent",
+      "kind": "target_absent",
+      "participants": [
+        {
+          "outcome": "validation_rejected",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "validation_rejected"
+        ],
+        "target_exists": false,
+        "appointment_status": null,
+        "appointment_state_version": null,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-006-authority-revoked",
+      "kind": "authority_revoked",
+      "participants": [
+        {
+          "outcome": "authority_revoked",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "authority_revoked"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-007-evidence-invalid",
+      "kind": "signed_evidence_invalid",
+      "participants": [
+        {
+          "outcome": "confirmation_required",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "confirmation_required"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-008-session-mismatch",
+      "kind": "session_mismatch",
+      "participants": [
+        {
+          "outcome": "confirmation_required",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "confirmation_required"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-009-version-stale",
+      "kind": "stale_version",
+      "participants": [
+        {
+          "outcome": "stale_precondition",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "stale_precondition"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-010-warning-missing",
+      "kind": "warning_missing",
+      "participants": [
+        {
+          "outcome": "confirmation_required",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "confirmation_required"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-011-warning-extra",
+      "kind": "warning_extra",
+      "participants": [
+        {
+          "outcome": "confirmation_required",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "confirmation_required"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-012-warning-duplicate",
+      "kind": "warning_duplicate",
+      "participants": [
+        {
+          "outcome": "confirmation_required",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "confirmation_required"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-013-warning-unknown",
+      "kind": "warning_unknown",
+      "participants": [
+        {
+          "outcome": "confirmation_required",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "confirmation_required"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-014-terminal",
+      "kind": "terminal_retransition",
+      "participants": [
+        {
+          "outcome": "transition_policy_deferred",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "transition_policy_deferred"
+        ],
+        "target_exists": true,
+        "appointment_status": "Completed",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-015-rollback-after-mutation",
+      "kind": "failure_after_mutation",
+      "participants": [
+        {
+          "outcome": "transaction_rolled_back",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "rollback:atomic"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "transaction_rolled_back"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-016-rollback-after-audit",
+      "kind": "failure_after_audit",
+      "participants": [
+        {
+          "outcome": "transaction_rolled_back",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "rollback:atomic"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "transaction_rolled_back"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-017-rollback-after-receipt",
+      "kind": "failure_after_receipt",
+      "participants": [
+        {
+          "outcome": "transaction_rolled_back",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "rollback:atomic"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "transaction_rolled_back"
+        ],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-018-response-loss-retry",
+      "kind": "response_loss_then_retry",
+      "participants": [
+        {
+          "outcome": "committed_delivery_unknown",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "delivery:unknown"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": true
+        },
+        {
+          "outcome": "idempotent_replay",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed_delivery_unknown",
+          "idempotent_replay"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-019-same-digest-race",
+      "kind": "concurrent_same_digest",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        },
+        {
+          "outcome": "idempotent_replay",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed",
+          "idempotent_replay"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 2
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-020-different-digest-race",
+      "kind": "concurrent_different_digest",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        },
+        {
+          "outcome": "idempotency_conflict",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed",
+          "idempotency_conflict"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-021-authority-loss-waiting",
+      "kind": "authority_loss_while_waiting",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        },
+        {
+          "outcome": "authority_revoked",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed",
+          "authority_revoked"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-022-source-loss-waiting",
+      "kind": "source_change_while_waiting",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        },
+        {
+          "outcome": "stale_precondition",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed",
+          "stale_precondition"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-023-replay-after-revocation",
+      "kind": "replay_after_authority_revoked",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        },
+        {
+          "outcome": "authority_revoked",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed",
+          "authority_revoked"
+        ],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    },
+    {
+      "id": "scr-024-replay-after-target-loss",
+      "kind": "replay_after_target_removed",
+      "participants": [
+        {
+          "outcome": "committed",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment",
+            "lock:idempotency_record",
+            "recheck:current_authority",
+            "inspect:idempotency",
+            "recheck:appointment_state_version",
+            "recompute:warning_codes",
+            "verify:signed_confirmation",
+            "check:terminal_policy",
+            "stage:appointment_mutation",
+            "stage:attributable_audit",
+            "stage:completed_receipt",
+            "commit:atomic",
+            "render:stored_canonical_receipt"
+          ],
+          "receipt_disclosed": true,
+          "response_digest": "sha256:89d82c85bf4fd4efbce9b35873eb99c663ff597a6436f972646cecc230169bfb",
+          "effect_written": true
+        },
+        {
+          "outcome": "validation_rejected",
+          "trace": [
+            "discriminate:status_only",
+            "ingress:server_authority",
+            "lock:practice",
+            "lock:appointment"
+          ],
+          "receipt_disclosed": false,
+          "response_digest": null,
+          "effect_written": false
+        }
+      ],
+      "final": {
+        "participant_outcomes": [
+          "committed",
+          "validation_rejected"
+        ],
+        "target_exists": false,
+        "appointment_status": null,
+        "appointment_state_version": null,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      },
+      "invariants": {
+        "lock_order_valid": true,
+        "authority_before_idempotency": true,
+        "atomic_write_counts_correlated": true,
+        "delivered_response_matches_stored_receipt": true
+      }
+    }
+  ],
+  "invariants": {
+    "status_only_discrimination": true,
+    "server_owned_authority_and_session": true,
+    "ordered_locks": true,
+    "authority_before_idempotency_disclosure": true,
+    "exact_version_warning_and_evidence_checks": true,
+    "terminal_retransition_deferred": true,
+    "atomic_mutation_audit_receipt": true,
+    "stored_canonical_initial_and_replay_delivery": true
+  },
+  "hostile_mutations": {
+    "attempted": 88,
+    "rejected": 88
+  },
+  "forbidden": {
+    "application_imported": false,
+    "application_edited": false,
+    "route_executed": false,
+    "database_driver_imported": false,
+    "database_executed": false,
+    "real_lock_acquired": false,
+    "provider_called": false,
+    "credential_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "command_executed": false
+  },
+  "next_candidate": "provider_free_read_only_status_confirm_physical_representability_review"
+}

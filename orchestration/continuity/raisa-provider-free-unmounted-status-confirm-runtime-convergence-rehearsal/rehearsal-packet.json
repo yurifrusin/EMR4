@@ -1,0 +1,421 @@
+{
+  "schema_version": "raisa.status_confirm_runtime_convergence_rehearsal.v1",
+  "result": "raisa_provider_free_unmounted_status_confirm_runtime_convergence_rehearsal_pass",
+  "source_head": "0fe6b9bfaea2394d7fb7ebb9866bfb1fa56611cc",
+  "evidence_label": "authored_synthetic_provider_free_pure_in_memory",
+  "implementation_authorized": false,
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-plan.md",
+      "sha256": "b2a645e11c28e625d13458d25cd6d6d959059897feef5f58c919ca5628e398f1"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md",
+      "sha256": "aa2eab6fddc0f8394ea3950965d525222917506a04b0ef10ab22999e2e442363"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md",
+      "sha256": "b5be8112872ec870f5c889a92e2be85a09833ac72d240fd5fd7144641d5638ee"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md",
+      "sha256": "c726c94fd635727f9359ea5f707d6a4395317a7658ae795d24c99fc93c6340a5"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json",
+      "sha256": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.schema.json",
+      "sha256": "634f143c4dd6e29e9c796cd9c03a7ae4e91b8565ffa6e68f05ca5a8193a98fbf"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/provider-free-architecture-evidence.json",
+      "sha256": "8e88d44b888eae461cfdbc4c0a8357e7cf60fffc9c93ee8d7436b0a4c023a750"
+    },
+    {
+      "path": "scripts/raisa_provider_free_unmounted_status_confirm_runtime_convergence_architecture.py",
+      "sha256": "bddcd4120a24a5b733e1bbe6b7028d3a4f0424ba560ef47cd1a34d109034505d"
+    }
+  ],
+  "architecture_binding": {
+    "path": "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json",
+    "sha256": "6f2c970a4ab9234e72d6ffb08b2aa9b8738b779b94cee1885dbf262bfb5306ce",
+    "lock_order": [
+      "practice",
+      "appointment",
+      "idempotency_record"
+    ],
+    "effect_write_set": [
+      "appointment_mutation",
+      "attributable_audit",
+      "completed_receipt"
+    ],
+    "response_source": "stored_canonical_receipt"
+  },
+  "initial_state": {
+    "practice_id": "practice-synthetic-001",
+    "appointment_id": "apt-synthetic-001",
+    "target_exists": true,
+    "appointment_status": "Booked",
+    "appointment_state_version": 7,
+    "actor_id": "actor-synthetic-001",
+    "actor_role": "Receptionist",
+    "session_binding_digest": "sha256:session-synthetic-001",
+    "authority_current": true,
+    "mutation_count": 0,
+    "audit_count": 0,
+    "receipt_count": 0
+  },
+  "schedules": [
+    {
+      "id": "scr-001-clean-commit",
+      "kind": "clean_commit",
+      "expected": {
+        "participant_outcomes": ["committed"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    },
+    {
+      "id": "scr-002-waiting-area",
+      "kind": "unsupported_variant",
+      "expected": {
+        "participant_outcomes": ["validation_rejected"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-003-server-authority",
+      "kind": "server_authority_incomplete",
+      "expected": {
+        "participant_outcomes": ["validation_rejected"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-004-session-missing",
+      "kind": "session_missing",
+      "expected": {
+        "participant_outcomes": ["validation_rejected"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-005-target-absent",
+      "kind": "target_absent",
+      "expected": {
+        "participant_outcomes": ["validation_rejected"],
+        "target_exists": false,
+        "appointment_status": null,
+        "appointment_state_version": null,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-006-authority-revoked",
+      "kind": "authority_revoked",
+      "expected": {
+        "participant_outcomes": ["authority_revoked"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-007-evidence-invalid",
+      "kind": "signed_evidence_invalid",
+      "expected": {
+        "participant_outcomes": ["confirmation_required"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-008-session-mismatch",
+      "kind": "session_mismatch",
+      "expected": {
+        "participant_outcomes": ["confirmation_required"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-009-version-stale",
+      "kind": "stale_version",
+      "expected": {
+        "participant_outcomes": ["stale_precondition"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-010-warning-missing",
+      "kind": "warning_missing",
+      "expected": {
+        "participant_outcomes": ["confirmation_required"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-011-warning-extra",
+      "kind": "warning_extra",
+      "expected": {
+        "participant_outcomes": ["confirmation_required"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-012-warning-duplicate",
+      "kind": "warning_duplicate",
+      "expected": {
+        "participant_outcomes": ["confirmation_required"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-013-warning-unknown",
+      "kind": "warning_unknown",
+      "expected": {
+        "participant_outcomes": ["confirmation_required"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-014-terminal",
+      "kind": "terminal_retransition",
+      "expected": {
+        "participant_outcomes": ["transition_policy_deferred"],
+        "target_exists": true,
+        "appointment_status": "Completed",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-015-rollback-after-mutation",
+      "kind": "failure_after_mutation",
+      "expected": {
+        "participant_outcomes": ["transaction_rolled_back"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-016-rollback-after-audit",
+      "kind": "failure_after_audit",
+      "expected": {
+        "participant_outcomes": ["transaction_rolled_back"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-017-rollback-after-receipt",
+      "kind": "failure_after_receipt",
+      "expected": {
+        "participant_outcomes": ["transaction_rolled_back"],
+        "target_exists": true,
+        "appointment_status": "Booked",
+        "appointment_state_version": 7,
+        "mutation_count": 0,
+        "audit_count": 0,
+        "receipt_count": 0,
+        "disclosure_count": 0
+      }
+    },
+    {
+      "id": "scr-018-response-loss-retry",
+      "kind": "response_loss_then_retry",
+      "expected": {
+        "participant_outcomes": ["committed_delivery_unknown", "idempotent_replay"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    },
+    {
+      "id": "scr-019-same-digest-race",
+      "kind": "concurrent_same_digest",
+      "expected": {
+        "participant_outcomes": ["committed", "idempotent_replay"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 2
+      }
+    },
+    {
+      "id": "scr-020-different-digest-race",
+      "kind": "concurrent_different_digest",
+      "expected": {
+        "participant_outcomes": ["committed", "idempotency_conflict"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    },
+    {
+      "id": "scr-021-authority-loss-waiting",
+      "kind": "authority_loss_while_waiting",
+      "expected": {
+        "participant_outcomes": ["committed", "authority_revoked"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    },
+    {
+      "id": "scr-022-source-loss-waiting",
+      "kind": "source_change_while_waiting",
+      "expected": {
+        "participant_outcomes": ["committed", "stale_precondition"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    },
+    {
+      "id": "scr-023-replay-after-revocation",
+      "kind": "replay_after_authority_revoked",
+      "expected": {
+        "participant_outcomes": ["committed", "authority_revoked"],
+        "target_exists": true,
+        "appointment_status": "Arrived",
+        "appointment_state_version": 8,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    },
+    {
+      "id": "scr-024-replay-after-target-loss",
+      "kind": "replay_after_target_removed",
+      "expected": {
+        "participant_outcomes": ["committed", "validation_rejected"],
+        "target_exists": false,
+        "appointment_status": null,
+        "appointment_state_version": null,
+        "mutation_count": 1,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "disclosure_count": 1
+      }
+    }
+  ],
+  "forbidden": {
+    "application_imported": false,
+    "application_edited": false,
+    "route_executed": false,
+    "database_driver_imported": false,
+    "database_executed": false,
+    "real_lock_acquired": false,
+    "provider_called": false,
+    "credential_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "command_executed": false
+  },
+  "next_candidate": "provider_free_read_only_status_confirm_physical_representability_review"
+}
