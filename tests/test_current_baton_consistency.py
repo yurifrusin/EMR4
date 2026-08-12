@@ -8,8 +8,10 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-status-confirm-preflight-idempotency-expectation-repair"
+    "raisa-provider-free-unmounted-status-confirm-route-convergence-"
+    "composition-rehearsal"
 )
+SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -24,10 +26,10 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 267
+    assert graph["graph_revision"] == 268
     assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 249
-    assert compass["source_graph_revision"] == 267
+    assert compass["map_revision"] == 250
+    assert compass["source_graph_revision"] == 268
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -37,15 +39,16 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 267 / Compass 249" in current
-    assert "ec9aa1b1d2813b3e864b37f331ac6b587816610a" in current
-    assert "update-confirm and delete-confirm require `Idempotency-Key`" in current
-    assert "historical Sprint-136 preflight" in current
-    assert "all application source remain unchanged" in current
-    assert "125 current status-confirm lineage checks" in current
+    assert "Continuity 268 / Compass 250" in current
+    assert SOURCE_HEAD in current
+    assert "complete `AppointmentConfirmStatusProposalOut` envelope" in current
+    assert "five-field status projection" in current
+    assert "Initial and replay delivery are byte-identical" in current
+    assert "163 current lineage" in current
     assert "191 canonical tests" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
+    assert SOURCE_HEAD in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
     assert "fe8313d224a92115aa31bea14f0cd3b14e4c9967" in relation
     assert "018099dd6c5f0502121360732feb602252eb34cc" in relation
@@ -67,13 +70,13 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free unmounted status-confirm route-convergence composition rehearsal" in next_work
-    assert "status-only adapter" in next_work
-    assert "server-owned session/current-authority ingress" in next_work
-    assert "exact physical transaction seam" in next_work
-    assert "do not edit, mount or call the application route" in next_work
+    assert "provider-free read-only status-confirm route-mounting readiness re-review" in next_work
+    assert SOURCE_HEAD in next_work
+    assert "seven prior composition blockers" in next_work
+    assert "may inspect exact non-protected files" in next_work
+    assert "may not edit, mount or call the route" in next_work
     assert "patient/product data" in next_work
-    assert "provider/ADC/credential/browser action" in next_work
+    assert "provider/ADC/credential/browser/network access" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -107,25 +110,20 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted status-confirm route-convergence composition rehearsal",
-        "status-only adapter",
-        "server-owned session/current-authority ingress",
-        "exact physical transaction seam",
-        "closed public-response mapper",
-        "do not edit, mount or call the application route",
-        "existing/product database",
+        "provider-free read-only status-confirm route-mounting readiness re-review",
+        "seven prior composition blockers",
+        "accepted physical postgresql proof",
+        "product adapter or route prerequisites",
+        "may not edit, mount or call the route",
+        "database/source",
         "product data",
         "command/write",
-        "concurrency",
-        "restart",
-        "unknown-commit",
-        "patient/product data",
-        "provider/adc/credential/browser action",
+        "provider/adc/credential/browser/network access",
         "docs/branding/",
-        "deployment",
+        "deploy",
         "release",
         "pages",
-        "protected-ref movement",
+        "protected refs",
         "explicit-path staging only",
     ):
         assert phrase in next_work

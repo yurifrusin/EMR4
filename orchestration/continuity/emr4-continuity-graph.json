@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 267,
+  "graph_revision": 268,
   "harvests": [],
   "nodes": [
     {
@@ -17296,6 +17296,87 @@
       "unresolved_gates": [
         "The accepted adapter, server authority/session ingress, physical seam and response mapper remain uncomposed and unmounted.",
         "No mounted-route edit/call, product command/database/data, concurrency, restart, unknown commit, provider, deployment or protected integration is proved or authorized."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal",
+      "title": "Provider-free unmounted status-confirm route-convergence composition rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "41f978ae9837cba50737cfb5f457ab62ac28dbdb",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-status-confirm-preflight-idempotency-expectation-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The application service is unmounted and absent from the router.",
+          "All execution evidence uses authored-synthetic in-memory doubles; no route or real database executes.",
+          "Product data, commands, providers, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-route-composition-rehearsal",
+          "source": "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the unmounted composition and full-envelope stored-replay reconciliation; proceed only to read-only route readiness re-review."
+        }
+      ],
+      "claim_scope": [
+        "One unmounted callable composes status-only admission, server ingress, physical transaction factory, locked readmission, injected effect and closed response mapping.",
+        "The complete current public envelope is canonical receipt authority and its five status fields are validated as a projection.",
+        "Twelve scenarios, 65 hostile mutations, 13 focused, 163 current lineage and 191 canonical tests pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-convergence-composition-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-route-convergence-composition-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_status_composition.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json",
+          "scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+          "scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The mounted route does not invoke the composition and product locked-state/effect adapters remain unproved.",
+        "The composition has not executed the physical PostgreSQL seam; concurrency, restart and unknown-commit claims remain closed.",
+        "No route/database execution, product data/command, provider, deployment or protected integration is authorized."
       ]
     }
   ],

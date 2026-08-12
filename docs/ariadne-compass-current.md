@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 267 / Compass 249. The stale status-confirm preflight expectation is repaired with no product change, and all 125 current lineage checks pass. The provider-free unmounted route composition rehearsal is next; mounted execution remains closed.
+> EMR4 is at Continuity 268 / Compass 250. The provider-free unmounted status-confirm composition and exact stored-envelope replay pass. A read-only route-mounting readiness re-review is next; mounted execution and product authority remain closed.
 
 ## North star
 
@@ -308,24 +308,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The endpoint is mounted and the physical foundation passes, but seven bounded composition gaps block unchanged convergence. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal`.
 146. **Remove one stale lifecycle-test contradiction before composing the status-confirm route seam — Status-confirm preflight idempotency expectation repair**
    The test-only expectation now matches accepted idempotency behavior and all 125 lineage checks pass. Lineage parent: `raisa-provider-free-read-only-status-confirm-route-mounting-admission-review`.
+147. **Compose the status-confirm safety path off-route and reconcile exact stored public replay — Provider-free unmounted status-confirm route-convergence composition rehearsal**
+   The unmounted callable passes finite execution/replay/failure rehearsal without opening route or database authority. Lineage parent: `raisa-status-confirm-preflight-idempotency-expectation-repair`.
 
 ## Current position
 
-**The status-confirm route lineage is internally consistent and ready for off-route composition — Status-confirm preflight idempotency expectation repair**
+**The status-confirm safety path is composed off-route with exact stored-envelope replay — Provider-free unmounted status-confirm route-convergence composition rehearsal**
 
-**Why this proof came next:** The admission review isolated one historical test contradiction before implementation rehearsal.
+**Why this proof came next:** The route admission review required composition before any mounting decision.
 
-The contradiction is corrected test-only; 125 current lineage checks and the canonical profile pass.
+The unmounted callable and response reconciliation pass all finite authored-synthetic checks.
 
 ### What this unlocks
 
-- Freeze and run a provider-free unmounted status-confirm route-convergence composition rehearsal.
-- Join the accepted status-only adapter, server authority/session ingress, physical seam and closed response mapper off-route.
+- Run a provider-free read-only status-confirm route-mounting readiness re-review.
+- Reclassify the seven prior blockers against exact composition source and name the narrowest remaining prerequisites.
 
 ### What it does not solve
 
-- Mounted-route convergence, route execution or a real product command.
-- Concurrency, restart, crash, unknown commit, retention, performance or production operations.
+- Mounted-route convergence, route execution, product adapters or a real product command.
+- Physical PostgreSQL composition execution, concurrency, restart, crash or unknown commit.
 - Provider/credential activity, patient/product data, deployment, release, Pages or protected-ref movement.
 
 ## Continuity and authority
@@ -394,8 +396,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve the accepted physical PostgreSQL status-confirm proof without reopening durability.
-- Rehearse one provider-free unmounted status-confirm route-convergence composition.
-- Join status-only admission, server authority/session ingress, physical seam and closed response mapping.
+- Re-review route-mounting readiness against the accepted unmounted composition source.
+- Identify only remaining product locked-state/effect adapter and route prerequisites.
 - Keep route edits/calls, product data/commands, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -748,6 +750,7 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption.py`
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
+- `app/services/appointment_status_composition.py`
 - `app/services/appointment_status_physical.py`
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
@@ -1098,6 +1101,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-plan.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture.md`
@@ -1222,6 +1227,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
@@ -1476,6 +1482,12 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-precommit-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-postcompaction-receipt.json`
@@ -1495,6 +1507,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-route-convergence-composition-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-admission-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
@@ -1821,6 +1834,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/convergence-architecture-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture/provider-free-architecture-evidence.json`
@@ -2105,6 +2121,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-representability-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-physical-schema-transaction-scaffold.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-convergence-composition-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-mounting-admission-review.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-runtime-convergence-rehearsal.md`
@@ -2128,6 +2145,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_office_practitioner_directory_consumer.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
+- `scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
 - `scripts/reception_one_bureau_model_text_lane_live.py`
 - `scripts/reception_one_preprinted_form_v5.py`
@@ -2182,6 +2200,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
+- `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
 - `tests/test_reception_one_bureau_post_admission_runtime_hardening.py`
@@ -2208,4 +2227,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 249; continuity graph revision 267._
+_Compass map revision 250; continuity graph revision 268._

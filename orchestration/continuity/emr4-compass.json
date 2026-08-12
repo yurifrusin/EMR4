@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 249,
+  "map_revision": 250,
   "updated_at": "2026-08-12T00:00:00Z",
-  "source_graph_revision": 267,
-  "orientation_statement": "EMR4 is at Continuity 267 / Compass 249. The stale status-confirm preflight expectation is repaired with no product change, and all 125 current lineage checks pass. The provider-free unmounted route composition rehearsal is next; mounted execution remains closed.",
+  "source_graph_revision": 268,
+  "orientation_statement": "EMR4 is at Continuity 268 / Compass 250. The provider-free unmounted status-confirm composition and exact stored-envelope replay pass. A read-only route-mounting readiness re-review is next; mounted execution and product authority remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2625,30 +2625,65 @@
         "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal",
+      "lineage_parent": "raisa-status-confirm-preflight-idempotency-expectation-repair",
+      "strategic_role": "Compose the status-confirm safety path off-route and reconcile exact stored public replay",
+      "outcome": "The unmounted callable passes finite execution/replay/failure rehearsal without opening route or database authority.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-threat-model-delta.md",
+        "app/services/appointment_status_composition.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json",
+        "scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-receipt.json",
+        "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-route-convergence-composition-rehearsal-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-convergence-composition-rehearsal.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-status-confirm-preflight-idempotency-expectation-repair",
-    "strategic_role": "The status-confirm route lineage is internally consistent and ready for off-route composition",
-    "why_now": "The admission review isolated one historical test contradiction before implementation rehearsal.",
-    "outcome": "The contradiction is corrected test-only; 125 current lineage checks and the canonical profile pass.",
+    "node_id": "raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal",
+    "strategic_role": "The status-confirm safety path is composed off-route with exact stored-envelope replay",
+    "why_now": "The route admission review required composition before any mounting decision.",
+    "outcome": "The unmounted callable and response reconciliation pass all finite authored-synthetic checks.",
     "unlocks": [
-      "Freeze and run a provider-free unmounted status-confirm route-convergence composition rehearsal.",
-      "Join the accepted status-only adapter, server authority/session ingress, physical seam and closed response mapper off-route."
+      "Run a provider-free read-only status-confirm route-mounting readiness re-review.",
+      "Reclassify the seven prior blockers against exact composition source and name the narrowest remaining prerequisites."
     ],
     "does_not_solve": [
-      "Mounted-route convergence, route execution or a real product command.",
-      "Concurrency, restart, crash, unknown commit, retention, performance or production operations.",
+      "Mounted-route convergence, route execution, product adapters or a real product command.",
+      "Physical PostgreSQL composition execution, concurrency, restart, crash or unknown commit.",
       "Provider/credential activity, patient/product data, deployment, release, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-status-confirm-preflight-idempotency-expectation-repair-plan.md",
-      "tests/test_api_spine_status_confirm_idempotency_preflight.py",
-      "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-runtime-state.json",
-      "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-receipt.json",
-      "docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md"
+      "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-threat-model-delta.md",
+      "app/services/appointment_status_composition.py",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json",
+      "scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+      "tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-receipt.json",
+      "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-status-confirm-route-convergence-composition-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-convergence-composition-rehearsal.md"
     ]
   },
   "decision_horizon": [
@@ -2745,8 +2780,8 @@
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
         "Preserve the accepted physical PostgreSQL status-confirm proof without reopening durability.",
-        "Rehearse one provider-free unmounted status-confirm route-convergence composition.",
-        "Join status-only admission, server authority/session ingress, physical seam and closed response mapping.",
+        "Re-review route-mounting readiness against the accepted unmounted composition source.",
+        "Identify only remaining product locked-state/effect adapter and route prerequisites.",
         "Keep route edits/calls, product data/commands, providers and protected integration separately gated."
       ],
       "boundary_changes": [],
@@ -3336,7 +3371,24 @@
         "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-receipt.json",
         "docs/raisa-status-confirm-preflight-idempotency-expectation-repair-closeout.md",
         "orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md",
-        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md"
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-preflight-idempotency-expectation-repair.md",
+        "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-threat-model-delta.md",
+        "app/services/appointment_status_composition.py",
+        "scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-precommit-receipt.json",
+        "docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-route-convergence-composition-rehearsal-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-12--status-confirm-route-convergence-composition-rehearsal.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout-precommit-receipt.json"
       ]
     },
     {

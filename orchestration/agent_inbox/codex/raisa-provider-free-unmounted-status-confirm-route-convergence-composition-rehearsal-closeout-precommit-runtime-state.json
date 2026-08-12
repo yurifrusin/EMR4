@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_status_confirm_route_composition_closeout_and_continuity_268_250",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md has been updated from the completely rehydrated baton to accept exact composition source 41f978ae9837cba50737cfb5f457ab62ac28dbdb at Continuity 268 / Compass 250 and name a provider-free read-only route-mounting readiness re-review next.",
+    "current_authority_allocation": "GPT Sol remains conductor, acceptance owner and explicit-path task-branch publisher. No worker, provider or subagent is active for closeout. The next read-only re-review remains within standing uninterrupted-development authority.",
+    "active_plan_and_acceptance": "The composition plan, exact contract, authored-synthetic evidence and accepted source are bound by the closeout and Sol acceptance. Twelve scenarios, 65 hostile mutations, 13 focused composition tests, 163 descendant-compatible lineage tests, 31 baton/Compass checks and the canonical 191-test fast profile pass.",
+    "protected_evidence_boundaries": "The source and closeout remain unmounted and provider-free. No route/database execution, product/patient data, command/write, provider/ADC/credential/IAM/browser/network access, deployment, release, Pages or protected-ref movement occurred. All five docs/branding files and every unrelated untracked file remain preserved; only exact closeout paths may be staged.",
+    "git_refs_and_worktree": "Source HEAD and the task branch are 41f978ae9837cba50737cfb5f457ab62ac28dbdb before the closeout commit; required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The source commit is not yet pushed; the closeout commit will be pushed with it after explicit-path staging and pre-push verification."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_route_composition_closeout_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Composition source, closeout, Continuity and Compass validations are complete in the active task worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent is selected for closeout."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed verifier is selected for the provider-free closeout."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker lane is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
