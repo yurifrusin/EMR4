@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-status-confirm-runtime-gap-review-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "review_mode",
+    "implementation_authorized",
+    "allowlist",
+    "dimensions",
+    "verdict_rule",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.status-confirm-runtime-gap-review-contract.v1"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "review_mode": {
+      "const": "provider_free_read_only_exact_file"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "allowlist": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "required_contract",
+          "classification",
+          "admission_blocker",
+          "observed_behavior",
+          "narrowest_prerequisite",
+          "citations"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_contract": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "enum": ["satisfied", "partial_gap", "blocking_gap"]
+          },
+          "admission_blocker": {
+            "type": "boolean"
+          },
+          "observed_behavior": {
+            "type": "string",
+            "minLength": 1
+          },
+          "narrowest_prerequisite": {
+            "type": "string",
+            "minLength": 1
+          },
+          "citations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "marker"],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "marker": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "after": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "verdict_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "any_blocking_gap",
+        "no_blocker_with_partial_gap",
+        "all_satisfied"
+      ],
+      "properties": {
+        "any_blocking_gap": {
+          "const": "not_admitted"
+        },
+        "no_blocker_with_partial_gap": {
+          "const": "admitted_after_bounded_prerequisites"
+        },
+        "all_satisfied": {
+          "const": "admitted"
+        }
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "app_import_performed",
+        "route_executed",
+        "database_executed",
+        "provider_calls_performed",
+        "product_data_accessed"
+      ],
+      "properties": {
+        "app_import_performed": {
+          "const": false
+        },
+        "route_executed": {
+          "const": false
+        },
+        "database_executed": {
+          "const": false
+        },
+        "provider_calls_performed": {
+          "const": false
+        },
+        "product_data_accessed": {
+          "const": false
+        }
+      }
+    },
+    "next_candidate": {
+      "const": "provider_free_unmounted_status_confirm_runtime_convergence_architecture"
+    }
+  }
+}

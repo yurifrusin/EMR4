@@ -1,0 +1,332 @@
+{
+  "schema_version": "raisa.status-confirm-runtime-gap-review-evidence.v1",
+  "result": "raisa_provider_free_read_only_status_confirm_runtime_gap_admission_review_pass",
+  "source_head": "1a26b49c0c3af84e8e8d2b6456268b7fff0d25f6",
+  "review_mode": "provider_free_read_only_exact_file",
+  "verdict": "not_admitted",
+  "implementation_authorized": false,
+  "dimension_counts": {
+    "satisfied": 0,
+    "partial_gap": 2,
+    "blocking_gap": 7
+  },
+  "dimensions": [
+    {
+      "id": "lock_order",
+      "title": "Practice, appointment and idempotency lock order",
+      "required_contract": "Acquire practice then appointment then idempotency_record, skipping no used domain and rechecking after waits.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The route claims and locks the idempotency record before loading the appointment; _get_appointment performs no FOR UPDATE and no practice lock is present.",
+      "narrowest_prerequisite": "Specify one transaction-owned status kernel that locks practice, appointment and idempotency in the accepted order before disclosure or effect.",
+      "citations": [
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2931,
+          "line_end": 2931
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2385,
+          "line_end": 2385
+        },
+        {
+          "path": "app/services/appointment_idempotency.py",
+          "line_start": 126,
+          "line_end": 126
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 563,
+          "line_end": 563
+        }
+      ]
+    },
+    {
+      "id": "current_authority_and_session",
+      "title": "Current authority and server session ingress",
+      "required_contract": "Server-owned practice, actor, role, active-user and session facts must be rechecked inside the transaction before replay disclosure or effect.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "FastAPI dependencies check active user and role before the handler, but the route has no server-session binding or post-wait in-transaction authority recheck before mapping replay.",
+      "narrowest_prerequisite": "Define server-only authority/session ingress and an in-transaction recheck that precedes every idempotency outcome disclosure.",
+      "citations": [
+        {
+          "path": "app/dependencies.py",
+          "line_start": 20,
+          "line_end": 20
+        },
+        {
+          "path": "app/dependencies.py",
+          "line_start": 40,
+          "line_end": 40
+        },
+        {
+          "path": "app/schemas/appointments.py",
+          "line_start": 553,
+          "line_end": 553
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2943,
+          "line_end": 2943
+        }
+      ]
+    },
+    {
+      "id": "status_only_discrimination",
+      "title": "Status-only discrimination from waiting-area union",
+      "required_contract": "Only update_appointment_status may enter the status kernel; waiting-area input must stop before request construction.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The confirmation schema accepts a status-or-waiting-area union and the same route currently confirms a waiting-area write.",
+      "narrowest_prerequisite": "Freeze an explicit status-only runtime discriminator or separate route before kernel admission, retaining waiting-area behavior outside this kernel.",
+      "citations": [
+        {
+          "path": "app/schemas/appointments.py",
+          "line_start": 555,
+          "line_end": 555
+        },
+        {
+          "path": "tests/test_api_spine_status_confirm_idempotency_route_contract.py",
+          "line_start": 355,
+          "line_end": 355
+        }
+      ]
+    },
+    {
+      "id": "terminal_transition_policy",
+      "title": "Fail-closed terminal re-transition policy",
+      "required_contract": "A terminal-to-different-status request must stop effect-free as transition_policy_deferred.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The proposal emits only an already_terminal warning and the shared update helper contains no terminal guard; the out-of-tree guard expects blocking but is intentionally not current executable evidence.",
+      "narrowest_prerequisite": "Keep terminal re-transition outside the kernel until an explicit policy is accepted; the convergence architecture must make the admitted path fail closed.",
+      "citations": [
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2683,
+          "line_end": 2683
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2880,
+          "line_end": 2880
+        },
+        {
+          "path": "review/test_raw_status_terminal_rollback_guard.py",
+          "line_start": 71,
+          "line_end": 71
+        }
+      ]
+    },
+    {
+      "id": "warning_acknowledgement",
+      "title": "Exact warning acknowledgement",
+      "required_contract": "Submitted warning codes must equal the current proposal warning set with no duplicate or unknown code.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The route concatenates proposal warning codes and submitted confirmed_warnings; it does not compare exact sets before effect.",
+      "narrowest_prerequisite": "Specify one exact warning-set equality check after locked current-state recomputation and before request construction.",
+      "citations": [
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 3021,
+          "line_end": 3021
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 3023,
+          "line_end": 3023
+        }
+      ]
+    },
+    {
+      "id": "evidence_and_freshness",
+      "title": "Signed evidence and freshness under current truth",
+      "required_contract": "Evidence must bind exact practice, actor, command, session, locked current source version and freshness token.",
+      "classification": "partial_gap",
+      "admission_blocker": false,
+      "observed_behavior": "Signed evidence binds practice, staff user, command, current status fields and freshness, but no session or durable source version is present and the state is read without the accepted lock order.",
+      "narrowest_prerequisite": "Extend the server-only binding to session and locked source version while retaining the existing practice/actor/command/current-state proof.",
+      "citations": [
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2556,
+          "line_end": 2556
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2974,
+          "line_end": 2974
+        },
+        {
+          "path": "app/models/appointments.py",
+          "line_start": 47,
+          "line_end": 47
+        }
+      ]
+    },
+    {
+      "id": "atomic_audit_receipt_correlation",
+      "title": "Atomic mutation, audit and receipt correlation",
+      "required_contract": "Appointment mutation, attributable audit and completed receipt must commit together with durable target and audit identifiers.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The route stages mutation, audit and completed idempotency response before one commit, but it discards the created audit identifier and status completion is not constrained to durable audit correlation.",
+      "narrowest_prerequisite": "Return the staged audit identity into the kernel receipt and require status completed-write rows to bind target and audit before commit.",
+      "citations": [
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 884,
+          "line_end": 884
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 3048,
+          "line_end": 3048
+        },
+        {
+          "path": "app/models/appointments.py",
+          "line_start": 248,
+          "line_end": 248
+        }
+      ]
+    },
+    {
+      "id": "authority_first_replay_disclosure",
+      "title": "Authority-first replay and conflict disclosure",
+      "required_contract": "Current authority must be rechecked after waits and before stored receipt, conflict or other idempotency outcome disclosure.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The idempotency service may return a completed stored response and the route returns the mapped result before loading/locking current appointment state or rechecking authority inside the transaction.",
+      "narrowest_prerequisite": "Move replay/conflict classification behind the ordered current-authority and target lock boundary without weakening same-key identity.",
+      "citations": [
+        {
+          "path": "app/services/appointment_idempotency.py",
+          "line_start": 136,
+          "line_end": 136
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 2944,
+          "line_end": 2944
+        }
+      ]
+    },
+    {
+      "id": "stored_receipt_delivery",
+      "title": "Canonical stored-receipt delivery",
+      "required_contract": "Initial success and replay must render the same canonical stored receipt and digest; post-commit delivery failure must not cause another effect.",
+      "classification": "partial_gap",
+      "admission_blocker": false,
+      "observed_behavior": "The service stores response JSON plus a canonical hash and replay returns the stored JSON, but initial success returns the separately held Pydantic response and no explicit unknown-commit delivery contract exists.",
+      "narrowest_prerequisite": "Define one stored receipt serializer used by initial and replay responses plus a typed post-commit delivery-failure recovery contract.",
+      "citations": [
+        {
+          "path": "app/services/appointment_idempotency.py",
+          "line_start": 175,
+          "line_end": 175
+        },
+        {
+          "path": "app/services/appointment_idempotency.py",
+          "line_start": 141,
+          "line_end": 141
+        },
+        {
+          "path": "app/routers/appointments.py",
+          "line_start": 3057,
+          "line_end": 3057
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "app/routers/appointments.py": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb",
+    "app/schemas/appointments.py": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "app/dependencies.py": "d44f777f742074f0ee4717d599d7ee71dd6343c7096c87793149c727c1c4b0a9",
+    "app/models/appointments.py": "af00f7318da3f19732843c75b56721db89a3fa0c94b6e0feeb12a614850c4952",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+    "tests/test_api_spine_status_confirm_idempotency_route_contract.py": "0ecc5b2bff0853d3f9797163b979f575f9604c6ba0895cf5bd36c165664eb8af",
+    "tests/test_api_spine_confirmation_contract_matrix.py": "4881bde300c6c62a061518aec8a1ddfc5e7b185e0c1cd4f86c490c5fef2c6ef6",
+    "review/test_raw_status_terminal_rollback_guard.py": "fbfa53e8fc8cf22b522437c1d74aa77638ef930bfc1fec5ff678b45c221555b6",
+    "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py": "a45b601a375c7dec7ee08e46be53e23991542cf9699a9ac75798c2e70d2865d8",
+    "scripts/raisa_provider_free_unmounted_status_transaction_kernel_protocol_rehearsal.py": "14883b8dcdf26a1f0ef88214d7b3f6b105a0fcc3e298298d4b14d1c703a93083"
+  },
+  "structural_assertions": [
+    {
+      "id": "claim_precedes_appointment_load",
+      "passed": true
+    },
+    {
+      "id": "mapped_replay_precedes_appointment_load",
+      "passed": true
+    },
+    {
+      "id": "appointment_load_has_no_for_update",
+      "passed": true
+    },
+    {
+      "id": "route_has_no_server_session_binding",
+      "passed": true
+    },
+    {
+      "id": "confirmation_schema_is_union",
+      "passed": true
+    },
+    {
+      "id": "confirmation_schema_has_no_session_binding",
+      "passed": true
+    },
+    {
+      "id": "terminal_retransition_is_warning_only",
+      "passed": true
+    },
+    {
+      "id": "warning_codes_are_concatenated",
+      "passed": true
+    },
+    {
+      "id": "signed_payload_has_no_session",
+      "passed": true
+    },
+    {
+      "id": "appointment_has_no_source_version",
+      "passed": true
+    },
+    {
+      "id": "status_completion_omits_audit_id",
+      "passed": true
+    },
+    {
+      "id": "status_not_in_completed_correlation_constraint",
+      "passed": true
+    },
+    {
+      "id": "completed_replay_returns_stored_json",
+      "passed": true
+    },
+    {
+      "id": "stored_response_has_canonical_hash",
+      "passed": true
+    },
+    {
+      "id": "initial_status_response_is_separate_object",
+      "passed": true
+    }
+  ],
+  "hostile_mutations": {
+    "attempted": 37,
+    "rejected": 37
+  },
+  "terminal_guard_executed": false,
+  "forbidden": {
+    "app_import_performed": false,
+    "route_executed": false,
+    "database_executed": false,
+    "provider_calls_performed": false,
+    "product_data_accessed": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_runtime_convergence_architecture"
+}

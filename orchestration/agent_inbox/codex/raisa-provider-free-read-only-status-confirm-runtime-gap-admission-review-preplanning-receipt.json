@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_provider_free_read_only_status_confirm_runtime_gap_admission_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:4d13b5dba254c44d3786a5752dc6894b57c9a2479361cb7b22fe5b3497b52e8d",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted adapter at source 30a49015d23bfcf069be0af838df7091032a40be and parent protocol at bd381de83bc0b5d4b6b43b4bbb4e1e70a68d7f62 freeze status-only authority-first input, lock order, fail-closed terminal deferral and stored-receipt output. The next review may inspect exact non-protected lock, server-session ingress, terminal, warning/evidence/freshness and receipt-delivery sources and must stop before implementation.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled read-only planning and evidence review under Yuri's standing uninterrupted-development authority and the API Steward boundary. No subagent, external worker or provider is selected.",
+    "git_refs_and_worktree": "Task HEAD and origin task align at 1a26b49c0c3af84e8e8d2b6456268b7fff0d25f6. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and adapter source 30a49015d23bfcf069be0af838df7091032a40be are ancestors. Tracked state is clean and exactly 516 untracked paths, including five docs/branding paths, precede this state.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published HEAD 1a26b49c0c3af84e8e8d2b6456268b7fff0d25f6 and SHA-256 26e136cbcf9eee3551184454e132da6fa542391fe03d880fe2bc6c6479a32399. Continuity 257 / Compass 239 names the provider-free read-only status-confirm runtime-gap admission review next.",
+    "protected_evidence_boundaries": "AER-0291 exact-file control applies. Protected holdouts and historical diary material remain closed. Content inspection is limited to named non-protected files; no route or database execution/edit, provider call, product/patient data, command, runtime, deployment, release, Pages or protected-ref action is authorised. docs/branding and unrelated untracked paths remain excluded; explicit-path staging only applies."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
