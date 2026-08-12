@@ -1,0 +1,176 @@
+{
+  "schema_version": "raisa.status-confirm-route-mounting-review-contract.v1",
+  "source_head": "d5684d934f80d1db49030b27b34b1b59a0c87f82",
+  "review_mode": "provider_free_read_only_exact_file",
+  "implementation_authorized": false,
+  "allowlist": [
+    {"path": "app/main.py", "sha256": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2"},
+    {"path": "app/routers/appointments.py", "sha256": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb"},
+    {"path": "app/dependencies.py", "sha256": "d44f777f742074f0ee4717d599d7ee71dd6343c7096c87793149c727c1c4b0a9"},
+    {"path": "app/schemas/appointments.py", "sha256": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d"},
+    {"path": "app/services/appointment_idempotency.py", "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"},
+    {"path": "app/services/appointment_status_physical.py", "sha256": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b"},
+    {"path": "app/models/appointments.py", "sha256": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"},
+    {"path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py", "sha256": "a45b601a375c7dec7ee08e46be53e23991542cf9699a9ac75798c2e70d2865d8"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json", "sha256": "00b094830c5f1a0cea19be40cb6761ed5350b6b2ed3fecb53e37ae255333eadd"}
+  ],
+  "dimensions": [
+    {
+      "id": "literal_route_mounting",
+      "title": "Literal route mounting",
+      "required_contract": "The reviewed handler must have a concrete router path and the application must include that router.",
+      "classification": "satisfied",
+      "admission_blocker": false,
+      "observed_behavior": "The appointments router is included by the application and exposes POST /api/v1/appointments/proposals/status-confirm.",
+      "narrowest_prerequisite": "None for literal mounting; do not mistake this fact for physical-seam admission.",
+      "citations": [
+        {"path": "app/main.py", "marker": "app.include_router(appointments.router)"},
+        {"path": "app/routers/appointments.py", "marker": "router = APIRouter(prefix=\"/api/v1/appointments\", tags=[\"appointments\"])"},
+        {"path": "app/routers/appointments.py", "marker": "\"/proposals/status-confirm\",", "after": "def _apply_appointment_status_update("}
+      ]
+    },
+    {
+      "id": "canonical_api_identity",
+      "title": "Canonical API identity and current alias",
+      "required_contract": "The mounted transport must preserve operation identity and have an explicit convergence disposition relative to the canonical API Spine path.",
+      "classification": "partial_gap",
+      "admission_blocker": false,
+      "observed_behavior": "The operation identity is frozen, but the mounted hyphenated path remains only a documented alias candidate for canonical /appointments/proposals/status/confirm.",
+      "narrowest_prerequisite": "The unmounted composition must preserve confirmAppointmentStatusProposal and defer any path migration or alias decision.",
+      "citations": [
+        {"path": "docs/api-spine/openapi/appointment-commands.yaml", "marker": "current_backend_path: /appointments/proposals/status-confirm"},
+        {"path": "docs/api-spine/openapi/appointment-commands.yaml", "marker": "canonical_openapi_path: /appointments/proposals/status/confirm"},
+        {"path": "docs/api-spine/openapi/appointment-commands.yaml", "marker": "operationId: confirmAppointmentStatusProposal"}
+      ]
+    },
+    {
+      "id": "physical_seam_composition",
+      "title": "Physical transaction-seam composition",
+      "required_contract": "The handler must enter status_confirm_locked_transaction rather than the legacy claim/update/complete sequence.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The physical seam exists, but the mounted handler imports and calls the legacy idempotency service and never imports or calls the seam.",
+      "narrowest_prerequisite": "Build an unmounted composition callable that maps admitted transport input into status_confirm_locked_transaction without changing the mounted route.",
+      "citations": [
+        {"path": "app/services/appointment_status_physical.py", "marker": "def status_confirm_locked_transaction("},
+        {"path": "app/routers/appointments.py", "marker": "decision = claim_appointment_command(", "after": "def confirm_status_proposal_route("},
+        {"path": "app/routers/appointments.py", "marker": "complete_appointment_command(", "after": "def confirm_status_proposal_route("}
+      ]
+    },
+    {
+      "id": "current_authority_and_session",
+      "title": "Current authority and server-session ingress",
+      "required_contract": "Server-owned principal, practice, role, active state and session binding must reach the seam and be rechecked after lock waits before disclosure or effect.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "Dependencies authenticate active user, tenant and role before the handler, but provide no server-session binding or in-transaction current-authority callback; legacy replay can return first.",
+      "narrowest_prerequisite": "Inject a server-only session binding and side-effect-free current-authority callback into the unmounted composition, with no client authority fields.",
+      "citations": [
+        {"path": "app/dependencies.py", "marker": "def get_current_user("},
+        {"path": "app/dependencies.py", "marker": "def require_role(*roles: UserRole):"},
+        {"path": "app/services/appointment_status_physical.py", "marker": "if not current_authority(practice, appointment):"},
+        {"path": "app/routers/appointments.py", "marker": "if mapped_decision is not None:", "after": "def confirm_status_proposal_route("}
+      ]
+    },
+    {
+      "id": "status_only_discrimination",
+      "title": "Status-only discrimination",
+      "required_contract": "Only update_appointment_status may enter this physical seam; waiting-area commands stop before construction.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The mounted schema accepts a status-or-waiting-area union while the accepted pure adapter rejects anything except update_appointment_status/status.",
+      "narrowest_prerequisite": "Place the accepted status-only discriminator before physical request construction and retain waiting-area behavior outside the seam.",
+      "citations": [
+        {"path": "app/schemas/appointments.py", "marker": "status_proposal: AppointmentStatusProposalOut | AppointmentWaitingAreaProposalOut"},
+        {"path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py", "marker": "if transport[\"proposal_intent\"] != \"update_appointment_status\" or transport[\"command\"][\"kind\"] != \"status\":"}
+      ]
+    },
+    {
+      "id": "locked_policy_admission",
+      "title": "Locked source version, warnings and terminal policy",
+      "required_contract": "The admitted request must bind locked state version, exact warning-set equality and fail-closed terminal re-transition policy.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "A durable appointment state version now exists and the pure adapter defines exact warnings and terminal deferral, but the mounted handler concatenates warnings and does not call that adapter under the lock.",
+      "narrowest_prerequisite": "Recompute the transport-to-kernel decision against the locked appointment and pass the accepted adapter output unchanged into the seam.",
+      "citations": [
+        {"path": "app/models/appointments.py", "marker": "appointment_state_version = Column(BigInteger, nullable=False, server_default=\"1\")"},
+        {"path": "app/routers/appointments.py", "marker": "confirmed_warnings = [", "after": "def confirm_status_proposal_route("},
+        {"path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py", "marker": "return stop(\"transition_policy_deferred\")"},
+        {"path": "scripts/raisa_provider_free_unmounted_status_confirm_kernel_adapter_contract.py", "marker": "return stop(\"warning_acknowledgement_mismatch\", \"confirmation_required\")"}
+      ]
+    },
+    {
+      "id": "atomic_audit_private_receipt",
+      "title": "Atomic audit and private-receipt correlation",
+      "required_contract": "Mutation, attributable audit and v1 private receipt must commit together with target, audit, pre-state and post-state correlation.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The mounted route stages mutation, audit and legacy completion before one commit, but discards the returned audit identity and does not populate the v1 private receipt fields.",
+      "narrowest_prerequisite": "Have the unmounted effect callback return the audit identity and complete only through the physical seam's v1 correlation checks.",
+      "citations": [
+        {"path": "app/routers/appointments.py", "marker": "_write_audit(", "after": "def _apply_appointment_status_update("},
+        {"path": "app/routers/appointments.py", "marker": "complete_appointment_command(", "after": "def confirm_status_proposal_route("},
+        {"path": "app/models/appointments.py", "marker": "completed_receipt_version = Column(SmallInteger, nullable=True)"},
+        {"path": "app/models/appointments.py", "marker": "response_body_canonical_bytes = Column(LargeBinary, nullable=True)"}
+      ]
+    },
+    {
+      "id": "canonical_stored_delivery",
+      "title": "Canonical stored-receipt delivery",
+      "required_contract": "Initial success and replay must deliver the same canonical stored bytes after authority-first classification.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The legacy service stores JSON and replay returns it, while initial success returns a separately held response object; the physical seam instead exposes canonical bytes but the handler does not map them.",
+      "narrowest_prerequisite": "Define one unmounted public-envelope mapper that consumes only the physical decision's canonical stored bytes for initial and replay delivery.",
+      "citations": [
+        {"path": "app/services/appointment_idempotency.py", "marker": "response_body_json=record.response_body_json,"},
+        {"path": "app/routers/appointments.py", "marker": "return response_body", "after": "def confirm_status_proposal_route("},
+        {"path": "app/services/appointment_status_physical.py", "marker": "response_body_canonical_bytes=record.response_body_canonical_bytes"}
+      ]
+    },
+    {
+      "id": "physical_outcome_mapping",
+      "title": "Physical outcome to public response mapping",
+      "required_contract": "Every seam decision and exception must map deterministically to the existing public envelope without disclosing unauthorized state.",
+      "classification": "blocking_gap",
+      "admission_blocker": true,
+      "observed_behavior": "The seam defines physical decisions and fail-closed exceptions, but the mounted handler has no composition or mapping for them and continues its legacy response paths.",
+      "narrowest_prerequisite": "Freeze and rehearse a closed, unmounted mapper for execute, replay, conflicts, incomplete scaffolds, revoked authority and unavailable targets.",
+      "citations": [
+        {"path": "app/services/appointment_status_physical.py", "marker": "class StatusConfirmTargetUnavailable(StatusConfirmPhysicalError):"},
+        {"path": "app/services/appointment_status_physical.py", "marker": "class StatusConfirmAuthorityRevoked(StatusConfirmPhysicalError):"},
+        {"path": "app/services/appointment_status_physical.py", "marker": "class StatusConfirmPhysicalDecision:"},
+        {"path": "app/schemas/appointments.py", "marker": "class AppointmentConfirmStatusProposalOut(BaseModel):"}
+      ]
+    },
+    {
+      "id": "proved_physical_foundation",
+      "title": "Accepted physical durability foundation",
+      "required_contract": "The exact physical seam must already have provider-free PostgreSQL behavior and rollback evidence before composition is considered.",
+      "classification": "satisfied",
+      "admission_blocker": false,
+      "observed_behavior": "The accepted disposable PostgreSQL rehearsal passed all sixteen serial behavior, authority, receipt, revocation and rollback scenarios with complete cleanup.",
+      "narrowest_prerequisite": "None; consume this evidence without reopening concurrency, restart or unknown-commit claims.",
+      "citations": [
+        {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json", "marker": "\"result\": \"raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal_pass\""},
+        {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json", "marker": "\"hostile_mutations_rejected\": 100"}
+      ]
+    }
+  ],
+  "verdict_rule": {
+    "any_blocking_gap": "mounted_legacy_route_not_admitted_for_physical_convergence",
+    "no_blocker_with_partial_gap": "mounted_route_admitted_after_bounded_prerequisites",
+    "all_satisfied": "mounted_route_admitted"
+  },
+  "forbidden": {
+    "app_import_performed": false,
+    "route_executed": false,
+    "database_executed": false,
+    "provider_calls_performed": false,
+    "product_data_accessed": false,
+    "route_edit_authorized": false
+  },
+  "next_candidate": "provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal"
+}

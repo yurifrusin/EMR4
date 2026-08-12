@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_freeze_and_run_provider_free_read_only_status_confirm_route_mounting_admission_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD d5684d934f80d1db49030b27b34b1b59a0c87f82. Continuity 265 / Compass 247 accepts the exact serial PostgreSQL status-confirm behavior/transaction rehearsal and names the provider-free read-only route-mounting admission review next.",
+    "current_authority_allocation": "GPT Sol remains conductor, planner, exact-file reviewer, acceptance owner and task-branch publisher. This is a bounded read-only architectural classification and remains Sol-owned under the worker-lane economy rule; no subagent, external worker or provider lane is selected.",
+    "active_plan_and_acceptance": "The complete behavior/transaction plan, closeout and Sol acceptance were read, together with the prior negative route-gap review, accepted convergence architecture, in-memory rehearsal and pure status adapter acceptance. PostgreSQL now proves the exact unmounted serial transaction seam, while the mounted route and adapter composition remain unproved. This tranche may inspect only the exact route/dependency/adapter/kernel/transaction boundary and return a converge/block decision.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored completely. Protected holdouts and historical Diary data remain sealed; AER-0292 exact-file-only access remains binding. No route edit, mounting or call; database/source runtime; product or patient data; command/write; concurrency/restart/unknown-commit claim; provider/ADC/credential/browser action; watcher/event authority; deployment, production, release, Pages or protected-ref movement is authorized. docs/branding and every unrelated untracked path remain preserved; explicit-path staging only applies.",
+    "git_refs_and_worktree": "HEAD, task branch and origin task are d5684d934f80d1db49030b27b34b1b59a0c87f82; required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean and all 516 untracked paths, including five docs/branding paths, are preserved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "status_confirm_route_mounting_admission_preplanning",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh five-source rehydration completed at the published behavior/transaction closeout HEAD."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent is selected for the bounded exact-file review."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed independent review is selected before deterministic admission evidence exists."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected for a read-only classification."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
