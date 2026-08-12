@@ -84,7 +84,7 @@ def test_status_confirm_preflight_lists_required_future_route_tests():
         assert phrase in text
 
 
-def test_router_consumed_status_confirm_preflight_in_sprint_138():
+def test_current_confirm_routes_supersede_sprint_136_header_exclusions():
     text = _read(PREFLIGHT)
     router_text = _read(ROUTER)
 
@@ -121,10 +121,14 @@ def test_router_consumed_status_confirm_preflight_in_sprint_138():
     assert "claim_appointment_command(" in status_route
     assert "complete_appointment_command(" in status_route
     assert "_STATUS_CONFIRM_ROUTE_FAMILY" in status_route
-    assert "Header(" not in update_route
-    assert "Idempotency-Key" not in update_route
-    assert "Header(" not in delete_route
-    assert "Idempotency-Key" not in delete_route
+    assert "Header(" in update_route
+    assert "Idempotency-Key" in update_route
+    assert "claim_appointment_command(" in update_route
+    assert "complete_appointment_command(" in update_route
+    assert "Header(" in delete_route
+    assert "Idempotency-Key" in delete_route
+    assert "claim_appointment_command(" in delete_route
+    assert "complete_appointment_command(" in delete_route
 
 
 def test_status_confirm_preflight_points_to_sprint_137_route_test_contract():
