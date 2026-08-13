@@ -200,10 +200,16 @@ Its exact inert SQL-text lowering now passes at source
 `cd890647d327a3d9bf4f60e5e1d6f9a1924bab29`: one byte-stable
 PostgreSQL-16-shaped artifact covers seven relations, fifty fields, seven
 primary keys, three unique keys, seven references and nineteen honest check
-dispositions; all 65 hostile variants fail closed. It was not parsed or
-executed. Disposable PostgreSQL parse/catalogue admission is next but paused
-at Yuri's request for the `2509.26507v1.pdf` discussion; persistence,
-watcher/source access, restart, unknown commit and delivery remain unproved.
+dispositions; all 65 hostile variants fail closed. Its exact disposable
+PostgreSQL-16 parse/catalogue descendant now passes at source
+`579e9e0e86bd92469d82eb1199e8b3120808844e`: PostgreSQL accepts the exact
+12,022 bytes as three domains, seven empty tables, fifty fields and the frozen
+keys/checks/references with no executable schema object. Attempt 001 stopped
+before artifact execution at an authenticated-readiness race and cleaned up;
+AER-0293 binds the narrow correction before passing fresh attempt 002. The
+five transaction protocols remain unproved and are the next separately frozen
+behavior/transaction candidate; persistence, watcher/source access, restart,
+unknown commit and delivery remain unproved.
 
 The provider-free legacy-route sequence now also passes through its source-
 bound default-off runtime-instrumentation architecture and globally-disabled
@@ -347,12 +353,14 @@ coalescing, fencing, lag and fresh-read reconciliation. The inert relational
 representation for those facts now passes at exact source
 `16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed` with seven exact relations, five
 explicitly future transaction protocols, 12 canonical row families and 80
-hostile rejections. The next product-direction gate is deterministic inert
-SQL-text lowering of that exact contract. No watcher runtime, database/source
-access, SQL or migration execution,
-persistence, product data, external patient client, other command,
-restart/unknown-commit claim, provider, deployment, production or release is
-opened.
+hostile rejections. Exact inert SQL-text lowering and disposable PostgreSQL-16
+parse/catalogue admission now also pass through source
+`579e9e0e86bd92469d82eb1199e8b3120808844e`, proving the frozen empty physical
+shape without proving the five transaction protocols. Their narrow
+provider-free behavior/transaction rehearsal is next. No watcher runtime,
+existing database/source access, persistence, product data, external patient
+client, other command, restart/unknown-commit claim, provider, deployment,
+production or release is opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
@@ -851,11 +859,13 @@ generation rehearsal. The architecture-only provider-free default-off
   and 80 hostile variants pass, and transaction-protocol claims remain
   explicitly separate from keys and row checks. Exact inert SQL-text lowering
   passes at source `cd890647d327a3d9bf4f60e5e1d6f9a1924bab29`; two
-  byte-identical renders and all 65 hostile variants pass without database
-  contact or SQL execution. The disposable PostgreSQL-16 parse/catalogue
-  descendant is dependency-satisfied but paused for Yuri's paper discussion;
-  persistence, watcher/source access, restart, unknown commit and delivery
-  remain unproved.
+  byte-identical renders and all 65 hostile variants pass. Its disposable
+  PostgreSQL-16 parse/catalogue descendant passes at source
+  `579e9e0e86bd92469d82eb1199e8b3120808844e`: the exact artifact creates the
+  frozen empty catalogue and no executable schema objects, then exact cleanup
+  removes the owned server. The five transaction protocols are the next
+  separately frozen behavior/transaction candidate; persistence,
+  watcher/source access, restart, unknown commit and delivery remain unproved.
   Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its

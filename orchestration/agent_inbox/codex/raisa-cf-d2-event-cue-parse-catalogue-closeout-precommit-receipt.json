@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+    "completed_stage": "parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e published and accepted for Continuity 280 / Compass 262 with exact cleanup and AER-0293",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "579e9e0e86bd92469d82eb1199e8b3120808844e",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_cf_d2_parse_catalogue_acceptance_continuity_compass_baton_direction_and_yuri_summary_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, exact contract, immutable readiness failure, AER-0293, passing evidence, closeout and Sol acceptance bind parse, exact empty catalogue and cleanup only. The active-operation latch is complete and names no unfinished stage.",
+    "current_authority_allocation": "GPT Sol owns acceptance, continuity, baton and task-branch closeout for this serial bounded database tranche under AGENTS.md section 4. No worker, verifier, subagent or provider was used.",
+    "git_refs_and_worktree": "Candidate source 579e9e0e86bd92469d82eb1199e8b3120808844e is published on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Closeout uses explicit-path staging only and excludes docs/branding plus every unrelated untracked path.",
+    "live_handover_current_baton": "AGENTS.md now records the candidate result at exact published source 579e9e0e86bd92469d82eb1199e8b3120808844e and the five-protocol behavior/transaction rehearsal as the next narrowly planned descendant.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/product data, existing database/source/watcher access, operational persistence, providers/ADC, credentials/IAM/external network, routes, commands/writes, deployment, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

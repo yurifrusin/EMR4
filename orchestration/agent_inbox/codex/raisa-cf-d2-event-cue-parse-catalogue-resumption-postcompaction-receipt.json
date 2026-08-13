@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted CF-D2 event and cue inert-DDL lowering",
+    "completed_stage": "inert DDL source cd890647d327a3d9bf4f60e5e1d6f9a1924bab29 published and accepted for Continuity 279 / Compass 261 with closeout prepared",
+    "next_executable_stage": "after_yuri_paper_discussion_resume_with_fresh_five_source_rehydration_then_freeze_disposable_postgresql_16_parse_catalogue_plan",
+    "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering",
+    "resume_after_compaction": true,
+    "source_head": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29",
+    "status": "paused",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_the_authorised_cf_d2_sequence_by_freezing_and_executing_the_narrowest_exact_artifact_disposable_postgresql_16_parse_catalogue_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted inert-DDL plan, design, threat-model delta, closeout and Sol acceptance were read completely. They bind exact source cd890647d327a3d9bf4f60e5e1d6f9a1924bab29 and authorise only a successor that applies the exact artifact inside a newly created isolated disposable PostgreSQL-16 server, inspects catalogue shape and destroys the server.",
+    "current_authority_allocation": "AGENTS.md section 4 assigns this small serial disposable-database tranche to GPT Sol under the worker-economy rule. No subagent, external worker, independent verifier or provider is selected.",
+    "git_refs_and_worktree": "Verified C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at HEAD ad847eda9beff8317aa83779d7ca36a7b95b3ebd, equal to origin task. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and inert-DDL source cd890647d327a3d9bf4f60e5e1d6f9a1924bab29 are ancestors. Local/origin master and handoff/current are exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean; 588 pre-existing untracked entries were observed and must remain preserved under explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md read completely after compaction. At Continuity 279 / Compass 261 it accepts inert-DDL source cd890647d327a3d9bf4f60e5e1d6f9a1924bab29 and names exact-artifact disposable PostgreSQL-16 parse/catalogue admission as the next dependency-satisfied tranche after the now-completed paper pause.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts, historical Diary/PHI, patient/product data, source/watcher access, operational persistence, providers/ADC, credentials/IAM/external network, product routes, commands/writes, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

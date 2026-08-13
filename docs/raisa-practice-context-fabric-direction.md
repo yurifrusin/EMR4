@@ -427,6 +427,18 @@ Each descendant must preserve GraphQL/query services as read-only, use REST or
 OpenAPI command paths for mutations, revalidate fresh authority at execution,
 and release no success based on a context frame alone.
 
+The observability-first CF-D2 return now also passes its exact inert
+seven-relation representation, byte-stable SQL lowering and disposable
+PostgreSQL-16 parse/catalogue admission through source
+`579e9e0e86bd92469d82eb1199e8b3120808844e`. The exact 12,022-byte artifact
+catalogues as three domains, seven empty tables, fifty fields and the frozen
+keys, row checks and references with no executable schema objects. This proves
+empty structural representability only. Terminal admission, pending
+coalescing, contiguous checkpoint advance, dispatch recording and
+reconciliation remain separately unproved and form the next narrow disposable
+behavior/transaction candidate. Runtime wiring, source access, persistence,
+restart, unknown commit and operational delivery remain later gates.
+
 ## Permanent boundaries
 
 - No global context dump, ambient unrestricted query or provider-held memory.

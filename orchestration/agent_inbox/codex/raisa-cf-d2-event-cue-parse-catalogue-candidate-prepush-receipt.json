@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+    "completed_stage": "attempt 002 passed exact artifact parse/catalogue admission, seven zero-row readbacks and exact owned cleanup after the bounded readiness repair; AER-0293 is registered",
+    "next_executable_stage": "complete_focused_lineage_and_canonical_verification_then_prepare_acceptance_closeout_continuity_compass_baton_and_yuri_summary",
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "ad847eda9beff8317aa83779d7ca36a7b95b3ebd",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_candidate_commit_579e9e0e86bd92469d82eb1199e8b3120808844e_to_the_existing_task_branch_without_moving_protected_refs",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen exact-artifact plan and contract passed 64 hostile mutations, exact parent hashes, a preserved cleaned-up readiness failure, the corrected fresh database run, exact catalogue/zero-row assertions, 245 register/focused tests, 126 lineage tests, 48 latch tests and the 193-test canonical fast profile.",
+    "current_authority_allocation": "GPT Sol owns this serial bounded database tranche and task-branch publication under AGENTS.md section 4; no worker, verifier, subagent or provider participated.",
+    "git_refs_and_worktree": "After fresh fetch, HEAD is candidate 579e9e0e86bd92469d82eb1199e8b3120808844e and origin task remains ad847eda9beff8317aa83779d7ca36a7b95b3ebd. Local/origin master and handoff/current remain exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean and only the existing task branch may advance.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction; Continuity 279 / Compass 261 names the exact-artifact disposable PostgreSQL-16 parse/catalogue successor now implemented at candidate source 579e9e0e86bd92469d82eb1199e8b3120808844e.",
+    "protected_evidence_boundaries": "Protected evidence, patient/product data, existing databases/sources/watchers, persistence, providers/ADC, credentials/IAM/external network, routes, commands/writes, deploy/release/Pages and protected refs stayed closed. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

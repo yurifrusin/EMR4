@@ -7,8 +7,10 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
-SOURCE_HEAD = "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29"
+NODE_ID = (
+    "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal"
+)
+SOURCE_HEAD = "579e9e0e86bd92469d82eb1199e8b3120808844e"
 STATUS_CONFIRM_SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
 INTEGRATION_SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
 ADAPTER_SOURCE_HEAD = "b728b903c99fa35f231df04ba68263533261121a"
@@ -27,28 +29,28 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 279
+    assert graph["graph_revision"] == 280
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 261
-    assert compass["source_graph_revision"] == 279
+    assert compass["map_revision"] == 262
+    assert compass["source_graph_revision"] == 280
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_cf_d2_inert_ddl_and_record_pause() -> None:
+def test_live_baton_rows_accept_cf_d2_parse_catalogue_and_name_next_protocols() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 279 / Compass 261" in current
-    assert "raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering_pass" in current
+    assert "Continuity 280 / Compass 262" in current
+    assert "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_pass" in current
     assert SOURCE_HEAD in current
-    assert "seven relations" in current
+    assert "seven empty tables" in current
     assert "fifty fields" in current
-    assert "nineteen honestly classified check labels" in current
-    assert "65 hostile candidates" in current
-    assert "142 focused lineage checks" in current
+    assert "eighteen table checks" in current
+    assert "64 hostile contracts" in current
+    assert "AER-0293" in current
     assert "193-test canonical fast profile" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
@@ -76,11 +78,12 @@ def test_live_baton_rows_accept_cf_d2_inert_ddl_and_record_pause() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "Explicitly paused" in next_work
-    assert "disposable PostgreSQL-16 event/cue parse-and-catalogue" in next_work
-    assert "2509.26507v1.pdf" in next_work
-    assert "exact-artifact-only" in next_work
-    assert "Transaction behavior" in next_work
+    assert "behavior/transaction rehearsal" in next_work
+    assert "terminal admission" in next_work
+    assert "pending coalescing" in next_work
+    assert "contiguous checkpoint advance" in next_work
+    assert "dispatch recording" in next_work
+    assert "reconciliation" in next_work
     assert "patient/product data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
@@ -116,10 +119,12 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "explicitly paused",
-        "provider-free disposable postgresql-16 event/cue parse-and-catalogue",
-        "exact-artifact-only",
-        "transaction behavior",
+        "provider-free disposable postgresql cf-d2 behavior/transaction rehearsal",
+        "terminal admission",
+        "pending coalescing",
+        "contiguous checkpoint advance",
+        "dispatch recording",
+        "reconciliation",
         "runtime/product wiring",
         "source/watcher access",
         "persistence",
@@ -128,7 +133,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "external patient client",
         "command/write",
         "provider/adc",
-        "credential/iam/network",
+        "credential/iam/external network",
         "docs/branding/",
         "deploy",
         "release",

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 279 / Compass 261. The provider-free unmounted CF-D2 inert-DDL lowering passes one exact byte-stable PostgreSQL-16-shaped artifact and sixty-five hostile variants without database contact. Yuri requested an explicit pause before disposable parse/catalogue admission while Sol reads and discusses 2509.26507v1.pdf.
+> EMR4 is at Continuity 280 / Compass 262. The exact provider-free CF-D2 event/cue artifact parses and catalogues in PostgreSQL 16 as three domains, seven empty tables and the frozen constraints, with a preserved readiness-race correction and exact cleanup. The next candidate is a separately frozen behavior/transaction rehearsal for the five existing protocols.
 
 ## North star
 
@@ -330,25 +330,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Seven payload-free relations and five explicitly unproved transaction protocols pass inert representability; SQL-text lowering is next. Lineage parent: `raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal`.
 157. **Make the accepted payload-free event/cue relations concrete as inert SQL text without claiming database behavior — Provider-free unmounted CF-D2 event and cue inert-DDL lowering**
    Exact byte-stable PostgreSQL-16-shaped DDL text passes static admission; disposable parse/catalogue rehearsal is next but explicitly paused for Yuri's paper discussion. Lineage parent: `raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture`.
+158. **Prove the exact payload-free event/cue schema is physically representable in PostgreSQL 16 without opening a runtime — Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal**
+   Exact parse, catalogue census, zero rows and cleanup pass; the five behavior/transaction protocols are the next separately frozen candidate. Lineage parent: `raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering`.
 
 ## Current position
 
-**Inert SQL-text lowering passes; explicit pause before disposable parse/catalogue admission — Provider-free unmounted CF-D2 event and cue inert-DDL lowering**
+**Exact event/cue PostgreSQL 16 parse and empty catalogue admission passes — Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal**
 
-**Why this proof came next:** The accepted abstract relations now have exact deterministic SQL text, and Yuri requested a brief pause to read and discuss 2509.26507v1.pdf before database contact.
+**Why this proof came next:** The inert schema has crossed the narrow database representability boundary without opening runtime, source or product authority.
 
-Seven tables, fifty fields, exact structural constraints and sixty-five hostile rejections pass without SQL execution or database contact.
+Three domains, seven tables, fifty fields and all exact structural constraints catalogue correctly with zero rows and verified cleanup.
 
 ### What this unlocks
 
-- After the explicit pause is lifted, freeze a disposable PostgreSQL-16 parse-and-catalogue admission of the exact inert artifact.
-- Verify exact types, tables, fields, constraints and references inside one isolated disposable server only.
-- Keep transaction behavior, source access, persistence/runtime and product wiring closed.
+- Freeze a provider-free disposable behavior/transaction rehearsal for the five already accepted CF-D2 protocols.
+- Exercise only authored-synthetic rows and exact lock, rollback and effect observations inside a newly owned disposable server.
+- Keep concurrency, restart, watcher/source access, persistence/runtime and product wiring separately closed.
 
 ### What it does not solve
 
-- PostgreSQL parse or catalogue acceptance, constraint behavior, transactions, source observation or persistent operational state.
-- Watcher process ownership, restart, unknown commit, delivery transport, retention, rotation or performance.
+- Terminal admission, coalescing, checkpoint, dispatch or reconciliation behavior and atomicity.
+- Concurrency, restart, unknown commit, delivery, watcher ownership, retention, rotation, purge or performance.
 - Product/patient data, external identity/channel delivery, provider access, commands, deployment, production or release.
 
 ## Continuity and authority
@@ -417,9 +419,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve source-owned truth and command-time current-authority checks as the correctness kernel.
-- Preserve the accepted payload-free observability, admission, representation and inert-DDL contracts.
-- After Yuri's explicit paper-review pause, admit only the exact inert artifact in a disposable PostgreSQL-16 parse/catalogue rehearsal.
-- Keep transaction behavior, runtime wiring, product data and operational retention separately closed.
+- Preserve the accepted observability, admission, representation, inert-DDL and disposable parse/catalogue evidence.
+- Freeze the narrowest provider-free disposable behavior/transaction scenarios for only the five existing CF-D2 protocols.
+- Keep concurrency, restart, watcher/source access, persistence/runtime, product data and operational retention separately closed.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -608,7 +610,7 @@ Prerequisites:
 
 ## Map limits
 
-- The CF-D2 inert DDL is static text evidence, not PostgreSQL parse, catalogue, constraint, transaction, persistence, restart or delivery proof.
+- The CF-D2 PostgreSQL catalogue pass proves parse and empty structural shape only, not transaction behavior, persistence, restart, delivery or runtime authority.
 - The CF-D2 representation is inert abstract row evidence, not SQL, PostgreSQL, transaction, persistence, restart or delivery proof.
 - The CF-D2 admission state machine is ephemeral repository evidence, not operational persistence, restart, delivery or database proof.
 - CF-D2 observability evidence is an architecture-only closed-contract proof; it does not prove persistence, restart, unknown commit, source observation or cue delivery.
@@ -809,6 +811,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-256.md`
 - `docs/ariadne-agent-error-correction-register-revision-257.md`
 - `docs/ariadne-agent-error-correction-register-revision-259.md`
+- `docs/ariadne-agent-error-correction-register-revision-260.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -1035,6 +1038,9 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-plan.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture.md`
+- `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md`
+- `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md`
+- `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md`
@@ -1260,6 +1266,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
+- `docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
@@ -1443,6 +1450,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-candidate-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-candidate-prepush-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-closeout-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-resumption-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-event-cue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preplanning-receipt.json`
@@ -1870,6 +1882,11 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json`
@@ -2276,6 +2293,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md`
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-event-cue-inert-ddl-lowering.md`
+- `orchestration/human_inbox/yuri/2026-08-13--cf-d2-event-cue-parse-catalogue-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-observability-first-event-cue-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-representation-architecture.md`
@@ -2303,6 +2321,7 @@ Prerequisites:
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
 - `scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py`
+- `scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
@@ -2370,6 +2389,7 @@ Prerequisites:
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
+- `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py`
@@ -2412,4 +2432,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 261; continuity graph revision 279._
+_Compass map revision 262; continuity graph revision 280._

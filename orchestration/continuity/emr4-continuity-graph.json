@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 279,
+  "graph_revision": 280,
   "harvests": [],
   "nodes": [
     {
@@ -18394,9 +18394,123 @@
         "Source observation, watcher ownership, restart, unknown commit, dispatch transport, retention and operations remain unproved.",
         "Product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+      "title": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-13T09:56:16Z",
+      "updated_at": "2026-08-13T09:56:16Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "579e9e0e86bd92469d82eb1199e8b3120808844e",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Only the exact accepted 12,022-byte artifact entered one owned networkless tmpfs PostgreSQL 16 container.",
+          "The passing claim is limited to parse, exact empty catalogue shape and verified cleanup.",
+          "Events and cues remain acceleration hints; database/source runtime, transaction protocols and product authority remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-cf-d2-event-cue-disposable-postgresql-parse-catalogue",
+          "source": "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact PostgreSQL 16 parse and empty catalogue admission while preserving all five transaction protocols as separately unproved."
+        }
+      ],
+      "claim_scope": [
+        "Three domains, seven tables, fifty fields, seven primary keys, three unique keys, eighteen table checks and seven foreign keys match exactly.",
+        "All seven relations contain zero rows and no function, trigger, view, sequence, policy, rule, row-security table or explicit object ACL was added.",
+        "Attempt 001 stopped before artifact execution at a readiness race and cleaned up; AER-0293 precedes passing fresh attempt 002.",
+        "Sixty-four hostile contracts, focused/register/lineage gates and the 193-test canonical fast profile pass.",
+        "Events and cues remain non-authoritative refresh hints; fresh source reads and command-time authority/truth checks remain mandatory."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.json",
+            "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md"
+          ],
+          "note": "The empty catalogue contains no appointment, practitioner, patient, time, duration or intent payload and cannot mutate a proposal."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.json",
+            "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md"
+          ],
+          "note": "The reconciliation relation is empty structural evidence only and cannot become projection truth, command evidence or future freshness."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-260.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--cf-d2-event-cue-parse-catalogue-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-resumption-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-candidate-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-closeout-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.schema.json",
+          "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+          "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Terminal admission, pending coalescing, contiguous checkpoint advance, dispatch recording and reconciliation transaction behavior remain unproved.",
+        "Concurrency, restart, unknown commit, watcher/source access, persistence, delivery, retention and product wiring remain unproved.",
+        "Patient/product data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T08:45:10Z"
+  "updated_at": "2026-08-13T09:56:16Z"
 }

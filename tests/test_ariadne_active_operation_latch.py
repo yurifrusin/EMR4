@@ -29,6 +29,8 @@ def latch() -> dict:
 def in_progress_latch() -> dict:
     value = latch()
     value["status"] = "in_progress"
+    value["resume_after_compaction"] = True
+    value["checkpoint"]["next_executable_stage"] = "continue_authorized_operation"
     value["terminal_response"] = {
         "permitted": False,
         "reason": "unfinished_authorized_operation",

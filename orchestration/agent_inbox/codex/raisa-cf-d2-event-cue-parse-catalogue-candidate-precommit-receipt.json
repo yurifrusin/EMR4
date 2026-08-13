@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+    "completed_stage": "attempt 002 passed exact artifact parse/catalogue admission, seven zero-row readbacks and exact owned cleanup after the bounded readiness repair; AER-0293 is registered",
+    "next_executable_stage": "complete_focused_lineage_and_canonical_verification_then_prepare_acceptance_closeout_continuity_compass_baton_and_yuri_summary",
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "ad847eda9beff8317aa83779d7ca36a7b95b3ebd",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_cf_d2_event_cue_parse_catalogue_candidate_paths_after_passing_exact_database_focused_register_lineage_and_canonical_fast_gates",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen parse/catalogue plan, design, threat delta and closed rehearsal contract bind exact parent hashes, cached postgres:16-bookworm identity, network-none tmpfs execution, exact catalogue assertions, zero rows and exact cleanup. Attempt 001 stopped before artifact execution and cleaned up; the bounded readiness correction and AER-0293 precede passing attempt 002.",
+    "current_authority_allocation": "AGENTS.md section 4 and the worker-economy rule assign this serial tightly coupled disposable-database tranche to GPT Sol. No subagent, external worker, independent verifier or provider was used.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at HEAD and origin task ad847eda9beff8317aa83779d7ca36a7b95b3ebd. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and accepted inert source are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit candidate paths will be staged from a worktree containing 601 preserved untracked entries; docs/branding remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Continuity 279 / Compass 261 accepts exact inert-DDL source cd890647d327a3d9bf4f60e5e1d6f9a1924bab29 and names this exact-artifact disposable PostgreSQL-16 parse/catalogue tranche as the dependency-satisfied successor.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/product data, existing database/source/watcher access, operational persistence, providers/ADC, credentials/IAM/external network, product routes, commands/writes, deployment, release, Pages and protected refs remained closed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
