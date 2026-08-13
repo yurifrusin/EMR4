@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-post-cf-d2-compass-baton-orientation",
-  "active_tranche": "Read-only post-CF-D2 Compass and baton orientation",
-  "objective": "Reconcile the accepted CF-D2 serial database foundation with the accepted Reception One, patient-interaction and Context Fabric directions, then freeze the narrowest next dependency-satisfied visible product tranche already supported by repository evidence.",
-  "status": "complete",
-  "source_head": "edba8f57380a48fd98decc332608349f2d9012e6",
-  "authority_source": "AGENTS.md Current Baton at Continuity 281 / Compass 263, the accepted CF-D2 closeout and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-selected-appointment-status-action-composition",
+  "active_tranche": "Provider-free Reception One selected-appointment status-action composition",
+  "objective": "Let staff act on one selected current Reception One appointment through the existing status vocabulary and existing setAppointmentStatus proposal/confirm interaction, with modeless fail-closed feedback and fresh projection reconciliation.",
+  "status": "in_progress",
+  "source_head": "9a1401665bc6163145bbcbbb53d06ce3f4abd036",
+  "authority_source": "AGENTS.md Current Baton at Continuity 282 / Compass 264, the accepted post-CF-D2 orientation and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "orientation accepted at exact source edba8f57380a48fd98decc332608349f2d9012e6 and bound at Continuity 282 / Compass 264 with the provider-free Reception One selected-appointment status-action composition named next",
-    "next_executable_stage": null,
+    "completed_stage": "fresh five-source rehydration and API Spine source pass completed with a passed preplanning receipt",
+    "next_executable_stage": "freeze exact plan and threat-model delta before product implementation",
     "retry_counters": {
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -22,23 +22,24 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_orientation_complete_and_visible_successor_named"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "orientation_read_only_except_repository_plan_evidence_and_continuity_artifacts",
-    "protected_evidence_closed",
-    "patient_product_clinical_data_closed",
-    "external_patient_identity_clients_and_channels_closed",
-    "existing_database_source_watcher_persistence_and_operational_retention_closed",
-    "provider_adc_credential_iam_and_external_network_closed",
-    "product_runtime_route_tool_command_and_write_authority_closed",
+    "one_selected_current_reception_one_appointment_only",
+    "existing_status_vocabulary_and_existing_set_appointment_status_interaction_only",
+    "no_second_command_path_and_no_raw_status_fallback",
+    "authored_synthetic_provider_free_ui_and_route_intercepted_evidence_only",
+    "backend_api_openapi_graphql_database_and_event_runtime_unchanged",
+    "protected_evidence_and_historical_diary_phi_closed",
+    "patient_product_clinical_data_and_external_patient_channels_closed",
+    "provider_adc_credentials_iam_external_network_closed",
     "deployment_production_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]
