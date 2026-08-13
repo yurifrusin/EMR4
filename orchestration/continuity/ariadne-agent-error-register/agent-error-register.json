@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 262,
+  "register_revision": 263,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12076,6 +12076,46 @@
           "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-postcompaction-powershell-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-262.md",
           "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postcompaction-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0301",
+      "attempt_id": "raisa-reception-one-time-reschedule-deepseek-preintegration-source-binding-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "integration",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every source-bound latch and receipt field must copy an exact forty-character object id captured from git rev-parse; a short commit display must never be expanded or guessed.",
+      "observed_error": "While drafting uncommitted pre-integration evidence, Sol expanded the displayed fff6103e commit prefix into a guessed forty-character value that did not exist instead of first capturing HEAD with git rev-parse. The error was detected before receipt generation or cherry-pick.",
+      "detection_method": "An explicit git rev-parse HEAD returned fff6103e9c5ece8c4127fd6738cdad6fac9ca965, which differed from the drafted value. The latch and runtime state were corrected before any receipt was emitted.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-preintegration-source-binding-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-263.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-deepseek-preintegration-receipt.json",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Capture the exact full HEAD with git rev-parse, replace every guessed binding in the live latch and pre-integration runtime state, and generate the receipt only after exact readback.",
+        "prevention_control": "Capture and retain the forty-character HEAD in a named scalar immediately after every commit; do not author any source-bound latch, packet or receipt field from Git's abbreviated commit output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-preintegration-source-binding-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-263.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-deepseek-preintegration-receipt.json"
         ]
       },
       "status": "corrected"

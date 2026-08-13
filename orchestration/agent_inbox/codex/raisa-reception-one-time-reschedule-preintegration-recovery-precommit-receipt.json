@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the Sol-owned product candidate and post-compaction evidence are committed at fff6103e9c5ece8c4127fd6738cdad6fac9ca965; DeepSeek's clean isolated commit changes only review/test_reception_one_time_reschedule_action.py and remains untrusted pending execution",
+    "next_executable_stage": "integrate the one-file DeepSeek test commit, execute it against the Sol product candidate, and mechanically recover test-contract defects inside the frozen boundary before full deterministic admission",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "fff6103e9c5ece8c4127fd6738cdad6fac9ca965",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_source_binding_recovery_and_passing_preintegration_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan permits the exact isolated test integration only after a passing source-bound receipt. AER-0301 preserves and corrects the guessed-hash draft before any receipt or cherry-pick; the fresh pre-integration receipt passes at exact HEAD fff6103e9c5ece8c4127fd6738cdad6fac9ca965.",
+    "current_authority_allocation": "Sol owns orchestration correction, integration and acceptance. DeepSeek's one-file test commit remains isolated and untrusted; Gemini remains gated.",
+    "git_refs_and_worktree": "The task branch remains at exact fff6103e9c5ece8c4127fd6738cdad6fac9ca965 with only the corrected latch, AER-0301 register artifacts and pre-integration state/receipt intentional. The worker remains clean at 180fd34ef19981650c32b9cbbe6cfc2342503c8d. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md and the in-progress latch retain Yuri's selected Reception One reschedule direction under standing authority.",
+    "protected_evidence_boundaries": "No product, backend, API, database, provider, network, deployment, protected evidence, PHI, product data, protected ref, docs/branding or unrelated untracked file enters this orchestration-only commit."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

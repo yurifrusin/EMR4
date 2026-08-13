@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the Sol-owned product candidate and post-compaction evidence are committed at fff6103e9c5ece8c4127fd6738cdad6fac9ca965; DeepSeek's clean isolated commit changes only review/test_reception_one_time_reschedule_action.py and remains untrusted pending execution",
+    "next_executable_stage": "integrate the one-file DeepSeek test commit, execute it against the Sol product candidate, and mechanically recover test-contract defects inside the frozen boundary before full deterministic admission",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "fff6103e9c5ece8c4127fd6738cdad6fac9ca965",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "cherry_pick_exact_one_file_deepseek_test_commit_as_untrusted_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan assigns one route-intercepted browser test artifact to DeepSeek. The worker returned commit 180fd34ef19981650c32b9cbbe6cfc2342503c8d with exactly review/test_reception_one_time_reschedule_action.py and a clean worktree; its test remains untrusted until executed against Sol's candidate.",
+    "current_authority_allocation": "Sol owns integration and acceptance. DeepSeek owns only its isolated new test artifact and claims no product or acceptance authority; Gemini remains gated for later independent veto.",
+    "git_refs_and_worktree": "The main task branch is clean for tracked files at fff6103e9c5ece8c4127fd6738cdad6fac9ca965 before latch evidence; the worker branch is clean at 180fd34ef19981650c32b9cbbe6cfc2342503c8d with a one-file diff from 19e2f5021dd188643a7a723657beac2536daa044. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md and the in-progress latch retain Yuri's selected Reception One reschedule direction under standing authority.",
+    "protected_evidence_boundaries": "The integration admits one new authored-synthetic route-intercepted test file only. Product/backend/API/database/provider/network/deployment surfaces, protected evidence, PHI, product data, docs/branding, protected refs and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

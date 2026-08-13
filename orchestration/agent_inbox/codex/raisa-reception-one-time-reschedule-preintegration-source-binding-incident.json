@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0301",
+  "observed_on": "2026-08-14",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "boundary": "DeepSeek test-artifact pre-integration source binding",
+  "observation": "Sol expanded an abbreviated commit display into a guessed forty-character object id while drafting uncommitted latch and runtime-state evidence. Exact git rev-parse readback detected the mismatch before receipt generation or integration.",
+  "containment": [
+    "No receipt with the incorrect source binding was generated and no cherry-pick or ref movement occurred.",
+    "The exact full HEAD was captured with git rev-parse and copied into every source-bound field before fresh pre-integration receipt generation.",
+    "The product candidate remained unchanged."
+  ],
+  "excluded": ["protected evidence", "patient or product data", "secrets or credentials"]
+}
