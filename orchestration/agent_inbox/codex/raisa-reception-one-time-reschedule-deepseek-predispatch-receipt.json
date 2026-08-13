@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "plan and threat delta committed; DeepSeek worktree and packet preflighted",
+    "next_executable_stage": "dispatch isolated test artifact while Sol implements product composition",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "19e2f5021dd188643a7a723657beac2536daa044",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_deepseek_flash_high_isolated_route_intercepted_test_artifact",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The committed frozen plan and threat delta at 503c4666aa58d19177171e80eff24d0a06f6462c constrain the worker to same-date same-practitioner duration-fixed time-only test engineering over the existing handleMoveResize path.",
+    "current_authority_allocation": "Sol retains product, acceptance and integration authority. DeepSeek V4 Flash/high receives only one new browser-test file in an isolated task-descendant worktree; Gemini remains reserved for later read-only veto.",
+    "git_refs_and_worktree": "The isolated worker worktree C:/Users/sarashera/EMR4-worktrees/rt1 is clean on codex/reception-one-time-reschedule-test-worker at exact task descendant 19e2f5021dd188643a7a723657beac2536daa044. Protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The main task branch contains the plan and incident recovery; no protected ref movement is authorized.",
+    "live_handover_current_baton": "AGENTS.md was reread completely. Yuri selected the existing appointment update/reschedule family after accepted projection-neutral truth parity.",
+    "protected_evidence_boundaries": "The worker has exact read and write allowlists. Protected evidence, historical Diary/PHI, product data, backend/API/OpenAPI/GraphQL/database/event/provider/network/deployment work, raw PUT and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

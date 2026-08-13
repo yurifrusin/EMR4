@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.worker-worktree-preflight.v1",
+  "agent_id": "reception_one_time_reschedule_test_worker",
+  "resource_id": "deepseek-flash-workers",
+  "model": "deepseek-v4-flash",
+  "reasoning": "high",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/rt1",
+  "branch": "codex/reception-one-time-reschedule-test-worker",
+  "head": "19e2f5021dd188643a7a723657beac2536daa044",
+  "expected_head": "19e2f5021dd188643a7a723657beac2536daa044",
+  "clean": true,
+  "at_handoff_current": false,
+  "divergence": "Recorded task-branch descendant; protected handoff/current remains closed.",
+  "write_allowlist": ["review/test_reception_one_time_reschedule_action.py"],
+  "status": "passed"
+}
