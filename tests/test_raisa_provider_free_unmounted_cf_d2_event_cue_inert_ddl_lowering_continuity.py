@@ -49,15 +49,14 @@ def test_inert_ddl_evidence_and_boundaries_are_bound() -> None:
         assert phrase in joined
 
 
-def test_compass_records_explicit_pause_before_parse_catalogue() -> None:
+def test_compass_preserves_the_historical_pause_without_freezing_current_position() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert compass["current_position"]["node_id"] == NODE_ID
-    unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
-    limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "pause is lifted" in unlocks
-    assert "disposable postgresql-16" in unlocks
-    assert "postgresql parse" in limits
-    assert "explicit pause" in compass["orientation_statement"].lower()
+    journey = {item["node_id"]: item for item in compass["journey"]}
+    historical = journey[NODE_ID]
+    assert "disposable parse/catalogue rehearsal is next" in historical["outcome"].lower()
+    assert "explicitly paused" in historical["outcome"].lower()
+    assert compass["current_position"]["node_id"] != NODE_ID
+    assert compass["map_revision"] > 261
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

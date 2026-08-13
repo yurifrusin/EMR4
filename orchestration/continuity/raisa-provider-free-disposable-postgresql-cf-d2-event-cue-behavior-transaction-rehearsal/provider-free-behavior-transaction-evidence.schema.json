@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/cf-d2-event-cue-behavior-transaction-evidence-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "result",
+    "status",
+    "evidence_label",
+    "contract_sha256",
+    "source_hashes",
+    "hostile_mutations_rejected",
+    "environment",
+    "scenario_groups",
+    "protocols_proved",
+    "rollback_probes",
+    "denied_transition_probes",
+    "lock_observations",
+    "cleanup",
+    "effects",
+    "claim_boundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.cf_d2_event_cue_behavior_transaction_evidence.v1"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_pass"},
+    "status": {"const": "passed"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_16_serial_behavior_transaction"},
+    "contract_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "source_hashes": {"type": "object", "minProperties": 9, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "hostile_mutations_rejected": {"const": 64},
+    "environment": {"type": "object"},
+    "scenario_groups": {"type": "array", "minItems": 6, "maxItems": 6},
+    "protocols_proved": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true},
+    "rollback_probes": {"type": "array", "minItems": 3},
+    "denied_transition_probes": {"type": "array", "minItems": 8},
+    "lock_observations": {"type": "array", "minItems": 5, "maxItems": 5},
+    "cleanup": {"type": "object"},
+    "effects": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 100}
+  }
+}

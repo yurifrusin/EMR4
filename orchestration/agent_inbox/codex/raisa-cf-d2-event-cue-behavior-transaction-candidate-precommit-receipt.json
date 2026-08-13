@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
+    "completed_stage": "one fresh owned PostgreSQL 16 run passed all six scenario groups, three rollback probes, eleven denied transitions, five lock footprints and exact cleanup; broader and canonical gates pass",
+    "next_executable_stage": "explicit-path candidate commit followed by exact source-head rebind and preacceptance review",
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "6e5fedb0fc54dff5d82a098bfbcad1bef0bccb3c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_exact_cf_d2_five_protocol_serial_behavior_transaction_candidate_after_passing_database_and_deterministic_gates",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The timestamped frozen behavior plan, design, threat delta and closed contract limit execution to six authored-synthetic serial scenario groups over admit_terminal, coalesce_pending, advance_contiguous_checkpoint, record_dispatch_attempt and record_reconciliation. One exact run passed with three forced rollbacks, eleven denied transitions, five uncontended lock footprints and exact cleanup.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates the small tightly coupled serial database implementation, execution, review and acceptance to GPT Sol under the worker-economy rule; no external worker, verifier, provider or native subagent is selected.",
+    "git_refs_and_worktree": "The task worktree remains C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at source HEAD 6e5fedb0fc54dff5d82a098bfbcad1bef0bccb3c equal to origin task before the candidate commit. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and accepted parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging excludes docs/branding and every unrelated untracked file.",
+    "live_handover_current_baton": "AGENTS.md at Continuity 280 / Compass 262 names this exact five-protocol provider-free disposable PostgreSQL behavior/transaction rehearsal as the next dependency-satisfied tranche after accepted parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/product data, external patient clients, existing database/source, watcher/runtime, operational persistence, concurrency/restart/unknown commit, providers/ADC, credentials/IAM/network, product routes/tools/commands/writes, deployment, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

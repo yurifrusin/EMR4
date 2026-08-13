@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/cf-d2-event-cue-behavior-transaction-rehearsal-contract-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline",
+    "accepted_parse_catalogue_source",
+    "result",
+    "evidence_label",
+    "hostile_mutation_target",
+    "source_bindings",
+    "artifact",
+    "docker_profile",
+    "fixtures",
+    "protocols",
+    "scenario_groups",
+    "acceptance",
+    "effects",
+    "claim_boundary",
+    "next_descendant"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.cf_d2_event_cue_behavior_transaction_rehearsal.v1"},
+    "status": {"const": "frozen_six_group_serial_disposable_postgresql_16_only"},
+    "planning_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_parse_catalogue_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_16_serial_behavior_transaction"},
+    "hostile_mutation_target": {"const": 64},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "artifact": {"type": "object"},
+    "docker_profile": {"type": "object"},
+    "fixtures": {"type": "object"},
+    "protocols": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["name", "required_lock_relations", "effect", "rollback_probe"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"enum": ["admit_terminal", "coalesce_pending", "advance_contiguous_checkpoint", "record_dispatch_attempt", "record_reconciliation"]},
+          "required_lock_relations": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+          "effect": {"type": "string", "minLength": 1},
+          "rollback_probe": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "scenario_groups": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "acceptance": {"type": "object"},
+    "effects": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 100},
+    "next_descendant": {"type": "object"}
+  }
+}

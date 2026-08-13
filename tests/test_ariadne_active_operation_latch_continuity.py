@@ -3,12 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from orchestration_harness.active_operation import validate_active_operation
+
 
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "ariadne-postcompaction-active-operation-latch"
-PRODUCT_POSITION = (
-    "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
-)
 SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
 
 
@@ -23,26 +22,27 @@ def test_latch_is_accepted_without_displacing_product_position() -> None:
     assert graph["graph_revision"] >= 274
     assert compass["map_revision"] >= 256
     assert compass["source_graph_revision"] == graph["graph_revision"]
-    assert compass["current_position"]["node_id"] == PRODUCT_POSITION
+    assert compass["current_position"]["node_id"] != NODE_ID
+    assert compass["current_position"]["node_id"] in {
+        item["node_id"] for item in compass["journey"]
+    }
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["authority"]["authorized_openings"] == []
 
 
-def test_current_latch_records_explicit_pause_before_parse_catalogue() -> None:
+def test_current_latch_validly_projects_its_live_operation_state() -> None:
     latch = _load(
         "orchestration/continuity/ariadne-active-operation-latch/current.json"
     )
-    assert latch["status"] == "paused"
-    assert (
-        latch["operation_id"]
-        == "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
-    )
-    assert (
-        "after_yuri_paper_discussion"
-        in latch["checkpoint"]["next_executable_stage"]
-    )
-    assert latch["terminal_response"]["permitted"] is True
-    assert "paper" in latch["terminal_response"]["reason"].lower()
+    assert validate_active_operation(latch) == latch
+    if latch["status"] == "in_progress":
+        assert latch["resume_after_compaction"] is True
+        assert latch["checkpoint"]["next_executable_stage"]
+        assert latch["user_attention"]["required"] is False
+        assert latch["terminal_response"] == {
+            "permitted": False,
+            "reason": "unfinished_authorized_operation",
+        }
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

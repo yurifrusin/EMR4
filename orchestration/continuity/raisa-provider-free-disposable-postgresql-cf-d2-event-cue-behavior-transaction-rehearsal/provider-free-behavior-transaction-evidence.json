@@ -1,0 +1,298 @@
+{
+  "claim_boundary": "Exact fixed authored-synthetic serial PostgreSQL 16 transactions prove the five accepted CF-D2 protocol effects, denials, rollback and uncontended required relation-lock footprints in one destroyed server; no concurrency, restart, source, runtime, product or external-authority behavior is proved.",
+  "cleanup": {
+    "container_id_sha256": "750aba35e9dcfd012529d09779cdb4d1ba433223b134c7d6f897ffb0f159fa7b",
+    "status": "cleanup_verified"
+  },
+  "contract_sha256": "sha256:6d1e1c3e0084cf8cd70cad7c7b75b3b5c7fa5dbdc6528b486abd3ad22c94026d",
+  "denied_transition_probes": [
+    {
+      "id": "divergent_duplicate",
+      "state_unchanged": true
+    },
+    {
+      "id": "stale_generation_admission",
+      "state_unchanged": true
+    },
+    {
+      "id": "coalesce_gap",
+      "state_unchanged": true
+    },
+    {
+      "id": "coalesce_cross_reason",
+      "state_unchanged": true
+    },
+    {
+      "id": "coalesce_delivered",
+      "state_unchanged": true
+    },
+    {
+      "id": "checkpoint_uncovered_required_cue",
+      "state_unchanged": true
+    },
+    {
+      "id": "stale_generation_dispatch",
+      "state_unchanged": true
+    },
+    {
+      "id": "dispatch_skipped_ordinal",
+      "state_unchanged": true
+    },
+    {
+      "id": "reconcile_without_delivered_attempt",
+      "state_unchanged": true
+    },
+    {
+      "id": "reconciliation_conflict",
+      "state_unchanged": true
+    },
+    {
+      "id": "reconciliation_truth_table_invalid",
+      "state_unchanged": true
+    }
+  ],
+  "effects": {
+    "authored_synthetic_rows_only": true,
+    "deployment_release_or_protected_ref_movement": false,
+    "exact_artifact_executions": 1,
+    "existing_database_or_source_connections": 0,
+    "external_network_calls": 0,
+    "operational_state_persisted": false,
+    "owned_disposable_postgresql_containers_created": 1,
+    "product_commands": 0,
+    "product_patient_or_clinical_data": false,
+    "provider_calls": 0,
+    "runtime_or_watcher_started": false
+  },
+  "environment": {
+    "catalogue_re_admitted": true,
+    "image_id_sha256": "sha256:7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "image_reference": "postgres:16-bookworm",
+    "network_mode": "none",
+    "postgresql_major": 16,
+    "repo_digest_sha256": "sha256:ff3b334d4ff04c3469652888137bdf8a590a402f57bc1bcfd5ec31342f6c392e",
+    "storage": "container_local_tmpfs"
+  },
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_16_serial_behavior_transaction",
+  "hostile_mutations_rejected": 64,
+  "lock_observations": [
+    {
+      "contention_claim": false,
+      "protocol": "admit_terminal",
+      "required_relation_mode_pairs": [
+        {
+          "mode": "RowShareLock",
+          "relation": "consumer_checkpoint"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "event_partition"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "terminal_receipt"
+        }
+      ],
+      "required_subset_observed": true
+    },
+    {
+      "contention_claim": false,
+      "protocol": "coalesce_pending",
+      "required_relation_mode_pairs": [
+        {
+          "mode": "RowShareLock",
+          "relation": "cue_obligation"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "event_partition"
+        }
+      ],
+      "required_subset_observed": true
+    },
+    {
+      "contention_claim": false,
+      "protocol": "advance_contiguous_checkpoint",
+      "required_relation_mode_pairs": [
+        {
+          "mode": "RowShareLock",
+          "relation": "consumer_checkpoint"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "cue_obligation"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "terminal_receipt"
+        }
+      ],
+      "required_subset_observed": true
+    },
+    {
+      "contention_claim": false,
+      "protocol": "record_dispatch_attempt",
+      "required_relation_mode_pairs": [
+        {
+          "mode": "RowShareLock",
+          "relation": "cue_obligation"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "dispatch_attempt"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "event_partition"
+        }
+      ],
+      "required_subset_observed": true
+    },
+    {
+      "contention_claim": false,
+      "protocol": "record_reconciliation",
+      "required_relation_mode_pairs": [
+        {
+          "mode": "RowShareLock",
+          "relation": "cue_obligation"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "dispatch_attempt"
+        },
+        {
+          "mode": "RowShareLock",
+          "relation": "reconciliation_receipt"
+        }
+      ],
+      "required_subset_observed": true
+    }
+  ],
+  "protocols_proved": [
+    "admit_terminal",
+    "coalesce_pending",
+    "advance_contiguous_checkpoint",
+    "record_dispatch_attempt",
+    "record_reconciliation"
+  ],
+  "result": "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_pass",
+  "rollback_probes": [
+    {
+      "id": "admission_post_obligation_mutation",
+      "state_unchanged": true
+    },
+    {
+      "id": "dispatch_post_attempt_pre_state_transition",
+      "state_unchanged": true
+    },
+    {
+      "id": "reconciliation_post_receipt",
+      "state_unchanged": true
+    }
+  ],
+  "scenario_groups": [
+    {
+      "assertion_count": 8,
+      "final_state_sha256": "sha256:d5e15157cb8047e9ca312cf770b96011c8e8a4cf94d4dd3c23377cd59237c581",
+      "id": "admission_identity_fencing_and_atomic_rollback",
+      "row_counts": {
+        "consumer_checkpoint": 1,
+        "cue_obligation": 1,
+        "dispatch_attempt": 0,
+        "event_partition": 1,
+        "observer_coordinate": 1,
+        "reconciliation_receipt": 0,
+        "terminal_receipt": 1
+      },
+      "status": "passed"
+    },
+    {
+      "assertion_count": 8,
+      "final_state_sha256": "sha256:eb187b570176a33de4ed2b450055a5c6129f406903d8ab7e1fef787ed885ead8",
+      "id": "pending_only_coalescing_boundaries",
+      "row_counts": {
+        "consumer_checkpoint": 1,
+        "cue_obligation": 3,
+        "dispatch_attempt": 1,
+        "event_partition": 1,
+        "observer_coordinate": 1,
+        "reconciliation_receipt": 0,
+        "terminal_receipt": 4
+      },
+      "status": "passed"
+    },
+    {
+      "assertion_count": 7,
+      "final_state_sha256": "sha256:8815490ae478c0491f1884876e6e6542a4f9285d97aed7566881b9c178d76e13",
+      "id": "contiguous_checkpoint_movement",
+      "row_counts": {
+        "consumer_checkpoint": 1,
+        "cue_obligation": 2,
+        "dispatch_attempt": 0,
+        "event_partition": 1,
+        "observer_coordinate": 1,
+        "reconciliation_receipt": 0,
+        "terminal_receipt": 5
+      },
+      "status": "passed"
+    },
+    {
+      "assertion_count": 10,
+      "final_state_sha256": "sha256:90faa1554c770a6ff163561a0a4b60c6945d24432d140aef76e19bc6f40c50f8",
+      "id": "dispatch_ordering_and_atomic_rollback",
+      "row_counts": {
+        "consumer_checkpoint": 1,
+        "cue_obligation": 2,
+        "dispatch_attempt": 2,
+        "event_partition": 1,
+        "observer_coordinate": 1,
+        "reconciliation_receipt": 0,
+        "terminal_receipt": 2
+      },
+      "status": "passed"
+    },
+    {
+      "assertion_count": 9,
+      "final_state_sha256": "sha256:b0f37ae7bebf88a59ec94a50c22df97c885d101a716f9315db84c5d3a1d31735",
+      "id": "delivered_only_reconciliation_and_atomic_rollback",
+      "row_counts": {
+        "consumer_checkpoint": 1,
+        "cue_obligation": 2,
+        "dispatch_attempt": 2,
+        "event_partition": 1,
+        "observer_coordinate": 1,
+        "reconciliation_receipt": 1,
+        "terminal_receipt": 2
+      },
+      "status": "passed"
+    },
+    {
+      "assertion_count": 5,
+      "final_state_sha256": "sha256:b337ed6adb67b85522ded2a3d1ec4a7a121cb92bff6d619e5675fb5484969d91",
+      "id": "uncontended_protocol_lock_footprints",
+      "row_counts": {
+        "consumer_checkpoint": 1,
+        "cue_obligation": 1,
+        "dispatch_attempt": 1,
+        "event_partition": 1,
+        "observer_coordinate": 1,
+        "reconciliation_receipt": 1,
+        "terminal_receipt": 1
+      },
+      "status": "passed"
+    }
+  ],
+  "schema_version": "raisa.context_fabric.cf_d2_event_cue_behavior_transaction_evidence.v1",
+  "source_hashes": {
+    "docs/api-spine/async/durable-diary-event-cue-observability.yaml": "e524b40c23e3735a7a94f8d5d6a790a66857718ee85e22eb736d2a4991c4025f",
+    "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md": "6824661959101f332611db9f0edaf28aa59d5cc63403a101499fb88379d7eb5e",
+    "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-parse-catalogue-sol-acceptance.md": "161a48f275163fc5ad16f07a02ed00a54d26221859591e50cb27ea14ebace2c9",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.json": "f1bb8a80541a6345d0258a528426b37f00caeb5cefa1841536849e34e1d4ea3d",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json": "aa89d239cff54635488224e1199c40233c5a571e92724cf84cafa9eb7079aa2f",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json": "6b410a707279a093e2874eb3e22eeef1ab1f8b89c196f7864d0132da59ff3ef1",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert": "3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json": "ca66a12388b9677dcd9f5c3f13e4ca680d130cd001c321bd5dfa7b0e30497ca8",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json": "ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64"
+  },
+  "status": "passed"
+}

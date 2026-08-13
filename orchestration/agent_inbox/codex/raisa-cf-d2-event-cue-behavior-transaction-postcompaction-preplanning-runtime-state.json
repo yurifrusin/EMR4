@@ -1,0 +1,122 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_provider_free_disposable_postgresql_cf_d2_five_protocol_behavior_transaction_rehearsal_after_postcompaction_rehydration",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md at Continuity 280 / Compass 262 accepts exact CF-D2 parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e and names the five-protocol provider-free disposable PostgreSQL behavior/transaction rehearsal as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates planning, architecture, serial disposable-database execution, recovery and acceptance to GPT Sol under the worker-economy rule; no external worker, verifier, provider or native subagent is selected.",
+    "active_plan_and_acceptance": "The complete accepted parse/catalogue plan, design, threat-model delta, closeout and Sol acceptance prove only exact empty PostgreSQL-16 structural representability and authorize a separately frozen successor limited to terminal admission, pending coalescing, contiguous checkpoint advance, dispatch recording and reconciliation with exact lock/effect/rollback observations and cleanup.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 keep protected holdouts, historical Diary/PHI, patient/product data, external patient clients, source/watcher access, operational persistence, providers/ADC, credentials/IAM/external network, product routes, command/write authority, deployment, release, Pages and protected refs closed. docs/branding and all unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the tracked worktree is clean at C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam HEAD 6e5fedb0fc54dff5d82a098bfbcad1bef0bccb3c equal to origin task. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and accepted parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 594 untracked entries, including five under docs/branding, remain preserved; staging is explicit-path only."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+    "objective": "Apply only the exact accepted inert event/cue DDL bytes inside one newly created networkless tmpfs PostgreSQL 16 container, admit the exact catalogue projection, prove zero rows and destroy the owned container.",
+    "status": "complete",
+    "source_head": "579e9e0e86bd92469d82eb1199e8b3120808844e",
+    "authority_source": "AGENTS.md Current Baton at Continuity 279 / Compass 261, the accepted inert-DDL next descendant and Yuri's resumed standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e published and accepted for Continuity 280 / Compass 262 with exact cleanup and AER-0293",
+      "next_executable_stage": null,
+      "retry_counters": {
+        "review": 0,
+        "verification": 1
+      },
+      "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": true,
+      "reason": "accepted_tranche_complete_and_next_dependency_satisfied_descendant_named"
+    },
+    "protected_boundaries": [
+      "protected_evidence_closed",
+      "patient_product_clinical_data_closed",
+      "external_patient_identity_clients_and_channels_closed",
+      "provider_adc_credential_iam_and_external_network_closed",
+      "existing_database_source_watcher_persistence_and_operational_retention_closed",
+      "one_exact_artifact_owned_networkless_tmpfs_postgresql_16_execution_only",
+      "watcher_listener_worker_runtime_closed",
+      "new_route_graphql_openapi_command_and_write_authority_closed",
+      "catalogue_metadata_and_zero_rows_only_no_transaction_protocol_behavior_claim",
+      "deployment_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_rehydration_after_mid_handoff_context_compaction",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh post-compaction five-source rehydration and API Spine source pass before behavior/transaction planning."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent is assigned; serial database work remains Sol-owned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent verifier is selected before deterministic planning gates."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker is selected for the tightly coupled serial database tranche."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

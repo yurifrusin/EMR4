@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+    "completed_stage": "parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e published and accepted for Continuity 280 / Compass 262 with exact cleanup and AER-0293",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "579e9e0e86bd92469d82eb1199e8b3120808844e",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_provider_free_disposable_postgresql_cf_d2_five_protocol_behavior_transaction_rehearsal_after_postcompaction_rehydration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete accepted parse/catalogue plan, design, threat-model delta, closeout and Sol acceptance prove only exact empty PostgreSQL-16 structural representability and authorize a separately frozen successor limited to terminal admission, pending coalescing, contiguous checkpoint advance, dispatch recording and reconciliation with exact lock/effect/rollback observations and cleanup.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates planning, architecture, serial disposable-database execution, recovery and acceptance to GPT Sol under the worker-economy rule; no external worker, verifier, provider or native subagent is selected.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the tracked worktree is clean at C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam HEAD 6e5fedb0fc54dff5d82a098bfbcad1bef0bccb3c equal to origin task. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and accepted parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 594 untracked entries, including five under docs/branding, remain preserved; staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md at Continuity 280 / Compass 262 accepts exact CF-D2 parse/catalogue source 579e9e0e86bd92469d82eb1199e8b3120808844e and names the five-protocol provider-free disposable PostgreSQL behavior/transaction rehearsal as the next dependency-satisfied tranche.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 keep protected holdouts, historical Diary/PHI, patient/product data, external patient clients, source/watcher access, operational persistence, providers/ADC, credentials/IAM/external network, product routes, command/write authority, deployment, release, Pages and protected refs closed. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}
