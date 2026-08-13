@@ -3,15 +3,15 @@
   "operation_id": "raisa-post-status-action-compass-baton-orientation",
   "active_tranche": "Read-only post-status-action Compass and baton orientation",
   "objective": "Interpret the first Reception One command truth-parity milestone, compare current programme directions against exact repository evidence, and select the narrowest dependency-satisfied successor without inferring closed authority.",
-  "status": "in_progress",
-  "source_head": "aefe6938002eae2b7c420e973912fa7973a5d901",
+  "status": "complete",
+  "source_head": "4b6a060c6b1aab42e1062c41d48d109f683abe00",
   "authority_source": "AGENTS.md Current Baton at Continuity 283 / Compass 265, the accepted selected-status composition, Yuri's truth-kernel milestone interpretation and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "read-only orientation plan frozen; exact grid, meta-grid, API Spine and programme-gate comparison selects a two-projection truth-parity conformance rehearsal",
-    "next_executable_stage": "verify and seal the exact orientation candidate, then perform closeout and continuity acceptance",
+    "completed_stage": "accepted at exact source 4b6a060c6b1aab42e1062c41d48d109f683abe00 and bound at Continuity 284 / Compass 266 with the two-projection truth-parity rehearsal named next",
+    "next_executable_stage": null,
     "retry_counters": {
       "review": 0,
-      "verification": 2
+      "verification": 5
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -22,14 +22,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "accepted_truth_parity_orientation_complete_and_rehearsal_named_next"
   },
   "protected_boundaries": [
     "orientation_read_only_no_product_behavior",

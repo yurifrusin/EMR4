@@ -31,15 +31,19 @@ def test_plan_freezes_truth_parity_orientation_without_product_authority() -> No
         assert phrase in text
 
 
-def test_active_latch_holds_read_only_orientation_open() -> None:
+def test_active_latch_remains_bound_to_read_only_orientation() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
     assert latch["operation_id"] == "raisa-post-status-action-compass-baton-orientation"
-    assert latch["status"] == "in_progress"
-    assert latch["source_head"] == "aefe6938002eae2b7c420e973912fa7973a5d901"
-    assert latch["resume_after_compaction"] is True
+    assert latch["status"] in {"in_progress", "complete"}
+    assert latch["source_head"] == "4b6a060c6b1aab42e1062c41d48d109f683abe00"
     assert latch["user_attention"] == {"required": False, "reason": None}
-    assert latch["terminal_response"] == {
-        "permitted": False,
-        "reason": "unfinished_authorized_operation",
-    }
+    if latch["status"] == "in_progress":
+        assert latch["resume_after_compaction"] is True
+        assert latch["terminal_response"] == {
+            "permitted": False,
+            "reason": "unfinished_authorized_operation",
+        }
+    else:
+        assert latch["resume_after_compaction"] is False
+        assert latch["terminal_response"]["permitted"] is True
     assert "orientation_read_only_no_product_behavior" in latch["protected_boundaries"]

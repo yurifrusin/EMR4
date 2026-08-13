@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 283 / Compass 265. The provider-free Reception One selected-appointment status-action composition passes over the existing status proposal/confirm family. A fresh read-only orientation is next; no further command or event family is inferred.
+> EMR4 is at Continuity 284 / Compass 266. The conventional grid and Reception One have truth parity for the existing status family, not general feature parity. A provider-free two-projection truth-parity conformance rehearsal is next.
 
 ## North star
 
@@ -338,31 +338,31 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The provider-free Reception One selected-appointment status-action composition is selected without opening new command or runtime authority. Lineage parent: `raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal`.
 161. **Compose one already-secured routine Diary command into the focused Reception One projection — Provider-free Reception One selected-appointment status-action composition**
    One selected current appointment now uses the existing status proposal/confirm interaction with fail-closed feedback and fresh projection reconciliation. Lineage parent: `raisa-post-cf-d2-compass-baton-orientation`.
+162. **Recognise cross-projection kernel truth parity and select its narrow conformance proof — Read-only post-status-action truth-parity orientation**
+   Truth parity is distinguished from feature parity and a two-renderer status conformance rehearsal is selected. Lineage parent: `raisa-reception-one-selected-appointment-status-action-composition`.
 
 ## Current position
 
-**The first post-durability visible Reception One command composition is accepted — Provider-free Reception One selected-appointment status-action composition**
+**The grid and meta-grid now share kernel truth rank for one command family — Read-only post-status-action truth-parity orientation**
 
-**Why this proof came next:** The selected appointment/status seam is complete and the remaining candidate directions carry different value or authority gates.
+**Why this proof came next:** The status composition proves authoritative meaning can remain invariant across different renderer grammars.
 
-Reception One can apply one existing appointment status safely through the canonical command path.
+A provider-free two-projection truth-parity conformance rehearsal is the next dependency-satisfied tranche.
 
 ### What this unlocks
 
-- Run a fresh provider-free read-only Compass and baton orientation over the completed visible seam.
-- Select the narrowest next dependency-satisfied product tranche without inferring another command, event, participant or patient-channel authority.
+- Freeze and execute the two-projection status truth-parity conformance rehearsal.
+- Use the kernel trace—not grid layout—as the future renderer correctness criterion.
 
 ### What it does not solve
 
-- No additional appointment command family or Diary event family is authorised.
-- Representative staff execution and the first external patient channel retain their recorded Yuri-owned gates.
-- Watcher/runtime, product data, providers, deployment, production and release remain closed.
+- Feature parity across Diary command families is not claimed.
+- Other commands/events, participants, patient channels and watcher/runtime retain their recorded gates.
+- Product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -617,6 +617,7 @@ Prerequisites:
 
 ## Map limits
 
+- Truth parity is accepted only for the existing status family and does not infer another command, renderer runtime, patient channel or feature-parity claim.
 - The selected-status composition proves authored-synthetic client and route-intercepted rendered behavior only; it adds no command family or backend, database, provider, deployment or production authority.
 - The post-CF-D2 orientation selects but does not implement the Reception One status-action composition; it opens no product, runtime, data, provider or command authority.
 - The CF-D2 PostgreSQL behavior pass proves only fixed single-server serial transaction effects, rollback and uncontended lock footprints; concurrency, restart, source, runtime, delivery and product authority remain unproved.
@@ -1027,6 +1028,9 @@ Prerequisites:
 - `docs/raisa-post-cf-d2-compass-baton-orientation-closeout.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation-plan.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation.md`
+- `docs/raisa-post-status-action-compass-baton-orientation-closeout.md`
+- `docs/raisa-post-status-action-compass-baton-orientation-plan.md`
+- `docs/raisa-post-status-action-compass-baton-orientation.md`
 - `docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md`
 - `docs/raisa-postgresql-oidc-authorization-attempt-store-design.md`
 - `docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md`
@@ -1563,6 +1567,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
@@ -2338,6 +2344,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-representation-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--post-cf-d2-compass-baton-orientation.md`
+- `orchestration/human_inbox/yuri/2026-08-13--post-status-action-truth-parity-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--reception-one-selected-appointment-status-action-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
@@ -2432,6 +2439,8 @@ Prerequisites:
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
 - `tests/test_raisa_post_cf_d2_compass_baton_orientation.py`
+- `tests/test_raisa_post_status_action_compass_baton_orientation.py`
+- `tests/test_raisa_post_status_action_compass_baton_orientation_plan.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
@@ -2479,4 +2488,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 265; continuity graph revision 283._
+_Compass map revision 266; continuity graph revision 284._

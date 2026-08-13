@@ -365,11 +365,16 @@ status-action composition as the next visible tranche. That composition now
 passes at exact source `b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33`: one
 selected current appointment delegates one existing status through the
 existing interaction, with fail-closed feedback and fresh projection
-reconciliation but no second command path. A fresh read-only Compass and baton
-orientation is next. No watcher runtime,
-existing database/source access, persistence, product data, external patient
-client, other command, restart/unknown-commit claim, provider, deployment,
-production or release is opened.
+reconciliation but no second command path. The subsequent orientation now
+passes at exact source
+`4b6a060c6b1aab42e1062c41d48d109f683abe00`: the conventional grid and
+Reception One have truth parity, not general feature parity, for the existing
+status family. A provider-free two-projection truth-parity conformance
+rehearsal is next; it will formalise the kernel invariant without adding a
+runtime contract or another command. No watcher runtime, existing database/
+source access, persistence, product data, external patient client, other
+command, restart/unknown-commit claim, provider, deployment, production or
+release is opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

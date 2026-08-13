@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 283,
+  "graph_revision": 284,
   "harvests": [],
   "nodes": [
     {
@@ -18795,9 +18795,83 @@
         "Another command family, event family, representative cohort or patient channel still requires its recorded Yuri decision.",
         "Watcher/runtime, product data, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-post-status-action-compass-baton-orientation",
+      "title": "Read-only post-status-action truth-parity orientation",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-13T13:21:48Z",
+      "updated_at": "2026-08-13T13:21:48Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4b6a060c6b1aab42e1062c41d48d109f683abe00",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-selected-appointment-status-action-composition",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Read-only repository orientation; no product behavior or runtime changed.",
+          "Truth parity is accepted for one status command family; broader feature parity is not claimed.",
+          "The kernel remains above every renderer and owns identity, truth, command meaning, commit, audit and receipt."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-two-projection-truth-parity-rehearsal",
+          "source": "orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Select a provider-free conformance rehearsal over the two existing status renderers without adding a command or runtime contract."
+        }
+      ],
+      "claim_scope": [
+        "Both existing renderers converge on the same status interaction and fresh authoritative reconciliation.",
+        "Projection differences may remain in layout, wording, focus and local history but not kernel meaning.",
+        "Another command/event family, participant cohort, patient channel and operational watcher remain separately gated.",
+        "The 72-test focused orientation/latch/baton/Compass packet and the 193-test canonical fast profile pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-post-status-action-compass-baton-orientation-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-post-status-action-compass-baton-orientation.md"
+        ],
+        "closeouts": [
+          "docs/raisa-post-status-action-compass-baton-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--post-status-action-truth-parity-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_post_status_action_compass_baton_orientation.py",
+          "tests/test_raisa_post_status_action_compass_baton_orientation_plan.py",
+          "tests/test_raisa_post_status_action_compass_baton_orientation_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_post_status_action_compass_baton_orientation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The selected truth-parity rehearsal remains unimplemented until its own frozen plan and evidence pass.",
+        "Other commands/events, Stage 3B execution, patient channels and watcher/runtime retain their recorded gates.",
+        "Product data, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T12:46:00Z"
+  "updated_at": "2026-08-13T13:21:48Z"
 }
