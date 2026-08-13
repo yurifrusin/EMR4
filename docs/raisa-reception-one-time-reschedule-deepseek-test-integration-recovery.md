@@ -51,6 +51,13 @@ traces over the six paired conventional-grid/Reception One outcomes, invalid
 and no-op denial, interruption, dialog keyboard/focus/Escape, three responsive
 viewports and the no-second-write-path source guard.
 
+The broader API Spine gate also exposed one stale historical preflight
+assertion: it still required delete-confirm to lack the HTTP idempotency header,
+although the separately accepted delete-confirm descendant now has the same
+ledger-backed route wiring. The repair keeps the Sprint 139 document's
+historical sequencing text immutable while asserting the current update and
+delete route reality. It changes no backend or API contract.
+
 This recovery proves only authored-synthetic `route_intercepted_browser` and
 `authored_synthetic_client_fixture` behavior. It opens no backend, database,
 provider, product-data, deployment or protected-ref authority.

@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the DeepSeek artifact recovery is committed at af148c184fe1a072831715ce704e3e14e0bc9d4f; 9/9 recovered browser tests, 144/144 Diary smoke, 85/85 update/API Spine/latch checks and the canonical fast profile with 193/193 tests pass; one stale historical delete-confirm expectation is mechanically corrected",
+    "next_executable_stage": "commit the deterministic-gate repair and evidence, bind a fresh exact read-only verifier worktree to the clean candidate, then dispatch Gemini 3.6 Flash/high for the single terminal veto",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "af148c184fe1a072831715ce704e3e14e0bc9d4f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_passing_deterministic_gate_and_historical_api_spine_expectation_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan's nine recovered route-intercepted browser checks, 144 Diary smoke tests, 85 update/API Spine/latch checks, JavaScript syntax, Ruff, whitespace and the canonical fast profile all pass. The only broader-gate defect was a stale historical assertion about separately accepted delete-confirm header wiring; the repair changes no backend contract.",
+    "current_authority_allocation": "Sol owns deterministic admission and the historical-test repair; DeepSeek's recovered artifact is committed; Gemini is now eligible only after this clean candidate commit and fresh read-only worktree binding.",
+    "git_refs_and_worktree": "The task branch is at exact af148c184fe1a072831715ce704e3e14e0bc9d4f before this deterministic-gate evidence commit, with only the historical test repair, recovery note and latch/receipt intentional. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md and the in-progress latch retain Yuri's selected Reception One time-reschedule direction over the accepted truth kernel.",
+    "protected_evidence_boundaries": "No protected evidence, PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/provider/network/deployment surface, docs/branding, protected ref or unrelated untracked file is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

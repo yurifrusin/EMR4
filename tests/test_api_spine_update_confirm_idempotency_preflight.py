@@ -80,7 +80,7 @@ def test_update_confirm_preflight_lists_required_future_route_tests():
         assert phrase in text
 
 
-def test_update_confirm_preflight_keeps_closed_gates_and_scoped_route_wiring():
+def test_update_confirm_preflight_records_historical_gates_and_current_route_wiring():
     text = _read(PREFLIGHT)
     router_text = _read(ROUTER)
 
@@ -113,8 +113,13 @@ def test_update_confirm_preflight_keeps_closed_gates_and_scoped_route_wiring():
     assert "complete_appointment_command(" in update_route
     assert "_UPDATE_CONFIRM_OPERATION_ID" in router_text
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in router_text
-    assert "Header(" not in delete_route
-    assert "Idempotency-Key" not in delete_route
+    # The Sprint 139 document preserves its historical sequencing decision,
+    # while the current router has since completed the separately accepted
+    # delete-confirm idempotency descendant.
+    assert "Header(" in delete_route
+    assert "Idempotency-Key" in delete_route
+    assert "claim_appointment_command(" in delete_route
+    assert "complete_appointment_command(" in delete_route
 
 
 def test_update_confirm_preflight_points_to_sprint_140_route_test_contract():
