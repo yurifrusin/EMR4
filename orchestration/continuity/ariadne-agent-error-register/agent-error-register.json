@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 260,
+  "register_revision": 261,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-13",
+    "source_cutoff_on": "2026-08-14",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -11795,6 +11795,209 @@
           "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-260.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0294",
+      "attempt_id": "raisa-reception-one-reschedule-main-discovery-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_search",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "Protected holdout and fixture surfaces must never be opened, enumerated or searched; discovery near protected evidence must use exact predeclared non-protected files and never a directory-root content search.",
+      "observed_error": "During appointment-reschedule discovery, Sol ran a content search over the broad tests tree. Protected-fixture match output appeared. Sol immediately quarantined the output and prohibits its use in planning, implementation, tests or acceptance. No repository file, runtime, database, provider, product data, command or ref was mutated.",
+      "detection_method": "The returned search output visibly crossed the protected boundary. Sol stopped broad discovery, disclosed the incident before planning and switched to one exact literal read per already-known non-protected file.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-main-protected-scope-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-261.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discard and prohibit use of the protected output, preserve the sanitized incident receipt, register AER-0294 before plan acceptance, and resume discovery only through one exact Get-Content -LiteralPath read per already-known non-protected file.",
+        "prevention_control": "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-main-protected-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-261.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0295",
+      "attempt_id": "raisa-reception-one-reschedule-ui-map-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "codex-native-parallel-worker",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_native_subagent",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded read-only worker must read only its exact predeclared non-protected file allowlist; intended exact operands are insufficient if the executed command emits repository-wide output.",
+      "observed_error": "The UI-mapping worker reported that two intended exact-file search commands emitted repository-wide match lines beyond its assigned allowlist. It stopped using search, discarded the broadened output and modified no file. Its first conclusions remain inadmissible pending a fresh literal-read-only reproduction.",
+      "detection_method": "The worker disclosed the output expansion in its closeout. Sol quarantined the full first worker result before plan acceptance and required a fresh post-receipt turn with literal reads only.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-ui-map-scope-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-261.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.exact_file_search_allowlist_not_effectively_enforced",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Discard the broadened output, preserve the sanitized incident receipt, register AER-0295 and freshly reproduce the UI mapping after the corrected passing receipt using one literal read per predeclared non-protected file and no search command.",
+        "prevention_control": "Protected-adjacent worker packets prohibit content search, globbing and recursive discovery; each required source is read through a separate literal-file command whose operand is visible before execution.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-ui-map-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-261.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-ui-map-postreceipt-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0296",
+      "attempt_id": "raisa-reception-one-reschedule-native-predispatch-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A distinct orchestrator receipt with worker_dispatch_permitted true must pass immediately before any native or external worker is spawned; semantic rehydration alone does not authorize dispatch.",
+      "observed_error": "Three exact-path read-only native subagents were spawned after semantic five-source rehydration but before the distinct preplanning receipt had passed. Their first results are quarantined and may not support plan or acceptance claims.",
+      "detection_method": "While building the post-dispatch runtime state, Sol identified that worker spawn had preceded formal receipt readback. The first generated receipt also failed for an independent representation error recorded as AER-0297.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-native-dispatch-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-261.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": ["AER-0297"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Quarantine every pre-receipt worker result, preserve the sanitized incident receipt, generate and read back a corrected passing five-source receipt, then freshly reproduce every useful API and UI worker finding before admission.",
+        "prevention_control": "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-native-dispatch-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-261.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-api-map-postreceipt-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-ui-map-postreceipt-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0297",
+      "attempt_id": "raisa-reception-one-reschedule-native-predispatch-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every orchestrator runtime state must use an admitted adapter observation method and may name assigned agents only with complete matching workspace receipts; deterministic preflight must pass before dispatch evidence is admitted.",
+      "observed_error": "The first preplanning state represented native-subagent activity with an unadmitted adapter observation method and unmatched assigned-agent identifiers. Deterministic preflight returned revision_required and authorized no worker dispatch or plan admission.",
+      "detection_method": "The generated receipt reported adapter_probe_method_invalid and three workspace_receipt_missing reasons. Sol corrected only the representation vocabulary, removed unmatched assignments and generated a distinct passing five-source receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-native-dispatch-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-261.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": ["AER-0296"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve a sanitized failure receipt, use admitted synthetic observation vocabulary with no unmatched assigned-agent identifiers, regenerate the five-source preplanning receipt and require exact passed readback before further work.",
+        "prevention_control": "Copy adapter observation and assignment shapes only from the current harness contract, keep native session coordination out of adapter probes and validate the state before any worker spawn.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-native-dispatch-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-261.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0298",
+      "attempt_id": "raisa-reception-one-reschedule-native-predispatch-002",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh orchestrator receipt must embed the exact live active-operation latch, including current operation id, status, source head, user-attention state and terminal-handback state; schema validity alone cannot make a stale operation authoritative.",
+      "observed_error": "The schema-valid preplanning receipt embedded the already-closed truth-parity operation with blocked status, user attention required and terminal handback permitted instead of the live in-progress rescheduling operation. Two post-receipt worker follow-ups were interrupted and their partial results remain inadmissible.",
+      "detection_method": "Sol compared the emitted receipt's active_operation object with the exact live latch before admitting worker results and observed the semantic mismatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-stale-active-operation-receipt-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-261.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.stale_active_operation_embedded_in_fresh_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Interrupt both worker follow-ups, discard any partial result, copy the exact live latch into the runtime state, change the continuation event to pre_worker_dispatch and regenerate the receipt before a fresh worker attempt.",
+        "prevention_control": "Immediately before every receipt generation, mechanically compare operation_id, status, source_head, user_attention and terminal_response in the runtime state against the live latch; do not infer freshness from a passing receipt alone.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-stale-active-operation-receipt-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-261.md"
         ]
       },
       "status": "corrected"

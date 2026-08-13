@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal",
-  "active_tranche": "Provider-free two-projection truth-parity conformance rehearsal",
-  "objective": "Drive the conventional grid and Reception One through six authored-synthetic status outcomes and prove their normalized kernel-owned truth fields agree while presentation remains renderer-local.",
-  "status": "blocked",
-  "source_head": "18aa4b613d735a68a7f6f2e55d34e498176c9935",
-  "authority_source": "AGENTS.md Current Baton at Continuity 284 / Compass 266, the accepted post-status truth-parity orientation and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "active_tranche": "Reception One selected-appointment reschedule composition",
+  "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
+  "status": "in_progress",
+  "source_head": "988c139a7f3592b48f5f3977e4b120bde2c78bac",
+  "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "accepted at exact source 18aa4b613d735a68a7f6f2e55d34e498176c9935 and bound at Continuity 285 / Compass 267 after twelve browser traces, six equal pairs, 115 focused checks and the canonical fast profile",
-    "next_executable_stage": null,
+    "completed_stage": "fresh five-source rehydration and exact-path API/UI reconnaissance completed; protected-scope incidents quarantined pending mandatory register update",
+    "next_executable_stage": "register all qualifying command-scope and process-order incidents, then freeze the narrowest same-practitioner selected-appointment time-reschedule composition plan and worker packets",
     "retry_counters": {
       "review": 0,
-      "verification": 6
+      "verification": 1
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -22,23 +22,23 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "genuine_post_truth_parity_programme_direction_fork"
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_truth_parity_rehearsal_complete_and_user_direction_required"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "exactly_conventional_grid_and_reception_one",
-    "existing_appointment_status_proposal_confirm_family_only",
-    "six_authored_synthetic_route_intercepted_scenarios_only",
-    "evidence_trace_not_runtime_contract",
-    "product_javascript_css_html_unchanged",
-    "no_second_command_raw_fallback_or_optimistic_truth",
-    "backend_api_openapi_graphql_database_source_watcher_event_unchanged",
+    "existing_appointment_update_proposal_confirm_family_only",
+    "one_selected_current_appointment",
+    "same_practitioner_time_reschedule_only_until_plan_freeze",
+    "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
+    "no_raw_put_or_second_command_path",
+    "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
+    "authored_synthetic_provider_free_evidence_only",
     "protected_evidence_and_historical_diary_phi_closed",
     "patient_product_clinical_data_and_external_patient_channels_closed",
     "provider_adc_credentials_iam_external_network_closed",

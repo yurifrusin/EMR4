@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 260
+    assert register["register_revision"] == 261
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 294)
+        f"AER-{index:04d}" for index in range(1, 299)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 192
+    assert len(agent_incidents) == 197
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 293
+    assert report["incident_count"] == 298
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2607,6 +2607,47 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert "artifact was never executed" in incident["observed_error"]
     assert "three consecutive" in incident["correction"]["prevention_control"]
+
+
+def test_aer_0294_through_0298_record_reschedule_discovery_and_dispatch_recovery() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    main_search = incidents["AER-0294"]
+    assert main_search["category"] == "command_scope_violation"
+    assert main_search["process_severity"] == "material"
+    assert main_search["recurrence_signature"] == (
+        "orchestrator.overbroad_repository_content_search"
+    )
+    assert main_search["status"] == "corrected"
+    assert main_search["correction"]["status"] == "control_added"
+
+    ui_search = incidents["AER-0295"]
+    assert ui_search["role"] == "implementer"
+    assert ui_search["category"] == "command_scope_violation"
+    assert ui_search["status"] == "corrected"
+    assert ui_search["correction"]["status"] == "corrected_fresh_attempt"
+
+    predispatch = incidents["AER-0296"]
+    representation = incidents["AER-0297"]
+    assert predispatch["related_incident_ids"] == ["AER-0297"]
+    assert representation["related_incident_ids"] == ["AER-0296"]
+    assert predispatch["recurrence_signature"] == (
+        "orchestrator.worker_spawn_before_distinct_predispatch_receipt"
+    )
+    assert predispatch["status"] == "corrected"
+    assert predispatch["correction"]["status"] == "corrected_fresh_attempt"
+    assert representation["category"] == "output_contract_violation"
+    assert representation["status"] == "corrected"
+    assert representation["correction"]["status"] == "corrected_fresh_attempt"
+
+    active_operation = incidents["AER-0298"]
+    assert active_operation["category"] == "evidence_misreport"
+    assert active_operation["related_incident_ids"] == []
+    assert active_operation["recurrence_signature"] == (
+        "orchestrator.stale_active_operation_embedded_in_fresh_receipt"
+    )
+    assert active_operation["status"] == "corrected"
+    assert active_operation["correction"]["status"] == "corrected_fresh_attempt"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2885,20 +2926,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 260
-    assert report["incident_count"] == 293
+    assert report["register_revision"] == 261
+    assert report["incident_count"] == 298
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 192,
+        "agent_behavior": 197,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 34,
-        "evidence_misreport": 37,
+        "command_scope_violation": 37,
+        "evidence_misreport": 38,
         "harness_failure": 37,
-        "output_contract_violation": 82,
+        "output_contract_violation": 83,
         "read_only_violation": 3,
         "reasoning_claim_error": 36,
         "repository_defect": 55,
@@ -2906,7 +2947,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 97,
-        "canonical_unchanged": 169,
+        "canonical_unchanged": 174,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(
@@ -2932,8 +2973,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     ] == [
         {
             "recurrence_signature": "orchestrator.overbroad_repository_content_search",
-            "incident_count": 3,
-            "incident_ids": ["AER-0054", "AER-0092", "AER-0291"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0054", "AER-0092", "AER-0291", "AER-0294"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
@@ -2942,6 +2983,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Architecture recovery packets and Sol self-checks must carry an explicit exact-path read allowlist. Environment facts are read from one named configuration or handover path; broad rg, recursive content search and wildcard discovery are prohibited under protected-evidence containment.",
                 "Every content-search command in this and later protected-evidence-adjacent work must supply an explicit exact-file allowlist assembled from already known non-protected baton/API paths. Searching a directory root such as tests, docs or the repository root is prohibited even when the textual pattern appears narrow.",
                 "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
+                "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file.",
             ],
         },
         {
@@ -2971,6 +3013,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
                 "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
                 "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.worker_spawn_before_distinct_predispatch_receipt"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0043", "AER-0296"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Treat pre_sprint_planning and pre_worker_dispatch as distinct ordered events; the dispatch command may be issued only after the latter receipt is generated and read back as passed.",
+                "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task.",
             ],
         },
         {
@@ -3102,7 +3159,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
-            "incident_count": 9,
+            "incident_count": 10,
             "incident_ids": [
                 "AER-0024",
                 "AER-0030",
@@ -3113,6 +3170,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0157",
                 "AER-0160",
                 "AER-0250",
+                "AER-0297",
             ],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
@@ -3126,6 +3184,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
                 "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
                 "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+                "Copy adapter observation and assignment shapes only from the current harness contract, keep native session coordination out of adapter probes and validate the state before any worker spawn.",
                 "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
                 "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string.",
             ],

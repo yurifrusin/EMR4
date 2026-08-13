@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0295",
+  "observed_on": "2026-08-14",
+  "attempt_id": "raisa-reception-one-reschedule-ui-map-001",
+  "observation": "A read-only UI-mapping worker reported that two intended exact-file search commands emitted repository-wide match lines beyond its assigned allowlist. The worker stopped using search, discarded the broadened output and modified no file.",
+  "effects": {
+    "repository_mutated": false,
+    "runtime_opened": false,
+    "database_accessed": false,
+    "provider_called": false,
+    "product_data_accessed": false,
+    "broadened_output_used": false
+  },
+  "correction": "Repeat required UI mapping after the passing orchestration receipt using one literal read per predeclared non-protected file and no content-search, recursive or glob command."
+}

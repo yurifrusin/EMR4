@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "546a6bc03c296f3476e4edb8094da5d8e439ab44f12f5f798038110bbb209019",
+  "canonical_register_sha256": "b1e7d17a82ca2a1f801e2e06ae5cef1c6244dcec07ce0089ce55648c538ad754",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 97,
-      "canonical_unchanged": 169,
+      "canonical_unchanged": 174,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
-      "command_scope_violation": 34,
-      "evidence_misreport": 37,
+      "command_scope_violation": 37,
+      "evidence_misreport": 38,
       "harness_failure": 37,
-      "output_contract_violation": 82,
+      "output_contract_violation": 83,
       "read_only_violation": 3,
       "reasoning_claim_error": 36,
       "repository_defect": 55,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 192,
+      "agent_behavior": 197,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 109,
-      "material": 96,
-      "moderate": 88
+      "low": 110,
+      "material": 97,
+      "moderate": 91
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
@@ -34,10 +34,10 @@
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
-      "codex-native-parallel-worker::implementer": 1,
+      "codex-native-parallel-worker::implementer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 141,
+      "codex-primary-orchestrator::orchestrator": 145,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -85,13 +85,13 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 19,
-      "orchestrator": 223,
+      "implementer": 20,
+      "orchestrator": 227,
       "verifier": 51
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 293,
+  "incident_count": 298,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -99,11 +99,12 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0054",
         "AER-0092",
-        "AER-0291"
+        "AER-0291",
+        "AER-0294"
       ],
       "origins": [
         "agent_behavior"
@@ -111,7 +112,8 @@
       "prevention_controls": [
         "Architecture recovery packets and Sol self-checks must carry an explicit exact-path read allowlist. Environment facts are read from one named configuration or handover path; broad rg, recursive content search and wildcard discovery are prohibited under protected-evidence containment.",
         "Every content-search command in this and later protected-evidence-adjacent work must supply an explicit exact-file allowlist assembled from already known non-protected baton/API paths. Searching a directory root such as tests, docs or the repository root is prohibited even when the textual pattern appears narrow.",
-        "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search."
+        "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
+        "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file."
       ],
       "recurrence_signature": "orchestrator.overbroad_repository_content_search",
       "resource_ids": [
@@ -165,6 +167,30 @@
         "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path."
       ],
       "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0043",
+        "AER-0296"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Treat pre_sprint_planning and pre_worker_dispatch as distinct ordered events; the dispatch command may be issued only after the latter receipt is generated and read back as passed.",
+        "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task."
+      ],
+      "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -399,7 +425,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 9,
+      "incident_count": 10,
       "incident_ids": [
         "AER-0024",
         "AER-0030",
@@ -409,7 +435,8 @@
         "AER-0154",
         "AER-0157",
         "AER-0160",
-        "AER-0250"
+        "AER-0250",
+        "AER-0297"
       ],
       "origins": [
         "agent_behavior"
@@ -422,6 +449,7 @@
         "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
         "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
         "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+        "Copy adapter observation and assignment shapes only from the current harness contract, keep native session coordination out of adapter probes and validate the state before any worker spawn.",
         "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
         "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string."
       ],
@@ -691,7 +719,7 @@
       ]
     }
   ],
-  "register_revision": 260,
+  "register_revision": 261,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-13"
+  "source_cutoff_on": "2026-08-14"
 }

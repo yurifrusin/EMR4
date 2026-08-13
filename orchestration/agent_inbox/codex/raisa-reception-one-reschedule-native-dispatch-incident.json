@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_ids": ["AER-0296", "AER-0297"],
+  "observed_on": "2026-08-14",
+  "attempt_id": "raisa-reception-one-reschedule-native-predispatch-001",
+  "observations": [
+    "Three exact-path read-only native subagents were started after semantic rehydration but before a distinct orchestrator receipt had passed.",
+    "The first runtime state represented native-subagent activity using an unadmitted adapter observation method and unmatched assigned-agent identifiers; deterministic preflight returned revision_required."
+  ],
+  "effects": {
+    "candidate_admitted": false,
+    "repository_mutated": false,
+    "runtime_opened": false,
+    "database_accessed": false,
+    "provider_called": false,
+    "product_data_accessed": false
+  },
+  "correction": "The runtime state now uses admitted observation vocabulary with no unmatched assigned-agent identifiers, the five-source receipt passes, and any useful worker findings must be reproduced in fresh post-receipt turns before admission."
+}

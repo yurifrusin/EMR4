@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0294",
+  "observed_on": "2026-08-14",
+  "attempt_id": "raisa-reception-one-reschedule-main-discovery-001",
+  "observation": "A main-lane content search used a broad tests-tree scope during appointment-reschedule discovery and printed protected-fixture match output. The output was immediately quarantined and is inadmissible for planning, implementation, tests or acceptance.",
+  "effects": {
+    "repository_mutated": false,
+    "runtime_opened": false,
+    "database_accessed": false,
+    "provider_called": false,
+    "product_data_accessed": false,
+    "protected_content_used": false
+  },
+  "correction": "Use one exact Get-Content -LiteralPath read per already-known non-protected file. Do not search a directory root near protected evidence."
+}

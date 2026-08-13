@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "fresh five-source rehydration completed; discovery and dispatch incidents quarantined and entered in register revision 261 pending fresh post-receipt reproduction",
+    "next_executable_stage": "freshly reproduce the bounded API and UI maps using exact literal reads, then freeze the narrowest same-practitioner duration-fixed selected-appointment time-reschedule composition plan",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "988c139a7f3592b48f5f3977e4b120bde2c78bac",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "fresh_literal_only_api_and_ui_mapping_then_freeze_narrowest_reception_one_existing_appointment_reschedule_composition",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The two-projection truth-parity plan, projection-neutral kernel architecture, closeout and Sol acceptance were reread completely. They prove the existing status family and require any next command family to converge on the same kernel-owned proposal, confirmation, authoritative commit, audit, receipt and fresh reconciliation without a renderer-owned command path.",
+    "current_authority_allocation": "AGENTS.md section 4 retains GPT Sol as conductor, architecture and acceptance owner. Two bounded read-only subagents map the exact existing API and UI surfaces and one bounded read-only subagent maps incident registration; none receives implementation, acceptance, integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at clean tracked HEAD 988c139a7f3592b48f5f3977e4b120bde2c78bac exactly aligned with origin task. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted truth-parity source 18aa4b613d735a68a7f6f2e55d34e498176c9935 are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 610 untracked files, including five docs/branding files, remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was reread completely. At Continuity 285 / Compass 267 it accepts two-projection truth parity at exact source 18aa4b613d735a68a7f6f2e55d34e498176c9935 and records the programme-direction fork that Yuri has now resolved in favour of another existing Reception One command family, naturally appointment update/rescheduling.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts and historical Diary/PHI remain closed and unusable. One over-broad search exposed protected-fixture output; it is quarantined from reasoning and must be entered in the agent-error register before candidate acceptance. Product/patient data, provider/ADC, credentials/IAM/network, new backend authority, database/source/watcher expansion, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved with explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

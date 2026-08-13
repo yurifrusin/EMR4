@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.native-read-only-result.v1",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "lane": "ui_map",
+  "source_head": "988c139a7f3592b48f5f3977e4b120bde2c78bac",
+  "orchestrator_receipt": "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-reschedule-composition-preplanning-receipt.json",
+  "status": "passed",
+  "result": "The narrowest composition is same-date, same-practitioner, duration-fixed start-time selection. A bridge delegates to existing handleMoveResize with zero duration delta, while meta-grid owns only presentation, accessibility and reconciliation; six paired route-intercepted outcomes prove exact coordinate parity and zero raw PUT.",
+  "inspection": "Seven predeclared non-protected files were each read once with Get-Content -LiteralPath; no search, listing, Git discovery or write occurred."
+}

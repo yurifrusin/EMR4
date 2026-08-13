@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0298",
+  "observed_on": "2026-08-14",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "boundary": "orchestrator receipt active-operation freshness",
+  "observation": "A schema-valid preplanning receipt embedded the already-closed truth-parity operation snapshot instead of the live in-progress rescheduling latch. Two post-receipt worker follow-ups were interrupted before their results were admitted.",
+  "containment": [
+    "No interrupted worker result is admissible.",
+    "The runtime state now embeds the exact live rescheduling latch.",
+    "A distinct pre_worker_dispatch receipt passes with the current operation in_progress, terminal handback false and all five named rehydration sources."
+  ],
+  "excluded": [
+    "protected evidence output",
+    "patient, clinical, product or document data",
+    "prompts, secrets, credentials or provider payloads"
+  ]
+}
