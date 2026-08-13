@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 281 / Compass 263. CF-D2's five payload-free event/cue transaction protocols now pass fixed single-server serial PostgreSQL behavior, rollback and uncontended lock-footprint evidence. Source truth and command-time current-authority checks remain the correctness kernel. A read-only post-CF-D2 programme orientation is next.
+> EMR4 is at Continuity 282 / Compass 264. The post-CF-D2 read-only orientation selects a provider-free Reception One selected-appointment status-action composition as the next visible tranche. It reuses the accepted status proposal/confirm family; CF-D2 remains a separately closed optional acceleration layer.
 
 ## North star
 
@@ -334,26 +334,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Exact parse, catalogue census, zero rows and cleanup pass; the five behavior/transaction protocols are the next separately frozen candidate. Lineage parent: `raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering`.
 159. **Prove the five accepted payload-free event/cue protocols as fixed serial PostgreSQL transactions without making durability the correctness kernel — Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal**
    All five serial transaction protocols, rollback probes and required uncontended lock footprints pass; read-only programme orientation is next. Lineage parent: `raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal`.
+160. **Reorient from the completed CF-D2 serial foundation to the narrowest already-supported visible Reception One improvement — Read-only post-CF-D2 Compass and baton orientation**
+   The provider-free Reception One selected-appointment status-action composition is selected without opening new command or runtime authority. Lineage parent: `raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal`.
 
 ## Current position
 
-**The narrow CF-D2 serial database foundation passes without becoming source truth or command authority — Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal**
+**The completed durability foundation is reconciled with the next visible Reception One product step — Read-only post-CF-D2 Compass and baton orientation**
 
-**Why this proof came next:** All five accepted transaction protocols now have bounded real PostgreSQL behavior evidence, so the programme can reorient before choosing the next visible product tranche.
+**Why this proof came next:** Reception One already shows selected appointment status and the ordinary Diary already owns the accepted status command interaction, leaving one small composition seam.
 
-Six serial groups, three rollback probes, eleven non-mutating denials, five uncontended lock footprints and exact cleanup pass.
+The provider-free selected-appointment status-action composition is frozen as the next dependency-satisfied tranche.
 
 ### What this unlocks
 
-- Run a read-only post-CF-D2 Compass and baton orientation.
-- Identify the next dependency-satisfied Reception One or product tranche from accepted repository evidence.
-- Retain the event mechanism as an optional acceleration layer over fresh source reads and conditional commands.
+- Freeze and execute the provider-free Reception One selected-appointment status-action composition.
+- Reuse the existing status vocabulary, proposal/confirm interaction and fresh Diary reload without a second command path.
+- Return to visible product work while retaining CF-D2 as a separately closed future acceleration extension.
 
 ### What it does not solve
 
-- Concurrency, restart, crash, unknown commit, watcher ownership, source observation, delivery or operational retention.
-- Real authority, real fresh reads, product/runtime wiring or patient/product data handling.
-- External identity/channels, providers, commands, deployment, production or release.
+- The selected visible status composition is not yet implemented or rendered.
+- Representative staff execution, first patient channel and another Diary event family still require their recorded user decisions.
+- Watcher/runtime, product data, providers, new commands, deployment, production and release remain closed.
 
 ## Continuity and authority
 
@@ -422,7 +424,7 @@ Prerequisites:
 
 - Preserve source-owned truth and command-time current-authority checks as the correctness kernel.
 - Preserve the accepted CF-D2 observability, admission, representation, inert-DDL, parse/catalogue and serial behavior evidence.
-- Run a fresh read-only post-CF-D2 Compass/baton orientation before selecting the next already-planned product tranche.
+- Treat event/cue durability as an optional later acceleration layer; visible product work does not wait for watcher runtime.
 - Keep concurrency, restart, watcher/source access, persistence/runtime, product data and operational retention separately closed.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -612,6 +614,7 @@ Prerequisites:
 
 ## Map limits
 
+- The post-CF-D2 orientation selects but does not implement the Reception One status-action composition; it opens no product, runtime, data, provider or command authority.
 - The CF-D2 PostgreSQL behavior pass proves only fixed single-server serial transaction effects, rollback and uncontended lock footprints; concurrency, restart, source, runtime, delivery and product authority remain unproved.
 - The CF-D2 representation is inert abstract row evidence, not SQL, PostgreSQL, transaction, persistence, restart or delivery proof.
 - The CF-D2 admission state machine is ephemeral repository evidence, not operational persistence, restart, delivery or database proof.
@@ -1017,6 +1020,9 @@ Prerequisites:
 - `docs/raisa-microsoft-federation-admission-runtime-plan.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-closeout.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-plan.md`
+- `docs/raisa-post-cf-d2-compass-baton-orientation-closeout.md`
+- `docs/raisa-post-cf-d2-compass-baton-orientation-plan.md`
+- `docs/raisa-post-cf-d2-compass-baton-orientation.md`
 - `docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md`
 - `docs/raisa-postgresql-oidc-authorization-attempt-store-design.md`
 - `docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md`
@@ -1546,6 +1552,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-candidate-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
@@ -2315,6 +2325,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-representation-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md`
+- `orchestration/human_inbox/yuri/2026-08-13--post-cf-d2-compass-baton-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
@@ -2406,6 +2417,7 @@ Prerequisites:
 - `tests/test_raisa_channel_neutral_patient_interaction_foundation_plan.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
+- `tests/test_raisa_post_cf_d2_compass_baton_orientation.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
@@ -2451,4 +2463,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 263; continuity graph revision 281._
+_Compass map revision 264; continuity graph revision 282._

@@ -16,6 +16,7 @@ THREAT = (
     / "docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md"
 )
 LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 EVIDENCE_DIR = (
     ROOT
     / "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring"
@@ -100,16 +101,20 @@ def test_existing_signed_confirm_and_no_raw_fallback_boundary_is_unchanged() -> 
     assert '(isStatusChange && TERMINAL_STATUSES.includes(newStatus))' in source
 
 
-def test_active_latch_resumes_this_exact_ui_operation() -> None:
+def test_historical_ui_operation_remains_accepted_after_latch_advances() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
-    assert latch["operation_id"] == (
-        "raisa-provider-free-visible-native-diary-status-confirm-wiring"
+    graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    node = next(
+        item
+        for item in graph["nodes"]
+        if item["id"] == "raisa-provider-free-visible-native-diary-status-confirm-wiring"
     )
-    assert latch["status"] == "in_progress"
-    assert latch["terminal_response"]["permitted"] is False
-    assert "verify_commit_notify_and_publish_the_ui_closeout" in (
-        latch["checkpoint"]["next_executable_stage"]
+    assert node["status"] == "accepted"
+    assert node["coordinates"]["source_head"] == (
+        "bed49be3d78d79207857b3d3a044cebd334112dc"
     )
+    assert latch["schema_version"] == "ariadne.active_operation_latch.v1"
+    assert latch["operation_id"] != node["id"]
 
 
 def test_evidence_is_closed_typed_and_candid_about_browser_modes() -> None:

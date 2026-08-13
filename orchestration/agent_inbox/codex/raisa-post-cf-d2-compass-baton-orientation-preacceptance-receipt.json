@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Read-only post-CF-D2 Compass and baton orientation",
+    "completed_stage": "orientation candidate committed at exact source edba8f57380a48fd98decc332608349f2d9012e6 with the provider-free Reception One selected-appointment status-action composition selected",
+    "next_executable_stage": "run preacceptance, bind Continuity 282 / Compass 264, complete checks, publish the orientation and rehydrate into the selected visible tranche",
+    "operation_id": "raisa-post-cf-d2-compass-baton-orientation",
+    "resume_after_compaction": true,
+    "source_head": "edba8f57380a48fd98decc332608349f2d9012e6",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_bind_read_only_post_cf_d2_orientation_at_exact_source_edba8f57380a48fd98decc332608349f2d9012e6",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen orientation plan and exact-source report reconcile the accepted CF-D2, Reception One, patient-interaction, API Spine and client evidence. They select only a composition over the existing status proposal/confirm interaction and preserve every new-command, runtime, provider, product-data and external-client closure.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates programme orientation, plan freezing, architecture and acceptance to GPT Sol. The small read-only comparison remained Sol-owned; no external worker, verifier, provider or native subagent was selected.",
+    "git_refs_and_worktree": "The task branch is at exact orientation source edba8f57380a48fd98decc332608349f2d9012e6. Required resumed HEAD and accepted CF-D2 source are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only exact orientation closeout/continuity files and the tracked latch are current task changes; all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md at Continuity 281 / Compass 263 names the fresh read-only post-CF-D2 orientation. Exact candidate source edba8f57380a48fd98decc332608349f2d9012e6 selects the provider-free Reception One selected-appointment status-action composition.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 keep protected holdouts, historical Diary/PHI, patient/product data, external patient clients and channels, source/watcher/runtime/persistence, providers/ADC, credentials/IAM/external network, new commands/writes, deployment, production, release, Pages and protected refs closed. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

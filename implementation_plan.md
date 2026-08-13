@@ -207,9 +207,10 @@ PostgreSQL-16 parse/catalogue descendant now passes at source
 keys/checks/references with no executable schema object. Attempt 001 stopped
 before artifact execution at an authenticated-readiness race and cleaned up;
 AER-0293 binds the narrow correction before passing fresh attempt 002. The
-five transaction protocols remain unproved and are the next separately frozen
-behavior/transaction candidate; persistence, watcher/source access, restart,
-unknown commit and delivery remain unproved.
+five transaction protocols subsequently pass their fixed serial PostgreSQL-16
+behavior/transaction rehearsal at exact source
+`f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9`; persistence,
+watcher/source access, restart, unknown commit and delivery remain unproved.
 
 The provider-free legacy-route sequence now also passes through its source-
 bound default-off runtime-instrumentation architecture and globally-disabled
@@ -356,8 +357,11 @@ explicitly future transaction protocols, 12 canonical row families and 80
 hostile rejections. Exact inert SQL-text lowering and disposable PostgreSQL-16
 parse/catalogue admission now also pass through source
 `579e9e0e86bd92469d82eb1199e8b3120808844e`, proving the frozen empty physical
-shape without proving the five transaction protocols. Their narrow
-provider-free behavior/transaction rehearsal is next. No watcher runtime,
+shape. The five protocols then pass fixed serial effects, denials, rollback and
+uncontended lock-footprint evidence at source
+`f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9`. The subsequent read-only
+orientation selects a provider-free Reception One selected-appointment
+status-action composition as the next visible tranche. No watcher runtime,
 existing database/source access, persistence, product data, external patient
 client, other command, restart/unknown-commit claim, provider, deployment,
 production or release is opened.
@@ -863,8 +867,9 @@ generation rehearsal. The architecture-only provider-free default-off
   PostgreSQL-16 parse/catalogue descendant passes at source
   `579e9e0e86bd92469d82eb1199e8b3120808844e`: the exact artifact creates the
   frozen empty catalogue and no executable schema objects, then exact cleanup
-  removes the owned server. The five transaction protocols are the next
-  separately frozen behavior/transaction candidate; persistence,
+  removes the owned server. The five transaction protocols subsequently pass
+  their fixed serial PostgreSQL behavior/transaction rehearsal at source
+  `f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9`; persistence,
   watcher/source access, restart, unknown commit and delivery remain unproved.
   Applied migration, application wiring,
   operational database/source access and every real-product or clinical

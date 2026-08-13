@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicitly_staged_post_cf_d2_orientation_closeout_and_continuity_artifacts",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md at Continuity 282 / Compass 264 accepts raisa_post_cf_d2_compass_baton_orientation_pass at exact source edba8f57380a48fd98decc332608349f2d9012e6 and names the provider-free Reception One selected-appointment status-action composition next.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates acceptance and task-branch publication to GPT Sol; the documentation-only orientation closeout remains Sol-owned with no worker or verifier selected.",
+    "active_plan_and_acceptance": "The orientation plan, report, closeout and Sol acceptance freeze the selected UI successor, document 91 focused checks plus the 193-test canonical fast profile passing, and keep all product/runtime authority closed during orientation.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 keep protected evidence, historical Diary/PHI, patient/product/clinical data, external patient channels, source/database/watcher runtime, provider/ADC, credentials/IAM/network, new commands/writes, deployment, production, release, Pages and protected refs closed. docs/branding and all unrelated untracked files are excluded by explicit-path staging.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at HEAD edba8f57380a48fd98decc332608349f2d9012e6; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Origin task remains d88c097583473eb2123b77ea752daba2ff798468 before closeout publication. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 601 untracked files, including five branding files, remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-post-cf-d2-compass-baton-orientation",
+    "active_tranche": "Read-only post-CF-D2 Compass and baton orientation",
+    "objective": "Reconcile the accepted CF-D2 serial database foundation with the accepted Reception One, patient-interaction and Context Fabric directions, then freeze the narrowest next dependency-satisfied visible product tranche already supported by repository evidence.",
+    "status": "complete",
+    "source_head": "edba8f57380a48fd98decc332608349f2d9012e6",
+    "authority_source": "AGENTS.md Current Baton at Continuity 281 / Compass 263, the accepted CF-D2 closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "orientation accepted at exact source edba8f57380a48fd98decc332608349f2d9012e6 and bound at Continuity 282 / Compass 264 with the provider-free Reception One selected-appointment status-action composition named next",
+      "next_executable_stage": null,
+      "retry_counters": {"review": 0, "verification": 1},
+      "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "accepted_orientation_complete_and_visible_successor_named"},
+    "protected_boundaries": [
+      "orientation_read_only_except_repository_plan_evidence_and_continuity_artifacts",
+      "protected_evidence_closed",
+      "patient_product_clinical_data_closed",
+      "external_patient_identity_clients_and_channels_closed",
+      "existing_database_source_watcher_persistence_and_operational_retention_closed",
+      "provider_adc_credential_iam_and_external_network_closed",
+      "product_runtime_route_tool_command_and_write_authority_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_rehydration_and_postcompaction_reverification_before_orientation_closeout_commit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is present for the explicit-path closeout commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent is assigned."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No independent verifier is selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external implementation worker is selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

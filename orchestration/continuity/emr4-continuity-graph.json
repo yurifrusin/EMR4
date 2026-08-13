@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 281,
+  "graph_revision": 282,
   "harvests": [],
   "nodes": [
     {
@@ -18619,9 +18619,84 @@
         "Watcher/source access, real delivery, persistence, retention, rotation, purge, performance and product wiring remain unproved.",
         "Real authority/fresh reads, patient/product data, providers, commands/writes, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-post-cf-d2-compass-baton-orientation",
+      "title": "Read-only post-CF-D2 Compass and baton orientation",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-13T11:25:00Z",
+      "updated_at": "2026-08-13T11:25:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "edba8f57380a48fd98decc332608349f2d9012e6",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Repository-local read-only product/programme orientation; no product behavior or runtime changed.",
+          "The selected successor reuses the accepted status proposal/confirm family and adds no command authority.",
+          "CF-D2 remains an optional acceleration layer; source truth and command-time authority remain the correctness kernel."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-reception-one-selected-appointment-status-action-composition",
+          "source": "orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Select one provider-free visible Reception One composition over the existing status interaction as the narrowest dependency-satisfied successor."
+        }
+      ],
+      "claim_scope": [
+        "Exact source inspection proves Reception One appointment status is read-only and its bridge has no status action.",
+        "The ordinary Diary already owns the accepted visible status proposal/confirm interaction and raw fallback remains absent.",
+        "Stage 3B participants, patient channels, another event or command family and operational CF-D2 runtime remain separately closed.",
+        "Four orientation assertions, 91 focused tests and the 193-test canonical fast profile pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-post-cf-d2-compass-baton-orientation-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-post-cf-d2-compass-baton-orientation.md"
+        ],
+        "closeouts": [
+          "docs/raisa-post-cf-d2-compass-baton-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--post-cf-d2-compass-baton-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_post_cf_d2_compass_baton_orientation.py",
+          "tests/test_raisa_post_cf_d2_compass_baton_orientation_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_post_cf_d2_compass_baton_orientation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The selected status-action composition remains unimplemented until its own freshly rehydrated plan and evidence pass.",
+        "Representative staff execution still requires Yuri's cohort nomination and reopening.",
+        "External patient channels, other events/commands, watcher/runtime, product data, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T10:54:23Z"
+  "updated_at": "2026-08-13T11:25:00Z"
 }

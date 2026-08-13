@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Read-only post-CF-D2 Compass and baton orientation",
+    "completed_stage": "orientation accepted at exact source edba8f57380a48fd98decc332608349f2d9012e6 and bound at Continuity 282 / Compass 264 with the provider-free Reception One selected-appointment status-action composition named next",
+    "next_executable_stage": null,
+    "operation_id": "raisa-post-cf-d2-compass-baton-orientation",
+    "resume_after_compaction": false,
+    "source_head": "edba8f57380a48fd98decc332608349f2d9012e6",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicitly_staged_post_cf_d2_orientation_closeout_and_continuity_artifacts",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The orientation plan, report, closeout and Sol acceptance freeze the selected UI successor, document 91 focused checks plus the 193-test canonical fast profile passing, and keep all product/runtime authority closed during orientation.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates acceptance and task-branch publication to GPT Sol; the documentation-only orientation closeout remains Sol-owned with no worker or verifier selected.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at HEAD edba8f57380a48fd98decc332608349f2d9012e6; required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Origin task remains d88c097583473eb2123b77ea752daba2ff798468 before closeout publication. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 601 untracked files, including five branding files, remain preserved.",
+    "live_handover_current_baton": "AGENTS.md at Continuity 282 / Compass 264 accepts raisa_post_cf_d2_compass_baton_orientation_pass at exact source edba8f57380a48fd98decc332608349f2d9012e6 and names the provider-free Reception One selected-appointment status-action composition next.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 keep protected evidence, historical Diary/PHI, patient/product/clinical data, external patient channels, source/database/watcher runtime, provider/ADC, credentials/IAM/network, new commands/writes, deployment, production, release, Pages and protected refs closed. docs/branding and all unrelated untracked files are excluded by explicit-path staging."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}
