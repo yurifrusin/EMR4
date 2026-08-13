@@ -3,15 +3,15 @@
   "operation_id": "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal",
   "active_tranche": "Provider-free two-projection truth-parity conformance rehearsal",
   "objective": "Drive the conventional grid and Reception One through six authored-synthetic status outcomes and prove their normalized kernel-owned truth fields agree while presentation remains renderer-local.",
-  "status": "in_progress",
-  "source_head": "fbb2fd1822f73b2469fc774eb001af31dfdfa85b",
+  "status": "blocked",
+  "source_head": "18aa4b613d735a68a7f6f2e55d34e498176c9935",
   "authority_source": "AGENTS.md Current Baton at Continuity 284 / Compass 266, the accepted post-status truth-parity orientation and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "fresh five-source rehydration complete and the evidence-only two-renderer six-scenario conformance boundary frozen",
-    "next_executable_stage": "implement the closed trace schema, route-intercepted browser harness, paired evidence and deterministic admission tests",
+    "completed_stage": "accepted at exact source 18aa4b613d735a68a7f6f2e55d34e498176c9935 and bound at Continuity 285 / Compass 267 after twelve browser traces, six equal pairs, 115 focused checks and the canonical fast profile",
+    "next_executable_stage": null,
     "retry_counters": {
       "review": 0,
-      "verification": 0
+      "verification": 6
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -22,14 +22,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "genuine_post_truth_parity_programme_direction_fork"
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "accepted_truth_parity_rehearsal_complete_and_user_direction_required"
   },
   "protected_boundaries": [
     "exactly_conventional_grid_and_reception_one",

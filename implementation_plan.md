@@ -365,13 +365,13 @@ status-action composition as the next visible tranche. That composition now
 passes at exact source `b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33`: one
 selected current appointment delegates one existing status through the
 existing interaction, with fail-closed feedback and fresh projection
-reconciliation but no second command path. The subsequent orientation now
-passes at exact source
-`4b6a060c6b1aab42e1062c41d48d109f683abe00`: the conventional grid and
-Reception One have truth parity, not general feature parity, for the existing
-status family. A provider-free two-projection truth-parity conformance
-rehearsal is next; it will formalise the kernel invariant without adding a
-runtime contract or another command. No watcher runtime, existing database/
+reconciliation but no second command path. The orientation passes at exact source
+`4b6a060c6b1aab42e1062c41d48d109f683abe00`, and its two-projection
+truth-parity rehearsal now passes at exact source
+`18aa4b613d735a68a7f6f2e55d34e498176c9935`. Twelve route-intercepted
+traces protect six paired status outcomes without changing product code. The
+next functional direction is a genuine Yuri-owned fork; no command, cohort,
+patient channel, event family or watcher runtime is inferred. No watcher runtime, existing database/
 source access, persistence, product data, external patient client, other
 command, restart/unknown-commit claim, provider, deployment, production or
 release is opened.

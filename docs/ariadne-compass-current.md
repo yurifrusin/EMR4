@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 284 / Compass 266. The conventional grid and Reception One have truth parity for the existing status family, not general feature parity. A provider-free two-projection truth-parity conformance rehearsal is next.
+> EMR4 is at Continuity 285 / Compass 267. Conventional grid and Reception One pass six paired status truth outcomes. The next functional direction is a genuine Yuri-owned programme fork.
 
 ## North star
 
@@ -340,24 +340,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One selected current appointment now uses the existing status proposal/confirm interaction with fail-closed feedback and fresh projection reconciliation. Lineage parent: `raisa-post-cf-d2-compass-baton-orientation`.
 162. **Recognise cross-projection kernel truth parity and select its narrow conformance proof — Read-only post-status-action truth-parity orientation**
    Truth parity is distinguished from feature parity and a two-renderer status conformance rehearsal is selected. Lineage parent: `raisa-reception-one-selected-appointment-status-action-composition`.
+163. **Make projection-neutral kernel truth parity executable for one complete command family — Provider-free two-projection truth-parity conformance rehearsal**
+   Two existing renderer grammars agree across six status outcomes; the next functional direction is a genuine Yuri-owned fork. Lineage parent: `raisa-post-status-action-compass-baton-orientation`.
 
 ## Current position
 
-**The grid and meta-grid now share kernel truth rank for one command family — Read-only post-status-action truth-parity orientation**
+**The grid and meta-grid now pass one executable kernel-truth invariant — Provider-free two-projection truth-parity conformance rehearsal**
 
-**Why this proof came next:** The status composition proves authoritative meaning can remain invariant across different renderer grammars.
+**Why this proof came next:** The first complete Reception One status action required protection against future renderer-specific semantic drift.
 
-A provider-free two-projection truth-parity conformance rehearsal is the next dependency-satisfied tranche.
+Twelve traces and six exact pairs pass; no further functional tranche is inferable without a Yuri-owned direction choice.
 
 ### What this unlocks
 
-- Freeze and execute the two-projection status truth-parity conformance rehearsal.
-- Use the kernel trace—not grid layout—as the future renderer correctness criterion.
+- Judge future modalities by kernel meaning rather than grid imitation.
+- Choose the next value-bearing product or runtime direction.
 
 ### What it does not solve
 
-- Feature parity across Diary command families is not claimed.
-- Other commands/events, participants, patient channels and watcher/runtime retain their recorded gates.
+- Feature parity across Diary commands is not claimed.
+- No new command/event/renderer, cohort, patient channel or watcher runtime is authorised.
 - Product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
@@ -366,6 +368,17 @@ A provider-free two-projection truth-parity conformance rehearsal is the next de
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
+
+### Post-truth-parity programme direction — candidate
+
+Which value-bearing direction should follow the protected truth-parity milestone: another Reception One command, representative staff execution, a patient channel/identity flow, another event family, or operational watcher/durability work?
+
+Each option changes functional breadth, evidence population or runtime/data authority differently; no one outcome is inferable from the accepted invariant alone.
+
+Prerequisites:
+
+- Yuri selects one exact direction and its intended product value.
+- Sol freezes that choice's narrowest fail-closed plan before implementation.
 
 ### Reception One representative-staff formative sessions — deferred
 
@@ -617,6 +630,7 @@ Prerequisites:
 
 ## Map limits
 
+- The truth-parity trace is evidence only and cannot become a runtime, API, database, analytics, audit or transcript contract.
 - Truth parity is accepted only for the existing status family and does not infer another command, renderer runtime, patient channel or feature-parity claim.
 - The selected-status composition proves authored-synthetic client and route-intercepted rendered behavior only; it adds no command family or backend, database, provider, deployment or production authority.
 - The post-CF-D2 orientation selects but does not implement the Reception One status-action composition; it opens no product, runtime, data, provider or command authority.
@@ -1038,6 +1052,7 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
 - `docs/raisa-practice-context-fabric-direction.md`
+- `docs/raisa-projection-neutral-kernel-truth-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
@@ -1130,6 +1145,8 @@ Prerequisites:
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
 - `docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md`
 - `docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md`
+- `docs/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-closeout.md`
+- `docs/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-plan.md`
@@ -1312,6 +1329,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md`
+- `docs/security/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-threat-model-delta.md`
@@ -1671,6 +1689,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-transaction-kernel-protocol-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-sol-acceptance.md`
@@ -1991,6 +2011,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/projection-truth-trace.schema.json`
+- `orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/two-projection-truth-parity-evidence.json`
+- `orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/two-projection-truth-parity-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json`
@@ -2351,6 +2374,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md`
 - `orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md`
+- `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2363,6 +2387,7 @@ Prerequisites:
 - `orchestration_harness/active_operation.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_status_action.py`
+- `review/test_two_projection_truth_parity.py`
 - `scripts/ariadne_active_operation_latch.py`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
@@ -2379,6 +2404,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `scripts/raisa_provider_free_status_confirm_http_route_convergence.py`
+- `scripts/raisa_provider_free_two_projection_truth_parity_conformance_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py`
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
@@ -2453,6 +2479,9 @@ Prerequisites:
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `tests/test_raisa_provider_free_status_confirm_http_route_convergence.py`
 - `tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py`
+- `tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal.py`
+- `tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_evidence.py`
+- `tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_plan.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
@@ -2488,4 +2517,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 266; continuity graph revision 284._
+_Compass map revision 267; continuity graph revision 285._
