@@ -1,0 +1,342 @@
+{
+  "schema_version": "emr4.patient_interaction_foundation.contract.v1",
+  "contract_id": "raisa-channel-neutral-patient-interaction-foundation",
+  "status": "architecture_only_unmounted",
+  "evidence_mode": "authored_synthetic_provider_free",
+  "authority_boundary": {
+    "external_patient_client_runtime": false,
+    "real_patient_identity": false,
+    "identity_provider_call": false,
+    "passkey_registration_or_authentication": false,
+    "channel_connector": false,
+    "product_or_patient_data": false,
+    "database_or_source_access": false,
+    "provider_or_model_call": false,
+    "credential_or_iam": false,
+    "network_or_webhook": false,
+    "command_or_write": false,
+    "deployment_or_production": false,
+    "release_or_pages": false,
+    "protected_ref_movement": false
+  },
+  "identity_model": {
+    "objects": [
+      "identity_subject",
+      "practice_patient_link",
+      "channel_binding",
+      "authenticator_binding",
+      "proxy_grant"
+    ],
+    "record_matching_is_identity_proofing": false,
+    "identity_proofing_is_authentication": false,
+    "authentication_is_authorization": false,
+    "channel_recognition_is_identity_proofing": false,
+    "patient_and_proxy_share_credentials": false,
+    "cross_practice_link_implies_authority": false,
+    "record_identifiers_forbidden_as_authenticators": [
+      "individual_healthcare_identifier",
+      "medicare_number",
+      "date_of_birth",
+      "address",
+      "telephone_number",
+      "email_address",
+      "appointment_details"
+    ],
+    "future_proofing_methods": [
+      "practice_attended",
+      "remote_attended",
+      "accredited_federated",
+      "approved_document_verification"
+    ],
+    "enabled_proofing_methods": []
+  },
+  "authentication_policy": {
+    "posture": "passkey_first_not_passkey_only",
+    "preferred_authenticator": "phishing_resistant_passkey",
+    "multiple_authenticators_supported": true,
+    "encourage_two_independent_authenticators": true,
+    "password_vault_required": false,
+    "physical_security_key_required": false,
+    "device_biometric_ingested_by_emr4": false,
+    "synced_passkey_treated_as_infallible": false,
+    "email_is_out_of_band_authenticator": false,
+    "sms_or_voice_is_phishing_resistant": false,
+    "knowledge_based_authentication_permitted": false,
+    "fallback_may_silently_raise_assurance": false,
+    "authenticator_binding_requires_current_assurance": true,
+    "authenticator_change_requires_independent_notification": true,
+    "provider_choice_settled": false
+  },
+  "assurance_policy": {
+    "default_decision": "deny",
+    "order": [
+      "public",
+      "recognized_channel",
+      "verified_patient",
+      "stepped_up",
+      "recovery_restricted"
+    ],
+    "levels": [
+      {
+        "level": "public",
+        "rank": 0,
+        "may": ["generic_minimized_availability"],
+        "must_not": [
+          "claim_patient_recognition",
+          "reveal_patient_record",
+          "view_patient_booking_state",
+          "confirm_command"
+        ]
+      },
+      {
+        "level": "recognized_channel",
+        "rank": 1,
+        "may": ["neutral_continuity", "neutral_notification"],
+        "must_not": [
+          "claim_identity_proof",
+          "reveal_patient_record",
+          "view_patient_booking_state",
+          "confirm_command"
+        ]
+      },
+      {
+        "level": "verified_patient",
+        "rank": 2,
+        "may": [
+          "view_own_minimized_booking_state",
+          "propose_booking",
+          "confirm_policy_permitted_booking"
+        ],
+        "must_not": [
+          "cross_practice_access",
+          "manage_proxy_grant_without_step_up",
+          "change_authenticator_without_step_up"
+        ]
+      },
+      {
+        "level": "stepped_up",
+        "rank": 3,
+        "may": [
+          "manage_authenticator",
+          "request_proxy_grant_change",
+          "confirm_higher_risk_action"
+        ],
+        "must_not": [
+          "bypass_current_authority",
+          "bypass_current_source_recheck",
+          "self_grant_proxy_scope"
+        ]
+      },
+      {
+        "level": "recovery_restricted",
+        "rank": 4,
+        "may": ["continue_recovery", "receive_neutral_recovery_notification"],
+        "must_not": [
+          "view_patient_booking_state",
+          "propose_booking",
+          "confirm_command",
+          "manage_proxy_grant"
+        ]
+      }
+    ],
+    "adapter_or_model_may_raise_assurance": false,
+    "stronger_action_requires_current_or_stronger_assurance": true,
+    "recovery_restricted_is_not_a_stronger_authentication_level": true,
+    "non_enumerating_failure_required": true
+  },
+  "channel_policy": {
+    "universal_fallback": "plain_text_plus_expiring_thin_web_handoff",
+    "channel_content_is_untrusted": true,
+    "channel_address_is_not_identity": true,
+    "channel_receipt_is_not_command_receipt": true,
+    "adapters": [
+      {
+        "channel": "sms",
+        "status": "future_closed",
+        "may_render": ["plain_text", "numbered_candidates", "secure_link"],
+        "may_collect": ["natural_language_candidate", "numbered_selection_candidate"],
+        "identity_proof": false,
+        "command_authority": false
+      },
+      {
+        "channel": "email",
+        "status": "future_closed",
+        "may_render": ["plain_text", "html_summary", "optional_dynamic_card", "secure_link"],
+        "may_collect": ["natural_language_candidate", "structured_selection_candidate"],
+        "identity_proof": false,
+        "command_authority": false
+      },
+      {
+        "channel": "thin_web",
+        "status": "future_closed",
+        "may_render": ["accessible_projection", "authentication_handoff", "confirmation_challenge"],
+        "may_collect": ["structured_selection_candidate", "confirmation_candidate"],
+        "identity_proof": false,
+        "command_authority": false
+      },
+      {
+        "channel": "whatsapp",
+        "status": "future_closed",
+        "may_render": ["plain_text", "numbered_candidates", "optional_buttons", "secure_link"],
+        "may_collect": ["natural_language_candidate", "structured_selection_candidate"],
+        "identity_proof": false,
+        "command_authority": false
+      },
+      {
+        "channel": "voice",
+        "status": "future_closed",
+        "may_render": ["spoken_shortlist", "secure_handoff"],
+        "may_collect": ["transcript_candidate", "readback_confirmation_candidate"],
+        "identity_proof": false,
+        "command_authority": false
+      },
+      {
+        "channel": "delegated_assistant",
+        "status": "future_closed",
+        "may_render": ["structured_projection", "secure_handoff"],
+        "may_collect": ["structured_intent_candidate", "structured_selection_candidate"],
+        "identity_proof": false,
+        "command_authority": false
+      }
+    ]
+  },
+  "interaction_policy": {
+    "backend_owns_typed_session_state": true,
+    "provider_or_channel_memory_is_authority": false,
+    "context_fabric_access_is_direct_from_channel": false,
+    "context_need_is_closed_candidate": true,
+    "context_frame_set_is_minimized_expiring_read_only": true,
+    "projection_is_current_truth": false,
+    "projection_is_reservation": false,
+    "selection_is_proposal_only": true,
+    "stale_projection_requires_reassembly": true,
+    "candidate_refs_are_opaque_and_expiring": true,
+    "plain_text_fallback_required": true,
+    "clinical_reason_in_async_projection": false,
+    "direct_identifier_in_transport_event": false
+  },
+  "command_convergence": {
+    "command_plane": "rest_openapi_single_purpose",
+    "graphql_mutation": false,
+    "channel_or_model_direct_command": false,
+    "confirmation_challenge_is_command_authority": false,
+    "server_selects_command_family": true,
+    "current_principal_recheck_required": true,
+    "current_practice_and_proxy_scope_recheck_required": true,
+    "current_assurance_recheck_required": true,
+    "current_proposal_and_source_recheck_required": true,
+    "idempotency_required": true,
+    "audit_required": true,
+    "atomic_receipt_required": true,
+    "exact_replay_required": true,
+    "transport_deduplication_is_command_idempotency": false,
+    "event_or_delivery_receipt_is_command_receipt": false,
+    "race_loser_gets_refreshed_projection": true
+  },
+  "recovery_policy": {
+    "ordinary_command_authority_while_recovery_unresolved": false,
+    "supported_future_classes": [
+      "second_authenticator_plus_recovery_evidence",
+      "two_independent_recovery_methods",
+      "repeated_identity_proofing",
+      "practice_attended_reproofing"
+    ],
+    "health_or_demographic_knowledge_as_proof": false,
+    "single_channel_possession_is_sufficient_for_high_assurance_recovery": false,
+    "independent_notification_required": true,
+    "prior_session_revocation_required": true,
+    "compromised_authenticator_revocation_required": true,
+    "sensitive_change_cooling_off_required": true,
+    "recovery_evidence_reusable_as_command_confirmation": false,
+    "recovery_may_create_proxy_grant": false,
+    "human_assisted_exception_path_required": true,
+    "recovery_events_audited": true
+  },
+  "delegation_policy": {
+    "patient_parent_guardian_carer_are_distinct_principals": true,
+    "proxy_grant_is_practice_patient_action_scoped": true,
+    "proxy_grant_is_expiring_and_revocable": true,
+    "shared_patient_credential": false,
+    "delegated_assistant_status": "future_closed",
+    "client_registration_required": true,
+    "oauth_oidc_authorization_code_pkce_required": true,
+    "audience_restricted": true,
+    "sender_constrained_where_supported": true,
+    "minimum_scopes_only": true,
+    "per_command_confirmation_policy_required": true,
+    "patient_emr_credential_disclosed_to_client": false,
+    "generic_command_tunnel": false,
+    "revocation_required": true
+  },
+  "privacy_and_audit_policy": {
+    "data_minimization_required": true,
+    "anti_enumeration_required": true,
+    "rate_limiting_required_before_runtime": true,
+    "privacy_impact_assessment_required_before_runtime": true,
+    "generic_external_errors_required": true,
+    "sensitive_values_forbidden_in_contract_evidence": true,
+    "forbidden_evidence_fields": [
+      "patient_identifier",
+      "patient_name",
+      "date_of_birth",
+      "medicare_number",
+      "individual_healthcare_identifier",
+      "phone_number",
+      "email_address",
+      "message_body",
+      "voice_recording",
+      "transcript",
+      "authenticator",
+      "credential",
+      "access_token",
+      "recovery_secret",
+      "command_payload",
+      "provider_output",
+      "unrestricted_exception"
+    ]
+  },
+  "schema_registry": [
+    {
+      "message_type": "PatientIdentityBinding",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientIdentityBinding"
+    },
+    {
+      "message_type": "IdentityAssuranceDecision",
+      "schema_ref": "foundation-contract.schema.json#/$defs/IdentityAssuranceDecision"
+    },
+    {
+      "message_type": "PatientInteractionEnvelope",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientInteractionEnvelope"
+    },
+    {
+      "message_type": "PatientDiaryProjection",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientDiaryProjection"
+    },
+    {
+      "message_type": "PatientSelection",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientSelection"
+    },
+    {
+      "message_type": "PatientConfirmationChallenge",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientConfirmationChallenge"
+    },
+    {
+      "message_type": "PatientCommandOutcome",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientCommandOutcome"
+    },
+    {
+      "message_type": "PatientRecoveryCase",
+      "schema_ref": "foundation-contract.schema.json#/$defs/PatientRecoveryCase"
+    }
+  ],
+  "next_descendant": {
+    "id": "bounded-visible-native-diary-status-confirm-wiring",
+    "staff_surface_only": true,
+    "external_patient_client": false,
+    "real_identity": false,
+    "channel_connector": false,
+    "provider_call": false,
+    "product_or_patient_data": false,
+    "requires_fresh_frozen_plan": true
+  }
+}

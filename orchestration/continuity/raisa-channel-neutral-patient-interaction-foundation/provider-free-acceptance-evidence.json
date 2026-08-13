@@ -1,0 +1,23 @@
+{
+  "schema_version": "emr4.patient_interaction_foundation.acceptance_evidence.v1",
+  "result": "raisa_channel_neutral_patient_interaction_foundation_pass",
+  "status": "passed",
+  "evidence_mode": "authored_synthetic_provider_free",
+  "recorded_at": "2026-08-13T04:40:00Z",
+  "canonical_contract_digest": "sha256:d9aaf1cd5f96c932c76c0edc369f278a194f4d1d18c9b9c1ca9dff91e511da8b",
+  "canonical_error_count": 0,
+  "message_type_count": 8,
+  "assurance_level_count": 5,
+  "channel_count": 6,
+  "scenario_count": 12,
+  "hostile_mutation_count": 143,
+  "hostile_rejection_count": 143,
+  "hostile_admission_count": 0,
+  "contains_sensitive_values": false,
+  "runtime_started": false,
+  "provider_calls": 0,
+  "external_patient_clients": 0,
+  "product_or_patient_data": false,
+  "database_or_source_access": false,
+  "command_or_write": false
+}

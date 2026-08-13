@@ -1,0 +1,508 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/patient-interaction-foundation/contract.v1.json",
+  "title": "Raisa channel-neutral patient interaction foundation contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "status",
+    "evidence_mode",
+    "authority_boundary",
+    "identity_model",
+    "authentication_policy",
+    "assurance_policy",
+    "channel_policy",
+    "interaction_policy",
+    "command_convergence",
+    "recovery_policy",
+    "delegation_policy",
+    "privacy_and_audit_policy",
+    "schema_registry",
+    "next_descendant"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.patient_interaction_foundation.contract.v1"
+    },
+    "contract_id": {
+      "const": "raisa-channel-neutral-patient-interaction-foundation"
+    },
+    "status": {"const": "architecture_only_unmounted"},
+    "evidence_mode": {"const": "authored_synthetic_provider_free"},
+    "authority_boundary": {"type": "object"},
+    "identity_model": {"type": "object"},
+    "authentication_policy": {"type": "object"},
+    "assurance_policy": {"type": "object"},
+    "channel_policy": {"type": "object"},
+    "interaction_policy": {"type": "object"},
+    "command_convergence": {"type": "object"},
+    "recovery_policy": {"type": "object"},
+    "delegation_policy": {"type": "object"},
+    "privacy_and_audit_policy": {"type": "object"},
+    "schema_registry": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["message_type", "schema_ref"],
+        "properties": {
+          "message_type": {
+            "enum": [
+              "PatientIdentityBinding",
+              "IdentityAssuranceDecision",
+              "PatientInteractionEnvelope",
+              "PatientDiaryProjection",
+              "PatientSelection",
+              "PatientConfirmationChallenge",
+              "PatientCommandOutcome",
+              "PatientRecoveryCase"
+            ]
+          },
+          "schema_ref": {"type": "string", "minLength": 20}
+        }
+      }
+    },
+    "next_descendant": {"type": "object"}
+  },
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 96
+    },
+    "OpaqueRef": {
+      "type": "string",
+      "pattern": "^ref_[a-z0-9]{12,64}$"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Channel": {
+      "enum": ["sms", "email", "thin_web", "whatsapp", "voice", "delegated_assistant"]
+    },
+    "AssuranceLevel": {
+      "enum": ["public", "recognized_channel", "verified_patient", "stepped_up", "recovery_restricted"]
+    },
+    "Candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_ref",
+        "start_at",
+        "duration_minutes",
+        "practitioner_display_ref",
+        "appointment_type_display_code",
+        "reserved"
+      ],
+      "properties": {
+        "candidate_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "start_at": {"$ref": "#/$defs/Timestamp"},
+        "duration_minutes": {"type": "integer", "minimum": 5, "maximum": 240},
+        "practitioner_display_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "appointment_type_display_code": {"$ref": "#/$defs/Identifier"},
+        "reserved": {"const": false}
+      }
+    },
+    "PatientIdentityBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "binding_id",
+        "identity_subject_ref",
+        "practice_ref",
+        "patient_record_ref",
+        "proofing_method",
+        "proofed_at",
+        "proofing_evidence_digest",
+        "channel_binding_refs",
+        "authenticator_binding_refs",
+        "proxy_grant_refs",
+        "active",
+        "knowledge_attributes_used_as_authenticator",
+        "channel_address_is_identity",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_identity_binding.v1"},
+        "binding_id": {"$ref": "#/$defs/Identifier"},
+        "identity_subject_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "practice_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "patient_record_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "proofing_method": {
+          "enum": ["practice_attended", "remote_attended", "accredited_federated", "approved_document_verification"]
+        },
+        "proofed_at": {"$ref": "#/$defs/Timestamp"},
+        "proofing_evidence_digest": {"$ref": "#/$defs/Digest"},
+        "channel_binding_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/OpaqueRef"}
+        },
+        "authenticator_binding_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/OpaqueRef"}
+        },
+        "proxy_grant_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/OpaqueRef"}
+        },
+        "active": {"const": true},
+        "knowledge_attributes_used_as_authenticator": {"const": false},
+        "channel_address_is_identity": {"const": false},
+        "command_authority": {"const": false}
+      }
+    },
+    "IdentityAssuranceDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "decision_id",
+        "identity_subject_ref",
+        "practice_ref",
+        "patient_record_ref",
+        "action",
+        "required_level",
+        "observed_level",
+        "decision",
+        "reason_codes",
+        "current_binding_checked",
+        "current_proxy_scope_checked",
+        "anti_enumerating_response",
+        "model_or_adapter_raised_assurance",
+        "command_authority",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.identity_assurance_decision.v1"},
+        "decision_id": {"$ref": "#/$defs/Identifier"},
+        "identity_subject_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "practice_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "patient_record_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "action": {
+          "enum": [
+            "generic_availability",
+            "recognized_continuity",
+            "own_appointment_read",
+            "propose_booking",
+            "confirm_booking",
+            "manage_authenticator",
+            "manage_proxy",
+            "account_recovery"
+          ]
+        },
+        "required_level": {"$ref": "#/$defs/AssuranceLevel"},
+        "observed_level": {"$ref": "#/$defs/AssuranceLevel"},
+        "decision": {"enum": ["allow", "deny", "step_up", "recovery_required"]},
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "current_binding_and_assurance",
+              "recognized_channel_only",
+              "assurance_insufficient",
+              "binding_missing_or_inactive",
+              "practice_or_patient_scope_mismatch",
+              "proxy_scope_missing_or_stale",
+              "recovery_restriction_active",
+              "non_enumerating_denial"
+            ]
+          }
+        },
+        "current_binding_checked": {"const": true},
+        "current_proxy_scope_checked": {"const": true},
+        "anti_enumerating_response": {"const": true},
+        "model_or_adapter_raised_assurance": {"const": false},
+        "command_authority": {"const": false},
+        "recorded_at": {"$ref": "#/$defs/Timestamp"}
+      }
+    },
+    "PatientInteractionEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "envelope_id",
+        "channel",
+        "direction",
+        "transport_message_ref",
+        "conversation_ref",
+        "practice_hint_ref",
+        "received_at",
+        "content_class",
+        "content_digest",
+        "channel_binding_state",
+        "assurance_ceiling",
+        "untrusted_input",
+        "provider_memory_authority",
+        "contains_command_receipt",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_interaction_envelope.v1"},
+        "envelope_id": {"$ref": "#/$defs/Identifier"},
+        "channel": {"$ref": "#/$defs/Channel"},
+        "direction": {"enum": ["inbound", "outbound"]},
+        "transport_message_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "conversation_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "practice_hint_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "received_at": {"$ref": "#/$defs/Timestamp"},
+        "content_class": {
+          "enum": [
+            "natural_language_candidate",
+            "structured_selection_candidate",
+            "neutral_notification",
+            "secure_link_handoff"
+          ]
+        },
+        "content_digest": {"$ref": "#/$defs/Digest"},
+        "channel_binding_state": {"enum": ["unbound", "recognized"]},
+        "assurance_ceiling": {"enum": ["public", "recognized_channel"]},
+        "untrusted_input": {"const": true},
+        "provider_memory_authority": {"const": false},
+        "contains_command_receipt": {"const": false},
+        "command_authority": {"const": false}
+      }
+    },
+    "PatientDiaryProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "projection_id",
+        "session_ref",
+        "practice_ref",
+        "purpose_code",
+        "assurance_level",
+        "source_revision_digest",
+        "assembled_at",
+        "expires_at",
+        "candidate_set_id",
+        "candidates",
+        "minimum_disclosure",
+        "contains_clinical_reason",
+        "read_only",
+        "current_truth",
+        "reservation_created",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_diary_projection.v1"},
+        "projection_id": {"$ref": "#/$defs/Identifier"},
+        "session_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "practice_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "purpose_code": {"const": "patient-booking-availability"},
+        "assurance_level": {"enum": ["public", "recognized_channel", "verified_patient"]},
+        "source_revision_digest": {"$ref": "#/$defs/Digest"},
+        "assembled_at": {"$ref": "#/$defs/Timestamp"},
+        "expires_at": {"$ref": "#/$defs/Timestamp"},
+        "candidate_set_id": {"$ref": "#/$defs/Identifier"},
+        "candidates": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/Candidate"}
+        },
+        "minimum_disclosure": {"const": true},
+        "contains_clinical_reason": {"const": false},
+        "read_only": {"const": true},
+        "current_truth": {"const": false},
+        "reservation_created": {"const": false},
+        "command_authority": {"const": false}
+      }
+    },
+    "PatientSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "selection_id",
+        "projection_id",
+        "candidate_set_id",
+        "candidate_ref",
+        "selected_at",
+        "projection_expires_at",
+        "transport_message_ref",
+        "proposal_only",
+        "reservation_created",
+        "current_source_recheck_required",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_selection.v1"},
+        "selection_id": {"$ref": "#/$defs/Identifier"},
+        "projection_id": {"$ref": "#/$defs/Identifier"},
+        "candidate_set_id": {"$ref": "#/$defs/Identifier"},
+        "candidate_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "selected_at": {"$ref": "#/$defs/Timestamp"},
+        "projection_expires_at": {"$ref": "#/$defs/Timestamp"},
+        "transport_message_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "proposal_only": {"const": true},
+        "reservation_created": {"const": false},
+        "current_source_recheck_required": {"const": true},
+        "command_authority": {"const": false}
+      }
+    },
+    "PatientConfirmationChallenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "challenge_id",
+        "identity_subject_ref",
+        "practice_ref",
+        "patient_record_ref",
+        "action",
+        "required_assurance",
+        "observed_assurance",
+        "proposal_evidence_digest",
+        "source_revision_digest",
+        "authority_binding_digest",
+        "issued_at",
+        "expires_at",
+        "single_use",
+        "reusable_credential",
+        "server_selected_command_family",
+        "current_authority_recheck_required",
+        "current_source_recheck_required",
+        "idempotency_key_required",
+        "audit_required",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_confirmation_challenge.v1"},
+        "challenge_id": {"$ref": "#/$defs/Identifier"},
+        "identity_subject_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "practice_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "patient_record_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "action": {"const": "confirm-booking"},
+        "required_assurance": {"enum": ["verified_patient", "stepped_up"]},
+        "observed_assurance": {"enum": ["verified_patient", "stepped_up"]},
+        "proposal_evidence_digest": {"$ref": "#/$defs/Digest"},
+        "source_revision_digest": {"$ref": "#/$defs/Digest"},
+        "authority_binding_digest": {"$ref": "#/$defs/Digest"},
+        "issued_at": {"$ref": "#/$defs/Timestamp"},
+        "expires_at": {"$ref": "#/$defs/Timestamp"},
+        "single_use": {"const": true},
+        "reusable_credential": {"const": false},
+        "server_selected_command_family": {"const": "appointment-create-confirm"},
+        "current_authority_recheck_required": {"const": true},
+        "current_source_recheck_required": {"const": true},
+        "idempotency_key_required": {"const": true},
+        "audit_required": {"const": true},
+        "command_authority": {"const": false}
+      }
+    },
+    "PatientCommandOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "outcome_id",
+        "challenge_id",
+        "action",
+        "outcome",
+        "effect_committed",
+        "command_idempotency_ref",
+        "command_receipt_ref",
+        "audit_event_ref",
+        "authoritative_source_revision_digest",
+        "current_principal_checked",
+        "current_source_checked",
+        "transport_receipt_is_command_receipt",
+        "exact_replay_bytes_required",
+        "refreshed_projection_required",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_command_outcome.v1"},
+        "outcome_id": {"$ref": "#/$defs/Identifier"},
+        "challenge_id": {"$ref": "#/$defs/Identifier"},
+        "action": {"const": "confirm-booking"},
+        "outcome": {"enum": ["committed", "replay", "blocked", "stale", "expired", "unavailable"]},
+        "effect_committed": {"type": "boolean"},
+        "command_idempotency_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "command_receipt_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "audit_event_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "authoritative_source_revision_digest": {"$ref": "#/$defs/Digest"},
+        "current_principal_checked": {"const": true},
+        "current_source_checked": {"const": true},
+        "transport_receipt_is_command_receipt": {"const": false},
+        "exact_replay_bytes_required": {"const": true},
+        "refreshed_projection_required": {"type": "boolean"},
+        "recorded_at": {"$ref": "#/$defs/Timestamp"}
+      }
+    },
+    "PatientRecoveryCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "case_id",
+        "identity_subject_ref",
+        "practice_ref",
+        "status",
+        "started_at",
+        "current_assurance",
+        "recovery_method",
+        "ordinary_command_authority",
+        "knowledge_based_verification",
+        "health_or_demographic_attributes_as_proof",
+        "independent_notifications_required",
+        "prior_sessions_revoked",
+        "compromised_authenticators_revoked",
+        "sensitive_change_cooling_off",
+        "may_create_proxy_grant",
+        "may_confirm_booking",
+        "audit_required",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.patient_recovery_case.v1"},
+        "case_id": {"$ref": "#/$defs/Identifier"},
+        "identity_subject_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "practice_ref": {"$ref": "#/$defs/OpaqueRef"},
+        "status": {"enum": ["initiated", "restricted", "reproofing", "approved", "denied", "complete"]},
+        "started_at": {"$ref": "#/$defs/Timestamp"},
+        "current_assurance": {"const": "recovery_restricted"},
+        "recovery_method": {
+          "enum": [
+            "second_authenticator_plus_recovery_evidence",
+            "two_independent_recovery_methods",
+            "repeated_identity_proofing",
+            "practice_attended_reproofing"
+          ]
+        },
+        "ordinary_command_authority": {"const": false},
+        "knowledge_based_verification": {"const": false},
+        "health_or_demographic_attributes_as_proof": {"const": false},
+        "independent_notifications_required": {"const": true},
+        "prior_sessions_revoked": {"const": true},
+        "compromised_authenticators_revoked": {"const": true},
+        "sensitive_change_cooling_off": {"const": true},
+        "may_create_proxy_grant": {"const": false},
+        "may_confirm_booking": {"const": false},
+        "audit_required": {"const": true},
+        "recorded_at": {"$ref": "#/$defs/Timestamp"}
+      }
+    }
+  }
+}

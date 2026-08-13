@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-status-confirm-http-route-convergence",
-  "active_tranche": "Provider-free authored-synthetic status-confirm HTTP route convergence",
-  "objective": "Freeze and execute the narrowest convergence of the existing authenticated status-confirm route onto the accepted product adapter with opaque proposal-version carriage and exact replay delivery.",
-  "status": "complete",
-  "source_head": "b414eb256853c301099d9cf7797a69cd3ec077c5",
-  "authority_source": "AGENTS.md Current Baton next implementation plus Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-channel-neutral-patient-interaction-foundation",
+  "active_tranche": "Provider-free unmounted channel-neutral patient interaction foundation",
+  "objective": "Freeze and prove the patient identity, assurance, recovery and channel-neutral interaction contracts without opening an external patient client, identity provider, channel connector, product data or command runtime.",
+  "status": "in_progress",
+  "source_head": "17bcf96778582e208e43f2c639090511f1ddb45c",
+  "authority_source": "Yuri's explicit 2026-08-13 direction to record the recommended posture and lay the small extra foundation slab",
   "checkpoint": {
-    "completed_stage": "accepted at source b414eb256853c301099d9cf7797a69cd3ec077c5 with 12 disposable scenarios, 112 hostile mutations, 217 focused/current-lineage tests, the 193-test canonical fast profile and exact cleanup; Continuity 273 / Compass 255 closeout complete",
-    "next_executable_stage": null,
+    "completed_stage": "mandatory five-source preplanning rehydration and fresh Ariadne receipt passed over exact task baseline 17bcf96778582e208e43f2c639090511f1ddb45c",
+    "next_executable_stage": "author_and_verify_the_closed_canonical_contract_schema_examples_architecture_and_threat_model",
     "retry_counters": {
       "review": 0,
       "verification": 0
@@ -22,21 +22,22 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_tranche_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "protected_evidence_closed",
     "patient_product_clinical_data_closed",
+    "external_patient_identity_clients_and_channels_closed",
     "provider_credential_iam_network_closed",
-    "route_schema_dependency_api_contract_edits_require_frozen_plan",
-    "only_owned_authored_synthetic_local_route_and_disposable_database_may_be_planned",
+    "application_route_graphql_openapi_database_frontend_and_command_changes_closed",
+    "authored_synthetic_static_contract_evidence_only",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]
