@@ -95,6 +95,13 @@
       busy: false,
       reconciliationRequired: false
     },
+    rescheduleAction: {
+      appointmentId: null,
+      requestedStart: null,
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    },
     proposalResult: null,
     patientContexts: new Map(),
     private: false,
@@ -520,6 +527,13 @@
         busy: false,
         reconciliationRequired: false
       };
+      state.rescheduleAction = {
+        appointmentId: null,
+        requestedStart: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
       state.proposalResult = null;
       state.comparisonIndex = 0;
       state.eventRuntime.cue = null;
@@ -626,6 +640,9 @@
         date: item.appointment_date,
         starts_at: item.start_time_local,
         ends_at: item.end_time_local,
+        duration_minutes: item.duration_minutes,
+        patient_id: item.patient_id,
+        practitioner_id: item.practitioner_id,
         patient_display: item.patient_display,
         practitioner_display: item.practitioner_display,
         location_display: item.location_display,
@@ -2121,6 +2138,13 @@
       busy: false,
       reconciliationRequired: false
     };
+    state.rescheduleAction = {
+      appointmentId: null,
+      requestedStart: null,
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    };
     state.proposalResult = null;
     if (state.current && ["selection_only", "proposal_not_committed"].includes(state.current.state)) {
       state.current = null;
@@ -2210,9 +2234,10 @@
   function markInterrupted() {
     if (!state.isOpen || !state.current || state.current.state === "overview") return;
     togglePrivacy(true);
-    if (state.statusAction.busy) {
+    if (state.statusAction.busy || state.rescheduleAction.busy) {
       state.interrupted = true;
-      state.statusAction.reconciliationRequired = true;
+      if (state.statusAction.busy) state.statusAction.reconciliationRequired = true;
+      if (state.rescheduleAction.busy) state.rescheduleAction.reconciliationRequired = true;
       return;
     }
     if (state.current.state === "reconciliation_required") return;
@@ -2283,6 +2308,13 @@
             state.statusAction = {
               appointmentId: String(item.id),
               requestedStatus: null,
+              phase: "idle",
+              busy: false,
+              reconciliationRequired: false
+            };
+            state.rescheduleAction = {
+              appointmentId: String(item.id),
+              requestedStart: null,
               phase: "idle",
               busy: false,
               reconciliationRequired: false
@@ -2568,6 +2600,17 @@
     committed: "Status committed and checked against a fresh Diary read."
   });
 
+  const RESCHEDULE_ACTION_MESSAGES = Object.freeze({
+    idle: "The proposed time is staff input only. The existing Diary review owns any change.",
+    checking: "Checking current Diary authority and booking truth.",
+    awaiting_confirmation: "Confirmation required in the existing Diary review dialog.",
+    saving: "Checking the current Diary again and saving.",
+    cancelled: "Time change cancelled. No change was made.",
+    blocked: "Time change blocked. No change was made.",
+    failed: "Time not changed. Fresh Diary truth has been restored.",
+    committed: "Time committed and checked against a fresh Diary read."
+  });
+
   function selectedStatusActionItem(projection = state.current) {
     const selectedId = String(state.selectedAppointment?.id || "");
     if (!selectedId || !["patient_timeline", "focused_schedule_lane"].includes(projection?.family)) {
@@ -2593,6 +2636,7 @@
     const requestedStatus = select?.value || state.statusAction.requestedStatus || currentStatus;
     const unavailable = Boolean(
       state.statusAction.busy
+      || state.rescheduleAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
     );
@@ -2604,6 +2648,31 @@
     if (feedback) feedback.textContent = statusActionMessage();
   }
 
+  function rescheduleActionMessage() {
+    return RESCHEDULE_ACTION_MESSAGES[state.rescheduleAction.phase] || RESCHEDULE_ACTION_MESSAGES.failed;
+  }
+
+  function updateRescheduleActionControls() {
+    const input = document.getElementById("meta-grid-reschedule-time");
+    const submit = document.getElementById("meta-grid-reschedule-submit");
+    const feedback = document.getElementById("meta-grid-reschedule-feedback");
+    const selected = selectedStatusActionItem();
+    const currentStart = selected?.starts_at || "";
+    const requestedStart = input?.value || state.rescheduleAction.requestedStart || currentStart;
+    const unavailable = Boolean(
+      state.rescheduleAction.busy
+      || state.statusAction.busy
+      || state.interrupted
+      || state.current?.freshness?.stale
+    );
+    if (input) {
+      input.disabled = unavailable;
+      input.toggleAttribute("aria-busy", state.rescheduleAction.busy);
+    }
+    if (submit) submit.disabled = unavailable || !requestedStart || requestedStart === currentStart;
+    if (feedback) feedback.textContent = rescheduleActionMessage();
+  }
+
   function applyFreshAppointmentToCurrentProjection(appointment) {
     if (!appointment || !state.current) return false;
     let selected = null;
@@ -2611,6 +2680,15 @@
       if (String(item.id || "") !== String(appointment.id || "")) return item;
       selected = {
         ...item,
+        date: appointment.appointment_date,
+        starts_at: appointment.start_time_local,
+        ends_at: appointment.end_time_local,
+        duration_minutes: appointment.duration_minutes,
+        patient_id: appointment.patient_id,
+        practitioner_id: appointment.practitioner_id,
+        practitioner_display: appointment.practitioner_display,
+        location_display: appointment.location_display,
+        display: `${timeLabel(appointment.start_time_local)}â€“${timeLabel(appointment.end_time_local)}`,
         status: appointment.status,
         secondary: `${item.patient_display || "Patient"} · ${appointment.status}`
       };
@@ -2624,7 +2702,7 @@
         ...state.current.freshness,
         observed_at: new Date().toISOString(),
         stale: false,
-        reason: "Fresh exact appointment read after status review"
+        reason: "Fresh exact appointment read after selected appointment action"
       }
     };
     state.selectedAppointment = selected;
@@ -2709,6 +2787,87 @@
     }, 0);
   }
 
+  async function executeSelectedRescheduleAction(input) {
+    const selected = selectedStatusActionItem();
+    const requestedStart = String(input?.value || "");
+    if (
+      !selected
+      || state.rescheduleAction.busy
+      || state.statusAction.busy
+      || state.interrupted
+      || state.current?.freshness?.stale
+      || requestedStart === selected.starts_at
+    ) return;
+
+    const appointmentId = String(selected.id);
+    state.rescheduleAction = {
+      appointmentId,
+      requestedStart,
+      phase: "checking",
+      busy: true,
+      reconciliationRequired: false
+    };
+    updateRescheduleActionControls();
+    updateStatusActionControls();
+
+    try {
+      const result = await bridge.rescheduleAppointmentTime(
+        { appointment_id: appointmentId, start_time_local: requestedStart },
+        input,
+        update => {
+          state.rescheduleAction.phase = update.phase;
+          state.rescheduleAction.busy = update.busy !== false;
+          updateRescheduleActionControls();
+          updateStatusActionControls();
+        }
+      );
+      const interrupted = state.rescheduleAction.reconciliationRequired || state.interrupted;
+      if (result.committed || interrupted) {
+        await refreshCurrent({
+          pushCurrent: false,
+          clearTrail: true,
+          preserveSelectedAppointmentId: appointmentId,
+          focusCanvas: false,
+          reason: result.committed
+            ? "Fresh scoped read after committed appointment time change"
+            : "Fresh scoped read after interrupted appointment time review"
+        });
+      } else {
+        applyFreshAppointmentToCurrentProjection(result.appointment);
+      }
+      state.rescheduleAction = {
+        appointmentId,
+        requestedStart,
+        phase: result.committed ? "committed" : result.outcome,
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.interrupted = false;
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = state.selectedAppointment
+          ? rescheduleActionMessage()
+          : "Time committed. The appointment is no longer in this current projection.";
+      }
+    } catch (_) {
+      state.rescheduleAction = {
+        appointmentId,
+        requestedStart,
+        phase: "failed",
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.interrupted = false;
+      render();
+      if (elements.announcer) elements.announcer.textContent = rescheduleActionMessage();
+    }
+    setTimeout(() => {
+      const currentInput = document.getElementById("meta-grid-reschedule-time");
+      if (currentInput) currentInput.focus({ preventScroll: true });
+      else focusCanvasWithoutWindowScroll();
+    }, 0);
+  }
+
   function renderStatusAction(projection) {
     const selected = selectedStatusActionItem(projection);
     if (!selected) {
@@ -2770,6 +2929,67 @@
     updateStatusActionControls();
   }
 
+  function renderRescheduleAction(projection) {
+    const selected = selectedStatusActionItem(projection);
+    if (!selected) {
+      if (state.rescheduleAction.phase === "committed" && state.rescheduleAction.appointmentId) {
+        const outcome = createElement(
+          "p",
+          "meta-grid-reschedule-outcome",
+          "Time committed. The appointment is no longer in this current projection."
+        );
+        outcome.setAttribute("role", "status");
+        outcome.setAttribute("aria-live", "polite");
+        elements.actions.appendChild(outcome);
+      }
+      return;
+    }
+
+    const panel = createElement("section", "meta-grid-reschedule-action");
+    panel.dataset.testid = "meta-grid-reschedule-action";
+    panel.setAttribute("aria-labelledby", "meta-grid-reschedule-action-heading");
+    const copy = createElement("div", "meta-grid-reschedule-action-copy");
+    const heading = createElement("strong", "", `Current time: ${selected.display}`);
+    heading.id = "meta-grid-reschedule-action-heading";
+    copy.append(
+      heading,
+      createElement("span", "", "Same day, practitioner and duration. Current Diary truth is checked again before any write.")
+    );
+
+    const label = createElement("label", "meta-grid-reschedule-label", "New start time");
+    label.htmlFor = "meta-grid-reschedule-time";
+    const input = createElement("input", "meta-grid-reschedule-time");
+    input.id = "meta-grid-reschedule-time";
+    input.dataset.testid = "meta-grid-reschedule-time";
+    input.type = "time";
+    input.step = "900";
+    input.value = (
+      state.rescheduleAction.appointmentId === String(selected.id)
+      && state.rescheduleAction.requestedStart
+    ) ? state.rescheduleAction.requestedStart : selected.starts_at;
+    input.addEventListener("input", () => {
+      state.rescheduleAction.requestedStart = input.value;
+      state.rescheduleAction.phase = "idle";
+      updateRescheduleActionControls();
+    });
+
+    const submit = createElement("button", "meta-grid-reschedule-submit", "Review time change");
+    submit.type = "button";
+    submit.id = "meta-grid-reschedule-submit";
+    submit.dataset.testid = "meta-grid-reschedule-submit";
+    submit.addEventListener("click", () => executeSelectedRescheduleAction(input));
+
+    const feedback = createElement("p", "meta-grid-reschedule-feedback", rescheduleActionMessage());
+    feedback.id = "meta-grid-reschedule-feedback";
+    feedback.dataset.testid = "meta-grid-reschedule-feedback";
+    feedback.setAttribute("role", "status");
+    feedback.setAttribute("aria-live", "polite");
+    feedback.setAttribute("aria-atomic", "true");
+    panel.append(copy, label, input, submit, feedback);
+    elements.actions.appendChild(panel);
+    updateRescheduleActionControls();
+  }
+
   function renderActions(projection) {
     elements.actions.replaceChildren();
     elements.actions.classList.remove("is-return-only");
@@ -2818,6 +3038,7 @@
       projection.state === "answer"
     ) {
       renderStatusAction(projection);
+      renderRescheduleAction(projection);
       const nextStep = createElement("div", "meta-grid-read-next");
       const icon = createElement("span", "meta-grid-read-next-icon", "+");
       icon.setAttribute("aria-hidden", "true");

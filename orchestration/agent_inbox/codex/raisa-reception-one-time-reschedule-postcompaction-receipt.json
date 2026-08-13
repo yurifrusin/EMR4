@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the frozen plan and dispatch boundary are committed; DeepSeek is active on the isolated route-intercepted test artifact; Sol's bridge-only product candidate passes JavaScript syntax, focused status/truth-parity regression, full Diary smoke and static composition checks",
+    "next_executable_stage": "complete Browser-plugin rendered checks, admit the DeepSeek artifact if its one-file boundary and tests pass, then run the complete deterministic candidate gate before fresh Gemini read-only veto",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "1b5d790338ca8fbfd1b42806aaa9a3d9be01bb00",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_rendered_and_isolated_test_admission_then_deterministic_candidate_verification",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen 2026-08-14 Reception One selected-appointment time-reschedule plan and threat-model delta constrain the candidate to same-date, same-practitioner, duration-fixed start-time composition through the existing handleMoveResize proposal/confirm path. The accepted two-projection truth-parity result at 18aa4b613d735a68a7f6f2e55d34e498176c9935 remains its parent invariant.",
+    "current_authority_allocation": "GPT Sol retains product, acceptance and integration authority; DeepSeek V4 Flash/high is active on one isolated new browser-test file; Gemini 3.6 Flash/high remains reserved for a fresh read-only veto only after deterministic local passage.",
+    "git_refs_and_worktree": "The active worktree is C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at 1b5d790338ca8fbfd1b42806aaa9a3d9be01bb00 with intentional unstaged product/test work and 611 preserved untracked files. Required 648c8ec9805af63729264ea9c22fd695f062a741 and truth-parity 18aa4b613d735a68a7f6f2e55d34e498176c9935 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Yuri's selected existing appointment update/reschedule direction replaces the prior completed truth-parity programme pause and the durable latch remains in progress.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, provider/ADC/credential/IAM/external network, raw PUT or any second command path, deployment, production, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

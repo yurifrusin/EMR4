@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0300",
+  "observed_on": "2026-08-14",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "boundary": "post-compaction read-only Git ref verification",
+  "observation": "A PowerShell ref probe recurred AER-0299 by embedding a semicolon-delimited Git and conditional sequence inside a parenthesized assignment. Parsing failed before any statement executed.",
+  "containment": [
+    "No filesystem, Git, provider, runtime or product action occurred.",
+    "The corrected probe used one statement per line, captured LASTEXITCODE in named scalars and verified the exact task ancestry and protected refs.",
+    "All remaining Git, ref and worktree probes in this tranche use newline-separated scalar assignments only."
+  ],
+  "excluded": ["protected evidence", "patient or product data", "secrets or credentials"]
+}

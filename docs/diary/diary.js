@@ -7327,6 +7327,67 @@ async function metaGridSetAppointmentStatus(input, selectEl = null, onStateChang
   });
 }
 
+async function metaGridRescheduleAppointmentTime(input, timeEl = null, onStateChange = null) {
+  const appointmentId = String(input?.appointment_id || "").trim();
+  const requestedStart = String(input?.start_time_local || "").trim();
+  if (!appointmentId || appointmentId.length > 200) {
+    throw new Error("The selected appointment is not available for a time review.");
+  }
+  if (!/^\d{2}:\d{2}$/.test(requestedStart)) {
+    throw new Error("Choose a valid appointment start time.");
+  }
+  const appointments = isSmokeMode() ? getMockAppointments() : activeAppointments;
+  const appointment = appointments.find(item => String(item?.id || "") === appointmentId);
+  if (!appointment) {
+    throw new Error("The selected appointment is no longer available in the current Diary.");
+  }
+  const currentStartMins = toMins(appointment.start_time_local);
+  const requestedStartMins = toMins(requestedStart);
+  const duration = Number(appointment.duration_minutes) || 15;
+  if (
+    requestedStartMins < 0
+    || requestedStartMins % 15 !== 0
+    || fromMins(requestedStartMins) !== requestedStart
+    || requestedStartMins + duration > 1440
+  ) {
+    throw new Error("Choose a 15-minute start time that keeps the appointment on the same day.");
+  }
+  if (requestedStartMins === currentStartMins) {
+    throw new Error("Choose a different start time before review.");
+  }
+
+  const practitionerId = metaGridPractitionerId(appointment);
+  const practitionerAhpra = appointment?.practitioner?.ahpra_number || appointment?.practitioner_ahpra;
+  const samePractitionerColumn = activeTemplate?.columns?.find(column => (
+    (practitionerId && String(column.practitioner_id || "") === practitionerId)
+    || (practitionerAhpra && column.practitioner_ahpra === practitionerAhpra)
+  )) || null;
+  let outcome = "checking";
+  const observe = update => {
+    outcome = update.phase;
+    if (typeof onStateChange === "function") onStateChange(update);
+  };
+  const result = await handleMoveResize(
+    appointment,
+    requestedStartMins - currentStartMins,
+    0,
+    samePractitionerColumn,
+    { onStateChange: observe, returnFocus: timeEl, suppressAlert: true }
+  );
+  let currentAppointment = metaGridAppointmentView(appointment);
+  try {
+    currentAppointment = await metaGridReadAppointment(appointmentId);
+  } catch (_) {
+    // Never promote the requested coordinate when the exact read is
+    // unavailable. The ordinary command path has already reloaded its truth.
+  }
+  return Object.freeze({
+    committed: result?.committed === true,
+    outcome: result?.committed === true ? "committed" : (result?.outcome || outcome),
+    appointment: currentAppointment
+  });
+}
+
 function setMetaGridLaunchAvailability(available) {
   const button = document.getElementById("btn-meta-grid-launch");
   if (button) button.classList.toggle("hidden", !available);
@@ -7352,6 +7413,7 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   readAvailability: metaGridReadAvailability,
   statusOptions: appointmentStatusOptions,
   setAppointmentStatus: metaGridSetAppointmentStatus,
+  rescheduleAppointmentTime: metaGridRescheduleAppointmentTime,
   composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
@@ -9367,6 +9429,7 @@ function showStatusProposalDialog(proposal, options = {}) {
   return new Promise(resolve => {
     const returnFocus = options.returnFocus || document.activeElement;
     const statusTransition = options.statusTransition || null;
+    const displayTransition = options.displayTransition || statusTransition;
     statusProposalDialogSequence += 1;
     const dialogId = `status-proposal-dialog-${statusProposalDialogSequence}`;
     const overlay = document.createElement("div");
@@ -9393,17 +9456,21 @@ function showStatusProposalDialog(proposal, options = {}) {
     const transition = document.createElement("div");
     transition.className = "status-confirm-transition";
     transition.dataset.testid = "status-confirm-transition";
-    if (statusTransition) {
+    if (displayTransition) {
       const from = document.createElement("span");
       from.className = "status-confirm-transition-value";
-      from.textContent = formatAuditStatus(statusTransition.from) || "Current status";
+      from.textContent = statusTransition
+        ? (formatAuditStatus(displayTransition.from) || "Current status")
+        : (displayTransition.from || "Current value");
       const arrow = document.createElement("span");
       arrow.className = "status-confirm-transition-arrow";
       arrow.setAttribute("aria-hidden", "true");
       arrow.textContent = "→";
       const to = document.createElement("span");
       to.className = "status-confirm-transition-value status-confirm-transition-target";
-      to.textContent = formatAuditStatus(statusTransition.to) || "Requested status";
+      to.textContent = statusTransition
+        ? (formatAuditStatus(displayTransition.to) || "Requested status")
+        : (displayTransition.to || "Requested value");
       transition.append(from, arrow, to);
     }
 
@@ -9458,9 +9525,9 @@ function showStatusProposalDialog(proposal, options = {}) {
       actions.appendChild(okBtn);
       setTimeout(() => okBtn.focus(), 0);
     } else {
-      title.textContent = "Confirm Status Change";
+      title.textContent = options.title || "Confirm Status Change";
 
-      let text = proposal.summary || "Are you sure you want to change the status?";
+      let text = proposal.summary || options.defaultSummary || "Are you sure you want to change the status?";
       if (proposal.warnings && proposal.warnings.length > 0) {
         text += "\n\nWarnings:\n" + proposal.warnings.map(w => `• ${w.message}`).join("\n");
       }
@@ -9483,7 +9550,7 @@ function showStatusProposalDialog(proposal, options = {}) {
     }
 
     panel.append(title);
-    if (statusTransition) panel.append(transition);
+    if (displayTransition) panel.append(transition);
     panel.append(body);
     if (options.currentTruthRecheck && !(proposal.blocks && proposal.blocks.length > 0)) {
       panel.append(recheck);
@@ -10105,8 +10172,15 @@ async function handleGlobalMouseUp(e) {
   await handleMoveResize(appt, deltaStart, deltaDuration, targetCol);
 }
 
-async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) {
+async function handleMoveResize(appt, deltaStart, deltaDuration, column = null, actionOptions = null) {
   suppressAutoPreview = true;
+  let transactionState = "checking";
+  const notify = (phase, busy) => {
+    transactionState = phase;
+    if (typeof actionOptions?.onStateChange === "function") {
+      actionOptions.onStateChange(Object.freeze({ phase, busy }));
+    }
+  };
   const currentStartMins = toMins(appt.start_time_local);
   const newStartMins = Math.max(0, Math.min(1425, currentStartMins + deltaStart));
   const newDuration = Math.max(15, (appt.duration_minutes || 15) + deltaDuration);
@@ -10115,7 +10189,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
   const newPractitionerId = targetPractitioner ? targetPractitioner.id : (appt.practitioner?.id || appt.practitioner_id);
 
   if (newStartMins === currentStartMins && newDuration === (appt.duration_minutes || 15) && (!column || newPractitionerId === (appt.practitioner?.id || appt.practitioner_id))) {
-    return;
+    return Object.freeze({ committed: false, outcome: "cancelled" });
   }
 
   const newStartTimeString = fromMins(newStartMins);
@@ -10146,6 +10220,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
   }
 
   try {
+    notify("checking", true);
     let proposal;
     if (isSmokeMode()) {
       const origEditingId = editingAppointmentId;
@@ -10168,13 +10243,26 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
     }
 
     if (!proposal.safe || (proposal.warnings && proposal.warnings.length > 0) || proposal.autonomy_tier === "proposal") {
-      const confirmed = await showStatusProposalDialog(proposal);
+      notify("awaiting_confirmation", true);
+      const confirmed = await showStatusProposalDialog(proposal, {
+        returnFocus: actionOptions?.returnFocus,
+        title: "Confirm Appointment Time Change",
+        defaultSummary: "Review the proposed appointment time change.",
+        displayTransition: {
+          from: `${fromMins(currentStartMins)}â€“${fromMins(currentStartMins + (appt.duration_minutes || 15))}`,
+          to: `${newStartTimeString}â€“${fromMins(newStartMins + newDuration)}`
+        },
+        currentTruthRecheck: true
+      });
       if (!confirmed) {
+        const outcome = proposal.blocks && proposal.blocks.length > 0 ? "blocked" : "cancelled";
         await loadDiary(true);
-        return;
+        notify(outcome, false);
+        return Object.freeze({ committed: false, outcome });
       }
     }
 
+    notify("saving", true);
     if (isSmokeMode()) {
       const cachedAppt = mockAppointmentsCache?.find(item => item.id === appt.id) || appt;
       cachedAppt.start_time_local = newStartTimeString;
@@ -10193,6 +10281,8 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
       setStatus("Booking moved/resized (Mock)");
       await loadDiary(true);
       scrollToAppointment(appt.id);
+      notify("committed", false);
+      return Object.freeze({ committed: true, outcome: "committed" });
     } else {
       setStatus("Updating appointment...");
       const confirmedWarnings = (proposal.warnings || []).map(issue => issue.code).filter(Boolean);
@@ -10228,11 +10318,17 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
       setStatus("Booking updated successfully.");
       await loadDiary(true);
       scrollToAppointment(appt.id);
+      notify("committed", false);
+      return Object.freeze({ committed: true, outcome: "committed" });
     }
   } catch (err) {
     console.error(err);
-    alert(err.message || "An error occurred while rescheduling the appointment.");
+    if (!actionOptions?.suppressAlert) {
+      alert(err.message || "An error occurred while rescheduling the appointment.");
+    }
     await loadDiary(true);
+    notify("failed", false);
+    return Object.freeze({ committed: false, outcome: transactionState });
   }
 }
 

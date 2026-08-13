@@ -65,8 +65,9 @@ blocks, signed confirmation evidence, idempotency, audit and atomic commit.
    blocks and old/new time meaning.
 6. Visible staff confirmation is mandatory for any proposal requiring it. The
    client preserves the server-created `confirm_payload` opaquely, changes only
-   `confirmed` to true, and uses the existing distinct confirmation idempotency
-   key. It never reconstructs freshness or signed evidence.
+   the existing confirmation acknowledgement fields (`confirmed` and exact
+   `confirmed_warnings`), and uses the existing distinct confirmation
+   idempotency key. It never reconstructs freshness or signed evidence.
 7. Parameterize the accessible proposal dialog as `Confirm Appointment Time
    Change`, retain focus containment and Escape/Cancel behavior, state that
    current truth will be checked again, and deterministically return focus to

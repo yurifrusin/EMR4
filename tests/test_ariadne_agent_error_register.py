@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 261
+    assert register["register_revision"] == 262
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 300)
+        f"AER-{index:04d}" for index in range(1, 301)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 198
+    assert len(agent_incidents) == 199
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 299
+    assert report["incident_count"] == 300
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2609,7 +2609,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0299_record_reschedule_discovery_and_dispatch_recovery() -> None:
+def test_aer_0294_through_0300_record_reschedule_discovery_and_dispatch_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2656,6 +2656,17 @@ def test_aer_0294_through_0299_record_reschedule_discovery_and_dispatch_recovery
         "orchestrator.powershell_statement_sequence_embedded_inside_expression"
     )
     assert powershell["status"] == "corrected"
+
+    recurrence = incidents["AER-0300"]
+    assert recurrence["stage"] == "deterministic_verification"
+    assert recurrence["category"] == "command_scope_violation"
+    assert recurrence["candidate_state"] == "canonical_unchanged"
+    assert recurrence["related_incident_ids"] == []
+    assert recurrence["recurrence_signature"] == (
+        "orchestrator.powershell_statement_sequence_embedded_inside_expression"
+    )
+    assert recurrence["status"] == "corrected"
+    assert recurrence["correction"]["status"] == "corrected_fresh_attempt"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2934,17 +2945,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 261
-    assert report["incident_count"] == 299
+    assert report["register_revision"] == 262
+    assert report["incident_count"] == 300
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 198,
+        "agent_behavior": 199,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 38,
+        "command_scope_violation": 39,
         "evidence_misreport": 38,
         "harness_failure": 37,
         "output_contract_violation": 83,
@@ -2955,7 +2966,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 97,
-        "canonical_unchanged": 175,
+        "canonical_unchanged": 176,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(
@@ -2998,13 +3009,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.powershell_statement_sequence_embedded_inside_expression"
             ),
-            "incident_count": 3,
-            "incident_ids": ["AER-0242", "AER-0246", "AER-0299"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0242", "AER-0246", "AER-0299", "AER-0300"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "Do not place a Git command, semicolon or if statement inside a PowerShell assignment expression. Use newline-separated scalar assignments exclusively for all remaining Git/ref/worktree probes in this tranche.",
                 "For PowerShell orchestration probes, use one statement per step: capture collection output, run Git or shell commands, capture $LASTEXITCODE, and only then construct the final object. Never place a semicolon-delimited statement sequence inside a property expression.",
                 "For every remaining worktree and worker probe, execute each PowerShell and Git statement separately, capture LASTEXITCODE immediately, and construct objects only from named scalar variables.",
                 "For the rest of AES-C2 orchestration, every PowerShell diagnostic uses literal command statements with named intermediate values and no script-text variable in command position; Git revision-path arguments are always quoted.",

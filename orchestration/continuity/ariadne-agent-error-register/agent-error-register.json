@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 261,
+  "register_revision": 262,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12036,6 +12036,46 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-powershell-preflight-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-261.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0300",
+      "attempt_id": "raisa-reception-one-reschedule-postcompaction-ref-probe-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-0299, every PowerShell Git probe must execute each command and LASTEXITCODE branch as separate statements before assembling any value.",
+      "observed_error": "The first post-compaction ref verification again embedded a semicolon-delimited git merge-base and conditional sequence inside a parenthesized assignment. PowerShell rejected the command at parse time before any statement or mutation executed.",
+      "detection_method": "The shell returned ParserError with missing-closing-parenthesis diagnostics before execution; the immediately corrected command used separate named scalar statements.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-postcompaction-powershell-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-262.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postcompaction-receipt.json",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Execute each ref read and merge-base probe on its own line, capture LASTEXITCODE in named variables, and only then format the result. The corrected probe verified the task ancestry and exact protected refs.",
+        "prevention_control": "Do not place a Git command, semicolon or if statement inside a PowerShell assignment expression. Use newline-separated scalar assignments exclusively for all remaining Git/ref/worktree probes in this tranche.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-postcompaction-powershell-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-262.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postcompaction-receipt.json"
         ]
       },
       "status": "corrected"
