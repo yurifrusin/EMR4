@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 272 / Compass 254. The status-confirm product adapter passes disposable PostgreSQL/RLS integration. HTTP route convergence remains closed.
+> EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next; CF-D2 remains a later observability-first durable event/cue extension.
 
 ## North star
 
@@ -310,29 +310,40 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The test-only expectation now matches accepted idempotency behavior and all 125 lineage checks pass. Lineage parent: `raisa-provider-free-read-only-status-confirm-route-mounting-admission-review`.
 147. **Compose the status-confirm safety path off-route and reconcile exact stored public replay — Provider-free unmounted status-confirm route-convergence composition rehearsal**
    The unmounted callable passes finite execution/replay/failure rehearsal without opening route or database authority. Lineage parent: `raisa-status-confirm-preflight-idempotency-expectation-repair`.
+148. **Separate completed off-route composition from the still-missing application-owned product adapter — Provider-free read-only status-confirm route-mounting readiness re-review**
+   The route is not ready to mount; four coupled adapter responsibilities are the narrow next tranche. Lineage parent: `raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal`.
+149. **Close the application-owned bridge between authenticated product facts and the accepted physical command seam — Provider-free unmounted status-confirm product-adapter rehearsal**
+   All four product-adapter blockers pass authored-synthetic rehearsal with exact response-loss replay. Lineage parent: `raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview`.
+150. **Join the accepted application adapter to the accepted physical database seam — Disposable PostgreSQL status-confirm product-adapter integration**
+   Exact atomic commit, replay, rollback, RLS and tenant-setting lifecycle pass on disposable PostgreSQL 16. Lineage parent: `raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal`.
+151. **Close the final backend status-confirm seam before visible Diary work — Provider-free status-confirm HTTP route convergence**
+   One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal`.
 
 ## Current position
 
-**The status-confirm safety path is composed off-route with exact stored-envelope replay — Provider-free unmounted status-confirm route-convergence composition rehearsal**
+**Backend status-confirm convergence complete; visible Diary work is next — Provider-free status-confirm HTTP route convergence**
 
-**Why this proof came next:** The unmounted composition passes, and the workflow latch now preserves this exact readiness-review checkpoint across interruptions.
+**Why this proof came next:** The adapter and physical seam already passed independently; the HTTP boundary now proves their exact mounted composition.
 
-The unmounted callable and response reconciliation pass all finite authored-synthetic checks.
+Canonical and compatibility paths share one fail-closed status-only transaction with exact-byte replay.
 
 ### What this unlocks
 
-- Resume the provider-free read-only status-confirm route-mounting readiness re-review.
-- Reclassify the ten frozen dimensions and name only the narrowest remaining application adapters or route prerequisites.
+- Freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.
+- Prove proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.
+- Use that settled interaction boundary to shape a later observability-first durable event/cue delivery tranche.
 
 ### What it does not solve
 
-- Mounted-route convergence, route execution, product adapters or a real product command.
-- Physical PostgreSQL composition execution, concurrency, restart, crash or unknown commit.
-- Provider/credential activity, patient/product data, deployment, release, Pages or protected-ref movement.
+- Visible Diary interaction or another command family.
+- CF-D2 restart/unknown-commit durability, watcher operations or cue recovery.
+- Product/patient data, provider access, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -395,10 +406,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted physical PostgreSQL status-confirm proof without reopening durability.
-- Re-review route-mounting readiness against the accepted unmounted composition source.
-- Identify only remaining product locked-state/effect adapter and route prerequisites.
-- Keep route edits/calls, product data/commands, providers and protected integration separately gated.
+- Preserve accepted conditional-command and status-confirm route correctness.
+- Wire and prove bounded visible Diary status-confirm behavior next.
+- Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -587,6 +597,7 @@ Prerequisites:
 
 ## Map limits
 
+- Status-confirm HTTP convergence proves one authored-synthetic mounted backend family, not visible UI behavior, other commands or durable event/cue delivery.
 - The accepted route-mounting review proves static composition facts only; it does not admit or execute the mounted handler against the physical seam.
 - The accepted status-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL transaction and selected rollback boundaries only, not route, concurrency or product-command safety.
 - The accepted status-confirm PostgreSQL rehearsal proves parse/catalogue and selected rolled-back invariants only, not application transaction, route or product-command safety.
@@ -713,6 +724,9 @@ Prerequisites:
 - The accepted repaired-request descendant proves one small authored-synthetic typed Gemini 2.5 Flash response through the configured Sydney Vertex locational endpoint and exact keyless Bernie impersonated-ADC boundary. The proofreader admitted four grounded fields, every ledger is consumed, no call followed success, no fallback occurred and task residue is zero. It does not prove Australian physical or sovereign processing, exact billing, general model reliability, production suitability, or safety for product-derived, patient, health, clinical or historical data, and it opens no further provider or product authority.
 - The evidence-complete receptionist-first v6.3 descendant proves twenty-two exact outcomes in the complete reused twenty-four-request cohort through the configured Sydney lane. It also exposes one proofreader-admitted broadening of an explicit exact-time constraint and one vetoed natural/form mismatch. No product delivery or write occurred. It does not establish generalisation, production fitness, real-data safety, Australian physical or sovereign processing, or product provider readiness.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
+- The accepted readiness re-review does not mount or authorise the status-confirm route; four product-adapter blockers remain.
+- The accepted product adapter is unmounted and authored-synthetic; real PostgreSQL and HTTP behavior remain unproved.
+- The accepted PostgreSQL product-adapter integration is serial, disposable, authored-synthetic and off-route; HTTP and UI behavior remain unproved.
 
 ## Evidence index
 
@@ -725,11 +739,14 @@ Prerequisites:
 - `alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py`
 - `alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py`
 - `alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py`
+- `app/dependencies.py`
 - `app/graphql/application_auth_product.py`
 - `app/models/application_auth.py`
 - `app/models/application_identity_oidc_attempt.py`
 - `app/models/appointments.py`
 - `app/routers/application_auth.py`
+- `app/routers/appointments.py`
+- `app/schemas/appointments.py`
 - `app/services/application_auth_database_role.py`
 - `app/services/application_auth_office_consumer.py`
 - `app/services/application_auth_operational_database.py`
@@ -752,6 +769,8 @@ Prerequisites:
 - `app/services/application_identity_oidc_transport.py`
 - `app/services/appointment_status_composition.py`
 - `app/services/appointment_status_physical.py`
+- `app/services/appointment_status_product_adapter.py`
+- `app/services/diary/confirm_actions.py`
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
@@ -760,6 +779,7 @@ Prerequisites:
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
+- `docs/api-spine/openapi/appointment-commands.yaml`
 - `docs/api-spine/openapi/technical-control-live-development-recovery-commands.yaml`
 - `docs/api-spine/openapi/technical-control-simulator-commands.yaml`
 - `docs/ariadne-agent-error-correction-register-revision-204.md`
@@ -1001,6 +1021,8 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-plan.md`
+- `docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md`
+- `docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
@@ -1046,12 +1068,16 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md`
+- `docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md`
+- `docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
 - `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
+- `docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md`
+- `docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-plan.md`
@@ -1103,6 +1129,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-plan.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-closeout.md`
@@ -1197,6 +1225,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md`
@@ -1211,8 +1240,10 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
+- `docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-threat-model-delta.md`
@@ -1230,6 +1261,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-status-confirm-kernel-adapter-contract-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-threat-model-delta.md`
@@ -1471,6 +1503,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md`
@@ -1503,6 +1538,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-behavior-transaction-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-design-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json`
@@ -1511,8 +1547,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-preflight-idempotency-expectation-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-route-convergence-composition-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-admission-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-readiness-rereview-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-runtime-convergence-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-scaffold-parse-catalogue-sol-acceptance.md`
@@ -1634,6 +1673,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-result-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-sol-acceptance.md`
 - `orchestration/api_spine_adr.md`
+- `orchestration/api_spine_appointment_command_alignment_inventory.md`
 - `orchestration/bernie_interaction_model.md`
 - `orchestration/bernie_release_gates.md`
 - `orchestration/continuity/ariadne-active-operation-latch/active-operation.schema.json`
@@ -1778,6 +1818,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json`
@@ -1805,10 +1849,18 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review/route-mounting-review-evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-contract.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-runtime-gap-admission-review/runtime-gap-review-evidence.json`
 - `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
+- `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json`
+- `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-failure-evidence.json`
+- `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json`
@@ -1840,6 +1892,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/composition-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json`
@@ -2136,6 +2191,10 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md`
+- `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
+- `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
+- `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2152,9 +2211,13 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
+- `scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_office_practitioner_directory_consumer.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
+- `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
+- `scripts/raisa_provider_free_status_confirm_http_route_convergence.py`
+- `scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
 - `scripts/reception_one_bureau_model_text_lane_live.py`
@@ -2208,9 +2271,16 @@ Prerequisites:
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
+- `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
+- `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
+- `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
+- `tests/test_raisa_provider_free_status_confirm_http_route_convergence.py`
+- `tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py`
+- `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py`
+- `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
@@ -2238,4 +2308,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 251; continuity graph revision 269._
+_Compass map revision 255; continuity graph revision 273._

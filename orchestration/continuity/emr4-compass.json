@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 254,
-  "updated_at": "2026-08-13T01:39:55Z",
-  "source_graph_revision": 272,
-  "orientation_statement": "EMR4 is at Continuity 272 / Compass 254. The status-confirm product adapter passes real disposable PostgreSQL/RLS integration; HTTP route convergence remains closed.",
+  "map_revision": 255,
+  "updated_at": "2026-08-13T03:09:24Z",
+  "source_graph_revision": 273,
+  "orientation_statement": "EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next; CF-D2 remains a later observability-first durable event/cue extension.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2709,35 +2709,76 @@
         "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-status-confirm-http-route-convergence",
+      "lineage_parent": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
+      "strategic_role": "Close the final backend status-confirm seam before visible Diary work",
+      "outcome": "One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next.",
+      "evidence": [
+        "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
+        "docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md",
+        "app/dependencies.py",
+        "app/routers/appointments.py",
+        "app/schemas/appointments.py",
+        "app/services/diary/confirm_actions.py",
+        "docs/api-spine/openapi/appointment-commands.yaml",
+        "orchestration/api_spine_appointment_command_alignment_inventory.md",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-failure-evidence.json",
+        "scripts/raisa_provider_free_status_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_status_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py",
+        "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
-    "strategic_role": "The backend status-confirm path is ready for HTTP route convergence",
-    "why_now": "Application and database behavior now pass together; the remaining backend gap is the existing route-local implementation and transport binding.",
-    "outcome": "Twelve PostgreSQL integration scenarios pass with exact cleanup and no product data.",
+    "node_id": "raisa-provider-free-status-confirm-http-route-convergence",
+    "strategic_role": "Backend status-confirm convergence complete; visible Diary work is next",
+    "why_now": "The adapter and physical seam already passed independently; the HTTP boundary now proves their exact mounted composition.",
+    "outcome": "Canonical and compatibility paths share one fail-closed status-only transaction with exact-byte replay.",
     "unlocks": [
-      "Freeze one provider-free authored-synthetic status-confirm HTTP route-convergence tranche."
+      "Freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.",
+      "Prove proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.",
+      "Use that settled interaction boundary to shape a later observability-first durable event/cue delivery tranche."
     ],
     "does_not_solve": [
-      "HTTP dependency wiring, opaque proposal-version carriage or exact stored-byte response delivery.",
-      "Diary UI consumption or other command families.",
-      "Product/patient data, concurrency, restart, deployment, production or release."
+      "Visible Diary interaction or another command family.",
+      "CF-D2 restart/unknown-commit durability, watcher operations or cue recovery.",
+      "Product/patient data, provider access, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md",
-      "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-threat-model-delta.md",
-      "app/services/appointment_status_product_adapter.py",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.schema.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.schema.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.json",
-      "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
-      "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
-      "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py",
-      "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
+      "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
+      "docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md",
+      "app/dependencies.py",
+      "app/routers/appointments.py",
+      "app/schemas/appointments.py",
+      "app/services/diary/confirm_actions.py",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/api_spine_appointment_command_alignment_inventory.md",
+      "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json",
+      "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-failure-evidence.json",
+      "scripts/raisa_provider_free_status_confirm_http_route_convergence.py",
+      "tests/test_raisa_provider_free_status_confirm_http_route_convergence.py",
+      "tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py",
+      "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -2845,9 +2886,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Preserve the accepted physical, composition, product-adapter and PostgreSQL integration proofs.",
-        "Converge the existing authenticated status-confirm route with opaque version binding and stored-byte replay.",
-        "Keep product data, providers, deployment and protected integration separately gated."
+        "Preserve accepted conditional-command and status-confirm route correctness.",
+        "Wire and prove bounded visible Diary status-confirm behavior next.",
+        "Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -3487,7 +3528,29 @@
         "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py",
         "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md",
         "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
-        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
+        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md",
+        "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
+        "docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md",
+        "app/dependencies.py",
+        "app/routers/appointments.py",
+        "app/schemas/appointments.py",
+        "app/services/diary/confirm_actions.py",
+        "docs/api-spine/openapi/appointment-commands.yaml",
+        "orchestration/api_spine_appointment_command_alignment_inventory.md",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json",
+        "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-failure-evidence.json",
+        "scripts/raisa_provider_free_status_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_status_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py",
+        "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json"
       ]
     },
     {
@@ -4332,6 +4395,7 @@
     }
   ],
   "map_limits": [
+    "Status-confirm HTTP convergence proves one authored-synthetic mounted backend family, not visible UI behavior, other commands or durable event/cue delivery.",
     "The accepted route-mounting review proves static composition facts only; it does not admit or execute the mounted handler against the physical seam.",
     "The accepted status-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL transaction and selected rollback boundaries only, not route, concurrency or product-command safety.",
     "The accepted status-confirm PostgreSQL rehearsal proves parse/catalogue and selected rolled-back invariants only, not application transaction, route or product-command safety.",

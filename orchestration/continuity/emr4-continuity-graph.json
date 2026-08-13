@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 272,
+  "graph_revision": 273,
   "harvests": [],
   "nodes": [
     {
@@ -17614,9 +17614,7 @@
         }
       ],
       "authority": {
-        "authorized_openings": [
-          "owned disposable authored-synthetic PostgreSQL read/write and exact cleanup"
-        ],
+        "authorized_openings": [],
         "notes": [
           "No route, product data, provider, deployment or protected-ref authority.",
           "The disposable application role is non-superuser, non-BYPASSRLS and forced through five tenant policies."
@@ -17635,9 +17633,7 @@
         "Atomic mutation/audit/receipt, adjacent version, byte-identical replay, rollback and pooled tenant-setting cleanup pass.",
         "All 104 hostile mutations, 112 focused current-lineage tests and the 193-test canonical fast profile pass."
       ],
-      "contract_evidence": [
-        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json"
-      ],
+      "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md",
@@ -17670,9 +17666,118 @@
         "Opaque proposal-version carriage and exact stored-byte HTTP delivery remain unproved.",
         "Diary UI consumption remains closed until route convergence passes."
       ]
+    },
+    {
+      "id": "raisa-provider-free-status-confirm-http-route-convergence",
+      "title": "Provider-free status-confirm HTTP route convergence",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-13T03:09:24Z",
+      "updated_at": "2026-08-13T03:09:24Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b414eb256853c301099d9cf7797a69cd3ec077c5",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Canonical and hidden compatibility paths share one product-adapter handler.",
+          "No provider, product database, patient data, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-http-route-convergence",
+          "source": "orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact-byte, database-version-bound status-only route convergence and proceed to visible Diary wiring."
+        }
+      ],
+      "claim_scope": [
+        "Canonical status-confirm and its hidden historical alias enter the same adapter-owned command path.",
+        "Opaque generation binding, fresh authority/source recheck, atomic status/audit/v1 receipt and exact-byte replay pass against disposable PostgreSQL.",
+        "Waiting-area-only input is explicitly unsupported and cannot reach a legacy local write.",
+        "Twelve scenarios, 112 hostile mutations, 217 focused/current-lineage tests and the 193-test canonical fast profile pass."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
+            "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json",
+            "tests/test_raisa_provider_free_status_confirm_http_route_convergence.py",
+            "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md"
+          ],
+          "note": "The status-only command rechecks current appointment truth and preserves every non-status scheduling field; event/cue durability remains separately closed."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
+            "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json",
+            "tests/test_raisa_provider_free_status_confirm_http_route_convergence.py",
+            "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md"
+          ],
+          "note": "Authored-synthetic route proofs retain the existing patient, practitioner, time and duration binding while changing only admitted status fields."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
+          "docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.json",
+          "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-failure-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-status-confirm-http-route-convergence-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-postcompaction-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_status_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py",
+          "tests/test_raisa_provider_free_status_confirm_http_route_convergence_continuity.py"
+        ],
+        "artifacts": [
+          "app/dependencies.py",
+          "app/routers/appointments.py",
+          "app/schemas/appointments.py",
+          "app/services/diary/confirm_actions.py",
+          "docs/api-spine/openapi/appointment-commands.yaml",
+          "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/provider-free-http-postgresql-evidence.schema.json",
+          "scripts/raisa_provider_free_status_confirm_http_route_convergence.py",
+          "scripts/raisa_provider_free_status_confirm_http_route_convergence_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Visible native Diary status-confirm consumption and interaction evidence remain unproved.",
+        "Other command families and the waiting-area-only confirmation path remain separately gated.",
+        "CF-D2 durability remains deferred to a fresh observability-first event/cue delivery plan.",
+        "Product/patient data, providers, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T01:39:55Z"
+  "updated_at": "2026-08-13T03:09:24Z"
 }

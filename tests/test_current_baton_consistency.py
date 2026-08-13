@@ -8,10 +8,10 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-disposable-postgresql-status-confirm-"
-    "product-adapter-integration-rehearsal"
+    "raisa-provider-free-status-confirm-http-route-convergence"
 )
-SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
+SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
+INTEGRATION_SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
 ADAPTER_SOURCE_HEAD = "b728b903c99fa35f231df04ba68263533261121a"
 COMPOSITION_SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
@@ -28,11 +28,11 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 272
+    assert graph["graph_revision"] == 273
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 254
-    assert compass["source_graph_revision"] == 272
+    assert compass["map_revision"] == 255
+    assert compass["source_graph_revision"] == 273
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -42,19 +42,18 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 272 / Compass 254" in current
-    assert "raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_pass" in current
+    assert "Continuity 273 / Compass 255" in current
+    assert "raisa_provider_free_status_confirm_http_route_convergence_pass" in current
     assert SOURCE_HEAD in current
-    assert "forced five-table RLS" in current
-    assert "atomic mutation/audit/v1 receipt" in current
-    assert "104 hostile mutations" in current
-    assert "112 current-lineage focused tests" in current
-    assert "current HTTP route remains on its legacy local implementation" in current
+    assert "Canonical `POST /api/v1/appointments/proposals/status/confirm`" in current
+    assert "atomic status/audit/v1 receipt" in current
+    assert "112 hostile mutations" in current
+    assert "217 focused/current-lineage tests" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert COMPOSITION_SOURCE_HEAD in relation
     assert ADAPTER_SOURCE_HEAD in relation
-    assert SOURCE_HEAD in relation
+    assert INTEGRATION_SOURCE_HEAD in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
     assert "fe8313d224a92115aa31bea14f0cd3b14e4c9967" in relation
     assert "018099dd6c5f0502121360732feb602252eb34cc" in relation
@@ -76,14 +75,13 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free authored-synthetic status-confirm HTTP route-convergence" in next_work
+    assert "bounded visible native Diary status-confirm wiring" in next_work
     assert SOURCE_HEAD in next_work
-    assert "`/appointments/proposals/status-confirm` route-local write path" in next_work
-    assert "opaque proposal-version binding" in next_work
-    assert "status-only admission" in next_work
-    assert "stored-byte HTTP replay" in next_work
-    assert "owned disposable PostgreSQL" in next_work
-    assert "patient/clinical or operational product data" in next_work
+    assert "no raw fallback" in next_work
+    assert "stale/current-truth" in next_work
+    assert "responsive/keyboard proof" in next_work
+    assert "observability-first durable event/cue plan" in next_work
+    assert "Patient/clinical or operational product data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -118,13 +116,15 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free authored-synthetic status-confirm http route-convergence",
-        "/appointments/proposals/status-confirm",
-        "opaque proposal-version binding",
-        "status-only admission",
-        "stored-byte http replay",
-        "owned disposable postgresql",
-        "route/schema/dependency/api-contract edits",
+        "bounded visible native diary status-confirm wiring",
+        "proposal",
+        "confirmation",
+        "stale/current-truth",
+        "ordinary-fallback",
+        "no raw fallback",
+        "provider-free authored-synthetic local frontend/backend interaction",
+        "responsive/keyboard proof",
+        "cf-d2 remains deferred",
         "patient/clinical or operational product data",
         "provider/adc",
         "credential/iam/network",

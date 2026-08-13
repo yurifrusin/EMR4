@@ -281,11 +281,28 @@ physical seam. One stale Sprint-138 test expectation is isolated for test-only
 lifecycle repair. That repair now passes at exact source
 `ec9aa1b1d2813b3e864b37f331ac6b587816610a`: update/delete confirmation tests
 match their accepted idempotency headers and all 125 current status-confirm
-lineage checks pass without application change. The next product-direction gate
-is an unmounted composition rehearsal joining status-only admission, server
-session/current authority, the physical seam and closed response mapping. Route
-edits/calls, product data, providers, concurrency, restart, unknown commit,
-watchers, events, commands, deployment and schedule fencing remain closed.
+lineage checks pass without application change. The subsequent unmounted
+composition, route-readiness, product-adapter and disposable PostgreSQL
+integration descendants now pass at their accepted source heads. The final
+provider-free HTTP convergence passes at exact source
+`b414eb256853c301099d9cf7797a69cd3ec077c5`: canonical
+`POST /api/v1/appointments/proposals/status/confirm` and the hidden historical
+alias share one product-adapter handler; proposals carry an opaque
+database-generation binding; current authority and source truth are rechecked
+in a fresh command session; mutation, audit and v1 receipt commit atomically;
+and initial delivery plus replay return exact stored bytes. Waiting-area-only
+input is blocked without a local fallback. All twelve disposable scenarios,
+112 hostile mutations, 217 focused/current-lineage tests and the 193-test
+canonical fast profile pass with exact cleanup.
+
+The next product-direction gate is bounded visible native Diary status-confirm
+wiring against this exact backend contract. CF-D2 is preserved but is not a
+prerequisite: the command path already derives correctness from current
+database truth, while the visible interaction boundary should define the
+quiet cues and reconciliation signals for a later observability-first durable
+event/cue delivery extension. Product data, providers, other command families,
+restart/unknown-commit claims, deployment, production and release remain
+separately closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
