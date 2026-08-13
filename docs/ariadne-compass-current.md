@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 276 / Compass 258. The provider-free CF-D2 observability-first architecture accepts only a payload-free durable refresh obligation, with ten distinct diagnostic stages and source/command authority preserved. The next safe gate is a pure unmounted admission rehearsal; no watcher, database/source or product-data authority is open.
+> EMR4 is at Continuity 277 / Compass 259. The provider-free unmounted CF-D2 event/cue admission rehearsal passes 22 canonical scenarios and rejects 60 hostile variants without state drift. The next safe gate is an inert relational representation architecture; no database, watcher, persistence or product-data authority is open.
 
 ## North star
 
@@ -324,30 +324,34 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Visible staff status-confirm behavior passes; its cue and reconciliation needs now bound the next observability-first durability plan. Lineage parent: `raisa-channel-neutral-patient-interaction-foundation`.
 154. **Make durable refresh acceleration small, observable and non-authoritative — Provider-free CF-D2 observability-first event and cue architecture**
    A payload-free cue obligation and ten-stage diagnostic contract pass; pure unmounted state admission is next. Lineage parent: `raisa-provider-free-visible-native-diary-status-confirm-wiring`.
+155. **Prove durable cue admission semantics before choosing storage machinery — Provider-free unmounted CF-D2 event and cue admission rehearsal**
+   Pure duplicate, gap, checkpoint, coalescing, fencing, lag and fresh-read reconciliation behavior passes; inert representation architecture is next. Lineage parent: `raisa-provider-free-cf-d2-observability-first-event-cue`.
 
 ## Current position
 
-**Observable payload-free durable cue architecture accepted; pure state admission next — Provider-free CF-D2 observability-first event and cue architecture**
+**Pure durable-cue admission passes; inert relational representation next — Provider-free unmounted CF-D2 event and cue admission rehearsal**
 
-**Why this proof came next:** The visible Diary consumer identifies the refresh need, while the smaller contract separates every durable handoff before any restart or database proof.
+**Why this proof came next:** The state transitions are now independently executable and fail closed, so representation can be judged against stable semantics rather than driving them.
 
-Durability is limited to a payload-free refresh obligation; source truth, command authority, checkpoint, delivery and reconciliation remain distinct.
+Duplicate identity, gaps, atomic obligation admission, checkpointing, coalescing, fencing, lag and reconciliation have exact provider-free behavior.
 
 ### What this unlocks
 
-- Run the provider-free unmounted event/cue admission rehearsal against the exact accepted contract.
-- Prove duplicate, gap, checkpoint, coalescing, fencing and reconciliation admission with authored-synthetic state only.
-- Use the ten diagnostic stages to fail closed without starting a watcher or opening a database/source.
+- Freeze the smallest provider-free unmounted event/cue representation architecture.
+- Map only the accepted partition, receipt, obligation, checkpoint, dispatch and reconciliation facts into an inert relational design.
+- Use deterministic representability checks without opening a database connection, migration or watcher.
 
 ### What it does not solve
 
-- PostgreSQL representation, durable persistence, source observation or a watcher process.
-- Restart, unknown-commit, dispatch transport, latency, retention, rotation or operational delivery.
+- PostgreSQL admission, transactions, source observation or persistent operational state.
+- Watcher process ownership, restart, unknown commit, delivery transport, retention, rotation or performance.
 - Product/patient data, external identity/channel delivery, provider access, commands, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -411,8 +415,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve source-owned truth and command-time current-authority checks as the correctness kernel.
-- Preserve the accepted payload-free refresh-obligation and ten-stage observability contract.
-- Exercise only pure authored-synthetic state admission before considering any persistence or watcher runtime.
+- Preserve the accepted payload-free observability and pure admission transitions.
+- Specify an inert relational representation before considering a database connection or migration execution.
 - Keep future patient channels behind the accepted identity, assurance, recovery, projection and confirmation foundation.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -602,6 +606,7 @@ Prerequisites:
 
 ## Map limits
 
+- The CF-D2 admission state machine is ephemeral repository evidence, not operational persistence, restart, delivery or database proof.
 - CF-D2 observability evidence is an architecture-only closed-contract proof; it does not prove persistence, restart, unknown commit, source observation or cue delivery.
 - Visible status-confirm evidence uses an authored-synthetic smoke client and route-intercepted browser responses; it is not live product-data or deployment evidence.
 - The patient interaction foundation is static architecture evidence, not real identity, channel delivery, patient self-service or command runtime.
@@ -1105,6 +1110,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md`
@@ -1269,6 +1276,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-threat-model-delta.md`
@@ -1538,6 +1546,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-status-confirm-http-route-convergence-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-fresh-generation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-invalidation-reassembly-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-rayleen-waiting-room-context-fabric-source-adapter-sol-acceptance.md`
@@ -1902,6 +1913,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json`
@@ -2233,6 +2247,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md`
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-observability-first-event-cue-architecture.md`
+- `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
@@ -2264,6 +2279,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `scripts/raisa_provider_free_status_confirm_http_route_convergence.py`
+- `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
@@ -2330,6 +2346,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `tests/test_raisa_provider_free_status_confirm_http_route_convergence.py`
 - `tests/test_raisa_provider_free_status_confirm_http_route_convergence_plan.py`
+- `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
@@ -2360,4 +2377,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 258; continuity graph revision 276._
+_Compass map revision 259; continuity graph revision 277._

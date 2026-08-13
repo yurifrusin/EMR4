@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 276,
+  "graph_revision": 277,
   "harvests": [],
   "nodes": [
     {
@@ -18069,9 +18069,113 @@
         "The next gate is a pure provider-free unmounted admission rehearsal over authored-synthetic state sequences only.",
         "Watcher/database/source, operational retention, product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal",
+      "title": "Provider-free unmounted CF-D2 event and cue admission rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-13T07:00:06Z",
+      "updated_at": "2026-08-13T07:00:06Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-cf-d2-observability-first-event-cue",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The exact accepted observability architecture remains the authority boundary.",
+          "The state machine is ephemeral and pure; repository evidence is not operational persistence.",
+          "No watcher, database/source, persistence, product data, provider, route, command, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-cf-d2-event-cue-admission-rehearsal",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact pure admission behavior for durable refresh cues before relational representation or runtime."
+        }
+      ],
+      "claim_scope": [
+        "Twenty-two canonical authored-synthetic state sequences pass for duplicate reuse, conflict, gaps, checkpointing, coalescing, fencing, lag and reconciliation.",
+        "All sixty hostile contract and candidate variants fail closed; every denied hostile candidate preserves the complete normalized state digest.",
+        "Ninety-one focused lineage checks and the 193-test canonical fast profile pass.",
+        "Events and cues remain non-authoritative acceleration hints; fresh scoped reads and command-time rechecks remain mandatory."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json",
+            "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md"
+          ],
+          "note": "The payload-free state machine contains no appointment identity or intent fields and cannot mutate the accepted combined appointment proposal."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json",
+            "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md"
+          ],
+          "note": "A delivered cue can record only a typed fresh-read reconciliation; it cannot supply authoritative projection values or future freshness."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json",
+          "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+          "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Relational representation, transactions, database/source access and persistence remain unproved.",
+        "Watcher ownership, restart, unknown commit, dispatch transport, retention and operations remain unproved.",
+        "Product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T06:26:12Z"
+  "updated_at": "2026-08-13T07:00:06Z"
 }

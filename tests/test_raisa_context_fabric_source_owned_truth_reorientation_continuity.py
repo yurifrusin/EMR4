@@ -26,7 +26,7 @@ def test_reorientation_remains_accepted_after_descendant_advances() -> None:
     assert compass["map_revision"] >= 258
     assert compass["source_graph_revision"] == graph["graph_revision"]
     assert compass["current_position"]["node_id"] == (
-        "raisa-provider-free-cf-d2-observability-first-event-cue"
+        "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
     )
     node = _node(graph)
     assert node["kind"] == "foundation"
@@ -62,11 +62,10 @@ def test_compass_names_pure_admission_next_and_runtime_durability_later() -> Non
         + current["does_not_solve"]
     ).lower()
 
-    assert "pure state admission next" in joined
-    assert "unmounted event/cue admission rehearsal" in joined
-    assert "payload-free refresh obligation" in joined
-    assert "source observation or a watcher process" in joined
-    assert "source/command authority preserved" in compass["orientation_statement"].lower()
+    assert "inert relational representation next" in joined
+    assert "unmounted event/cue representation architecture" in joined
+    assert "persistent operational state" in joined
+    assert "no database, watcher" in compass["orientation_statement"].lower()
 
 
 def test_accepted_evidence_binds_review_and_human_summary() -> None:

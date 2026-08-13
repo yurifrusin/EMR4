@@ -290,5 +290,7 @@ def test_active_latch_is_transferred_to_unmounted_admission() -> None:
         latch["operation_id"]
         == "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
     )
-    assert "generate_precommit_receipt" in latch["checkpoint"]["next_executable_stage"]
+    assert "verify_closeout_generate_precommit_receipt" in latch[
+        "checkpoint"
+    ]["next_executable_stage"]
     assert latch["terminal_response"]["permitted"] is False

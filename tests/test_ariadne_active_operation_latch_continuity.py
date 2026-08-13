@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "ariadne-postcompaction-active-operation-latch"
-PRODUCT_POSITION = "raisa-provider-free-cf-d2-observability-first-event-cue"
+PRODUCT_POSITION = "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
 SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
 
 
@@ -36,7 +36,7 @@ def test_current_latch_resumes_exact_cf_d2_admission_descendant() -> None:
         == "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
     )
     assert (
-        "generate_precommit_receipt_then_explicitly_stage_commit_and_publish"
+        "verify_closeout_generate_precommit_receipt_then_commit_notify"
         in latch["checkpoint"]["next_executable_stage"]
     )
     assert latch["terminal_response"] == {

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 258,
-  "updated_at": "2026-08-13T06:26:12Z",
-  "source_graph_revision": 276,
-  "orientation_statement": "EMR4 is at Continuity 276 / Compass 258. The provider-free CF-D2 observability-first architecture accepts only a payload-free durable refresh obligation, with ten distinct diagnostic stages and source/command authority preserved. The next safe gate is a pure unmounted admission rehearsal; no watcher, database/source or product-data authority is open.",
+  "map_revision": 259,
+  "updated_at": "2026-08-13T07:00:06Z",
+  "source_graph_revision": 277,
+  "orientation_statement": "EMR4 is at Continuity 277 / Compass 259. The provider-free unmounted CF-D2 event/cue admission rehearsal passes 22 canonical scenarios and rejects 60 hostile variants without state drift. The next safe gate is an inert relational representation architecture; no database, watcher, persistence or product-data authority is open.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2807,37 +2807,56 @@
         "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal",
+      "lineage_parent": "raisa-provider-free-cf-d2-observability-first-event-cue",
+      "strategic_role": "Prove durable cue admission semantics before choosing storage machinery",
+      "outcome": "Pure duplicate, gap, checkpoint, coalescing, fencing, lag and fresh-read reconciliation behavior passes; inert representation architecture is next.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json",
+        "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+        "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preacceptance-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-cf-d2-observability-first-event-cue",
-    "strategic_role": "Observable payload-free durable cue architecture accepted; pure state admission next",
-    "why_now": "The visible Diary consumer identifies the refresh need, while the smaller contract separates every durable handoff before any restart or database proof.",
-    "outcome": "Durability is limited to a payload-free refresh obligation; source truth, command authority, checkpoint, delivery and reconciliation remain distinct.",
+    "node_id": "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal",
+    "strategic_role": "Pure durable-cue admission passes; inert relational representation next",
+    "why_now": "The state transitions are now independently executable and fail closed, so representation can be judged against stable semantics rather than driving them.",
+    "outcome": "Duplicate identity, gaps, atomic obligation admission, checkpointing, coalescing, fencing, lag and reconciliation have exact provider-free behavior.",
     "unlocks": [
-      "Run the provider-free unmounted event/cue admission rehearsal against the exact accepted contract.",
-      "Prove duplicate, gap, checkpoint, coalescing, fencing and reconciliation admission with authored-synthetic state only.",
-      "Use the ten diagnostic stages to fail closed without starting a watcher or opening a database/source."
+      "Freeze the smallest provider-free unmounted event/cue representation architecture.",
+      "Map only the accepted partition, receipt, obligation, checkpoint, dispatch and reconciliation facts into an inert relational design.",
+      "Use deterministic representability checks without opening a database connection, migration or watcher."
     ],
     "does_not_solve": [
-      "PostgreSQL representation, durable persistence, source observation or a watcher process.",
-      "Restart, unknown-commit, dispatch transport, latency, retention, rotation or operational delivery.",
+      "PostgreSQL admission, transactions, source observation or persistent operational state.",
+      "Watcher process ownership, restart, unknown commit, delivery transport, retention, rotation or performance.",
       "Product/patient data, external identity/channel delivery, provider access, commands, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md",
-      "docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md",
-      "docs/security/raisa-provider-free-cf-d2-observability-first-event-cue-threat-model-delta.md",
-      "docs/api-spine/async/durable-diary-event-cue-observability.yaml",
-      "orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json",
-      "orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json",
-      "scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py",
-      "tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py",
-      "docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-event-cue-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-13--cf-d2-observability-first-event-cue-architecture.md",
-      "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json"
+      "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json",
+      "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+      "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+      "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preacceptance-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -2946,8 +2965,8 @@
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
         "Preserve source-owned truth and command-time current-authority checks as the correctness kernel.",
-        "Preserve the accepted payload-free refresh-obligation and ten-stage observability contract.",
-        "Exercise only pure authored-synthetic state admission before considering any persistence or watcher runtime.",
+        "Preserve the accepted payload-free observability and pure admission transitions.",
+        "Specify an inert relational representation before considering a database connection or migration execution.",
         "Keep future patient channels behind the accepted identity, assurance, recovery, projection and confirmation foundation."
       ],
       "boundary_changes": [],
@@ -3654,7 +3673,19 @@
         "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-event-cue-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-13--cf-d2-observability-first-event-cue-architecture.md",
         "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preplanning-receipt.json",
-        "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json"
+        "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json",
+        "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json",
+        "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py",
+        "docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-admission-rehearsal.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-admission-preacceptance-receipt.json"
       ]
     },
     {
@@ -4499,6 +4530,7 @@
     }
   ],
   "map_limits": [
+    "The CF-D2 admission state machine is ephemeral repository evidence, not operational persistence, restart, delivery or database proof.",
     "CF-D2 observability evidence is an architecture-only closed-contract proof; it does not prove persistence, restart, unknown commit, source observation or cue delivery.",
     "Visible status-confirm evidence uses an authored-synthetic smoke client and route-intercepted browser responses; it is not live product-data or deployment evidence.",
     "The patient interaction foundation is static architecture evidence, not real identity, channel delivery, patient self-service or command runtime.",

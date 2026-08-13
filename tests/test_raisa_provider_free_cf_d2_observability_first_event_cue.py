@@ -264,7 +264,7 @@ def test_active_latch_transferred_to_cf_d2_admission_descendant() -> None:
         "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
     )
     assert (
-        "generate_precommit_receipt_then_explicitly_stage_commit_and_publish"
+        "verify_closeout_generate_precommit_receipt_then_commit_notify"
         in (latch["checkpoint"]["next_executable_stage"])
     )
     assert latch["terminal_response"]["permitted"] is False

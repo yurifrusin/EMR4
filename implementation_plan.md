@@ -187,8 +187,12 @@ CF-D1 evidence. Its fresh provider-free observability-first CF-D2 architecture
 now passes at exact source `e8677b54d1c339dcd14776ce8bf15e7db2980378`:
 durability retains a payload-free refresh obligation rather than appointment
 truth, and separately observes source head, observation, terminal
-classification, checkpoint, dispatch and fresh-read reconciliation. The next
-gate is a pure unmounted authored-synthetic admission rehearsal; persistence,
+classification, checkpoint, dispatch and fresh-read reconciliation. Its pure
+unmounted authored-synthetic admission rehearsal now passes at exact source
+`a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b`: all 22 duplicate, gap,
+checkpoint, coalescing, fencing, lag and reconciliation sequences pass and all
+60 hostile variants fail closed without state drift. The next gate is an inert
+relational representation architecture; database admission, persistence,
 watcher/source access, restart, unknown commit and delivery remain unproved.
 
 The provider-free legacy-route sequence now also passes through its source-
@@ -325,10 +329,14 @@ exact source `e8677b54d1c339dcd14776ce8bf15e7db2980378`. It keeps events and cue
 as acceleration hints, preserves command-time authority and source-truth
 correctness, and freezes a payload-free refresh obligation plus distinct
 position, classification, checkpoint, lag, dispatch, reconciliation and
-operator-evidence facts. The next product-direction gate is its pure unmounted
-authored-synthetic admission rehearsal for duplicates, gaps, checkpointing,
-coalescing, fencing and reconciliation. No watcher runtime, database/source
-access, persistence, product data, external patient client, other command,
+operator-evidence facts. Its pure unmounted authored-synthetic admission
+rehearsal now passes at exact source
+`a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b`, with 22 canonical sequences and
+60 hostile variants proving fail-closed duplicates, gaps, checkpointing,
+coalescing, fencing, lag and fresh-read reconciliation. The next product-
+direction gate is an inert relational representation architecture for those
+facts. No watcher runtime, database/source access, migration execution,
+persistence, product data, external patient client, other command,
 restart/unknown-commit claim, provider, deployment, production or release is
 opened.
 
@@ -820,10 +828,13 @@ generation rehearsal. The architecture-only provider-free default-off
   chose the source-owned-truth direction and a smaller observability-first
   return. Its architecture-only CF-D2 descendant passes at exact source
   `e8677b54d1c339dcd14776ce8bf15e7db2980378`, retaining only a payload-free
-  refresh obligation and ten independently diagnosable stages. A pure
-  provider-free unmounted admission rehearsal is now dependency-satisfied;
-  PostgreSQL representation, persistence, watcher/source access, restart,
-  unknown commit and delivery remain unproved. Applied migration, application wiring,
+  refresh obligation and ten independently diagnosable stages. Its pure
+  provider-free unmounted admission rehearsal passes at exact source
+  `a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b`, with all 22 canonical state
+  sequences and 60 hostile variants passing. An inert relational
+  representation architecture is now dependency-satisfied; PostgreSQL
+  admission, persistence, watcher/source access, restart, unknown commit and
+  delivery remain unproved. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1

@@ -31,10 +31,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 180924,
-  "ledger_line_count": 155,
+  "ledger_byte_count": 181931,
+  "ledger_line_count": 156,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "16c6c1461f116ff20a14c4bcf03955336ba887dcd8262319ce46bfbc6b017387",
+  "ledger_sha256": "fd50c6944ba85529b994b7f0d091749487a9a479f3adedb509e215a827bb2733",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -174,14 +174,15 @@
     "Provider-free status-confirm HTTP route convergence acceptance",
     "Channel-neutral patient interaction foundation acceptance",
     "Visible native Diary status-confirm wiring acceptance",
-    "Context Fabric CF-D2 observability-first event/cue architecture acceptance"
+    "Context Fabric CF-D2 observability-first event/cue architecture acceptance",
+    "Provider-free unmounted CF-D2 event/cue admission rehearsal acceptance"
   ],
-  "moved_row_count": 139,
+  "moved_row_count": 140,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 74090,
-  "source_agents_git_blob_sha1": "557dbb74e13172e69a878304820bd534f1357f71",
+  "source_agents_byte_count": 74309,
+  "source_agents_git_blob_sha1": "b965a18a72de3c0bd628586cfb70363b3bdd0c60",
   "source_agents_line_count": 495,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "cc392ca313d038357ac2d06204c8fb73b8303715680b1e5d75d467d304d818a6",
-  "source_git_head": "e8677b54d1c339dcd14776ce8bf15e7db2980378"
+  "source_agents_sha256": "5f59566ce356915cdc7c66dd4e8694397a472a4dfc6f00cbb94d7eadcb2a2ce6",
+  "source_git_head": "a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b"
 }

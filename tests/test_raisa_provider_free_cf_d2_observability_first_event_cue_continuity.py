@@ -62,14 +62,16 @@ def test_cf_d2_observability_evidence_and_boundaries_are_bound() -> None:
 
 def test_compass_advances_to_pure_unmounted_admission_rehearsal() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert compass["current_position"]["node_id"] == (
+        "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+    )
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
     limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "unmounted event/cue admission rehearsal" in unlocks
-    assert "duplicate, gap, checkpoint, coalescing, fencing" in unlocks
-    assert "without starting a watcher" in unlocks
-    assert "postgresql representation" in limits
-    assert "no watcher, database/source" in compass["orientation_statement"].lower()
+    assert "unmounted event/cue representation architecture" in unlocks
+    assert "inert relational design" in unlocks
+    assert "without opening a database connection" in unlocks
+    assert "postgresql admission" in limits
+    assert "no database, watcher" in compass["orientation_statement"].lower()
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:
