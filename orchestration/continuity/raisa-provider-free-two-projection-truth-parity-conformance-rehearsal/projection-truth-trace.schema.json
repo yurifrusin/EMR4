@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/projection-truth-trace.schema.json",
+  "title": "Evidence-only projection truth trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_mode",
+    "renderer",
+    "scenario",
+    "selected_current_coordinate",
+    "proposal_outcome",
+    "confirmation_outcome",
+    "kernel_result",
+    "fresh_read_result",
+    "displayed_terminal_state",
+    "route_counts",
+    "renderer_local"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.projection-truth-trace.v1"},
+    "evidence_mode": {"const": "route_intercepted_browser"},
+    "renderer": {"enum": ["conventional_grid", "reception_one"]},
+    "scenario": {"enum": ["safe", "cancelled", "blocked", "stale", "failed", "committed"]},
+    "selected_current_coordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["practice_scope", "appointment_id", "observed_status", "requested_status"],
+      "properties": {
+        "practice_scope": {"const": "authored-synthetic-practice"},
+        "appointment_id": {"const": "truth-parity-status-1"},
+        "observed_status": {"const": "Booked"},
+        "requested_status": {"enum": ["Arrived", "Cancelled", "Completed"]}
+      }
+    },
+    "proposal_outcome": {"enum": ["safe", "confirmation_required", "blocked", "unavailable"]},
+    "confirmation_outcome": {"enum": ["confirmed_without_staff_dialog", "staff_cancelled", "not_offered", "stale_rejected", "not_reached", "staff_confirmed"]},
+    "kernel_result": {"enum": ["committed", "no_commit_cancelled", "no_commit_blocked", "no_commit_stale", "no_commit_failed"]},
+    "fresh_read_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_status", "basis"],
+      "properties": {
+        "current_status": {"enum": ["Booked", "Arrived", "Completed"]},
+        "basis": {"enum": ["fresh_authoritative_reconciliation", "no_commit_preserved_current_truth"]}
+      }
+    },
+    "displayed_terminal_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {"status": {"enum": ["Booked", "Arrived", "Completed"]}}
+    },
+    "route_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal", "confirm", "raw_compatibility"],
+      "properties": {
+        "proposal": {"const": 1},
+        "confirm": {"type": "integer", "minimum": 0, "maximum": 1},
+        "raw_compatibility": {"const": 0}
+      }
+    },
+    "renderer_local": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout", "wording", "focus_target", "history_behavior"],
+      "properties": {
+        "layout": {"type": "string", "minLength": 1, "maxLength": 80},
+        "wording": {"type": "string", "minLength": 1, "maxLength": 160},
+        "focus_target": {"type": "string", "minLength": 1, "maxLength": 80},
+        "history_behavior": {"type": "string", "minLength": 1, "maxLength": 120}
+      }
+    }
+  }
+}
