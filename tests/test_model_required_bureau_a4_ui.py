@@ -98,7 +98,7 @@ def test_ui_is_separate_read_only_accessible_and_responsive() -> None:
     assert "@media (max-width: 420px)" in css
     assert ":focus-visible" in css
     assert 'diary.css?v=140' in html
-    assert 'diary.js?v=199' in html
+    assert 'diary.js?v=200' in html
 
 
 def test_ui_has_refresh_close_escape_stale_and_fallback_states() -> None:

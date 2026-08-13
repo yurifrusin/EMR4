@@ -2938,3 +2938,105 @@ body.meta-grid-open #diary-status {
     display: inline-flex;
   }
 }
+
+.meta-grid-status-action {
+  align-items: end;
+  background: #f3f7f4;
+  border: 1px solid #c4d6d0;
+  border-radius: 8px;
+  display: grid;
+  flex: 1 0 100%;
+  gap: 7px 10px;
+  grid-template-columns: minmax(180px, 1fr) minmax(120px, 0.55fr) auto;
+  padding: 11px 12px;
+}
+
+.meta-grid-status-action-copy {
+  align-self: center;
+  display: grid;
+  gap: 2px;
+  grid-row: span 2;
+}
+
+.meta-grid-status-action-copy strong {
+  color: var(--bureau-navy-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+}
+
+.meta-grid-status-action-copy span,
+.meta-grid-status-feedback,
+.meta-grid-status-outcome {
+  color: #526770;
+  font-size: 10px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.meta-grid-status-label {
+  color: #3f575f;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.meta-grid-status-select,
+.meta-grid-status-submit {
+  min-height: 36px;
+}
+
+.meta-grid-status-select {
+  background: #fff;
+  border: 1px solid #aebfbd;
+  border-radius: 5px;
+  color: var(--bureau-navy-deep);
+  font: inherit;
+  padding: 6px 28px 6px 8px;
+}
+
+.meta-grid-status-submit {
+  background: var(--bureau-eucalyptus);
+  border-color: #1f6756;
+  color: #fff;
+  grid-row: 2;
+  grid-column: 3;
+  white-space: nowrap;
+}
+
+.meta-grid-status-feedback {
+  grid-column: 2 / -1;
+}
+
+.meta-grid-status-outcome {
+  background: #f3f7f4;
+  border: 1px solid #c4d6d0;
+  border-radius: 8px;
+  flex: 1 0 100%;
+  padding: 10px 12px;
+}
+
+.meta-grid-status-select:focus-visible,
+.meta-grid-status-submit:focus-visible {
+  outline: 2px solid var(--bureau-terracotta);
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .meta-grid-status-action {
+    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .meta-grid-status-action-copy,
+  .meta-grid-status-submit,
+  .meta-grid-status-feedback {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .meta-grid-status-submit {
+    justify-content: center;
+    width: 100%;
+  }
+}

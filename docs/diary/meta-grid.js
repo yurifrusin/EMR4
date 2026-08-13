@@ -88,6 +88,13 @@
     recentRoots: [],
     selectedItem: null,
     selectedAppointment: null,
+    statusAction: {
+      appointmentId: null,
+      requestedStatus: null,
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    },
     proposalResult: null,
     patientContexts: new Map(),
     private: false,
@@ -506,6 +513,13 @@
       state.trail = [];
       state.selectedItem = null;
       state.selectedAppointment = null;
+      state.statusAction = {
+        appointmentId: null,
+        requestedStatus: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
       state.proposalResult = null;
       state.comparisonIndex = 0;
       state.eventRuntime.cue = null;
@@ -1328,7 +1342,13 @@
     );
   }
 
-  async function refreshCurrent() {
+  async function refreshCurrent({
+    pushCurrent = true,
+    clearTrail = false,
+    preserveSelectedAppointmentId = null,
+    focusCanvas = true,
+    reason = "Fresh scoped read after interruption"
+  } = {}) {
     const current = state.current;
     if (!current) return;
     const directory = snapshot().practitioners || [];
@@ -1360,7 +1380,7 @@
       patient,
       operation: "reconcile",
       trigger: "system_freshness",
-      reason: "Fresh scoped read after interruption",
+      reason,
       changedDimensions: ["freshness"],
       rootIntentId: current.root_intent_id,
       parentProjectionId: current.projection_id,
@@ -1381,7 +1401,10 @@
       next = await buildComparison(practitioners, current.root_request, context);
     } else if (current.family === "patient_timeline") {
       next = await buildPatientTimeline(
-        { id: current.scope.patient_ids[0], display_name: current.scope_summary.split(" · ")[0] },
+        {
+          id: current.scope.patient_ids[0],
+          display_name: patient?.display_name || current.items[0]?.patient_display || "Patient"
+        },
         current.root_request,
         {
           dateFrom: current.scope.date_from,
@@ -1393,7 +1416,14 @@
       next = await buildOverview(current.root_request, context);
     }
     state.interrupted = false;
-    setProjection(next, { newRoot: false, pushCurrent: true });
+    if (clearTrail) state.trail = [];
+    if (preserveSelectedAppointmentId) {
+      state.selectedAppointment = next.items.find(
+        item => String(item.id || "") === String(preserveSelectedAppointmentId)
+      ) || null;
+    }
+    setProjection(next, { newRoot: false, pushCurrent, focusCanvas });
+    return next;
   }
 
   async function routeRequest(rawText, options = {}) {
@@ -2083,6 +2113,14 @@
     stopEventPolling();
     state.eventRuntime.cue = null;
     state.selectedItem = null;
+    state.selectedAppointment = null;
+    state.statusAction = {
+      appointmentId: null,
+      requestedStatus: null,
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    };
     state.proposalResult = null;
     if (state.current && ["selection_only", "proposal_not_committed"].includes(state.current.state)) {
       state.current = null;
@@ -2172,6 +2210,11 @@
   function markInterrupted() {
     if (!state.isOpen || !state.current || state.current.state === "overview") return;
     togglePrivacy(true);
+    if (state.statusAction.busy) {
+      state.interrupted = true;
+      state.statusAction.reconciliationRequired = true;
+      return;
+    }
     if (state.current.state === "reconciliation_required") return;
     state.interrupted = true;
     state.current = {
@@ -2225,7 +2268,10 @@
       const row = createElement("li", className === "meta-grid-timeline" ? "meta-grid-timeline-item" : "meta-grid-item");
       if (item.kind === "appointment" && item.id) {
         row.dataset.appointmentId = String(item.id);
-        const selectableAppointment = !String(item.id).startsWith("synthetic-");
+        const selectableAppointment = (
+          !String(item.id).startsWith("synthetic-")
+          && !String(item.id).startsWith("meta-grid-smoke-")
+        );
         row.tabIndex = selectableAppointment ? 0 : -1;
         row.setAttribute("aria-selected", String(
           String(state.selectedAppointment?.id || "") === String(item.id)
@@ -2234,10 +2280,18 @@
           row.setAttribute("role", "button");
           const selectAppointment = () => {
             state.selectedAppointment = item;
+            state.statusAction = {
+              appointmentId: String(item.id),
+              requestedStatus: null,
+              phase: "idle",
+              busy: false,
+              reconciliationRequired: false
+            };
             if (elements.announcer) {
-              elements.announcer.textContent = "Appointment selected for proposal review. Nothing has changed.";
+              elements.announcer.textContent = "Appointment selected for review. Nothing has changed.";
             }
             render();
+            setTimeout(() => document.getElementById("meta-grid-status-select")?.focus(), 0);
           };
           row.addEventListener("click", selectAppointment);
           row.addEventListener("keydown", event => {
@@ -2503,6 +2557,219 @@
     elements.content.appendChild(wrapper);
   }
 
+  const STATUS_ACTION_MESSAGES = Object.freeze({
+    idle: "Selection is provisional. Choose a different existing Diary status to review.",
+    checking: "Checking current Diary authority and booking truth.",
+    awaiting_confirmation: "Confirmation required in the existing Diary review dialog.",
+    saving: "Checking the current Diary again and saving.",
+    cancelled: "Status change cancelled. No change was made.",
+    blocked: "Status change blocked. No change was made.",
+    failed: "Status not changed. The current Diary status has been restored.",
+    committed: "Status committed and checked against a fresh Diary read."
+  });
+
+  function selectedStatusActionItem(projection = state.current) {
+    const selectedId = String(state.selectedAppointment?.id || "");
+    if (!selectedId || !["patient_timeline", "focused_schedule_lane"].includes(projection?.family)) {
+      return null;
+    }
+    if (selectedId.startsWith("synthetic-") || selectedId.startsWith("meta-grid-smoke-")) {
+      return null;
+    }
+    return (projection.items || []).find(item => (
+      item.kind === "appointment" && String(item.id || "") === selectedId
+    )) || null;
+  }
+
+  function statusActionMessage() {
+    return STATUS_ACTION_MESSAGES[state.statusAction.phase] || STATUS_ACTION_MESSAGES.failed;
+  }
+
+  function updateStatusActionControls() {
+    const select = document.getElementById("meta-grid-status-select");
+    const submit = document.getElementById("meta-grid-status-submit");
+    const feedback = document.getElementById("meta-grid-status-feedback");
+    const currentStatus = selectedStatusActionItem()?.status || "";
+    const requestedStatus = select?.value || state.statusAction.requestedStatus || currentStatus;
+    const unavailable = Boolean(
+      state.statusAction.busy
+      || state.interrupted
+      || state.current?.freshness?.stale
+    );
+    if (select) {
+      select.disabled = unavailable;
+      select.toggleAttribute("aria-busy", state.statusAction.busy);
+    }
+    if (submit) submit.disabled = unavailable || !requestedStatus || requestedStatus === currentStatus;
+    if (feedback) feedback.textContent = statusActionMessage();
+  }
+
+  function applyFreshAppointmentToCurrentProjection(appointment) {
+    if (!appointment || !state.current) return false;
+    let selected = null;
+    const items = state.current.items.map(item => {
+      if (String(item.id || "") !== String(appointment.id || "")) return item;
+      selected = {
+        ...item,
+        status: appointment.status,
+        secondary: `${item.patient_display || "Patient"} · ${appointment.status}`
+      };
+      return selected;
+    });
+    if (!selected) return false;
+    state.current = {
+      ...state.current,
+      items,
+      freshness: {
+        ...state.current.freshness,
+        observed_at: new Date().toISOString(),
+        stale: false,
+        reason: "Fresh exact appointment read after status review"
+      }
+    };
+    state.selectedAppointment = selected;
+    return true;
+  }
+
+  async function executeSelectedStatusAction(select) {
+    const selected = selectedStatusActionItem();
+    const requestedStatus = String(select?.value || "");
+    if (
+      !selected
+      || state.statusAction.busy
+      || state.interrupted
+      || state.current?.freshness?.stale
+      || requestedStatus === selected.status
+    ) return;
+
+    const appointmentId = String(selected.id);
+    state.statusAction = {
+      appointmentId,
+      requestedStatus,
+      phase: "checking",
+      busy: true,
+      reconciliationRequired: false
+    };
+    updateStatusActionControls();
+
+    try {
+      const result = await bridge.setAppointmentStatus(
+        { appointment_id: appointmentId, status: requestedStatus },
+        select,
+        update => {
+          state.statusAction.phase = update.phase;
+          state.statusAction.busy = true;
+          updateStatusActionControls();
+        }
+      );
+      const interrupted = state.statusAction.reconciliationRequired || state.interrupted;
+      if (result.committed || interrupted) {
+        await refreshCurrent({
+          pushCurrent: false,
+          clearTrail: true,
+          preserveSelectedAppointmentId: appointmentId,
+          focusCanvas: false,
+          reason: result.committed
+            ? "Fresh scoped read after committed status change"
+            : "Fresh scoped read after interrupted status review"
+        });
+      } else {
+        applyFreshAppointmentToCurrentProjection(result.appointment);
+      }
+      state.statusAction = {
+        appointmentId,
+        requestedStatus,
+        phase: result.committed ? "committed" : result.outcome,
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.interrupted = false;
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = state.selectedAppointment
+          ? statusActionMessage()
+          : "Status committed. The appointment is no longer in this current projection.";
+      }
+    } catch (_) {
+      state.statusAction = {
+        appointmentId,
+        requestedStatus,
+        phase: "failed",
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.interrupted = false;
+      render();
+      if (elements.announcer) elements.announcer.textContent = statusActionMessage();
+    }
+    setTimeout(() => {
+      const currentSelect = document.getElementById("meta-grid-status-select");
+      if (currentSelect) currentSelect.focus({ preventScroll: true });
+      else focusCanvasWithoutWindowScroll();
+    }, 0);
+  }
+
+  function renderStatusAction(projection) {
+    const selected = selectedStatusActionItem(projection);
+    if (!selected) {
+      if (state.statusAction.phase === "committed" && state.statusAction.appointmentId) {
+        const outcome = createElement(
+          "p",
+          "meta-grid-status-outcome",
+          "Status committed. The appointment is no longer in this current projection."
+        );
+        outcome.setAttribute("role", "status");
+        outcome.setAttribute("aria-live", "polite");
+        elements.actions.appendChild(outcome);
+      }
+      return;
+    }
+
+    const panel = createElement("section", "meta-grid-status-action");
+    panel.dataset.testid = "meta-grid-status-action";
+    panel.setAttribute("aria-labelledby", "meta-grid-status-action-heading");
+    const copy = createElement("div", "meta-grid-status-action-copy");
+    const heading = createElement("strong", "", `Current status: ${selected.status}`);
+    heading.id = "meta-grid-status-action-heading";
+    copy.append(
+      heading,
+      createElement("span", "", "A selection is staff input only. The existing Diary review owns any change.")
+    );
+
+    const label = createElement("label", "meta-grid-status-label", "New status");
+    label.htmlFor = "meta-grid-status-select";
+    const select = createElement("select", "meta-grid-status-select");
+    select.id = "meta-grid-status-select";
+    select.dataset.testid = "meta-grid-status-select";
+    (bridge.statusOptions?.(selected.status) || []).forEach(optionData => {
+      const option = createElement("option", "", optionData.label);
+      option.value = optionData.value;
+      option.selected = optionData.value === selected.status;
+      select.appendChild(option);
+    });
+    select.addEventListener("change", () => {
+      state.statusAction.requestedStatus = select.value;
+      state.statusAction.phase = "idle";
+      updateStatusActionControls();
+    });
+
+    const submit = createElement("button", "meta-grid-status-submit", "Review status change");
+    submit.type = "button";
+    submit.id = "meta-grid-status-submit";
+    submit.dataset.testid = "meta-grid-status-submit";
+    submit.addEventListener("click", () => executeSelectedStatusAction(select));
+
+    const feedback = createElement("p", "meta-grid-status-feedback", statusActionMessage());
+    feedback.id = "meta-grid-status-feedback";
+    feedback.dataset.testid = "meta-grid-status-feedback";
+    feedback.setAttribute("role", "status");
+    feedback.setAttribute("aria-live", "polite");
+    feedback.setAttribute("aria-atomic", "true");
+    panel.append(copy, label, select, submit, feedback);
+    elements.actions.appendChild(panel);
+    updateStatusActionControls();
+  }
+
   function renderActions(projection) {
     elements.actions.replaceChildren();
     elements.actions.classList.remove("is-return-only");
@@ -2550,6 +2817,7 @@
       ["patient_timeline", "focused_schedule_lane"].includes(projection.family) &&
       projection.state === "answer"
     ) {
+      renderStatusAction(projection);
       const nextStep = createElement("div", "meta-grid-read-next");
       const icon = createElement("span", "meta-grid-read-next-icon", "+");
       icon.setAttribute("aria-hidden", "true");
@@ -2898,6 +3166,7 @@
     });
     document.addEventListener("keydown", event => {
       if (event.key !== "Escape") return;
+      if (document.querySelector('[data-testid="status-proposal-dialog"]')) return;
       if (dismissEventCue() || closeExplanation()) {
         event.preventDefault();
         return;

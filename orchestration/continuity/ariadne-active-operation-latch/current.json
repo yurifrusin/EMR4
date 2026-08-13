@@ -4,14 +4,14 @@
   "active_tranche": "Provider-free Reception One selected-appointment status-action composition",
   "objective": "Let staff act on one selected current Reception One appointment through the existing status vocabulary and existing setAppointmentStatus proposal/confirm interaction, with modeless fail-closed feedback and fresh projection reconciliation.",
   "status": "in_progress",
-  "source_head": "9a1401665bc6163145bbcbbb53d06ce3f4abd036",
+  "source_head": "3b51ec3b6f5dfb35f4d189847c5afb3b638510a1",
   "authority_source": "AGENTS.md Current Baton at Continuity 282 / Compass 264, the accepted post-CF-D2 orientation and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "fresh five-source rehydration and API Spine source pass completed with a passed preplanning receipt",
-    "next_executable_stage": "freeze exact plan and threat-model delta before product implementation",
+    "completed_stage": "frozen plan implemented and provider-free rendered acceptance passed after one bounded patient-timeline heading repair",
+    "next_executable_stage": "seal the exact source candidate, generate typed evidence, then perform closeout and continuity acceptance",
     "retry_counters": {
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },

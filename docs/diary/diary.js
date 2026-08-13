@@ -103,6 +103,23 @@ const STATUS_REASON_CODE_LABELS = {
   OTHER: "Other administrative reason"
 };
 const STATUS_REASON_CODE_STATUSES = new Set(["Cancelled", "NoShow", "DNA"]);
+const APPOINTMENT_STATUS_OPTIONS = Object.freeze([
+  Object.freeze({ value: "Booked", label: "Booked" }),
+  Object.freeze({ value: "Arrived", label: "Arrived" }),
+  Object.freeze({ value: "InConsult", label: "In Consult" }),
+  Object.freeze({ value: "Completed", label: "Done" }),
+  Object.freeze({ value: "Cancelled", label: "Cancelled" }),
+  Object.freeze({ value: "NoShow", label: "No Show" }),
+  Object.freeze({ value: "DNA", label: "DNA" })
+]);
+
+function appointmentStatusOptions(currentStatus) {
+  const options = APPOINTMENT_STATUS_OPTIONS.map(option => ({ ...option }));
+  if (currentStatus === "Confirmed") {
+    options.splice(1, 0, { value: "Confirmed", label: "Confirmed" });
+  }
+  return options;
+}
 const FIRST_PARTY_REASON_CODE_OPTIONS = [
   "PATIENT_CANCELLED",
   "PATIENT_RESCHEDULED",
@@ -2656,6 +2673,14 @@ function setStatusTransactionState(selectEl, state, message, busy = false) {
     selectEl.removeAttribute("aria-busy");
   }
 }
+function notifyStatusActionObserver(actionOptions, phase, busy = false) {
+  if (typeof actionOptions?.onStateChange !== "function") return;
+  try {
+    actionOptions.onStateChange(Object.freeze({ phase, busy }));
+  } catch (error) {
+    console.error("Status action observer failed:", error);
+  }
+}
 function showLoading(on) {
   const el = document.getElementById("diary-loading");
   if (el) el.classList.toggle("hidden", !on);
@@ -4590,26 +4615,13 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       statusSelect.dataset.testid = "appointment-status-select";
       statusSelect.dataset.appointmentId = a.id;
 
-      const selectOptions = [
-        { value: "Booked", label: "Booked" },
-        { value: "Arrived", label: "Arrived" },
-        { value: "InConsult", label: "In Consult" },
-        { value: "Completed", label: "Done" },
-        { value: "Cancelled", label: "Cancelled" },
-        { value: "NoShow", label: "No Show" },
-        { value: "DNA", label: "DNA" }
-      ];
-
-      if (a.status === "Confirmed") {
-        selectOptions.splice(1, 0, { value: "Confirmed", label: "Confirmed" });
-      }
+      const selectOptions = appointmentStatusOptions(a.status);
 
       selectOptions.forEach(optData => {
         const opt = document.createElement("option");
         opt.value = optData.value;
         opt.textContent = optData.label;
-        const currentMappedStatus = a.status === "Confirmed" ? "Booked" : a.status;
-        if (currentMappedStatus === optData.value) {
+        if (a.status === optData.value) {
           opt.selected = true;
         }
         statusSelect.appendChild(opt);
@@ -7272,6 +7284,49 @@ function metaGridHandoffProposal(result) {
   return true;
 }
 
+async function metaGridSetAppointmentStatus(input, selectEl = null, onStateChange = null) {
+  const appointmentId = String(input?.appointment_id || "").trim();
+  const requestedStatus = String(input?.status || "").trim();
+  if (!appointmentId || appointmentId.length > 200) {
+    throw new Error("The selected appointment is not available for a status review.");
+  }
+  const appointments = isSmokeMode() ? getMockAppointments() : activeAppointments;
+  const appointment = appointments.find(item => String(item?.id || "") === appointmentId);
+  if (!appointment) {
+    throw new Error("The selected appointment is no longer available in the current Diary.");
+  }
+  const allowedStatuses = appointmentStatusOptions(appointment.status).map(option => option.value);
+  if (!allowedStatuses.includes(requestedStatus) || requestedStatus === appointment.status) {
+    throw new Error("Choose a different existing Diary status before review.");
+  }
+
+  let outcome = "checking";
+  const observe = update => {
+    outcome = update.phase;
+    if (typeof onStateChange === "function") onStateChange(update);
+  };
+  const committed = await setAppointmentStatus(
+    appointment,
+    requestedStatus,
+    selectEl,
+    null,
+    { onStateChange: observe }
+  );
+  let currentAppointment = metaGridAppointmentView(appointment);
+  try {
+    currentAppointment = await metaGridReadAppointment(appointmentId);
+  } catch (_) {
+    // The existing command path did not optimistically change a failed or
+    // cancelled appointment. Preserve that exact in-memory status when a
+    // follow-up read is temporarily unavailable.
+  }
+  return Object.freeze({
+    committed: committed === true,
+    outcome: committed === true ? "committed" : outcome,
+    appointment: currentAppointment
+  });
+}
+
 function setMetaGridLaunchAvailability(available) {
   const button = document.getElementById("btn-meta-grid-launch");
   if (button) button.classList.toggle("hidden", !available);
@@ -7295,6 +7350,8 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   readCommittedEvents: metaGridReadCommittedEvents,
   searchPatients: metaGridSearchPatients,
   readAvailability: metaGridReadAvailability,
+  statusOptions: appointmentStatusOptions,
+  setAppointmentStatus: metaGridSetAppointmentStatus,
   composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
@@ -8557,15 +8614,7 @@ function prepareStatusDropdown(currentStatus) {
   const select = document.getElementById("booking-status");
   select.innerHTML = "";
 
-  const options = [
-    { value: "Booked", label: "Booked" },
-    { value: "Arrived", label: "Arrived" },
-    { value: "InConsult", label: "In Consult" },
-    { value: "Completed", label: "Done" },
-    { value: "Cancelled", label: "Cancelled" },
-    { value: "NoShow", label: "No Show" },
-    { value: "DNA", label: "DNA" }
-  ];
+  const options = appointmentStatusOptions(currentStatus);
 
   options.forEach(opt => {
     const el = document.createElement("option");
@@ -10291,7 +10340,7 @@ async function applySignedDeleteProposal(proposal, cancellationReason, statusRea
   return confirmResult.appointment;
 }
 
-async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
+async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null, actionOptions = null) {
   const isStatusChange = (newStatus !== appt.status);
   const isWaitingAreaChangeOnly = (!isStatusChange && waitingAreaId !== null && waitingAreaId !== appt.waiting_area_id);
   const priorSelectValue = isWaitingAreaChangeOnly
@@ -10307,6 +10356,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
   showError("");
   if (selectEl) selectEl.disabled = true;
   setStatusTransactionState(selectEl, transactionState, "Checking current Diary…", true);
+  notifyStatusActionObserver(actionOptions, transactionState, true);
 
   try {
     // 1. Proposal check
@@ -10359,6 +10409,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
     if (needsConfirm) {
       transactionState = "awaiting_confirmation";
       setStatusTransactionState(selectEl, transactionState, "Appointment change needs confirmation.", true);
+      notifyStatusActionObserver(actionOptions, transactionState, true);
       const confirmed = await showStatusProposalDialog(proposal, {
         returnFocus: selectEl,
         statusTransition: isStatusChange ? { from: appt.status, to: newStatus } : null,
@@ -10375,6 +10426,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
             ? "Status change blocked. No change made."
             : "Appointment change cancelled. No change made."
         );
+        notifyStatusActionObserver(actionOptions, transactionState, false);
         return false;
       }
     }
@@ -10384,12 +10436,14 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       transactionState = "cancelled";
       if (selectEl) selectEl.value = priorSelectValue;
       setStatusTransactionState(selectEl, transactionState, "Appointment change cancelled. No change made.");
+      notifyStatusActionObserver(actionOptions, transactionState, false);
       return false;
     }
 
     // 4. Actual save operation (mutation)
     transactionState = "saving";
     setStatusTransactionState(selectEl, transactionState, "Checking current Diary and saving…", true);
+    notifyStatusActionObserver(actionOptions, transactionState, true);
     if (isSmokeMode()) {
       appt.status = newStatus;
       if (waitingAreaId !== null) {
@@ -10404,6 +10458,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
         ? "Waiting area updated (Mock)."
         : `Status updated to ${formatAuditStatus(newStatus)} (Mock).`;
       setStatusTransactionState(refreshedSelect, transactionState, message);
+      notifyStatusActionObserver(actionOptions, transactionState, false);
     } else {
       const updatedAppt = await applySignedStatusProposal(appt, proposal, newStatus, waitingAreaId);
       appt.status = updatedAppt.status;
@@ -10417,6 +10472,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
         ? "Waiting area updated."
         : `Status updated to ${formatAuditStatus(updatedAppt.status)}.`;
       setStatusTransactionState(refreshedSelect, transactionState, message);
+      notifyStatusActionObserver(actionOptions, transactionState, false);
     }
     showError("");
     await updateFlowPanel();
@@ -10432,6 +10488,12 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       setStatus("Status not changed. Refresh the Diary before trying again.");
     }
     if (selectEl) selectEl.value = priorSelectValue;
+    setStatusTransactionState(
+      selectEl,
+      transactionState,
+      "Status not changed. Refresh the Diary before trying again."
+    );
+    notifyStatusActionObserver(actionOptions, transactionState, false);
     return false;
   } finally {
     const currentSelect = returnFocusId ? document.getElementById(returnFocusId) : selectEl;

@@ -69,7 +69,7 @@ def test_diary_bootstrap_is_default_off_local_and_model_release_only() -> None:
         bootstrap = client.get("/acceptance/bootstrap.js")
     assert html.status_code == 200
     assert '<script src="/acceptance/bootstrap.js"></script>' in html.text
-    assert 'diary.js?v=199' in html.text
+    assert 'diary.js?v=200' in html.text
     assert bootstrap.status_code == 200
     assert "__EMR4_RAYLEEN_WAITING_ROOM__" in bootstrap.text
     assert 'fetch("/acceptance/occupied-release"' in bootstrap.text

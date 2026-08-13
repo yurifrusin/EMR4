@@ -11,6 +11,10 @@ THREAT = (
     / "docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md"
 )
 LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+DIARY_JS = ROOT / "docs/diary/diary.js"
+META_GRID_JS = ROOT / "docs/diary/meta-grid.js"
+META_GRID_CSS = ROOT / "docs/diary/meta-grid.css"
+DIARY_HTML = ROOT / "docs/diary/diary.html"
 
 
 def _text(path: Path) -> str:
@@ -53,7 +57,7 @@ def test_active_latch_holds_execution_open_at_the_frozen_plan_boundary() -> None
         "raisa-reception-one-selected-appointment-status-action-composition"
     )
     assert latch["status"] == "in_progress"
-    assert latch["source_head"] == "9a1401665bc6163145bbcbbb53d06ce3f4abd036"
+    assert latch["source_head"] == "3b51ec3b6f5dfb35f4d189847c5afb3b638510a1"
     assert latch["resume_after_compaction"] is True
     assert latch["terminal_response"] == {
         "permitted": False,
@@ -62,3 +66,46 @@ def test_active_latch_holds_execution_open_at_the_frozen_plan_boundary() -> None
     assert "existing_status_vocabulary_and_existing_set_appointment_status_interaction_only" in latch[
         "protected_boundaries"
     ]
+
+
+def test_shared_status_vocabulary_and_bridge_delegate_to_the_existing_interaction() -> None:
+    diary = _text(DIARY_JS)
+    assert "const APPOINTMENT_STATUS_OPTIONS = Object.freeze([" in diary
+    for value in ("Booked", "Arrived", "InConsult", "Completed", "Cancelled", "NoShow", "DNA"):
+        assert f'Object.freeze({{ value: "{value}"' in diary
+    assert 'if (currentStatus === "Confirmed")' in diary
+    assert "const selectOptions = appointmentStatusOptions(a.status);" in diary
+    assert "const options = appointmentStatusOptions(currentStatus);" in diary
+
+    bridge_start = diary.index("async function metaGridSetAppointmentStatus")
+    bridge_end = diary.index("function setMetaGridLaunchAvailability", bridge_start)
+    bridge = diary[bridge_start:bridge_end]
+    assert "setAppointmentStatus(" in bridge
+    assert "metaGridReadAppointment(appointmentId)" in bridge
+    for forbidden in ("fetch(", "apiFetch(", "/appointments/proposals/", "status-confirm"):
+        assert forbidden not in bridge
+
+
+def test_reception_one_action_is_modeless_fail_closed_and_freshly_reconciled() -> None:
+    source = _text(META_GRID_JS)
+    css = _text(META_GRID_CSS)
+    html = _text(DIARY_HTML)
+    for token in (
+        'panel.dataset.testid = "meta-grid-status-action"',
+        'select.dataset.testid = "meta-grid-status-select"',
+        'submit.dataset.testid = "meta-grid-status-submit"',
+        'feedback.setAttribute("aria-live", "polite")',
+        "state.statusAction.busy",
+        "preserveSelectedAppointmentId: appointmentId",
+        "clearTrail: true",
+        'document.querySelector(\'[data-testid="status-proposal-dialog"]\')',
+        "The appointment is no longer in this current projection.",
+    ):
+        assert token in source
+    assert "bridge.setAppointmentStatus(" in source
+    assert "fetch(" not in source
+    assert "apiFetch(" not in source
+    assert ".meta-grid-status-action" in css
+    assert "@media (max-width: 700px)" in css
+    assert 'meta-grid.css?v=12' in html
+    assert 'meta-grid.js?v=17' in html

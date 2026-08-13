@@ -59,11 +59,11 @@ def test_standalone_office_bootstrap_is_loopback_only_and_preserves_office_loadi
 
 def test_interrupted_proposal_recovers_fresh_availability_not_stale_proposal():
     source = _read(DIARY / "meta-grid.js")
-    refresh = source[source.index("async function refreshCurrent()") : source.index("async function routeRequest")]
+    refresh = source[source.index("async function refreshCurrent(") : source.index("async function routeRequest")]
     assert 'current.family === "proposal_review" && practitioners[0]' in refresh
     assert "next = await buildAvailability" in refresh
     assert "Proposal and patient selection are deliberately discarded" in refresh
-    assert '<script src="meta-grid.js?v=16" defer>' in _read(DIARY / "diary.html")
+    assert '<script src="meta-grid.js?v=17" defer>' in _read(DIARY / "diary.html")
 
 
 def test_harness_is_exact_disposable_synthetic_and_provider_disabled():

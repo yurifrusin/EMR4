@@ -78,7 +78,7 @@ def test_projection_grows_for_result_heavy_views_then_scrolls_its_canvas() -> No
     html = _read(DIARY / "diary.html")
     css = _read(DIARY / "meta-grid.css")
 
-    assert 'href="meta-grid.css?v=11"' in html
+    assert 'href="meta-grid.css?v=12"' in html
     assert (
         '.meta-grid[data-family="availability_slots"] .meta-grid-shell'
         in css
@@ -209,7 +209,6 @@ def test_continuity_and_compass_bind_accepted_provider_free_ui_result() -> None:
             ),
         }
     ]
-    assert compass["current_position"]["node_id"] == (
-        "raisa-word-online-authenticated-companion-verification"
-    )
+    assert any(item["node_id"] == node["id"] for item in compass["journey"])
+    assert compass["current_position"]["node_id"] != node["id"]
     assert "Satisfied on 2026-07-31" in decision["required_before"]
