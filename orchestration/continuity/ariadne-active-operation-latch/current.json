@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-channel-neutral-patient-interaction-foundation",
-  "active_tranche": "Provider-free unmounted channel-neutral patient interaction foundation",
-  "objective": "Freeze and prove the patient identity, assurance, recovery and channel-neutral interaction contracts without opening an external patient client, identity provider, channel connector, product data or command runtime.",
+  "operation_id": "raisa-provider-free-visible-native-diary-status-confirm-wiring",
+  "active_tranche": "Provider-free visible native Diary status-confirm wiring for staff",
+  "objective": "Wire and prove the existing signed status proposal/confirm family through the visible native Diary with truthful pending, confirmation, cancellation, success and fail-closed feedback, without adding backend authority or a raw fallback.",
   "status": "in_progress",
-  "source_head": "17d9da1844e59406eecda44b5029e839b2e8a573",
-  "authority_source": "Yuri's explicit 2026-08-13 direction to record the recommended posture and lay the small extra foundation slab",
+  "source_head": "2a407a8300560406f5311db4a4a54ebcf38a1e0e",
+  "authority_source": "Yuri's 2026-08-13 go-ahead plus standing uninterrupted-development authority after the accepted patient-interaction foundation",
   "checkpoint": {
-    "completed_stage": "accepted at source 17d9da1844e59406eecda44b5029e839b2e8a573 with eight closed messages, five assurance states, six future-closed channels, 12 scenarios, 143 hostile rejections, 100 combined source tests, 98 closeout continuity/baton tests and the 193-test canonical fast profile; Continuity 274 / Compass 256 closeout complete",
-    "next_executable_stage": "commit_notify_and_publish_the_accepted_foundation_closeout_then_rehydrate_and_transfer_the_latch_to_visible_native_diary_status_confirm_wiring",
+    "completed_stage": "bounded staff-visible status interaction implemented and verified with 81 focused contract/API/security/latch tests, four exact route-intercepted status cases, the complete 144-test Diary browser review, desktop/tablet/phone in-app evidence and the 193-test canonical fast profile",
+    "next_executable_stage": "explicit_path_commit_and_push_the_verified_ui_source_then_rehydrate_for_closeout_acceptance",
     "retry_counters": {
       "review": 0,
       "verification": 1
     },
-    "settings_fingerprint": "sha256:80ac4e99b4bdb7fe7518b47812f4d51e773ab7679f90b2963e7dd2a094a80c9b"
+    "settings_fingerprint": "sha256:c12c25b531049a370d83257ee9cb95d04e64fc8c3fd81aa44c121acc3a82486e"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -36,8 +36,9 @@
     "patient_product_clinical_data_closed",
     "external_patient_identity_clients_and_channels_closed",
     "provider_credential_iam_network_closed",
-    "application_route_graphql_openapi_database_frontend_and_command_changes_closed",
-    "authored_synthetic_static_contract_evidence_only",
+    "new_application_route_graphql_openapi_database_and_command_authority_closed",
+    "native_diary_status_interaction_only",
+    "authored_synthetic_provider_free_local_frontend_backend_evidence_only",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

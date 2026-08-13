@@ -8871,13 +8871,14 @@ def test_follow_up_status_missing_evidence_reports_partial_base_outcome_without_
 
 
 def test_status_control_uses_signed_status_confirm_without_raw_patch(diary_page):
-    """Status-only controls write through signed status-confirm when evidence is present."""
+    """Route-intercepted browser: a safe status control uses signed confirm."""
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_proposals = []
     captured_confirms = []
     captured_raw_patches = []
+    interaction_result = None
 
     def handle_api(route):
         request = route.request
@@ -8962,9 +8963,22 @@ def test_status_control_uses_signed_status_confirm_without_raw_patch(diary_page)
         diary_page.route("**/api/v1/**", handle_api)
         diary_page.goto(base_url + "/diary/diary.html?smoke=true")
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
-        diary_page.evaluate(
-            """() => {
+        interaction_result = diary_page.evaluate(
+            """async () => {
               history.replaceState(null, "", "/diary/diary.html");
+              window.loadDiary = async () => {};
+              window.updateFlowPanel = async () => {};
+              const select = document.createElement("select");
+              select.id = "status-select-appt-status-1";
+              for (const value of ["Booked", "Arrived"]) {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+              }
+              select.value = "Arrived";
+              document.body.appendChild(select);
+              select.focus();
               const appt = {
                 id: "appt-status-1",
                 status: "Booked",
@@ -8972,10 +8986,18 @@ def test_status_control_uses_signed_status_confirm_without_raw_patch(diary_page)
                 patient_id: "patient-123",
                 patient: { first_name: "Margaret", last_name: "Thompson" }
               };
-              window.__g5StatusPromise = setAppointmentStatus(appt, "Arrived");
+              const result = await setAppointmentStatus(appt, "Arrived", select);
+              return {
+                result,
+                status: document.getElementById("diary-status").textContent,
+                value: select.value,
+                disabled: select.disabled,
+                busy: select.getAttribute("aria-busy"),
+                state: select.dataset.statusTransactionState,
+                focused: document.activeElement === select
+              };
             }"""
         )
-        diary_page.wait_for_timeout(1000)
     finally:
         diary_page.unroute("**/api/v1/**", handle_api)
         diary_page.goto(base_url + CHECKS["target"])
@@ -8986,16 +9008,26 @@ def test_status_control_uses_signed_status_confirm_without_raw_patch(diary_page)
     assert captured_confirms[0]["confirmed"] is True
     assert captured_confirms[0]["status_proposal"]["command"]["status"] == "Arrived"
     assert captured_raw_patches == []
+    assert interaction_result == {
+        "result": True,
+        "status": "Status updated to Arrived.",
+        "value": "Arrived",
+        "disabled": False,
+        "busy": None,
+        "state": "committed",
+        "focused": True,
+    }
 
 
 def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
-    """A rejected signed status-confirm must not fall back to raw PATCH."""
+    """Route-intercepted browser: rejection visibly fails closed without PATCH."""
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_confirms = []
     captured_confirm_keys = []
     captured_raw_patches = []
+    interaction_result = None
 
     def handle_api(route):
         request = route.request
@@ -9067,9 +9099,20 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
         diary_page.route("**/api/v1/**", handle_api)
         diary_page.goto(base_url + "/diary/diary.html?smoke=true")
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
-        diary_page.evaluate(
-            """() => {
+        interaction_result = diary_page.evaluate(
+            """async () => {
               history.replaceState(null, "", "/diary/diary.html");
+              const select = document.createElement("select");
+              select.id = "status-select-appt-status-fail";
+              for (const value of ["Booked", "Arrived"]) {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+              }
+              select.value = "Arrived";
+              document.body.appendChild(select);
+              select.focus();
               const appt = {
                 id: "appt-status-fail",
                 status: "Booked",
@@ -9077,10 +9120,19 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
                 patient_id: "patient-123",
                 patient: { first_name: "Margaret", last_name: "Thompson" }
               };
-              window.__g5StatusPromise = setAppointmentStatus(appt, "Arrived");
+              const result = await setAppointmentStatus(appt, "Arrived", select);
+              return {
+                result,
+                status: document.getElementById("diary-status").textContent,
+                error: document.getElementById("diary-error").textContent,
+                value: select.value,
+                disabled: select.disabled,
+                busy: select.getAttribute("aria-busy"),
+                state: select.dataset.statusTransactionState,
+                focused: document.activeElement === select
+              };
             }"""
         )
-        diary_page.wait_for_timeout(1000)
     finally:
         diary_page.unroute("**/api/v1/**", handle_api)
         diary_page.goto(base_url + CHECKS["target"])
@@ -9089,6 +9141,269 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
     assert captured_confirms, "Expected signed status-confirm request"
     assert captured_confirm_keys == ["status-confirm-status-fresh-fail"]
     assert captured_raw_patches == []
+    assert interaction_result["result"] is False
+    assert interaction_result["status"] == (
+        "Status not changed. Refresh the Diary before trying again."
+    )
+    assert interaction_result["error"] == "Status not changed. Status proposal is stale."
+    assert interaction_result["value"] == "Booked"
+    assert interaction_result["disabled"] is False
+    assert interaction_result["busy"] is None
+    assert interaction_result["state"] == "failed"
+    assert interaction_result["focused"] is True
+
+
+def test_route_intercepted_status_dialog_escape_restores_focus_without_commit(diary_page):
+    """Terminal status review is labelled, keyboard-bounded and cancellable."""
+    import urllib.parse
+
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_confirms = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith(
+            "/appointments/proposals/status/appt-status-terminal"
+        ):
+            proposal = {
+                "intent": "update_appointment_status",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "execute_with_report",
+                "summary": "Review the terminal status change.",
+                "command": {
+                    "appointment_id": "appt-status-terminal",
+                    "status": "Cancelled",
+                    "waiting_area_id": None,
+                    "waiting_area_id_supplied": False,
+                    "clears_waiting_area": False,
+                },
+                "warnings": [],
+                "blocks": [],
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/status-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "status_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "status_proposal_freshness_id": "status-fresh-terminal",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_status_proposal",
+                            "payload": {"fixture": "terminal-status-dialog"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith(
+            "/appointments/proposals/status-confirm"
+        ):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=500,
+                content_type="application/json",
+                body=json.dumps({"detail": "confirm must not run after Escape"}),
+            )
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              const select = document.createElement("select");
+              select.id = "status-select-appt-status-terminal";
+              for (const value of ["Booked", "Cancelled"]) {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+              }
+              select.value = "Cancelled";
+              document.body.appendChild(select);
+              select.focus();
+              window.__statusDialogSelect = select;
+              window.__statusDialogPromise = setAppointmentStatus({
+                id: "appt-status-terminal",
+                status: "Booked",
+                waiting_area_id: null,
+                patient_id: "patient-123",
+                patient: { first_name: "Margaret", last_name: "Thompson" }
+              }, "Cancelled", select);
+            }"""
+        )
+        dialog = diary_page.locator("[data-testid='status-proposal-dialog']")
+        dialog.wait_for(state="visible", timeout=5000)
+        assert dialog.get_attribute("role") == "dialog"
+        assert dialog.get_attribute("aria-modal") == "true"
+        assert dialog.get_attribute("aria-labelledby").startswith("status-proposal-dialog-")
+        assert dialog.get_attribute("aria-describedby").startswith("status-proposal-dialog-")
+        assert diary_page.locator(
+            "[data-testid='status-confirm-transition']"
+        ).text_content().strip() == "Booked→Cancelled"
+        assert "check current authority and current booking truth again" in (
+            diary_page.locator(
+                "[data-testid='status-confirm-current-truth-boundary']"
+            ).text_content()
+        )
+        cancel = dialog.get_by_role("button", name="Cancel")
+        confirm = dialog.get_by_role("button", name="Confirm & Save")
+        assert cancel.count() == 1
+        assert confirm.count() == 1
+        diary_page.wait_for_function(
+            "document.activeElement && document.activeElement.textContent === 'Cancel'"
+        )
+        diary_page.keyboard.press("Shift+Tab")
+        assert diary_page.evaluate("document.activeElement.textContent") == "Confirm & Save"
+        diary_page.keyboard.press("Tab")
+        assert diary_page.evaluate("document.activeElement.textContent") == "Cancel"
+        diary_page.keyboard.press("Escape")
+        result = diary_page.evaluate(
+            """async () => {
+              const outcome = await window.__statusDialogPromise;
+              await new Promise(resolve => setTimeout(resolve, 0));
+              const select = window.__statusDialogSelect;
+              return {
+                outcome,
+                value: select.value,
+                disabled: select.disabled,
+                state: select.dataset.statusTransactionState,
+                focused: document.activeElement === select,
+                status: document.getElementById("diary-status").textContent
+              };
+            }"""
+        )
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_confirms == []
+    assert result == {
+        "outcome": False,
+        "value": "Booked",
+        "disabled": False,
+        "state": "cancelled",
+        "focused": True,
+        "status": "Appointment change cancelled. No change made.",
+    }
+
+
+def test_route_intercepted_blocked_status_dialog_offers_no_commit(diary_page):
+    """A blocked proposal exposes only Close and returns the selector to truth."""
+    import urllib.parse
+
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_confirms = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith(
+            "/appointments/proposals/status/appt-status-blocked"
+        ):
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "update_appointment_status",
+                    "safe": False,
+                    "requires_confirmation": True,
+                    "autonomy_tier": "blocked",
+                    "summary": "Status change blocked.",
+                    "command": {
+                        "appointment_id": "appt-status-blocked",
+                        "status": "Arrived",
+                        "waiting_area_id": None,
+                        "waiting_area_id_supplied": False,
+                        "clears_waiting_area": False,
+                    },
+                    "warnings": [],
+                    "blocks": [{
+                        "code": "current_authority_changed",
+                        "message": "Current authority no longer permits this status change.",
+                    }],
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith(
+            "/appointments/proposals/status-confirm"
+        ):
+            captured_confirms.append(request.post_data_json)
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              const select = document.createElement("select");
+              select.id = "status-select-appt-status-blocked";
+              for (const value of ["Booked", "Arrived"]) {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+              }
+              select.value = "Arrived";
+              document.body.appendChild(select);
+              window.__blockedStatusSelect = select;
+              window.__blockedStatusPromise = setAppointmentStatus({
+                id: "appt-status-blocked",
+                status: "Booked",
+                waiting_area_id: null,
+                patient_id: "patient-123",
+                patient: { first_name: "Margaret", last_name: "Thompson" }
+              }, "Arrived", select);
+            }"""
+        )
+        dialog = diary_page.locator("[data-testid='status-proposal-dialog']")
+        dialog.wait_for(state="visible", timeout=5000)
+        assert dialog.get_by_role("button", name="Confirm & Save").count() == 0
+        assert dialog.locator(
+            "[data-testid='status-confirm-current-truth-boundary']"
+        ).count() == 0
+        close = dialog.get_by_role("button", name="Close")
+        assert close.count() == 1
+        close.click()
+        result = diary_page.evaluate(
+            """async () => {
+              const outcome = await window.__blockedStatusPromise;
+              const select = window.__blockedStatusSelect;
+              return {
+                outcome,
+                value: select.value,
+                state: select.dataset.statusTransactionState,
+                status: document.getElementById("diary-status").textContent
+              };
+            }"""
+        )
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_confirms == []
+    assert result == {
+        "outcome": False,
+        "value": "Booked",
+        "state": "blocked",
+        "status": "Status change blocked. No change made.",
+    }
 
 
 def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):

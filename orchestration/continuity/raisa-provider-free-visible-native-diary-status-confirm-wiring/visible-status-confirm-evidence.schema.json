@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/visible-native-diary-status-confirm-evidence-v1.json",
+  "title": "Visible native Diary status-confirm evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "result",
+    "task_baseline",
+    "accepted_backend_source",
+    "evidence_modes",
+    "browser_checks",
+    "test_results",
+    "zero_authority_counts",
+    "candid_limit"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.visible_native_diary_status_confirm_evidence.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "result": {
+      "const": "raisa_provider_free_visible_native_diary_status_confirm_wiring_pass"
+    },
+    "task_baseline": {
+      "const": "2a407a8300560406f5311db4a4a54ebcf38a1e0e"
+    },
+    "accepted_backend_source": {
+      "const": "b414eb256853c301099d9cf7797a69cd3ec077c5"
+    },
+    "evidence_modes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "authored_synthetic_client_fixture",
+          "route_intercepted_browser",
+          "repository_static_and_regression"
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "browser_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "url_origin",
+        "baseline_dom_nonblank",
+        "baseline_blocking_overlay_count",
+        "console_warning_error_count",
+        "safe_transition",
+        "terminal_transition",
+        "keyboard_interruption",
+        "viewports",
+        "screenshots_persisted"
+      ],
+      "properties": {
+        "title": { "const": "EMR — Diary" },
+        "url_origin": { "const": "http://127.0.0.1" },
+        "baseline_dom_nonblank": { "const": true },
+        "baseline_blocking_overlay_count": { "const": 0 },
+        "console_warning_error_count": { "const": 0 },
+        "safe_transition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["from", "to", "dialog_count", "final_state", "visible_outcome"],
+          "properties": {
+            "from": { "const": "Booked" },
+            "to": { "const": "Arrived" },
+            "dialog_count": { "const": 0 },
+            "final_state": { "const": "committed" },
+            "visible_outcome": { "const": "Status updated to Arrived (Mock)." }
+          }
+        },
+        "terminal_transition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["from", "to", "dialog_count", "current_truth_boundary_visible"],
+          "properties": {
+            "from": { "const": "Arrived" },
+            "to": { "const": "Cancelled" },
+            "dialog_count": { "const": 1 },
+            "current_truth_boundary_visible": { "const": true }
+          }
+        },
+        "keyboard_interruption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["escape_cancelled", "prior_value_restored", "focus_restored"],
+          "properties": {
+            "escape_cancelled": { "const": true },
+            "prior_value_restored": { "const": true },
+            "focus_restored": { "const": true }
+          }
+        },
+        "viewports": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "width", "height", "dialog_visible"],
+            "properties": {
+              "name": { "enum": ["desktop", "tablet", "phone"] },
+              "width": { "type": "integer", "minimum": 320 },
+              "height": { "type": "integer", "minimum": 640 },
+              "dialog_visible": { "const": true }
+            }
+          }
+        },
+        "screenshots_persisted": { "const": false }
+      }
+    },
+    "test_results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "focused_contract_api_security_latch",
+        "focused_route_intercepted_status",
+        "full_diary_browser_review",
+        "canonical_fast_profile"
+      ],
+      "properties": {
+        "focused_contract_api_security_latch": { "const": 81 },
+        "focused_route_intercepted_status": { "const": 4 },
+        "full_diary_browser_review": { "const": 144 },
+        "canonical_fast_profile": { "const": 193 }
+      }
+    },
+    "zero_authority_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_calls",
+        "external_network_calls",
+        "patient_product_records",
+        "new_routes",
+        "raw_status_fallbacks",
+        "database_schema_changes",
+        "deployments",
+        "protected_ref_movements"
+      ],
+      "properties": {
+        "provider_calls": { "const": 0 },
+        "external_network_calls": { "const": 0 },
+        "patient_product_records": { "const": 0 },
+        "new_routes": { "const": 0 },
+        "raw_status_fallbacks": { "const": 0 },
+        "database_schema_changes": { "const": 0 },
+        "deployments": { "const": 0 },
+        "protected_ref_movements": { "const": 0 }
+      }
+    },
+    "candid_limit": {
+      "type": "string",
+      "minLength": 80
+    }
+  }
+}

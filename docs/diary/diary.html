@@ -81,7 +81,7 @@
       </details>
     </div>
     <button id="btn-admin-panel" class="hidden" title="Resource Administration">⚙️ Admin</button>
-    <span id="diary-status">Connecting…</span>
+    <span id="diary-status" role="status" aria-live="polite" aria-atomic="true">Connecting…</span>
   </div>
 </div>
 
@@ -98,7 +98,7 @@
   <div id="diary-loading">
     <div class="spinner"></div>
   </div>
-  <div id="diary-error" class="hidden"></div>
+  <div id="diary-error" class="hidden" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
   <div id="diary-grid-container" class="hidden">
     <div id="diary-grid"></div>

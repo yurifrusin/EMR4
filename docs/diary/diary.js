@@ -2645,6 +2645,17 @@ function setStatus(msg) {
   const el = document.getElementById("diary-status");
   if (el) el.textContent = msg;
 }
+function setStatusTransactionState(selectEl, state, message, busy = false) {
+  setStatus(message);
+  if (!selectEl) return;
+  selectEl.dataset.statusTransactionState = state;
+  selectEl.setAttribute("aria-describedby", "diary-status");
+  if (busy) {
+    selectEl.setAttribute("aria-busy", "true");
+  } else {
+    selectEl.removeAttribute("aria-busy");
+  }
+}
 function showLoading(on) {
   const el = document.getElementById("diary-loading");
   if (el) el.classList.toggle("hidden", !on);
@@ -4559,6 +4570,8 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       // Inline compact status changer
       const statusChanger = document.createElement("div");
       statusChanger.className = "appt-status-changer";
+      statusChanger.dataset.testid = "appointment-status-control";
+      statusChanger.dataset.appointmentId = a.id;
       statusChanger.addEventListener("click", e => {
         e.stopPropagation();
       });
@@ -4574,6 +4587,8 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       statusSelect.className = "status-select";
       statusSelect.id = statusSelectId;
       statusSelect.ariaLabel = "Change appointment status";
+      statusSelect.dataset.testid = "appointment-status-select";
+      statusSelect.dataset.appointmentId = a.id;
 
       const selectOptions = [
         { value: "Booked", label: "Booked" },
@@ -9297,23 +9312,56 @@ function simulateWaitingAreaProposal(appt, payload) {
   };
 }
 
-function showStatusProposalDialog(proposal) {
+let statusProposalDialogSequence = 0;
+
+function showStatusProposalDialog(proposal, options = {}) {
   return new Promise(resolve => {
+    const returnFocus = options.returnFocus || document.activeElement;
+    const statusTransition = options.statusTransition || null;
+    statusProposalDialogSequence += 1;
+    const dialogId = `status-proposal-dialog-${statusProposalDialogSequence}`;
     const overlay = document.createElement("div");
     overlay.className = "identity-confirm-overlay";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-labelledby", `${dialogId}-title`);
+    overlay.setAttribute("aria-describedby", `${dialogId}-body`);
+    overlay.dataset.testid = "status-proposal-dialog";
 
     const panel = document.createElement("div");
     panel.className = "identity-confirm-panel";
 
     const title = document.createElement("h2");
     title.className = "identity-confirm-title";
+    title.id = `${dialogId}-title`;
 
     const body = document.createElement("div");
     body.className = "identity-confirm-body";
+    body.id = `${dialogId}-body`;
     body.style.whiteSpace = "pre-wrap";
     body.style.marginBottom = "15px";
+
+    const transition = document.createElement("div");
+    transition.className = "status-confirm-transition";
+    transition.dataset.testid = "status-confirm-transition";
+    if (statusTransition) {
+      const from = document.createElement("span");
+      from.className = "status-confirm-transition-value";
+      from.textContent = formatAuditStatus(statusTransition.from) || "Current status";
+      const arrow = document.createElement("span");
+      arrow.className = "status-confirm-transition-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "→";
+      const to = document.createElement("span");
+      to.className = "status-confirm-transition-value status-confirm-transition-target";
+      to.textContent = formatAuditStatus(statusTransition.to) || "Requested status";
+      transition.append(from, arrow, to);
+    }
+
+    const recheck = document.createElement("p");
+    recheck.className = "status-confirm-recheck";
+    recheck.dataset.testid = "status-confirm-current-truth-boundary";
+    recheck.textContent = "The Diary will check current authority and current booking truth again when you confirm.";
 
     const actions = document.createElement("div");
     actions.className = "identity-confirm-actions";
@@ -9322,10 +9370,29 @@ function showStatusProposalDialog(proposal) {
       document.removeEventListener("keydown", onKeyDown);
       overlay.remove();
       resolve(result);
+      if (!result && returnFocus && typeof returnFocus.focus === "function") {
+        setTimeout(() => returnFocus.focus({ preventScroll: true }), 0);
+      }
     };
 
     const onKeyDown = event => {
-      if (event.key === "Escape") close(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(panel.querySelectorAll("button:not([disabled])"));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     if (proposal.blocks && proposal.blocks.length > 0) {
@@ -9366,7 +9433,13 @@ function showStatusProposalDialog(proposal) {
       setTimeout(() => cancelBtn.focus(), 0);
     }
 
-    panel.append(title, body, actions);
+    panel.append(title);
+    if (statusTransition) panel.append(transition);
+    panel.append(body);
+    if (options.currentTruthRecheck && !(proposal.blocks && proposal.blocks.length > 0)) {
+      panel.append(recheck);
+    }
+    panel.append(actions);
     overlay.appendChild(panel);
     document.body.appendChild(overlay);
     document.addEventListener("keydown", onKeyDown);
@@ -10221,12 +10294,19 @@ async function applySignedDeleteProposal(proposal, cancellationReason, statusRea
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
   const isStatusChange = (newStatus !== appt.status);
   const isWaitingAreaChangeOnly = (!isStatusChange && waitingAreaId !== null && waitingAreaId !== appt.waiting_area_id);
+  const priorSelectValue = isWaitingAreaChangeOnly
+    ? (appt.waiting_area_id || "")
+    : (appt.status === "Confirmed" ? "Booked" : appt.status);
+  const returnFocusId = selectEl?.id || null;
+  let transactionState = "checking";
 
   if (!isStatusChange && !isWaitingAreaChangeOnly) {
     return true;
   }
 
+  showError("");
   if (selectEl) selectEl.disabled = true;
+  setStatusTransactionState(selectEl, transactionState, "Checking current Diary…", true);
 
   try {
     // 1. Proposal check
@@ -10277,72 +10357,91 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
     );
 
     if (needsConfirm) {
-      const confirmed = await showStatusProposalDialog(proposal);
+      transactionState = "awaiting_confirmation";
+      setStatusTransactionState(selectEl, transactionState, "Appointment change needs confirmation.", true);
+      const confirmed = await showStatusProposalDialog(proposal, {
+        returnFocus: selectEl,
+        statusTransition: isStatusChange ? { from: appt.status, to: newStatus } : null,
+        currentTruthRecheck: true
+      });
       if (!confirmed) {
-        if (selectEl) {
-          if (isWaitingAreaChangeOnly) {
-            selectEl.value = appt.waiting_area_id || "";
-          } else {
-            selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
-          }
-        }
+        const wasBlocked = Boolean(proposal.blocks && proposal.blocks.length > 0);
+        transactionState = wasBlocked ? "blocked" : "cancelled";
+        if (selectEl) selectEl.value = priorSelectValue;
+        setStatusTransactionState(
+          selectEl,
+          transactionState,
+          wasBlocked
+            ? "Status change blocked. No change made."
+            : "Appointment change cancelled. No change made."
+        );
         return false;
       }
     }
 
     // 3. Keep original patient identity confirmation check
     if (!await confirmUnidentifiedProgress(appt, newStatus)) {
-      if (selectEl) {
-        if (isWaitingAreaChangeOnly) {
-          selectEl.value = appt.waiting_area_id || "";
-        } else {
-          selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
-        }
-      }
+      transactionState = "cancelled";
+      if (selectEl) selectEl.value = priorSelectValue;
+      setStatusTransactionState(selectEl, transactionState, "Appointment change cancelled. No change made.");
       return false;
     }
 
     // 4. Actual save operation (mutation)
-    setStatus("Updating status...");
+    transactionState = "saving";
+    setStatusTransactionState(selectEl, transactionState, "Checking current Diary and saving…", true);
     if (isSmokeMode()) {
       appt.status = newStatus;
       if (waitingAreaId !== null) {
         appt.waiting_area_id = waitingAreaId || null;
       }
-      setStatus("Status updated (Mock)");
       await loadDiary(true);
       const el = findAppointmentElementById(appt.id);
       if (el) el.classList.add("appt-active");
+      transactionState = "committed";
+      const refreshedSelect = returnFocusId ? document.getElementById(returnFocusId) : selectEl;
+      const message = isWaitingAreaChangeOnly
+        ? "Waiting area updated (Mock)."
+        : `Status updated to ${formatAuditStatus(newStatus)} (Mock).`;
+      setStatusTransactionState(refreshedSelect, transactionState, message);
     } else {
       const updatedAppt = await applySignedStatusProposal(appt, proposal, newStatus, waitingAreaId);
       appt.status = updatedAppt.status;
       appt.waiting_area_id = updatedAppt.waiting_area_id;
-      setStatus("Status updated successfully.");
       await loadDiary(true);
       const el = findAppointmentElementById(appt.id);
       if (el) el.classList.add("appt-active");
+      transactionState = "committed";
+      const refreshedSelect = returnFocusId ? document.getElementById(returnFocusId) : selectEl;
+      const message = isWaitingAreaChangeOnly
+        ? "Waiting area updated."
+        : `Status updated to ${formatAuditStatus(updatedAppt.status)}.`;
+      setStatusTransactionState(refreshedSelect, transactionState, message);
     }
+    showError("");
     await updateFlowPanel();
     return true;
   } catch (err) {
     console.error("Error updating status:", err);
+    transactionState = "failed";
     if (err.message === "401 Unauthorized") {
       showError("Session expired. Please reopen the taskpane to sign in again.");
       setStatus("Session expired.");
     } else {
-      showError(err.message || "Failed to update appointment status.");
-      setStatus("Error updating status.");
+      showError(`Status not changed. ${err.message || "The appointment status could not be updated."}`);
+      setStatus("Status not changed. Refresh the Diary before trying again.");
     }
-    if (selectEl) {
-      if (isWaitingAreaChangeOnly) {
-        selectEl.value = appt.waiting_area_id || "";
-      } else {
-        selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
-      }
-    }
+    if (selectEl) selectEl.value = priorSelectValue;
     return false;
   } finally {
-    if (selectEl) selectEl.disabled = false;
+    const currentSelect = returnFocusId ? document.getElementById(returnFocusId) : selectEl;
+    if (currentSelect) {
+      currentSelect.disabled = false;
+      currentSelect.removeAttribute("aria-busy");
+      currentSelect.dataset.statusTransactionState = transactionState;
+      currentSelect.setAttribute("aria-describedby", "diary-status");
+      currentSelect.focus({ preventScroll: true });
+    }
   }
 }
 

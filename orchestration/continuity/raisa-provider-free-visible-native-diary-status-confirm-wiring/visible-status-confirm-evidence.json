@@ -1,0 +1,75 @@
+{
+  "schema_version": "raisa.visible_native_diary_status_confirm_evidence.v1",
+  "generated_at": "2026-08-13T15:34:38+10:00",
+  "result": "raisa_provider_free_visible_native_diary_status_confirm_wiring_pass",
+  "task_baseline": "2a407a8300560406f5311db4a4a54ebcf38a1e0e",
+  "accepted_backend_source": "b414eb256853c301099d9cf7797a69cd3ec077c5",
+  "evidence_modes": [
+    "authored_synthetic_client_fixture",
+    "route_intercepted_browser",
+    "repository_static_and_regression"
+  ],
+  "browser_checks": {
+    "title": "EMR — Diary",
+    "url_origin": "http://127.0.0.1",
+    "baseline_dom_nonblank": true,
+    "baseline_blocking_overlay_count": 0,
+    "console_warning_error_count": 0,
+    "safe_transition": {
+      "from": "Booked",
+      "to": "Arrived",
+      "dialog_count": 0,
+      "final_state": "committed",
+      "visible_outcome": "Status updated to Arrived (Mock)."
+    },
+    "terminal_transition": {
+      "from": "Arrived",
+      "to": "Cancelled",
+      "dialog_count": 1,
+      "current_truth_boundary_visible": true
+    },
+    "keyboard_interruption": {
+      "escape_cancelled": true,
+      "prior_value_restored": true,
+      "focus_restored": true
+    },
+    "viewports": [
+      {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720,
+        "dialog_visible": true
+      },
+      {
+        "name": "tablet",
+        "width": 768,
+        "height": 1024,
+        "dialog_visible": true
+      },
+      {
+        "name": "phone",
+        "width": 390,
+        "height": 844,
+        "dialog_visible": true
+      }
+    ],
+    "screenshots_persisted": false
+  },
+  "test_results": {
+    "focused_contract_api_security_latch": 81,
+    "focused_route_intercepted_status": 4,
+    "full_diary_browser_review": 144,
+    "canonical_fast_profile": 193
+  },
+  "zero_authority_counts": {
+    "provider_calls": 0,
+    "external_network_calls": 0,
+    "patient_product_records": 0,
+    "new_routes": 0,
+    "raw_status_fallbacks": 0,
+    "database_schema_changes": 0,
+    "deployments": 0,
+    "protected_ref_movements": 0
+  },
+  "candid_limit": "The smoke rendering proves only authored-synthetic client behavior, and the intercepted browser cases prove exact UI request and response handling without a live backend. The already accepted backend source separately proves the local canonical HTTP command. This tranche does not prove product-data operation, deployment, production, restart or unknown-commit recovery."
+}

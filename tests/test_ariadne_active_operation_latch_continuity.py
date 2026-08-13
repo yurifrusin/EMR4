@@ -6,10 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "ariadne-postcompaction-active-operation-latch"
-PRODUCT_POSITION = (
-    "raisa-provider-free-unmounted-status-confirm-route-convergence-"
-    "composition-rehearsal"
-)
+PRODUCT_POSITION = "raisa-channel-neutral-patient-interaction-foundation"
 SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
 
 
@@ -21,24 +18,27 @@ def test_latch_is_accepted_without_displacing_product_position() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
-    assert graph["graph_revision"] >= 269
-    assert compass["map_revision"] >= 251
+    assert graph["graph_revision"] >= 274
+    assert compass["map_revision"] >= 256
     assert compass["source_graph_revision"] == graph["graph_revision"]
     assert compass["current_position"]["node_id"] == PRODUCT_POSITION
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["authority"]["authorized_openings"] == []
 
 
-def test_current_latch_resumes_exact_readiness_rereview() -> None:
+def test_current_latch_resumes_exact_visible_diary_status_wiring() -> None:
     latch = _load(
         "orchestration/continuity/ariadne-active-operation-latch/current.json"
     )
     assert latch["status"] == "in_progress"
     assert (
         latch["operation_id"]
-        == "raisa-status-confirm-route-mounting-readiness-rereview"
+        == "raisa-provider-free-visible-native-diary-status-confirm-wiring"
     )
-    assert "fourteen frozen sources" in latch["checkpoint"]["next_executable_stage"]
+    assert (
+        "explicit_path_commit_and_push_the_verified_ui_source"
+        in latch["checkpoint"]["next_executable_stage"]
+    )
     assert latch["terminal_response"] == {
         "permitted": False,
         "reason": "unfinished_authorized_operation",

@@ -57,7 +57,12 @@ def test_confirmation_posts_use_the_canonical_allowlist() -> None:
         "/appointments/proposals/delete-confirm",
     ):
         assert f'"{path}"' in source
-    assert source.count("apiFetch(allowlistedConfirmApiPath(") == 7
+    assert source.count("apiFetch(allowlistedConfirmApiPath(") == 6
+    assert source.count(
+        "const normalizedConfirmPath = allowlistedConfirmApiPath(confirmEndpoint);"
+    ) == 1
+    assert source.count("apiFetch(normalizedConfirmPath, {") == 1
+    assert "apiFetch(confirmEndpoint" not in source
     assert "apiFetch(normalizeApiPath(confirmEndpoint)" not in source
     assert "apiFetch(normalizeApiPath(payload.confirm_endpoint)" not in source
     assert "apiFetch(normalizeApiPath(envelope.confirm_endpoint)" not in source
