@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0302",
+  "observed_on": "2026-08-14",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "boundary": "pre-verifier Antigravity local help inspection",
+  "observation": "The Antigravity Python harness was first invoked by filesystem path and stopped immediately on its scripts-package import. No external review, project, model or provider request started.",
+  "containment": [
+    "The task candidate and all Git refs remained unchanged.",
+    "The corrected package-module invocation returned the local CLI help successfully.",
+    "All remaining repository Python harness calls in this tranche use python -m scripts.<module>."
+  ],
+  "excluded": ["protected evidence", "patient or product data", "secrets or credentials"]
+}

@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "fd4417b8bd0e4656d1e49793f3d2b3816c753acfd2652dd47bb1ac7eb534f9de",
+  "canonical_register_sha256": "a5cd20c6221bf99f3cc0747a276005749cbc685cb6a6b5b9aee221e43bcb935d",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 97,
-      "canonical_unchanged": 177,
+      "canonical_unchanged": 179,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
-      "command_scope_violation": 39,
+      "command_scope_violation": 40,
       "evidence_misreport": 39,
       "harness_failure": 37,
-      "output_contract_violation": 83,
+      "output_contract_violation": 84,
       "read_only_violation": 3,
       "reasoning_claim_error": 36,
       "repository_defect": 55,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 200,
+      "agent_behavior": 202,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 112,
+      "low": 114,
       "material": 97,
       "moderate": 92
     },
@@ -37,7 +37,7 @@
       "codex-native-parallel-worker::implementer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 148,
+      "codex-primary-orchestrator::orchestrator": 150,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -86,12 +86,12 @@
     },
     "by_role": {
       "implementer": 20,
-      "orchestrator": 230,
+      "orchestrator": 232,
       "verifier": 51
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 301,
+  "incident_count": 303,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -155,17 +155,19 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0058",
         "AER-0066",
         "AER-0067",
-        "AER-0204"
+        "AER-0204",
+        "AER-0302"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "For the remainder of this tranche, invoke every repository Python harness only as python -m scripts.<module>; use filesystem paths only for non-Python executables or files passed as data arguments.",
         "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
         "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
         "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path."
@@ -725,7 +727,7 @@
       ]
     }
   ],
-  "register_revision": 263,
+  "register_revision": 265,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-14"
 }

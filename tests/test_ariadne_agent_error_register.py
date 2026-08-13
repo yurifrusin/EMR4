@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 263
+    assert register["register_revision"] == 265
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 302)
+        f"AER-{index:04d}" for index in range(1, 304)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 200
+    assert len(agent_incidents) == 202
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 301
+    assert report["incident_count"] == 303
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2609,7 +2609,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0301_record_reschedule_discovery_and_dispatch_recovery() -> None:
+def test_aer_0294_through_0303_record_reschedule_discovery_and_dispatch_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2678,6 +2678,26 @@ def test_aer_0294_through_0301_record_reschedule_discovery_and_dispatch_recovery
     )
     assert source_binding["status"] == "corrected"
     assert source_binding["correction"]["status"] == "corrected_fresh_attempt"
+
+    module_invocation = incidents["AER-0302"]
+    assert module_invocation["stage"] == "dispatch"
+    assert module_invocation["category"] == "command_scope_violation"
+    assert module_invocation["candidate_state"] == "canonical_unchanged"
+    assert module_invocation["recurrence_signature"] == (
+        "orchestrator.python_package_script_path_invocation"
+    )
+    assert module_invocation["status"] == "corrected"
+    assert module_invocation["correction"]["status"] == "corrected_fresh_attempt"
+
+    slot_inventory = incidents["AER-0303"]
+    assert slot_inventory["stage"] == "dispatch"
+    assert slot_inventory["category"] == "output_contract_violation"
+    assert slot_inventory["candidate_state"] == "canonical_unchanged"
+    assert slot_inventory["recurrence_signature"] == (
+        "orchestrator.configured_worker_slot_inventory_omitted_when_idle"
+    )
+    assert slot_inventory["status"] == "corrected"
+    assert slot_inventory["correction"]["status"] == "corrected_fresh_attempt"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2956,20 +2976,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 263
-    assert report["incident_count"] == 301
+    assert report["register_revision"] == 265
+    assert report["incident_count"] == 303
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 200,
+        "agent_behavior": 202,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 39,
+        "command_scope_violation": 40,
         "evidence_misreport": 39,
         "harness_failure": 37,
-        "output_contract_violation": 83,
+        "output_contract_violation": 84,
         "read_only_violation": 3,
         "reasoning_claim_error": 36,
         "repository_defect": 55,
@@ -2977,7 +2997,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 97,
-        "canonical_unchanged": 177,
+        "canonical_unchanged": 179,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(
@@ -3035,13 +3055,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.python_package_script_path_invocation",
-            "incident_count": 4,
-            "incident_ids": ["AER-0058", "AER-0066", "AER-0067", "AER-0204"],
+            "incident_count": 5,
+            "incident_ids": ["AER-0058", "AER-0066", "AER-0067", "AER-0204", "AER-0302"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "For the remainder of this tranche, invoke every repository Python harness only as python -m scripts.<module>; use filesystem paths only for non-Python executables or files passed as data arguments.",
                 "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
                 "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
                 "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",

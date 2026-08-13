@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 263,
+  "register_revision": 265,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12116,6 +12116,84 @@
           "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-preintegration-source-binding-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-263.md",
           "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-deepseek-preintegration-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0302",
+      "attempt_id": "raisa-reception-one-time-reschedule-antigravity-help-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository scripts that import the scripts package must be invoked as python -m scripts.<module> from the repository root.",
+      "observed_error": "Sol invoked scripts/ariadne_antigravity.py --help by filesystem path. Python stopped immediately with ModuleNotFoundError for the scripts package before Antigravity, a model, a project or a provider request started.",
+      "detection_method": "The local interpreter returned ModuleNotFoundError before the CLI help parser ran. The corrected invocation used python -m scripts.ariadne_antigravity and returned the expected help without external activity.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-antigravity-help-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-264.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Invoke the Antigravity harness as python -m scripts.ariadne_antigravity from the repository root; its help then completed normally with no external review dispatch.",
+        "prevention_control": "For the remainder of this tranche, invoke every repository Python harness only as python -m scripts.<module>; use filesystem paths only for non-Python executables or files passed as data arguments.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-antigravity-help-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-264.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0303",
+      "attempt_id": "raisa-reception-one-time-reschedule-verifier-prep-precommit-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every orchestrator runtime state must include the complete configured worker-slot inventory even when every slot is idle.",
+      "observed_error": "The first verifier-preparation precommit state used an empty worker_slots array after DeepSeek completed. Deterministic preflight returned revision_required for missing deepseek-flash-workers inventory and authorised no review dispatch.",
+      "detection_method": "The generated receipt returned worker_slot_inventory_missing:deepseek-flash-workers. The corrected state restores the configured resource with empty active and stale instance arrays.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-verifier-prep-precommit-receipt-failure.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-verifier-prep-precommit-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-265.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.configured_worker_slot_inventory_omitted_when_idle",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failure receipt, restore deepseek-flash-workers with empty active_instance_ids and stale_instance_ids, and generate a distinct fresh precommit receipt before any verifier worktree or dispatch.",
+        "prevention_control": "Copy the complete configured worker-slot inventory into every runtime state regardless of current occupancy; represent idleness with empty instance arrays, never by omitting the slot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-verifier-prep-precommit-receipt-failure.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-verifier-prep-precommit-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-265.md"
         ]
       },
       "status": "corrected"

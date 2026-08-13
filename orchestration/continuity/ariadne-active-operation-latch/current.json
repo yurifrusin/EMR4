@@ -4,14 +4,14 @@
   "active_tranche": "Reception One selected-appointment reschedule composition",
   "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
   "status": "in_progress",
-  "source_head": "af148c184fe1a072831715ce704e3e14e0bc9d4f",
+  "source_head": "9827d63d6ebe348e0cecd0d951d4b0533b6fae45",
   "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "the DeepSeek artifact recovery is committed at af148c184fe1a072831715ce704e3e14e0bc9d4f; 9/9 recovered browser tests, 144/144 Diary smoke, 85/85 update/API Spine/latch checks and the canonical fast profile with 193/193 tests pass; one stale historical delete-confirm expectation is mechanically corrected",
-    "next_executable_stage": "commit the deterministic-gate repair and evidence, bind a fresh exact read-only verifier worktree to the clean candidate, then dispatch Gemini 3.6 Flash/high for the single terminal veto",
+    "completed_stage": "the complete deterministic candidate is committed at 9827d63d6ebe348e0cecd0d951d4b0533b6fae45; AER-0302 preserves and corrects a local package-module help invocation before any external review started; the 302-incident register is valid",
+    "next_executable_stage": "commit the AER-0302 recovery evidence, create a fresh exact clean read-only verifier worktree and packet, generate a passing pre-verifier receipt, then dispatch Gemini 3.6 Flash/high for one terminal veto",
     "retry_counters": {
       "review": 0,
-      "verification": 10
+      "verification": 11
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },

@@ -1,0 +1,39 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the complete deterministic candidate is committed at 9827d63d6ebe348e0cecd0d951d4b0533b6fae45; AER-0302 preserves and corrects a local package-module help invocation before any external review started; the 302-incident register is valid",
+    "next_executable_stage": "commit the AER-0302 recovery evidence, create a fresh exact clean read-only verifier worktree and packet, generate a passing pre-verifier receipt, then dispatch Gemini 3.6 Flash/high for one terminal veto",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "9827d63d6ebe348e0cecd0d951d4b0533b6fae45",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_antigravity_help_recovery_before_fresh_verifier_setup",
+  "reasons": [
+    "worker_slot_inventory_missing:deepseek-flash-workers"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The deterministic candidate at 9827d63d6ebe348e0cecd0d951d4b0533b6fae45 passes the frozen plan's affected and canonical gates. AER-0302 contains the failed local filesystem-path help invocation and its successful package-module correction before external dispatch.",
+    "current_authority_allocation": "Sol owns orchestration correction and review dispatch. Gemini 3.6 Flash/high receives read-only veto authority only after a passing fresh receipt; no review has started.",
+    "git_refs_and_worktree": "The task branch is at exact clean candidate 9827d63d6ebe348e0cecd0d951d4b0533b6fae45 before the AER-0302 evidence commit. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md and the active latch retain Yuri's selected Reception One time-reschedule direction.",
+    "protected_evidence_boundaries": "No protected evidence, PHI, patient/product data, provider call, Antigravity project, model request, backend/database/network/deployment, docs/branding, protected ref or unrelated untracked file entered the failed help probe or this commit."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}
