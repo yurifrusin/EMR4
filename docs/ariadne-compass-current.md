@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 270 / Compass 252. The status-confirm readiness re-review passes with four remaining product-adapter blockers. Route mounting and product execution remain closed.
+> EMR4 is at Continuity 271 / Compass 253. The unmounted status-confirm product adapter passes. Disposable PostgreSQL integration and route wiring remain closed.
 
 ## North star
 

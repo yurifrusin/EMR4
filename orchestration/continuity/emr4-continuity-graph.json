@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 270,
+  "graph_revision": 271,
   "harvests": [],
   "nodes": [
     {
@@ -17522,9 +17522,80 @@
         "Application-owned server session/current authority, status-only admission, locked-state policy and atomic effect/audit adapters remain absent.",
         "Canonical alias policy and stored-byte HTTP delivery remain later route decisions."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal",
+      "title": "Provider-free unmounted status-confirm product-adapter rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-13T00:44:05Z",
+      "updated_at": "2026-08-13T00:44:05Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b728b903c99fa35f231df04ba68263533261121a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Authored-synthetic, provider-free and unmounted adapter only.",
+          "No route, database, product data, provider, command, deployment or protected-ref authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-product-adapter",
+          "source": "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the four coupled adapters and the opaque proposal-version binding; continue off-route to disposable PostgreSQL integration."
+        }
+      ],
+      "claim_scope": [
+        "Server-session/current-authority, status-only admission, locked policy and atomic effect/audit adapters pass together.",
+        "A signed proposal-version binding preserves exact lost-response replay and locked-generation checks.",
+        "All thirteen source hashes, 84 hostile mutations, 118 focused checks and 193 canonical fast-profile tests pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_status_product_adapter.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-evidence.json",
+          "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Real PostgreSQL/RLS integration of the product adapter remains unproved.",
+        "Route dependency wiring, proposal-version carriage and exact stored-byte HTTP delivery remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-12T23:52:23Z"
+  "updated_at": "2026-08-13T00:44:05Z"
 }

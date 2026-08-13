@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL-16 status-confirm product-adapter integration rehearsal",
+    "completed_stage": "predecessor unmounted product adapter accepted at source b728b903c99fa35f231df04ba68263533261121a with continuity 271 / compass 253 closeout prepared",
+    "next_executable_stage": "publish the predecessor closeout, perform a fresh five-source rehydration and freeze the narrow off-route disposable PostgreSQL-16 product-adapter integration plan before any database execution",
+    "operation_id": "raisa-status-confirm-product-adapter-postgresql-integration",
+    "resume_after_compaction": true,
+    "source_head": "b728b903c99fa35f231df04ba68263533261121a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_status_confirm_product_adapter_closeout_and_continuity_271_compass_253",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The revision-2 frozen plan, generated 84-mutation evidence, closeout and Sol acceptance bind the exact unmounted adapter result. The 118 focused checks and 193-test canonical fast profile pass with the route unchanged.",
+    "current_authority_allocation": "GPT Sol owns the provider-free closeout and acceptance. No external worker or verifier received data, runtime, acceptance, integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "At 2026-08-13T10:50:19+10:00, task HEAD was the exact reviewed source b728b903c99fa35f231df04ba68263533261121a and required 648c8ec9805af63729264ea9c22fd695f062a741 remained an ancestor. Local/origin master and handoff/current remained protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit closeout, continuity, baton and test paths are candidates for the closeout commit.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted product-adapter result at Continuity 271 / Compass 253 and preserves exact source b728b903c99fa35f231df04ba68263533261121a plus every protected ref boundary.",
+    "protected_evidence_boundaries": "No protected evidence, PHI, patient/clinical/operational product data, route edit/mount/call, real database, provider/ADC/credentials/IAM/browser/network, product/runtime command, deployment, release, Pages or protected refs were opened. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

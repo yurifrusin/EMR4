@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-status-confirm-product-adapter-rehearsal",
-  "active_tranche": "Provider-free unmounted status-confirm product-adapter rehearsal",
-  "objective": "Close the four coupled route-readiness blockers with one application-owned, provider-free and unmounted adapter over the accepted status-confirm composition.",
+  "operation_id": "raisa-status-confirm-product-adapter-postgresql-integration",
+  "active_tranche": "Provider-free disposable PostgreSQL-16 status-confirm product-adapter integration rehearsal",
+  "objective": "Freeze and execute the narrowest off-route disposable PostgreSQL integration of the accepted product adapter using only owned authored-synthetic rows and complete cleanup.",
   "status": "in_progress",
-  "source_head": "3c5d69512358cf7308c80e0da070d6650acb7f73",
+  "source_head": "b728b903c99fa35f231df04ba68263533261121a",
   "authority_source": "AGENTS.md Current Baton next implementation plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "unmounted product adapter, opaque proposal-version binding, 84-mutation rehearsal, 118 focused checks and the 193-test canonical fast profile pass with the route unchanged",
-    "next_executable_stage": "generate the pre-commit receipt, explicitly stage only owned tranche artifacts, commit the reviewed source and proceed to paired closeout acceptance without touching protected refs or unrelated untracked files",
+    "completed_stage": "predecessor unmounted product adapter accepted at source b728b903c99fa35f231df04ba68263533261121a with continuity 271 / compass 253 closeout prepared",
+    "next_executable_stage": "publish the predecessor closeout, perform a fresh five-source rehydration and freeze the narrow off-route disposable PostgreSQL-16 product-adapter integration plan before any database execution",
     "retry_counters": {
       "review": 0,
       "verification": 0
@@ -35,7 +35,8 @@
     "protected_evidence_closed",
     "patient_product_clinical_data_closed",
     "provider_credential_iam_network_closed",
-    "route_database_command_runtime_closed",
+    "route_product_command_runtime_closed",
+    "only_owned_disposable_authored_synthetic_database_may_be_planned",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

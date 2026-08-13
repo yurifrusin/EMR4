@@ -7,11 +7,8 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = (
-    "raisa-provider-free-read-only-status-confirm-route-mounting-readiness-"
-    "rereview"
-)
-SOURCE_HEAD = "b2107060facb701208d034cba3bc8ef29f22a7f9"
+NODE_ID = "raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal"
+SOURCE_HEAD = "b728b903c99fa35f231df04ba68263533261121a"
 COMPOSITION_SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
@@ -27,11 +24,11 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 270
+    assert graph["graph_revision"] == 271
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 252
-    assert compass["source_graph_revision"] == 270
+    assert compass["map_revision"] == 253
+    assert compass["source_graph_revision"] == 271
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -41,17 +38,14 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 270 / Compass 252" in current
-    assert (
-        "raisa_provider_free_read_only_status_confirm_route_mounting_"
-        "readiness_rereview_pass"
-    ) in current
+    assert "Continuity 271 / Compass 253" in current
+    assert "raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_pass" in current
     assert SOURCE_HEAD in current
-    assert "four satisfied dimensions" in current
-    assert "two nonblocking partial gaps" in current
-    assert "four blocking product-adapter gaps" in current
-    assert "69 hostile mutations" in current
-    assert "No application runtime was imported" in current
+    assert "four coupled application blockers pass together" in current
+    assert "opaque proposal-version binding" in current
+    assert "84 hostile mutations" in current
+    assert "118 focused checks" in current
+    assert "current route remains unchanged and unmounted" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert COMPOSITION_SOURCE_HEAD in relation
@@ -76,15 +70,14 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free unmounted status-confirm product adapter" in next_work
+    assert "provider-free disposable PostgreSQL-16 integration rehearsal" in next_work
     assert SOURCE_HEAD in next_work
-    assert "four coupled blockers" in next_work
-    assert "server-owned session/current-authority ingress" in next_work
-    assert "status-only discrimination" in next_work
-    assert "locked-state policy reconstruction" in next_work
-    assert "atomic status-effect/audit-identity staging" in next_work
+    assert "transaction-local practice context" in next_work
+    assert "both fresh actor checks" in next_work
+    assert "one-mutation/one-audit/private-receipt completion" in next_work
+    assert "byte-identical replay" in next_work
     assert "no route edit/mount/call" in next_work
-    assert "product/patient data" in next_work
+    assert "patient/clinical or operational product data" in next_work
     assert "provider/ADC/credential/IAM/browser/network" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -119,16 +112,15 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted status-confirm product adapter",
-        "four coupled blockers",
-        "server-owned session/current-authority ingress",
-        "status-only discrimination",
-        "locked-state policy reconstruction",
-        "atomic status-effect/audit-identity staging",
+        "provider-free disposable postgresql-16 integration rehearsal",
+        "transaction-local practice context",
+        "both fresh actor checks",
+        "one-mutation/one-audit/private-receipt completion",
+        "byte-identical replay",
         "no route edit/mount/call",
-        "database/source",
-        "product/patient data",
-        "command/write",
+        "authored-synthetic rows",
+        "no product/runtime command/write",
+        "patient/clinical or operational product data",
         "provider/adc/credential/iam/browser/network",
         "docs/branding/",
         "deploy",
