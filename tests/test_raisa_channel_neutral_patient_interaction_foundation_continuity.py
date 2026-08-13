@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "raisa-channel-neutral-patient-interaction-foundation"
 SOURCE_HEAD = "17d9da1844e59406eecda44b5029e839b2e8a573"
 CURRENT_POSITION = (
-    "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
+    "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
 )
 
 
@@ -70,9 +70,9 @@ def test_patient_foundation_evidence_remains_bound_after_cf_d2_advance() -> None
     assert compass["current_position"]["node_id"] == CURRENT_POSITION
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
     limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "inert-ddl lowering" in unlocks
-    assert "database connection" in unlocks
+    assert "disposable postgresql-16" in unlocks
+    assert "parse-and-catalogue" in unlocks
     assert "external identity/channel delivery" in limits
-    assert "cf-d2 representation architecture" in compass[
+    assert "cf-d2 inert-ddl lowering" in compass[
         "orientation_statement"
     ].lower()

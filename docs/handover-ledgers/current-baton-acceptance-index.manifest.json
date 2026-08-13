@@ -31,10 +31,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 183099,
-  "ledger_line_count": 157,
+  "ledger_byte_count": 184160,
+  "ledger_line_count": 158,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "e2765c2185fd1460ea76ed2cf6a64ae66e5d55e3f98ca241c1a1beb32bf24da3",
+  "ledger_sha256": "307b83998bfeeaf764d7026da20e970a7d8ed602517e0ed23699a9aef48b2e8a",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -176,14 +176,15 @@
     "Visible native Diary status-confirm wiring acceptance",
     "Context Fabric CF-D2 observability-first event/cue architecture acceptance",
     "Provider-free unmounted CF-D2 event/cue admission rehearsal acceptance",
-    "Context Fabric CF-D2 event/cue representation architecture acceptance"
+    "Context Fabric CF-D2 event/cue representation architecture acceptance",
+    "Context Fabric CF-D2 event/cue inert-DDL lowering acceptance"
   ],
-  "moved_row_count": 141,
+  "moved_row_count": 142,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 73441,
-  "source_agents_git_blob_sha1": "79eb85dc71196573ef653a10bd303d32c79ed426",
+  "source_agents_byte_count": 73878,
+  "source_agents_git_blob_sha1": "4cd602199595667df4603ba8af216be3f2a60dd9",
   "source_agents_line_count": 494,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "10dc2204665e89c86011f3a78b0f1e0a4a756f39ded963692eebf19d753748c5",
-  "source_git_head": "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed"
+  "source_agents_sha256": "0612b9d53fd6c3477a089d777bb959f94ccdc529154a53313db6943706d94d96",
+  "source_git_head": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29"
 }

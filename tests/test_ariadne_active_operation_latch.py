@@ -26,14 +26,24 @@ def latch() -> dict:
     return json.loads(CURRENT.read_text(encoding="utf-8"))
 
 
+def in_progress_latch() -> dict:
+    value = latch()
+    value["status"] = "in_progress"
+    value["terminal_response"] = {
+        "permitted": False,
+        "reason": "unfinished_authorized_operation",
+    }
+    return value
+
+
 def test_current_latch_matches_schema_and_pure_validator() -> None:
     jsonschema = pytest.importorskip("jsonschema")
     value = latch()
     jsonschema.validate(value, json.loads(SCHEMA.read_text(encoding="utf-8")))
     assert validate_active_operation(value) == value
     projection = receipt_projection(value)
-    assert projection["status"] == "in_progress"
-    assert projection["terminal_handback_permitted"] is False
+    assert projection["status"] == "paused"
+    assert projection["terminal_handback_permitted"] is True
     assert projection["next_executable_stage"]
 
 
@@ -50,7 +60,7 @@ def test_current_latch_matches_schema_and_pure_validator() -> None:
 def test_non_replacing_interruption_resumes_active_operation(
     prompt_class: str, decision: str
 ) -> None:
-    result = assess_interruption(latch(), prompt_class=prompt_class)
+    result = assess_interruption(in_progress_latch(), prompt_class=prompt_class)
     assert result["status"] == "passed"
     assert result["decision"] == decision
     assert result["terminal_handback_permitted"] is False
@@ -61,14 +71,14 @@ def test_non_replacing_interruption_resumes_active_operation(
 def test_explicit_pause_or_redirect_requires_latch_update_first(
     prompt_class: str,
 ) -> None:
-    result = assess_interruption(latch(), prompt_class=prompt_class)
+    result = assess_interruption(in_progress_latch(), prompt_class=prompt_class)
     assert result["decision"] == "update_latch_before_terminal_or_replacement"
     assert result["terminal_handback_permitted"] is False
 
 
 def test_terminal_intent_fails_closed_while_work_is_in_progress() -> None:
     result = assess_interruption(
-        latch(), prompt_class="side_question", terminal_intent=True
+        in_progress_latch(), prompt_class="side_question", terminal_intent=True
     )
     assert result["status"] == "revision_required"
     assert result["terminal_handback_permitted"] is False
@@ -76,7 +86,7 @@ def test_terminal_intent_fails_closed_while_work_is_in_progress() -> None:
 
 
 def hostile_mutations() -> list[dict]:
-    base = latch()
+    base = in_progress_latch()
     cases: list[dict] = []
     for key in base:
         candidate = copy.deepcopy(base)

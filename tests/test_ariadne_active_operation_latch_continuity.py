@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "ariadne-postcompaction-active-operation-latch"
 PRODUCT_POSITION = (
-    "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
+    "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
 )
 SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
 
@@ -28,23 +28,21 @@ def test_latch_is_accepted_without_displacing_product_position() -> None:
     assert node["authority"]["authorized_openings"] == []
 
 
-def test_current_latch_resumes_exact_cf_d2_representation_descendant() -> None:
+def test_current_latch_records_explicit_pause_before_parse_catalogue() -> None:
     latch = _load(
         "orchestration/continuity/ariadne-active-operation-latch/current.json"
     )
-    assert latch["status"] == "in_progress"
+    assert latch["status"] == "paused"
     assert (
         latch["operation_id"]
-        == "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
+        == "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
     )
     assert (
-        "write_verify_commit_notify_and_publish_closeout"
+        "after_yuri_paper_discussion"
         in latch["checkpoint"]["next_executable_stage"]
     )
-    assert latch["terminal_response"] == {
-        "permitted": False,
-        "reason": "unfinished_authorized_operation",
-    }
+    assert latch["terminal_response"]["permitted"] is True
+    assert "paper" in latch["terminal_response"]["reason"].lower()
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

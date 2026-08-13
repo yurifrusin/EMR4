@@ -7,8 +7,8 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
-SOURCE_HEAD = "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed"
+NODE_ID = "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering"
+SOURCE_HEAD = "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29"
 STATUS_CONFIRM_SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
 INTEGRATION_SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
 ADAPTER_SOURCE_HEAD = "b728b903c99fa35f231df04ba68263533261121a"
@@ -27,28 +27,28 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 278
+    assert graph["graph_revision"] == 279
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 260
-    assert compass["source_graph_revision"] == 278
+    assert compass["map_revision"] == 261
+    assert compass["source_graph_revision"] == 279
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_cf_d2_representation_and_bound_ddl_lowering() -> None:
+def test_live_baton_rows_accept_cf_d2_inert_ddl_and_record_pause() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 278 / Compass 260" in current
-    assert "raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture_pass" in current
+    assert "Continuity 279 / Compass 261" in current
+    assert "raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering_pass" in current
     assert SOURCE_HEAD in current
-    assert "Seven exact payload-free relation shapes" in current
-    assert "five explicitly future transaction protocols" in current
-    assert "12 authored-synthetic row families" in current
-    assert "52 hostile contract and 28 hostile row variants" in current
-    assert "92 focused lineage checks" in current
+    assert "seven relations" in current
+    assert "fifty fields" in current
+    assert "nineteen honestly classified check labels" in current
+    assert "65 hostile candidates" in current
+    assert "142 focused lineage checks" in current
     assert "193-test canonical fast profile" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
@@ -76,13 +76,12 @@ def test_live_baton_rows_accept_cf_d2_representation_and_bound_ddl_lowering() ->
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "smallest provider-free unmounted CF-D2 inert-DDL lowering" in next_work
-    assert "exact accepted seven-relation representation" in next_work
-    assert "deterministic SQL text" in next_work
-    assert "fields, keys, references, checks, enums and mutability guards" in next_work
-    assert "future transaction protocols and external source/command authority" in next_work
-    assert "No database connection" in next_work
-    assert "product/patient data" in next_work
+    assert "Explicitly paused" in next_work
+    assert "disposable PostgreSQL-16 event/cue parse-and-catalogue" in next_work
+    assert "2509.26507v1.pdf" in next_work
+    assert "exact-artifact-only" in next_work
+    assert "Transaction behavior" in next_work
+    assert "patient/product data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -117,19 +116,17 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted cf-d2 inert-ddl lowering",
-        "exact accepted seven-relation representation",
-        "deterministic sql text",
-        "fields, keys, references, checks, enums and mutability guards",
-        "future transaction protocols and external source/command authority",
-        "no database connection",
-        "sql or migration execution",
-        "watcher/source access",
+        "explicitly paused",
+        "provider-free disposable postgresql-16 event/cue parse-and-catalogue",
+        "exact-artifact-only",
+        "transaction behavior",
+        "runtime/product wiring",
+        "source/watcher access",
         "persistence",
         "operational retention",
-        "product/patient data",
+        "patient/product data",
         "external patient client",
-        "other command",
+        "command/write",
         "provider/adc",
         "credential/iam/network",
         "docs/branding/",

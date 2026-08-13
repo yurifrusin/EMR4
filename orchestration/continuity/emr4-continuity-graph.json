@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 278,
+  "graph_revision": 279,
   "harvests": [],
   "nodes": [
     {
@@ -18280,9 +18280,123 @@
         "Source observation, watcher ownership, restart, unknown commit, dispatch transport, retention and operations remain unproved.",
         "Product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering",
+      "title": "Provider-free unmounted CF-D2 event and cue inert-DDL lowering",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-13T08:45:10Z",
+      "updated_at": "2026-08-13T08:45:10Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The exact accepted seven-relation representation and its SHA-256 remain the authority boundary.",
+          "One .sql.inert artifact proves deterministic structural text lowering only; PostgreSQL parse and catalogue admission remain unproved.",
+          "No database/source, SQL execution, persistence, watcher, product data, provider, command, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-cf-d2-event-cue-inert-ddl-lowering",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact byte-stable structural SQL text while leaving semantic, transaction and external-authority enforcement explicitly unlowered."
+        }
+      ],
+      "claim_scope": [
+        "Seven relations, fifty fields, seven primary keys, three unique keys, seven references and nineteen honest check dispositions are deterministically lowered.",
+        "Two isolated renders are byte-identical and all sixty-five hostile text variants fail closed without changing canonical artifacts.",
+        "One hundred forty-two focused lineage checks and the 193-test canonical fast profile pass.",
+        "Events and cues remain acceleration hints; fresh scoped reads and command-time current-authority and source-truth checks remain mandatory."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-plan.md",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-design.md",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/provider-free-unmounted-inert-ddl-evidence.json",
+            "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md"
+          ],
+          "note": "The DDL admits no appointment, practitioner, patient, time, duration or intent payload and cannot mutate a proposal."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-plan.md",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-design.md",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/provider-free-unmounted-inert-ddl-evidence.json",
+            "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md"
+          ],
+          "note": "Reconciliation remains one fresh-read-attempt record and does not become projection truth, command evidence or future freshness."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-plan.md",
+          "docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-design.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/provider-free-unmounted-inert-ddl-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--cf-d2-event-cue-inert-ddl-lowering.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-prepush-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py",
+          "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.schema.json",
+          "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py",
+          "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "PostgreSQL parsing, catalogue creation, constraint behavior, transactions and persistence remain unproved.",
+        "Source observation, watcher ownership, restart, unknown commit, dispatch transport, retention and operations remain unproved.",
+        "Product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T07:46:24Z"
+  "updated_at": "2026-08-13T08:45:10Z"
 }

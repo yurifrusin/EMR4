@@ -196,9 +196,14 @@ representation architecture now also passes at exact source
 `16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed`: 12 row families pass and all 80
 hostile contract/row variants fail closed while row constraints, five future
 transaction protocols and external source/command authority remain distinct.
-The next gate is exact inert SQL-text lowering; database admission,
-persistence, watcher/source access, restart, unknown commit and delivery remain
-unproved.
+Its exact inert SQL-text lowering now passes at source
+`cd890647d327a3d9bf4f60e5e1d6f9a1924bab29`: one byte-stable
+PostgreSQL-16-shaped artifact covers seven relations, fifty fields, seven
+primary keys, three unique keys, seven references and nineteen honest check
+dispositions; all 65 hostile variants fail closed. It was not parsed or
+executed. Disposable PostgreSQL parse/catalogue admission is next but paused
+at Yuri's request for the `2509.26507v1.pdf` discussion; persistence,
+watcher/source access, restart, unknown commit and delivery remain unproved.
 
 The provider-free legacy-route sequence now also passes through its source-
 bound default-off runtime-instrumentation architecture and globally-disabled
@@ -845,8 +850,12 @@ generation rehearsal. The architecture-only provider-free default-off
   `16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed`; all 12 canonical row families
   and 80 hostile variants pass, and transaction-protocol claims remain
   explicitly separate from keys and row checks. Exact inert SQL-text lowering
-  is now dependency-satisfied; PostgreSQL admission, persistence,
-  watcher/source access, restart, unknown commit and delivery remain unproved.
+  passes at source `cd890647d327a3d9bf4f60e5e1d6f9a1924bab29`; two
+  byte-identical renders and all 65 hostile variants pass without database
+  contact or SQL execution. The disposable PostgreSQL-16 parse/catalogue
+  descendant is dependency-satisfied but paused for Yuri's paper discussion;
+  persistence, watcher/source access, restart, unknown commit and delivery
+  remain unproved.
   Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its

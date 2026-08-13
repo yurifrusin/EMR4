@@ -59,18 +59,13 @@ def test_unmounted_admission_evidence_and_boundaries_are_bound() -> None:
         assert phrase in joined
 
 
-def test_compass_advances_to_inert_representation_architecture() -> None:
+def test_admission_journey_declares_representation_architecture_next() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert compass["current_position"]["node_id"] == (
-        "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+    assert journey["lineage_parent"] == (
+        "raisa-provider-free-cf-d2-observability-first-event-cue"
     )
-    unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
-    limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "inert-ddl lowering" in unlocks
-    assert "deterministic sql text" in unlocks
-    assert "database connection" in unlocks
-    assert "postgresql parsing" in limits
-    assert "no database, watcher" in compass["orientation_statement"].lower()
+    assert "inert representation architecture" in journey["outcome"].lower()
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:
