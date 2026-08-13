@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "source_head", "accepted_adapter_source", "evidence_label", "baseline_bindings", "source_bindings", "docker_profile", "tenant_contract", "scenarios", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "raisa.status_confirm_product_adapter_postgresql_contract.v1"},
+    "result": {"const": "contract_frozen"},
+    "source_head": {"pattern": "^[0-9a-f]{40}$"},
+    "accepted_adapter_source": {"pattern": "^[0-9a-f]{40}$"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_product_adapter"},
+    "baseline_bindings": {"type": "object", "minProperties": 2, "maxProperties": 2, "additionalProperties": {"pattern": "^[0-9a-f]{64}$"}},
+    "source_bindings": {"type": "array", "minItems": 13, "maxItems": 13, "items": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"pattern": "^[0-9a-f]{64}$"}}}},
+    "docker_profile": {"type": "object"},
+    "tenant_contract": {"type": "object"},
+    "scenarios": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "object", "additionalProperties": false, "required": ["id", "kind", "expected"], "properties": {"id": {"pattern": "^PGA-S(0[1-9]|1[0-2])$"}, "kind": {"type": "string"}, "expected": {"type": "string"}}}},
+    "cleanup": {"type": "object"}
+  }
+}

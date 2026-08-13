@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "evidence_label", "source_head", "contract_sha256", "source_hashes", "implementation_hashes", "hostile_mutations", "environment", "catalogue", "scenarios", "lifecycle", "cleanup", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "raisa.status_confirm_product_adapter_postgresql_evidence.v1"},
+    "result": {"enum": ["raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_pass", "rehearsal_failed"]},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_product_adapter"},
+    "source_head": {"pattern": "^[0-9a-f]{40}$"},
+    "contract_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "source_hashes": {"type": "object", "minProperties": 13, "additionalProperties": {"pattern": "^[0-9a-f]{64}$"}},
+    "implementation_hashes": {"type": "object", "minProperties": 2, "additionalProperties": {"pattern": "^[0-9a-f]{64}$"}},
+    "hostile_mutations": {"type": "object", "additionalProperties": false, "required": ["attempted", "rejected", "minimum_required"], "properties": {"attempted": {"type": "integer", "minimum": 100}, "rejected": {"type": "integer", "minimum": 100}, "minimum_required": {"const": 100}}},
+    "environment": {"type": "object"},
+    "catalogue": {"type": "object"},
+    "scenarios": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "outcome", "facts"],
+        "properties": {
+          "id": {"pattern": "^PGA-S(0[1-9]|1[0-2])$"},
+          "status": {"const": "passed"},
+          "outcome": {"type": "string"},
+          "facts": {
+            "type": "object",
+            "additionalProperties": {"type": ["string", "integer", "boolean", "null"]}
+          }
+        }
+      }
+    },
+    "lifecycle": {"type": "array", "items": {"type": "string"}},
+    "cleanup": {"type": "object"},
+    "claim_boundary": {"type": "string"}
+  }
+}

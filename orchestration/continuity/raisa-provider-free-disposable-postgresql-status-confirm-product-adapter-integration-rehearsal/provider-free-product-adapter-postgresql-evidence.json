@@ -1,0 +1,185 @@
+{
+  "schema_version": "raisa.status_confirm_product_adapter_postgresql_evidence.v1",
+  "result": "raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_product_adapter",
+  "source_head": "73d41c6f9da2d82970310f475d1858f311bded38",
+  "contract_sha256": "dcacab90f9d785229604e0cd3eab6f185430d4e5c1cd146fc4144858d3aa3540",
+  "source_hashes": {
+    "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md": "ff975620aa9dc531b04389f89963759a5decc0e80ab853d6688e5501924e3366",
+    "app/services/appointment_status_composition.py": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/models/tenancy.py": "6be0d9ab4fc33a8709268d2f2a4550b6063e3f3e4188349c5fe3b0b6acd14431",
+    "app/schemas/appointments.py": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d",
+    "app/services/bernie_turn_evidence.py": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py": "875afd5bdfcac9e8cdbc5deb000645c638b68d1eb2239d3cd55f130366c08bd9",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/rehearsal-contract.json": "bdc848e2033715eb110f3d55425e06894abbc3a492c0a35fea0a2daf2c55d19b",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json": "00b094830c5f1a0cea19be40cb6761ed5350b6b2ed3fecb53e37ae255333eadd",
+    "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py": "bfa72b627061b8e477903ec9fc2cfbb35a4970b26ab7115db18c3daef1d3696c",
+    "app/routers/appointments.py": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+  },
+  "implementation_hashes": {
+    "app/services/appointment_status_product_adapter.py": "a067e05802a74461fb14571c26e02bb72f34fcdd4624ee2a5ebcadd0266cdf55",
+    "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py": "6ac1cf7125b8f6bffbf7b8f6454aaf9df1c3d0cc23a93eb31aab24b9544a64aa"
+  },
+  "hostile_mutations": {
+    "attempted": 104,
+    "rejected": 104,
+    "minimum_required": 100
+  },
+  "environment": {
+    "postgresql_major": 16,
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "network_internal": true,
+    "published_ports": false,
+    "storage": "container_local_tmpfs",
+    "host_transport": "fixed_in_process_ipv4_loopback_relay",
+    "provider_calls": 0,
+    "product_rows": 0
+  },
+  "catalogue": {
+    "alembic_head": "w2x3y4z5a6b7",
+    "forced_rls_tables": 5,
+    "tenant_policies": 5,
+    "application_role_restricted": true,
+    "adjacent_version_trigger": true
+  },
+  "scenarios": [
+    {
+      "id": "PGA-S01",
+      "status": "passed",
+      "outcome": "committed",
+      "facts": {
+        "session_count": 1,
+        "version_delta": 1,
+        "audit_delta": 1,
+        "receipt_delta": 1
+      }
+    },
+    {
+      "id": "PGA-S02",
+      "status": "passed",
+      "outcome": "replay",
+      "facts": {
+        "session_count": 1,
+        "byte_identical": true,
+        "second_effect": false
+      }
+    },
+    {
+      "id": "PGA-S03",
+      "status": "passed",
+      "outcome": "zero_visibility",
+      "facts": {
+        "tables_checked": 5,
+        "visible_rows": 0
+      }
+    },
+    {
+      "id": "PGA-S04",
+      "status": "passed",
+      "outcome": "current_authority_unavailable",
+      "facts": {
+        "session_count": 1,
+        "claim_delta": 0
+      }
+    },
+    {
+      "id": "PGA-S05",
+      "status": "passed",
+      "outcome": "current_authority_unavailable",
+      "facts": {
+        "session_count": 1,
+        "authority_reads": 2,
+        "rollback_equal": true
+      }
+    },
+    {
+      "id": "PGA-S06",
+      "status": "passed",
+      "outcome": "appointment_not_found",
+      "facts": {
+        "session_count": 1,
+        "disclosed_row": false
+      }
+    },
+    {
+      "id": "PGA-S07",
+      "status": "passed",
+      "outcome": "locked_request_digest_changed",
+      "facts": {
+        "session_count": 1,
+        "rollback_equal": true
+      }
+    },
+    {
+      "id": "PGA-S08",
+      "status": "passed",
+      "outcome": "authenticated_status_context_unavailable",
+      "facts": {
+        "session_count": 0,
+        "pre_session_stop": true
+      }
+    },
+    {
+      "id": "PGA-S09",
+      "status": "passed",
+      "outcome": "status_confirm_transaction_unavailable",
+      "facts": {
+        "session_count": 1,
+        "rollback_equal": true
+      }
+    },
+    {
+      "id": "PGA-S10",
+      "status": "passed",
+      "outcome": "committed",
+      "facts": {
+        "session_count": 1,
+        "waiting_area_cleared": true,
+        "warning_acknowledged": true
+      }
+    },
+    {
+      "id": "PGA-S11",
+      "status": "passed",
+      "outcome": "current_authority_unavailable",
+      "facts": {
+        "session_count": 1,
+        "claim_delta": 0
+      }
+    },
+    {
+      "id": "PGA-S12",
+      "status": "passed",
+      "outcome": "no_leakage",
+      "facts": {
+        "commit_boundary": true,
+        "rollback_boundary": true,
+        "pooled_connection": true
+      }
+    }
+  ],
+  "lifecycle": [
+    "contract_sources_and_104_mutations_verified",
+    "cached_image_verified",
+    "owned_internal_network_verified",
+    "owned_tmpfs_container_verified",
+    "postgresql_16_schema_and_rls_installed",
+    "fixed_loopback_relay_started",
+    "restricted_application_role_catalogue_verified",
+    "twelve_serial_product_adapter_scenarios_verified",
+    "fixed_loopback_relay_stopped",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container": "container_absent",
+    "network": "network_absent",
+    "container_id_sha256": "d516b07b12a3f24d522d80002daa7c8d4636f8cb85d559669cf8e15cef2d79c1",
+    "network_id_sha256": "a541a80d0307fd6264a4aa9f75d6b9fbad9fbccc98946c86aca7f26834a585dc"
+  },
+  "claim_boundary": "Exact off-route authored-synthetic product-adapter integration over one disposable PostgreSQL 16 server only; no HTTP wiring, product data, concurrency, restart, deployment, production or UI claim."
+}

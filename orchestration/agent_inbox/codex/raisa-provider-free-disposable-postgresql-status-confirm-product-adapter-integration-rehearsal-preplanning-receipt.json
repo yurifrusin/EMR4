@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL-16 status-confirm product-adapter integration rehearsal",
+    "completed_stage": "predecessor unmounted product adapter accepted at source b728b903c99fa35f231df04ba68263533261121a with continuity 271 / compass 253 closeout prepared",
+    "next_executable_stage": "publish the predecessor closeout, perform a fresh five-source rehydration and freeze the narrow off-route disposable PostgreSQL-16 product-adapter integration plan before any database execution",
+    "operation_id": "raisa-status-confirm-product-adapter-postgresql-integration",
+    "resume_after_compaction": true,
+    "source_head": "b728b903c99fa35f231df04ba68263533261121a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_narrowest_off_route_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted product-adapter closeout and Sol acceptance were read completely. They require the next gate to prove transaction-local practice context, both fresh actor checks, exact one-mutation/one-audit/private-receipt completion, adjacent version, rollback and byte-identical replay using only owned authored-synthetic rows with cleanup while staying off-route.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. The disposable database sequence is serial, stateful and tightly coupled, so it remains Sol-owned under the worker-economy rule; no external model or worker is selected.",
+    "git_refs_and_worktree": "At 2026-08-13T10:59:21+10:00, HEAD and origin task were exact 73d41c6f9da2d82970310f475d1858f311bded38 and required 648c8ec9805af63729264ea9c22fd695f062a741 remained an ancestor. Local/origin master and handoff/current were all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state was clean; 524 untracked status entries including five docs/branding files and the predecessor untracked pre-push pair were preserved before this pair.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 73d41c6f9da2d82970310f475d1858f311bded38. Continuity 271 / Compass 253 accepts the unmounted product adapter at source b728b903c99fa35f231df04ba68263533261121a and names an off-route disposable PostgreSQL-16 integration rehearsal next.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected evidence, historical PHI, patient/clinical/operational product data, route edit/mount/call, provider/ADC/credential/IAM/browser/network, product/runtime command, deployment, release, Pages and protected refs remain closed. Only a frozen plan may authorize exact owned disposable authored-synthetic PostgreSQL write/readback/cleanup. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

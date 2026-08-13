@@ -6,7 +6,7 @@ import hashlib
 import hmac
 import json
 import uuid
-from contextlib import closing
+from contextlib import closing, contextmanager
 from typing import Any, Callable, Mapping
 
 from sqlalchemy import text
@@ -557,6 +557,18 @@ def _set_practice_context(db: Any, practice_id: Any) -> None:
     )
 
 
+def _practice_is_active(
+    *,
+    db: Any,
+    practice_id: Any,
+) -> Callable[[Any], bool]:
+    def check(practice: Any) -> bool:
+        _set_practice_context(db, practice_id)
+        return bool(practice.id == practice_id)
+
+    return check
+
+
 def _current_authority(
     *,
     db: Any,
@@ -581,6 +593,23 @@ def _current_authority(
         )
 
     return check
+
+
+def _uuid_bound_transaction_factory(
+    transaction_factory: TransactionFactory,
+) -> TransactionFactory:
+    @contextmanager
+    def enter(db: Any, **arguments: Any):
+        target = arguments.get("target_appointment_id")
+        if isinstance(target, str):
+            target = uuid.UUID(target)
+        if not isinstance(target, uuid.UUID):
+            raise ValueError("physical target appointment id is invalid")
+        exact_arguments = {**arguments, "target_appointment_id": target}
+        with transaction_factory(db, **exact_arguments) as decision:
+            yield decision
+
+    return enter
 
 
 def _locked_server_factory(
@@ -738,9 +767,12 @@ def compose_product_status_confirm(
                 authenticated_user=authenticated_user,
                 session_reference=session_reference,
             ),
-            practice_is_active=lambda practice: practice.id == authenticated_user.practice_id,
+            practice_is_active=_practice_is_active(
+                db=command_db,
+                practice_id=authenticated_user.practice_id,
+            ),
             current_authority=authority,
-            transaction_factory=transaction_factory,
+            transaction_factory=_uuid_bound_transaction_factory(transaction_factory),
         )
 
 
