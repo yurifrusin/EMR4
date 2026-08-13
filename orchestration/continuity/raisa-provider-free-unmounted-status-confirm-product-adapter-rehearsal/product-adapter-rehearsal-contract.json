@@ -1,0 +1,51 @@
+{
+  "schema_version": "raisa.status_confirm_product_adapter_rehearsal_contract.v1",
+  "source_head": "3c5d69512358cf7308c80e0da070d6650acb7f73",
+  "accepted_parent_result": "raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview_pass",
+  "frozen_inputs": {
+    "app/services/appointment_status_composition.py": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/models/tenancy.py": "6be0d9ab4fc33a8709268d2f2a4550b6063e3f3e4188349c5fe3b0b6acd14431",
+    "app/schemas/appointments.py": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d",
+    "app/services/diary/confirm_actions.py": "7b37dce383b5f36fa831e6b3221d5cd897bc24bb0c6fd9637b11a7a6bc9b2561",
+    "app/services/bernie_turn_evidence.py": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467",
+    "app/services/auth_service.py": "c7380e744bc42be006b34546769b76eb3b8f010b8602513a64f3865c76c1f33c",
+    "app/dependencies.py": "d44f777f742074f0ee4717d599d7ee71dd6343c7096c87793149c727c1c4b0a9",
+    "app/routers/appointments.py": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb",
+    "docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md": "c75c7c707ab0023cf8d4bf4a90dfe638c36179fbd1a87b81397cda51fea5e10f",
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-contract.json": "f472b722c3a7fcffb81d901b64a5c2d5135c201b6361d31a213d098197021b46",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json": "694d8bc0302feb9b8b99013634ab80b9b60ce0919759dad8f16c1a2382c3e306"
+  },
+  "adapter_responsibilities": [
+    "server_owned_session_and_current_authority_ingress",
+    "status_only_union_discrimination",
+    "signed_proposal_state_and_opaque_version_binding_with_locked_policy_reconstruction",
+    "atomic_status_effect_and_audit_identity_staging"
+  ],
+  "required_scenarios": [
+    "clean_execute",
+    "byte_identical_response_loss_replay",
+    "bearer_minimisation",
+    "distinct_bearer_session_separation",
+    "current_authority_before_and_after_idempotency",
+    "waiting_area_union_pretransaction_rejection",
+    "signed_proposal_version_binding",
+    "changed_locked_generation_stop",
+    "same_state_and_terminal_stop",
+    "warning_and_evidence_stop",
+    "single_mutation_single_audit_adjacent_version",
+    "command_audit_session_correlation",
+    "complete_canonical_public_envelope"
+  ],
+  "minimum_hostile_mutations": 80,
+  "forbidden": [
+    "route_edit_mount_or_call",
+    "real_database_or_source_execution",
+    "product_patient_or_clinical_data",
+    "provider_adc_credential_iam_browser_or_network",
+    "runtime_command_or_write",
+    "deployment_production_release_pages_or_protected_ref_movement"
+  ],
+  "claim_boundary": "authored_synthetic_unmounted_application_adapter_only"
+}

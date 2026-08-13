@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only status-confirm route-mounting readiness re-review",
+    "completed_stage": "fourteen-source deterministic ten-dimension readiness re-review passed with four satisfied, two partial and four blocking product-adapter dimensions",
+    "next_executable_stage": "complete Sol closeout, continuity update, explicit-path commit, push and notification, then freeze the narrow provider-free unmounted product-adapter rehearsal",
+    "operation_id": "raisa-status-confirm-route-mounting-readiness-rereview",
+    "resume_after_compaction": true,
+    "source_head": "b2107060facb701208d034cba3bc8ef29f22a7f9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_narrowest_provider_free_unmounted_status_confirm_product_adapter_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted readiness closeout and Sol acceptance were read. They freeze four coupled blockers: server-session/current-authority ingress, status-only admission, locked-state policy reconstruction and atomic status-effect/audit-identity staging against accepted composition source b2107060facb701208d034cba3bc8ef29f22a7f9.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. The next plan is tightly coupled authority-boundary work; worker allocation will be decided only after its exact separable implementation boundary is frozen.",
+    "git_refs_and_worktree": "HEAD, local task and origin task are exact 3c5d69512358cf7308c80e0da070d6650acb7f73; required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; 522 untracked status entries and five docs/branding files are preserved before this runtime-state/receipt pair.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 3c5d69512358cf7308c80e0da070d6650acb7f73. Continuity 270 / Compass 252 accepts the readiness re-review and names one unmounted status-confirm product-adapter rehearsal next.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts, historical PHI, patient/product data, route edit/mount/call, database/source execution, provider/ADC/credential/IAM/browser/network, command/write, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

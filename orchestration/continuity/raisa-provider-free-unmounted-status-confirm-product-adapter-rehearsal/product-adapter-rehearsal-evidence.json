@@ -1,0 +1,56 @@
+{
+  "claim_boundary": "authored_synthetic_unmounted_application_adapter_only",
+  "contract_sha256": "74a95c55e6731436b253ebdaecd68eea0e76804e94bcd0d8e84c0c94b120d19a",
+  "hostile_mutations": {
+    "attempted": 84,
+    "minimum_required": 80,
+    "rejected": 84
+  },
+  "implementation_hashes": {
+    "app/services/appointment_status_product_adapter.py": "4c6351352a0c3af9f392f4cfb424db926b9acb475cdf4864b4c46ec8fb65963e",
+    "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py": "b31683e0a376dd7928b7d7290b0af40226f5d220316d66e7947df915f2ccdc22",
+    "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py": "06e540c3dc6d3f4a1f3f8ff41561c473fe1bfa7aa4ddfd44bc143f0869cde4f4"
+  },
+  "input_hashes": {
+    "app/dependencies.py": "d44f777f742074f0ee4717d599d7ee71dd6343c7096c87793149c727c1c4b0a9",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/models/tenancy.py": "6be0d9ab4fc33a8709268d2f2a4550b6063e3f3e4188349c5fe3b0b6acd14431",
+    "app/routers/appointments.py": "59c2923f9cb4dcad75e727fd7614231a0ac5888d30a79f3d1b7949e4fb483ddb",
+    "app/schemas/appointments.py": "d721c94dece8a60fec9f36a542a3c9cc3e6964ef394da8d76f099332c1c6806d",
+    "app/services/appointment_status_composition.py": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "app/services/auth_service.py": "c7380e744bc42be006b34546769b76eb3b8f010b8602513a64f3865c76c1f33c",
+    "app/services/bernie_turn_evidence.py": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467",
+    "app/services/diary/confirm_actions.py": "7b37dce383b5f36fa831e6b3221d5cd897bc24bb0c6fd9637b11a7a6bc9b2561",
+    "docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md": "c75c7c707ab0023cf8d4bf4a90dfe638c36179fbd1a87b81397cda51fea5e10f",
+    "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-contract.json": "f472b722c3a7fcffb81d901b64a5c2d5135c201b6361d31a213d098197021b46",
+    "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal/provider-free-composition-evidence.json": "694d8bc0302feb9b8b99013634ab80b9b60ce0919759dad8f16c1a2382c3e306"
+  },
+  "result": "raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_pass",
+  "route_import_absent": true,
+  "route_unchanged": true,
+  "scenario_results": {
+    "bearer_minimisation": true,
+    "byte_identical_response_loss_replay": true,
+    "changed_locked_generation_stop": true,
+    "clean_execute": true,
+    "command_audit_session_correlation": true,
+    "complete_canonical_public_envelope": true,
+    "current_authority_before_and_after_idempotency": true,
+    "distinct_bearer_session_separation": true,
+    "same_state_and_terminal_stop": true,
+    "signed_proposal_version_binding": true,
+    "single_mutation_single_audit_adjacent_version": true,
+    "waiting_area_union_pretransaction_rejection": true,
+    "warning_and_evidence_stop": true
+  },
+  "schema_version": "raisa.status_confirm_product_adapter_rehearsal_evidence.v1",
+  "side_effects": {
+    "database_connections": 0,
+    "network_calls": 0,
+    "product_patient_records": 0,
+    "provider_calls": 0,
+    "route_calls": 0
+  },
+  "source_head": "3c5d69512358cf7308c80e0da070d6650acb7f73"
+}

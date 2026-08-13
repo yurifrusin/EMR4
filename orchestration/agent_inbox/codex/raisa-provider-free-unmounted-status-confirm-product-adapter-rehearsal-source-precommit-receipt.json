@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted status-confirm product-adapter rehearsal",
+    "completed_stage": "unmounted product adapter, opaque proposal-version binding, 84-mutation rehearsal, 118 focused checks and the 193-test canonical fast profile pass with the route unchanged",
+    "next_executable_stage": "generate the pre-commit receipt, explicitly stage only owned tranche artifacts, commit the reviewed source and proceed to paired closeout acceptance without touching protected refs or unrelated untracked files",
+    "operation_id": "raisa-status-confirm-product-adapter-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3c5d69512358cf7308c80e0da070d6650acb7f73",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_reviewed_provider_free_unmounted_status_confirm_product_adapter_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The revision-2 frozen plan closes all four coupled readiness blockers and repairs the proposal-time source-version replay gap with one off-route server-minted HMAC binding. The generated rehearsal rejects 84 of 84 hostile mutations; 118 focused checks and the 193-test canonical fast profile pass.",
+    "current_authority_allocation": "GPT Sol retained this tightly coupled implementation and acceptance work. No external worker or verifier received code, data, integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "At 2026-08-13T10:42:28+10:00, task HEAD and origin task remained 3c5d69512358cf7308c80e0da070d6650acb7f73 with required 648c8ec9805af63729264ea9c22fd695f062a741 as ancestor. Local/origin master and handoff/current remained exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicitly owned tranche artifacts and the active latch are candidates for staging; all unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Continuity 270 / Compass 252 names the exact unmounted product-adapter tranche now implemented over task parent 3c5d69512358cf7308c80e0da070d6650acb7f73.",
+    "protected_evidence_boundaries": "No protected evidence, historical PHI, patient/product data, route mount/call, real database/source, provider/ADC/credential/IAM/browser/network, runtime command/write, deployment, release, Pages or protected ref was opened. The current route remains hash-exact and has no adapter import. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

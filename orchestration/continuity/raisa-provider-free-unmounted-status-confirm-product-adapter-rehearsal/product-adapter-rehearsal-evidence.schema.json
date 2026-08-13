@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/status-confirm-product-adapter-rehearsal-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "contract_sha256",
+    "input_hashes",
+    "implementation_hashes",
+    "route_unchanged",
+    "route_import_absent",
+    "scenario_results",
+    "hostile_mutations",
+    "side_effects",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.status_confirm_product_adapter_rehearsal_evidence.v1"},
+    "result": {"const": "raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_pass"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "input_hashes": {
+      "type": "object",
+      "minProperties": 13,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "implementation_hashes": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "route_unchanged": {"const": true},
+    "route_import_absent": {"const": true},
+    "scenario_results": {
+      "type": "object",
+      "minProperties": 13,
+      "additionalProperties": {"const": true}
+    },
+    "hostile_mutations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "rejected", "minimum_required"],
+      "properties": {
+        "attempted": {"type": "integer", "minimum": 80},
+        "rejected": {"type": "integer", "minimum": 80},
+        "minimum_required": {"const": 80}
+      }
+    },
+    "side_effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_calls", "database_connections", "provider_calls", "network_calls", "product_patient_records"],
+      "properties": {
+        "route_calls": {"const": 0},
+        "database_connections": {"const": 0},
+        "provider_calls": {"const": 0},
+        "network_calls": {"const": 0},
+        "product_patient_records": {"const": 0}
+      }
+    },
+    "claim_boundary": {"const": "authored_synthetic_unmounted_application_adapter_only"}
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted status-confirm product-adapter rehearsal",
+    "completed_stage": "fresh post-compaction five-source rehydration, source discovery and narrow fail-closed product-adapter plan freeze complete",
+    "next_executable_stage": "implement the one owned unmounted product-adapter service, deterministic authored-synthetic rehearsal and focused tests without editing or calling the route or executing a database",
+    "operation_id": "raisa-status-confirm-product-adapter-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3c5d69512358cf7308c80e0da070d6650acb7f73",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_provider_free_unmounted_status_confirm_product_adapter_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen product-adapter plan, accepted readiness closeout, Sol acceptance and active-operation latch were read completely. The next executable stage is the one owned off-route adapter, authored-synthetic rehearsal and focused tests over the accepted composition.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. This tightly coupled bounded adapter remains Sol-owned; no worker or verifier receives integration, acceptance, baton or protected-ref authority.",
+    "git_refs_and_worktree": "At 2026-08-13T10:21:45+10:00, HEAD and origin task were exact 3c5d69512358cf7308c80e0da070d6650acb7f73; required 648c8ec9805af63729264ea9c22fd695f062a741 remained an ancestor. Local/origin master and handoff/current remained exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the active latch and newly owned tranche files were tracked/untracked work; 528 untracked status entries including docs/branding were preserved before this fresh pair.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction at task HEAD 3c5d69512358cf7308c80e0da070d6650acb7f73. Continuity 270 / Compass 252 remains the accepted readiness result and the in-progress latch names the unmounted status-confirm product-adapter rehearsal.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts, historical PHI, patient/product data, route edit/mount/call, database/source execution, provider/ADC/credential/IAM/browser/network, command/write, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

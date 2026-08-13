@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_narrowest_provider_free_unmounted_status_confirm_product_adapter_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 3c5d69512358cf7308c80e0da070d6650acb7f73. Continuity 270 / Compass 252 accepts the readiness re-review and names one unmounted status-confirm product-adapter rehearsal next.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. The next plan is tightly coupled authority-boundary work; worker allocation will be decided only after its exact separable implementation boundary is frozen.",
+    "active_plan_and_acceptance": "The accepted readiness closeout and Sol acceptance were read. They freeze four coupled blockers: server-session/current-authority ingress, status-only admission, locked-state policy reconstruction and atomic status-effect/audit-identity staging against accepted composition source b2107060facb701208d034cba3bc8ef29f22a7f9.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts, historical PHI, patient/product data, route edit/mount/call, database/source execution, provider/ADC/credential/IAM/browser/network, command/write, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "HEAD, local task and origin task are exact 3c5d69512358cf7308c80e0da070d6650acb7f73; required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; 522 untracked status entries and five docs/branding files are preserved before this runtime-state/receipt pair."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-status-confirm-route-mounting-readiness-rereview",
+    "active_tranche": "Provider-free read-only status-confirm route-mounting readiness re-review",
+    "objective": "Reclassify the original ten route-mounting dimensions against the accepted unmounted composition and identify only the narrowest remaining product adapter or route prerequisites.",
+    "status": "in_progress",
+    "source_head": "b2107060facb701208d034cba3bc8ef29f22a7f9",
+    "authority_source": "AGENTS.md Current Baton next implementation plus Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "fourteen-source deterministic ten-dimension readiness re-review passed with four satisfied, two partial and four blocking product-adapter dimensions",
+      "next_executable_stage": "complete Sol closeout, continuity update, explicit-path commit, push and notification, then freeze the narrow provider-free unmounted product-adapter rehearsal",
+      "retry_counters": {"review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "protected_evidence_closed",
+      "patient_product_clinical_data_closed",
+      "provider_credential_iam_network_closed",
+      "route_database_command_runtime_closed",
+      "deployment_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "status_confirm_product_adapter_preplanning",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Repository-local plan and accepted exact sources are available."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent is selected before plan freeze."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Independent review allocation is deferred until deterministic implementation evidence exists."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Worker allocation is deferred until a separable packet exists."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
