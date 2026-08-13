@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "AER-0294 through AER-0298 corrected, literal-only API/UI maps admitted, and same-date same-practitioner duration-fixed time-reschedule plan frozen",
+    "next_executable_stage": "commit the plan, generate a pre-worker receipt, dispatch the isolated browser-test artifact to DeepSeek and implement product composition with Sol",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "2ee298e8b089e1d16133989f9a669d6dd46aff51",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_provider_free_selected_appointment_time_reschedule_composition_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted truth-parity plan, kernel architecture, closeout and Sol acceptance plus the fresh corrected API/UI result receipts constrain this plan to same-date same-practitioner duration-fixed time-only delegation through existing handleMoveResize.",
+    "current_authority_allocation": "Sol owns the narrow plan and acceptance. DeepSeek V4 Flash/high is allocated one isolated new route-intercepted test artifact only after the plan commit and a distinct passing pre-worker receipt; Gemini 3.6 Flash/high is reserved for later read-only veto.",
+    "git_refs_and_worktree": "The task branch is at incident-recovery source 2ee298e8b089e1d16133989f9a669d6dd46aff51, descended from required 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging alone is permitted.",
+    "live_handover_current_baton": "AGENTS.md was reread completely. Continuity 285 / Compass 267 accepts projection-neutral status truth parity and Yuri selected the next existing Reception One family as appointment update/rescheduling.",
+    "protected_evidence_boundaries": "Protected evidence and historical Diary/PHI remain closed. Only authored-synthetic provider-free UI composition is opened. Raw PUT, new routes, backend/API/OpenAPI/GraphQL/database/event/provider/network/product-data/deployment work remain closed; docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

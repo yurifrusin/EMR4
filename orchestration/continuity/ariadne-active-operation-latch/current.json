@@ -4,14 +4,14 @@
   "active_tranche": "Reception One selected-appointment reschedule composition",
   "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
   "status": "in_progress",
-  "source_head": "988c139a7f3592b48f5f3977e4b120bde2c78bac",
+  "source_head": "2ee298e8b089e1d16133989f9a669d6dd46aff51",
   "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "fresh five-source rehydration and exact-path API/UI reconnaissance completed; protected-scope incidents quarantined pending mandatory register update",
-    "next_executable_stage": "register all qualifying command-scope and process-order incidents, then freeze the narrowest same-practitioner selected-appointment time-reschedule composition plan and worker packets",
+    "completed_stage": "AER-0294 through AER-0298 corrected, literal-only API/UI maps admitted, and same-date same-practitioner duration-fixed time-reschedule composition plan frozen",
+    "next_executable_stage": "commit the frozen plan, generate a fresh pre-worker receipt and dispatch the isolated route-intercepted test artifact to DeepSeek V4 Flash/high while Sol implements the shared product path",
     "retry_counters": {
       "review": 0,
-      "verification": 1
+      "verification": 4
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
