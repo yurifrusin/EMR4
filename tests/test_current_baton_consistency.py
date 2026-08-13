@@ -76,6 +76,8 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert "bounded visible native Diary status-confirm wiring" in next_work
+    assert "Paused before commencement" in next_work
+    assert "resume only on Yuri's explicit go-ahead" in next_work
     assert SOURCE_HEAD in next_work
     assert "no raw fallback" in next_work
     assert "stale/current-truth" in next_work
@@ -117,6 +119,8 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "bounded visible native diary status-confirm wiring",
+        "paused before commencement",
+        "explicit go-ahead",
         "proposal",
         "confirmation",
         "stale/current-truth",

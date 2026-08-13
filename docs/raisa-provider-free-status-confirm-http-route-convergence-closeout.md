@@ -79,6 +79,10 @@ and the visible interaction boundary should now define the cues and
 reconciliation behavior that a later observability-first durability extension
 must prove. No watcher retry is opened by this closeout.
 
+After the task-branch closeout push, Yuri requested a pause before the visible
+Diary tranche begins. That tranche is unstarted and resumes only on explicit
+go-ahead.
+
 Patient/clinical and operational product data, providers, credentials/IAM,
 external network, deployment, production, release, Pages and protected refs
 remain closed. `docs/branding/` and every unrelated untracked file remain

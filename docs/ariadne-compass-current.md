@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next; CF-D2 remains a later observability-first durable event/cue extension.
+> EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next but paused before commencement at Yuri's request; CF-D2 remains a later observability-first durable event/cue extension.
 
 ## North star
 
@@ -317,11 +317,11 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 150. **Join the accepted application adapter to the accepted physical database seam — Disposable PostgreSQL status-confirm product-adapter integration**
    Exact atomic commit, replay, rollback, RLS and tenant-setting lifecycle pass on disposable PostgreSQL 16. Lineage parent: `raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal`.
 151. **Close the final backend status-confirm seam before visible Diary work — Provider-free status-confirm HTTP route convergence**
-   One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal`.
+   One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next but paused before commencement at Yuri's request. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal`.
 
 ## Current position
 
-**Backend status-confirm convergence complete; visible Diary work is next — Provider-free status-confirm HTTP route convergence**
+**Backend status-confirm convergence complete; paused before visible Diary work — Provider-free status-confirm HTTP route convergence**
 
 **Why this proof came next:** The adapter and physical seam already passed independently; the HTTP boundary now proves their exact mounted composition.
 
@@ -329,7 +329,7 @@ Canonical and compatibility paths share one fail-closed status-only transaction 
 
 ### What this unlocks
 
-- Freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.
+- After Yuri explicitly resumes, freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.
 - Prove proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.
 - Use that settled interaction boundary to shape a later observability-first durable event/cue delivery tranche.
 
@@ -407,7 +407,7 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve accepted conditional-command and status-confirm route correctness.
-- Wire and prove bounded visible Diary status-confirm behavior next.
+- After Yuri explicitly resumes, wire and prove bounded visible Diary status-confirm behavior.
 - Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked

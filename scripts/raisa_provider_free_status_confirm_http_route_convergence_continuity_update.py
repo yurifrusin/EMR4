@@ -195,7 +195,7 @@ def main() -> int:
         "node_id": NODE_ID,
         "lineage_parent": PARENT,
         "strategic_role": "Close the final backend status-confirm seam before visible Diary work",
-        "outcome": "One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next.",
+        "outcome": "One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next but paused before commencement at Yuri's request.",
         "evidence": _evidence(),
     }
     if (
@@ -218,7 +218,7 @@ def main() -> int:
             horizon["status"] = "active"
             horizon["prerequisites"] = [
                 "Preserve accepted conditional-command and status-confirm route correctness.",
-                "Wire and prove bounded visible Diary status-confirm behavior next.",
+                "After Yuri explicitly resumes, wire and prove bounded visible Diary status-confirm behavior.",
                 "Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary.",
             ]
             for item in journey["evidence"]:
@@ -230,11 +230,11 @@ def main() -> int:
 
     compass["current_position"] = {
         "node_id": NODE_ID,
-        "strategic_role": "Backend status-confirm convergence complete; visible Diary work is next",
+        "strategic_role": "Backend status-confirm convergence complete; paused before visible Diary work",
         "why_now": "The adapter and physical seam already passed independently; the HTTP boundary now proves their exact mounted composition.",
         "outcome": "Canonical and compatibility paths share one fail-closed status-only transaction with exact-byte replay.",
         "unlocks": [
-            "Freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.",
+            "After Yuri explicitly resumes, freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.",
             "Prove proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.",
             "Use that settled interaction boundary to shape a later observability-first durable event/cue delivery tranche.",
         ],
@@ -249,7 +249,8 @@ def main() -> int:
         "EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm "
         "HTTP route now converges on the accepted adapter/transaction seam with "
         "opaque generation binding and exact-byte replay. Visible native Diary "
-        "status-confirm wiring is next; CF-D2 remains a later observability-first "
+        "status-confirm wiring is next but paused before commencement at Yuri's "
+        "request; CF-D2 remains a later observability-first "
         "durable event/cue extension."
     )
     limit = (

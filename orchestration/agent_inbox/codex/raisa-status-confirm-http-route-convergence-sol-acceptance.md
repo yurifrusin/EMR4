@@ -28,3 +28,6 @@ tranche against this frozen backend contract. CF-D2 is not a prerequisite for
 that work and remains a later observability-first event/cue durability
 extension. Other commands, product data, providers, deployment, release,
 Pages and protected integration remain separately closed.
+
+Yuri subsequently paused before that UI tranche begins. No UI planning or
+implementation starts until Yuri explicitly resumes it.

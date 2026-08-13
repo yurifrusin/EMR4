@@ -4,7 +4,7 @@
   "map_revision": 255,
   "updated_at": "2026-08-13T03:09:24Z",
   "source_graph_revision": 273,
-  "orientation_statement": "EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next; CF-D2 remains a later observability-first durable event/cue extension.",
+  "orientation_statement": "EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next but paused before commencement at Yuri's request; CF-D2 remains a later observability-first durable event/cue extension.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2714,7 +2714,7 @@
       "node_id": "raisa-provider-free-status-confirm-http-route-convergence",
       "lineage_parent": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
       "strategic_role": "Close the final backend status-confirm seam before visible Diary work",
-      "outcome": "One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next.",
+      "outcome": "One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next but paused before commencement at Yuri's request.",
       "evidence": [
         "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md",
         "docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md",
@@ -2743,11 +2743,11 @@
   ],
   "current_position": {
     "node_id": "raisa-provider-free-status-confirm-http-route-convergence",
-    "strategic_role": "Backend status-confirm convergence complete; visible Diary work is next",
+    "strategic_role": "Backend status-confirm convergence complete; paused before visible Diary work",
     "why_now": "The adapter and physical seam already passed independently; the HTTP boundary now proves their exact mounted composition.",
     "outcome": "Canonical and compatibility paths share one fail-closed status-only transaction with exact-byte replay.",
     "unlocks": [
-      "Freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.",
+      "After Yuri explicitly resumes, freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.",
       "Prove proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.",
       "Use that settled interaction boundary to shape a later observability-first durable event/cue delivery tranche."
     ],
@@ -2887,7 +2887,7 @@
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
         "Preserve accepted conditional-command and status-confirm route correctness.",
-        "Wire and prove bounded visible Diary status-confirm behavior next.",
+        "After Yuri explicitly resumes, wire and prove bounded visible Diary status-confirm behavior.",
         "Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary."
       ],
       "boundary_changes": [],

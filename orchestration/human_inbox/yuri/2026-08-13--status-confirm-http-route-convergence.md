@@ -49,3 +49,6 @@ without a settled consumer boundary.
 Next: bounded visible native Diary status-confirm wiring and interaction proof.
 CF-D2 remains an explicitly deferred observability-first durability extension,
 not abandoned work and not a prerequisite for the UI tranche.
+
+Pause: Yuri requested a stop before the UI tranche begins. It remains unstarted
+until explicit resumption.

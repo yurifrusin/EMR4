@@ -69,4 +69,5 @@ def test_status_confirm_http_evidence_and_next_ui_direction_are_bound() -> None:
     assert "visible native diary" in " ".join(
         compass["current_position"]["unlocks"]
     ).lower()
+    assert "paused" in compass["current_position"]["strategic_role"].lower()
     assert "observability-first" in compass["orientation_statement"].lower()

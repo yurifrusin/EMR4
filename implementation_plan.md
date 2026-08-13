@@ -296,7 +296,8 @@ input is blocked without a local fallback. All twelve disposable scenarios,
 canonical fast profile pass with exact cleanup.
 
 The next product-direction gate is bounded visible native Diary status-confirm
-wiring against this exact backend contract. CF-D2 is preserved but is not a
+wiring against this exact backend contract. Work is paused before that tranche
+at Yuri's 2026-08-13 request and resumes only on explicit go-ahead. CF-D2 is preserved but is not a
 prerequisite: the command path already derives correctness from current
 database truth, while the visible interaction boundary should define the
 quiet cues and reconciliation signals for a later observability-first durable
