@@ -18,14 +18,16 @@ def _node(graph: dict) -> dict:
     return matches[0]
 
 
-def test_reorientation_is_the_accepted_continuity_position() -> None:
+def test_reorientation_remains_accepted_after_descendant_advances() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
 
-    assert graph["graph_revision"] == 245
-    assert compass["map_revision"] == 227
-    assert compass["source_graph_revision"] == 245
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert graph["graph_revision"] >= 276
+    assert compass["map_revision"] >= 258
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert compass["current_position"]["node_id"] == (
+        "raisa-provider-free-cf-d2-observability-first-event-cue"
+    )
     node = _node(graph)
     assert node["kind"] == "foundation"
     assert node["status"] == "accepted"
@@ -51,7 +53,7 @@ def test_reorientation_opens_no_runtime_authority() -> None:
         assert phrase in joined
 
 
-def test_compass_names_admission_next_and_durability_later() -> None:
+def test_compass_names_pure_admission_next_and_runtime_durability_later() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
     current = compass["current_position"]
     joined = " ".join(
@@ -60,10 +62,11 @@ def test_compass_names_admission_next_and_durability_later() -> None:
         + current["does_not_solve"]
     ).lower()
 
-    assert "conditional-command admission" in joined
-    assert "durable event and cue delivery" in joined
-    assert "events are acceleration hints" in compass["orientation_statement"].lower()
-    assert "one logical watcher" in compass["orientation_statement"].lower()
+    assert "pure state admission next" in joined
+    assert "unmounted event/cue admission rehearsal" in joined
+    assert "payload-free refresh obligation" in joined
+    assert "source observation or a watcher process" in joined
+    assert "source/command authority preserved" in compass["orientation_statement"].lower()
 
 
 def test_accepted_evidence_binds_review_and_human_summary() -> None:

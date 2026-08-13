@@ -26,17 +26,17 @@ def test_latch_is_accepted_without_displacing_product_position() -> None:
     assert node["authority"]["authorized_openings"] == []
 
 
-def test_current_latch_resumes_exact_cf_d2_observability_plan() -> None:
+def test_current_latch_resumes_exact_cf_d2_admission_descendant() -> None:
     latch = _load(
         "orchestration/continuity/ariadne-active-operation-latch/current.json"
     )
     assert latch["status"] == "in_progress"
     assert (
         latch["operation_id"]
-        == "raisa-provider-free-cf-d2-observability-first-event-cue-plan"
+        == "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
     )
     assert (
-        "verify_closeout_generate_precommit_receipt_then_commit_notify"
+        "generate_precommit_receipt_then_explicitly_stage_commit_and_publish"
         in latch["checkpoint"]["next_executable_stage"]
     )
     assert latch["terminal_response"] == {

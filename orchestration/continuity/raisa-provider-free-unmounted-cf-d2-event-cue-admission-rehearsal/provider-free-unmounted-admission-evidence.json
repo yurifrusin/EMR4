@@ -1,0 +1,20 @@
+{
+  "accepted_architecture_source": "e8677b54d1c339dcd14776ce8bf15e7db2980378",
+  "admitted_candidate_mutations": [],
+  "admitted_contract_mutations": [],
+  "command_or_write": false,
+  "contract_errors": [],
+  "database_or_source_opened": false,
+  "hostile_rejection_count": 60,
+  "operational_state_persisted": false,
+  "parent_contract_errors": [],
+  "planning_baseline": "351c47bef9bf78383d054f89cd2161d9a6a91718",
+  "product_patient_or_clinical_data": false,
+  "provider_calls": 0,
+  "runtime_started": false,
+  "scenario_count": 22,
+  "scenario_errors": [],
+  "scenario_evidence_digest": "sha256:eefc87fac463799c24b5e240b5d1956c9c9000297ceb82453fc42654712be98f",
+  "schema_version": "raisa.context_fabric.unmounted_event_cue_admission.evidence.v1",
+  "status": "passed"
+}

@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-cf-d2-observability-first-event-cue-plan",
-  "active_tranche": "Provider-free CF-D2 observability-first durable event and cue architecture",
-  "objective": "Freeze and deterministically prove the smallest non-authoritative cue, position, lag, deduplication, reconciliation and operator-evidence contract needed by the accepted visible Diary consumer before any watcher or database runtime.",
+  "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal",
+  "active_tranche": "Provider-free unmounted CF-D2 event and cue admission rehearsal",
+  "objective": "Exercise the accepted observability contract through pure authored-synthetic duplicate, gap, checkpoint, coalescing, fencing and reconciliation state sequences without opening persistence or runtime.",
   "status": "in_progress",
-  "source_head": "e8677b54d1c339dcd14776ce8bf15e7db2980378",
+  "source_head": "351c47bef9bf78383d054f89cd2161d9a6a91718",
   "authority_source": "AGENTS.md Current Baton at Continuity 276 / Compass 258 plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "architecture source e8677b54d1c339dcd14776ce8bf15e7db2980378 accepted and closeout plus Continuity 276 / Compass 258 authored",
-    "next_executable_stage": "verify_closeout_generate_precommit_receipt_then_commit_notify_and_publish_before_transferring_to_the_pure_unmounted_admission_rehearsal",
+    "completed_stage": "frozen pure unmounted admission source passes 22 canonical scenarios, 60 hostile rejections, 91 focused lineage checks and the 193-test canonical fast profile",
+    "next_executable_stage": "generate_precommit_receipt_then_explicitly_stage_commit_and_publish_the_admission_source_before_postsource_rehydration_and_closeout",
     "retry_counters": {
       "review": 0,
       "verification": 0
@@ -38,7 +38,7 @@
     "provider_adc_credential_iam_network_closed",
     "watcher_database_source_and_operational_retention_closed",
     "new_route_graphql_openapi_command_and_write_authority_closed",
-    "authored_synthetic_provider_free_unmounted_architecture_only",
+    "authored_synthetic_provider_free_unmounted_pure_state_only",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

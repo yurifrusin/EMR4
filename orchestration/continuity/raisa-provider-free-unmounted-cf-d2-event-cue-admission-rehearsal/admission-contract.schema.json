@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-unmounted-event-cue-admission-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline",
+    "accepted_architecture_source",
+    "data_ceiling",
+    "execution",
+    "authority",
+    "candidate",
+    "invariants",
+    "scenario_ids",
+    "evidence",
+    "forbidden_effects",
+    "next_descendant"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.unmounted_event_cue_admission.v1"},
+    "status": {"const": "provider_free_unmounted_pure_state"},
+    "planning_baseline": {"const": "351c47bef9bf78383d054f89cd2161d9a6a91718"},
+    "accepted_architecture_source": {"const": "e8677b54d1c339dcd14776ce8bf15e7db2980378"},
+    "data_ceiling": {"const": "authored_synthetic_patient_free"},
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pure_in_memory_state_only", "clock_or_randomness", "environment_or_credential_lookup", "filesystem_from_state_machine", "database_source_or_network", "process_listener_worker_or_queue", "provider_call", "command_or_write"],
+      "properties": {
+        "pure_in_memory_state_only": {"const": true},
+        "clock_or_randomness": {"const": false},
+        "environment_or_credential_lookup": {"const": false},
+        "filesystem_from_state_machine": {"const": false},
+        "database_source_or_network": {"const": false},
+        "process_listener_worker_or_queue": {"const": false},
+        "provider_call": {"const": false},
+        "command_or_write": {"const": false}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_owns_current_truth", "event_and_cue_are_acceleration_hints_only", "cue_may_update_display_directly", "fresh_authorized_scoped_read_required", "command_rechecks_current_authority_and_source_truth"],
+      "properties": {
+        "source_owns_current_truth": {"const": true},
+        "event_and_cue_are_acceleration_hints_only": {"const": true},
+        "cue_may_update_display_directly": {"const": false},
+        "fresh_authorized_scoped_read_required": {"const": true},
+        "command_rechecks_current_authority_and_source_truth": {"const": true}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exact_fields", "terminal_classifications", "reason_codes", "rejection_reason_codes", "prohibited_fields"],
+      "properties": {
+        "exact_fields": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": {"type": "string"}},
+        "terminal_classifications": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"enum": ["cue_required", "suppressed_irrelevant", "rejected_unsupported"]}},
+        "reason_codes": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"enum": ["diary_status_may_have_changed", "diary_availability_may_have_changed"]}},
+        "rejection_reason_codes": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"enum": ["unsupported_event_schema", "unsupported_event_family", "policy_rejected"]}},
+        "prohibited_fields": {"type": "array", "minItems": 18, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_position_minimum", "duplicate_returns_original_receipt_and_obligation", "divergent_identity_result", "denial_preserves_complete_state", "checkpoint_requires_contiguous_terminal_receipts", "cue_required_requires_atomic_obligation", "delivery_required_before_checkpoint", "rejected_event_creates_obligation", "coalescing", "stale_generation_result", "lag_states", "acknowledgement_confers_future_freshness"],
+      "properties": {
+        "source_position_minimum": {"const": 1},
+        "duplicate_returns_original_receipt_and_obligation": {"const": true},
+        "divergent_identity_result": {"const": "identity_conflict"},
+        "denial_preserves_complete_state": {"const": true},
+        "checkpoint_requires_contiguous_terminal_receipts": {"const": true},
+        "cue_required_requires_atomic_obligation": {"const": true},
+        "delivery_required_before_checkpoint": {"const": false},
+        "rejected_event_creates_obligation": {"const": false},
+        "coalescing": {"const": "contiguous_pending_same_partition_consumer_and_reason_only"},
+        "stale_generation_result": {"const": "ownership_fenced"},
+        "lag_states": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"enum": ["exact", "unknown", "epoch_mismatch"]}},
+        "acknowledgement_confers_future_freshness": {"const": false}
+      }
+    },
+    "scenario_ids": {"type": "array", "minItems": 22, "maxItems": 22, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["normalized_state_only", "patient_or_product_payload", "operational_state_persisted", "denied_transition_state_digest_required", "scenario_count", "minimum_hostile_rejections"],
+      "properties": {
+        "normalized_state_only": {"const": true},
+        "patient_or_product_payload": {"const": false},
+        "operational_state_persisted": {"const": false},
+        "denied_transition_state_digest_required": {"const": true},
+        "scenario_count": {"const": 22},
+        "minimum_hostile_rejections": {"type": "integer", "minimum": 40}
+      }
+    },
+    "forbidden_effects": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "next_descendant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "architecture_only", "database_connection", "migration_execution", "watcher_or_source", "restart_or_delivery"],
+      "properties": {
+        "id": {"const": "provider-free-unmounted-event-cue-representation-architecture"},
+        "architecture_only": {"const": true},
+        "database_connection": {"const": false},
+        "migration_execution": {"const": false},
+        "watcher_or_source": {"const": false},
+        "restart_or_delivery": {"const": false}
+      }
+    }
+  }
+}

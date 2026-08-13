@@ -1,0 +1,138 @@
+{
+  "schema_version": "raisa.context_fabric.unmounted_event_cue_admission.v1",
+  "status": "provider_free_unmounted_pure_state",
+  "planning_baseline": "351c47bef9bf78383d054f89cd2161d9a6a91718",
+  "accepted_architecture_source": "e8677b54d1c339dcd14776ce8bf15e7db2980378",
+  "data_ceiling": "authored_synthetic_patient_free",
+  "execution": {
+    "pure_in_memory_state_only": true,
+    "clock_or_randomness": false,
+    "environment_or_credential_lookup": false,
+    "filesystem_from_state_machine": false,
+    "database_source_or_network": false,
+    "process_listener_worker_or_queue": false,
+    "provider_call": false,
+    "command_or_write": false
+  },
+  "authority": {
+    "source_owns_current_truth": true,
+    "event_and_cue_are_acceleration_hints_only": true,
+    "cue_may_update_display_directly": false,
+    "fresh_authorized_scoped_read_required": true,
+    "command_rechecks_current_authority_and_source_truth": true
+  },
+  "candidate": {
+    "exact_fields": [
+      "source_system",
+      "practice_scope_digest",
+      "event_family",
+      "source_epoch",
+      "source_position",
+      "event_fingerprint",
+      "classification",
+      "reason_code",
+      "create_required_obligation",
+      "lease_generation"
+    ],
+    "terminal_classifications": [
+      "cue_required",
+      "suppressed_irrelevant",
+      "rejected_unsupported"
+    ],
+    "reason_codes": [
+      "diary_status_may_have_changed",
+      "diary_availability_may_have_changed"
+    ],
+    "rejection_reason_codes": [
+      "unsupported_event_schema",
+      "unsupported_event_family",
+      "policy_rejected"
+    ],
+    "prohibited_fields": [
+      "appointment_id",
+      "patient_id",
+      "practitioner_id",
+      "person_name",
+      "date_of_birth",
+      "phone_number",
+      "medicare_number",
+      "appointment_status",
+      "appointment_start",
+      "appointment_end",
+      "appointment_reason",
+      "free_text",
+      "event_payload",
+      "command_result",
+      "command_receipt",
+      "precondition_or_confirmation_evidence",
+      "credential",
+      "provider_output"
+    ]
+  },
+  "invariants": {
+    "source_position_minimum": 1,
+    "duplicate_returns_original_receipt_and_obligation": true,
+    "divergent_identity_result": "identity_conflict",
+    "denial_preserves_complete_state": true,
+    "checkpoint_requires_contiguous_terminal_receipts": true,
+    "cue_required_requires_atomic_obligation": true,
+    "delivery_required_before_checkpoint": false,
+    "rejected_event_creates_obligation": false,
+    "coalescing": "contiguous_pending_same_partition_consumer_and_reason_only",
+    "stale_generation_result": "ownership_fenced",
+    "lag_states": ["exact", "unknown", "epoch_mismatch"],
+    "acknowledgement_confers_future_freshness": false
+  },
+  "scenario_ids": [
+    "contiguous_required",
+    "duplicate_reuses_receipt",
+    "divergent_duplicate_conflicts",
+    "out_of_order_gap_holds",
+    "gap_fill_advances",
+    "suppressed_terminal_advances",
+    "rejected_terminal_advances_without_cue",
+    "classification_gap_denied",
+    "obligation_gap_denied_atomically",
+    "contiguous_same_reason_coalesces",
+    "different_reason_does_not_coalesce",
+    "delivered_obligation_does_not_coalesce",
+    "stale_generation_fenced",
+    "current_generation_admitted",
+    "source_head_unknown_lag",
+    "source_epoch_mismatch_lag",
+    "exact_lag",
+    "projection_refresh_requires_fresh_read",
+    "authorization_rejected_retains_display",
+    "source_unavailable_retains_display",
+    "stale_session_retains_display",
+    "payload_field_rejected"
+  ],
+  "evidence": {
+    "normalized_state_only": true,
+    "patient_or_product_payload": false,
+    "operational_state_persisted": false,
+    "denied_transition_state_digest_required": true,
+    "scenario_count": 22,
+    "minimum_hostile_rejections": 40
+  },
+  "forbidden_effects": [
+    "protected_evidence_or_historical_diary_access",
+    "watcher_listener_worker_runtime",
+    "database_or_source_access",
+    "migration_persistence_or_operational_retention",
+    "product_patient_or_clinical_data",
+    "external_patient_client_or_real_identity",
+    "provider_adc_credential_iam_or_network",
+    "executable_tool_command_or_write",
+    "graphql_openapi_or_route_change",
+    "deployment_production_release_pages_or_protected_refs"
+  ],
+  "next_descendant": {
+    "id": "provider-free-unmounted-event-cue-representation-architecture",
+    "architecture_only": true,
+    "database_connection": false,
+    "migration_execution": false,
+    "watcher_or_source": false,
+    "restart_or_delivery": false
+  }
+}
