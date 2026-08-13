@@ -4,8 +4,8 @@ Date: 2026-08-14
 
 Timestamp: 2026-08-14T07:25:00+10:00 (Australia/Brisbane)
 
-Revision 261 records AER-0294 through AER-0298. The register now contains 298
-bounded known incidents. All five are corrected. AER-0295 and AER-0296 closed
+Revision 261 records AER-0294 through AER-0299. The register now contains 299
+bounded known incidents. All six are corrected. AER-0295 and AER-0296 closed
 only after the required API and UI maps were freshly reproduced with literal
 reads after the corrected passing orchestration receipt.
 
@@ -46,3 +46,8 @@ forbids terminal handback and passes with all five named sources.
 
 No protected output, prompt, secret, credential, patient, clinical, document or
 product-derived value is retained in this revision or its sanitized receipts.
+
+AER-0299 records a recurrence of the PowerShell statement-inside-expression
+parser trap during a read-only worker-worktree preflight. Parsing failed before
+any statement executed. The corrected probe used named scalar steps and
+confirmed the target path and branch were absent before creation.

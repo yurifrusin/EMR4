@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "b1e7d17a82ca2a1f801e2e06ae5cef1c6244dcec07ce0089ce55648c538ad754",
+  "canonical_register_sha256": "66a2a2617ddc65c3f781040f0edaec5607a6cd00b60d44e169b4168d4c8fda68",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 97,
-      "canonical_unchanged": 174,
+      "canonical_unchanged": 175,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
-      "command_scope_violation": 37,
+      "command_scope_violation": 38,
       "evidence_misreport": 38,
       "harness_failure": 37,
       "output_contract_violation": 83,
@@ -17,13 +17,13 @@
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 197,
+      "agent_behavior": 198,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 110,
+      "low": 111,
       "material": 97,
       "moderate": 91
     },
@@ -37,7 +37,7 @@
       "codex-native-parallel-worker::implementer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 145,
+      "codex-primary-orchestrator::orchestrator": 146,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -86,12 +86,12 @@
     },
     "by_role": {
       "implementer": 20,
-      "orchestrator": 227,
+      "orchestrator": 228,
       "verifier": 51
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 298,
+  "incident_count": 299,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -127,16 +127,18 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0242",
-        "AER-0246"
+        "AER-0246",
+        "AER-0299"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "For PowerShell orchestration probes, use one statement per step: capture collection output, run Git or shell commands, capture $LASTEXITCODE, and only then construct the final object. Never place a semicolon-delimited statement sequence inside a property expression.",
+        "For every remaining worktree and worker probe, execute each PowerShell and Git statement separately, capture LASTEXITCODE immediately, and construct objects only from named scalar variables.",
         "For the rest of AES-C2 orchestration, every PowerShell diagnostic uses literal command statements with named intermediate values and no script-text variable in command position; Git revision-path arguments are always quoted."
       ],
       "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",

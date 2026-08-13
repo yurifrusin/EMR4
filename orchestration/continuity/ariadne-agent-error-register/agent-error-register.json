@@ -12001,6 +12001,44 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0299",
+      "attempt_id": "raisa-reception-one-reschedule-worker-worktree-preflight-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "PowerShell orchestration probes must execute one statement per step, capture command output and LASTEXITCODE separately, and construct result objects only after those statements complete.",
+      "observed_error": "A worker-worktree existence probe placed a semicolon-delimited git show-ref statement sequence inside a hashtable value expression. PowerShell rejected the command during parsing before any statement or mutation executed.",
+      "detection_method": "The shell returned ParserError with missing-closing-parenthesis and incomplete-hashtable diagnostics before execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-powershell-preflight-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-261.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Run target-path testing and git show-ref as separate statements, capture LASTEXITCODE in a named boolean, then construct the result object. The corrected probe confirmed both target and branch absent.",
+        "prevention_control": "For every remaining worktree and worker probe, execute each PowerShell and Git statement separately, capture LASTEXITCODE immediately, and construct objects only from named scalar variables.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-reschedule-powershell-preflight-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-261.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

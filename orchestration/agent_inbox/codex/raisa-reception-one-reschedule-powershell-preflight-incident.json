@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0299",
+  "observed_on": "2026-08-14",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "boundary": "worker-worktree read-only preflight",
+  "observation": "A PowerShell worktree-existence probe placed a semicolon-delimited Git statement sequence inside a hashtable value expression. PowerShell rejected the command at parse time before any statement executed.",
+  "containment": [
+    "No filesystem, Git, provider, runtime or product action occurred.",
+    "The corrected probe executes each statement separately, captures LASTEXITCODE and only then constructs the result object.",
+    "The target worktree and worker branch were confirmed absent before creation."
+  ],
+  "excluded": ["protected evidence", "patient or product data", "secrets or credentials"]
+}
