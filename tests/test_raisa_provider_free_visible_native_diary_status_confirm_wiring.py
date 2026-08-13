@@ -107,7 +107,7 @@ def test_active_latch_resumes_this_exact_ui_operation() -> None:
     )
     assert latch["status"] == "in_progress"
     assert latch["terminal_response"]["permitted"] is False
-    assert "explicit_path_commit_and_push_the_verified_ui_source" in (
+    assert "verify_commit_notify_and_publish_the_ui_closeout" in (
         latch["checkpoint"]["next_executable_stage"]
     )
 

@@ -4,11 +4,11 @@
   "active_tranche": "Provider-free visible native Diary status-confirm wiring for staff",
   "objective": "Wire and prove the existing signed status proposal/confirm family through the visible native Diary with truthful pending, confirmation, cancellation, success and fail-closed feedback, without adding backend authority or a raw fallback.",
   "status": "in_progress",
-  "source_head": "2a407a8300560406f5311db4a4a54ebcf38a1e0e",
+  "source_head": "bed49be3d78d79207857b3d3a044cebd334112dc",
   "authority_source": "Yuri's 2026-08-13 go-ahead plus standing uninterrupted-development authority after the accepted patient-interaction foundation",
   "checkpoint": {
-    "completed_stage": "bounded staff-visible status interaction implemented and verified with 81 focused contract/API/security/latch tests, four exact route-intercepted status cases, the complete 144-test Diary browser review, desktop/tablet/phone in-app evidence and the 193-test canonical fast profile",
-    "next_executable_stage": "explicit_path_commit_and_push_the_verified_ui_source_then_rehydrate_for_closeout_acceptance",
+    "completed_stage": "accepted at source bed49be3d78d79207857b3d3a044cebd334112dc with responsive and keyboard browser evidence, four route-intercepted status cases, 144 full Diary tests, 81 focused tests and the 193-test canonical profile; Continuity 275 / Compass 257 closeout authored",
+    "next_executable_stage": "verify_commit_notify_and_publish_the_ui_closeout_then_rehydrate_and_transfer_the_latch_to_the_fresh_cf_d2_observability_first_plan",
     "retry_counters": {
       "review": 0,
       "verification": 1

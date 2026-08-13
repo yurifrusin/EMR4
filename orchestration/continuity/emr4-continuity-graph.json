@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 274,
+  "graph_revision": 275,
   "harvests": [],
   "nodes": [
     {
@@ -17858,9 +17858,112 @@
         "CF-D2 durability remains deferred to a fresh observability-first event/cue delivery plan.",
         "Patient/product data, providers, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-visible-native-diary-status-confirm-wiring",
+      "title": "Provider-free visible native Diary status-confirm wiring",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-13T05:42:33Z",
+      "updated_at": "2026-08-13T05:42:33Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "bed49be3d78d79207857b3d3a044cebd334112dc",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-channel-neutral-patient-interaction-foundation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The existing backend status-confirm command remains the sole write authority.",
+          "No route, raw fallback, database/source, product data, patient channel, provider, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-visible-native-diary-status-confirm-wiring",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept truthful responsive staff status proposal/confirm interaction over the existing backend command."
+        }
+      ],
+      "claim_scope": [
+        "Safe routine status changes remain dialog-free; warning and terminal changes require explicit labelled confirmation.",
+        "Blocked, cancelled, stale and rejected changes restore prior truth, clear busy state and expose no raw fallback.",
+        "Desktop, tablet, phone, keyboard, focus and interruption behavior pass with zero console warnings or errors.",
+        "Four route-intercepted status cases, 144 full Diary tests, 81 focused tests and the 193-test canonical fast profile pass."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md",
+            "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json",
+            "review/test_diary_smoke.py",
+            "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md"
+          ],
+          "note": "The status-only interaction preserves the accepted appointment identity, practitioner, time and duration projection while proposing and confirming only one status field."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md",
+            "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json",
+            "review/test_diary_smoke.py",
+            "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md"
+          ],
+          "note": "Successful status confirmation reloads authoritative Diary truth; late, duplicate or absent event cues remain non-authoritative and CF-D2 stays separately closed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md",
+          "docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "review/test_diary_smoke.py",
+          "tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py",
+          "tests/test_diary_security_hardening.py",
+          "tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring_continuity.py"
+        ],
+        "artifacts": [
+          "docs/diary/diary.html",
+          "docs/diary/diary.css",
+          "docs/diary/diary.js",
+          "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json",
+          "scripts/raisa_provider_free_visible_native_diary_status_confirm_wiring_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The rendered smoke client and intercepted browser cases are not live-backend evidence; backend proof remains inherited from its accepted source.",
+        "CF-D2 restart, unknown-commit and durable event/cue delivery remain unproved and reopen only through a fresh observability-first plan.",
+        "Other commands, external patient clients, real identity, patient/product data, providers, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T04:54:31Z"
+  "updated_at": "2026-08-13T05:42:33Z"
 }

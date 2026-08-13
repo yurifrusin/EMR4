@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "ariadne-postcompaction-active-operation-latch"
-PRODUCT_POSITION = "raisa-channel-neutral-patient-interaction-foundation"
+PRODUCT_POSITION = "raisa-provider-free-visible-native-diary-status-confirm-wiring"
 SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
 
 
@@ -36,7 +36,7 @@ def test_current_latch_resumes_exact_visible_diary_status_wiring() -> None:
         == "raisa-provider-free-visible-native-diary-status-confirm-wiring"
     )
     assert (
-        "explicit_path_commit_and_push_the_verified_ui_source"
+        "verify_commit_notify_and_publish_the_ui_closeout"
         in latch["checkpoint"]["next_executable_stage"]
     )
     assert latch["terminal_response"] == {

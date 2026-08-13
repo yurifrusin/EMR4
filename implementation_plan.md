@@ -305,15 +305,23 @@ selection proposal-only and confirmation challenge non-authoritative until the
 backend command rechecks current authority and Diary truth. It creates no
 patient client, identity provider, route, database or command runtime.
 
-The next product-direction gate is bounded visible native Diary status-confirm
-wiring for staff against the exact accepted backend contract. CF-D2 is
-preserved but is not a prerequisite: the command path already derives
-correctness from current database truth, while the visible interaction boundary
-should define the quiet cues and reconciliation signals for a later
-observability-first durable event/cue delivery extension. Product data,
-providers, external patient clients, other command families,
-restart/unknown-commit claims, deployment, production and release remain
-separately closed.
+The bounded visible native Diary status-confirm wiring now passes at exact
+source `bed49be3d78d79207857b3d3a044cebd334112dc`. Safe routine staff status
+changes remain dialog-free; warning or terminal changes show the exact
+transition and final current-truth recheck; blocked, cancelled, stale and
+rejected changes restore the previous status and expose no raw fallback.
+Desktop, tablet, phone, keyboard and interruption evidence passes without
+opening another backend command or patient client.
+
+That visible consumer boundary now makes the next durability step specific.
+The next product-direction gate is a fresh provider-free CF-D2
+observability-first durable event/cue plan. It must keep events as acceleration
+hints, preserve command-time authority and source-truth correctness, and freeze
+only the smallest cue, position, lag, deduplication, reconciliation and
+operator-evidence contract before any watcher runtime, database/source access
+or product data is considered. External patient clients, other command
+families, restart/unknown-commit runtime claims, providers, deployment,
+production and release remain separately closed.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "raisa-channel-neutral-patient-interaction-foundation"
 SOURCE_HEAD = "17d9da1844e59406eecda44b5029e839b2e8a573"
+CURRENT_POSITION = "raisa-provider-free-visible-native-diary-status-confirm-wiring"
 
 
 def _load(path: str) -> dict:
@@ -52,7 +53,7 @@ def test_patient_interaction_foundation_preserves_closed_boundaries() -> None:
         assert phrase in joined
 
 
-def test_patient_foundation_evidence_and_next_staff_ui_are_bound() -> None:
+def test_patient_foundation_evidence_remains_bound_after_staff_ui_advance() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
@@ -64,9 +65,10 @@ def test_patient_foundation_evidence_and_next_staff_ui_are_bound() -> None:
         "orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md",
         "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/provider-free-acceptance-evidence.json",
     } <= evidence
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert compass["current_position"]["node_id"] == CURRENT_POSITION
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
-    assert "visible native diary status-confirm" in unlocks
-    assert "for staff" in unlocks
-    assert "patient client" in compass["orientation_statement"].lower()
+    limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
+    assert "observability-first" in unlocks
+    assert "without opening a watcher runtime" in unlocks
+    assert "patient self-service" in limits
     assert "observability-first" in compass["orientation_statement"].lower()

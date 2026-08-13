@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 256,
-  "updated_at": "2026-08-13T04:54:31Z",
-  "source_graph_revision": 274,
-  "orientation_statement": "EMR4 is at Continuity 274 / Compass 256. The provider-free channel-neutral patient interaction foundation fixes passkey-first-not-passkey-only identity, restricted recovery and backend-owned projection/proposal/confirmation semantics without enabling any patient client or channel. Bounded visible native Diary status-confirm wiring for staff is next; CF-D2 remains a later observability-first durable event/cue extension.",
+  "map_revision": 257,
+  "updated_at": "2026-08-13T05:42:33Z",
+  "source_graph_revision": 275,
+  "orientation_statement": "EMR4 is at Continuity 275 / Compass 257. The provider-free visible native Diary status-confirm wiring passes for staff over the existing backend-owned command, with responsive, keyboard, interruption and fail-closed evidence. The next safe gate is a fresh provider-free CF-D2 observability-first durable event/cue plan; no watcher runtime or product-data authority is open.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2763,41 +2763,62 @@
         "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json",
         "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-visible-native-diary-status-confirm-wiring",
+      "lineage_parent": "raisa-channel-neutral-patient-interaction-foundation",
+      "strategic_role": "Make the accepted status command truthful and usable in Reception One",
+      "outcome": "Visible staff status-confirm behavior passes; its cue and reconciliation needs now bound the next observability-first durability plan.",
+      "evidence": [
+        "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md",
+        "docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md",
+        "docs/diary/diary.html",
+        "docs/diary/diary.css",
+        "docs/diary/diary.js",
+        "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json",
+        "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json",
+        "review/test_diary_smoke.py",
+        "tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py",
+        "tests/test_diary_security_hardening.py",
+        "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preacceptance-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-channel-neutral-patient-interaction-foundation",
-    "strategic_role": "Patient interaction foundation complete; staff-visible Diary wiring next",
-    "why_now": "A small static slab prevents future channel or identity choices from splitting the backend authority model before visible UI work resumes.",
-    "outcome": "Passkey-first-not-passkey-only identity, restricted recovery and channel-neutral proposal/confirmation semantics are frozen without enabling a patient client.",
+    "node_id": "raisa-provider-free-visible-native-diary-status-confirm-wiring",
+    "strategic_role": "First visible staff status command complete; observability-first cue planning next",
+    "why_now": "The UI now identifies the exact checking, confirmation, non-change, commit and refresh states that durable event delivery may accelerate without owning correctness.",
+    "outcome": "Reception One visibly preserves proposal versus current-truth semantics across safe, warning, blocked, stale, success and interruption paths.",
     "unlocks": [
-      "Freeze bounded visible native Diary status-confirm wiring for staff against the accepted backend route and interaction principles.",
-      "Prove staff proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.",
-      "Preserve a later external-patient-client programme without requiring a dedicated application or duplicating command authority."
+      "Freeze the narrowest provider-free CF-D2 observability-first durable event/cue plan.",
+      "Define the positions, lag, deduplication, reconciliation and operator evidence needed by this visible consumer without opening a watcher runtime.",
+      "Keep correctness in command-time authority and source-truth checks even when cues are late, duplicated or absent."
     ],
     "does_not_solve": [
-      "Real patient identity, authentication, recovery or channel delivery.",
-      "Visible Diary interaction, another command family or patient self-service policy.",
-      "CF-D2 restart/unknown-commit durability, watcher operations or cue recovery.",
-      "Product/patient data, provider access, deployment, production or release."
+      "Live product-data status operation, another command family or patient self-service.",
+      "A database watcher, durable cue transport, restart or unknown-commit recovery.",
+      "External identity/channel delivery, provider access, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-channel-neutral-patient-interaction-foundation-plan.md",
-      "docs/raisa-channel-neutral-patient-interaction-foundation-architecture.md",
-      "docs/security/raisa-channel-neutral-patient-interaction-foundation-threat-model-delta.md",
-      "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.json",
-      "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.schema.json",
-      "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/authored-synthetic-contract-examples.json",
-      "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/provider-free-acceptance-evidence.json",
-      "scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py",
-      "tests/test_raisa_channel_neutral_patient_interaction_foundation.py",
-      "tests/test_raisa_channel_neutral_patient_interaction_foundation_plan.py",
-      "docs/raisa-channel-neutral-patient-interaction-foundation-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md",
-      "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json"
+      "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md",
+      "docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md",
+      "docs/diary/diary.html",
+      "docs/diary/diary.css",
+      "docs/diary/diary.js",
+      "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json",
+      "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json",
+      "review/test_diary_smoke.py",
+      "tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py",
+      "tests/test_diary_security_hardening.py",
+      "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preacceptance-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -2906,9 +2927,9 @@
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
         "Preserve accepted conditional-command and status-confirm route correctness.",
-        "Wire and prove bounded visible native Diary status-confirm behavior for staff.",
+        "Use the accepted visible staff status-confirm boundary to specify cue, lag and reconciliation evidence.",
         "Keep future patient channels behind the accepted identity, assurance, recovery, projection and confirmation foundation.",
-        "Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary."
+        "Return to durable event/cue delivery only through a fresh provider-free observability-first CF-D2 plan; events remain acceleration hints, not command evidence."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -3586,7 +3607,22 @@
         "orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md",
         "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-preplanning-receipt.json",
         "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json",
-        "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json"
+        "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json",
+        "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md",
+        "docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md",
+        "docs/diary/diary.html",
+        "docs/diary/diary.css",
+        "docs/diary/diary.js",
+        "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json",
+        "orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json",
+        "review/test_diary_smoke.py",
+        "tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py",
+        "tests/test_diary_security_hardening.py",
+        "docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preacceptance-receipt.json"
       ]
     },
     {
@@ -4431,6 +4467,7 @@
     }
   ],
   "map_limits": [
+    "Visible status-confirm evidence uses an authored-synthetic smoke client and route-intercepted browser responses; it is not live product-data or deployment evidence.",
     "The patient interaction foundation is static architecture evidence, not real identity, channel delivery, patient self-service or command runtime.",
     "Status-confirm HTTP convergence proves one authored-synthetic mounted backend family, not visible UI behavior, other commands or durable event/cue delivery.",
     "The accepted route-mounting review proves static composition facts only; it does not admit or execute the mounted handler against the physical seam.",

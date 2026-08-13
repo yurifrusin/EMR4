@@ -9,8 +9,8 @@ verbatim from the Current Baton table. It has artifact lookup authority only.
 Live authority, protected boundaries, active acceptance and next work remain
 controlled by `AGENTS.md`; this ledger cannot override them.
 
-Source HEAD: `17d9da1844e59406eecda44b5029e839b2e8a573`
-Source `AGENTS.md` SHA-256: `4f069f9c34f37f07eca52f7c9dae68e932edd0147a1f099d24668462c9dac034`
+Source HEAD: `bed49be3d78d79207857b3d3a044cebd334112dc`
+Source `AGENTS.md` SHA-256: `1f943d82355290bb2d473efbae46f712f761ab1404059402789cbcca4f4440c1`
 
 | Item | Indexed acceptance artifacts |
 |---|---|
@@ -151,3 +151,4 @@ Source `AGENTS.md` SHA-256: `4f069f9c34f37f07eca52f7c9dae68e932edd0147a1f099d246
 | Disposable PostgreSQL status-confirm product-adapter integration acceptance | Plan/threat delta, adapter, closed contract/schemas/evidence, rehearsal/tests, timestamped closeout, Sol/Yuri summaries and continuity updater/test under the matching named paths. |
 | Provider-free status-confirm HTTP route convergence acceptance | `docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md`, `docs/security/raisa-provider-free-status-confirm-http-route-convergence-threat-model-delta.md`, the four mounted application/API source files, API Spine contract/inventory, `orchestration/continuity/raisa-provider-free-status-confirm-http-route-convergence/`, `scripts/raisa_provider_free_status_confirm_http_route_convergence.py`, focused/current-lineage tests, timestamped closeout, Sol/Yuri summaries, receipt pairs and Continuity/Compass updater/test. |
 | Channel-neutral patient interaction foundation acceptance | `docs/raisa-channel-neutral-patient-interaction-foundation-plan.md`, `docs/raisa-channel-neutral-patient-interaction-foundation-architecture.md`, `docs/security/raisa-channel-neutral-patient-interaction-foundation-threat-model-delta.md`, `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/`, `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`, focused plan/contract tests, timestamped closeout, Sol/Yuri summaries, receipt pairs and Continuity/Compass updater/test. |
+| Visible native Diary status-confirm wiring acceptance | `docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md`, `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`, `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/`, `review/test_diary_smoke.py`, `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`, `docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md`, `orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md`, `orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md`, `scripts/raisa_provider_free_visible_native_diary_status_confirm_wiring_continuity_update.py`, and `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring_continuity.py` |

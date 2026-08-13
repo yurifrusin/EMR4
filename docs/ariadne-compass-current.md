@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 274 / Compass 256. The provider-free channel-neutral patient interaction foundation fixes passkey-first-not-passkey-only identity, restricted recovery and backend-owned projection/proposal/confirmation semantics without enabling any patient client or channel. Bounded visible native Diary status-confirm wiring for staff is next; CF-D2 remains a later observability-first durable event/cue extension.
+> EMR4 is at Continuity 275 / Compass 257. The provider-free visible native Diary status-confirm wiring passes for staff over the existing backend-owned command, with responsive, keyboard, interruption and fail-closed evidence. The next safe gate is a fresh provider-free CF-D2 observability-first durable event/cue plan; no watcher runtime or product-data authority is open.
 
 ## North star
 
@@ -320,31 +320,34 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next but paused before commencement at Yuri's request. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal`.
 152. **Preserve channel-minimal patient access without weakening backend authority — Channel-neutral patient interaction foundation**
    The static identity, assurance, recovery, projection and confirmation foundation passes; staff-visible Diary wiring is next. Lineage parent: `raisa-provider-free-status-confirm-http-route-convergence`.
+153. **Make the accepted status command truthful and usable in Reception One — Provider-free visible native Diary status-confirm wiring**
+   Visible staff status-confirm behavior passes; its cue and reconciliation needs now bound the next observability-first durability plan. Lineage parent: `raisa-channel-neutral-patient-interaction-foundation`.
 
 ## Current position
 
-**Patient interaction foundation complete; staff-visible Diary wiring next — Channel-neutral patient interaction foundation**
+**First visible staff status command complete; observability-first cue planning next — Provider-free visible native Diary status-confirm wiring**
 
-**Why this proof came next:** A small static slab prevents future channel or identity choices from splitting the backend authority model before visible UI work resumes.
+**Why this proof came next:** The UI now identifies the exact checking, confirmation, non-change, commit and refresh states that durable event delivery may accelerate without owning correctness.
 
-Passkey-first-not-passkey-only identity, restricted recovery and channel-neutral proposal/confirmation semantics are frozen without enabling a patient client.
+Reception One visibly preserves proposal versus current-truth semantics across safe, warning, blocked, stale, success and interruption paths.
 
 ### What this unlocks
 
-- Freeze bounded visible native Diary status-confirm wiring for staff against the accepted backend route and interaction principles.
-- Prove staff proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.
-- Preserve a later external-patient-client programme without requiring a dedicated application or duplicating command authority.
+- Freeze the narrowest provider-free CF-D2 observability-first durable event/cue plan.
+- Define the positions, lag, deduplication, reconciliation and operator evidence needed by this visible consumer without opening a watcher runtime.
+- Keep correctness in command-time authority and source-truth checks even when cues are late, duplicated or absent.
 
 ### What it does not solve
 
-- Real patient identity, authentication, recovery or channel delivery.
-- Visible Diary interaction, another command family or patient self-service policy.
-- CF-D2 restart/unknown-commit durability, watcher operations or cue recovery.
-- Product/patient data, provider access, deployment, production or release.
+- Live product-data status operation, another command family or patient self-service.
+- A database watcher, durable cue transport, restart or unknown-commit recovery.
+- External identity/channel delivery, provider access, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -408,9 +411,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve accepted conditional-command and status-confirm route correctness.
-- Wire and prove bounded visible native Diary status-confirm behavior for staff.
+- Use the accepted visible staff status-confirm boundary to specify cue, lag and reconciliation evidence.
 - Keep future patient channels behind the accepted identity, assurance, recovery, projection and confirmation foundation.
-- Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary.
+- Return to durable event/cue delivery only through a fresh provider-free observability-first CF-D2 plan; events remain acceleration hints, not command evidence.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -599,6 +602,7 @@ Prerequisites:
 
 ## Map limits
 
+- Visible status-confirm evidence uses an authored-synthetic smoke client and route-intercepted browser responses; it is not live product-data or deployment evidence.
 - The patient interaction foundation is static architecture evidence, not real identity, channel delivery, patient self-service or command runtime.
 - Status-confirm HTTP convergence proves one authored-synthetic mounted backend family, not visible UI behavior, other commands or durable event/cue delivery.
 - The accepted route-mounting review proves static composition facts only; it does not admit or execute the mounted handler against the physical seam.
@@ -922,6 +926,9 @@ Prerequisites:
 - `docs/bernie-reception-one-yuri-internal-walkthrough-findings.md`
 - `docs/bernie-reception-one-yuri-internal-walkthrough-plan.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
+- `docs/diary/diary.css`
+- `docs/diary/diary.html`
+- `docs/diary/diary.js`
 - `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md`
 - `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md`
 - `docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md`
@@ -1147,6 +1154,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-plan.md`
+- `docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-closeout.md`
+- `docs/raisa-provider-free-visible-native-diary-status-confirm-wiring-plan.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
@@ -1273,6 +1282,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
@@ -1545,6 +1555,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-confirm-runtime-convergence-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-unmounted-status-transaction-kernel-protocol-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-visible-native-diary-status-confirm-wiring-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
@@ -1922,6 +1935,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal/protocol-packet.schema.json`
+- `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json`
+- `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
@@ -2211,6 +2226,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md`
+- `orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2221,6 +2237,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review-analysis.json`
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
+- `review/test_diary_smoke.py`
 - `scripts/ariadne_active_operation_latch.py`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
@@ -2281,6 +2298,7 @@ Prerequisites:
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
+- `tests/test_diary_security_hardening.py`
 - `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
 - `tests/test_model_required_bureau_c3_d3.py`
 - `tests/test_model_required_bureau_gate_zero.py`
@@ -2301,6 +2319,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
+- `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
 - `tests/test_reception_one_bureau_post_admission_runtime_hardening.py`
@@ -2327,4 +2346,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 256; continuity graph revision 274._
+_Compass map revision 257; continuity graph revision 275._

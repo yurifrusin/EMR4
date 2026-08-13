@@ -31,10 +31,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 178854,
-  "ledger_line_count": 153,
+  "ledger_byte_count": 179846,
+  "ledger_line_count": 154,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "a08928ff4976188c02e547c37bbc289c2871cb8b72f98a7ee3f2f009f6411b39",
+  "ledger_sha256": "9cc86e1fca1633cd44c5e2578e6f66a557e0ee114b39baa2e400f394287cb4fe",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -172,14 +172,15 @@
     "Provider-free unmounted status-confirm product-adapter rehearsal acceptance",
     "Disposable PostgreSQL status-confirm product-adapter integration acceptance",
     "Provider-free status-confirm HTTP route convergence acceptance",
-    "Channel-neutral patient interaction foundation acceptance"
+    "Channel-neutral patient interaction foundation acceptance",
+    "Visible native Diary status-confirm wiring acceptance"
   ],
-  "moved_row_count": 137,
+  "moved_row_count": 138,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 77068,
-  "source_agents_git_blob_sha1": "127c5e8604386a1e485314a0ab48e09dbcbe170c",
-  "source_agents_line_count": 501,
+  "source_agents_byte_count": 73452,
+  "source_agents_git_blob_sha1": "a46fb94d1b21f401671912fc6336f784bf40ced9",
+  "source_agents_line_count": 495,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "4f069f9c34f37f07eca52f7c9dae68e932edd0147a1f099d24668462c9dac034",
-  "source_git_head": "17d9da1844e59406eecda44b5029e839b2e8a573"
+  "source_agents_sha256": "1f943d82355290bb2d473efbae46f712f761ab1404059402789cbcca4f4440c1",
+  "source_git_head": "bed49be3d78d79207857b3d3a044cebd334112dc"
 }
