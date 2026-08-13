@@ -31,10 +31,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 184160,
-  "ledger_line_count": 158,
+  "ledger_byte_count": 186782,
+  "ledger_line_count": 160,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "307b83998bfeeaf764d7026da20e970a7d8ed602517e0ed23699a9aef48b2e8a",
+  "ledger_sha256": "16d5b403ca4ee6de979911c94ade99503531ee619a687d1dce4574c4e1dd66cb",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -177,14 +177,16 @@
     "Context Fabric CF-D2 observability-first event/cue architecture acceptance",
     "Provider-free unmounted CF-D2 event/cue admission rehearsal acceptance",
     "Context Fabric CF-D2 event/cue representation architecture acceptance",
-    "Context Fabric CF-D2 event/cue inert-DDL lowering acceptance"
+    "Context Fabric CF-D2 event/cue inert-DDL lowering acceptance",
+    "Provider-free disposable PostgreSQL CF-D2 event/cue parse/catalogue rehearsal acceptance",
+    "Provider-free disposable PostgreSQL CF-D2 event/cue behavior/transaction rehearsal acceptance"
   ],
-  "moved_row_count": 142,
+  "moved_row_count": 144,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 73878,
-  "source_agents_git_blob_sha1": "4cd602199595667df4603ba8af216be3f2a60dd9",
+  "source_agents_byte_count": 74338,
+  "source_agents_git_blob_sha1": "7441c411525c9e99ef00b338ea59c78a0fd637f4",
   "source_agents_line_count": 494,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "0612b9d53fd6c3477a089d777bb959f94ccdc529154a53313db6943706d94d96",
-  "source_git_head": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29"
+  "source_agents_sha256": "b9f81722816c40bf11936967e3ccce2fb2dbc2b4995870cc53fb2bc3dbbb8539",
+  "source_git_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9"
 }

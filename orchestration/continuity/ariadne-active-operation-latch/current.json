@@ -3,12 +3,12 @@
   "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
   "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
   "objective": "Exercise only the five accepted CF-D2 transaction protocols through six fixed authored-synthetic serial scenario groups in one newly owned networkless tmpfs PostgreSQL 16 server, observe effects, refusals, rollback and uncontended lock footprints, then clean up exactly.",
-  "status": "in_progress",
-  "source_head": "6e5fedb0fc54dff5d82a098bfbcad1bef0bccb3c",
+  "status": "complete",
+  "source_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9",
   "authority_source": "AGENTS.md Current Baton at Continuity 280 / Compass 262, the accepted parse/catalogue next descendant and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "one fresh owned PostgreSQL 16 run passed all six scenario groups, three rollback probes, eleven denied transitions, five lock footprints and exact cleanup; broader and canonical gates pass",
-    "next_executable_stage": "explicit-path candidate commit followed by exact source-head rebind and preacceptance review",
+    "completed_stage": "accepted source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 published with six serial groups, five protocols, exact cleanup and Continuity 281 / Compass 263 closeout",
+    "next_executable_stage": null,
     "retry_counters": {
       "review": 0,
       "verification": 1
@@ -22,14 +22,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "accepted_tranche_complete_and_read_only_orientation_named_next"
   },
   "protected_boundaries": [
     "protected_evidence_closed",

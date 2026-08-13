@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
+    "completed_stage": "candidate source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 committed after one passing owned database run, exact cleanup and deterministic gates",
+    "next_executable_stage": "publish exact candidate source, perform source-bound preacceptance review and closeout continuity update",
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "publish_exact_cf_d2_serial_behavior_transaction_candidate_source_to_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen six-group plan and candidate at f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 passed one exact database run, three rollbacks, eleven non-mutating denials, five lock footprints, exact cleanup, 206 broader checks and the 193-test canonical fast profile.",
+    "current_authority_allocation": "GPT Sol owns the small serial database candidate, review, task-branch publication and acceptance under AGENTS.md section 4; no worker, verifier, provider or protected integration is selected.",
+    "git_refs_and_worktree": "Candidate HEAD f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 is on codex/ariadne-bernie-davida-parallel-seam; origin task remains 6e5fedb0fc54dff5d82a098bfbcad1bef0bccb3c before this push. Required resumed HEAD and accepted parse/catalogue source are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the task branch may move and no force is authorised.",
+    "live_handover_current_baton": "AGENTS.md at Continuity 280 / Compass 262 names the exact five-protocol provider-free disposable PostgreSQL behavior/transaction rehearsal as the next dependency-satisfied CF-D2 tranche.",
+    "protected_evidence_boundaries": "Protected evidence, PHI/product data, external clients, existing source/database, watcher/runtime, persistence, concurrency/restart, provider/ADC, credentials/IAM/network, product routes/tools/commands/writes, deployment, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

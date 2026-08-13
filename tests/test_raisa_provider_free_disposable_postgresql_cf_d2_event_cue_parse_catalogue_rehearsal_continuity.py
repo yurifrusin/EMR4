@@ -61,15 +61,14 @@ def test_parse_catalogue_evidence_and_boundaries_are_bound() -> None:
         assert phrase in joined
 
 
-def test_compass_points_to_behavior_transaction_rehearsal_without_overclaim() -> None:
+def test_compass_preserves_parse_handoff_without_freezing_current_position() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert compass["current_position"]["node_id"] == NODE_ID
-    unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
-    limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "behavior/transaction rehearsal" in unlocks
-    assert "five" in unlocks
-    assert "terminal admission" in limits
-    assert "continuity 280 / compass 262" in compass["orientation_statement"].lower()
+    journey = {item["node_id"]: item for item in compass["journey"]}
+    historical = journey[NODE_ID]
+    assert "five behavior/transaction protocols" in historical["outcome"].lower()
+    assert "separately frozen" in historical["outcome"].lower()
+    assert compass["current_position"]["node_id"] != NODE_ID
+    assert compass["map_revision"] > 262
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

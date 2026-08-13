@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
+    "completed_stage": "candidate source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 committed after one passing owned database run, exact cleanup and deterministic gates",
+    "next_executable_stage": "publish exact candidate source, perform source-bound preacceptance review and closeout continuity update",
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_accepted_cf_d2_serial_behavior_transaction_closeout_and_continuity_281_compass_263_updates",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen six-group plan and Sol source-bound acceptance admit the published result after six scenario groups, five protocols, three rollbacks, eleven denial non-effects, five lock footprints, exact cleanup, 208 focused/lineage checks and the 193-test canonical fast profile.",
+    "current_authority_allocation": "GPT Sol owns acceptance, task-branch closeout, continuity update and publication for this small serial database tranche; no worker, verifier, provider, protected integrator or subagent is selected.",
+    "git_refs_and_worktree": "HEAD and origin task equal accepted source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 before the closeout commit. Required resumed HEAD and parse/catalogue source are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Closeout staging is explicit-path only and excludes docs/branding plus unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md Continuity 280 / Compass 262 names the five-protocol behavior/transaction rehearsal now passing at published exact source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9.",
+    "protected_evidence_boundaries": "Concurrency, restart/unknown commit, watcher/source access, persistence/runtime, real delivery, external authority/fresh reads, patient/product data, providers/ADC, credentials/IAM/network, product commands/writes, deployment, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

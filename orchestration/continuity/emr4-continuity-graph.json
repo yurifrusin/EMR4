@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 280,
+  "graph_revision": 281,
   "harvests": [],
   "nodes": [
     {
@@ -18508,9 +18508,120 @@
         "Concurrency, restart, unknown commit, watcher/source access, persistence, delivery, retention and product wiring remain unproved.",
         "Patient/product data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+      "title": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-13T10:54:23Z",
+      "updated_at": "2026-08-13T10:54:23Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Only fixed authored-synthetic rows and the exact accepted artifact entered one owned networkless tmpfs PostgreSQL 16 server.",
+          "The passing claim is limited to five fixed serial protocol effects, denials, rollback and uncontended lock footprints.",
+          "Events and cues remain acceleration hints; source truth, fresh reads and command authority remain external."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-cf-d2-event-cue-disposable-postgresql-behavior-transaction",
+          "source": "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the fixed single-server serial proof for all five CF-D2 protocols without opening concurrency, runtime, source or product authority."
+        }
+      ],
+      "claim_scope": [
+        "Six serial groups prove terminal admission, pending coalescing, contiguous checkpoint advance, dispatch recording and reconciliation.",
+        "Three deliberately induced post-write failures restore identical canonical state digests.",
+        "Eleven refused transitions preserve state and five protocols expose their required uncontended RowShareLock relation subsets.",
+        "Sixty-four hostile contracts, 215 CF-D2/API/continuity tests and the 193-test canonical fast profile pass with exact cleanup.",
+        "No real authority or fresh read occurred; events and cues remain non-authoritative refresh hints."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-plan.md",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-design.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/rehearsal-contract.json",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+            "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-closeout.md"
+          ],
+          "note": "All rows remain payload-free authored-synthetic coordinates and cannot mutate an appointment or proposal."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-plan.md",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-design.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/rehearsal-contract.json",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+            "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py",
+            "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-closeout.md"
+          ],
+          "note": "Reconciliation records one typed synthetic read-attempt outcome and never becomes display truth, command evidence or future freshness."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-design.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--cf-d2-event-cue-behavior-transaction-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-postcompaction-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-candidate-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-closeout-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+          "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py",
+          "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Multi-session concurrency, contention, restart, crash and unknown-commit recovery remain unproved.",
+        "Watcher/source access, real delivery, persistence, retention, rotation, purge, performance and product wiring remain unproved.",
+        "Real authority/fresh reads, patient/product data, providers, commands/writes, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T09:56:16Z"
+  "updated_at": "2026-08-13T10:54:23Z"
 }
