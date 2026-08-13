@@ -26,7 +26,7 @@ def test_reorientation_remains_accepted_after_descendant_advances() -> None:
     assert compass["map_revision"] >= 258
     assert compass["source_graph_revision"] == graph["graph_revision"]
     assert compass["current_position"]["node_id"] == (
-        "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+        "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
     node = _node(graph)
     assert node["kind"] == "foundation"
@@ -53,7 +53,7 @@ def test_reorientation_opens_no_runtime_authority() -> None:
         assert phrase in joined
 
 
-def test_compass_names_pure_admission_next_and_runtime_durability_later() -> None:
+def test_compass_names_inert_ddl_next_and_runtime_durability_later() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
     current = compass["current_position"]
     joined = " ".join(
@@ -62,8 +62,8 @@ def test_compass_names_pure_admission_next_and_runtime_durability_later() -> Non
         + current["does_not_solve"]
     ).lower()
 
-    assert "inert relational representation next" in joined
-    assert "unmounted event/cue representation architecture" in joined
+    assert "inert relational representation passes" in joined
+    assert "inert-ddl lowering" in joined
     assert "persistent operational state" in joined
     assert "no database, watcher" in compass["orientation_statement"].lower()
 

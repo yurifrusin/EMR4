@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 277,
+  "graph_revision": 278,
   "harvests": [],
   "nodes": [
     {
@@ -18173,9 +18173,116 @@
         "Watcher ownership, restart, unknown commit, dispatch transport, retention and operations remain unproved.",
         "Product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture",
+      "title": "Provider-free unmounted CF-D2 event and cue representation architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-13T07:46:24Z",
+      "updated_at": "2026-08-13T07:46:24Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The exact accepted observability and admission contracts remain the authority boundary.",
+          "Seven abstract relations prove inert representability only; five transaction protocols remain unexecuted.",
+          "No SQL, database/source, persistence, watcher, product data, provider, command, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unmounted-cf-d2-event-cue-representation-architecture",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-representation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the smallest payload-free relational representation while keeping transaction enforcement and source truth explicitly separate."
+        }
+      ],
+      "claim_scope": [
+        "Seven exact relation shapes and five future transaction protocols cover the accepted event/cue facts without a generic payload column.",
+        "Twelve authored-synthetic row families pass and eighty hostile contract or row variants fail closed without changing canonical inputs.",
+        "Ninety-two focused lineage checks and the 193-test canonical fast profile pass.",
+        "Events and cues remain acceleration hints; fresh scoped reads and command-time current-authority and source-truth checks remain mandatory."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-plan.md",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture.md",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/provider-free-unmounted-representation-evidence.json",
+            "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-closeout.md"
+          ],
+          "note": "The representation admits no appointment, practitioner, patient, time, duration or intent payload and cannot mutate a proposal."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-plan.md",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture.md",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json",
+            "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/provider-free-unmounted-representation-evidence.json",
+            "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py",
+            "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-closeout.md"
+          ],
+          "note": "A reconciliation receipt represents one typed fresh-read attempt only and cannot supply projection truth or future freshness."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-plan.md",
+          "docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/provider-free-unmounted-representation-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-representation-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-representation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-representation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-representation-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-representation-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.schema.json",
+          "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py",
+          "scripts/raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "SQL lowering, PostgreSQL catalogue admission, transactions and persistence remain unproved.",
+        "Source observation, watcher ownership, restart, unknown commit, dispatch transport, retention and operations remain unproved.",
+        "Product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T07:00:06Z"
+  "updated_at": "2026-08-13T07:46:24Z"
 }

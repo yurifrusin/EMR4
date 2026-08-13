@@ -61,12 +61,12 @@ def test_visible_status_confirm_evidence_and_boundaries_are_bound() -> None:
 def test_compass_preserves_visible_status_and_advances_to_cf_d2_observability() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
     assert compass["current_position"]["node_id"] == (
-        "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+        "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
     limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "unmounted event/cue representation architecture" in unlocks
-    assert "without opening a database connection" in unlocks
+    assert "inert-ddl lowering" in unlocks
+    assert "database connection" in unlocks
     assert "restart, unknown commit" in limits
     assert "no database, watcher" in compass["orientation_statement"].lower()
 

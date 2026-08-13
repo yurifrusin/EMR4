@@ -253,5 +253,5 @@ def test_active_latch_is_on_the_representation_architecture() -> None:
         latch["operation_id"]
         == "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
-    assert latch["source_head"] == "784fdc4c0237e1c363676638d010b2bd4b033210"
+    assert latch["source_head"] == "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed"
     assert latch["terminal_response"]["permitted"] is False

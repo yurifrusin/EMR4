@@ -264,7 +264,7 @@ def test_active_latch_transferred_to_cf_d2_representation_descendant() -> None:
         "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
     assert (
-        "verify_representation_evidence_then_generate_precommit_receipt"
+        "write_verify_commit_notify_and_publish_closeout"
         in (latch["checkpoint"]["next_executable_stage"])
     )
     assert latch["terminal_response"]["permitted"] is False

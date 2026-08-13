@@ -7,7 +7,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "raisa-channel-neutral-patient-interaction-foundation"
 SOURCE_HEAD = "17d9da1844e59406eecda44b5029e839b2e8a573"
-CURRENT_POSITION = "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+CURRENT_POSITION = (
+    "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
+)
 
 
 def _load(path: str) -> dict:
@@ -68,9 +70,9 @@ def test_patient_foundation_evidence_remains_bound_after_cf_d2_advance() -> None
     assert compass["current_position"]["node_id"] == CURRENT_POSITION
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
     limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "unmounted event/cue representation architecture" in unlocks
-    assert "without opening a database connection" in unlocks
+    assert "inert-ddl lowering" in unlocks
+    assert "database connection" in unlocks
     assert "external identity/channel delivery" in limits
-    assert "unmounted cf-d2 event/cue admission rehearsal" in compass[
+    assert "cf-d2 representation architecture" in compass[
         "orientation_statement"
     ].lower()

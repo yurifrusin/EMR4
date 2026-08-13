@@ -60,17 +60,17 @@ def test_cf_d2_observability_evidence_and_boundaries_are_bound() -> None:
         assert phrase in joined
 
 
-def test_compass_advances_to_pure_unmounted_admission_rehearsal() -> None:
+def test_compass_advances_through_admission_to_representation() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
     assert compass["current_position"]["node_id"] == (
-        "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+        "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
     limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "unmounted event/cue representation architecture" in unlocks
-    assert "inert relational design" in unlocks
-    assert "without opening a database connection" in unlocks
-    assert "postgresql admission" in limits
+    assert "inert-ddl lowering" in unlocks
+    assert "deterministic sql text" in unlocks
+    assert "database connection" in unlocks
+    assert "postgresql parsing" in limits
     assert "no database, watcher" in compass["orientation_statement"].lower()
 
 

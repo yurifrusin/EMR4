@@ -191,9 +191,14 @@ classification, checkpoint, dispatch and fresh-read reconciliation. Its pure
 unmounted authored-synthetic admission rehearsal now passes at exact source
 `a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b`: all 22 duplicate, gap,
 checkpoint, coalescing, fencing, lag and reconciliation sequences pass and all
-60 hostile variants fail closed without state drift. The next gate is an inert
-relational representation architecture; database admission, persistence,
-watcher/source access, restart, unknown commit and delivery remain unproved.
+60 hostile variants fail closed without state drift. Its inert seven-relation
+representation architecture now also passes at exact source
+`16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed`: 12 row families pass and all 80
+hostile contract/row variants fail closed while row constraints, five future
+transaction protocols and external source/command authority remain distinct.
+The next gate is exact inert SQL-text lowering; database admission,
+persistence, watcher/source access, restart, unknown commit and delivery remain
+unproved.
 
 The provider-free legacy-route sequence now also passes through its source-
 bound default-off runtime-instrumentation architecture and globally-disabled
@@ -333,9 +338,13 @@ operator-evidence facts. Its pure unmounted authored-synthetic admission
 rehearsal now passes at exact source
 `a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b`, with 22 canonical sequences and
 60 hostile variants proving fail-closed duplicates, gaps, checkpointing,
-coalescing, fencing, lag and fresh-read reconciliation. The next product-
-direction gate is an inert relational representation architecture for those
-facts. No watcher runtime, database/source access, migration execution,
+coalescing, fencing, lag and fresh-read reconciliation. The inert relational
+representation for those facts now passes at exact source
+`16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed` with seven exact relations, five
+explicitly future transaction protocols, 12 canonical row families and 80
+hostile rejections. The next product-direction gate is deterministic inert
+SQL-text lowering of that exact contract. No watcher runtime, database/source
+access, SQL or migration execution,
 persistence, product data, external patient client, other command,
 restart/unknown-commit claim, provider, deployment, production or release is
 opened.
@@ -831,10 +840,14 @@ generation rehearsal. The architecture-only provider-free default-off
   refresh obligation and ten independently diagnosable stages. Its pure
   provider-free unmounted admission rehearsal passes at exact source
   `a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b`, with all 22 canonical state
-  sequences and 60 hostile variants passing. An inert relational
-  representation architecture is now dependency-satisfied; PostgreSQL
-  admission, persistence, watcher/source access, restart, unknown commit and
-  delivery remain unproved. Applied migration, application wiring,
+  sequences and 60 hostile variants passing. Its inert seven-relation
+  representation architecture passes at exact source
+  `16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed`; all 12 canonical row families
+  and 80 hostile variants pass, and transaction-protocol claims remain
+  explicitly separate from keys and row checks. Exact inert SQL-text lowering
+  is now dependency-satisfied; PostgreSQL admission, persistence,
+  watcher/source access, restart, unknown commit and delivery remain unproved.
+  Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1
