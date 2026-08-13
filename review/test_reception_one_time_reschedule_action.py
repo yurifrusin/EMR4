@@ -367,7 +367,7 @@ def open_reception_one(page) -> None:
     selector = f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}']"
     page.wait_for_selector(selector, state="visible")
     page.click(selector)
-    page.wait_for_selector("[data-testid='meta-grid-time-action']", state="visible")
+    page.wait_for_selector("[data-testid='meta-grid-reschedule-action']", state="visible")
 
 
 def _trigger_time_action(page, *, renderer: str, scenario: str) -> None:
@@ -375,8 +375,8 @@ def _trigger_time_action(page, *, renderer: str, scenario: str) -> None:
         page.locator(f".appt[data-id='{APPOINTMENT_ID}']").focus()
         page.keyboard.press("Alt+ArrowDown")
     else:
-        page.fill("[data-testid='meta-grid-time-input']", REQUESTED_START)
-        page.click("[data-testid='meta-grid-time-submit']")
+        page.fill("[data-testid='meta-grid-reschedule-time']", REQUESTED_START)
+        page.click("[data-testid='meta-grid-reschedule-submit']")
     if EXPECTED[scenario]["dialog"]:
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
@@ -427,10 +427,24 @@ def exercise(page, *, renderer: str, scenario: str) -> dict:
         }
     else:
         page.wait_for_function(
-            "fragment => document.querySelector('[data-testid=meta-grid-time-feedback]')?.textContent.toLowerCase().includes(fragment)",
+            "fragment => document.querySelector('[data-testid=meta-grid-reschedule-feedback]')?.textContent.toLowerCase().includes(fragment)",
             arg=expected["feedback"],
             timeout=10000,
         )
+        if expected["start"] == REQUESTED_START:
+            page.wait_for_function(
+                r"""([id, expectedStart]) => {
+                  const heading = document.querySelector(
+                    `#meta-grid-content [data-appointment-id='${id}'] h3`
+                  );
+                  if (!heading) return false;
+                  const match = heading.textContent.match(/(\d{1,2}):(\d{2})/);
+                  return Boolean(match)
+                    && String(match[1]).padStart(2, '0') + ':' + match[2] === expectedStart;
+                }""",
+                arg=[APPOINTMENT_ID, expected["start"]],
+                timeout=10000,
+            )
         displayed_start = _reception_displayed_start(page)
         renderer_local = {
             "layout": "selected_card_time_action_panel",
@@ -555,11 +569,11 @@ def test_invalid_and_no_op_time_input_makes_zero_routes(reception_page) -> None:
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        time_input = page.locator("[data-testid='meta-grid-time-input']")
+        time_input = page.locator("[data-testid='meta-grid-reschedule-time']")
 
         # Unchanged time is a local no-op.
         time_input.fill(CURRENT_START)
-        page.click("[data-testid='meta-grid-time-submit']")
+        assert page.locator("[data-testid='meta-grid-reschedule-submit']").is_disabled()
         page.wait_for_timeout(250)
         assert state["proposal_count"] == 0
         assert state["confirm_count"] == 0
@@ -568,7 +582,7 @@ def test_invalid_and_no_op_time_input_makes_zero_routes(reception_page) -> None:
 
         # Off-15-minute-grid time is rejected locally without a request.
         time_input.fill("09:07")
-        page.click("[data-testid='meta-grid-time-submit']")
+        page.click("[data-testid='meta-grid-reschedule-submit']")
         page.wait_for_timeout(250)
         assert state["proposal_count"] == 0
         assert state["confirm_count"] == 0
@@ -588,8 +602,8 @@ def test_interruption_keeps_one_action_and_requires_fresh_reconciliation(recepti
         open_diary(page, base_url)
         open_reception_one(page)
         initial_list_reads = state["list_read_count"]
-        page.fill("[data-testid='meta-grid-time-input']", REQUESTED_START)
-        page.click("[data-testid='meta-grid-time-submit']")
+        page.fill("[data-testid='meta-grid-reschedule-time']", REQUESTED_START)
+        page.click("[data-testid='meta-grid-reschedule-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         page.evaluate("window.dispatchEvent(new Event('blur'))")
         assert page.locator("#bernie-meta-grid").get_attribute("class").find("is-private") >= 0
@@ -599,15 +613,20 @@ def test_interruption_keeps_one_action_and_requires_fresh_reconciliation(recepti
         page.locator("[data-testid='status-proposal-dialog'] button:has-text('Cancel')").press("Escape")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
         page.wait_for_function(
-            "document.querySelector('[data-testid=meta-grid-time-feedback]')?.textContent.toLowerCase().includes('cancelled')"
+            "document.querySelector('[data-testid=meta-grid-reschedule-feedback]')?.textContent.toLowerCase().includes('cancelled')"
         )
         page.wait_for_timeout(150)
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
         assert state["raw_count"] == 0
         assert state["list_read_count"] > initial_list_reads
-        assert page.locator("[data-testid='meta-grid-time-input']").input_value() == CURRENT_START
-        assert page.locator("[data-testid='meta-grid-time-input']").evaluate("el => document.activeElement === el")
+        # The selected input remains provisional staff intent; the rendered
+        # appointment coordinate must come from the fresh authoritative read.
+        assert _reception_displayed_start(page) == CURRENT_START
+        page.wait_for_function(
+            "document.activeElement?.dataset?.testid === 'meta-grid-reschedule-time'"
+        )
+        assert page.locator("[data-testid='meta-grid-reschedule-time']").evaluate("el => document.activeElement === el")
     finally:
         page.unroute("**/api/v1/**", handler)
 
@@ -618,8 +637,8 @@ def test_keyboard_focus_containment_and_escape_return_to_time_input(reception_pa
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        page.fill("[data-testid='meta-grid-time-input']", REQUESTED_START)
-        page.click("[data-testid='meta-grid-time-submit']")
+        page.fill("[data-testid='meta-grid-reschedule-time']", REQUESTED_START)
+        page.click("[data-testid='meta-grid-reschedule-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
 
@@ -633,7 +652,10 @@ def test_keyboard_focus_containment_and_escape_return_to_time_input(reception_pa
         page.keyboard.press("Escape")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
         assert page.locator("#bernie-meta-grid").is_visible()
-        assert page.locator("[data-testid='meta-grid-time-input']").evaluate("el => document.activeElement === el")
+        page.wait_for_function(
+            "document.activeElement?.dataset?.testid === 'meta-grid-reschedule-time'"
+        )
+        assert page.locator("[data-testid='meta-grid-reschedule-time']").evaluate("el => document.activeElement === el")
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
         assert state["raw_count"] == 0
@@ -655,7 +677,7 @@ def test_time_action_is_usable_without_horizontal_overflow(
         page.set_viewport_size({"width": width, "height": height})
         open_diary(page, base_url)
         open_reception_one(page)
-        layout = page.locator("[data-testid='meta-grid-time-action']").evaluate("""panel => {
+        layout = page.locator("[data-testid='meta-grid-reschedule-action']").evaluate("""panel => {
           const host = document.getElementById('bernie-meta-grid');
           const panelRect = panel.getBoundingClientRect();
           const hostRect = host.getBoundingClientRect();
@@ -665,9 +687,9 @@ def test_time_action_is_usable_without_horizontal_overflow(
           };
         }""")
         assert layout == {"overflow": False, "withinHost": True}
-        assert page.locator("[data-testid='meta-grid-time-input']").is_visible()
-        assert page.locator("[data-testid='meta-grid-time-submit']").is_visible()
-        assert page.locator("[data-testid='meta-grid-time-feedback']").is_visible()
+        assert page.locator("[data-testid='meta-grid-reschedule-time']").is_visible()
+        assert page.locator("[data-testid='meta-grid-reschedule-submit']").is_visible()
+        assert page.locator("[data-testid='meta-grid-reschedule-feedback']").is_visible()
         assert state["proposal_count"] == 0
         assert state["confirm_count"] == 0
     finally:
@@ -681,12 +703,12 @@ def test_selected_card_time_input_is_15_minute_step(reception_page) -> None:
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        time_input = page.locator("[data-testid='meta-grid-time-input']")
+        time_input = page.locator("[data-testid='meta-grid-reschedule-time']")
         assert time_input.get_attribute("type") == "time"
-        assert time_input.get_attribute("step") == "15"
-        submit = page.locator("[data-testid='meta-grid-time-submit']")
+        assert time_input.get_attribute("step") == "900"
+        submit = page.locator("[data-testid='meta-grid-reschedule-submit']")
         assert submit.text_content().strip() == "Review time change"
-        assert page.locator("[data-testid='meta-grid-time-action']").is_visible()
+        assert page.locator("[data-testid='meta-grid-reschedule-action']").is_visible()
         assert state["proposal_count"] == 0
     finally:
         page.unroute("**/api/v1/**", handler)
@@ -704,7 +726,7 @@ def test_reception_one_time_action_source_has_no_second_write_path() -> None:
     diary = (DOCS / "diary/diary.js").read_text(encoding="utf-8")
 
     # 1. The selected-card time panel is present in Reception One.
-    for testid in ("meta-grid-time-action", "meta-grid-time-input", "meta-grid-time-submit", "meta-grid-time-feedback"):
+    for testid in ("meta-grid-reschedule-action", "meta-grid-reschedule-time", "meta-grid-reschedule-submit", "meta-grid-reschedule-feedback"):
         assert testid in meta, f"missing Reception One time-action testid: {testid}"
     assert "Review time change" in meta
 
@@ -728,7 +750,10 @@ def test_reception_one_time_action_source_has_no_second_write_path() -> None:
     assert "/appointments/proposals/update/confirm" in diary
 
     # 4. The bridge fixes the duration delta at zero (same-date, duration-fixed).
-    assert re.search(r"deltaDuration\s*[:=]\s*0", diary), "duration delta is not fixed at zero"
+    assert re.search(
+        r"handleMoveResize\(\s*appointment,\s*requestedStartMins\s*-\s*currentStartMins,\s*0,",
+        diary,
+    ), "duration delta is not fixed at zero"
 
 
 if __name__ == "__main__":  # pragma: no cover

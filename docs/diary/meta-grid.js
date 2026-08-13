@@ -2832,6 +2832,9 @@
             ? "Fresh scoped read after committed appointment time change"
             : "Fresh scoped read after interrupted appointment time review"
         });
+        if (result.committed) {
+          applyFreshAppointmentToCurrentProjection(result.appointment);
+        }
       } else {
         applyFreshAppointmentToCurrentProjection(result.appointment);
       }

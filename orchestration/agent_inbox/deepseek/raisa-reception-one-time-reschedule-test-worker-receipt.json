@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Terminal receipt\n\n**Status:** complete (artifact delivered; acceptance is Sol's, not claimed)\n\n**Exact changed file:** `review/test_reception_one_time_reschedule_action.py` (735 lines, +735; the only staged/committed file)\n\n**Syntax-check result:** `PY_COMPILE_OK` \u2014 `py -3 -m py_compile review/test_reception_one_time_reschedule_action.py` passed (the bare `python` alias was unavailable on this machine; used the Windows `py` launcher). `git diff --check` and `git diff --cached --check` also passed.\n\n**Expected-red behavioural status:** red as intended. The contract requires `meta-grid-time-action`/`meta-grid-time-input`/`meta-grid-time-submit`/`meta-grid-time-feedback`, a `Review time change` action, a `handleMoveResize`-delegating bridge that fixes `deltaDuration` at zero, and the existing `update`/`update/confirm` routes \u2014 none of which exist in the pre-implementation source. The six paired `conventional_grid`/`reception_one` matrix, the invalid/no-op zero-route, interruption/fresh-reconciliation, keyboard/focus/Escape, desktop/tablet/phone no-overflow, and static source-guard tests therefore fail until Sol's parallel product implementation lands. pytest was not run in this worktree.\n\n**Commit hash:** `180fd34ef19981650c32b9cbbe6cfc2342503c8d` on `codex/reception-one-time-reschedule-test-worker`\n\n**Boundary attestation:** Only the single allowlisted new test artifact was created/edited/staged/committed. Only the listed checks were run. No pytest, no product/backend/existing-test edits, no protected ref, push, provider, database, or deployment action. Evidence labels in the artifact are strictly `route_intercepted_browser` (intercepted browser cases) and `authored_synthetic_client_fixture` (static source guard); no live operation is claimed. Clean worktree at the worker commit.\n\n**Genuine blocker:** none.",
+  "usage": {
+    "input_tokens": 204010,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 9957120,
+    "output_tokens": 177931,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 10.460535,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

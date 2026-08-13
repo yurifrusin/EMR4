@@ -4,14 +4,14 @@
   "active_tranche": "Reception One selected-appointment reschedule composition",
   "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
   "status": "in_progress",
-  "source_head": "fff6103e9c5ece8c4127fd6738cdad6fac9ca965",
+  "source_head": "34bfcd7187fac3fe12a752525402f3b696fddeb5",
   "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "the Sol-owned product candidate and post-compaction evidence are committed at fff6103e9c5ece8c4127fd6738cdad6fac9ca965; DeepSeek's clean isolated commit changes only review/test_reception_one_time_reschedule_action.py and remains untrusted pending execution",
-    "next_executable_stage": "integrate the one-file DeepSeek test commit, execute it against the Sol product candidate, and mechanically recover test-contract defects inside the frozen boundary before full deterministic admission",
+    "completed_stage": "DeepSeek's one-file commit is integrated at 34bfcd7187fac3fe12a752525402f3b696fddeb5 and recovered under Sol ownership: selectors, HTML time-step units, disabled no-op semantics and async waits are corrected; one fresh-coordinate product race is repaired; all nine worker tests now pass",
+    "next_executable_stage": "commit the bounded recovery, run the complete affected and canonical deterministic gates, then prepare a fresh read-only Gemini veto worktree and exact packet",
     "retry_counters": {
       "review": 0,
-      "verification": 8
+      "verification": 9
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },

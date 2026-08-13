@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "DeepSeek's one-file commit is integrated at 34bfcd7187fac3fe12a752525402f3b696fddeb5 and recovered under Sol ownership: selectors, HTML time-step units, disabled no-op semantics and async waits are corrected; one fresh-coordinate product race is repaired; all nine worker tests now pass",
+    "next_executable_stage": "commit the bounded recovery, run the complete affected and canonical deterministic gates, then prepare a fresh read-only Gemini veto worktree and exact packet",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "34bfcd7187fac3fe12a752525402f3b696fddeb5",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_recovered_deepseek_test_artifact_and_fresh_coordinate_product_fix",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan permits mechanical test recovery and in-boundary freshness correction. Nine recovered tests now pass, including twelve paired route-intercepted outcomes and responsive, focus, interruption and no-second-write-path checks.",
+    "current_authority_allocation": "Sol owns recovery, product repair, evidence and acceptance. DeepSeek's isolated provenance is preserved but not transferred; Gemini remains gated for fresh veto.",
+    "git_refs_and_worktree": "The task branch is at exact integration parent 34bfcd7187fac3fe12a752525402f3b696fddeb5. The current diff contains one product freshness amendment, Sol's exact test recovery, latch and recovery evidence. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The in-progress latch and AGENTS.md retain Yuri's selected same-date appointment reschedule composition direction.",
+    "protected_evidence_boundaries": "Only docs/diary/meta-grid.js, the new route-intercepted test, its worker receipt and the recovery evidence are admitted. Backend/API/database/provider/network/deployment, protected evidence, PHI, product data, docs/branding, protected refs and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
