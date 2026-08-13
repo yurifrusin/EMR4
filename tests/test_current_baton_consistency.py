@@ -7,8 +7,8 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-visible-native-diary-status-confirm-wiring"
-SOURCE_HEAD = "bed49be3d78d79207857b3d3a044cebd334112dc"
+NODE_ID = "raisa-provider-free-cf-d2-observability-first-event-cue"
+SOURCE_HEAD = "e8677b54d1c339dcd14776ce8bf15e7db2980378"
 STATUS_CONFIRM_SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
 INTEGRATION_SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
 ADAPTER_SOURCE_HEAD = "b728b903c99fa35f231df04ba68263533261121a"
@@ -27,26 +27,27 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 275
+    assert graph["graph_revision"] == 276
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 257
-    assert compass["source_graph_revision"] == 275
+    assert compass["map_revision"] == 258
+    assert compass["source_graph_revision"] == 276
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_visible_status_and_bound_cf_d2_planning() -> None:
+def test_live_baton_rows_accept_cf_d2_observability_and_bound_admission() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 275 / Compass 257" in current
-    assert "raisa_provider_free_visible_native_diary_status_confirm_wiring_pass" in current
+    assert "Continuity 276 / Compass 258" in current
+    assert "raisa_provider_free_cf_d2_observability_first_event_cue_architecture_pass" in current
     assert SOURCE_HEAD in current
-    assert "Safe routine staff status changes remain dialog-free" in current
-    assert "blocked changes expose no commit" in current
-    assert "144-test full Diary review" in current
+    assert "payload-free practice-scoped refresh obligation" in current
+    assert "Ten failure stages" in current
+    assert "39 hostile mutations" in current
+    assert "114 focused tests" in current
     assert "193-test canonical fast profile" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
@@ -74,10 +75,11 @@ def test_live_baton_rows_accept_visible_status_and_bound_cf_d2_planning() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "fresh provider-free CF-D2 observability-first durable event/cue plan" in next_work
-    assert "Events remain acceleration hints" in next_work
-    assert "command-time current authority and source truth remain correctness" in next_work
-    assert "cue, position, lag, deduplication, reconciliation and operator-evidence" in next_work
+    assert SOURCE_HEAD in relation
+    assert "pure provider-free unmounted CF-D2 event/cue admission rehearsal" in next_work
+    assert "authored-synthetic duplicate, gap, checkpoint, coalescing, fencing and reconciliation" in next_work
+    assert "Events and cues remain acceleration hints" in next_work
+    assert "source truth and command-time current authority remain correctness" in next_work
     assert "No watcher" in next_work
     assert "product/patient data" in next_work
     assert "provider/ADC" in next_work
@@ -114,14 +116,13 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "fresh provider-free cf-d2 observability-first durable event/cue plan",
-        "events remain acceleration hints",
-        "command-time current authority",
-        "source truth remain correctness",
-        "cue, position, lag, deduplication, reconciliation and operator-evidence",
-        "before any runtime",
+        "pure provider-free unmounted cf-d2 event/cue admission rehearsal",
+        "authored-synthetic duplicate, gap, checkpoint, coalescing, fencing and reconciliation",
+        "events and cues remain acceleration hints",
+        "source truth and command-time current authority remain correctness",
         "no watcher",
         "database/source access",
+        "persistence",
         "operational retention",
         "product/patient data",
         "external patient client",

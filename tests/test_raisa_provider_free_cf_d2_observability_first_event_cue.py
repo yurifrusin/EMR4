@@ -264,7 +264,7 @@ def test_active_latch_transferred_to_cf_d2_plan() -> None:
         "raisa-provider-free-cf-d2-observability-first-event-cue-plan"
     )
     assert (
-        "commit_and_push_the_verified_architecture_source"
+        "verify_closeout_generate_precommit_receipt_then_commit_notify"
         in (latch["checkpoint"]["next_executable_stage"])
     )
     assert latch["terminal_response"]["permitted"] is False

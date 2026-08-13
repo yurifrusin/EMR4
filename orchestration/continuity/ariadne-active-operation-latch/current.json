@@ -4,11 +4,11 @@
   "active_tranche": "Provider-free CF-D2 observability-first durable event and cue architecture",
   "objective": "Freeze and deterministically prove the smallest non-authoritative cue, position, lag, deduplication, reconciliation and operator-evidence contract needed by the accepted visible Diary consumer before any watcher or database runtime.",
   "status": "in_progress",
-  "source_head": "6f8904c5f7c8ab268c2010bd2c4f859d998ff1a4",
-  "authority_source": "AGENTS.md Current Baton at Continuity 275 / Compass 257 plus Yuri's standing uninterrupted-development authority",
+  "source_head": "e8677b54d1c339dcd14776ce8bf15e7db2980378",
+  "authority_source": "AGENTS.md Current Baton at Continuity 276 / Compass 258 plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "one plan, one machine contract and one architecture pass 39 hostile mutations, 114 focused tests and the 193-test canonical fast profile without runtime",
-    "next_executable_stage": "commit_and_push_the_verified_architecture_source_then_rehydrate_and_write_its_acceptance_closeout",
+    "completed_stage": "architecture source e8677b54d1c339dcd14776ce8bf15e7db2980378 accepted and closeout plus Continuity 276 / Compass 258 authored",
+    "next_executable_stage": "verify_closeout_generate_precommit_receipt_then_commit_notify_and_publish_before_transferring_to_the_pure_unmounted_admission_rehearsal",
     "retry_counters": {
       "review": 0,
       "verification": 0

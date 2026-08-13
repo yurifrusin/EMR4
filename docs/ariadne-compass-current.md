@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 275 / Compass 257. The provider-free visible native Diary status-confirm wiring passes for staff over the existing backend-owned command, with responsive, keyboard, interruption and fail-closed evidence. The next safe gate is a fresh provider-free CF-D2 observability-first durable event/cue plan; no watcher runtime or product-data authority is open.
+> EMR4 is at Continuity 276 / Compass 258. The provider-free CF-D2 observability-first architecture accepts only a payload-free durable refresh obligation, with ten distinct diagnostic stages and source/command authority preserved. The next safe gate is a pure unmounted admission rehearsal; no watcher, database/source or product-data authority is open.
 
 ## North star
 
@@ -322,32 +322,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The static identity, assurance, recovery, projection and confirmation foundation passes; staff-visible Diary wiring is next. Lineage parent: `raisa-provider-free-status-confirm-http-route-convergence`.
 153. **Make the accepted status command truthful and usable in Reception One — Provider-free visible native Diary status-confirm wiring**
    Visible staff status-confirm behavior passes; its cue and reconciliation needs now bound the next observability-first durability plan. Lineage parent: `raisa-channel-neutral-patient-interaction-foundation`.
+154. **Make durable refresh acceleration small, observable and non-authoritative — Provider-free CF-D2 observability-first event and cue architecture**
+   A payload-free cue obligation and ten-stage diagnostic contract pass; pure unmounted state admission is next. Lineage parent: `raisa-provider-free-visible-native-diary-status-confirm-wiring`.
 
 ## Current position
 
-**First visible staff status command complete; observability-first cue planning next — Provider-free visible native Diary status-confirm wiring**
+**Observable payload-free durable cue architecture accepted; pure state admission next — Provider-free CF-D2 observability-first event and cue architecture**
 
-**Why this proof came next:** The UI now identifies the exact checking, confirmation, non-change, commit and refresh states that durable event delivery may accelerate without owning correctness.
+**Why this proof came next:** The visible Diary consumer identifies the refresh need, while the smaller contract separates every durable handoff before any restart or database proof.
 
-Reception One visibly preserves proposal versus current-truth semantics across safe, warning, blocked, stale, success and interruption paths.
+Durability is limited to a payload-free refresh obligation; source truth, command authority, checkpoint, delivery and reconciliation remain distinct.
 
 ### What this unlocks
 
-- Freeze the narrowest provider-free CF-D2 observability-first durable event/cue plan.
-- Define the positions, lag, deduplication, reconciliation and operator evidence needed by this visible consumer without opening a watcher runtime.
-- Keep correctness in command-time authority and source-truth checks even when cues are late, duplicated or absent.
+- Run the provider-free unmounted event/cue admission rehearsal against the exact accepted contract.
+- Prove duplicate, gap, checkpoint, coalescing, fencing and reconciliation admission with authored-synthetic state only.
+- Use the ten diagnostic stages to fail closed without starting a watcher or opening a database/source.
 
 ### What it does not solve
 
-- Live product-data status operation, another command family or patient self-service.
-- A database watcher, durable cue transport, restart or unknown-commit recovery.
-- External identity/channel delivery, provider access, deployment, production or release.
+- PostgreSQL representation, durable persistence, source observation or a watcher process.
+- Restart, unknown-commit, dispatch transport, latency, retention, rotation or operational delivery.
+- Product/patient data, external identity/channel delivery, provider access, commands, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -410,10 +410,10 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve accepted conditional-command and status-confirm route correctness.
-- Use the accepted visible staff status-confirm boundary to specify cue, lag and reconciliation evidence.
+- Preserve source-owned truth and command-time current-authority checks as the correctness kernel.
+- Preserve the accepted payload-free refresh-obligation and ten-stage observability contract.
+- Exercise only pure authored-synthetic state admission before considering any persistence or watcher runtime.
 - Keep future patient channels behind the accepted identity, assurance, recovery, projection and confirmation foundation.
-- Return to durable event/cue delivery only through a fresh provider-free observability-first CF-D2 plan; events remain acceleration hints, not command evidence.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -602,6 +602,7 @@ Prerequisites:
 
 ## Map limits
 
+- CF-D2 observability evidence is an architecture-only closed-contract proof; it does not prove persistence, restart, unknown commit, source observation or cue delivery.
 - Visible status-confirm evidence uses an authored-synthetic smoke client and route-intercepted browser responses; it is not live product-data or deployment evidence.
 - The patient interaction foundation is static architecture evidence, not real identity, channel delivery, patient self-service or command runtime.
 - Status-confirm HTTP convergence proves one authored-synthetic mounted backend family, not visible UI behavior, other commands or durable event/cue delivery.
@@ -781,6 +782,7 @@ Prerequisites:
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
+- `docs/api-spine/async/durable-diary-event-cue-observability.yaml`
 - `docs/api-spine/external-read-model-current-surface-status.json`
 - `docs/api-spine/external-read-model-current-surface-status.schema.json`
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
@@ -1008,6 +1010,9 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
 - `docs/raisa-practice-context-fabric-direction.md`
+- `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
+- `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
+- `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
@@ -1233,6 +1238,7 @@ Prerequisites:
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-cf-d2-observability-first-event-cue-threat-model-delta.md`
 - `docs/security/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-threat-model-delta.md`
 - `docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
@@ -1417,6 +1423,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-event-cue-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-preplanning-receipt.json`
@@ -1823,6 +1832,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
+- `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json`
@@ -2221,6 +2232,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md`
+- `orchestration/human_inbox/yuri/2026-08-13--cf-d2-observability-first-event-cue-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
@@ -2244,6 +2256,7 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
+- `scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
@@ -2307,6 +2320,7 @@ Prerequisites:
 - `tests/test_raisa_channel_neutral_patient_interaction_foundation_plan.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
+- `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py`
@@ -2346,4 +2360,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 257; continuity graph revision 275._
+_Compass map revision 258; continuity graph revision 276._

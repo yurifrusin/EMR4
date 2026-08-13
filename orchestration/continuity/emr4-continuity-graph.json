@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 275,
+  "graph_revision": 276,
   "harvests": [],
   "nodes": [
     {
@@ -17961,9 +17961,117 @@
         "CF-D2 restart, unknown-commit and durable event/cue delivery remain unproved and reopen only through a fresh observability-first plan.",
         "Other commands, external patient clients, real identity, patient/product data, providers, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-cf-d2-observability-first-event-cue",
+      "title": "Provider-free CF-D2 observability-first event and cue architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-13T06:26:12Z",
+      "updated_at": "2026-08-13T06:26:12Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "e8677b54d1c339dcd14776ce8bf15e7db2980378",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-visible-native-diary-status-confirm-wiring",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "raisa-context-fabric-source-owned-truth-conditional-command-reorientation",
+          "relation": "protects"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Source services retain current truth and commands retain current-authority and source-truth checks.",
+          "A durable cue is a payload-free refresh obligation and never command evidence, confirmation or appointment truth.",
+          "No watcher, database/source, persistence, product data, provider, route, command, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-cf-d2-observability-first-event-cue-architecture",
+          "source": "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-event-cue-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the smallest independently observable durable refresh-obligation contract before any runtime rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "Partition, opaque source coordinate, terminal classification receipt, checkpoint, cue obligation, dispatch and reconciliation are separate facts.",
+        "Checkpoint advancement requires contiguous terminal receipts and atomic creation of every required cue obligation; delivery is a separate backlog.",
+        "Ten diagnostic stages retain mutually distinct payload-free operator evidence and safe responses.",
+        "All 39 hostile mutations, 114 focused tests and the 193-test canonical fast profile pass without runtime, database, provider or product/patient data."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md",
+            "docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md",
+            "orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json",
+            "tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py",
+            "docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md"
+          ],
+          "note": "The payload-free cue cannot replace or mutate the accepted combined appointment intent; the consumer must freshly read its authoritative projection."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md",
+            "docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md",
+            "orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json",
+            "tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py",
+            "docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md"
+          ],
+          "note": "Event and cue delivery remain acceleration hints; reconciliation uses a fresh scoped read and preserves the existing selection/proposal rules."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md",
+          "docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md",
+          "docs/security/raisa-provider-free-cf-d2-observability-first-event-cue-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--cf-d2-observability-first-event-cue-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-event-cue-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-cf-d2-observability-first-plan-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py",
+          "tests/test_raisa_provider_free_cf_d2_observability_first_event_cue_continuity.py"
+        ],
+        "artifacts": [
+          "docs/api-spine/async/durable-diary-event-cue-observability.yaml",
+          "orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json",
+          "scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py",
+          "scripts/raisa_provider_free_cf_d2_observability_first_event_cue_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "PostgreSQL representation, persistence, source observation, restart, unknown commit and delivery remain unproved.",
+        "The next gate is a pure provider-free unmounted admission rehearsal over authored-synthetic state sequences only.",
+        "Watcher/database/source, operational retention, product/patient data, provider, command/write, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T05:42:33Z"
+  "updated_at": "2026-08-13T06:26:12Z"
 }

@@ -163,12 +163,12 @@ restart, unknown-commit recovery, key rotation, retention execution, purge,
 performance and operational availability remain unproved. Applied migration,
 application behavior, operational database/source access and runtime remain
 closed. CF-D1 subsequently proved the bounded two-session concurrency slice,
-but CF-D2 restart/unknown-commit and its recovery descendant stopped before any
-crash. The accepted workflow-incident diagnosis now separates hard safety
-controls from adaptive flow and requires distinct observations for every viable
-cause before another correction or retry. It does not prove CF-D2; key rotation
-and retention/purge remain blocked and the next independent programme direction
-requires Yuri's choice.
+but the original CF-D2 restart/unknown-commit work and its recovery descendant
+stopped before any crash. The accepted workflow-incident diagnosis now
+separates hard safety controls from adaptive flow and requires distinct
+observations for every viable cause before another correction or retry. It did
+not prove restart or unknown-commit recovery; key rotation and retention/purge
+remain blocked.
 
 Yuri subsequently selected the independent source-owned-truth reorientation.
 The first Context Fabric runtime is to depend on authoritative source services
@@ -182,8 +182,14 @@ final database invariant check. The four legacy compatibility writes are to
 converge on the same backend kernel before deprecation, without treating an
 implicit freshness check as human confirmation. Durable Event and Cue Delivery
 remains a named later extension with one logical consumer per database event
-partition, optional externally fenced active/standby replicas, retained CF-D1
-evidence and any CF-D2 return gated by a fresh observability-first plan.
+partition, optional externally fenced active/standby replicas and retained
+CF-D1 evidence. Its fresh provider-free observability-first CF-D2 architecture
+now passes at exact source `e8677b54d1c339dcd14776ce8bf15e7db2980378`:
+durability retains a payload-free refresh obligation rather than appointment
+truth, and separately observes source head, observation, terminal
+classification, checkpoint, dispatch and fresh-read reconciliation. The next
+gate is a pure unmounted authored-synthetic admission rehearsal; persistence,
+watcher/source access, restart, unknown commit and delivery remain unproved.
 
 The provider-free legacy-route sequence now also passes through its source-
 bound default-off runtime-instrumentation architecture and globally-disabled
@@ -313,15 +319,18 @@ rejected changes restore the previous status and expose no raw fallback.
 Desktop, tablet, phone, keyboard and interruption evidence passes without
 opening another backend command or patient client.
 
-That visible consumer boundary now makes the next durability step specific.
-The next product-direction gate is a fresh provider-free CF-D2
-observability-first durable event/cue plan. It must keep events as acceleration
-hints, preserve command-time authority and source-truth correctness, and freeze
-only the smallest cue, position, lag, deduplication, reconciliation and
-operator-evidence contract before any watcher runtime, database/source access
-or product data is considered. External patient clients, other command
-families, restart/unknown-commit runtime claims, providers, deployment,
-production and release remain separately closed.
+That visible consumer boundary made the next durability step specific. The
+provider-free CF-D2 observability-first event/cue architecture now passes at
+exact source `e8677b54d1c339dcd14776ce8bf15e7db2980378`. It keeps events and cues
+as acceleration hints, preserves command-time authority and source-truth
+correctness, and freezes a payload-free refresh obligation plus distinct
+position, classification, checkpoint, lag, dispatch, reconciliation and
+operator-evidence facts. The next product-direction gate is its pure unmounted
+authored-synthetic admission rehearsal for duplicates, gaps, checkpointing,
+coalescing, fencing and reconciliation. No watcher runtime, database/source
+access, persistence, product data, external patient client, other command,
+restart/unknown-commit claim, provider, deployment, production or release is
+opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
@@ -807,10 +816,14 @@ generation rehearsal. The architecture-only provider-free default-off
   `018099dd6c5f0502121360732feb602252eb34cc`. Hard authority, data, effect,
   stop, cleanup, claim and protected-ref controls remain intact; diagnostic
   corrections and retries now require distinct observations for every viable
-  cause, and review commands/results are mechanically exact. This repair does
-  not reopen CF-D2. No automatic durability tranche remains dependency-
-  satisfied, so the next independent programme direction is a Yuri-owned
-  choice. Applied migration, application wiring,
+  cause, and review commands/results are mechanically exact. Yuri subsequently
+  chose the source-owned-truth direction and a smaller observability-first
+  return. Its architecture-only CF-D2 descendant passes at exact source
+  `e8677b54d1c339dcd14776ce8bf15e7db2980378`, retaining only a payload-free
+  refresh obligation and ten independently diagnosable stages. A pure
+  provider-free unmounted admission rehearsal is now dependency-satisfied;
+  PostgreSQL representation, persistence, watcher/source access, restart,
+  unknown commit and delivery remain unproved. Applied migration, application wiring,
   operational database/source access and every real-product or clinical
   descendant remain closed. The bounded architectural-health pulse and its
   provider-free CI/lifecycle repair, AES-C0 architecture contract, AES-C1

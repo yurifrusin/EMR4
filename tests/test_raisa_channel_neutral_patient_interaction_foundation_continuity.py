@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "raisa-channel-neutral-patient-interaction-foundation"
 SOURCE_HEAD = "17d9da1844e59406eecda44b5029e839b2e8a573"
-CURRENT_POSITION = "raisa-provider-free-visible-native-diary-status-confirm-wiring"
+CURRENT_POSITION = "raisa-provider-free-cf-d2-observability-first-event-cue"
 
 
 def _load(path: str) -> dict:
@@ -53,7 +53,7 @@ def test_patient_interaction_foundation_preserves_closed_boundaries() -> None:
         assert phrase in joined
 
 
-def test_patient_foundation_evidence_remains_bound_after_staff_ui_advance() -> None:
+def test_patient_foundation_evidence_remains_bound_after_cf_d2_advance() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
     node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
@@ -68,7 +68,7 @@ def test_patient_foundation_evidence_remains_bound_after_staff_ui_advance() -> N
     assert compass["current_position"]["node_id"] == CURRENT_POSITION
     unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
     limits = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "observability-first" in unlocks
-    assert "without opening a watcher runtime" in unlocks
-    assert "patient self-service" in limits
-    assert "observability-first" in compass["orientation_statement"].lower()
+    assert "unmounted event/cue admission rehearsal" in unlocks
+    assert "without starting a watcher" in unlocks
+    assert "external identity/channel delivery" in limits
+    assert "observability-first architecture" in compass["orientation_statement"].lower()
