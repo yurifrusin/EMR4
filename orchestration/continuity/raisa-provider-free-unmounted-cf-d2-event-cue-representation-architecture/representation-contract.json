@@ -1,0 +1,260 @@
+{
+  "schema_version": "raisa.context_fabric.unmounted_event_cue_representation.v1",
+  "status": "architecture_only_provider_free_unmounted_inert",
+  "planning_baseline": "784fdc4c0237e1c363676638d010b2bd4b033210",
+  "accepted_observability_source": "e8677b54d1c339dcd14776ce8bf15e7db2980378",
+  "accepted_admission_source": "a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b",
+  "data_ceiling": "authored_synthetic_patient_free_digests_enums_and_positions_only",
+  "evidence_label": "provider_free_unmounted_inert_relational_representation",
+  "authority": {
+    "source_owns_current_truth": true,
+    "observer_coordinate_is_non_authoritative": true,
+    "event_and_cue_are_acceleration_hints_only": true,
+    "cue_may_update_display_directly": false,
+    "fresh_authorized_scoped_read_required": true,
+    "command_rechecks_current_authority_and_source_truth": true,
+    "represented_row_may_assert_command_success_or_authority": false
+  },
+  "scalar_types": [
+    "boolean",
+    "digest",
+    "enum",
+    "nullable_digest",
+    "nullable_enum",
+    "nullable_positive_integer",
+    "opaque_id",
+    "positive_integer"
+  ],
+  "relations": [
+    {
+      "name": "event_partition",
+      "fields": [
+        {"name": "partition_id", "type": "digest", "nullable": false},
+        {"name": "source_system", "type": "enum", "nullable": false},
+        {"name": "practice_scope_digest", "type": "digest", "nullable": false},
+        {"name": "event_family", "type": "enum", "nullable": false},
+        {"name": "source_epoch_digest", "type": "digest", "nullable": false},
+        {"name": "lease_generation", "type": "positive_integer", "nullable": false}
+      ],
+      "primary_key": ["partition_id"],
+      "unique_keys": [["source_system", "practice_scope_digest", "event_family"]],
+      "references": [],
+      "checks": ["partition_id_matches_exact_partition_tuple_digest", "lease_generation_positive"],
+      "mutable_fields": ["source_epoch_digest", "lease_generation"]
+    },
+    {
+      "name": "observer_coordinate",
+      "fields": [
+        {"name": "partition_id", "type": "digest", "nullable": false},
+        {"name": "consumer_scope", "type": "enum", "nullable": false},
+        {"name": "source_epoch_digest", "type": "digest", "nullable": false},
+        {"name": "observed_state", "type": "enum", "nullable": false},
+        {"name": "observed_position", "type": "nullable_positive_integer", "nullable": true},
+        {"name": "source_head_state", "type": "enum", "nullable": false},
+        {"name": "source_head_epoch_digest", "type": "nullable_digest", "nullable": true},
+        {"name": "source_head_position", "type": "nullable_positive_integer", "nullable": true}
+      ],
+      "primary_key": ["partition_id", "consumer_scope"],
+      "unique_keys": [],
+      "references": [{"fields": ["partition_id"], "relation": "event_partition", "target_fields": ["partition_id"]}],
+      "checks": ["observed_none_iff_position_null", "source_head_state_matches_nullable_coordinate", "coordinate_is_non_authoritative"],
+      "mutable_fields": ["source_epoch_digest", "observed_state", "observed_position", "source_head_state", "source_head_epoch_digest", "source_head_position"]
+    },
+    {
+      "name": "terminal_receipt",
+      "fields": [
+        {"name": "receipt_id", "type": "opaque_id", "nullable": false},
+        {"name": "partition_id", "type": "digest", "nullable": false},
+        {"name": "source_epoch_digest", "type": "digest", "nullable": false},
+        {"name": "source_position", "type": "positive_integer", "nullable": false},
+        {"name": "event_fingerprint_digest", "type": "digest", "nullable": false},
+        {"name": "classification", "type": "enum", "nullable": false},
+        {"name": "reason_code", "type": "nullable_enum", "nullable": true},
+        {"name": "obligation_id", "type": "opaque_id", "nullable": true}
+      ],
+      "primary_key": ["receipt_id"],
+      "unique_keys": [["partition_id", "source_epoch_digest", "source_position"]],
+      "references": [
+        {"fields": ["partition_id"], "relation": "event_partition", "target_fields": ["partition_id"]},
+        {"fields": ["obligation_id"], "relation": "cue_obligation", "target_fields": ["obligation_id"], "nullable_reference": true, "future_deferrable": true}
+      ],
+      "checks": ["classification_reason_and_obligation_shape_exact", "source_position_positive"],
+      "mutable_fields": []
+    },
+    {
+      "name": "cue_obligation",
+      "fields": [
+        {"name": "obligation_id", "type": "opaque_id", "nullable": false},
+        {"name": "partition_id", "type": "digest", "nullable": false},
+        {"name": "consumer_scope", "type": "enum", "nullable": false},
+        {"name": "source_epoch_digest", "type": "digest", "nullable": false},
+        {"name": "from_position", "type": "positive_integer", "nullable": false},
+        {"name": "through_position", "type": "positive_integer", "nullable": false},
+        {"name": "reason_code", "type": "enum", "nullable": false},
+        {"name": "fresh_authorized_read_required", "type": "boolean", "nullable": false},
+        {"name": "state", "type": "enum", "nullable": false}
+      ],
+      "primary_key": ["obligation_id"],
+      "unique_keys": [],
+      "references": [{"fields": ["partition_id"], "relation": "event_partition", "target_fields": ["partition_id"]}],
+      "checks": ["range_positive_and_ordered", "consumer_and_reason_allowlisted", "fresh_authorized_read_literal_true", "state_pending_or_delivered"],
+      "mutable_fields": ["through_position", "state"]
+    },
+    {
+      "name": "consumer_checkpoint",
+      "fields": [
+        {"name": "partition_id", "type": "digest", "nullable": false},
+        {"name": "consumer_scope", "type": "enum", "nullable": false},
+        {"name": "source_epoch_digest", "type": "digest", "nullable": false},
+        {"name": "checkpoint_state", "type": "enum", "nullable": false},
+        {"name": "checkpoint_position", "type": "nullable_positive_integer", "nullable": true},
+        {"name": "lease_generation", "type": "positive_integer", "nullable": false}
+      ],
+      "primary_key": ["partition_id", "consumer_scope", "source_epoch_digest"],
+      "unique_keys": [],
+      "references": [{"fields": ["partition_id"], "relation": "event_partition", "target_fields": ["partition_id"]}],
+      "checks": ["checkpoint_none_iff_position_null", "lease_generation_positive"],
+      "mutable_fields": ["checkpoint_state", "checkpoint_position", "lease_generation"]
+    },
+    {
+      "name": "dispatch_attempt",
+      "fields": [
+        {"name": "obligation_id", "type": "opaque_id", "nullable": false},
+        {"name": "attempt_ordinal", "type": "positive_integer", "nullable": false},
+        {"name": "lease_generation", "type": "positive_integer", "nullable": false},
+        {"name": "outcome", "type": "enum", "nullable": false},
+        {"name": "failure_class", "type": "nullable_enum", "nullable": true}
+      ],
+      "primary_key": ["obligation_id", "attempt_ordinal"],
+      "unique_keys": [],
+      "references": [{"fields": ["obligation_id"], "relation": "cue_obligation", "target_fields": ["obligation_id"]}],
+      "checks": ["attempt_ordinal_positive", "dispatch_outcome_failure_shape_exact", "lease_generation_positive"],
+      "mutable_fields": []
+    },
+    {
+      "name": "reconciliation_receipt",
+      "fields": [
+        {"name": "reconciliation_id", "type": "opaque_id", "nullable": false},
+        {"name": "obligation_id", "type": "opaque_id", "nullable": false},
+        {"name": "dispatch_attempt_ordinal", "type": "positive_integer", "nullable": false},
+        {"name": "outcome", "type": "enum", "nullable": false},
+        {"name": "scope_authorized", "type": "boolean", "nullable": false},
+        {"name": "fresh_read_performed", "type": "boolean", "nullable": false},
+        {"name": "acknowledgement", "type": "enum", "nullable": false},
+        {"name": "display_disposition", "type": "enum", "nullable": false}
+      ],
+      "primary_key": ["reconciliation_id"],
+      "unique_keys": [["obligation_id"]],
+      "references": [{"fields": ["obligation_id", "dispatch_attempt_ordinal"], "relation": "dispatch_attempt", "target_fields": ["obligation_id", "attempt_ordinal"]}],
+      "checks": ["reconciliation_truth_table_exact", "acknowledgement_one_fresh_read_attempt_only", "display_disposition_matches_outcome"],
+      "mutable_fields": []
+    }
+  ],
+  "transaction_protocols": [
+    {
+      "name": "admit_terminal",
+      "requires": ["current_lease_generation", "unique_position_resolution", "exact_duplicate_comparison", "receipt_and_required_obligation_same_transaction"],
+      "forbids": ["divergent_identity_mutation", "checkpoint_before_required_obligation"]
+    },
+    {
+      "name": "coalesce_pending",
+      "requires": ["current_lease_generation", "adjacent_range", "same_partition_epoch_consumer_and_reason", "obligation_state_pending"],
+      "forbids": ["delivered_obligation_mutation", "range_gap_or_overlap", "cross_reason_coalescing"]
+    },
+    {
+      "name": "advance_contiguous_checkpoint",
+      "requires": ["current_lease_generation", "next_position_terminal_receipt", "cue_required_position_covered_by_obligation"],
+      "forbids": ["gap_crossing", "delivery_prerequisite", "epoch_crossing"]
+    },
+    {
+      "name": "record_dispatch_attempt",
+      "requires": ["current_lease_generation", "next_attempt_ordinal", "stable_failure_class_for_failed_outcome"],
+      "forbids": ["cue_payload_mutation", "delivered_to_pending_regression"]
+    },
+    {
+      "name": "record_reconciliation",
+      "requires": ["delivered_dispatch_attempt", "exact_outcome_truth_table", "exact_duplicate_reuse"],
+      "forbids": ["conflicting_second_result", "future_freshness_claim", "direct_source_truth_mutation"]
+    }
+  ],
+  "enforcement_classification": {
+    "row_constraint": ["scalar_shape", "closed_enum", "nullability_pair", "positive_range", "literal_true", "outcome_truth_table_shape"],
+    "key_or_reference": ["partition_identity", "one_receipt_per_position", "receipt_obligation_reference", "one_checkpoint_per_consumer_epoch", "attempt_ordinal_identity", "one_reconciliation_per_obligation"],
+    "transaction_protocol": ["duplicate_identity_resolution", "atomic_receipt_obligation", "pending_only_coalescing", "contiguous_checkpoint", "generation_fencing", "ordered_dispatch", "delivered_only_reconciliation"],
+    "external_authority": ["current_source_truth", "current_user_authority", "fresh_scoped_read", "command_precondition_mutation_audit_and_readback"]
+  },
+  "closed_enums": {
+    "source_system": ["emr4_diary"],
+    "event_family": ["diary_appointment_change"],
+    "consumer_scope": ["reception_one_diary_projection"],
+    "observed_state": ["none", "exact"],
+    "source_head_state": ["unknown", "exact", "epoch_mismatch"],
+    "checkpoint_state": ["none", "exact"],
+    "classification": ["cue_required", "suppressed_irrelevant", "rejected_unsupported"],
+    "cue_reason": ["diary_status_may_have_changed", "diary_availability_may_have_changed"],
+    "rejection_reason": ["unsupported_event_schema", "unsupported_event_family", "policy_rejected"],
+    "obligation_state": ["pending", "delivered"],
+    "dispatch_outcome": ["delivered", "failed"],
+    "dispatch_failure_class": ["consumer_unavailable", "authorization_rejected", "transient_transport"],
+    "reconciliation_outcome": ["projection_unchanged", "projection_refreshed", "local_selection_or_proposal_cleared", "authorization_rejected", "source_unavailable", "stale_session"],
+    "acknowledgement": ["one_fresh_read_attempt_only"],
+    "display_disposition": ["unchanged", "refreshed", "cleared"]
+  },
+  "representability_scenario_ids": [
+    "empty_partition",
+    "one_required_pending",
+    "same_reason_coalesced",
+    "different_reason_separate",
+    "out_of_order_gap_held",
+    "gap_filled_checkpoint_advanced",
+    "suppressed_without_obligation",
+    "rejected_without_obligation",
+    "dispatch_failed_pending",
+    "dispatch_delivered",
+    "reconciliation_refreshed",
+    "reconciliation_failure_retains_display"
+  ],
+  "prohibited_field_fragments": [
+    "appointment_id",
+    "patient_id",
+    "practitioner_id",
+    "person_name",
+    "date_of_birth",
+    "phone_number",
+    "medicare_number",
+    "appointment_status",
+    "appointment_start",
+    "appointment_end",
+    "appointment_reason",
+    "free_text",
+    "event_payload",
+    "json_payload",
+    "binary_payload",
+    "command_result",
+    "command_receipt",
+    "confirmation_evidence",
+    "credential",
+    "provider_output"
+  ],
+  "forbidden_effects": [
+    "protected_evidence_or_historical_diary_access",
+    "sql_ddl_or_migration_execution",
+    "database_or_source_access",
+    "persistence_or_operational_retention",
+    "watcher_listener_worker_or_queue_runtime",
+    "product_patient_or_clinical_data",
+    "external_patient_client_or_real_identity",
+    "provider_adc_credential_iam_or_network",
+    "executable_tool_command_or_write",
+    "graphql_openapi_or_route_change",
+    "deployment_production_release_pages_or_protected_refs"
+  ],
+  "next_descendant": {
+    "id": "provider-free-unmounted-event-cue-inert-ddl-lowering",
+    "sql_text_rendering_only": true,
+    "database_connection": false,
+    "migration_execution": false,
+    "watcher_or_source": false,
+    "persistence_restart_or_delivery": false
+  }
+}

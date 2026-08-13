@@ -283,14 +283,14 @@ def test_plan_and_threat_model_have_brisbane_timestamps() -> None:
         assert "+10:00 (Australia/Brisbane)" in head
 
 
-def test_active_latch_is_transferred_to_unmounted_admission() -> None:
+def test_active_latch_has_transferred_to_the_representation_descendant() -> None:
     latch = _load(LATCH)
     assert latch["status"] == "in_progress"
     assert (
         latch["operation_id"]
-        == "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+        == "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
-    assert "verify_closeout_generate_precommit_receipt" in latch[
+    assert "verify_representation_evidence_then_generate_precommit_receipt" in latch[
         "checkpoint"
     ]["next_executable_stage"]
     assert latch["terminal_response"]["permitted"] is False

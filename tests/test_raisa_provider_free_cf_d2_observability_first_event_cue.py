@@ -256,15 +256,15 @@ def test_plan_documents_have_timestamp_and_exact_closed_boundary() -> None:
         assert phrase in plan
 
 
-def test_active_latch_transferred_to_cf_d2_admission_descendant() -> None:
+def test_active_latch_transferred_to_cf_d2_representation_descendant() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
 
     assert latch["status"] == "in_progress"
     assert latch["operation_id"] == (
-        "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal"
+        "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
     )
     assert (
-        "verify_closeout_generate_precommit_receipt_then_commit_notify"
+        "verify_representation_evidence_then_generate_precommit_receipt"
         in (latch["checkpoint"]["next_executable_stage"])
     )
     assert latch["terminal_response"]["permitted"] is False

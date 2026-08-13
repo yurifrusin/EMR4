@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal",
-  "active_tranche": "Provider-free unmounted CF-D2 event and cue admission rehearsal",
-  "objective": "Exercise the accepted observability contract through pure authored-synthetic duplicate, gap, checkpoint, coalescing, fencing and reconciliation state sequences without opening persistence or runtime.",
+  "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture",
+  "active_tranche": "Provider-free unmounted CF-D2 event and cue representation architecture",
+  "objective": "Map only the accepted partition, source coordinate, immutable terminal receipt, payload-free obligation, checkpoint, dispatch and reconciliation facts into an inert relational design with deterministic representability checks and no database contact.",
   "status": "in_progress",
-  "source_head": "a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b",
+  "source_head": "784fdc4c0237e1c363676638d010b2bd4b033210",
   "authority_source": "AGENTS.md Current Baton at Continuity 277 / Compass 259 plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "pure unmounted admission source a7c6f7a66b06fbc065ae8a6eede7fa8baaee1b6b accepted and closeout plus Continuity 277 / Compass 259 authored",
-    "next_executable_stage": "verify_closeout_generate_precommit_receipt_then_commit_notify_and_publish_before_transferring_to_the_representation_architecture",
+    "completed_stage": "narrowest seven-relation five-protocol representation plan frozen and twelve canonical plus eighty hostile checks pass without database or SQL contact",
+    "next_executable_stage": "verify_representation_evidence_then_generate_precommit_receipt_and_commit_source",
     "retry_counters": {
       "review": 0,
       "verification": 0
     },
-    "settings_fingerprint": "sha256:c12c25b531049a370d83257ee9cb95d04e64fc8c3fd81aa44c121acc3a82486e"
+    "settings_fingerprint": "sha256:fecd05d54ba80cab563bac1cbe8f25712d4a5550528178bdd243ec761f088bec"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -36,9 +36,9 @@
     "patient_product_clinical_data_closed",
     "external_patient_identity_clients_and_channels_closed",
     "provider_adc_credential_iam_network_closed",
-    "watcher_database_source_and_operational_retention_closed",
+    "watcher_database_source_persistence_migration_execution_and_operational_retention_closed",
     "new_route_graphql_openapi_command_and_write_authority_closed",
-    "authored_synthetic_provider_free_unmounted_pure_state_only",
+    "authored_synthetic_provider_free_unmounted_inert_representation_only",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

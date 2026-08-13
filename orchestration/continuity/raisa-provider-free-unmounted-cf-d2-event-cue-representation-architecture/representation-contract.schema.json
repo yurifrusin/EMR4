@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-unmounted-event-cue-representation-v1.json",
+  "title": "Raisa provider-free unmounted CF-D2 event and cue representation contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline",
+    "accepted_observability_source",
+    "accepted_admission_source",
+    "data_ceiling",
+    "evidence_label",
+    "authority",
+    "scalar_types",
+    "relations",
+    "transaction_protocols",
+    "enforcement_classification",
+    "closed_enums",
+    "representability_scenario_ids",
+    "prohibited_field_fragments",
+    "forbidden_effects",
+    "next_descendant"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.unmounted_event_cue_representation.v1"},
+    "status": {"const": "architecture_only_provider_free_unmounted_inert"},
+    "planning_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_observability_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_admission_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "data_ceiling": {"const": "authored_synthetic_patient_free_digests_enums_and_positions_only"},
+    "evidence_label": {"const": "provider_free_unmounted_inert_relational_representation"},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_owns_current_truth",
+        "observer_coordinate_is_non_authoritative",
+        "event_and_cue_are_acceleration_hints_only",
+        "cue_may_update_display_directly",
+        "fresh_authorized_scoped_read_required",
+        "command_rechecks_current_authority_and_source_truth",
+        "represented_row_may_assert_command_success_or_authority"
+      ],
+      "properties": {
+        "source_owns_current_truth": {"const": true},
+        "observer_coordinate_is_non_authoritative": {"const": true},
+        "event_and_cue_are_acceleration_hints_only": {"const": true},
+        "cue_may_update_display_directly": {"const": false},
+        "fresh_authorized_scoped_read_required": {"const": true},
+        "command_rechecks_current_authority_and_source_truth": {"const": true},
+        "represented_row_may_assert_command_success_or_authority": {"const": false}
+      }
+    },
+    "scalar_types": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": {"enum": ["boolean", "digest", "enum", "nullable_digest", "nullable_enum", "nullable_positive_integer", "opaque_id", "positive_integer"]}
+    },
+    "relations": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {"$ref": "#/$defs/relation"}
+    },
+    "transaction_protocols": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/protocol"}
+    },
+    "enforcement_classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["row_constraint", "key_or_reference", "transaction_protocol", "external_authority"],
+      "properties": {
+        "row_constraint": {"$ref": "#/$defs/nonempty_string_set"},
+        "key_or_reference": {"$ref": "#/$defs/nonempty_string_set"},
+        "transaction_protocol": {"$ref": "#/$defs/nonempty_string_set"},
+        "external_authority": {"$ref": "#/$defs/nonempty_string_set"}
+      }
+    },
+    "closed_enums": {
+      "type": "object",
+      "minProperties": 15,
+      "additionalProperties": {"$ref": "#/$defs/nonempty_string_set"}
+    },
+    "representability_scenario_ids": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "prohibited_field_fragments": {"$ref": "#/$defs/nonempty_string_set"},
+    "forbidden_effects": {"$ref": "#/$defs/nonempty_string_set"},
+    "next_descendant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sql_text_rendering_only", "database_connection", "migration_execution", "watcher_or_source", "persistence_restart_or_delivery"],
+      "properties": {
+        "id": {"const": "provider-free-unmounted-event-cue-inert-ddl-lowering"},
+        "sql_text_rendering_only": {"const": true},
+        "database_connection": {"const": false},
+        "migration_execution": {"const": false},
+        "watcher_or_source": {"const": false},
+        "persistence_restart_or_delivery": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "nonempty_string_set": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "nullable"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "type": {"enum": ["boolean", "digest", "enum", "nullable_digest", "nullable_enum", "nullable_positive_integer", "opaque_id", "positive_integer"]},
+        "nullable": {"type": "boolean"}
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fields", "relation", "target_fields"],
+      "properties": {
+        "fields": {"$ref": "#/$defs/nonempty_string_set"},
+        "relation": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "target_fields": {"$ref": "#/$defs/nonempty_string_set"},
+        "nullable_reference": {"type": "boolean"},
+        "future_deferrable": {"type": "boolean"}
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "fields", "primary_key", "unique_keys", "references", "checks", "mutable_fields"],
+      "properties": {
+        "name": {"enum": ["event_partition", "observer_coordinate", "terminal_receipt", "cue_obligation", "consumer_checkpoint", "dispatch_attempt", "reconciliation_receipt"]},
+        "fields": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"$ref": "#/$defs/field"}},
+        "primary_key": {"$ref": "#/$defs/nonempty_string_set"},
+        "unique_keys": {"type": "array", "items": {"$ref": "#/$defs/nonempty_string_set"}},
+        "references": {"type": "array", "items": {"$ref": "#/$defs/reference"}},
+        "checks": {"$ref": "#/$defs/nonempty_string_set"},
+        "mutable_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "requires", "forbids"],
+      "properties": {
+        "name": {"enum": ["admit_terminal", "coalesce_pending", "advance_contiguous_checkpoint", "record_dispatch_attempt", "record_reconciliation"]},
+        "requires": {"$ref": "#/$defs/nonempty_string_set"},
+        "forbids": {"$ref": "#/$defs/nonempty_string_set"}
+      }
+    }
+  }
+}
