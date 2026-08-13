@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
+    "completed_stage": "accepted source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 published with six serial groups, five protocols, exact cleanup and Continuity 281 / Compass 263 closeout",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "perform_read_only_post_cf_d2_compass_baton_orientation_and_freeze_narrowest_next_dependency_satisfied_visible_product_tranche",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete accepted CF-D2 behavior/transaction plan, design, threat-model delta, closeout and Sol acceptance prove the five exact protocols only in one fixed serial disposable PostgreSQL-16 execution and explicitly direct a fresh read-only Compass/baton orientation before selecting the next already-planned Reception One/product tranche.",
+    "current_authority_allocation": "AGENTS.md section 4 allocates programme orientation, plan freezing, architecture and acceptance to GPT Sol. This small read-only tightly coupled orientation remains Sol-owned; no external worker, verifier, provider or native subagent is selected.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the tracked worktree is clean at C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam HEAD d88c097583473eb2123b77ea752daba2ff798468 equal to origin task. Required resumed HEAD 648c8ec9805af63729264ea9c22fd695f062a741 and accepted CF-D2 source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 594 untracked entries, including five under docs/branding, remain preserved; staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md at Continuity 281 / Compass 263 accepts exact CF-D2 serial behavior source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 and names a fresh read-only post-CF-D2 Compass/baton orientation as the next implementation.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 keep protected holdouts, historical Diary/PHI, patient/product data, external patient clients and channels, existing source/watcher/runtime/persistence, providers/ADC, credentials/IAM/external network, commands/writes, deployment, production, release, Pages and protected refs closed. The orientation is read-only; docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

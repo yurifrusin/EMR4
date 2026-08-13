@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
-  "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue behavior/transaction rehearsal",
-  "objective": "Exercise only the five accepted CF-D2 transaction protocols through six fixed authored-synthetic serial scenario groups in one newly owned networkless tmpfs PostgreSQL 16 server, observe effects, refusals, rollback and uncontended lock footprints, then clean up exactly.",
-  "status": "complete",
-  "source_head": "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9",
-  "authority_source": "AGENTS.md Current Baton at Continuity 280 / Compass 262, the accepted parse/catalogue next descendant and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-post-cf-d2-compass-baton-orientation",
+  "active_tranche": "Read-only post-CF-D2 Compass and baton orientation",
+  "objective": "Reconcile the accepted CF-D2 serial database foundation with the accepted Reception One, patient-interaction and Context Fabric directions, then freeze the narrowest next dependency-satisfied visible product tranche already supported by repository evidence.",
+  "status": "in_progress",
+  "source_head": "d88c097583473eb2123b77ea752daba2ff798468",
+  "authority_source": "AGENTS.md Current Baton at Continuity 281 / Compass 263, the accepted CF-D2 closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "accepted source f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9 published with six serial groups, five protocols, exact cleanup and Continuity 281 / Compass 263 closeout",
-    "next_executable_stage": null,
+    "completed_stage": "repository evidence reconciled and the provider-free Reception One selected-appointment status-action composition selected as the narrowest dependency-satisfied successor",
+    "next_executable_stage": "commit the read-only orientation candidate, bind its exact source, accept and publish the orientation, then rehydrate into the selected visible tranche",
     "retry_counters": {
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -22,28 +22,24 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_tranche_complete_and_read_only_orientation_named_next"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
+    "orientation_read_only_except_repository_plan_evidence_and_continuity_artifacts",
     "protected_evidence_closed",
     "patient_product_clinical_data_closed",
     "external_patient_identity_clients_and_channels_closed",
-    "provider_adc_credential_iam_and_external_network_closed",
     "existing_database_source_watcher_persistence_and_operational_retention_closed",
-    "one_exact_artifact_owned_networkless_tmpfs_postgresql_16_serial_behavior_execution_only",
-    "watcher_listener_worker_runtime_closed",
-    "new_route_graphql_openapi_command_and_write_authority_closed",
-    "five_exact_protocols_six_fixed_authored_synthetic_serial_groups_only",
-    "concurrency_restart_crash_unknown_commit_and_real_delivery_closed",
-    "external_authority_fresh_read_and_product_command_truth_unproved",
-    "deployment_release_pages_protected_refs_closed",
+    "provider_adc_credential_iam_and_external_network_closed",
+    "product_runtime_route_tool_command_and_write_authority_closed",
+    "deployment_production_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]
 }
