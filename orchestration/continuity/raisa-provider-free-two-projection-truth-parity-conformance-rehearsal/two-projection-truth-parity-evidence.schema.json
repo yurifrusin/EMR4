@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/two-projection-truth-parity-evidence.schema.json",
+  "title": "Two-projection truth-parity evidence envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_mode",
+    "traces",
+    "comparisons",
+    "authority_counts",
+    "generated_at",
+    "candidate_source",
+    "trace_count",
+    "comparison_count",
+    "claim_limit"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.two-projection-truth-parity-evidence.v1"},
+    "result": {"const": "raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_pass"},
+    "evidence_mode": {"const": "route_intercepted_browser"},
+    "traces": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {"$ref": "projection-truth-trace.schema.json"}
+    },
+    "comparisons": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario", "kernel_fields_equal", "raw_compatibility_requests"],
+        "properties": {
+          "scenario": {"enum": ["safe", "cancelled", "blocked", "stale", "failed", "committed"]},
+          "kernel_fields_equal": {"const": true},
+          "raw_compatibility_requests": {"const": 0}
+        }
+      }
+    },
+    "authority_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_calls", "patient_or_product_records", "database_or_source_reads", "database_writes", "deployments", "releases", "protected_ref_movements"],
+      "properties": {
+        "provider_calls": {"const": 0},
+        "patient_or_product_records": {"const": 0},
+        "database_or_source_reads": {"const": 0},
+        "database_writes": {"const": 0},
+        "deployments": {"const": 0},
+        "releases": {"const": 0},
+        "protected_ref_movements": {"const": 0}
+      }
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "trace_count": {"const": 12},
+    "comparison_count": {"const": 6},
+    "claim_limit": {"type": "string", "minLength": 80, "maxLength": 600}
+  }
+}

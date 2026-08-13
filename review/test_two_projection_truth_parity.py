@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import argparse
+from datetime import datetime
 import json
 from pathlib import Path
 import sys
 from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -388,4 +391,18 @@ def test_two_projection_truth_parity_matrix() -> None:
 
 
 if __name__ == "__main__":
-    print(json.dumps(run_matrix(), indent=2, ensure_ascii=False))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--candidate-source", required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    evidence = run_matrix()
+    evidence["generated_at"] = datetime.now(ZoneInfo("Australia/Brisbane")).isoformat(timespec="seconds")
+    evidence["candidate_source"] = args.candidate_source
+    evidence["trace_count"] = len(evidence["traces"])
+    evidence["comparison_count"] = len(evidence["comparisons"])
+    evidence["claim_limit"] = (
+        "Proves provider-free route-intercepted authored-synthetic conformance of the conventional grid "
+        "and Reception One over the existing appointment-status family only; it proves no live backend, "
+        "database, product-data, deployed, production, or broader feature-parity operation."
+    )
+    args.output.write_text(json.dumps(evidence, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
