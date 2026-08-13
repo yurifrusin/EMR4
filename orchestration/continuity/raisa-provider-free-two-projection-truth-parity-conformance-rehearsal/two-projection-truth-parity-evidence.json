@@ -1,0 +1,449 @@
+{
+  "schema_version": "raisa.two-projection-truth-parity-evidence.v1",
+  "result": "raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_pass",
+  "evidence_mode": "route_intercepted_browser",
+  "traces": [
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "conventional_grid",
+      "scenario": "safe",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "safe",
+      "confirmation_outcome": "confirmed_without_staff_dialog",
+      "kernel_result": "committed",
+      "fresh_read_result": {
+        "current_status": "Arrived",
+        "basis": "fresh_authoritative_reconciliation"
+      },
+      "displayed_terminal_state": {
+        "status": "Arrived"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 1,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "inline_grid_status_selector",
+        "wording": "Status updated to Arrived.",
+        "focus_target": "appointment_status_select",
+        "history_behavior": "ordinary_grid_rebuild_without_projection_trail"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "conventional_grid",
+      "scenario": "cancelled",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Cancelled"
+      },
+      "proposal_outcome": "confirmation_required",
+      "confirmation_outcome": "staff_cancelled",
+      "kernel_result": "no_commit_cancelled",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 0,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "inline_grid_status_selector",
+        "wording": "Appointment change cancelled. No change made.",
+        "focus_target": "appointment_status_select",
+        "history_behavior": "ordinary_grid_rebuild_without_projection_trail"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "conventional_grid",
+      "scenario": "blocked",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "blocked",
+      "confirmation_outcome": "not_offered",
+      "kernel_result": "no_commit_blocked",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 0,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "inline_grid_status_selector",
+        "wording": "Status change blocked. No change made.",
+        "focus_target": "appointment_status_select",
+        "history_behavior": "ordinary_grid_rebuild_without_projection_trail"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "conventional_grid",
+      "scenario": "stale",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "safe",
+      "confirmation_outcome": "stale_rejected",
+      "kernel_result": "no_commit_stale",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 1,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "inline_grid_status_selector",
+        "wording": "Status not changed. Refresh the Diary before trying again.",
+        "focus_target": "appointment_status_select",
+        "history_behavior": "ordinary_grid_rebuild_without_projection_trail"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "conventional_grid",
+      "scenario": "failed",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "unavailable",
+      "confirmation_outcome": "not_reached",
+      "kernel_result": "no_commit_failed",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 0,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "inline_grid_status_selector",
+        "wording": "Status not changed. Refresh the Diary before trying again.",
+        "focus_target": "appointment_status_select",
+        "history_behavior": "ordinary_grid_rebuild_without_projection_trail"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "conventional_grid",
+      "scenario": "committed",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Completed"
+      },
+      "proposal_outcome": "confirmation_required",
+      "confirmation_outcome": "staff_confirmed",
+      "kernel_result": "committed",
+      "fresh_read_result": {
+        "current_status": "Completed",
+        "basis": "fresh_authoritative_reconciliation"
+      },
+      "displayed_terminal_state": {
+        "status": "Completed"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 1,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "inline_grid_status_selector",
+        "wording": "Status updated to Completed.",
+        "focus_target": "appointment_status_select",
+        "history_behavior": "ordinary_grid_rebuild_without_projection_trail"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "reception_one",
+      "scenario": "safe",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "safe",
+      "confirmation_outcome": "confirmed_without_staff_dialog",
+      "kernel_result": "committed",
+      "fresh_read_result": {
+        "current_status": "Arrived",
+        "basis": "fresh_authoritative_reconciliation"
+      },
+      "displayed_terminal_state": {
+        "status": "Arrived"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 1,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "selected_card_status_action_panel",
+        "wording": "Status committed and checked against a fresh Diary read.",
+        "focus_target": "meta_grid_status_select",
+        "history_behavior": "projection_trail_cleared_only_after_commit"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "reception_one",
+      "scenario": "cancelled",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Cancelled"
+      },
+      "proposal_outcome": "confirmation_required",
+      "confirmation_outcome": "staff_cancelled",
+      "kernel_result": "no_commit_cancelled",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 0,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "selected_card_status_action_panel",
+        "wording": "Status change cancelled. No change was made.",
+        "focus_target": "meta_grid_status_select",
+        "history_behavior": "projection_trail_cleared_only_after_commit"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "reception_one",
+      "scenario": "blocked",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "blocked",
+      "confirmation_outcome": "not_offered",
+      "kernel_result": "no_commit_blocked",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 0,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "selected_card_status_action_panel",
+        "wording": "Status change blocked. No change was made.",
+        "focus_target": "meta_grid_status_select",
+        "history_behavior": "projection_trail_cleared_only_after_commit"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "reception_one",
+      "scenario": "stale",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "safe",
+      "confirmation_outcome": "stale_rejected",
+      "kernel_result": "no_commit_stale",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 1,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "selected_card_status_action_panel",
+        "wording": "Status not changed. The current Diary status has been restored.",
+        "focus_target": "meta_grid_status_select",
+        "history_behavior": "projection_trail_cleared_only_after_commit"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "reception_one",
+      "scenario": "failed",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Arrived"
+      },
+      "proposal_outcome": "unavailable",
+      "confirmation_outcome": "not_reached",
+      "kernel_result": "no_commit_failed",
+      "fresh_read_result": {
+        "current_status": "Booked",
+        "basis": "no_commit_preserved_current_truth"
+      },
+      "displayed_terminal_state": {
+        "status": "Booked"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 0,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "selected_card_status_action_panel",
+        "wording": "Status not changed. The current Diary status has been restored.",
+        "focus_target": "meta_grid_status_select",
+        "history_behavior": "projection_trail_cleared_only_after_commit"
+      }
+    },
+    {
+      "schema_version": "raisa.projection-truth-trace.v1",
+      "evidence_mode": "route_intercepted_browser",
+      "renderer": "reception_one",
+      "scenario": "committed",
+      "selected_current_coordinate": {
+        "practice_scope": "authored-synthetic-practice",
+        "appointment_id": "truth-parity-status-1",
+        "observed_status": "Booked",
+        "requested_status": "Completed"
+      },
+      "proposal_outcome": "confirmation_required",
+      "confirmation_outcome": "staff_confirmed",
+      "kernel_result": "committed",
+      "fresh_read_result": {
+        "current_status": "Completed",
+        "basis": "fresh_authoritative_reconciliation"
+      },
+      "displayed_terminal_state": {
+        "status": "Completed"
+      },
+      "route_counts": {
+        "proposal": 1,
+        "confirm": 1,
+        "raw_compatibility": 0
+      },
+      "renderer_local": {
+        "layout": "selected_card_status_action_panel",
+        "wording": "Status committed and checked against a fresh Diary read.",
+        "focus_target": "meta_grid_status_select",
+        "history_behavior": "projection_trail_cleared_only_after_commit"
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "scenario": "safe",
+      "kernel_fields_equal": true,
+      "raw_compatibility_requests": 0
+    },
+    {
+      "scenario": "cancelled",
+      "kernel_fields_equal": true,
+      "raw_compatibility_requests": 0
+    },
+    {
+      "scenario": "blocked",
+      "kernel_fields_equal": true,
+      "raw_compatibility_requests": 0
+    },
+    {
+      "scenario": "stale",
+      "kernel_fields_equal": true,
+      "raw_compatibility_requests": 0
+    },
+    {
+      "scenario": "failed",
+      "kernel_fields_equal": true,
+      "raw_compatibility_requests": 0
+    },
+    {
+      "scenario": "committed",
+      "kernel_fields_equal": true,
+      "raw_compatibility_requests": 0
+    }
+  ],
+  "authority_counts": {
+    "provider_calls": 0,
+    "patient_or_product_records": 0,
+    "database_or_source_reads": 0,
+    "database_writes": 0,
+    "deployments": 0,
+    "releases": 0,
+    "protected_ref_movements": 0
+  },
+  "generated_at": "2026-08-14T00:14:42+10:00",
+  "candidate_source": "18aa4b613d735a68a7f6f2e55d34e498176c9935",
+  "trace_count": 12,
+  "comparison_count": 6,
+  "claim_limit": "Proves provider-free route-intercepted authored-synthetic conformance of the conventional grid and Reception One over the existing appointment-status family only; it proves no live backend, database, product-data, deployed, production, or broader feature-parity operation."
+}
