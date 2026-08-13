@@ -51,18 +51,22 @@ def test_plan_and_threat_delta_freeze_the_narrow_existing_command_composition() 
         assert token in threat
 
 
-def test_active_latch_holds_execution_open_at_the_frozen_plan_boundary() -> None:
+def test_active_latch_remains_bound_to_the_exact_accepted_source() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
     assert latch["operation_id"] == (
         "raisa-reception-one-selected-appointment-status-action-composition"
     )
-    assert latch["status"] == "in_progress"
-    assert latch["source_head"] == "3b51ec3b6f5dfb35f4d189847c5afb3b638510a1"
-    assert latch["resume_after_compaction"] is True
-    assert latch["terminal_response"] == {
-        "permitted": False,
-        "reason": "unfinished_authorized_operation",
-    }
+    assert latch["status"] in {"in_progress", "complete"}
+    assert latch["source_head"] == "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33"
+    if latch["status"] == "in_progress":
+        assert latch["resume_after_compaction"] is True
+        assert latch["terminal_response"] == {
+            "permitted": False,
+            "reason": "unfinished_authorized_operation",
+        }
+    else:
+        assert latch["resume_after_compaction"] is False
+        assert latch["terminal_response"]["permitted"] is True
     assert "existing_status_vocabulary_and_existing_set_appointment_status_interaction_only" in latch[
         "protected_boundaries"
     ]

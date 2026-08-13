@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-post-cf-d2-compass-baton-orientation"
-SOURCE_HEAD = "edba8f57380a48fd98decc332608349f2d9012e6"
+NODE_ID = "raisa-reception-one-selected-appointment-status-action-composition"
+SOURCE_HEAD = "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33"
+ORIENTATION_SOURCE_HEAD = "edba8f57380a48fd98decc332608349f2d9012e6"
 CF_D2_SOURCE_HEAD = "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9"
 STATUS_CONFIRM_SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
 INTEGRATION_SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
@@ -24,33 +25,37 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
+def test_continuity_and_compass_bind_the_live_status_composition_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 282
+    assert graph["graph_revision"] == 283
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 264
-    assert compass["source_graph_revision"] == 282
+    assert compass["map_revision"] == 265
+    assert compass["source_graph_revision"] == 283
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_orientation_and_name_visible_successor() -> None:
+def test_live_baton_rows_accept_status_composition_and_name_orientation_next() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 282 / Compass 264" in current
-    assert "raisa_post_cf_d2_compass_baton_orientation_pass" in current
+    assert "Continuity 283 / Compass 265" in current
+    assert "raisa_reception_one_selected_appointment_status_action_composition_pass" in current
     assert SOURCE_HEAD in current
-    assert "selected-appointment status-action composition" in current
-    assert "status read-only" in current
-    assert "no product behavior or authority changed" in current
+    assert "setAppointmentStatus" in current
+    assert "no raw fallback" in current
+    assert "no backend/API/database/event/provider or protected-ref authority changed" in current
+    assert "8-case browser acceptance" in current
+    assert "144-case native Diary suite" in current
+    assert "171-test focused packet" in current
     assert "193-test canonical fast profile" in current
     assert CF_D2_SOURCE_HEAD in relation
     assert SOURCE_HEAD in relation
+    assert ORIENTATION_SOURCE_HEAD in relation
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert COMPOSITION_SOURCE_HEAD in relation
@@ -77,8 +82,8 @@ def test_live_baton_rows_accept_orientation_and_name_visible_successor() -> None
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "selected-appointment status-action composition" in next_work
-    assert "Reception One" in next_work
+    assert "read-only Compass and baton orientation" in next_work
+    assert "narrowest dependency-satisfied product tranche" in next_work
     assert "product/patient data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
@@ -116,13 +121,12 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "selected-appointment status-action composition",
-        "existing status vocabulary",
-        "reception one",
-        "no backend route",
-        "database object",
-        "new command",
-        "event/watcher runtime",
+        "read-only compass and baton orientation",
+        "another command family",
+        "event family",
+        "representative participant cohort",
+        "external patient channel",
+        "backend/database/source/watcher runtime",
         "product/patient data",
         "provider/adc",
         "credential/iam/network",

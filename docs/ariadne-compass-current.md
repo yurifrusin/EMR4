@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 282 / Compass 264. The post-CF-D2 read-only orientation selects a provider-free Reception One selected-appointment status-action composition as the next visible tranche. It reuses the accepted status proposal/confirm family; CF-D2 remains a separately closed optional acceleration layer.
+> EMR4 is at Continuity 283 / Compass 265. The provider-free Reception One selected-appointment status-action composition passes over the existing status proposal/confirm family. A fresh read-only orientation is next; no further command or event family is inferred.
 
 ## North star
 
@@ -336,30 +336,33 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    All five serial transaction protocols, rollback probes and required uncontended lock footprints pass; read-only programme orientation is next. Lineage parent: `raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal`.
 160. **Reorient from the completed CF-D2 serial foundation to the narrowest already-supported visible Reception One improvement — Read-only post-CF-D2 Compass and baton orientation**
    The provider-free Reception One selected-appointment status-action composition is selected without opening new command or runtime authority. Lineage parent: `raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal`.
+161. **Compose one already-secured routine Diary command into the focused Reception One projection — Provider-free Reception One selected-appointment status-action composition**
+   One selected current appointment now uses the existing status proposal/confirm interaction with fail-closed feedback and fresh projection reconciliation. Lineage parent: `raisa-post-cf-d2-compass-baton-orientation`.
 
 ## Current position
 
-**The completed durability foundation is reconciled with the next visible Reception One product step — Read-only post-CF-D2 Compass and baton orientation**
+**The first post-durability visible Reception One command composition is accepted — Provider-free Reception One selected-appointment status-action composition**
 
-**Why this proof came next:** Reception One already shows selected appointment status and the ordinary Diary already owns the accepted status command interaction, leaving one small composition seam.
+**Why this proof came next:** The selected appointment/status seam is complete and the remaining candidate directions carry different value or authority gates.
 
-The provider-free selected-appointment status-action composition is frozen as the next dependency-satisfied tranche.
+Reception One can apply one existing appointment status safely through the canonical command path.
 
 ### What this unlocks
 
-- Freeze and execute the provider-free Reception One selected-appointment status-action composition.
-- Reuse the existing status vocabulary, proposal/confirm interaction and fresh Diary reload without a second command path.
-- Return to visible product work while retaining CF-D2 as a separately closed future acceleration extension.
+- Run a fresh provider-free read-only Compass and baton orientation over the completed visible seam.
+- Select the narrowest next dependency-satisfied product tranche without inferring another command, event, participant or patient-channel authority.
 
 ### What it does not solve
 
-- The selected visible status composition is not yet implemented or rendered.
-- Representative staff execution, first patient channel and another Diary event family still require their recorded user decisions.
-- Watcher/runtime, product data, providers, new commands, deployment, production and release remain closed.
+- No additional appointment command family or Diary event family is authorised.
+- Representative staff execution and the first external patient channel retain their recorded Yuri-owned gates.
+- Watcher/runtime, product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -614,6 +617,7 @@ Prerequisites:
 
 ## Map limits
 
+- The selected-status composition proves authored-synthetic client and route-intercepted rendered behavior only; it adds no command family or backend, database, provider, deployment or production authority.
 - The post-CF-D2 orientation selects but does not implement the Reception One status-action composition; it opens no product, runtime, data, provider or command authority.
 - The CF-D2 PostgreSQL behavior pass proves only fixed single-server serial transaction effects, rollback and uncontended lock footprints; concurrency, restart, source, runtime, delivery and product authority remain unproved.
 - The CF-D2 representation is inert abstract row evidence, not SQL, PostgreSQL, transaction, persistence, restart or delivery proof.
@@ -1198,6 +1202,8 @@ Prerequisites:
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
+- `docs/raisa-reception-one-selected-appointment-status-action-composition-closeout.md`
+- `docs/raisa-reception-one-selected-appointment-status-action-composition-plan.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-design.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-plan.md`
@@ -1329,6 +1335,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
+- `docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md`
@@ -1636,6 +1643,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-behavior-transaction-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
@@ -2035,6 +2045,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json`
 - `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-status-action-composition/selected-appointment-status-action-evidence.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-status-action-composition/selected-appointment-status-action-evidence.schema.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json`
@@ -2326,6 +2338,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--cf-d2-unmounted-event-cue-representation-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--post-cf-d2-compass-baton-orientation.md`
+- `orchestration/human_inbox/yuri/2026-08-13--reception-one-selected-appointment-status-action-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
@@ -2342,6 +2355,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `review/test_diary_smoke.py`
+- `review/test_reception_one_status_action.py`
 - `scripts/ariadne_active_operation_latch.py`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
@@ -2437,6 +2451,8 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
+- `tests/test_raisa_reception_one_selected_appointment_status_action_composition_evidence.py`
+- `tests/test_raisa_reception_one_selected_appointment_status_action_composition_plan.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
 - `tests/test_reception_one_bureau_post_admission_runtime_hardening.py`
@@ -2463,4 +2479,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 264; continuity graph revision 282._
+_Compass map revision 265; continuity graph revision 283._

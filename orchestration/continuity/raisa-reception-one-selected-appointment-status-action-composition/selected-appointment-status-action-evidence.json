@@ -1,0 +1,45 @@
+{
+  "schema_version": "raisa.reception-one.selected-status-action.evidence.v1",
+  "generated_at": "2026-08-13T22:42:09+10:00",
+  "result": "raisa_reception_one_selected_appointment_status_action_composition_pass",
+  "planning_baseline": "3b51ec3b6f5dfb35f4d189847c5afb3b638510a1",
+  "candidate_source": "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33",
+  "evidence_modes": [
+    "authored_synthetic_client_fixture",
+    "route_intercepted_browser",
+    "repository_static_and_regression"
+  ],
+  "api_surface": {
+    "graphql": "read_only_unchanged",
+    "rest": "existing_status_proposal_confirm_only",
+    "bridge": "local_delegation_no_network",
+    "new_routes": 0,
+    "raw_write_fallbacks": 0
+  },
+  "browser_acceptance": {
+    "safe_commit": "pass_one_proposal_one_confirm_zero_raw_fresh_reconciliation",
+    "terminal_escape": "pass_zero_confirm_zero_raw_selection_restored",
+    "blocked": "pass_zero_confirm",
+    "stale": "pass_fail_closed",
+    "interruption": "pass_no_duplicate_and_fresh_reconciliation",
+    "viewports": ["1280x720", "768x1024", "390x844"],
+    "console_errors": 0,
+    "persisted_screenshots": false
+  },
+  "verification": {
+    "dedicated_browser": 8,
+    "native_diary_browser": 144,
+    "focused": 171,
+    "canonical_fast": 193
+  },
+  "authority_counts": {
+    "provider_calls": 0,
+    "patient_or_product_records": 0,
+    "database_or_source_reads": 0,
+    "database_writes": 0,
+    "deployments": 0,
+    "releases": 0,
+    "protected_ref_movements": 0
+  },
+  "claim_limit": "Proves provider-free authored-synthetic client composition and route-intercepted browser behavior only; it does not prove backend, database, deployed, production, real-user or patient-data operation."
+}

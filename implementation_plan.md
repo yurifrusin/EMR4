@@ -360,8 +360,13 @@ parse/catalogue admission now also pass through source
 shape. The five protocols then pass fixed serial effects, denials, rollback and
 uncontended lock-footprint evidence at source
 `f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9`. The subsequent read-only
-orientation selects a provider-free Reception One selected-appointment
-status-action composition as the next visible tranche. No watcher runtime,
+orientation selected a provider-free Reception One selected-appointment
+status-action composition as the next visible tranche. That composition now
+passes at exact source `b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33`: one
+selected current appointment delegates one existing status through the
+existing interaction, with fail-closed feedback and fresh projection
+reconciliation but no second command path. A fresh read-only Compass and baton
+orientation is next. No watcher runtime,
 existing database/source access, persistence, product data, external patient
 client, other command, restart/unknown-commit claim, provider, deployment,
 production or release is opened.

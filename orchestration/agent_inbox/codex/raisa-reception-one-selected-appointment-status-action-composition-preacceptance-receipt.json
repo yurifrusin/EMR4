@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free Reception One selected-appointment status-action composition",
+    "completed_stage": "exact source candidate sealed and all schema, rendered, focused and canonical acceptance gates pass",
+    "next_executable_stage": "advance Continuity and Compass, complete latch and publish closeout",
+    "operation_id": "raisa-reception-one-selected-appointment-status-action-composition",
+    "resume_after_compaction": true,
+    "source_head": "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_source_reception_one_selected_appointment_status_action_composition_and_advance_continuity",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and threat delta limit the tranche to one selected current appointment, the existing status vocabulary, the existing setAppointmentStatus interaction, fail-closed modeless feedback, fresh reconciliation and authored-synthetic rendered evidence. Exact source b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33 implements that contract. Its schema-bound evidence, 8 dedicated browser cases, 144 native Diary cases, 171 focused tests and canonical 193-test fast profile pass.",
+    "current_authority_allocation": "AGENTS.md section 4 and the standing uninterrupted-development authority keep this tightly coupled serial UI implementation, review, acceptance and task-branch publication Sol-owned. No external worker, verifier, provider or subagent is selected.",
+    "git_refs_and_worktree": "After fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact source HEAD b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. origin task remains the last published closeout 9a1401665bc6163145bbcbbb53d06ce3f4abd036. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked/index state was clean before current explicit closeout artifacts; all 604 then-untracked files, including five under docs/branding, remain preserved.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 282 / Compass 264 names the provider-free Reception One selected-appointment status-action composition as the next implementation and preserves all protected and untracked-file boundaries.",
+    "protected_evidence_boundaries": "Protected evidence, historical Diary/PHI, patient/product/clinical data, external patient channels, database/source/watcher/persistence, providers/ADC, credentials/IAM/network, new routes or command families, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded with explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
