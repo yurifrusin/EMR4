@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-durable-event-cue-observability-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline",
+    "data_ceiling",
+    "authority",
+    "partition",
+    "position",
+    "classification",
+    "cue_obligation",
+    "lag",
+    "reconciliation",
+    "diagnostics",
+    "retained_operator_evidence",
+    "forbidden_effects",
+    "prior_evidence",
+    "next_descendant"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.durable_event_cue_observability.v1"},
+    "status": {"const": "architecture_only_provider_free_unmounted"},
+    "planning_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "data_ceiling": {"const": "authored_synthetic_patient_free"},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_owns_current_truth",
+        "context_frame_is_expiring_read_only_evidence",
+        "event_is_acceleration_hint_only",
+        "cue_is_acceleration_hint_only",
+        "event_or_cue_may_assert_command_success",
+        "event_or_cue_may_grant_command_authority",
+        "consumer_must_fresh_read",
+        "command_must_recheck_current_authority_and_source_truth"
+      ],
+      "properties": {
+        "source_owns_current_truth": {"const": true},
+        "context_frame_is_expiring_read_only_evidence": {"const": true},
+        "event_is_acceleration_hint_only": {"const": true},
+        "cue_is_acceleration_hint_only": {"const": true},
+        "event_or_cue_may_assert_command_success": {"const": false},
+        "event_or_cue_may_grant_command_authority": {"const": false},
+        "consumer_must_fresh_read": {"const": true},
+        "command_must_recheck_current_authority_and_source_truth": {"const": true}
+      }
+    },
+    "partition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key_fields", "logical_consumer_count", "initial_physical_consumers_per_database", "high_availability_mode", "equal_checkpoint_writers_allowed"],
+      "properties": {
+        "key_fields": {"type": "array", "prefixItems": [{"const": "source_system"}, {"const": "practice_scope_digest"}, {"const": "event_family"}], "items": false},
+        "logical_consumer_count": {"const": 1},
+        "initial_physical_consumers_per_database": {"const": 1},
+        "high_availability_mode": {"const": "active_standby_external_lease_and_fencing"},
+        "equal_checkpoint_writers_allowed": {"const": false}
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate_fields", "source_position_minimum", "ordered_within_partition_epoch_only", "source_head_distinct_from_observed", "observed_distinct_from_checkpoint", "checkpoint_requires_contiguous_terminal_receipts", "checkpoint_requires_atomic_required_obligation", "delivery_required_before_checkpoint", "gap_crossing_allowed"],
+      "properties": {
+        "coordinate_fields": {"type": "array", "prefixItems": [{"const": "source_epoch"}, {"const": "source_position"}], "items": false},
+        "source_position_minimum": {"const": 1},
+        "ordered_within_partition_epoch_only": {"const": true},
+        "source_head_distinct_from_observed": {"const": true},
+        "observed_distinct_from_checkpoint": {"const": true},
+        "checkpoint_requires_contiguous_terminal_receipts": {"const": true},
+        "checkpoint_requires_atomic_required_obligation": {"const": true},
+        "delivery_required_before_checkpoint": {"const": false},
+        "gap_crossing_allowed": {"const": false}
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["terminal_results", "exactly_one_terminal_receipt_per_position", "duplicate_returns_original_receipt", "divergent_identity_result", "identity_conflict_advances_checkpoint", "rejected_event_creates_obligation"],
+      "properties": {
+        "terminal_results": {"type": "array", "uniqueItems": true, "minItems": 3, "maxItems": 3, "items": {"enum": ["cue_required", "suppressed_irrelevant", "rejected_unsupported"]}},
+        "exactly_one_terminal_receipt_per_position": {"const": true},
+        "duplicate_returns_original_receipt": {"const": true},
+        "divergent_identity_result": {"const": "identity_conflict"},
+        "identity_conflict_advances_checkpoint": {"const": false},
+        "rejected_event_creates_obligation": {"const": false}
+      }
+    },
+    "cue_obligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "consumer_scope", "reason_codes", "delivery_semantics", "duplicate_policy", "coalescing_policy", "fresh_authorized_read_required", "prohibited_content"],
+      "properties": {
+        "required_fields": {"type": "array", "uniqueItems": true, "minItems": 10, "maxItems": 10, "items": {"type": "string", "minLength": 1}},
+        "consumer_scope": {"const": "reception_one_diary_projection"},
+        "reason_codes": {"type": "array", "uniqueItems": true, "minItems": 2, "maxItems": 2, "items": {"enum": ["diary_status_may_have_changed", "diary_availability_may_have_changed"]}},
+        "delivery_semantics": {"const": "at_least_once"},
+        "duplicate_policy": {"const": "reuse_original_obligation"},
+        "coalescing_policy": {"const": "contiguous_pending_same_partition_consumer_and_reason_only"},
+        "fresh_authorized_read_required": {"const": true},
+        "prohibited_content": {"type": "array", "uniqueItems": true, "minItems": 7, "maxItems": 7, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "lag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["states", "exact_formula", "unknown_may_serialize_as_zero", "epoch_mismatch_may_serialize_as_zero"],
+      "properties": {
+        "states": {"type": "array", "uniqueItems": true, "minItems": 3, "maxItems": 3, "items": {"enum": ["exact", "unknown", "epoch_mismatch"]}},
+        "exact_formula": {"const": "source_head_minus_checkpoint_within_same_epoch"},
+        "unknown_may_serialize_as_zero": {"const": false},
+        "epoch_mismatch_may_serialize_as_zero": {"const": false}
+      }
+    },
+    "reconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cue_may_directly_update_display", "practice_role_resource_recheck_required", "fresh_scoped_read_required", "outcomes", "acknowledgement_meaning", "acknowledgement_confers_future_freshness"],
+      "properties": {
+        "cue_may_directly_update_display": {"const": false},
+        "practice_role_resource_recheck_required": {"const": true},
+        "fresh_scoped_read_required": {"const": true},
+        "outcomes": {"type": "array", "uniqueItems": true, "minItems": 6, "maxItems": 6, "items": {"enum": ["projection_unchanged", "projection_refreshed", "local_selection_or_proposal_cleared", "authorization_rejected", "source_unavailable", "stale_session"]}},
+        "acknowledgement_meaning": {"const": "one_fresh_read_attempt_only"},
+        "acknowledgement_confers_future_freshness": {"const": false}
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generic_collapsed_failure_coordinate_allowed", "stages", "distinct_observable_per_stage_required", "distinct_safe_response_per_stage_required"],
+      "properties": {
+        "generic_collapsed_failure_coordinate_allowed": {"const": false},
+        "stages": {"type": "array", "minItems": 10, "maxItems": 10, "items": {"$ref": "#/$defs/diagnostic_stage"}},
+        "distinct_observable_per_stage_required": {"const": true},
+        "distinct_safe_response_per_stage_required": {"const": true}
+      }
+    },
+    "retained_operator_evidence": {"type": "array", "uniqueItems": true, "minItems": 12, "maxItems": 12, "items": {"type": "string", "minLength": 1}},
+    "forbidden_effects": {"type": "array", "uniqueItems": true, "minItems": 10, "maxItems": 10, "items": {"type": "string", "minLength": 1}},
+    "prior_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cf_d1_concurrency_retained", "stopped_cf_d2_attempts_remain_negative_evidence", "old_four_crash_anchor_protocol_retried", "workflow_evidence_led_gate_applied"],
+      "properties": {
+        "cf_d1_concurrency_retained": {"const": true},
+        "stopped_cf_d2_attempts_remain_negative_evidence": {"const": true},
+        "old_four_crash_anchor_protocol_retried": {"const": false},
+        "workflow_evidence_led_gate_applied": {"const": true}
+      }
+    },
+    "next_descendant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "authored_synthetic_only", "pure_state_machine_only", "runtime", "database_or_source", "persistence", "provider_call", "command_or_write"],
+      "properties": {
+        "id": {"const": "provider-free-unmounted-event-cue-admission-rehearsal"},
+        "authored_synthetic_only": {"const": true},
+        "pure_state_machine_only": {"const": true},
+        "runtime": {"const": false},
+        "database_or_source": {"const": false},
+        "persistence": {"const": false},
+        "provider_call": {"const": false},
+        "command_or_write": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "diagnostic_stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "observable", "safe_response"],
+      "properties": {
+        "stage": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"},
+        "observable": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,127}$"},
+        "safe_response": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,127}$"}
+      }
+    }
+  }
+}

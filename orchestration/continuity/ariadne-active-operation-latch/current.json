@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-visible-native-diary-status-confirm-wiring",
-  "active_tranche": "Provider-free visible native Diary status-confirm wiring for staff",
-  "objective": "Wire and prove the existing signed status proposal/confirm family through the visible native Diary with truthful pending, confirmation, cancellation, success and fail-closed feedback, without adding backend authority or a raw fallback.",
+  "operation_id": "raisa-provider-free-cf-d2-observability-first-event-cue-plan",
+  "active_tranche": "Provider-free CF-D2 observability-first durable event and cue architecture",
+  "objective": "Freeze and deterministically prove the smallest non-authoritative cue, position, lag, deduplication, reconciliation and operator-evidence contract needed by the accepted visible Diary consumer before any watcher or database runtime.",
   "status": "in_progress",
-  "source_head": "bed49be3d78d79207857b3d3a044cebd334112dc",
-  "authority_source": "Yuri's 2026-08-13 go-ahead plus standing uninterrupted-development authority after the accepted patient-interaction foundation",
+  "source_head": "6f8904c5f7c8ab268c2010bd2c4f859d998ff1a4",
+  "authority_source": "AGENTS.md Current Baton at Continuity 275 / Compass 257 plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "accepted at source bed49be3d78d79207857b3d3a044cebd334112dc with responsive and keyboard browser evidence, four route-intercepted status cases, 144 full Diary tests, 81 focused tests and the 193-test canonical profile; Continuity 275 / Compass 257 closeout authored",
-    "next_executable_stage": "verify_commit_notify_and_publish_the_ui_closeout_then_rehydrate_and_transfer_the_latch_to_the_fresh_cf_d2_observability_first_plan",
+    "completed_stage": "one plan, one machine contract and one architecture pass 39 hostile mutations, 114 focused tests and the 193-test canonical fast profile without runtime",
+    "next_executable_stage": "commit_and_push_the_verified_architecture_source_then_rehydrate_and_write_its_acceptance_closeout",
     "retry_counters": {
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:c12c25b531049a370d83257ee9cb95d04e64fc8c3fd81aa44c121acc3a82486e"
   },
@@ -35,10 +35,10 @@
     "protected_evidence_closed",
     "patient_product_clinical_data_closed",
     "external_patient_identity_clients_and_channels_closed",
-    "provider_credential_iam_network_closed",
-    "new_application_route_graphql_openapi_database_and_command_authority_closed",
-    "native_diary_status_interaction_only",
-    "authored_synthetic_provider_free_local_frontend_backend_evidence_only",
+    "provider_adc_credential_iam_network_closed",
+    "watcher_database_source_and_operational_retention_closed",
+    "new_route_graphql_openapi_command_and_write_authority_closed",
+    "authored_synthetic_provider_free_unmounted_architecture_only",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

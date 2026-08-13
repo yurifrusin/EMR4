@@ -1,0 +1,151 @@
+schema_version: api-spine.durable-diary-event-cue-observability.v0
+artifact_kind: non_invasive_async_architecture_contract
+status: prototype_only_runtime_blocked
+evidence_mode: authored_synthetic_patient_free
+
+authority_boundary:
+  event_is_current_truth: false
+  cue_is_current_truth: false
+  event_or_cue_is_command_authority: false
+  event_or_cue_is_command_receipt: false
+  fresh_authorized_read_before_display: true
+  consequential_mutation_requires_rest_command: true
+  command_rechecks_current_authority_and_source_truth: true
+
+partition:
+  exact_key_fields:
+    - source_system
+    - practice_scope_digest
+    - event_family
+  logical_consumer_count: 1
+  initial_physical_consumer_count_per_database: 1
+  high_availability: active_standby_with_external_lease_and_fencing
+  equal_checkpoint_writers_allowed: false
+
+position:
+  coordinate_fields: [source_epoch, source_position]
+  source_position_type: positive_monotone_integer_within_partition_epoch
+  source_head_distinct_from_observed_position: true
+  observed_position_distinct_from_checkpoint: true
+  checkpoint_definition: highest_contiguous_terminally_classified_position_with_any_required_obligation_created_atomically
+  delivery_required_before_checkpoint: false
+  cross_epoch_ordering_allowed: false
+  gap_crossing_allowed: false
+
+classification:
+  exactly_one_terminal_receipt_per_position: true
+  terminal_results:
+    - cue_required
+    - suppressed_irrelevant
+    - rejected_unsupported
+  identity_conflict_is_terminal_success: false
+  unsupported_event_creates_cue: false
+
+cue_obligation:
+  required_fields:
+    - cue_schema_version
+    - obligation_id
+    - practice_scope_digest
+    - consumer_scope
+    - event_family
+    - source_epoch
+    - from_position
+    - through_position
+    - reason_code
+    - fresh_authorized_read_required
+  consumer_scope: reception_one_diary_projection
+  allowed_reason_codes:
+    - diary_status_may_have_changed
+    - diary_availability_may_have_changed
+  fresh_authorized_read_required: true
+  delivery: at_least_once
+  duplicate_policy: reuse_original_obligation
+  coalescing: contiguous_pending_same_partition_consumer_and_reason_only
+  prohibited_fields:
+    - appointment_id
+    - patient_id
+    - practitioner_id
+    - person_name
+    - date_of_birth
+    - phone_number
+    - medicare_number
+    - appointment_status
+    - appointment_start_or_end
+    - appointment_reason_or_note
+    - free_text
+    - event_payload
+    - command_result
+    - command_receipt
+    - precondition_or_confirmation_evidence
+    - credential
+    - provider_output
+
+lag:
+  states: [exact, unknown, epoch_mismatch]
+  exact_formula: source_head_position_minus_checkpoint_position_within_same_epoch
+  unknown_or_epoch_mismatch_may_equal_zero: false
+
+reconciliation:
+  cue_payload_may_update_display_directly: false
+  practice_role_resource_recheck_required: true
+  fresh_scoped_read_required: true
+  outcomes:
+    - projection_unchanged
+    - projection_refreshed
+    - local_selection_or_proposal_cleared
+    - authorization_rejected
+    - source_unavailable
+    - stale_session
+  acknowledgement_meaning: one_fresh_read_attempt_only
+  acknowledgement_confers_future_freshness: false
+
+operator_evidence:
+  payload_free: true
+  distinct_failure_stages:
+    - source_head_unknown
+    - observation_lag
+    - position_gap
+    - classification_gap
+    - classification_rejected
+    - obligation_gap
+    - dispatch_lag
+    - dispatch_failed
+    - ownership_fenced
+    - reconciliation_failed
+  generic_collapsed_failure_coordinate_allowed: false
+  retained_values:
+    - partition_digest
+    - source_epoch_digest
+    - source_head_state
+    - observed_position
+    - checkpoint_position
+    - lag_state_and_value_or_null
+    - receipt_state_and_reason_code
+    - pending_obligation_count
+    - oldest_pending_age_bucket
+    - lease_generation_digest
+    - last_dispatch_state
+    - last_reconciliation_state
+
+closed_surfaces:
+  runtime_wiring: blocked
+  watcher_listener_worker: blocked
+  database_or_source_access: blocked
+  operational_retention: blocked
+  product_patient_clinical_data: blocked
+  external_patient_clients: blocked
+  provider_adc_credentials_iam_network: blocked
+  executable_tools_commands_or_writes: blocked
+  graphql_openapi_route_changes: blocked
+  deployment_production_release_pages: blocked
+  protected_refs: blocked
+
+next_descendant:
+  id: provider_free_unmounted_event_cue_admission_rehearsal
+  pure_state_machine_only: true
+  authored_synthetic_only: true
+  runtime: false
+  database_or_source: false
+  persistence: false
+  provider_call: false
+  command_or_write: false

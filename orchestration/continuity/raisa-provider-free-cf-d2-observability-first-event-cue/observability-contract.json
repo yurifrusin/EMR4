@@ -1,0 +1,151 @@
+{
+  "schema_version": "raisa.context_fabric.durable_event_cue_observability.v1",
+  "status": "architecture_only_provider_free_unmounted",
+  "planning_baseline": "6f8904c5f7c8ab268c2010bd2c4f859d998ff1a4",
+  "data_ceiling": "authored_synthetic_patient_free",
+  "authority": {
+    "source_owns_current_truth": true,
+    "context_frame_is_expiring_read_only_evidence": true,
+    "event_is_acceleration_hint_only": true,
+    "cue_is_acceleration_hint_only": true,
+    "event_or_cue_may_assert_command_success": false,
+    "event_or_cue_may_grant_command_authority": false,
+    "consumer_must_fresh_read": true,
+    "command_must_recheck_current_authority_and_source_truth": true
+  },
+  "partition": {
+    "key_fields": ["source_system", "practice_scope_digest", "event_family"],
+    "logical_consumer_count": 1,
+    "initial_physical_consumers_per_database": 1,
+    "high_availability_mode": "active_standby_external_lease_and_fencing",
+    "equal_checkpoint_writers_allowed": false
+  },
+  "position": {
+    "coordinate_fields": ["source_epoch", "source_position"],
+    "source_position_minimum": 1,
+    "ordered_within_partition_epoch_only": true,
+    "source_head_distinct_from_observed": true,
+    "observed_distinct_from_checkpoint": true,
+    "checkpoint_requires_contiguous_terminal_receipts": true,
+    "checkpoint_requires_atomic_required_obligation": true,
+    "delivery_required_before_checkpoint": false,
+    "gap_crossing_allowed": false
+  },
+  "classification": {
+    "terminal_results": ["cue_required", "suppressed_irrelevant", "rejected_unsupported"],
+    "exactly_one_terminal_receipt_per_position": true,
+    "duplicate_returns_original_receipt": true,
+    "divergent_identity_result": "identity_conflict",
+    "identity_conflict_advances_checkpoint": false,
+    "rejected_event_creates_obligation": false
+  },
+  "cue_obligation": {
+    "required_fields": [
+      "cue_schema_version",
+      "obligation_id",
+      "practice_scope_digest",
+      "consumer_scope",
+      "event_family",
+      "source_epoch",
+      "from_position",
+      "through_position",
+      "reason_code",
+      "fresh_authorized_read_required"
+    ],
+    "consumer_scope": "reception_one_diary_projection",
+    "reason_codes": ["diary_status_may_have_changed", "diary_availability_may_have_changed"],
+    "delivery_semantics": "at_least_once",
+    "duplicate_policy": "reuse_original_obligation",
+    "coalescing_policy": "contiguous_pending_same_partition_consumer_and_reason_only",
+    "fresh_authorized_read_required": true,
+    "prohibited_content": [
+      "appointment_or_person_identifier",
+      "appointment_status_or_time",
+      "patient_or_clinical_content",
+      "free_text_or_event_payload",
+      "command_result_or_receipt",
+      "precondition_or_confirmation_evidence",
+      "credential_or_provider_output"
+    ]
+  },
+  "lag": {
+    "states": ["exact", "unknown", "epoch_mismatch"],
+    "exact_formula": "source_head_minus_checkpoint_within_same_epoch",
+    "unknown_may_serialize_as_zero": false,
+    "epoch_mismatch_may_serialize_as_zero": false
+  },
+  "reconciliation": {
+    "cue_may_directly_update_display": false,
+    "practice_role_resource_recheck_required": true,
+    "fresh_scoped_read_required": true,
+    "outcomes": [
+      "projection_unchanged",
+      "projection_refreshed",
+      "local_selection_or_proposal_cleared",
+      "authorization_rejected",
+      "source_unavailable",
+      "stale_session"
+    ],
+    "acknowledgement_meaning": "one_fresh_read_attempt_only",
+    "acknowledgement_confers_future_freshness": false
+  },
+  "diagnostics": {
+    "generic_collapsed_failure_coordinate_allowed": false,
+    "stages": [
+      {"stage": "source_head_unknown", "observable": "source_head_state_unknown", "safe_response": "report_unknown_lag"},
+      {"stage": "observation_lag", "observable": "same_epoch_positive_head_checkpoint_delta", "safe_response": "resume_after_checkpoint"},
+      {"stage": "position_gap", "observable": "higher_observed_with_exact_missing_lower_position", "safe_response": "hold_checkpoint_at_gap"},
+      {"stage": "classification_gap", "observable": "observed_position_without_terminal_receipt", "safe_response": "retry_classification_only"},
+      {"stage": "classification_rejected", "observable": "immutable_reject_receipt_and_reason", "safe_response": "alert_without_cue"},
+      {"stage": "obligation_gap", "observable": "cue_required_receipt_without_atomic_obligation", "safe_response": "hold_checkpoint_and_fail_closed"},
+      {"stage": "dispatch_lag", "observable": "pending_obligation_without_attempt", "safe_response": "retain_backlog"},
+      {"stage": "dispatch_failed", "observable": "attempt_failure_class_for_same_obligation", "safe_response": "bounded_redelivery_same_identity"},
+      {"stage": "ownership_fenced", "observable": "stale_lease_generation_on_checkpoint_write", "safe_response": "reject_writer"},
+      {"stage": "reconciliation_failed", "observable": "delivered_obligation_and_typed_fresh_read_failure", "safe_response": "retain_truthful_old_ui_and_report_refresh_failure"}
+    ],
+    "distinct_observable_per_stage_required": true,
+    "distinct_safe_response_per_stage_required": true
+  },
+  "retained_operator_evidence": [
+    "partition_digest",
+    "source_epoch_digest",
+    "source_head_state",
+    "observed_position",
+    "checkpoint_position",
+    "lag_state_and_value_or_null",
+    "receipt_state_and_reason_code",
+    "pending_obligation_count",
+    "oldest_pending_age_bucket",
+    "lease_generation_digest",
+    "last_dispatch_state",
+    "last_reconciliation_state"
+  ],
+  "forbidden_effects": [
+    "watcher_listener_or_worker_runtime",
+    "database_or_source_access",
+    "migration_persistence_or_operational_retention",
+    "product_patient_or_clinical_data",
+    "external_patient_client_or_real_identity",
+    "provider_adc_credential_iam_or_network",
+    "executable_tool_command_or_write",
+    "graphql_openapi_or_route_change",
+    "deployment_production_release_or_pages",
+    "protected_ref_movement"
+  ],
+  "prior_evidence": {
+    "cf_d1_concurrency_retained": true,
+    "stopped_cf_d2_attempts_remain_negative_evidence": true,
+    "old_four_crash_anchor_protocol_retried": false,
+    "workflow_evidence_led_gate_applied": true
+  },
+  "next_descendant": {
+    "id": "provider-free-unmounted-event-cue-admission-rehearsal",
+    "authored_synthetic_only": true,
+    "pure_state_machine_only": true,
+    "runtime": false,
+    "database_or_source": false,
+    "persistence": false,
+    "provider_call": false,
+    "command_or_write": false
+  }
+}
