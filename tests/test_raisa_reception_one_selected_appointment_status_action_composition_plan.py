@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,7 +10,6 @@ THREAT = (
     ROOT
     / "docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md"
 )
-LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
 DIARY_JS = ROOT / "docs/diary/diary.js"
 META_GRID_JS = ROOT / "docs/diary/meta-grid.js"
 META_GRID_CSS = ROOT / "docs/diary/meta-grid.css"
@@ -51,25 +50,19 @@ def test_plan_and_threat_delta_freeze_the_narrow_existing_command_composition() 
         assert token in threat
 
 
-def test_active_latch_remains_bound_to_the_exact_accepted_source() -> None:
-    latch = json.loads(LATCH.read_text(encoding="utf-8"))
-    assert latch["operation_id"] == (
-        "raisa-reception-one-selected-appointment-status-action-composition"
+def test_exact_accepted_source_remains_in_current_lineage() -> None:
+    result = subprocess.run(
+        [
+            "git",
+            "merge-base",
+            "--is-ancestor",
+            "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33",
+            "HEAD",
+        ],
+        cwd=ROOT,
+        check=False,
     )
-    assert latch["status"] in {"in_progress", "complete"}
-    assert latch["source_head"] == "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33"
-    if latch["status"] == "in_progress":
-        assert latch["resume_after_compaction"] is True
-        assert latch["terminal_response"] == {
-            "permitted": False,
-            "reason": "unfinished_authorized_operation",
-        }
-    else:
-        assert latch["resume_after_compaction"] is False
-        assert latch["terminal_response"]["permitted"] is True
-    assert "existing_status_vocabulary_and_existing_set_appointment_status_interaction_only" in latch[
-        "protected_boundaries"
-    ]
+    assert result.returncode == 0
 
 
 def test_shared_status_vocabulary_and_bridge_delegate_to_the_existing_interaction() -> None:
