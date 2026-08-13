@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 269,
+  "graph_revision": 270,
   "harvests": [],
   "nodes": [
     {
@@ -17453,9 +17453,78 @@
         "The repository guard cannot directly intercept a host final-channel operation; model compliance remains required.",
         "The status-confirm route readiness re-review remains in progress and opens no mounted route or database authority."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview",
+      "title": "Provider-free read-only status-confirm route-mounting readiness re-review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-12T23:52:23Z",
+      "updated_at": "2026-08-12T23:52:23Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b2107060facb701208d034cba3bc8ef29f22a7f9",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-confirm-route-convergence-composition-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Text-only exact-file review; no application import, route, database, provider, product data or command authority.",
+          "Route mounting remains blocked until four application-owned adapters pass off-route."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-readiness-rereview",
+          "source": "docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md",
+          "status": "accepted",
+          "summary": "Accept four satisfied, two partial and four blocking dimensions; continue only to an unmounted product-adapter rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "Four satisfied, two partial and four blocking dimensions.",
+        "All fourteen frozen source hashes and 69 hostile mutations pass.",
+        "The accepted physical PostgreSQL proof is consumed without reopening concurrency, restart or unknown commit."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-plan.md",
+          "docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-threat-model-delta.md"
+        ],
+        "findings": [],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-route-mounting-readiness-rereview-sol-acceptance.md"
+        ],
+        "receipts": [],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview/route-mounting-readiness-rereview-report.md",
+          "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Application-owned server session/current authority, status-only admission, locked-state policy and atomic effect/audit adapters remain absent.",
+        "Canonical alias policy and stored-byte HTTP delivery remain later route decisions."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-12T23:31:31Z"
+  "updated_at": "2026-08-12T23:52:23Z"
 }

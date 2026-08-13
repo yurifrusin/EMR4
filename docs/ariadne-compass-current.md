@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 269 / Compass 251. The post-compaction active-operation latch passes and the provider-free read-only status-confirm route-mounting readiness re-review is in progress. Mounted execution and product authority remain closed.
+> EMR4 is at Continuity 270 / Compass 252. The status-confirm readiness re-review passes with four remaining product-adapter blockers. Route mounting and product execution remain closed.
 
 ## North star
 

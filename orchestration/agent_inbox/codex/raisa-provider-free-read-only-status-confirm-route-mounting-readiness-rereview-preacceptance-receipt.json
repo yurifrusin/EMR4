@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_and_close_status_confirm_route_mounting_readiness_rereview_then_continue_to_unmounted_product_adapter",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the accepted active-operation latch. Continuity 269 / Compass 251 named this exact re-review as active work.",
+    "current_authority_allocation": "GPT Sol remains conductor, exact-file reviewer and acceptance owner. The serial text-only judgment did not require a worker or external verifier.",
+    "active_plan_and_acceptance": "The frozen plan, threat delta, accepted composition, exact fourteen-source contract, generated evidence and focused tests were read. The result is four satisfied, two partial and four blocking dimensions with route mounting not ready.",
+    "protected_evidence_boundaries": "The review imported no application runtime and opened no route, database/source, provider, network, credential, product/patient data, command, deployment, release, Pages or protected-ref authority. All unrelated untracked files and docs/branding remain preserved.",
+    "git_refs_and_worktree": "HEAD and local task are b2107060facb701208d034cba3bc8ef29f22a7f9; origin task remains 74c8be9ec39947e7bf58c2e7caeb9e36c8a1df84 before closeout push. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Five docs/branding files and all other untracked files remain preserved."
+  },
+  "active_operation": {
+    "operation_id": "raisa-status-confirm-route-mounting-readiness-rereview",
+    "active_tranche": "Provider-free read-only status-confirm route-mounting readiness re-review",
+    "status": "in_progress",
+    "source_head": "b2107060facb701208d034cba3bc8ef29f22a7f9",
+    "completed_stage": "deterministic ten-dimension re-review passed",
+    "next_executable_stage": "Sol acceptance, closeout, continuity update, commit, push and notification",
+    "resume_after_compaction": true,
+    "user_attention_required": false,
+    "terminal_handback_permitted": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "worker_dispatch_permitted": true,
+  "terminal_handback_permitted": false
+}

@@ -8,12 +8,11 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-unmounted-status-confirm-route-convergence-"
-    "composition-rehearsal"
+    "raisa-provider-free-read-only-status-confirm-route-mounting-readiness-"
+    "rereview"
 )
-SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
-LATCH_NODE_ID = "ariadne-postcompaction-active-operation-latch"
-LATCH_SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
+SOURCE_HEAD = "b2107060facb701208d034cba3bc8ef29f22a7f9"
+COMPOSITION_SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
 PROTECTED_SHA = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
 
 
@@ -28,11 +27,11 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 269
-    assert graph["nodes"][-1]["id"] == LATCH_NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == LATCH_SOURCE_HEAD
-    assert compass["map_revision"] == 251
-    assert compass["source_graph_revision"] == 269
+    assert graph["graph_revision"] == 270
+    assert graph["nodes"][-1]["id"] == NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] == 252
+    assert compass["source_graph_revision"] == 270
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -42,18 +41,20 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 269 / Compass 251" in current
-    assert "ariadne_postcompaction_active_operation_latch_pass" in current
-    assert LATCH_SOURCE_HEAD in current
+    assert "Continuity 270 / Compass 252" in current
+    assert (
+        "raisa_provider_free_read_only_status_confirm_route_mounting_"
+        "readiness_rereview_pass"
+    ) in current
     assert SOURCE_HEAD in current
-    assert "prompt recency alone cannot replace unfinished work" in current
-    assert "in-progress terminal response fails closed" in current
-    assert "complete-envelope canonical replay" in current
-    assert "39 hostile latch mutations" in current
-    assert "193-test canonical profile" in current
+    assert "four satisfied dimensions" in current
+    assert "two nonblocking partial gaps" in current
+    assert "four blocking product-adapter gaps" in current
+    assert "69 hostile mutations" in current
+    assert "No application runtime was imported" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
-    assert SOURCE_HEAD in relation
+    assert COMPOSITION_SOURCE_HEAD in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
     assert "fe8313d224a92115aa31bea14f0cd3b14e4c9967" in relation
     assert "018099dd6c5f0502121360732feb602252eb34cc" in relation
@@ -75,16 +76,16 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert (
-        "provider-free read-only status-confirm route-mounting readiness re-review"
-        in next_work
-    )
+    assert "provider-free unmounted status-confirm product adapter" in next_work
     assert SOURCE_HEAD in next_work
-    assert "seven prior composition blockers" in next_work
-    assert "may inspect exact non-protected files" in next_work
-    assert "may not edit, mount or call the route" in next_work
-    assert "patient/product data" in next_work
-    assert "provider/ADC/credential/browser/network access" in next_work
+    assert "four coupled blockers" in next_work
+    assert "server-owned session/current-authority ingress" in next_work
+    assert "status-only discrimination" in next_work
+    assert "locked-state policy reconstruction" in next_work
+    assert "atomic status-effect/audit-identity staging" in next_work
+    assert "no route edit/mount/call" in next_work
+    assert "product/patient data" in next_work
+    assert "provider/ADC/credential/IAM/browser/network" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -118,20 +119,22 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free read-only status-confirm route-mounting readiness re-review",
-        "seven prior composition blockers",
-        "accepted physical postgresql proof",
-        "product adapter or route prerequisites",
-        "may not edit, mount or call the route",
+        "provider-free unmounted status-confirm product adapter",
+        "four coupled blockers",
+        "server-owned session/current-authority ingress",
+        "status-only discrimination",
+        "locked-state policy reconstruction",
+        "atomic status-effect/audit-identity staging",
+        "no route edit/mount/call",
         "database/source",
-        "product data",
+        "product/patient data",
         "command/write",
-        "provider/adc/credential/browser/network access",
+        "provider/adc/credential/iam/browser/network",
         "docs/branding/",
         "deploy",
         "release",
         "pages",
-        "protected refs",
+        "protected-ref movement",
         "explicit-path staging only",
     ):
         assert phrase in next_work
