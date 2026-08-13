@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free Reception One selected-appointment status-action composition",
+    "completed_stage": "accepted at exact source b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33 and bound at Continuity 283 / Compass 265 after typed, rendered, focused and canonical gates",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-status-action-composition",
+    "resume_after_compaction": false,
+    "source_head": "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_read_only_post_status_action_compass_baton_orientation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted status-action plan, threat delta, closeout, Sol acceptance, typed evidence and completed latch were reread. They prove one selected appointment status composition over the existing command path and require the next orientation to select only a dependency-satisfied successor already supported by current repository evidence.",
+    "current_authority_allocation": "AGENTS.md section 4 retains GPT Sol as conductor, sprint planner, architecture and acceptance owner. This small read-only repository orientation is tightly coupled judgment work and remains Sol-owned; no worker, verifier, provider or subagent is selected.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at HEAD aefe6938002eae2b7c420e973912fa7973a5d901 exactly aligned with origin task. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked and staged state is clean; all 598 untracked files, including five under docs/branding and the selected-status pre-push receipt/state pair, remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after publication. At Continuity 283 / Compass 265 it accepts exact source b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33 and names a fresh provider-free read-only Compass and baton orientation as the next implementation.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts and historical Diary/PHI remain closed. Another command or event family, representative cohort, external patient channel, backend/database/source/watcher runtime, product/patient data, provider/ADC, credentials/IAM/network, deployment, production, release, Pages and protected refs cannot be inferred. docs/branding and unrelated untracked files remain preserved with explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

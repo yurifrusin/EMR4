@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-selected-appointment-status-action-composition",
-  "active_tranche": "Provider-free Reception One selected-appointment status-action composition",
-  "objective": "Let staff act on one selected current Reception One appointment through the existing status vocabulary and existing setAppointmentStatus proposal/confirm interaction, with modeless fail-closed feedback and fresh projection reconciliation.",
-  "status": "complete",
-  "source_head": "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33",
-  "authority_source": "AGENTS.md Current Baton at Continuity 282 / Compass 264, the accepted post-CF-D2 orientation and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-post-status-action-compass-baton-orientation",
+  "active_tranche": "Read-only post-status-action Compass and baton orientation",
+  "objective": "Interpret the first Reception One command truth-parity milestone, compare current programme directions against exact repository evidence, and select the narrowest dependency-satisfied successor without inferring closed authority.",
+  "status": "in_progress",
+  "source_head": "aefe6938002eae2b7c420e973912fa7973a5d901",
+  "authority_source": "AGENTS.md Current Baton at Continuity 283 / Compass 265, the accepted selected-status composition, Yuri's truth-kernel milestone interpretation and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "accepted at exact source b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33 and bound at Continuity 283 / Compass 265 after typed, rendered, focused and canonical gates",
-    "next_executable_stage": null,
+    "completed_stage": "fresh five-source rehydration and preplanning receipt passed after selected-status publication",
+    "next_executable_stage": "freeze the read-only orientation plan, inspect exact repository seams and compare successor candidates",
     "retry_counters": {
       "review": 0,
-      "verification": 5
+      "verification": 1
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -22,21 +22,21 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_status_action_composition_complete_and_read_only_orientation_named_next"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "one_selected_current_reception_one_appointment_only",
-    "existing_status_vocabulary_and_existing_set_appointment_status_interaction_only",
-    "no_second_command_path_and_no_raw_status_fallback",
-    "authored_synthetic_provider_free_ui_and_route_intercepted_evidence_only",
-    "backend_api_openapi_graphql_database_and_event_runtime_unchanged",
+    "orientation_read_only_no_product_behavior",
+    "truth_parity_not_unproved_feature_parity",
+    "kernel_owns_truth_authority_command_meaning_commit_audit_and_receipt",
+    "no_inferred_command_event_participant_or_patient_channel_authority",
+    "backend_api_openapi_graphql_database_source_watcher_event_and_ui_unchanged",
     "protected_evidence_and_historical_diary_phi_closed",
     "patient_product_clinical_data_and_external_patient_channels_closed",
     "provider_adc_credentials_iam_external_network_closed",
