@@ -1,0 +1,37 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free authored-synthetic status-confirm HTTP route convergence",
+    "completed_stage": "product-adapter/PostgreSQL integration accepted at source 553d38c37af86ceefc7b4315b8eaa171d405ab95 with Continuity 272 / Compass 254 closeout prepared",
+    "next_executable_stage": "publish the integration closeout, perform a fresh five-source rehydration and freeze the exact authenticated route-convergence plan before route edits",
+    "operation_id": "raisa-status-confirm-http-route-convergence",
+    "resume_after_compaction": true,
+    "source_head": "553d38c37af86ceefc7b4315b8eaa171d405ab95",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_narrowest_provider_free_authored_synthetic_status_confirm_http_route_convergence_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted PostgreSQL integration closeout and Sol acceptance were read completely. They require convergence of the existing authenticated /appointments/proposals/status-confirm family onto the accepted adapter, opaque proposal-version carriage without client authority, exact stored-byte replay and a canonical-alias decision using only owned authored-synthetic local fixtures.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. This route/schema/dependency transition is tightly coupled and remains Sol-owned under the worker-economy rule until a separately useful bounded review surface exists.",
+    "git_refs_and_worktree": "At 2026-08-13T11:54:54+10:00, HEAD, local task and origin task are exact 43ccca7cf6585724a5a06c795d9ffdffcdd78e39 and required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; 526 untracked status entries including docs/branding and all prior receipt/state artifacts remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely at published task HEAD 43ccca7cf6585724a5a06c795d9ffdffcdd78e39. Continuity 272 / Compass 254 accepts disposable PostgreSQL product-adapter integration at source 553d38c37af86ceefc7b4315b8eaa171d405ab95 and names provider-free authored-synthetic status-confirm HTTP route convergence next.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected evidence, historical PHI, patient/clinical/operational product data, other command families, providers/ADC, credentials/IAM, external network, deployment, production, release, Pages and protected refs remain closed. Only a frozen plan may authorize exact route/schema/dependency/API-contract edits and owned local synthetic calls. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

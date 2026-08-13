@@ -87,6 +87,29 @@ def engine():
         conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
         conn.commit()
     Base.metadata.create_all(eng)
+    with eng.begin() as conn:
+        conn.execute(text("""
+            CREATE OR REPLACE FUNCTION emr4_advance_appointment_state_version()
+            RETURNS trigger
+            LANGUAGE plpgsql
+            AS $$
+            BEGIN
+                IF OLD.appointment_state_version >= 9223372036854775807 THEN
+                    RAISE EXCEPTION 'appointment_state_version overflow'
+                        USING ERRCODE = '22003';
+                END IF;
+                NEW.appointment_state_version := OLD.appointment_state_version + 1;
+                RETURN NEW;
+            END;
+            $$
+        """))
+        conn.execute(text("DROP TRIGGER IF EXISTS trg_appointments_advance_state_version ON appointments"))
+        conn.execute(text("""
+            CREATE TRIGGER trg_appointments_advance_state_version
+            BEFORE UPDATE ON appointments
+            FOR EACH ROW
+            EXECUTE FUNCTION emr4_advance_appointment_state_version()
+        """))
     yield eng
     Base.metadata.drop_all(eng)
     eng.dispose()

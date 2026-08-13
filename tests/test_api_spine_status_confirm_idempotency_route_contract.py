@@ -1,10 +1,9 @@
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import date, datetime, time, timezone
 from pathlib import Path
 
 import pytest
 
 import app.routers.appointments as appointments_router
-from app.config import settings
 from app.models.appointments import (
     Appointment,
     AppointmentAuditLog,
@@ -13,8 +12,6 @@ from app.models.appointments import (
     BookingChannel,
 )
 from app.models.diary import WaitingArea
-from app.schemas.appointments import AppointmentStatusProposalConfirmationIn
-from app.services.appointment_idempotency import claim_appointment_command
 from tests.conftest import make_token
 
 
@@ -43,7 +40,7 @@ APPOINTMENT_AUDIT_TESTS = ROOT / "tests" / "test_appointment_audit.py"
 
 OPERATION_ID = "confirmAppointmentStatusProposal"
 ROUTE_FAMILY = "status-confirm"
-CONFIRM_URL = "/api/v1/appointments/proposals/status-confirm"
+CONFIRM_URL = "/api/v1/appointments/proposals/status/confirm"
 STATUS_PROPOSAL_URL = "/api/v1/appointments/proposals/status/{appt_id}"
 WAITING_AREA_PROPOSAL_URL = "/api/v1/appointments/proposals/waiting-area/{appt_id}"
 CANONICAL_OPENAPI_PATH = "/api/v1/appointments/proposals/status/confirm"
@@ -60,15 +57,12 @@ PASSING_CONTRACT_TESTS = {
     "test_missing_idempotency_key_blocks_before_status_or_audit_mutation",
     "test_invalid_status_confirm_payload_does_not_create_ledger_by_default",
     "test_first_confirmed_status_change_writes_status_audit_and_ledger",
-    "test_first_confirmed_waiting_area_change_writes_waiting_area_audit_and_ledger",
+    "test_waiting_area_variant_blocks_without_write_or_ledger",
     "test_same_key_same_body_status_replay_has_no_second_status_or_audit_write",
-    "test_same_key_same_body_waiting_area_replay_has_no_second_waiting_area_or_audit_write",
+    "test_waiting_area_repeat_stays_blocked_without_write_or_ledger",
     "test_same_key_different_status_body_conflicts_without_mutation",
-    "test_active_in_progress_status_key_fails_closed_without_mutation",
-    "test_stale_in_progress_status_key_fails_closed_without_mutation",
-    "test_failed_transient_status_key_fails_closed_without_mutation",
     "test_idempotency_key_does_not_bypass_confirmed_true_signed_evidence_or_freshness",
-    "test_status_and_waiting_area_union_variants_hash_as_distinct_effective_commands",
+    "test_waiting_area_variant_cannot_reuse_status_key_to_reopen_write",
 }
 
 
@@ -114,7 +108,7 @@ def _make_appt(db, practice, practitioner, patient, *, status=AppointmentStatus.
         booked_via=BookingChannel.Receptionist,
     )
     db.add(appt)
-    db.flush()
+    db.commit()
     return appt
 
 
@@ -155,25 +149,6 @@ def _waiting_area_payload(client, token: str, appt_id, area_id) -> dict:
     payload = proposal.json()["confirm_payload"]
     payload["confirmed"] = True
     return payload
-
-
-def _canonical_request_body(payload: dict) -> dict:
-    return AppointmentStatusProposalConfirmationIn(**payload).model_dump(mode="json")
-
-
-def _preclaim(db, user, payload: dict, *, key: str):
-    return claim_appointment_command(
-        db,
-        practice_id=user.practice_id,
-        actor_user_id=str(user.id),
-        actor_role=user.role.value,
-        operation_id=OPERATION_ID,
-        route_family=ROUTE_FAMILY,
-        raw_idempotency_key=key,
-        request_body=_canonical_request_body(payload),
-        secret=settings.secret_key.encode("utf-8"),
-        stale_after=timedelta(minutes=10),
-    )
 
 
 def test_status_confirm_route_test_contract_records_scope():
@@ -224,7 +199,7 @@ def test_current_router_wires_status_confirm_idempotency_surface():
     status_route = _route_body(
         router_text,
         "def confirm_status_proposal_route(",
-        "def get_waiting_room(",
+        "def _a5_check_in_gate_open(",
     )
     update_route = _route_body(
         router_text,
@@ -239,11 +214,12 @@ def test_current_router_wires_status_confirm_idempotency_surface():
 
     assert "Header(" in status_route
     assert "Idempotency-Key" in status_route
-    assert "claim_appointment_command(" in status_route
-    assert "complete_appointment_command(" in status_route
+    assert "compose_product_status_confirm(" in status_route
+    assert "claim_appointment_command(" not in status_route
+    assert "complete_appointment_command(" not in status_route
     assert "_STATUS_CONFIRM_OPERATION_ID" in router_text
     assert "_STATUS_CONFIRM_ROUTE_FAMILY" in router_text
-    assert "commit=False" in status_route
+    assert "stored_response_bytes" in status_route
     assert "Header(" in update_route
     assert "Idempotency-Key" in update_route
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
@@ -352,7 +328,7 @@ def test_first_confirmed_status_change_writes_status_audit_and_ledger(
     assert ledger.target_appointment_id == appt.id
 
 
-def test_first_confirmed_waiting_area_change_writes_waiting_area_audit_and_ledger(
+def test_waiting_area_variant_blocks_without_write_or_ledger(
     client, db, gp_user, practice, practitioner, patient
 ):
     token = make_token(gp_user)
@@ -364,12 +340,12 @@ def test_first_confirmed_waiting_area_change_writes_waiting_area_audit_and_ledge
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "waiting-first-key"))
 
     assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["blocks"][0]["code"] == "unsupported_status_confirm_variant"
     db.refresh(appt)
-    assert appt.waiting_area_id == area.id
-    assert _row_counts(db) == (before[0], before[1] + 1, before[2] + 1)
-    ledger = db.query(AppointmentCommandIdempotency).one()
-    assert ledger.state == "completed"
-    assert ledger.target_appointment_id == appt.id
+    assert appt.waiting_area_id is None
+    assert _row_counts(db) == before
 
 
 def test_same_key_same_body_status_replay_has_no_second_status_or_audit_write(
@@ -386,31 +362,34 @@ def test_same_key_same_body_status_replay_has_no_second_status_or_audit_write(
     second = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "status-replay-key"))
 
     assert second.status_code == 200, second.text
+    assert second.content == first.content
     assert second.json() == first.json()
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Confirmed
     assert _row_counts(db) == after_first
 
 
-def test_same_key_same_body_waiting_area_replay_has_no_second_waiting_area_or_audit_write(
+def test_waiting_area_repeat_stays_blocked_without_write_or_ledger(
     client, db, gp_user, practice, practitioner, patient
 ):
     token = make_token(gp_user)
     area = _make_area(db, practice)
     appt = _make_appt(db, practice, practitioner, patient)
     payload = _waiting_area_payload(client, token, appt.id, area.id)
+    before = _row_counts(db)
 
     first = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "waiting-replay-key"))
     assert first.status_code == 200, first.text
-    after_first = _row_counts(db)
+    assert first.json()["blocks"][0]["code"] == "unsupported_status_confirm_variant"
+    assert _row_counts(db) == before
 
     second = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "waiting-replay-key"))
 
     assert second.status_code == 200, second.text
-    assert second.json() == first.json()
+    assert second.content == first.content
     db.refresh(appt)
-    assert appt.waiting_area_id == area.id
-    assert _row_counts(db) == after_first
+    assert appt.waiting_area_id is None
+    assert _row_counts(db) == before
 
 
 def test_same_key_different_status_body_conflicts_without_mutation(
@@ -431,65 +410,6 @@ def test_same_key_different_status_body_conflicts_without_mutation(
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Confirmed
     assert _row_counts(db) == after_first
-
-
-def test_active_in_progress_status_key_fails_closed_without_mutation(
-    client, db, gp_user, practice, practitioner, patient
-):
-    token = make_token(gp_user)
-    appt = _make_appt(db, practice, practitioner, patient)
-    payload = _status_payload(client, token, appt.id)
-    claim = _preclaim(db, gp_user, payload, key="status-progress-key")
-    assert claim.kind == "started"
-    before = _row_counts(db)
-
-    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "status-progress-key"))
-
-    assert resp.status_code == 409, resp.text
-    assert resp.json()["detail"]["code"] == "idempotency_key_in_progress"
-    db.refresh(appt)
-    assert appt.status == AppointmentStatus.Booked
-    assert _row_counts(db) == before
-
-
-def test_stale_in_progress_status_key_fails_closed_without_mutation(
-    client, db, gp_user, practice, practitioner, patient
-):
-    token = make_token(gp_user)
-    appt = _make_appt(db, practice, practitioner, patient)
-    payload = _status_payload(client, token, appt.id)
-    claim = _preclaim(db, gp_user, payload, key="status-stale-key")
-    claim.record.updated_at = datetime(2000, 1, 1, tzinfo=timezone.utc)
-    db.flush()
-    before = _row_counts(db)
-
-    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "status-stale-key"))
-
-    assert resp.status_code == 409, resp.text
-    assert resp.json()["detail"]["code"] == "idempotency_key_stale_in_progress"
-    db.refresh(appt)
-    assert appt.status == AppointmentStatus.Booked
-    assert _row_counts(db) == before
-
-
-def test_failed_transient_status_key_fails_closed_without_mutation(
-    client, db, gp_user, practice, practitioner, patient
-):
-    token = make_token(gp_user)
-    appt = _make_appt(db, practice, practitioner, patient)
-    payload = _status_payload(client, token, appt.id)
-    claim = _preclaim(db, gp_user, payload, key="status-failed-key")
-    claim.record.state = "failed_transient"
-    db.flush()
-    before = _row_counts(db)
-
-    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "status-failed-key"))
-
-    assert resp.status_code == 503, resp.text
-    assert resp.json()["detail"]["code"] == "idempotency_key_failed_transient"
-    db.refresh(appt)
-    assert appt.status == AppointmentStatus.Booked
-    assert _row_counts(db) == before
 
 
 def test_idempotency_key_does_not_bypass_confirmed_true_signed_evidence_or_freshness(
@@ -514,7 +434,7 @@ def test_idempotency_key_does_not_bypass_confirmed_true_signed_evidence_or_fresh
     assert _row_counts(db) == before
 
 
-def test_status_and_waiting_area_union_variants_hash_as_distinct_effective_commands(
+def test_waiting_area_variant_cannot_reuse_status_key_to_reopen_write(
     client, db, gp_user, practice, practitioner, patient
 ):
     token = make_token(gp_user)
@@ -522,15 +442,19 @@ def test_status_and_waiting_area_union_variants_hash_as_distinct_effective_comma
     appt = _make_appt(db, practice, practitioner, patient)
     status_payload = _status_payload(client, token, appt.id)
     waiting_payload = _waiting_area_payload(client, token, appt.id, area.id)
-    claim = _preclaim(db, gp_user, status_payload, key="status-union-key")
-    assert claim.kind == "started"
-    before = _row_counts(db)
+    first = client.post(
+        CONFIRM_URL,
+        json=status_payload,
+        headers=_auth(token, "status-union-key"),
+    )
+    assert first.status_code == 200, first.text
+    after_first = _row_counts(db)
 
     resp = client.post(CONFIRM_URL, json=waiting_payload, headers=_auth(token, "status-union-key"))
 
-    assert resp.status_code == 409, resp.text
-    assert resp.json()["detail"]["code"] == "idempotency_key_conflict"
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["blocks"][0]["code"] == "unsupported_status_confirm_variant"
     db.refresh(appt)
-    assert appt.status == AppointmentStatus.Booked
+    assert appt.status == AppointmentStatus.Confirmed
     assert appt.waiting_area_id is None
-    assert _row_counts(db) == before
+    assert _row_counts(db) == after_first

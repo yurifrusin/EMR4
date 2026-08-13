@@ -2,8 +2,10 @@ import uuid
 import re
 import secrets
 import hashlib
+import hmac
 import json
 from datetime import date as date_type, datetime, time, timedelta, timezone
+from collections.abc import Callable
 from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Body, Depends, Header, HTTPException, Query, Response, status
@@ -13,7 +15,13 @@ from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
 from app.config import settings
-from app.dependencies import get_db, get_current_user, require_role
+from app.dependencies import (
+    get_command_session_factory,
+    get_db,
+    get_current_user,
+    oauth2_scheme,
+    require_role,
+)
 from app.models.patients import Patient
 from app.models.tenancy import User, UserRole, Practitioner, Practice, PracticeLocation
 from app.models.appointments import (
@@ -82,6 +90,10 @@ from app.services.diary.confirm_actions import (
     verify_signed_confirmation_evidence_block,
     DiaryConfirmAction,
     get_diary_confirm_action,
+)
+from app.services.appointment_status_product_adapter import (
+    compose_product_status_confirm,
+    mint_status_proposal_version_binding,
 )
 from app.services.bernie import (
     BernieReceptionPolicyDecision,
@@ -1406,6 +1418,19 @@ def _staff_create_confirm_idempotency_secret() -> bytes:
     return settings.secret_key.encode("utf-8")
 
 
+def _status_confirm_domain_secret(purpose: str) -> bytes:
+    """Derive one purpose-separated status-confirm key from backend config."""
+    return hmac.new(
+        settings.secret_key.encode("utf-8"),
+        f"emr4.status-confirm.{purpose}.v1".encode("utf-8"),
+        hashlib.sha256,
+    ).digest()
+
+
+def _status_confirm_evidence_secret() -> str:
+    return _status_confirm_domain_secret("evidence").hex()
+
+
 def _handle_create_confirm_idempotency_decision(
     decision: AppointmentIdempotencyDecision,
 ):
@@ -2574,6 +2599,7 @@ _STATUS_CONFIRM_METADATA_FIELDS = {
     "confirm_endpoint",
     "confirm_payload",
     "status_proposal_freshness_id",
+    "status_proposal_version_binding",
     "signed_confirmation_evidence",
     "signed_confirmation_evidence_required",
 }
@@ -2610,16 +2636,27 @@ def _attach_status_confirmation_evidence(
     signed_confirmation_evidence = mint_signed_confirmation_evidence(
         signed_payload,
         evidence_purpose=_STATUS_CONFIRM_ACTION.evidence_purpose,
+        secret=_status_confirm_evidence_secret(),
+    )
+    status_proposal_version_binding = mint_status_proposal_version_binding(
+        signed_confirmation_evidence,
+        source_version=appt.appointment_state_version,
+        secret=_status_confirm_domain_secret("proposal-version"),
     )
     proposal.confirm_endpoint = _STATUS_CONFIRM_ACTION.endpoint
     proposal.status_proposal_freshness_id = status_proposal_freshness_id
+    proposal.status_proposal_version_binding = status_proposal_version_binding
     proposal.signed_confirmation_evidence = signed_confirmation_evidence
     proposal.signed_confirmation_evidence_required = True
+    confirmation_proposal = _status_proposal_evidence_payload(proposal)
+    confirmation_proposal["status_proposal_freshness_id"] = status_proposal_freshness_id
+    confirmation_proposal["signed_confirmation_evidence_required"] = True
     proposal.confirm_payload = {
         "confirmed": False,
-        "status_proposal": _status_proposal_evidence_payload(proposal),
+        "status_proposal": confirmation_proposal,
         "confirmed_warnings": [issue.code for issue in proposal.warnings],
         "status_proposal_freshness_id": status_proposal_freshness_id,
+        "status_proposal_version_binding": status_proposal_version_binding,
         "signed_confirmation_evidence": signed_confirmation_evidence,
         "signed_confirmation_evidence_required": True,
     }
@@ -2649,7 +2686,7 @@ def _confirm_status_block(code: str, message: str) -> AppointmentProposalIssue:
     )
 
 
-@router.post("/proposals/status/{appointment_id}", response_model=AppointmentStatusProposalOut)
+@router.post("/proposals/status/{appointment_id:uuid}", response_model=AppointmentStatusProposalOut)
 def propose_status_update(
     appointment_id: uuid.UUID,
     body: AppointmentStatusProposalIn,
@@ -2920,141 +2957,40 @@ def _apply_appointment_status_update(
 @router.post(
     "/proposals/status-confirm",
     response_model=AppointmentConfirmStatusProposalOut,
+    include_in_schema=False,
+)
+@router.post(
+    "/proposals/status/confirm",
+    response_model=AppointmentConfirmStatusProposalOut,
 )
 def confirm_status_proposal_route(
     body: AppointmentStatusProposalConfirmationIn,
     idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
-    db: Session = Depends(get_db),
+    authenticated_bearer_token: str = Depends(oauth2_scheme),
+    command_session_factory: Callable[[], Session] = Depends(get_command_session_factory),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
     normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
-    decision = claim_appointment_command(
-        db,
-        practice_id=current_user.practice_id,
-        actor_user_id=str(current_user.id),
-        actor_role=current_user.role.value if current_user.role else "unknown",
-        operation_id=_STATUS_CONFIRM_OPERATION_ID,
-        route_family=_STATUS_CONFIRM_ROUTE_FAMILY,
-        raw_idempotency_key=normalized_idempotency_key,
-        request_body=body.model_dump(mode="json"),
-        secret=_staff_create_confirm_idempotency_secret(),
-        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    result = compose_product_status_confirm(
+        body,
+        authenticated_user=current_user,
+        authenticated_bearer_token=authenticated_bearer_token,
+        idempotency_key=normalized_idempotency_key,
+        proposal_version_binding=body.status_proposal_version_binding,
+        command_session_factory=command_session_factory,
+        authenticated_session_secret=_status_confirm_domain_secret("authenticated-session"),
+        proposal_version_binding_secret=_status_confirm_domain_secret("proposal-version"),
+        idempotency_secret=_status_confirm_domain_secret("idempotency"),
+        session_binding_secret=_status_confirm_domain_secret("stored-session-binding"),
+        evidence_secret=_status_confirm_evidence_secret(),
     )
-    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
-    if mapped_decision is not None:
-        return mapped_decision
-
-    audit_evidence = list(_STATUS_CONFIRM_BASE_EVIDENCE)
-    blocks: list[AppointmentProposalIssue] = []
-    proposal = body.status_proposal
-    command = proposal.command
-
-    if body.confirmed is not True:
-        blocks.append(_confirm_status_block(
-            "explicit_confirmation_required",
-            "confirmed=true is required before changing appointment status.",
-        ))
-
-    if (
-        not proposal.safe
-        or proposal.autonomy_tier == "blocked"
-        or not proposal.requires_confirmation
-    ):
-        blocks.append(_confirm_status_block(
-            "status_proposal_not_safe",
-            "The status proposal is not safe to confirm.",
-        ))
-
-    appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
-    current_state = _appointment_status_state_payload(appt)
-    submitted_freshness_id = (
-        body.status_proposal_freshness_id
-        or proposal.status_proposal_freshness_id
-    )
-    expected_freshness_id = _compute_status_proposal_freshness_id(
-        command=command,
-        current_state=current_state,
-    )
-    expected_signed_payload = _status_signed_confirmation_payload(
-        practice_id=current_user.practice_id,
-        staff_user_id=current_user.id,
-        command=command,
-        current_state=current_state,
-        status_proposal_freshness_id=expected_freshness_id,
-    )
-    ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
-        evidence=body.signed_confirmation_evidence,
-        evidence_required=body.signed_confirmation_evidence_required,
-        expected_payload=expected_signed_payload,
-        expected_purpose=_STATUS_CONFIRM_ACTION.evidence_purpose,
-        block_builder=_confirm_status_block,
-        audit_tag="status_signed_confirmation_evidence_verified",
-        missing_message="Signed confirmation evidence is required before changing appointment status.",
-    )
-    if ev_audit_tag is not None:
-        audit_evidence.append(ev_audit_tag)
-    blocks.extend(ev_blocks)
-
-    if submitted_freshness_id != expected_freshness_id:
-        blocks.append(_confirm_status_block(
-            "stale_status_proposal_freshness_id",
-            "Confirmation blocked: status proposal freshness id does not match current appointment state.",
-        ))
-
-    if command.waiting_area_id_supplied and command.waiting_area_id is not None:
-        try:
-            _ensure_waiting_area(command.waiting_area_id, current_user.practice_id, db)
-        except HTTPException:
-            blocks.append(_confirm_status_block(
-                "waiting_area_not_found",
-                "The selected waiting area is no longer available.",
-            ))
-
-    if blocks:
-        db.rollback()
-        return _block_status_confirmation(
-            blocks,
-            warnings=proposal.warnings,
-            audit_evidence=audit_evidence,
+    if result.stored_response_bytes is not None:
+        return Response(
+            content=result.stored_response_bytes,
+            status_code=result.status_code,
+            media_type="application/json",
         )
-
-    confirmed_warnings = [
-        *[issue.code for issue in proposal.warnings],
-        *body.confirmed_warnings,
-    ]
-    update_body = _status_update_body_from_command(
-        command,
-        current_status=appt.status,
-        confirmed_warnings=confirmed_warnings,
-    )
-    appointment = _apply_appointment_status_update(
-        appointment_id=command.appointment_id,
-        body=update_body,
-        db=db,
-        current_user=current_user,
-        audit_evidence=audit_evidence,
-        commit=False,
-    )
-    response_body = AppointmentConfirmStatusProposalOut(
-        safe=True,
-        requires_confirmation=False,
-        autonomy_tier="confirmed_write",
-        summary="Confirmed status proposal and updated one appointment.",
-        appointment=appointment,
-        warnings=proposal.warnings,
-        blocks=[],
-        audit_evidence=audit_evidence,
-    )
-    complete_appointment_command(
-        db,
-        decision.record,
-        response_status_code=status.HTTP_200_OK,
-        response_body=response_body.model_dump(mode="json"),
-        result_kind="confirmed_write",
-        target_appointment_id=command.appointment_id,
-    )
-    db.commit()
-    return response_body
+    return JSONResponse(status_code=result.status_code, content=dict(result.body))
 
 
 # ── A5.1 Rayleen check-in (dedicated, default-off, Receptionist-confirmed) ─────

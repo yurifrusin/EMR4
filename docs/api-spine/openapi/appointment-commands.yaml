@@ -23,8 +23,8 @@ tags:
 
 x-emr4-current-backend-alignment:
   sprint: 123
-  status: documentation_only_no_runtime_aliases
-  reviewed_on: "2026-07-07"
+  status: canonical_status_confirm_runtime_alias_mounted
+  reviewed_on: "2026-08-13"
   backend_prefix: /api/v1
   source_inventory: orchestration/api_spine_appointment_command_alignment_inventory.md
   guard_test: tests/test_api_spine_appointment_openapi_drift_guard.py
@@ -32,7 +32,7 @@ x-emr4-current-backend-alignment:
     - current_backend_path: /appointments/proposals/status-confirm
       canonical_openapi_path: /appointments/proposals/status/confirm
       operation_id: confirmAppointmentStatusProposal
-      disposition: documented_current_backend_alias_candidate
+      disposition: canonical_runtime_path_mounted_compatibility_alias_retained
     - current_backend_path: /appointments/proposals/delete-confirm
       canonical_openapi_path: /appointments/proposals/delete/confirm
       operation_id: confirmAppointmentDeleteProposal
@@ -255,7 +255,12 @@ paths:
     post:
       tags: [AppointmentCommands]
       operationId: confirmAppointmentStatusProposal
-      summary: Confirm backend-prepared status or waiting-area proposal evidence.
+      summary: Confirm backend-prepared status proposal evidence.
+      description: >
+        Status-only atomic confirmation. The legacy
+        /appointments/proposals/status-confirm spelling remains a hidden
+        compatibility alias over this same handler. Waiting-area proposals fail
+        closed and have no route-local write fallback.
       parameters:
         - $ref: "#/components/parameters/IdempotencyKey"
         - $ref: "#/components/parameters/CorrelationId"
@@ -267,7 +272,7 @@ paths:
               $ref: "#/components/schemas/AppointmentStatusConfirmationCommand"
       responses:
         "200":
-          description: Confirmed status/waiting-area result, or a blocked confirmation result.
+          description: Confirmed status result, or a blocked confirmation result.
           content:
             application/json:
               schema:
@@ -900,6 +905,38 @@ components:
           properties:
             intent:
               enum: [update_appointment_status, update_appointment_waiting_area]
+            status_proposal_version_binding:
+              $ref: "#/components/schemas/StatusProposalVersionBinding"
+
+    AppointmentStatusOnlyProposalEnvelope:
+      allOf:
+        - $ref: "#/components/schemas/AppointmentStatusProposalEnvelope"
+        - type: object
+          properties:
+            intent:
+              const: update_appointment_status
+
+    StatusProposalVersionBinding:
+      type: object
+      required: [schema_version, source_version, evidence_signature, signature]
+      additionalProperties: false
+      properties:
+        schema_version:
+          const: raisa.status_proposal_version_binding.v1
+        source_version:
+          type: integer
+          minimum: 1
+          readOnly: true
+        evidence_signature:
+          type: string
+          minLength: 64
+          maxLength: 64
+          readOnly: true
+        signature:
+          type: string
+          minLength: 64
+          maxLength: 64
+          readOnly: true
 
     AppointmentDeleteProposalCommand:
       type: object
@@ -977,7 +1014,7 @@ components:
 
     AppointmentStatusConfirmationCommand:
       type: object
-      required: [meta, confirmer, confirmed, status_proposal, confirmed_warnings, freshness]
+      required: [meta, confirmer, confirmed, status_proposal, confirmed_warnings, freshness, status_proposal_version_binding]
       additionalProperties: false
       properties:
         meta:
@@ -987,7 +1024,9 @@ components:
         confirmed:
           const: true
         status_proposal:
-          $ref: "#/components/schemas/AppointmentStatusProposalEnvelope"
+          $ref: "#/components/schemas/AppointmentStatusOnlyProposalEnvelope"
+        status_proposal_version_binding:
+          $ref: "#/components/schemas/StatusProposalVersionBinding"
         confirmed_warnings:
           type: array
           items:

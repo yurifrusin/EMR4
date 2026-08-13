@@ -1,0 +1,191 @@
+{
+  "schema_version": "raisa.status_confirm_http_route_convergence_evidence.v1",
+  "result": "raisa_provider_free_status_confirm_http_route_convergence_pass",
+  "evidence_label": "authored_synthetic_provider_free_live_local_http_postgresql",
+  "source_head": "43ccca7cf6585724a5a06c795d9ffdffcdd78e39",
+  "contract_sha256": "67aa436ee7b67a8a61445fc2bfdbab54327a36fcf46db0a74caf67aff3beb706",
+  "source_hashes": {
+    "app/services/appointment_status_product_adapter.py": "a067e05802a74461fb14571c26e02bb72f34fcdd4624ee2a5ebcadd0266cdf55",
+    "app/services/appointment_status_composition.py": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py": "f5af625924cd7287db006014db10df21af0e9dc4fd92475f1ed7bad6ab5b5ffb"
+  },
+  "implementation_hashes": {
+    "app/dependencies.py": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc",
+    "app/routers/appointments.py": "25ef66edaf84df14abb6827b7d080bd3fda341609abf8af36ec2942b23fb7cf0",
+    "app/schemas/appointments.py": "c35c271e9308f1f57eeeee53eefa6388087e126944ab5100c225f50066e3a0cf",
+    "app/services/diary/confirm_actions.py": "9c7afeea930ce349edfc22dc2a1cd38fedf52c8cd8ae96be9c56e2deb634ec86",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
+  },
+  "hostile_mutations": {
+    "attempted": 112,
+    "rejected": 112,
+    "minimum_required": 100
+  },
+  "environment": {
+    "postgresql_major": 16,
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "network_internal": true,
+    "published_ports": false,
+    "storage": "container_local_tmpfs",
+    "host_transport": "fixed_in_process_ipv4_loopback_relay",
+    "transport": "fastapi_testclient_real_route",
+    "provider_calls": 0,
+    "product_rows": 0
+  },
+  "catalogue": {
+    "alembic_head": "w2x3y4z5a6b7",
+    "forced_rls_tables": 5,
+    "tenant_policies": 5,
+    "application_role_restricted": true,
+    "adjacent_version_trigger": true,
+    "two_connection_tenant_context_absent": true
+  },
+  "scenarios": [
+    {
+      "id": "HRC-S01",
+      "status": "passed",
+      "outcome": "non_mutating_bound_proposal",
+      "facts": {
+        "source_version": 1,
+        "mutation_delta": 0,
+        "canonical_endpoint": true
+      }
+    },
+    {
+      "id": "HRC-S02",
+      "status": "passed",
+      "outcome": "exact_stored_bytes",
+      "facts": {
+        "http_status": 200,
+        "post_version": 2,
+        "audit_count": 1,
+        "receipt_count": 1,
+        "stored_bytes_exact": true
+      }
+    },
+    {
+      "id": "HRC-S03",
+      "status": "passed",
+      "outcome": "same_handler_commit",
+      "facts": {
+        "http_status": 200,
+        "one_effect": true,
+        "stored_bytes_exact": true
+      }
+    },
+    {
+      "id": "HRC-S04",
+      "status": "passed",
+      "outcome": "byte_identical_replay",
+      "facts": {
+        "http_status": 200,
+        "byte_identical": true,
+        "audit_count": 1,
+        "claim_count": 1
+      }
+    },
+    {
+      "id": "HRC-S05",
+      "status": "passed",
+      "outcome": "required_and_conflict",
+      "facts": {
+        "missing_status": 400,
+        "blank_status": 400,
+        "conflict_status": 409,
+        "effect_count": 1
+      }
+    },
+    {
+      "id": "HRC-S06",
+      "status": "passed",
+      "outcome": "unauthorized_and_inactive",
+      "facts": {
+        "missing_status": 401,
+        "inactive_status": 401,
+        "effect_count": 0
+      }
+    },
+    {
+      "id": "HRC-S07",
+      "status": "passed",
+      "outcome": "appointment_not_found",
+      "facts": {
+        "http_status": 404,
+        "row_disclosure": false,
+        "effect_count": 0
+      }
+    },
+    {
+      "id": "HRC-S08",
+      "status": "passed",
+      "outcome": "pre_session_stop",
+      "facts": {
+        "http_status": 403,
+        "command_sessions": 0,
+        "effect_count": 0
+      }
+    },
+    {
+      "id": "HRC-S09",
+      "status": "passed",
+      "outcome": "unsupported_status_confirm_variant",
+      "facts": {
+        "http_status": 200,
+        "effect_count": 0,
+        "fallback_path": false
+      }
+    },
+    {
+      "id": "HRC-S10",
+      "status": "passed",
+      "outcome": "atomic_block",
+      "facts": {
+        "http_status": 200,
+        "effect_count": 0,
+        "warning_required": true
+      }
+    },
+    {
+      "id": "HRC-S11",
+      "status": "passed",
+      "outcome": "rollback_503",
+      "facts": {
+        "http_status": 503,
+        "effect_count": 0,
+        "rollback": true
+      }
+    },
+    {
+      "id": "HRC-S12",
+      "status": "passed",
+      "outcome": "canonical_visible_alias_hidden",
+      "facts": {
+        "same_handler": true,
+        "canonical_in_openapi": true,
+        "alias_in_openapi": false
+      }
+    }
+  ],
+  "lifecycle": [
+    "contract_sources_and_112_mutations_verified",
+    "cached_image_verified",
+    "owned_internal_network_verified",
+    "owned_tmpfs_container_verified",
+    "postgresql_16_schema_and_rls_installed",
+    "fixed_loopback_relay_started",
+    "restricted_application_role_catalogue_verified",
+    "twelve_serial_http_postgresql_scenarios_verified",
+    "fixed_loopback_relay_stopped",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container": "container_absent",
+    "network": "network_absent",
+    "container_id_sha256": "139b818f89b1c0f5cfa8fffdcedf41c2269f070be11b84f22e824d71b86a30d3",
+    "network_id_sha256": "66cc11d83379ff6ec218dd8d551f88f28967afb6b5d64ef142cb1df4ee4ece62"
+  },
+  "claim_boundary": "Exact authored-synthetic provider-free status-only FastAPI HTTP convergence over one disposable PostgreSQL 16 server; no UI, product data, durable cue delivery, deployment, production or other command-family claim."
+}

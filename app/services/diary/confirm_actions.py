@@ -70,7 +70,7 @@ DIARY_CONFIRM_ACTIONS: dict[DiaryConfirmAction, DiaryConfirmActionDescriptor] = 
     ),
     DiaryConfirmAction.status: DiaryConfirmActionDescriptor(
         action=DiaryConfirmAction.status,
-        endpoint="/api/v1/appointments/proposals/status-confirm",
+        endpoint="/api/v1/appointments/proposals/status/confirm",
         evidence_purpose=SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
         blocked_summary="Cannot confirm status proposal. See blocked issues.",
     ),

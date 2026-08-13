@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "source_head", "accepted_database_integration_source", "evidence_label", "canonical_path", "compatibility_alias", "read_only_bindings", "implementation_paths", "docker_profile", "tenant_contract", "scenarios", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "raisa.status_confirm_http_route_convergence_contract.v1"},
+    "result": {"const": "contract_frozen"},
+    "source_head": {"pattern": "^[0-9a-f]{40}$"},
+    "accepted_database_integration_source": {"const": "553d38c37af86ceefc7b4315b8eaa171d405ab95"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_live_local_http_postgresql"},
+    "canonical_path": {"const": "/api/v1/appointments/proposals/status/confirm"},
+    "compatibility_alias": {"const": "/api/v1/appointments/proposals/status-confirm"},
+    "read_only_bindings": {"type": "object", "minProperties": 4, "maxProperties": 4, "additionalProperties": {"pattern": "^[0-9a-f]{64}$"}},
+    "implementation_paths": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "docker_profile": {"type": "object"},
+    "tenant_contract": {"type": "object"},
+    "scenarios": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "object", "additionalProperties": false, "required": ["id", "kind", "expected"], "properties": {"id": {"pattern": "^HRC-S(0[1-9]|1[0-2])$"}, "kind": {"type": "string", "minLength": 1}, "expected": {"type": "string", "minLength": 1}}}},
+    "cleanup": {"type": "object"}
+  }
+}

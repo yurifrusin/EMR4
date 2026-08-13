@@ -1,6 +1,8 @@
+from collections.abc import Callable
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy import text
 from app.database import SessionLocal
 from app.services.auth_service import verify_token
@@ -17,11 +19,27 @@ def get_db():
         db.close()
 
 
+def get_command_session_factory(
+    request_db: Session = Depends(get_db),
+) -> Callable[[], Session]:
+    """Return the configured factory for a fresh, command-owned transaction."""
+    return sessionmaker(
+        autocommit=False,
+        autoflush=False,
+        expire_on_commit=False,
+        bind=request_db.get_bind(),
+    )
+
+
 def get_current_user(
     token: str = Depends(oauth2_scheme),
     db: Session = Depends(get_db),
 ) -> User:
     token_data = verify_token(token)
+    db.execute(
+        text("SELECT set_config('app.current_practice_id', :practice_id, true)"),
+        {"practice_id": str(token_data.practice_id)},
+    )
     user = db.query(User).filter(User.id == token_data.user_id, User.is_active == True).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found or inactive")
@@ -30,10 +48,6 @@ def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token practice does not match the current user practice",
         )
-    db.execute(
-        text("SELECT set_config('app.current_practice_id', :practice_id, true)"),
-        {"practice_id": str(user.practice_id)},
-    )
     return user
 
 

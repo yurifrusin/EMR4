@@ -21,7 +21,7 @@ TODAY = date.today() + timedelta(days=14)
 PAST_DATE = date(2026, 4, 15)
 APPT_URL = "/api/v1/appointments"
 DELETE_CONFIRM_URL = f"{APPT_URL}/proposals/delete-confirm"
-STATUS_CONFIRM_URL = f"{APPT_URL}/proposals/status-confirm"
+STATUS_CONFIRM_URL = f"{APPT_URL}/proposals/status/confirm"
 
 
 def _make_appt(
@@ -158,6 +158,7 @@ def test_status_proposal_confirm_persists_status_reason_code(
     assert proposal_resp.json()["command"]["status_reason_code"] == "DID_NOT_ATTEND"
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
+    db.commit()
 
     confirm_resp = client.post(STATUS_CONFIRM_URL, json=payload, headers=_auth_status_confirm(token))
     assert confirm_resp.status_code == 200, confirm_resp.text

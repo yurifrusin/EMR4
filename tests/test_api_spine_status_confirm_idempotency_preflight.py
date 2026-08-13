@@ -103,7 +103,7 @@ def test_current_confirm_routes_supersede_sprint_136_header_exclusions():
     status_route = _route_body(
         router_text,
         "def confirm_status_proposal_route(",
-        "def get_waiting_room(",
+        "def _a5_check_in_gate_open(",
     )
     update_route = _route_body(
         router_text,
@@ -118,9 +118,9 @@ def test_current_confirm_routes_supersede_sprint_136_header_exclusions():
 
     assert "Header(" in status_route
     assert "Idempotency-Key" in status_route
-    assert "claim_appointment_command(" in status_route
-    assert "complete_appointment_command(" in status_route
-    assert "_STATUS_CONFIRM_ROUTE_FAMILY" in status_route
+    assert "compose_product_status_confirm(" in status_route
+    assert "claim_appointment_command(" not in status_route
+    assert "complete_appointment_command(" not in status_route
     assert "Header(" in update_route
     assert "Idempotency-Key" in update_route
     assert "claim_appointment_command(" in update_route

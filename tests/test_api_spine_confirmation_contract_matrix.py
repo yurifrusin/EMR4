@@ -68,15 +68,16 @@ CONFIRMATION_CONTRACT_MATRIX = {
     },
     "status": {
         "handler": "confirm_status_proposal_route",
-        "route": "POST /api/v1/appointments/proposals/status-confirm",
+        "route": "POST /api/v1/appointments/proposals/status/confirm",
         "operation_id_constant": "_STATUS_CONFIRM_OPERATION_ID",
         "operation_id_value": "confirmAppointmentStatusProposal",
         "route_family_constant": "_STATUS_CONFIRM_ROUTE_FAMILY",
         "route_family_value": "status-confirm",
         "base_evidence": "_STATUS_CONFIRM_BASE_EVIDENCE",
-        "end_marker": "def get_waiting_room(",
+        "end_marker": "def _a5_check_in_gate_open(",
         "has_confirm_body_check": True,
         "has_freshness_revalidation": True,
+        "execution_mode": "product_adapter",
     },
     "delete": {
         "handler": "confirm_delete_proposal_route",
@@ -91,6 +92,14 @@ CONFIRMATION_CONTRACT_MATRIX = {
         "has_freshness_revalidation": True,
     },
 }
+
+
+def _route_local_confirmation_details():
+    return (
+        details
+        for details in CONFIRMATION_CONTRACT_MATRIX.values()
+        if details.get("execution_mode") != "product_adapter"
+    )
 
 
 # ── Basis assertions: constants defined in source ────────────────────────────
@@ -153,7 +162,7 @@ def test_each_handler_calls_claim_appointment_command():
     """Every confirmation handler calls claim_appointment_command before writes."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         assert "claim_appointment_command(" in route, (
             f"{details['handler']}: missing claim_appointment_command call"
@@ -171,7 +180,7 @@ def test_each_handler_binds_operation_id_to_claim():
     """Every confirmation handler passes its operation id to claim_appointment_command."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         assert f"operation_id={details['operation_id_constant']}" in route, (
             f"{details['handler']}: missing or incorrect operation_id binding"
@@ -182,7 +191,7 @@ def test_each_handler_binds_route_family_to_claim():
     """Every confirmation handler passes its route family to claim_appointment_command."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         assert f"route_family={details['route_family_constant']}" in route, (
             f"{details['handler']}: missing or incorrect route_family binding"
@@ -193,7 +202,7 @@ def test_each_handler_binds_request_body_to_claim():
     """Every confirmation handler passes request_body=body.model_dump(mode='json') to claim."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         assert 'request_body=body.model_dump(mode="json")' in route, (
             f"{details['handler']}: missing request_body binding with JSON mode"
@@ -204,7 +213,7 @@ def test_each_handler_handles_idempotency_decision():
     """Every confirmation handler maps the idempotency decision before writes."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         assert "_handle_create_confirm_idempotency_decision(decision)" in route, (
             f"{details['handler']}: missing idempotency decision handler"
@@ -218,7 +227,7 @@ def test_each_handler_calls_complete_appointment_command():
     """Every confirmation handler calls complete_appointment_command before final commit."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         assert "complete_appointment_command(" in route, (
             f"{details['handler']}: missing complete_appointment_command call"
@@ -232,7 +241,7 @@ def test_each_handler_completes_before_commit():
     """Every confirmation handler calls db.commit() after complete_appointment_command."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         route = _route_body(router_text, details["handler"], details["end_marker"])
         route_compact = _compact(route)
 
@@ -264,7 +273,7 @@ def test_each_handler_includes_audit_evidence():
     delegating helper)."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         body = _handler_or_helper_body(router_text, details["handler"], details["end_marker"])
         evidence_const = details["base_evidence"]
         assert f"audit_evidence = list({evidence_const})" in body, (
@@ -277,7 +286,7 @@ def test_each_handler_includes_audit_evidence_in_response():
     (in route or delegating helper)."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         body = _handler_or_helper_body(router_text, details["handler"], details["end_marker"])
         assert "audit_evidence=audit_evidence" in body, (
             f"{details['handler']}: missing audit_evidence in response or error body"
@@ -289,13 +298,29 @@ def test_each_handler_validates_confirm_body():
     (in route or delegating helper)."""
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_CONTRACT_MATRIX.values():
+    for details in _route_local_confirmation_details():
         if not details["has_confirm_body_check"]:
             continue
         body = _handler_or_helper_body(router_text, details["handler"], details["end_marker"])
         assert "body.confirmed is not True" in body, (
             f"{details['handler']}: missing confirmed=true guard"
         )
+
+
+def test_status_confirmation_uses_the_accepted_product_adapter_once():
+    router_text = _read(ROUTER)
+    details = CONFIRMATION_CONTRACT_MATRIX["status"]
+    route = _route_body(router_text, details["handler"], details["end_marker"])
+
+    assert route.count("compose_product_status_confirm(") == 1
+    assert "command_session_factory=command_session_factory" in route
+    assert "proposal_version_binding=body.status_proposal_version_binding" in route
+    assert 'authenticated_bearer_token: str = Depends(oauth2_scheme)' in route
+    assert '_status_confirm_domain_secret("proposal-version")' in route
+    assert "result.stored_response_bytes" in route
+    assert "claim_appointment_command(" not in route
+    assert "complete_appointment_command(" not in route
+    assert "db.commit()" not in route
 
 
 # ── Exclusion assertions: proposal-only and raw compat routes ────────────────

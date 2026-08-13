@@ -19,9 +19,10 @@ EXPECTED_ROUTE_INVENTORY = (
     ("POST", "/proposals/update/confirm", "confirm_update_proposal_route", "confirm command"),
     ("POST", "/proposals/update/{appointment_id}", "propose_update_appointment", "proposal command"),
     ("POST", "/proposals/bernie/tool-intent", "propose_bernie_tool_intent", "command-style read"),
-    ("POST", "/proposals/status/{appointment_id}", "propose_status_update", "proposal command"),
+    ("POST", "/proposals/status/{appointment_id:uuid}", "propose_status_update", "proposal command"),
     ("POST", "/proposals/waiting-area/{appointment_id}", "propose_waiting_area_update", "proposal command"),
-    ("POST", "/proposals/status-confirm", "confirm_status_proposal_route", "confirm command"),
+    ("POST", "/proposals/status/confirm", "confirm_status_proposal_route", "confirm command"),
+    ("POST", "/proposals/status-confirm", "confirm_status_proposal_route", "compatibility alias"),
     (
         "POST",
         "/proposals/check-in/{appointment_id:uuid}",
@@ -102,11 +103,6 @@ EXPECTED_OPENAPI_PATHS = {
 }
 
 DELIBERATE_OPENAPI_DRIFT = (
-    (
-        "POST",
-        "/proposals/status-confirm",
-        "/appointments/proposals/status/confirm",
-    ),
     (
         "POST",
         "/proposals/delete-confirm",

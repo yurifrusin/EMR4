@@ -22,7 +22,7 @@ def test_openapi_records_current_backend_alignment_extension():
     alignment = doc["x-emr4-current-backend-alignment"]
 
     assert alignment["sprint"] == 123
-    assert alignment["status"] == "documentation_only_no_runtime_aliases"
+    assert alignment["status"] == "canonical_status_confirm_runtime_alias_mounted"
     assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", alignment["reviewed_on"])
     assert alignment["backend_prefix"] == "/api/v1"
     assert alignment["source_inventory"] == (
@@ -31,7 +31,7 @@ def test_openapi_records_current_backend_alignment_extension():
     assert alignment["guard_test"] == "tests/test_api_spine_appointment_openapi_drift_guard.py"
 
 
-def test_openapi_records_canonical_path_drift_without_adding_runtime_aliases():
+def test_openapi_records_canonical_path_alignment_and_remaining_drift():
     alignment = _openapi_doc()["x-emr4-current-backend-alignment"]
 
     drift = {
@@ -52,9 +52,15 @@ def test_openapi_records_canonical_path_drift_without_adding_runtime_aliases():
     assert drift["/appointments/proposals/slot-search/selection"]["canonical_openapi_path"] == (
         "/appointments/proposals/slot-search/select"
     )
+    assert drift["/appointments/proposals/status-confirm"]["disposition"] == (
+        "canonical_runtime_path_mounted_compatibility_alias_retained"
+    )
     assert all(
-        entry["disposition"] == "documented_current_backend_alias_candidate"
-        for entry in drift.values()
+        drift[path]["disposition"] == "documented_current_backend_alias_candidate"
+        for path in (
+            "/appointments/proposals/delete-confirm",
+            "/appointments/proposals/slot-search/selection",
+        )
     )
 
 

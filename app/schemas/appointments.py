@@ -519,6 +519,7 @@ class AppointmentStatusProposalOut(BaseModel):
     confirm_endpoint: Optional[str] = None
     confirm_payload: Optional[dict[str, Any]] = None
     status_proposal_freshness_id: Optional[str] = None
+    status_proposal_version_binding: Optional[dict[str, Any]] = None
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
 
@@ -546,6 +547,7 @@ class AppointmentWaitingAreaProposalOut(BaseModel):
     confirm_endpoint: Optional[str] = None
     confirm_payload: Optional[dict[str, Any]] = None
     status_proposal_freshness_id: Optional[str] = None
+    status_proposal_version_binding: Optional[dict[str, Any]] = None
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
 
@@ -555,6 +557,7 @@ class AppointmentStatusProposalConfirmationIn(BaseModel):
     status_proposal: AppointmentStatusProposalOut | AppointmentWaitingAreaProposalOut
     confirmed_warnings: list[str] = Field(default_factory=list)
     status_proposal_freshness_id: Optional[str] = None
+    status_proposal_version_binding: dict[str, Any]
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
 

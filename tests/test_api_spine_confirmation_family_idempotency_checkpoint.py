@@ -35,7 +35,7 @@ CONFIRMATION_FAMILIES = {
         "operation_value": "confirmAppointmentStatusProposal",
         "family": "_STATUS_CONFIRM_ROUTE_FAMILY",
         "family_value": "status-confirm",
-        "end": "def get_waiting_room(",
+        "end": "def _a5_check_in_gate_open(",
     },
     "delete": {
         "route": "POST /api/v1/appointments/proposals/delete-confirm",
@@ -84,13 +84,18 @@ def test_checkpoint_lists_all_wired_confirmation_families():
         assert details["family_value"] in text
 
 
-def test_router_wires_each_confirmation_family_to_idempotency_ledger():
+def test_router_wires_each_confirmation_family_to_owned_idempotency_seam():
     router_text = _read(ROUTER)
 
-    for details in CONFIRMATION_FAMILIES.values():
+    for name, details in CONFIRMATION_FAMILIES.items():
         route = _route_body(router_text, details["handler"], details["end"])
         assert "Header(" in route
         assert "Idempotency-Key" in route
+        if name == "status":
+            assert "compose_product_status_confirm(" in route
+            assert "claim_appointment_command(" not in route
+            assert "complete_appointment_command(" not in route
+            continue
         assert "claim_appointment_command(" in route
         assert "complete_appointment_command(" in route
         assert f"operation_id={details['operation']}" in route

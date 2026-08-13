@@ -201,5 +201,5 @@ def test_openapi_command_metadata_preflight_stays_documentation_only():
 
     assert spec["servers"][0]["url"].endswith(".invalid/api/v1")
     alignment = spec["x-emr4-current-backend-alignment"]
-    assert alignment["status"] == "documentation_only_no_runtime_aliases"
+    assert alignment["status"] == "canonical_status_confirm_runtime_alias_mounted"
     assert REQUIRED_BLOCKED_GATES <= set(alignment["blocked_gates"])

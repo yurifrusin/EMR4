@@ -109,7 +109,7 @@ def _confirm_status_proposal(client, token, proposal: dict, *, confirmed: bool =
     payload = proposal["confirm_payload"]
     payload["confirmed"] = confirmed
     return client.post(
-        "/api/v1/appointments/proposals/status-confirm",
+        "/api/v1/appointments/proposals/status/confirm",
         json=payload,
         headers=_status_confirm_headers(token),
     )
@@ -301,7 +301,7 @@ def test_delete_clears_waiting_area_on_cancel(
     area = _make_area(db, practice)
     appt = _make_appt(db, practice, practitioner, patient)
     appt.waiting_area_id = area.id
-    db.flush()
+    db.commit()
 
     token = make_token(gp_user)
     resp = _delete(client, token, appt.id)
@@ -336,7 +336,7 @@ def test_delete_proposal_warns_waiting_area_cleared(
     area = _make_area(db, practice)
     appt = _make_appt(db, practice, practitioner, patient)
     appt.waiting_area_id = area.id
-    db.flush()
+    db.commit()
 
     token = make_token(gp_user)
     resp = client.post(
@@ -688,10 +688,12 @@ def test_status_proposal_returns_signed_confirm_payload(
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["safe"] is True
-    assert data["confirm_endpoint"] == "/api/v1/appointments/proposals/status-confirm"
+    assert data["confirm_endpoint"] == "/api/v1/appointments/proposals/status/confirm"
     assert data["confirm_payload"]["confirmed"] is False
     assert data["confirm_payload"]["status_proposal_freshness_id"] == data["status_proposal_freshness_id"]
     assert data["signed_confirmation_evidence_required"] is True
+    assert data["status_proposal_version_binding"]["source_version"] == 1
+    assert data["confirm_payload"]["status_proposal_version_binding"] == data["status_proposal_version_binding"]
     assert data["signed_confirmation_evidence"]["purpose"] == "diary_confirm_status_proposal"
     assert data["command"]["waiting_area_id_supplied"] is False
 
@@ -703,6 +705,7 @@ def test_status_confirm_route_writes_once_with_signed_evidence(
     proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Confirmed"})
     assert proposal_resp.status_code == 200, proposal_resp.text
     proposal = proposal_resp.json()
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = _confirm_status_proposal(client, token, proposal)
@@ -712,7 +715,7 @@ def test_status_confirm_route_writes_once_with_signed_evidence(
     assert data["safe"] is True
     assert data["autonomy_tier"] == "confirmed_write"
     assert data["appointment"]["status"] == "Confirmed"
-    assert "diary_confirm_status_proposal" in data["audit_evidence"]
+    assert "status_product_adapter_v1" in data["audit_evidence"]
     assert "status_signed_confirmation_evidence_verified" in data["audit_evidence"]
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Confirmed
@@ -737,10 +740,8 @@ def test_status_confirm_route_blocks_tampered_status_without_write(
         headers=_status_confirm_headers(token, "tampered-status"),
     )
 
-    assert confirm_resp.status_code == 200, confirm_resp.text
-    data = confirm_resp.json()
-    assert data["safe"] is False
-    assert any(block["code"] in {"signed_evidence_mismatch", "stale_status_proposal_freshness_id"} for block in data["blocks"])
+    assert confirm_resp.status_code == 403, confirm_resp.text
+    assert confirm_resp.json()["detail"]["code"] == "authenticated_status_context_unavailable"
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Booked
     assert db.query(AppointmentAuditLog).count() == before_audits
@@ -751,17 +752,19 @@ def test_status_confirm_preserves_waiting_area_when_field_omitted(
     area = _make_area(db, practice)
     appt = _make_appt(db, practice, practitioner, patient)
     appt.waiting_area_id = area.id
-    db.flush()
+    db.commit()
     token = make_token(gp_user)
     proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Arrived"})
     assert proposal_resp.status_code == 200, proposal_resp.text
     proposal = proposal_resp.json()
     assert proposal["command"]["waiting_area_id_supplied"] is False
+    db.commit()
 
     confirm_resp = _confirm_status_proposal(client, token, proposal)
 
     assert confirm_resp.status_code == 200, confirm_resp.text
     data = confirm_resp.json()
+    assert data["safe"] is True, data["blocks"]
     assert data["appointment"]["status"] == "Arrived"
     assert data["appointment"]["waiting_area_id"] == str(area.id)
 
@@ -771,7 +774,7 @@ def test_status_confirm_clears_waiting_area_when_null_supplied(
     area = _make_area(db, practice)
     appt = _make_appt(db, practice, practitioner, patient)
     appt.waiting_area_id = area.id
-    db.flush()
+    db.commit()
     token = make_token(gp_user)
     proposal_resp = _post_status_proposal(client, token, appt.id, {
         "status": "Arrived",
@@ -780,11 +783,14 @@ def test_status_confirm_clears_waiting_area_when_null_supplied(
     assert proposal_resp.status_code == 200, proposal_resp.text
     proposal = proposal_resp.json()
     assert proposal["command"]["waiting_area_id_supplied"] is True
+    db.commit()
 
     confirm_resp = _confirm_status_proposal(client, token, proposal)
 
     assert confirm_resp.status_code == 200, confirm_resp.text
-    assert confirm_resp.json()["appointment"]["waiting_area_id"] is None
+    data = confirm_resp.json()
+    assert data["safe"] is True, data["blocks"]
+    assert data["appointment"]["waiting_area_id"] is None
 
 
 def test_r9_status_proposal_allows_past_date_without_temporal_block(
@@ -839,6 +845,7 @@ def test_r9_status_confirm_allows_past_date_with_signed_evidence_and_audit(
     token = make_token(gp_user)
     proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Completed"})
     assert proposal_resp.status_code == 200, proposal_resp.text
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = _confirm_status_proposal(client, token, proposal_resp.json())
@@ -848,7 +855,7 @@ def test_r9_status_confirm_allows_past_date_with_signed_evidence_and_audit(
     assert data["safe"] is True
     assert data["autonomy_tier"] == "confirmed_write"
     assert data["appointment"]["status"] == "Completed"
-    assert "diary_confirm_status_proposal" in data["audit_evidence"]
+    assert "status_product_adapter_v1" in data["audit_evidence"]
     assert "status_signed_confirmation_evidence_verified" in data["audit_evidence"]
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Completed
@@ -873,10 +880,8 @@ def test_r9_status_confirm_past_date_blocks_tampered_status_without_write(
         headers=_status_confirm_headers(token, "tampered-past-status"),
     )
 
-    assert confirm_resp.status_code == 200, confirm_resp.text
-    data = confirm_resp.json()
-    assert data["safe"] is False
-    assert any(block["code"] in {"signed_evidence_mismatch", "stale_status_proposal_freshness_id"} for block in data["blocks"])
+    assert confirm_resp.status_code == 403, confirm_resp.text
+    assert confirm_resp.json()["detail"]["code"] == "authenticated_status_context_unavailable"
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Booked
     assert db.query(AppointmentAuditLog).count() == before_audits

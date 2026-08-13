@@ -1,0 +1,46 @@
+{
+  "schema_version": "raisa.status_confirm_http_route_convergence_evidence.v1",
+  "result": "rehearsal_failed",
+  "evidence_label": "authored_synthetic_provider_free_live_local_http_postgresql",
+  "source_head": "43ccca7cf6585724a5a06c795d9ffdffcdd78e39",
+  "contract_sha256": "67aa436ee7b67a8a61445fc2bfdbab54327a36fcf46db0a74caf67aff3beb706",
+  "source_hashes": {
+    "failure_detail": "9c67a5ff3487a0295e2ca0453597d5968ea5a5c22bf9a14b5ca4294a88cbe810"
+  },
+  "implementation_hashes": {
+    "failure_stage": "49f756463ad9dcfb9b6ade54d7d6f15476e7214f46a65b4b0c55d46845b12f70"
+  },
+  "hostile_mutations": {
+    "attempted": 100,
+    "rejected": 100,
+    "minimum_required": 100
+  },
+  "environment": {
+    "provider_calls": 0,
+    "product_rows": 0
+  },
+  "catalogue": {
+    "status": "not_released"
+  },
+  "scenarios": [],
+  "lifecycle": [
+    "contract_sources_and_112_mutations_verified",
+    "cached_image_verified",
+    "owned_internal_network_verified",
+    "owned_tmpfs_container_verified",
+    "postgresql_16_schema_and_rls_installed",
+    "fixed_loopback_relay_started",
+    "restricted_application_role_catalogue_verified",
+    "failed_HRC-S02_NoResultFound_none",
+    "fixed_loopback_relay_stopped",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container": "container_absent",
+    "network": "network_absent",
+    "container_id_sha256": "e99c8be948d7451c37a15fce259c05abf85b381c6039cf6f861c6aed1cb309ca",
+    "network_id_sha256": "b0a6bf677e6d96bc590fcb00364aa7094f80e44c583932de8abae7a19a58a71c"
+  },
+  "claim_boundary": "Exact authored-synthetic provider-free status-only FastAPI HTTP convergence over one disposable PostgreSQL 16 server; no UI, product data, durable cue delivery, deployment, production or other command-family claim."
+}

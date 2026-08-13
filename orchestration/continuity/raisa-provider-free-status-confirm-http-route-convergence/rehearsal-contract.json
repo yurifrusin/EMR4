@@ -1,0 +1,80 @@
+{
+  "schema_version": "raisa.status_confirm_http_route_convergence_contract.v1",
+  "result": "contract_frozen",
+  "source_head": "43ccca7cf6585724a5a06c795d9ffdffcdd78e39",
+  "accepted_database_integration_source": "553d38c37af86ceefc7b4315b8eaa171d405ab95",
+  "evidence_label": "authored_synthetic_provider_free_live_local_http_postgresql",
+  "canonical_path": "/api/v1/appointments/proposals/status/confirm",
+  "compatibility_alias": "/api/v1/appointments/proposals/status-confirm",
+  "read_only_bindings": {
+    "app/services/appointment_status_product_adapter.py": "a067e05802a74461fb14571c26e02bb72f34fcdd4624ee2a5ebcadd0266cdf55",
+    "app/services/appointment_status_composition.py": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a",
+    "app/services/appointment_status_physical.py": "4ab9d0ff3816d85d7eb374e97fec7618e0b922354b104766b2898b0989e56f1b",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py": "f5af625924cd7287db006014db10df21af0e9dc4fd92475f1ed7bad6ab5b5ffb"
+  },
+  "implementation_paths": [
+    "app/dependencies.py",
+    "app/routers/appointments.py",
+    "app/schemas/appointments.py",
+    "app/services/diary/confirm_actions.py",
+    "docs/api-spine/openapi/appointment-commands.yaml"
+  ],
+  "docker_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_internal": true,
+    "network_name_prefix": "emr4-status-http-hrc-net-",
+    "container_name_prefix": "emr4-status-http-hrc-pg16-",
+    "harness_label": "status-confirm-http-route-pg16-v1",
+    "published_ports": false,
+    "relay_host_ip": "127.0.0.1",
+    "relay_dynamic_host_port": true,
+    "relay_container_executable": "bash",
+    "relay_container_command": "exec 3<>/dev/tcp/127.0.0.1/5432; cat <&3 & cat >&3; wait",
+    "postgres_container_port": 5432,
+    "sqlalchemy_driver": "psycopg2",
+    "data_destination": "/var/lib/postgresql/data",
+    "tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "memory_bytes": 536870912,
+    "nano_cpus": 1000000000,
+    "pids_limit": 128,
+    "restart_policy": "no",
+    "postgres_user": "emr4_status_btr",
+    "postgres_password": "status-confirm-behavior-authored-synthetic-only",
+    "postgres_database": "status_confirm_behavior",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "application_user": "emr4_status_adapter_app",
+    "application_password": "status-adapter-authored-synthetic-only",
+    "startup_timeout_seconds": 90,
+    "command_timeout_seconds": 30,
+    "total_timeout_seconds": 300,
+    "readiness_observations": 3
+  },
+  "tenant_contract": {
+    "setting": "app.current_practice_id",
+    "transaction_local": true,
+    "forced_rls_tables": ["appointments", "users", "practitioners", "appointment_command_idempotency", "appointment_audit_log"],
+    "application_role_superuser": false,
+    "application_role_bypass_rls": false
+  },
+  "scenarios": [
+    {"id": "HRC-S01", "kind": "proposal_binding", "expected": "non_mutating_bound_proposal"},
+    {"id": "HRC-S02", "kind": "canonical_commit", "expected": "exact_stored_bytes"},
+    {"id": "HRC-S03", "kind": "compatibility_alias", "expected": "same_handler_commit"},
+    {"id": "HRC-S04", "kind": "response_loss_retry", "expected": "byte_identical_replay"},
+    {"id": "HRC-S05", "kind": "idempotency", "expected": "required_and_conflict"},
+    {"id": "HRC-S06", "kind": "authentication", "expected": "unauthorized_and_inactive"},
+    {"id": "HRC-S07", "kind": "cross_practice", "expected": "appointment_not_found"},
+    {"id": "HRC-S08", "kind": "tampered_binding", "expected": "pre_session_stop"},
+    {"id": "HRC-S09", "kind": "waiting_area_variant", "expected": "unsupported_status_confirm_variant"},
+    {"id": "HRC-S10", "kind": "warning_mismatch", "expected": "atomic_block"},
+    {"id": "HRC-S11", "kind": "projection_failure", "expected": "rollback_503"},
+    {"id": "HRC-S12", "kind": "route_contract", "expected": "canonical_visible_alias_hidden"}
+  ],
+  "cleanup": {
+    "container_target": "captured_container_id_only",
+    "network_target": "captured_network_id_only_after_empty_reverification",
+    "post_remove_exact_id_absence_required": true
+  }
+}

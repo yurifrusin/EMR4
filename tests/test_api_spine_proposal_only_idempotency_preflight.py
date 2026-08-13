@@ -24,7 +24,7 @@ PROPOSAL_ROUTES = {
         "end": "def _block_bernie_update_confirmation(",
     },
     "status": {
-        "route": "POST /api/v1/appointments/proposals/status/{appointment_id}",
+        "route": "POST /api/v1/appointments/proposals/status/{appointment_id:uuid}",
         "handler": "propose_status_update",
         "operation": "proposeAppointmentStatus",
         "end": '@router.post("/proposals/waiting-area/{appointment_id}"',
@@ -77,7 +77,10 @@ def test_preflight_lists_current_proposal_only_scope():
     text = _read(PREFLIGHT)
 
     for details in PROPOSAL_ROUTES.values():
-        assert details["route"] in text
+        documented_route = details["route"].replace(
+            "{appointment_id:uuid}", "{appointment_id}"
+        )
+        assert documented_route in text
         assert details["handler"] in text
         assert details["operation"] in text
     assert "Slot-search" in text

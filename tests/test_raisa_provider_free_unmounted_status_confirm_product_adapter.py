@@ -161,6 +161,7 @@ def _body(
             status_proposal_freshness_id=freshness,
             signed_confirmation_evidence=evidence,
             signed_confirmation_evidence_required=True,
+            status_proposal_version_binding=binding,
         ),
         binding,
     )
@@ -427,6 +428,7 @@ def test_waiting_area_union_is_rejected_before_session_construction() -> None:
         confirmed=True,
         status_proposal=waiting_proposal,
         signed_confirmation_evidence=status_body.signed_confirmation_evidence,
+        status_proposal_version_binding=binding,
     )
 
     result, _db, physical, session_calls = _run(body, binding, appointment, user)
