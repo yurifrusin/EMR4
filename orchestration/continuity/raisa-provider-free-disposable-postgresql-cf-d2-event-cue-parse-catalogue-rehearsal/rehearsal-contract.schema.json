@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/raisa-cf-d2-event-cue-parse-catalogue-rehearsal-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "planning_baseline",
+    "accepted_inert_ddl_source",
+    "result",
+    "evidence_label",
+    "hostile_mutation_target",
+    "source_bindings",
+    "artifact",
+    "docker_profile",
+    "catalogue",
+    "effects",
+    "claim_boundary",
+    "next_descendant"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.cf_d2_event_cue_parse_catalogue_rehearsal.v1"},
+    "status": {"const": "frozen_exact_artifact_disposable_postgresql_16_only"},
+    "planning_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_inert_ddl_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_16_parse_catalogue"},
+    "hostile_mutation_target": {"const": 64},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "artifact": {"type": "object"},
+    "docker_profile": {"type": "object"},
+    "catalogue": {"type": "object"},
+    "effects": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 40},
+    "next_descendant": {"type": "object"}
+  }
+}

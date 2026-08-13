@@ -1,0 +1,234 @@
+{
+  "schema_version": "raisa.context_fabric.cf_d2_event_cue_parse_catalogue_rehearsal.v1",
+  "status": "frozen_exact_artifact_disposable_postgresql_16_only",
+  "planning_baseline": "ad847eda9beff8317aa83779d7ca36a7b95b3ebd",
+  "accepted_inert_ddl_source": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29",
+  "result": "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_16_parse_catalogue",
+  "hostile_mutation_target": 64,
+  "source_bindings": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert",
+      "sha256": "3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json",
+      "sha256": "ca66a12388b9677dcd9f5c3f13e4ca680d130cd001c321bd5dfa7b0e30497ca8"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.json",
+      "sha256": "736d3eab20ae6563a0f23801bb8ef1e4d7a6169648ea49e1607c4baac75dd8d5"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json",
+      "sha256": "ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md",
+      "sha256": "95b6005811817937d34093775ac17c82d6100626e15ab75fa252177995675c62"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-sol-acceptance.md",
+      "sha256": "41065ca2ae4754eb28ca6d62ec4895009d0ae11d54d9f05b8c0c03a18acf5b2b"
+    }
+  ],
+  "artifact": {
+    "path": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert",
+    "sha256": "3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6",
+    "byte_count": 12022,
+    "statement_count": 18,
+    "streamed_unchanged": true,
+    "psql_single_transaction_is_containment_only": true
+  },
+  "docker_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "repo_digest": "postgres@sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "container_name_prefix": "emr4-cf-d2-cue-pg16-catalogue-",
+    "harness_label": "cf-d2-event-cue-pg16-catalogue-v1",
+    "data_destination": "/var/lib/postgresql/data",
+    "tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "memory_bytes": 536870912,
+    "nano_cpus": 1000000000,
+    "pids_limit": 128,
+    "restart_policy": "no",
+    "postgres_user": "emr4_cf_rehearsal",
+    "postgres_password": "cf-d2-authored-synthetic-only",
+    "postgres_database": "cf_d2_catalogue_rehearsal",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "startup_timeout_seconds": 90,
+    "command_timeout_seconds": 30,
+    "total_timeout_seconds": 300,
+    "readiness_observations": 3
+  },
+  "catalogue": {
+    "postgresql_major": 16,
+    "schema_name": "emr4_context_fabric_cue",
+    "domain_names": [
+      "digest_v1",
+      "opaque_id_v1",
+      "positive_integer_v1"
+    ],
+    "domain_base_types": {
+      "digest_v1": "text",
+      "opaque_id_v1": "text",
+      "positive_integer_v1": "bigint"
+    },
+    "domain_constraint_names": [
+      "ck_digest_v1_format",
+      "ck_opaque_id_v1_nonempty",
+      "ck_positive_integer_v1_above_zero"
+    ],
+    "relation_order": [
+      "event_partition",
+      "observer_coordinate",
+      "terminal_receipt",
+      "cue_obligation",
+      "consumer_checkpoint",
+      "dispatch_attempt",
+      "reconciliation_receipt"
+    ],
+    "field_count": 50,
+    "primary_keys": {
+      "pk_event_partition": ["event_partition", "partition_id"],
+      "pk_observer_coordinate": ["observer_coordinate", "partition_id", "consumer_scope"],
+      "pk_terminal_receipt": ["terminal_receipt", "receipt_id"],
+      "pk_cue_obligation": ["cue_obligation", "obligation_id"],
+      "pk_consumer_checkpoint": ["consumer_checkpoint", "partition_id", "consumer_scope", "source_epoch_digest"],
+      "pk_dispatch_attempt": ["dispatch_attempt", "obligation_id", "attempt_ordinal"],
+      "pk_reconciliation_receipt": ["reconciliation_receipt", "reconciliation_id"]
+    },
+    "unique_keys": {
+      "uq_event_partition_scope": ["event_partition", "source_system", "practice_scope_digest", "event_family"],
+      "uq_terminal_receipt_position": ["terminal_receipt", "partition_id", "source_epoch_digest", "source_position"],
+      "uq_reconciliation_receipt_obligation": ["reconciliation_receipt", "obligation_id"]
+    },
+    "table_checks": {
+      "ck_event_partition_identity": "event_partition",
+      "ck_event_partition_generation": "event_partition",
+      "ck_observer_coordinate_observed_shape": "observer_coordinate",
+      "ck_observer_coordinate_head_shape": "observer_coordinate",
+      "ck_terminal_receipt_classification_shape": "terminal_receipt",
+      "ck_terminal_receipt_position": "terminal_receipt",
+      "ck_cue_obligation_range": "cue_obligation",
+      "ck_cue_obligation_scope_reason": "cue_obligation",
+      "ck_cue_obligation_fresh_read": "cue_obligation",
+      "ck_cue_obligation_state": "cue_obligation",
+      "ck_consumer_checkpoint_shape": "consumer_checkpoint",
+      "ck_consumer_checkpoint_generation": "consumer_checkpoint",
+      "ck_dispatch_attempt_ordinal": "dispatch_attempt",
+      "ck_dispatch_attempt_outcome": "dispatch_attempt",
+      "ck_dispatch_attempt_generation": "dispatch_attempt",
+      "ck_reconciliation_receipt_truth_table": "reconciliation_receipt",
+      "ck_reconciliation_receipt_acknowledgement": "reconciliation_receipt",
+      "ck_reconciliation_receipt_display": "reconciliation_receipt"
+    },
+    "foreign_keys": {
+      "fk_observer_coordinate_partition": {
+        "table": "observer_coordinate",
+        "columns": ["partition_id"],
+        "referenced_table": "event_partition",
+        "referenced_columns": ["partition_id"],
+        "deferrable": false,
+        "initially_deferred": false
+      },
+      "fk_terminal_receipt_partition": {
+        "table": "terminal_receipt",
+        "columns": ["partition_id"],
+        "referenced_table": "event_partition",
+        "referenced_columns": ["partition_id"],
+        "deferrable": false,
+        "initially_deferred": false
+      },
+      "fk_terminal_receipt_obligation": {
+        "table": "terminal_receipt",
+        "columns": ["obligation_id"],
+        "referenced_table": "cue_obligation",
+        "referenced_columns": ["obligation_id"],
+        "deferrable": true,
+        "initially_deferred": true
+      },
+      "fk_cue_obligation_partition": {
+        "table": "cue_obligation",
+        "columns": ["partition_id"],
+        "referenced_table": "event_partition",
+        "referenced_columns": ["partition_id"],
+        "deferrable": false,
+        "initially_deferred": false
+      },
+      "fk_consumer_checkpoint_partition": {
+        "table": "consumer_checkpoint",
+        "columns": ["partition_id"],
+        "referenced_table": "event_partition",
+        "referenced_columns": ["partition_id"],
+        "deferrable": false,
+        "initially_deferred": false
+      },
+      "fk_dispatch_attempt_obligation": {
+        "table": "dispatch_attempt",
+        "columns": ["obligation_id"],
+        "referenced_table": "cue_obligation",
+        "referenced_columns": ["obligation_id"],
+        "deferrable": false,
+        "initially_deferred": false
+      },
+      "fk_reconciliation_receipt_attempt": {
+        "table": "reconciliation_receipt",
+        "columns": ["obligation_id", "dispatch_attempt_ordinal"],
+        "referenced_table": "dispatch_attempt",
+        "referenced_columns": ["obligation_id", "attempt_ordinal"],
+        "deferrable": false,
+        "initially_deferred": false
+      }
+    },
+    "expected_counts": {
+      "domains": 3,
+      "domain_checks": 3,
+      "tables": 7,
+      "fields": 50,
+      "primary_keys": 7,
+      "unique_keys": 3,
+      "table_checks": 18,
+      "foreign_keys": 7,
+      "rows": 0,
+      "functions": 0,
+      "triggers": 0,
+      "views": 0,
+      "materialized_views": 0,
+      "sequences": 0,
+      "policies": 0,
+      "non_internal_rules": 0,
+      "row_security_tables": 0,
+      "explicit_object_acls": 0
+    }
+  },
+  "effects": {
+    "provider_calls": 0,
+    "external_network_calls": 0,
+    "existing_database_or_source_connections": 0,
+    "owned_disposable_postgresql_containers_created": 1,
+    "exact_artifact_executions": 1,
+    "rows_written": 0,
+    "product_commands": 0,
+    "product_patient_or_clinical_data": false,
+    "operational_state_persisted": false,
+    "runtime_or_watcher_started": false,
+    "deployment_release_or_protected_ref_movement": false
+  },
+  "claim_boundary": "Exact inert artifact parses and creates the frozen PostgreSQL 16 catalogue shape with zero rows in one destroyed networkless tmpfs container; no transaction-protocol behavior, runtime durability or product authority is proved.",
+  "next_descendant": {
+    "id": "provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal",
+    "separately_frozen": true,
+    "transaction_protocols": [
+      "admit_terminal",
+      "coalesce_pending",
+      "advance_contiguous_checkpoint",
+      "record_dispatch_attempt",
+      "record_reconciliation"
+    ],
+    "runtime_or_product_wiring": false
+  }
+}

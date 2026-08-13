@@ -1,0 +1,97 @@
+{
+  "schema_version": "raisa.context_fabric.cf_d2_event_cue_parse_catalogue_evidence.v1",
+  "result": "raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_16_parse_catalogue",
+  "planning_baseline": "ad847eda9beff8317aa83779d7ca36a7b95b3ebd",
+  "accepted_inert_ddl_source": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29",
+  "contract_sha256": "aa89d239cff54635488224e1199c40233c5a571e92724cf84cafa9eb7079aa2f",
+  "source_hashes": {
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert": "3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json": "ca66a12388b9677dcd9f5c3f13e4ca680d130cd001c321bd5dfa7b0e30497ca8",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.json": "736d3eab20ae6563a0f23801bb8ef1e4d7a6169648ea49e1607c4baac75dd8d5",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json": "ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64",
+    "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md": "95b6005811817937d34093775ac17c82d6100626e15ab75fa252177995675c62",
+    "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-sol-acceptance.md": "41065ca2ae4754eb28ca6d62ec4895009d0ae11d54d9f05b8c0c03a18acf5b2b"
+  },
+  "hostile_mutations_rejected": 64,
+  "environment": {
+    "postgresql_major": 16,
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "repo_digest_sha256": "ff3b334d4ff04c3469652888137bdf8a590a402f57bc1bcfd5ec31342f6c392e",
+    "network_mode": "none",
+    "storage": "container_local_tmpfs"
+  },
+  "artifact": {
+    "sha256": "3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6",
+    "byte_count": 12022,
+    "statement_count": 18,
+    "streamed_unchanged": true,
+    "installation_wrapper_claim": "containment_only"
+  },
+  "catalogue": {
+    "status": "exact_match",
+    "schema": "emr4_context_fabric_cue",
+    "domains": 3,
+    "domain_checks": 3,
+    "tables": 7,
+    "fields": 50,
+    "primary_keys": 7,
+    "unique_keys": 3,
+    "table_checks": 18,
+    "foreign_keys": 7,
+    "domain_definition_digests_sha256": "b0940036b1fef43565ea8007743ce252878b767e8032edcf46f7d5742671f211",
+    "constraint_definition_digests_sha256": "4670e2d10087239af8e16abc79d8df5c0f5f868b9212df3b2506a4fb72051c8c",
+    "facts_sha256": "81632f53b71318485bb8a1d2ea5ec192af7f0caec1f36d1177e70e6c19d521a4",
+    "absence": {
+      "views": 0,
+      "policies": 0,
+      "triggers": 0,
+      "functions": 0,
+      "sequences": 0,
+      "materialized_views": 0,
+      "non_internal_rules": 0,
+      "row_security_tables": 0,
+      "explicit_object_acls": 0
+    }
+  },
+  "row_counts": {
+    "event_partition": 0,
+    "observer_coordinate": 0,
+    "terminal_receipt": 0,
+    "cue_obligation": 0,
+    "consumer_checkpoint": 0,
+    "dispatch_attempt": 0,
+    "reconciliation_receipt": 0
+  },
+  "lifecycle": [
+    "contract_sources_and_exact_artifact_verified",
+    "exact_cached_image_verified",
+    "owned_container_created",
+    "container_profile_verified",
+    "postgresql_16_ready",
+    "exact_artifact_installed",
+    "exact_catalogue_verified",
+    "zero_rows_verified",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container_id_sha256": "0b80e729850d543d39684173778e38bb7c4bcabca171119ad70953c7e8d73d90"
+  },
+  "effects": {
+    "provider_calls": 0,
+    "external_network_calls": 0,
+    "existing_database_or_source_connections": 0,
+    "owned_disposable_postgresql_containers_created": 1,
+    "exact_artifact_executions": 1,
+    "rows_written": 0,
+    "product_commands": 0,
+    "product_patient_or_clinical_data": false,
+    "operational_state_persisted": false,
+    "runtime_or_watcher_started": false,
+    "deployment_release_or_protected_ref_movement": false
+  },
+  "failure": null,
+  "claim_boundary": "Exact inert artifact parses and creates the frozen PostgreSQL 16 catalogue shape with zero rows in one destroyed networkless tmpfs container; no transaction-protocol behavior, runtime durability or product authority is proved."
+}

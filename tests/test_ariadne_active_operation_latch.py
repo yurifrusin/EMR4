@@ -42,9 +42,13 @@ def test_current_latch_matches_schema_and_pure_validator() -> None:
     jsonschema.validate(value, json.loads(SCHEMA.read_text(encoding="utf-8")))
     assert validate_active_operation(value) == value
     projection = receipt_projection(value)
-    assert projection["status"] == "paused"
-    assert projection["terminal_handback_permitted"] is True
-    assert projection["next_executable_stage"]
+    assert projection["status"] == value["status"]
+    assert projection["terminal_handback_permitted"] is value["terminal_response"][
+        "permitted"
+    ]
+    assert projection["next_executable_stage"] == value["checkpoint"][
+        "next_executable_stage"
+    ]
 
 
 @pytest.mark.parametrize(

@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 259,
+  "register_revision": 260,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-12",
+    "source_cutoff_on": "2026-08-13",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -11753,6 +11753,48 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-status-confirm-physical-representability-protected-metadata-scope-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-259.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0293",
+      "attempt_id": "raisa-cf-d2-event-cue-parse-catalogue-attempt-001",
+      "observed_on": "2026-08-13",
+      "tranche": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "emr4-cf-d2-event-cue-parse-catalogue-harness",
+      "model": null,
+      "reasoning_level": "deterministic",
+      "transport": "local_python_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Disposable PostgreSQL readiness must tolerate the bounded bootstrap interval between pg_isready socket acceptance and a stable authenticated SQL query, and must admit execution only after three consecutive successful authenticated PostgreSQL-16 observations.",
+      "observed_error": "Attempt 001 verified the exact closed contract, source hashes, cached image and owned networkless tmpfs container profile, then stopped in the readiness loop when pg_isready returned ready but the following authenticated server-major query returned nonzero. The exact SQL artifact was never executed. The failure evidence retained only the closed stage/code and diagnostic digest, and exact owned-container cleanup passed.",
+      "detection_method": "The minimized attempt-001 evidence stopped after container_profile_verified and before postgresql_16_ready or exact_artifact_installed, with psql/unexpected_sql_failure and cleanup_verified. Direct control-flow inspection showed that the readiness loop treated the first transient authenticated-query failure as terminal instead of resetting its consecutive-observation counter.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json",
+        "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-260.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.postgresql_readiness_insufficiently_authenticated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve attempt 001, change only the readiness loop so a nonzero or malformed authenticated version probe resets the consecutive-observation counter inside the existing bounded deadline, rerun all focused static/hostile tests, and use a freshly owned container for attempt 002. Attempt 002 passed three consecutive authenticated observations, exact artifact and catalogue admission, zero-row readback and verified cleanup.",
+        "prevention_control": "Every disposable PostgreSQL harness must model readiness as a bounded sequence of paired socket and authenticated SQL observations. Transient failures inside the startup deadline reset stability rather than escaping the loop; only three consecutive authenticated exact-major results may open SQL execution.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-evidence.json",
+          "scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-260.md"
         ]
       },
       "status": "corrected"

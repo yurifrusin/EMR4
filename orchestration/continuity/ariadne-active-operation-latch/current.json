@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering",
-  "active_tranche": "Provider-free unmounted CF-D2 event and cue inert-DDL lowering",
-  "objective": "Lower only the exact accepted seven-relation CF-D2 representation into deterministic PostgreSQL-16 DDL text and prove structural coverage without parsing, connecting to or executing against a database.",
-  "status": "paused",
-  "source_head": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29",
-  "authority_source": "AGENTS.md Current Baton at Continuity 278 / Compass 260 plus Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal",
+  "active_tranche": "Provider-free disposable PostgreSQL CF-D2 event and cue parse/catalogue rehearsal",
+  "objective": "Apply only the exact accepted inert event/cue DDL bytes inside one newly created networkless tmpfs PostgreSQL 16 container, admit the exact catalogue projection, prove zero rows and destroy the owned container.",
+  "status": "in_progress",
+  "source_head": "ad847eda9beff8317aa83779d7ca36a7b95b3ebd",
+  "authority_source": "AGENTS.md Current Baton at Continuity 279 / Compass 261, the accepted inert-DDL next descendant and Yuri's resumed standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "inert DDL source cd890647d327a3d9bf4f60e5e1d6f9a1924bab29 published and accepted for Continuity 279 / Compass 261 with closeout prepared",
-    "next_executable_stage": "after_yuri_paper_discussion_resume_with_fresh_five_source_rehydration_then_freeze_disposable_postgresql_16_parse_catalogue_plan",
+    "completed_stage": "attempt 002 passed exact artifact parse/catalogue admission, seven zero-row readbacks and exact owned cleanup after the bounded readiness repair; AER-0293 is registered",
+    "next_executable_stage": "complete_focused_lineage_and_canonical_verification_then_prepare_acceptance_closeout_continuity_compass_baton_and_yuri_summary",
     "retry_counters": {
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
@@ -28,18 +28,19 @@
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "Yuri explicitly requested a brief pause before the next tranche while Sol reads and discusses the attached paper"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "protected_evidence_closed",
     "patient_product_clinical_data_closed",
     "external_patient_identity_clients_and_channels_closed",
-    "provider_adc_credential_iam_network_closed",
-    "database_source_sql_migration_execution_persistence_and_operational_retention_closed",
+    "provider_adc_credential_iam_and_external_network_closed",
+    "existing_database_source_watcher_persistence_and_operational_retention_closed",
+    "one_exact_artifact_owned_networkless_tmpfs_postgresql_16_execution_only",
     "watcher_listener_worker_runtime_closed",
     "new_route_graphql_openapi_command_and_write_authority_closed",
-    "authored_synthetic_provider_free_unmounted_deterministic_postgresql_16_ddl_text_only",
+    "catalogue_metadata_and_zero_rows_only_no_transaction_protocol_behavior_claim",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

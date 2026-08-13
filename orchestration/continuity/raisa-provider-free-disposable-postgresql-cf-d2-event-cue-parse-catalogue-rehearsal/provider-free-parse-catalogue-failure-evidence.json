@@ -1,0 +1,39 @@
+{
+  "schema_version": "raisa.context_fabric.cf_d2_event_cue_parse_catalogue_evidence.v1",
+  "result": "rehearsal_failed",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_16_parse_catalogue",
+  "planning_baseline": "ad847eda9beff8317aa83779d7ca36a7b95b3ebd",
+  "accepted_inert_ddl_source": "cd890647d327a3d9bf4f60e5e1d6f9a1924bab29",
+  "contract_sha256": "aa89d239cff54635488224e1199c40233c5a571e92724cf84cafa9eb7079aa2f",
+  "source_hashes": {
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert": "3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json": "ca66a12388b9677dcd9f5c3f13e4ca680d130cd001c321bd5dfa7b0e30497ca8",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-contract.json": "736d3eab20ae6563a0f23801bb8ef1e4d7a6169648ea49e1607c4baac75dd8d5",
+    "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json": "ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64",
+    "docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md": "95b6005811817937d34093775ac17c82d6100626e15ab75fa252177995675c62",
+    "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-sol-acceptance.md": "41065ca2ae4754eb28ca6d62ec4895009d0ae11d54d9f05b8c0c03a18acf5b2b"
+  },
+  "hostile_mutations_rejected": 64,
+  "environment": {},
+  "artifact": {},
+  "catalogue": {},
+  "row_counts": {},
+  "lifecycle": [
+    "contract_sources_and_exact_artifact_verified",
+    "exact_cached_image_verified",
+    "owned_container_created",
+    "container_profile_verified",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container_id_sha256": "6453f60939e44d3922535107049ca24cbe968d00f5993fd6f74ae26479375fa2"
+  },
+  "effects": {},
+  "failure": {
+    "stage": "psql",
+    "code": "unexpected_sql_failure",
+    "detail_sha256": "fb28109b742fdea379f0633247121281696d9be87c902ef369a1af04c6f3b0fa"
+  },
+  "claim_boundary": "Exact inert artifact parses and creates the frozen PostgreSQL 16 catalogue shape with zero rows in one destroyed networkless tmpfs container; no transaction-protocol behavior, runtime durability or product authority is proved."
+}
