@@ -46,9 +46,10 @@ def test_rehydration_receipt_names_all_five_sources() -> None:
     assert receipt["terminal_handback_permitted"] is False
 
 
-def test_active_latch_tracks_the_same_unfinished_operation() -> None:
+def test_active_latch_advances_to_route_convergence_after_acceptance() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
-    assert latch["operation_id"] == "raisa-status-confirm-product-adapter-postgresql-integration"
+    assert latch["operation_id"] == "raisa-status-confirm-http-route-convergence"
     assert latch["status"] == "in_progress"
+    assert latch["source_head"] == "553d38c37af86ceefc7b4315b8eaa171d405ab95"
     assert latch["terminal_response"]["permitted"] is False
     assert latch["user_attention"]["required"] is False

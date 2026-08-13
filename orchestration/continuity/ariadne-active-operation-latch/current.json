@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-status-confirm-product-adapter-postgresql-integration",
-  "active_tranche": "Provider-free disposable PostgreSQL-16 status-confirm product-adapter integration rehearsal",
-  "objective": "Freeze and execute the narrowest off-route disposable PostgreSQL integration of the accepted product adapter using only owned authored-synthetic rows and complete cleanup.",
+  "operation_id": "raisa-status-confirm-http-route-convergence",
+  "active_tranche": "Provider-free authored-synthetic status-confirm HTTP route convergence",
+  "objective": "Freeze and execute the narrowest convergence of the existing authenticated status-confirm route onto the accepted product adapter with opaque proposal-version carriage and exact replay delivery.",
   "status": "in_progress",
-  "source_head": "b728b903c99fa35f231df04ba68263533261121a",
+  "source_head": "553d38c37af86ceefc7b4315b8eaa171d405ab95",
   "authority_source": "AGENTS.md Current Baton next implementation plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "source verification passes: 104 hostile mutations, twelve PostgreSQL scenarios, 112 focused current-lineage tests and the 193-test canonical fast profile are green with exact cleanup",
-    "next_executable_stage": "create the exact-path source commit, inspect it at exact HEAD and prepare paired technical/lay closeout plus continuity acceptance",
+    "completed_stage": "product-adapter/PostgreSQL integration accepted at source 553d38c37af86ceefc7b4315b8eaa171d405ab95 with Continuity 272 / Compass 254 closeout prepared",
+    "next_executable_stage": "publish the integration closeout, perform a fresh five-source rehydration and freeze the exact authenticated route-convergence plan before route edits",
     "retry_counters": {
       "review": 0,
       "verification": 0
     },
-    "settings_fingerprint": "sha256:365f78c5be0633ae4893e66d80775f7bd324802d7c1abce665f27d7e67c6d78a"
+    "settings_fingerprint": "sha256:80ac4e99b4bdb7fe7518b47812f4d51e773ab7679f90b2963e7dd2a094a80c9b"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -35,8 +35,8 @@
     "protected_evidence_closed",
     "patient_product_clinical_data_closed",
     "provider_credential_iam_network_closed",
-    "route_product_command_runtime_closed",
-    "only_owned_disposable_authored_synthetic_database_may_be_executed",
+    "route_schema_dependency_api_contract_edits_require_frozen_plan",
+    "only_owned_authored_synthetic_local_route_and_disposable_database_may_be_planned",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

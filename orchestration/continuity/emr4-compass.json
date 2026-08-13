@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 253,
-  "updated_at": "2026-08-13T00:44:05Z",
-  "source_graph_revision": 271,
-  "orientation_statement": "EMR4 is at Continuity 271 / Compass 253. The unmounted status-confirm product adapter passes; disposable PostgreSQL integration and route wiring remain closed.",
+  "map_revision": 254,
+  "updated_at": "2026-08-13T01:39:55Z",
+  "source_graph_revision": 272,
+  "orientation_statement": "EMR4 is at Continuity 272 / Compass 254. The status-confirm product adapter passes real disposable PostgreSQL/RLS integration; HTTP route convergence remains closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -2688,34 +2688,56 @@
         "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-rehearsal-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
+      "lineage_parent": "raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal",
+      "strategic_role": "Join the accepted application adapter to the accepted physical database seam",
+      "outcome": "Exact atomic commit, replay, rollback, RLS and tenant-setting lifecycle pass on disposable PostgreSQL 16.",
+      "evidence": [
+        "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-threat-model-delta.md",
+        "app/services/appointment_status_product_adapter.py",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.json",
+        "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py",
+        "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal",
-    "strategic_role": "The off-route application adapter is ready for disposable database integration",
-    "why_now": "The physical seam and product translation now pass separately; their real PostgreSQL behavior must be composed before route wiring.",
-    "outcome": "Four coupled adapters and proposal-version recovery pass without mounting or calling a route.",
+    "node_id": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
+    "strategic_role": "The backend status-confirm path is ready for HTTP route convergence",
+    "why_now": "Application and database behavior now pass together; the remaining backend gap is the existing route-local implementation and transport binding.",
+    "outcome": "Twelve PostgreSQL integration scenarios pass with exact cleanup and no product data.",
     "unlocks": [
-      "Freeze one provider-free disposable PostgreSQL-16 product-adapter integration rehearsal."
+      "Freeze one provider-free authored-synthetic status-confirm HTTP route-convergence tranche."
     ],
     "does_not_solve": [
-      "Real PostgreSQL/RLS behavior or cleanup.",
-      "HTTP route wiring, proposal-version transport or stored-byte delivery.",
-      "Product/patient data, UI behavior, deployment, production or release."
+      "HTTP dependency wiring, opaque proposal-version carriage or exact stored-byte response delivery.",
+      "Diary UI consumption or other command families.",
+      "Product/patient data, concurrency, restart, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-plan.md",
-      "docs/security/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-threat-model-delta.md",
       "app/services/appointment_status_product_adapter.py",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-contract.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-evidence.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal/product-adapter-rehearsal-evidence.json",
-      "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py",
-      "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py",
-      "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py",
-      "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-rehearsal-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md"
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.json",
+      "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py",
+      "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
     ]
   },
   "decision_horizon": [
@@ -2823,9 +2845,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Preserve the accepted physical, composition and product-adapter proofs.",
-        "Rehearse the exact adapter against disposable PostgreSQL while remaining off-route.",
-        "Keep route transport/mounting, product data, providers and protected integration separately gated."
+        "Preserve the accepted physical, composition, product-adapter and PostgreSQL integration proofs.",
+        "Converge the existing authenticated status-confirm route with opaque version binding and stored-byte replay.",
+        "Keep product data, providers, deployment and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -3453,7 +3475,19 @@
         "tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py",
         "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md",
         "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-rehearsal-sol-acceptance.md",
-        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md"
+        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md",
+        "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.json",
+        "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py",
+        "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
       ]
     },
     {
@@ -4425,6 +4459,7 @@
     "The evidence-complete receptionist-first v6.3 descendant proves twenty-two exact outcomes in the complete reused twenty-four-request cohort through the configured Sydney lane. It also exposes one proofreader-admitted broadening of an explicit exact-time constraint and one vetoed natural/form mismatch. No product delivery or write occurred. It does not establish generalisation, production fitness, real-data safety, Australian physical or sovereign processing, or product provider readiness.",
     "The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.",
     "The accepted readiness re-review does not mount or authorise the status-confirm route; four product-adapter blockers remain.",
-    "The accepted product adapter is unmounted and authored-synthetic; real PostgreSQL and HTTP behavior remain unproved."
+    "The accepted product adapter is unmounted and authored-synthetic; real PostgreSQL and HTTP behavior remain unproved.",
+    "The accepted PostgreSQL product-adapter integration is serial, disposable, authored-synthetic and off-route; HTTP and UI behavior remain unproved."
   ]
 }

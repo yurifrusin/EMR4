@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 271,
+  "graph_revision": 272,
   "harvests": [],
   "nodes": [
     {
@@ -17593,9 +17593,86 @@
         "Real PostgreSQL/RLS integration of the product adapter remains unproved.",
         "Route dependency wiring, proposal-version carriage and exact stored-byte HTTP delivery remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal",
+      "title": "Disposable PostgreSQL status-confirm product-adapter integration",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-13T01:39:55Z",
+      "updated_at": "2026-08-13T01:39:55Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "553d38c37af86ceefc7b4315b8eaa171d405ab95",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          "owned disposable authored-synthetic PostgreSQL read/write and exact cleanup"
+        ],
+        "notes": [
+          "No route, product data, provider, deployment or protected-ref authority.",
+          "The disposable application role is non-superuser, non-BYPASSRLS and forced through five tenant policies."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-status-confirm-product-adapter-postgresql-integration",
+          "source": "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact adapter/physical PostgreSQL integration and proceed to provider-free route convergence."
+        }
+      ],
+      "claim_scope": [
+        "Twelve serial authored-synthetic scenarios pass under forced five-table RLS.",
+        "Atomic mutation/audit/receipt, adjacent version, byte-identical replay, rollback and pooled tenant-setting cleanup pass.",
+        "All 104 hostile mutations, 112 focused current-lineage tests and the 193-test canonical fast profile pass."
+      ],
+      "contract_evidence": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json"
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-status-confirm-product-adapter-postgresql-integration-sol-acceptance.md"
+        ],
+        "receipts": [],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_status_product_adapter.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/provider-free-product-adapter-postgresql-evidence.json",
+          "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The existing HTTP route still uses its legacy local write path.",
+        "Opaque proposal-version carriage and exact stored-byte HTTP delivery remain unproved.",
+        "Diary UI consumption remains closed until route convergence passes."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T00:44:05Z"
+  "updated_at": "2026-08-13T01:39:55Z"
 }

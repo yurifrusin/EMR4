@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 271 / Compass 253. The unmounted status-confirm product adapter passes. Disposable PostgreSQL integration and route wiring remain closed.
+> EMR4 is at Continuity 272 / Compass 254. The status-confirm product adapter passes disposable PostgreSQL/RLS integration. HTTP route convergence remains closed.
 
 ## North star
 
