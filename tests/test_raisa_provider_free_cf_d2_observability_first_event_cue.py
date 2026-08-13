@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 from scripts.raisa_provider_free_cf_d2_observability_first_event_cue_acceptance import (
@@ -256,15 +255,15 @@ def test_plan_documents_have_timestamp_and_exact_closed_boundary() -> None:
         assert phrase in plan
 
 
-def test_active_latch_transferred_to_cf_d2_representation_descendant() -> None:
-    latch = json.loads(LATCH.read_text(encoding="utf-8"))
-
-    assert latch["status"] == "in_progress"
-    assert latch["operation_id"] == (
-        "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
-    )
-    assert (
-        "write_verify_commit_notify_and_publish_closeout"
-        in (latch["checkpoint"]["next_executable_stage"])
-    )
-    assert latch["terminal_response"]["permitted"] is False
+def test_observability_declares_the_exact_admission_descendant() -> None:
+    contract = _load_yaml(API_SPINE_PATH)
+    assert contract["next_descendant"] == {
+        "id": "provider_free_unmounted_event_cue_admission_rehearsal",
+        "pure_state_machine_only": True,
+        "authored_synthetic_only": True,
+        "runtime": False,
+        "database_or_source": False,
+        "persistence": False,
+        "provider_call": False,
+        "command_or_write": False,
+    }

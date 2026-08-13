@@ -1,0 +1,208 @@
+-- EMR4 CF-D2 INERT POSTGRESQL-16 DDL TEXT — DO NOT EXECUTE AS A MIGRATION
+-- evidence_label: provider_free_unmounted_inert_postgresql_16_ddl_text
+-- accepted_representation_sha256: sha256:ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64
+
+-- phase 1: dedicated schema and scalar domains
+CREATE SCHEMA emr4_context_fabric_cue;
+
+CREATE DOMAIN emr4_context_fabric_cue.digest_v1 AS pg_catalog.text
+    CONSTRAINT ck_digest_v1_format
+    CHECK (VALUE ~ '^sha256:[0-9a-f]{64}$');
+
+CREATE DOMAIN emr4_context_fabric_cue.opaque_id_v1 AS pg_catalog.text
+    CONSTRAINT ck_opaque_id_v1_nonempty
+    CHECK (pg_catalog.char_length(VALUE) > 0);
+
+CREATE DOMAIN emr4_context_fabric_cue.positive_integer_v1 AS pg_catalog.int8
+    CONSTRAINT ck_positive_integer_v1_above_zero
+    CHECK (VALUE > 0);
+
+-- phase 2: exact seven relations in accepted order
+-- relation event_partition mutable_fields=source_epoch_digest,lease_generation ddl_enforced=false
+CREATE TABLE emr4_context_fabric_cue.event_partition (
+    partition_id emr4_context_fabric_cue.digest_v1 NOT NULL,
+    source_system pg_catalog.text NOT NULL,
+    practice_scope_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    event_family pg_catalog.text NOT NULL,
+    source_epoch_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    lease_generation emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    CONSTRAINT pk_event_partition PRIMARY KEY (partition_id),
+    CONSTRAINT uq_event_partition_scope UNIQUE (source_system, practice_scope_digest, event_family),
+    CONSTRAINT ck_event_partition_identity CHECK (
+        source_system = 'emr4_diary'
+        AND event_family = 'diary_appointment_change'
+        AND partition_id = 'sha256:' || pg_catalog.encode(
+            pg_catalog.sha256(pg_catalog.convert_to(
+                source_system || '|' || practice_scope_digest || '|' || event_family,
+                'UTF8'
+            )),
+            'hex'
+        )
+    ),
+    CONSTRAINT ck_event_partition_generation CHECK (lease_generation > 0)
+);
+
+-- relation observer_coordinate mutable_fields=source_epoch_digest,observed_state,observed_position,source_head_state,source_head_epoch_digest,source_head_position ddl_enforced=false
+-- semantic assertion coordinate_is_non_authoritative sql_enforced=false
+CREATE TABLE emr4_context_fabric_cue.observer_coordinate (
+    partition_id emr4_context_fabric_cue.digest_v1 NOT NULL,
+    consumer_scope pg_catalog.text NOT NULL,
+    source_epoch_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    observed_state pg_catalog.text NOT NULL,
+    observed_position emr4_context_fabric_cue.positive_integer_v1,
+    source_head_state pg_catalog.text NOT NULL,
+    source_head_epoch_digest emr4_context_fabric_cue.digest_v1,
+    source_head_position emr4_context_fabric_cue.positive_integer_v1,
+    CONSTRAINT pk_observer_coordinate PRIMARY KEY (partition_id, consumer_scope),
+    CONSTRAINT ck_observer_coordinate_observed_shape CHECK (
+        consumer_scope = 'reception_one_diary_projection'
+        AND (
+            (observed_state = 'none' AND observed_position IS NULL)
+            OR (observed_state = 'exact' AND observed_position IS NOT NULL)
+        )
+    ),
+    CONSTRAINT ck_observer_coordinate_head_shape CHECK (
+        (source_head_state = 'unknown' AND source_head_epoch_digest IS NULL AND source_head_position IS NULL)
+        OR (source_head_state = 'exact' AND source_head_epoch_digest = source_epoch_digest AND source_head_position IS NOT NULL)
+        OR (source_head_state = 'epoch_mismatch' AND source_head_epoch_digest IS NOT NULL AND source_head_epoch_digest <> source_epoch_digest AND source_head_position IS NOT NULL)
+    )
+);
+
+-- relation terminal_receipt mutable_fields=none ddl_enforced=false
+CREATE TABLE emr4_context_fabric_cue.terminal_receipt (
+    receipt_id emr4_context_fabric_cue.opaque_id_v1 NOT NULL,
+    partition_id emr4_context_fabric_cue.digest_v1 NOT NULL,
+    source_epoch_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    source_position emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    event_fingerprint_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    classification pg_catalog.text NOT NULL,
+    reason_code pg_catalog.text,
+    obligation_id emr4_context_fabric_cue.opaque_id_v1,
+    CONSTRAINT pk_terminal_receipt PRIMARY KEY (receipt_id),
+    CONSTRAINT uq_terminal_receipt_position UNIQUE (partition_id, source_epoch_digest, source_position),
+    CONSTRAINT ck_terminal_receipt_classification_shape CHECK (
+        (classification = 'cue_required' AND reason_code IN ('diary_status_may_have_changed', 'diary_availability_may_have_changed') AND obligation_id IS NOT NULL)
+        OR (classification = 'suppressed_irrelevant' AND reason_code IS NULL AND obligation_id IS NULL)
+        OR (classification = 'rejected_unsupported' AND reason_code IN ('unsupported_event_schema', 'unsupported_event_family', 'policy_rejected') AND obligation_id IS NULL)
+    ),
+    CONSTRAINT ck_terminal_receipt_position CHECK (source_position > 0)
+);
+
+-- relation cue_obligation mutable_fields=through_position,state ddl_enforced=false
+CREATE TABLE emr4_context_fabric_cue.cue_obligation (
+    obligation_id emr4_context_fabric_cue.opaque_id_v1 NOT NULL,
+    partition_id emr4_context_fabric_cue.digest_v1 NOT NULL,
+    consumer_scope pg_catalog.text NOT NULL,
+    source_epoch_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    from_position emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    through_position emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    reason_code pg_catalog.text NOT NULL,
+    fresh_authorized_read_required pg_catalog.bool NOT NULL,
+    state pg_catalog.text NOT NULL,
+    CONSTRAINT pk_cue_obligation PRIMARY KEY (obligation_id),
+    CONSTRAINT ck_cue_obligation_range CHECK (from_position > 0 AND through_position >= from_position),
+    CONSTRAINT ck_cue_obligation_scope_reason CHECK (
+        consumer_scope = 'reception_one_diary_projection'
+        AND reason_code IN ('diary_status_may_have_changed', 'diary_availability_may_have_changed')
+    ),
+    CONSTRAINT ck_cue_obligation_fresh_read CHECK (fresh_authorized_read_required IS TRUE),
+    CONSTRAINT ck_cue_obligation_state CHECK (state IN ('pending', 'delivered'))
+);
+
+-- relation consumer_checkpoint mutable_fields=checkpoint_state,checkpoint_position,lease_generation ddl_enforced=false
+CREATE TABLE emr4_context_fabric_cue.consumer_checkpoint (
+    partition_id emr4_context_fabric_cue.digest_v1 NOT NULL,
+    consumer_scope pg_catalog.text NOT NULL,
+    source_epoch_digest emr4_context_fabric_cue.digest_v1 NOT NULL,
+    checkpoint_state pg_catalog.text NOT NULL,
+    checkpoint_position emr4_context_fabric_cue.positive_integer_v1,
+    lease_generation emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    CONSTRAINT pk_consumer_checkpoint PRIMARY KEY (partition_id, consumer_scope, source_epoch_digest),
+    CONSTRAINT ck_consumer_checkpoint_shape CHECK (
+        consumer_scope = 'reception_one_diary_projection'
+        AND (
+            (checkpoint_state = 'none' AND checkpoint_position IS NULL)
+            OR (checkpoint_state = 'exact' AND checkpoint_position IS NOT NULL)
+        )
+    ),
+    CONSTRAINT ck_consumer_checkpoint_generation CHECK (lease_generation > 0)
+);
+
+-- relation dispatch_attempt mutable_fields=none ddl_enforced=false
+CREATE TABLE emr4_context_fabric_cue.dispatch_attempt (
+    obligation_id emr4_context_fabric_cue.opaque_id_v1 NOT NULL,
+    attempt_ordinal emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    lease_generation emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    outcome pg_catalog.text NOT NULL,
+    failure_class pg_catalog.text,
+    CONSTRAINT pk_dispatch_attempt PRIMARY KEY (obligation_id, attempt_ordinal),
+    CONSTRAINT ck_dispatch_attempt_ordinal CHECK (attempt_ordinal > 0),
+    CONSTRAINT ck_dispatch_attempt_outcome CHECK (
+        (outcome = 'delivered' AND failure_class IS NULL)
+        OR (outcome = 'failed' AND failure_class IN ('consumer_unavailable', 'authorization_rejected', 'transient_transport'))
+    ),
+    CONSTRAINT ck_dispatch_attempt_generation CHECK (lease_generation > 0)
+);
+
+-- relation reconciliation_receipt mutable_fields=none ddl_enforced=false
+CREATE TABLE emr4_context_fabric_cue.reconciliation_receipt (
+    reconciliation_id emr4_context_fabric_cue.opaque_id_v1 NOT NULL,
+    obligation_id emr4_context_fabric_cue.opaque_id_v1 NOT NULL,
+    dispatch_attempt_ordinal emr4_context_fabric_cue.positive_integer_v1 NOT NULL,
+    outcome pg_catalog.text NOT NULL,
+    scope_authorized pg_catalog.bool NOT NULL,
+    fresh_read_performed pg_catalog.bool NOT NULL,
+    acknowledgement pg_catalog.text NOT NULL,
+    display_disposition pg_catalog.text NOT NULL,
+    CONSTRAINT pk_reconciliation_receipt PRIMARY KEY (reconciliation_id),
+    CONSTRAINT uq_reconciliation_receipt_obligation UNIQUE (obligation_id),
+    CONSTRAINT ck_reconciliation_receipt_truth_table CHECK (
+        (outcome = 'projection_unchanged' AND scope_authorized IS TRUE AND fresh_read_performed IS TRUE AND display_disposition = 'unchanged')
+        OR (outcome = 'projection_refreshed' AND scope_authorized IS TRUE AND fresh_read_performed IS TRUE AND display_disposition = 'refreshed')
+        OR (outcome = 'local_selection_or_proposal_cleared' AND scope_authorized IS TRUE AND fresh_read_performed IS TRUE AND display_disposition = 'cleared')
+        OR (outcome = 'authorization_rejected' AND scope_authorized IS FALSE AND fresh_read_performed IS FALSE AND display_disposition = 'unchanged')
+        OR (outcome = 'source_unavailable' AND scope_authorized IS TRUE AND fresh_read_performed IS FALSE AND display_disposition = 'unchanged')
+        OR (outcome = 'stale_session' AND scope_authorized IS FALSE AND fresh_read_performed IS FALSE AND display_disposition = 'unchanged')
+    ),
+    CONSTRAINT ck_reconciliation_receipt_acknowledgement CHECK (acknowledgement = 'one_fresh_read_attempt_only'),
+    CONSTRAINT ck_reconciliation_receipt_display CHECK (display_disposition IN ('unchanged', 'refreshed', 'cleared'))
+);
+
+-- phase 3: exact references after all accepted-order tables exist
+ALTER TABLE emr4_context_fabric_cue.observer_coordinate
+    ADD CONSTRAINT fk_observer_coordinate_partition
+    FOREIGN KEY (partition_id) REFERENCES emr4_context_fabric_cue.event_partition (partition_id);
+
+ALTER TABLE emr4_context_fabric_cue.terminal_receipt
+    ADD CONSTRAINT fk_terminal_receipt_partition
+    FOREIGN KEY (partition_id) REFERENCES emr4_context_fabric_cue.event_partition (partition_id);
+
+ALTER TABLE emr4_context_fabric_cue.terminal_receipt
+    ADD CONSTRAINT fk_terminal_receipt_obligation
+    FOREIGN KEY (obligation_id) REFERENCES emr4_context_fabric_cue.cue_obligation (obligation_id)
+    DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE emr4_context_fabric_cue.cue_obligation
+    ADD CONSTRAINT fk_cue_obligation_partition
+    FOREIGN KEY (partition_id) REFERENCES emr4_context_fabric_cue.event_partition (partition_id);
+
+ALTER TABLE emr4_context_fabric_cue.consumer_checkpoint
+    ADD CONSTRAINT fk_consumer_checkpoint_partition
+    FOREIGN KEY (partition_id) REFERENCES emr4_context_fabric_cue.event_partition (partition_id);
+
+ALTER TABLE emr4_context_fabric_cue.dispatch_attempt
+    ADD CONSTRAINT fk_dispatch_attempt_obligation
+    FOREIGN KEY (obligation_id) REFERENCES emr4_context_fabric_cue.cue_obligation (obligation_id);
+
+ALTER TABLE emr4_context_fabric_cue.reconciliation_receipt
+    ADD CONSTRAINT fk_reconciliation_receipt_attempt
+    FOREIGN KEY (obligation_id, dispatch_attempt_ordinal)
+    REFERENCES emr4_context_fabric_cue.dispatch_attempt (obligation_id, attempt_ordinal);
+
+-- phase 4: transaction protocols and external authority remain deliberately unlowered
+-- admit_terminal sql_enforced=false
+-- coalesce_pending sql_enforced=false
+-- advance_contiguous_checkpoint sql_enforced=false
+-- record_dispatch_attempt sql_enforced=false
+-- record_reconciliation sql_enforced=false
+-- current source truth and command authority remain external

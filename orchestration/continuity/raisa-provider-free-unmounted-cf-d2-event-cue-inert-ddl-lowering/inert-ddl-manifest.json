@@ -1,0 +1,560 @@
+{
+  "accepted_representation_contract_sha256": "sha256:ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64",
+  "accepted_representation_source": "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed",
+  "check_bindings": [
+    {
+      "constraint_name": "ck_event_partition_identity",
+      "disposition": "sql_check_constraint",
+      "label": "partition_id_matches_exact_partition_tuple_digest",
+      "relation": "event_partition"
+    },
+    {
+      "constraint_name": "ck_event_partition_generation",
+      "disposition": "sql_check_constraint",
+      "label": "lease_generation_positive",
+      "relation": "event_partition"
+    },
+    {
+      "constraint_name": "ck_observer_coordinate_observed_shape",
+      "disposition": "sql_check_constraint",
+      "label": "observed_none_iff_position_null",
+      "relation": "observer_coordinate"
+    },
+    {
+      "constraint_name": "ck_observer_coordinate_head_shape",
+      "disposition": "sql_check_constraint",
+      "label": "source_head_state_matches_nullable_coordinate",
+      "relation": "observer_coordinate"
+    },
+    {
+      "constraint_name": null,
+      "disposition": "inert_semantic_annotation",
+      "label": "coordinate_is_non_authoritative",
+      "relation": "observer_coordinate"
+    },
+    {
+      "constraint_name": "ck_terminal_receipt_classification_shape",
+      "disposition": "sql_check_constraint",
+      "label": "classification_reason_and_obligation_shape_exact",
+      "relation": "terminal_receipt"
+    },
+    {
+      "constraint_name": "ck_terminal_receipt_position",
+      "disposition": "sql_check_constraint",
+      "label": "source_position_positive",
+      "relation": "terminal_receipt"
+    },
+    {
+      "constraint_name": "ck_cue_obligation_range",
+      "disposition": "sql_check_constraint",
+      "label": "range_positive_and_ordered",
+      "relation": "cue_obligation"
+    },
+    {
+      "constraint_name": "ck_cue_obligation_scope_reason",
+      "disposition": "sql_check_constraint",
+      "label": "consumer_and_reason_allowlisted",
+      "relation": "cue_obligation"
+    },
+    {
+      "constraint_name": "ck_cue_obligation_fresh_read",
+      "disposition": "sql_check_constraint",
+      "label": "fresh_authorized_read_literal_true",
+      "relation": "cue_obligation"
+    },
+    {
+      "constraint_name": "ck_cue_obligation_state",
+      "disposition": "sql_check_constraint",
+      "label": "state_pending_or_delivered",
+      "relation": "cue_obligation"
+    },
+    {
+      "constraint_name": "ck_consumer_checkpoint_shape",
+      "disposition": "sql_check_constraint",
+      "label": "checkpoint_none_iff_position_null",
+      "relation": "consumer_checkpoint"
+    },
+    {
+      "constraint_name": "ck_consumer_checkpoint_generation",
+      "disposition": "sql_check_constraint",
+      "label": "lease_generation_positive",
+      "relation": "consumer_checkpoint"
+    },
+    {
+      "constraint_name": "ck_dispatch_attempt_ordinal",
+      "disposition": "sql_check_constraint",
+      "label": "attempt_ordinal_positive",
+      "relation": "dispatch_attempt"
+    },
+    {
+      "constraint_name": "ck_dispatch_attempt_outcome",
+      "disposition": "sql_check_constraint",
+      "label": "dispatch_outcome_failure_shape_exact",
+      "relation": "dispatch_attempt"
+    },
+    {
+      "constraint_name": "ck_dispatch_attempt_generation",
+      "disposition": "sql_check_constraint",
+      "label": "lease_generation_positive",
+      "relation": "dispatch_attempt"
+    },
+    {
+      "constraint_name": "ck_reconciliation_receipt_truth_table",
+      "disposition": "sql_check_constraint",
+      "label": "reconciliation_truth_table_exact",
+      "relation": "reconciliation_receipt"
+    },
+    {
+      "constraint_name": "ck_reconciliation_receipt_acknowledgement",
+      "disposition": "sql_check_constraint",
+      "label": "acknowledgement_one_fresh_read_attempt_only",
+      "relation": "reconciliation_receipt"
+    },
+    {
+      "constraint_name": "ck_reconciliation_receipt_display",
+      "disposition": "sql_check_constraint",
+      "label": "display_disposition_matches_outcome",
+      "relation": "reconciliation_receipt"
+    }
+  ],
+  "domain_names": [
+    "digest_v1",
+    "opaque_id_v1",
+    "positive_integer_v1"
+  ],
+  "effects": {
+    "command_or_write": false,
+    "database_or_source_opened": false,
+    "operational_state_persisted": false,
+    "product_patient_or_clinical_data": false,
+    "provider_calls": 0,
+    "runtime_started": false,
+    "sql_or_migration_executed": false
+  },
+  "evidence_label": "provider_free_unmounted_inert_postgresql_16_ddl_text",
+  "external_authority": {
+    "command_rechecks_current_authority_and_source_truth": true,
+    "disposition": "unlowered_external_authority",
+    "fresh_authorized_scoped_read_required": true,
+    "proved_by_ddl": false,
+    "source_owns_current_truth": true
+  },
+  "postgresql_major_target": 16,
+  "reference_constraint_names": [
+    "fk_observer_coordinate_partition",
+    "fk_terminal_receipt_partition",
+    "fk_terminal_receipt_obligation",
+    "fk_cue_obligation_partition",
+    "fk_consumer_checkpoint_partition",
+    "fk_dispatch_attempt_obligation",
+    "fk_reconciliation_receipt_attempt"
+  ],
+  "relations": [
+    {
+      "fields": [
+        {
+          "name": "partition_id",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "source_system",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "practice_scope_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "event_family",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "source_epoch_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "lease_generation",
+          "nullable": false,
+          "type": "positive_integer"
+        }
+      ],
+      "mutable_fields": [
+        "source_epoch_digest",
+        "lease_generation"
+      ],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "event_partition",
+      "primary_key": [
+        "partition_id"
+      ],
+      "reference_count": 0,
+      "unique_keys": [
+        [
+          "source_system",
+          "practice_scope_digest",
+          "event_family"
+        ]
+      ]
+    },
+    {
+      "fields": [
+        {
+          "name": "partition_id",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "consumer_scope",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "source_epoch_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "observed_state",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "observed_position",
+          "nullable": true,
+          "type": "nullable_positive_integer"
+        },
+        {
+          "name": "source_head_state",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "source_head_epoch_digest",
+          "nullable": true,
+          "type": "nullable_digest"
+        },
+        {
+          "name": "source_head_position",
+          "nullable": true,
+          "type": "nullable_positive_integer"
+        }
+      ],
+      "mutable_fields": [
+        "source_epoch_digest",
+        "observed_state",
+        "observed_position",
+        "source_head_state",
+        "source_head_epoch_digest",
+        "source_head_position"
+      ],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "observer_coordinate",
+      "primary_key": [
+        "partition_id",
+        "consumer_scope"
+      ],
+      "reference_count": 1,
+      "unique_keys": []
+    },
+    {
+      "fields": [
+        {
+          "name": "receipt_id",
+          "nullable": false,
+          "type": "opaque_id"
+        },
+        {
+          "name": "partition_id",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "source_epoch_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "source_position",
+          "nullable": false,
+          "type": "positive_integer"
+        },
+        {
+          "name": "event_fingerprint_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "classification",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "reason_code",
+          "nullable": true,
+          "type": "nullable_enum"
+        },
+        {
+          "name": "obligation_id",
+          "nullable": true,
+          "type": "opaque_id"
+        }
+      ],
+      "mutable_fields": [],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "terminal_receipt",
+      "primary_key": [
+        "receipt_id"
+      ],
+      "reference_count": 2,
+      "unique_keys": [
+        [
+          "partition_id",
+          "source_epoch_digest",
+          "source_position"
+        ]
+      ]
+    },
+    {
+      "fields": [
+        {
+          "name": "obligation_id",
+          "nullable": false,
+          "type": "opaque_id"
+        },
+        {
+          "name": "partition_id",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "consumer_scope",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "source_epoch_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "from_position",
+          "nullable": false,
+          "type": "positive_integer"
+        },
+        {
+          "name": "through_position",
+          "nullable": false,
+          "type": "positive_integer"
+        },
+        {
+          "name": "reason_code",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "fresh_authorized_read_required",
+          "nullable": false,
+          "type": "boolean"
+        },
+        {
+          "name": "state",
+          "nullable": false,
+          "type": "enum"
+        }
+      ],
+      "mutable_fields": [
+        "through_position",
+        "state"
+      ],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "cue_obligation",
+      "primary_key": [
+        "obligation_id"
+      ],
+      "reference_count": 1,
+      "unique_keys": []
+    },
+    {
+      "fields": [
+        {
+          "name": "partition_id",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "consumer_scope",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "source_epoch_digest",
+          "nullable": false,
+          "type": "digest"
+        },
+        {
+          "name": "checkpoint_state",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "checkpoint_position",
+          "nullable": true,
+          "type": "nullable_positive_integer"
+        },
+        {
+          "name": "lease_generation",
+          "nullable": false,
+          "type": "positive_integer"
+        }
+      ],
+      "mutable_fields": [
+        "checkpoint_state",
+        "checkpoint_position",
+        "lease_generation"
+      ],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "consumer_checkpoint",
+      "primary_key": [
+        "partition_id",
+        "consumer_scope",
+        "source_epoch_digest"
+      ],
+      "reference_count": 1,
+      "unique_keys": []
+    },
+    {
+      "fields": [
+        {
+          "name": "obligation_id",
+          "nullable": false,
+          "type": "opaque_id"
+        },
+        {
+          "name": "attempt_ordinal",
+          "nullable": false,
+          "type": "positive_integer"
+        },
+        {
+          "name": "lease_generation",
+          "nullable": false,
+          "type": "positive_integer"
+        },
+        {
+          "name": "outcome",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "failure_class",
+          "nullable": true,
+          "type": "nullable_enum"
+        }
+      ],
+      "mutable_fields": [],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "dispatch_attempt",
+      "primary_key": [
+        "obligation_id",
+        "attempt_ordinal"
+      ],
+      "reference_count": 1,
+      "unique_keys": []
+    },
+    {
+      "fields": [
+        {
+          "name": "reconciliation_id",
+          "nullable": false,
+          "type": "opaque_id"
+        },
+        {
+          "name": "obligation_id",
+          "nullable": false,
+          "type": "opaque_id"
+        },
+        {
+          "name": "dispatch_attempt_ordinal",
+          "nullable": false,
+          "type": "positive_integer"
+        },
+        {
+          "name": "outcome",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "scope_authorized",
+          "nullable": false,
+          "type": "boolean"
+        },
+        {
+          "name": "fresh_read_performed",
+          "nullable": false,
+          "type": "boolean"
+        },
+        {
+          "name": "acknowledgement",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "name": "display_disposition",
+          "nullable": false,
+          "type": "enum"
+        }
+      ],
+      "mutable_fields": [],
+      "mutable_fields_enforced_by_ddl": false,
+      "name": "reconciliation_receipt",
+      "primary_key": [
+        "reconciliation_id"
+      ],
+      "reference_count": 1,
+      "unique_keys": [
+        [
+          "obligation_id"
+        ]
+      ]
+    }
+  ],
+  "schema_name": "emr4_context_fabric_cue",
+  "schema_version": "raisa.context_fabric.unmounted_event_cue_inert_ddl.manifest.v1",
+  "sql_artifact_path": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert",
+  "sql_artifact_sha256": "sha256:3eebbe132b195ccab2f00283ad20f04c521fa6116bb30d0f38ab49158db1ebd6",
+  "sql_byte_count": 12022,
+  "sql_line_count": 208,
+  "statement_count": 18,
+  "status": "inert_sql_text_rendered_static_admission_only",
+  "transaction_protocols": [
+    {
+      "disposition": "unlowered_transaction_protocol",
+      "name": "admit_terminal",
+      "proved_by_ddl": false
+    },
+    {
+      "disposition": "unlowered_transaction_protocol",
+      "name": "coalesce_pending",
+      "proved_by_ddl": false
+    },
+    {
+      "disposition": "unlowered_transaction_protocol",
+      "name": "advance_contiguous_checkpoint",
+      "proved_by_ddl": false
+    },
+    {
+      "disposition": "unlowered_transaction_protocol",
+      "name": "record_dispatch_attempt",
+      "proved_by_ddl": false
+    },
+    {
+      "disposition": "unlowered_transaction_protocol",
+      "name": "record_reconciliation",
+      "proved_by_ddl": false
+    }
+  ]
+}

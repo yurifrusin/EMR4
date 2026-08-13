@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-context-fabric-unmounted-event-cue-inert-ddl-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "status", "planning_baseline",
+    "accepted_representation_source", "accepted_representation_contract_path",
+    "accepted_representation_contract_sha256", "postgresql_major_target",
+    "evidence_label", "schema_name", "output_paths", "expected_census",
+    "allowed_statement_families", "forbidden_statement_families",
+    "unlowered_enforcement_classes", "authority", "effects", "next_descendant"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.context_fabric.unmounted_event_cue_inert_ddl.v1"},
+    "status": {"const": "provider_free_unmounted_deterministic_sql_text_only"},
+    "planning_baseline": {"const": "bc21d637632f239243d384811781b8ca9b539cb8"},
+    "accepted_representation_source": {"const": "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed"},
+    "accepted_representation_contract_path": {"const": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.json"},
+    "accepted_representation_contract_sha256": {"const": "sha256:ff72cb2b6458193fb723b19209ac0ca487d3fdda5846d43ccdfafb6986957f64"},
+    "postgresql_major_target": {"const": 16},
+    "evidence_label": {"const": "provider_free_unmounted_inert_postgresql_16_ddl_text"},
+    "schema_name": {"const": "emr4_context_fabric_cue"},
+    "output_paths": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sql", "manifest", "evidence"],
+      "properties": {
+        "sql": {"const": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/event-cue-schema.sql.inert"},
+        "manifest": {"const": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/inert-ddl-manifest.json"},
+        "evidence": {"const": "orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering/provider-free-unmounted-inert-ddl-evidence.json"}
+      }
+    },
+    "expected_census": {
+      "type": "object", "additionalProperties": false,
+      "required": ["domain_count", "relation_count", "field_count", "primary_key_count", "unique_key_count", "reference_count", "relation_check_label_count", "sql_check_constraint_count", "semantic_annotation_count", "transaction_protocol_count", "statement_count"],
+      "properties": {
+        "domain_count": {"const": 3}, "relation_count": {"const": 7},
+        "field_count": {"const": 50}, "primary_key_count": {"const": 7},
+        "unique_key_count": {"const": 3}, "reference_count": {"const": 7},
+        "relation_check_label_count": {"const": 19},
+        "sql_check_constraint_count": {"const": 18},
+        "semantic_annotation_count": {"const": 1},
+        "transaction_protocol_count": {"const": 5}, "statement_count": {"const": 18}
+      }
+    },
+    "allowed_statement_families": {"const": ["CREATE SCHEMA", "CREATE DOMAIN", "CREATE TABLE", "ALTER TABLE ADD CONSTRAINT"]},
+    "forbidden_statement_families": {"const": ["BEGIN", "COMMIT", "ROLLBACK", "SAVEPOINT", "DO", "COPY", "INSERT", "UPDATE", "DELETE", "TRUNCATE", "MERGE", "CREATE FUNCTION", "CREATE PROCEDURE", "CREATE TRIGGER", "CREATE RULE", "CREATE ROLE", "GRANT", "REVOKE", "CREATE EXTENSION", "ALTER SYSTEM", "SET ROLE"]},
+    "unlowered_enforcement_classes": {"const": ["transaction_protocol", "external_authority"]},
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["event_and_cue_are_acceleration_hints_only", "cue_may_update_display_directly", "fresh_authorized_scoped_read_required", "command_rechecks_current_authority_and_source_truth", "ddl_confers_command_authority"],
+      "properties": {
+        "event_and_cue_are_acceleration_hints_only": {"const": true},
+        "cue_may_update_display_directly": {"const": false},
+        "fresh_authorized_scoped_read_required": {"const": true},
+        "command_rechecks_current_authority_and_source_truth": {"const": true},
+        "ddl_confers_command_authority": {"const": false}
+      }
+    },
+    "effects": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sql_text_rendered", "sql_or_migration_executed", "database_or_source_opened", "operational_state_persisted", "runtime_started", "provider_calls", "command_or_write", "product_patient_or_clinical_data"],
+      "properties": {
+        "sql_text_rendered": {"const": true}, "sql_or_migration_executed": {"const": false},
+        "database_or_source_opened": {"const": false}, "operational_state_persisted": {"const": false},
+        "runtime_started": {"const": false}, "provider_calls": {"const": 0},
+        "command_or_write": {"const": false}, "product_patient_or_clinical_data": {"const": false}
+      }
+    },
+    "next_descendant": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "exact_inert_artifact_only", "disposable_database_only", "transaction_behavior", "runtime_or_product_wiring"],
+      "properties": {
+        "id": {"const": "provider-free-disposable-postgresql-16-event-cue-parse-catalogue-admission"},
+        "exact_inert_artifact_only": {"const": true}, "disposable_database_only": {"const": true},
+        "transaction_behavior": {"const": false}, "runtime_or_product_wiring": {"const": false}
+      }
+    }
+  }
+}

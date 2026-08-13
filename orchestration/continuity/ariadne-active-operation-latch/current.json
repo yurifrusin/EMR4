@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture",
-  "active_tranche": "Provider-free unmounted CF-D2 event and cue representation architecture",
-  "objective": "Map only the accepted partition, source coordinate, immutable terminal receipt, payload-free obligation, checkpoint, dispatch and reconciliation facts into an inert relational design with deterministic representability checks and no database contact.",
+  "operation_id": "raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering",
+  "active_tranche": "Provider-free unmounted CF-D2 event and cue inert-DDL lowering",
+  "objective": "Lower only the exact accepted seven-relation CF-D2 representation into deterministic PostgreSQL-16 DDL text and prove structural coverage without parsing, connecting to or executing against a database.",
   "status": "in_progress",
-  "source_head": "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed",
+  "source_head": "bc21d637632f239243d384811781b8ca9b539cb8",
   "authority_source": "AGENTS.md Current Baton at Continuity 278 / Compass 260 plus Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "representation source 16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed published with seven relations, five protocols, twelve canonical families and eighty hostile variants passing",
-    "next_executable_stage": "write_verify_commit_notify_and_publish_closeout_then_transfer_to_inert_ddl_lowering",
+    "completed_stage": "inert DDL source candidate passes exact parent binding, two byte-identical renders, 65 hostile rejections, 142 focused lineage checks and the 193-test canonical fast profile",
+    "next_executable_stage": "generate_preacceptance_and_precommit_receipts_then_commit_and_publish_exact_source_candidate",
     "retry_counters": {
       "review": 0,
       "verification": 0
     },
-    "settings_fingerprint": "sha256:fecd05d54ba80cab563bac1cbe8f25712d4a5550528178bdd243ec761f088bec"
+    "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -36,9 +36,10 @@
     "patient_product_clinical_data_closed",
     "external_patient_identity_clients_and_channels_closed",
     "provider_adc_credential_iam_network_closed",
-    "watcher_database_source_persistence_migration_execution_and_operational_retention_closed",
+    "database_source_sql_migration_execution_persistence_and_operational_retention_closed",
+    "watcher_listener_worker_runtime_closed",
     "new_route_graphql_openapi_command_and_write_authority_closed",
-    "authored_synthetic_provider_free_unmounted_inert_representation_only",
+    "authored_synthetic_provider_free_unmounted_deterministic_postgresql_16_ddl_text_only",
     "deployment_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
   ]

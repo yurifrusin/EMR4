@@ -246,12 +246,13 @@ def test_plan_architecture_and_threat_have_brisbane_timestamps() -> None:
         assert "+10:00 (Australia/Brisbane)" in head
 
 
-def test_active_latch_is_on_the_representation_architecture() -> None:
-    latch = _load(LATCH)
-    assert latch["status"] == "in_progress"
-    assert (
-        latch["operation_id"]
-        == "raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture"
-    )
-    assert latch["source_head"] == "16ec7993ee3c46d83772f47aa7dab61fc1fcb7ed"
-    assert latch["terminal_response"]["permitted"] is False
+def test_representation_declares_the_exact_inert_ddl_descendant() -> None:
+    contract = _load(CONTRACT)
+    assert contract["next_descendant"] == {
+        "id": "provider-free-unmounted-event-cue-inert-ddl-lowering",
+        "sql_text_rendering_only": True,
+        "database_connection": False,
+        "migration_execution": False,
+        "watcher_or_source": False,
+        "persistence_restart_or_delivery": False,
+    }
