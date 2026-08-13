@@ -24,9 +24,6 @@
     "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal acceptance",
     "Provider-free read-only status-confirm route-mounting admission review acceptance",
     "Status-confirm preflight idempotency expectation repair acceptance",
-    "Provider-free unmounted status-confirm route-convergence composition rehearsal acceptance",
-    "Provider-free unmounted status-confirm product-adapter rehearsal acceptance",
-    "Ariadne post-compaction active-operation latch acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -34,10 +31,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 174625,
-  "ledger_line_count": 146,
+  "ledger_byte_count": 178854,
+  "ledger_line_count": 153,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "037b31d28bb84a2d77c32c502f02c8249fa6f884671f04e3c296d2133278f7cf",
+  "ledger_sha256": "a08928ff4976188c02e547c37bbc289c2871cb8b72f98a7ee3f2f009f6411b39",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -168,14 +165,21 @@
     "Provider-free unmounted status-confirm runtime convergence rehearsal acceptance",
     "Provider-free read-only status-confirm physical representability review acceptance",
     "Provider-free unmounted status-confirm physical-design architecture acceptance",
-    "Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal acceptance"
+    "Provider-free disposable PostgreSQL status-confirm behavior/transaction rehearsal acceptance",
+    "Current task-source relation",
+    "Ariadne post-compaction active-operation latch acceptance",
+    "Provider-free unmounted status-confirm route-convergence composition rehearsal acceptance",
+    "Provider-free unmounted status-confirm product-adapter rehearsal acceptance",
+    "Disposable PostgreSQL status-confirm product-adapter integration acceptance",
+    "Provider-free status-confirm HTTP route convergence acceptance",
+    "Channel-neutral patient interaction foundation acceptance"
   ],
-  "moved_row_count": 130,
+  "moved_row_count": 137,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 74635,
-  "source_agents_git_blob_sha1": "a74e118824fcddd921b981473f1e694c93ce76f5",
-  "source_agents_line_count": 489,
+  "source_agents_byte_count": 77068,
+  "source_agents_git_blob_sha1": "127c5e8604386a1e485314a0ab48e09dbcbe170c",
+  "source_agents_line_count": 501,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "b0ecb7b435b84b8e18045feecf91620e61271b5809be99f405148e5b59b543c4",
-  "source_git_head": "ec9aa1b1d2813b3e864b37f331ac6b587816610a"
+  "source_agents_sha256": "4f069f9c34f37f07eca52f7c9dae68e932edd0147a1f099d24668462c9dac034",
+  "source_git_head": "17d9da1844e59406eecda44b5029e839b2e8a573"
 }

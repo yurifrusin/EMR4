@@ -7,10 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = (
-    "raisa-provider-free-status-confirm-http-route-convergence"
-)
-SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
+NODE_ID = "raisa-channel-neutral-patient-interaction-foundation"
+SOURCE_HEAD = "17d9da1844e59406eecda44b5029e839b2e8a573"
+STATUS_CONFIRM_SOURCE_HEAD = "b414eb256853c301099d9cf7797a69cd3ec077c5"
 INTEGRATION_SOURCE_HEAD = "553d38c37af86ceefc7b4315b8eaa171d405ab95"
 ADAPTER_SOURCE_HEAD = "b728b903c99fa35f231df04ba68263533261121a"
 COMPOSITION_SOURCE_HEAD = "41f978ae9837cba50737cfb5f457ab62ac28dbdb"
@@ -28,11 +27,11 @@ def test_continuity_and_compass_bind_the_live_reorientation_result() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 273
+    assert graph["graph_revision"] == 274
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 255
-    assert compass["source_graph_revision"] == 273
+    assert compass["map_revision"] == 256
+    assert compass["source_graph_revision"] == 274
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -42,13 +41,13 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 273 / Compass 255" in current
-    assert "raisa_provider_free_status_confirm_http_route_convergence_pass" in current
+    assert "Continuity 274 / Compass 256" in current
+    assert "raisa_channel_neutral_patient_interaction_foundation_pass" in current
     assert SOURCE_HEAD in current
-    assert "Canonical `POST /api/v1/appointments/proposals/status/confirm`" in current
-    assert "atomic status/audit/v1 receipt" in current
-    assert "112 hostile mutations" in current
-    assert "217 focused/current-lineage tests" in current
+    assert "passkey-first-not-passkey-only" in current
+    assert "six future-closed untrusted channels" in current
+    assert "143 hostile rejections" in current
+    assert "100 combined foundation/API/latch tests" in current
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert COMPOSITION_SOURCE_HEAD in relation
@@ -76,12 +75,12 @@ def test_live_baton_rows_accept_reorientation_and_keep_cf_d2_deferred() -> None:
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert "bounded visible native Diary status-confirm wiring" in next_work
-    assert "Paused before commencement" in next_work
-    assert "resume only on Yuri's explicit go-ahead" in next_work
+    assert "for staff" in next_work
+    assert STATUS_CONFIRM_SOURCE_HEAD in next_work
     assert SOURCE_HEAD in next_work
     assert "no raw fallback" in next_work
     assert "stale/current-truth" in next_work
-    assert "responsive/keyboard proof" in next_work
+    assert "desktop/tablet/phone, keyboard" in next_work
     assert "observability-first durable event/cue plan" in next_work
     assert "Patient/clinical or operational product data" in next_work
     assert "provider/ADC" in next_work
@@ -119,15 +118,15 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "bounded visible native diary status-confirm wiring",
-        "paused before commencement",
-        "explicit go-ahead",
+        "for staff",
+        "external patient client",
         "proposal",
         "confirmation",
         "stale/current-truth",
         "ordinary-fallback",
         "no raw fallback",
         "provider-free authored-synthetic local frontend/backend interaction",
-        "responsive/keyboard proof",
+        "desktop/tablet/phone, keyboard",
         "cf-d2 remains deferred",
         "patient/clinical or operational product data",
         "provider/adc",

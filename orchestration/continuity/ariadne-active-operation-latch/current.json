@@ -4,14 +4,14 @@
   "active_tranche": "Provider-free unmounted channel-neutral patient interaction foundation",
   "objective": "Freeze and prove the patient identity, assurance, recovery and channel-neutral interaction contracts without opening an external patient client, identity provider, channel connector, product data or command runtime.",
   "status": "in_progress",
-  "source_head": "17bcf96778582e208e43f2c639090511f1ddb45c",
+  "source_head": "17d9da1844e59406eecda44b5029e839b2e8a573",
   "authority_source": "Yuri's explicit 2026-08-13 direction to record the recommended posture and lay the small extra foundation slab",
   "checkpoint": {
-    "completed_stage": "mandatory five-source preplanning rehydration and fresh Ariadne receipt passed over exact task baseline 17bcf96778582e208e43f2c639090511f1ddb45c",
-    "next_executable_stage": "author_and_verify_the_closed_canonical_contract_schema_examples_architecture_and_threat_model",
+    "completed_stage": "accepted at source 17d9da1844e59406eecda44b5029e839b2e8a573 with eight closed messages, five assurance states, six future-closed channels, 12 scenarios, 143 hostile rejections, 100 combined source tests, 98 closeout continuity/baton tests and the 193-test canonical fast profile; Continuity 274 / Compass 256 closeout complete",
+    "next_executable_stage": "commit_notify_and_publish_the_accepted_foundation_closeout_then_rehydrate_and_transfer_the_latch_to_visible_native_diary_status_confirm_wiring",
     "retry_counters": {
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:80ac4e99b4bdb7fe7518b47812f4d51e773ab7679f90b2963e7dd2a094a80c9b"
   },

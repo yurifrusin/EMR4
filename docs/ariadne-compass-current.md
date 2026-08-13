@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 273 / Compass 255. The provider-free status-confirm HTTP route now converges on the accepted adapter/transaction seam with opaque generation binding and exact-byte replay. Visible native Diary status-confirm wiring is next but paused before commencement at Yuri's request; CF-D2 remains a later observability-first durable event/cue extension.
+> EMR4 is at Continuity 274 / Compass 256. The provider-free channel-neutral patient interaction foundation fixes passkey-first-not-passkey-only identity, restricted recovery and backend-owned projection/proposal/confirmation semantics without enabling any patient client or channel. Bounded visible native Diary status-confirm wiring for staff is next; CF-D2 remains a later observability-first durable event/cue extension.
 
 ## North star
 
@@ -318,32 +318,33 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Exact atomic commit, replay, rollback, RLS and tenant-setting lifecycle pass on disposable PostgreSQL 16. Lineage parent: `raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal`.
 151. **Close the final backend status-confirm seam before visible Diary work — Provider-free status-confirm HTTP route convergence**
    One canonical adapter-owned status-confirm HTTP path now passes; bounded visible Diary wiring is next but paused before commencement at Yuri's request. Lineage parent: `raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal`.
+152. **Preserve channel-minimal patient access without weakening backend authority — Channel-neutral patient interaction foundation**
+   The static identity, assurance, recovery, projection and confirmation foundation passes; staff-visible Diary wiring is next. Lineage parent: `raisa-provider-free-status-confirm-http-route-convergence`.
 
 ## Current position
 
-**Backend status-confirm convergence complete; paused before visible Diary work — Provider-free status-confirm HTTP route convergence**
+**Patient interaction foundation complete; staff-visible Diary wiring next — Channel-neutral patient interaction foundation**
 
-**Why this proof came next:** The adapter and physical seam already passed independently; the HTTP boundary now proves their exact mounted composition.
+**Why this proof came next:** A small static slab prevents future channel or identity choices from splitting the backend authority model before visible UI work resumes.
 
-Canonical and compatibility paths share one fail-closed status-only transaction with exact-byte replay.
+Passkey-first-not-passkey-only identity, restricted recovery and channel-neutral proposal/confirmation semantics are frozen without enabling a patient client.
 
 ### What this unlocks
 
-- After Yuri explicitly resumes, freeze bounded visible native Diary status-confirm wiring against the accepted HTTP contract.
-- Prove proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.
-- Use that settled interaction boundary to shape a later observability-first durable event/cue delivery tranche.
+- Freeze bounded visible native Diary status-confirm wiring for staff against the accepted backend route and interaction principles.
+- Prove staff proposal review, confirmation, stale/current-truth reconciliation and responsive interaction without raw fallback.
+- Preserve a later external-patient-client programme without requiring a dedicated application or duplicating command authority.
 
 ### What it does not solve
 
-- Visible Diary interaction or another command family.
+- Real patient identity, authentication, recovery or channel delivery.
+- Visible Diary interaction, another command family or patient self-service policy.
 - CF-D2 restart/unknown-commit durability, watcher operations or cue recovery.
 - Product/patient data, provider access, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -407,7 +408,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 Prerequisites:
 
 - Preserve accepted conditional-command and status-confirm route correctness.
-- After Yuri explicitly resumes, wire and prove bounded visible Diary status-confirm behavior.
+- Wire and prove bounded visible native Diary status-confirm behavior for staff.
+- Keep future patient channels behind the accepted identity, assurance, recovery, projection and confirmation foundation.
 - Return to durable event/cue delivery only through a fresh observability-first CF-D2 plan informed by the visible consumer boundary.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -597,6 +599,7 @@ Prerequisites:
 
 ## Map limits
 
+- The patient interaction foundation is static architecture evidence, not real identity, channel delivery, patient self-service or command runtime.
 - Status-confirm HTTP convergence proves one authored-synthetic mounted backend family, not visible UI behavior, other commands or durable event/cue delivery.
 - The accepted route-mounting review proves static composition facts only; it does not admit or execute the mounted handler against the physical seam.
 - The accepted status-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL transaction and selected rollback boundaries only, not route, concurrency or product-command safety.
@@ -955,6 +958,9 @@ Prerequisites:
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
+- `docs/raisa-channel-neutral-patient-interaction-foundation-architecture.md`
+- `docs/raisa-channel-neutral-patient-interaction-foundation-closeout.md`
+- `docs/raisa-channel-neutral-patient-interaction-foundation-plan.md`
 - `docs/raisa-clinician-one-readonly-document-context-closeout.md`
 - `docs/raisa-clinician-one-readonly-document-context-plan.md`
 - `docs/raisa-clinician-one-word-desktop-selection-check-closeout.md`
@@ -1206,6 +1212,7 @@ Prerequisites:
 - `docs/security/raisa-agent-execution-surface-containment-gate-aes-c4-bounded-occupied-provider-proof-threat-model-delta.md`
 - `docs/security/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-threat-model-delta.md`
 - `docs/security/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-channel-neutral-patient-interaction-foundation-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
@@ -1400,6 +1407,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -1776,6 +1787,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-dry-run-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-1-preflight.json`
+- `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/authored-synthetic-contract-examples.json`
+- `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.json`
+- `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.schema.json`
+- `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-api-runtime-identity-enablement/evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/browser-word-online-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/interim-residue-evidence.json`
@@ -2191,6 +2206,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-12--status-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-12--status-transaction-kernel-protocol.md`
 - `orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md`
+- `orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-postgresql-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
@@ -2210,6 +2226,7 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
+- `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
@@ -2268,6 +2285,8 @@ Prerequisites:
 - `tests/test_model_required_bureau_c3_d3.py`
 - `tests/test_model_required_bureau_gate_zero.py`
 - `tests/test_model_required_bureau_successor_lanes.py`
+- `tests/test_raisa_channel_neutral_patient_interaction_foundation.py`
+- `tests/test_raisa_channel_neutral_patient_interaction_foundation_plan.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
@@ -2308,4 +2327,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 255; continuity graph revision 273._
+_Compass map revision 256; continuity graph revision 274._

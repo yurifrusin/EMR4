@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 273,
+  "graph_revision": 274,
   "harvests": [],
   "nodes": [
     {
@@ -17775,9 +17775,92 @@
         "CF-D2 durability remains deferred to a fresh observability-first event/cue delivery plan.",
         "Product/patient data, providers, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-channel-neutral-patient-interaction-foundation",
+      "title": "Channel-neutral patient interaction foundation",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-13T04:54:31Z",
+      "updated_at": "2026-08-13T04:54:31Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "17d9da1844e59406eecda44b5029e839b2e8a573",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-status-confirm-http-route-convergence",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The external-patient-client, identity-provider and channel gates remain closed.",
+          "No runtime, patient/product data, database/source, provider, command, deployment or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-channel-neutral-patient-interaction-foundation",
+          "source": "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept passkey-first-not-passkey-only identity, recovery and channel-neutral projection/confirmation architecture."
+        }
+      ],
+      "claim_scope": [
+        "Record resolution, proofing, binding, authentication, authorisation, delegation and recovery remain distinct.",
+        "Eight closed message families, five assurance states and six future-closed untrusted channels are fixed.",
+        "Projection is not current truth or reservation; selection is proposal-only; command authority remains in REST/OpenAPI.",
+        "Twelve scenarios, 143 hostile rejections, 100 combined tests and the 193-test canonical fast profile pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-channel-neutral-patient-interaction-foundation-plan.md",
+          "docs/raisa-channel-neutral-patient-interaction-foundation-architecture.md",
+          "docs/security/raisa-channel-neutral-patient-interaction-foundation-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.json",
+          "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/authored-synthetic-contract-examples.json",
+          "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-channel-neutral-patient-interaction-foundation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-13--channel-neutral-patient-interaction-foundation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-postcompaction-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_channel_neutral_patient_interaction_foundation.py",
+          "tests/test_raisa_channel_neutral_patient_interaction_foundation_plan.py",
+          "tests/test_raisa_channel_neutral_patient_interaction_foundation_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.schema.json",
+          "scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py",
+          "scripts/raisa_channel_neutral_patient_interaction_foundation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Identity topology, proofing/federation provider, action-assurance mapping and recovery service levels remain unselected.",
+        "Real identity, patient clients, SMS, email, WhatsApp, voice and delegated assistants remain closed.",
+        "Visible native Diary status-confirm behavior remains unproved and is the next staff-only tranche.",
+        "CF-D2 durability remains deferred to a fresh observability-first event/cue delivery plan.",
+        "Patient/product data, providers, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T03:09:24Z"
+  "updated_at": "2026-08-13T04:54:31Z"
 }

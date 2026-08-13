@@ -295,13 +295,23 @@ input is blocked without a local fallback. All twelve disposable scenarios,
 112 hostile mutations, 217 focused/current-lineage tests and the 193-test
 canonical fast profile pass with exact cleanup.
 
+Before visible UI work resumed, the provider-free channel-neutral patient
+interaction foundation passed at exact source
+`17d9da1844e59406eecda44b5029e839b2e8a573`. It separates record resolution,
+identity proofing, binding, authentication, authorisation, delegation and
+recovery; fixes a passkey-first-not-passkey-only posture; keeps six patient
+channels future-closed and untrusted; and makes every projection expiring,
+selection proposal-only and confirmation challenge non-authoritative until the
+backend command rechecks current authority and Diary truth. It creates no
+patient client, identity provider, route, database or command runtime.
+
 The next product-direction gate is bounded visible native Diary status-confirm
-wiring against this exact backend contract. Work is paused before that tranche
-at Yuri's 2026-08-13 request and resumes only on explicit go-ahead. CF-D2 is preserved but is not a
-prerequisite: the command path already derives correctness from current
-database truth, while the visible interaction boundary should define the
-quiet cues and reconciliation signals for a later observability-first durable
-event/cue delivery extension. Product data, providers, other command families,
+wiring for staff against the exact accepted backend contract. CF-D2 is
+preserved but is not a prerequisite: the command path already derives
+correctness from current database truth, while the visible interaction boundary
+should define the quiet cues and reconciliation signals for a later
+observability-first durable event/cue delivery extension. Product data,
+providers, external patient clients, other command families,
 restart/unknown-commit claims, deployment, production and release remain
 separately closed.
 
@@ -1500,26 +1510,27 @@ export mapping canonical.
 
 ---
 
-### PHASE 3 — Online Booking Portal
-*Public-facing web app + embeddable widget.*
+### PHASE 3 — Channel-neutral patient booking
+*Existing-channel-first interaction with an optional thin web renderer.*
 
 | Item | Details |
 |:---|:---|
-| Standalone site | Vite SPA; browse practitioners; view slots; book/cancel |
-| Embeddable | `<iframe>` with practice ID parameter for existing websites |
-| Patient verification | Name + DOB + Medicare to confirm identity |
-| SMS confirmation | Booking confirmation + reminder via ClickSend |
-| Waitlist | Notify patient if earlier slot opens |
+| Initial surfaces | Plain SMS and email where safe, with an expiring thin-web handoff for richer projections, phishing-resistant authentication, consent and confirmation |
+| Future renderers | WhatsApp, voice and registered delegated assistants remain separately gated adapters over the same protocol |
+| Patient identity | Proofed identity binding plus passkey-first-not-passkey-only authentication, multiple authenticators and separately restricted recovery; IHI, Medicare, DOB, address, contact details and health knowledge are never authenticators |
+| Booking flow | Backend-owned minimized projection → proposal-only selection → single-use challenge → existing REST/OpenAPI command with fresh authority and Diary-truth recheck |
+| Optional portal/widget | A standalone page or embeddable renderer may be added later for discoverability, but is not required infrastructure and never owns identity, availability or command truth |
+| Notifications and waitlist | Channel delivery is replaceable and deduplicated separately from command idempotency; delivery receipts never prove a booking |
 
 ---
 
-### PHASE 3B — Patient PWA App
-*Progressive Web App for patients — booking + queue + notifications.*
+### PHASE 3B — Optional rich patient renderer
+*A progressive web client for patients who want one, not a prerequisite for access.*
 
 | Item | Details |
 |:---|:---|
-| PWA | Installable to home screen; service worker for push notifications |
-| Booking | Same API as web portal |
+| PWA | Optional installable renderer with service-worker notifications; email, SMS and thin web remain viable entry paths |
+| Booking | Same channel-neutral projection/proposal-confirm protocol and backend command authority |
 | Queue position | Real-time "You are #3, estimated wait 12 min" (from Rayleen data) |
 | Appointment history | Past and upcoming appointments |
 | Push notifications | Reminders, confirmations, recall notices (supplement/replace SMS) |
