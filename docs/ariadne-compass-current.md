@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 287 / Compass 269. Reception One time and duration changes pass through the canonical appointment-update path; practitioner-only reassignment is the next narrow descendant.
+> EMR4 is at Continuity 288 / Compass 270. Reception One status, time, duration and practitioner reassignment share kernel-owned truth; compact selected-action orientation is next.
 
 ## North star
 
@@ -346,25 +346,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One selected appointment can change its same-day start time through the canonical update path with fresh truth in both projections. Lineage parent: `raisa-provider-free-two-projection-truth-parity-conformance-rehearsal`.
 165. **Apply projection-neutral kernel truth to a second update/reschedule field — Provider-free Reception One selected-appointment duration composition**
    One selected appointment can change duration through the canonical update path with fresh truth in both projections. Lineage parent: `raisa-reception-one-selected-appointment-time-reschedule-composition`.
+166. **Complete the bounded handleMoveResize field family with practitioner-only composition — Provider-free Reception One selected-appointment practitioner reassignment composition**
+   One selected appointment can move to one current active practitioner through the canonical update path with fresh truth in both projections. Lineage parent: `raisa-reception-one-selected-appointment-duration-composition`.
 
 ## Current position
 
-**The update/reschedule family now has time and duration compositions in Reception One — Provider-free Reception One selected-appointment duration composition**
+**Reception One now composes status and all three bounded handleMoveResize meanings over kernel truth — Provider-free Reception One selected-appointment practitioner reassignment composition**
 
-**Why this proof came next:** Duration was the next independent handleMoveResize field after same-day time rescheduling.
+**Why this proof came next:** Practitioner reassignment was the final independent handleMoveResize field after same-day time and duration.
 
-Duration-only adjustment passes through one backend-owned command path; practitioner-only reassignment is next.
+One active-target reassignment passes through the backend-owned command path; compact selected-action orientation is next.
 
 ### What this unlocks
 
-- Compose same-date, same-start, same-duration practitioner-only reassignment through the identical update interaction.
+- Orient a compact progressive-disclosure or intent-led selected-action console without opening another field.
 - Continue evaluating both projections by fresh kernel truth rather than renderer imitation.
 
 ### What it does not solve
 
-- Cross-day movement and full appointment editing remain closed.
-- No new backend command, event family or watcher runtime is authorised.
-- Product data, product providers, deployment, production and release remain closed.
+- Cross-day movement, full editing and another appointment field remain closed.
+- No new command, event family or watcher runtime is authorised.
+- Product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
 
@@ -625,6 +627,7 @@ Prerequisites:
 
 ## Map limits
 
+- The selected-practitioner composition is authored-synthetic client and local command-test evidence and cannot become a second scheduler, new command path or live-product claim.
 - The selected-duration composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.
 - The selected-time composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.
 - The truth-parity trace is evidence only and cannot become a runtime, API, database, analytics, audit or transcript contract.
@@ -1224,6 +1227,8 @@ Prerequisites:
 - `docs/raisa-reception-one-duration-deepseek-test-integration-recovery.md`
 - `docs/raisa-reception-one-selected-appointment-duration-composition-closeout.md`
 - `docs/raisa-reception-one-selected-appointment-duration-composition-plan.md`
+- `docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md`
+- `docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-plan.md`
 - `docs/raisa-reception-one-selected-appointment-status-action-composition-closeout.md`
 - `docs/raisa-reception-one-selected-appointment-status-action-composition-plan.md`
 - `docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md`
@@ -1362,6 +1367,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-duration-composition-threat-model-delta.md`
+- `docs/security/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-time-reschedule-composition-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
@@ -1413,6 +1419,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
@@ -1676,7 +1683,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-duration-composition-pre-verifier-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-duration-composition-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-sol-acceptance.md`
@@ -2090,6 +2100,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.schema.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-status-action-composition/selected-appointment-status-action-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-status-action-composition/selected-appointment-status-action-evidence.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json`
@@ -2393,6 +2405,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md`
 - `orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-duration-composition.md`
+- `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -2407,6 +2420,7 @@ Prerequisites:
 - `orchestration_harness/active_operation.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_duration_action.py`
+- `review/test_reception_one_practitioner_reassignment_action.py`
 - `review/test_reception_one_status_action.py`
 - `review/test_reception_one_time_reschedule_action.py`
 - `review/test_two_projection_truth_parity.py`
@@ -2512,6 +2526,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
 - `tests/test_raisa_reception_one_selected_appointment_duration_composition_evidence.py`
+- `tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_status_action_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_status_action_composition_plan.py`
 - `tests/test_raisa_reception_one_selected_appointment_time_reschedule_composition_evidence.py`
@@ -2521,6 +2536,7 @@ Prerequisites:
 - `tests/test_reception_one_bureau_runtime_ui_wiring.py`
 - `tests/test_reception_one_default_off_dual_planner_runtime.py`
 - `tests/test_reception_one_duration_composition.py`
+- `tests/test_reception_one_practitioner_reassignment_composition.py`
 - `tests/test_reception_one_preprinted_form_v5.py`
 - `tests/test_reception_one_preprinted_form_v5_broad_language_cohort.py`
 - `tests/test_reception_one_preprinted_form_v5_multicase.py`
@@ -2543,4 +2559,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 269; continuity graph revision 287._
+_Compass map revision 270; continuity graph revision 288._

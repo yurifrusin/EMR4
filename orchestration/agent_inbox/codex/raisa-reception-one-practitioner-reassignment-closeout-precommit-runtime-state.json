@@ -1,0 +1,102 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_practitioner_reassignment_closeout_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction and now records the accepted practitioner reassignment at Continuity 288 / Compass 270 plus the read-only selected-action-console orientation next.",
+    "current_authority_allocation": "Sol alone owns closeout acceptance and Git. DeepSeek completed the bounded test package, the native subagent completed the seam map and Gemini completed the independent exact-candidate veto.",
+    "active_plan_and_acceptance": "The frozen plan, threat-model delta, closeout, Sol acceptance and typed evidence bind result raisa_reception_one_selected_appointment_practitioner_reassignment_composition_pass to f085fc98ead21a3e7929ee9adbda81abfc7542c9. Final closeout tests pass 86/86 and the canonical fast profile passes 196/196.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, real source/database access, provider/ADC, credentials/IAM/network, new command or route authority, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded by explicit-path staging.",
+    "git_refs_and_worktree": "The task branch remains at f085fc98ead21a3e7929ee9adbda81abfc7542c9 before closeout commit and descends from required 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Seven intentional tracked closeout changes and 620 preserved untracked entries are present before the two precommit artifacts."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "objective": "Compose one selected current Reception One appointment reassignment to one existing active practitioner through the existing update proposal/confirm path while freezing date, start time, duration and every unrelated field.",
+    "status": "complete",
+    "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
+    "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Accepted practitioner-only composition at f085fc98ead21a3e7929ee9adbda81abfc7542c9 after DeepSeek/native recovery, 20 browser, 42 backend, 126 consolidated, 196 canonical and 80 independent-veto tests",
+      "next_executable_stage": null,
+      "retry_counters": {"review": 0, "verification": 4},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "accepted_operation_complete"},
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_selected_current_appointment",
+      "same_date_same_start_same_duration_practitioner_only",
+      "existing_active_practitioner_targets_only",
+      "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
+      "no_raw_put_or_second_command_path",
+      "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
+      "authored_synthetic_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "assessed_stage": "accepted closeout pre-commit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "rationale": "Its broad test artifact was useful but needed three Sol fixture repairs and had a non-authoritative USD 17.55 estimate, so repetition has negative economy.",
+        "work_packages": ["completed recovered browser-test contract"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "The fresh read-only exact-candidate veto passed 80 tests and left f085fc98 clean and unchanged; the review obligation is satisfied.",
+        "work_packages": ["completed exact-candidate veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The native seam map produced two material fail-closed client repairs and no further independent current-tranche package remains.",
+        "work_packages": ["completed read-only seam analysis"]
+      }
+    ],
+    "parallel_work_packages": ["DeepSeek browser tests", "native seam analysis", "Gemini veto"],
+    "serial_constraints": ["Sol alone owns explicit-path staging, acceptance commit, pre-push verification and publication"],
+    "reassessment_triggers": ["commit failure", "pre-push", "next tranche planning"]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "fresh_postcompaction_readback_and_precommit_verification",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns closeout commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native seam review is complete."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini veto is complete."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek test package is complete."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

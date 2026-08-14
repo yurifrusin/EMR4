@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 269,
-  "updated_at": "2026-08-14T01:55:58Z",
-  "source_graph_revision": 287,
-  "orientation_statement": "EMR4 is at Continuity 287 / Compass 269. Reception One time and duration changes pass through the canonical appointment-update path; practitioner-only reassignment is the next narrow descendant.",
+  "map_revision": 270,
+  "updated_at": "2026-08-14T03:38:04Z",
+  "source_graph_revision": 288,
+  "orientation_statement": "EMR4 is at Continuity 288 / Compass 270. Reception One status, time, duration and practitioner reassignment share kernel-owned truth; compact selected-action orientation is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3048,38 +3048,59 @@
         "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-duration-composition.md",
         "orchestration/agent_inbox/codex/raisa-reception-one-duration-composition-pre-verifier-receipt.json"
       ]
+    },
+    {
+      "node_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+      "lineage_parent": "raisa-reception-one-selected-appointment-duration-composition",
+      "strategic_role": "Complete the bounded handleMoveResize field family with practitioner-only composition",
+      "outcome": "One selected appointment can move to one current active practitioner through the canonical update path with fresh truth in both projections.",
+      "evidence": [
+        "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-plan.md",
+        "docs/security/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-threat-model-delta.md",
+        "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.schema.json",
+        "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json",
+        "review/test_reception_one_practitioner_reassignment_action.py",
+        "tests/test_reception_one_practitioner_reassignment_composition.py",
+        "tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_evidence.py",
+        "orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json",
+        "orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json",
+        "docs/ariadne-mandatory-parallelism-efficacy-control.md",
+        "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-reception-one-selected-appointment-duration-composition",
-    "strategic_role": "The update/reschedule family now has time and duration compositions in Reception One",
-    "why_now": "Duration was the next independent handleMoveResize field after same-day time rescheduling.",
-    "outcome": "Duration-only adjustment passes through one backend-owned command path; practitioner-only reassignment is next.",
+    "node_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "strategic_role": "Reception One now composes status and all three bounded handleMoveResize meanings over kernel truth",
+    "why_now": "Practitioner reassignment was the final independent handleMoveResize field after same-day time and duration.",
+    "outcome": "One active-target reassignment passes through the backend-owned command path; compact selected-action orientation is next.",
     "unlocks": [
-      "Compose same-date, same-start, same-duration practitioner-only reassignment through the identical update interaction.",
+      "Orient a compact progressive-disclosure or intent-led selected-action console without opening another field.",
       "Continue evaluating both projections by fresh kernel truth rather than renderer imitation."
     ],
     "does_not_solve": [
-      "Cross-day movement and full appointment editing remain closed.",
-      "No new backend command, event family or watcher runtime is authorised.",
-      "Product data, product providers, deployment, production and release remain closed."
+      "Cross-day movement, full editing and another appointment field remain closed.",
+      "No new command, event family or watcher runtime is authorised.",
+      "Product data, providers, deployment, production and release remain closed."
     ],
     "evidence": [
-      "docs/raisa-reception-one-selected-appointment-duration-composition-plan.md",
-      "docs/security/raisa-reception-one-selected-appointment-duration-composition-threat-model-delta.md",
-      "orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.schema.json",
-      "orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.json",
-      "review/test_reception_one_duration_action.py",
-      "tests/test_reception_one_duration_composition.py",
-      "tests/test_raisa_reception_one_selected_appointment_duration_composition_evidence.py",
-      "docs/raisa-reception-one-duration-deepseek-test-integration-recovery.md",
-      "orchestration/agent_inbox/deepseek/raisa-reception-one-duration-test-worker-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json",
+      "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-plan.md",
+      "docs/security/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-threat-model-delta.md",
+      "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.schema.json",
+      "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json",
+      "review/test_reception_one_practitioner_reassignment_action.py",
+      "tests/test_reception_one_practitioner_reassignment_composition.py",
+      "tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_evidence.py",
+      "orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json",
+      "orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json",
       "docs/ariadne-mandatory-parallelism-efficacy-control.md",
-      "docs/raisa-reception-one-selected-appointment-duration-composition-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-duration-composition-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-duration-composition.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-duration-composition-pre-verifier-receipt.json"
+      "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -4828,6 +4849,7 @@
     }
   ],
   "map_limits": [
+    "The selected-practitioner composition is authored-synthetic client and local command-test evidence and cannot become a second scheduler, new command path or live-product claim.",
     "The selected-duration composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.",
     "The selected-time composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.",
     "The truth-parity trace is evidence only and cannot become a runtime, API, database, analytics, audit or transcript contract.",

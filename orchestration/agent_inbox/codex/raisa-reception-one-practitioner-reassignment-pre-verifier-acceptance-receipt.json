@@ -1,0 +1,87 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "Deterministic exact candidate f085fc98 passes focused, consolidated, rendered and canonical gates in a clean tracked worktree; the clean verifier preflight passes",
+    "next_executable_stage": "dispatch one fresh Gemini exact-candidate veto, admit its terminal result and recover only evidence-backed findings",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": true,
+    "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "clean deterministic candidate pre-verifier",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The test lane found useful defects but its USD 17.54766 non-authoritative estimate and near-cap output were uneconomical; no further DeepSeek work is justified in this tranche.",
+        "work_packages": [
+          "integrated and recovered browser contract"
+        ]
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A clean exact-candidate source veto is now dependency-satisfied and is the only remaining independent review package.",
+        "work_packages": [
+          "one read-only f085fc98 veto with exact 80-test command packet"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The seam review found material client and command-truth risks that are now repaired; another native review would duplicate the Gemini package.",
+        "work_packages": [
+          "completed seam map"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "completed DeepSeek browser contract",
+      "completed native seam review",
+      "fresh Gemini veto"
+    ],
+    "reassessment_triggers": [
+      "verifier return",
+      "revision_required recovery",
+      "tranche closeout",
+      "next tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Gemini follows clean deterministic candidate",
+      "one reviewer decision only",
+      "Sol alone admits, recovers, accepts and closes out"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_candidate_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate f085fc98ead21a3e7929ee9adbda81abfc7542c9 passes 20 practitioner browser cases, 42 update-proposal cases, 126 consolidated cases, rendered desktop/mobile QA and the canonical 196-test fast profile under the frozen plan and command-truth amendment.",
+    "current_authority_allocation": "Sol retains acceptance and Git authority. DeepSeek and native lanes are complete. Gemini 3.6 Flash/high receives one read-only exact-candidate veto through a fresh Antigravity project.",
+    "git_refs_and_worktree": "The verifier worktree C:/Users/sarashera/EMR4-worktrees/practitioner-review-f085 is clean on codex/review-reception-one-practitioner-f085 at exact candidate f085fc98ead21a3e7929ee9adbda81abfc7542c9. The main tracked worktree is clean at the same candidate; unrelated untracked files remain preserved. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 287 / Compass 269 accepts duration composition and names practitioner-only reassignment as the active descendant.",
+    "protected_evidence_boundaries": "Gemini may read only the packet allowlist and exact plan-parent-to-candidate diff, run exact local provider-free commands and return one decision. Protected evidence, historical Diary PHI, patient/product data, docs/branding, writes, provider/product calls, deployment, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

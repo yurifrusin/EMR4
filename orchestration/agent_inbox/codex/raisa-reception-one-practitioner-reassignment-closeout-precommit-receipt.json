@@ -1,0 +1,84 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "Accepted practitioner-only composition at f085fc98ead21a3e7929ee9adbda81abfc7542c9 after DeepSeek/native recovery, 20 browser, 42 backend, 126 consolidated, 196 canonical and 80 independent-veto tests",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": false,
+    "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "accepted closeout pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its broad test artifact was useful but needed three Sol fixture repairs and had a non-authoritative USD 17.55 estimate, so repetition has negative economy.",
+        "work_packages": [
+          "completed recovered browser-test contract"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh read-only exact-candidate veto passed 80 tests and left f085fc98 clean and unchanged; the review obligation is satisfied.",
+        "work_packages": [
+          "completed exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The native seam map produced two material fail-closed client repairs and no further independent current-tranche package remains.",
+        "work_packages": [
+          "completed read-only seam analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "DeepSeek browser tests",
+      "native seam analysis",
+      "Gemini veto"
+    ],
+    "reassessment_triggers": [
+      "commit failure",
+      "pre-push",
+      "next tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone owns explicit-path staging, acceptance commit, pre-push verification and publication"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_practitioner_reassignment_closeout_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, threat-model delta, closeout, Sol acceptance and typed evidence bind result raisa_reception_one_selected_appointment_practitioner_reassignment_composition_pass to f085fc98ead21a3e7929ee9adbda81abfc7542c9. Final closeout tests pass 86/86 and the canonical fast profile passes 196/196.",
+    "current_authority_allocation": "Sol alone owns closeout acceptance and Git. DeepSeek completed the bounded test package, the native subagent completed the seam map and Gemini completed the independent exact-candidate veto.",
+    "git_refs_and_worktree": "The task branch remains at f085fc98ead21a3e7929ee9adbda81abfc7542c9 before closeout commit and descends from required 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Seven intentional tracked closeout changes and 620 preserved untracked entries are present before the two precommit artifacts.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction and now records the accepted practitioner reassignment at Continuity 288 / Compass 270 plus the read-only selected-action-console orientation next.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, real source/database access, provider/ADC, credentials/IAM/network, new command or route authority, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded by explicit-path staging."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

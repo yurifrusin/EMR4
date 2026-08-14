@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 287,
+  "graph_revision": 288,
   "harvests": [],
   "nodes": [
     {
@@ -19159,9 +19159,112 @@
         "Cross-day movement, full appointment editing and another command or event family remain closed.",
         "Product data, watcher/runtime, product providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+      "title": "Provider-free Reception One selected-appointment practitioner reassignment composition",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-14T03:38:04Z",
+      "updated_at": "2026-08-14T03:38:04Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-selected-appointment-duration-composition",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Authored-synthetic composition over the existing appointment update proposal/confirm family.",
+          "The bridge admits one fresh unique active-directory target, freezes it, fixes both deltas at zero and delegates once without network access.",
+          "The existing proposal and confirm-time re-proposal own changed-target activity, current authority, source truth, idempotency, audit and atomic commit."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-selected-appointment-practitioner-reassignment",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept one selected current appointment practitioner-only reassignment through the existing update interaction with current active-target truth and fresh reconciliation."
+        }
+      ],
+      "claim_scope": [
+        "One selected current appointment can move to one distinct active practitioner with unchanged date, start and duration.",
+        "Twelve paired traces cover safe, cancelled, blocked, stale, failed and committed outcomes with eight equal fresh-truth fields and no raw fallback.",
+        "DeepSeek supplied useful but uneconomical test breadth, native review drove material repairs and Gemini passed 80 tests at an unchanged clean candidate.",
+        "No new command route, product/provider call, real product data, deployment or protected-ref activity occurred."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json",
+            "review/test_reception_one_practitioner_reassignment_action.py",
+            "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md"
+          ],
+          "note": "Practitioner-only interaction preserves appointment identity, patient linkage, date, start and duration through the existing command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json",
+            "review/test_reception_one_practitioner_reassignment_action.py",
+            "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md"
+          ],
+          "note": "Every terminal outcome fresh-reads current truth before a practitioner is presented as committed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-plan.md",
+          "docs/security/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.schema.json",
+          "orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json",
+          "docs/ariadne-mandatory-parallelism-efficacy-control.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "review/test_reception_one_practitioner_reassignment_action.py",
+          "tests/test_reception_one_practitioner_reassignment_composition.py",
+          "tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_evidence.py",
+          "tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_reception_one_selected_appointment_practitioner_reassignment_composition_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The next planned descendant is a read-only selected-action-console consolidation orientation before another appointment field is added.",
+        "Cross-day movement, full editing and another command or event family remain closed.",
+        "Product data, watcher/runtime, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T01:55:58Z"
+  "updated_at": "2026-08-14T03:38:04Z"
 }

@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "Accepted practitioner-only composition at f085fc98ead21a3e7929ee9adbda81abfc7542c9 after DeepSeek/native recovery, 20 browser, 42 backend, 126 consolidated, 196 canonical and 80 independent-veto tests",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": false,
+    "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "parallelism_assessment": {
+    "assessed_stage": "post-compaction accepted-closeout resumption",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded browser-test package provided broad cases but required three fixture repairs and its non-authoritative USD 17.55 estimate made repetition in this tranche uneconomical.",
+        "work_packages": [
+          "completed and recovered 649-line route-intercepted browser contract"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh read-only veto passed exactly 80 tests at the unchanged clean f085fc98 candidate; further review would duplicate accepted evidence.",
+        "work_packages": [
+          "completed exact-candidate independent veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The read-only seam map exposed duplicate-directory and frozen-admission risks that directly produced two fail-closed client repairs.",
+        "work_packages": [
+          "completed active-directory and command-seam map"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "completed DeepSeek browser-test package",
+      "completed native seam analysis",
+      "completed Gemini independent veto"
+    ],
+    "reassessment_triggers": [
+      "closeout verification failure",
+      "pre-commit",
+      "pre-push",
+      "next tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone verifies closeout state, admits evidence, commits explicit paths, publishes the task branch and sends the non-PHI notification"
+    ]
+  },
+  "planned_action": "verify_and_commit_practitioner_reassignment_closeout_then_publish_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen practitioner-only plan, threat-model delta, typed evidence, closeout and Sol acceptance bind one active distinct target through the existing update proposal/confirm path. The candidate passes 20 practitioner browser cases, 42 backend cases, 126 consolidated cases, the 196-test canonical fast profile and an 80-test independent veto.",
+    "current_authority_allocation": "Sol retains architecture, acceptance, recovery, integration and Git authority. DeepSeek V4 Flash/high completed the bounded test-only package, the native subagent completed the read-only seam map, and Gemini 3.6 Flash/high completed one fresh exact-candidate veto.",
+    "git_refs_and_worktree": "The main worktree is on codex/ariadne-bernie-davida-parallel-seam at f085fc98ead21a3e7929ee9adbda81abfc7542c9, ahead of origin task e3015f36a9f93b7fc9382908a16c8a729fefc590 by three commits. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Seven intentional tracked closeout changes and 618 preserved untracked entries exist; explicit-path staging only is required.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 288 / Compass 270 accepts practitioner-only reassignment at exact source f085fc98ead21a3e7929ee9adbda81abfc7542c9 and names a read-only selected-action-console consolidation orientation next.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain unopened. Patient/product/clinical data, real source or database reads, provider/ADC, credentials/IAM/network, new command or route authority, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

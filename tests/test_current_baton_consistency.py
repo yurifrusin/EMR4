@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-reception-one-selected-appointment-duration-composition"
-SOURCE_HEAD = "f397a3706f3b870b8436eb3993bd90c6c0c742a8"
+NODE_ID = "raisa-reception-one-selected-appointment-practitioner-reassignment-composition"
+SOURCE_HEAD = "f085fc98ead21a3e7929ee9adbda81abfc7542c9"
+DURATION_SOURCE_HEAD = "f397a3706f3b870b8436eb3993bd90c6c0c742a8"
 TIME_RESCHEDULE_SOURCE_HEAD = "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a"
 TRUTH_PARITY_SOURCE_HEAD = "18aa4b613d735a68a7f6f2e55d34e498176c9935"
 STATUS_COMPOSITION_SOURCE_HEAD = "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33"
@@ -28,27 +29,27 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_the_live_duration_composition() -> None:
+def test_continuity_and_compass_bind_live_practitioner_composition() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 287
+    assert graph["graph_revision"] == 288
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 269
-    assert compass["source_graph_revision"] == 287
+    assert compass["map_revision"] == 270
+    assert compass["source_graph_revision"] == 288
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_duration_and_name_practitioner_next() -> None:
+def test_live_baton_rows_accept_practitioner_and_name_compact_orientation() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 287 / Compass 269" in current
+    assert "Continuity 288 / Compass 270" in current
     assert (
-        "raisa_reception_one_selected_appointment_duration_composition_pass"
+        "raisa_reception_one_selected_appointment_practitioner_reassignment_composition_pass"
         in current
     )
     assert SOURCE_HEAD in current
@@ -56,6 +57,7 @@ def test_live_baton_rows_accept_duration_and_name_practitioner_next() -> None:
     assert "Twelve paired traces" in current
     assert "eight fresh-truth fields" in current
     assert SOURCE_HEAD in relation
+    assert DURATION_SOURCE_HEAD in relation
     assert TIME_RESCHEDULE_SOURCE_HEAD in relation
     assert TRUTH_PARITY_SOURCE_HEAD in relation
     assert STATUS_COMPOSITION_SOURCE_HEAD in relation
@@ -87,8 +89,8 @@ def test_live_baton_rows_accept_duration_and_name_practitioner_next() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "practitioner-only reassignment" in next_work
-    assert "same existing update proposal/confirm path" in next_work
+    assert "selected-action-console consolidation orientation" in next_work
+    assert "progressive-disclosure or intent-led composition" in next_work
     assert "mandatory DeepSeek/Gemini/native-subagent" in next_work
     assert "product/patient data" in next_work
     assert "provider/ADC" in next_work
@@ -127,12 +129,11 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "practitioner-only reassignment",
-        "date, start time, duration and every unrelated field",
-        "limit targets to existing active practitioners",
-        "zero raw or second command path",
-        "no backend/api/openapi/graphql/database/event/watcher expansion",
-        "cross-day move",
+        "selected-action-console consolidation orientation",
+        "status, time, duration and practitioner truth/command contracts",
+        "no product edit",
+        "new command/field",
+        "backend/api/openapi/graphql/database/event/watcher expansion",
         "product/patient data",
         "provider/adc",
         "credentials/iam/network",

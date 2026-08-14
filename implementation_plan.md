@@ -377,8 +377,13 @@ passes at exact reviewed source
 proposal/confirm path with fresh reconciliation and no second command path. Its
 duration-only descendant now also passes at exact reviewed source
 `f397a3706f3b870b8436eb3993bd90c6c0c742a8`, preserving date, start and
-practitioner through the identical command path. Same-date, same-start,
-same-duration practitioner-only reassignment is the next narrow descendant.
+practitioner through the identical command path. Its practitioner-only
+descendant now also passes at exact reviewed source
+`f085fc98ead21a3e7929ee9adbda81abfc7542c9`, preserving date, start and
+duration while requiring one current active target at proposal and confirm.
+Before another field is added, a read-only compact selected-action-console
+orientation is the next narrow descendant so proven controls do not accrete as
+vertical middleware-style UI.
 No watcher runtime, existing database/
 source access, persistence, product data, external patient client, other
 command, restart/unknown-commit claim, provider, deployment, production or

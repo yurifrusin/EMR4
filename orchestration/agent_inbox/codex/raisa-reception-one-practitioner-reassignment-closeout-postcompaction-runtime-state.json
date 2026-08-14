@@ -1,0 +1,172 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_and_commit_practitioner_reassignment_closeout_then_publish_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 288 / Compass 270 accepts practitioner-only reassignment at exact source f085fc98ead21a3e7929ee9adbda81abfc7542c9 and names a read-only selected-action-console consolidation orientation next.",
+    "current_authority_allocation": "Sol retains architecture, acceptance, recovery, integration and Git authority. DeepSeek V4 Flash/high completed the bounded test-only package, the native subagent completed the read-only seam map, and Gemini 3.6 Flash/high completed one fresh exact-candidate veto.",
+    "active_plan_and_acceptance": "The frozen practitioner-only plan, threat-model delta, typed evidence, closeout and Sol acceptance bind one active distinct target through the existing update proposal/confirm path. The candidate passes 20 practitioner browser cases, 42 backend cases, 126 consolidated cases, the 196-test canonical fast profile and an 80-test independent veto.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain unopened. Patient/product/clinical data, real source or database reads, provider/ADC, credentials/IAM/network, new command or route authority, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain excluded.",
+    "git_refs_and_worktree": "The main worktree is on codex/ariadne-bernie-davida-parallel-seam at f085fc98ead21a3e7929ee9adbda81abfc7542c9, ahead of origin task e3015f36a9f93b7fc9382908a16c8a729fefc590 by three commits. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Seven intentional tracked closeout changes and 618 preserved untracked entries exist; explicit-path staging only is required."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "objective": "Compose one selected current Reception One appointment reassignment to one existing active practitioner through the existing update proposal/confirm path while freezing date, start time, duration and every unrelated field.",
+    "status": "complete",
+    "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
+    "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Accepted practitioner-only composition at f085fc98ead21a3e7929ee9adbda81abfc7542c9 after DeepSeek/native recovery, 20 browser, 42 backend, 126 consolidated, 196 canonical and 80 independent-veto tests",
+      "next_executable_stage": null,
+      "retry_counters": {
+        "review": 0,
+        "verification": 4
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": true,
+      "reason": "accepted_operation_complete"
+    },
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_selected_current_appointment",
+      "same_date_same_start_same_duration_practitioner_only",
+      "existing_active_practitioner_targets_only",
+      "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
+      "no_raw_put_or_second_command_path",
+      "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
+      "authored_synthetic_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "assessed_stage": "post-compaction accepted-closeout resumption",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "rationale": "The bounded browser-test package provided broad cases but required three fixture repairs and its non-authoritative USD 17.55 estimate made repetition in this tranche uneconomical.",
+        "work_packages": [
+          "completed and recovered 649-line route-intercepted browser contract"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "The fresh read-only veto passed exactly 80 tests at the unchanged clean f085fc98 candidate; further review would duplicate accepted evidence.",
+        "work_packages": [
+          "completed exact-candidate independent veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The read-only seam map exposed duplicate-directory and frozen-admission risks that directly produced two fail-closed client repairs.",
+        "work_packages": [
+          "completed active-directory and command-seam map"
+        ]
+      }
+    ],
+    "parallel_work_packages": [
+      "completed DeepSeek browser-test package",
+      "completed native seam analysis",
+      "completed Gemini independent veto"
+    ],
+    "serial_constraints": [
+      "Sol alone verifies closeout state, admits evidence, commits explicit paths, publishes the task branch and sends the non-PHI notification"
+    ],
+    "reassessment_triggers": [
+      "closeout verification failure",
+      "pre-commit",
+      "pre-push",
+      "next tranche planning"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_postcompaction_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol is active and retains closeout authority."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native seam review completed; no further current-tranche dispatch is justified."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini exact-candidate veto completed and left the review worktree clean and unchanged."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek test-only package completed and its actual economy is recorded."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Anthropic transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
