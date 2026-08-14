@@ -7580,7 +7580,14 @@ async function metaGridUpdateAppointmentDetails(input, returnFocus = null, onSta
 
   let admittedPractitioner = null;
   if (requestedPractitionerId !== currentPractitionerId) {
-    const matches = metaGridDirectorySnapshot().filter(row => (
+    const directory = isSmokeMode()
+      ? metaGridDirectorySnapshot()
+      : normalizePractitionerDirectory(await loadPractitionerDirectory()).map(row => ({
+          id: row.id,
+          display_name: row.displayName,
+          active: row.active === true
+        }));
+    const matches = directory.filter(row => (
       row.active === true && String(row.id || "") === requestedPractitionerId
     ));
     if (matches.length !== 1) {
@@ -10222,8 +10229,7 @@ async function deleteBooking() {
     }
 
     if (
-      actionOptions?.forceConfirmation === true
-      || !proposal.safe
+      !proposal.safe
       || (proposal.warnings && proposal.warnings.length > 0)
       || proposal.autonomy_tier === "proposal"
     ) {
@@ -10544,7 +10550,12 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null, 
       proposal = await propRes.json();
     }
 
-    if (!proposal.safe || (proposal.warnings && proposal.warnings.length > 0) || proposal.autonomy_tier === "proposal") {
+    if (
+      actionOptions?.forceConfirmation === true
+      || !proposal.safe
+      || (proposal.warnings && proposal.warnings.length > 0)
+      || proposal.autonomy_tier === "proposal"
+    ) {
       notify("awaiting_confirmation", true);
       const confirmed = await showStatusProposalDialog(proposal, {
         returnFocus: actionOptions?.returnFocus,

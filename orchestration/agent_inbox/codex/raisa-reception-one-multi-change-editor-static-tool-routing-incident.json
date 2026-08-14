@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0315",
+  "attempt_id": "raisa-reception-one-multi-change-editor-static-tool-routing-001",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "observation": "Sol passed two JavaScript sources to Ruff; Ruff parsed them as Python and failed with syntax noise.",
+  "candidate_effect": "No source, external state or Git ref changed.",
+  "containment": "Run Node syntax checks for JavaScript and Ruff only for Python paths, with separate fresh pass results.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}

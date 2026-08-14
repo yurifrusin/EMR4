@@ -393,7 +393,9 @@ def _trigger_duration_action(page, *, renderer: str, scenario: str) -> None:
     else:
         page.select_option("[data-testid='meta-grid-duration-select']", str(REQUESTED_DURATION))
         page.click("[data-testid='meta-grid-duration-submit']")
-    if EXPECTED[scenario]["dialog"] or (renderer == "reception_one" and scenario == "safe"):
+    if EXPECTED[scenario]["dialog"] or (
+        renderer == "reception_one" and scenario in {"safe", "stale"}
+    ):
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
         if scenario == "cancelled":
@@ -774,6 +776,11 @@ def test_time_action_regression_with_duration_panel(reception_page) -> None:
         # proposal/confirm family and leaves the duration unchanged.
         page.fill("[data-testid='meta-grid-reschedule-time']", "09:15")
         page.click("[data-testid='meta-grid-reschedule-submit']")
+        page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
+        page.locator(
+            "[data-testid='status-proposal-dialog'] button:has-text('Confirm & Save')"
+        ).click()
+        page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
         page.wait_for_function(
             "document.querySelector('[data-testid=meta-grid-reschedule-feedback]')?.textContent.toLowerCase().includes('committed')"
         )

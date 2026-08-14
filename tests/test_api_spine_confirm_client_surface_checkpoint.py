@@ -77,7 +77,7 @@ def test_diary_client_surface_matches_checkpoint_summary():
     source = _read(DIARY_JS)
 
     for phrase in (
-        'headers["Idempotency-Key"] = ensureElementIdempotencyKey(saveBtn);',
+        "idempotencyHeadersFor(ensureElementIdempotencyKey(saveBtn))",
         "idempotencyHeadersFor(ensureElementConfirmIdempotencyKey(saveBtn))",
         '"create-confirm-bernie"',
         "updateConfirmIdempotencyKey(proposal, confirmPayload)",

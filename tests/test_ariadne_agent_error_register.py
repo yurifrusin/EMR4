@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 275
+    assert register["register_revision"] == 276
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 315)
+        f"AER-{index:04d}" for index in range(1, 316)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 213
+    assert len(agent_incidents) == 214
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 314
+    assert report["incident_count"] == 315
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2841,6 +2841,23 @@ def test_aer_0314_records_parallelism_leverage_vocabulary_mismatch() -> None:
     )
     assert vocabulary["status"] == "corrected"
     assert vocabulary["correction"]["status"] == "corrected_fresh_attempt"
+
+
+def test_aer_0315_records_mixed_language_static_tool_routing() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    tool_routing = incidents["AER-0315"]
+    assert tool_routing["stage"] == "deterministic_verification"
+    assert tool_routing["role"] == "orchestrator"
+    assert tool_routing["category"] == "command_scope_violation"
+    assert tool_routing["process_severity"] == "low"
+    assert tool_routing["candidate_state"] == "canonical_unchanged"
+    assert tool_routing["related_incident_ids"] == []
+    assert tool_routing["recurrence_signature"] == (
+        "orchestrator.python_linter_invoked_on_javascript_source"
+    )
+    assert tool_routing["status"] == "corrected"
+    assert tool_routing["correction"]["status"] == "corrected_fresh_attempt"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -3117,17 +3134,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 275
-    assert report["incident_count"] == 314
+    assert report["register_revision"] == 276
+    assert report["incident_count"] == 315
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 213,
+        "agent_behavior": 214,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 45,
+        "command_scope_violation": 46,
         "evidence_misreport": 42,
         "harness_failure": 37,
         "output_contract_violation": 87,
@@ -3138,7 +3155,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 188,
+        "canonical_unchanged": 189,
         "untrusted_partial_worktree": 28,
     }
     receipt_event_recurrence = next(

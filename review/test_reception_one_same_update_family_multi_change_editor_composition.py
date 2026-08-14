@@ -46,6 +46,7 @@ from test_reception_one_selected_action_console import (  # noqa: E402, F401
     REQUESTED_DURATION,
     REQUESTED_START,
     SUMMARY,
+    SUBMIT,
     TARGET_PRACTITIONER_ID,
     WAIT_TIMEOUT,
     assert_field_value,
@@ -64,9 +65,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
 # Combined update editor surface: the provisional shared-draft summary and the
-# single update-family Review control mounted inside the one labelled editor.
+# active field view's Review control mounted inside the one labelled editor.
 DRAFT_SUMMARY = "[data-testid='meta-grid-update-draft-summary']"
-REVIEW = "[data-testid='meta-grid-update-review']"
 
 
 # ─── Behavioural contract (evidence label: route_intercepted_browser) ────────
@@ -133,7 +133,12 @@ def test_collapse_and_status_crossing_discard_whole_update_draft(
         # Collapse discards the whole unsubmitted update draft.
         toggle_action(page, "duration", via="Enter")
         assert not page.locator(DRAFT_SUMMARY).is_visible()
-        assert page.locator(REVIEW).is_disabled()
+        open_action(page, "time", via="click")
+        assert_field_value(page, "time", CURRENT_START)
+        assert page.locator(SUBMIT["time"]).is_disabled()
+        open_action(page, "duration", via="click")
+        assert_field_value(page, "duration", str(CURRENT_DURATION))
+        assert page.locator(SUBMIT["duration"]).is_disabled()
 
         # A fresh combined draft is also discarded when crossing to status.
         open_action(page, "time", via="click")
@@ -142,7 +147,12 @@ def test_collapse_and_status_crossing_discard_whole_update_draft(
         set_field(page, "duration", str(REQUESTED_DURATION))
         open_action(page, "status", via="click")
         assert not page.locator(DRAFT_SUMMARY).is_visible()
-        assert page.locator(REVIEW).is_disabled()
+        open_action(page, "time", via="click")
+        assert_field_value(page, "time", CURRENT_START)
+        assert page.locator(SUBMIT["time"]).is_disabled()
+        open_action(page, "duration", via="click")
+        assert_field_value(page, "duration", str(CURRENT_DURATION))
+        assert page.locator(SUBMIT["duration"]).is_disabled()
         # Status never enters an update payload and no route was issued.
         assert_zero_routes(state)
         assert_route_log_unchanged(state)
@@ -164,9 +174,9 @@ def test_combined_review_emits_one_proposal_and_opens_existing_dialog(
         set_field(page, "duration", str(REQUESTED_DURATION))
         open_action(page, "practitioner", via="click")
         set_field(page, "practitioner", TARGET_PRACTITIONER_ID)
-        # The visible update Review control exists.
-        assert page.locator(REVIEW).is_visible()
-        page.locator(REVIEW).click()
+        # The active update view's visible Review control submits the whole draft.
+        assert page.locator(SUBMIT["practitioner"]).is_visible()
+        page.locator(SUBMIT["practitioner"]).click()
         # Even a safe/no-warning proposal stops at the existing dialog.
         page.wait_for_selector(DIALOG, state="visible", timeout=WAIT_TIMEOUT)
         assert state["proposal_count"] == 1
@@ -177,6 +187,8 @@ def test_combined_review_emits_one_proposal_and_opens_existing_dialog(
         assert body["start_time_local"] == REQUESTED_START
         assert body["duration_minutes"] == REQUESTED_DURATION
         assert body["practitioner_id"] == TARGET_PRACTITIONER_ID
+        page.keyboard.press("Escape")
+        page.wait_for_selector(DIALOG, state="detached", timeout=WAIT_TIMEOUT)
     finally:
         page.unroute("**/api/v1/**", handler)
 
@@ -195,8 +207,8 @@ def test_visible_confirm_and_save_emits_one_confirm_and_fresh_summary(
         set_field(page, "duration", str(REQUESTED_DURATION))
         open_action(page, "practitioner", via="click")
         set_field(page, "practitioner", TARGET_PRACTITIONER_ID)
-        assert page.locator(REVIEW).is_visible()
-        page.locator(REVIEW).click()
+        assert page.locator(SUBMIT["practitioner"]).is_visible()
+        page.locator(SUBMIT["practitioner"]).click()
         page.wait_for_selector(DIALOG, state="visible", timeout=WAIT_TIMEOUT)
         # Only the visible Confirm & Save control may cause one confirm request.
         page.locator(f"{DIALOG} button:has-text('Confirm & Save')").click()
@@ -235,8 +247,8 @@ def test_escape_from_safe_dialog_zero_confirms_and_restores_focus(
         set_field(page, "duration", str(REQUESTED_DURATION))
         open_action(page, "practitioner", via="click")
         set_field(page, "practitioner", TARGET_PRACTITIONER_ID)
-        assert page.locator(REVIEW).is_visible()
-        page.locator(REVIEW).click()
+        assert page.locator(SUBMIT["practitioner"]).is_visible()
+        page.locator(SUBMIT["practitioner"]).click()
         page.wait_for_selector(DIALOG, state="visible", timeout=WAIT_TIMEOUT)
         # Escape cancels the safe dialog.
         page.keyboard.press("Escape")
@@ -332,15 +344,22 @@ def test_combined_update_editor_source_guards_reject_loops_raw_and_status() -> N
     diary = (DOCS / "diary/diary.js").read_text(encoding="utf-8")
 
     # 1. One combined update bridge entry exists on both sides of the bridge.
-    assert "metaGridProposeCombinedUpdate" in diary
-    assert "proposeCombinedUpdate" in meta
+    assert "metaGridUpdateAppointmentDetails" in diary
+    assert "updateAppointmentDetails" in meta
 
-    # 2. The combined client renders the shared draft summary and Review control.
+    # 2. The combined client renders the shared draft summary in each existing
+    #    update-family view and wires every field's Review control to one executor.
     assert "meta-grid-update-draft-summary" in meta
-    assert "meta-grid-update-review" in meta
+    for submit_id in (
+        "meta-grid-reschedule-submit",
+        "meta-grid-duration-submit",
+        "meta-grid-practitioner-submit",
+    ):
+        assert submit_id in meta
+    assert meta.count("executeSelectedUpdateAction(") == 4
 
     # 3. The combined bridge delegates to the existing Diary command exactly once.
-    combined_start = diary.index("async function metaGridProposeCombinedUpdate")
+    combined_start = diary.index("async function metaGridUpdateAppointmentDetails")
     boundaries = []
     for boundary in (
         "\nfunction ",
@@ -387,11 +406,11 @@ def test_combined_update_editor_source_guards_reject_loops_raw_and_status() -> N
     ):
         assert marker not in combined
 
-    # 8. No raw PUT/PATCH fallback anywhere in the client.
+    # 8. No raw PUT/PATCH fallback is introduced in the meta-grid client. The
+    #    established conventional Diary has unrelated compatibility PATCH code,
+    #    so the bridge-specific absence is already proved against ``combined``.
     assert 'method: "PUT"' not in meta
     assert 'method: "PATCH"' not in meta
-    assert 'method: "PUT"' not in diary
-    assert 'method: "PATCH"' not in diary
 
     # 9. No new update-family proposal/confirm route spelling.
     for marker in (

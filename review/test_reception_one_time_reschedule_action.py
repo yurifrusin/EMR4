@@ -380,7 +380,9 @@ def _trigger_time_action(page, *, renderer: str, scenario: str) -> None:
     else:
         page.fill("[data-testid='meta-grid-reschedule-time']", REQUESTED_START)
         page.click("[data-testid='meta-grid-reschedule-submit']")
-    if EXPECTED[scenario]["dialog"] or (renderer == "reception_one" and scenario == "safe"):
+    if EXPECTED[scenario]["dialog"] or (
+        renderer == "reception_one" and scenario in {"safe", "stale"}
+    ):
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
         if scenario == "cancelled":
@@ -585,7 +587,7 @@ def test_invalid_and_no_op_time_input_makes_zero_routes(reception_page) -> None:
 
         # Off-15-minute-grid time is rejected locally without a request.
         time_input.fill("09:07")
-        page.click("[data-testid='meta-grid-reschedule-submit']")
+        assert page.locator("[data-testid='meta-grid-reschedule-submit']").is_disabled()
         page.wait_for_timeout(250)
         assert state["proposal_count"] == 0
         assert state["confirm_count"] == 0
