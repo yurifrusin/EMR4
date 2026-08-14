@@ -37,6 +37,8 @@ Implementation is limited to:
   `docs/diary/diary.html`;
 - the four existing route-intercepted selected-action browser test files for
   Sol-owned mechanical palette activation adaptations;
+- the accepted two-projection status-truth parity browser helper for the same
+  mechanical status-palette activation, with all parity assertions unchanged;
 - one new, tightly capped route-intercepted selected-action-console browser
   contract owned by the bounded test worker; and
 - tranche-local plan, threat, typed evidence, acceptance, continuity and

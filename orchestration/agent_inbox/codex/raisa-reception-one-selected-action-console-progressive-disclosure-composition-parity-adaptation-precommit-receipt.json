@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "completed_stage": "The recorded parity-helper adaptation passes its exact case, the complete broader packet passes 167/167, and the canonical fast profile passes Ruff, 209-source compilation, 196 tests, Diary JavaScript syntax and Git whitespace",
+    "next_executable_stage": "commit the exact parity-helper and plan refinement after a passing receipt, then create an unchanged clean review worktree and admit one fresh Gemini exact-candidate veto",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "resume_after_compaction": true,
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "parity adaptation pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its artifact required the already closed Sol recovery; no further external correction is useful.",
+        "work_packages": [
+          "completed and preserved"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The passing candidate is now nearly ready for the required fresh veto.",
+        "work_packages": [
+          "exact-candidate veto after clean commit"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only audits remain incorporated.",
+        "work_packages": [
+          "completed implementation audit",
+          "completed test audit"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate commit",
+      "pre-verifier admission",
+      "verifier return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol commits the exact verified helper adaptation",
+      "Gemini requires a clean exact checkout"
+    ]
+  },
+  "planned_action": "commit_recorded_two_projection_parity_helper_palette_adaptation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The plan now expressly admits the accepted two-projection parity browser helper for mechanical status-choice activation only. Its assertions are unchanged. The exact parity case passes, the broader packet passes 167/167, and the canonical fast profile passes Ruff, 209-source compilation, 196 tests, Diary JavaScript syntax and Git whitespace.",
+    "current_authority_allocation": "Sol owns the mechanical parity-helper adaptation, plan refinement, verification, commit and later acceptance. DeepSeek is complete and closed after Sol recovery; native analyses are complete; Gemini remains reserved for a fresh exact-candidate veto.",
+    "git_refs_and_worktree": "Task branch HEAD is 78cf861c2fd1506521232065158968c34bf2a06f with only the active plan, two-projection test helper and latch modified plus this receipt pair untracked. Origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 requires the active provider-free selected-action-console composition and unchanged paired command truth.",
+    "protected_evidence_boundaries": "The refinement changes no product, bridge, route, request, backend, API, database or authority meaning. Protected evidence, historical Diary PHI, patient/product/clinical data, providers, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

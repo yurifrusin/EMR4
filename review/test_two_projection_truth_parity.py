@@ -252,6 +252,9 @@ def open_reception_one(page) -> None:
     selector = f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}']"
     page.wait_for_selector(selector, state="visible")
     page.click(selector)
+    page.wait_for_selector("[data-testid='meta-grid-selected-action-console']", state="visible")
+    assert page.locator("[data-testid='meta-grid-status-action']").count() == 0
+    page.click("[data-testid='meta-grid-action-choice-status']")
     page.wait_for_selector("[data-testid='meta-grid-status-action']", state="visible")
 
 
