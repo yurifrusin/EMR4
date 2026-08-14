@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 269,
+  "register_revision": 270,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12394,6 +12394,48 @@
           "orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json",
           "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-gemini-report-reconciliation-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-269.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0309",
+      "attempt_id": "raisa-reception-one-same-update-family-multi-change-deepseek-egress-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The bounded implementation worker must return exactly one JSON decision object and no prose, as required by the frozen packet.",
+      "observed_error": "The completed DeepSeek result prefaced the requested object with two prose sentences and wrapped the object in a Markdown code fence. The outer transport receipt, exact one-file commit and test summaries were otherwise present.",
+      "detection_method": "Sol compared the persisted worker result with the packet's exact decision-format instruction before integrating or relying on any worker claim.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-deepseek-packet.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-deepseek-result.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-deepseek-egress-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-270.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.required_single_json_decision_wrapped_in_prose_and_fence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the exact result, treat its prose and embedded decision as non-authoritative, inspect the exact Git commit and independently rerun the full deterministic candidate packet before normal independent review.",
+        "prevention_control": "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git and independently reproduced checks.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-deepseek-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-deepseek-result.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-deepseek-egress-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-270.md"
         ]
       },
       "status": "corrected"

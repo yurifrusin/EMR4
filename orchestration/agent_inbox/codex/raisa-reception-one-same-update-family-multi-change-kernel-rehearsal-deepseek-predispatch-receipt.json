@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Committed the frozen provider-free M1-M7 plan at 5411d09a132b0cc28a1bec5045c3819986c642b4 and created a clean exact-source disposable DeepSeek worktree with one owned test path",
+    "next_executable_stage": "run the fresh five-source pre-dispatch receipt, then launch DeepSeek V4 Flash/high through Claude Code bare mode on the exact test-only packet",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5411d09a132b0cc28a1bec5045c3819986c642b4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "pre-worker dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The exact clean plan source and one-file M1-M7 test package are stable and separable.",
+        "work_packages": [
+          "implement and commit the single owned test module"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Atomicity and rollback claims require fresh independent review after deterministic admission.",
+        "work_packages": [
+          "fresh read-only exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Source inspection is complete and prior native scope breaches make another lane uneconomical.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek implements the test module while Sol prepares non-overlapping review scaffolding"
+    ],
+    "reassessment_triggers": [
+      "worker return",
+      "scope breach",
+      "test failure",
+      "pre-verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "DeepSeek owns only one new test file",
+      "repository PostgreSQL pytest processes remain serial",
+      "Gemini waits for deterministic candidate admission",
+      "Sol owns integration and acceptance"
+    ]
+  },
+  "planned_action": "dispatch_one_deepseek_flash_high_test_only_worker_on_the_exact_clean_plan_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan at 5411d09a defines M1-M7 over the unchanged existing update proposal/confirm route: one combined practitioner/time/duration command, fresh-truth, conflict, inactive target, exact replay, different-body conflict, correlated audit/idempotency and pre-commit rollback/retry. The packet forbids product-source repair and all discovery commands.",
+    "current_authority_allocation": "Sol owns plan, acceptance and Git. DeepSeek V4 Flash/high receives only the single new test module. Gemini remains reserved for later independent review. Native subagents remain declined after prior scope breaches.",
+    "git_refs_and_worktree": "Task HEAD is 5411d09a132b0cc28a1bec5045c3819986c642b4 and origin task remains 704f2827c7b914792c43c12f026149ce25f70882. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Worker worktree and branch are clean at exact plan source 5411d09a.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 names this exact test-first rehearsal and preserves all product, external and protected closures.",
+    "protected_evidence_boundaries": "Only ordinary allowlisted sources and newly authored synthetic test fixtures are permitted. Protected holdouts, historical Diary PHI, unrelated untracked files, docs/branding, patient/product data, adapters, providers, ADC/credentials/IAM/network, UI/API/schema/migration changes, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

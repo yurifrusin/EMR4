@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 269
+    assert register["register_revision"] == 270
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 309)
+        f"AER-{index:04d}" for index in range(1, 310)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 207
+    assert len(agent_incidents) == 208
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 308
+    assert report["incident_count"] == 309
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2610,7 +2610,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0308_record_reschedule_and_multi_change_recovery() -> None:
+def test_aer_0294_through_0309_record_reschedule_and_multi_change_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2749,6 +2749,19 @@ def test_aer_0294_through_0308_record_reschedule_and_multi_change_recovery() -> 
     )
     assert review_report["status"] == "corrected"
     assert review_report["correction"]["status"] == "control_added"
+
+    deepseek_egress = incidents["AER-0309"]
+    assert deepseek_egress["stage"] == "implementation"
+    assert deepseek_egress["role"] == "implementer"
+    assert deepseek_egress["category"] == "output_contract_violation"
+    assert deepseek_egress["process_severity"] == "low"
+    assert deepseek_egress["candidate_state"] == "accepted_candidate_changed"
+    assert deepseek_egress["related_incident_ids"] == []
+    assert deepseek_egress["recurrence_signature"] == (
+        "implementer.required_single_json_decision_wrapped_in_prose_and_fence"
+    )
+    assert deepseek_egress["status"] == "corrected"
+    assert deepseek_egress["correction"]["status"] == "control_added"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -3025,11 +3038,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 269
-    assert report["incident_count"] == 308
+    assert report["register_revision"] == 270
+    assert report["incident_count"] == 309
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 207,
+        "agent_behavior": 208,
         "harness": 37,
         "repository": 55,
         "transport": 9,
@@ -3038,14 +3051,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 42,
         "evidence_misreport": 41,
         "harness_failure": 37,
-        "output_contract_violation": 85,
+        "output_contract_violation": 86,
         "read_only_violation": 3,
         "reasoning_claim_error": 36,
         "repository_defect": 55,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 97,
+        "accepted_candidate_changed": 98,
         "canonical_unchanged": 184,
         "untrusted_partial_worktree": 27,
     }

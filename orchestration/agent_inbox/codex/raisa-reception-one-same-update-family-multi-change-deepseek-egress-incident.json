@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0309",
+  "attempt_id": "raisa-reception-one-same-update-family-multi-change-deepseek-egress-001",
+  "observed_on": "2026-08-14",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+  "observation": "The completed DeepSeek result included two prose sentences and a fenced JSON block although the packet required exactly one JSON object and no prose.",
+  "candidate_effect": "The sole owned test commit remained clean and was independently inspected and rerun by Sol; the egress wording is not used as acceptance evidence.",
+  "containment": "Preserve the exact result, reject its narrative as authoritative, bind the candidate only by Git and independent deterministic verification, and record the output-contract mismatch before candidate integration.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}

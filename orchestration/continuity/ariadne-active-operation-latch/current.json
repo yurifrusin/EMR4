@@ -4,11 +4,11 @@
   "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
   "objective": "Use provider-free authored-synthetic evidence to prove that changed practitioner, time and duration travel through the existing appointment update proposal and confirmation path as one command, with fresh-truth, conflict, idempotency, audit and rollback behavior bounded exactly.",
   "status": "in_progress",
-  "source_head": "704f2827c7b914792c43c12f026149ce25f70882",
+  "source_head": "5411d09a132b0cc28a1bec5045c3819986c642b4",
   "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Froze the provider-free authored-synthetic M1-M7 test-first plan and threat delta over the exact existing appointment update proposal/confirm transaction without authorising product-source changes",
-    "next_executable_stage": "commit the exact plan/latch/rehydration artifacts, create a clean disposable worktree at that plan source, then dispatch the bounded DeepSeek test-only package",
+    "completed_stage": "DeepSeek produced clean one-file candidate db5292d8eb07caf3ba4b7e31ab72233b14c91288; Sol independently inspected it and reproduced 109 passing tests plus Ruff, while AER-0309 contains the worker's fenced-prose egress mismatch",
+    "next_executable_stage": "commit the exact worker packet/result, AER-0309 register update and latch checkpoint, then run a fresh pre-integration receipt before cherry-picking only the one-file candidate commit",
     "retry_counters": {
       "implementation": 0,
       "review": 0,

@@ -1,8 +1,8 @@
 {
-  "canonical_register_sha256": "0dd977ede951b927bb1f007f1bb316ab17e3a883dfd71efcd8a25a6e296af47d",
+  "canonical_register_sha256": "5ba061b8b6db8926addec2de53eb286bf84a101c803751ea22dc645dfb5e3274",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 97,
+      "accepted_candidate_changed": 98,
       "canonical_unchanged": 184,
       "untrusted_partial_worktree": 27
     },
@@ -10,20 +10,20 @@
       "command_scope_violation": 42,
       "evidence_misreport": 41,
       "harness_failure": 37,
-      "output_contract_violation": 85,
+      "output_contract_violation": 86,
       "read_only_violation": 3,
       "reasoning_claim_error": 36,
       "repository_defect": 55,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 207,
+      "agent_behavior": 208,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 115,
+      "low": 116,
       "material": 98,
       "moderate": 95
     },
@@ -46,7 +46,7 @@
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 5,
+      "deepseek-flash-workers::implementer": 6,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,14 +87,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 20,
+      "implementer": 21,
       "integration_reviewer": 2,
       "orchestrator": 234,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 308,
+  "incident_count": 309,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -730,7 +730,7 @@
       ]
     }
   ],
-  "register_revision": 269,
+  "register_revision": 270,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-14"
 }

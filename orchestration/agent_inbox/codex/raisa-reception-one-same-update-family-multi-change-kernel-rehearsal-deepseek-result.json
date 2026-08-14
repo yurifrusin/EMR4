@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All required commands passed, the sole owned path was committed, and the worktree is clean on the worker branch. Final verification confirms end HEAD `db5292d8eb07caf3ba4b7e31ab72233b14c91288` and branch `codex/worker-reception-one-same-update-multi-change-5411d09a`.\n\n```json\n{\n  \"decision\": \"candidate_ready\",\n  \"start_head\": \"5411d09a132b0cc28a1bec5045c3819986c642b4\",\n  \"end_head\": \"db5292d8eb07caf3ba4b7e31ab72233b14c91288\",\n  \"branch\": \"codex/worker-reception-one-same-update-multi-change-5411d09a\",\n  \"owned_paths_changed\": [\"tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py\"],\n  \"commit\": \"db5292d8eb07caf3ba4b7e31ab72233b14c91288\",\n  \"tests\": [\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m ruff format tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py\", \"exit_code\": 0, \"summary\": \"formatted the new module\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m ruff check tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py\", \"exit_code\": 0, \"summary\": \"ruff check passed\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m pytest -q tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py\", \"exit_code\": 0, \"summary\": \"7 passed (M1-M7 rehearsal)\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m pytest -q tests/test_appointment_update_proposal.py tests/test_api_spine_update_confirm_idempotency_route_contract.py tests/test_api_spine_artifacts.py tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py\", \"exit_code\": 0, \"summary\": \"109 passed across update proposal/idempotency/artifacts/rehearsal\"},\n    {\"command\": \"git diff --check -- tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py\", \"exit_code\": 0, \"summary\": \"no whitespace errors\"},\n    {\"command\": \"git status --short\", \"exit_code\": 0, \"summary\": \"clean worktree after commit\"}\n  ],\n  \"worktree_clean\": true,\n  \"issues\": []\n}\n```",
+  "usage": {
+    "input_tokens": 116875,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 5217792,
+    "output_tokens": 66946,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 4.881006,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

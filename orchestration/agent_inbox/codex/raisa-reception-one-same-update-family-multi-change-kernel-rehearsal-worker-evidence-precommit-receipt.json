@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "DeepSeek produced clean one-file candidate db5292d8eb07caf3ba4b7e31ab72233b14c91288; Sol independently inspected it and reproduced 109 passing tests plus Ruff, while AER-0309 contains the worker's fenced-prose egress mismatch",
+    "next_executable_stage": "commit the exact worker packet/result, AER-0309 register update and latch checkpoint, then run a fresh pre-integration receipt before cherry-picking only the one-file candidate commit",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5411d09a132b0cc28a1bec5045c3819986c642b4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "worker return pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "One clean one-file candidate and independently reproduced deterministic packet provided positive implementation leverage; AER-0309 contains its bounded egress defect.",
+        "work_packages": [
+          "completed one-file M1-M7 test candidate"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh independent review follows integration and deterministic admission.",
+        "work_packages": [
+          "fresh exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No new separable analysis remains and prior scope breaches keep native leverage negative.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-integration",
+      "post-integration deterministic gate",
+      "pre-verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit worker evidence before integration",
+      "cherry-pick only exact one-file commit",
+      "PostgreSQL tests remain serial",
+      "Sol owns admission"
+    ]
+  },
+  "planned_action": "commit_only_the_worker_packet_result_scope_receipts_aer_0309_and_active_checkpoint_before_candidate_integration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen M1-M7 plan at 5411d09a remains unchanged. Worker commit db5292d8 adds exactly one test module. Sol read it completely and independently reproduced Ruff plus 109 passing update/idempotency/API Spine tests. AER-0309 records only the worker's extra prose and Markdown fence around its required JSON egress.",
+    "current_authority_allocation": "Sol retains acceptance and Git. DeepSeek completed one test-only candidate; its self-report is non-authoritative. Gemini remains reserved. Native subagents remain declined.",
+    "git_refs_and_worktree": "Task HEAD is 5411d09a132b0cc28a1bec5045c3819986c642b4; origin task remains 704f2827c7b914792c43c12f026149ce25f70882. Protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Worker branch is clean at db5292d8eb07caf3ba4b7e31ab72233b14c91288 with exactly one added test file.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 authorises the frozen same-update-family kernel rehearsal and no product-source broadening.",
+    "protected_evidence_boundaries": "No product source, protected evidence, historical Diary PHI, patient/product data, external channel, provider/ADC/credential/IAM/network, UI/API/schema/migration, deployment, production, release, Pages or protected ref was opened. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

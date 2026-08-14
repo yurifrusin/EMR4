@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.worker_worktree_preflight.v1",
+  "worker_id": "deepseek-same-update-multi-change-5411d09a",
+  "worker": "DeepSeek V4 Flash/high through Claude Code bare mode",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/same-update-multi-change-worker-5411d09a",
+  "branch": "codex/worker-reception-one-same-update-multi-change-5411d09a",
+  "head": "5411d09a132b0cc28a1bec5045c3819986c642b4",
+  "clean": true,
+  "owned_paths": [
+    "tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py"
+  ],
+  "protected_paths_opened": false,
+  "provider_or_external_runtime_opened": false,
+  "integration_or_push_authority": false
+}
