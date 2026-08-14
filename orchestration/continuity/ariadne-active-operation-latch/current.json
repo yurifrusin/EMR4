@@ -4,14 +4,14 @@
   "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
   "objective": "Compose one selected current Reception One appointment reassignment to one existing active practitioner through the existing update proposal/confirm path while freezing date, start time, duration and every unrelated field.",
   "status": "in_progress",
-  "source_head": "e3015f36a9f93b7fc9382908a16c8a729fefc590",
+  "source_head": "fe922f1bff27760817e0a6ce1858ce1b17d646db",
   "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "The practitioner-only plan and threat delta are frozen at task baseline e3015f36a9f93b7fc9382908a16c8a729fefc590 and their plan plus orchestration controls pass 24 focused tests",
-    "next_executable_stage": "commit the explicit planning boundary, generate the distinct pre-dispatch receipt, then dispatch the bounded DeepSeek and native-subagent packages",
+    "completed_stage": "The exact DeepSeek test candidate is integrated at fe922f1bff27760817e0a6ce1858ce1b17d646db; Sol and native-review recoveries pass 20 practitioner browser cases, 42 update-proposal cases, 126 consolidated cases, JavaScript, Ruff, whitespace and rendered desktop/mobile inspection",
+    "next_executable_stage": "pass the pre-commit receipt, commit the deterministic product candidate, run the canonical fast profile and dispatch one fresh exact-candidate Gemini veto from a clean verifier worktree",
     "retry_counters": {
       "review": 0,
-      "verification": 1
+      "verification": 4
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },

@@ -85,7 +85,13 @@ def test_reception_one_owns_presentation_reconciliation_and_interruption_only() 
     assert 'input.step = "900"' in render
     assert '"Review time change"' in render
     assert 'feedback.setAttribute("aria-live", "polite")' in render
-    assert "state.statusAction.busy || state.rescheduleAction.busy" in source
+    for busy in (
+        "state.statusAction.busy",
+        "state.rescheduleAction.busy",
+        "state.durationAction.busy",
+        "state.practitionerAction.busy",
+    ):
+        assert busy in source
     assert "if (state.rescheduleAction.busy)" in source
 
 

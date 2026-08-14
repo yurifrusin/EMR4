@@ -728,7 +728,6 @@ def test_update_proposal_null_patient_id_with_provisional_is_safe(
 def test_update_proposal_cross_practice_returns_404(
         client, db, gp_user, practice_b, patient_b):
     """Proposing an update for another practice's appointment returns 404."""
-    import uuid as _uuid
     pr_b = Practitioner(
         practice_id=practice_b.id,
         first_name="Other",
@@ -824,6 +823,103 @@ def test_update_proposal_valid_practitioner_change(
     # Row unchanged — proposal is non-mutating
     db.refresh(appt)
     assert appt.practitioner_id == practitioner.id
+
+
+def test_update_proposal_blocks_changed_inactive_practitioner(
+        client, db, gp_user, practice, practitioner, patient):
+    inactive = Practitioner(
+        practice_id=practice.id,
+        first_name="Inactive",
+        last_name="Target",
+        ahpra_number="MED0007654322",
+        is_active=False,
+    )
+    db.add(inactive)
+    db.flush()
+    appt = _make_appt(db, practice, practitioner, patient, start_h=14)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"practitioner_id": str(inactive.id)},
+        headers=_proposal_headers(make_token(gp_user)),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert [block["code"] for block in data["blocks"]].count("practitioner_inactive") == 1
+    assert data["confirm_payload"] is None
+    db.refresh(appt)
+    assert appt.practitioner_id == practitioner.id
+
+
+def test_update_confirm_rechecks_target_practitioner_activity(
+        client, db, gp_user, practice, practitioner, patient):
+    target = Practitioner(
+        practice_id=practice.id,
+        first_name="Active",
+        last_name="Then Inactive",
+        ahpra_number="MED0007654323",
+        is_active=True,
+    )
+    db.add(target)
+    db.flush()
+    appt = _make_appt(db, practice, practitioner, patient, start_h=14)
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"practitioner_id": str(target.id)},
+        headers=_proposal_headers(token),
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    assert proposal["safe"] is True
+
+    target.is_active = False
+    db.commit()
+    payload = proposal["confirm_payload"]
+    payload["confirmed"] = True
+    before_audits = db.query(AppointmentAuditLog).count()
+    confirm_resp = client.post(
+        UPDATE_CONFIRM_URL,
+        json=payload,
+        headers=_update_confirm_headers(token),
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    codes = [block["code"] for block in data["blocks"]]
+    assert "update_proposal_revalidation_blocked" in codes
+    assert "practitioner_inactive" in codes
+    db.refresh(appt)
+    assert appt.practitioner_id == practitioner.id
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_update_proposal_allows_unchanged_inactive_practitioner(
+        client, db, gp_user, practice, practitioner, patient):
+    practitioner.is_active = False
+    appt = _make_appt(db, practice, practitioner, patient, start_h=14)
+    db.flush()
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={
+            "practitioner_id": str(practitioner.id),
+            "duration_minutes": 30,
+        },
+        headers=_proposal_headers(make_token(gp_user)),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert "practitioner_inactive" not in [block["code"] for block in data["blocks"]]
+    db.refresh(appt)
+    assert appt.practitioner_id == practitioner.id
+    assert appt.duration_minutes == 15
 
 
 # ─── Status proposal coverage gaps ───────────────────────────────────────────

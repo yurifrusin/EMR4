@@ -6920,6 +6920,7 @@ function metaGridDirectorySnapshot() {
   const rows = activePractitionerDirectory.map(row => ({
     id: row.id,
     display_name: row.displayName,
+    active: row.active === true,
     location_id: row.defaultLocationId || activeLocationId || null,
     location_display: row.defaultLocationName || activeTemplate?.practice_name || "Current practice"
   }));
@@ -6931,23 +6932,28 @@ function metaGridDirectorySnapshot() {
     rows.push({
       id: String(id),
       display_name: col.assignment,
+      active: false,
       location_id: activeLocationId || null,
       location_display: activeTemplate?.practice_name || "Current practice"
     });
   });
   if (isSmokeMode()) {
     const fixtures = [
-      { id: "meta-grid-smoke-prac-shera", display_name: "Dr Alex Shera", location_id: "loc-1", location_display: "Main Clinic" },
-      { id: "meta-grid-smoke-prac-patel", display_name: "Dr Anika Patel", location_id: "loc-1", location_display: "Main Clinic" },
-      { id: "meta-grid-smoke-prac-chen", display_name: "Dr Alex Chen", location_id: "loc-1", location_display: "Main Clinic" }
+      { id: "meta-grid-smoke-prac-shera", display_name: "Dr Alex Shera", active: true, location_id: "loc-1", location_display: "Main Clinic" },
+      { id: "meta-grid-smoke-prac-patel", display_name: "Dr Anika Patel", active: true, location_id: "loc-1", location_display: "Main Clinic" },
+      { id: "meta-grid-smoke-prac-chen", display_name: "Dr Alex Chen", active: true, location_id: "loc-1", location_display: "Main Clinic" }
     ];
     fixtures.forEach(row => {
       const fixtureName = row.display_name.toLowerCase().replace(/^dr\s+/, "");
-      const exists = rows.some(existing => (
-        existing.id === row.id ||
-        existing.display_name.toLowerCase().replace(/^dr\s+/, "") === fixtureName
+      const existing = rows.find(candidate => (
+        candidate.id === row.id ||
+        candidate.display_name.toLowerCase().replace(/^dr\s+/, "") === fixtureName
       ));
-      if (!exists) rows.push(row);
+      if (existing) {
+        existing.active = true;
+        return;
+      }
+      rows.push(row);
     });
   }
   return rows;
@@ -7456,6 +7462,85 @@ async function metaGridResizeAppointmentDuration(input, durationEl = null, onSta
   });
 }
 
+async function metaGridReassignAppointmentPractitioner(input, practitionerEl = null, onStateChange = null) {
+  const appointmentId = String(input?.appointment_id || "").trim();
+  const requestedPractitionerId = String(input?.practitioner_id || "").trim();
+  if (!appointmentId || appointmentId.length > 200) {
+    throw new Error("The selected appointment is not available for a practitioner review.");
+  }
+  if (!requestedPractitionerId || requestedPractitionerId.length > 200) {
+    throw new Error("Choose an active practitioner before review.");
+  }
+
+  const appointment = await metaGridReadAppointmentSource(appointmentId);
+  const directory = isSmokeMode()
+    ? metaGridDirectorySnapshot()
+    : normalizePractitionerDirectory(await loadPractitionerDirectory()).map(row => ({
+        id: row.id,
+        display_name: row.displayName,
+        active: row.active === true
+      }));
+  const matches = directory.filter(row => (
+    row.active === true && String(row.id || "") === requestedPractitionerId
+  ));
+  if (matches.length !== 1) {
+    throw new Error("That practitioner is not available in the current active directory.");
+  }
+
+  const currentPractitionerId = metaGridPractitionerId(appointment);
+  if (!currentPractitionerId || currentPractitionerId === requestedPractitionerId) {
+    throw new Error("Choose a different active practitioner before review.");
+  }
+
+  const target = matches[0];
+  const targetColumn = activeTemplate?.columns?.find(column => (
+    String(column.practitioner_id || "") === requestedPractitionerId
+    || (
+      column.practitioner_ahpra
+      && String(ahpraToPractitionerMap[column.practitioner_ahpra]?.id || "") === requestedPractitionerId
+    )
+  )) || {
+    practitioner_id: requestedPractitionerId,
+    practitioner_ahpra: null,
+    assignment: target.display_name
+  };
+  let outcome = "checking";
+  const observe = update => {
+    outcome = update.phase;
+    if (
+      typeof onStateChange === "function"
+      && !["committed", "cancelled", "blocked", "failed"].includes(update.phase)
+    ) onStateChange(update);
+  };
+  const result = await handleMoveResize(
+    appointment,
+    0,
+    0,
+    targetColumn,
+    {
+      onStateChange: observe,
+      returnFocus: practitionerEl,
+      suppressAlert: true,
+      admittedPractitioner: Object.freeze({
+        id: requestedPractitionerId,
+        displayName: target.display_name
+      }),
+      dialogTitle: "Confirm Appointment Practitioner Change",
+      dialogSummary: "Review the proposed appointment practitioner reassignment.",
+      displayTransition: {
+        from: metaGridPractitionerDisplay(appointment),
+        to: target.display_name
+      }
+    }
+  );
+  const currentAppointment = await metaGridReadAppointment(appointmentId);
+  return Object.freeze({
+    committed: result?.committed === true,
+    outcome: result?.committed === true ? "committed" : (result?.outcome || outcome),
+    appointment: currentAppointment
+  });
+}
+
 function setMetaGridLaunchAvailability(available) {
   const button = document.getElementById("btn-meta-grid-launch");
   if (button) button.classList.toggle("hidden", !available);
@@ -7483,6 +7568,7 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   setAppointmentStatus: metaGridSetAppointmentStatus,
   rescheduleAppointmentTime: metaGridRescheduleAppointmentTime,
   resizeAppointmentDuration: metaGridResizeAppointmentDuration,
+  reassignAppointmentPractitioner: metaGridReassignAppointmentPractitioner,
   composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
@@ -10254,7 +10340,37 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null, 
   const newStartMins = Math.max(0, Math.min(1425, currentStartMins + deltaStart));
   const newDuration = Math.max(15, (appt.duration_minutes || 15) + deltaDuration);
 
-  const targetPractitioner = column ? ahpraToPractitionerMap[column.practitioner_ahpra] : null;
+  const targetPractitionerId = column?.practitioner_id
+    ? String(column.practitioner_id)
+    : "";
+  const admittedPractitioner = actionOptions?.admittedPractitioner || null;
+  if (
+    admittedPractitioner
+    && (
+      String(admittedPractitioner.id || "") !== targetPractitionerId
+      || !String(admittedPractitioner.displayName || "").trim()
+    )
+  ) {
+    notify("blocked", false);
+    return Object.freeze({ committed: false, outcome: "blocked" });
+  }
+  const directoryTarget = targetPractitionerId
+    ? activePractitionerDirectory.find(practitioner => practitioner.id === targetPractitionerId)
+    : null;
+  const targetPractitioner = column
+    ? (
+        targetPractitionerId
+          ? {
+              id: targetPractitionerId,
+              first_name: admittedPractitioner?.displayName
+                || directoryTarget?.displayName
+                || column.assignment
+                || "Practitioner",
+              last_name: ""
+            }
+          : ahpraToPractitionerMap[column.practitioner_ahpra]
+      )
+    : null;
   const newPractitionerId = targetPractitioner ? targetPractitioner.id : (appt.practitioner?.id || appt.practitioner_id);
 
   if (newStartMins === currentStartMins && newDuration === (appt.duration_minutes || 15) && (!column || newPractitionerId === (appt.practitioner?.id || appt.practitioner_id))) {
@@ -10339,11 +10455,13 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null, 
       if (column && targetPractitioner) {
         cachedAppt.practitioner = {
           id: targetPractitioner.id,
-          ahpra_number: column.practitioner_ahpra,
+          ahpra_number: column.practitioner_ahpra || null,
           first_name: targetPractitioner.first_name,
           last_name: targetPractitioner.last_name
         };
+        cachedAppt.practitioner_id = targetPractitioner.id;
         appt.practitioner = cachedAppt.practitioner;
+        appt.practitioner_id = targetPractitioner.id;
       }
       appt.start_time_local = newStartTimeString;
       appt.duration_minutes = newDuration;

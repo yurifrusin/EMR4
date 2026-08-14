@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks pass. Here is the terminal receipt.\n\n## Terminal receipt\n\n**Status:** `worker_commit_complete` \u2014 one owned artifact created, staged, and committed on the assigned task branch. No acceptance claimed.\n\n**Exact changed file:**\n- `review/test_reception_one_practitioner_reassignment_action.py` (new; sole file in commit)\n\n**Final line count:** 646 source lines (cap 650; measured by literal `len(readlines())`).\n\n**Syntax-check result:** `python -m py_compile` \u2192 **PASS** (`SYNTAX_OK`).\n\n**Expected-red behavioural status:** **RED as designed.** The product implementation is intentionally absent. All Reception One behavioural cases that wait for `meta-grid-practitioner-action`/selector/bridge, the fresh-directory recheck fail-closed cases, the 200-row over-cap fail-closed case, and the new-product static-guard assertions (new testids, `Review practitioner change`, `handleMoveResize(appointment, 0, 0,`, `reassignAppointmentPractitioner`, `Confirm Appointment Practitioner Change`) fail against the pre-implementation source. The conventional-grid drag path, existing `handleMoveResize`/proposal/confirm route presence, and meta-grid no-second-write-path markers remain green. The contract was **not weakened** to pass pre-implementation.\n\n**Commit hash:** `7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8` (branch `codex/reception-one-practitioner-test-worker-5dfd`).\n\n**Boundary attestation:**\n- Only the allowlisted plan/threat-model/sibling-test/diary-asset reads were performed (literal exact-path only; no Glob/Grep/rg/recursive listing).\n- Only the one allowed file was created/edited; explicit-path staging only; one worker commit.\n- Allowed checks run: `py_compile`, literal line count, `git status --short --untracked-files=no` (clean), `git diff --check`, `git diff`, `git add`, `git diff --cached --check`, `git commit -m \"test(reception-one): specify practitioner reassignment\"`, `git rev-parse HEAD`. No pytest executed in the worktree.\n- Contract covers all 9 packet requirements: selected-card selector + review action; active-directory-only options with same/blank/malformed/inactive/unlisted/duplicate zero-route denial; exact fresh appointment/directory rechecks failing closed; zero-delta bridge delegating once to `handleMoveResize` with no bridge-local write path; existing proposal/confirm routes only; six paired conventional-grid/reception-one outcomes; identical normalized truth, exact route counts, zero raw PUT/unexpected mutations; separate interruption/fresh-read, four-way mutual exclusion, dialog focus/Escape, time/duration/status regression, 200-row boundary, and desktop/tablet/phone no-overflow; `route_intercepted_browser` + `authored_synthetic_client_fixture` evidence labels with no live claim.\n\n**Genuine blocker:** None within the bounded packet.",
+  "usage": {
+    "input_tokens": 247208,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 25642880,
+    "output_tokens": 139096,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 17.547659999999993,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

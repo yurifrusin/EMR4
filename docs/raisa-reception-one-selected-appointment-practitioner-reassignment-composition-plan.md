@@ -4,7 +4,7 @@ Date: 2026-08-14
 
 Timestamp: 2026-08-14T12:47:51+10:00 (Australia/Brisbane)
 
-Status: `frozen_for_provider_free_execution`
+Status: `frozen_for_provider_free_execution_with_command_truth_recovery`
 
 Task baseline: `e3015f36a9f93b7fc9382908a16c8a729fefc590`
 
@@ -34,7 +34,8 @@ evidence, idempotency, audit and atomic commit.
   and a fresh post-action appointment/projection read.
 - **Command surface:** existing
   `POST /api/v1/appointments/proposals/update/{id}` and its proposal-supplied
-  allowlisted confirm endpoint only.
+  allowlisted confirm endpoint only. A changed practitioner target must be
+  revalidated as active inside both proposal and confirm-time re-proposal.
 - **UI composition:** one practitioner selector within the selected
   appointment actions and a same-page bridge to `handleMoveResize`.
 - **Only mutable meaning:** `practitioner_id`.
@@ -42,8 +43,9 @@ evidence, idempotency, audit and atomic commit.
   patient linkage, type, location, status, waiting area, reason, notes and
   booking channel.
 - **Not opened:** raw `PUT`, new route or command family, full edit, time or
-  duration change, cross-day move, GraphQL mutation, backend/OpenAPI/database,
-  event/provider or external-patient work.
+  duration change, cross-day move, GraphQL mutation, OpenAPI/database,
+  event/provider or external-patient work. The sole backend amendment is the
+  active-target invariant inside the existing update proposal function.
 
 ## Frozen implementation
 
@@ -54,7 +56,7 @@ evidence, idempotency, audit and atomic commit.
 2. Offer only distinct entries whose current directory row has
    `active === true`, comes from the existing authenticated practice-scoped
    practitioner directory, and is not the selected appointment's current
-   practitioner. Template-only, inactive, malformed, duplicate and synthetic
+   practitioner. Template-only, inactive, blank, oversized, duplicate and synthetic
    non-test entries are never action targets. The accepted 200-row directory
    cap remains an explicit limit; this tranche adds no pagination.
 3. Immediately before delegation, read the exact current appointment and the
@@ -69,8 +71,9 @@ evidence, idempotency, audit and atomic commit.
    idempotency, compatibility-write or raw-`PUT` implementation.
 5. Permit `handleMoveResize` to resolve an exact target directly from the
    column's existing `practitioner_id`, retaining its AHPRA mapping fallback
-   for ordinary grid callers. No caller may supply an arbitrary target outside
-   the freshly admitted active-directory row.
+   for ordinary grid callers. The Reception One bridge binds a frozen admitted
+   practitioner identity into the shared composer, which rejects any mismatch
+   with the supplied target column before proposal.
 6. Parameterize the existing dialog options so the accessible title is
    `Confirm Appointment Practitioner Change`, the summary names a practitioner
    reassignment, and the visible transition shows current and proposed display
@@ -80,18 +83,26 @@ evidence, idempotency, audit and atomic commit.
    duration and every other field from the exact fresh appointment. The
    proposal remains non-mutating and owns roster, schedule/break conflict,
    warning and block meaning.
-8. Visible staff confirmation is mandatory whenever the proposal requires it.
+8. If and only if the proposed `practitioner_id` differs from the appointment's
+   current practitioner, the existing backend proposal queries that exact
+   same-practice target's current activity and emits a typed
+   `practitioner_inactive` block when it is no longer active. The existing
+   confirm path re-runs this proposal after its freshness/evidence checks, so a
+   target deactivated after UI admission cannot be written. Unchanged-
+   practitioner time or duration work remains valid for historical
+   appointments.
+9. Visible staff confirmation is mandatory whenever the proposal requires it.
    Preserve `confirm_payload` opaquely; alter only the accepted acknowledgement
    fields and use the existing distinct confirmation idempotency key.
-9. Status, time, duration and practitioner actions share mutual exclusion.
+10. Status, time, duration and practitioner actions share mutual exclusion.
    Blur or visibility interruption starts no duplicate and requires fresh
    reconciliation before any further selected-appointment action.
-10. After every terminal outcome--cancel, block, stale rejection, directory or
+11. After every terminal outcome--cancel, block, stale rejection, directory or
     transport failure, idempotent replay or commit--perform an exact fresh
     appointment read and reconcile both projections. Only that read may supply
     the displayed practitioner. Terminal bridge callbacks must not outrun the
     required exact read.
-11. The dialog retains focus containment and Escape/Cancel behavior and returns
+12. The dialog retains focus containment and Escape/Cancel behavior and returns
     focus to the practitioner selector. Preserve visible focus and no
     horizontal overflow at desktop, tablet and phone sizes.
 
@@ -111,9 +122,10 @@ Every pair normalizes to identical appointment id, date, start, end,
 practitioner, duration, patient linkage and status. It proves exact
 proposal/confirm counts, zero raw `PUT`, zero unexpected mutations, and no
 optimistic target after failure. Separate cases cover same, inactive,
-unlisted, duplicate and malformed target zero-route denial; fresh-directory
-failure; interruption/fresh reconciliation; dialog focus/Escape; status/time/
-duration regression; the 200-row boundary; and desktop/tablet/phone layout.
+unlisted, duplicate, blank and oversized target zero-route denial; fresh-directory
+failure; target deactivation between proposal and confirmation; interruption/
+fresh reconciliation; dialog focus/Escape; status/time/duration regression;
+the 200-row boundary; and desktop/tablet/phone layout.
 
 Evidence labels are `route_intercepted_browser`,
 `authored_synthetic_client_fixture` and `repository_static_and_regression`,
@@ -153,6 +165,9 @@ pre-verifier admission and closeout; closeout compares planned with actual use.
   directory regressions, affected API Spine/security/idempotency tests,
   JavaScript syntax, canonical fast profile, rendered desktop/tablet/phone
   inspection and Git whitespace.
+- Existing-route backend tests proving an inactive changed target is blocked
+  without mutation, target deactivation is blocked again at confirm-time, and
+  an unchanged inactive practitioner does not break time/duration proposals.
 - No PostgreSQL, provider, external network, real product source or deployment.
 
 ## Recovery and stop
@@ -166,9 +181,23 @@ non-inferable user-owned interaction choice.
 
 ## Closed surfaces
 
-No FastAPI, GraphQL, OpenAPI, database/migration/RLS, event/cue runtime,
-watcher, product/patient/clinical data, historical Diary/PHI, external patient
-identity/client/channel, provider/ADC, credential/IAM/network, executable model
-tool, new command/write, deployment, production, release, Pages or protected-
-ref action is opened. `docs/branding/` and every unrelated untracked file
-remain preserved; staging is explicit-path only.
+No new FastAPI route/schema, GraphQL, OpenAPI, database/migration/RLS,
+event/cue runtime, watcher, product/patient/clinical data, historical
+Diary/PHI, external patient identity/client/channel, provider/ADC,
+credential/IAM/network, executable model tool, new command/write, deployment,
+production, release, Pages or protected-ref action is opened. The narrow
+existing-command active-target recheck adds no authority. `docs/branding/` and
+every unrelated untracked file remain preserved; staging is explicit-path
+only.
+
+## Command-truth recovery amendment
+
+Recovery timestamp: 2026-08-14T13:04:39+10:00 (Australia/Brisbane)
+
+Source inspection showed that `_ensure_practitioner` proves same-practice
+existence but not activity. Treating the UI's fresh directory read as final
+authority would contradict the accepted source-owned-truth and conditional-
+command architecture. The plan therefore admits the one invariant in item 8
+inside the already authorised update proposal/confirm family. No route,
+request/response schema, database object, command family or compatibility
+write is added.

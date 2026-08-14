@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "admit_and_integrate_exact_deepseek_browser_test_candidate_after_sol_and_native_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 287 / Compass 269 accepts duration composition and names practitioner-only reassignment as the active descendant.",
+    "current_authority_allocation": "Sol retains product, user-visible meaning, backend invariant recovery, integration and acceptance. DeepSeek V4 Flash/high returned one capped browser-test file at worker commit 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8; the native subagent completed a read-only seam review; Gemini remains reserved for a fresh exact-candidate veto.",
+    "active_plan_and_acceptance": "The committed plan at 5dfd6d34fa908fe9b50862ff84979698e27a661f plus its explicit command-truth recovery amendment constrain work to a distinct active target, frozen date/start/duration, the existing update proposal/confirm route, confirm-time activity revalidation and fresh authoritative reconciliation.",
+    "protected_evidence_boundaries": "The worker candidate is exactly one authored-synthetic route-intercepted browser test file. Protected evidence, historical Diary PHI, real product/patient/clinical data, new routes or schemas, OpenAPI/GraphQL/database/event expansion, providers/ADC/credentials/IAM/network, raw PUT, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Main is at plan HEAD 5dfd6d34fa908fe9b50862ff84979698e27a661f with intentional unstaged tranche changes and all unrelated untracked entries preserved. The DeepSeek worktree is clean at exact descendant 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8 and changes only review/test_reception_one_practitioner_reassignment_action.py. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "objective": "Compose one selected current Reception One appointment reassignment to one existing active practitioner through the existing update proposal/confirm path while freezing date, start time, duration and every unrelated field.",
+    "status": "in_progress",
+    "source_head": "5dfd6d34fa908fe9b50862ff84979698e27a661f",
+    "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Sol implementation and command-truth recovery pass focused static, JavaScript, lint and all 42 update-proposal tests; native review defects are repaired; DeepSeek returned one clean 646-line test-only commit",
+      "next_executable_stage": "pass pre-integration receipt, integrate the exact one-file worker commit, run its route-intercepted browser contract and repair only evidence-backed candidate defects",
+      "retry_counters": {"review": 0, "verification": 3},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["deepseek_exact_one_test_file_max_650_lines", "same_date_same_start_same_duration_practitioner_only", "fresh_distinct_active_practitioner_target_only", "existing_update_proposal_confirm_only", "changed_target_activity_rechecked_at_proposal_and_confirmation", "no_raw_put_or_second_command_path", "provider_free_authored_synthetic_only", "protected_evidence_product_data_database_network_deployment_and_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "assessed_stage": "worker-return and command-truth-recovery pre-integration",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "negative", "rationale": "The one-file matrix is comprehensive and clean but reached 646 of 650 lines and incurred a high non-authoritative USD 17.54766 estimate; admit on test merit while recording the allocation as uneconomical for repetition unchanged.", "work_packages": ["review/test_reception_one_practitioner_reassignment_action.py at 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Fresh veto remains valuable and is serially gated by deterministic and rendered candidate passage.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "The read-only seam review found duplicate-ID visibility, caller-column admission and target-activity race risks; Sol repaired the first two client seams and the backend race was recovered under the existing command contract.", "work_packages": ["completed read-only directory/delegation/latch/reconciliation seam map"]}
+    ],
+    "parallel_work_packages": ["DeepSeek one-file browser contract", "native read-only seam review", "Sol product and existing-command invariant recovery"],
+    "serial_constraints": ["receipt passes before worker integration", "stateful browser execution remains serial", "deterministic and rendered passage precedes Gemini", "Sol alone integrates, recovers and accepts"],
+    "reassessment_triggers": ["integrated browser-test result", "material product or test recovery", "new or restored task window", "pre-verifier acceptance", "verifier return", "tranche closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_pre_integration_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol controls exact admission, product recovery, integration and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native read-only seam review completed with no edits."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini veto remains reserved until deterministic and rendered passage."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek worker completed cleanly at exact commit 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8; receipt reports 646 lines and no permission denials."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

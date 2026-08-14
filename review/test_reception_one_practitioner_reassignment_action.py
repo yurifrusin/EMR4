@@ -48,6 +48,7 @@ TARGET_PRACTITIONER_ID = "practitioner-reassignment-target"
 INACTIVE_PRACTITIONER_ID = "practitioner-reassignment-inactive"
 CURRENT_DISPLAY_NAME = "Dr Alex Example"
 TARGET_DISPLAY_NAME = "Dr Anika Patel"
+CURRENT_CARD_NAME, TARGET_CARD_NAME = "Alex Example", "Anika Patel"
 CURRENT_AHPRA = "MED0000000001"
 TARGET_AHPRA = "MED0000000002"
 APPOINTMENT_DATE = "2026-08-13"
@@ -215,6 +216,7 @@ def install_routes(page, *, scenario: str, directory: list | None = None) -> tup
             return
         if request.method == "POST" and path.endswith("/appointments/proposals/update/confirm"):
             state["confirm_count"] += 1
+            confirm_body = request.post_data_json or {}
             if scenario == "stale":
                 route.fulfill(status=200, content_type="application/json", body=json.dumps({
                     "intent": "confirm_update_appointment", "safe": False, "requires_confirmation": True,
@@ -223,7 +225,8 @@ def install_routes(page, *, scenario: str, directory: list | None = None) -> tup
                     "blocks": [{"code": "stale_update_proposal_freshness_id", "message": "Stale."}],
                     "audit_evidence": []}))
             else:
-                state["practitioner"] = TARGET_PRACTITIONER_ID
+                state["practitioner"] = confirm_body.get("update_proposal", {}).get(
+                    "command", {}).get("practitioner_id", state["practitioner"])
                 route.fulfill(status=200, content_type="application/json", body=json.dumps({
                     "intent": "confirm_update_appointment", "safe": True, "requires_confirmation": False,
                     "autonomy_tier": "confirmed_write", "summary": "Updated authored-synthetic truth.",
@@ -336,9 +339,9 @@ def _grid_displayed_practitioner(page) -> str:
 
 def _reception_displayed_practitioner(page) -> str:
     text = page.locator(f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}']").text_content() or ""
-    if TARGET_DISPLAY_NAME in text:
+    if TARGET_CARD_NAME in text:
         return TARGET_PRACTITIONER_ID
-    if CURRENT_DISPLAY_NAME in text:
+    if CURRENT_CARD_NAME in text:
         return CURRENT_PRACTITIONER_ID
     return ""
 
@@ -359,7 +362,7 @@ def exercise(page, *, renderer: str, scenario: str) -> str:
     if expected["practitioner"] == TARGET_PRACTITIONER_ID:
         page.wait_for_function(
             "([id, name]) => document.querySelector(`#meta-grid-content [data-appointment-id='${id}']`)?.textContent.includes(name)",
-            arg=[APPOINTMENT_ID, TARGET_DISPLAY_NAME], timeout=10000)
+            arg=[APPOINTMENT_ID, TARGET_CARD_NAME], timeout=10000)
     return _reception_displayed_practitioner(page)
 
 def _normalized_fresh_truth(state: dict) -> dict:
@@ -573,10 +576,10 @@ def test_time_duration_and_status_actions_remain_registered_with_practitioner_pa
 @pytest.mark.parametrize("row_count", [200, 201], ids=["at_200", "over_200"])
 def test_directory_200_row_boundary(reception_page, row_count: int) -> None:
     page, base_url = reception_page
-    rows = [directory_row(CURRENT_PRACTITIONER_ID, CURRENT_DISPLAY_NAME),
-            directory_row(TARGET_PRACTITIONER_ID, TARGET_DISPLAY_NAME)] + \
-        [directory_row(f"practitioner-extra-{i}", f"Dr Extra {i}") for i in range(row_count - 2)]
-    state, handler = install_routes(page, scenario="safe", directory=rows)
+    rows = [directory_row(CURRENT_PRACTITIONER_ID, CURRENT_DISPLAY_NAME)] + \
+        [directory_row(f"practitioner-extra-{i}", f"Dr Extra {i}") for i in range(row_count - 2)] + \
+        [directory_row(TARGET_PRACTITIONER_ID, TARGET_DISPLAY_NAME)]
+    state, handler = install_routes(page, scenario="safe", directory=rows[:200])
     try:
         open_diary(page, base_url)
         open_reception_one(page)

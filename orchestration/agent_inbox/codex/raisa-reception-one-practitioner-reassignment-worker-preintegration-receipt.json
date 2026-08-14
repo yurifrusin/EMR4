@@ -1,0 +1,88 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "Sol implementation and command-truth recovery pass focused static, JavaScript, lint and all 42 update-proposal tests; native review defects are repaired; DeepSeek returned one clean 646-line test-only commit",
+    "next_executable_stage": "pass pre-integration receipt, integrate the exact one-file worker commit, run its route-intercepted browser contract and repair only evidence-backed candidate defects",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": true,
+    "source_head": "5dfd6d34fa908fe9b50862ff84979698e27a661f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "parallelism_assessment": {
+    "assessed_stage": "worker-return and command-truth-recovery pre-integration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one-file matrix is comprehensive and clean but reached 646 of 650 lines and incurred a high non-authoritative USD 17.54766 estimate; admit on test merit while recording the allocation as uneconomical for repetition unchanged.",
+        "work_packages": [
+          "review/test_reception_one_practitioner_reassignment_action.py at 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh veto remains valuable and is serially gated by deterministic and rendered candidate passage.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The read-only seam review found duplicate-ID visibility, caller-column admission and target-activity race risks; Sol repaired the first two client seams and the backend race was recovered under the existing command contract.",
+        "work_packages": [
+          "completed read-only directory/delegation/latch/reconciliation seam map"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "DeepSeek one-file browser contract",
+      "native read-only seam review",
+      "Sol product and existing-command invariant recovery"
+    ],
+    "reassessment_triggers": [
+      "integrated browser-test result",
+      "material product or test recovery",
+      "new or restored task window",
+      "pre-verifier acceptance",
+      "verifier return",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "receipt passes before worker integration",
+      "stateful browser execution remains serial",
+      "deterministic and rendered passage precedes Gemini",
+      "Sol alone integrates, recovers and accepts"
+    ]
+  },
+  "planned_action": "admit_and_integrate_exact_deepseek_browser_test_candidate_after_sol_and_native_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The committed plan at 5dfd6d34fa908fe9b50862ff84979698e27a661f plus its explicit command-truth recovery amendment constrain work to a distinct active target, frozen date/start/duration, the existing update proposal/confirm route, confirm-time activity revalidation and fresh authoritative reconciliation.",
+    "current_authority_allocation": "Sol retains product, user-visible meaning, backend invariant recovery, integration and acceptance. DeepSeek V4 Flash/high returned one capped browser-test file at worker commit 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8; the native subagent completed a read-only seam review; Gemini remains reserved for a fresh exact-candidate veto.",
+    "git_refs_and_worktree": "Main is at plan HEAD 5dfd6d34fa908fe9b50862ff84979698e27a661f with intentional unstaged tranche changes and all unrelated untracked entries preserved. The DeepSeek worktree is clean at exact descendant 7fb5272e9d8f67960a5c33a1cb0c418be9e2cdf8 and changes only review/test_reception_one_practitioner_reassignment_action.py. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 287 / Compass 269 accepts duration composition and names practitioner-only reassignment as the active descendant.",
+    "protected_evidence_boundaries": "The worker candidate is exactly one authored-synthetic route-intercepted browser test file. Protected evidence, historical Diary PHI, real product/patient/clinical data, new routes or schemas, OpenAPI/GraphQL/database/event expansion, providers/ADC/credentials/IAM/network, raw PUT, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

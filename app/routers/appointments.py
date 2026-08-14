@@ -1948,6 +1948,19 @@ def propose_update_appointment(
     if patient_id is not None:
         _ensure_patient(patient_id, practice_id, db)
     _ensure_practitioner(practitioner_id, practice_id, db)
+    practitioner_changed = practitioner_id != appt.practitioner_id
+    if practitioner_changed:
+        active_practitioner = db.query(Practitioner.id).filter(
+            Practitioner.id == practitioner_id,
+            Practitioner.practice_id == practice_id,
+            Practitioner.is_active.is_(True),
+        ).first()
+        if not active_practitioner:
+            blocks.append(AppointmentProposalIssue(
+                code="practitioner_inactive",
+                severity="blocked",
+                message="The proposed practitioner is no longer active.",
+            ))
     _ensure_appointment_type(appointment_type_id, practice_id, db)
     _ensure_location(location_id, practice_id, db)
 

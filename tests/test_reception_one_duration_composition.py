@@ -87,7 +87,13 @@ def test_reception_one_duration_action_reconciles_and_is_mutually_exclusive() ->
     assert "validDurationTargets(selected)" in render
     assert '"Review duration change"' in render
     assert 'feedback.setAttribute("aria-live", "polite")' in render
-    assert "state.statusAction.busy || state.rescheduleAction.busy || state.durationAction.busy" in source
+    for busy in (
+        "state.statusAction.busy",
+        "state.rescheduleAction.busy",
+        "state.durationAction.busy",
+        "state.practitionerAction.busy",
+    ):
+        assert busy in source
     assert "if (state.durationAction.busy)" in source
 
 

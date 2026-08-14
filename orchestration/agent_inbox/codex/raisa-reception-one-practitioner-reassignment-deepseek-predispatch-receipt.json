@@ -1,0 +1,88 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "The practitioner-only plan and threat delta are committed at 5dfd6d34fa908fe9b50862ff84979698e27a661f; an exact clean DeepSeek worktree and capped one-file packet are prepared",
+    "next_executable_stage": "pass the distinct pre-dispatch receipt, dispatch DeepSeek and the native read-only seam analysis, then implement the Sol-owned product composition beside them",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": true,
+    "source_head": "5dfd6d34fa908fe9b50862ff84979698e27a661f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "committed-plan pre-worker-dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The isolated paired browser matrix is a stable one-file artifact in an exact clean task-descendant worktree, with a strict 650-line cap to control output cost.",
+        "work_packages": [
+          "author review/test_reception_one_practitioner_reassignment_action.py only"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh veto remains valuable but is serially gated by deterministic and rendered candidate passage.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The exact read-only directory/delegation seam map is independent of mutable product and test ownership and can guide Sol integration.",
+        "work_packages": [
+          "read-only active-target, handleMoveResize, latch, reconciliation, accessibility and regression seam map"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "DeepSeek isolated test authoring",
+      "native read-only seam analysis",
+      "Sol product implementation"
+    ],
+    "reassessment_triggers": [
+      "worker artifact return",
+      "material product or test recovery",
+      "new or restored task window",
+      "pre-verifier acceptance",
+      "verifier return",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "receipt passes before dispatch",
+      "deterministic local passage precedes Gemini",
+      "Sol alone integrates, recovers and accepts",
+      "stateful browser execution remains serial"
+    ]
+  },
+  "planned_action": "dispatch_practitioner_reassignment_deepseek_test_and_native_read_only_seam_map_beside_sol_product_implementation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The committed plan and threat delta at 5dfd6d34fa908fe9b50862ff84979698e27a661f constrain both workers to a fresh active-directory target, same date/start/duration and one existing handleMoveResize update proposal/confirm path.",
+    "current_authority_allocation": "Sol retains product, user-visible meaning, integration, recovery and acceptance. DeepSeek V4 Flash/high receives one capped new browser-test file; a native subagent receives one read-only seam map; Gemini remains reserved for a fresh exact-candidate veto.",
+    "git_refs_and_worktree": "The isolated DeepSeek worktree C:/Users/sarashera/EMR4-worktrees/practitioner-test-worker-5dfd is clean on codex/reception-one-practitioner-test-worker-5dfd at exact source 5dfd6d34fa908fe9b50862ff84979698e27a661f. The main task worktree is at the same HEAD with intentional continuation artifacts and all unrelated untracked entries preserved. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 287 / Compass 269 accepts duration composition and names practitioner-only reassignment as the active descendant.",
+    "protected_evidence_boundaries": "Workers have exact read/write boundaries. Protected evidence, historical Diary PHI, real product/patient/clinical data, backend/API/OpenAPI/GraphQL/database/event changes, providers/ADC/credentials/IAM/network, raw PUT, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "DeepSeek and native results are integrated and recovered; 20 practitioner browser, 42 update-proposal and 126 consolidated cases plus rendered QA pass",
+    "next_executable_stage": "commit the explicit-path deterministic candidate, run canonical verification, then create a clean exact-candidate Gemini review worktree",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": true,
+    "source_head": "fe922f1bff27760817e0a6ce1858ce1b17d646db",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "deterministic candidate pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The comprehensive 649-line integrated browser contract found useful defects but the reported non-authoritative USD 17.54766 estimate and near-cap output make this allocation uneconomical to repeat unchanged.",
+        "work_packages": [
+          "integrated practitioner reassignment route-intercepted browser contract"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto is serially gated by this commit and canonical deterministic passage.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The read-only seam review exposed duplicate-ID and caller-admission risks and helped reveal the server-side target-activity race; all are now repaired and tested.",
+        "work_packages": [
+          "completed directory/delegation/reconciliation seam review"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "DeepSeek browser contract",
+      "native seam review",
+      "Sol implementation and recovery"
+    ],
+    "reassessment_triggers": [
+      "candidate commit",
+      "canonical result",
+      "pre-verifier acceptance",
+      "verifier return",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path candidate commit precedes clean verifier worktree",
+      "canonical passage precedes Gemini dispatch",
+      "Sol alone commits, integrates, accepts and closes out"
+    ]
+  },
+  "planned_action": "commit_deterministically_passing_practitioner_reassignment_product_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan plus command-truth amendment admits one selected appointment's practitioner change through the existing update proposal/confirm family, with date/start/duration frozen, current active-target truth checked again by the command and exact fresh reconciliation.",
+    "current_authority_allocation": "Sol owns product meaning, existing-command recovery, integration and candidate commit. DeepSeek's exact one-file test is integrated with Sol fixture repairs; native review is complete; Gemini remains reserved for a clean exact-candidate veto after commit.",
+    "git_refs_and_worktree": "Task HEAD is fe922f1bff27760817e0a6ce1858ce1b17d646db with intentional explicit-path candidate changes and all unrelated untracked entries preserved. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 287 / Compass 269 accepts duration composition and names practitioner-only reassignment as the active descendant.",
+    "protected_evidence_boundaries": "Only authored-synthetic route-intercepted and repository-local evidence is used. No new route/schema, OpenAPI/GraphQL/database/event authority, product/patient data, provider/ADC/credential/IAM/network, raw PUT, deployment, release, Pages or protected-ref movement is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -24,12 +24,14 @@ def test_plan_and_threat_freeze_practitioner_only_existing_command_composition()
         "DeepSeek V4 Flash/high -- planned",
         "Native subagent -- planned",
         "Gemini 3.6 Flash/high -- reserved",
-        "No FastAPI, GraphQL, OpenAPI, database/migration/RLS",
+        "No new FastAPI route/schema, GraphQL, OpenAPI, database/migration/RLS",
+        "`practitioner_inactive` block",
     ):
         assert phrase in plan
     for phrase in (
         "supplies literal zero `deltaStart` and `deltaDuration`",
         "exactly one matching active row",
+        "confirmation re-runs the proposal before writing",
         "Template-only rows",
         "GraphQL stays read-only",
         "zero raw `PUT`",
