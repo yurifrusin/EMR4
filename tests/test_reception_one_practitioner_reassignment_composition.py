@@ -130,7 +130,8 @@ def test_panel_is_accessible_provisional_and_four_way_exclusive() -> None:
     assert "activePractitionerTargets(selected)" in render
     assert 'feedback.setAttribute("aria-live", "polite")' in render
     assert "Current practitioner:" in render
-    assert "Same date, start and duration" in render
+    assert "share one provisional update draft" in render
+    assert "Current practitioner activity and Diary truth are checked again" in render
     for busy in (
         "state.statusAction.busy",
         "state.rescheduleAction.busy",
