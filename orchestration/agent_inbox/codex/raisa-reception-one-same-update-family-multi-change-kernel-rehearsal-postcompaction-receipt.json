@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Integrated only worker test commit db5292d8 as task commit d1544bb40602c017c35cb7d3c50250d4c312c9c1 after exact pre-integration admission; product source remains unchanged",
+    "next_executable_stage": "run the full deterministic integrated-candidate packet, reconcile exact M1-M7 evidence, then freeze and dispatch one fresh Gemini read-only veto if all checks pass",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "d1544bb40602c017c35cb7d3c50250d4c312c9c1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "parallelism_assessment": {
+    "assessed_stage": "post-compaction deterministic verification",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek supplied the bounded one-file M1-M7 test candidate; Sol independently admitted and integrated only that commit. AER-0309 contains its output-format defect.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh read-only veto at the deterministic-admitted exact candidate remains required.",
+        "work_packages": [
+          "post-integration exact-candidate review"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No separable analysis remains, the test packet is PostgreSQL-serial, and the preceding tranche's scope breaches make a new native packet negative leverage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "integrated deterministic result",
+      "pre-verifier dispatch",
+      "verifier return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "all PostgreSQL-loading pytest commands remain serial",
+      "Sol reconciles integrated evidence before external review",
+      "Gemini dispatch follows deterministic admission",
+      "Sol alone owns acceptance, continuity and Git"
+    ]
+  },
+  "planned_action": "resume_exact_integrated_candidate_verification_then_fresh_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and threat delta require exact M1-M7 evidence over the existing update proposal/confirm kernel and prohibit product-source changes. The accepted parent is the multi-change atomicity orientation at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58. The active latch resumes at integrated candidate d1544bb40602c017c35cb7d3c50250d4c312c9c1 before full deterministic verification and Gemini review.",
+    "current_authority_allocation": "GPT Sol remains conductor, deterministic verifier, integrator and acceptance owner. DeepSeek V4 Flash/high has completed its bounded one-file test implementation; Gemini 3.6 Flash/high remains reserved for one fresh exact-candidate veto; native subagents remain declined for negative leverage and no separable package.",
+    "git_refs_and_worktree": "After fetch, task HEAD is d1544bb40602c017c35cb7d3c50250d4c312c9c1 on codex/ariadne-bernie-davida-parallel-seam, three commits ahead of origin task 704f2827c7b914792c43c12f026149ce25f70882. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked dirt is only current-tranche latch and AER-0310 register evidence; 624 untracked entries, including docs/branding, remain preserved. No pytest process is running.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Its live Current Baton remains at Continuity 291 / Compass 273 and names the same-update-family multi-change kernel rehearsal as the active next implementation.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored. Protected holdouts and historical Diary PHI remain unopened; only authored-synthetic local PostgreSQL evidence is allowed. No product/UI/API schema/migration expansion, external patient or channel runtime, provider/ADC/credentials/IAM/network, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

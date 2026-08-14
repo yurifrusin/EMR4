@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 270,
+  "register_revision": 271,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12436,6 +12436,46 @@
           "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-deepseek-result.json",
           "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-deepseek-egress-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-270.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0310",
+      "attempt_id": "raisa-reception-one-same-update-family-multi-change-integration-source-binding-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "integration",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every full Git object ID written into a latch, receipt or acceptance must be copied from an exact Git command result; a displayed short hash must never be manually expanded.",
+      "observed_error": "After cherry-pick displayed d1544bb4, Sol wrote a nonexistent fabricated full hash into the uncommitted active-operation latch before resolving git rev-parse HEAD. No receipt, acceptance or Git action consumed the incorrect value.",
+      "detection_method": "Sol ran git rev-parse HEAD immediately after the latch edit, compared the exact object ID with the written value and corrected both latch occurrences before deterministic admission.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-integration-source-binding-incident.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-271.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve git rev-parse HEAD, replace both fabricated values with exact d1544bb40602c017c35cb7d3c50250d4c312c9c1 and admit no receipt until the corrected latch validates.",
+        "prevention_control": "Copy every full commit identifier only from an exact Git command result, even immediately after a successful command prints a short hash; never synthesize or autocomplete an object ID.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-integration-source-binding-incident.json",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-271.md"
         ]
       },
       "status": "corrected"

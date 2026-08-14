@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 270
+    assert register["register_revision"] == 271
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 310)
+        f"AER-{index:04d}" for index in range(1, 311)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 208
+    assert len(agent_incidents) == 209
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 309
+    assert report["incident_count"] == 310
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2610,7 +2610,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0309_record_reschedule_and_multi_change_recovery() -> None:
+def test_aer_0294_through_0310_record_reschedule_and_multi_change_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2762,6 +2762,21 @@ def test_aer_0294_through_0309_record_reschedule_and_multi_change_recovery() -> 
     )
     assert deepseek_egress["status"] == "corrected"
     assert deepseek_egress["correction"]["status"] == "control_added"
+
+    source_binding_recurrence = incidents["AER-0310"]
+    assert source_binding_recurrence["stage"] == "integration"
+    assert source_binding_recurrence["role"] == "orchestrator"
+    assert source_binding_recurrence["category"] == "evidence_misreport"
+    assert source_binding_recurrence["process_severity"] == "low"
+    assert source_binding_recurrence["candidate_state"] == "canonical_unchanged"
+    assert source_binding_recurrence["related_incident_ids"] == []
+    assert source_binding_recurrence["recurrence_signature"] == (
+        "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
+    )
+    assert source_binding_recurrence["status"] == "corrected"
+    assert source_binding_recurrence["correction"]["status"] == (
+        "corrected_fresh_attempt"
+    )
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -3038,18 +3053,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 270
-    assert report["incident_count"] == 309
+    assert report["register_revision"] == 271
+    assert report["incident_count"] == 310
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 208,
+        "agent_behavior": 209,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 42,
-        "evidence_misreport": 41,
+        "evidence_misreport": 42,
         "harness_failure": 37,
         "output_contract_violation": 86,
         "read_only_violation": 3,
@@ -3059,7 +3074,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 184,
+        "canonical_unchanged": 185,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(
@@ -3155,7 +3170,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id"
             ),
-            "incident_count": 11,
+            "incident_count": 12,
             "incident_ids": [
                 "AER-0192",
                 "AER-0196",
@@ -3168,6 +3183,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0267",
                 "AER-0289",
                 "AER-0301",
+                "AER-0310",
             ],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
@@ -3176,6 +3192,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "Before any source-bound evidence generation, capture full HEAD from git rev-parse, verify it with git cat-file, and pass that same captured value directly to the harness; never copy a restored summary or abbreviated display hash into source_head.",
                 "Capture and retain the forty-character HEAD in a named scalar immediately after every commit; do not author any source-bound latch, packet or receipt field from Git's abbreviated commit output.",
+                "Copy every full commit identifier only from an exact Git command result, even immediately after a successful command prints a short hash; never synthesize or autocomplete an object ID.",
                 "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
                 "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
                 "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch.",

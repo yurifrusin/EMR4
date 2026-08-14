@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "5ba061b8b6db8926addec2de53eb286bf84a101c803751ea22dc645dfb5e3274",
+  "canonical_register_sha256": "9e552e5d289935080f5797f06a147ba77e83bfaa7cbdf73163e7550d0bdfc10f",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 184,
+      "canonical_unchanged": 185,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
       "command_scope_violation": 42,
-      "evidence_misreport": 41,
+      "evidence_misreport": 42,
       "harness_failure": 37,
       "output_contract_violation": 86,
       "read_only_violation": 3,
@@ -17,13 +17,13 @@
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 208,
+      "agent_behavior": 209,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 116,
+      "low": 117,
       "material": 98,
       "moderate": 95
     },
@@ -39,7 +39,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 152,
+      "codex-primary-orchestrator::orchestrator": 153,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -89,12 +89,12 @@
     "by_role": {
       "implementer": 21,
       "integration_reviewer": 2,
-      "orchestrator": 234,
+      "orchestrator": 235,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 309,
+  "incident_count": 310,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -211,7 +211,7 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 11,
+      "incident_count": 12,
       "incident_ids": [
         "AER-0192",
         "AER-0196",
@@ -223,7 +223,8 @@
         "AER-0261",
         "AER-0267",
         "AER-0289",
-        "AER-0301"
+        "AER-0301",
+        "AER-0310"
       ],
       "origins": [
         "agent_behavior"
@@ -231,6 +232,7 @@
       "prevention_controls": [
         "Before any source-bound evidence generation, capture full HEAD from git rev-parse, verify it with git cat-file, and pass that same captured value directly to the harness; never copy a restored summary or abbreviated display hash into source_head.",
         "Capture and retain the forty-character HEAD in a named scalar immediately after every commit; do not author any source-bound latch, packet or receipt field from Git's abbreviated commit output.",
+        "Copy every full commit identifier only from an exact Git command result, even immediately after a successful command prints a short hash; never synthesize or autocomplete an object ID.",
         "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
         "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
         "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch."
@@ -730,7 +732,7 @@
       ]
     }
   ],
-  "register_revision": 270,
+  "register_revision": 271,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-14"
 }

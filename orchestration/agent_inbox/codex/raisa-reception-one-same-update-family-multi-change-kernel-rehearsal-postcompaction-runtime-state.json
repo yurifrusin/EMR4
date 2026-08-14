@@ -1,0 +1,185 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_exact_integrated_candidate_verification_then_fresh_gemini_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Its live Current Baton remains at Continuity 291 / Compass 273 and names the same-update-family multi-change kernel rehearsal as the active next implementation.",
+    "current_authority_allocation": "GPT Sol remains conductor, deterministic verifier, integrator and acceptance owner. DeepSeek V4 Flash/high has completed its bounded one-file test implementation; Gemini 3.6 Flash/high remains reserved for one fresh exact-candidate veto; native subagents remain declined for negative leverage and no separable package.",
+    "active_plan_and_acceptance": "The frozen plan and threat delta require exact M1-M7 evidence over the existing update proposal/confirm kernel and prohibit product-source changes. The accepted parent is the multi-change atomicity orientation at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58. The active latch resumes at integrated candidate d1544bb40602c017c35cb7d3c50250d4c312c9c1 before full deterministic verification and Gemini review.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored. Protected holdouts and historical Diary PHI remain unopened; only authored-synthetic local PostgreSQL evidence is allowed. No product/UI/API schema/migration expansion, external patient or channel runtime, provider/ADC/credentials/IAM/network, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "After fetch, task HEAD is d1544bb40602c017c35cb7d3c50250d4c312c9c1 on codex/ariadne-bernie-davida-parallel-seam, three commits ahead of origin task 704f2827c7b914792c43c12f026149ce25f70882. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked dirt is only current-tranche latch and AER-0310 register evidence; 624 untracked entries, including docs/branding, remain preserved. No pytest process is running."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "objective": "Use provider-free authored-synthetic evidence to prove that changed practitioner, time and duration travel through the existing appointment update proposal and confirmation path as one command, with fresh-truth, conflict, idempotency, audit and rollback behavior bounded exactly.",
+    "status": "in_progress",
+    "source_head": "d1544bb40602c017c35cb7d3c50250d4c312c9c1",
+    "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Integrated only worker test commit db5292d8 as task commit d1544bb40602c017c35cb7d3c50250d4c312c9c1 after exact pre-integration admission; product source remains unchanged",
+      "next_executable_stage": "run the full deterministic integrated-candidate packet, reconcile exact M1-M7 evidence, then freeze and dispatch one fresh Gemini read-only veto if all checks pass",
+      "retry_counters": {
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_combined_practitioner_time_duration_command_not_sequential_writes",
+      "provider_free_authored_synthetic_evidence_only",
+      "current_authority_and_source_truth_rechecked_at_confirmation",
+      "conflict_and_stale_evidence_fail_closed_without_write",
+      "same_key_replay_is_mutation_free_and_returns_one_committed_result",
+      "audit_idempotency_and_appointment_truth_share_the_command_outcome",
+      "injected_precommit_failure_rolls_back_all_effects_before_clean_retry",
+      "prefer_tests_and_fixture_only_changes",
+      "no_ui_new_route_schema_command_family_or_database_migration",
+      "no_cross_family_status_plus_update_execution",
+      "no_external_patient_or_channel_runtime",
+      "no_patient_product_or_clinical_data",
+      "no_provider_adc_credentials_iam_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "assessed_stage": "post-compaction deterministic verification",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "DeepSeek supplied the bounded one-file M1-M7 test candidate; Sol independently admitted and integrated only that commit. AER-0309 contains its output-format defect.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "One fresh read-only veto at the deterministic-admitted exact candidate remains required.",
+        "work_packages": [
+          "post-integration exact-candidate review"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "No separable analysis remains, the test packet is PostgreSQL-serial, and the preceding tranche's scope breaches make a new native packet negative leverage.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "all PostgreSQL-loading pytest commands remain serial",
+      "Sol reconciles integrated evidence before external review",
+      "Gemini dispatch follows deterministic admission",
+      "Sol alone owns acceptance, continuity and Git"
+    ],
+    "reassessment_triggers": [
+      "integrated deterministic result",
+      "pre-verifier dispatch",
+      "verifier return",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_post_compaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh five-source rehydration and latch validation completed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane explicitly declined for this serial stage."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini lane remains reserved after deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek implementation lane is complete and integrated as one test-only commit."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

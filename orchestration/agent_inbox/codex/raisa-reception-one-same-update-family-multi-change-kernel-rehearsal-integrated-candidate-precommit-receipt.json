@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Integrated candidate d1544bb40602c017c35cb7d3c50250d4c312c9c1 passes the exact 412-test packet, including M1-M7, plus Ruff, JSON and whitespace checks; AER-0310 corrects the pre-receipt hash-binding mistake without candidate change",
+    "next_executable_stage": "commit the deterministic evidence and fresh post-compaction receipt, then create an exact clean read-only worktree and dispatch one Gemini 3.6 Flash/high veto",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "d1544bb40602c017c35cb7d3c50250d4c312c9c1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "integrated-candidate pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded one-file M1-M7 test implementation is integrated and independently passes the exact packet; AER-0309 contains its egress-format defect.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh independent veto remains valuable and is required after the deterministic-admitted candidate is committed cleanly.",
+        "work_packages": [
+          "fresh exact-candidate read-only veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No separable package remains and PostgreSQL evidence plus acceptance are serial; prior scope breaches continue to outweigh leverage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-verifier dispatch",
+      "verifier return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path evidence commit before review worktree creation",
+      "Gemini follows exact clean candidate admission",
+      "Sol owns review reconciliation and acceptance"
+    ]
+  },
+  "planned_action": "commit_only_integrated_candidate_evidence_aer_0310_and_postcompaction_receipt_before_fresh_verifier_worktree",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen M1-M7 plan and threat delta require one combined practitioner/time/duration proposal-confirm outcome, current-truth and conflict denials, inactive-practitioner denial, exact replay/body conflict, correlated audit/idempotency and transaction-wide rollback/retry. Candidate d1544bb40602c017c35cb7d3c50250d4c312c9c1 passes the exact 412-test integrated packet; Ruff, JSON and Git whitespace checks also pass. Product source is unchanged.",
+    "current_authority_allocation": "Sol owns deterministic admission, integration and acceptance. DeepSeek's bounded test implementation is complete and independently reproduced. Gemini 3.6 Flash/high is reserved for one fresh exact-candidate veto after this clean evidence commit. Native subagents remain declined for negative leverage.",
+    "git_refs_and_worktree": "Task branch HEAD is exactly d1544bb40602c017c35cb7d3c50250d4c312c9c1 and required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 704f2827c7b914792c43c12f026149ce25f70882. Tracked dirt and new files are bounded to the active latch, AER-0310/register evidence and fresh rehydration/precommit artifacts.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 291 / Compass 273 authorises this exact provider-free same-update-family kernel rehearsal and keeps every wider runtime surface closed.",
+    "protected_evidence_boundaries": "Only newly authored synthetic local PostgreSQL test evidence and orchestration bookkeeping are included. Protected holdouts, historical Diary PHI, product/patient data, app/UI/API schema/migration changes, external channels, providers, ADC, credentials/IAM, network, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded by explicit-path staging."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

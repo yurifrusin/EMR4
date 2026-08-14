@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "DeepSeek produced clean one-file candidate db5292d8eb07caf3ba4b7e31ab72233b14c91288; Sol independently inspected it and reproduced 109 passing tests plus Ruff, while AER-0309 contains the worker's fenced-prose egress mismatch",
+    "next_executable_stage": "commit the exact worker packet/result, AER-0309 register update and latch checkpoint, then run a fresh pre-integration receipt before cherry-picking only the one-file candidate commit",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5411d09a132b0cc28a1bec5045c3819986c642b4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "parallelism_assessment": {
+    "assessed_stage": "pre-integration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one-file candidate supplied positive test implementation leverage and passed independent reproduction; AER-0309 contains only its egress format defect.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact integrated-candidate veto is still required.",
+        "work_packages": [
+          "post-integration read-only veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No separable analysis remains and earlier command-scope failures outweigh leverage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post-integration tests",
+      "pre-verifier",
+      "verifier return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "cherry-pick exact commit only",
+      "rerun PostgreSQL tests serially after integration",
+      "Gemini follows deterministic admission",
+      "Sol owns acceptance"
+    ]
+  },
+  "planned_action": "cherry_pick_only_worker_commit_db5292d8_after_exact_scope_and_independent_test_admission",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen M1-M7 plan at 5411d09a requires one combined practitioner/time/duration command, stale truth, conflict, inactive target, replay/body conflict, correlated audit/idempotency and rollback/retry. Exact worker commit db5292d8 adds one test file only; Sol read it fully and independently passed Ruff and the 109-test packet. AER-0309 records and contains the worker egress-format defect.",
+    "current_authority_allocation": "Sol alone owns candidate admission and integration. DeepSeek's work is an untrusted one-file candidate whose claims were independently reproduced; Gemini remains reserved for the post-integration veto; native subagents remain declined.",
+    "git_refs_and_worktree": "Primary task HEAD is 206e0d309370ddfcda6e8f4d951116f5f7902622 with a clean tracked tree; origin task remains 704f2827c7b914792c43c12f026149ce25f70882. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Worker branch is clean at db5292d8eb07caf3ba4b7e31ab72233b14c91288, whose diff from 5411d09a adds exactly the owned test file.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 authorises the provider-free same-update-family kernel rehearsal and forbids product-source expansion.",
+    "protected_evidence_boundaries": "Integration is limited to the single new authored-synthetic test file. No app, UI, API schema, migration, protected evidence, historical Diary PHI, patient/product data, external adapter, provider/ADC/credential/IAM/network, deployment, production, release, Pages or protected ref is in scope. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

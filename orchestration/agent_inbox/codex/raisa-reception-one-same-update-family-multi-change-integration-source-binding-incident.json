@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0310",
+  "attempt_id": "raisa-reception-one-same-update-family-multi-change-integration-source-binding-001",
+  "observed_on": "2026-08-14",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+  "observation": "After cherry-pick, Sol expanded the displayed short commit d1544bb4 into a nonexistent fabricated full hash in the active latch instead of first resolving git rev-parse HEAD.",
+  "containment": "Before any receipt or acceptance used the value, Sol resolved the exact full object ID d1544bb40602c017c35cb7d3c50250d4c312c9c1 and corrected both latch fields.",
+  "candidate_effect": "No Git object, candidate source or protected ref changed; only transient uncommitted continuity text was wrong.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}
