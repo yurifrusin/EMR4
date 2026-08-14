@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0316",
+  "attempt_id": "raisa-reception-one-multi-change-editor-gemini-worktree-001",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "observation": "Sol created the exact clean verifier worktree at detached HEAD; the deterministic preflight rejected its empty branch before any verifier or provider call.",
+  "candidate_effect": "The exact candidate remained unchanged and clean; no receipt, project, provider or external action followed the rejection.",
+  "containment": "Attach the same worktree to a disposable codex/review branch and require a fresh exact-HEAD clean preflight pass before pre-verifier receipt or dispatch.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}

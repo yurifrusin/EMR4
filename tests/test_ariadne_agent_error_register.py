@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 276
+    assert register["register_revision"] == 277
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 316)
+        f"AER-{index:04d}" for index in range(1, 317)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 214
+    assert len(agent_incidents) == 215
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 315
+    assert report["incident_count"] == 316
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2860,6 +2860,21 @@ def test_aer_0315_records_mixed_language_static_tool_routing() -> None:
     assert tool_routing["correction"]["status"] == "corrected_fresh_attempt"
 
 
+def test_aer_0316_records_recurring_detached_verifier_worktree() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    detached = incidents["AER-0316"]
+    assert detached["stage"] == "independent_review"
+    assert detached["role"] == "orchestrator"
+    assert detached["category"] == "output_contract_violation"
+    assert detached["process_severity"] == "low"
+    assert detached["candidate_state"] == "canonical_unchanged"
+    assert detached["related_incident_ids"] == []
+    assert detached["recurrence_signature"] == "orchestrator.detached_verifier_branch"
+    assert detached["status"] == "corrected"
+    assert detached["correction"]["status"] == "corrected_fresh_attempt"
+
+
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
@@ -3134,11 +3149,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 276
-    assert report["incident_count"] == 315
+    assert report["register_revision"] == 277
+    assert report["incident_count"] == 316
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 214,
+        "agent_behavior": 215,
         "harness": 37,
         "repository": 55,
         "transport": 9,
@@ -3147,7 +3162,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 46,
         "evidence_misreport": 42,
         "harness_failure": 37,
-        "output_contract_violation": 87,
+        "output_contract_violation": 88,
         "read_only_violation": 3,
         "reasoning_claim_error": 36,
         "repository_defect": 55,
@@ -3155,7 +3170,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 189,
+        "canonical_unchanged": 190,
         "untrusted_partial_worktree": 28,
     }
     receipt_event_recurrence = next(
@@ -3313,13 +3328,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.detached_verifier_branch",
-            "incident_count": 2,
-            "incident_ids": ["AER-0012", "AER-0014"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0012", "AER-0014", "AER-0316"],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "Create every verifier worktree directly on a named non-protected codex/review branch; never use --detach even temporarily before the mandatory preflight.",
                 "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
                 "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate.",
             ],

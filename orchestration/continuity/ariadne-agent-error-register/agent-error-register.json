@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 276,
+  "register_revision": 277,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -12674,6 +12674,46 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-static-tool-routing-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-276.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0316",
+      "attempt_id": "raisa-reception-one-multi-change-editor-gemini-worktree-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity_local_wrapper_preflight",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact clean verifier candidate must be on a named non-protected codex/review branch before pre-verifier receipt or Antigravity dispatch.",
+      "observed_error": "Sol created the exact candidate worktree at detached HEAD. The deterministic verifier preflight rejected its empty branch before receipt generation, project creation or any provider/model call.",
+      "detection_method": "scripts.ariadne_verifier_worktree_preflight returned revision_required with Antigravity refuses protected or detached branch; provider_or_model_calls remained zero.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-gemini-detached-worktree-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-277.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Attach the unchanged worktree to disposable branch codex/review-reception-one-multi-change-editor-57d3cc30 and require exact-HEAD clean preflight to pass before any pre-verifier receipt or dispatch.",
+        "prevention_control": "Create every verifier worktree directly on a named non-protected codex/review branch; never use --detach even temporarily before the mandatory preflight.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-gemini-detached-worktree-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-277.md"
         ]
       },
       "status": "corrected"
