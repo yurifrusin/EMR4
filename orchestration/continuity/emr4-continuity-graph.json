@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 289,
+  "graph_revision": 290,
   "harvests": [],
   "nodes": [
     {
@@ -19368,9 +19368,118 @@
         "Natural-language action activation, another field, full edit and compound commands remain closed.",
         "Product data, watcher/runtime, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+      "title": "Provider-free Reception One selected-action-console progressive-disclosure composition",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-14T08:40:01Z",
+      "updated_at": "2026-08-14T08:40:01Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "1d9e58fd2624f87b8b3def538297054999e7bef3",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Presentation now exposes four native choices and zero-or-one existing editor without changing backend command authority.",
+          "Palette activity is route-inert; idle drafts are discarded and busy, confirmation, interruption and reconciliation states fail closed.",
+          "Status and update command families remain distinct; no generic dispatcher, automatic sequencing or compound-update claim exists."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-selected-action-console-progressive-disclosure",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the compact four-button, zero-or-one-editor composition over the unchanged four appointment action paths."
+        }
+      ],
+      "claim_scope": [
+        "The current-truth summary, native action palette and shared editor are implemented in the existing Diary presentation layer.",
+        "Collapse and idle switching issue zero routes and discard abandoned provisional drafts; busy reselection cannot erase an in-flight latch.",
+        "The exact broader packet passes 167 tests, the canonical fast profile passes 196 tests, and Gemini passed the unchanged clean candidate.",
+        "Browser command evidence is route_intercepted_browser; live backend/database behavior, compound updates and representative usability are not claimed."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.json",
+            "review/test_reception_one_selected_action_console.py",
+            "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout.md"
+          ],
+          "note": "The console presents current status, time, duration and practitioner while keeping every action independently explicit and future intent non-executing."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/security/raisa-reception-one-selected-action-console-progressive-disclosure-composition-threat-model-delta.md",
+            "orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.json",
+            "review/test_two_projection_truth_parity.py",
+            "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout.md"
+          ],
+          "note": "Requested values never become truth; terminal display remains bound to exact fresh projection reconciliation."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-plan.md",
+          "docs/security/raisa-reception-one-selected-action-console-progressive-disclosure-composition-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.schema.json",
+          "orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-native-analysis.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-test-recovery.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-action-console-progressive-disclosure.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout-postcompaction-2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-packet.md",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "review/test_reception_one_selected_action_console.py",
+          "tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py",
+          "review/test_two_projection_truth_parity.py",
+          "tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_continuity.py"
+        ],
+        "artifacts": [
+          "docs/diary/diary.html",
+          "docs/diary/meta-grid.css",
+          "docs/diary/meta-grid.js",
+          "scripts/raisa_reception_one_selected_action_console_progressive_disclosure_composition_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Run a read-only multi-change request atomicity orientation before any combined appointment edit is represented or executed.",
+        "Automatic sequential execution, a compound payload and a compound atomicity claim remain closed.",
+        "Product data, watcher/runtime, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T04:29:56Z"
+  "updated_at": "2026-08-14T08:40:01Z"
 }

@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "completed_stage": "Accepted the unchanged reviewed candidate 1d9e58fd2624f87b8b3def538297054999e7bef3, wrote paired closeout, advanced Continuity 290 / Compass 272 and passed the canonical 196-test fast profile",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "resume_after_compaction": false,
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "closeout pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its bounded test artifact required Sol recovery after one correction; the final admitted tests pass but no further lane work has leverage.",
+        "work_packages": [
+          "completed test-only candidate and preserved recovery provenance"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One valid schema-constrained pass binds the exact unchanged clean candidate and 167 exact tests.",
+        "work_packages": [
+          "completed exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only analyses strengthened implementation and tests; no closeout dispatch is useful.",
+        "work_packages": [
+          "completed implementation audit",
+          "completed test audit"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-push",
+      "next tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone stages and commits the accepted path allowlist",
+      "the canonical repository profile already completed serially",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "explicitly_stage_and_commit_only_the_accepted_selected_action_console_closeout_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen presentation-only plan is satisfied at reviewed source 1d9e58fd2624f87b8b3def538297054999e7bef3. The paired closeout and Sol acceptance bind 23 new, 49 existing, one parity, 167 broader, 196 canonical and five typed evidence checks, unchanged command surfaces and the inert multi-change boundary.",
+    "current_authority_allocation": "Sol alone owns acceptance, explicit-path staging, task-branch commit and push. DeepSeek and both native lanes are complete; Gemini completed one exact-candidate review and has no Git authority.",
+    "git_refs_and_worktree": "Main task branch is at reviewed candidate 1d9e58fd2624f87b8b3def538297054999e7bef3 with seven expected tracked closeout mutations and tranche-local untracked evidence. There are 633 preserved untracked entries before this receipt. Origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted selected-action-console composition at Continuity 290 / Compass 272 and names the read-only multi-change atomicity orientation as next.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, providers/ADC/credentials/IAM/network, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

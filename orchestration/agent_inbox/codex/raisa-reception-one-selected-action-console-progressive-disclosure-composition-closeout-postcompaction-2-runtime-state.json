@@ -1,0 +1,192 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_exact_latched_selected_action_console_acceptance_closeout_after_complete_rehydration",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 names the accepted selected-action-console orientation, the bounded progressive-disclosure composition and its presentation-only acceptance boundary.",
+    "current_authority_allocation": "Sol retains product, architecture, recovery, integration, acceptance and Git authority. DeepSeek V4 Flash/high and both native read-only lanes are complete; Gemini 3.6 Flash/high completed its required fresh exact-candidate veto and has no further authority.",
+    "active_plan_and_acceptance": "The frozen plan, threat-model delta and native-analysis synthesis require one current-truth summary, four native presentation buttons, zero-or-one existing editor, zero routes on palette changes, abandoned-draft disposal, busy/interruption/fresh-reconciliation protection, unchanged field command paths, inert multi-field intent and no compound-update claim. Candidate 1d9e58fd2624f87b8b3def538297054999e7bef3 passed the deterministic matrix and one fresh unchanged-clean-worktree Gemini veto.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher changes, providers/ADC/credentials/IAM/network, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Main worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 1d9e58fd2624f87b8b3def538297054999e7bef3 with only expected tranche acceptance/evidence work plus 625 preserved untracked entries. Origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current are each exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
+    "status": "in_progress",
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Gemini 3.6 Flash/high returned one schema-constrained pass over unchanged clean candidate 1d9e58fd2624f87b8b3def538297054999e7bef3 with all 167 exact tests and static gates passing; the typed evidence adds five passing checks",
+      "next_executable_stage": "pass the separate pre-verifier-acceptance receipt, then write Sol acceptance, paired Yuri closeout, Continuity 290 / Compass 272 and the next narrow planned direction",
+      "retry_counters": {
+        "review": 0,
+        "verification": 1
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "presentation_only_diary_client_composition",
+      "preserve_status_time_duration_and_practitioner_contracts",
+      "preserve_one_kernel_owned_proposal_confirm_path_per_action",
+      "preserve_visible_confirmation_fresh_reconciliation_and_accessibility",
+      "only_meta_grid_javascript_css_cache_reference_and_affected_provider_free_tests",
+      "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands",
+      "no_compound_update_claim_without_a_separate_atomic_backend_proof",
+      "no_new_command_field_route_schema_or_write_authority",
+      "no_api_openapi_graphql_database_event_or_watcher_expansion",
+      "repository_local_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "assessed_stage": "post-compaction acceptance closeout resumption",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "rationale": "Its test structure required Sol recovery; the final admitted tests pass and no further same-lane work has leverage.",
+        "work_packages": [
+          "completed and preserved test-only candidate"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "One valid schema-constrained pass binds the exact unchanged clean candidate and exact 167-test result.",
+        "work_packages": [
+          "completed exact-candidate veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "Both read-only analyses materially improved implementation and test coverage and require no further dispatch.",
+        "work_packages": [
+          "completed implementation seam audit",
+          "completed test and responsive seam audit"
+        ]
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol alone validates verifier acceptance, writes continuity and closes the tranche",
+      "repository tests that load tests/conftest.py remain serial",
+      "protected refs remain closed"
+    ],
+    "reassessment_triggers": [
+      "pre-verifier acceptance",
+      "closeout",
+      "next tranche planning"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_post_compaction_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed a fresh five-source rehydration and resumed the exact in-progress latch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Both bounded native read-only audits completed before this resumption."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini completed one valid schema-constrained pass at the exact unchanged clean candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek evidence and the bounded Sol test recovery are preserved."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "resource_id": "gemini-3.6-flash-high-verifier",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/action-console-review-1d9e",
+      "branch": "codex/review-reception-one-action-console-1d9e",
+      "head": "1d9e58fd2624f87b8b3def538297054999e7bef3",
+      "clean": true
+    }
+  ],
+  "assigned_agent_ids": []
+}

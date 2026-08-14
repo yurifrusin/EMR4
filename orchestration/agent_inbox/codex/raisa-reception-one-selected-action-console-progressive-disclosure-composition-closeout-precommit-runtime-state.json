@@ -1,0 +1,123 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicitly_stage_and_commit_only_the_accepted_selected_action_console_closeout_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records the accepted selected-action-console composition at Continuity 290 / Compass 272 and names the read-only multi-change atomicity orientation as next.",
+    "current_authority_allocation": "Sol alone owns acceptance, explicit-path staging, task-branch commit and push. DeepSeek and both native lanes are complete; Gemini completed one exact-candidate review and has no Git authority.",
+    "active_plan_and_acceptance": "The frozen presentation-only plan is satisfied at reviewed source 1d9e58fd2624f87b8b3def538297054999e7bef3. The paired closeout and Sol acceptance bind 23 new, 49 existing, one parity, 167 broader, 196 canonical and five typed evidence checks, unchanged command surfaces and the inert multi-change boundary.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, providers/ADC/credentials/IAM/network, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved and excluded.",
+    "git_refs_and_worktree": "Main task branch is at reviewed candidate 1d9e58fd2624f87b8b3def538297054999e7bef3 with seven expected tracked closeout mutations and tranche-local untracked evidence. There are 633 preserved untracked entries before this receipt. Origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
+    "status": "complete",
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Accepted the unchanged reviewed candidate 1d9e58fd2624f87b8b3def538297054999e7bef3, wrote paired closeout, advanced Continuity 290 / Compass 272 and passed the canonical 196-test fast profile",
+      "next_executable_stage": null,
+      "retry_counters": {
+        "review": 0,
+        "verification": 1
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": true,
+      "reason": "completed_authorized_operation"
+    },
+    "protected_boundaries": [
+      "presentation_only_diary_client_composition",
+      "preserve_status_time_duration_and_practitioner_contracts",
+      "preserve_one_kernel_owned_proposal_confirm_path_per_action",
+      "preserve_visible_confirmation_fresh_reconciliation_and_accessibility",
+      "only_meta_grid_javascript_css_cache_reference_and_affected_provider_free_tests",
+      "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands",
+      "no_compound_update_claim_without_a_separate_atomic_backend_proof",
+      "no_new_command_field_route_schema_or_write_authority",
+      "no_api_openapi_graphql_database_event_or_watcher_expansion",
+      "repository_local_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "assessed_stage": "closeout pre-commit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "rationale": "Its bounded test artifact required Sol recovery after one correction; the final admitted tests pass but no further lane work has leverage.",
+        "work_packages": ["completed test-only candidate and preserved recovery provenance"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "One valid schema-constrained pass binds the exact unchanged clean candidate and 167 exact tests.",
+        "work_packages": ["completed exact-candidate veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "Both read-only analyses strengthened implementation and tests; no closeout dispatch is useful.",
+        "work_packages": ["completed implementation audit", "completed test audit"]
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol alone stages and commits the accepted path allowlist",
+      "the canonical repository profile already completed serially",
+      "protected refs remain closed"
+    ],
+    "reassessment_triggers": ["pre-push", "next tranche planning"]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "fresh_complete_five_source_closeout_precommit",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed deterministic acceptance and closeout."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Both native audits completed with positive leverage."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini completed one exact unchanged-candidate pass."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek output and Sol recovery provenance are preserved."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"resource_id": "gemini-3.6-flash-high-verifier", "worktree": "C:/Users/sarashera/EMR4-worktrees/action-console-review-1d9e", "branch": "codex/review-reception-one-action-console-1d9e", "head": "1d9e58fd2624f87b8b3def538297054999e7bef3", "clean": true}],
+  "assigned_agent_ids": []
+}

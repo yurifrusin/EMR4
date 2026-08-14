@@ -1,0 +1,89 @@
+{
+  "schema_version": "raisa.reception-one.selected-action-console-composition.evidence.v1",
+  "generated_at": "2026-08-14T18:33:26+10:00",
+  "result": "raisa_reception_one_selected_action_console_progressive_disclosure_composition_pass",
+  "planning_baseline": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+  "reviewed_candidate": "1d9e58fd2624f87b8b3def538297054999e7bef3",
+  "evidence_modes": [
+    "authored_synthetic_client_fixture",
+    "route_intercepted_browser",
+    "repository_static_and_regression",
+    "in_app_browser_local_shell_inspection",
+    "independent_read_only_veto"
+  ],
+  "presentation_contract": {
+    "states": [null, "status", "time", "duration", "practitioner"],
+    "choices": ["status", "time", "duration", "practitioner"],
+    "initial_field_editors": 0,
+    "maximum_field_editors": 1,
+    "palette_routes": 0,
+    "summary_source": "selected_fresh_projection_only",
+    "summary_fields": ["status", "time_window", "duration_minutes", "practitioner_display"],
+    "patient_name_in_summary": false,
+    "idle_switch": "discard_outgoing_unsubmitted_draft",
+    "multi_field_intent": "inert_editor_selection_only",
+    "automatic_command_sequence": false,
+    "compound_update_claim": false
+  },
+  "command_contract": {
+    "graphql": "read_only_unchanged",
+    "status": "existing_status_proposal_confirm_only",
+    "time": "existing_update_proposal_confirm_via_handleMoveResize",
+    "duration": "existing_update_proposal_confirm_via_handleMoveResize",
+    "practitioner": "existing_update_proposal_confirm_via_handleMoveResize",
+    "new_routes": 0,
+    "new_schemas": 0,
+    "raw_put_patch_fallbacks": 0,
+    "generic_executor": false,
+    "combined_draft": false
+  },
+  "interaction_acceptance": {
+    "busy_palette": "all_four_disabled_active_editor_mounted",
+    "busy_reselection": "ignored",
+    "confirmation_focus": "existing_dialog_contained_escape_returns_to_field",
+    "interruption": "idle_draft_cleared_disabled_palette_exact_refresh_only",
+    "external_fresh_replacement": "idle_draft_cleared_before_new_truth",
+    "terminal": "active_action_retained_fresh_rebind_or_specific_removal_outcome",
+    "live_regions_in_active_editor": 1,
+    "target_minimum_css_pixels": 44,
+    "viewports": ["1280x720", "768x1024", "390x844"],
+    "horizontal_overflow": false
+  },
+  "verification": {
+    "new_console_cases": 23,
+    "existing_field_cases": 49,
+    "two_projection_parity_cases": 1,
+    "broader_packet": 167,
+    "canonical_fast": 196,
+    "maintained_python_sources": 209,
+    "independent_veto": 167,
+    "javascript_syntax": "pass",
+    "ruff": "pass",
+    "git_whitespace": "pass"
+  },
+  "parallelism_efficacy": {
+    "native": "two_read_only_audits_completed_positive_leverage",
+    "deepseek": "two_calls_test_structure_recovered_by_sol_negative_net_leverage",
+    "deepseek_final_lines": 794,
+    "deepseek_non_authoritative_cost_estimate_usd": 10.18991,
+    "gemini": "fresh_exact_candidate_pass",
+    "sol": "product_existing_test_adaptation_worker_recovery_rendered_verification_acceptance_continuity_git"
+  },
+  "authority_counts": {
+    "product_or_vertex_calls": 0,
+    "patient_or_product_records": 0,
+    "real_database_or_source_reads": 0,
+    "real_database_writes": 0,
+    "new_command_routes": 0,
+    "deployments": 0,
+    "releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_movements": 0
+  },
+  "unchanged_authority_blobs": {
+    "docs/diary/diary.js": "789c5e43078bdc08c7e060938dda606b4b98d199",
+    "app/routers/appointments.py": "ccae18334f82fc29822c1e32f0d99585cf850657",
+    "docs/api-spine/openapi/appointment-commands.yaml": "42e24524e069fe12a15911cee98f9df22f0d51fb"
+  },
+  "claim_limit": "Proves provider-free authored-synthetic client composition, route-intercepted browser behavior, local shell inspection, repository regression and independent source review only; it does not prove live backend/database, product-data, deployed, production, real-user or patient-data operation, or an atomic compound-update contract."
+}

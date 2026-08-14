@@ -381,16 +381,17 @@ practitioner through the identical command path. Its practitioner-only
 descendant now also passes at exact reviewed source
 `f085fc98ead21a3e7929ee9adbda81abfc7542c9`, preserving date, start and
 duration while requiring one current active target at proposal and confirm.
-The read-only selected-action-console orientation now passes at exact reviewed
-source `2d602cfd822235977676bfe9ee8d8dc0a14714fe`. It selects four native action
-choices with no editor initially and at most one progressively disclosed
-existing editor, while preserving distinct status and update command families.
-Its presentation-only implementation is the next narrow descendant before
-another field is added.
-No watcher runtime, existing database/
-source access, persistence, product data, external patient client, other
-command, restart/unknown-commit claim, provider, deployment, production or
-release is opened.
+The selected-action-console progressive-disclosure composition now passes at
+exact reviewed source `1d9e58fd2624f87b8b3def538297054999e7bef3`.
+Reception One shows one current-truth summary, four route-inert native choices
+and at most one existing field editor; abandoned drafts are discarded and
+busy, confirmation, interruption and fresh-reconciliation states fail closed.
+All four existing command paths remain distinct and unchanged. The next narrow
+descendant is a provider-free read-only multi-change request atomicity
+orientation before any compound edit or another command field is considered.
+No watcher runtime, existing database/source access, persistence, product data,
+external patient client, compound command, restart/unknown-commit claim,
+provider, deployment, production or release is opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the
