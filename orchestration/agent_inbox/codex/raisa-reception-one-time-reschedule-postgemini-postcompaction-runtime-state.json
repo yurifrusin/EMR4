@@ -1,0 +1,154 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "reconcile_completed_gemini_review_evidence_update_latch_and_complete_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Yuri's selected appointment update/reschedule direction remains controlling through the in-progress durable latch, while the live Current Baton still records the accepted truth-parity parent pending this tranche's closeout.",
+    "current_authority_allocation": "GPT Sol retains product, recovery, acceptance and integration authority. DeepSeek V4 Flash/high supplied one bounded test artifact without acceptance authority, and Gemini 3.6 Flash/high supplied one fresh read-only veto decision without edit, integration or baton authority.",
+    "active_plan_and_acceptance": "The frozen 2026-08-14 Reception One selected-appointment time-reschedule plan and threat-model delta constrain the candidate to same-date, same-practitioner, duration-fixed start-time composition through the existing handleMoveResize proposal/confirm path. The accepted truth-parity result at 18aa4b613d735a68a7f6f2e55d34e498176c9935 remains its parent invariant. The candidate at d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a has already passed deterministic gates and a fresh Gemini veto; the durable latch checkpoint must now be reconciled to that completed evidence before acceptance.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, provider/ADC/credential/IAM/external network, raw PUT or any second command path, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "After fetch, the active worktree is C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a with four intentional tracked closeout-preparation modifications and 619 preserved untracked files, including five under docs/branding. Required 648c8ec9805af63729264ea9c22fd695f062a741 and truth-parity 18aa4b613d735a68a7f6f2e55d34e498176c9935 are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task is 988c139a7f3592b48f5f3977e4b120bde2c78bac."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
+    "status": "in_progress",
+    "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+    "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "the deterministic candidate and pre-verifier recovery evidence are committed at d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a; fresh review worktree r133 is clean and exact; its bounded veto packet is complete",
+      "next_executable_stage": "generate a passing pre-verifier-acceptance receipt, dispatch one fresh Gemini 3.6 Flash/high read-only veto, and admit only one exact terminal decision with unchanged clean postcondition",
+      "retry_counters": {
+        "review": 0,
+        "verification": 12
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_selected_current_appointment",
+      "same_practitioner_time_reschedule_only_until_plan_freeze",
+      "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
+      "no_raw_put_or_second_command_path",
+      "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
+      "authored_synthetic_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "assessed_stage": "post-Gemini review and workflow-control closeout",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "A separable one-file browser-test packet supplied an independent matrix and exposed a fresh-coordinate race after bounded Sol integration recovery.",
+        "work_packages": ["author the route-intercepted time-reschedule browser matrix"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "Material projection/command composition benefited from a fresh exact-candidate veto after all deterministic gates passed.",
+        "work_packages": ["independently challenge command convergence, freshness, focus, interruption and authority scope"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "DeepSeek already owned the separable test surface and Gemini the veto surface; another agent would duplicate evidence while closeout remained serial and Sol-owned.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": ["DeepSeek browser-test authoring ran beside Sol product integration before deterministic convergence"],
+    "serial_constraints": ["Sol recovery and deterministic passage preceded Gemini dispatch", "Continuity, acceptance, Git publication and notification remain Sol-owned"],
+    "reassessment_triggers": ["start of duration-only descendant", "material recovery", "new session or compaction", "pre-verifier acceptance"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_post_compaction_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol resumed the exact in-progress latch after complete five-source rehydration."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent owns implementation or acceptance."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh exact-candidate Gemini review completed with one pass decision and unchanged clean review worktree."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded DeepSeek test artifact is integrated and no worker remains active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Anthropic transport is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

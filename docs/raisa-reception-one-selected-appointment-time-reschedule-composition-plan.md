@@ -124,6 +124,17 @@ live. Static smoke evidence is labelled `authored_synthetic_client_fixture`.
   the candidate passes locally. It checks command-path convergence, freshness,
   focus/Escape/accessibility, interruption and the absence of a second write
   path; it has no edit or integration authority.
+- **Native subagents:** declined for this tranche. DeepSeek already owns the
+  separable test artifact and Gemini the independent veto; an additional agent
+  would duplicate those surfaces while product integration, recovery and
+  acceptance remain tightly coupled and Sol-owned.
+
+Expected leverage is positive for DeepSeek's parallel test authoring and
+required independence for Gemini's serial post-gate veto. DeepSeek may run
+beside Sol product integration. Sol must integrate and recover the test packet,
+then complete the deterministic gate before Gemini may start. Reassess the
+three lanes after a material recovery, a compaction or restored task window,
+before verifier admission, and at closeout; record expected versus actual mix.
 
 ## Verification
 

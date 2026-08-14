@@ -1,0 +1,39 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the deterministic candidate and pre-verifier recovery evidence are committed at d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a; fresh review worktree r133 is clean and exact; its bounded veto packet is complete",
+    "next_executable_stage": "generate a passing pre-verifier-acceptance receipt, dispatch one fresh Gemini 3.6 Flash/high read-only veto, and admit only one exact terminal decision with unchanged clean postcondition",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": true,
+    "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_veto",
+  "reasons": [
+    "adapter_probe_method_invalid:antigravity_cli_print"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d48e1d2f623c05a7edc1c775eb1618d990bb70b3e4c9c30e4007b91a53534265",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and threat delta bind one same-date, same-practitioner, duration-fixed start-time composition through existing handleMoveResize. The candidate at d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a passes 9 recovered browser tests, 144 Diary smoke, 85 API/latch checks and the canonical fast profile. The exact packet requires 35 focused review tests plus Ruff, JavaScript syntax and diff checks.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project receives read-only independent veto only. Sol retains implementation, recovery, acceptance, integration and ref authority; silent fallback is forbidden.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/r133 is clean on codex/review-reception-one-time-reschedule-d803d1d8 at exact candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a; preflight passed. Baseline is 1b5d790338ca8fbfd1b42806aaa9a3d9be01bb00. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md and the live in-progress latch retain Yuri's selected Reception One time-reschedule direction and require a fresh risk-triggered veto after recovered material change.",
+    "protected_evidence_boundaries": "The verifier may read only the packet's exact allowlist and baseline-to-candidate diff. Protected evidence, historical Diary PHI, docs/branding, patient/product data, backend/database runtime, provider/product calls, credentials, network, writes, deployment, Pages and protected refs remain closed."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

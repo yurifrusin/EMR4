@@ -26,13 +26,17 @@ def test_truth_parity_is_current_at_exact_source() -> None:
     assert node["contract_evidence"] == []
 
 
-def test_compass_records_genuine_user_owned_direction_fork() -> None:
+def test_compass_records_yuris_selected_direction_as_an_accepted_descendant() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "genuine Yuri-owned programme fork" in compass["orientation_statement"]
-    decision = next(item for item in compass["decision_horizon"] if item["id"] == "post-truth-parity-programme-direction")
-    assert decision["status"] == "candidate"
-    assert "Continuity 285 / Compass 267" in compass["orientation_statement"]
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
+    assert compass["current_position"]["node_id"] == (
+        "raisa-reception-one-selected-appointment-time-reschedule-composition"
+    )
+    assert not any(
+        item["id"] == "post-truth-parity-programme-direction"
+        for item in compass["decision_horizon"]
+    )
+    assert "Continuity 286 / Compass 268" in compass["orientation_statement"]
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

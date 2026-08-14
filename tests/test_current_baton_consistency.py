@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal"
-SOURCE_HEAD = "18aa4b613d735a68a7f6f2e55d34e498176c9935"
+NODE_ID = "raisa-reception-one-selected-appointment-time-reschedule-composition"
+SOURCE_HEAD = "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a"
+TRUTH_PARITY_SOURCE_HEAD = "18aa4b613d735a68a7f6f2e55d34e498176c9935"
 STATUS_COMPOSITION_SOURCE_HEAD = "b6c6a983c4936c1f0bd5e9daf03924bbcd4ddd33"
 ORIENTATION_SOURCE_HEAD = "edba8f57380a48fd98decc332608349f2d9012e6"
 CF_D2_SOURCE_HEAD = "f4bd8ca5ec0654f8be7b1d2d74b1aca444038ee9"
@@ -26,31 +27,35 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_the_live_truth_parity_conformance() -> None:
+def test_continuity_and_compass_bind_the_live_time_reschedule_composition() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 285
+    assert graph["graph_revision"] == 286
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 267
-    assert compass["source_graph_revision"] == 285
+    assert compass["map_revision"] == 268
+    assert compass["source_graph_revision"] == 286
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_truth_parity_and_name_the_genuine_fork() -> None:
+def test_live_baton_rows_accept_time_rescheduling_and_name_duration_next() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 285 / Compass 267" in current
-    assert "raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_pass" in current
+    assert "Continuity 286 / Compass 268" in current
+    assert (
+        "raisa_reception_one_selected_appointment_time_reschedule_composition_pass"
+        in current
+    )
     assert SOURCE_HEAD in current
-    assert "truth parity, not general feature parity" in current
-    assert "Twelve route-intercepted browser traces" in current
-    assert "all six pairs agree" in current
+    assert "existing update proposal/confirm path" in current
+    assert "Twelve paired conventional-grid/Reception One traces" in current
+    assert "eight fresh-truth fields" in current
     assert SOURCE_HEAD in relation
+    assert TRUTH_PARITY_SOURCE_HEAD in relation
     assert STATUS_COMPOSITION_SOURCE_HEAD in relation
     assert CF_D2_SOURCE_HEAD in relation
     assert ORIENTATION_SOURCE_HEAD in relation
@@ -80,12 +85,9 @@ def test_live_baton_rows_accept_truth_parity_and_name_the_genuine_fork() -> None
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "genuine Yuri-attention programme fork" in next_work
-    assert "another Reception One command family" in next_work
-    assert "representative Stage 3B staff execution" in next_work
-    assert "a first patient channel/identity flow" in next_work
-    assert "another typed Diary event family" in next_work
-    assert "operational watcher/durability work" in next_work
+    assert "selected-appointment duration-only composition" in next_work
+    assert "same existing `handleMoveResize` update proposal/confirm path" in next_work
+    assert "mandatory DeepSeek/Gemini/native-subagent" in next_work
     assert "product/patient data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
@@ -123,14 +125,11 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "genuine yuri-attention programme fork",
-        "another reception one command family",
-        "representative stage 3b staff execution",
-        "first patient channel/identity flow",
-        "another typed diary event family",
-        "operational watcher/durability work",
-        "no new command/event/renderer",
-        "database/source/watcher runtime",
+        "duration-only composition",
+        "date, start time, practitioner and every unrelated field",
+        "zero raw or second command path",
+        "no backend/api/openapi/graphql/database/event/watcher expansion",
+        "cross-day or cross-practitioner move",
         "product/patient data",
         "provider/adc",
         "credentials/iam/network",

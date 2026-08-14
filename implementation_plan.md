@@ -369,9 +369,13 @@ reconciliation but no second command path. The orientation passes at exact sourc
 `4b6a060c6b1aab42e1062c41d48d109f683abe00`, and its two-projection
 truth-parity rehearsal now passes at exact source
 `18aa4b613d735a68a7f6f2e55d34e498176c9935`. Twelve route-intercepted
-traces protect six paired status outcomes without changing product code. The
-next functional direction is a genuine Yuri-owned fork; no command, cohort,
-patient channel, event family or watcher runtime is inferred. No watcher runtime, existing database/
+traces protect six paired status outcomes without changing product code. Yuri
+then selected the existing appointment update/reschedule family. Its first
+same-day, same-practitioner, duration-fixed Reception One time composition
+passes at exact reviewed source
+`d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a`, through the same update
+proposal/confirm path with fresh reconciliation and no second command path. A
+duration-only composition is the next narrow descendant. No watcher runtime, existing database/
 source access, persistence, product data, external patient client, other
 command, restart/unknown-commit claim, provider, deployment, production or
 release is opened.

@@ -51,7 +51,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal"
+        "raisa-reception-one-selected-appointment-time-reschedule-composition"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
@@ -64,9 +64,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
         "deferred"
     )
     assert horizon_by_id["next-typed-diary-event-family"]["status"] == "candidate"
-    assert horizon_by_id["post-truth-parity-programme-direction"]["status"] == (
-        "candidate"
-    )
+    assert "post-truth-parity-programme-direction" not in horizon_by_id
     assert "shared-application-auth-runtime-foundation" not in horizon_by_id
     assert "shared-application-auth-postgresql-persistence" not in horizon_by_id
     assert "shared-application-auth-runtime-role-secure-transport" not in horizon_by_id

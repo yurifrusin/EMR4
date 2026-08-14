@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/selected-appointment-time-reschedule-evidence.schema.json",
+  "title": "Reception One selected-appointment time-reschedule composition evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "result",
+    "planning_baseline",
+    "candidate_source",
+    "evidence_modes",
+    "api_surface",
+    "frozen_change",
+    "paired_browser_acceptance",
+    "interaction_acceptance",
+    "verification",
+    "worker_evidence",
+    "authority_counts",
+    "claim_limit"
+  ],
+  "properties": {
+    "schema_version": { "const": "raisa.reception-one.selected-time-reschedule.evidence.v1" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "result": { "const": "raisa_reception_one_selected_appointment_time_reschedule_composition_pass" },
+    "planning_baseline": { "const": "2ee298e8b089e1d16133989f9a669d6dd46aff51" },
+    "candidate_source": { "const": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a" },
+    "evidence_modes": {
+      "const": [
+        "authored_synthetic_client_fixture",
+        "route_intercepted_browser",
+        "repository_static_and_regression",
+        "independent_read_only_veto"
+      ]
+    },
+    "api_surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graphql", "rest", "bridge", "new_routes", "raw_write_fallbacks", "unexpected_mutation_routes"],
+      "properties": {
+        "graphql": { "const": "read_only_unchanged" },
+        "rest": { "const": "existing_update_proposal_confirm_only" },
+        "bridge": { "const": "time_validation_and_handleMoveResize_delegation_no_network" },
+        "new_routes": { "const": 0 },
+        "raw_write_fallbacks": { "const": 0 },
+        "unexpected_mutation_routes": { "const": 0 }
+      }
+    },
+    "frozen_change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "practitioner", "duration_minutes", "mutable_field", "grid_minutes"],
+      "properties": {
+        "date": { "const": "unchanged" },
+        "practitioner": { "const": "unchanged" },
+        "duration_minutes": { "const": "unchanged_delta_zero" },
+        "mutable_field": { "const": "start_time_local_only" },
+        "grid_minutes": { "const": 15 }
+      }
+    },
+    "paired_browser_acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["renderers", "outcomes", "route_traces", "normalized_fields", "proposal_confirm_counts", "fresh_coordinates_equal"],
+      "properties": {
+        "renderers": { "const": ["conventional_grid", "reception_one"] },
+        "outcomes": { "const": ["safe", "cancelled", "blocked", "stale", "failed", "committed"] },
+        "route_traces": { "const": 12 },
+        "normalized_fields": {
+          "const": ["appointment_id", "appointment_date", "start_time_local", "end_time_local", "practitioner_id", "duration_minutes", "patient_id", "status"]
+        },
+        "proposal_confirm_counts": {
+          "const": {
+            "safe": [1, 1],
+            "cancelled": [1, 0],
+            "blocked": [1, 0],
+            "stale": [1, 1],
+            "failed": [1, 0],
+            "committed": [1, 1]
+          }
+        },
+        "fresh_coordinates_equal": { "const": true }
+      }
+    },
+    "interaction_acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invalid_or_noop_routes", "interruption", "dialog_escape", "focus_return", "viewports", "horizontal_overflow", "persisted_screenshots"],
+      "properties": {
+        "invalid_or_noop_routes": { "const": 0 },
+        "interruption": { "const": "pass_no_duplicate_fresh_reconciliation" },
+        "dialog_escape": { "const": "pass_cancel_without_workspace_close" },
+        "focus_return": { "const": "pass_time_input" },
+        "viewports": { "const": ["1280x900", "768x1024", "390x844"] },
+        "horizontal_overflow": { "const": false },
+        "persisted_screenshots": { "const": false }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dedicated_browser_functions", "dedicated_browser_cases", "native_diary_browser", "focused_ui_truth", "api_latch", "independent_veto", "canonical_fast"],
+      "properties": {
+        "dedicated_browser_functions": { "const": 9 },
+        "dedicated_browser_cases": { "const": 11 },
+        "native_diary_browser": { "const": 144 },
+        "focused_ui_truth": { "const": 23 },
+        "api_latch": { "const": 85 },
+        "independent_veto": { "const": 51 },
+        "canonical_fast": { "const": 193 }
+      }
+    },
+    "worker_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deepseek", "gemini", "gemini_candidate_unchanged"],
+      "properties": {
+        "deepseek": { "const": "one_test_artifact_integrated_under_sol_recovery" },
+        "gemini": { "const": "fresh_read_only_veto_pass" },
+        "gemini_candidate_unchanged": { "const": true }
+      }
+    },
+    "authority_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_calls", "patient_or_product_records", "database_or_source_reads", "database_writes", "deployments", "releases", "pages_rebuilds", "protected_ref_movements"],
+      "properties": {
+        "provider_calls": { "const": 0 },
+        "patient_or_product_records": { "const": 0 },
+        "database_or_source_reads": { "const": 0 },
+        "database_writes": { "const": 0 },
+        "deployments": { "const": 0 },
+        "releases": { "const": 0 },
+        "pages_rebuilds": { "const": 0 },
+        "protected_ref_movements": { "const": 0 }
+      }
+    },
+    "claim_limit": {
+      "const": "Proves provider-free authored-synthetic client composition, route-intercepted browser behavior and independent source review only; it does not prove live backend, database, deployed, production, real-user or patient-data operation."
+    }
+  }
+}

@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "a5cd20c6221bf99f3cc0747a276005749cbc685cb6a6b5b9aee221e43bcb935d",
+  "canonical_register_sha256": "6f41531c9d71c00adf3349f8403eb825a319d595c1084195ac26a3a2a5e97483",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 97,
-      "canonical_unchanged": 179,
+      "canonical_unchanged": 181,
       "untrusted_partial_worktree": 27
     },
     "by_category": {
       "command_scope_violation": 40,
-      "evidence_misreport": 39,
+      "evidence_misreport": 40,
       "harness_failure": 37,
-      "output_contract_violation": 84,
+      "output_contract_violation": 85,
       "read_only_violation": 3,
       "reasoning_claim_error": 36,
       "repository_defect": 55,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 202,
+      "agent_behavior": 204,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 114,
+      "low": 115,
       "material": 97,
-      "moderate": 92
+      "moderate": 93
     },
     "by_resource_and_role": {
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
@@ -37,7 +37,7 @@
       "codex-native-parallel-worker::implementer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 150,
+      "codex-primary-orchestrator::orchestrator": 152,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -86,12 +86,12 @@
     },
     "by_role": {
       "implementer": 20,
-      "orchestrator": 232,
+      "orchestrator": 234,
       "verifier": 51
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 303,
+  "incident_count": 305,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -727,7 +727,7 @@
       ]
     }
   ],
-  "register_revision": 265,
+  "register_revision": 267,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-14"
 }

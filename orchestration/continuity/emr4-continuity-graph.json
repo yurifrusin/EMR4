@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 285,
+  "graph_revision": 286,
   "harvests": [],
   "nodes": [
     {
@@ -18951,9 +18951,113 @@
         "Another command/event/renderer, representative cohort, patient channel and watcher/runtime retain their recorded gates.",
         "Product data, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-selected-appointment-time-reschedule-composition",
+      "title": "Provider-free Reception One selected-appointment time-reschedule composition",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-13T23:50:00Z",
+      "updated_at": "2026-08-13T23:50:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Consumer-only authored-synthetic composition over the existing update proposal/confirm command family.",
+          "The bridge validates a same-day time, fixes duration delta at zero, retains the same practitioner and performs no network call.",
+          "Backend current-authority, source-truth, safety, idempotency, audit and atomic-commit ownership are unchanged."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-selected-appointment-time-reschedule-composition",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-time-reschedule-composition-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept one selected current appointment same-day time change through the existing update interaction with fresh reconciliation."
+        }
+      ],
+      "claim_scope": [
+        "One selected current Reception One appointment can propose one 15-minute-aligned same-day start time with unchanged practitioner and duration.",
+        "Twelve paired traces cover safe, cancelled, blocked, stale, failed and committed outcomes with eight equal fresh-truth fields.",
+        "DeepSeek supplied one recovered test artifact and Gemini returned one fresh unchanged-candidate veto pass over 51 tests.",
+        "No raw fallback, unexpected mutation, backend/API/database/provider/product-data/deployment or protected-ref activity occurred."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json",
+            "review/test_reception_one_time_reschedule_action.py",
+            "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md"
+          ],
+          "note": "The time-only interaction preserves appointment identity, patient linkage, practitioner and duration while changing only start/end coordinates through the existing command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json",
+            "review/test_reception_one_time_reschedule_action.py",
+            "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md"
+          ],
+          "note": "Every terminal outcome fresh-reads current truth; a committed card receives its coordinate only from the exact fresh appointment response."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-plan.md",
+          "docs/security/raisa-reception-one-selected-appointment-time-reschedule-composition-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.schema.json",
+          "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json",
+          "docs/raisa-reception-one-time-reschedule-deepseek-test-integration-recovery.md",
+          "docs/ariadne-mandatory-parallelism-efficacy-control.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-time-reschedule-composition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-reception-one-time-reschedule-test-worker-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postgemini-postcompaction-receipt.json"
+        ],
+        "tests": [
+          "review/test_reception_one_time_reschedule_action.py",
+          "tests/test_reception_one_time_reschedule_composition.py",
+          "tests/test_raisa_reception_one_selected_appointment_time_reschedule_composition_evidence.py",
+          "tests/test_raisa_reception_one_selected_appointment_time_reschedule_composition_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_reception_one_selected_appointment_time_reschedule_composition_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The next planned descendant is a same-start, same-date, same-practitioner duration-only composition through the existing update interaction.",
+        "Cross-day and cross-practitioner rescheduling, full edit and another command or event family remain closed.",
+        "Product data, watcher/runtime, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-13T14:20:41Z"
+  "updated_at": "2026-08-13T23:50:00Z"
 }

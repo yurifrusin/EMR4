@@ -48,7 +48,61 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
     assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
     assert receipt["active_operation"]["operation_id"] == "fixture-operation"
     assert receipt["active_operation"]["status"] == "in_progress"
+    assert receipt["parallelism_assessment"]["operation_id"] == "fixture-operation"
+    assert [
+        lane["lane_id"] for lane in receipt["parallelism_assessment"]["lanes"]
+    ] == ["deepseek_flash", "gemini_verifier", "native_subagents"]
     assert receipt["terminal_handback_permitted"] is False
+
+
+def test_every_continuation_fails_closed_without_parallelism_assessment(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state.pop("parallelism_assessment")
+    for event in CONTINUATION_EVENTS:
+        runtime_state["continuation_event"] = event
+        path = tmp_path / f"parallelism-{event}.json"
+        path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+        receipt = build_receipt(runtime_state_path=path)
+
+        assert receipt["status"] == "revision_required"
+        assert receipt["parallelism_assessment"] == {}
+        assert "parallelism_assessment_missing" in receipt["reasons"]
+
+
+def test_parallelism_assessment_requires_all_three_distinct_lanes(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["parallelism_assessment"]["lanes"] = runtime_state[
+        "parallelism_assessment"
+    ]["lanes"][:2]
+    path = tmp_path / "missing-native-lane.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert "parallelism_lane_inventory_invalid" in receipt["reasons"]
+
+
+def test_serial_execution_requires_an_explicit_efficacy_basis(tmp_path: Path) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    for lane in runtime_state["parallelism_assessment"]["lanes"]:
+        lane["disposition"] = "declined"
+        lane["expected_leverage"] = "negative"
+        lane["work_packages"] = []
+    runtime_state["parallelism_assessment"]["parallel_work_packages"] = []
+    runtime_state["parallelism_assessment"]["serial_constraints"] = []
+    path = tmp_path / "implicit-serial.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert "parallelism_efficacy_basis_missing" in receipt["reasons"]
 
 
 def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(

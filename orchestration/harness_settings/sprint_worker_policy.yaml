@@ -47,6 +47,13 @@ required_plan_fields:
   - independence_labels
   - unfilled_obligations
   - workspace_receipts
+  - parallelism_efficacy_assessment
+  - deepseek_disposition
+  - gemini_disposition
+  - native_subagent_disposition
+  - concurrency_and_serial_dependency_map
+  - reassessment_triggers
+  - expected_and_actual_worker_mix
   - security_delta
   - security_review_tier
   - red_blue_packet_independence
@@ -63,6 +70,10 @@ deterministic_plan_checks:
   - fallback_and_reduced_independence_are_explicit
   - no_orchestrator_substitution
   - workspace_receipts_match_assigned_agent_and_handoff_state
+  - all_three_parallel_lanes_have_explicit_dispositions_and_rationales
+  - solo_serial_execution_has_named_dependency_or_negative_leverage_evidence
+  - independent_veto_is_reserved_when_risk_triggered_even_if_not_concurrent
+  - closeout_reports_expected_versus_actual_worker_mix
   - material_sprint_security_delta_is_complete
   - security_sensitive_triggers_require_independent_red_and_blue
   - red_and_blue_packets_are_asymmetric

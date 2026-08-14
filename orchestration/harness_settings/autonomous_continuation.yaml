@@ -22,6 +22,8 @@ standing_programme_authority:
     - allowed_side_effects_and_forbidden_surfaces
     - evidence_labels_acceptance_recovery_and_stop_conditions
     - claim_boundary_and_cleanup
+    - parallelism_efficacy_across_deepseek_gemini_and_native_subagents
+    - separable_work_packages_serial_dependencies_and_reassessment_triggers
   conductor_boundary_derivation_defaults:
     - development_before_production
     - authored_synthetic_before_real_or_product_derived_data
@@ -130,6 +132,14 @@ task_lifecycle:
     scope_addition_behavior: merge_then_resume
     replacement_requires_explicit_pause_or_redirect: true
     in_progress_terminal_response_permitted: false
+  parallelism_assessment:
+    required_at_every_configured_continuation_event: true
+    required_lanes: [deepseek_flash, gemini_verifier, native_subagents]
+    solo_serial_is_never_implicit: true
+    decline_or_reserve_requires_bounded_rationale: true
+    carry_forward_across_new_session_compaction_and_restoration: true
+    reassess_at: [named_tranche_start, material_recovery, pre_verifier_acceptance, tranche_closeout]
+    closeout_must_compare_expected_and_actual_worker_mix: true
 resume_checkpoint:
   required_for_platform_interruption: true
   must_name: [active_sprint, completed_stage, next_executable_stage, retry_counters, settings_fingerprint]

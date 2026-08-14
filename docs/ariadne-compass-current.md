@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 285 / Compass 267. Conventional grid and Reception One pass six paired status truth outcomes. The next functional direction is a genuine Yuri-owned programme fork.
+> EMR4 is at Continuity 286 / Compass 268. Reception One same-day time rescheduling passes through the canonical appointment-update path; duration-only composition is the next narrow descendant.
 
 ## North star
 
@@ -342,43 +342,36 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Truth parity is distinguished from feature parity and a two-renderer status conformance rehearsal is selected. Lineage parent: `raisa-reception-one-selected-appointment-status-action-composition`.
 163. **Make projection-neutral kernel truth parity executable for one complete command family — Provider-free two-projection truth-parity conformance rehearsal**
    Two existing renderer grammars agree across six status outcomes; the next functional direction is a genuine Yuri-owned fork. Lineage parent: `raisa-post-status-action-compass-baton-orientation`.
+164. **Apply projection-neutral kernel truth to the first update/reschedule field — Provider-free Reception One selected-appointment time-reschedule composition**
+   One selected appointment can change its same-day start time through the canonical update path with fresh truth in both projections. Lineage parent: `raisa-provider-free-two-projection-truth-parity-conformance-rehearsal`.
 
 ## Current position
 
-**The grid and meta-grid now pass one executable kernel-truth invariant — Provider-free two-projection truth-parity conformance rehearsal**
+**The update/reschedule family now has its first focused Reception One composition — Provider-free Reception One selected-appointment time-reschedule composition**
 
-**Why this proof came next:** The first complete Reception One status action required protection against future renderer-specific semantic drift.
+**Why this proof came next:** Yuri selected appointment update/rescheduling after truth parity, and time-only change was its narrowest useful field.
 
-Twelve traces and six exact pairs pass; no further functional tranche is inferable without a Yuri-owned direction choice.
+Same-day time rescheduling passes through one backend-owned command path; duration-only composition is next.
 
 ### What this unlocks
 
-- Judge future modalities by kernel meaning rather than grid imitation.
-- Choose the next value-bearing product or runtime direction.
+- Compose duration-only adjustment through the identical update interaction.
+- Continue evaluating both projections by fresh kernel truth rather than renderer imitation.
 
 ### What it does not solve
 
-- Feature parity across Diary commands is not claimed.
-- No new command/event/renderer, cohort, patient channel or watcher runtime is authorised.
+- Cross-day, cross-practitioner and full appointment editing remain closed.
+- No new backend command, event family or watcher runtime is authorised.
 - Product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
-
-### Post-truth-parity programme direction — candidate
-
-Which value-bearing direction should follow the protected truth-parity milestone: another Reception One command, representative staff execution, a patient channel/identity flow, another event family, or operational watcher/durability work?
-
-Each option changes functional breadth, evidence population or runtime/data authority differently; no one outcome is inferable from the accepted invariant alone.
-
-Prerequisites:
-
-- Yuri selects one exact direction and its intended product value.
-- Sol freezes that choice's narrowest fail-closed plan before implementation.
 
 ### Reception One representative-staff formative sessions — deferred
 
@@ -630,6 +623,7 @@ Prerequisites:
 
 ## Map limits
 
+- The selected-time composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.
 - The truth-parity trace is evidence only and cannot become a runtime, API, database, analytics, audit or transcript contract.
 - Truth parity is accepted only for the existing status family and does not infer another command, renderer runtime, patient channel or feature-parity claim.
 - The selected-status composition proves authored-synthetic client and route-intercepted rendered behavior only; it adds no command family or backend, database, provider, deployment or production authority.
@@ -851,6 +845,7 @@ Prerequisites:
 - `docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-plan.md`
+- `docs/ariadne-mandatory-parallelism-efficacy-control.md`
 - `docs/ariadne-postcompaction-active-operation-latch-closeout.md`
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
@@ -1225,6 +1220,9 @@ Prerequisites:
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
 - `docs/raisa-reception-one-selected-appointment-status-action-composition-closeout.md`
 - `docs/raisa-reception-one-selected-appointment-status-action-composition-plan.md`
+- `docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md`
+- `docs/raisa-reception-one-selected-appointment-time-reschedule-composition-plan.md`
+- `docs/raisa-reception-one-time-reschedule-deepseek-test-integration-recovery.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-design.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-plan.md`
@@ -1358,6 +1356,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md`
+- `docs/security/raisa-reception-one-selected-appointment-time-reschedule-composition-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md`
@@ -1406,6 +1405,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
@@ -1670,6 +1670,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-time-reschedule-composition-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postgemini-postcompaction-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-behavior-transaction-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-http-route-convergence-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-status-confirm-kernel-adapter-contract-sol-acceptance.md`
@@ -1807,6 +1809,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-word-hybrid-contextual-launch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-result-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-sol-acceptance.md`
+- `orchestration/agent_inbox/deepseek/raisa-reception-one-time-reschedule-test-worker-receipt.json`
 - `orchestration/api_spine_adr.md`
 - `orchestration/api_spine_appointment_command_alignment_inventory.md`
 - `orchestration/bernie_interaction_model.md`
@@ -2076,6 +2079,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-status-action-composition/selected-appointment-status-action-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-status-action-composition/selected-appointment-status-action-evidence.schema.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.schema.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json`
@@ -2374,6 +2379,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md`
 - `orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md`
+- `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2387,6 +2393,7 @@ Prerequisites:
 - `orchestration_harness/active_operation.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_status_action.py`
+- `review/test_reception_one_time_reschedule_action.py`
 - `review/test_two_projection_truth_parity.py`
 - `scripts/ariadne_active_operation_latch.py`
 - `scripts/ariadne_evidence_gate.py`
@@ -2491,6 +2498,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
 - `tests/test_raisa_reception_one_selected_appointment_status_action_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_status_action_composition_plan.py`
+- `tests/test_raisa_reception_one_selected_appointment_time_reschedule_composition_evidence.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
 - `tests/test_reception_one_bureau_post_admission_runtime_hardening.py`
@@ -2513,8 +2521,9 @@ Prerequisites:
 - `tests/test_reception_one_receptionist_first_v69.py`
 - `tests/test_reception_one_shared_typed_plan_language.py`
 - `tests/test_reception_one_structured_source_plan_language.py`
+- `tests/test_reception_one_time_reschedule_composition.py`
 - `tests/test_reception_one_word_compact_companion_shell.py`
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 267; continuity graph revision 285._
+_Compass map revision 268; continuity graph revision 286._

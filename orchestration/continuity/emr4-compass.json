@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 267,
-  "updated_at": "2026-08-13T14:20:41Z",
-  "source_graph_revision": 285,
-  "orientation_statement": "EMR4 is at Continuity 285 / Compass 267. Conventional grid and Reception One pass six paired status truth outcomes. The next functional direction is a genuine Yuri-owned programme fork.",
+  "map_revision": 268,
+  "updated_at": "2026-08-13T23:50:00Z",
+  "source_graph_revision": 286,
+  "orientation_statement": "EMR4 is at Continuity 286 / Compass 268. Reception One same-day time rescheduling passes through the canonical appointment-update path; duration-only composition is the next narrow descendant.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3002,59 +3002,64 @@
         "orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md",
         "orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-preplanning-receipt.json"
       ]
+    },
+    {
+      "node_id": "raisa-reception-one-selected-appointment-time-reschedule-composition",
+      "lineage_parent": "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal",
+      "strategic_role": "Apply projection-neutral kernel truth to the first update/reschedule field",
+      "outcome": "One selected appointment can change its same-day start time through the canonical update path with fresh truth in both projections.",
+      "evidence": [
+        "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-plan.md",
+        "docs/security/raisa-reception-one-selected-appointment-time-reschedule-composition-threat-model-delta.md",
+        "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.schema.json",
+        "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json",
+        "review/test_reception_one_time_reschedule_action.py",
+        "tests/test_reception_one_time_reschedule_composition.py",
+        "tests/test_raisa_reception_one_selected_appointment_time_reschedule_composition_evidence.py",
+        "docs/raisa-reception-one-time-reschedule-deepseek-test-integration-recovery.md",
+        "orchestration/agent_inbox/deepseek/raisa-reception-one-time-reschedule-test-worker-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json",
+        "docs/ariadne-mandatory-parallelism-efficacy-control.md",
+        "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-time-reschedule-composition-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postgemini-postcompaction-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-two-projection-truth-parity-conformance-rehearsal",
-    "strategic_role": "The grid and meta-grid now pass one executable kernel-truth invariant",
-    "why_now": "The first complete Reception One status action required protection against future renderer-specific semantic drift.",
-    "outcome": "Twelve traces and six exact pairs pass; no further functional tranche is inferable without a Yuri-owned direction choice.",
+    "node_id": "raisa-reception-one-selected-appointment-time-reschedule-composition",
+    "strategic_role": "The update/reschedule family now has its first focused Reception One composition",
+    "why_now": "Yuri selected appointment update/rescheduling after truth parity, and time-only change was its narrowest useful field.",
+    "outcome": "Same-day time rescheduling passes through one backend-owned command path; duration-only composition is next.",
     "unlocks": [
-      "Judge future modalities by kernel meaning rather than grid imitation.",
-      "Choose the next value-bearing product or runtime direction."
+      "Compose duration-only adjustment through the identical update interaction.",
+      "Continue evaluating both projections by fresh kernel truth rather than renderer imitation."
     ],
     "does_not_solve": [
-      "Feature parity across Diary commands is not claimed.",
-      "No new command/event/renderer, cohort, patient channel or watcher runtime is authorised.",
+      "Cross-day, cross-practitioner and full appointment editing remain closed.",
+      "No new backend command, event family or watcher runtime is authorised.",
       "Product data, providers, deployment, production and release remain closed."
     ],
     "evidence": [
-      "docs/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-plan.md",
-      "docs/security/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-threat-model-delta.md",
-      "docs/raisa-projection-neutral-kernel-truth-architecture.md",
-      "scripts/raisa_provider_free_two_projection_truth_parity_conformance_rehearsal.py",
-      "review/test_two_projection_truth_parity.py",
-      "orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/projection-truth-trace.schema.json",
-      "orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/two-projection-truth-parity-evidence.schema.json",
-      "orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/two-projection-truth-parity-evidence.json",
-      "tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal.py",
-      "tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_plan.py",
-      "tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_evidence.py",
-      "tests/test_raisa_reception_one_selected_appointment_status_action_composition_plan.py",
-      "docs/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md",
-      "orchestration/agent_inbox/codex/raisa-two-projection-truth-parity-conformance-preplanning-receipt.json"
+      "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-plan.md",
+      "docs/security/raisa-reception-one-selected-appointment-time-reschedule-composition-threat-model-delta.md",
+      "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.schema.json",
+      "orchestration/continuity/raisa-reception-one-selected-appointment-time-reschedule-composition/selected-appointment-time-reschedule-evidence.json",
+      "review/test_reception_one_time_reschedule_action.py",
+      "tests/test_reception_one_time_reschedule_composition.py",
+      "tests/test_raisa_reception_one_selected_appointment_time_reschedule_composition_evidence.py",
+      "docs/raisa-reception-one-time-reschedule-deepseek-test-integration-recovery.md",
+      "orchestration/agent_inbox/deepseek/raisa-reception-one-time-reschedule-test-worker-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json",
+      "docs/ariadne-mandatory-parallelism-efficacy-control.md",
+      "docs/raisa-reception-one-selected-appointment-time-reschedule-composition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-time-reschedule-composition-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-postgemini-postcompaction-receipt.json"
     ]
   },
   "decision_horizon": [
-    {
-      "id": "post-truth-parity-programme-direction",
-      "title": "Post-truth-parity programme direction",
-      "status": "candidate",
-      "strategic_question": "Which value-bearing direction should follow the protected truth-parity milestone: another Reception One command, representative staff execution, a patient channel/identity flow, another event family, or operational watcher/durability work?",
-      "why_it_matters": "Each option changes functional breadth, evidence population or runtime/data authority differently; no one outcome is inferable from the accepted invariant alone.",
-      "prerequisites": [
-        "Yuri selects one exact direction and its intended product value.",
-        "Sol freezes that choice's narrowest fail-closed plan before implementation."
-      ],
-      "boundary_changes": [],
-      "evidence": [
-        "docs/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal-closeout.md",
-        "orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md",
-        "docs/raisa-projection-neutral-kernel-truth-architecture.md"
-      ]
-    },
     {
       "id": "reception-one-stage3b-participant-execution",
       "title": "Reception One representative-staff formative sessions",
@@ -4800,6 +4805,7 @@
     }
   ],
   "map_limits": [
+    "The selected-time composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.",
     "The truth-parity trace is evidence only and cannot become a runtime, API, database, analytics, audit or transcript contract.",
     "Truth parity is accepted only for the existing status family and does not infer another command, renderer runtime, patient channel or feature-parity claim.",
     "The selected-status composition proves authored-synthetic client and route-intercepted rendered behavior only; it adds no command family or backend, database, provider, deployment or production authority.",

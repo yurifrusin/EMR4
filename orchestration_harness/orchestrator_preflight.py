@@ -7,6 +7,127 @@ from typing import Any
 from orchestration_harness.active_operation import receipt_projection
 
 
+def _bounded_text(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and bool(value.strip())
+        and value == value.strip()
+        and "\r" not in value
+        and "\n" not in value
+        and len(value) <= 500
+    )
+
+
+def _parallelism_projection(
+    *,
+    runtime_state: dict[str, Any],
+    policy: dict[str, Any],
+    continuation_event: Any,
+    active_operation: dict[str, Any],
+    reasons: list[str],
+) -> dict[str, Any]:
+    """Validate an explicit three-lane efficacy decision for this continuation."""
+    if continuation_event not in policy.get("required_events", []):
+        return {}
+    field = policy.get("runtime_state_field")
+    value = runtime_state.get(field) if isinstance(field, str) else None
+    if not isinstance(value, dict):
+        reasons.append("parallelism_assessment_missing")
+        return {}
+    expected_keys = {
+        "schema_version",
+        "operation_id",
+        "assessed_stage",
+        "lanes",
+        "parallel_work_packages",
+        "serial_constraints",
+        "reassessment_triggers",
+    }
+    if set(value) != expected_keys:
+        reasons.append("parallelism_assessment_keys_invalid")
+        return {}
+    if value.get("schema_version") != policy.get("schema_version"):
+        reasons.append("parallelism_assessment_schema_invalid")
+    if value.get("operation_id") != active_operation.get("operation_id"):
+        reasons.append("parallelism_assessment_operation_mismatch")
+    if not _bounded_text(value.get("assessed_stage")):
+        reasons.append("parallelism_assessment_stage_invalid")
+
+    required_lane_ids = policy.get("required_lane_ids", [])
+    dispositions = set(policy.get("admitted_dispositions", []))
+    leverages = set(policy.get("admitted_leverage", []))
+    lanes = value.get("lanes")
+    lane_by_id: dict[Any, Any] = {}
+    if isinstance(lanes, list):
+        lane_by_id = {
+            lane.get("lane_id"): lane for lane in lanes if isinstance(lane, dict)
+        }
+    if (
+        not isinstance(lanes, list)
+        or len(lanes) != len(required_lane_ids)
+        or set(lane_by_id) != set(required_lane_ids)
+    ):
+        reasons.append("parallelism_lane_inventory_invalid")
+    else:
+        rationales: list[str] = []
+        for lane_id in required_lane_ids:
+            lane = lane_by_id[lane_id]
+            if set(lane) != {
+                "lane_id",
+                "disposition",
+                "expected_leverage",
+                "rationale",
+                "work_packages",
+            }:
+                reasons.append(f"parallelism_lane_keys_invalid:{lane_id}")
+                continue
+            if lane.get("disposition") not in dispositions:
+                reasons.append(f"parallelism_lane_disposition_invalid:{lane_id}")
+            if lane.get("expected_leverage") not in leverages:
+                reasons.append(f"parallelism_lane_leverage_invalid:{lane_id}")
+            rationale = lane.get("rationale")
+            if not _bounded_text(rationale):
+                reasons.append(f"parallelism_lane_rationale_missing:{lane_id}")
+            else:
+                rationales.append(rationale)
+            work_packages = lane.get("work_packages")
+            if (
+                not isinstance(work_packages, list)
+                or any(not _bounded_text(item) for item in work_packages)
+                or len(work_packages) != len(set(work_packages))
+            ):
+                reasons.append(f"parallelism_work_packages_invalid:{lane_id}")
+            elif lane.get("disposition") in {"planned", "dispatched", "completed"} and not work_packages:
+                reasons.append(f"parallelism_work_package_missing:{lane_id}")
+        if policy.get("require_distinct_rationale_per_lane") is True and len(
+            rationales
+        ) != len(set(rationales)):
+            reasons.append("parallelism_lane_rationales_not_distinct")
+
+    list_fields = (
+        "parallel_work_packages",
+        "serial_constraints",
+        "reassessment_triggers",
+    )
+    for list_field in list_fields:
+        items = value.get(list_field)
+        if (
+            not isinstance(items, list)
+            or any(not _bounded_text(item) for item in items)
+            or len(items) != len(set(items))
+        ):
+            reasons.append(f"parallelism_{list_field}_invalid")
+    if not value.get("reassessment_triggers"):
+        reasons.append("parallelism_reassessment_triggers_missing")
+    if (
+        policy.get("require_serial_constraints_or_positive_parallel_work") is True
+        and not value.get("parallel_work_packages")
+        and not value.get("serial_constraints")
+    ):
+        reasons.append("parallelism_efficacy_basis_missing")
+    return value
+
+
 def _has_evidence(value: Any) -> bool:
     if isinstance(value, str):
         return bool(value.strip())
@@ -80,6 +201,14 @@ def build_orchestrator_receipt(
                 active_operation = receipt_projection(runtime_state["active_operation"])
             except ValueError:
                 reasons.append("active_operation_latch_invalid")
+
+    parallelism_assessment = _parallelism_projection(
+        runtime_state=runtime_state,
+        policy=requirements.get("parallelism_assessment", {}),
+        continuation_event=continuation_event,
+        active_operation=active_operation,
+        reasons=reasons,
+    )
 
     adapter_by_id = {
         item.get("adapter_id"): item
@@ -273,6 +402,7 @@ def build_orchestrator_receipt(
         "rehydration_sources": receipt_sources,
         "source_evidence": receipt_evidence,
         "active_operation": active_operation,
+        "parallelism_assessment": parallelism_assessment,
         "terminal_handback_permitted": active_operation.get(
             "terminal_handback_permitted"
         ),

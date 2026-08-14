@@ -1,0 +1,77 @@
+{
+  "schema_version": "raisa.reception-one.selected-time-reschedule.evidence.v1",
+  "generated_at": "2026-08-14T09:50:00+10:00",
+  "result": "raisa_reception_one_selected_appointment_time_reschedule_composition_pass",
+  "planning_baseline": "2ee298e8b089e1d16133989f9a669d6dd46aff51",
+  "candidate_source": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+  "evidence_modes": [
+    "authored_synthetic_client_fixture",
+    "route_intercepted_browser",
+    "repository_static_and_regression",
+    "independent_read_only_veto"
+  ],
+  "api_surface": {
+    "graphql": "read_only_unchanged",
+    "rest": "existing_update_proposal_confirm_only",
+    "bridge": "time_validation_and_handleMoveResize_delegation_no_network",
+    "new_routes": 0,
+    "raw_write_fallbacks": 0,
+    "unexpected_mutation_routes": 0
+  },
+  "frozen_change": {
+    "date": "unchanged",
+    "practitioner": "unchanged",
+    "duration_minutes": "unchanged_delta_zero",
+    "mutable_field": "start_time_local_only",
+    "grid_minutes": 15
+  },
+  "paired_browser_acceptance": {
+    "renderers": ["conventional_grid", "reception_one"],
+    "outcomes": ["safe", "cancelled", "blocked", "stale", "failed", "committed"],
+    "route_traces": 12,
+    "normalized_fields": ["appointment_id", "appointment_date", "start_time_local", "end_time_local", "practitioner_id", "duration_minutes", "patient_id", "status"],
+    "proposal_confirm_counts": {
+      "safe": [1, 1],
+      "cancelled": [1, 0],
+      "blocked": [1, 0],
+      "stale": [1, 1],
+      "failed": [1, 0],
+      "committed": [1, 1]
+    },
+    "fresh_coordinates_equal": true
+  },
+  "interaction_acceptance": {
+    "invalid_or_noop_routes": 0,
+    "interruption": "pass_no_duplicate_fresh_reconciliation",
+    "dialog_escape": "pass_cancel_without_workspace_close",
+    "focus_return": "pass_time_input",
+    "viewports": ["1280x900", "768x1024", "390x844"],
+    "horizontal_overflow": false,
+    "persisted_screenshots": false
+  },
+  "verification": {
+    "dedicated_browser_functions": 9,
+    "dedicated_browser_cases": 11,
+    "native_diary_browser": 144,
+    "focused_ui_truth": 23,
+    "api_latch": 85,
+    "independent_veto": 51,
+    "canonical_fast": 193
+  },
+  "worker_evidence": {
+    "deepseek": "one_test_artifact_integrated_under_sol_recovery",
+    "gemini": "fresh_read_only_veto_pass",
+    "gemini_candidate_unchanged": true
+  },
+  "authority_counts": {
+    "provider_calls": 0,
+    "patient_or_product_records": 0,
+    "database_or_source_reads": 0,
+    "database_writes": 0,
+    "deployments": 0,
+    "releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_movements": 0
+  },
+  "claim_limit": "Proves provider-free authored-synthetic client composition, route-intercepted browser behavior and independent source review only; it does not prove live backend, database, deployed, production, real-user or patient-data operation."
+}

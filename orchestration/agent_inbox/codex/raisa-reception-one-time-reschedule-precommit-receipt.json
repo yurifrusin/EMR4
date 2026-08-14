@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the exact candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a passes deterministic verification, fresh Gemini veto, source-bound evidence, Continuity 286 / Compass 268, Sol acceptance, Yuri summary and the mandatory parallelism-efficacy control",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": false,
+    "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "accepted tranche pre-commit closeout",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The isolated test packet supplied a distinct artifact and exposed a product reconciliation race after bounded Sol recovery.",
+        "work_packages": [
+          "route-intercepted time-reschedule browser matrix"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh exact-candidate veto challenged command convergence and truth reconciliation after deterministic passage.",
+        "work_packages": [
+          "read-only exact-candidate independent veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No distinct artifact remained after DeepSeek and Gemini allocation; another agent would duplicate evidence and increase integration cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "parallel_work_packages": [
+      "DeepSeek test authoring ran beside Sol product integration"
+    ],
+    "reassessment_triggers": [
+      "duration-only tranche start",
+      "material recovery",
+      "new or restored task window",
+      "pre-verifier gate"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol recovery and deterministic passage preceded Gemini",
+      "Sol alone owns acceptance, continuity, commit and publication"
+    ]
+  },
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen time-reschedule plan, threat delta, source-bound evidence, Sol acceptance and Yuri summary accept exact reviewed candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a. The active operation latch is complete.",
+    "current_authority_allocation": "GPT Sol retains acceptance, integration, commit and task-branch publication authority. DeepSeek completed one bounded test artifact and Gemini completed one read-only veto; neither holds current write or ref authority.",
+    "git_refs_and_worktree": "The task worktree is on codex/ariadne-bernie-davida-parallel-seam at reviewed candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a with 19 intentional tracked modifications and 631 preserved untracked files, including five under docs/branding. Required 648c8ec9805af63729264ea9c22fd695f062a741 and truth-parity 18aa4b613d735a68a7f6f2e55d34e498176c9935 remain ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md records the accepted time-reschedule composition at Continuity 286 / Compass 268 and duration-only composition as the next narrow descendant.",
+    "protected_evidence_boundaries": "Protected evidence, historical Diary PHI, product/patient/clinical data, backend/API/database/event/watcher expansion, providers, credentials, deployment, production, release, Pages and protected refs remain closed. Explicit-path staging excludes docs/branding and unrelated untracked files."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

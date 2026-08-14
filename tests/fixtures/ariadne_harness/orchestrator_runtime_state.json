@@ -64,6 +64,37 @@
       "authored_fixture_boundaries"
     ]
   },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "fixture-operation",
+    "assessed_stage": "fixture continuation",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "A bounded fixture artifact is separable from conductor acceptance.",
+        "work_packages": ["author one bounded fixture artifact"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "Independent veto remains gated until deterministic fixture passage.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The remaining fixture mutation is too small to repay a separate briefing and review cycle.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": ["deepseek fixture artifact can run beside conductor-owned fixture review"],
+    "serial_constraints": ["deterministic passage must precede independent verifier dispatch"],
+    "reassessment_triggers": ["fixture artifact completion", "deterministic gate result", "restored task window"]
+  },
   "adapter_observations": [
     {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "deepcode_cli", "method": "deepcode_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},

@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized-incident.v1",
+  "incident_id": "AER-0305",
+  "observed_on": "2026-08-14",
+  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+  "boundary": "Gemini focused-test count reconciliation",
+  "observation": "The dispatched packet underreported the exact six-module pytest collection as 35. Gemini ran every listed path and reported 51 passed; fresh Sol collect-only readback confirmed 51 with per-file counts 9, 5, 8, 1, 6 and 22.",
+  "containment": [
+    "No intended test path was missing and every listed test passed.",
+    "The verifier candidate remained clean and unchanged at the exact reviewed HEAD.",
+    "Acceptance uses exact observed and mechanically collected 51, not the packet's incorrect 35."
+  ],
+  "excluded": ["protected evidence", "patient or product data", "secrets or credentials"]
+}

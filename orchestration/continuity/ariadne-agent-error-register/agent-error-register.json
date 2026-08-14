@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 265,
+  "register_revision": 267,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12194,6 +12194,88 @@
           "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-verifier-prep-precommit-receipt-failure.json",
           "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-verifier-prep-precommit-runtime-state.json",
           "docs/ariadne-agent-error-correction-register-revision-265.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0304",
+      "attempt_id": "raisa-reception-one-time-reschedule-gemini-predispatch-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Antigravity reachability in an orchestrator runtime state must use the admitted agy_cli_observation method vocabulary.",
+      "observed_error": "The first Gemini predispatch state used the unadmitted method name antigravity_cli_observation. Deterministic preflight returned revision_required and authorised no Antigravity dispatch.",
+      "detection_method": "The generated receipt returned adapter_probe_method_invalid:antigravity_cli_print. Exact comparison with a current accepted veto state identified agy_cli_observation as the admitted method.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-predispatch-receipt-failure.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-predispatch-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-266.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.antigravity_adapter_probe_method_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failure receipt, replace the method with exact admitted agy_cli_observation and generate a distinct passing pre-verifier receipt before dispatch.",
+        "prevention_control": "Copy Antigravity adapter observation vocabulary from a current passing veto-predispatch state and require exact method readback before any external verifier launch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-predispatch-receipt-failure.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-predispatch-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-266.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0305",
+      "attempt_id": "raisa-reception-one-time-reschedule-gemini-review-count-reconciliation-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-selected-appointment-reschedule-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "An independent-review packet that claims an exact pytest total must mechanically collect the exact listed command and report that observed total.",
+      "observed_error": "The Gemini packet stated an expected total of 35 for six exact test modules. The verifier ran every listed module and correctly reported 51 passed; fresh Sol collect-only readback confirmed per-file counts 9, 5, 8, 1, 6 and 22, totalling 51.",
+      "detection_method": "Gemini's receipt explicitly disagreed with the packet while reporting all listed paths and a passing run. Sol then ran the exact collect-only command in the unchanged review worktree and reconciled the total to 51.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-count-reconciliation-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-267.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.review_packet_exact_test_count_underreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the dispatched packet unchanged, treat exact pytest output and fresh collect-only arithmetic as authoritative, record 51 rather than 35 in acceptance, and require mechanical collection before any future packet states an exact total.",
+        "prevention_control": "Before verifier dispatch, run the exact packet test command with --collect-only and copy its per-file and total counts verbatim; never calculate counts from remembered test-function totals or prior runs.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-review-packet.md",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-count-reconciliation-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-267.md"
         ]
       },
       "status": "corrected"
