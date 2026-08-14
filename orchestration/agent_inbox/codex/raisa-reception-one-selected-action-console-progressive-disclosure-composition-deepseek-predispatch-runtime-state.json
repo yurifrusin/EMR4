@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_capped_deepseek_action_console_test_file_beside_sol_product_implementation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 and the accepted orientation require the bounded presentation-only selected-action-console composition.",
+    "current_authority_allocation": "Sol retains product, architecture, recovery, integration, acceptance and Git authority. DeepSeek V4 Flash/high receives exactly one new capped test file, both native analyses are complete, and Gemini remains reserved for fresh exact-candidate veto.",
+    "active_plan_and_acceptance": "The exact committed plan source 46df6dd8db69d73dd672f5beb5c545510eeb3ecb freezes one four-button zero-or-one-editor console, zero routes on palette state, idle draft disposal, busy and fresh-reconciliation protection, unchanged field command paths, inert multi-field intent and no compound-update claim. The worker packet specifies seven authored-synthetic route-intercepted tests only.",
+    "protected_evidence_boundaries": "The worker owns one new review test file only and uses exact-path reads. Protected evidence, historical Diary PHI, product/patient/clinical data, product source, backend/API/database/event changes, providers, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "The isolated worker worktree C:/Users/sarashera/EMR4-worktrees/action-console-test-worker-d8dbe80a is clean on codex/reception-one-action-console-test-worker-d8dbe80a at exact source 46df6dd8db69d73dd672f5beb5c545510eeb3ecb. Main HEAD matches it; origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main tracked state is clean and 613 preserved untracked entries include the worker packet before this receipt pair."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
+    "status": "in_progress",
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Both native read-only audits completed with positive leverage; the committed plan is mechanically refined so DeepSeek owns one new seven-case browser contract while Sol retains the four existing test adaptations and product implementation",
+      "next_executable_stage": "commit the native-analysis refinement, fast-forward the clean isolated DeepSeek worktree, pass the exact pre-dispatch receipt, then run the test worker beside Sol product implementation",
+      "retry_counters": {"review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["presentation_only_diary_client_composition", "deepseek_one_new_test_file_max_800_lines", "preserve_status_time_duration_and_practitioner_contracts", "preserve_one_kernel_owned_proposal_confirm_path_per_action", "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands", "no_compound_update_claim_without_a_separate_atomic_backend_proof", "no_new_command_field_route_schema_or_write_authority", "no_api_openapi_graphql_database_event_or_watcher_expansion", "repository_local_provider_free_evidence_only", "protected_evidence_and_historical_diary_phi_closed", "patient_product_clinical_data_and_external_patient_channels_closed", "provider_adc_credentials_iam_external_network_closed", "deployment_production_release_pages_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "assessed_stage": "exact-source DeepSeek pre-dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "One new capped self-contained test file is fully separable from Sol-owned product and existing-test changes, with exact selectors, cases, read allowlist, checks and one worker commit.", "work_packages": ["author review/test_reception_one_selected_action_console.py only"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Fresh independent veto remains serially gated by deterministic and rendered candidate passage.", "work_packages": ["later exact-candidate presentation, accessibility and API-boundary veto"]},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "Both read-only analyses completed and directly refined implementation hazards and the exact worker package.", "work_packages": ["completed implementation seam audit", "completed test and responsive seam audit"]}
+    ],
+    "parallel_work_packages": ["DeepSeek isolated new test authoring", "Sol product implementation", "Sol existing-test palette adaptations"],
+    "serial_constraints": ["receipt passes before worker launch", "Sol alone integrates, recovers, executes stateful browser tests, accepts and uses Git", "Gemini waits for one exact passing candidate"],
+    "reassessment_triggers": ["worker return", "worker boundary or syntax failure", "material product recovery", "pre-verifier admission", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_deepseek_predispatch_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is active beside the separable worker package."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Both native audits completed with durable results."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains reserved until deterministic candidate admission."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DEEPSEEK_API_KEY presence was verified without disclosure, Claude Code is available and the exact isolated worktree is clean."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": ["reception_one_action_console_test_worker"], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

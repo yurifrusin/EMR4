@@ -48,7 +48,7 @@ TARGET_AHPRA = "MED0000000002"
 CURRENT_START = "09:00"
 REQUESTED_START = "09:15"
 CURRENT_DURATION = 30
-REQUESTED_DURATION = 35
+REQUESTED_DURATION = 45
 APPOINTMENT_DATE = "2026-08-13"
 CURRENT_STATUS = "Booked"
 REQUESTED_STATUS = "Arrived"
@@ -552,7 +552,7 @@ def test_idle_collapse_and_switch_discard_each_field_draft(reception_page, field
             switch_to = "time" if field != "time" else "status"
             open_action(page, switch_to, via="click")
         # The announcer says no new Diary change occurred.
-        assert "no new Diary change" in page.locator("#meta-grid-announcer").text_content().lower()
+        assert "no new diary change" in page.locator("#meta-grid-announcer").text_content().lower()
         # Reopen: current/default truth is restored and review stays disabled.
         open_action(page, field, via="click")
         assert_field_value(page, field, FIELD_CURRENT[field])
@@ -585,13 +585,19 @@ def test_each_busy_action_locks_all_four_choices_and_preserves_dialog(reception_
         # Escape cancels and returns focus to the active field's unchanged control.
         page.keyboard.press("Escape")
         page.wait_for_selector(DIALOG, state="detached", timeout=WAIT_TIMEOUT)
+        page.wait_for_function(
+            "tid => document.activeElement?.dataset?.testid === tid",
+            arg=CONTROL_ID[field], timeout=WAIT_TIMEOUT)
         assert page.evaluate(
             "tid => document.activeElement?.dataset?.testid === tid",
             CONTROL_ID[field])
-        assert_field_value(page, field, FIELD_CURRENT[field])
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
         assert state["raw_count"] == 0
+        assert state["status"] == CURRENT_STATUS
+        assert state["start"] == CURRENT_START
+        assert state["duration"] == CURRENT_DURATION
+        assert state["practitioner"] == CURRENT_PRACTITIONER_ID
     finally:
         page.unroute("**/api/v1/**", handler)
 
@@ -760,9 +766,9 @@ def test_selected_action_console_source_guards_reject_compound_and_raw_writes() 
     assert "meta-grid-selected-action-palette" in meta
     assert "meta-grid-selected-action-summary" in meta
     assert "meta-grid-selected-action-editor" in meta
-    for testid in ("meta-grid-action-choice-status", "meta-grid-action-choice-time",
-                   "meta-grid-action-choice-duration", "meta-grid-action-choice-practitioner"):
-        assert testid in meta
+    assert "meta-grid-action-choice-${action}" in meta
+    for action in FIELDS:
+        assert f'["{action}",' in meta
 
     # 2. No generic action executor map or compound draft is constructed.
     for marker in ("executorMap", "actionExecutors", "compoundDraft", "compound_update",

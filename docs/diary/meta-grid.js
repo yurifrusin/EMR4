@@ -88,6 +88,7 @@
     recentRoots: [],
     selectedItem: null,
     selectedAppointment: null,
+    activeSelectedAction: null,
     statusAction: {
       appointmentId: null,
       requestedStatus: null,
@@ -534,6 +535,7 @@
       state.trail = [];
       state.selectedItem = null;
       state.selectedAppointment = null;
+      state.activeSelectedAction = null;
       state.statusAction = {
         appointmentId: null,
         requestedStatus: null,
@@ -1959,6 +1961,15 @@
       previousItem.ends_at === currentItem.ends_at
     ) return;
 
+    if (
+      String(state.selectedAppointment?.id || "") === aggregateId
+      && !anySelectedActionBusy()
+    ) {
+      resetAllSelectedActionDrafts({ collapse: true });
+      if (elements.announcer) {
+        elements.announcer.textContent = "Fresh Diary truth replaced an unsubmitted appointment draft. No change was made.";
+      }
+    }
     state.interrupted = false;
     setProjection(next, { newRoot: false, pushCurrent: false, focusCanvas: false });
     if (
@@ -2159,6 +2170,7 @@
     state.eventRuntime.cue = null;
     state.selectedItem = null;
     state.selectedAppointment = null;
+    state.activeSelectedAction = null;
     state.statusAction = {
       appointmentId: null,
       requestedStatus: null,
@@ -2290,6 +2302,7 @@
       return;
     }
     if (state.current.state === "reconciliation_required") return;
+    resetAllSelectedActionDrafts({ collapse: true });
     state.interrupted = true;
     state.current = {
       ...state.current,
@@ -2376,7 +2389,14 @@
         if (selectableAppointment) {
           row.setAttribute("role", "button");
           const selectAppointment = () => {
+            if (anySelectedActionBusy() || confirmationDialogOwnsFocus()) {
+              if (elements.announcer) {
+                elements.announcer.textContent = "Finish or cancel the current appointment review before selecting another appointment.";
+              }
+              return;
+            }
             state.selectedAppointment = item;
+            state.activeSelectedAction = null;
             state.statusAction = {
               appointmentId: String(item.id),
               requestedStatus: null,
@@ -2409,7 +2429,7 @@
               elements.announcer.textContent = "Appointment selected for review. Nothing has changed.";
             }
             render();
-            setTimeout(() => document.getElementById("meta-grid-status-select")?.focus(), 0);
+            setTimeout(() => document.getElementById("meta-grid-action-choice-status")?.focus(), 0);
           };
           row.addEventListener("click", selectAppointment);
           row.addEventListener("keydown", event => {
@@ -2732,6 +2752,125 @@
     )) || null;
   }
 
+  function anySelectedActionBusy() {
+    return Boolean(
+      state.statusAction.busy
+      || state.rescheduleAction.busy
+      || state.durationAction.busy
+      || state.practitionerAction.busy
+    );
+  }
+
+  function anySelectedActionNeedsReconciliation() {
+    return Boolean(
+      state.statusAction.reconciliationRequired
+      || state.rescheduleAction.reconciliationRequired
+      || state.durationAction.reconciliationRequired
+      || state.practitionerAction.reconciliationRequired
+    );
+  }
+
+  function confirmationDialogOwnsFocus() {
+    return Boolean(document.querySelector('[data-testid="status-proposal-dialog"]'));
+  }
+
+  function selectedActionPaletteUnavailable() {
+    return Boolean(
+      anySelectedActionBusy()
+      || anySelectedActionNeedsReconciliation()
+      || confirmationDialogOwnsFocus()
+      || state.interrupted
+      || state.current?.state === "reconciliation_required"
+      || state.current?.freshness?.stale
+    );
+  }
+
+  function resetSelectedActionDraft(action) {
+    const appointmentId = state.selectedAppointment?.id
+      ? String(state.selectedAppointment.id)
+      : null;
+    if (action === "status") {
+      state.statusAction = {
+        appointmentId,
+        requestedStatus: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
+    } else if (action === "time") {
+      state.rescheduleAction = {
+        appointmentId,
+        requestedStart: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
+    } else if (action === "duration") {
+      state.durationAction = {
+        appointmentId,
+        requestedDuration: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
+    } else if (action === "practitioner") {
+      state.practitionerAction = {
+        appointmentId,
+        requestedPractitionerId: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
+    }
+  }
+
+  function resetAllSelectedActionDrafts({ collapse = false } = {}) {
+    if (anySelectedActionBusy()) return false;
+    resetSelectedActionDraft("status");
+    resetSelectedActionDraft("time");
+    resetSelectedActionDraft("duration");
+    resetSelectedActionDraft("practitioner");
+    if (collapse) state.activeSelectedAction = null;
+    return true;
+  }
+
+  function selectedActionControlId(action) {
+    if (action === "status") return "meta-grid-status-select";
+    if (action === "time") return "meta-grid-reschedule-time";
+    if (action === "duration") return "meta-grid-duration-select";
+    if (action === "practitioner") return "meta-grid-practitioner-select";
+    return null;
+  }
+
+  function updateSelectedActionPaletteControls() {
+    const unavailable = selectedActionPaletteUnavailable();
+    document.querySelectorAll("[data-selected-action]").forEach(button => {
+      const action = button.getAttribute("data-selected-action");
+      button.disabled = unavailable;
+      button.setAttribute("aria-expanded", String(state.activeSelectedAction === action));
+    });
+  }
+
+  function activateSelectedAction(action) {
+    if (!["status", "time", "duration", "practitioner"].includes(action)) return;
+    if (selectedActionPaletteUnavailable()) return;
+    const previous = state.activeSelectedAction;
+    if (previous) resetSelectedActionDraft(previous);
+    state.activeSelectedAction = previous === action ? null : action;
+    render();
+    if (elements.announcer) {
+      elements.announcer.textContent = state.activeSelectedAction
+        ? `${action === "time" ? "Time" : `${action[0].toUpperCase()}${action.slice(1)}`} editor opened. No new Diary change occurred.`
+        : "Appointment action editor closed. No new Diary change occurred.";
+    }
+    setTimeout(() => {
+      const focusId = state.activeSelectedAction
+        ? selectedActionControlId(state.activeSelectedAction)
+        : `meta-grid-action-choice-${action}`;
+      document.getElementById(focusId)?.focus({ preventScroll: true });
+    }, 0);
+  }
+
   function statusActionMessage() {
     return STATUS_ACTION_MESSAGES[state.statusAction.phase] || STATUS_ACTION_MESSAGES.failed;
   }
@@ -2756,6 +2895,7 @@
     }
     if (submit) submit.disabled = unavailable || !requestedStatus || requestedStatus === currentStatus;
     if (feedback) feedback.textContent = statusActionMessage();
+    updateSelectedActionPaletteControls();
   }
 
   function rescheduleActionMessage() {
@@ -2783,6 +2923,7 @@
     }
     if (submit) submit.disabled = unavailable || !requestedStart || requestedStart === currentStart;
     if (feedback) feedback.textContent = rescheduleActionMessage();
+    updateSelectedActionPaletteControls();
   }
 
   function durationActionMessage() {
@@ -2827,6 +2968,7 @@
         || requestedDuration === currentDuration;
     }
     if (feedback) feedback.textContent = durationActionMessage();
+    updateSelectedActionPaletteControls();
   }
 
   function practitionerActionMessage() {
@@ -2879,6 +3021,7 @@
     if (feedback) feedback.textContent = targets.length === 0 && state.practitionerAction.phase === "idle"
       ? "No other active practitioner is available in the current directory projection."
       : practitionerActionMessage();
+    updateSelectedActionPaletteControls();
   }
 
   function applyFreshAppointmentToCurrentProjection(appointment) {
@@ -3291,7 +3434,7 @@
     }, 0);
   }
 
-  function renderStatusAction(projection) {
+  function renderStatusAction(projection, target = elements.actions) {
     const selected = selectedStatusActionItem(projection);
     if (!selected) {
       if (state.statusAction.phase === "committed" && state.statusAction.appointmentId) {
@@ -3302,7 +3445,8 @@
         );
         outcome.setAttribute("role", "status");
         outcome.setAttribute("aria-live", "polite");
-        elements.actions.appendChild(outcome);
+        outcome.setAttribute("aria-atomic", "true");
+        target.appendChild(outcome);
       }
       return;
     }
@@ -3348,11 +3492,11 @@
     feedback.setAttribute("aria-live", "polite");
     feedback.setAttribute("aria-atomic", "true");
     panel.append(copy, label, select, submit, feedback);
-    elements.actions.appendChild(panel);
+    target.appendChild(panel);
     updateStatusActionControls();
   }
 
-  function renderRescheduleAction(projection) {
+  function renderRescheduleAction(projection, target = elements.actions) {
     const selected = selectedStatusActionItem(projection);
     if (!selected) {
       if (state.rescheduleAction.phase === "committed" && state.rescheduleAction.appointmentId) {
@@ -3363,7 +3507,8 @@
         );
         outcome.setAttribute("role", "status");
         outcome.setAttribute("aria-live", "polite");
-        elements.actions.appendChild(outcome);
+        outcome.setAttribute("aria-atomic", "true");
+        target.appendChild(outcome);
       }
       return;
     }
@@ -3409,11 +3554,11 @@
     feedback.setAttribute("aria-live", "polite");
     feedback.setAttribute("aria-atomic", "true");
     panel.append(copy, label, input, submit, feedback);
-    elements.actions.appendChild(panel);
+    target.appendChild(panel);
     updateRescheduleActionControls();
   }
 
-  function renderDurationAction(projection) {
+  function renderDurationAction(projection, target = elements.actions) {
     const selected = selectedStatusActionItem(projection);
     if (!selected) {
       if (state.durationAction.phase === "committed" && state.durationAction.appointmentId) {
@@ -3424,7 +3569,8 @@
         );
         outcome.setAttribute("role", "status");
         outcome.setAttribute("aria-live", "polite");
-        elements.actions.appendChild(outcome);
+        outcome.setAttribute("aria-atomic", "true");
+        target.appendChild(outcome);
       }
       return;
     }
@@ -3482,11 +3628,11 @@
     feedback.setAttribute("aria-live", "polite");
     feedback.setAttribute("aria-atomic", "true");
     panel.append(copy, label, select, submit, feedback);
-    elements.actions.appendChild(panel);
+    target.appendChild(panel);
     updateDurationActionControls();
   }
 
-  function renderPractitionerAction(projection) {
+  function renderPractitionerAction(projection, target = elements.actions) {
     const selected = selectedStatusActionItem(projection);
     if (!selected) {
       if (state.practitionerAction.phase === "committed" && state.practitionerAction.appointmentId) {
@@ -3497,7 +3643,8 @@
         );
         outcome.setAttribute("role", "status");
         outcome.setAttribute("aria-live", "polite");
-        elements.actions.appendChild(outcome);
+        outcome.setAttribute("aria-atomic", "true");
+        target.appendChild(outcome);
       }
       return;
     }
@@ -3576,14 +3723,113 @@
     feedback.setAttribute("aria-live", "polite");
     feedback.setAttribute("aria-atomic", "true");
     panel.append(copy, label, select, submit, feedback);
-    elements.actions.appendChild(panel);
+    target.appendChild(panel);
     updatePractitionerActionControls();
+  }
+
+  function selectedActionHasRemovalOutcome(action) {
+    if (action === "status") {
+      return state.statusAction.phase === "committed" && Boolean(state.statusAction.appointmentId);
+    }
+    if (action === "time") {
+      return state.rescheduleAction.phase === "committed" && Boolean(state.rescheduleAction.appointmentId);
+    }
+    if (action === "duration") {
+      return state.durationAction.phase === "committed" && Boolean(state.durationAction.appointmentId);
+    }
+    if (action === "practitioner") {
+      return state.practitionerAction.phase === "committed" && Boolean(state.practitionerAction.appointmentId);
+    }
+    return false;
+  }
+
+  function selectedActionLabel(action) {
+    if (action === "status") return "Status";
+    if (action === "time") return "Time";
+    if (action === "duration") return "Duration";
+    if (action === "practitioner") return "Practitioner";
+    return "Appointment action";
+  }
+
+  function renderSelectedActionConsole(projection) {
+    const selected = selectedStatusActionItem(projection);
+    const activeAction = state.activeSelectedAction;
+    if (!selected && !selectedActionHasRemovalOutcome(activeAction)) return;
+
+    const consolePanel = createElement("section", "meta-grid-selected-action-console");
+    consolePanel.dataset.testid = "meta-grid-selected-action-console";
+    consolePanel.setAttribute("aria-labelledby", "meta-grid-selected-action-heading");
+
+    const heading = createElement(
+      "h2",
+      "meta-grid-selected-action-heading",
+      selected ? "Appointment actions" : "Appointment action result"
+    );
+    heading.id = "meta-grid-selected-action-heading";
+    consolePanel.appendChild(heading);
+
+    if (selected) {
+      const summary = createElement(
+        "p",
+        "meta-grid-selected-action-summary",
+        `Current Diary truth: ${selected.status} Â· ${selected.display} Â· ${selected.duration_minutes} minutes Â· ${selected.practitioner_display || "Practitioner"}`
+      );
+      summary.dataset.testid = "meta-grid-selected-action-summary";
+      consolePanel.appendChild(summary);
+
+      const palette = createElement("div", "meta-grid-selected-action-palette");
+      palette.dataset.testid = "meta-grid-selected-action-palette";
+      [
+        ["status", "Change status"],
+        ["time", "Change time"],
+        ["duration", "Change duration"],
+        ["practitioner", "Change practitioner"]
+      ].forEach(([action, label]) => {
+        const button = createElement("button", "meta-grid-action-choice", label);
+        button.type = "button";
+        button.id = `meta-grid-action-choice-${action}`;
+        button.dataset.testid = `meta-grid-action-choice-${action}`;
+        button.setAttribute("data-selected-action", action);
+        button.setAttribute("aria-controls", "meta-grid-selected-action-editor");
+        button.setAttribute("aria-expanded", String(activeAction === action));
+        button.disabled = selectedActionPaletteUnavailable();
+        button.addEventListener("click", () => activateSelectedAction(action));
+        palette.appendChild(button);
+      });
+      consolePanel.appendChild(palette);
+    }
+
+    const editor = createElement("section", "meta-grid-selected-action-editor");
+    editor.id = "meta-grid-selected-action-editor";
+    editor.dataset.testid = "meta-grid-selected-action-editor";
+    editor.setAttribute("aria-labelledby", "meta-grid-selected-action-editor-heading");
+    const editorHeading = createElement(
+      "h3",
+      "meta-grid-selected-action-editor-heading",
+      `${selectedActionLabel(activeAction)} editor`
+    );
+    editorHeading.id = "meta-grid-selected-action-editor-heading";
+    editor.appendChild(editorHeading);
+    consolePanel.appendChild(editor);
+    elements.actions.appendChild(consolePanel);
+
+    if (!activeAction) {
+      editor.hidden = true;
+      updateSelectedActionPaletteControls();
+      return;
+    }
+    if (activeAction === "status") renderStatusAction(projection, editor);
+    else if (activeAction === "time") renderRescheduleAction(projection, editor);
+    else if (activeAction === "duration") renderDurationAction(projection, editor);
+    else if (activeAction === "practitioner") renderPractitionerAction(projection, editor);
+    updateSelectedActionPaletteControls();
   }
 
   function renderActions(projection) {
     elements.actions.replaceChildren();
     elements.actions.classList.remove("is-return-only");
     if (projection.state === "reconciliation_required") {
+      renderSelectedActionConsole(projection);
       const refresh = createElement("button", "meta-grid-primary", "Refresh current view");
       refresh.type = "button";
       refresh.setAttribute("data-testid", "meta-grid-refresh-current");
@@ -3627,10 +3873,7 @@
       ["patient_timeline", "focused_schedule_lane"].includes(projection.family) &&
       projection.state === "answer"
     ) {
-      renderStatusAction(projection);
-      renderRescheduleAction(projection);
-      renderDurationAction(projection);
-      renderPractitionerAction(projection);
+      renderSelectedActionConsole(projection);
       const nextStep = createElement("div", "meta-grid-read-next");
       const icon = createElement("span", "meta-grid-read-next-icon", "+");
       icon.setAttribute("aria-hidden", "true");

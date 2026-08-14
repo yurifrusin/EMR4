@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "completed_stage": "The implementation candidate, four adapted field suites and recovered DeepSeek console contract pass 49 plus 23 route-intercepted browser cases with exact worker and Sol recovery evidence preserved",
+    "next_executable_stage": "commit the exact bounded candidate after a passing continuation receipt, then bind typed evidence and run broader deterministic/API/canonical and rendered gates before one fresh Gemini veto",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "resume_after_compaction": true,
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "candidate pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker supplied a separable test structure but its one correction still required a bounded Sol recovery; immutable worker evidence and exact economy data are preserved and no further same-lane retry is useful.",
+        "work_packages": [
+          "completed one new test file",
+          "completed exhausted correction",
+          "Sol recovery closed 23 of 23"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh veto waits for the full deterministic and rendered candidate gate.",
+        "work_packages": [
+          "later exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only analyses found material implementation and test hazards that are represented in the candidate.",
+        "work_packages": [
+          "completed implementation audit",
+          "completed test audit"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate commit",
+      "deterministic failure",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol commits and verifies the exact candidate",
+      "pytest processes remain serial",
+      "Gemini waits for all deterministic and rendered gates"
+    ]
+  },
+  "planned_action": "commit_exact_bounded_action_console_product_and_browser_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan requires a current-truth summary, four native buttons, zero-or-one existing editor, zero palette routes, draft disposal, busy/interruption/fresh-reconciliation protection, unchanged field command paths, inert multi-field intent and no compound-update claim. The candidate passes 23 recovered console cases and 49 existing status/time/duration/practitioner cases with Python compilation, JavaScript syntax and Git whitespace clean.",
+    "current_authority_allocation": "Sol owns product, recovery, integration, acceptance and Git. DeepSeek completed one test-only artifact and its exhausted mechanical correction; Sol's explicit recovery is closed. Both native analyses are complete and Gemini remains reserved for one fresh exact-candidate veto.",
+    "git_refs_and_worktree": "Task branch is at exact HEAD 195cd09d2a55edfd4cf675e09c086227e767b0c7 with only the bounded product, four adapted existing tests, recovered worker test and latch modifications plus tranche-local receipt/recovery artifacts intended for this commit; 629 untracked entries remain preserved before this receipt pair. Origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 names the provider-free selected-action-console progressive-disclosure composition as the active bounded implementation.",
+    "protected_evidence_boundaries": "All evidence is authored-synthetic and route-intercepted or repository-static. Protected evidence, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher changes, provider/ADC/credentials/IAM/network, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded with explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

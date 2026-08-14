@@ -380,6 +380,9 @@ def open_reception_one(page) -> None:
     selector = f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}']"
     page.wait_for_selector(selector, state="visible")
     page.click(selector)
+    page.wait_for_selector("[data-testid='meta-grid-selected-action-console']", state="visible")
+    assert page.locator("[data-testid='meta-grid-duration-action']").count() == 0
+    page.click("[data-testid='meta-grid-action-choice-duration']")
     page.wait_for_selector("[data-testid='meta-grid-duration-action']", state="visible")
 
 
@@ -718,28 +721,33 @@ def test_duration_status_time_actions_share_mutual_exclusion(reception_page) -> 
         open_diary(page, base_url)
         open_reception_one(page)
         duration_select = page.locator("[data-testid='meta-grid-duration-select']")
-        time_input = page.locator("[data-testid='meta-grid-reschedule-time']")
-        status_select = page.locator("[data-testid='meta-grid-status-select']")
+        palette_choices = [
+            page.locator(f"[data-testid='meta-grid-action-choice-{action}']")
+            for action in ("status", "time", "duration", "practitioner")
+        ]
 
         # While the duration review is awaiting staff confirmation, the time and
-        # status actions are disabled too (status/time/duration mutual exclusion).
+        # All action switching is disabled while the active duration review
+        # owns the shared editor and awaits staff confirmation.
         page.select_option("[data-testid='meta-grid-duration-select']", str(REQUESTED_DURATION))
         page.click("[data-testid='meta-grid-duration-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
-        assert status_select.is_disabled()
-        assert time_input.is_disabled()
+        assert all(choice.is_disabled() for choice in palette_choices)
         assert duration_select.is_disabled()
+        assert page.locator("[data-testid='meta-grid-duration-action']").count() == 1
+        assert page.locator("[data-testid='meta-grid-status-action']").count() == 0
+        assert page.locator("[data-testid='meta-grid-reschedule-action']").count() == 0
+        assert page.locator("[data-testid='meta-grid-practitioner-action']").count() == 0
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
 
-        # Cancel re-enables all three actions without committing anything.
+        # Cancel re-enables the palette without committing anything.
         page.locator("[data-testid='status-proposal-dialog'] button:has-text('Cancel')").click()
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
         page.wait_for_function(
             "document.querySelector('[data-testid=meta-grid-duration-feedback]')?.textContent.toLowerCase().includes('cancelled')"
         )
-        assert not status_select.is_disabled()
-        assert not time_input.is_disabled()
+        assert all(not choice.is_disabled() for choice in palette_choices)
         assert not duration_select.is_disabled()
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
@@ -755,10 +763,13 @@ def test_time_action_regression_with_duration_panel(reception_page) -> None:
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        # The existing time reschedule action still renders beside the new
-        # duration action (no regression and no second command path).
-        assert page.locator("[data-testid='meta-grid-reschedule-action']").is_visible()
+        for action in ("status", "time", "duration", "practitioner"):
+            assert page.locator(f"[data-testid='meta-grid-action-choice-{action}']").is_visible()
         assert page.locator("[data-testid='meta-grid-duration-action']").is_visible()
+        assert page.locator("[data-testid='meta-grid-reschedule-action']").count() == 0
+        page.click("[data-testid='meta-grid-action-choice-time']")
+        page.wait_for_selector("[data-testid='meta-grid-reschedule-action']", state="visible")
+        assert page.locator("[data-testid='meta-grid-duration-action']").count() == 0
         # A valid time action still commits through the same update
         # proposal/confirm family and leaves the duration unchanged.
         page.fill("[data-testid='meta-grid-reschedule-time']", "09:15")

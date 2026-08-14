@@ -300,6 +300,9 @@ def open_reception_one(page) -> None:
     page.fill("#meta-grid-request", "Show Margaret Thompson's upcoming appointments")
     page.press("#meta-grid-request", "Enter")
     page.wait_for_selector(f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}']", state="visible").click()
+    page.wait_for_selector("[data-testid='meta-grid-selected-action-console']", state="visible")
+    assert page.locator("[data-testid='meta-grid-practitioner-action']").count() == 0
+    page.click("[data-testid='meta-grid-action-choice-practitioner']")
     page.wait_for_selector("[data-testid='meta-grid-practitioner-action']", state="visible")
 
 def _grid_drag_to_target(page) -> None:
@@ -537,19 +540,23 @@ def test_status_time_duration_and_practitioner_actions_share_mutual_exclusion(re
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        controls = [page.locator(f"[data-testid='{tid}']") for tid in
-                    ("meta-grid-practitioner-select", "meta-grid-status-select",
-                     "meta-grid-reschedule-time", "meta-grid-duration-select")]
+        palette_choices = [
+            page.locator(f"[data-testid='meta-grid-action-choice-{action}']")
+            for action in ("status", "time", "duration", "practitioner")
+        ]
         page.select_option("[data-testid='meta-grid-practitioner-select']", TARGET_PRACTITIONER_ID)
         page.click("[data-testid='meta-grid-practitioner-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
-        assert all(c.is_disabled() for c in controls)
+        assert all(choice.is_disabled() for choice in palette_choices)
+        assert page.locator("[data-testid='meta-grid-practitioner-action']").count() == 1
+        for testid in ("meta-grid-status-action", "meta-grid-reschedule-action", "meta-grid-duration-action"):
+            assert page.locator(f"[data-testid='{testid}']").count() == 0
         assert (state["proposal_count"], state["confirm_count"]) == (1, 0)
         page.locator("[data-testid='status-proposal-dialog'] button:has-text('Cancel')").click()
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
         page.wait_for_function(
             "document.querySelector('[data-testid=meta-grid-practitioner-feedback]')?.textContent.toLowerCase().includes('cancelled')")
-        assert all(not c.is_disabled() for c in controls)
+        assert all(not choice.is_disabled() for choice in palette_choices)
         assert (state["proposal_count"], state["confirm_count"], state["raw_count"]) == (1, 0, 0)
     finally:
         page.unroute("**/api/v1/**", handler)
@@ -560,9 +567,14 @@ def test_time_duration_and_status_actions_remain_registered_with_practitioner_pa
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        for testid in ("meta-grid-practitioner-action", "meta-grid-reschedule-action",
-                       "meta-grid-duration-action", "meta-grid-status-action"):
-            assert page.locator(f"[data-testid='{testid}']").is_visible()
+        for action in ("status", "time", "duration", "practitioner"):
+            assert page.locator(f"[data-testid='meta-grid-action-choice-{action}']").is_visible()
+        assert page.locator("[data-testid='meta-grid-practitioner-action']").is_visible()
+        for testid in ("meta-grid-reschedule-action", "meta-grid-duration-action", "meta-grid-status-action"):
+            assert page.locator(f"[data-testid='{testid}']").count() == 0
+        page.click("[data-testid='meta-grid-action-choice-time']")
+        page.wait_for_selector("[data-testid='meta-grid-reschedule-action']", state="visible")
+        assert page.locator("[data-testid='meta-grid-practitioner-action']").count() == 0
         page.fill("[data-testid='meta-grid-reschedule-time']", "09:15")
         page.click("[data-testid='meta-grid-reschedule-submit']")
         page.wait_for_function(

@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "## Terminal receipt\n\n**Changed path (only file committed):**\n`review/test_reception_one_selected_action_console.py`\n\n**Line count:** 794 (was 790; +4 net, all within correction 2's expanded activation-slice guard \u2014 correction 1 preserved line count)\n\n**Syntax & whitespace:**\n- `py -m py_compile review/test_reception_one_selected_action_console.py` \u2192 `PY_COMPILE_OK`\n- `git diff --check` \u2192 clean (the single CRLF line-ending notice is informational Git advice, not a diff error)\n\n**Commit hash:** `11fef4102129ba9392b38beb5c456c158219e6c7`\n(on `codex/reception-one-action-console-test-worker-d8dbe80a`, parent `7cf598e99bf6910f3227415f89ce64c877b4451d`)\n\n**Clean-worktree status:** `nothing to commit, working tree clean`; commit contains exactly one file (`1 file changed, 11 insertions(+), 7 deletions(-)`).\n\n**Attestation \u2014 both exact mechanical corrections, and no other semantic change:**\n1. Replaced the five terminal-removal assertions selecting `meta-grid-*-outcome` via `[data-testid='\u2026']` with the exact existing class selectors `.meta-grid-status-outcome`, `.meta-grid-reschedule-outcome`, `.meta-grid-duration-outcome` and `.meta-grid-practitioner-outcome` (verified as class names in `docs/diary/meta-grid.js` via `createElement(\"p\", \"meta-grid-\u2026-outcome\", \u2026)`).\n2. Extracted only the activation source slice `meta[meta.index(\"function activateSelectedAction\"): meta.index(\"function statusActionMessage\")]` (spellings per packet; `function statusActionMessage` verified at line 2735 of `docs/diary/meta-grid.js`) and asserted the palette-command markers `apiFetch(`, `fetch(`, `/appointments/proposals/`, `confirm_endpoint`, `Idempotency-Key` are absent from that slice only. The whole-file negative guards for generic/compound/sequential executor markers (step 2) and raw `PUT`/`PATCH` (step 4) were retained unchanged.\n\nNo test names, scenario counts, product source, existing tests, or acceptance meaning were changed; no pytest was run; nothing was pushed. Per the packet, I claim no acceptance.",
+  "usage": {
+    "input_tokens": 19641,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 364160,
+    "output_tokens": 14575,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 0.6543349999999999,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

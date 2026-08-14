@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All seven required tests are present with exact names, plus the static source guard.\n\n## Terminal receipt\n\n**Status:** COMPLETE \u2014 artifact authored, checks pass, one worker commit made. No acceptance claimed.\n\n**Exact changed file:**\n- `review/test_reception_one_selected_action_console.py` (created)\n\n**Final line count:** 790 (under the 800-source-line cap)\n\n**Syntax check:** `py -3 -m py_compile review/test_reception_one_selected_action_console.py` \u2192 OK\n\n**Expected-red behavioral status:** RED (intentional). The product implementation is absent at this source, so every browser case waits for `meta-grid-selected-action-console` (and the static guard asserts `activeSelectedAction` + the new selectors in `meta-grid.js`) and fails until Sol's parallel source lands. No assertion was weakened to pass pre-implementation.\n\n**Commit hash:** `7cf598e99bf6910f3227415f89ce64c877b4451d`\n(branch `codex/reception-one-action-console-test-worker-d8dbe80a`, message `test(reception-one): specify selected action console`)\n\n**Tests authored (exactly the seven required):**\n1. `test_palette_starts_collapsed_native_and_route_inert`\n2. `test_open_collapse_switch_keeps_zero_or_one_editor_and_zero_routes`\n3. `test_idle_collapse_and_switch_discard_each_field_draft` (param status/time/duration/practitioner \u00d7 collapse/switch)\n4. `test_each_busy_action_locks_all_four_choices_and_preserves_dialog` (param \u00d74)\n5. `test_interruption_clears_draft_and_requires_fresh_refresh`\n6. `test_field_request_traces_and_fresh_rebind_or_removal` (param \u00d74 + status removal)\n7. `test_palette_editor_accessibility_and_containment` (param 1280\u00d7720 / 768\u00d71024 / 390\u00d7844)\n\nPlus one static guard: `test_selected_action_console_source_guards_reject_compound_and_raw_writes`.\n\n**Multi-field/authority guards present:** no generic executor map/compound draft markers; zero-or-one editor + zero palette routes asserted behaviorally; status and update proposal/confirm trace counts exact; raw appointment PUT/PATCH counted and fails closed with `raw_count == 0`; `aria-controls`/`aria-expanded` native-button contract asserted.\n\n**Evidence labels retained:** `route_intercepted_browser` and `authored_synthetic_client_fixture` both present; no live/backend/database claim.\n\n**Boundary attestation:** Only `review/test_reception_one_selected_action_console.py` created/staged/committed; only allowlisted files read; no pytest run in the worker worktree; no push, protected-ref movement, deployment, product/source edit, or existing-test edit; `git diff --check` and `git diff --cached --check` both clean; HEAD of source unchanged (`46df6dd\u2026`).\n\n**Genuine blockers:** none.",
+  "usage": {
+    "input_tokens": 191369,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 9936000,
+    "output_tokens": 143820,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 9.535575,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

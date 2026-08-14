@@ -1,0 +1,89 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "completed_stage": "The presentation-only product source and four existing browser-suite adaptations are implemented with 49 focused tests passing; DeepSeek returned one clean test-only candidate whose review found two bounded mechanical test defects",
+    "next_executable_stage": "run the one permitted same-lane mechanical test correction while Sol completes interruption-safe console behavior, then admit the corrected worker artifact and execute its new browser contract",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "resume_after_compaction": true,
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "bounded DeepSeek mechanical correction pre-dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The first candidate is clean and within ownership; two exact mechanical test defects can be corrected without changing scenarios or acceptance, and this is the single permitted same-lane revision.",
+        "work_packages": [
+          "correct existing outcome selectors",
+          "scope palette route markers to activateSelectedAction"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh veto waits for deterministic and rendered passage.",
+        "work_packages": [
+          "later exact-candidate presentation accessibility and API-boundary veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only analyses completed and remain authoritative for the implementation seam.",
+        "work_packages": [
+          "completed implementation seam audit",
+          "completed test and responsive seam audit"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "parallel_work_packages": [
+      "DeepSeek mechanical test correction",
+      "Sol interruption-safe product completion"
+    ],
+    "reassessment_triggers": [
+      "worker correction return",
+      "worker scope or syntax failure",
+      "new browser contract result",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone admits or recovers worker source",
+      "Sol runs the new browser contract serially after integration",
+      "Gemini waits for deterministic and rendered passage"
+    ]
+  },
+  "planned_action": "dispatch_one_bounded_same_lane_mechanical_test_correction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan requires the one shared editor, unchanged command traces and source guards against generic or sequential command execution. The first worker commit is clean and bounded but its terminal-outcome selectors do not match the existing classes and its palette-route static guard is scoped too broadly across legitimate existing reads. The correction packet freezes only those two mechanical repairs.",
+    "current_authority_allocation": "Sol retains product, recovery, integration, acceptance and Git authority. DeepSeek V4 Flash/high receives its one permitted mechanical revision of the same test-only artifact; both native analyses are complete; Gemini remains reserved for exact-candidate veto.",
+    "git_refs_and_worktree": "The isolated worker worktree is clean at exact source 7cf598e99bf6910f3227415f89ce64c877b4451d on codex/reception-one-action-console-test-worker-d8dbe80a. Main is at 46df6dd8db69d73dd672f5beb5c545510eeb3ecb with only the intended active product/test/latch tracked modifications and 623 preserved untracked entries. Origin task remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 requires the bounded progressive-disclosure composition and mandatory lane assessment.",
+    "protected_evidence_boundaries": "The worker may read the correction packet, its test file and exact meta-grid source spelling and may write only its existing test file. Product source, existing tests, protected evidence, historical Diary PHI, product/patient/clinical data, backend/API/database/event changes, providers beyond the selected worker transport, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

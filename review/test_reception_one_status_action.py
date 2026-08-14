@@ -231,6 +231,9 @@ def open_selected_status_action(page, base_url: str) -> None:
     page.press("#meta-grid-request", "Enter")
     page.wait_for_selector("[data-appointment-id='route-status-1']", state="visible")
     page.click("[data-appointment-id='route-status-1']")
+    page.wait_for_selector("[data-testid='meta-grid-selected-action-console']", state="visible")
+    assert page.locator("[data-testid='meta-grid-status-action']").count() == 0
+    page.click("[data-testid='meta-grid-action-choice-status']")
     page.wait_for_selector("[data-testid='meta-grid-status-action']", state="visible")
 
 
