@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 293,
+  "graph_revision": 294,
   "harvests": [],
   "nodes": [
     {
@@ -19816,9 +19816,100 @@
         "Conversational execution, patient-channel delegation and live revocation enforcement remain unproved and closed.",
         "Other command/event families, product data, providers, watcher/database runtime, deployment, production and release require separate authority."
       ]
+    },
+    {
+      "id": "raisa-post-combined-editor-compass-baton-orientation",
+      "title": "Provider-free post-combined-editor Compass and baton orientation",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-14T20:42:00Z",
+      "updated_at": "2026-08-14T20:42:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2ca3a111d2ee9277571ea3c905f22ce78c8e9745",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The programme is at a genuine Yuri-owned fork; standing continuation authority does not select a new command, channel, event or runtime family.",
+          "A future patient-channel or assistant delegation is narrow, expiring and revocable for future acts, including an uncommitted confirmation.",
+          "An already committed appointment remains source truth until a separately authorised cancellation or rescheduling command changes it."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-post-combined-editor-orientation",
+          "source": "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept cancellation as the recommended direction while pausing before its read-only readiness review until Yuri chooses it."
+        }
+      ],
+      "claim_scope": [
+        "Reception One's exact current reach is one status command family and one update family spanning practitioner, local time and duration.",
+        "Cancellation is presentation-only in Reception One and has an ordinary Diary delete-to-status compatibility seam requiring a read-only readiness review before reuse.",
+        "Context Fabric events remain acceleration hints; source-owned current truth and command-time authority checks remain the correctness kernel.",
+        "Gemini passed 115 exact tests and ten challenges at unchanged clean source; evidence is repository_static_authored_synthetic."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-post-combined-editor-compass-baton-orientation.md",
+            "orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json",
+            "docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md"
+          ],
+          "note": "The accepted status and multi-field update reach is reconciled without granting another command family."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-post-combined-editor-compass-baton-orientation-plan.md",
+          "docs/security/raisa-post-combined-editor-compass-baton-orientation-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-post-combined-editor-compass-baton-orientation.md",
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-receipt-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-281.md"
+        ],
+        "closeouts": [
+          "docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_post_combined_editor_compass_baton_orientation_plan.py",
+          "tests/test_raisa_post_combined_editor_compass_baton_orientation.py",
+          "tests/test_raisa_post_combined_editor_compass_baton_orientation_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_post_combined_editor_compass_baton_orientation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Yuri must choose whether to begin the recommended cancellation direction before any cancellation-family convergence or UI exposure.",
+        "Patient channels, identity, live delegation and revocation enforcement, Stage 3B and another event family remain separate choices or actions.",
+        "Operational durability, source/database access, providers, product data, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T18:08:00Z"
+  "updated_at": "2026-08-14T20:42:00Z"
 }

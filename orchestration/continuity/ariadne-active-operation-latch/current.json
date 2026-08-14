@@ -3,15 +3,15 @@
   "operation_id": "raisa-post-combined-editor-compass-baton-orientation",
   "active_tranche": "Post-combined-editor Compass and baton orientation",
   "objective": "Reconcile the accepted Reception One status and update families, Context Fabric and durable-cue horizon, channel-neutral patient foundation and remaining Yuri-owned gates, then freeze the narrowest dependency-satisfied next product tranche or identify the exact genuine user-attention fork.",
-  "status": "in_progress",
-  "source_head": "aa2b34573d47e0a81ae689cb20b0461b3585c221",
+  "status": "blocked",
+  "source_head": "2ca3a111d2ee9277571ea3c905f22ce78c8e9745",
   "authority_source": "AGENTS.md Continuity 293 / Compass 275, the accepted same-update-family multi-change editor composition, Yuri's standing uninterrupted-development authority and the channel-neutral foundation's narrow revocable-delegation boundary",
   "checkpoint": {
-    "completed_stage": "Fresh complete five-source rehydration and initial repository orientation readback",
-    "next_executable_stage": "Pass the fresh Ariadne preplanning receipt, freeze the read-only orientation plan and compare every remaining direction against current authority",
+    "completed_stage": "Accepted at Continuity 294 / Compass 276 after deterministic and independent exact-candidate verification",
+    "next_executable_stage": null,
     "retry_counters": {
-      "planning": 0,
-      "review": 0,
+      "planning": 1,
+      "review": 1,
       "verification": 0
     },
     "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
@@ -23,14 +23,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "Yuri must choose whether to pursue the recommended appointment-cancellation direction before its read-only readiness review begins."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "genuine_user_attention_fork"
   },
   "protected_boundaries": [
     "read_only_repository_orientation_only",

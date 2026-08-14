@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 275,
-  "updated_at": "2026-08-14T18:08:00Z",
-  "source_graph_revision": 293,
-  "orientation_statement": "EMR4 is at Continuity 293 / Compass 275. The provider-free combined Reception One editor passes; a read-only post-editor Compass orientation is next.",
+  "map_revision": 276,
+  "updated_at": "2026-08-14T20:42:00Z",
+  "source_graph_revision": 294,
+  "orientation_statement": "EMR4 is at Continuity 294 / Compass 276. Reception One's first status and update console is complete; cancellation is recommended at a genuine Yuri-owned programme fork.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3209,57 +3209,82 @@
         "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md"
       ]
+    },
+    {
+      "node_id": "raisa-post-combined-editor-compass-baton-orientation",
+      "lineage_parent": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "strategic_role": "Reconcile the completed Reception One command set and expose the next material programme choice",
+      "outcome": "The programme is at a genuine Yuri-owned fork; cancellation is recommended and begins only with a read-only readiness review if selected.",
+      "evidence": [
+        "docs/raisa-post-combined-editor-compass-baton-orientation-plan.md",
+        "docs/raisa-post-combined-editor-compass-baton-orientation.md",
+        "docs/security/raisa-post-combined-editor-compass-baton-orientation-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-review-packet.md",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-receipt-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-281.md",
+        "tests/test_raisa_post_combined_editor_compass_baton_orientation_plan.py",
+        "tests/test_raisa_post_combined_editor_compass_baton_orientation.py",
+        "docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
-    "strategic_role": "Join the Reception One semantic console to one backend-owned multi-field truth transaction",
-    "why_now": "The atomic update kernel passed and could safely support a visible shared draft without adding command authority.",
-    "outcome": "Reception One now composes doctor, time and duration provisionally, pauses at explicit confirmation and rereads truth after every terminal outcome.",
+    "node_id": "raisa-post-combined-editor-compass-baton-orientation",
+    "strategic_role": "Pause honestly at the first post-console material programme choice",
+    "why_now": "Reception One's accepted status and multi-field update families are complete, while every high-value successor changes meaning or authority.",
+    "outcome": "Cancellation is recommended, but no implementation or readiness review begins until Yuri selects that direction.",
     "unlocks": [
-      "Run a read-only post-editor programme orientation across the accepted command, context and channel foundations.",
-      "Select and freeze the narrowest dependency-satisfied next product tranche without presuming a new authority opening."
+      "If Yuri agrees, freeze the provider-free read-only cancellation command-path readiness review.",
+      "Retain patient-channel delegation, check-in, Stage 3B, event-family and operational durability horizons without activating them."
     ],
     "does_not_solve": [
-      "No conversational execution, patient-channel delegation or live revocation enforcement is proven.",
-      "No additional command or event family is opened by this acceptance.",
+      "No cancellation family, control, runtime or safety property is implemented or accepted.",
+      "No live patient identity, delegation or revocation enforcement exists.",
       "Product data, providers, watcher/database runtime, deployment, production and release remain closed."
     ],
     "evidence": [
-      "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-plan.md",
-      "docs/security/raisa-reception-one-same-update-family-multi-change-editor-composition-threat-model-delta.md",
-      "docs/diary/diary.html",
-      "docs/diary/diary.js",
-      "docs/diary/meta-grid.css",
-      "docs/diary/meta-grid.js",
-      "review/test_reception_one_selected_action_console.py",
-      "review/test_reception_one_time_reschedule_action.py",
-      "review/test_reception_one_duration_action.py",
-      "review/test_reception_one_practitioner_reassignment_action.py",
-      "review/test_reception_one_same_update_family_multi_change_editor_composition.py",
-      "review/test_two_projection_truth_parity.py",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-packet.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-predispatch-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-result.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-worktree-preflight.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-packet.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-predispatch-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-pre-verifier-acceptance-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-273.md",
-      "docs/ariadne-agent-error-correction-register-revision-274.md",
-      "docs/ariadne-agent-error-correction-register-revision-275.md",
-      "docs/ariadne-agent-error-correction-register-revision-276.md",
-      "docs/ariadne-agent-error-correction-register-revision-277.md",
-      "docs/ariadne-agent-error-correction-register-revision-278.md",
-      "docs/ariadne-agent-error-correction-register-revision-279.md",
-      "docs/ariadne-agent-error-correction-register-revision-280.md",
-      "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md"
+      "docs/raisa-post-combined-editor-compass-baton-orientation-plan.md",
+      "docs/raisa-post-combined-editor-compass-baton-orientation.md",
+      "docs/security/raisa-post-combined-editor-compass-baton-orientation-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-receipt-incident.json",
+      "docs/ariadne-agent-error-correction-register-revision-281.md",
+      "tests/test_raisa_post_combined_editor_compass_baton_orientation_plan.py",
+      "tests/test_raisa_post_combined_editor_compass_baton_orientation.py",
+      "docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md"
     ]
   },
   "decision_horizon": [
+    {
+      "id": "reception-one-appointment-cancellation-direction",
+      "title": "Reception One appointment cancellation direction",
+      "status": "candidate",
+      "strategic_question": "Should Reception One pursue appointment cancellation next, beginning with a provider-free read-only cancellation command-path readiness review?",
+      "why_it_matters": "Cancellation is a high-value selected-appointment action, but the ordinary Diary's delete-to-status fallback and Reception One's missing bridge must be classified before destructive behavior is exposed in a second renderer.",
+      "prerequisites": [
+        "Yuri selects appointment cancellation as the next programme direction.",
+        "The first tranche remains provider-free and repository-read-only.",
+        "No cancellation UI, command-family convergence or write is inferred from the review."
+      ],
+      "boundary_changes": [],
+      "evidence": [
+        "docs/raisa-post-combined-editor-compass-baton-orientation.md",
+        "docs/security/raisa-post-combined-editor-compass-baton-orientation-threat-model-delta.md",
+        "docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md"
+      ]
+    },
     {
       "id": "reception-one-stage3b-participant-execution",
       "title": "Reception One representative-staff formative sessions",
@@ -5002,9 +5027,21 @@
         "orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md",
         "tests/test_ariadne_autonomous_continuation.py"
       ]
+    },
+    {
+      "id": "reception-one-appointment-cancellation-direction",
+      "question": "Should Reception One pursue appointment cancellation next, beginning with a provider-free read-only cancellation command-path readiness review?",
+      "required_before": "Yuri's choice is required before any cancellation family convergence or UI exposure; if selected, only the provider-free read-only readiness review starts.",
+      "evidence": [
+        "docs/raisa-post-combined-editor-compass-baton-orientation.md",
+        "docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md"
+      ]
     }
   ],
   "map_limits": [
+    "The post-editor orientation is repository-static evidence and opens no cancellation command, patient-channel delegation, live revocation, database/watcher runtime or production authority.",
     "The combined editor evidence is authored-synthetic and route-intercepted; it does not prove a live backend, conversational or patient-channel authority, delegation revocation, or production operation.",
     "The combined update rehearsal is authored-synthetic local PostgreSQL evidence; it does not prove a browser editor, conversational activation, patient delegation or production operation.",
     "The multi-change orientation is repository-static architecture evidence; it does not prove a compound UI, live channel delegation or practitioner/time/duration transaction behavior.",

@@ -11,7 +11,6 @@
     "Independent worker/reviewer",
     "Active Ariadne descendant",
     "Active product track",
-    "Antigravity independent-verifier allocation",
     "Ariadne agent error and correction register acceptance",
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
@@ -30,10 +29,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 202227,
-  "ledger_line_count": 173,
+  "ledger_byte_count": 204120,
+  "ledger_line_count": 175,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "bc518c7caa8c027a04e1781afdaab7f7f569e4c81e1b723b18e1cae293fe39f0",
+  "ledger_sha256": "b9ac9ed9f8bf41fbf02cbdecb4091ebeaa1e3a5e617e91ffbcde1fa322b62b49",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -191,14 +190,16 @@
     "Reception One selected-action-console progressive-disclosure composition acceptance",
     "Reception One multi-change request atomicity orientation acceptance",
     "Reception One same-update-family multi-change kernel rehearsal acceptance",
-    "Reception One same-update-family multi-change editor composition acceptance"
+    "Reception One same-update-family multi-change editor composition acceptance",
+    "Post-combined-editor Compass and baton orientation acceptance",
+    "Antigravity independent-verifier allocation"
   ],
-  "moved_row_count": 157,
+  "moved_row_count": 159,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 76140,
-  "source_agents_git_blob_sha1": "bee3634066fa5953820cc281518f8851d488ece0",
-  "source_agents_line_count": 483,
+  "source_agents_byte_count": 75281,
+  "source_agents_git_blob_sha1": "9d8586fa4a216b1f45fd48531c54f9d87a46f10e",
+  "source_agents_line_count": 482,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "993c9dd5dd693f3f1b55d24214798f52f8dbec7e3bbedbbd02d05017dc57fd57",
-  "source_git_head": "daed421954d65c159871585559f45caa32d95aee"
+  "source_agents_sha256": "638ffda4b9ec1d0a4f9e65ac18a8f9ea5122e725261d13efcbd7709357052674",
+  "source_git_head": "2ca3a111d2ee9277571ea3c905f22ce78c8e9745"
 }

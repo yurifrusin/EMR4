@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-reception-one-same-update-family-multi-change-editor-composition"
-SOURCE_HEAD = "daed421954d65c159871585559f45caa32d95aee"
+NODE_ID = "raisa-post-combined-editor-compass-baton-orientation"
+SOURCE_HEAD = "2ca3a111d2ee9277571ea3c905f22ce78c8e9745"
+EDITOR_SOURCE_HEAD = "daed421954d65c159871585559f45caa32d95aee"
 ORIENTATION_ATOMICITY_SOURCE_HEAD = "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58"
 CONSOLE_SOURCE_HEAD = "1d9e58fd2624f87b8b3def538297054999e7bef3"
 CONSOLE_ORIENTATION_SOURCE_HEAD = "2d602cfd822235977676bfe9ee8d8dc0a14714fe"
@@ -33,37 +34,33 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_live_combined_update_editor() -> None:
+def test_continuity_and_compass_bind_live_post_editor_orientation() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 293
+    assert graph["graph_revision"] == 294
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 275
-    assert compass["source_graph_revision"] == 293
+    assert compass["map_revision"] == 276
+    assert compass["source_graph_revision"] == 294
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_combined_editor_and_name_read_only_orientation() -> (
-    None
-):
+def test_live_baton_rows_accept_orientation_and_name_programme_fork() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 293 / Compass 275" in current
-    assert (
-        "raisa_reception_one_same_update_family_multi_change_editor_composition_pass"
-        in current
-    )
+    assert "Continuity 294 / Compass 276" in current
+    assert "raisa_post_combined_editor_compass_baton_orientation_pass" in current
     assert SOURCE_HEAD in current
-    assert "one provisional draft" in current
-    assert "one existing update proposal" in current
-    assert "one explicit confirmation" in current
-    assert "Gemini passed the exact 173-test packet" in current
+    assert "genuine Yuri-owned programme fork" in current
+    assert "Appointment cancellation is recommended" in current
+    assert "read-only command-path readiness review" in current
+    assert "Gemini passed the exact 115-test packet" in current
     assert SOURCE_HEAD in relation
+    assert EDITOR_SOURCE_HEAD in relation
     assert ORIENTATION_ATOMICITY_SOURCE_HEAD in relation
     assert CONSOLE_SOURCE_HEAD in relation
     assert CONSOLE_ORIENTATION_SOURCE_HEAD in relation
@@ -100,16 +97,15 @@ def test_live_baton_rows_accept_combined_editor_and_name_read_only_orientation()
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "raisa_post_combined_editor_compass_baton_orientation" in next_work
-    assert "provider-free read-only" in next_work
-    assert "accepted Reception One command families" in next_work
-    assert "Context Fabric/event-cue horizon" in next_work
-    assert "patient-channel foundation" in next_work
-    assert "remaining Yuri-owned gates" in next_work
-    assert "narrowest dependency-satisfied next tranche" in next_work
-    assert "no new model/provider" in next_work
-    assert "command/event family" in next_work
-    assert "product/patient data" in next_work
+    assert "Paused pending Yuri's programme choice" in next_work
+    assert "Reception One appointment cancellation" in next_work
+    assert (
+        "provider-free read-only cancellation command-path readiness review"
+        in next_work
+    )
+    assert "No cancellation implementation" in next_work
+    assert "Patient-channel identity/delegation" in next_work
+    assert "operational durability" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -145,24 +141,18 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "raisa_post_combined_editor_compass_baton_orientation",
-        "provider-free read-only",
-        "accepted reception one command families",
-        "context fabric/event-cue horizon",
-        "patient-channel foundation",
-        "remaining yuri-owned gates",
-        "narrowest dependency-satisfied next tranche",
-        "no new model/provider",
-        "external channel",
-        "command/event family",
-        "product/patient data",
-        "database/watcher runtime",
+        "paused pending yuri's programme choice",
+        "reception one appointment cancellation",
+        "provider-free read-only cancellation command-path readiness review",
+        "no cancellation implementation",
+        "ui exposure",
+        "command-family convergence",
+        "patient-channel identity/delegation",
+        "check-in/waiting-area",
+        "stage 3b",
+        "another event family",
+        "operational durability",
         "docs/branding/",
-        "deployment",
-        "production",
-        "release",
-        "pages",
-        "protected-ref authority",
         "explicit-path staging only",
     ):
         assert phrase in next_work

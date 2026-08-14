@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.workflow-incident.v1",
+  "incident_id": "AER-0320",
+  "attempt_id": "raisa-post-combined-editor-orientation-pre-verifier-receipt-001",
+  "candidate_head": "2ca3a111d2ee9277571ea3c905f22ce78c8e9745",
+  "rejected_reasons": [
+    "parallelism_lane_disposition_invalid:gemini_verifier",
+    "workspace_receipt_missing:gemini-3.6-flash-high-independent-veto"
+  ],
+  "external_verifier_calls_before_correction": 0,
+  "candidate_changed": false,
+  "correction": "Use disposition planned, the exact resource-bound workspace receipt shape and no internal assigned-agent id; regenerate and require a passing receipt before dispatch.",
+  "status": "corrected"
+}

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 293 / Compass 275. The provider-free combined Reception One editor passes; a read-only post-editor Compass orientation is next.
+> EMR4 is at Continuity 294 / Compass 276. Reception One's first status and update console is complete; cancellation is recommended at a genuine Yuri-owned programme fork.
 
 ## North star
 
@@ -358,34 +358,46 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One practitioner/time/duration command now has denial, replay, audit, idempotency and rollback evidence without product-source change. Lineage parent: `raisa-reception-one-multi-change-request-atomicity-orientation`.
 171. **Expose the proved multi-field update kernel through one safe Reception One provisional editor — Provider-free Reception One same-update-family multi-change editor composition**
    Practitioner, time and duration now converge on one existing proposal and one explicit confirmation with fresh reconciliation. Lineage parent: `raisa-reception-one-same-update-family-multi-change-kernel-rehearsal`.
+172. **Reconcile the completed Reception One command set and expose the next material programme choice — Provider-free post-combined-editor Compass and baton orientation**
+   The programme is at a genuine Yuri-owned fork; cancellation is recommended and begins only with a read-only readiness review if selected. Lineage parent: `raisa-reception-one-same-update-family-multi-change-editor-composition`.
 
 ## Current position
 
-**Join the Reception One semantic console to one backend-owned multi-field truth transaction — Provider-free Reception One same-update-family multi-change editor composition**
+**Pause honestly at the first post-console material programme choice — Provider-free post-combined-editor Compass and baton orientation**
 
-**Why this proof came next:** The atomic update kernel passed and could safely support a visible shared draft without adding command authority.
+**Why this proof came next:** Reception One's accepted status and multi-field update families are complete, while every high-value successor changes meaning or authority.
 
-Reception One now composes doctor, time and duration provisionally, pauses at explicit confirmation and rereads truth after every terminal outcome.
+Cancellation is recommended, but no implementation or readiness review begins until Yuri selects that direction.
 
 ### What this unlocks
 
-- Run a read-only post-editor programme orientation across the accepted command, context and channel foundations.
-- Select and freeze the narrowest dependency-satisfied next product tranche without presuming a new authority opening.
+- If Yuri agrees, freeze the provider-free read-only cancellation command-path readiness review.
+- Retain patient-channel delegation, check-in, Stage 3B, event-family and operational durability horizons without activating them.
 
 ### What it does not solve
 
-- No conversational execution, patient-channel delegation or live revocation enforcement is proven.
-- No additional command or event family is opened by this acceptance.
+- No cancellation family, control, runtime or safety property is implemented or accepted.
+- No live patient identity, delegation or revocation enforcement exists.
 - Product data, providers, watcher/database runtime, deployment, production and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
+
+### Reception One appointment cancellation direction — candidate
+
+Should Reception One pursue appointment cancellation next, beginning with a provider-free read-only cancellation command-path readiness review?
+
+Cancellation is a high-value selected-appointment action, but the ordinary Diary's delete-to-status fallback and Reception One's missing bridge must be classified before destructive behavior is exposed in a second renderer.
+
+Prerequisites:
+
+- Yuri selects appointment cancellation as the next programme direction.
+- The first tranche remains provider-free and repository-read-only.
+- No cancellation UI, command-family convergence or write is inferred from the review.
 
 ### Reception One representative-staff formative sessions — deferred
 
@@ -634,9 +646,12 @@ Prerequisites:
   Required before: Satisfied and consumed on 2026-08-04: Gate zero passes at Continuity 209 / Compass 190.
 - **May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?**
   Required before: Satisfied on 2026-08-04 by Yuri's standing programme authority.
+- **Should Reception One pursue appointment cancellation next, beginning with a provider-free read-only cancellation command-path readiness review?**
+  Required before: Yuri's choice is required before any cancellation family convergence or UI exposure; if selected, only the provider-free read-only readiness review starts.
 
 ## Map limits
 
+- The post-editor orientation is repository-static evidence and opens no cancellation command, patient-channel delegation, live revocation, database/watcher runtime or production authority.
 - The combined editor evidence is authored-synthetic and route-intercepted; it does not prove a live backend, conversational or patient-channel authority, delegation revocation, or production operation.
 - The combined update rehearsal is authored-synthetic local PostgreSQL evidence; it does not prove a browser editor, conversational activation, patient delegation or production operation.
 - The multi-change orientation is repository-static architecture evidence; it does not prove a compound UI, live channel delegation or practitioner/time/duration transaction behavior.
@@ -863,6 +878,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-278.md`
 - `docs/ariadne-agent-error-correction-register-revision-279.md`
 - `docs/ariadne-agent-error-correction-register-revision-280.md`
+- `docs/ariadne-agent-error-correction-register-revision-281.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -1072,6 +1088,9 @@ Prerequisites:
 - `docs/raisa-post-cf-d2-compass-baton-orientation-closeout.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation-plan.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation.md`
+- `docs/raisa-post-combined-editor-compass-baton-orientation-closeout.md`
+- `docs/raisa-post-combined-editor-compass-baton-orientation-plan.md`
+- `docs/raisa-post-combined-editor-compass-baton-orientation.md`
 - `docs/raisa-post-status-action-compass-baton-orientation-closeout.md`
 - `docs/raisa-post-status-action-compass-baton-orientation-plan.md`
 - `docs/raisa-post-status-action-compass-baton-orientation.md`
@@ -1347,6 +1366,7 @@ Prerequisites:
 - `docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md`
 - `docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
+- `docs/security/raisa-post-combined-editor-compass-baton-orientation-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-cf-d2-observability-first-event-cue-threat-model-delta.md`
@@ -1464,6 +1484,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json`
@@ -1651,6 +1672,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-gemini-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-receipt-incident.json`
+- `orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-status-action-compass-baton-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
@@ -2503,6 +2529,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
+- `orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -2600,6 +2627,8 @@ Prerequisites:
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
 - `tests/test_raisa_post_cf_d2_compass_baton_orientation.py`
+- `tests/test_raisa_post_combined_editor_compass_baton_orientation.py`
+- `tests/test_raisa_post_combined_editor_compass_baton_orientation_plan.py`
 - `tests/test_raisa_post_status_action_compass_baton_orientation.py`
 - `tests/test_raisa_post_status_action_compass_baton_orientation_plan.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
@@ -2662,4 +2691,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 275; continuity graph revision 293._
+_Compass map revision 276; continuity graph revision 294._

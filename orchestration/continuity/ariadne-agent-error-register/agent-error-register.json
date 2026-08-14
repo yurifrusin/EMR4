@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 280,
+  "register_revision": 281,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -12841,6 +12841,48 @@
           "tests/test_current_baton_consistency.py",
           "scripts/compact_agents_acceptance_index.py",
           "tests/test_agents_acceptance_index.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0320",
+      "attempt_id": "raisa-post-combined-editor-orientation-pre-verifier-receipt-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-post-combined-editor-compass-baton-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-verifier runtime state must use the configured parallelism disposition vocabulary and provide every workspace receipt in the exact resource-bound shape expected by the assigned-agent gate.",
+      "observed_error": "Sol wrote Gemini disposition selected, which is not admitted, supplied a path/status/head evidence object rather than the required resource_id/worktree/branch/head/clean workspace receipt, and simultaneously assigned an agent id without a matching resource receipt. The preflight returned revision_required before dispatch.",
+      "detection_method": "The repository-local Ariadne preflight reported parallelism_lane_disposition_invalid:gemini_verifier and workspace_receipt_missing:gemini-3.6-flash-high-independent-veto. No verifier or product call occurred under the rejected receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-receipt-incident.json",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-281.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_verifier_parallelism_disposition_and_workspace_receipt_shape_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace selected with the admitted planned disposition, encode the clean review worktree as resource_id/worktree/branch/head/clean, leave assigned_agent_ids empty for the external verifier adapter, keep related_incident_ids empty because AER peer links require the same attempt id, regenerate the receipt and require status passed before dispatch.",
+        "prevention_control": "Construct pre-verifier parallelism and workspace-receipt objects from the last passing exact analogue, validate incident peer links as part of register admission, then validate the runtime state before invoking any external verifier; do not infer enum values or reuse generic receipt metadata shapes.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-receipt-incident.json",
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-281.md"
         ]
       },
       "status": "corrected"

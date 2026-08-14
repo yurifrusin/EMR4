@@ -33,7 +33,6 @@ ACTIVE_LABELS = (
     "Independent worker/reviewer",
     "Active Ariadne descendant",
     "Active product track",
-    "Antigravity independent-verifier allocation",
     "Ariadne agent error and correction register acceptance",
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau C4 allowlisted-actuator simulator acceptance",
@@ -218,7 +217,8 @@ def write_compaction() -> dict[str, Any]:
         next(
             i
             for i, row in enumerate(kept_rows)
-            if _row_label(row) == "Antigravity independent-verifier allocation"
+            if _row_label(row)
+            == "Ariadne agent error and correction register acceptance"
         )
         + 1
     )

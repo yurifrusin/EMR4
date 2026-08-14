@@ -51,12 +51,16 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "raisa-reception-one-same-update-family-multi-change-editor-composition"
+        "raisa-post-combined-editor-compass-baton-orientation"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
     assert report["current_position"]["does_not_solve"]
     horizon_by_id = {item["id"]: item for item in report["decision_horizon"]}
+    assert (
+        horizon_by_id["reception-one-appointment-cancellation-direction"]["status"]
+        == "candidate"
+    )
     assert "reception-one-yuri-internal-walkthrough-completion" not in horizon_by_id
     assert "reception-one-product-context-proposal-runtime" not in horizon_by_id
     assert "reception-one-bounded-model-text-lane" not in horizon_by_id
