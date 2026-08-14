@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 272
+    assert register["register_revision"] == 274
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 312)
+        f"AER-{index:04d}" for index in range(1, 314)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 210
+    assert len(agent_incidents) == 212
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 311
+    assert report["incident_count"] == 313
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2790,6 +2790,40 @@ def test_aer_0294_through_0311_record_reschedule_and_multi_change_recovery() -> 
     )
     assert antigravity_help["status"] == "corrected"
     assert antigravity_help["correction"]["status"] == "corrected_fresh_attempt"
+
+
+def test_aer_0312_records_recurring_deepseek_fenced_egress() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    deepseek_egress = incidents["AER-0312"]
+    assert deepseek_egress["stage"] == "implementation"
+    assert deepseek_egress["role"] == "implementer"
+    assert deepseek_egress["category"] == "output_contract_violation"
+    assert deepseek_egress["process_severity"] == "low"
+    assert deepseek_egress["candidate_state"] == "untrusted_partial_worktree"
+    assert deepseek_egress["related_incident_ids"] == []
+    assert deepseek_egress["recurrence_signature"] == (
+        "implementer.required_single_json_decision_wrapped_in_prose_and_fence"
+    )
+    assert deepseek_egress["status"] == "corrected"
+    assert deepseek_egress["correction"]["status"] == "control_added"
+
+
+def test_aer_0313_records_unverified_module_name_invocation() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    module_discovery = incidents["AER-0313"]
+    assert module_discovery["stage"] == "integration"
+    assert module_discovery["role"] == "orchestrator"
+    assert module_discovery["category"] == "command_scope_violation"
+    assert module_discovery["process_severity"] == "low"
+    assert module_discovery["candidate_state"] == "canonical_unchanged"
+    assert module_discovery["related_incident_ids"] == []
+    assert module_discovery["recurrence_signature"] == (
+        "orchestrator.unverified_repository_module_name_invocation"
+    )
+    assert module_discovery["status"] == "corrected"
+    assert module_discovery["correction"]["status"] == "corrected_fresh_attempt"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -3066,20 +3100,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 272
-    assert report["incident_count"] == 311
+    assert report["register_revision"] == 274
+    assert report["incident_count"] == 313
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 210,
+        "agent_behavior": 212,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 43,
+        "command_scope_violation": 44,
         "evidence_misreport": 42,
         "harness_failure": 37,
-        "output_contract_violation": 86,
+        "output_contract_violation": 87,
         "read_only_violation": 3,
         "reasoning_claim_error": 36,
         "repository_defect": 55,
@@ -3087,8 +3121,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 186,
-        "untrusted_partial_worktree": 27,
+        "canonical_unchanged": 187,
+        "untrusted_partial_worktree": 28,
     }
     receipt_event_recurrence = next(
         row
@@ -3226,6 +3260,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
                 "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
                 "Fresh replacement review admission requires exact per-file collect-only and pass arithmetic, not an aggregate progress-line estimate.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "implementer.required_single_json_decision_wrapped_in_prose_and_fence"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0309", "AER-0312"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["implementer"],
+            "resource_ids": ["deepseek-flash-workers"],
+            "prevention_controls": [
+                "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git and independently reproduced checks.",
+                "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git inspection, explicit Sol recovery and independently reproduced checks.",
             ],
         },
         {

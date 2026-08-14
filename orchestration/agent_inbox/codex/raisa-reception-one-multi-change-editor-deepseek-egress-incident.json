@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0312",
+  "attempt_id": "raisa-reception-one-multi-change-editor-deepseek-egress-001",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "observation": "The completed DeepSeek result wrapped its decision object in a Markdown code fence although the packet required exactly one JSON object and no prose.",
+  "candidate_effect": "The sole owned test commit remains an untrusted candidate; its narrative is not acceptance evidence and its mismatched surface assumptions require explicit Sol recovery before deterministic admission.",
+  "containment": "Preserve the exact result, integrate only the exact one-file Git candidate, repair it under Sol ownership against the actual combined-update surface, and independently rerun every acceptance command before verifier dispatch.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}

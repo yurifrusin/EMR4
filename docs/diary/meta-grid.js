@@ -9,6 +9,7 @@
   const EVENT_SNOOZE_MS = 5 * 60 * 1000;
   const REQUEST_INPUT_MIN_HEIGHT_PX = 52;
   const REQUEST_INPUT_MAX_HEIGHT_PX = 96;
+  const UPDATE_FAMILY_ACTIONS = new Set(["time", "duration", "practitioner"]);
   const WORD_COMPANION_ALLOWED_FAMILIES = new Set([
     "focused_schedule_lane",
     "patient_timeline",
@@ -2824,12 +2825,25 @@
     }
   }
 
-  function resetAllSelectedActionDrafts({ collapse = false } = {}) {
-    if (anySelectedActionBusy()) return false;
-    resetSelectedActionDraft("status");
+  function isUpdateFamilyAction(action) {
+    return UPDATE_FAMILY_ACTIONS.has(action);
+  }
+
+  function resetSelectedUpdateDraft() {
     resetSelectedActionDraft("time");
     resetSelectedActionDraft("duration");
     resetSelectedActionDraft("practitioner");
+  }
+
+  function resetSelectedActionFamily(action) {
+    if (isUpdateFamilyAction(action)) resetSelectedUpdateDraft();
+    else resetSelectedActionDraft(action);
+  }
+
+  function resetAllSelectedActionDrafts({ collapse = false } = {}) {
+    if (anySelectedActionBusy()) return false;
+    resetSelectedActionDraft("status");
+    resetSelectedUpdateDraft();
     if (collapse) state.activeSelectedAction = null;
     return true;
   }
@@ -2855,13 +2869,23 @@
     if (!["status", "time", "duration", "practitioner"].includes(action)) return;
     if (selectedActionPaletteUnavailable()) return;
     const previous = state.activeSelectedAction;
-    if (previous) resetSelectedActionDraft(previous);
+    const retainedUpdateDraft = Boolean(
+      previous
+      && previous !== action
+      && isUpdateFamilyAction(previous)
+      && isUpdateFamilyAction(action)
+    );
+    if (previous && !retainedUpdateDraft) resetSelectedActionFamily(previous);
     state.activeSelectedAction = previous === action ? null : action;
     render();
     if (elements.announcer) {
-      elements.announcer.textContent = state.activeSelectedAction
-        ? `${action === "time" ? "Time" : `${action[0].toUpperCase()}${action.slice(1)}`} editor opened. No new Diary change occurred.`
-        : "Appointment action editor closed. No new Diary change occurred.";
+      if (retainedUpdateDraft) {
+        elements.announcer.textContent = "Shared appointment draft retained. No new Diary change occurred.";
+      } else {
+        elements.announcer.textContent = state.activeSelectedAction
+          ? `${action === "time" ? "Time" : `${action[0].toUpperCase()}${action.slice(1)}`} editor opened. No new Diary change occurred.`
+          : "Appointment action editor closed and its unsubmitted draft was discarded. No new Diary change occurred.";
+      }
     }
     setTimeout(() => {
       const focusId = state.activeSelectedAction
@@ -2907,22 +2931,24 @@
     const submit = document.getElementById("meta-grid-reschedule-submit");
     const feedback = document.getElementById("meta-grid-reschedule-feedback");
     const selected = selectedStatusActionItem();
-    const currentStart = selected?.starts_at || "";
-    const requestedStart = input?.value || state.rescheduleAction.requestedStart || currentStart;
+    const draft = selectedUpdateDraft(selected);
     const unavailable = Boolean(
-      state.rescheduleAction.busy
-      || state.statusAction.busy
-      || state.durationAction.busy
-      || state.practitionerAction.busy
+      anySelectedActionBusy()
       || state.interrupted
       || state.current?.freshness?.stale
     );
     if (input) {
       input.disabled = unavailable;
-      input.toggleAttribute("aria-busy", state.rescheduleAction.busy);
+      input.toggleAttribute("aria-busy", anySelectedUpdateActionBusy());
     }
-    if (submit) submit.disabled = unavailable || !requestedStart || requestedStart === currentStart;
+    if (submit) {
+      submit.disabled = unavailable
+        || !selectedUpdateDraftIsValid(selected, draft)
+        || selectedUpdateChangedFields(selected, draft).length === 0;
+      updateSelectedUpdateReviewLabel(submit, selected, draft);
+    }
     if (feedback) feedback.textContent = rescheduleActionMessage();
+    updateSharedUpdateDraftSummary(selected, draft);
     updateSelectedActionPaletteControls();
   }
 
@@ -2948,26 +2974,25 @@
     const select = document.getElementById("meta-grid-duration-select");
     const submit = document.getElementById("meta-grid-duration-submit");
     const feedback = document.getElementById("meta-grid-duration-feedback");
-    const currentDuration = Number(selectedStatusActionItem()?.duration_minutes);
-    const requestedDuration = Number(select?.value || state.durationAction.requestedDuration || currentDuration);
+    const selected = selectedStatusActionItem();
+    const draft = selectedUpdateDraft(selected);
     const unavailable = Boolean(
-      state.durationAction.busy
-      || state.statusAction.busy
-      || state.rescheduleAction.busy
-      || state.practitionerAction.busy
+      anySelectedActionBusy()
       || state.interrupted
       || state.current?.freshness?.stale
     );
     if (select) {
       select.disabled = unavailable;
-      select.toggleAttribute("aria-busy", state.durationAction.busy);
+      select.toggleAttribute("aria-busy", anySelectedUpdateActionBusy());
     }
     if (submit) {
       submit.disabled = unavailable
-        || !Number.isInteger(requestedDuration)
-        || requestedDuration === currentDuration;
+        || !selectedUpdateDraftIsValid(selected, draft)
+        || selectedUpdateChangedFields(selected, draft).length === 0;
+      updateSelectedUpdateReviewLabel(submit, selected, draft);
     }
     if (feedback) feedback.textContent = durationActionMessage();
+    updateSharedUpdateDraftSummary(selected, draft);
     updateSelectedActionPaletteControls();
   }
 
@@ -2995,33 +3020,187 @@
     });
   }
 
+  function anySelectedUpdateActionBusy() {
+    return Boolean(
+      state.rescheduleAction.busy
+      || state.durationAction.busy
+      || state.practitionerAction.busy
+    );
+  }
+
+  function selectedUpdateDraft(selected = selectedStatusActionItem()) {
+    if (!selected) return null;
+    const appointmentId = String(selected.id);
+    const requestedStart = state.rescheduleAction.appointmentId === appointmentId
+      ? state.rescheduleAction.requestedStart
+      : null;
+    const requestedDuration = state.durationAction.appointmentId === appointmentId
+      ? state.durationAction.requestedDuration
+      : null;
+    const requestedPractitionerId = state.practitionerAction.appointmentId === appointmentId
+      ? state.practitionerAction.requestedPractitionerId
+      : null;
+    return Object.freeze({
+      startTime: requestedStart === null ? String(selected.starts_at || "") : String(requestedStart),
+      durationMinutes: Number.isInteger(requestedDuration)
+        ? requestedDuration
+        : Number(selected.duration_minutes),
+      practitionerId: String(requestedPractitionerId || selected.practitioner_id || "")
+    });
+  }
+
+  function selectedUpdateChangedFields(selected, draft = selectedUpdateDraft(selected)) {
+    if (!selected || !draft) return [];
+    const changed = [];
+    if (draft.startTime !== String(selected.starts_at || "")) changed.push("time");
+    if (draft.durationMinutes !== Number(selected.duration_minutes)) changed.push("duration");
+    if (draft.practitionerId !== String(selected.practitioner_id || "")) changed.push("practitioner");
+    return changed;
+  }
+
+  function selectedUpdateDraftIsValid(selected, draft = selectedUpdateDraft(selected)) {
+    if (!selected || !draft) return false;
+    const startMinutes = minutesFromTime(draft.startTime);
+    const currentDuration = Number(selected.duration_minutes);
+    if (
+      startMinutes === null
+      || startMinutes % 15 !== 0
+      || !Number.isInteger(draft.durationMinutes)
+      || draft.durationMinutes < 15
+      || draft.durationMinutes > 480
+      || !Number.isInteger(currentDuration)
+      || (draft.durationMinutes - currentDuration) % 15 !== 0
+      || startMinutes + draft.durationMinutes >= 1440
+    ) return false;
+    const currentPractitionerId = String(selected.practitioner_id || "");
+    return Boolean(
+      draft.practitionerId
+      && (
+        draft.practitionerId === currentPractitionerId
+        || activePractitionerTargets(selected).some(
+          target => String(target.id || "") === draft.practitionerId
+        )
+      )
+    );
+  }
+
+  function selectedUpdatePractitionerDisplay(selected, practitionerId) {
+    if (String(practitionerId || "") === String(selected?.practitioner_id || "")) {
+      return selected?.practitioner_display || "Practitioner";
+    }
+    return activePractitionerTargets(selected).find(
+      target => String(target.id || "") === String(practitionerId || "")
+    )?.display_name || "Selected practitioner";
+  }
+
+  function selectedUpdateDraftSummary(selected, draft = selectedUpdateDraft(selected)) {
+    const changed = selectedUpdateChangedFields(selected, draft);
+    if (changed.length === 0) return "Shared update draft: no pending changes.";
+    const parts = [];
+    if (changed.includes("time")) {
+      parts.push(`time ${timeLabel(selected.starts_at)} to ${timeLabel(draft.startTime)}`);
+    }
+    if (changed.includes("duration")) {
+      parts.push(`duration ${selected.duration_minutes} to ${draft.durationMinutes} minutes`);
+    }
+    if (changed.includes("practitioner")) {
+      parts.push(
+        `practitioner ${selected.practitioner_display || "Practitioner"} to ${selectedUpdatePractitionerDisplay(selected, draft.practitionerId)}`
+      );
+    }
+    return `Provisional shared draft — not current Diary truth: ${parts.join("; ")}.`;
+  }
+
+  function updateSharedUpdateDraftSummary(selected, draft = selectedUpdateDraft(selected)) {
+    const summary = document.querySelector('[data-testid="meta-grid-update-draft-summary"]');
+    if (summary) summary.textContent = selectedUpdateDraftSummary(selected, draft);
+  }
+
+  function updateSelectedUpdateReviewLabel(button, selected, draft = selectedUpdateDraft(selected)) {
+    if (!button) return;
+    const changed = selectedUpdateChangedFields(selected, draft);
+    if (changed.length > 1) {
+      button.textContent = "Review appointment changes";
+    } else if (changed[0] === "duration" || (!changed[0] && button.id.includes("duration"))) {
+      button.textContent = "Review duration change";
+    } else if (changed[0] === "practitioner" || (!changed[0] && button.id.includes("practitioner"))) {
+      button.textContent = "Review practitioner change";
+    } else {
+      button.textContent = "Review time change";
+    }
+  }
+
   function updatePractitionerActionControls() {
     const select = document.getElementById("meta-grid-practitioner-select");
     const submit = document.getElementById("meta-grid-practitioner-submit");
     const feedback = document.getElementById("meta-grid-practitioner-feedback");
     const selected = selectedStatusActionItem();
     const targets = activePractitionerTargets(selected);
-    const requestedPractitionerId = String(
-      select?.value || state.practitionerAction.requestedPractitionerId || ""
-    );
-    const targetExists = targets.some(target => String(target.id) === requestedPractitionerId);
+    const draft = selectedUpdateDraft(selected);
     const unavailable = Boolean(
-      state.practitionerAction.busy
-      || state.statusAction.busy
-      || state.rescheduleAction.busy
-      || state.durationAction.busy
+      anySelectedActionBusy()
       || state.interrupted
       || state.current?.freshness?.stale
     );
     if (select) {
       select.disabled = unavailable || targets.length === 0;
-      select.toggleAttribute("aria-busy", state.practitionerAction.busy);
+      select.toggleAttribute("aria-busy", anySelectedUpdateActionBusy());
     }
-    if (submit) submit.disabled = unavailable || !targetExists;
+    if (submit) {
+      submit.disabled = unavailable
+        || !selectedUpdateDraftIsValid(selected, draft)
+        || selectedUpdateChangedFields(selected, draft).length === 0;
+      updateSelectedUpdateReviewLabel(submit, selected, draft);
+    }
     if (feedback) feedback.textContent = targets.length === 0 && state.practitionerAction.phase === "idle"
       ? "No other active practitioner is available in the current directory projection."
       : practitionerActionMessage();
+    updateSharedUpdateDraftSummary(selected, draft);
     updateSelectedActionPaletteControls();
+  }
+
+  function setSelectedUpdateDraftState(
+    appointmentId,
+    draft,
+    { phase = "idle", busy = false, reconciliationRequired = false } = {}
+  ) {
+    state.rescheduleAction = {
+      appointmentId,
+      requestedStart: draft?.startTime ?? null,
+      phase,
+      busy,
+      reconciliationRequired
+    };
+    state.durationAction = {
+      appointmentId,
+      requestedDuration: Number.isInteger(draft?.durationMinutes)
+        ? draft.durationMinutes
+        : null,
+      phase,
+      busy,
+      reconciliationRequired
+    };
+    state.practitionerAction = {
+      appointmentId,
+      requestedPractitionerId: draft?.practitionerId ?? null,
+      phase,
+      busy,
+      reconciliationRequired
+    };
+  }
+
+  function setSelectedUpdateTransactionPhase(phase, busy) {
+    [state.rescheduleAction, state.durationAction, state.practitionerAction].forEach(action => {
+      action.phase = phase;
+      action.busy = busy;
+    });
+  }
+
+  function updateAllSelectedActionControls() {
+    updateStatusActionControls();
+    updateRescheduleActionControls();
+    updateDurationActionControls();
+    updatePractitionerActionControls();
   }
 
   function applyFreshAppointmentToCurrentProjection(appointment) {
@@ -3434,6 +3613,106 @@
     }, 0);
   }
 
+  async function executeSelectedUpdateAction(returnControl) {
+    const selected = selectedStatusActionItem();
+    const draft = selectedUpdateDraft(selected);
+    const appointmentId = String(selected?.id || "");
+    if (
+      !selected
+      || anySelectedActionBusy()
+      || state.interrupted
+      || state.current?.freshness?.stale
+      || !selectedUpdateDraftIsValid(selected, draft)
+      || selectedUpdateChangedFields(selected, draft).length === 0
+    ) return;
+
+    setSelectedUpdateDraftState(appointmentId, draft, {
+      phase: "checking",
+      busy: true,
+      reconciliationRequired: false
+    });
+    updateAllSelectedActionControls();
+
+    try {
+      const result = await bridge.updateAppointmentDetails(
+        {
+          appointment_id: appointmentId,
+          start_time_local: draft.startTime,
+          duration_minutes: draft.durationMinutes,
+          practitioner_id: draft.practitionerId
+        },
+        returnControl,
+        update => {
+          setSelectedUpdateTransactionPhase(update.phase, update.busy !== false);
+          updateAllSelectedActionControls();
+        }
+      );
+      const interrupted = Boolean(
+        state.rescheduleAction.reconciliationRequired
+        || state.durationAction.reconciliationRequired
+        || state.practitionerAction.reconciliationRequired
+        || state.interrupted
+      );
+      if (result.committed || interrupted) {
+        await refreshCurrent({
+          pushCurrent: false,
+          clearTrail: true,
+          preserveSelectedAppointmentId: appointmentId,
+          focusCanvas: false,
+          reason: result.committed
+            ? "Fresh scoped read after committed appointment update"
+            : "Fresh scoped read after interrupted appointment update review"
+        });
+        if (result.committed) applyFreshAppointmentToCurrentProjection(result.appointment);
+      } else {
+        applyFreshAppointmentToCurrentProjection(result.appointment);
+      }
+      setSelectedUpdateDraftState(appointmentId, null, {
+        phase: result.committed ? "committed" : result.outcome,
+        busy: false,
+        reconciliationRequired: false
+      });
+      state.interrupted = false;
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = state.selectedAppointment
+          ? (result.committed
+              ? "Appointment changes committed and checked against a fresh Diary read."
+              : "Appointment changes were not committed. Fresh Diary truth is shown.")
+          : "Appointment changes committed. The appointment is no longer in this current projection.";
+      }
+    } catch (_) {
+      let reconciled = false;
+      try {
+        const fresh = await bridge.readAppointment(appointmentId);
+        reconciled = applyFreshAppointmentToCurrentProjection(fresh);
+      } catch (_readError) {
+        reconciled = false;
+      }
+      setSelectedUpdateDraftState(appointmentId, null, {
+        phase: "failed",
+        busy: false,
+        reconciliationRequired: !reconciled
+      });
+      state.interrupted = false;
+      if (!reconciled) {
+        requireFreshActionReconciliation(
+          "The appointment update outcome could not be reconciled from an exact fresh appointment read"
+        );
+      }
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = "Appointment not changed. Fresh Diary truth has been restored.";
+      }
+    }
+    setTimeout(() => {
+      const focusId = selectedActionControlId(state.activeSelectedAction);
+      const control = focusId ? document.getElementById(focusId) : null;
+      if (control) control.focus({ preventScroll: true });
+      else focusCanvasWithoutWindowScroll();
+    }, 0);
+  }
+
   function renderStatusAction(projection, target = elements.actions) {
     const selected = selectedStatusActionItem(projection);
     if (!selected) {
@@ -3519,9 +3798,16 @@
     const copy = createElement("div", "meta-grid-reschedule-action-copy");
     const heading = createElement("strong", "", `Current time: ${selected.display}`);
     heading.id = "meta-grid-reschedule-action-heading";
+    const draftSummary = createElement(
+      "p",
+      "meta-grid-update-draft-summary",
+      selectedUpdateDraftSummary(selected)
+    );
+    draftSummary.dataset.testid = "meta-grid-update-draft-summary";
     copy.append(
       heading,
-      createElement("span", "", "Same day, practitioner and duration. Current Diary truth is checked again before any write.")
+      createElement("span", "", "Time, duration and practitioner share one provisional update draft. Current Diary truth is checked again before any write."),
+      draftSummary
     );
 
     const label = createElement("label", "meta-grid-reschedule-label", "New start time");
@@ -3545,7 +3831,7 @@
     submit.type = "button";
     submit.id = "meta-grid-reschedule-submit";
     submit.dataset.testid = "meta-grid-reschedule-submit";
-    submit.addEventListener("click", () => executeSelectedRescheduleAction(input));
+    submit.addEventListener("click", () => executeSelectedUpdateAction(input));
 
     const feedback = createElement("p", "meta-grid-reschedule-feedback", rescheduleActionMessage());
     feedback.id = "meta-grid-reschedule-feedback";
@@ -3585,9 +3871,16 @@
       `Current duration: ${selected.duration_minutes} minutes; ends ${timeLabel(selected.ends_at)}`
     );
     heading.id = "meta-grid-duration-action-heading";
+    const draftSummary = createElement(
+      "p",
+      "meta-grid-update-draft-summary",
+      selectedUpdateDraftSummary(selected)
+    );
+    draftSummary.dataset.testid = "meta-grid-update-draft-summary";
     copy.append(
       heading,
-      createElement("span", "", "Same date, start and practitioner. Current Diary truth is checked again before any write.")
+      createElement("span", "", "Time, duration and practitioner share one provisional update draft. Current Diary truth is checked again before any write."),
+      draftSummary
     );
 
     const label = createElement("label", "meta-grid-duration-label", "New duration");
@@ -3619,7 +3912,7 @@
     submit.type = "button";
     submit.id = "meta-grid-duration-submit";
     submit.dataset.testid = "meta-grid-duration-submit";
-    submit.addEventListener("click", () => executeSelectedDurationAction(select));
+    submit.addEventListener("click", () => executeSelectedUpdateAction(select));
 
     const feedback = createElement("p", "meta-grid-duration-feedback", durationActionMessage());
     feedback.id = "meta-grid-duration-feedback";
@@ -3660,9 +3953,16 @@
       `Current practitioner: ${selected.practitioner_display || "Practitioner"}`
     );
     heading.id = "meta-grid-practitioner-action-heading";
+    const draftSummary = createElement(
+      "p",
+      "meta-grid-update-draft-summary",
+      selectedUpdateDraftSummary(selected)
+    );
+    draftSummary.dataset.testid = "meta-grid-update-draft-summary";
     copy.append(
       heading,
-      createElement("span", "", "Same date, start and duration. Current practitioner activity and Diary truth are checked again before any write.")
+      createElement("span", "", "Time, duration and practitioner share one provisional update draft. Current practitioner activity and Diary truth are checked again before any write."),
+      draftSummary
     );
 
     const label = createElement("label", "meta-grid-practitioner-label", "New practitioner");
@@ -3710,7 +4010,7 @@
     submit.type = "button";
     submit.id = "meta-grid-practitioner-submit";
     submit.dataset.testid = "meta-grid-practitioner-submit";
-    submit.addEventListener("click", () => executeSelectedPractitionerAction(select));
+    submit.addEventListener("click", () => executeSelectedUpdateAction(select));
 
     const feedback = createElement(
       "p",

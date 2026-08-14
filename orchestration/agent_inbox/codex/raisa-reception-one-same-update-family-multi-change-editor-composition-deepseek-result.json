@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "```json\n{\n  \"decision\": \"candidate_ready\",\n  \"start_head\": \"c1f7acbe750c66d05b230671a3deb695eceedef1\",\n  \"end_head\": \"27f6d9125b2a78004b4363d3b56e19bfa2928d58\",\n  \"branch\": \"codex/worker-reception-one-multi-change-editor-c1f7acbe\",\n  \"owned_paths_changed\": [\"review/test_reception_one_same_update_family_multi_change_editor_composition.py\"],\n  \"commit\": \"27f6d9125b2a78004b4363d3b56e19bfa2928d58\",\n  \"tests\": [\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m ruff format review/test_reception_one_same_update_family_multi_change_editor_composition.py\", \"exit_code\": 0, \"summary\": \"format ok\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m ruff check review/test_reception_one_same_update_family_multi_change_editor_composition.py\", \"exit_code\": 0, \"summary\": \"lint ok\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m py_compile review/test_reception_one_same_update_family_multi_change_editor_composition.py\", \"exit_code\": 0, \"summary\": \"compiles\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m pytest --collect-only -q review/test_reception_one_same_update_family_multi_change_editor_composition.py\", \"exit_code\": 0, \"summary\": \"collected 9 tests\"},\n    {\"command\": \"C:\\\\Users\\\\sarashera\\\\emr4\\\\.venv\\\\Scripts\\\\python.exe -m pytest -q review/test_reception_one_same_update_family_multi_change_editor_composition.py\", \"exit_code\": 1, \"summary\": \"6 expected red assertion failures, 3 accessibility parametrizations pass\"},\n    {\"command\": \"git diff --check -- review/test_reception_one_same_update_family_multi_change_editor_composition.py\", \"exit_code\": 0, \"summary\": \"no whitespace errors\"},\n    {\"command\": \"git status --short\", \"exit_code\": 0, \"summary\": \"clean worktree\"}\n  ],\n  \"expected_red_nodes\": [\n    \"review/test_reception_one_same_update_family_multi_change_editor_composition.py::test_same_family_switching_preserves_shared_update_draft\",\n    \"review/test_reception_one_same_update_family_multi_change_editor_composition.py::test_collapse_and_status_crossing_discard_whole_update_draft\",\n    \"review/test_reception_one_same_update_family_multi_change_editor_composition.py::test_combined_review_emits_one_proposal_and_opens_existing_dialog\",\n    \"review/test_reception_one_same_update_family_multi_change_editor_composition.py::test_visible_confirm_and_save_emits_one_confirm_and_fresh_summary\",\n    \"review/test_reception_one_same_update_family_multi_change_editor_composition.py::test_escape_from_safe_dialog_zero_confirms_and_restores_focus\",\n    \"review/test_reception_one_same_update_family_multi_change_editor_composition.py::test_combined_update_editor_source_guards_reject_loops_raw_and_status\"\n  ],\n  \"worktree_clean\": true,\n  \"issues\": []\n}\n```",
+  "usage": {
+    "input_tokens": 226875,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 5562240,
+    "output_tokens": 58542,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 5.39308,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

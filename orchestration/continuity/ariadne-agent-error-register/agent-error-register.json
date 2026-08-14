@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 272,
+  "register_revision": 274,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -12514,6 +12514,86 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-antigravity-help-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-272.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0312",
+      "attempt_id": "raisa-reception-one-multi-change-editor-deepseek-egress-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The bounded implementation worker must return exactly one JSON decision object and no prose, as required by the frozen packet.",
+      "observed_error": "The completed DeepSeek result wrapped its decision object in a Markdown code fence although the packet required exactly one JSON object and no prose. The exact one-file worker commit and deterministic test summaries were otherwise present.",
+      "detection_method": "Sol compared the persisted worker result with the packet's exact decision-format instruction before integrating or relying on any worker claim.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-packet.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-result.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-deepseek-egress-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-273.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.required_single_json_decision_wrapped_in_prose_and_fence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the exact result, reject its embedded decision as acceptance evidence, inspect and integrate only the exact one-file Git candidate, and repair that candidate under Sol ownership before independent deterministic verification.",
+        "prevention_control": "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git inspection, explicit Sol recovery and independently reproduced checks.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-result.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-deepseek-egress-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-273.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0313",
+      "attempt_id": "raisa-reception-one-multi-change-editor-orchestrator-module-discovery-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "integration",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A repository Python module name must be resolved from an exact existing scripts path before invocation; an orchestrator must not guess a receipt-builder module name.",
+      "observed_error": "Sol invoked the guessed module scripts.ariadne_orchestrator. Python failed immediately with No module named scripts.ariadne_orchestrator before any receipt, source, Git or external action. Exact filename discovery then identified scripts/ariadne_orchestrator_preflight.py.",
+      "detection_method": "The local interpreter returned No module named scripts.ariadne_orchestrator; a bounded filename-only search under scripts found the actual module before any further invocation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-orchestrator-module-discovery-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-274.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unverified_repository_module_name_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the exact existing filename first, then invoke only python -m scripts.ariadne_orchestrator_preflight from the repository root.",
+        "prevention_control": "Before invoking any repository module not already named in the active plan, resolve its exact scripts filename with a bounded filename-only search and derive the module path only from that result.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-orchestrator-module-discovery-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-274.md"
         ]
       },
       "status": "corrected"

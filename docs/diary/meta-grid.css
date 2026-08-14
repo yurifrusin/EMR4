@@ -2983,12 +2983,19 @@ body.meta-grid-open #diary-status {
 .meta-grid-duration-feedback,
 .meta-grid-duration-outcome,
 .meta-grid-practitioner-action-copy span,
+.meta-grid-update-draft-summary,
 .meta-grid-practitioner-feedback,
 .meta-grid-practitioner-outcome {
   color: #526770;
   font-size: 10px;
   line-height: 1.4;
   margin: 0;
+}
+
+.meta-grid-update-draft-summary {
+  border-left: 2px solid #8eaaa0;
+  margin-top: 4px;
+  padding-left: 7px;
 }
 
 .meta-grid-status-label,

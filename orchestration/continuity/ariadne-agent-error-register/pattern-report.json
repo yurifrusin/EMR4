@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "62498724ef8b696ffd092bafdc010e2e8f12eddfde7beca65d7972bc26232183",
+  "canonical_register_sha256": "3da76642db650922926377b6199ef75a2321e574b05199792979285dc4c41a85",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 186,
-      "untrusted_partial_worktree": 27
+      "canonical_unchanged": 187,
+      "untrusted_partial_worktree": 28
     },
     "by_category": {
-      "command_scope_violation": 43,
+      "command_scope_violation": 44,
       "evidence_misreport": 42,
       "harness_failure": 37,
-      "output_contract_violation": 86,
+      "output_contract_violation": 87,
       "read_only_violation": 3,
       "reasoning_claim_error": 36,
       "repository_defect": 55,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 210,
+      "agent_behavior": 212,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 118,
+      "low": 120,
       "material": 98,
       "moderate": 95
     },
@@ -39,14 +39,14 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 154,
+      "codex-primary-orchestrator::orchestrator": 155,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 6,
+      "deepseek-flash-workers::implementer": 7,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,14 +87,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 21,
+      "implementer": 22,
       "integration_reviewer": 2,
-      "orchestrator": 236,
+      "orchestrator": 237,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 311,
+  "incident_count": 313,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -273,6 +273,30 @@
       ],
       "roles": [
         "verifier"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0309",
+        "AER-0312"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git and independently reproduced checks.",
+        "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git inspection, explicit Sol recovery and independently reproduced checks."
+      ],
+      "recurrence_signature": "implementer.required_single_json_decision_wrapped_in_prose_and_fence",
+      "resource_ids": [
+        "deepseek-flash-workers"
+      ],
+      "roles": [
+        "implementer"
       ]
     },
     {
@@ -734,7 +758,7 @@
       ]
     }
   ],
-  "register_revision": 272,
+  "register_revision": 274,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

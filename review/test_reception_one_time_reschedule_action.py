@@ -380,7 +380,7 @@ def _trigger_time_action(page, *, renderer: str, scenario: str) -> None:
     else:
         page.fill("[data-testid='meta-grid-reschedule-time']", REQUESTED_START)
         page.click("[data-testid='meta-grid-reschedule-submit']")
-    if EXPECTED[scenario]["dialog"]:
+    if EXPECTED[scenario]["dialog"] or (renderer == "reception_one" and scenario == "safe"):
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
         if scenario == "cancelled":
@@ -388,7 +388,7 @@ def _trigger_time_action(page, *, renderer: str, scenario: str) -> None:
         elif scenario == "blocked":
             assert dialog.locator("button:has-text('Confirm & Save')").count() == 0
             dialog.locator("button:has-text('Close')").click()
-        else:  # committed -> explicit staff confirmation
+        else:  # Reception One always requires explicit confirmation; warning commit does too.
             dialog.locator("button:has-text('Confirm & Save')").click()
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
 

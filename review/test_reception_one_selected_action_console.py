@@ -536,9 +536,8 @@ def test_open_collapse_switch_keeps_zero_or_one_editor_and_zero_routes(reception
         page.unroute("**/api/v1/**", handler)
 
 @pytest.mark.parametrize("field", FIELDS)
-@pytest.mark.parametrize("discard_via", ["collapse", "switch"])
-def test_idle_collapse_and_switch_discard_each_field_draft(reception_page, field, discard_via) -> None:
-    """Idle collapse/switch discards every field's provisional draft."""
+def test_idle_collapse_discards_each_field_draft(reception_page, field) -> None:
+    """Collapsing any action discards its complete provisional draft."""
     page, base_url = reception_page
     state, handler = install_routes(page, mode="safe")
     try:
@@ -546,17 +545,57 @@ def test_idle_collapse_and_switch_discard_each_field_draft(reception_page, field
         open_action(page, field, via="click")
         set_field(page, field, FIELD_REQUESTED[field])
         assert not page.locator(SUBMIT[field]).is_disabled()  # a real draft exists
-        if discard_via == "collapse":
-            toggle_action(page, field, via="Enter")
-        else:
-            switch_to = "time" if field != "time" else "status"
-            open_action(page, switch_to, via="click")
+        toggle_action(page, field, via="Enter")
         # The announcer says no new Diary change occurred.
         assert "no new diary change" in page.locator("#meta-grid-announcer").text_content().lower()
         # Reopen: current/default truth is restored and review stays disabled.
         open_action(page, field, via="click")
         assert_field_value(page, field, FIELD_CURRENT[field])
         assert page.locator(SUBMIT[field]).is_disabled()
+        assert_zero_routes(state)
+        assert_route_log_unchanged(state)
+    finally:
+        page.unroute("**/api/v1/**", handler)
+
+
+def test_same_update_family_switch_retains_shared_draft_but_status_discards_it(
+    reception_page,
+) -> None:
+    """Update-family views share one draft; status remains a hard boundary."""
+    page, base_url = reception_page
+    state, handler = install_routes(page, mode="safe")
+    try:
+        open_selected_appointment(page, base_url, state)
+        open_action(page, "time")
+        set_field(page, "time", REQUESTED_START)
+        open_action(page, "duration")
+        set_field(page, "duration", str(REQUESTED_DURATION))
+        open_action(page, "practitioner")
+        set_field(page, "practitioner", TARGET_PRACTITIONER_ID)
+
+        for field, expected in (
+            ("time", REQUESTED_START),
+            ("duration", str(REQUESTED_DURATION)),
+            ("practitioner", TARGET_PRACTITIONER_ID),
+        ):
+            open_action(page, field)
+            assert_field_value(page, field, expected)
+        assert "not current diary truth" in page.locator(
+            "[data-testid='meta-grid-update-draft-summary']"
+        ).text_content().lower()
+        assert "shared appointment draft retained" in page.locator(
+            "#meta-grid-announcer"
+        ).text_content().lower()
+        assert_zero_routes(state)
+        assert_route_log_unchanged(state)
+
+        open_action(page, "status")
+        open_action(page, "time")
+        assert_field_value(page, "time", CURRENT_START)
+        open_action(page, "duration")
+        assert_field_value(page, "duration", str(CURRENT_DURATION))
+        open_action(page, "practitioner")
+        assert_field_value(page, "practitioner", "")
         assert_zero_routes(state)
         assert_route_log_unchanged(state)
     finally:
@@ -651,6 +690,11 @@ def test_field_request_traces_and_fresh_rebind_or_removal(reception_page, action
         open_action(page, action, via="click")
         set_field(page, action, FIELD_REQUESTED[action])
         page.locator(SUBMIT[action]).click()
+        if action != "status":
+            page.wait_for_selector(DIALOG, state="visible", timeout=WAIT_TIMEOUT)
+            assert state["confirm_count"] == 0
+            page.locator(f"{DIALOG} button:has-text('Confirm & Save')").click()
+            page.wait_for_selector(DIALOG, state="detached", timeout=WAIT_TIMEOUT)
         page.wait_for_function(
             "tid => document.querySelector(`[data-testid='${tid}']`)?.textContent.toLowerCase().includes('committed')",
             arg=FEEDBACK_ID[action], timeout=WAIT_TIMEOUT)

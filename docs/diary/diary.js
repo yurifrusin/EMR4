@@ -7541,6 +7541,117 @@ async function metaGridReassignAppointmentPractitioner(input, practitionerEl = n
   });
 }
 
+async function metaGridUpdateAppointmentDetails(input, returnFocus = null, onStateChange = null) {
+  const appointmentId = String(input?.appointment_id || "").trim();
+  const requestedStart = String(input?.start_time_local || "").trim();
+  const requestedDuration = Number(input?.duration_minutes);
+  const requestedPractitionerId = String(input?.practitioner_id || "").trim();
+  if (!appointmentId || appointmentId.length > 200) {
+    throw new Error("The selected appointment is not available for an update review.");
+  }
+  if (!/^\d{2}:\d{2}$/.test(requestedStart)) {
+    throw new Error("Choose a valid appointment start time.");
+  }
+  if (!requestedPractitionerId || requestedPractitionerId.length > 200) {
+    throw new Error("Choose a valid practitioner before review.");
+  }
+
+  const appointment = await metaGridReadAppointmentSource(appointmentId);
+  const currentStartMins = toMins(appointment.start_time_local);
+  const requestedStartMins = toMins(requestedStart);
+  const currentDuration = Number(appointment.duration_minutes);
+  const currentPractitionerId = metaGridPractitionerId(appointment);
+  if (
+    requestedStartMins < 0
+    || requestedStartMins % 15 !== 0
+    || fromMins(requestedStartMins) !== requestedStart
+    || !Number.isInteger(currentDuration)
+    || currentDuration < 1
+    || !Number.isInteger(requestedDuration)
+    || requestedDuration < 15
+    || requestedDuration > 480
+    || (requestedDuration - currentDuration) % 15 !== 0
+    || requestedStartMins + requestedDuration >= 1440
+  ) {
+    throw new Error(
+      "Choose a 15-minute start and duration combination that keeps the appointment on the same day."
+    );
+  }
+
+  let admittedPractitioner = null;
+  if (requestedPractitionerId !== currentPractitionerId) {
+    const matches = metaGridDirectorySnapshot().filter(row => (
+      row.active === true && String(row.id || "") === requestedPractitionerId
+    ));
+    if (matches.length !== 1) {
+      throw new Error("That practitioner is not available in the current active directory.");
+    }
+    admittedPractitioner = Object.freeze({
+      id: requestedPractitionerId,
+      displayName: matches[0].display_name
+    });
+  }
+
+  if (
+    requestedStartMins === currentStartMins
+    && requestedDuration === currentDuration
+    && requestedPractitionerId === currentPractitionerId
+  ) {
+    throw new Error("Choose at least one different appointment detail before review.");
+  }
+
+  const targetColumn = activeTemplate?.columns?.find(column => (
+    String(column.practitioner_id || "") === requestedPractitionerId
+    || (
+      column.practitioner_ahpra
+      && String(ahpraToPractitionerMap[column.practitioner_ahpra]?.id || "") === requestedPractitionerId
+    )
+  )) || (
+    admittedPractitioner
+      ? {
+          practitioner_id: requestedPractitionerId,
+          practitioner_ahpra: null,
+          assignment: admittedPractitioner.displayName
+        }
+      : null
+  );
+  const targetPractitionerDisplay = admittedPractitioner?.displayName
+    || metaGridPractitionerDisplay(appointment);
+  let outcome = "checking";
+  const observe = update => {
+    outcome = update.phase;
+    if (
+      typeof onStateChange === "function"
+      && !["committed", "cancelled", "blocked", "failed"].includes(update.phase)
+    ) onStateChange(update);
+  };
+  const result = await handleMoveResize(
+    appointment,
+    requestedStartMins - currentStartMins,
+    requestedDuration - currentDuration,
+    targetColumn,
+    {
+      onStateChange: observe,
+      returnFocus,
+      suppressAlert: true,
+      admittedPractitioner,
+      forceConfirmation: true,
+      dialogTitle: "Confirm Appointment Changes",
+      dialogSummary: "Review the complete proposed appointment update before saving.",
+      displayTransition: {
+        from: `${fromMins(currentStartMins)}–${fromMins(currentStartMins + currentDuration)} · ${currentDuration} minutes · ${metaGridPractitionerDisplay(appointment)}`,
+        to: `${requestedStart}–${fromMins(requestedStartMins + requestedDuration)} · ${requestedDuration} minutes · ${targetPractitionerDisplay}`
+      }
+    }
+  );
+  const currentAppointment = await metaGridReadAppointment(appointmentId);
+  return Object.freeze({
+    committed: result?.committed === true,
+    outcome: result?.committed === true ? "committed" : (result?.outcome || outcome),
+    appointment: currentAppointment
+  });
+}
+
 function setMetaGridLaunchAvailability(available) {
   const button = document.getElementById("btn-meta-grid-launch");
   if (button) button.classList.toggle("hidden", !available);
@@ -7569,6 +7680,7 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   rescheduleAppointmentTime: metaGridRescheduleAppointmentTime,
   resizeAppointmentDuration: metaGridResizeAppointmentDuration,
   reassignAppointmentPractitioner: metaGridReassignAppointmentPractitioner,
+  updateAppointmentDetails: metaGridUpdateAppointmentDetails,
   composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
@@ -10109,7 +10221,12 @@ async function deleteBooking() {
       }
     }
 
-    if (!proposal.safe || (proposal.warnings && proposal.warnings.length > 0) || proposal.autonomy_tier === "proposal") {
+    if (
+      actionOptions?.forceConfirmation === true
+      || !proposal.safe
+      || (proposal.warnings && proposal.warnings.length > 0)
+      || proposal.autonomy_tier === "proposal"
+    ) {
       const confirmed = await showStatusProposalDialog(proposal);
       if (!confirmed) {
         deleteBtn.dataset.confirming = "";

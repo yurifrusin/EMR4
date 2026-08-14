@@ -322,7 +322,7 @@ def _trigger_practitioner_action(page, *, renderer: str, scenario: str) -> None:
     else:
         page.select_option("[data-testid='meta-grid-practitioner-select']", TARGET_PRACTITIONER_ID)
         page.click("[data-testid='meta-grid-practitioner-submit']")
-    if EXPECTED[scenario]["dialog"]:
+    if EXPECTED[scenario]["dialog"] or (renderer == "reception_one" and scenario == "safe"):
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
         if scenario == "cancelled":

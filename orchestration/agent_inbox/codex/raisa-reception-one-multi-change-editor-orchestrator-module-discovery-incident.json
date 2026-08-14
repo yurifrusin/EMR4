@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0313",
+  "attempt_id": "raisa-reception-one-multi-change-editor-orchestrator-module-discovery-001",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "observation": "Sol invoked a guessed repository module name, scripts.ariadne_orchestrator, which does not exist; Python stopped before any receipt, source, Git or external action.",
+  "candidate_effect": "Canonical source and all refs remained unchanged.",
+  "containment": "Resolve the exact existing scripts filename before invocation and use only python -m scripts.ariadne_orchestrator_preflight from the repository root.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}
