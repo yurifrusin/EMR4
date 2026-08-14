@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted time-reschedule composition at Continuity 286 / Compass 268 and duration-only composition next.",
+    "current_authority_allocation": "Sol alone owns task-branch publication. DeepSeek and Gemini are complete with no integration or ref authority; native subagents were explicitly declined for lack of a distinct surface.",
+    "active_plan_and_acceptance": "The frozen plan, source-bound evidence, Sol acceptance, Yuri summary and exact reviewed candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a are committed in descendant 8790d6481914878283ed214b86d69f0f06718bc8; the latch is complete.",
+    "protected_evidence_boundaries": "Protected evidence, product/patient data, backend/database/provider/runtime/deployment/release/Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at 8790d6481914878283ed214b86d69f0f06718bc8 with zero tracked modifications and 610 preserved untracked files including five in docs/branding; origin task is 988c139a7f3592b48f5f3977e4b120bde2c78bac. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
+    "status": "complete",
+    "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+    "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "the exact candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a passes deterministic verification, fresh Gemini veto, source-bound evidence, Continuity 286 / Compass 268, Sol acceptance, Yuri summary and the mandatory parallelism-efficacy control",
+      "next_executable_stage": null,
+      "retry_counters": {"review": 1, "verification": 14},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "operation_complete"},
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_selected_current_appointment",
+      "same_practitioner_time_reschedule_only_until_plan_freeze",
+      "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
+      "no_raw_put_or_second_command_path",
+      "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
+      "authored_synthetic_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "assessed_stage": "accepted tranche pre-push publication",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "positive", "rationale": "The distinct browser matrix exposed a real reconciliation race after bounded recovery.", "work_packages": ["route-intercepted time-reschedule browser matrix"]},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "A fresh exact-candidate veto challenged the repaired material composition after deterministic passage.", "work_packages": ["read-only exact-candidate independent veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "No distinct artifact remained after the external test and verifier lanes; another agent would duplicate evidence.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["DeepSeek test authoring ran beside Sol product integration"],
+    "serial_constraints": ["Sol recovery and deterministic passage preceded Gemini", "Sol alone owns acceptance and task-branch publication"],
+    "reassessment_triggers": ["duration-only tranche start", "material recovery", "new or restored task window", "pre-verifier gate"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_prepush_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol controls exact task-branch publication."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Native subagents were assessed and declined for lack of a distinct remaining package."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini completed one unchanged-candidate pass."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek completed its one-file test packet and no worker remains active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

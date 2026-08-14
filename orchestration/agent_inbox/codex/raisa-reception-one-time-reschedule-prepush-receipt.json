@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment reschedule composition",
+    "completed_stage": "the exact candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a passes deterministic verification, fresh Gemini veto, source-bound evidence, Continuity 286 / Compass 268, Sol acceptance, Yuri summary and the mandatory parallelism-efficacy control",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "resume_after_compaction": false,
+    "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "parallelism_assessment": {
+    "assessed_stage": "accepted tranche pre-push publication",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The distinct browser matrix exposed a real reconciliation race after bounded recovery.",
+        "work_packages": [
+          "route-intercepted time-reschedule browser matrix"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact-candidate veto challenged the repaired material composition after deterministic passage.",
+        "work_packages": [
+          "read-only exact-candidate independent veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No distinct artifact remained after the external test and verifier lanes; another agent would duplicate evidence.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
+    "parallel_work_packages": [
+      "DeepSeek test authoring ran beside Sol product integration"
+    ],
+    "reassessment_triggers": [
+      "duration-only tranche start",
+      "material recovery",
+      "new or restored task window",
+      "pre-verifier gate"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol recovery and deterministic passage preceded Gemini",
+      "Sol alone owns acceptance and task-branch publication"
+    ]
+  },
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, source-bound evidence, Sol acceptance, Yuri summary and exact reviewed candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a are committed in descendant 8790d6481914878283ed214b86d69f0f06718bc8; the latch is complete.",
+    "current_authority_allocation": "Sol alone owns task-branch publication. DeepSeek and Gemini are complete with no integration or ref authority; native subagents were explicitly declined for lack of a distinct surface.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at 8790d6481914878283ed214b86d69f0f06718bc8 with zero tracked modifications and 610 preserved untracked files including five in docs/branding; origin task is 988c139a7f3592b48f5f3977e4b120bde2c78bac. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md records the accepted time-reschedule composition at Continuity 286 / Compass 268 and duration-only composition next.",
+    "protected_evidence_boundaries": "Protected evidence, product/patient data, backend/database/provider/runtime/deployment/release/Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}
