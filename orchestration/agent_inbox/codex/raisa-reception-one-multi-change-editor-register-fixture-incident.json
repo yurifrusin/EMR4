@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0318",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "candidate_head": "daed421954d65c159871585559f45caa32d95aee",
+  "failed_assertion": "test_seed_separates_agent_behavior_from_transport expected 215 agent incidents but the AER-0317 register contained 216",
+  "containment": {
+    "candidate_state": "canonical_unchanged",
+    "product_source_changed": false,
+    "provider_or_model_calls": 0,
+    "protected_ref_movement": false,
+    "acceptance_or_notification_after_failure": false
+  },
+  "correction": {
+    "all_exact_register_assertions_searched": true,
+    "new_totals": {
+      "register_revision": 279,
+      "incident_count": 318,
+      "agent_behavior": 217,
+      "output_contract_violation": 89,
+      "canonical_unchanged": 192
+    },
+    "recurrence_fixture": [
+      "AER-0255",
+      "AER-0318"
+    ],
+    "related_incident_ids": [],
+    "peer_link_rule": "recurrence uses recurrence_signature; related IDs require the same attempt"
+  }
+}

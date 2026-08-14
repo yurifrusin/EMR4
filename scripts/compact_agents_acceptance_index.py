@@ -176,7 +176,13 @@ def write_compaction() -> dict[str, Any]:
             for line in ledger_lines[ledger_header + 2 :]
             if line.startswith("| ") and _row_label(line) not in active
         ]
-        moved_rows = [*existing_moved_rows, *newly_moved_rows]
+        replacements = {_row_label(row): row for row in newly_moved_rows}
+        moved_rows = [
+            replacements.pop(_row_label(row), row) for row in existing_moved_rows
+        ]
+        moved_rows.extend(
+            row for row in newly_moved_rows if _row_label(row) in replacements
+        )
     else:
         moved_rows = newly_moved_rows
     moved_labels = [_row_label(row) for row in moved_rows]

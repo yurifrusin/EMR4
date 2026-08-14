@@ -381,17 +381,18 @@ practitioner through the identical command path. Its practitioner-only
 descendant now also passes at exact reviewed source
 `f085fc98ead21a3e7929ee9adbda81abfc7542c9`, preserving date, start and
 duration while requiring one current active target at proposal and confirm.
-The provider-free same-update-family multi-change kernel rehearsal now passes
-at exact reviewed source `3dd5f3b39ed98a2d562685d1d1567a359930c693`.
-The unchanged existing update proposal/confirm path handles practitioner, local
-time and duration as one command with proposal non-mutation, current-truth and
-target-state denials, one correlated audit/idempotency outcome, exact replay,
-different-body conflict and transaction-wide rollback before clean retry. The
-next narrow descendant is a provider-free progressive Reception One combined
-editor composition over that exact command; status remains separate and
-conversational activation stays closed. No watcher runtime, product data,
-external patient client, new command family, provider, deployment, production
-or release is opened.
+The provider-free same-update-family multi-change kernel and visible editor now
+pass at exact reviewed editor source
+`daed421954d65c159871585559f45caa32d95aee`. Practitioner, local time and
+duration share one provisional Reception One draft, one existing update
+proposal and one explicit confirmation. Same-family switching is request-free;
+collapse, status crossing, reselection and interruption discard the draft.
+Fresh practitioner admission and exact terminal reconciliation prevent partial
+or optimistic truth promotion. Status remains separate and conversational
+activation stays closed. The next narrow descendant is a provider-free,
+read-only post-editor Compass orientation before another product family is
+opened. No watcher runtime, product data, external patient client, new command
+family, provider, deployment, production or release is opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

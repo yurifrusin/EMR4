@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 277,
+  "register_revision": 280,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -12714,6 +12714,133 @@
           "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-gemini-detached-worktree-incident.json",
           "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-worktree-preflight.json",
           "docs/ariadne-agent-error-correction-register-revision-277.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0317",
+      "attempt_id": "raisa-reception-one-multi-change-editor-continuity-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_module",
+      "stage": "closeout",
+      "category": "reasoning_claim_error",
+      "process_severity": "low",
+      "expected_invariant": "Every satisfied Continuity contract must link its required evidence categories to paths classified in the same node before the graph or Compass is accepted.",
+      "observed_error": "Sol's first combined-editor continuity node linked product artifacts that the contract validator did not classify as node evidence, then omitted a closeout-category link required by the committed-reschedule contract. The updater wrote revision 293/275 JSON before validation but stopped before changing AGENTS.md, implementation_plan.md or the active-operation latch.",
+      "detection_method": "scripts.raisa_reception_one_same_update_family_multi_change_editor_composition_continuity_update returned contract_evidence_path_not_node_evidence and then contract_evidence_type_unlinked; its own report gate prevented acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-continuity-contract-mapping-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-278.md",
+        "scripts/raisa_reception_one_same_update_family_multi_change_editor_composition_continuity_update.py",
+        "tests/test_raisa_reception_one_same_update_family_multi_change_editor_composition_continuity.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_contract_evidence_category_mapping_error",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove product-only paths from contract evidence, link at least one node test to each required tests category and link the tranche closeout to the committed-reschedule closeouts category; rerun the idempotent updater and all continuity tests to pass.",
+        "prevention_control": "Before running a continuity updater, inspect each reused contract's required_evidence_types and ensure every contract-evidence list intersects the new node's matching evidence categories; retain report validation before handover or latch mutation.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-continuity-contract-mapping-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-278.md",
+          "scripts/raisa_reception_one_same_update_family_multi_change_editor_composition_continuity_update.py",
+          "tests/test_raisa_reception_one_same_update_family_multi_change_editor_composition_continuity.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0318",
+      "attempt_id": "raisa-reception-one-multi-change-editor-register-validation-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Adding an incident must update the ordered range, revision, incident total, every affected aggregate and every newly recurring pattern fixture as one mechanical change before the focused suite runs.",
+      "observed_error": "After adding AER-0317, Sol updated the revision, ordered range, report totals and final aggregate dictionary but missed the earlier standalone agent-incidents length assertion. The combined continuity/register run stopped on the stale expected value 215 versus actual 216.",
+      "detection_method": "tests/test_ariadne_agent_error_register.py::test_seed_separates_agent_behavior_from_transport failed before acceptance, notification, staging or Git publication.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-register-fixture-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-279.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance all register fixtures through AER-0318, update both standalone and report aggregate assertions, express the AER-0255/AER-0318 recurrence only through their shared signature, add the exact recurring-pattern fixture, regenerate the report and rerun the complete focused suite.",
+        "prevention_control": "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-register-fixture-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-279.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0319",
+      "attempt_id": "raisa-reception-one-multi-change-editor-final-closeout-packet-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A closeout continuity update must use the active-latch schema's exact terminal status vocabulary and update all global Compass/current-baton fixtures from the previous node to the accepted node before the final packet.",
+      "observed_error": "Sol wrote latch status completed instead of the admitted enum complete, and the first final aggregate packet found test_ariadne_compass plus test_current_baton_consistency still bound to the predecessor kernel at Continuity 292 / Compass 274 and its old next-work text. During correction, the acceptance-index compactor then rejected a refreshed live editor row because the same label already existed in the historical ledger.",
+      "detection_method": "The final nine-module closeout packet failed two latch schema/validator assertions and four exact global Compass/baton assertions; the subsequent compaction check stopped on acceptance-index refresh would duplicate moved labels. All stops occurred before notification, staging or publication.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-final-closeout-fixture-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-280.md",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_ariadne_compass.py",
+        "tests/test_current_baton_consistency.py",
+        "scripts/compact_agents_acceptance_index.py",
+        "tests/test_agents_acceptance_index.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use the complete latch's full invariant set (resume false and next stage null), bind the global Compass test to the editor node, update current-baton assertions to Continuity 293 / Compass 275 and the read-only orientation, and make compaction replace an indexed row by label before rerunning the complete packet.",
+        "prevention_control": "Before a closeout updater runs, validate the complete latch as a whole object, search all global continuity/Compass/current-baton fixtures for the predecessor, and require acceptance-index refresh to replace an existing moved label in place rather than duplicating or rejecting it.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-final-closeout-fixture-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-280.md",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_ariadne_compass.py",
+          "tests/test_current_baton_consistency.py",
+          "scripts/compact_agents_acceptance_index.py",
+          "tests/test_agents_acceptance_index.py"
         ]
       },
       "status": "corrected"

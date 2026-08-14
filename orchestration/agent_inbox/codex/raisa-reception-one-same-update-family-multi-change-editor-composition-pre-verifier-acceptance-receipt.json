@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change editor composition",
+    "completed_stage": "Gemini 3.6 Flash/high returned schema-constrained pass at unchanged clean daed421954d65c159871585559f45caa32d95aee after exactly 173 tests and all static gates",
+    "next_executable_stage": "Admit the exact verifier result, write closeout/acceptance/Yuri summary and Continuity 293 / Compass 275, run final gates, notify, commit and push the task branch",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "resume_after_compaction": true,
+    "source_head": "c1f7acbe750c66d05b230671a3deb695eceedef1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre-verifier acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Useful one-file seed required substantial Sol recovery and repeated output-contract containment.",
+        "work_packages": [
+          "completed"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Returned the required exact clean independent pass with full command reproduction.",
+        "work_packages": [
+          "completed exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No separate package was available after the coupled implementation began.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "closeout",
+      "next tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol admits the verifier result",
+      "continuity follows accepted exact source",
+      "protected refs remain unchanged"
+    ]
+  },
+  "planned_action": "admit_exact_unchanged_gemini_pass_and_prepare_tranche_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate daed421954d65c159871585559f45caa32d95aee satisfies the frozen shared-draft, single-proposal, explicit-confirmation, fresh-practitioner, fresh-reconciliation, status-separation, accessibility and no-new-command acceptance. Local evidence is 70/70 focused UI, 173/173 widened, 391/391 non-browser and canonical 196/196 fast plus static gates. Gemini independently passed the exact 173-test packet with no findings.",
+    "current_authority_allocation": "Sol alone owns acceptance and Git. Gemini 3.6 Flash/high supplied one read-only veto over the exact clean candidate; DeepSeek and native lanes are closed.",
+    "git_refs_and_worktree": "Gemini review branch codex/review-reception-one-multi-change-editor-57d3cc30 remained clean and unchanged before/after at exact daed421954d65c159871585559f45caa32d95aee. Main task branch is also at daed4219 with only bounded verifier evidence pending. Origin task remains e417eca0e1871a7ce5ed90c5e9223b8f86982b20. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 292 / Compass 274 authorises the provider-free combined editor composition and keeps protected integration and all wider runtime authority closed.",
+    "protected_evidence_boundaries": "Only authored-synthetic route-intercepted browser and repository-local evidence was used. No patient/product/clinical data, protected evidence, provider beyond verifier transport, backend/API/database expansion, runtime broker, deployment, production, release, Pages or protected-ref movement occurred."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 292 / Compass 274. The combined practitioner/time/duration update kernel passes; one provider-free progressive Reception One editor composition is next.
+> EMR4 is at Continuity 293 / Compass 275. The provider-free combined Reception One editor passes; a read-only post-editor Compass orientation is next.
 
 ## North star
 
@@ -356,25 +356,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One-family update composition is permitted; cross-family requests remain non-executable and model authority remains zero. Lineage parent: `raisa-reception-one-selected-action-console-progressive-disclosure-composition`.
 170. **Prove the atomic backend kernel before exposing a combined Reception One editor — Provider-free Reception One same-update-family multi-change kernel rehearsal**
    One practitioner/time/duration command now has denial, replay, audit, idempotency and rollback evidence without product-source change. Lineage parent: `raisa-reception-one-multi-change-request-atomicity-orientation`.
+171. **Expose the proved multi-field update kernel through one safe Reception One provisional editor — Provider-free Reception One same-update-family multi-change editor composition**
+   Practitioner, time and duration now converge on one existing proposal and one explicit confirmation with fresh reconciliation. Lineage parent: `raisa-reception-one-same-update-family-multi-change-kernel-rehearsal`.
 
 ## Current position
 
-**Put compound Reception One interactions on one backend-owned truth transaction — Provider-free Reception One same-update-family multi-change kernel rehearsal**
+**Join the Reception One semantic console to one backend-owned multi-field truth transaction — Provider-free Reception One same-update-family multi-change editor composition**
 
-**Why this proof came next:** The safe multi-change semantics were frozen and required exact kernel proof before visible compound composition.
+**Why this proof came next:** The atomic update kernel passed and could safely support a visible shared draft without adding command authority.
 
-The existing update command now proves all-or-none practitioner, time and duration behavior across success, denial, replay and rollback.
+Reception One now composes doctor, time and duration provisionally, pauses at explicit confirmation and rereads truth after every terminal outcome.
 
 ### What this unlocks
 
-- Compose practitioner, local time and duration into one progressive Reception One draft, review and explicit confirmation.
-- Reuse the existing canonical route and fresh reconciliation without adding a backend command.
+- Run a read-only post-editor programme orientation across the accepted command, context and channel foundations.
+- Select and freeze the narrowest dependency-satisfied next product tranche without presuming a new authority opening.
 
 ### What it does not solve
 
-- No browser/editor composition or conversational execution is yet proven.
-- Status remains a distinct command family and cross-family atomicity remains closed.
-- Patient channels, product data, providers, deployment, production and release remain closed.
+- No conversational execution, patient-channel delegation or live revocation enforcement is proven.
+- No additional command or event family is opened by this acceptance.
+- Product data, providers, watcher/database runtime, deployment, production and release remain closed.
 
 ## Continuity and authority
 
@@ -635,6 +637,7 @@ Prerequisites:
 
 ## Map limits
 
+- The combined editor evidence is authored-synthetic and route-intercepted; it does not prove a live backend, conversational or patient-channel authority, delegation revocation, or production operation.
 - The combined update rehearsal is authored-synthetic local PostgreSQL evidence; it does not prove a browser editor, conversational activation, patient delegation or production operation.
 - The multi-change orientation is repository-static architecture evidence; it does not prove a compound UI, live channel delegation or practitioner/time/duration transaction behavior.
 - The selected-action-console composition proves route-intercepted presentation behavior, not live backend/database execution, compound updates or representative usability.
@@ -852,6 +855,14 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-270.md`
 - `docs/ariadne-agent-error-correction-register-revision-271.md`
 - `docs/ariadne-agent-error-correction-register-revision-272.md`
+- `docs/ariadne-agent-error-correction-register-revision-273.md`
+- `docs/ariadne-agent-error-correction-register-revision-274.md`
+- `docs/ariadne-agent-error-correction-register-revision-275.md`
+- `docs/ariadne-agent-error-correction-register-revision-276.md`
+- `docs/ariadne-agent-error-correction-register-revision-277.md`
+- `docs/ariadne-agent-error-correction-register-revision-278.md`
+- `docs/ariadne-agent-error-correction-register-revision-279.md`
+- `docs/ariadne-agent-error-correction-register-revision-280.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -1246,6 +1257,8 @@ Prerequisites:
 - `docs/raisa-reception-one-multi-change-request-atomicity-architecture.md`
 - `docs/raisa-reception-one-multi-change-request-atomicity-orientation-closeout.md`
 - `docs/raisa-reception-one-multi-change-request-atomicity-orientation-plan.md`
+- `docs/raisa-reception-one-same-update-family-multi-change-editor-composition-closeout.md`
+- `docs/raisa-reception-one-same-update-family-multi-change-editor-composition-plan.md`
 - `docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-closeout.md`
 - `docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-plan.md`
 - `docs/raisa-reception-one-selected-action-console-consolidation-architecture.md`
@@ -1395,6 +1408,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-reception-one-multi-change-request-atomicity-orientation-threat-model-delta.md`
+- `docs/security/raisa-reception-one-same-update-family-multi-change-editor-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-action-console-progressive-disclosure-composition-threat-model-delta.md`
@@ -1453,6 +1467,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-receipt.json`
@@ -1728,6 +1743,14 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-result.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-predispatch-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-packet.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-worktree-preflight.json`
@@ -2480,6 +2503,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
+- `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2494,6 +2518,7 @@ Prerequisites:
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_duration_action.py`
 - `review/test_reception_one_practitioner_reassignment_action.py`
+- `review/test_reception_one_same_update_family_multi_change_editor_composition.py`
 - `review/test_reception_one_selected_action_console.py`
 - `review/test_reception_one_status_action.py`
 - `review/test_reception_one_time_reschedule_action.py`
@@ -2637,4 +2662,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 274; continuity graph revision 292._
+_Compass map revision 275; continuity graph revision 293._

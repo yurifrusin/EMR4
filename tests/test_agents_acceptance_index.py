@@ -35,12 +35,12 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         manifest["schema_version"] == "emr4.current_baton_acceptance_index_manifest.v1"
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
-    assert manifest["source_git_head"] == ("fbb7ffb46e041bbfc193ff3a76b2f970c06dee58")
+    assert manifest["source_git_head"] == ("daed421954d65c159871585559f45caa32d95aee")
     assert manifest["source_agents_sha256"] == (
-        "3d9c9205ccab8f72d4f104e35872d0eb8bf1a9eeae70bcf836ddee20e66b65b7"
+        "993c9dd5dd693f3f1b55d24214798f52f8dbec7e3bbedbbd02d05017dc57fd57"
     )
-    assert manifest["source_agents_byte_count"] == 81100
-    assert manifest["source_agents_line_count"] == 496
+    assert manifest["source_agents_byte_count"] == 76140
+    assert manifest["source_agents_line_count"] == 483
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]
@@ -50,7 +50,7 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         after_header="| Item | Indexed acceptance artifacts |",
     )
     assert ledger_labels == manifest["moved_labels"]
-    assert len(ledger_labels) == manifest["moved_row_count"] == 155
+    assert len(ledger_labels) == manifest["moved_row_count"] == 157
 
 
 def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> None:
@@ -87,3 +87,39 @@ def test_compaction_check_rejects_an_unclassified_new_live_row(
 
     with pytest.raises(ValueError, match="unclassified live Current Baton rows"):
         compact_agents_acceptance_index.check_compaction()
+
+
+def test_compaction_refresh_replaces_an_existing_indexed_label(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    live_path = tmp_path / "AGENTS.md"
+    ledger_path = tmp_path / "current-baton-acceptance-index.md"
+    manifest_path = tmp_path / "current-baton-acceptance-index.manifest.json"
+    live_path.write_bytes((ROOT / "AGENTS.md").read_bytes())
+    ledger_path.write_bytes(
+        (ROOT / "docs/handover-ledgers/current-baton-acceptance-index.md").read_bytes()
+    )
+    monkeypatch.setattr(compact_agents_acceptance_index, "AGENTS_PATH", live_path)
+    monkeypatch.setattr(compact_agents_acceptance_index, "LEDGER_PATH", ledger_path)
+    monkeypatch.setattr(compact_agents_acceptance_index, "MANIFEST_PATH", manifest_path)
+    monkeypatch.setattr(compact_agents_acceptance_index, "ROOT", tmp_path)
+    monkeypatch.setattr(
+        compact_agents_acceptance_index,
+        "_source_head",
+        lambda: "a" * 40,
+    )
+
+    manifest = compact_agents_acceptance_index.write_compaction()
+    ledger = ledger_path.read_text(encoding="utf-8")
+    label = "| Reception One same-update-family multi-change editor composition acceptance |"
+
+    assert ledger.count(label) == 1
+    assert "revision-280.md" in next(
+        line for line in ledger.splitlines() if line.startswith(label)
+    )
+    assert (
+        manifest["moved_labels"].count(
+            "Reception One same-update-family multi-change editor composition acceptance"
+        )
+        == 1
+    )

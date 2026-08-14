@@ -1,0 +1,77 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change editor composition",
+    "completed_stage": "Accepted at Continuity 293 / Compass 275 after deterministic and independent exact-candidate verification",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "resume_after_compaction": false,
+    "source_head": "daed421954d65c159871585559f45caa32d95aee",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "closeout precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The isolated test seed required substantial Sol repair and egress containment.",
+        "work_packages": [
+          "completed"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact clean candidate passed the independent 173-test and static veto.",
+        "work_packages": [
+          "completed exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No independent package remained in the tightly coupled client implementation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "fresh next-tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol owns acceptance and explicit-path Git publication",
+      "protected refs remain unchanged"
+    ]
+  },
+  "planned_action": "commit_and_push_the_accepted_combined_editor_closeout_with_explicit_paths_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen shared-draft/single-proposal/explicit-confirmation plan is satisfied. Local evidence is 70/70 focused UI, 173/173 widened, 356/356 final closeout and canonical fast 196/196 plus static gates; Gemini independently passed the exact 173-test packet at unchanged clean daed421954d65c159871585559f45caa32d95aee.",
+    "current_authority_allocation": "Sol alone owns closeout acceptance and Git. DeepSeek is closed with negative net leverage; Gemini 3.6 Flash/high is closed with a positive exact-candidate pass; no native subagent lane was opened.",
+    "git_refs_and_worktree": "Main task HEAD remains daed421954d65c159871585559f45caa32d95aee and origin task remains e417eca0e1871a7ce5ed90c5e9223b8f86982b20 before closeout commit. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are 639 untracked paths and only explicit tranche paths will be staged.",
+    "live_handover_current_baton": "AGENTS.md now records Continuity 293 / Compass 275 and accepts the combined Reception One editor at exact reviewed source daed421954d65c159871585559f45caa32d95aee; the next implementation is the provider-free read-only post-editor Compass orientation.",
+    "protected_evidence_boundaries": "Evidence remains authored-synthetic and route-intercepted. No patient/product/clinical data, backend/API/database/event expansion, product provider call, external channel authority, watcher runtime, deployment, production, release, Pages or protected-ref movement occurred. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

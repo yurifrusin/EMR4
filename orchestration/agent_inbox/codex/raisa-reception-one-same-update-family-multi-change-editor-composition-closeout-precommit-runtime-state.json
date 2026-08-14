@@ -1,0 +1,93 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_and_push_the_accepted_combined_editor_closeout_with_explicit_paths_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records Continuity 293 / Compass 275 and accepts the combined Reception One editor at exact reviewed source daed421954d65c159871585559f45caa32d95aee; the next implementation is the provider-free read-only post-editor Compass orientation.",
+    "current_authority_allocation": "Sol alone owns closeout acceptance and Git. DeepSeek is closed with negative net leverage; Gemini 3.6 Flash/high is closed with a positive exact-candidate pass; no native subagent lane was opened.",
+    "active_plan_and_acceptance": "The frozen shared-draft/single-proposal/explicit-confirmation plan is satisfied. Local evidence is 70/70 focused UI, 173/173 widened, 356/356 final closeout and canonical fast 196/196 plus static gates; Gemini independently passed the exact 173-test packet at unchanged clean daed421954d65c159871585559f45caa32d95aee.",
+    "protected_evidence_boundaries": "Evidence remains authored-synthetic and route-intercepted. No patient/product/clinical data, backend/API/database/event expansion, product provider call, external channel authority, watcher runtime, deployment, production, release, Pages or protected-ref movement occurred. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "Main task HEAD remains daed421954d65c159871585559f45caa32d95aee and origin task remains e417eca0e1871a7ce5ed90c5e9223b8f86982b20 before closeout commit. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are 639 untracked paths and only explicit tranche paths will be staged."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "active_tranche": "Reception One same-update-family multi-change editor composition",
+    "objective": "Compose practitioner, local time and duration into one progressive Reception One draft, one existing update-family proposal, one review and one explicit human confirmation, while preserving fresh reconciliation and keeping status as a distinct command family.",
+    "status": "complete",
+    "source_head": "daed421954d65c159871585559f45caa32d95aee",
+    "authority_source": "AGENTS.md Continuity 292 / Compass 274, the accepted same-update-family multi-change kernel rehearsal, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Accepted at Continuity 293 / Compass 275 after deterministic and independent exact-candidate verification",
+      "next_executable_stage": null,
+      "retry_counters": {"implementation": 0, "review": 0, "verification": 1},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "accepted_operation_complete"},
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_combined_practitioner_time_duration_draft_and_command_not_sequential_writes",
+      "one_review_and_one_explicit_human_confirmation",
+      "route_inert_draft_until_existing_update_proposal_submission",
+      "fresh_authoritative_reconciliation_after_terminal_result",
+      "status_remains_a_distinct_action_and_command_family",
+      "no_new_backend_route_request_field_command_schema_or_database_migration",
+      "provider_free_authored_synthetic_and_route_intercepted_browser_evidence_only",
+      "no_conversational_execution_or_external_patient_channel_authority",
+      "no_patient_product_or_clinical_data",
+      "no_provider_adc_credentials_iam_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "assessed_stage": "closeout precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "negative", "rationale": "The isolated test seed required substantial Sol repair and egress containment.", "work_packages": ["completed"]},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "positive", "rationale": "The exact clean candidate passed the independent 173-test and static veto.", "work_packages": ["completed exact-candidate veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "No independent package remained in the tightly coupled client implementation.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["Sol owns acceptance and explicit-path Git publication", "protected refs remain unchanged"],
+    "reassessment_triggers": ["fresh next-tranche planning"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_closeout_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol acceptance, continuity and final closeout packet passed."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini exact-candidate pass is consumed."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek test lane is closed."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"resource_id": "gemini-3.6-flash-high-verifier", "worktree": "C:/Users/sarashera/EMR4-worktrees/multi-change-editor-gemini-57d3cc30", "branch": "codex/review-reception-one-multi-change-editor-57d3cc30", "head": "daed421954d65c159871585559f45caa32d95aee", "clean": true}],
+  "assigned_agent_ids": []
+}

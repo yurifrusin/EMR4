@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0317",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "candidate_head": "daed421954d65c159871585559f45caa32d95aee",
+  "candidate_state": "canonical_unchanged",
+  "failed_attempts": [
+    {
+      "reason": "contract_evidence_path_not_node_evidence",
+      "detail": "Product artifact paths were referenced by a contract but were not an admitted contract evidence category."
+    },
+    {
+      "reason": "contract_evidence_type_unlinked",
+      "detail": "The committed-reschedule contract required a path intersecting node closeouts; the first repair linked tests but not the closeout."
+    }
+  ],
+  "containment": {
+    "product_source_changed": false,
+    "candidate_changed": false,
+    "provider_or_model_calls": 0,
+    "protected_ref_movement": false,
+    "acceptance_emitted_before_correction": false,
+    "latch_closed_before_correction": false
+  },
+  "correction": {
+    "contract_required_evidence_types_read": true,
+    "tests_category_linked": true,
+    "closeouts_category_linked": true,
+    "idempotent_updater_rerun": "passed",
+    "continuity_tests": "7 passed"
+  }
+}

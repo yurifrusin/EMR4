@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 292,
+  "graph_revision": 293,
   "harvests": [],
   "nodes": [
     {
@@ -19685,9 +19685,140 @@
         "No browser/editor evidence, conversational execution, patient-channel delegation or cross-family atomic command is yet proven.",
         "Product data, providers, watcher runtime, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "title": "Provider-free Reception One same-update-family multi-change editor composition",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-14T18:08:00Z",
+      "updated_at": "2026-08-14T18:08:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "daed421954d65c159871585559f45caa32d95aee",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Time, duration and practitioner are three views over one local provisional draft, not three commands or current truth.",
+          "One review enters one existing update-family proposal and every admissible proposal requires one visible explicit human confirmation.",
+          "Status remains distinct; no model, adapter, channel or patient representative receives mutation or confirmation authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-same-update-family-multi-change-editor-composition",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the shared provisional editor, single existing update proposal, forced explicit confirmation and fresh terminal reconciliation."
+        }
+      ],
+      "claim_scope": [
+        "Same-family switching preserves one multi-field draft with zero requests; collapse, status crossing, reselection and interruption discard the entire draft.",
+        "One combined review sends the three effective values through one bridge and exactly one existing handleMoveResize call.",
+        "Fresh practitioner admission, interval validation, forced confirmation and fresh exact reconciliation prevent partial or optimistic truth promotion.",
+        "Gemini passed 173 exact tests at unchanged clean source and the evidence label is route_intercepted_browser_authored_synthetic."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-plan.md",
+            "review/test_reception_one_selected_action_console.py",
+            "review/test_reception_one_time_reschedule_action.py",
+            "review/test_reception_one_duration_action.py",
+            "review/test_reception_one_practitioner_reassignment_action.py",
+            "review/test_reception_one_same_update_family_multi_change_editor_composition.py",
+            "review/test_two_projection_truth_parity.py",
+            "orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-receipt.json",
+            "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-closeout.md"
+          ],
+          "note": "The visible client composes practitioner, time and duration into one existing atomic update command."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/security/raisa-reception-one-same-update-family-multi-change-editor-composition-threat-model-delta.md",
+            "review/test_reception_one_selected_action_console.py",
+            "review/test_reception_one_time_reschedule_action.py",
+            "review/test_reception_one_duration_action.py",
+            "review/test_reception_one_practitioner_reassignment_action.py",
+            "review/test_reception_one_same_update_family_multi_change_editor_composition.py",
+            "review/test_two_projection_truth_parity.py",
+            "orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-receipt.json",
+            "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-closeout.md",
+            "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-sol-acceptance.md"
+          ],
+          "note": "Only explicit confirmation may write and every terminal path rereads current appointment/projection truth."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-plan.md",
+          "docs/security/raisa-reception-one-same-update-family-multi-change-editor-composition-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-273.md",
+          "docs/ariadne-agent-error-correction-register-revision-274.md",
+          "docs/ariadne-agent-error-correction-register-revision-275.md",
+          "docs/ariadne-agent-error-correction-register-revision-276.md",
+          "docs/ariadne-agent-error-correction-register-revision-277.md",
+          "docs/ariadne-agent-error-correction-register-revision-278.md",
+          "docs/ariadne-agent-error-correction-register-revision-279.md",
+          "docs/ariadne-agent-error-correction-register-revision-280.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-same-update-family-multi-change-editor-composition-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-deepseek-result.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-editor-composition-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "review/test_reception_one_selected_action_console.py",
+          "review/test_reception_one_time_reschedule_action.py",
+          "review/test_reception_one_duration_action.py",
+          "review/test_reception_one_practitioner_reassignment_action.py",
+          "review/test_reception_one_same_update_family_multi_change_editor_composition.py",
+          "review/test_two_projection_truth_parity.py",
+          "tests/test_raisa_reception_one_same_update_family_multi_change_editor_composition_continuity.py"
+        ],
+        "artifacts": [
+          "docs/diary/diary.html",
+          "docs/diary/diary.js",
+          "docs/diary/meta-grid.css",
+          "docs/diary/meta-grid.js",
+          "scripts/raisa_reception_one_same_update_family_multi_change_editor_composition_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A read-only post-editor Compass orientation must select the narrowest dependency-satisfied next product tranche.",
+        "Conversational execution, patient-channel delegation and live revocation enforcement remain unproved and closed.",
+        "Other command/event families, product data, providers, watcher/database runtime, deployment, production and release require separate authority."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T14:46:56Z"
+  "updated_at": "2026-08-14T18:08:00Z"
 }

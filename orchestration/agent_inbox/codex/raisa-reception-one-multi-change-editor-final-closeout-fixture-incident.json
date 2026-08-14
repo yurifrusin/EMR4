@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0319",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "candidate_head": "daed421954d65c159871585559f45caa32d95aee",
+  "failures": {
+    "latch_status": "completed is not admitted; schema requires complete",
+    "compass_fixture": "expected predecessor kernel node",
+    "baton_fixture": "expected Continuity 292 / Compass 274 and old editor-next wording",
+    "acceptance_index_refresh": "existing indexed editor label was rejected instead of replaced in place"
+  },
+  "containment": {
+    "candidate_state": "canonical_unchanged",
+    "product_source_changed": false,
+    "provider_or_model_calls": 0,
+    "protected_ref_movement": false,
+    "notification_or_git_publication_after_failure": false
+  },
+  "correction": {
+    "latch_status": "complete with resume_after_compaction false and next_executable_stage null",
+    "current_node": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "continuity_revision": 293,
+    "compass_revision": 275,
+    "next_operation": "raisa_post_combined_editor_compass_baton_orientation",
+    "acceptance_index_same_label_refresh": "replace_in_place"
+  }
+}

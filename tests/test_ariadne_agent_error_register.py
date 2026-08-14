@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 277
+    assert register["register_revision"] == 280
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 317)
+        f"AER-{index:04d}" for index in range(1, 320)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 215
+    assert len(agent_incidents) == 218
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 316
+    assert report["incident_count"] == 319
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2875,6 +2875,57 @@ def test_aer_0316_records_recurring_detached_verifier_worktree() -> None:
     assert detached["correction"]["status"] == "corrected_fresh_attempt"
 
 
+def test_aer_0317_records_continuity_contract_evidence_mapping_error() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    mapping = incidents["AER-0317"]
+    assert mapping["stage"] == "closeout"
+    assert mapping["role"] == "orchestrator"
+    assert mapping["category"] == "reasoning_claim_error"
+    assert mapping["process_severity"] == "low"
+    assert mapping["candidate_state"] == "canonical_unchanged"
+    assert mapping["related_incident_ids"] == []
+    assert mapping["recurrence_signature"] == (
+        "orchestrator.continuity_contract_evidence_category_mapping_error"
+    )
+    assert mapping["status"] == "corrected"
+    assert mapping["correction"]["status"] == "corrected_fresh_attempt"
+
+
+def test_aer_0318_records_recurring_register_fixture_maintenance_error() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    fixture = incidents["AER-0318"]
+    assert fixture["stage"] == "deterministic_verification"
+    assert fixture["role"] == "orchestrator"
+    assert fixture["category"] == "output_contract_violation"
+    assert fixture["process_severity"] == "low"
+    assert fixture["candidate_state"] == "canonical_unchanged"
+    assert fixture["related_incident_ids"] == []
+    assert fixture["recurrence_signature"] == (
+        "orchestrator.agent_error_register_population_fixture_update_incomplete"
+    )
+    assert fixture["status"] == "corrected"
+    assert fixture["correction"]["status"] == "corrected_fresh_attempt"
+
+
+def test_aer_0319_records_closeout_latch_and_global_fixture_errors() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    closeout = incidents["AER-0319"]
+    assert closeout["stage"] == "closeout"
+    assert closeout["role"] == "orchestrator"
+    assert closeout["category"] == "output_contract_violation"
+    assert closeout["process_severity"] == "low"
+    assert closeout["candidate_state"] == "canonical_unchanged"
+    assert closeout["related_incident_ids"] == []
+    assert closeout["recurrence_signature"] == (
+        "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale"
+    )
+    assert closeout["status"] == "corrected"
+    assert closeout["correction"]["status"] == "corrected_fresh_attempt"
+
+
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
@@ -3149,11 +3200,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 277
-    assert report["incident_count"] == 316
+    assert report["register_revision"] == 280
+    assert report["incident_count"] == 319
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 215,
+        "agent_behavior": 218,
         "harness": 37,
         "repository": 55,
         "transport": 9,
@@ -3162,15 +3213,15 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 46,
         "evidence_misreport": 42,
         "harness_failure": 37,
-        "output_contract_violation": 88,
+        "output_contract_violation": 90,
         "read_only_violation": 3,
-        "reasoning_claim_error": 36,
+        "reasoning_claim_error": 37,
         "repository_defect": 55,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 190,
+        "canonical_unchanged": 193,
         "untrusted_partial_worktree": 28,
     }
     receipt_event_recurrence = next(
@@ -3324,6 +3375,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git and independently reproduced checks.",
                 "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git inspection, explicit Sol recovery and independently reproduced checks.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.agent_error_register_population_fixture_update_incomplete"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0255", "AER-0318"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
+                "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
             ],
         },
         {
