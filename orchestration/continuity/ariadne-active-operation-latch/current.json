@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
-  "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
-  "objective": "Compose one selected current Reception One appointment reassignment to one existing active practitioner through the existing update proposal/confirm path while freezing date, start time, duration and every unrelated field.",
-  "status": "complete",
-  "source_head": "f085fc98ead21a3e7929ee9adbda81abfc7542c9",
-  "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+  "active_tranche": "Reception One selected-action-console consolidation orientation",
+  "objective": "Select and freeze the narrowest read-only progressive-disclosure or intent-led composition for the four proven selected-appointment actions before another field is added, without editing product behavior or opening command authority.",
+  "status": "in_progress",
+  "source_head": "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52",
+  "authority_source": "AGENTS.md Continuity 288 / Compass 270, the accepted practitioner-reassignment closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Accepted practitioner-only composition at f085fc98ead21a3e7929ee9adbda81abfc7542c9 after DeepSeek/native recovery, 20 browser, 42 backend, 126 consolidated, 196 canonical and 80 independent-veto tests",
-    "next_executable_stage": null,
+    "completed_stage": "Two native read-only packages converged on a deterministic four-button palette with one progressively disclosed existing editor; the typed architecture contract and six deterministic tests pass",
+    "next_executable_stage": "commit the exact read-only architecture candidate, admit one clean fresh Gemini veto, then accept and close out the orientation",
     "retry_counters": {
       "review": 0,
-      "verification": 4
+      "verification": 1
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -22,24 +22,24 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "existing_appointment_update_proposal_confirm_family_only",
-    "one_selected_current_appointment",
-    "same_date_same_start_same_duration_practitioner_only",
-    "existing_active_practitioner_targets_only",
-    "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
-    "no_raw_put_or_second_command_path",
-    "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
-    "authored_synthetic_provider_free_evidence_only",
+    "read_only_architecture_orientation_only",
+    "preserve_status_time_duration_and_practitioner_contracts",
+    "preserve_one_kernel_owned_proposal_confirm_path_per_action",
+    "preserve_visible_confirmation_fresh_reconciliation_and_accessibility",
+    "no_product_html_css_javascript_or_backend_edit",
+    "no_new_command_field_route_schema_or_write_authority",
+    "no_api_openapi_graphql_database_event_or_watcher_expansion",
+    "repository_local_provider_free_evidence_only",
     "protected_evidence_and_historical_diary_phi_closed",
     "patient_product_clinical_data_and_external_patient_channels_closed",
     "provider_adc_credentials_iam_external_network_closed",

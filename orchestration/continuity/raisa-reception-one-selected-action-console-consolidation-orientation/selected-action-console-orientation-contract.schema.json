@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/selected-action-console-orientation-contract.schema.json",
+  "title": "Reception One selected-action-console orientation contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "decision",
+    "action_order",
+    "field_authority",
+    "state_contract",
+    "closed_surfaces",
+    "next_tranche"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.reception_one.selected_action_console_orientation.v1"},
+    "result": {"const": "raisa_reception_one_selected_action_console_consolidation_orientation_pass"},
+    "source_head": {"const": "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52"},
+    "evidence_label": {"const": "repository_static_read_only_architecture"},
+    "decision": {"const": "deterministic_action_palette_with_single_panel_progressive_disclosure"},
+    "action_order": {
+      "const": ["status", "time", "duration", "practitioner"]
+    },
+    "field_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "time", "duration", "practitioner"],
+      "properties": {
+        "status": {"const": "existing_status_proposal_confirm_via_metaGridSetAppointmentStatus"},
+        "time": {"const": "existing_update_proposal_confirm_via_handleMoveResize"},
+        "duration": {"const": "existing_update_proposal_confirm_via_handleMoveResize"},
+        "practitioner": {"const": "existing_update_proposal_confirm_via_handleMoveResize"}
+      }
+    },
+    "state_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initial", "visible_editors_maximum", "switch", "busy", "terminal", "intent"],
+      "properties": {
+        "initial": {"const": "no_editor_open"},
+        "visible_editors_maximum": {"const": 1},
+        "switch": {"const": "idle_only_discard_unsubmitted_outgoing_draft"},
+        "busy": {"const": "palette_transitions_disabled_active_editor_remains_mounted"},
+        "terminal": {"const": "exact_fresh_reconciliation_then_action_specific_feedback_and_focus"},
+        "intent": {"const": "future_editor_activation_only_never_command"}
+      }
+    },
+    "closed_surfaces": {
+      "type": "array",
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "next_tranche": {"const": "raisa_reception_one_selected_action_console_progressive_disclosure_composition"}
+  }
+}

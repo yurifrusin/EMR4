@@ -1,0 +1,36 @@
+{
+  "schema_version": "raisa.reception_one.selected_action_console_orientation.v1",
+  "result": "raisa_reception_one_selected_action_console_consolidation_orientation_pass",
+  "source_head": "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52",
+  "evidence_label": "repository_static_read_only_architecture",
+  "decision": "deterministic_action_palette_with_single_panel_progressive_disclosure",
+  "action_order": ["status", "time", "duration", "practitioner"],
+  "field_authority": {
+    "status": "existing_status_proposal_confirm_via_metaGridSetAppointmentStatus",
+    "time": "existing_update_proposal_confirm_via_handleMoveResize",
+    "duration": "existing_update_proposal_confirm_via_handleMoveResize",
+    "practitioner": "existing_update_proposal_confirm_via_handleMoveResize"
+  },
+  "state_contract": {
+    "initial": "no_editor_open",
+    "visible_editors_maximum": 1,
+    "switch": "idle_only_discard_unsubmitted_outgoing_draft",
+    "busy": "palette_transitions_disabled_active_editor_remains_mounted",
+    "terminal": "exact_fresh_reconciliation_then_action_specific_feedback_and_focus",
+    "intent": "future_editor_activation_only_never_command"
+  },
+  "closed_surfaces": [
+    "product_source_edit",
+    "generic_command_dispatcher",
+    "combined_or_multi_field_command",
+    "new_route_or_schema",
+    "backend_or_database_change",
+    "event_or_watcher_runtime",
+    "product_patient_or_clinical_data",
+    "provider_adc_credentials_iam_or_network",
+    "deployment_production_release_or_pages",
+    "protected_ref_movement",
+    "protected_evidence_or_historical_diary_phi"
+  ],
+  "next_tranche": "raisa_reception_one_selected_action_console_progressive_disclosure_composition"
+}

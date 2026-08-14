@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console consolidation orientation",
+    "completed_stage": "Two native read-only packages converged on a deterministic four-button palette with one progressively disclosed existing editor; the typed architecture contract and six deterministic tests pass",
+    "next_executable_stage": "commit the exact read-only architecture candidate, admit one clean fresh Gemini veto, then accept and close out the orientation",
+    "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+    "resume_after_compaction": true,
+    "source_head": "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "frozen architecture candidate pre-commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No bounded mechanical artifact emerged in this read-only meaning-selection tranche; dispatch would duplicate architecture judgment and repeat the prior lane's negative economy.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh read-only veto is dependency-satisfied only after this exact deterministic candidate is committed into a clean review worktree.",
+        "work_packages": [
+          "exact architecture, contract, threat and next-boundary veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Two independent read-only packages converged on the selected pattern and supplied exact focus, state, layout and command-authority seams.",
+        "work_packages": [
+          "completed current-surface audit",
+          "completed consolidation-option analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+    "parallel_work_packages": [
+      "completed native current-surface audit",
+      "completed native option analysis",
+      "reserved Gemini veto"
+    ],
+    "reassessment_triggers": [
+      "candidate commit",
+      "pre-verifier admission",
+      "review return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone selected and froze architecture and owns candidate commit",
+      "Gemini follows exact clean deterministic candidate",
+      "DeepSeek is reconsidered for a capped browser-test artifact only in the implementation descendant"
+    ]
+  },
+  "planned_action": "commit_the_exact_read_only_selected_action_console_orientation_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen orientation plan and architecture select a deterministic four-button action palette with zero-or-one existing field editor, preserve the separate status and update command families, and bind the next implementation surface without editing product source. The typed contract and all six dedicated tests pass.",
+    "current_authority_allocation": "Sol owns architecture, acceptance and Git. Two native subagents completed read-only analysis; DeepSeek remains declined for negative conceptual-work leverage; Gemini is reserved for one fresh exact-candidate veto after commit and deterministic preflight.",
+    "git_refs_and_worktree": "HEAD, task and origin task remain exactly 2b65cc8b639b6922c8f176a1d65ddc206fa6ba52 before candidate commit; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. One intentional latch modification and 616 preserved untracked entries exist before this precommit pair; staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md Continuity 288 / Compass 270 identifies the read-only selected-action-console consolidation orientation as the active next work after accepted practitioner reassignment.",
+    "protected_evidence_boundaries": "No product source edit, command, route, database/source access, product/patient data, provider/ADC, credential/IAM/network, deployment, production, release, Pages, protected evidence or protected ref is opened. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
