@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_two_bounded_native_read_only_action_console_implementation_audits",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely and records Continuity 289 / Compass 271, the accepted selected-action-console orientation and the presentation-only progressive-disclosure composition as next.",
+    "current_authority_allocation": "Sol retains plan, implementation, acceptance, recovery and Git authority. Native subagents may own bounded read-only analyses; DeepSeek Flash is planned only for a later exact test-only package; Gemini 3.6 Flash/high remains reserved for a fresh exact-candidate veto.",
+    "active_plan_and_acceptance": "The accepted orientation freezes four native buttons, no editor initially, at most one existing field editor, zero routes on palette activity, draft disposal, four-way busy exclusion, existing confirmation focus ownership and fresh reconciliation. Yuri additionally froze multi-field intent as inert: no automatic sequential commands and no compound-update claim.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain unopened. Product/patient/clinical data, provider/ADC, credentials/IAM/network, backend/API/database/event expansion, commands, deployment, production, release, Pages and protected refs remain closed. The native packages are exact-path read-only; docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "HEAD, task and origin task are exactly 67f203097507d5f8c976f716ff37f720f4ea6b73; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the active-operation latch is intentionally tracked-modified; 614 untracked entries remain preserved before this receipt pair."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
+    "status": "in_progress",
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Fresh five-source preplanning receipt passed; the implementation boundary and multi-field prohibition are restored",
+      "next_executable_stage": "dispatch two exact-path native read-only audits, then reconcile their findings into the frozen plan and threat delta",
+      "retry_counters": {"review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "presentation_only_diary_client_composition",
+      "preserve_status_time_duration_and_practitioner_contracts",
+      "preserve_one_kernel_owned_proposal_confirm_path_per_action",
+      "preserve_visible_confirmation_fresh_reconciliation_and_accessibility",
+      "only_meta_grid_javascript_css_cache_reference_and_affected_provider_free_tests",
+      "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands",
+      "no_compound_update_claim_without_a_separate_atomic_backend_proof",
+      "no_new_command_field_route_schema_or_write_authority",
+      "no_api_openapi_graphql_database_event_or_watcher_expansion",
+      "repository_local_provider_free_evidence_only",
+      "protected_evidence_and_historical_diary_phi_closed",
+      "patient_product_clinical_data_and_external_patient_channels_closed",
+      "provider_adc_credentials_iam_external_network_closed",
+      "deployment_production_release_pages_protected_refs_closed",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "assessed_stage": "native read-only pre-dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "One exact test-only package remains separable after the implementation plan is frozen; dispatch now would under-specify selectors and acceptance.", "work_packages": ["later one-file route-intercepted browser-test artifact"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Fresh independent review has value only after deterministic and rendered candidate passage.", "work_packages": ["later exact-candidate presentation, accessibility and API-boundary veto"]},
+      {"lane_id": "native_subagents", "disposition": "planned", "expected_leverage": "positive", "rationale": "Two non-overlapping exact-path read-only audits can run concurrently and reduce implementation and test-seam risk before Sol edits source.", "work_packages": ["meta-grid JavaScript/CSS implementation seam audit", "provider-free browser-test, selector and responsive seam audit"]}
+    ],
+    "parallel_work_packages": ["native implementation seam audit", "native test and responsive seam audit"],
+    "serial_constraints": ["Sol alone freezes meaning and plan, edits product source, accepts evidence and uses Git", "DeepSeek waits for the frozen plan", "Gemini waits for one exact passing candidate"],
+    "reassessment_triggers": ["native audit return", "plan freeze", "DeepSeek pre-dispatch", "material recovery", "pre-verifier admission", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_native_predispatch_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol remains active and owns plan and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Two exact-path read-only packages are ready for dispatch after this receipt."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains reserved until deterministic candidate admission."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek remains planned after plan freeze; it is not part of this dispatch."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

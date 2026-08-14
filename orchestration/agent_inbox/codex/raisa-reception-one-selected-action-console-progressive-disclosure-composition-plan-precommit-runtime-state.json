@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_progressive_disclosure_plan_threat_and_active_latch_to_the_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely and records Continuity 289 / Compass 271, the accepted selected-action-console orientation and the bounded presentation-only composition as next.",
+    "current_authority_allocation": "Sol owns plan freezing, implementation, acceptance, recovery and Git. Two native read-only audits are dispatched, DeepSeek V4 Flash/high is planned for one later test-only packet, and Gemini 3.6 Flash/high is reserved for fresh exact-candidate veto.",
+    "active_plan_and_acceptance": "The newly frozen plan and threat delta implement the accepted four-button zero-or-one-editor architecture, preserve all field-specific command paths, forbid automatic sequential multi-field execution and compound claims, and incorporate native findings that busy appointment reselection and fresh external replacement must not erase or resurrect draft state. The active-latch and orchestrator suite passes 71 tests; API Spine artifacts pass 36 tests.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain unopened. Patient/product/clinical data, providers, backend/API/database/event expansion, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain excluded.",
+    "git_refs_and_worktree": "HEAD, task and origin task remain exactly 67f203097507d5f8c976f716ff37f720f4ea6b73 before the plan commit; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Exactly three intentional tracked paths are modified or new and 616 unrelated untracked entries remain preserved before this pre-commit pair; explicit-path staging only applies."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
+    "status": "in_progress",
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Fresh five-source and native pre-dispatch receipts passed; the bounded implementation plan and threat delta are frozen, including inert multi-field intent, busy card-selection protection and fresh-replacement draft teardown",
+      "next_executable_stage": "commit the exact frozen plan descendant, prepare and preflight the isolated DeepSeek test-only worktree and packet, then implement the presentation-only console beside the bounded worker",
+      "retry_counters": {"review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["presentation_only_diary_client_composition", "preserve_status_time_duration_and_practitioner_contracts", "preserve_one_kernel_owned_proposal_confirm_path_per_action", "preserve_visible_confirmation_fresh_reconciliation_and_accessibility", "only_meta_grid_javascript_css_cache_reference_and_affected_provider_free_tests", "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands", "no_compound_update_claim_without_a_separate_atomic_backend_proof", "no_new_command_field_route_schema_or_write_authority", "no_api_openapi_graphql_database_event_or_watcher_expansion", "repository_local_provider_free_evidence_only", "protected_evidence_and_historical_diary_phi_closed", "patient_product_clinical_data_and_external_patient_channels_closed", "provider_adc_credentials_iam_external_network_closed", "deployment_production_release_pages_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "assessed_stage": "frozen-plan pre-commit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The frozen selector and transition contract now supports one exact isolated test-only packet; it waits for this committed plan source.", "work_packages": ["adapt four existing route-intercepted selected-action test files to the one-editor palette contract"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Fresh veto remains serially gated by one deterministic and rendered exact candidate.", "work_packages": ["later exact-candidate presentation, accessibility and API-boundary veto"]},
+      {"lane_id": "native_subagents", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "The implementation audit already identified two concrete fail-closed hazards and the test-surface audit remains active; neither owns edits or acceptance.", "work_packages": ["completed JavaScript/CSS implementation seam audit", "active browser-test and responsive seam audit"]}
+    ],
+    "parallel_work_packages": ["native implementation seam audit", "native test and responsive seam audit", "subsequent isolated DeepSeek test adaptation"],
+    "serial_constraints": ["Sol alone commits the plan, edits product source, integrates worker tests, accepts evidence and uses Git", "DeepSeek dispatch requires this exact committed plan and a distinct receipt", "Gemini waits for deterministic and rendered candidate passage"],
+    "reassessment_triggers": ["plan commit", "DeepSeek pre-dispatch", "native return", "worker return", "material recovery", "pre-verifier admission", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_plan_precommit_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is active and owns this explicit-path plan commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["One native audit completed with useful hazards and one remains active."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains reserved until candidate admission."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek packet awaits exact committed plan source."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
