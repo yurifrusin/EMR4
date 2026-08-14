@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_native_analysis_and_exact_deepseek_test_package_refinement_to_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 and the accepted orientation continue to require the presentation-only progressive-disclosure composition.",
+    "current_authority_allocation": "Sol retains plan, product, recovery, acceptance and Git. Both native read-only audits are complete, DeepSeek Flash is next for one new capped test file, and Gemini remains reserved for exact-candidate veto.",
+    "active_plan_and_acceptance": "The committed plan remains semantically unchanged and is mechanically refined from broad existing-test worker ownership to one new seven-case test artifact. Native findings add busy reselection protection, external-freshness draft teardown, collapse draft disposal and shared-editor live-region scoping without widening product or command authority.",
+    "protected_evidence_boundaries": "Protected evidence, historical Diary PHI, product/patient/clinical data, providers, backend/API/database/event expansion, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded.",
+    "git_refs_and_worktree": "HEAD is exact committed plan source d8dbe80aaa6359b39a057db9512ed402ab69065c. Task origin remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Two tracked paths plus one new native-analysis path are intentional; 613 unrelated untracked entries remain before this pre-commit pair."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
+    "status": "in_progress",
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Both native read-only audits completed with positive leverage; the committed plan is mechanically refined so DeepSeek owns one new seven-case browser contract while Sol retains the four existing test adaptations and product implementation",
+      "next_executable_stage": "commit the native-analysis refinement, fast-forward the clean isolated DeepSeek worktree, pass the exact pre-dispatch receipt, then run the test worker beside Sol product implementation",
+      "retry_counters": {"review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["presentation_only_diary_client_composition", "preserve_status_time_duration_and_practitioner_contracts", "preserve_one_kernel_owned_proposal_confirm_path_per_action", "preserve_visible_confirmation_fresh_reconciliation_and_accessibility", "only_meta_grid_javascript_css_cache_reference_and_affected_provider_free_tests", "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands", "no_compound_update_claim_without_a_separate_atomic_backend_proof", "no_new_command_field_route_schema_or_write_authority", "no_api_openapi_graphql_database_event_or_watcher_expansion", "repository_local_provider_free_evidence_only", "protected_evidence_and_historical_diary_phi_closed", "patient_product_clinical_data_and_external_patient_channels_closed", "provider_adc_credentials_iam_external_network_closed", "deployment_production_release_pages_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "assessed_stage": "native-refinement pre-commit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "Native test analysis reduced the package to one new capped self-contained file, maximizing separation and preventing conflicts with Sol's existing-test adaptations.", "work_packages": ["author review/test_reception_one_selected_action_console.py only"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Fresh veto remains gated by exact candidate passage.", "work_packages": ["later exact-candidate presentation, accessibility and API-boundary veto"]},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "Both read-only packages returned concrete state, focus, hidden-draft, test-fixture and responsive findings now durably recorded.", "work_packages": ["completed implementation seam audit", "completed test and responsive seam audit"]}
+    ],
+    "parallel_work_packages": ["completed native audits", "next isolated DeepSeek test authoring", "parallel Sol product and existing-test implementation"],
+    "serial_constraints": ["Sol alone commits refinements, fast-forwards the exact clean worker worktree, integrates tests, accepts evidence and uses Git", "DeepSeek requires a distinct exact-source pre-dispatch receipt", "Gemini waits for deterministic and rendered passage"],
+    "reassessment_triggers": ["DeepSeek pre-dispatch", "worker return", "material recovery", "pre-verifier admission", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_native_refinement_precommit_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is active and owns this refinement commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Both native audits completed read-only with positive leverage."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains reserved."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek package is now one exact new test artifact and awaits pre-dispatch."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

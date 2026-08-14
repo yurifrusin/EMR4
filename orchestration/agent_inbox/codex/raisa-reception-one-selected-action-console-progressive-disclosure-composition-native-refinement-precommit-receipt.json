@@ -1,0 +1,89 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
+    "completed_stage": "Both native read-only audits completed with positive leverage; the committed plan is mechanically refined so DeepSeek owns one new seven-case browser contract while Sol retains the four existing test adaptations and product implementation",
+    "next_executable_stage": "commit the native-analysis refinement, fast-forward the clean isolated DeepSeek worktree, pass the exact pre-dispatch receipt, then run the test worker beside Sol product implementation",
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "resume_after_compaction": true,
+    "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "native-refinement pre-commit",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Native test analysis reduced the package to one new capped self-contained file, maximizing separation and preventing conflicts with Sol's existing-test adaptations.",
+        "work_packages": [
+          "author review/test_reception_one_selected_action_console.py only"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh veto remains gated by exact candidate passage.",
+        "work_packages": [
+          "later exact-candidate presentation, accessibility and API-boundary veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only packages returned concrete state, focus, hidden-draft, test-fixture and responsive findings now durably recorded.",
+        "work_packages": [
+          "completed implementation seam audit",
+          "completed test and responsive seam audit"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+    "parallel_work_packages": [
+      "completed native audits",
+      "next isolated DeepSeek test authoring",
+      "parallel Sol product and existing-test implementation"
+    ],
+    "reassessment_triggers": [
+      "DeepSeek pre-dispatch",
+      "worker return",
+      "material recovery",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone commits refinements, fast-forwards the exact clean worker worktree, integrates tests, accepts evidence and uses Git",
+      "DeepSeek requires a distinct exact-source pre-dispatch receipt",
+      "Gemini waits for deterministic and rendered passage"
+    ]
+  },
+  "planned_action": "commit_native_analysis_and_exact_deepseek_test_package_refinement_to_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The committed plan remains semantically unchanged and is mechanically refined from broad existing-test worker ownership to one new seven-case test artifact. Native findings add busy reselection protection, external-freshness draft teardown, collapse draft disposal and shared-editor live-region scoping without widening product or command authority.",
+    "current_authority_allocation": "Sol retains plan, product, recovery, acceptance and Git. Both native read-only audits are complete, DeepSeek Flash is next for one new capped test file, and Gemini remains reserved for exact-candidate veto.",
+    "git_refs_and_worktree": "HEAD is exact committed plan source d8dbe80aaa6359b39a057db9512ed402ab69065c. Task origin remains 67f203097507d5f8c976f716ff37f720f4ea6b73. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Two tracked paths plus one new native-analysis path are intentional; 613 unrelated untracked entries remain before this pre-commit pair.",
+    "live_handover_current_baton": "AGENTS.md Continuity 289 / Compass 271 and the accepted orientation continue to require the presentation-only progressive-disclosure composition.",
+    "protected_evidence_boundaries": "Protected evidence, historical Diary PHI, product/patient/clinical data, providers, backend/API/database/event expansion, commands, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

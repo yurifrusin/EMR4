@@ -35,8 +35,10 @@ Implementation is limited to:
 - `docs/diary/meta-grid.css`;
 - the `meta-grid.js` and `meta-grid.css` cache references in
   `docs/diary/diary.html`;
-- the four existing route-intercepted selected-action browser test files and
-  one narrowly bounded action-console test artifact if useful; and
+- the four existing route-intercepted selected-action browser test files for
+  Sol-owned mechanical palette activation adaptations;
+- one new, tightly capped route-intercepted selected-action-console browser
+  contract owned by the bounded test worker; and
 - tranche-local plan, threat, typed evidence, acceptance, continuity and
   closeout artifacts.
 
@@ -52,7 +54,8 @@ payload, route and database surface are read-only controls in this tranche.
    the first button without opening an editor.
 3. A button activation performs zero HTTP requests and only opens its existing
    field-specific renderer in one shared labelled editor region.
-4. Activating the open action collapses it and returns focus to its button.
+4. Activating the open action resets any idle unsubmitted field draft,
+   collapses it and returns focus to its button.
 5. Idle switching resets the outgoing field's unsubmitted provisional state
    from current truth, announces that no new Diary change occurred and opens
    the requested editor. No concealed draft survives.
@@ -132,8 +135,9 @@ explicit non-intercepted backend boundary is separately proven.
   implementation-seam audit and one existing browser-fixture, selector,
   route-count and responsive-validation audit.
 - **DeepSeek V4 Flash/high — planned after this freeze:** one tightly capped
-  test-only package over the four existing route-intercepted selected-action
-  test files, with no product-source, architecture, acceptance or Git authority.
+  new `review/test_reception_one_selected_action_console.py` test-only artifact,
+  with no existing-test, product-source, architecture, acceptance or Git
+  authority beyond one isolated worker commit.
 - **Gemini 3.6 Flash/high — reserved:** one fresh read-only exact-candidate veto
   after deterministic and rendered passage.
 - **Sol — serial authority owner:** reconcile analyses, implement product
