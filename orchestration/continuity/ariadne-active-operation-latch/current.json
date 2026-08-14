@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
-  "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
-  "objective": "Use provider-free authored-synthetic evidence to prove that changed practitioner, time and duration travel through the existing appointment update proposal and confirmation path as one command, with fresh-truth, conflict, idempotency, audit and rollback behavior bounded exactly.",
-  "status": "complete",
-  "source_head": "3dd5f3b39ed98a2d562685d1d1567a359930c693",
-  "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "active_tranche": "Reception One same-update-family multi-change editor composition",
+  "objective": "Compose practitioner, local time and duration into one progressive Reception One draft, one existing update-family proposal, one review and one explicit human confirmation, while preserving fresh reconciliation and keeping status as a distinct command family.",
+  "status": "in_progress",
+  "source_head": "e417eca0e1871a7ce5ed90c5e9223b8f86982b20",
+  "authority_source": "AGENTS.md Continuity 292 / Compass 274, the accepted same-update-family multi-change kernel rehearsal, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Accepted raisa_reception_one_same_update_family_multi_change_kernel_rehearsal_pass at reviewed source 3dd5f3b39ed98a2d562685d1d1567a359930c693; the final continuity-inclusive 438-test packet, Continuity 292 / Compass 274, Sol acceptance, closeout and Yuri summary are complete",
-    "next_executable_stage": null,
+    "completed_stage": "Completed the fresh five-source rehydration and froze the narrow four-key shared-update-draft plan and threat delta over baseline e417eca0e1871a7ce5ed90c5e9223b8f86982b20; 107 latch, preflight and API Spine tests pass",
+    "next_executable_stage": "Commit the frozen plan checkpoint, create an exact clean disposable DeepSeek test worktree, run the pre-dispatch receipt and launch the one-file test-only worker while Sol implements product source",
     "retry_counters": {
       "implementation": 0,
       "review": 0,
@@ -23,31 +23,29 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_tranche_complete_with_named_next_descendant"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "existing_appointment_update_proposal_confirm_family_only",
-    "one_combined_practitioner_time_duration_command_not_sequential_writes",
-    "provider_free_authored_synthetic_evidence_only",
-    "current_authority_and_source_truth_rechecked_at_confirmation",
-    "conflict_and_stale_evidence_fail_closed_without_write",
-    "same_key_replay_is_mutation_free_and_returns_one_committed_result",
-    "audit_idempotency_and_appointment_truth_share_the_command_outcome",
-    "injected_precommit_failure_rolls_back_all_effects_before_clean_retry",
-    "prefer_tests_and_fixture_only_changes",
-    "no_ui_new_route_schema_command_family_or_database_migration",
-    "no_cross_family_status_plus_update_execution",
-    "no_external_patient_or_channel_runtime",
+    "one_combined_practitioner_time_duration_draft_and_command_not_sequential_writes",
+    "one_review_and_one_explicit_human_confirmation",
+    "route_inert_draft_until_existing_update_proposal_submission",
+    "fresh_authoritative_reconciliation_after_terminal_result",
+    "status_remains_a_distinct_action_and_command_family",
+    "no_new_backend_route_request_field_command_schema_or_database_migration",
+    "provider_free_authored_synthetic_and_route_intercepted_browser_evidence_only",
+    "no_conversational_execution_or_external_patient_channel_authority",
     "no_patient_product_or_clinical_data",
     "no_provider_adc_credentials_iam_or_external_network",
     "no_deployment_production_release_pages_or_protected_ref_movement",
-    "docs_branding_and_unrelated_untracked_preserved"
+    "docs_branding_and_unrelated_untracked_preserved",
+    "explicit_path_staging_only"
   ]
 }

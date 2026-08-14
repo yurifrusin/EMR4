@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_combined_editor_plan_checkpoint_with_explicit_paths_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Continuity 292 / Compass 274 names the provider-free Reception One same-update-family multi-change editor composition as the next implementation under standing authority.",
+    "current_authority_allocation": "Sol owns plan, product implementation, recovery, acceptance and Git; DeepSeek is limited to one new test module after the plan commit; Gemini is reserved for the exact-candidate veto; native agents remain declined.",
+    "active_plan_and_acceptance": "The freshly frozen plan preserves four semantic buttons, makes time/duration/practitioner three views of one visible provisional draft, keeps status separate, invokes the existing update proposal path once and requires the existing dialog plus visible Confirm & Save before one confirm request. The accepted M1-M7 kernel closeout supplies the underlying atomicity, freshness, idempotency, audit and rollback evidence.",
+    "protected_evidence_boundaries": "No backend, API/OpenAPI/GraphQL, schema/migration, event/watcher, provider/ADC, credentials/IAM/network, external channel, patient/product data, deployment, production, release, Pages or protected ref is open. Protected holdouts and historical Diary PHI remain unenumerated; docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "HEAD and origin task remain e417eca0e1871a7ce5ed90c5e9223b8f86982b20 with required ancestor 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the new latch, plan, threat delta and preplanning/precommit receipt artifacts are intentionally tracked-dirty; 618 pre-existing untracked entries are untouched."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "active_tranche": "Reception One same-update-family multi-change editor composition",
+    "objective": "Compose practitioner, local time and duration into one progressive Reception One draft, one existing update-family proposal, one review and one explicit human confirmation, while preserving fresh reconciliation and keeping status as a distinct command family.",
+    "status": "in_progress",
+    "source_head": "e417eca0e1871a7ce5ed90c5e9223b8f86982b20",
+    "authority_source": "AGENTS.md Continuity 292 / Compass 274, the accepted same-update-family multi-change kernel rehearsal, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Completed the fresh five-source rehydration and froze the narrow four-key shared-update-draft plan and threat delta over baseline e417eca0e1871a7ce5ed90c5e9223b8f86982b20; 107 latch, preflight and API Spine tests pass",
+      "next_executable_stage": "Commit the frozen plan checkpoint, create an exact clean disposable DeepSeek test worktree, run the pre-dispatch receipt and launch the one-file test-only worker while Sol implements product source",
+      "retry_counters": {"implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_combined_practitioner_time_duration_draft_and_command_not_sequential_writes",
+      "one_review_and_one_explicit_human_confirmation",
+      "route_inert_draft_until_existing_update_proposal_submission",
+      "fresh_authoritative_reconciliation_after_terminal_result",
+      "status_remains_a_distinct_action_and_command_family",
+      "no_new_backend_route_request_field_command_schema_or_database_migration",
+      "provider_free_authored_synthetic_and_route_intercepted_browser_evidence_only",
+      "no_conversational_execution_or_external_patient_channel_authority",
+      "no_patient_product_or_clinical_data",
+      "no_provider_adc_credentials_iam_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "assessed_stage": "plan freeze before commit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The frozen UI contract now supports one separable new route-intercepted test module.", "work_packages": ["one new combined-editor browser contract after exact clean plan commit"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "positive", "rationale": "The exact product candidate will receive one fresh read-only veto after deterministic admission.", "work_packages": ["fresh exact-head review"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "The remaining product state and existing fixture adaptations are tightly coupled.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["DeepSeek test-only authoring may run while Sol implements non-overlapping Diary product paths"],
+    "serial_constraints": ["plan commit before worker dispatch", "shared browser and PostgreSQL checks run serially", "Gemini waits for deterministic admission", "Sol owns acceptance and Git"],
+    "reassessment_triggers": ["worker pre-dispatch", "worker return", "candidate failure", "pre-verifier", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_plan_precommit", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Plan and threat delta frozen; focused deterministic packet passed."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini lane reserved."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek packet is next after plan commit."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
