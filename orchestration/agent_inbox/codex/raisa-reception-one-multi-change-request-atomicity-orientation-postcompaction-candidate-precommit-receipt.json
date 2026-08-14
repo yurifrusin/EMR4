@@ -1,0 +1,84 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One multi-change request atomicity orientation",
+    "completed_stage": "Committed the Sol-owned exact-source architecture and typed contract at d780a18800c9fa1f8510afe9e383489229cc6136 after quarantining both inadmissible native analyses; 457 exact checks plus Ruff, JSON, source guards and whitespace passed in the clean review worktree, and the fresh five-source post-compaction receipt passed",
+    "next_executable_stage": "bind a fresh clean exact-candidate review worktree and dispatch one Gemini 3.6 Flash/high independent veto under an exact literal-path allowlist",
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "resume_after_compaction": true,
+    "source_head": "d780a18800c9fa1f8510afe9e383489229cc6136",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "post-compaction deterministic candidate precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No stable mechanical implementation package exists and the preceding test-only lane had negative net economy.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto follows the continuity commit and a newly bound clean worktree.",
+        "work_packages": [
+          "exact candidate architecture veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only attempts breached command scope, were interrupted and are wholly inadmissible under AER-0306 and AER-0307; Sol reproduced the facts from exact literal files.",
+        "work_packages": [
+          "rejected exact source and test contract map",
+          "rejected adapter-neutral typed-action threat and option analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate continuity commit",
+      "pre-verifier dispatch",
+      "Gemini return",
+      "material architecture revision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "no native output is admitted",
+      "Sol owns exact-literal source reconciliation and candidate authoring",
+      "Gemini waits for the committed exact continuity candidate",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "commit_the_fresh_post_compaction_receipt_and_current_pre_verifier_latch_before_rebinding_the_clean_review_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta and typed contract select inert action candidates, one same-update-family proposal and confirmation, cross-family non-execution and no runtime changes. Architecture candidate d780a18800c9fa1f8510afe9e383489229cc6136 passed 457 exact serial checks plus Ruff, JSON, source guards and Git whitespace in a clean review worktree.",
+    "current_authority_allocation": "Sol owns source reconciliation, architecture, acceptance and Git. DeepSeek remains declined. Both native outputs remain wholly rejected under AER-0306 and AER-0307. Gemini 3.6 Flash/high remains reserved for one fresh exact-candidate veto after deterministic admission.",
+    "git_refs_and_worktree": "HEAD is d780a18800c9fa1f8510afe9e383489229cc6136 on codex/ariadne-bernie-davida-parallel-seam with only the exact current latch and post-compaction receipt pair intended for the continuity commit. Review worktree C:/Users/sarashera/EMR4-worktrees/r01 is clean at d780a18800c9fa1f8510afe9e383489229cc6136. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local and remote master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains f362f0de378fdddb610a04ae61182aaae2c105c0.",
+    "live_handover_current_baton": "AGENTS.md Continuity 290 / Compass 272 names the provider-free read-only Reception One multi-change request atomicity orientation and preserves every product, adapter, provider, protected-evidence and protected-ref closure.",
+    "protected_evidence_boundaries": "AER-0306 and AER-0307 outputs remain quarantined and inadmissible. No protected fixture, historical Diary PHI, patient/product/clinical data, external adapter runtime, provider/ADC/credentials/IAM/network, product/API/database/event change, deployment, production, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
