@@ -1,0 +1,188 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_existing_route_test_first_same_update_family_kernel_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding closeout. At Continuity 291 / Compass 273 it names the provider-free authored-synthetic same-update-family multi-change kernel rehearsal as the next implementation and forbids UI, route, schema, command-family and migration expansion.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance, recovery and Git. DeepSeek V4 Flash/high is eligible only for a stable bounded test package after plan freeze. Gemini 3.6 Flash/high is reserved for a fresh independent veto. Native subagents have no accepted work package at planning because the preceding two analyses breached command scope.",
+    "active_plan_and_acceptance": "The accepted orientation plan, architecture, threat delta, closeout and Sol acceptance at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 identify the exact gap: successful practitioner-plus-time-plus-duration confirmation, exact replay, and injected rollback are structurally supported but not directly proven. The API Spine ADR, programme, Bernie gates and steward checklist require one practice-scoped explicit proposal/confirm command, fresh revalidation, idempotency, audit and no GraphQL/model write path.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain unopened and unenumerated. The tranche is limited to ordinary source and newly authored synthetic fixtures, with no external patient/channel runtime, product/patient data, provider/ADC/credentials/IAM/network, cross-family execution, deployment, production, release, Pages or protected refs. docs/branding and all unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Task HEAD and origin task are 704f2827c7b914792c43c12f026149ce25f70882 and contain required 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Before opening the new latch the tracked tree was clean; 620 untracked files, including five under docs/branding and the preceding pre-push pair, were preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "objective": "Use provider-free authored-synthetic evidence to prove that changed practitioner, time and duration travel through the existing appointment update proposal and confirmation path as one command, with fresh-truth, conflict, idempotency, audit and rollback behavior bounded exactly.",
+    "status": "in_progress",
+    "source_head": "704f2827c7b914792c43c12f026149ce25f70882",
+    "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Published raisa_reception_one_multi_change_request_atomicity_orientation_pass at task commit 704f2827c7b914792c43c12f026149ce25f70882 with protected refs unchanged and closeout notification delivered",
+      "next_executable_stage": "inspect the exact existing appointment update command and test surface, then freeze the narrowest provider-free authored-synthetic rehearsal plan before any worker dispatch or implementation",
+      "retry_counters": {
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_combined_practitioner_time_duration_command_not_sequential_writes",
+      "provider_free_authored_synthetic_evidence_only",
+      "current_authority_and_source_truth_rechecked_at_confirmation",
+      "conflict_and_stale_evidence_fail_closed_without_write",
+      "same_key_replay_is_mutation_free_and_returns_one_committed_result",
+      "audit_idempotency_and_appointment_truth_share_the_command_outcome",
+      "injected_precommit_failure_rolls_back_all_effects_before_clean_retry",
+      "prefer_tests_and_fixture_only_changes",
+      "no_ui_new_route_schema_command_family_or_database_migration",
+      "no_cross_family_status_plus_update_execution",
+      "no_external_patient_or_channel_runtime",
+      "no_patient_product_or_clinical_data",
+      "no_provider_adc_credentials_iam_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "assessed_stage": "tranche start before plan freeze",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "The anticipated artifact is a stable separable authored-synthetic test package over an existing route; dispatch waits for Sol to freeze exact nodes, files and acceptance.",
+        "work_packages": [
+          "bounded test-only implementation candidate after deterministic source inspection"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "Atomic mutation, replay and rollback claims warrant one fresh independent exact-candidate veto after all deterministic gates pass.",
+        "work_packages": [
+          "fresh read-only exact-head verification"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The exact source/test inspection is short and serial, while the immediately preceding native analyses had two command-scope breaches; briefing and containment cost exceed expected value.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [
+      "DeepSeek test-only implementation may proceed after the exact test matrix is frozen while Sol prepares non-overlapping plan and threat artifacts"
+    ],
+    "serial_constraints": [
+      "Sol must freeze command meaning and exact acceptance before dispatch",
+      "PostgreSQL-loading pytest runs remain serial",
+      "Gemini review begins only after deterministic candidate admission",
+      "Sol alone owns acceptance and Git"
+    ],
+    "reassessment_triggers": [
+      "plan freeze",
+      "pre-worker dispatch",
+      "candidate failure or scope change",
+      "pre-verifier gate",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_next_tranche_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the full five-source rehydration and API Steward source pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane declined at planning."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini lane reserved after deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek test lane planned after exact plan freeze."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

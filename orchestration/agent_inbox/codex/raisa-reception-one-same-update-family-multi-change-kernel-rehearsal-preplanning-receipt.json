@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Published raisa_reception_one_multi_change_request_atomicity_orientation_pass at task commit 704f2827c7b914792c43c12f026149ce25f70882 with protected refs unchanged and closeout notification delivered",
+    "next_executable_stage": "inspect the exact existing appointment update command and test surface, then freeze the narrowest provider-free authored-synthetic rehearsal plan before any worker dispatch or implementation",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "704f2827c7b914792c43c12f026149ce25f70882",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "parallelism_assessment": {
+    "assessed_stage": "tranche start before plan freeze",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The anticipated artifact is a stable separable authored-synthetic test package over an existing route; dispatch waits for Sol to freeze exact nodes, files and acceptance.",
+        "work_packages": [
+          "bounded test-only implementation candidate after deterministic source inspection"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Atomic mutation, replay and rollback claims warrant one fresh independent exact-candidate veto after all deterministic gates pass.",
+        "work_packages": [
+          "fresh read-only exact-head verification"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The exact source/test inspection is short and serial, while the immediately preceding native analyses had two command-scope breaches; briefing and containment cost exceed expected value.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek test-only implementation may proceed after the exact test matrix is frozen while Sol prepares non-overlapping plan and threat artifacts"
+    ],
+    "reassessment_triggers": [
+      "plan freeze",
+      "pre-worker dispatch",
+      "candidate failure or scope change",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol must freeze command meaning and exact acceptance before dispatch",
+      "PostgreSQL-loading pytest runs remain serial",
+      "Gemini review begins only after deterministic candidate admission",
+      "Sol alone owns acceptance and Git"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_existing_route_test_first_same_update_family_kernel_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted orientation plan, architecture, threat delta, closeout and Sol acceptance at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 identify the exact gap: successful practitioner-plus-time-plus-duration confirmation, exact replay, and injected rollback are structurally supported but not directly proven. The API Spine ADR, programme, Bernie gates and steward checklist require one practice-scoped explicit proposal/confirm command, fresh revalidation, idempotency, audit and no GraphQL/model write path.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance, recovery and Git. DeepSeek V4 Flash/high is eligible only for a stable bounded test package after plan freeze. Gemini 3.6 Flash/high is reserved for a fresh independent veto. Native subagents have no accepted work package at planning because the preceding two analyses breached command scope.",
+    "git_refs_and_worktree": "Task HEAD and origin task are 704f2827c7b914792c43c12f026149ce25f70882 and contain required 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Before opening the new latch the tracked tree was clean; 620 untracked files, including five under docs/branding and the preceding pre-push pair, were preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding closeout. At Continuity 291 / Compass 273 it names the provider-free authored-synthetic same-update-family multi-change kernel rehearsal as the next implementation and forbids UI, route, schema, command-family and migration expansion.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain unopened and unenumerated. The tranche is limited to ordinary source and newly authored synthetic fixtures, with no external patient/channel runtime, product/patient data, provider/ADC/credentials/IAM/network, cross-family execution, deployment, production, release, Pages or protected refs. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

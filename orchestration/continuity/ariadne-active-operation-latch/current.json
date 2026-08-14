@@ -1,19 +1,20 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
-  "active_tranche": "Reception One multi-change request atomicity orientation",
-  "objective": "Map the exact existing appointment update and status proposal/confirm contracts, then freeze the narrowest adapter-neutral typed action and atomicity boundary for requests containing several changes without granting Raisa, Siri-like adapters or clients direct command authority.",
-  "status": "complete",
-  "source_head": "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58",
-  "authority_source": "AGENTS.md Continuity 290 / Compass 272, the accepted selected-action-console composition, Yuri's clarification about Raisa and future chatbot adapters, and standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+  "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+  "objective": "Use provider-free authored-synthetic evidence to prove that changed practitioner, time and duration travel through the existing appointment update proposal and confirmation path as one command, with fresh-truth, conflict, idempotency, audit and rollback behavior bounded exactly.",
+  "status": "in_progress",
+  "source_head": "704f2827c7b914792c43c12f026149ce25f70882",
+  "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-      "completed_stage": "Accepted raisa_reception_one_multi_change_request_atomicity_orientation_pass at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 with 457 exact tests, one fresh Gemini pass, AER-0308 reconciliation, timestamped closeout and Continuity 291 / Compass 273",
-      "next_executable_stage": null,
+    "completed_stage": "Froze the provider-free authored-synthetic M1-M7 test-first plan and threat delta over the exact existing appointment update proposal/confirm transaction without authorising product-source changes",
+    "next_executable_stage": "commit the exact plan/latch/rehydration artifacts, create a clean disposable worktree at that plan source, then dispatch the bounded DeepSeek test-only package",
     "retry_counters": {
+      "implementation": 0,
       "review": 0,
-        "verification": 0
+      "verification": 0
     },
-      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -22,31 +23,31 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "read_only_architecture_and_exact_existing_contract_mapping_only",
-    "human_buttons_are_presentation_affordances_not_model_actuators",
-    "raisa_and_adapters_may_emit_only_typed_inert_action_candidates",
-    "deterministic_bureau_and_backend_own_admission_authority_and_current_truth",
-    "staff_confirmation_and_kernel_command_remain_mandatory",
-    "update_family_multi_field_atomicity_must_be_distinguished_from_cross_family_requests",
-    "status_and_update_command_families_remain_distinct",
-    "no_automatic_sequential_execution_or_hidden_partial_success",
-    "no_new_command_field_route_schema_or_write_authority",
-    "no_product_code_api_openapi_graphql_database_event_or_watcher_change",
-    "repository_local_provider_free_authored_synthetic_evidence_only",
-    "protected_evidence_and_historical_diary_phi_closed",
-    "patient_product_clinical_data_and_external_patient_channels_or_chatbot_runtimes_closed",
-    "provider_adc_credentials_iam_external_network_closed",
-    "deployment_production_release_pages_protected_refs_closed",
+    "existing_appointment_update_proposal_confirm_family_only",
+    "one_combined_practitioner_time_duration_command_not_sequential_writes",
+    "provider_free_authored_synthetic_evidence_only",
+    "current_authority_and_source_truth_rechecked_at_confirmation",
+    "conflict_and_stale_evidence_fail_closed_without_write",
+    "same_key_replay_is_mutation_free_and_returns_one_committed_result",
+    "audit_idempotency_and_appointment_truth_share_the_command_outcome",
+    "injected_precommit_failure_rolls_back_all_effects_before_clean_retry",
+    "prefer_tests_and_fixture_only_changes",
+    "no_ui_new_route_schema_command_family_or_database_migration",
+    "no_cross_family_status_plus_update_execution",
+    "no_external_patient_or_channel_runtime",
+    "no_patient_product_or_clinical_data",
+    "no_provider_adc_credentials_iam_or_external_network",
+    "no_deployment_production_release_pages_or_protected_ref_movement",
     "docs_branding_and_unrelated_untracked_preserved"
   ]
 }

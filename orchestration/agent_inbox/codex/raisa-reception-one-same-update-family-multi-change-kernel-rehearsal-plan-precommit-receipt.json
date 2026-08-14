@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Froze the provider-free authored-synthetic M1-M7 test-first plan and threat delta over the exact existing appointment update proposal/confirm transaction without authorising product-source changes",
+    "next_executable_stage": "commit the exact plan/latch/rehydration artifacts, create a clean disposable worktree at that plan source, then dispatch the bounded DeepSeek test-only package",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "704f2827c7b914792c43c12f026149ce25f70882",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "plan freeze pre-commit",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "M1-M7 now form a stable separable test-only package; dispatch waits for this clean plan-source commit.",
+        "work_packages": [
+          "new bounded authored-synthetic test module only"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact atomicity and rollback claim warrants one fresh independent veto after deterministic admission.",
+        "work_packages": [
+          "fresh read-only exact-candidate review"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Sol completed the short serial source inspection and the prior native lanes breached command scope.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek may implement the isolated test module while Sol prepares non-overlapping review scaffolding"
+    ],
+    "reassessment_triggers": [
+      "pre-worker dispatch",
+      "worker return",
+      "scenario failure",
+      "pre-verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "planning commit precedes worktree creation",
+      "PostgreSQL pytest processes remain serial",
+      "Gemini follows deterministic candidate admission",
+      "Sol owns integration and acceptance"
+    ]
+  },
+  "planned_action": "commit_only_the_frozen_kernel_rehearsal_plan_threat_latch_and_five_source_receipt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted multi-change orientation identifies successful practitioner/time/duration confirmation, exact replay and injected rollback as the unproved kernel gap. The new plan freezes M1-M7 against the existing update proposal/confirm route with no initial product-source change, and its threat delta binds rollback observation to a separately owned session.",
+    "current_authority_allocation": "Sol froze the plan and owns this explicit-path planning commit. DeepSeek is planned only for the new test module after a clean plan-source worktree exists; Gemini is reserved for later independent review; native subagents are declined.",
+    "git_refs_and_worktree": "Task and origin task start at 704f2827c7b914792c43c12f026149ce25f70882 with required 648c8ec9805af63729264ea9c22fd695f062a741 as ancestor. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the new plan/threat/latch/receipt paths are intended for this commit.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 names this exact provider-free test-first rehearsal and keeps UI, route, schema, command-family, migration and every external surface closed.",
+    "protected_evidence_boundaries": "Only ordinary source and newly authored synthetic test data are in scope. Protected holdouts, historical Diary PHI, product/patient data, external channels, providers/ADC/credentials/IAM/network, cross-family execution, UI, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
