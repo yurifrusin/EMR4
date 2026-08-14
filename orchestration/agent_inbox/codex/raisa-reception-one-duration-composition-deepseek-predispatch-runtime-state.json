@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_duration_deepseek_test_and_native_read_only_seam_map_beside_sol_product_implementation",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 286 / Compass 268 accepts the time-reschedule parent and names duration-only composition as the active descendant.",
+    "current_authority_allocation": "Sol retains product, integration, recovery and acceptance authority. DeepSeek V4 Flash/high receives one isolated new browser-test file; a native subagent receives a read-only seam-map package; Gemini remains reserved for a later exact-candidate veto.",
+    "active_plan_and_acceptance": "The committed frozen duration plan and threat delta at 65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab constrain both workers to same-date, same-start, same-practitioner duration-only composition over the existing handleMoveResize update proposal/confirm path.",
+    "protected_evidence_boundaries": "Workers have exact read/write boundaries. Protected evidence, historical Diary PHI, product/patient/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, providers/ADC/credentials/IAM/network, raw PUT, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "The isolated DeepSeek worktree C:/Users/sarashera/EMR4-worktrees/duration-test-worker-65f0 is clean on codex/reception-one-duration-test-worker-65f0 at exact source 65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab. The main task worktree is at the same HEAD with intentional continuation artifacts and 606 preserved untracked status entries. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
+    "status": "in_progress",
+    "source_head": "65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab",
+    "authority_source": "AGENTS.md Continuity 286 / Compass 268, accepted time-reschedule closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "plan and threat delta committed; complete post-compaction rehydration passed; exact DeepSeek worktree, worker packet and three-lane allocations preflighted",
+      "next_executable_stage": "dispatch the isolated DeepSeek test worker and native read-only seam-map subagent, then implement the product composition beside them",
+      "retry_counters": {"review": 0, "verification": 2},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["deepseek_one_new_test_file_only", "native_subagent_read_only_exact_files", "same_date_same_start_same_practitioner_duration_only", "existing_update_proposal_confirm_only", "no_raw_put_or_second_command_path", "provider_free_authored_synthetic_only", "protected_evidence_product_data_backend_database_network_deployment_and_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "assessed_stage": "committed-plan pre-worker-dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "The isolated route-intercepted duration matrix is a stable one-file artifact with an exact clean task-descendant worktree.", "work_packages": ["author review/test_reception_one_duration_action.py only"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Fresh veto remains valuable but is serially gated by deterministic candidate passage.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "The exact read-only seam map is independent of mutable product/test ownership and can guide Sol integration.", "work_packages": ["read-only duration bridge, latch, dialog, responsive and regression seam map"]}
+    ],
+    "parallel_work_packages": ["DeepSeek isolated test authoring", "native read-only seam analysis", "Sol product implementation"],
+    "serial_constraints": ["receipt passes before dispatch", "deterministic local passage precedes Gemini", "Sol alone integrates, recovers and accepts"],
+    "reassessment_triggers": ["worker artifact return", "material product or test recovery", "new or restored task window", "pre-verifier acceptance", "tranche closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_pre_worker_dispatch_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol controls exact worker packets, mutable product files, integration and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["One native read-only seam-map package is bounded to exact files with no edit authority."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini veto remains reserved until deterministic passage."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DEEPSEEK_API_KEY presence was checked without disclosure, Claude Code is available and the isolated worktree is clean at exact source."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": ["reception_one_duration_test_worker"], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

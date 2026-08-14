@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "## Terminal receipt\n\n**Status:** \u2705 Complete \u2014 one worker artifact authored, verified, and committed on the assigned branch.\n\n**Exact changed file (one, new):**\n`review/test_reception_one_duration_action.py` (895 lines, 1 file changed)\n\n**Syntax-check result:** PASS \u2014 `py -m py_compile review/test_reception_one_duration_action.py` \u2192 `SYNTAX OK`. (`python` resolves to the Windows Store stub, so the repo/launcher interpreter `py` was used for the identical listed check.)\n\n**Expected-red behavioural status:** \u2705 RED by design against pre-implementation source. The behavioural matrix and static guards assert the not-yet-landed duration composition:\n- `meta-grid-duration-*` testids, `Review duration change`, `changeAppointmentDuration`, `Confirm Appointment Duration Change`, and the bridge call `handleMoveResize(appointment, 0, requestedDurationMins - currentDurationMins, ...)` are absent from the current source and will stay red until Sol's implementation lands.\n- The green anchors (`handleMoveResize`, `/appointments/proposals/update/`, `/appointments/proposals/update/confirm`, no second write path in meta-grid.js) are preserved so the contract remains correctly anchored. No contract was weakened to pass pre-implementation.\n\n**Commit hash:** `f08a16960c26f400954fbfedc3e30ff2b87705c6` (branch `codex/reception-one-duration-test-worker-65f0`; source HEAD `65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab`).\n\n**Checks run (only the allowlist):**\n- `py -m py_compile review/test_reception_one_duration_action.py` \u2192 PASS\n- `git status --short --untracked-files=no` \u2192 clean tracked tree\n- `git diff --check -- review/test_reception_one_duration_action.py` \u2192 PASS\n- `git diff -- review/test_reception_one_duration_action.py` \u2192 empty (staged)\n- `git add -- review/test_reception_one_duration_action.py` \u2192 staged exact file\n- `git diff --cached --check` \u2192 PASS\n- `git commit -m \"test(reception-one): specify duration composition\"` \u2192 succeeded\n- `git rev-parse HEAD` \u2192 `f08a16960c26f400954fbfedc3e30ff2b87705c6`\n\n**Boundary attestation:** Only the one allowlisted new file was created/edited. No product source, existing tests, orchestration, acceptance, or Git integration was touched. No pytest executed in the worker worktree (Sol owns execution). No protected refs, push, deployment, or provider actions performed. All reads were exact-path allowlisted files only (no Glob/Grep/recursive search). The artifact is self-contained (no mutable helper imports), uses `route_intercepted_browser` / `authored_synthetic_client_fixture` evidence labels, and makes no live-product claim.\n\n**Genuine blocker:** None. One environment note (not a blocker): the `python` alias on this Windows host resolves to the Store stub, so the listed py_compile check was run via the `py` launcher against the identical file.",
+  "usage": {
+    "input_tokens": 276229,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 9592448,
+    "output_tokens": 94840,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 8.560988999999998,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

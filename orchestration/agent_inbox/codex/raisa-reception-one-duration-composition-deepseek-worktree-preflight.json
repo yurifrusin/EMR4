@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.worker-worktree-preflight.v1",
+  "agent_id": "reception_one_duration_test_worker",
+  "resource_id": "deepseek-flash-workers",
+  "model": "deepseek-v4-flash",
+  "reasoning": "high",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/duration-test-worker-65f0",
+  "branch": "codex/reception-one-duration-test-worker-65f0",
+  "head": "65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab",
+  "expected_head": "65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab",
+  "clean": true,
+  "at_handoff_current": false,
+  "divergence": "Recorded task-branch descendant; protected handoff/current remains closed.",
+  "write_allowlist": ["review/test_reception_one_duration_action.py"],
+  "status": "passed"
+}

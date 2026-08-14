@@ -427,7 +427,7 @@ app = create_native_diary_rayleen_waiting_room_app(
 @app.get("/diary/diary.html", response_class=HTMLResponse)
 def diary_html() -> HTMLResponse:
     html = (DIARY_DIR / "diary.html").read_text(encoding="utf-8")
-    marker = '<script src="diary.js?v=199" defer></script>'
+    marker = '<script src="diary.js?v=201" defer></script>'
     injected = '<script src="/acceptance/bootstrap.js"></script>\n  ' + marker
     response = HTMLResponse(html.replace(marker, injected))
     response.set_cookie(

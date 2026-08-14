@@ -373,7 +373,7 @@ def _build_app(
     @app.get("/diary/diary.html", response_class=HTMLResponse)
     def diary_html() -> HTMLResponse:
         html = (DIARY_DIR / "diary.html").read_text(encoding="utf-8")
-        marker = '<script src="diary.js?v=199" defer></script>'
+        marker = '<script src="diary.js?v=201" defer></script>'
         injected = '<script src="/acceptance/bootstrap.js"></script>\n  ' + marker
         if marker not in html:
             raise AcceptanceError("diary_asset_version_mismatch")

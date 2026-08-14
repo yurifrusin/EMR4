@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "completed_stage": "DeepSeek and native contributions are recovered and complete; responsive rendered QA, consolidated 118-test regressions and canonical 196-test fast profile pass",
+    "next_executable_stage": "commit the exact deterministic candidate and orchestration evidence, create a fresh clean read-only review worktree, generate the pre-verifier receipt and dispatch the reserved Gemini veto",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "resume_after_compaction": true,
+    "source_head": "52ee727928f32581f5fd5a969bfbcde55a13d87d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "deterministic candidate pre-commit and independent-veto boundary",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its isolated matrix was recovered into the frozen selector contract and exposed the repaired terminal-callback reconciliation race.",
+        "work_packages": [
+          "completed one-file route-intercepted duration matrix"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The deterministic candidate now qualifies for one fresh exact-head command-convergence and fresh-truth veto after a clean review checkout exists.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Read-only seam analysis found exact-read, reconciliation, midnight and static-regression issues repaired before candidate freeze.",
+        "work_packages": [
+          "completed read-only seam and regression analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "parallel_work_packages": [
+      "completed DeepSeek test lane",
+      "completed native analysis lane"
+    ],
+    "reassessment_triggers": [
+      "candidate commit",
+      "pre-verifier acceptance",
+      "verifier return",
+      "material verifier recovery",
+      "tranche closeout",
+      "new or restored task window"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "candidate commit precedes exact clean review worktree creation",
+      "pre-verifier receipt precedes Gemini dispatch",
+      "Sol alone accepts and integrates"
+    ]
+  },
+  "planned_action": "commit_exact_duration_composition_deterministic_candidate_for_fresh_independent_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen duration plan and threat delta require same-date, same-start, same-practitioner duration-only composition through existing handleMoveResize. Sol recovery is documented. In-app responsive QA, the consolidated 118-test packet and canonical 196-test fast profile pass.",
+    "current_authority_allocation": "GPT Sol owns recovery, candidate commit, acceptance and integration. DeepSeek V4 Flash/high completed the one-file browser-test candidate; the native subagent completed read-only seam analysis; Gemini 3.6 Flash/high is reserved for a fresh clean exact-candidate veto after this commit.",
+    "git_refs_and_worktree": "The active task worktree is intentionally dirty over HEAD 52ee727928f32581f5fd5a969bfbcde55a13d87d with only the exact duration product/test/recovery/receipt candidate to be staged. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Freshly fetched local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 268e90316c3ef248385ec19d25768c20aed2f3fe. All preserved untracked files stay unstaged except explicitly named duration evidence.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after the latest compaction. Continuity 286 / Compass 268 names duration-only composition as the active narrow descendant of the accepted time-reschedule result.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, provider/ADC/credentials/IAM/network, raw PUT or a second command path, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -24,7 +24,7 @@ def test_bridge_delegates_time_only_change_without_network_or_write_path() -> No
     bridge = _between(
         source,
         "async function metaGridRescheduleAppointmentTime",
-        "function setMetaGridLaunchAvailability",
+        "async function metaGridResizeAppointmentDuration",
     )
 
     assert "requestedStartMins % 15 !== 0" in bridge
@@ -57,7 +57,7 @@ def test_existing_move_resize_path_owns_proposal_confirm_and_typed_phases() -> N
     assert "`/appointments/proposals/update/${appt.id}`" in interaction
     assert "allowlistedConfirmApiPath(confirmEndpoint)" in interaction
     assert "updateConfirmIdempotencyKey(proposal, confirmPayload)" in interaction
-    assert 'title: "Confirm Appointment Time Change"' in interaction
+    assert 'actionOptions?.dialogTitle || "Confirm Appointment Time Change"' in interaction
     assert "currentTruthRecheck: true" in interaction
     assert 'method: "PUT"' not in interaction
 
@@ -72,7 +72,7 @@ def test_reception_one_owns_presentation_reconciliation_and_interruption_only() 
     render = _between(
         source,
         "function renderRescheduleAction",
-        "function renderActions",
+        "function renderDurationAction",
     )
 
     assert "bridge.rescheduleAppointmentTime(" in action

@@ -104,5 +104,5 @@ def test_reception_one_action_is_modeless_fail_closed_and_freshly_reconciled() -
     assert "apiFetch(" not in source
     assert ".meta-grid-status-action" in css
     assert "@media (max-width: 700px)" in css
-    assert 'meta-grid.css?v=12' in html
-    assert 'meta-grid.js?v=17' in html
+    assert 'meta-grid.css?v=13' in html
+    assert 'meta-grid.js?v=18' in html

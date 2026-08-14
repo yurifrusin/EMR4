@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "completed_stage": "DeepSeek's one-file test candidate was integrated under Sol recovery, its assumptions were rebound to the frozen selector, native analysis risks were repaired and focused product and affected UI regressions pass",
+    "next_executable_stage": "complete in-app rendered desktop/tablet/phone inspection, rerun deterministic candidate gates, freeze and dispatch the reserved fresh Gemini veto, then package acceptance and closeout",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "resume_after_compaction": true,
+    "source_head": "52ee727928f32581f5fd5a969bfbcde55a13d87d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "parallelism_assessment": {
+    "assessed_stage": "post-compaction rendered-QA and deterministic-convergence boundary",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The isolated test artifact supplied a large paired matrix and, after bounded Sol recovery, exposed a real terminal-callback reconciliation race.",
+        "work_packages": [
+          "completed review/test_reception_one_duration_action.py candidate; integrated under Sol recovery"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh independent veto remains useful and required, but deterministic and rendered candidate gates must pass first.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The read-only seam map found exact-read, reconciliation, midnight-boundary and static-test risks before acceptance.",
+        "work_packages": [
+          "completed read-only duration bridge, latch, dialog, responsive and regression seam analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "parallel_work_packages": [
+      "DeepSeek isolated test candidate completed",
+      "native read-only seam analysis completed"
+    ],
+    "reassessment_triggers": [
+      "material rendered-QA recovery",
+      "pre-verifier acceptance",
+      "verifier return",
+      "tranche closeout",
+      "new or restored task window"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the active in-app browser session is stateful and Sol-owned",
+      "deterministic candidate passage precedes Gemini",
+      "Sol alone recovers, integrates and accepts"
+    ]
+  },
+  "planned_action": "resume_duration_composition_rendered_qa_deterministic_gate_and_reserved_verifier",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted time-reschedule closeout and Sol acceptance preserve the canonical update proposal/confirm path and fresh reconciliation. The frozen duration plan and threat delta permit only same-date, same-start, same-practitioner duration composition through handleMoveResize. The active latch resumes at rendered QA, deterministic convergence and the reserved verifier.",
+    "current_authority_allocation": "GPT Sol retains implementation, recovery, acceptance and integration authority. DeepSeek V4 Flash/high completed its isolated test artifact; the native read-only subagent completed its seam map; Gemini 3.6 Flash/high remains reserved for one fresh exact-candidate veto after deterministic passage.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the active worktree is C:/Users/sarashera/emr4 on codex/ariadne-bernie-davida-parallel-seam at 52ee727928f32581f5fd5a969bfbcde55a13d87d with intentional unstaged product/test/latch changes and 635 preserved untracked status entries. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 268e90316c3ef248385ec19d25768c20aed2f3fe.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after this compaction. Continuity 286 / Compass 268 accepts the time-reschedule parent and names the in-progress duration-only selected-appointment descendant.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain closed. No patient, product or clinical data; backend, API, OpenAPI, GraphQL, database, event or watcher expansion; provider, ADC, credential, IAM or external network; raw PUT or second command path; deployment, production, release, Pages or protected-ref movement is permitted. docs/branding and all unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

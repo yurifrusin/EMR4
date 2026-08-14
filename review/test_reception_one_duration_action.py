@@ -388,7 +388,7 @@ def _trigger_duration_action(page, *, renderer: str, scenario: str) -> None:
         page.locator(f".appt[data-id='{APPOINTMENT_ID}']").focus()
         page.keyboard.press("Alt+ArrowRight")
     else:
-        page.fill("[data-testid='meta-grid-duration-input']", str(REQUESTED_DURATION))
+        page.select_option("[data-testid='meta-grid-duration-select']", str(REQUESTED_DURATION))
         page.click("[data-testid='meta-grid-duration-submit']")
     if EXPECTED[scenario]["dialog"]:
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
@@ -446,25 +446,10 @@ def exercise(page, *, renderer: str, scenario: str) -> dict:
             arg=expected["feedback"],
             timeout=10000,
         )
-        if expected["duration"] == REQUESTED_DURATION:
-            page.wait_for_function(
-                r"""([id, expectedEnd]) => {
-                  const heading = document.querySelector(
-                    `#meta-grid-content [data-appointment-id='${id}'] h3`
-                  );
-                  if (!heading) return false;
-                  const text = heading.textContent || '';
-                  const matches = text.match(/\d{1,2}:\d{2}/g) || [];
-                  const end = matches[matches.length - 1] || '';
-                  return end === expectedEnd;
-                }""",
-                arg=[APPOINTMENT_ID, expected_end],
-                timeout=10000,
-            )
         displayed_window = _reception_displayed_window(page)
         renderer_local = {
             "layout": "selected_card_duration_action_panel",
-            "focus_target": "meta_grid_duration_input",
+            "focus_target": "meta_grid_duration_select",
             "history_behavior": "projection_trail_cleared_only_after_commit",
         }
 
@@ -498,7 +483,18 @@ def run_matrix() -> dict:
                         open_diary(page, base_url)
                         if renderer == "reception_one":
                             open_reception_one(page)
-                        rendered = exercise(page, renderer=renderer, scenario=scenario)
+                        try:
+                            rendered = exercise(page, renderer=renderer, scenario=scenario)
+                        except Exception as exc:
+                            feedback = page.locator(
+                                "[data-testid='meta-grid-duration-feedback']"
+                            ).text_content() if page.locator(
+                                "[data-testid='meta-grid-duration-feedback']"
+                            ).count() else "<missing>"
+                            raise AssertionError(
+                                f"duration matrix exercise failed for {renderer}/{scenario}; "
+                                f"feedback={feedback!r}; state={state!r}"
+                            ) from exc
                         expected = EXPECTED[scenario]
 
                         assert state["start"] == CURRENT_START, (renderer, scenario, state["start"])
@@ -507,9 +503,20 @@ def run_matrix() -> dict:
                         assert state["confirm_count"] == expected["confirm"], (renderer, scenario, state)
                         assert state["raw_count"] == 0, (renderer, scenario, state)
                         assert state["unexpected_mutation_count"] == 0, (renderer, scenario, state["unexpected_mutation_paths"])
-                        assert rendered["displayed_window"] == (
+                        expected_window = (
                             CURRENT_START, _add_minutes(CURRENT_START, expected["duration"])
-                        ), (renderer, scenario, rendered)
+                        )
+                        if rendered["displayed_window"] != expected_window:
+                            headings = page.locator(
+                                f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}'] h3"
+                            ).all_text_contents()
+                            exact = page.evaluate(
+                                "id => window.EMR4DiaryMetaGridBridge.readAppointment(id)",
+                                APPOINTMENT_ID,
+                            )
+                            raise AssertionError(
+                                (renderer, scenario, rendered, headings, exact)
+                            )
 
                         if state["proposal_bodies"]:
                             body = state["proposal_bodies"][0]
@@ -584,46 +591,24 @@ def test_duration_change_paired_matrix() -> None:
 
 # ─── Separate cases: invalid/no-op/out-of-day, interruption, focus, layout ───
 
-def test_invalid_and_no_op_duration_input_makes_zero_routes(reception_page) -> None:
+def test_closed_duration_selector_excludes_invalid_and_no_op_makes_zero_routes(reception_page) -> None:
     page, base_url = reception_page
     state, handler = install_routes(page, scenario="safe")
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        duration_input = page.locator("[data-testid='meta-grid-duration-input']")
+        duration_select = page.locator("[data-testid='meta-grid-duration-select']")
 
-        # Unchanged duration is a local no-op.
-        duration_input.fill(str(CURRENT_DURATION))
+        # Current duration is selected and remains a local no-op.
+        assert duration_select.input_value() == str(CURRENT_DURATION)
         assert page.locator("[data-testid='meta-grid-duration-submit']").is_disabled()
-        page.wait_for_timeout(250)
-        assert state["proposal_count"] == 0
-        assert state["confirm_count"] == 0
-        assert state["raw_count"] == 0
-        assert state["unexpected_mutation_count"] == 0
-
-        # Off-15-minute-grid duration delta is rejected locally without a request.
-        duration_input.fill(str(CURRENT_DURATION + 12))  # 32 from 20 -> delta 12
-        page.click("[data-testid='meta-grid-duration-submit']")
-        page.wait_for_timeout(250)
-        assert state["proposal_count"] == 0
-        assert state["confirm_count"] == 0
-        assert state["raw_count"] == 0
-        assert state["unexpected_mutation_count"] == 0
-        # No optimistic commit: the input must not have advanced.
-        assert duration_input.input_value() != str(REQUESTED_DURATION)
-
-        # Below the 15-minute floor.
-        duration_input.fill("10")
-        page.click("[data-testid='meta-grid-duration-submit']")
-        page.wait_for_timeout(250)
-        assert state["proposal_count"] == 0
-        assert state["confirm_count"] == 0
-        assert state["raw_count"] == 0
-        assert state["unexpected_mutation_count"] == 0
-
-        # Above the 480-minute ceiling.
-        duration_input.fill("495")
-        page.click("[data-testid='meta-grid-duration-submit']")
+        option_values = duration_select.locator("option").evaluate_all(
+            "options => options.map(option => option.value)"
+        )
+        assert str(REQUESTED_DURATION) in option_values
+        assert str(CURRENT_DURATION + 12) not in option_values
+        assert "10" not in option_values
+        assert "495" not in option_values
         page.wait_for_timeout(250)
         assert state["proposal_count"] == 0
         assert state["confirm_count"] == 0
@@ -639,22 +624,21 @@ def test_out_of_day_duration_makes_zero_routes(reception_page) -> None:
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        duration_input = page.locator("[data-testid='meta-grid-duration-input']")
+        duration_select = page.locator("[data-testid='meta-grid-duration-select']")
 
-        # 23:30 + 45 minutes crosses midnight -> out-of-day, rejected with zero request.
-        duration_input.fill("45")
-        page.click("[data-testid='meta-grid-duration-submit']")
+        # At 23:30, 30 minutes reaches midnight and every longer option crosses
+        # it. The closed selector therefore exposes only the unchanged 15.
+        option_values = duration_select.locator("option").evaluate_all(
+            "options => options.map(option => option.value)"
+        )
+        assert option_values == ["15"]
+        assert duration_select.input_value() == "15"
+        assert page.locator("[data-testid='meta-grid-duration-submit']").is_disabled()
         page.wait_for_timeout(250)
         assert state["proposal_count"] == 0
         assert state["confirm_count"] == 0
         assert state["raw_count"] == 0
         assert state["unexpected_mutation_count"] == 0
-
-        # The unchanged same-day duration is still a local no-op (submit disabled).
-        duration_input.fill("15")
-        assert page.locator("[data-testid='meta-grid-duration-submit']").is_disabled()
-        assert state["proposal_count"] == 0
-        assert state["confirm_count"] == 0
     finally:
         page.unroute("**/api/v1/**", handler)
 
@@ -666,7 +650,7 @@ def test_interruption_keeps_one_action_and_requires_fresh_reconciliation(recepti
         open_diary(page, base_url)
         open_reception_one(page)
         initial_list_reads = state["list_read_count"]
-        page.fill("[data-testid='meta-grid-duration-input']", str(REQUESTED_DURATION))
+        page.select_option("[data-testid='meta-grid-duration-select']", str(REQUESTED_DURATION))
         page.click("[data-testid='meta-grid-duration-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         page.evaluate("window.dispatchEvent(new Event('blur'))")
@@ -688,20 +672,20 @@ def test_interruption_keeps_one_action_and_requires_fresh_reconciliation(recepti
         # appointment coordinate must come from the fresh authoritative read.
         assert _reception_displayed_window(page) == (CURRENT_START, CURRENT_END)
         page.wait_for_function(
-            "document.activeElement?.dataset?.testid === 'meta-grid-duration-input'"
+            "document.activeElement?.dataset?.testid === 'meta-grid-duration-select'"
         )
-        assert page.locator("[data-testid='meta-grid-duration-input']").evaluate("el => document.activeElement === el")
+        assert page.locator("[data-testid='meta-grid-duration-select']").evaluate("el => document.activeElement === el")
     finally:
         page.unroute("**/api/v1/**", handler)
 
 
-def test_dialog_focus_containment_and_escape_return_to_duration_input(reception_page) -> None:
+def test_dialog_focus_containment_and_escape_return_to_duration_selector(reception_page) -> None:
     page, base_url = reception_page
     state, handler = install_routes(page, scenario="cancelled")
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        page.fill("[data-testid='meta-grid-duration-input']", str(REQUESTED_DURATION))
+        page.select_option("[data-testid='meta-grid-duration-select']", str(REQUESTED_DURATION))
         page.click("[data-testid='meta-grid-duration-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         dialog = page.locator("[data-testid='status-proposal-dialog']")
@@ -717,9 +701,9 @@ def test_dialog_focus_containment_and_escape_return_to_duration_input(reception_
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
         assert page.locator("#bernie-meta-grid").is_visible()
         page.wait_for_function(
-            "document.activeElement?.dataset?.testid === 'meta-grid-duration-input'"
+            "document.activeElement?.dataset?.testid === 'meta-grid-duration-select'"
         )
-        assert page.locator("[data-testid='meta-grid-duration-input']").evaluate("el => document.activeElement === el")
+        assert page.locator("[data-testid='meta-grid-duration-select']").evaluate("el => document.activeElement === el")
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
         assert state["raw_count"] == 0
@@ -733,27 +717,30 @@ def test_duration_status_time_actions_share_mutual_exclusion(reception_page) -> 
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        duration_input = page.locator("[data-testid='meta-grid-duration-input']")
+        duration_select = page.locator("[data-testid='meta-grid-duration-select']")
         time_input = page.locator("[data-testid='meta-grid-reschedule-time']")
         status_select = page.locator("[data-testid='meta-grid-status-select']")
 
         # While the duration review is awaiting staff confirmation, the time and
         # status actions are disabled too (status/time/duration mutual exclusion).
-        page.fill("[data-testid='meta-grid-duration-input']", str(REQUESTED_DURATION))
+        page.select_option("[data-testid='meta-grid-duration-select']", str(REQUESTED_DURATION))
         page.click("[data-testid='meta-grid-duration-submit']")
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="visible")
         assert status_select.is_disabled()
         assert time_input.is_disabled()
-        assert duration_input.is_disabled()
+        assert duration_select.is_disabled()
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
 
         # Cancel re-enables all three actions without committing anything.
         page.locator("[data-testid='status-proposal-dialog'] button:has-text('Cancel')").click()
         page.wait_for_selector("[data-testid='status-proposal-dialog']", state="detached")
+        page.wait_for_function(
+            "document.querySelector('[data-testid=meta-grid-duration-feedback]')?.textContent.toLowerCase().includes('cancelled')"
+        )
         assert not status_select.is_disabled()
         assert not time_input.is_disabled()
-        assert not duration_input.is_disabled()
+        assert not duration_select.is_disabled()
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
         assert state["raw_count"] == 0
@@ -813,7 +800,7 @@ def test_duration_action_is_usable_without_horizontal_overflow(
           };
         }""")
         assert layout == {"overflow": False, "withinHost": True}
-        assert page.locator("[data-testid='meta-grid-duration-input']").is_visible()
+        assert page.locator("[data-testid='meta-grid-duration-select']").is_visible()
         assert page.locator("[data-testid='meta-grid-duration-submit']").is_visible()
         assert page.locator("[data-testid='meta-grid-duration-feedback']").is_visible()
         assert state["proposal_count"] == 0
@@ -823,17 +810,24 @@ def test_duration_action_is_usable_without_horizontal_overflow(
         page.set_viewport_size({"width": 1280, "height": 720})
 
 
-def test_selected_card_duration_input_is_15_minute_step(reception_page) -> None:
+def test_selected_card_duration_selector_uses_15_minute_deltas(reception_page) -> None:
     page, base_url = reception_page
     state, handler = install_routes(page, scenario="responsive")
     try:
         open_diary(page, base_url)
         open_reception_one(page)
-        duration_input = page.locator("[data-testid='meta-grid-duration-input']")
-        assert duration_input.get_attribute("type") == "number"
-        assert duration_input.get_attribute("step") == "15"
-        assert duration_input.get_attribute("min") == "15"
-        assert duration_input.get_attribute("max") == "480"
+        duration_select = page.locator("[data-testid='meta-grid-duration-select']")
+        assert duration_select.evaluate("element => element.tagName") == "SELECT"
+        option_values = [
+            int(value)
+            for value in duration_select.locator("option").evaluate_all(
+                "options => options.map(option => option.value)"
+            )
+        ]
+        assert CURRENT_DURATION in option_values
+        assert REQUESTED_DURATION in option_values
+        assert all(15 <= value <= 480 for value in option_values)
+        assert all((value - CURRENT_DURATION) % 15 == 0 for value in option_values)
         submit = page.locator("[data-testid='meta-grid-duration-submit']")
         assert submit.text_content().strip() == "Review duration change"
         assert page.locator("[data-testid='meta-grid-duration-action']").is_visible()
@@ -855,7 +849,7 @@ def test_reception_one_duration_action_source_has_no_second_write_path() -> None
     diary = (DOCS / "diary/diary.js").read_text(encoding="utf-8")
 
     # 1. The selected-card duration panel is present in Reception One.
-    for testid in ("meta-grid-duration-action", "meta-grid-duration-input", "meta-grid-duration-submit", "meta-grid-duration-feedback"):
+    for testid in ("meta-grid-duration-action", "meta-grid-duration-select", "meta-grid-duration-submit", "meta-grid-duration-feedback"):
         assert testid in meta, f"missing Reception One duration-action testid: {testid}"
     assert "Review duration change" in meta
 
@@ -881,13 +875,13 @@ def test_reception_one_duration_action_source_has_no_second_write_path() -> None
     # 4. The duration bridge fixes the start delta at literal zero and computes
     #    only the duration delta (same-date, same-start, same-practitioner).
     assert re.search(
-        r"handleMoveResize\(\s*appointment,\s*0,\s*requestedDurationMins\s*-\s*currentDurationMins,",
+        r"handleMoveResize\(\s*appointment,\s*0,\s*requestedDuration\s*-\s*currentDuration,",
         diary,
     ), "start delta is not fixed at literal zero"
 
     # 5. The bridge exposes a duration-only change method and the shared review
     #    dialog is parameterized with the duration wording.
-    assert "changeAppointmentDuration" in diary
+    assert "resizeAppointmentDuration" in diary
     assert "Confirm Appointment Duration Change" in diary
 
 

@@ -4,14 +4,14 @@
   "active_tranche": "Reception One selected-appointment duration-only composition",
   "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
   "status": "in_progress",
-  "source_head": "268e90316c3ef248385ec19d25768c20aed2f3fe",
+  "source_head": "52ee727928f32581f5fd5a969bfbcde55a13d87d",
   "authority_source": "AGENTS.md Continuity 286 / Compass 268, the accepted time-reschedule closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "the fresh preplanning receipt passes and the provider-free duration-only plan, threat delta, three-lane allocation and plan admission test are frozen over baseline 268e90316c3ef248385ec19d25768c20aed2f3fe",
-    "next_executable_stage": "commit the frozen plan boundary, generate a passing pre-worker-dispatch receipt, then run the DeepSeek test-artifact worker and native read-only seam-map subagent beside Sol product implementation",
+    "completed_stage": "DeepSeek and native-subagent contributions are recovered and complete; in-app desktop/tablet/phone QA passes after correcting one rendered range-separator defect; the consolidated 118-test packet and canonical 196-test fast profile pass",
+    "next_executable_stage": "commit the exact deterministic candidate and orchestration evidence, create a fresh clean read-only review worktree, generate the pre-verifier receipt and dispatch the reserved Gemini 3.6 Flash/high veto",
     "retry_counters": {
       "review": 0,
-      "verification": 1
+      "verification": 7
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },

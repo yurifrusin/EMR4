@@ -102,6 +102,13 @@
       busy: false,
       reconciliationRequired: false
     },
+    durationAction: {
+      appointmentId: null,
+      requestedDuration: null,
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    },
     proposalResult: null,
     patientContexts: new Map(),
     private: false,
@@ -530,6 +537,13 @@
       state.rescheduleAction = {
         appointmentId: null,
         requestedStart: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.durationAction = {
+        appointmentId: null,
+        requestedDuration: null,
         phase: "idle",
         busy: false,
         reconciliationRequired: false
@@ -2145,6 +2159,13 @@
       busy: false,
       reconciliationRequired: false
     };
+    state.durationAction = {
+      appointmentId: null,
+      requestedDuration: null,
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    };
     state.proposalResult = null;
     if (state.current && ["selection_only", "proposal_not_committed"].includes(state.current.state)) {
       state.current = null;
@@ -2234,10 +2255,11 @@
   function markInterrupted() {
     if (!state.isOpen || !state.current || state.current.state === "overview") return;
     togglePrivacy(true);
-    if (state.statusAction.busy || state.rescheduleAction.busy) {
+    if (state.statusAction.busy || state.rescheduleAction.busy || state.durationAction.busy) {
       state.interrupted = true;
       if (state.statusAction.busy) state.statusAction.reconciliationRequired = true;
       if (state.rescheduleAction.busy) state.rescheduleAction.reconciliationRequired = true;
+      if (state.durationAction.busy) state.durationAction.reconciliationRequired = true;
       return;
     }
     if (state.current.state === "reconciliation_required") return;
@@ -2262,6 +2284,29 @@
     state.proposalResult = null;
     state.trail = [];
     render();
+  }
+
+  function requireFreshActionReconciliation(reason) {
+    state.interrupted = true;
+    state.current = {
+      ...state.current,
+      state: "reconciliation_required",
+      items: (state.current?.items || []).map(item => ({ ...item, selected: false })),
+      freshness: {
+        ...state.current?.freshness,
+        stale: true,
+        reason
+      },
+      action_boundary: {
+        posture: "none",
+        appointment_write_authority: false,
+        operational_command_available: false,
+        required_backend_pattern: "Refresh the exact current scope before another appointment action"
+      }
+    };
+    state.selectedItem = null;
+    state.proposalResult = null;
+    state.trail = [];
   }
 
   function renderRootHistory() {
@@ -2315,6 +2360,13 @@
             state.rescheduleAction = {
               appointmentId: String(item.id),
               requestedStart: null,
+              phase: "idle",
+              busy: false,
+              reconciliationRequired: false
+            };
+            state.durationAction = {
+              appointmentId: String(item.id),
+              requestedDuration: null,
               phase: "idle",
               busy: false,
               reconciliationRequired: false
@@ -2611,6 +2663,17 @@
     committed: "Time committed and checked against a fresh Diary read."
   });
 
+  const DURATION_ACTION_MESSAGES = Object.freeze({
+    idle: "The proposed duration is staff input only. The existing Diary review owns any change.",
+    checking: "Checking current Diary authority and booking truth.",
+    awaiting_confirmation: "Confirmation required in the existing Diary review dialog.",
+    saving: "Checking the current Diary again and saving.",
+    cancelled: "Duration change cancelled. No change was made.",
+    blocked: "Duration change blocked. No change was made.",
+    failed: "Duration not changed. Fresh Diary truth has been restored.",
+    committed: "Duration committed and checked against a fresh Diary read."
+  });
+
   function selectedStatusActionItem(projection = state.current) {
     const selectedId = String(state.selectedAppointment?.id || "");
     if (!selectedId || !["patient_timeline", "focused_schedule_lane"].includes(projection?.family)) {
@@ -2637,6 +2700,7 @@
     const unavailable = Boolean(
       state.statusAction.busy
       || state.rescheduleAction.busy
+      || state.durationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
     );
@@ -2662,6 +2726,7 @@
     const unavailable = Boolean(
       state.rescheduleAction.busy
       || state.statusAction.busy
+      || state.durationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
     );
@@ -2671,6 +2736,49 @@
     }
     if (submit) submit.disabled = unavailable || !requestedStart || requestedStart === currentStart;
     if (feedback) feedback.textContent = rescheduleActionMessage();
+  }
+
+  function durationActionMessage() {
+    return DURATION_ACTION_MESSAGES[state.durationAction.phase] || DURATION_ACTION_MESSAGES.failed;
+  }
+
+  function validDurationTargets(selected) {
+    const currentDuration = Number(selected?.duration_minutes);
+    const startMinutes = minutesFromTime(selected?.starts_at);
+    if (!Number.isInteger(currentDuration) || currentDuration < 1 || startMinutes === null) return [];
+    const values = [currentDuration];
+    for (let target = 15; target <= 480; target += 1) {
+      if (target === currentDuration) continue;
+      if ((target - currentDuration) % 15 !== 0) continue;
+      if (startMinutes + target >= 1440) continue;
+      values.push(target);
+    }
+    return values.sort((left, right) => left - right);
+  }
+
+  function updateDurationActionControls() {
+    const select = document.getElementById("meta-grid-duration-select");
+    const submit = document.getElementById("meta-grid-duration-submit");
+    const feedback = document.getElementById("meta-grid-duration-feedback");
+    const currentDuration = Number(selectedStatusActionItem()?.duration_minutes);
+    const requestedDuration = Number(select?.value || state.durationAction.requestedDuration || currentDuration);
+    const unavailable = Boolean(
+      state.durationAction.busy
+      || state.statusAction.busy
+      || state.rescheduleAction.busy
+      || state.interrupted
+      || state.current?.freshness?.stale
+    );
+    if (select) {
+      select.disabled = unavailable;
+      select.toggleAttribute("aria-busy", state.durationAction.busy);
+    }
+    if (submit) {
+      submit.disabled = unavailable
+        || !Number.isInteger(requestedDuration)
+        || requestedDuration === currentDuration;
+    }
+    if (feedback) feedback.textContent = durationActionMessage();
   }
 
   function applyFreshAppointmentToCurrentProjection(appointment) {
@@ -2688,7 +2796,7 @@
         practitioner_id: appointment.practitioner_id,
         practitioner_display: appointment.practitioner_display,
         location_display: appointment.location_display,
-        display: `${timeLabel(appointment.start_time_local)}â€“${timeLabel(appointment.end_time_local)}`,
+        display: `${timeLabel(appointment.start_time_local)}–${timeLabel(appointment.end_time_local)}`,
         status: appointment.status,
         secondary: `${item.patient_display || "Patient"} · ${appointment.status}`
       };
@@ -2715,6 +2823,8 @@
     if (
       !selected
       || state.statusAction.busy
+      || state.rescheduleAction.busy
+      || state.durationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
       || requestedStatus === selected.status
@@ -2729,6 +2839,8 @@
       reconciliationRequired: false
     };
     updateStatusActionControls();
+    updateRescheduleActionControls();
+    updateDurationActionControls();
 
     try {
       const result = await bridge.setAppointmentStatus(
@@ -2736,8 +2848,10 @@
         select,
         update => {
           state.statusAction.phase = update.phase;
-          state.statusAction.busy = true;
+          state.statusAction.busy = update.busy !== false;
           updateStatusActionControls();
+          updateRescheduleActionControls();
+          updateDurationActionControls();
         }
       );
       const interrupted = state.statusAction.reconciliationRequired || state.interrupted;
@@ -2794,6 +2908,7 @@
       !selected
       || state.rescheduleAction.busy
       || state.statusAction.busy
+      || state.durationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
       || requestedStart === selected.starts_at
@@ -2809,6 +2924,7 @@
     };
     updateRescheduleActionControls();
     updateStatusActionControls();
+    updateDurationActionControls();
 
     try {
       const result = await bridge.rescheduleAppointmentTime(
@@ -2819,6 +2935,7 @@
           state.rescheduleAction.busy = update.busy !== false;
           updateRescheduleActionControls();
           updateStatusActionControls();
+          updateDurationActionControls();
         }
       );
       const interrupted = state.rescheduleAction.reconciliationRequired || state.interrupted;
@@ -2867,6 +2984,96 @@
     setTimeout(() => {
       const currentInput = document.getElementById("meta-grid-reschedule-time");
       if (currentInput) currentInput.focus({ preventScroll: true });
+      else focusCanvasWithoutWindowScroll();
+    }, 0);
+  }
+
+  async function executeSelectedDurationAction(select) {
+    const selected = selectedStatusActionItem();
+    const requestedDuration = Number(select?.value);
+    if (
+      !selected
+      || state.durationAction.busy
+      || state.statusAction.busy
+      || state.rescheduleAction.busy
+      || state.interrupted
+      || state.current?.freshness?.stale
+      || !Number.isInteger(requestedDuration)
+      || requestedDuration === Number(selected.duration_minutes)
+    ) return;
+
+    const appointmentId = String(selected.id);
+    state.durationAction = {
+      appointmentId,
+      requestedDuration,
+      phase: "checking",
+      busy: true,
+      reconciliationRequired: false
+    };
+    updateDurationActionControls();
+    updateStatusActionControls();
+    updateRescheduleActionControls();
+
+    try {
+      const result = await bridge.resizeAppointmentDuration(
+        { appointment_id: appointmentId, duration_minutes: requestedDuration },
+        select,
+        update => {
+          state.durationAction.phase = update.phase;
+          state.durationAction.busy = update.busy !== false;
+          updateDurationActionControls();
+          updateStatusActionControls();
+          updateRescheduleActionControls();
+        }
+      );
+      const interrupted = state.durationAction.reconciliationRequired || state.interrupted;
+      if (result.committed || interrupted) {
+        await refreshCurrent({
+          pushCurrent: false,
+          clearTrail: true,
+          preserveSelectedAppointmentId: appointmentId,
+          focusCanvas: false,
+          reason: result.committed
+            ? "Fresh scoped read after committed appointment duration change"
+            : "Fresh scoped read after interrupted appointment duration review"
+        });
+        if (result.committed) {
+          applyFreshAppointmentToCurrentProjection(result.appointment);
+        }
+      } else {
+        applyFreshAppointmentToCurrentProjection(result.appointment);
+      }
+      state.durationAction = {
+        appointmentId,
+        requestedDuration,
+        phase: result.committed ? "committed" : result.outcome,
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.interrupted = false;
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = state.selectedAppointment
+          ? durationActionMessage()
+          : "Duration committed. The appointment is no longer in this current projection.";
+      }
+    } catch (_) {
+      state.durationAction = {
+        appointmentId,
+        requestedDuration,
+        phase: "failed",
+        busy: false,
+        reconciliationRequired: true
+      };
+      requireFreshActionReconciliation(
+        "The duration outcome could not be reconciled from an exact fresh appointment read"
+      );
+      render();
+      if (elements.announcer) elements.announcer.textContent = durationActionMessage();
+    }
+    setTimeout(() => {
+      const currentSelect = document.getElementById("meta-grid-duration-select");
+      if (currentSelect) currentSelect.focus({ preventScroll: true });
       else focusCanvasWithoutWindowScroll();
     }, 0);
   }
@@ -2993,6 +3200,79 @@
     updateRescheduleActionControls();
   }
 
+  function renderDurationAction(projection) {
+    const selected = selectedStatusActionItem(projection);
+    if (!selected) {
+      if (state.durationAction.phase === "committed" && state.durationAction.appointmentId) {
+        const outcome = createElement(
+          "p",
+          "meta-grid-duration-outcome",
+          "Duration committed. The appointment is no longer in this current projection."
+        );
+        outcome.setAttribute("role", "status");
+        outcome.setAttribute("aria-live", "polite");
+        elements.actions.appendChild(outcome);
+      }
+      return;
+    }
+
+    const panel = createElement("section", "meta-grid-duration-action");
+    panel.dataset.testid = "meta-grid-duration-action";
+    panel.setAttribute("aria-labelledby", "meta-grid-duration-action-heading");
+    const copy = createElement("div", "meta-grid-duration-action-copy");
+    const heading = createElement(
+      "strong",
+      "",
+      `Current duration: ${selected.duration_minutes} minutes; ends ${timeLabel(selected.ends_at)}`
+    );
+    heading.id = "meta-grid-duration-action-heading";
+    copy.append(
+      heading,
+      createElement("span", "", "Same date, start and practitioner. Current Diary truth is checked again before any write.")
+    );
+
+    const label = createElement("label", "meta-grid-duration-label", "New duration");
+    label.htmlFor = "meta-grid-duration-select";
+    const select = createElement("select", "meta-grid-duration-select");
+    select.id = "meta-grid-duration-select";
+    select.dataset.testid = "meta-grid-duration-select";
+    const requested = (
+      state.durationAction.appointmentId === String(selected.id)
+      && Number.isInteger(state.durationAction.requestedDuration)
+    ) ? state.durationAction.requestedDuration : Number(selected.duration_minutes);
+    validDurationTargets(selected).forEach(duration => {
+      const option = createElement(
+        "option",
+        "",
+        `${duration} minutes · ends ${timeLabel(addHours(selected.starts_at, duration))}`
+      );
+      option.value = String(duration);
+      option.selected = duration === requested;
+      select.appendChild(option);
+    });
+    select.addEventListener("change", () => {
+      state.durationAction.requestedDuration = Number(select.value);
+      state.durationAction.phase = "idle";
+      updateDurationActionControls();
+    });
+
+    const submit = createElement("button", "meta-grid-duration-submit", "Review duration change");
+    submit.type = "button";
+    submit.id = "meta-grid-duration-submit";
+    submit.dataset.testid = "meta-grid-duration-submit";
+    submit.addEventListener("click", () => executeSelectedDurationAction(select));
+
+    const feedback = createElement("p", "meta-grid-duration-feedback", durationActionMessage());
+    feedback.id = "meta-grid-duration-feedback";
+    feedback.dataset.testid = "meta-grid-duration-feedback";
+    feedback.setAttribute("role", "status");
+    feedback.setAttribute("aria-live", "polite");
+    feedback.setAttribute("aria-atomic", "true");
+    panel.append(copy, label, select, submit, feedback);
+    elements.actions.appendChild(panel);
+    updateDurationActionControls();
+  }
+
   function renderActions(projection) {
     elements.actions.replaceChildren();
     elements.actions.classList.remove("is-return-only");
@@ -3042,6 +3322,7 @@
     ) {
       renderStatusAction(projection);
       renderRescheduleAction(projection);
+      renderDurationAction(projection);
       const nextStep = createElement("div", "meta-grid-read-next");
       const icon = createElement("span", "meta-grid-read-next-icon", "+");
       icon.setAttribute("aria-hidden", "true");

@@ -20,7 +20,7 @@ def test_result_heavy_projection_uses_content_aware_height_and_canvas_scroll() -
     css = CSS.read_text(encoding="utf-8")
     html = HTML.read_text(encoding="utf-8")
 
-    assert 'href="meta-grid.css?v=12"' in html
+    assert 'href="meta-grid.css?v=13"' in html
     assert "height: min(84vh, 760px);" in css
     canvas = css[css.rindex(".meta-grid-canvas {") :]
     for contract in (

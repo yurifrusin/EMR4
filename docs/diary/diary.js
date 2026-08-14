@@ -6981,16 +6981,20 @@ async function metaGridReadAppointments(filters = {}) {
 }
 
 async function metaGridReadAppointment(appointmentId) {
+  return metaGridAppointmentView(await metaGridReadAppointmentSource(appointmentId));
+}
+
+async function metaGridReadAppointmentSource(appointmentId) {
   const normalized = String(appointmentId || "").trim();
   if (!normalized) throw new Error("Appointment id is required for a fresh read.");
   if (isSmokeMode()) {
-    const appointment = metaGridSmokeAppointments().find(item => item.id === normalized);
+    const appointment = getMockAppointments().find(item => String(item?.id || "") === normalized);
     if (!appointment) throw new Error("Appointment is no longer available in this scope.");
     return appointment;
   }
   const response = await apiFetch(`/appointments/${encodeURIComponent(normalized)}`);
   if (!response.ok) throw new Error(await apiErrorMessage(response, "Appointment read"));
-  return metaGridAppointmentView(await response.json());
+  return response.json();
 }
 
 async function metaGridReadCommittedEvents(cursor = null, limit = 10) {
@@ -7388,6 +7392,70 @@ async function metaGridRescheduleAppointmentTime(input, timeEl = null, onStateCh
   });
 }
 
+async function metaGridResizeAppointmentDuration(input, durationEl = null, onStateChange = null) {
+  const appointmentId = String(input?.appointment_id || "").trim();
+  const requestedDuration = Number(input?.duration_minutes);
+  if (!appointmentId || appointmentId.length > 200) {
+    throw new Error("The selected appointment is not available for a duration review.");
+  }
+  const appointment = await metaGridReadAppointmentSource(appointmentId);
+  const currentDuration = Number(appointment.duration_minutes);
+  const currentStartMins = toMins(appointment.start_time_local);
+  if (
+    !Number.isInteger(currentDuration)
+    || currentDuration < 1
+    || !Number.isInteger(requestedDuration)
+    || requestedDuration < 15
+    || requestedDuration > 480
+    || (requestedDuration - currentDuration) % 15 !== 0
+    || currentStartMins < 0
+    || currentStartMins + requestedDuration >= 1440
+  ) {
+    throw new Error("Choose a 15-minute duration step that keeps the appointment on the same day.");
+  }
+  if (requestedDuration === currentDuration) {
+    throw new Error("Choose a different duration before review.");
+  }
+
+  const practitionerId = metaGridPractitionerId(appointment);
+  const practitionerAhpra = appointment?.practitioner?.ahpra_number || appointment?.practitioner_ahpra;
+  const samePractitionerColumn = activeTemplate?.columns?.find(column => (
+    (practitionerId && String(column.practitioner_id || "") === practitionerId)
+    || (practitionerAhpra && column.practitioner_ahpra === practitionerAhpra)
+  )) || null;
+  let outcome = "checking";
+  const observe = update => {
+    outcome = update.phase;
+    if (
+      typeof onStateChange === "function"
+      && !["committed", "cancelled", "blocked", "failed"].includes(update.phase)
+    ) onStateChange(update);
+  };
+  const result = await handleMoveResize(
+    appointment,
+    0,
+    requestedDuration - currentDuration,
+    samePractitionerColumn,
+    {
+      onStateChange: observe,
+      returnFocus: durationEl,
+      suppressAlert: true,
+      dialogTitle: "Confirm Appointment Duration Change",
+      dialogSummary: "Review the proposed appointment duration and derived end time.",
+      displayTransition: {
+        from: `${currentDuration} minutes; ends ${fromMins(currentStartMins + currentDuration)}`,
+        to: `${requestedDuration} minutes; ends ${fromMins(currentStartMins + requestedDuration)}`
+      }
+    }
+  );
+  const currentAppointment = await metaGridReadAppointment(appointmentId);
+  return Object.freeze({
+    committed: result?.committed === true,
+    outcome: result?.committed === true ? "committed" : (result?.outcome || outcome),
+    appointment: currentAppointment
+  });
+}
+
 function setMetaGridLaunchAvailability(available) {
   const button = document.getElementById("btn-meta-grid-launch");
   if (button) button.classList.toggle("hidden", !available);
@@ -7414,6 +7482,7 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   statusOptions: appointmentStatusOptions,
   setAppointmentStatus: metaGridSetAppointmentStatus,
   rescheduleAppointmentTime: metaGridRescheduleAppointmentTime,
+  resizeAppointmentDuration: metaGridResizeAppointmentDuration,
   composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
@@ -10246,9 +10315,9 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null, 
       notify("awaiting_confirmation", true);
       const confirmed = await showStatusProposalDialog(proposal, {
         returnFocus: actionOptions?.returnFocus,
-        title: "Confirm Appointment Time Change",
-        defaultSummary: "Review the proposed appointment time change.",
-        displayTransition: {
+        title: actionOptions?.dialogTitle || "Confirm Appointment Time Change",
+        defaultSummary: actionOptions?.dialogSummary || "Review the proposed appointment time change.",
+        displayTransition: actionOptions?.displayTransition || {
           from: `${fromMins(currentStartMins)}â€“${fromMins(currentStartMins + (appt.duration_minutes || 15))}`,
           to: `${newStartTimeString}â€“${fromMins(newStartMins + newDuration)}`
         },

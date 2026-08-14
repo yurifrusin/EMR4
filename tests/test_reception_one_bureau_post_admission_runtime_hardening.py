@@ -143,7 +143,7 @@ def test_client_contract_is_exact_and_clears_planner_scoped_state() -> None:
     assert "clearPlannerScopedResultForModeChange()" in source
     assert "state.selectedAppointment = null;" in source
     assert 'projectionState: "planner_reselection_required"' in source
-    assert "meta-grid.js?v=17" in DIARY_HTML.read_text(encoding="utf-8")
+    assert "meta-grid.js?v=18" in DIARY_HTML.read_text(encoding="utf-8")
 
 
 def test_plan_and_threat_delta_keep_provider_and_write_gates_closed() -> None:

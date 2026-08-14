@@ -220,7 +220,7 @@ def test_diary_wiring_is_strict_true_and_enabled_branch_has_no_fallback() -> Non
     assert "fetchPractitionerDirectoryGraphql" not in application_session
     assert "fetchPractitionerDirectoryRest" not in application_session
     assert "apiFetch(" not in application_session
-    assert 'diary.js?v=200' in DIARY_HTML.read_text(encoding="utf-8")
+    assert 'diary.js?v=201' in DIARY_HTML.read_text(encoding="utf-8")
 
 
 def test_invalid_transitions_reset_and_enabled_failure_is_rethrown() -> None:

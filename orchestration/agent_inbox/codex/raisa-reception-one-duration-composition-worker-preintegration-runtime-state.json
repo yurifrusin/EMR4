@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "adopt_deepseek_one_file_test_candidate_under_sol_recovery_without_acceptance_transfer",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 286 / Compass 268 keeps duration-only composition active under the standing uninterrupted-development authority.",
+    "current_authority_allocation": "Sol retains product, integration, recovery and acceptance authority. DeepSeek completed exactly one isolated test artifact at f08a16960c26f400954fbfedc3e30ff2b87705c6; the native subagent completed read-only seam analysis; Gemini remains reserved for post-deterministic veto.",
+    "active_plan_and_acceptance": "The frozen duration plan requires a bounded selector, exact fresh reconciliation and the existing handleMoveResize update proposal/confirm path. DeepSeek's matrix is useful but its free-form input selectors and bridge-name assumption require Sol recovery before behavioural admission.",
+    "protected_evidence_boundaries": "The worker changed only review/test_reception_one_duration_action.py. Protected evidence, historical Diary PHI, product/patient/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, providers/ADC/credentials/IAM/network, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "The DeepSeek worktree is clean at f08a16960c26f400954fbfedc3e30ff2b87705c6 with exactly one added file over source 65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab. The main task worktree remains at 65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab with intentional duration product, test and continuation changes plus preserved untracked files. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
+    "status": "in_progress",
+    "source_head": "65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab",
+    "authority_source": "AGENTS.md Continuity 286 / Compass 268, accepted time-reschedule closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "DeepSeek completed a clean one-file test commit and native read-only analysis found fresh-read, reconciliation and midnight-boundary risks that Sol repaired; focused product regressions pass",
+      "next_executable_stage": "adopt the one-file worker candidate under the recovery lease, replace its free-form input and bridge-name assumptions with the frozen selector contract, then execute it against the Sol product candidate",
+      "retry_counters": {"review": 0, "verification": 5},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["worker_one_new_test_file_only", "sol_recovery_non_transferable_provenance", "same_date_same_start_same_practitioner_duration_only", "existing_update_proposal_confirm_only", "no_raw_put_or_second_command_path", "provider_free_authored_synthetic_only", "protected_evidence_product_data_backend_database_network_deployment_and_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "assessed_stage": "worker return and preintegration recovery",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "positive", "rationale": "The one-file matrix and routes realized useful leverage, while selector and identifier assumptions require bounded Sol recovery rather than redispatch.", "work_packages": ["f08a16960c26f400954fbfedc3e30ff2b87705c6 review/test_reception_one_duration_action.py"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "A fresh veto remains required after the recovered candidate passes deterministic checks.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "Read-only seam analysis realized leverage by exposing exact fresh-read failure, reconciliation and midnight-boundary risks before candidate admission.", "work_packages": ["read-only final seam and risk map"]}
+    ],
+    "parallel_work_packages": ["DeepSeek one-file matrix completed", "native risk map completed", "Sol product and test recovery active"],
+    "serial_constraints": ["Sol recovery and deterministic execution now share the exact candidate", "deterministic passage precedes Gemini", "Sol alone integrates and accepts"],
+    "reassessment_triggers": ["recovered worker test execution", "material product or test recovery", "pre-verifier acceptance", "tranche closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_worker_preintegration_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reviewed the worker receipt, exact commit boundary and candidate source before recovery adoption."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native read-only seam analysis completed without edits or acceptance claim."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains reserved until deterministic passage."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek returned a non-transferable completed receipt and clean exact one-file commit."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport is not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -78,7 +78,7 @@ def test_projection_grows_for_result_heavy_views_then_scrolls_its_canvas() -> No
     html = _read(DIARY / "diary.html")
     css = _read(DIARY / "meta-grid.css")
 
-    assert 'href="meta-grid.css?v=12"' in html
+    assert 'href="meta-grid.css?v=13"' in html
     assert (
         '.meta-grid[data-family="availability_slots"] .meta-grid-shell'
         in css
