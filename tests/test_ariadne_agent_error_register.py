@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 271
+    assert register["register_revision"] == 272
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 311)
+        f"AER-{index:04d}" for index in range(1, 312)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 209
+    assert len(agent_incidents) == 210
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 310
+    assert report["incident_count"] == 311
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2610,7 +2610,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0310_record_reschedule_and_multi_change_recovery() -> None:
+def test_aer_0294_through_0311_record_reschedule_and_multi_change_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2777,6 +2777,19 @@ def test_aer_0294_through_0310_record_reschedule_and_multi_change_recovery() -> 
     assert source_binding_recurrence["correction"]["status"] == (
         "corrected_fresh_attempt"
     )
+
+    antigravity_help = incidents["AER-0311"]
+    assert antigravity_help["stage"] == "dispatch"
+    assert antigravity_help["role"] == "orchestrator"
+    assert antigravity_help["category"] == "command_scope_violation"
+    assert antigravity_help["process_severity"] == "low"
+    assert antigravity_help["candidate_state"] == "canonical_unchanged"
+    assert antigravity_help["related_incident_ids"] == []
+    assert antigravity_help["recurrence_signature"] == (
+        "orchestrator.python_package_script_path_invocation"
+    )
+    assert antigravity_help["status"] == "corrected"
+    assert antigravity_help["correction"]["status"] == "corrected_fresh_attempt"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -3053,17 +3066,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 271
-    assert report["incident_count"] == 310
+    assert report["register_revision"] == 272
+    assert report["incident_count"] == 311
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 209,
+        "agent_behavior": 210,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 42,
+        "command_scope_violation": 43,
         "evidence_misreport": 42,
         "harness_failure": 37,
         "output_contract_violation": 86,
@@ -3074,7 +3087,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 185,
+        "canonical_unchanged": 186,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(
@@ -3132,19 +3145,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.python_package_script_path_invocation",
-            "incident_count": 5,
+            "incident_count": 6,
             "incident_ids": [
                 "AER-0058",
                 "AER-0066",
                 "AER-0067",
                 "AER-0204",
                 "AER-0302",
+                "AER-0311",
             ],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
+                "For every remaining repository Python harness in this tranche, use python -m scripts.<module> exclusively; never infer direct-path safety from an AGENTS.md launcher label.",
                 "For the remainder of this tranche, invoke every repository Python harness only as python -m scripts.<module>; use filesystem paths only for non-Python executables or files passed as data arguments.",
                 "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
                 "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",

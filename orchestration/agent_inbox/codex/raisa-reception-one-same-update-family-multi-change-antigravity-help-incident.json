@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0311",
+  "attempt_id": "raisa-reception-one-same-update-family-multi-change-antigravity-help-001",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+  "observation": "Sol invoked the import-dependent Antigravity Python harness by filesystem path for --help, causing an immediate local ModuleNotFoundError before argument parsing.",
+  "containment": "No Antigravity project, model or provider request started. Sol invoked the same harness correctly as python -m scripts.ariadne_antigravity from the repository root and obtained the expected help output before packet creation or dispatch.",
+  "candidate_effect": "No candidate file, review worktree content, external model state or protected ref changed.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}

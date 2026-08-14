@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 271,
+  "register_revision": 272,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-14",
+    "source_cutoff_on": "2026-08-15",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -12476,6 +12476,44 @@
           "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-integration-source-binding-incident.json",
           "orchestration/continuity/ariadne-active-operation-latch/current.json",
           "docs/ariadne-agent-error-correction-register-revision-271.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0311",
+      "attempt_id": "raisa-reception-one-same-update-family-multi-change-antigravity-help-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository Python harnesses that import the scripts package must be invoked as python -m scripts.<module> from the repository root.",
+      "observed_error": "Sol invoked scripts/ariadne_antigravity.py --help by filesystem path. Python stopped immediately with ModuleNotFoundError for the scripts package before Antigravity, a model, a project or a provider request started.",
+      "detection_method": "The local interpreter returned ModuleNotFoundError before the argument parser ran. The corrected python -m scripts.ariadne_antigravity --help invocation completed locally and displayed the expected CLI without external activity.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-antigravity-help-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-272.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Invoke the Antigravity harness only as python -m scripts.ariadne_antigravity from the repository root; the corrected help invocation passed before packet construction or verifier dispatch.",
+        "prevention_control": "For every remaining repository Python harness in this tranche, use python -m scripts.<module> exclusively; never infer direct-path safety from an AGENTS.md launcher label.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-antigravity-help-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-272.md"
         ]
       },
       "status": "corrected"

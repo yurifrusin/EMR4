@@ -1,0 +1,81 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Candidate 0acc745a5adf759026e62e749d32f8317a0bfb59 retains the exact 412-test M1-M7 pass; AER-0311 contains a local direct-path Antigravity help invocation that reached no model and the corrected module invocation passes, with the complete register module green",
+    "next_executable_stage": "commit the AER-0311 harness-recovery evidence, fast-forward the unused review branch to the new exact evidence head, rerun worktree preflight and dispatch one Gemini 3.6 Flash/high veto",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "0acc745a5adf759026e62e749d32f8317a0bfb59",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "pre-verifier harness recovery pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Bounded implementation work is complete and requires no redispatch.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "No Gemini invocation occurred during the local help failure; one fresh veto remains required after exact-head rebind and preflight.",
+        "work_packages": [
+          "fresh exact-candidate read-only veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "There is no separable package; repository and review transitions are serial and Sol-owned.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-verifier dispatch",
+      "verifier return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit harness recovery before worktree rebind",
+      "fresh preflight before Gemini dispatch",
+      "one exact read-only Gemini decision",
+      "Sol owns acceptance"
+    ]
+  },
+  "planned_action": "commit_aer_0311_and_rebind_unused_clean_review_worktree_before_any_gemini_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen M1-M7 plan remains satisfied by the exact 412-test integrated pass at candidate 0acc745a5adf759026e62e749d32f8317a0bfb59. AER-0311 records only the pre-dispatch direct-path help invocation; no Antigravity project or model started. The corrected module-form help passed and the full 234-test register module, Ruff and whitespace checks are green.",
+    "current_authority_allocation": "Sol owns harness recovery, Git and acceptance. DeepSeek's one-file test work is complete. Gemini 3.6 Flash/high remains reserved and has not been invoked. Native subagents remain declined for negative leverage.",
+    "git_refs_and_worktree": "Primary HEAD is exactly 0acc745a5adf759026e62e749d32f8317a0bfb59. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The unused review branch is clean at the same head and will be fast-forwarded only after this explicit evidence commit, followed by a fresh exact-head preflight.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 remains the live baton after complete post-compaction reread and authorises only this provider-free same-update-family kernel rehearsal.",
+    "protected_evidence_boundaries": "No provider, patient/product data, protected holdout, historical Diary PHI, external channel, app/UI/API schema/migration, deployment, production, release, Pages or protected ref was contacted or changed. The unused review worktree is clean and has not been dispatched. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -7,8 +7,8 @@
   "source_head": "d1544bb40602c017c35cb7d3c50250d4c312c9c1",
   "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Integrated candidate d1544bb40602c017c35cb7d3c50250d4c312c9c1 passes the exact 412-test packet, including M1-M7, plus Ruff, JSON and whitespace checks; AER-0310 corrects the pre-receipt hash-binding mistake without candidate change",
-    "next_executable_stage": "commit the deterministic evidence and fresh post-compaction receipt, then create an exact clean read-only worktree and dispatch one Gemini 3.6 Flash/high veto",
+    "completed_stage": "Candidate 0acc745a5adf759026e62e749d32f8317a0bfb59 retains the exact 412-test M1-M7 pass; AER-0311 contains a local direct-path Antigravity help invocation that reached no model and the corrected module invocation passes, with the complete register module green",
+    "next_executable_stage": "commit the AER-0311 harness-recovery evidence, fast-forward the unused review branch to the new exact evidence head, rerun worktree preflight and dispatch one Gemini 3.6 Flash/high veto",
     "retry_counters": {
       "implementation": 0,
       "review": 0,
