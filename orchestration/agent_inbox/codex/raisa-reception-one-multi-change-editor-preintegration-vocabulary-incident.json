@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.incident_evidence.v1",
+  "incident_id": "AER-0314",
+  "attempt_id": "raisa-reception-one-multi-change-editor-preintegration-vocabulary-001",
+  "observed_on": "2026-08-15",
+  "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+  "observation": "The pre-integration runtime state used invented expected_leverage value negative_net; the local preflight rejected it before integration.",
+  "candidate_effect": "Canonical source, the worker candidate and all refs remained unchanged.",
+  "containment": "Use configured value negative, preserve the qualified assessment in rationale text, and require a newly generated passed receipt before cherry-pick.",
+  "sensitive_data_present": false,
+  "protected_evidence_accessed": false,
+  "product_or_provider_runtime_accessed": false
+}

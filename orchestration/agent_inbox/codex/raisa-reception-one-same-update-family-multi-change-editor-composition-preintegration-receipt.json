@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change editor composition",
+    "completed_stage": "Committed Sol implementation plus worker and AER evidence at 66bec5a5defd73bedc4df03d9661f22bc42966df; the exact worker branch is clean at one-file candidate 27f6d9125b2a78004b4363d3b56e19bfa2928d58",
+    "next_executable_stage": "Cherry-pick only worker commit 27f6d9125b2a78004b4363d3b56e19bfa2928d58, repair its known surface and lifecycle mismatches under Sol ownership, then run deterministic admission before Gemini dispatch",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "resume_after_compaction": true,
+    "source_head": "c1f7acbe750c66d05b230671a3deb695eceedef1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "parallelism_assessment": {
+    "assessed_stage": "pre-integration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Net leverage was negative: the one-file test candidate is useful, but invented surface names and lifecycle gaps require bounded Sol recovery and the fenced egress recurred under AER-0312.",
+        "work_packages": [
+          "completed one-file route-intercepted browser test candidate"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact repaired-candidate veto remains useful after deterministic admission.",
+        "work_packages": [
+          "post-repair read-only veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The remaining repair touches the same test/source surface and is serially constrained by exact browser outcomes.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post-integration tests",
+      "pre-verifier",
+      "verifier return",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "cherry-pick exact one-file commit only",
+      "Sol repairs known mismatches",
+      "browser tests execute without parallel shared-fixture contention",
+      "Gemini follows deterministic admission",
+      "Sol owns acceptance"
+    ]
+  },
+  "planned_action": "cherry_pick_only_worker_commit_27f6d912_then_repair_untrusted_test_candidate_under_sol_ownership",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan at c1f7acbe requires one route-inert shared time/duration/practitioner draft, one existing update proposal, one explicit confirmation, fresh reconciliation and complete discard on collapse or status crossing. Sol implementation checkpoint 66bec5a5 exists. Exact worker commit 27f6d912 adds one authored-synthetic browser test file, which Sol read fully and identified as requiring bounded surface-name and lifecycle repair before deterministic admission. AER-0312 contains its fenced egress and AER-0313 contains the failed guessed local module invocation.",
+    "current_authority_allocation": "Sol alone owns candidate admission, integration and repair. DeepSeek's output decision is non-authoritative under AER-0312; only its exact one-file Git candidate may be integrated. Gemini remains reserved for a fresh exact post-repair veto; native subagents remain declined.",
+    "git_refs_and_worktree": "Primary task HEAD is 66bec5a5defd73bedc4df03d9661f22bc42966df with a clean tracked tree; origin task remains e417eca0e1871a7ce5ed90c5e9223b8f86982b20. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Worker branch is clean at exact 27f6d9125b2a78004b4363d3b56e19bfa2928d58 and differs from plan checkpoint c1f7acbe by exactly its owned test file.",
+    "live_handover_current_baton": "AGENTS.md Continuity 292 / Compass 274 authorises the provider-free same-update-family multi-change editor composition and forbids new backend, route, provider, data or deployment scope.",
+    "protected_evidence_boundaries": "Integration is limited to the worker's single new authored-synthetic route-intercepted browser test file. No patient, clinical or product data, backend, API schema, database, source adapter, provider, ADC, credential, IAM, external network, deployment, production, release, Pages or protected ref is in scope. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

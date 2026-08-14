@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 274,
+  "register_revision": 275,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -12594,6 +12594,48 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-orchestrator-module-discovery-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-274.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0314",
+      "attempt_id": "raisa-reception-one-multi-change-editor-preintegration-vocabulary-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-same-update-family-multi-change-editor-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "integration",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne parallelism assessment must use the configured expected_leverage vocabulary before a pre-integration receipt can pass.",
+      "observed_error": "Sol wrote expected_leverage as negative_net for the completed DeepSeek lane. The orchestrator preflight rejected the runtime state with parallelism_lane_leverage_invalid:deepseek_flash before integration.",
+      "detection_method": "The repository-local preflight emitted status revision_required and the exact invalid-lane reason; no Git integration or external action followed that receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-preintegration-vocabulary-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-preintegration-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-preintegration-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-275.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the invalid value with configured expected_leverage negative while retaining the net-negative rationale, then regenerate and read back a fresh pre-integration receipt before cherry-pick.",
+        "prevention_control": "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-editor-preintegration-vocabulary-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-preintegration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-editor-composition-preintegration-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-275.md"
         ]
       },
       "status": "corrected"
