@@ -1,0 +1,194 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "reconcile_and_accept_exact_m1_m7_candidate_after_fresh_gemini_pass",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 names this provider-free same-update-family kernel rehearsal as the exact next work and preserves every wider gate.",
+    "current_authority_allocation": "Sol alone owns acceptance and continuity. DeepSeek completed only the bounded test module. Gemini 3.6 Flash/high completed one independent veto with no integration authority. Native subagents were declined.",
+    "active_plan_and_acceptance": "The frozen M1-M7 plan passes locally and in the fresh verifier worktree. Gemini independently observed exactly 109 core, 69 continuity and 234 register tests, totalling 412; Ruff, format, 32-path scope and whitespace passed. Its decision is one schema-constrained pass at unchanged clean HEAD 3dd5f3b39ed98a2d562685d1d1567a359930c693.",
+    "protected_evidence_boundaries": "Evidence is limited to provider-free authored-synthetic local backend/PostgreSQL behavior. No product source, UI, API schema, migration, status cross-family transaction, external patient/channel, protected evidence, patient/product data, provider, ADC, credentials/IAM, network, deployment, production, release, Pages or protected ref is opened. docs/branding remains excluded.",
+    "git_refs_and_worktree": "Primary candidate is 3dd5f3b39ed98a2d562685d1d1567a359930c693. Review branch codex/review-reception-one-same-update-multi-change-0acc745a remained at that exact HEAD and clean before and after review. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "objective": "Use provider-free authored-synthetic evidence to prove that changed practitioner, time and duration travel through the existing appointment update proposal and confirmation path as one command, with fresh-truth, conflict, idempotency, audit and rollback behavior bounded exactly.",
+    "status": "in_progress",
+    "source_head": "3dd5f3b39ed98a2d562685d1d1567a359930c693",
+    "authority_source": "AGENTS.md Continuity 291 / Compass 273, the accepted multi-change atomicity orientation, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Gemini 3.6 Flash/high returned one pass at exact unchanged clean candidate 3dd5f3b39ed98a2d562685d1d1567a359930c693 after independently passing 109 core, 69 continuity and 234 register tests plus all source-scope checks",
+      "next_executable_stage": "generate and validate pre-verifier-acceptance evidence, then write Sol acceptance, closeout, Yuri summary and continuity updates before task-branch publication",
+      "retry_counters": {
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "existing_appointment_update_proposal_confirm_family_only",
+      "one_combined_practitioner_time_duration_command_not_sequential_writes",
+      "provider_free_authored_synthetic_evidence_only",
+      "current_authority_and_source_truth_rechecked_at_confirmation",
+      "conflict_and_stale_evidence_fail_closed_without_write",
+      "same_key_replay_is_mutation_free_and_returns_one_committed_result",
+      "audit_idempotency_and_appointment_truth_share_the_command_outcome",
+      "injected_precommit_failure_rolls_back_all_effects_before_clean_retry",
+      "prefer_tests_and_fixture_only_changes",
+      "no_ui_new_route_schema_command_family_or_database_migration",
+      "no_cross_family_status_plus_update_execution",
+      "no_external_patient_or_channel_runtime",
+      "no_patient_product_or_clinical_data",
+      "no_provider_adc_credentials_iam_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "assessed_stage": "pre-verifier acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The bounded test implementation supplied useful leverage and was independently reproduced; AER-0309 contains only its egress-format defect.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The fresh exact-candidate veto returned pass with exact counts and an unchanged clean postcondition.",
+        "work_packages": [
+          "completed exact read-only veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "No bounded separable package was available after the preceding tranche's scope breaches; serial Sol review was more reliable.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol independently reconciles every M1-M7 claim",
+      "continuity and closeout follow acceptance",
+      "protected refs remain fixed"
+    ],
+    "reassessment_triggers": [
+      "closeout",
+      "next tranche planning"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_and_completed_verifier_receipt",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      },
+      {
+        "agent_id": "gemini-verifier-same-update-multi-change-3dd5",
+        "measurement_source": "completed_schema_constrained_review_receipt",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol deterministic verification and receipt reconciliation pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane was declined."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini returned one schema-constrained pass at unchanged clean exact HEAD."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek candidate was independently reproduced and integrated only as one test file."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

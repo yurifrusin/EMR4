@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "AER-0311 harness recovery is committed at exact candidate 3dd5f3b39ed98a2d562685d1d1567a359930c693; the unused review branch was fast-forwarded to that exact head and fresh preflight proves the named codex/review branch clean with zero model calls",
+    "next_executable_stage": "generate and validate the distinct pre-worker-dispatch receipt, then launch exactly one Gemini 3.6 Flash/high read-only veto from the frozen packet",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3dd5f3b39ed98a2d562685d1d1567a359930c693",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "Gemini pre-dispatch",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one-file test implementation is complete, integrated and independently reproduced; no redispatch is allowed or useful.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact deterministic-admitted candidate now needs one genuinely independent source/test veto from the fresh clean review worktree.",
+        "work_packages": [
+          "one exact read-only veto over M1-M7 and claim boundaries"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No separable package remains and another local reviewer would not supply the required independent model veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier return",
+      "dirty or changed postcondition",
+      "revision_required",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one Gemini project and one terminal decision",
+      "exact command allowlist only",
+      "PostgreSQL tests run sequentially inside the packet",
+      "Sol reconciles receipt and postcondition before acceptance"
+    ]
+  },
+  "planned_action": "dispatch_one_gemini_36_flash_high_exact_candidate_read_only_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen M1-M7 plan passes the exact 412-test deterministic packet at candidate 3dd5f3b39ed98a2d562685d1d1567a359930c693. The bounded review packet requires exact 109/69/234 results, 32 changed paths, unchanged clean postcondition and one terminal decision. AER-0309 through AER-0311 are contained and cannot substitute for independent source review.",
+    "current_authority_allocation": "Sol remains conductor and acceptance owner. DeepSeek implementation is complete. Gemini 3.6 Flash/high owns exactly one independent read-only veto from a fresh named worktree and receives no implementation, integration, baton, product or protected authority. Native subagents remain declined.",
+    "git_refs_and_worktree": "Review worktree C:/Users/sarashera/EMR4-worktrees/same-update-multi-change-review-0acc745a is on codex/review-reception-one-same-update-multi-change-0acc745a at exact HEAD 3dd5f3b39ed98a2d562685d1d1567a359930c693 and passed the verifier-worktree preflight clean with zero calls. Primary task HEAD is the same. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 authorises the provider-free same-update-family kernel rehearsal and requires one fresh Gemini 3.6 Flash/high veto after deterministic admission.",
+    "protected_evidence_boundaries": "The review is limited to literal allowlisted ordinary source, authored-synthetic tests and sanitized orchestration evidence. No protected holdout, historical Diary PHI, docs/branding, patient/product data, external patient/channel runtime, provider/product/network call, credential/IAM action, edit, commit, push, deployment, production, release, Pages or protected-ref movement is allowed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

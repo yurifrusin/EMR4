@@ -381,16 +381,17 @@ practitioner through the identical command path. Its practitioner-only
 descendant now also passes at exact reviewed source
 `f085fc98ead21a3e7929ee9adbda81abfc7542c9`, preserving date, start and
 duration while requiring one current active target at proposal and confirm.
-The provider-free multi-change request atomicity orientation now passes at
-exact reviewed source `fbb7ffb46e041bbfc193ff3a76b2f970c06dee58`.
-Raisa and future adapters may emit only typed inert candidates. Time, duration
-and practitioner may compose into one existing update-family proposal and one
-explicit confirmation; status remains separate and cross-family requests stay
-non-executable. The next narrow descendant is an authored-synthetic kernel
-rehearsal of practitioner, time and duration together through the existing
-update path, including stale truth, conflict, idempotency, audit and rollback.
-No watcher runtime, existing product data, external patient client, new command
-family, provider, deployment, production or release is opened.
+The provider-free same-update-family multi-change kernel rehearsal now passes
+at exact reviewed source `3dd5f3b39ed98a2d562685d1d1567a359930c693`.
+The unchanged existing update proposal/confirm path handles practitioner, local
+time and duration as one command with proposal non-mutation, current-truth and
+target-state denials, one correlated audit/idempotency outcome, exact replay,
+different-body conflict and transaction-wide rollback before clean retry. The
+next narrow descendant is a provider-free progressive Reception One combined
+editor composition over that exact command; status remains separate and
+conversational activation stays closed. No watcher runtime, product data,
+external patient client, new command family, provider, deployment, production
+or release is opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

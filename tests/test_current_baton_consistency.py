@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-reception-one-multi-change-request-atomicity-orientation"
-SOURCE_HEAD = "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58"
+NODE_ID = "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal"
+SOURCE_HEAD = "3dd5f3b39ed98a2d562685d1d1567a359930c693"
+ORIENTATION_ATOMICITY_SOURCE_HEAD = "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58"
 CONSOLE_SOURCE_HEAD = "1d9e58fd2624f87b8b3def538297054999e7bef3"
 CONSOLE_ORIENTATION_SOURCE_HEAD = "2d602cfd822235977676bfe9ee8d8dc0a14714fe"
 PRACTITIONER_SOURCE_HEAD = "f085fc98ead21a3e7929ee9adbda81abfc7542c9"
@@ -32,19 +33,19 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_live_multi_change_orientation() -> None:
+def test_continuity_and_compass_bind_live_combined_update_kernel() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 291
+    assert graph["graph_revision"] == 292
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 273
-    assert compass["source_graph_revision"] == 291
+    assert compass["map_revision"] == 274
+    assert compass["source_graph_revision"] == 292
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_atomicity_orientation_and_name_kernel_rehearsal() -> (
+def test_live_baton_rows_accept_combined_kernel_and_name_editor_composition() -> (
     None
 ):
     text = AGENTS.read_text(encoding="utf-8")
@@ -52,16 +53,14 @@ def test_live_baton_rows_accept_atomicity_orientation_and_name_kernel_rehearsal(
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 291 / Compass 273" in current
-    assert (
-        "raisa_reception_one_multi_change_request_atomicity_orientation_pass" in current
-    )
+    assert "Continuity 292 / Compass 274" in current
+    assert "raisa_reception_one_same_update_family_multi_change_kernel_rehearsal_pass" in current
     assert SOURCE_HEAD in current
-    assert "typed inert action candidates" in current
-    assert "one existing update-family proposal" in current
-    assert "cross-family request is non-executable" in current
-    assert "Gemini passed 457 exact tests" in current
+    assert "all seven combined practitioner/time/duration scenarios" in current
+    assert "transaction-wide rollback before clean retry" in current
+    assert "Gemini passed 412 exact tests" in current
     assert SOURCE_HEAD in relation
+    assert ORIENTATION_ATOMICITY_SOURCE_HEAD in relation
     assert CONSOLE_SOURCE_HEAD in relation
     assert CONSOLE_ORIENTATION_SOURCE_HEAD in relation
     assert PRACTITIONER_SOURCE_HEAD in relation
@@ -97,11 +96,13 @@ def test_live_baton_rows_accept_atomicity_orientation_and_name_kernel_rehearsal(
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "same_update_family_multi_change_kernel_rehearsal" in next_work
-    assert "existing appointment update proposal/confirm path" in next_work
-    assert "changed time, duration and practitioner in one command" in next_work
-    assert "idempotency, audit and failure-injection rollback" in next_work
-    assert "new route, schema, command family or database migration" in next_work
+    assert "same_update_family_multi_change_editor_composition" in next_work
+    assert "practitioner, local time and duration" in next_work
+    assert "one existing update-family proposal" in next_work
+    assert "one review and one explicit confirmation" in next_work
+    assert "Status remains distinct" in next_work
+    assert "no new backend command" in next_work
+    assert "conversational execution" in next_work
     assert "product/patient data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
@@ -139,17 +140,16 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "same_update_family_multi_change_kernel_rehearsal",
-        "existing appointment update proposal/confirm path",
-        "changed time, duration and practitioner in one command",
-        "stale-current-truth",
-        "conflict",
-        "idempotency",
-        "audit",
-        "failure-injection rollback",
-        "no ui",
-        "new route, schema, command family or database migration",
-        "external patient/channel runtime",
+        "same_update_family_multi_change_editor_composition",
+        "practitioner, local time and duration",
+        "one progressive reception one draft",
+        "one existing update-family proposal",
+        "one review and one explicit confirmation",
+        "status remains distinct",
+        "canonical route and fresh reconciliation",
+        "no new backend command",
+        "conversational execution",
+        "external patient/channel authority",
         "product/patient data",
         "provider/adc",
         "credentials/iam/network",

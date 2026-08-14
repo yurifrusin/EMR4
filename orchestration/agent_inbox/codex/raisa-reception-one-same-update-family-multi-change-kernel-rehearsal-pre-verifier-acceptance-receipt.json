@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Gemini 3.6 Flash/high returned one pass at exact unchanged clean candidate 3dd5f3b39ed98a2d562685d1d1567a359930c693 after independently passing 109 core, 69 continuity and 234 register tests plus all source-scope checks",
+    "next_executable_stage": "generate and validate pre-verifier-acceptance evidence, then write Sol acceptance, closeout, Yuri summary and continuity updates before task-branch publication",
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3dd5f3b39ed98a2d562685d1d1567a359930c693",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre-verifier acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded test implementation supplied useful leverage and was independently reproduced; AER-0309 contains only its egress-format defect.",
+        "work_packages": [
+          "completed M1-M7 test module"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh exact-candidate veto returned pass with exact counts and an unchanged clean postcondition.",
+        "work_packages": [
+          "completed exact read-only veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No bounded separable package was available after the preceding tranche's scope breaches; serial Sol review was more reliable.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "closeout",
+      "next tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol independently reconciles every M1-M7 claim",
+      "continuity and closeout follow acceptance",
+      "protected refs remain fixed"
+    ]
+  },
+  "planned_action": "reconcile_and_accept_exact_m1_m7_candidate_after_fresh_gemini_pass",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen M1-M7 plan passes locally and in the fresh verifier worktree. Gemini independently observed exactly 109 core, 69 continuity and 234 register tests, totalling 412; Ruff, format, 32-path scope and whitespace passed. Its decision is one schema-constrained pass at unchanged clean HEAD 3dd5f3b39ed98a2d562685d1d1567a359930c693.",
+    "current_authority_allocation": "Sol alone owns acceptance and continuity. DeepSeek completed only the bounded test module. Gemini 3.6 Flash/high completed one independent veto with no integration authority. Native subagents were declined.",
+    "git_refs_and_worktree": "Primary candidate is 3dd5f3b39ed98a2d562685d1d1567a359930c693. Review branch codex/review-reception-one-same-update-multi-change-0acc745a remained at that exact HEAD and clean before and after review. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 names this provider-free same-update-family kernel rehearsal as the exact next work and preserves every wider gate.",
+    "protected_evidence_boundaries": "Evidence is limited to provider-free authored-synthetic local backend/PostgreSQL behavior. No product source, UI, API schema, migration, status cross-family transaction, external patient/channel, protected evidence, patient/product data, provider, ADC, credentials/IAM, network, deployment, production, release, Pages or protected ref is opened. docs/branding remains excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

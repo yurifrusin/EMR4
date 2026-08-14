@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One same-update-family multi-change kernel rehearsal",
+    "completed_stage": "Accepted raisa_reception_one_same_update_family_multi_change_kernel_rehearsal_pass at reviewed source 3dd5f3b39ed98a2d562685d1d1567a359930c693; the final continuity-inclusive 438-test packet, Continuity 292 / Compass 274, Sol acceptance, closeout and Yuri summary are complete",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "3dd5f3b39ed98a2d562685d1d1567a359930c693",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "closeout pre-commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek supplied the bounded one-file M1-M7 test module; Sol independently reproduced and integrated it. AER-0309 contains its egress defect.",
+        "work_packages": [
+          "completed M1-M7 test implementation"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini supplied the required independent exact-candidate veto with precise counts and unchanged clean postcondition.",
+        "work_packages": [
+          "completed exact read-only veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No separable package remained and prior scope breaches outweighed local parallelism leverage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "next tranche fresh planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol-only continuity and acceptance",
+      "explicit-path staging only",
+      "task branch only",
+      "protected refs fixed"
+    ]
+  },
+  "planned_action": "commit_accepted_combined_update_kernel_closeout_and_continuity_with_explicit_paths_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "M1-M7 pass the exact local and independent packets. Gemini passed 109 core, 69 continuity and 234 register tests at unchanged clean exact source; the final continuity-inclusive packet passed 438 tests across eleven modules. Sol acceptance, closeout and the paired Yuri summary are written with Brisbane timestamps.",
+    "current_authority_allocation": "Sol owns acceptance, continuity, explicit-path staging and task-branch publication. DeepSeek completed only the bounded test implementation; Gemini completed one read-only veto; native subagents were declined. No worker receives integration or protected authority.",
+    "git_refs_and_worktree": "Task HEAD before the closeout commit is exact reviewed source 3dd5f3b39ed98a2d562685d1d1567a359930c693. Local/origin master and handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked dirt is limited to handover/plan/Compass/latch and descendant-aware tests; new untracked tranche artifacts are individually named for staging.",
+    "live_handover_current_baton": "AGENTS.md is advanced to Continuity 292 / Compass 274 and records raisa_reception_one_same_update_family_multi_change_kernel_rehearsal_pass at exact reviewed source 3dd5f3b39ed98a2d562685d1d1567a359930c693.",
+    "protected_evidence_boundaries": "No product source, UI, API schema, migration, cross-family command, external patient/channel runtime, protected evidence, patient/product data, provider/ADC, credential/IAM, network, deployment, production, release, Pages or protected ref is opened. All 637 pre-existing/current untracked entries are preserved; docs/branding is excluded and staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 291,
+  "graph_revision": 292,
   "harvests": [],
   "nodes": [
     {
@@ -19583,9 +19583,111 @@
         "No compound editor, conversational execution, patient-channel runtime or cross-family atomic command is implemented.",
         "Product data, providers, watcher/runtime, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-same-update-family-multi-change-kernel-rehearsal",
+      "title": "Provider-free Reception One same-update-family multi-change kernel rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-14T14:46:56Z",
+      "updated_at": "2026-08-14T14:46:56Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3dd5f3b39ed98a2d562685d1d1567a359930c693",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The existing update proposal/confirm kernel accepts practitioner, local time and duration as one closed command, never three client writes.",
+          "Current appointment truth, target conflict and practitioner state are rechecked before one explicit confirmation can commit.",
+          "Status remains a distinct command family and no model, adapter or channel receives confirmation or write authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-same-update-family-multi-change-kernel-rehearsal",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept M1-M7 as proof of one atomic practitioner/time/duration update with denial, replay and rollback safety."
+        }
+      ],
+      "claim_scope": [
+        "One combined practitioner, local time and duration proposal is non-mutating and one confirmation commits all three fields with one correlated audit and idempotency result.",
+        "Stale appointment truth, a new target conflict and target-practitioner inactivation deny the entire candidate without retained effects.",
+        "Fresh-session exact replay is mutation-free, different-body key reuse conflicts, and post-flush pre-commit failure rolls every effect back before clean retry.",
+        "Gemini passed 412 exact tests at unchanged clean source and the evidence label is provider_free_live_local_backend_postgresql_authored_synthetic."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-plan.md",
+            "docs/security/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-threat-model-delta.md",
+            "tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py",
+            "docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-closeout.md"
+          ],
+          "note": "Combined update confirmation revalidates current truth, target availability and practitioner state before one commit."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py",
+            "orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-receipt.json",
+            "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-sol-acceptance.md"
+          ],
+          "note": "One appointment outcome, audit and idempotency result remain correlated across success, replay and rollback/retry."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-plan.md",
+          "docs/security/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-270.md",
+          "docs/ariadne-agent-error-correction-register-revision-271.md",
+          "docs/ariadne-agent-error-correction-register-revision-272.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py",
+          "tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_reception_one_same_update_family_multi_change_kernel_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Compose the proven practitioner/time/duration command into one progressive Reception One editor with one review and explicit confirmation.",
+        "No browser/editor evidence, conversational execution, patient-channel delegation or cross-family atomic command is yet proven.",
+        "Product data, providers, watcher runtime, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T11:47:54Z"
+  "updated_at": "2026-08-14T14:46:56Z"
 }

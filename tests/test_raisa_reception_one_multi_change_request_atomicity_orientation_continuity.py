@@ -51,10 +51,9 @@ def test_continuity_binds_one_family_commands_and_adapter_containment() -> None:
 
 def test_compass_names_same_update_family_kernel_rehearsal_next() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert compass["current_position"]["node_id"] == NODE_ID
-    unlocks = " ".join(compass["current_position"]["unlocks"]).lower()
-    assert "practitioner, time and duration together" in unlocks
-    assert "Continuity 291 / Compass 273" in compass["orientation_statement"]
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+    assert "one-family" in journey["outcome"].lower()
+    assert compass["map_revision"] >= 273
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:
@@ -73,10 +72,10 @@ def test_closeout_documents_have_brisbane_timestamps() -> None:
 def test_handover_and_plan_keep_external_and_cross_family_runtime_closed() -> None:
     handover = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     plan = (ROOT / "implementation_plan.md").read_text(encoding="utf-8")
-    assert "Continuity 291 / Compass 273" in handover
-    assert "same_update_family_multi_change_kernel_rehearsal" in handover
-    assert "cross-family request is non-executable" in handover
-    assert "provider-free multi-change request atomicity orientation" in plan
+    assert "Continuity 292 / Compass 274" in handover
+    assert "same_update_family_multi_change_editor_composition" in handover
+    assert "Status remains distinct" in handover
+    assert "provider-free same-update-family multi-change kernel rehearsal" in plan
     assert "No watcher runtime" in plan
 
 
@@ -84,8 +83,10 @@ def test_register_revision_269_is_bound_to_reconciled_review() -> None:
     register = _load(
         "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
     )
-    assert register["register_revision"] == 269
-    incident = register["incidents"][-1]
+    assert register["register_revision"] >= 269
+    incident = next(
+        item for item in register["incidents"] if item["incident_id"] == "AER-0308"
+    )
     assert incident["incident_id"] == "AER-0308"
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["correction"]["status"] == "control_added"

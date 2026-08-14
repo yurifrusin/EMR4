@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 291 / Compass 273. Multi-change meaning is frozen as typed inert candidates and one-family-owned commands; the same-update-family kernel rehearsal is next.
+> EMR4 is at Continuity 292 / Compass 274. The combined practitioner/time/duration update kernel passes; one provider-free progressive Reception One editor composition is next.
 
 ## North star
 
@@ -354,29 +354,33 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One current-truth summary and four route-inert choices now expose zero-or-one existing editor without merging command authority. Lineage parent: `raisa-reception-one-selected-action-console-consolidation-orientation`.
 169. **Freeze adapter-neutral multi-change meaning before any compound Reception One editor — Provider-free Reception One multi-change request atomicity orientation**
    One-family update composition is permitted; cross-family requests remain non-executable and model authority remains zero. Lineage parent: `raisa-reception-one-selected-action-console-progressive-disclosure-composition`.
+170. **Prove the atomic backend kernel before exposing a combined Reception One editor — Provider-free Reception One same-update-family multi-change kernel rehearsal**
+   One practitioner/time/duration command now has denial, replay, audit, idempotency and rollback evidence without product-source change. Lineage parent: `raisa-reception-one-multi-change-request-atomicity-orientation`.
 
 ## Current position
 
-**Let Raisa understand richer appointment requests without receiving a generic tool belt — Provider-free Reception One multi-change request atomicity orientation**
+**Put compound Reception One interactions on one backend-owned truth transaction — Provider-free Reception One same-update-family multi-change kernel rehearsal**
 
-**Why this proof came next:** The compact four-action console is implemented and needs an exact composition rule before compound UI or conversational activation.
+**Why this proof came next:** The safe multi-change semantics were frozen and required exact kernel proof before visible compound composition.
 
-Typed inert candidates now map same-update-family requests to one existing command and keep status-plus-update non-executable.
+The existing update command now proves all-or-none practitioner, time and duration behavior across success, denial, replay and rollback.
 
 ### What this unlocks
 
-- Rehearse practitioner, time and duration together through the existing update proposal/confirm kernel.
-- Consider a later multi-field editor only after the exact kernel properties pass.
+- Compose practitioner, local time and duration into one progressive Reception One draft, review and explicit confirmation.
+- Reuse the existing canonical route and fresh reconciliation without adding a backend command.
 
 ### What it does not solve
 
-- Successful practitioner/time/duration confirmation, exact replay and injected rollback remain unproved.
-- No compound editor, cross-family transaction or conversational command execution is implemented.
+- No browser/editor composition or conversational execution is yet proven.
+- Status remains a distinct command family and cross-family atomicity remains closed.
 - Patient channels, product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -631,6 +635,7 @@ Prerequisites:
 
 ## Map limits
 
+- The combined update rehearsal is authored-synthetic local PostgreSQL evidence; it does not prove a browser editor, conversational activation, patient delegation or production operation.
 - The multi-change orientation is repository-static architecture evidence; it does not prove a compound UI, live channel delegation or practitioner/time/duration transaction behavior.
 - The selected-action-console composition proves route-intercepted presentation behavior, not live backend/database execution, compound updates or representative usability.
 - The selected-action-console result is read-only architecture evidence; it does not implement UI behavior or merge status and update command authority.
@@ -844,6 +849,9 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-259.md`
 - `docs/ariadne-agent-error-correction-register-revision-260.md`
 - `docs/ariadne-agent-error-correction-register-revision-269.md`
+- `docs/ariadne-agent-error-correction-register-revision-270.md`
+- `docs/ariadne-agent-error-correction-register-revision-271.md`
+- `docs/ariadne-agent-error-correction-register-revision-272.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -1238,6 +1246,8 @@ Prerequisites:
 - `docs/raisa-reception-one-multi-change-request-atomicity-architecture.md`
 - `docs/raisa-reception-one-multi-change-request-atomicity-orientation-closeout.md`
 - `docs/raisa-reception-one-multi-change-request-atomicity-orientation-plan.md`
+- `docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-closeout.md`
+- `docs/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-plan.md`
 - `docs/raisa-reception-one-selected-action-console-consolidation-architecture.md`
 - `docs/raisa-reception-one-selected-action-console-consolidation-orientation-closeout.md`
 - `docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md`
@@ -1385,6 +1395,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-reception-one-multi-change-request-atomicity-orientation-threat-model-delta.md`
+- `docs/security/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-action-console-progressive-disclosure-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-duration-composition-threat-model-delta.md`
@@ -1442,6 +1453,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
@@ -1716,6 +1728,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-packet.md`
@@ -2463,6 +2480,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
+- `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2582,6 +2600,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
 - `tests/test_raisa_reception_one_multi_change_request_atomicity_orientation.py`
+- `tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py`
 - `tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py`
 - `tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_duration_composition_evidence.py`
@@ -2618,4 +2637,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 273; continuity graph revision 291._
+_Compass map revision 274; continuity graph revision 292._
