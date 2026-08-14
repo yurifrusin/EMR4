@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Post-combined-editor Compass and baton orientation",
+    "completed_stage": "Fresh complete five-source rehydration and initial repository orientation readback",
+    "next_executable_stage": "Pass the fresh Ariadne preplanning receipt, freeze the read-only orientation plan and compare every remaining direction against current authority",
+    "operation_id": "raisa-post-combined-editor-compass-baton-orientation",
+    "resume_after_compaction": true,
+    "source_head": "aa2b34573d47e0a81ae689cb20b0461b3585c221",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Cross-programme authority reconciliation and successor selection are coupled conceptual judgments with no stable mechanical artifact to delegate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh read-only exact-candidate veto can challenge whether the final classification honestly identifies a dependency-satisfied successor or a genuine Yuri fork.",
+        "work_packages": [
+          "final exact-candidate programme-orientation veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The evidence set is tightly coupled and the active collaboration policy permits dispatch only for a concrete bounded independent subtask; none is necessary at preplanning.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-post-combined-editor-compass-baton-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan freeze",
+      "material classification change",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone reconciles repository facts with user-owned authority",
+      "the orientation must freeze before any independent veto",
+      "no worker may open a product or runtime surface",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "freeze_the_read_only_post_combined_editor_compass_and_baton_orientation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The combined-editor plan, closeout, Sol acceptance and terminal latch were read in full. They accept one provisional practitioner/time/duration draft over the exact existing update family and require this descendant to reconcile existing command families, Context Fabric/event cues, the channel-neutral patient foundation and remaining Yuri gates without opening a new family or runtime.",
+    "current_authority_allocation": "Sol owns synthesis, plan, acceptance and Git. DeepSeek V4 Flash/high is declined because this is coupled programme judgment rather than mechanical implementation. Native subagents are declined because no concrete independent package is both necessary and admissible. Gemini 3.6 Flash/high is reserved for one fresh read-only exact-candidate veto after deterministic admission.",
+    "git_refs_and_worktree": "The main worktree is on codex/ariadne-bernie-davida-parallel-seam at clean published closeout HEAD aa2b34573d47e0a81ae689cb20b0461b3585c221 before starting this latch. Origin task equals that HEAD; required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 622 then-current untracked entries, including docs/branding, remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the prior closeout and records Continuity 293 / Compass 275, accepted combined-editor source daed421954d65c159871585559f45caa32d95aee and this provider-free read-only orientation as the next implementation.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/product/clinical data, external patient/channel/delegation runtime, live revocation enforcement, provider/ADC/credentials/IAM/network, product source mutation, API/OpenAPI/GraphQL/database/event/watcher/runtime change, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
