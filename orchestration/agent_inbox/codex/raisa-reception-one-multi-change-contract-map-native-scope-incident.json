@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.sanitized_incident_receipt.v1",
+  "incident_id": "AER-0306",
+  "observed_on": "2026-08-14",
+  "tranche": "raisa-reception-one-multi-change-request-atomicity-orientation",
+  "attempt_id": "raisa-reception-one-multi-change-contract-map-native-001",
+  "origin": "agent_behavior",
+  "category": "command_scope_violation",
+  "observation": "The read-only contract-map worker used filename-discovery commands over directory roots instead of the packet's exact ordinary-file allowlist. Its returned output contained only ordinary test filenames and exposed no protected path or content, but the broad enumeration itself crossed the fail-closed command boundary.",
+  "containment": [
+    "worker_interrupted",
+    "all_worker_findings_inadmissible",
+    "no_file_git_runtime_provider_or_external_mutation",
+    "sol_exact_literal_file_reconciliation_only"
+  ],
+  "sensitive_content_retained": false,
+  "candidate_state": "canonical_unchanged"
+}

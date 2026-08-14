@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 267,
+  "register_revision": 268,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12276,6 +12276,82 @@
           "orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json",
           "orchestration/agent_inbox/codex/raisa-reception-one-time-reschedule-gemini-count-reconciliation-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-267.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0306",
+      "attempt_id": "raisa-reception-one-multi-change-contract-map-native-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-multi-change-request-atomicity-orientation",
+      "origin": "agent_behavior",
+      "role": "integration_reviewer",
+      "resource_id": "codex-native-parallel-worker",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_native_subagent",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded read-only analyst must use only exact predeclared non-protected literal-file operands and must not enumerate, glob or search a directory root near protected evidence.",
+      "observed_error": "The contract-map worker used filename-discovery commands over directory roots. Its returned output contained only ordinary test filenames and exposed no protected path or content, but the broad enumeration itself crossed the packet's exact-file command boundary.",
+      "detection_method": "The worker self-reported the exact command shape after Sol's containment notice. Sol interrupted the worker and rejected its complete findings before durable architecture authoring.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-contract-map-native-scope-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-268.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "integration_reviewer.directory_root_filename_discovery_outside_exact_allowlist",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Interrupt the worker, discard all findings and move the exact ordinary-source reconciliation to Sol using one literal-file operand per read; retain Gemini only for the later exact-candidate veto.",
+        "prevention_control": "Protected-adjacent native packets must explicitly forbid every search, glob, recursive discovery and directory-root operand and must enumerate each permitted literal file before dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-contract-map-native-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-268.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0307",
+      "attempt_id": "raisa-reception-one-multi-change-adapter-authority-native-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-multi-change-request-atomicity-orientation",
+      "origin": "agent_behavior",
+      "role": "integration_reviewer",
+      "resource_id": "codex-native-parallel-worker",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_native_subagent",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "Protected holdout and fixture content must never be opened, enumerated or searched; a read-only analyst must use only exact predeclared non-protected literal-file operands.",
+      "observed_error": "The adapter-authority worker ran a content search over a directory root and protected-fixture content appeared in local tool output. The worker self-reported immediately. Sol interrupted the lane and quarantined its complete output before any substantive finding was used.",
+      "detection_method": "The worker's live self-report named the protected-content exposure. Sol stopped the worker, rejected the output and preserved only a sanitized content-free receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-adapter-authority-native-protected-scope-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-268.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "integration_reviewer.overbroad_repository_content_search_exposed_protected_fixture",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Interrupt the worker, discard and prohibit use of its complete output, preserve only sanitized incident evidence and move the authority analysis to Sol over exact literal-file reads.",
+        "prevention_control": "Native analysis packets near protected evidence must prohibit every content search and directory-root operand; later verifier packets must contain a closed explicit path manifest and no discovery command.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-adapter-authority-native-protected-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-268.md"
         ]
       },
       "status": "corrected"

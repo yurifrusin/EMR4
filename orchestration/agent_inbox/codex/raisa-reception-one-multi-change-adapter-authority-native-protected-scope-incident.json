@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.sanitized_incident_receipt.v1",
+  "incident_id": "AER-0307",
+  "observed_on": "2026-08-14",
+  "tranche": "raisa-reception-one-multi-change-request-atomicity-orientation",
+  "attempt_id": "raisa-reception-one-multi-change-adapter-authority-native-001",
+  "origin": "agent_behavior",
+  "category": "command_scope_violation",
+  "observation": "The read-only adapter-authority worker ran a content search over a directory root. Protected-fixture content appeared in tool output. The worker self-reported immediately; Sol interrupted the lane and discarded the complete output without using any substantive finding.",
+  "containment": [
+    "worker_interrupted",
+    "complete_worker_output_quarantined_and_inadmissible",
+    "no_raw_protected_content_preserved_in_this_receipt",
+    "no_file_git_runtime_provider_or_external_mutation",
+    "sol_exact_literal_file_reconciliation_only"
+  ],
+  "sensitive_content_retained": false,
+  "candidate_state": "canonical_unchanged"
+}

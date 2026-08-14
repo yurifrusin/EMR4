@@ -1,0 +1,160 @@
+{
+  "schema_version": "raisa.reception_one.multi_change_action_atomicity.v1",
+  "result": "raisa_reception_one_multi_change_request_atomicity_orientation_pass",
+  "source_head": "0eec51f419d955461696e8b986f7fb7e4dd20ab5",
+  "evidence_label": "repository_static_authored_synthetic",
+  "decision": "typed_inert_candidate_then_one_family_owned_command",
+  "human_console": {
+    "operator": "authorised_human_staff",
+    "action_order": ["status", "time", "duration", "practitioner"],
+    "button_effect": "route_inert_presentation_only_editor_activation",
+    "provider_model_can_press": false,
+    "channel_adapter_can_press": false
+  },
+  "candidate_boundary": {
+    "type": "AppointmentActionCandidate",
+    "origin_kinds": ["staff_conversation", "provider_interpretation", "email", "sms", "whatsapp", "voice", "external_chatbot"],
+    "semantic_fields": ["time", "duration", "practitioner", "status"],
+    "authority": {
+      "dom": "none",
+      "route": "none",
+      "confirmation": "none",
+      "write": "none"
+    },
+    "admission_requirements": ["one_exact_target", "one_value_per_field", "allowlisted_fields_only", "current_principal_and_practice", "current_capability", "current_source_truth", "one_command_family_or_non_executable_cross_family"]
+  },
+  "command_families": {
+    "update": {
+      "candidate_fields": ["time", "duration", "practitioner"],
+      "proposal_effect": "non_mutating_typed_proposal",
+      "confirm_effect": "one_locked_update_command_transaction_after_explicit_human_confirmation",
+      "directly_proven": ["date_time_duration_combined_proposal_is_non_mutating", "date_time_duration_combined_confirmation_updates_one_appointment_and_one_audit", "stale_temporal_revalidation_blocks_without_write", "changed_practitioner_activity_rechecked_at_confirmation_without_write"],
+      "structurally_supported": ["closed_optional_multi_field_patch", "supplied_fields_merged_over_current_truth", "one_full_signed_update_command", "practice_scoped_row_lock_before_revalidation", "full_command_reproposal_and_exact_match", "one_apply_audit_command_completion_and_commit_path"],
+      "unproved": ["successful_changed_practitioner_plus_time_plus_duration_confirmation", "exact_combination_same_key_replay", "exact_combination_failure_injection_rollback"]
+    },
+    "status": {
+      "candidate_fields": ["status"],
+      "proposal_effect": "non_mutating_typed_proposal",
+      "confirm_effect": "one_distinct_status_only_kernel_transaction_after_explicit_human_confirmation",
+      "directly_proven": ["signed_status_confirm_payload", "status_confirm_writes_once_with_one_audit", "tampered_status_blocks_without_write"],
+      "structurally_supported": ["distinct_status_input_and_command", "distinct_status_version_binding", "distinct_status_proposal_and_confirm_routes"],
+      "unproved": ["atomic_status_plus_update_family_transaction"]
+    }
+  },
+  "composition_rules": [
+    {
+      "classification": "same_update_family",
+      "fields": ["time", "duration", "practitioner"],
+      "presentation": "one_combined_update_review_packet",
+      "execution": "one_update_proposal_then_one_explicit_update_confirmation",
+      "automatic_sequence": false
+    },
+    {
+      "classification": "status_family",
+      "fields": ["status"],
+      "presentation": "one_status_review_packet",
+      "execution": "one_status_proposal_then_one_explicit_status_confirmation",
+      "automatic_sequence": false
+    },
+    {
+      "classification": "cross_family",
+      "fields": ["status", "time", "duration", "practitioner"],
+      "presentation": "non_executable_review_plan_with_no_all_or_nothing_claim",
+      "execution": "none_unless_staff_later_selects_separate_freshly_proposed_actions",
+      "automatic_sequence": false
+    },
+    {
+      "classification": "clarification_or_block",
+      "fields": [],
+      "presentation": "minimum_clarifying_question_or_typed_block",
+      "execution": "none",
+      "automatic_sequence": false
+    }
+  ],
+  "recovery_contract": {
+    "stale_candidate": "discard_or_readmit_against_current_truth",
+    "stale_proposal": "kernel_blocks_then_rebuilds_from_fresh_truth",
+    "cross_family_partial": "show_first_commit_and_later_block_as_distinct_outcomes",
+    "interruption": "no_unconfirmed_write_and_fresh_read_before_resume",
+    "event": "refresh_hint_only_never_truth_authority_or_command_evidence"
+  },
+  "future_complex_button": {
+    "kind": "typed_presentation_macro",
+    "same_family_rule": "may_group_only_when_one_proven_kernel_command_owns_every_field",
+    "cross_family_rule": "requires_separately_proven_kernel_owned_atomic_command",
+    "direct_tool_authority": "none"
+  },
+  "source_map": {
+    "app/routers/appointments.py": "ccae18334f82fc29822c1e32f0d99585cf850657",
+    "app/schemas/appointments.py": "3b8c6ef039d6916da11efd190b94f4b78d9a3137",
+    "docs/api-spine/openapi/appointment-commands.yaml": "42e24524e069fe12a15911cee98f9df22f0d51fb",
+    "docs/diary/diary.js": "789c5e43078bdc08c7e060938dda606b4b98d199",
+    "docs/diary/meta-grid.js": "68ecec30aa4234ba7cf7ec96dac97e5c9e05901f",
+    "orchestration/api_spine_adr.md": "c5a5df35d20751a4cc67c1dd17e8c2cf85991f5e",
+    "orchestration/bernie_interaction_model.md": "35c1b44c1b34c875ce2bbdf7f8634feb416f20a4",
+    "tests/test_appointment_status_mutations.py": "2b4ad0b65399820fa4fa8847286d0c029e67a06f",
+    "tests/test_appointment_update_proposal.py": "d12900cd3c591ab6d46351dcda116f0651987cba"
+  },
+  "authored_synthetic_examples": [
+    {
+      "example_id": "same-family-three-field",
+      "origin": "staff_conversation",
+      "target_resolution": "exact",
+      "provisional_values": {
+        "appointment_date": "2030-06-03",
+        "start_time_local": "10:00:00",
+        "duration_minutes": 30,
+        "practitioner_ref": "synthetic-practitioner-002"
+      },
+      "classification": "same_update_family",
+      "presentation_outcome": "one_update_review_packet",
+      "write_authority": "none",
+      "confirmation_authority": "none",
+      "automatic_execution": false
+    },
+    {
+      "example_id": "cross-family-status-and-time",
+      "origin": "email",
+      "target_resolution": "exact",
+      "provisional_values": {
+        "start_time_local": "11:00:00",
+        "status": "Confirmed"
+      },
+      "classification": "cross_family",
+      "presentation_outcome": "non_executable_review_plan",
+      "write_authority": "none",
+      "confirmation_authority": "none",
+      "automatic_execution": false
+    },
+    {
+      "example_id": "voice-ambiguous-target",
+      "origin": "voice",
+      "target_resolution": "ambiguous",
+      "provisional_values": {
+        "duration_minutes": 30
+      },
+      "classification": "clarification_required",
+      "presentation_outcome": "minimum_clarifying_question",
+      "write_authority": "none",
+      "confirmation_authority": "none",
+      "automatic_execution": false
+    }
+  ],
+  "closed_surfaces": [
+    "product_or_ui_implementation",
+    "new_api_openapi_graphql_or_command",
+    "database_migration_event_or_watcher",
+    "automatic_command_sequencing",
+    "model_or_adapter_dom_activation",
+    "model_or_adapter_confirmation",
+    "external_patient_or_chatbot_runtime",
+    "identity_authentication_or_patient_recognition_change",
+    "product_patient_clinical_or_historical_diary_data",
+    "provider_adc_credentials_iam_or_external_network",
+    "deployment_production_release_or_pages",
+    "protected_ref_movement",
+    "protected_evidence",
+    "docs_branding_or_unrelated_untracked_files"
+  ],
+  "next_tranche": "raisa_reception_one_same_update_family_multi_change_kernel_rehearsal"
+}

@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/multi-change-action-atomicity-contract.schema.json",
+  "title": "Reception One multi-change action atomicity contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "decision",
+    "human_console",
+    "candidate_boundary",
+    "command_families",
+    "composition_rules",
+    "recovery_contract",
+    "future_complex_button",
+    "source_map",
+    "authored_synthetic_examples",
+    "closed_surfaces",
+    "next_tranche"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.reception_one.multi_change_action_atomicity.v1"},
+    "result": {"const": "raisa_reception_one_multi_change_request_atomicity_orientation_pass"},
+    "source_head": {"const": "0eec51f419d955461696e8b986f7fb7e4dd20ab5"},
+    "evidence_label": {"const": "repository_static_authored_synthetic"},
+    "decision": {"const": "typed_inert_candidate_then_one_family_owned_command"},
+    "human_console": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operator", "action_order", "button_effect", "provider_model_can_press", "channel_adapter_can_press"],
+      "properties": {
+        "operator": {"const": "authorised_human_staff"},
+        "action_order": {"const": ["status", "time", "duration", "practitioner"]},
+        "button_effect": {"const": "route_inert_presentation_only_editor_activation"},
+        "provider_model_can_press": {"const": false},
+        "channel_adapter_can_press": {"const": false}
+      }
+    },
+    "candidate_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "origin_kinds", "semantic_fields", "authority", "admission_requirements"],
+      "properties": {
+        "type": {"const": "AppointmentActionCandidate"},
+        "origin_kinds": {
+          "const": ["staff_conversation", "provider_interpretation", "email", "sms", "whatsapp", "voice", "external_chatbot"]
+        },
+        "semantic_fields": {"const": ["time", "duration", "practitioner", "status"]},
+        "authority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dom", "route", "confirmation", "write"],
+          "properties": {
+            "dom": {"const": "none"},
+            "route": {"const": "none"},
+            "confirmation": {"const": "none"},
+            "write": {"const": "none"}
+          }
+        },
+        "admission_requirements": {
+          "const": ["one_exact_target", "one_value_per_field", "allowlisted_fields_only", "current_principal_and_practice", "current_capability", "current_source_truth", "one_command_family_or_non_executable_cross_family"]
+        }
+      }
+    },
+    "command_families": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["update", "status"],
+      "properties": {
+        "update": {"$ref": "#/$defs/commandFamily"},
+        "status": {"$ref": "#/$defs/commandFamily"}
+      }
+    },
+    "composition_rules": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/compositionRule"}
+    },
+    "recovery_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stale_candidate", "stale_proposal", "cross_family_partial", "interruption", "event"],
+      "properties": {
+        "stale_candidate": {"const": "discard_or_readmit_against_current_truth"},
+        "stale_proposal": {"const": "kernel_blocks_then_rebuilds_from_fresh_truth"},
+        "cross_family_partial": {"const": "show_first_commit_and_later_block_as_distinct_outcomes"},
+        "interruption": {"const": "no_unconfirmed_write_and_fresh_read_before_resume"},
+        "event": {"const": "refresh_hint_only_never_truth_authority_or_command_evidence"}
+      }
+    },
+    "future_complex_button": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "same_family_rule", "cross_family_rule", "direct_tool_authority"],
+      "properties": {
+        "kind": {"const": "typed_presentation_macro"},
+        "same_family_rule": {"const": "may_group_only_when_one_proven_kernel_command_owns_every_field"},
+        "cross_family_rule": {"const": "requires_separately_proven_kernel_owned_atomic_command"},
+        "direct_tool_authority": {"const": "none"}
+      }
+    },
+    "source_map": {
+      "type": "object",
+      "minProperties": 9,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+    },
+    "authored_synthetic_examples": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/candidateExample"}
+    },
+    "closed_surfaces": {
+      "type": "array",
+      "minItems": 12,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "next_tranche": {"const": "raisa_reception_one_same_update_family_multi_change_kernel_rehearsal"}
+  },
+  "$defs": {
+    "commandFamily": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_fields", "proposal_effect", "confirm_effect", "directly_proven", "structurally_supported", "unproved"],
+      "properties": {
+        "candidate_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "proposal_effect": {"const": "non_mutating_typed_proposal"},
+        "confirm_effect": {"type": "string", "minLength": 1},
+        "directly_proven": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "structurally_supported": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "unproved": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "compositionRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "fields", "presentation", "execution", "automatic_sequence"],
+      "properties": {
+        "classification": {"enum": ["same_update_family", "status_family", "cross_family", "clarification_or_block"]},
+        "fields": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "presentation": {"type": "string", "minLength": 1},
+        "execution": {"type": "string", "minLength": 1},
+        "automatic_sequence": {"const": false}
+      }
+    },
+    "candidateValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "appointment_date": {"type": "string", "format": "date"},
+        "start_time_local": {"type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$"},
+        "duration_minutes": {"type": "integer", "minimum": 1, "maximum": 480},
+        "practitioner_ref": {"type": "string", "minLength": 1},
+        "status": {"type": "string", "minLength": 1}
+      }
+    },
+    "candidateExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["example_id", "origin", "target_resolution", "provisional_values", "classification", "presentation_outcome", "write_authority", "confirmation_authority", "automatic_execution"],
+      "properties": {
+        "example_id": {"type": "string", "minLength": 1},
+        "origin": {"enum": ["staff_conversation", "email", "voice"]},
+        "target_resolution": {"enum": ["exact", "ambiguous", "missing"]},
+        "provisional_values": {"$ref": "#/$defs/candidateValues"},
+        "classification": {"enum": ["same_update_family", "cross_family", "clarification_required"]},
+        "presentation_outcome": {"enum": ["one_update_review_packet", "non_executable_review_plan", "minimum_clarifying_question"]},
+        "write_authority": {"const": "none"},
+        "confirmation_authority": {"const": "none"},
+        "automatic_execution": {"const": false}
+      }
+    }
+  }
+}

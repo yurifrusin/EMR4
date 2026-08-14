@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 267
+    assert register["register_revision"] == 268
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 306)
+        f"AER-{index:04d}" for index in range(1, 308)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 204
+    assert len(agent_incidents) == 206
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 305
+    assert report["incident_count"] == 307
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2589,8 +2589,9 @@ def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
     assert incident["status"] == "corrected"
     assert incident["correction"]["status"] == "control_added"
     assert "No file content was opened" in incident["observed_error"]
-    assert "exact already-known non-protected files" in (
-        incident["correction"]["prevention_control"]
+    assert (
+        "exact already-known non-protected files"
+        in (incident["correction"]["prevention_control"])
     )
 
 
@@ -2609,7 +2610,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0305_record_reschedule_discovery_and_dispatch_recovery() -> None:
+def test_aer_0294_through_0307_record_reschedule_and_multi_change_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2718,6 +2719,24 @@ def test_aer_0294_through_0305_record_reschedule_discovery_and_dispatch_recovery
     )
     assert count_reconciliation["status"] == "corrected"
     assert count_reconciliation["correction"]["status"] == "control_added"
+
+    contract_map = incidents["AER-0306"]
+    assert contract_map["stage"] == "implementation"
+    assert contract_map["category"] == "command_scope_violation"
+    assert contract_map["process_severity"] == "moderate"
+    assert contract_map["candidate_state"] == "canonical_unchanged"
+    assert contract_map["related_incident_ids"] == []
+    assert contract_map["status"] == "corrected"
+    assert contract_map["correction"]["status"] == "contained_then_escalated"
+
+    adapter_authority = incidents["AER-0307"]
+    assert adapter_authority["stage"] == "implementation"
+    assert adapter_authority["category"] == "command_scope_violation"
+    assert adapter_authority["process_severity"] == "material"
+    assert adapter_authority["candidate_state"] == "canonical_unchanged"
+    assert adapter_authority["related_incident_ids"] == []
+    assert adapter_authority["status"] == "corrected"
+    assert adapter_authority["correction"]["status"] == "contained_then_escalated"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -2961,9 +2980,7 @@ def test_aer_0290_preserves_rejected_preplanning_event_before_correction() -> No
     )
     assert incident["status"] == "corrected"
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
-    assert "--list-continuation-events" in incident["correction"][
-        "prevention_control"
-    ]
+    assert "--list-continuation-events" in incident["correction"]["prevention_control"]
 
 
 def test_aer_0291_contains_protected_scope_search_before_adapter_planning() -> None:
@@ -2996,17 +3013,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 267
-    assert report["incident_count"] == 305
+    assert report["register_revision"] == 268
+    assert report["incident_count"] == 307
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 204,
+        "agent_behavior": 206,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 40,
+        "command_scope_violation": 42,
         "evidence_misreport": 40,
         "harness_failure": 37,
         "output_contract_violation": 85,
@@ -3017,7 +3034,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 97,
-        "canonical_unchanged": 181,
+        "canonical_unchanged": 183,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(
@@ -3076,7 +3093,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         {
             "recurrence_signature": "orchestrator.python_package_script_path_invocation",
             "incident_count": 5,
-            "incident_ids": ["AER-0058", "AER-0066", "AER-0067", "AER-0204", "AER-0302"],
+            "incident_ids": [
+                "AER-0058",
+                "AER-0066",
+                "AER-0067",
+                "AER-0204",
+                "AER-0302",
+            ],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],

@@ -1,0 +1,84 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One multi-change request atomicity orientation",
+    "completed_stage": "Passed the native predispatch receipt, then stopped and quarantined both native analyses after AER-0306 and AER-0307 command-scope breaches; no worker finding is admissible and Sol has taken exact-literal-file reconciliation ownership",
+    "next_executable_stage": "author the closed architecture and typed contract from Sol's exact ordinary-source map, then run deterministic admission before any Gemini veto",
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "resume_after_compaction": true,
+    "source_head": "f362f0de378fdddb610a04ae61182aaae2c105c0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "candidate precommit after native containment",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No stable mechanical implementation package exists and the preceding test-only lane had negative net economy.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto follows only after a committed clean review worktree and deterministic admission.",
+        "work_packages": [
+          "exact candidate architecture veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only attempts breached command scope, were interrupted and are wholly inadmissible under AER-0306 and AER-0307; Sol reproduced the facts from exact literal files.",
+        "work_packages": [
+          "rejected exact source and test contract map",
+          "rejected adapter-neutral typed-action threat and option analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate commit",
+      "pre-verifier admission",
+      "Gemini return",
+      "material architecture revision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "no native output is admitted",
+      "Sol owns exact-literal source reconciliation and candidate authoring",
+      "Gemini waits for a committed exact clean candidate",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "commit_the_exact_read_only_multi_change_atomicity_architecture_candidate_for_clean_independent_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Plan commit 0eec51f419d955461696e8b986f7fb7e4dd20ab5 freezes typed inert candidates, one-family command composition, cross-family non-execution and zero runtime changes. Eleven focused architecture tests, 133 exact API/update/status tests and 79 latch/preflight tests pass; the full error-register suite passed after canonical report regeneration.",
+    "current_authority_allocation": "Sol owns architecture, incident containment, source reconciliation, acceptance and Git. DeepSeek is declined. Both native outputs are rejected under AER-0306 and AER-0307. Gemini remains reserved for one fresh exact-candidate veto after commit.",
+    "git_refs_and_worktree": "HEAD is exact plan commit 0eec51f419d955461696e8b986f7fb7e4dd20ab5 with only the explicit candidate, incident-control and latch paths dirty. Origin task remains f362f0de378fdddb610a04ae61182aaae2c105c0. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 290 / Compass 272 names the read-only multi-change atomicity orientation next and preserves all product, adapter, provider, protected and protected-ref closures.",
+    "protected_evidence_boundaries": "The AER-0307 worker output is wholly quarantined and no protected content is retained or used. No protected fixture, historical Diary PHI, patient/product/clinical data, adapter runtime, provider/ADC/credentials/IAM/network, product/API/database/event change, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
