@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "completed_stage": "Duration composition is accepted at exact reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 after 118 consolidated tests, final 196-test canonical passage, responsive rendered QA and one unchanged clean Gemini 68-test veto pass; Continuity 287 and Compass 269 are bound",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "resume_after_compaction": false,
+    "source_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "parallelism_assessment": {
+    "assessed_stage": "accepted closeout pre-push",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The recovered isolated test artifact found a real ordering race; no further worker package is needed for publication.",
+        "work_packages": [
+          "completed recovered route-intercepted duration matrix"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh exact-candidate veto passed 68 tests with unchanged clean postcondition.",
+        "work_packages": [
+          "completed exact f397a370 veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Read-only seam analysis found four material risks before candidate freeze.",
+        "work_packages": [
+          "completed duration seam analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "parallel_work_packages": [
+      "all planned worker lanes complete"
+    ],
+    "reassessment_triggers": [
+      "practitioner-only tranche start",
+      "new or restored task window",
+      "material recovery",
+      "pre-verifier gate",
+      "next closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "only Sol may push the task branch",
+      "protected refs remain fixed",
+      "next-tranche allocation waits for fresh post-closeout rehydration"
+    ]
+  },
+  "planned_action": "push_accepted_duration_closeout_commits_to_existing_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen duration plan passes at reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8; closeout commit 66ebc13c89abc67ae49248d45c2f6d1c77ae953d binds evidence, Sol acceptance, Yuri summary and complete latch after final focused and canonical gates.",
+    "current_authority_allocation": "Sol alone may publish the accepted task branch. DeepSeek, native and Gemini lanes are complete and possess no push, protected-ref, baton or acceptance authority.",
+    "git_refs_and_worktree": "After fresh fetch, task HEAD is 66ebc13c89abc67ae49248d45c2f6d1c77ae953d and origin task is 268e90316c3ef248385ec19d25768c20aed2f3fe. Tracked status is clean and exactly 606 untracked status entries remain preserved. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current all remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md at committed task HEAD 66ebc13c89abc67ae49248d45c2f6d1c77ae953d binds the accepted duration result at Continuity 287 / Compass 269 and names practitioner-only reassignment next.",
+    "protected_evidence_boundaries": "Push is limited to codex/ariadne-bernie-davida-parallel-seam. No master, handoff/current, Pages, deployment, release, product/provider, patient/product data, protected evidence or docs/branding action is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

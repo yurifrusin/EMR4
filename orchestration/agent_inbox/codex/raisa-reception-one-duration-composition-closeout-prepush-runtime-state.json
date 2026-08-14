@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_accepted_duration_closeout_commits_to_existing_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md at committed task HEAD 66ebc13c89abc67ae49248d45c2f6d1c77ae953d binds the accepted duration result at Continuity 287 / Compass 269 and names practitioner-only reassignment next.",
+    "current_authority_allocation": "Sol alone may publish the accepted task branch. DeepSeek, native and Gemini lanes are complete and possess no push, protected-ref, baton or acceptance authority.",
+    "active_plan_and_acceptance": "The frozen duration plan passes at reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8; closeout commit 66ebc13c89abc67ae49248d45c2f6d1c77ae953d binds evidence, Sol acceptance, Yuri summary and complete latch after final focused and canonical gates.",
+    "protected_evidence_boundaries": "Push is limited to codex/ariadne-bernie-davida-parallel-seam. No master, handoff/current, Pages, deployment, release, product/provider, patient/product data, protected evidence or docs/branding action is authorised.",
+    "git_refs_and_worktree": "After fresh fetch, task HEAD is 66ebc13c89abc67ae49248d45c2f6d1c77ae953d and origin task is 268e90316c3ef248385ec19d25768c20aed2f3fe. Tracked status is clean and exactly 606 untracked status entries remain preserved. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current all remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
+    "status": "complete",
+    "source_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+    "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Duration composition is accepted at exact reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 after 118 consolidated tests, final 196-test canonical passage, responsive rendered QA and one unchanged clean Gemini 68-test veto pass; Continuity 287 and Compass 269 are bound",
+      "next_executable_stage": null,
+      "retry_counters": {"review": 1, "verification": 9},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "accepted_operation_closeout_ready"},
+    "protected_boundaries": ["existing_appointment_update_proposal_confirm_family_only", "one_selected_current_appointment", "same_date_same_start_same_practitioner_duration_only_until_plan_freeze", "visible_staff_confirmation_and_fresh_authoritative_reconciliation", "no_raw_put_or_second_command_path", "no_backend_api_openapi_graphql_database_event_or_watcher_expansion", "authored_synthetic_provider_free_evidence_only", "protected_evidence_and_historical_diary_phi_closed", "patient_product_clinical_data_and_external_patient_channels_closed", "provider_adc_credentials_iam_external_network_closed", "deployment_production_release_pages_protected_refs_closed", "docs_branding_and_unrelated_untracked_preserved"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1", "operation_id": "raisa-reception-one-selected-appointment-duration-composition", "assessed_stage": "accepted closeout pre-push",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "positive", "rationale": "The recovered isolated test artifact found a real ordering race; no further worker package is needed for publication.", "work_packages": ["completed recovered route-intercepted duration matrix"]},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "Fresh exact-candidate veto passed 68 tests with unchanged clean postcondition.", "work_packages": ["completed exact f397a370 veto"]},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "Read-only seam analysis found four material risks before candidate freeze.", "work_packages": ["completed duration seam analysis"]}
+    ],
+    "parallel_work_packages": ["all planned worker lanes complete"],
+    "serial_constraints": ["only Sol may push the task branch", "protected refs remain fixed", "next-tranche allocation waits for fresh post-closeout rehydration"],
+    "reassessment_triggers": ["practitioner-only tranche start", "new or restored task window", "material recovery", "pre-verifier gate", "next closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_post_compaction_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready to push the exact accepted task branch."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane is complete."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini lane is complete with pass."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek lane is complete with a preserved receipt."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code fallback was not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport was not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}], "workspace_receipts": [], "assigned_agent_ids": []
+}
