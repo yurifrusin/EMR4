@@ -693,13 +693,13 @@ def test_field_request_traces_and_fresh_rebind_or_removal(reception_page, action
             page.wait_for_selector(DIALOG, state="visible", timeout=WAIT_TIMEOUT)
             page.locator(f"{DIALOG} button:has-text('Confirm & Save')").click()
             page.wait_for_selector(DIALOG, state="detached", timeout=WAIT_TIMEOUT)
-            page.wait_for_selector("[data-testid='meta-grid-status-outcome']",
+            page.wait_for_selector(".meta-grid-status-outcome",
                                    state="visible", timeout=WAIT_TIMEOUT)
             assert count_mounted_editors(page) == 0
-            assert page.locator("[data-testid='meta-grid-status-outcome']").count() == 1
-            assert page.locator("[data-testid='meta-grid-reschedule-outcome']").count() == 0
-            assert page.locator("[data-testid='meta-grid-duration-outcome']").count() == 0
-            assert page.locator("[data-testid='meta-grid-practitioner-outcome']").count() == 0
+            assert page.locator(".meta-grid-status-outcome").count() == 1
+            assert page.locator(".meta-grid-reschedule-outcome").count() == 0
+            assert page.locator(".meta-grid-duration-outcome").count() == 0
+            assert page.locator(".meta-grid-practitioner-outcome").count() == 0
             assert state["proposal_count"] == 1
             assert state["confirm_count"] == 1
             assert state["raw_count"] == 0
@@ -769,10 +769,14 @@ def test_selected_action_console_source_guards_reject_compound_and_raw_writes() 
                    "multiFieldDraft", "executeMany", "runActions", "sequentialRun"):
         assert marker not in meta
 
-    # 3. Palette activation issues no API request (no fetch/route/proposal/confirm).
+    # 3. Palette activation issues no API request (no fetch/route/proposal/confirm)
+    #    inside the exact activation slice only (activateSelectedAction up to
+    #    statusActionMessage); existing reads elsewhere in meta-grid.js are exempt.
+    activation_slice = meta[meta.index("function activateSelectedAction"):
+                            meta.index("function statusActionMessage")]
     for marker in ("apiFetch(", "fetch(", "/appointments/proposals/", "confirm_endpoint",
                    "Idempotency-Key"):
-        assert marker not in meta
+        assert marker not in activation_slice
 
     # 4. No raw compatibility PUT/PATCH fallback appears in the client.
     assert 'method: "PUT"' not in meta
