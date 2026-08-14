@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 288,
+  "graph_revision": 289,
   "harvests": [],
   "nodes": [
     {
@@ -19262,9 +19262,115 @@
         "Cross-day movement, full editing and another command or event family remain closed.",
         "Product data, watcher/runtime, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+      "title": "Provider-free Reception One selected-action-console consolidation orientation",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-14T04:29:56Z",
+      "updated_at": "2026-08-14T04:29:56Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2d602cfd822235977676bfe9ee8d8dc0a14714fe",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Read-only architecture selects a deterministic four-button palette with no editor initially and at most one existing field editor.",
+          "Status and update proposal/confirm authorities remain distinct; the palette is presentation state only and issues no command.",
+          "Idle switching discards unsubmitted drafts; busy, stale, interrupted and confirmation states forbid switching; terminal truth still requires exact fresh reconciliation."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-selected-action-console-orientation",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept a deterministic action palette with single-panel progressive disclosure as the next Reception One composition boundary."
+        }
+      ],
+      "claim_scope": [
+        "The orientation replaces four permanently visible editors with four discoverable choices and zero-or-one visible existing editor in the next implementation.",
+        "Action choice remains zero-route presentation state; no generic dispatcher, compound edit or command-capable language intent is admitted.",
+        "Two native analyses converged and one fresh Gemini veto passed 77 tests at an unchanged clean candidate.",
+        "No product source, patient/product data, provider, deployment or protected-ref activity occurred."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md",
+            "docs/raisa-reception-one-selected-action-console-consolidation-architecture.md",
+            "orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.json",
+            "docs/raisa-reception-one-selected-action-console-consolidation-orientation-closeout.md"
+          ],
+          "note": "The compact palette preserves distinct status, time, duration and practitioner meanings while future intent is limited to editor activation."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-action-console-consolidation-architecture.md",
+            "docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md",
+            "orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.json",
+            "docs/raisa-reception-one-selected-action-console-consolidation-orientation-closeout.md"
+          ],
+          "note": "Current summary and terminal outcomes remain bound to exact fresh projection truth rather than hidden or requested drafts."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md",
+          "docs/raisa-reception-one-selected-action-console-consolidation-architecture.md",
+          "docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.schema.json",
+          "orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-native-analysis.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-selected-action-console-consolidation-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-action-console-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py",
+          "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_reception_one_selected_action_console_consolidation_orientation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Implement the bounded presentation-only progressive-disclosure console over the four existing action paths.",
+        "Natural-language action activation, another field, full edit and compound commands remain closed.",
+        "Product data, watcher/runtime, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T03:38:04Z"
+  "updated_at": "2026-08-14T04:29:56Z"
 }

@@ -1,0 +1,175 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\selected-action-console-review-2d602cfd",
+  "branch": "codex/review-selected-action-console-2d602cfd",
+  "head_before": "2d602cfd822235977676bfe9ee8d8dc0a14714fe",
+  "head_after": "2d602cfd822235977676bfe9ee8d8dc0a14714fe",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "e210cc81084ad49005df9d2576def4c04a7dd913c295fe0c150ef20773dd3a4c",
+  "result": "# Independent Veto Review: Reception One Selected Action Console Orientation\n\n## 1. Five-Source Rehydration Receipt\n- `live_handover_current_baton`: Rehydrated completely from `AGENTS.md`. Master protected at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Worktree bound to `C:\\Users\\sarashera\\EMR4-worktrees\\selected-action-console-review-2d602cfd`.\n- `current_authority_allocation`: Conductor GPT Sol, Implementation Worker DeepSeek V4 Flash, Independent Verifier Gemini 3.6 Flash (High).\n- `active_plan_and_acceptance`: `docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md`, `docs/raisa-reception-one-selected-action-console-consolidation-architecture.md`, `docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md`.\n- `protected_evidence_boundaries`: Protected master `2e34bdad732fdab32fbf778280b3d3c70d66d602` preserved, zero Pages rebuild, zero patient/clinical/product data access, zero holdout/branding boundary breaches.\n- `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\selected-action-console-review-2d602cfd`, branch `codex/review-selected-action-console-2d602cfd`, candidate candidate HEAD `2d602cfd822235977676bfe9ee8d8dc0a14714fe`, parent `2b65cc8b639b6922c8f176a1d65ddc206fa6ba52`.\n\n## 2. Evaluation of Required Challenges\n1. **HEAD, Branch & Worktree Cleanliness**: Initial `git status --short --branch` (C01) and `git rev-parse HEAD` (C02) confirmed branch `codex/review-selected-action-console-2d602cfd` and candidate HEAD `2d602cfd822235977676bfe9ee8d8dc0a14714fe` on clean worktree. Post-review checks C06 and C07 confirmed identical clean state. Whitespace diff check (C05) passed with zero errors.\n2. **Palette & Zero-Route Behavior**: Confirmed four-button palette (`status`, `time`, `duration`, `practitioner`) opens 0 or 1 editor, starts in `no_editor_open`, and issues 0 HTTP route calls on open, collapse, or switch.\n3. **Switching Constraints**: Confirmed switching is idle-only, discards unsubmitted outgoing drafts, and is disabled whenever an action is busy, stale, interrupted, or awaiting confirmation.\n4. **Active Editor Mounting**: Confirmed active editor stays mounted through proposal, confirmation modal display, HTTP request execution, and fresh projection reconciliation, preserving Escape handler and focus return target validity.\n5. **State & Outcome Boundaries**: Confirmed current truth summary, provisional input draft, and fresh server readback remain strictly segregated, with an out-of-scope appointment receiving a clear action-specific terminal outcome.\n6. **Independence of Executors & Renderers**: Confirmed all 4 state objects, renderers, executors, and bridges remain independent and are not merged into a generic command object.\n7. **Command Spines & Authority**: Confirmed `status` remains on its existing status proposal/confirm family (`metaGridSetAppointmentStatus`), while `time`, `duration`, and `practitioner` remain on update proposal/confirm (`handleMoveResize`).\n8. **Accessibility & Responsive Constraints**: Confirmed standard HTML `<button>` semantics, `aria-expanded`, `aria-controls`, single polite ARIA live region (`aria-live=\"polite\"`), 44px minimum target sizes, and desktop/tablet/phone containment are frozen without adding tablists, modals, drawers, or custom focus systems.\n9. **Natural Language / Intent Boundaries**: Confirmed natural language intent is strictly limited to editor activation (`select_editor`) and receives zero command or proposal authority.\n10. **Tranche Scoping**: Confirmed next implementation (`raisa_reception_one_selected_action_console_progressive_disclosure_composition`) is strictly presentation-only with 11 explicit closed surfaces (no backend, API Spine, database, event, provider, or ref changes).\n11. **Product Source Isolation**: Confirmed candidate commit `2d602cfd822235977676bfe9ee8d8dc0a14714fe` contains zero product HTML, CSS, JavaScript, or Python source changes.\n12. **Execution Manifest Verification**: All 7 commands in the bound manifest executed in exact order with 0 exit codes. Pytest C03 reported exactly 77 passed across `test_raisa_reception_one_selected_action_console_consolidation_orientation.py`, `test_ariadne_active_operation_latch.py`, and `test_ariadne_orchestrator_preflight.py`. Ruff check C04 reported all checks passed.\n\n## 3. Final Decision\n- **Decision**: `pass`\n- **Candidate HEAD**: `2d602cfd822235977676bfe9ee8d8dc0a14714fe`\n- **Test Results**: 77 passed, 0 failed\n- **Post-Review Status**: Clean",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Veto Review: Reception One Selected Action Console Orientation\n\n## 1. Five-Source Rehydration Receipt\n- `live_handover_current_baton`: Rehydrated completely from `AGENTS.md`. Master protected at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Worktree bound to `C:\\Users\\sarashera\\EMR4-worktrees\\selected-action-console-review-2d602cfd`.\n- `current_authority_allocation`: Conductor GPT Sol, Implementation Worker DeepSeek V4 Flash, Independent Verifier Gemini 3.6 Flash (High).\n- `active_plan_and_acceptance`: `docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md`, `docs/raisa-reception-one-selected-action-console-consolidation-architecture.md`, `docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md`.\n- `protected_evidence_boundaries`: Protected master `2e34bdad732fdab32fbf778280b3d3c70d66d602` preserved, zero Pages rebuild, zero patient/clinical/product data access, zero holdout/branding boundary breaches.\n- `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\selected-action-console-review-2d602cfd`, branch `codex/review-selected-action-console-2d602cfd`, candidate candidate HEAD `2d602cfd822235977676bfe9ee8d8dc0a14714fe`, parent `2b65cc8b639b6922c8f176a1d65ddc206fa6ba52`.\n\n## 2. Evaluation of Required Challenges\n1. **HEAD, Branch & Worktree Cleanliness**: Initial `git status --short --branch` (C01) and `git rev-parse HEAD` (C02) confirmed branch `codex/review-selected-action-console-2d602cfd` and candidate HEAD `2d602cfd822235977676bfe9ee8d8dc0a14714fe` on clean worktree. Post-review checks C06 and C07 confirmed identical clean state. Whitespace diff check (C05) passed with zero errors.\n2. **Palette & Zero-Route Behavior**: Confirmed four-button palette (`status`, `time`, `duration`, `practitioner`) opens 0 or 1 editor, starts in `no_editor_open`, and issues 0 HTTP route calls on open, collapse, or switch.\n3. **Switching Constraints**: Confirmed switching is idle-only, discards unsubmitted outgoing drafts, and is disabled whenever an action is busy, stale, interrupted, or awaiting confirmation.\n4. **Active Editor Mounting**: Confirmed active editor stays mounted through proposal, confirmation modal display, HTTP request execution, and fresh projection reconciliation, preserving Escape handler and focus return target validity.\n5. **State & Outcome Boundaries**: Confirmed current truth summary, provisional input draft, and fresh server readback remain strictly segregated, with an out-of-scope appointment receiving a clear action-specific terminal outcome.\n6. **Independence of Executors & Renderers**: Confirmed all 4 state objects, renderers, executors, and bridges remain independent and are not merged into a generic command object.\n7. **Command Spines & Authority**: Confirmed `status` remains on its existing status proposal/confirm family (`metaGridSetAppointmentStatus`), while `time`, `duration`, and `practitioner` remain on update proposal/confirm (`handleMoveResize`).\n8. **Accessibility & Responsive Constraints**: Confirmed standard HTML `<button>` semantics, `aria-expanded`, `aria-controls`, single polite ARIA live region (`aria-live=\"polite\"`), 44px minimum target sizes, and desktop/tablet/phone containment are frozen without adding tablists, modals, drawers, or custom focus systems.\n9. **Natural Language / Intent Boundaries**: Confirmed natural language intent is strictly limited to editor activation (`select_editor`) and receives zero command or proposal authority.\n10. **Tranche Scoping**: Confirmed next implementation (`raisa_reception_one_selected_action_console_progressive_disclosure_composition`) is strictly presentation-only with 11 explicit closed surfaces (no backend, API Spine, database, event, provider, or ref changes).\n11. **Product Source Isolation**: Confirmed candidate commit `2d602cfd822235977676bfe9ee8d8dc0a14714fe` contains zero product HTML, CSS, JavaScript, or Python source changes.\n12. **Execution Manifest Verification**: All 7 commands in the bound manifest executed in exact order with 0 exit codes. Pytest C03 reported exactly 77 passed across `test_raisa_reception_one_selected_action_console_consolidation_orientation.py`, `test_ariadne_active_operation_latch.py`, and `test_ariadne_orchestrator_preflight.py`. Ruff check C04 reported all checks passed.\n\n## 3. Final Decision\n- **Decision**: `pass`\n- **Candidate HEAD**: `2d602cfd822235977676bfe9ee8d8dc0a14714fe`\n- **Test Results**: 77 passed, 0 failed\n- **Post-Review Status**: Clean",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-action-console-2d60",
+          "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_orchestrator_preflight.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52..2d602cfd822235977676bfe9ee8d8dc0a14714fe"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "217ae35daa34e849a3d23527a165f615754972743f47834663f69d67ea773cb3",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-action-console-2d60",
+        "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52..2d602cfd822235977676bfe9ee8d8dc0a14714fe"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

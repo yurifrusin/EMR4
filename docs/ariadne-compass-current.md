@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 288 / Compass 270. Reception One status, time, duration and practitioner reassignment share kernel-owned truth; compact selected-action orientation is next.
+> EMR4 is at Continuity 289 / Compass 271. Reception One has a selected four-button, single-editor action-console architecture; its presentation-only implementation is next.
 
 ## North star
 
@@ -348,31 +348,31 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One selected appointment can change duration through the canonical update path with fresh truth in both projections. Lineage parent: `raisa-reception-one-selected-appointment-time-reschedule-composition`.
 166. **Complete the bounded handleMoveResize field family with practitioner-only composition — Provider-free Reception One selected-appointment practitioner reassignment composition**
    One selected appointment can move to one current active practitioner through the canonical update path with fresh truth in both projections. Lineage parent: `raisa-reception-one-selected-appointment-duration-composition`.
+167. **Select a scalable presentation for the four proven selected-appointment actions — Provider-free Reception One selected-action-console consolidation orientation**
+   One deterministic palette will expose zero-or-one existing editor without merging command authority. Lineage parent: `raisa-reception-one-selected-appointment-practitioner-reassignment-composition`.
 
 ## Current position
 
-**Reception One now composes status and all three bounded handleMoveResize meanings over kernel truth — Provider-free Reception One selected-appointment practitioner reassignment composition**
+**Protect the minimum-app Reception One surface from one-panel-per-field accumulation — Provider-free Reception One selected-action-console consolidation orientation**
 
-**Why this proof came next:** Practitioner reassignment was the final independent handleMoveResize field after same-day time and duration.
+**Why this proof came next:** Four independently proven actions currently render as four full-width editors, making presentation consolidation dependency-satisfied before another field.
 
-One active-target reassignment passes through the backend-owned command path; compact selected-action orientation is next.
+The accepted architecture keeps four discoverable choices and opens exactly one existing field editor at a time.
 
 ### What this unlocks
 
-- Orient a compact progressive-disclosure or intent-led selected-action console without opening another field.
-- Continue evaluating both projections by fresh kernel truth rather than renderer imitation.
+- Implement a presentation-only progressive-disclosure console over the existing four command paths.
+- Retain future intent compatibility without giving language command authority.
 
 ### What it does not solve
 
-- Cross-day movement, full editing and another appointment field remain closed.
-- No new command, event family or watcher runtime is authorised.
+- The compact console is not implemented yet and representative usability remains unproved.
+- Another field, compound edits and language-driven action activation remain closed.
 - Product data, providers, deployment, production and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -627,6 +627,7 @@ Prerequisites:
 
 ## Map limits
 
+- The selected-action-console result is read-only architecture evidence; it does not implement UI behavior or merge status and update command authority.
 - The selected-practitioner composition is authored-synthetic client and local command-test evidence and cannot become a second scheduler, new command path or live-product claim.
 - The selected-duration composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.
 - The selected-time composition is authored-synthetic client evidence and cannot become a second scheduler, command path or live-product claim.
@@ -1225,6 +1226,9 @@ Prerequisites:
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
 - `docs/raisa-reception-one-duration-deepseek-test-integration-recovery.md`
+- `docs/raisa-reception-one-selected-action-console-consolidation-architecture.md`
+- `docs/raisa-reception-one-selected-action-console-consolidation-orientation-closeout.md`
+- `docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md`
 - `docs/raisa-reception-one-selected-appointment-duration-composition-closeout.md`
 - `docs/raisa-reception-one-selected-appointment-duration-composition-plan.md`
 - `docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md`
@@ -1366,6 +1370,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
+- `docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-duration-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md`
@@ -1420,6 +1425,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
@@ -1685,6 +1691,14 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-reception-one-duration-composition-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-deepseek-worker-output.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-practitioner-reassignment-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-candidate-precommit-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-native-analysis.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-consolidation-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-duration-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preacceptance-receipt.json`
@@ -2098,6 +2112,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.json`
 - `orchestration/continuity/raisa-provider-free-visible-native-diary-status-confirm-wiring/visible-status-confirm-evidence.schema.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.json`
+- `orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json`
@@ -2404,6 +2420,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-product-adapter-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-13--status-confirm-route-mounting-readiness-rereview.md`
 - `orchestration/human_inbox/yuri/2026-08-13--visible-native-diary-status-confirm-wiring.md`
+- `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-action-console-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-duration-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
@@ -2525,6 +2542,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
+- `tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py`
 - `tests/test_raisa_reception_one_selected_appointment_duration_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_status_action_composition_evidence.py`
@@ -2559,4 +2577,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 270; continuity graph revision 288._
+_Compass map revision 271; continuity graph revision 289._

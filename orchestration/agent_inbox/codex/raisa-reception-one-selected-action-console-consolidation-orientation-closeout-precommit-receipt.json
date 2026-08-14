@@ -1,0 +1,84 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console consolidation orientation",
+    "completed_stage": "Accepted a deterministic four-button, zero-or-one-editor architecture at 2d602cfd822235977676bfe9ee8d8dc0a14714fe after two native analyses, six dedicated tests, the canonical 196-test profile and a fresh 77-test Gemini veto",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+    "resume_after_compaction": false,
+    "source_head": "2d602cfd822235977676bfe9ee8d8dc0a14714fe",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "accepted orientation closeout pre-commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The orientation never produced a stable mechanical artifact and the prior tranche showed negative economy; dispatch would have duplicated Sol's product-meaning judgment.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh exact-candidate veto passed all seven manifest commands and exactly 77 tests with unchanged clean HEAD.",
+        "work_packages": [
+          "completed architecture and next-boundary veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Two independent read-only packages converged and supplied exact state, focus, layout, accessibility and command-authority constraints.",
+        "work_packages": [
+          "completed current-surface audit",
+          "completed option analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+    "parallel_work_packages": [
+      "native surface audit",
+      "native option analysis",
+      "Gemini independent veto"
+    ],
+    "reassessment_triggers": [
+      "closeout verification failure",
+      "pre-push",
+      "next implementation planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone owns acceptance, Continuity, explicit-path commit, publication and notification",
+      "DeepSeek will be reassessed for a capped browser-test artifact only in the implementation descendant"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_selected_action_console_orientation_closeout_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta, typed contract, closeout and Sol acceptance bind raisa_reception_one_selected_action_console_consolidation_orientation_pass to 2d602cfd822235977676bfe9ee8d8dc0a14714fe. Six dedicated tests, 85 closeout/latch/baton tests, the 196-test canonical profile and a 77-test Gemini veto pass.",
+    "current_authority_allocation": "Sol retains acceptance and Git authority. Two native subagents completed read-only analysis, DeepSeek was explicitly declined for negative conceptual-work leverage, and Gemini completed one fresh exact-candidate veto.",
+    "git_refs_and_worktree": "HEAD and task are exact candidate 2d602cfd822235977676bfe9ee8d8dc0a14714fe before closeout commit; origin task remains at published predecessor 2b65cc8b639b6922c8f176a1d65ddc206fa6ba52. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Seven intentional tracked closeout changes and 619 preserved untracked entries exist before this precommit pair.",
+    "live_handover_current_baton": "AGENTS.md now records Continuity 289 / Compass 271, accepted selected-action-console orientation source 2d602cfd822235977676bfe9ee8d8dc0a14714fe and the presentation-only progressive-disclosure composition next.",
+    "protected_evidence_boundaries": "No Diary or backend product source changed. Protected evidence, historical Diary PHI, product/patient data, provider/ADC, credentials/IAM/network, commands/routes, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

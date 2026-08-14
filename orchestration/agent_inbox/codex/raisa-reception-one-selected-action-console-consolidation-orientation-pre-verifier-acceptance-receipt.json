@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-action-console consolidation orientation",
+    "completed_stage": "Two native read-only packages converged on a deterministic four-button palette with one progressively disclosed existing editor; the typed architecture contract and six deterministic tests pass",
+    "next_executable_stage": "commit the exact read-only architecture candidate, admit one clean fresh Gemini veto, then accept and close out the orientation",
+    "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+    "resume_after_compaction": true,
+    "source_head": "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "clean exact architecture candidate pre-verifier",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The current package remains architecture judgment with no stable mechanical artifact; external implementation/test work is reserved for the next product tranche.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The clean exact candidate and seven-command manifest now pass deterministic admission, making one fresh independent architecture veto dependency-satisfied.",
+        "work_packages": [
+          "one read-only exact 2d602cfd veto with 77-test command packet"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only packages converged and supplied the exact state, focus, responsive and command-authority constraints now under independent review.",
+        "work_packages": [
+          "completed current-surface audit",
+          "completed option analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-action-console-consolidation-orientation",
+    "parallel_work_packages": [
+      "completed native audits",
+      "fresh Gemini veto"
+    ],
+    "reassessment_triggers": [
+      "verifier return",
+      "revision_required recovery",
+      "closeout",
+      "next implementation planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Gemini follows deterministic clean candidate",
+      "one reviewer decision only",
+      "Sol alone admits, recovers, accepts and closes out"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_candidate_architecture_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate 2d602cfd822235977676bfe9ee8d8dc0a14714fe freezes the deterministic action palette and single-panel progressive disclosure architecture, distinct field authority mapping, threat controls, typed contract and next implementation boundary. Six dedicated tests, 77 verifier-packet tests and the canonical 196-test fast profile pass.",
+    "current_authority_allocation": "Sol retains architecture, acceptance and Git authority. Native analysis is complete, DeepSeek is declined for this conceptual tranche, and Gemini 3.6 Flash/high receives one fresh read-only exact-candidate veto.",
+    "git_refs_and_worktree": "The verifier worktree C:/Users/sarashera/EMR4-worktrees/selected-action-console-review-2d602cfd is clean on codex/review-selected-action-console-2d602cfd at exact candidate 2d602cfd822235977676bfe9ee8d8dc0a14714fe. The main tracked worktree is clean at the same candidate with unrelated untracked files preserved. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 288 / Compass 270 identifies the read-only selected-action-console consolidation orientation after accepted practitioner reassignment.",
+    "protected_evidence_boundaries": "Gemini may read only the packet allowlist and parent-to-candidate diff, run the exact local provider-free command manifest and return one decision. Protected evidence, historical Diary PHI, docs/branding, patient/product data, writes, provider/product calls, deployment, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

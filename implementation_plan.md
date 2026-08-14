@@ -381,9 +381,12 @@ practitioner through the identical command path. Its practitioner-only
 descendant now also passes at exact reviewed source
 `f085fc98ead21a3e7929ee9adbda81abfc7542c9`, preserving date, start and
 duration while requiring one current active target at proposal and confirm.
-Before another field is added, a read-only compact selected-action-console
-orientation is the next narrow descendant so proven controls do not accrete as
-vertical middleware-style UI.
+The read-only selected-action-console orientation now passes at exact reviewed
+source `2d602cfd822235977676bfe9ee8d8dc0a14714fe`. It selects four native action
+choices with no editor initially and at most one progressively disclosed
+existing editor, while preserving distinct status and update command families.
+Its presentation-only implementation is the next narrow descendant before
+another field is added.
 No watcher runtime, existing database/
 source access, persistence, product data, external patient client, other
 command, restart/unknown-commit claim, provider, deployment, production or

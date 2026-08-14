@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-action-console-2d60",
+        "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2b65cc8b639b6922c8f176a1d65ddc206fa6ba52..2d602cfd822235977676bfe9ee8d8dc0a14714fe"
+      ]
+    },
+    {"id": "C06", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C07", "argv": ["git", "rev-parse", "HEAD"]}
+  ]
+}
