@@ -1,0 +1,89 @@
+{
+  "schema_version": "raisa.reception-one.selected-duration.evidence.v1",
+  "generated_at": "2026-08-14T11:55:58+10:00",
+  "result": "raisa_reception_one_selected_appointment_duration_composition_pass",
+  "planning_baseline": "65f0e6ff117bb5a764beb5ac8fc7a8b5cea13cab",
+  "candidate_source": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+  "evidence_modes": [
+    "authored_synthetic_client_fixture",
+    "route_intercepted_browser",
+    "repository_static_and_regression",
+    "in_app_rendered_inspection",
+    "independent_read_only_veto"
+  ],
+  "api_surface": {
+    "graphql": "read_only_unchanged",
+    "rest": "existing_update_proposal_confirm_only",
+    "bridge": "duration_validation_and_handleMoveResize_delegation_no_network",
+    "new_routes": 0,
+    "raw_write_fallbacks": 0,
+    "unexpected_mutation_routes": 0
+  },
+  "frozen_change": {
+    "date": "unchanged",
+    "start_time_local": "unchanged_delta_zero",
+    "practitioner": "unchanged",
+    "mutable_field": "duration_minutes_only",
+    "minimum_minutes": 15,
+    "maximum_minutes": 480,
+    "delta_quantum_minutes": 15,
+    "same_date_end_required": true,
+    "non_multiple_current_example": "20_to_35_admitted"
+  },
+  "paired_browser_acceptance": {
+    "renderers": ["conventional_grid", "reception_one"],
+    "outcomes": ["safe", "cancelled", "blocked", "stale", "failed", "committed"],
+    "route_traces": 12,
+    "normalized_fields": ["appointment_id", "appointment_date", "start_time_local", "end_time_local", "practitioner_id", "duration_minutes", "patient_id", "status"],
+    "proposal_confirm_counts": {
+      "safe": [1, 1],
+      "cancelled": [1, 0],
+      "blocked": [1, 0],
+      "stale": [1, 1],
+      "failed": [1, 0],
+      "committed": [1, 1]
+    },
+    "fresh_truth_equal": true,
+    "terminal_callback_precedes_fresh_reconciliation": false
+  },
+  "interaction_acceptance": {
+    "invalid_noop_or_out_of_day_routes": 0,
+    "interruption": "pass_no_duplicate_fresh_reconciliation",
+    "dialog_escape": "pass_cancel_without_workspace_close",
+    "focus_return": "pass_duration_selector",
+    "mutual_exclusion": "pass_status_time_duration",
+    "viewports": ["1280x900", "768x1024", "390x844"],
+    "horizontal_overflow": false,
+    "range_separator_encoding": "pass_unicode_en_dash",
+    "persisted_screenshots": false
+  },
+  "verification": {
+    "dedicated_browser_functions": 10,
+    "dedicated_browser_cases": 12,
+    "consolidated_ui_truth": 118,
+    "independent_veto": 68,
+    "canonical_fast": 196,
+    "javascript_syntax": "pass",
+    "git_whitespace": "pass"
+  },
+  "parallelism_efficacy": {
+    "deepseek_planned": "one_isolated_browser_test_artifact",
+    "deepseek_actual": "completed_and_integrated_under_sol_recovery",
+    "native_planned": "read_only_exact_seam_map",
+    "native_actual": "completed_four_material_risks_found",
+    "gemini_planned": "fresh_exact_candidate_veto",
+    "gemini_actual": "pass_unchanged_clean_candidate",
+    "sol_only_surfaces": ["product_integration", "candidate_recovery", "browser_session", "acceptance", "continuity", "git"]
+  },
+  "authority_counts": {
+    "provider_product_calls": 0,
+    "patient_or_product_records": 0,
+    "database_or_source_reads": 0,
+    "database_writes": 0,
+    "deployments": 0,
+    "releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_movements": 0
+  },
+  "claim_limit": "Proves provider-free authored-synthetic client composition, route-intercepted browser behavior, rendered inspection and independent source review only; it does not prove live backend, database, deployed, production, real-user or patient-data operation."
+}

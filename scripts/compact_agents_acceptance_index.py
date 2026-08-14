@@ -44,7 +44,6 @@ ACTIVE_LABELS = (
     "Context Fabric CF-D1 concurrency rehearsal acceptance",
     "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal acceptance",
-    "Provider-free read-only status-confirm route-mounting admission review acceptance",
     "Status-confirm preflight idempotency expectation repair acceptance",
     "Current result",
     "Next implementation",

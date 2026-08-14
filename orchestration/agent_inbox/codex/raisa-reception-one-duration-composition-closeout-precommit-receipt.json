@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "completed_stage": "Duration composition is accepted at exact reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 after 118 consolidated tests, final 196-test canonical passage, responsive rendered QA and one unchanged clean Gemini 68-test veto pass; Continuity 287 and Compass 269 are bound",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "resume_after_compaction": false,
+    "source_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "tranche closeout planned-versus-actual efficacy",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Planned one-file test authoring completed and, after Sol selector-contract recovery, exposed the repaired terminal-callback race; its unusually high token use lowers economy but not realized defect-finding value.",
+        "work_packages": [
+          "completed recovered route-intercepted duration matrix"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The reserved fresh veto ran only after deterministic passage, passed 68 tests and left exact candidate HEAD and status unchanged.",
+        "work_packages": [
+          "completed fresh exact f397a370 read-only veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The read-only seam map found exact-read, reconciliation, midnight-boundary and brittle-static-test risks without sharing mutable files.",
+        "work_packages": [
+          "completed read-only duration seam and regression map"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "parallel_work_packages": [
+      "all three planned non-Sol lanes completed"
+    ],
+    "reassessment_triggers": [
+      "next practitioner-only tranche start",
+      "new or restored task window",
+      "material recovery",
+      "pre-verifier gate",
+      "next closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone recovered product/test candidates",
+      "the stateful in-app browser sequence remained serial",
+      "Sol alone accepted, updated Continuity and controls Git"
+    ]
+  },
+  "planned_action": "commit_duration_acceptance_continuity_closeout_and_reporting_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen duration plan and threat delta are satisfied at exact candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8. Typed evidence, Sol acceptance, closeout and Yuri paired summary are present. The consolidated packet passes 118, Gemini passes 68 and the final canonical fast profile passes 196.",
+    "current_authority_allocation": "Sol owns acceptance, Continuity, Git and closeout. DeepSeek completed its recovered isolated test artifact, the native subagent completed read-only seam analysis, and Gemini 3.6 Flash/high returned one fresh pass at an unchanged clean candidate.",
+    "git_refs_and_worktree": "The task worktree remains on codex/ariadne-bernie-davida-parallel-seam over candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 with intentional closeout/Continuity changes and 631 preserved untracked status entries before adding exact duration artifacts. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; protected refs will not move.",
+    "live_handover_current_baton": "AGENTS.md now binds the accepted duration result at Continuity 287 / Compass 269 and names practitioner-only reassignment as the next narrow descendant. The current acceptance lookup row is hash-bound in the compact ledger.",
+    "protected_evidence_boundaries": "No protected holdout or historical Diary PHI, patient/product/clinical data, backend/API/OpenAPI/GraphQL/database/event/watcher expansion, product-provider/ADC/credentials/IAM/network, raw PUT or second command path, deployment, production, release, Pages or protected-ref movement occurred. docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

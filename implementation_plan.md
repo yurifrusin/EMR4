@@ -374,8 +374,12 @@ then selected the existing appointment update/reschedule family. Its first
 same-day, same-practitioner, duration-fixed Reception One time composition
 passes at exact reviewed source
 `d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a`, through the same update
-proposal/confirm path with fresh reconciliation and no second command path. A
-duration-only composition is the next narrow descendant. No watcher runtime, existing database/
+proposal/confirm path with fresh reconciliation and no second command path. Its
+duration-only descendant now also passes at exact reviewed source
+`f397a3706f3b870b8436eb3993bd90c6c0c742a8`, preserving date, start and
+practitioner through the identical command path. Same-date, same-start,
+same-duration practitioner-only reassignment is the next narrow descendant.
+No watcher runtime, existing database/
 source access, persistence, product data, external patient client, other
 command, restart/unknown-commit claim, provider, deployment, production or
 release is opened.

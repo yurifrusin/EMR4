@@ -3,15 +3,15 @@
   "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
   "active_tranche": "Reception One selected-appointment duration-only composition",
   "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
-  "status": "in_progress",
-  "source_head": "52ee727928f32581f5fd5a969bfbcde55a13d87d",
-  "authority_source": "AGENTS.md Continuity 286 / Compass 268, the accepted time-reschedule closeout and Yuri's standing uninterrupted-development authority",
+  "status": "complete",
+  "source_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+  "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "DeepSeek and native-subagent contributions are recovered and complete; in-app desktop/tablet/phone QA passes after correcting one rendered range-separator defect; the consolidated 118-test packet and canonical 196-test fast profile pass",
-    "next_executable_stage": "commit the exact deterministic candidate and orchestration evidence, create a fresh clean read-only review worktree, generate the pre-verifier receipt and dispatch the reserved Gemini 3.6 Flash/high veto",
+    "completed_stage": "Duration composition is accepted at exact reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 after 118 consolidated tests, final 196-test canonical passage, responsive rendered QA and one unchanged clean Gemini 68-test veto pass; Continuity 287 and Compass 269 are bound",
+    "next_executable_stage": null,
     "retry_counters": {
-      "review": 0,
-      "verification": 7
+      "review": 1,
+      "verification": 9
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -22,14 +22,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "accepted_operation_closeout_ready"
   },
   "protected_boundaries": [
     "existing_appointment_update_proposal_confirm_family_only",

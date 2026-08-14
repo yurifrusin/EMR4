@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment duration-only composition",
+    "completed_stage": "candidate f397a370 is committed, deterministic and rendered gates pass, and clean exact review worktree r191 passes preflight",
+    "next_executable_stage": "dispatch one fresh Gemini veto, verify unchanged exact-head and clean postcondition, then accept or enter bounded recovery",
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "resume_after_compaction": true,
+    "source_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "fresh exact-candidate independent veto dispatch",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The recovered one-file matrix supplied realized defect-finding leverage and needs no redispatch.",
+        "work_packages": [
+          "completed route-intercepted duration matrix"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh independent scrutiny is now admissible over the deterministic clean candidate and distinct from Sol acceptance.",
+        "work_packages": [
+          "review exact f397a370 candidate in r191 and return one pass or revision_required"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The bounded seam analysis has completed and its findings are repaired; no further distinct pre-veto package remains.",
+        "work_packages": [
+          "completed read-only seam analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+    "parallel_work_packages": [
+      "Gemini fresh read-only veto is the sole active worker package"
+    ],
+    "reassessment_triggers": [
+      "verifier return",
+      "dirty or changed-head postcondition",
+      "revision_required decision",
+      "tranche closeout",
+      "new or restored task window"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "deterministic admission completed before verifier",
+      "only one independent veto writes its external receipt",
+      "Sol alone verifies postconditions and accepts"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_read_only_veto_over_exact_duration_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen duration plan, threat delta and Sol recovery document bind exact same-date, same-start, same-practitioner duration-only behavior. Candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 passed responsive in-app QA, 118 consolidated regressions and the canonical 196-test fast profile.",
+    "current_authority_allocation": "Sol owns acceptance and integration. DeepSeek and native lanes are complete. Gemini 3.6 Flash/high owns exactly one fresh read-only veto in clean worktree r191 and may return only pass or revision_required.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r191 is clean on codex/review-reception-one-duration-f397a370 at exact candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main task worktree retains only intentional post-candidate review evidence and preserved unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 286 / Compass 268 binds the active duration-only descendant under the accepted time-reschedule result.",
+    "protected_evidence_boundaries": "The verifier receives exact non-protected allowlisted authored-synthetic source only. Protected holdouts, historical Diary PHI, branding, patient/product/clinical data, provider/ADC, database/source/runtime, deployment, Pages and protected refs remain closed. Review is read-only and provider-neutral source inspection through Antigravity, not a product/provider call."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
