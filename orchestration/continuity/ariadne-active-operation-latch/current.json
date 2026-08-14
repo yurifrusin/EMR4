@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-selected-appointment-reschedule-composition",
-  "active_tranche": "Reception One selected-appointment reschedule composition",
-  "objective": "Apply projection-neutral kernel truth architecture to the narrowest existing appointment update/reschedule command family through one selected Reception One appointment without a second command path.",
-  "status": "complete",
-  "source_head": "d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a",
-  "authority_source": "Yuri's 2026-08-14 selection of the recommended existing Reception One appointment update/reschedule family, AGENTS.md Continuity 285 / Compass 267 and standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
+  "active_tranche": "Reception One selected-appointment duration-only composition",
+  "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
+  "status": "in_progress",
+  "source_head": "268e90316c3ef248385ec19d25768c20aed2f3fe",
+  "authority_source": "AGENTS.md Continuity 286 / Compass 268, the accepted time-reschedule closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "the exact candidate d803d1d85267af31ee5b6a08b0ecfefb6ad3e04a passes deterministic verification, fresh Gemini veto, source-bound evidence, Continuity 286 / Compass 268, Sol acceptance, Yuri summary and the mandatory parallelism-efficacy control",
-    "next_executable_stage": null,
+    "completed_stage": "the fresh preplanning receipt passes and the provider-free duration-only plan, threat delta, three-lane allocation and plan admission test are frozen over baseline 268e90316c3ef248385ec19d25768c20aed2f3fe",
+    "next_executable_stage": "commit the frozen plan boundary, generate a passing pre-worker-dispatch receipt, then run the DeepSeek test-artifact worker and native read-only seam-map subagent beside Sol product implementation",
     "retry_counters": {
-      "review": 1,
-      "verification": 14
+      "review": 0,
+      "verification": 1
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -22,19 +22,19 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "existing_appointment_update_proposal_confirm_family_only",
     "one_selected_current_appointment",
-    "same_practitioner_time_reschedule_only_until_plan_freeze",
+    "same_date_same_start_same_practitioner_duration_only_until_plan_freeze",
     "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
     "no_raw_put_or_second_command_path",
     "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
