@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 272,
-  "updated_at": "2026-08-14T08:40:01Z",
-  "source_graph_revision": 290,
-  "orientation_statement": "EMR4 is at Continuity 290 / Compass 272. Reception One now has a compact four-choice, zero-or-one-editor action console; read-only multi-change atomicity orientation is next.",
+  "map_revision": 273,
+  "updated_at": "2026-08-14T11:47:54Z",
+  "source_graph_revision": 291,
+  "orientation_statement": "EMR4 is at Continuity 291 / Compass 273. Multi-change meaning is frozen as typed inert candidates and one-family-owned commands; the same-update-family kernel rehearsal is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3123,43 +3123,65 @@
         "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-action-console-progressive-disclosure.md"
       ]
+    },
+    {
+      "node_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+      "lineage_parent": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
+      "strategic_role": "Freeze adapter-neutral multi-change meaning before any compound Reception One editor",
+      "outcome": "One-family update composition is permitted; cross-family requests remain non-executable and model authority remains zero.",
+      "evidence": [
+        "docs/raisa-reception-one-multi-change-request-atomicity-orientation-plan.md",
+        "docs/raisa-reception-one-multi-change-request-atomicity-architecture.md",
+        "docs/security/raisa-reception-one-multi-change-request-atomicity-orientation-threat-model-delta.md",
+        "orchestration/continuity/raisa-reception-one-multi-change-request-atomicity-orientation/multi-change-action-atomicity-contract.schema.json",
+        "orchestration/continuity/raisa-reception-one-multi-change-request-atomicity-orientation/multi-change-action-atomicity-contract.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-native-analysis.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-packet.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-gemini-report-reconciliation-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-269.md",
+        "tests/test_raisa_reception_one_multi_change_request_atomicity_orientation.py",
+        "docs/raisa-reception-one-multi-change-request-atomicity-orientation-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-14--reception-one-multi-change-request-atomicity-orientation.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
-    "strategic_role": "Keep Reception One compact while preserving kernel-owned command meaning",
-    "why_now": "The four independent actions were proven and their selected single-editor presentation architecture was accepted.",
-    "outcome": "The compact console is implemented with route-inert palette activity, draft disposal and exact fresh reconciliation over unchanged command paths.",
+    "node_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "strategic_role": "Let Raisa understand richer appointment requests without receiving a generic tool belt",
+    "why_now": "The compact four-action console is implemented and needs an exact composition rule before compound UI or conversational activation.",
+    "outcome": "Typed inert candidates now map same-update-family requests to one existing command and keep status-plus-update non-executable.",
     "unlocks": [
-      "Orient the safe representation and atomicity of a request containing several appointment changes.",
-      "Consider later intent-driven editor activation without granting language command authority."
+      "Rehearse practitioner, time and duration together through the existing update proposal/confirm kernel.",
+      "Consider a later multi-field editor only after the exact kernel properties pass."
     ],
     "does_not_solve": [
-      "No compound update transaction, automatic command sequencing or conversational execution is implemented.",
-      "Representative usability and live backend/database behavior remain unproved by this tranche.",
-      "Product data, providers, deployment, production and release remain closed."
+      "Successful practitioner/time/duration confirmation, exact replay and injected rollback remain unproved.",
+      "No compound editor, cross-family transaction or conversational command execution is implemented.",
+      "Patient channels, product data, providers, deployment, production and release remain closed."
     ],
     "evidence": [
-      "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-plan.md",
-      "docs/security/raisa-reception-one-selected-action-console-progressive-disclosure-composition-threat-model-delta.md",
-      "orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.schema.json",
-      "orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-native-analysis.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-test-recovery.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout-postcompaction-2-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-pre-verifier-acceptance-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-review-worktree-preflight.json",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-packet.md",
-      "orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-receipt.json",
-      "review/test_reception_one_selected_action_console.py",
-      "tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py",
-      "review/test_two_projection_truth_parity.py",
-      "docs/diary/diary.html",
-      "docs/diary/meta-grid.css",
-      "docs/diary/meta-grid.js",
-      "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-action-console-progressive-disclosure.md"
+      "docs/raisa-reception-one-multi-change-request-atomicity-orientation-plan.md",
+      "docs/raisa-reception-one-multi-change-request-atomicity-architecture.md",
+      "docs/security/raisa-reception-one-multi-change-request-atomicity-orientation-threat-model-delta.md",
+      "orchestration/continuity/raisa-reception-one-multi-change-request-atomicity-orientation/multi-change-action-atomicity-contract.schema.json",
+      "orchestration/continuity/raisa-reception-one-multi-change-request-atomicity-orientation/multi-change-action-atomicity-contract.json",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-native-analysis.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-predispatch-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-pre-verifier-acceptance-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-gemini-report-reconciliation-incident.json",
+      "docs/ariadne-agent-error-correction-register-revision-269.md",
+      "tests/test_raisa_reception_one_multi_change_request_atomicity_orientation.py",
+      "docs/raisa-reception-one-multi-change-request-atomicity-orientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-14--reception-one-multi-change-request-atomicity-orientation.md"
     ]
   },
   "decision_horizon": [
@@ -4908,6 +4930,7 @@
     }
   ],
   "map_limits": [
+    "The multi-change orientation is repository-static architecture evidence; it does not prove a compound UI, live channel delegation or practitioner/time/duration transaction behavior.",
     "The selected-action-console composition proves route-intercepted presentation behavior, not live backend/database execution, compound updates or representative usability.",
     "The selected-action-console result is read-only architecture evidence; it does not implement UI behavior or merge status and update command authority.",
     "The selected-practitioner composition is authored-synthetic client and local command-test evidence and cannot become a second scheduler, new command path or live-product claim.",

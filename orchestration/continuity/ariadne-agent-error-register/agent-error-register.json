@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 268,
+  "register_revision": 269,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-14",
@@ -12352,6 +12352,48 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-adapter-authority-native-protected-scope-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-268.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0308",
+      "attempt_id": "raisa-reception-one-multi-change-gemini-review-report-reconciliation-001",
+      "observed_on": "2026-08-14",
+      "tranche": "raisa-reception-one-multi-change-request-atomicity-orientation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-36-flash-high",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "An independent-review receipt must count the frozen exact command lines correctly and must describe a non-mutating Ruff format check as already formatted rather than formatted by the verifier.",
+      "observed_error": "The passing Gemini receipt said all five mandatory shell commands ran although the packet contained nine exact command lines, and it summarized the non-mutating Ruff format-check result as two files formatted rather than two files already formatted. Its detailed result list, 144/79/234 pytest counts, unchanged HEAD and clean postcondition otherwise agree with the frozen packet and harness.",
+      "detection_method": "Sol compared the fresh receipt narrative with the exact frozen packet, the receipt's own detailed command-result list and the harness-owned unchanged-clean postcondition before acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-gemini-report-reconciliation-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-269.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.review_receipt_command_count_and_format_check_wording_misreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the Gemini receipt and pass decision, bind the authoritative nine command lines and exact 144/79/234 results in a separate reconciliation receipt, interpret the Ruff result as check-only, and admit no broader claim from the verifier prose.",
+        "prevention_control": "Before Sol acceptance, compare every review receipt's narrative command count and mutation wording with the frozen packet and harness postcondition; record any mismatch in a distinct reconciliation receipt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-packet.md",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-multi-change-gemini-report-reconciliation-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-269.md"
         ]
       },
       "status": "corrected"

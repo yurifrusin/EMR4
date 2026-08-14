@@ -35,12 +35,12 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         manifest["schema_version"] == "emr4.current_baton_acceptance_index_manifest.v1"
     )
     assert manifest["source_agents_path"] == "AGENTS.md"
-    assert manifest["source_git_head"] == ("f397a3706f3b870b8436eb3993bd90c6c0c742a8")
+    assert manifest["source_git_head"] == ("fbb7ffb46e041bbfc193ff3a76b2f970c06dee58")
     assert manifest["source_agents_sha256"] == (
-        "02a973dd5d43333181678d03f0c14a636b2cd285c0259b9d82a61633594c7a1c"
+        "3d9c9205ccab8f72d4f104e35872d0eb8bf1a9eeae70bcf836ddee20e66b65b7"
     )
-    assert manifest["source_agents_byte_count"] == 75931
-    assert manifest["source_agents_line_count"] == 493
+    assert manifest["source_agents_byte_count"] == 81100
+    assert manifest["source_agents_line_count"] == 496
     assert len(payload) == manifest["ledger_byte_count"]
     assert len(payload.decode("utf-8").splitlines()) == manifest["ledger_line_count"]
     assert hashlib.sha256(payload).hexdigest() == manifest["ledger_sha256"]
@@ -50,7 +50,7 @@ def test_acceptance_index_matches_hash_bound_manifest() -> None:
         after_header="| Item | Indexed acceptance artifacts |",
     )
     assert ledger_labels == manifest["moved_labels"]
-    assert len(ledger_labels) == manifest["moved_row_count"] == 151
+    assert len(ledger_labels) == manifest["moved_row_count"] == 155
 
 
 def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> None:

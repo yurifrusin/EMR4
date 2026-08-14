@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-reception-one-selected-action-console-progressive-disclosure-composition"
-SOURCE_HEAD = "1d9e58fd2624f87b8b3def538297054999e7bef3"
+NODE_ID = "raisa-reception-one-multi-change-request-atomicity-orientation"
+SOURCE_HEAD = "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58"
+CONSOLE_SOURCE_HEAD = "1d9e58fd2624f87b8b3def538297054999e7bef3"
 CONSOLE_ORIENTATION_SOURCE_HEAD = "2d602cfd822235977676bfe9ee8d8dc0a14714fe"
 PRACTITIONER_SOURCE_HEAD = "f085fc98ead21a3e7929ee9adbda81abfc7542c9"
 DURATION_SOURCE_HEAD = "f397a3706f3b870b8436eb3993bd90c6c0c742a8"
@@ -31,32 +32,37 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_live_action_console_composition() -> None:
+def test_continuity_and_compass_bind_live_multi_change_orientation() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 290
+    assert graph["graph_revision"] == 291
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 272
-    assert compass["source_graph_revision"] == 290
+    assert compass["map_revision"] == 273
+    assert compass["source_graph_revision"] == 291
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_console_composition_and_name_atomicity_orientation() -> None:
+def test_live_baton_rows_accept_atomicity_orientation_and_name_kernel_rehearsal() -> (
+    None
+):
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 290 / Compass 272" in current
-    assert "raisa_reception_one_selected_action_console_progressive_disclosure_composition_pass" in current
+    assert "Continuity 291 / Compass 273" in current
+    assert (
+        "raisa_reception_one_multi_change_request_atomicity_orientation_pass" in current
+    )
     assert SOURCE_HEAD in current
-    assert "four native action choices" in current
-    assert "zero-or-one existing editor" in current
-    assert "all four command paths remain distinct and unchanged" in current
-    assert "Gemini passed 167 tests" in current
+    assert "typed inert action candidates" in current
+    assert "one existing update-family proposal" in current
+    assert "cross-family request is non-executable" in current
+    assert "Gemini passed 457 exact tests" in current
     assert SOURCE_HEAD in relation
+    assert CONSOLE_SOURCE_HEAD in relation
     assert CONSOLE_ORIENTATION_SOURCE_HEAD in relation
     assert PRACTITIONER_SOURCE_HEAD in relation
     assert DURATION_SOURCE_HEAD in relation
@@ -91,11 +97,11 @@ def test_live_baton_rows_accept_console_composition_and_name_atomicity_orientati
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "multi-change request atomicity orientation" in next_work
-    assert "existing appointment update proposal/confirm contract" in next_work
-    assert "Automatic sequencing of single-field commands" in next_work
-    assert "combined client dispatcher" in next_work
-    assert "compound atomicity claim" in next_work
+    assert "same_update_family_multi_change_kernel_rehearsal" in next_work
+    assert "existing appointment update proposal/confirm path" in next_work
+    assert "changed time, duration and practitioner in one command" in next_work
+    assert "idempotency, audit and failure-injection rollback" in next_work
+    assert "new route, schema, command family or database migration" in next_work
     assert "product/patient data" in next_work
     assert "provider/ADC" in next_work
     assert "attempt-016" not in relation.lower()
@@ -133,13 +139,17 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "multi-change request atomicity orientation",
-        "existing appointment update proposal/confirm contract",
-        "automatic sequencing of single-field commands",
-        "combined client dispatcher",
-        "compound atomicity claim",
-        "separately proven kernel-owned command contract",
-        "backend/api/openapi/graphql/database/event/watcher expansion",
+        "same_update_family_multi_change_kernel_rehearsal",
+        "existing appointment update proposal/confirm path",
+        "changed time, duration and practitioner in one command",
+        "stale-current-truth",
+        "conflict",
+        "idempotency",
+        "audit",
+        "failure-injection rollback",
+        "no ui",
+        "new route, schema, command family or database migration",
+        "external patient/channel runtime",
         "product/patient data",
         "provider/adc",
         "credentials/iam/network",

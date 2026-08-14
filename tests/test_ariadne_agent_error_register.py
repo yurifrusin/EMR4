@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 268
+    assert register["register_revision"] == 269
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 308)
+        f"AER-{index:04d}" for index in range(1, 309)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 206
+    assert len(agent_incidents) == 207
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 307
+    assert report["incident_count"] == 308
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2610,7 +2610,7 @@ def test_aer_0293_records_cf_d2_authenticated_readiness_race() -> None:
     assert "three consecutive" in incident["correction"]["prevention_control"]
 
 
-def test_aer_0294_through_0307_record_reschedule_and_multi_change_recovery() -> None:
+def test_aer_0294_through_0308_record_reschedule_and_multi_change_recovery() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
     main_search = incidents["AER-0294"]
@@ -2737,6 +2737,18 @@ def test_aer_0294_through_0307_record_reschedule_and_multi_change_recovery() -> 
     assert adapter_authority["related_incident_ids"] == []
     assert adapter_authority["status"] == "corrected"
     assert adapter_authority["correction"]["status"] == "contained_then_escalated"
+
+    review_report = incidents["AER-0308"]
+    assert review_report["stage"] == "independent_review"
+    assert review_report["category"] == "evidence_misreport"
+    assert review_report["process_severity"] == "moderate"
+    assert review_report["candidate_state"] == "canonical_unchanged"
+    assert review_report["related_incident_ids"] == []
+    assert review_report["recurrence_signature"] == (
+        "verifier.review_receipt_command_count_and_format_check_wording_misreport"
+    )
+    assert review_report["status"] == "corrected"
+    assert review_report["correction"]["status"] == "control_added"
 
 
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
@@ -3013,18 +3025,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 268
-    assert report["incident_count"] == 307
+    assert report["register_revision"] == 269
+    assert report["incident_count"] == 308
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 206,
+        "agent_behavior": 207,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 42,
-        "evidence_misreport": 40,
+        "evidence_misreport": 41,
         "harness_failure": 37,
         "output_contract_violation": 85,
         "read_only_violation": 3,
@@ -3034,7 +3046,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 97,
-        "canonical_unchanged": 183,
+        "canonical_unchanged": 184,
         "untrusted_partial_worktree": 27,
     }
     receipt_event_recurrence = next(

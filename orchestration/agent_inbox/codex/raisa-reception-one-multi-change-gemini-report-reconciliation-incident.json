@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.sanitized_incident_receipt.v1",
+  "incident_id": "AER-0308",
+  "attempt_id": "raisa-reception-one-multi-change-gemini-review-report-reconciliation-001",
+  "observed_on": "2026-08-14",
+  "tranche": "raisa-reception-one-multi-change-request-atomicity-orientation",
+  "candidate_head": "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58",
+  "candidate_state": "canonical_unchanged",
+  "observed": {
+    "review_decision": "pass",
+    "receipt_command_line_claim": 5,
+    "packet_command_line_count": 9,
+    "pytest_packet_counts": [144, 79, 234],
+    "pytest_total": 457,
+    "ruff_format_command": "check_only",
+    "ruff_format_observed_meaning": "two_files_already_formatted",
+    "head_unchanged": true,
+    "worktree_clean": true
+  },
+  "disposition": "receipt_prose_reconciled_without_broadening_decision",
+  "correction": "Treat the packet's nine exact command lines, the receipt's per-command result list, the exact 144/79/234 pytest outputs, and unchanged-clean harness postcondition as authoritative. Read 'all 5 mandatory shell commands' as a verifier prose count error and '2 files formatted' as a wording error for the non-mutating Ruff format-check pass. No candidate or verifier decision is changed.",
+  "prevention_control": "Future review admission must compare the receipt's narrative command count and format wording with the frozen packet and harness postcondition before Sol acceptance; any mismatch is corrected in a separate reconciliation receipt.",
+  "protected_boundary": "Contains no protected, patient, clinical, product-derived, credential or quarantined worker content."
+}

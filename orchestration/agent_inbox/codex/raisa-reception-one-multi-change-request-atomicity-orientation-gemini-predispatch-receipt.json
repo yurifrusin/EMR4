@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One multi-change request atomicity orientation",
+    "completed_stage": "Committed the Sol-owned exact-source architecture and typed contract at d780a18800c9fa1f8510afe9e383489229cc6136 after quarantining both inadmissible native analyses; 457 exact checks plus Ruff, JSON, source guards and whitespace passed in the clean review worktree, and the fresh five-source post-compaction receipt passed",
+    "next_executable_stage": "bind a fresh clean exact-candidate review worktree and dispatch one Gemini 3.6 Flash/high independent veto under an exact literal-path allowlist",
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "resume_after_compaction": true,
+    "source_head": "d780a18800c9fa1f8510afe9e383489229cc6136",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "exact candidate pre-verifier dispatch",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No stable mechanical implementation package exists and the preceding test-only lane had negative net economy.",
+        "work_packages": []
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The deterministic gate and clean-worktree preflight pass; one fresh exact-candidate veto is now admissible.",
+        "work_packages": [
+          "exact candidate architecture veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Both read-only attempts breached command scope, were interrupted and are wholly inadmissible under AER-0306 and AER-0307; Sol reproduced the facts from exact literal files.",
+        "work_packages": [
+          "rejected exact source and test contract map",
+          "rejected adapter-neutral typed-action threat and option analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "parallel_work_packages": [
+      "one fresh Gemini veto after deterministic admission"
+    ],
+    "reassessment_triggers": [
+      "Gemini return",
+      "material architecture revision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "no native output is admitted",
+      "Gemini receives one exact literal-path read-only packet",
+      "all PostgreSQL-loading pytest commands run serially",
+      "Sol alone owns acceptance and Git",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_36_flash_high_exact_candidate_read_only_veto_with_no_fallback",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta and typed contract select inert action candidates, one same-update-family proposal and confirmation, cross-family non-execution and no runtime changes. Candidate fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 is bound to a fresh clean review worktree after 457 exact serial checks plus Ruff, JSON, source guards and Git whitespace passed.",
+    "current_authority_allocation": "Sol owns architecture and acceptance. DeepSeek is declined. AER-0306 and AER-0307 make both native outputs inadmissible. Gemini 3.6 Flash/high owns exactly one independent read-only veto at the exact candidate and receives no implementation, acceptance, Git or fallback authority.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/r02 is clean on codex/review-reception-one-multi-change-fbb7ffb4 at exact candidate fbb7ffb46e041bbfc193ff3a76b2f970c06dee58. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local and remote master plus handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; remote task remains f362f0de378fdddb610a04ae61182aaae2c105c0.",
+    "live_handover_current_baton": "AGENTS.md Continuity 290 / Compass 272 names the provider-free read-only Reception One multi-change request atomicity orientation and preserves every product, adapter, provider, protected-evidence and protected-ref closure.",
+    "protected_evidence_boundaries": "The Gemini packet permits only exact named ordinary files and exact commands; all search, glob, recursion and directory-root commands are forbidden. No quarantined native output, protected fixture, historical Diary PHI, patient/product/clinical data, adapter runtime, provider/ADC/credentials/IAM/network, product/API/database/event change, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

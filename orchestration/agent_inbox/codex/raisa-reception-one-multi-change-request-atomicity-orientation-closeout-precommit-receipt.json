@@ -1,0 +1,81 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One multi-change request atomicity orientation",
+    "completed_stage": "Accepted raisa_reception_one_multi_change_request_atomicity_orientation_pass at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 with 457 exact tests, one fresh Gemini pass, AER-0308 reconciliation, timestamped closeout and Continuity 291 / Compass 273",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "resume_after_compaction": false,
+    "source_head": "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "closeout pre-commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No stable mechanical implementation package existed during the read-only architecture orientation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate pass supplied independent architecture veto value; AER-0308 contains its bounded narrative misreport.",
+        "work_packages": [
+          "completed exact-candidate architecture veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Both attempts breached command scope and were wholly rejected; Sol admitted no worker finding.",
+        "work_packages": [
+          "rejected contract map",
+          "rejected adapter-authority analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post-commit",
+      "pre-push",
+      "next-tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol owns exact acceptance and Git mutation",
+      "only explicit tranche paths may be staged",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_multi_change_orientation_closeout_and_continuity_paths_after_all_closeout_checks_pass",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta, closed schemas and authored-synthetic scenarios at reviewed source fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 establish typed inert candidates, same-update-family one-command composition, cross-family non-executability and default clarification/denial. The fresh Sol closeout packet passes 347 tests plus focused formatting, lint, diff and compaction checks; the earlier unchanged candidate independently passed 457 Gemini checks.",
+    "current_authority_allocation": "Sol alone owns acceptance, explicit-path staging, commit and task-branch publication. DeepSeek was declined, both native outputs remain rejected under AER-0306/AER-0307, and Gemini 3.6 Flash/high supplied one read-only independent pass reconciled by AER-0308.",
+    "git_refs_and_worktree": "Task HEAD is fbb7ffb46e041bbfc193ff3a76b2f970c06dee58 and contains required 648c8ec9805af63729264ea9c22fd695f062a741. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Origin task is f362f0de378fdddb610a04ae61182aaae2c105c0. The primary tree is dirty only with explicitly identified closeout/continuity changes among preserved unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md Continuity 291 / Compass 273 records raisa_reception_one_multi_change_request_atomicity_orientation_pass and names the bounded same-update-family kernel rehearsal as the next implementation.",
+    "protected_evidence_boundaries": "No quarantined native output, protected evidence, historical Diary PHI, patient/product/clinical data, external patient channel, provider/ADC/credential/IAM/network runtime, product/API/database/event code, deployment, production, release, Pages or protected ref was used or changed. docs/branding and every unrelated untracked file remain preserved and excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

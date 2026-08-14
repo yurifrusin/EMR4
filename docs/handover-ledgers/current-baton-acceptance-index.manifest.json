@@ -30,10 +30,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 194548,
-  "ledger_line_count": 167,
+  "ledger_byte_count": 199944,
+  "ledger_line_count": 171,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "fd6027b9d4ecb29b6395d001e209dbea633bebde1ccc9ff66f4415fd901c6960",
+  "ledger_sha256": "071fad123ec14695f7ef5c75045be9259a32af5eb31e24a305ed1253c7f8d68f",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -185,14 +185,18 @@
     "Two-projection truth-parity conformance acceptance",
     "Reception One selected-appointment time-reschedule composition acceptance",
     "Reception One selected-appointment duration composition acceptance",
-    "Provider-free read-only status-confirm route-mounting admission review acceptance"
+    "Provider-free read-only status-confirm route-mounting admission review acceptance",
+    "Reception One selected-appointment practitioner reassignment composition acceptance",
+    "Reception One selected-action-console consolidation orientation acceptance",
+    "Reception One selected-action-console progressive-disclosure composition acceptance",
+    "Reception One multi-change request atomicity orientation acceptance"
   ],
-  "moved_row_count": 151,
+  "moved_row_count": 155,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 75931,
-  "source_agents_git_blob_sha1": "13425f815150613078bd7aedd9567498df382fd8",
-  "source_agents_line_count": 493,
+  "source_agents_byte_count": 81100,
+  "source_agents_git_blob_sha1": "254f9d3fc6d6325c9d9a02e85a5ba062d59f0d81",
+  "source_agents_line_count": 496,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "02a973dd5d43333181678d03f0c14a636b2cd285c0259b9d82a61633594c7a1c",
-  "source_git_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8"
+  "source_agents_sha256": "3d9c9205ccab8f72d4f104e35872d0eb8bf1a9eeae70bcf836ddee20e66b65b7",
+  "source_git_head": "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58"
 }
