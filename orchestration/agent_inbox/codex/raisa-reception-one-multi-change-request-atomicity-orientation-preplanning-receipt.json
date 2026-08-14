@@ -1,0 +1,87 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One multi-change request atomicity orientation",
+    "completed_stage": "Completed a fresh five-source rehydration and API Steward source pass; the existing update contract already admits multiple update-family fields atomically while status remains a separate command family",
+    "next_executable_stage": "pass the preplanning receipt, freeze the read-only plan and threat boundary, then run bounded native contract and adapter-authority analyses",
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "resume_after_compaction": true,
+    "source_head": "f362f0de378fdddb610a04ae61182aaae2c105c0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "This tranche selects architecture and authority meaning from coupled API and UX evidence; there is no stable mechanical implementation artifact, and the preceding test lane had negative economy.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto will independently challenge atomicity, adapter authority and API Spine conformance after deterministic admission.",
+        "work_packages": [
+          "later exact-candidate architecture and authority veto"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Two independent read-only packages can run concurrently after freeze: exact update/status contract mapping and future-adapter action-authority threat/option analysis.",
+        "work_packages": [
+          "exact existing contract and test map",
+          "adapter-neutral typed action and authority analysis"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+    "parallel_work_packages": [
+      "native exact-contract analysis",
+      "native adapter-authority analysis"
+    ],
+    "reassessment_triggers": [
+      "plan freeze",
+      "native returns",
+      "material architecture revision",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the plan before any dispatch and alone chooses the architecture",
+      "the exact API contract mapping and cross-family conclusion are reconciled by Sol",
+      "Gemini waits for one deterministic exact candidate",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_read_only_multi_change_and_adapter_action_atomicity_orientation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted console closeout keeps multi-change requests non-executable and requires this descendant to map the exact existing update proposal/confirm contract. API Steward readback shows the update family already carries a closed multi-field patch and one full command through signed freshness revalidation and one atomic confirmed write, while status remains a separate proposal/confirm family. Yuri's adapter clarification is merged as future compatibility only: Raisa and Siri-like transports may nominate typed inert actions but never click, confirm or write.",
+    "current_authority_allocation": "Sol owns architecture selection, plan, acceptance and Git. DeepSeek V4 Flash/high is declined at preplanning because no stable mechanical artifact exists; two native read-only analyses are planned after plan freeze; Gemini 3.6 Flash/high is reserved for one exact-candidate independent veto.",
+    "git_refs_and_worktree": "Main worktree is on codex/ariadne-bernie-davida-parallel-seam at published closeout HEAD f362f0de378fdddb610a04ae61182aaae2c105c0 with only the expected new-latch tracked mutation and 618 preserved untracked entries, including the prior pre-push pair. Origin task equals f362f0de378fdddb610a04ae61182aaae2c105c0. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Continuity 290 / Compass 272 accepts the compact selected-action console and names the provider-free read-only multi-change request atomicity orientation as next.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary PHI, product/patient/clinical data, external patient or chatbot runtime, provider/ADC/credentials/IAM/network, product source, API/OpenAPI/GraphQL/database/event/watcher mutation, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

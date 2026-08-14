@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-selected-action-console-progressive-disclosure-composition",
-  "active_tranche": "Reception One selected-action-console progressive-disclosure composition",
-  "objective": "Implement the accepted presentation-only four-button action palette and zero-or-one shared editor while preserving every existing field-specific proposal, confirmation, command and fresh-reconciliation path; keep multi-field intent inert and forbid automatic sequential execution.",
-  "status": "complete",
-  "source_head": "67f203097507d5f8c976f716ff37f720f4ea6b73",
-  "authority_source": "AGENTS.md Continuity 289 / Compass 271, the accepted selected-action-console orientation, Yuri's explicit direction to proceed and standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-multi-change-request-atomicity-orientation",
+  "active_tranche": "Reception One multi-change request atomicity orientation",
+  "objective": "Map the exact existing appointment update and status proposal/confirm contracts, then freeze the narrowest adapter-neutral typed action and atomicity boundary for requests containing several changes without granting Raisa, Siri-like adapters or clients direct command authority.",
+  "status": "in_progress",
+  "source_head": "f362f0de378fdddb610a04ae61182aaae2c105c0",
+  "authority_source": "AGENTS.md Continuity 290 / Compass 272, the accepted selected-action-console composition, Yuri's clarification about Raisa and future chatbot adapters, and standing uninterrupted-development authority",
   "checkpoint": {
-      "completed_stage": "Accepted the unchanged reviewed candidate 1d9e58fd2624f87b8b3def538297054999e7bef3, wrote paired closeout, advanced Continuity 290 / Compass 272 and passed the canonical 196-test fast profile",
-      "next_executable_stage": null,
+      "completed_stage": "Passed fresh five-source preplanning and froze the read-only multi-change and adapter action-authority plan plus threat boundary against exact existing update and status families",
+      "next_executable_stage": "commit the frozen plan, pass a separate native predispatch receipt, then run two bounded read-only analyses",
     "retry_counters": {
       "review": 0,
-        "verification": 1
+        "verification": 0
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -22,28 +22,29 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "completed_authorized_operation"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "presentation_only_diary_client_composition",
-    "preserve_status_time_duration_and_practitioner_contracts",
-    "preserve_one_kernel_owned_proposal_confirm_path_per_action",
-    "preserve_visible_confirmation_fresh_reconciliation_and_accessibility",
-    "only_meta_grid_javascript_css_cache_reference_and_affected_provider_free_tests",
-    "multi_field_intent_is_inert_and_never_auto_executes_sequential_commands",
-    "no_compound_update_claim_without_a_separate_atomic_backend_proof",
+    "read_only_architecture_and_exact_existing_contract_mapping_only",
+    "human_buttons_are_presentation_affordances_not_model_actuators",
+    "raisa_and_adapters_may_emit_only_typed_inert_action_candidates",
+    "deterministic_bureau_and_backend_own_admission_authority_and_current_truth",
+    "staff_confirmation_and_kernel_command_remain_mandatory",
+    "update_family_multi_field_atomicity_must_be_distinguished_from_cross_family_requests",
+    "status_and_update_command_families_remain_distinct",
+    "no_automatic_sequential_execution_or_hidden_partial_success",
     "no_new_command_field_route_schema_or_write_authority",
-    "no_api_openapi_graphql_database_event_or_watcher_expansion",
-    "repository_local_provider_free_evidence_only",
+    "no_product_code_api_openapi_graphql_database_event_or_watcher_change",
+    "repository_local_provider_free_authored_synthetic_evidence_only",
     "protected_evidence_and_historical_diary_phi_closed",
-    "patient_product_clinical_data_and_external_patient_channels_closed",
+    "patient_product_clinical_data_and_external_patient_channels_or_chatbot_runtimes_closed",
     "provider_adc_credentials_iam_external_network_closed",
     "deployment_production_release_pages_protected_refs_closed",
     "docs_branding_and_unrelated_untracked_preserved"
