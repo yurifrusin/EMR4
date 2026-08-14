@@ -1,0 +1,86 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+    "completed_stage": "Fresh post-compaction five-source rehydration and API Spine review confirm practitioner-only reassignment as the next narrow descendant at task HEAD e3015f36a9f93b7fc9382908a16c8a729fefc590",
+    "next_executable_stage": "freeze the narrowest practitioner-only plan and threat delta, commit the planning boundary, then dispatch the bounded DeepSeek and native-subagent packages",
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "resume_after_compaction": true,
+    "source_head": "e3015f36a9f93b7fc9382908a16c8a729fefc590",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "parallelism_assessment": {
+    "assessed_stage": "post-compaction preplanning and allocation boundary",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "A closed paired route-intercepted browser matrix is a separable mechanical artifact; a strict one-file and output-size packet can reuse the accepted time/duration pattern while reducing the prior duration lane's briefing and output cost.",
+        "work_packages": [
+          "one new practitioner-reassignment browser-test file only, capped at 650 source lines, with no product or acceptance edits"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "User-visible command composition benefits from one fresh exact-candidate veto after all deterministic and rendered gates pass.",
+        "work_packages": []
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Practitioner directory, active roster-column mapping, exact fresh appointment reads and projection reconciliation form an independently inspectable risk seam that can be mapped read-only while Sol freezes the plan.",
+        "work_packages": [
+          "read-only exact seam map covering active-target derivation, handleMoveResize delegation, latching, reconciliation, accessibility and regression surfaces"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+    "parallel_work_packages": [
+      "DeepSeek isolated browser-test artifact after committed plan",
+      "native read-only practitioner seam analysis after committed plan"
+    ],
+    "reassessment_triggers": [
+      "worker return",
+      "material recovery",
+      "new or restored task window",
+      "pre-verifier acceptance",
+      "verifier return",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone freezes user-visible meaning, edits product integration, recovers worker output and accepts",
+      "deterministic candidate passage precedes Gemini",
+      "rendered browser sessions sharing mutable fixture state remain serial"
+    ]
+  },
+  "planned_action": "freeze_and_execute_reception_one_practitioner_only_reassignment_composition",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted duration closeout and Sol acceptance preserve handleMoveResize and the existing update proposal/confirm path. implementation_plan.md and the Current Baton freeze practitioner-only reassignment with date, start time, duration and every unrelated field unchanged. The new tranche plan and threat delta are the next executable artifacts.",
+    "current_authority_allocation": "GPT Sol retains planning, product integration, recovery, acceptance and Git authority. DeepSeek V4 Flash/high is planned for one tightly bounded route-intercepted browser-test artifact, one native subagent is planned for an exact read-only seam/risk map, and Gemini 3.6 Flash/high is reserved for one fresh exact-candidate veto after deterministic passage.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at e3015f36a9f93b7fc9382908a16c8a729fefc590, aligned with origin task, with zero tracked changes before latch transition and 610 preserved untracked entries. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted duration source f397a3706f3b870b8436eb3993bd90c6c0c742a8 are ancestors. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 287 / Compass 269 accepts duration-only composition and names same-date, same-start, same-duration practitioner-only reassignment as the next narrow descendant.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary PHI remain closed. No patient, clinical or real product data; backend, API, OpenAPI, GraphQL, database, event or watcher expansion; new route, raw PUT or second command path; provider, ADC, credentials, IAM or external network; deployment, production, release, Pages or protected-ref movement is permitted. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

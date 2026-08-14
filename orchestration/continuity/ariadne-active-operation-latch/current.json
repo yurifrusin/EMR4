@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-selected-appointment-duration-composition",
-  "active_tranche": "Reception One selected-appointment duration-only composition",
-  "objective": "Compose one selected current Reception One appointment duration adjustment through the existing update proposal/confirm path while freezing date, start time, practitioner and every unrelated field.",
-  "status": "complete",
-  "source_head": "f397a3706f3b870b8436eb3993bd90c6c0c742a8",
+  "operation_id": "raisa-reception-one-selected-appointment-practitioner-reassignment-composition",
+  "active_tranche": "Reception One selected-appointment practitioner-only reassignment composition",
+  "objective": "Compose one selected current Reception One appointment reassignment to one existing active practitioner through the existing update proposal/confirm path while freezing date, start time, duration and every unrelated field.",
+  "status": "in_progress",
+  "source_head": "e3015f36a9f93b7fc9382908a16c8a729fefc590",
   "authority_source": "AGENTS.md Continuity 287 / Compass 269, the accepted duration-composition closeout and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Duration composition is accepted at exact reviewed candidate f397a3706f3b870b8436eb3993bd90c6c0c742a8 after 118 consolidated tests, final 196-test canonical passage, responsive rendered QA and one unchanged clean Gemini 68-test veto pass; Continuity 287 and Compass 269 are bound",
-    "next_executable_stage": null,
+    "completed_stage": "The practitioner-only plan and threat delta are frozen at task baseline e3015f36a9f93b7fc9382908a16c8a729fefc590 and their plan plus orchestration controls pass 24 focused tests",
+    "next_executable_stage": "commit the explicit planning boundary, generate the distinct pre-dispatch receipt, then dispatch the bounded DeepSeek and native-subagent packages",
     "retry_counters": {
-      "review": 1,
-      "verification": 9
+      "review": 0,
+      "verification": 1
     },
       "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -22,19 +22,20 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_closeout_ready"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "existing_appointment_update_proposal_confirm_family_only",
     "one_selected_current_appointment",
-    "same_date_same_start_same_practitioner_duration_only_until_plan_freeze",
+    "same_date_same_start_same_duration_practitioner_only",
+    "existing_active_practitioner_targets_only",
     "visible_staff_confirmation_and_fresh_authoritative_reconciliation",
     "no_raw_put_or_second_command_path",
     "no_backend_api_openapi_graphql_database_event_or_watcher_expansion",
