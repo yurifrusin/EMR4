@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 294 / Compass 276. Reception One's first status and update console is complete; cancellation is recommended at a genuine Yuri-owned programme fork.
+> EMR4 is at Continuity 295 / Compass 277. Cancellation is selected and its command path is mapped; an unmounted locked-truth/current-authority kernel architecture is next before Reception One exposure.
 
 ## North star
 
@@ -360,25 +360,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Practitioner, time and duration now converge on one existing proposal and one explicit confirmation with fresh reconciliation. Lineage parent: `raisa-reception-one-same-update-family-multi-change-kernel-rehearsal`.
 172. **Reconcile the completed Reception One command set and expose the next material programme choice — Provider-free post-combined-editor Compass and baton orientation**
    The programme is at a genuine Yuri-owned fork; cancellation is recommended and begins only with a read-only readiness review if selected. Lineage parent: `raisa-reception-one-same-update-family-multi-change-editor-composition`.
+173. **Map the existing cancellation family and freeze its smallest assurance prerequisite — Reception One cancellation command-path readiness review**
+   The dedicated delete family is the convergence base; an unmounted locked-truth/current-authority kernel architecture must precede Reception One composition. Lineage parent: `raisa-post-combined-editor-compass-baton-orientation`.
 
 ## Current position
 
-**Pause honestly at the first post-console material programme choice — Provider-free post-combined-editor Compass and baton orientation**
+**Convert Yuri's cancellation choice into one exact backend-assurance sequence — Reception One cancellation command-path readiness review**
 
-**Why this proof came next:** Reception One's accepted status and multi-field update families are complete, while every high-value successor changes meaning or authority.
+**Why this proof came next:** The read-only review found a strong existing family and two exact convergence blockers before destructive UI exposure.
 
-Cancellation is recommended, but no implementation or readiness review begins until Yuri selects that direction.
+Proceed to an unmounted locked-truth/current-authority kernel architecture; do not yet change product or runtime source.
 
 ### What this unlocks
 
-- If Yuri agrees, freeze the provider-free read-only cancellation command-path readiness review.
-- Retain patient-channel delegation, check-in, Stage 3B, event-family and operational durability horizons without activating them.
+- A typed admission contract for the future dedicated cancellation transaction.
+- Later disposable PostgreSQL and mounted route convergence gates if the architecture passes.
+- Reception One cancellation composition only after backend convergence evidence.
 
 ### What it does not solve
 
-- No cancellation family, control, runtime or safety property is implemented or accepted.
-- No live patient identity, delegation or revocation enforcement exists.
-- Product data, providers, watcher/database runtime, deployment, production and release remain closed.
+- No current delete route, raw compatibility route or native fallback changed.
+- No concurrent PostgreSQL cancellation behavior is proved.
+- No cancellation UI, patient channel, provider, production or release authority is opened.
 
 ## Continuity and authority
 
@@ -387,17 +390,28 @@ Cancellation is recommended, but no implementation or readiness review begins un
 
 ## Product decision horizon
 
-### Reception One appointment cancellation direction — candidate
+### Reception One delete-confirm conditional-command kernel — active
 
-Should Reception One pursue appointment cancellation next, beginning with a provider-free read-only cancellation command-path readiness review?
+How should the dedicated cancellation family lock current truth and recheck current actor authority atomically before later runtime convergence?
 
-Cancellation is a high-value selected-appointment action, but the ordinary Diary's delete-to-status fallback and Reception One's missing bridge must be classified before destructive behavior is exposed in a second renderer.
+Cancellation is destructive; UI composition should inherit one backend-owned transaction with current truth, current authority, confirmation, idempotency, audit and readback.
 
 Prerequisites:
 
-- Yuri selects appointment cancellation as the next programme direction.
-- The first tranche remains provider-free and repository-read-only.
-- No cancellation UI, command-family convergence or write is inferred from the review.
+- Provider-free authored-synthetic unmounted architecture only.
+- No mounted route, database, product client or UI source change.
+- Preserve explicit human confirmation and the existing signed delete evidence semantics.
+
+### Reception One appointment cancellation direction — active
+
+Yuri selected Reception One appointment cancellation; its command-path readiness review now passes.
+
+The existing delete family is retained as the convergence base while its exact locked-truth/current-authority prerequisite is made explicit before UI exposure.
+
+Prerequisites:
+
+- Complete the provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal.
+- Keep mounted route, PostgreSQL and UI integration as later gates.
 
 ### Reception One representative-staff formative sessions — deferred
 
@@ -646,11 +660,10 @@ Prerequisites:
   Required before: Satisfied and consumed on 2026-08-04: Gate zero passes at Continuity 209 / Compass 190.
 - **May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?**
   Required before: Satisfied on 2026-08-04 by Yuri's standing programme authority.
-- **Should Reception One pursue appointment cancellation next, beginning with a provider-free read-only cancellation command-path readiness review?**
-  Required before: Yuri's choice is required before any cancellation family convergence or UI exposure; if selected, only the provider-free read-only readiness review starts.
 
 ## Map limits
 
+- The cancellation readiness result is repository-static; it proves no locked concurrent database transaction, current-authority revocation behavior, mounted route convergence or UI behavior.
 - The post-editor orientation is repository-static evidence and opens no cancellation command, patient-channel delegation, live revocation, database/watcher runtime or production authority.
 - The combined editor evidence is authored-synthetic and route-intercepted; it does not prove a live backend, conversational or patient-channel authority, delegation revocation, or production operation.
 - The combined update rehearsal is authored-synthetic local PostgreSQL evidence; it does not prove a browser editor, conversational activation, patient delegation or production operation.
@@ -1272,6 +1285,9 @@ Prerequisites:
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
+- `docs/raisa-reception-one-cancellation-command-path-readiness-review-closeout.md`
+- `docs/raisa-reception-one-cancellation-command-path-readiness-review-plan.md`
+- `docs/raisa-reception-one-cancellation-command-path-readiness-review.md`
 - `docs/raisa-reception-one-duration-deepseek-test-integration-recovery.md`
 - `docs/raisa-reception-one-multi-change-request-atomicity-architecture.md`
 - `docs/raisa-reception-one-multi-change-request-atomicity-orientation-closeout.md`
@@ -1427,6 +1443,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-status-transaction-kernel-protocol-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-visible-native-diary-status-confirm-wiring-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
+- `docs/security/raisa-reception-one-cancellation-command-path-readiness-review-threat-model-delta.md`
 - `docs/security/raisa-reception-one-multi-change-request-atomicity-orientation-threat-model-delta.md`
 - `docs/security/raisa-reception-one-same-update-family-multi-change-editor-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-threat-model-delta.md`
@@ -1485,6 +1502,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-practitioner-reassignment-gemini-review-receipt.json`
@@ -1759,6 +1777,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-pure-route-adapter-differential-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-gemini-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-duration-composition-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-multi-change-gemini-report-reconciliation-incident.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-predispatch-receipt.json`
@@ -2530,6 +2553,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
 - `orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md`
+- `orchestration/human_inbox/yuri/2026-08-15--reception-one-cancellation-command-path-readiness-review.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -2653,6 +2677,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `tests/test_raisa_provider_free_visible_native_diary_status_confirm_wiring.py`
+- `tests/test_raisa_reception_one_cancellation_command_path_readiness_review.py`
 - `tests/test_raisa_reception_one_multi_change_request_atomicity_orientation.py`
 - `tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py`
 - `tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py`
@@ -2691,4 +2716,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 276; continuity graph revision 294._
+_Compass map revision 277; continuity graph revision 295._

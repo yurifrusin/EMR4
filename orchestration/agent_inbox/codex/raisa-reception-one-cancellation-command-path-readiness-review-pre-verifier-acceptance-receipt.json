@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One cancellation command-path readiness review",
+    "completed_stage": "Read-only cancellation readiness candidate committed after seven focused static assertions, 188 cancellation/API tests and the 196-test canonical fast profile passed",
+    "next_executable_stage": "Obtain one fresh Gemini 3.6 Flash/high read-only exact-candidate veto, then accept or repair before closeout and the unmounted delete-confirm kernel architecture descendant",
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "resume_after_compaction": true,
+    "source_head": "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No stable mechanical work package remains in the exact read-only semantics candidate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact-candidate veto can independently challenge route completeness, blocker severity, claim boundary and the chosen prerequisite.",
+        "work_packages": [
+          "exact-candidate cancellation-readiness veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No additional bounded package exceeds briefing and reconciliation cost after deterministic source reconciliation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier return",
+      "material revision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Gemini receives read-only exact-candidate authority only",
+      "Sol retains acceptance and Git",
+      "no product or runtime authority opens",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "dispatch_one_read_only_exact_candidate_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735 passes the frozen read-only plan and selects one provider-free unmounted delete-confirm conditional-command kernel architecture/admission prerequisite. Seven static assertions, the exact 188-test cancellation/API packet and the 196-test canonical fast profile pass.",
+    "current_authority_allocation": "Sol owns source reconciliation, acceptance, continuity and Git. DeepSeek V4 Flash/high remains declined because no stable mechanical artifact exists in this coupled semantics review. Native subagents remain declined because briefing/reconciliation cost exceeds leverage. Gemini 3.6 Flash/high owns one fresh exact-candidate read-only veto.",
+    "git_refs_and_worktree": "Candidate HEAD is bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735. Fresh review worktree C:/Users/sarashera/EMR4-worktrees/cancellation-readiness-gemini-bb36e19c is clean on codex/review-cancellation-readiness-bb36e19c at that exact HEAD. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely again after compaction and records Continuity 294 / Compass 276, Yuri's selected Reception One cancellation direction and this provider-free read-only readiness review as its first tranche.",
+    "protected_evidence_boundaries": "The verifier is limited to the clean candidate worktree, named repository-static sources and exact commands. Product/patient/clinical data, protected evidence, product/API/database/UI mutation, providers beyond the verifier transport, credentials/IAM, external channels, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

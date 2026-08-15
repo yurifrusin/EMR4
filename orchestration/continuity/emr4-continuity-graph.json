@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 294,
+  "graph_revision": 295,
   "harvests": [],
   "nodes": [
     {
@@ -19907,9 +19907,100 @@
         "Patient channels, identity, live delegation and revocation enforcement, Stage 3B and another event family remain separate choices or actions.",
         "Operational durability, source/database access, providers, product data, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-cancellation-command-path-readiness-review",
+      "title": "Reception One cancellation command-path readiness review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-15T01:33:02Z",
+      "updated_at": "2026-08-15T01:33:02Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-post-combined-editor-compass-baton-orientation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri selected appointment cancellation; the review itself changes no product or runtime source.",
+          "The dedicated delete family retains explicit human confirmation, signed evidence, idempotency, audit and fresh readback.",
+          "Reception One composition waits for a provider-free unmounted locked-truth/current-authority kernel architecture and admission rehearsal."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-cancellation-command-path-readiness-review",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the dedicated delete family as the convergence base, but require an unmounted conditional-command kernel prerequisite before UI reuse."
+        }
+      ],
+      "claim_scope": [
+        "The current delete confirm path has explicit confirmation, signed actor/practice/command/current-state evidence, freshness, reason preservation, idempotency, audit and result readback.",
+        "It does not lock the appointment or explicitly recheck current actor authority inside its mutation transaction; current differently-keyed coverage is serial.",
+        "The native Diary 404 fallback crosses into status confirmation and omits free-text cancellation reason while retaining explicit and signed confirmation.",
+        "OpenAPI/runtime delete proposal and confirmation path/payload shapes are not exact; evidence is repository_static_authored_synthetic.",
+        "Gemini passed 188 exact tests and ten challenges at unchanged clean source."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-cancellation-command-path-readiness-review.md",
+            "orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json",
+            "docs/raisa-reception-one-cancellation-command-path-readiness-review-closeout.md"
+          ],
+          "note": "The exact existing cancellation routes and missing conditional-command safeguards are frozen before any Reception One exposure."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-cancellation-command-path-readiness-review-plan.md",
+          "docs/security/raisa-reception-one-cancellation-command-path-readiness-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-reception-one-cancellation-command-path-readiness-review.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-cancellation-command-path-readiness-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--reception-one-cancellation-command-path-readiness-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-gemini-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_reception_one_cancellation_command_path_readiness_review.py",
+          "tests/test_raisa_reception_one_cancellation_command_path_readiness_review_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_reception_one_cancellation_command_path_readiness_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Mounted delete route, database and native client convergence remain unproved and closed.",
+        "Reception One cancellation UI remains closed until the kernel and later product-integration gates pass.",
+        "Raw compatibility delete remains mounted and must not become a new product-client path.",
+        "Patient channels, product data, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-14T20:42:00Z"
+  "updated_at": "2026-08-15T01:33:02Z"
 }

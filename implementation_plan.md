@@ -383,16 +383,19 @@ descendant now also passes at exact reviewed source
 duration while requiring one current active target at proposal and confirm.
 The provider-free same-update-family multi-change kernel and visible editor pass
 at exact reviewed editor source
-`daed421954d65c159871585559f45caa32d95aee`. The subsequent read-only programme
-orientation passes at exact reviewed source
-`2ca3a111d2ee9277571ea3c905f22ce78c8e9745`. It finds a genuine Yuri-owned
-fork: appointment cancellation is recommended, but Yuri's programme choice is
-required before the provider-free read-only cancellation command-path readiness
-review begins. That review must classify the ordinary Diary delete-to-status
-compatibility seam before any destructive Reception One UI or command-family
-convergence. Patient-channel delegation, check-in, Stage 3B, another event
-family and operational durability remain retained at their exact gates. No
-watcher runtime, product data, external patient client, new command family,
+`daed421954d65c159871585559f45caa32d95aee`. The subsequent programme
+orientation passes at `2ca3a111d2ee9277571ea3c905f22ce78c8e9745`, Yuri selected
+appointment cancellation, and its repository-static command-path readiness
+review passes at exact reviewed source
+`bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735`. The dedicated delete family is
+the convergence base, but its confirm transaction lacks a locked appointment
+read and explicit in-transaction current-authority recheck; the native Diary's
+404 status fallback also omits free-text cancellation reason. The next narrow
+descendant is a provider-free unmounted delete-confirm conditional-command
+kernel architecture and admission rehearsal before any mounted route,
+PostgreSQL or Reception One UI change. Patient-channel delegation, check-in,
+Stage 3B, another event family and operational durability remain retained at
+their exact gates. No watcher runtime, product data, external patient client,
 provider, deployment, production or release is opened.
 
 The bounded read-only architectural-health and conformance pulse now passes at

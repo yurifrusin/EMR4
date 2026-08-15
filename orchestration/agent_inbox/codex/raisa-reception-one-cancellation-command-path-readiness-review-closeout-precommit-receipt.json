@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One cancellation command-path readiness review",
+    "completed_stage": "Accepted at Continuity 295 / Compass 277 after deterministic and independent exact-candidate verification",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "resume_after_compaction": false,
+    "source_head": "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "accepted readiness closeout pre-commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The read-only review produced no stable mechanical implementation package; dispatch would have duplicated coupled command-semantics judgment.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh exact-candidate veto passed 188 tests and ten challenges with unchanged clean HEAD.",
+        "work_packages": [
+          "completed exact-candidate cancellation-readiness veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No bounded independent package exceeded briefing and reconciliation cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "parallel_work_packages": [
+      "Gemini independent veto"
+    ],
+    "reassessment_triggers": [
+      "pre-push",
+      "next tranche planning",
+      "next tranche pre-verifier"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone owns acceptance, Continuity, explicit-path commit, publication and notification",
+      "The next architecture tranche requires a fresh five-source receipt before action"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_cancellation_readiness_closeout_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, repository-static finding, threat delta, closeout and Sol acceptance bind raisa_reception_one_cancellation_command_path_readiness_review_pass to exact source bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735. Seven focused assertions, 188 cancellation/API tests, the 196-test canonical fast profile, 75 continuity/baton checks and Gemini's ten challenges pass. The next dependency-satisfied tranche is the provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal.",
+    "current_authority_allocation": "Sol retains source synthesis, acceptance, continuity and Git. DeepSeek and native subagents were declined because no stable independent implementation package existed. Gemini 3.6 Flash/high completed the planned fresh read-only exact-candidate veto with positive leverage.",
+    "git_refs_and_worktree": "HEAD is exact reviewed candidate bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735 before the closeout commit; origin task remains c4e28ad03bb22516bd40d110021ac2de9ead1ec8. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Eight tracked closeout modifications and 632 preserved untracked entries existed before this precommit pair; docs/branding remains present. The Gemini review worktree remains clean at the exact candidate.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now records Continuity 295 / Compass 277, accepted cancellation readiness source bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735 and the unmounted delete-confirm kernel architecture/admission as next.",
+    "protected_evidence_boundaries": "No cancellation UI, product behavior, route, OpenAPI, GraphQL, schema, database, event, watcher or provider source is opened. Patient/product/clinical data, protected evidence, external channels, credentials/IAM, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}
