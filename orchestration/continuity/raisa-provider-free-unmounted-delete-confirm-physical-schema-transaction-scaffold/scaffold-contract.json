@@ -48,12 +48,20 @@
     {
       "path": "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
       "sha256": "f350bcec600d024fe52ffaae640369debfca9668003ef496c8a3f1ca316d7e93"
+    },
+    {
+      "path": "tests/test_api_spine_appointment_idempotency_model_migration.py",
+      "sha256": "f2f80b21932ab711ec18dac28545e00d57f43de8a7274746caeabac504c703d6"
+    },
+    {
+      "path": "tests/test_current_baton_consistency.py",
+      "sha256": "e1da581b6a911712bf4d5a64fa70fa5b0bd11ce7a1cb02d15bc909fb03da0db8"
     }
   ],
   "implementation_bindings": [
     {
       "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
-      "sha256": "6c59a4715876d0e9e1b8c40d67f9eb12c2b0c1d52c5b4eeb9ea4aad470e51168"
+      "sha256": "d3b94dcc974fd0d2b4f34961ac264082b6c4a3e0ee3f61b07157ec5be9e66b58"
     },
     {
       "path": "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",

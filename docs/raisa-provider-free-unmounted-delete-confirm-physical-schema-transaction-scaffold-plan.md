@@ -89,6 +89,25 @@ repair after its failure is reproduced at both the plan source and candidate:
   `28060c2f5b1cb4ff00f62b498511995a35a630963e586920115f34740c5d1ac3`.
   No other line in that test and no OpenAPI/product path may change.
 
+The first exact-candidate canonical profile additionally authorizes two narrow
+test-only conformance repairs, with no application or contract widening:
+
+- `tests/test_api_spine_appointment_idempotency_model_migration.py`, admitted
+  at pre-repair digest
+  `26520cd0a0921462318f91e015e3eb9cb5cce4e27b1e8745533b4486eb9e28c8`,
+  may add only the new nullable private `authority_generation` column to its
+  exact additive column/nullable expectations; and
+- `tests/test_current_baton_consistency.py`, admitted at pre-repair digest
+  `4a4ac53e222e76337fa80ae192da312fed73dd1d7bfca257c788f83786540ace`,
+  may replace its superseded physical-design-pause assertions with exact
+  Continuity 299 / Compass 281 Ariadne-harness/current-product-position and
+  resumed-scaffold baton assertions already present at the plan source.
+
+The latter three failures reproduce unchanged at exact plan source
+`d500f1f86a83695cee0c2aac93aa2e2735e8f799`; the additive idempotency column
+failure is an expected consequence of this tranche and must be repaired before
+admission. No production source is changed by either conformance repair.
+
 New application and deterministic evidence paths that may be created:
 
 - `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py`;
@@ -105,7 +124,8 @@ receipts, eventual closeout, Sol acceptance, continuity updater/test and Yuri
 summary are also tranche-owned evidence. No router, schema, OpenAPI, current
 idempotency service, status-confirm service or earlier migration may change.
 The single corrected stale hash assertion above is the sole exception and does
-not alter status-confirm behavior.
+not alter status-confirm behavior. The two exact conformance-test repairs above
+are the only additional exceptions.
 
 ## Frozen implementation
 

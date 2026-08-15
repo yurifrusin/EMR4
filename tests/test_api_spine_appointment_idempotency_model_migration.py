@@ -66,6 +66,7 @@ REQUIRED_COLUMNS = (
     "pre_state_version",
     "post_state_version",
     "response_body_canonical_bytes",
+    "authority_generation",
 )
 FORBIDDEN_FIELDS = (
     "raw_idempotency_key",
@@ -114,6 +115,7 @@ def test_model_declares_appointment_command_idempotency_table_contract():
         "pre_state_version",
         "post_state_version",
         "response_body_canonical_bytes",
+        "authority_generation",
     ):
         assert table.c[column].nullable is True
     assert str(table.c.actor_user_id.type) == "VARCHAR(64)"

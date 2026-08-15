@@ -11,6 +11,10 @@ NODE_ID = (
     "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture"
 )
 SOURCE_HEAD = "3fd22ba69f96c0378538ea27c6bea444fcb81936"
+HARNESS_NODE_ID = (
+    "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards"
+)
+HARNESS_SOURCE_HEAD = "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce"
 REPRESENTABILITY_SOURCE_HEAD = "bc066a1b639c5c57cc72f2697c063c5842511840"
 KERNEL_SOURCE_HEAD = "356b28a1750e7a7b379406e864f2a3501606938a"
 READINESS_SOURCE_HEAD = "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735"
@@ -39,36 +43,37 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_live_physical_design_pause() -> None:
+def test_continuity_and_compass_bind_harness_result_and_product_position() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 298
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 280
-    assert compass["source_graph_revision"] == 298
+    assert graph["graph_revision"] == 299
+    assert graph["nodes"][-1]["id"] == HARNESS_NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == HARNESS_SOURCE_HEAD
+    assert compass["map_revision"] == 281
+    assert compass["source_graph_revision"] == 299
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_physical_design_and_name_paused_scaffold() -> None:
+def test_live_baton_rows_accept_harness_and_name_resumed_scaffold() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
-    acceptance = _table_row(text, "Accepted delete-confirm physical-design source")
+    product = _table_row(text, "Active product track")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 298 / Compass 280" in current
+    assert "Continuity 299 / Compass 281" in current
     assert (
-        "raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass"
+        "ariadne_provider_free_continuity_journal_and_refinement_promotion_safeguards_pass"
         in current
     )
-    assert SOURCE_HEAD in current
-    assert "twenty hashes" in current.lower()
-    assert "166 hostile rejections" in current
-    assert "implementation_authorized` remains false" in current
+    assert HARNESS_SOURCE_HEAD in current
+    assert "200 focused tests" in current.lower()
+    assert "167 hostile rejections" in current
+    assert "opens no Raisa product authority" in current
     assert "gemini 3.7 flash/high" in current.lower()
-    assert SOURCE_HEAD in acceptance
+    assert SOURCE_HEAD in product
+    assert "No cancellation schema/service/route runtime is implemented" in product
     assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
     assert READINESS_SOURCE_HEAD in relation
@@ -110,10 +115,11 @@ def test_live_baton_rows_accept_physical_design_and_name_paused_scaffold() -> No
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert "provider-free unmounted delete-confirm physical schema-and-transaction scaffold" in next_work
-    assert "pause" in next_work
-    assert "primeintellect" in next_work.lower()
-    assert "no application/ddl execution" in next_work.lower()
+    assert "Yuri resumed uninterrupted product development" in next_work
+    assert "Executable DDL/database" in next_work
     assert "provider" in next_work.lower()
+    assert "pause" not in next_work.lower()
+    assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -150,10 +156,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
-        "unopened",
-        "pause",
-        "primeintellect",
-        "no application/ddl execution",
+        "yuri resumed uninterrupted product development",
+        "executable ddl/database",
+        "mounted route",
         "database",
         "ui",
         "docs/branding/",
