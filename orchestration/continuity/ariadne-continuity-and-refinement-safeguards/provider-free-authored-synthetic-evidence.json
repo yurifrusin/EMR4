@@ -36,10 +36,14 @@
     {"boundary_id": "journal.missing_cursor_snapshot_required", "outcome": "rejected", "note": "A cursor pointing into a sequence gap returns snapshot_required."},
     {"boundary_id": "journal.out_of_range_cursor_snapshot_required", "outcome": "rejected", "note": "An out-of-range cursor returns snapshot_required."},
     {"boundary_id": "journal.request_digest_stability_required", "outcome": "rejected", "note": "A command whose request digest changes across events is rejected."},
+    {"boundary_id": "journal.request_conflict_precedes_state", "outcome": "rejected", "note": "A differing request under an existing command id is conflict in every live or terminal state."},
+    {"boundary_id": "journal.append_only_coordinate_order", "outcome": "rejected", "note": "A reordered event array is rejected even when its coordinates could be sorted into validity."},
+    {"boundary_id": "journal.retired_live_state_rejected", "outcome": "rejected", "note": "A retired-generation received or running command without its recovery uncertainty is rejected."},
     {"boundary_id": "gate.partial_fingerprint_fails_closed", "outcome": "rejected", "note": "A gate fingerprint missing any composite component is rejected."},
     {"boundary_id": "gate.transient_outcome_never_deterministic_failure", "outcome": "rejected", "note": "Transient/provider/transport/timeout outcomes can only be represented as uncertain."},
     {"boundary_id": "gate.exact_pass_does_not_apply_to_changed_code", "outcome": "rejected", "note": "A pass is reused only for identical candidate/evidence/manifest fingerprints."},
     {"boundary_id": "gate.failure_never_converted_to_success", "outcome": "rejected", "note": "No gate decision executes the gate or converts a failure/uncertainty into success."},
+    {"boundary_id": "gate.conflicting_exact_evidence_rejected", "outcome": "rejected", "note": "Duplicate attempt identity/generation or conflicting results for one exact fingerprint fail closed rather than using latest-wins."},
     {"boundary_id": "refinement.executable_content_unrepresentable", "outcome": "rejected", "note": "Closed non-executable kinds and bounded text/digest fields make code, commands, dependencies and credentials unrepresentable."},
     {"boundary_id": "refinement.proposer_cannot_promote", "outcome": "rejected", "note": "A promotion where the promoter equals the proposer is rejected."},
     {"boundary_id": "refinement.validation_manifest_must_equal_proposal", "outcome": "rejected", "note": "Promotion requires a validation manifest digest exactly equal to the proposal."},
@@ -49,11 +53,15 @@
     {"boundary_id": "refinement.global_without_independent_review_rejected", "outcome": "rejected", "note": "Global promotion without a distinct independent review pass is rejected."},
     {"boundary_id": "refinement.in_place_mutation_rejected", "outcome": "rejected", "note": "In-place history rewriting is rejected; generations and decisions are append-only."},
     {"boundary_id": "refinement.ambiguous_rollback_rejected", "outcome": "rejected", "note": "Rollback must name exactly one promoted decision and its recorded base digest."},
+    {"boundary_id": "refinement.source_head_and_proposal_bound", "outcome": "rejected", "note": "Promotion binds the canonical proposal digest, exact source HEAD and exact source-evidence digests."},
+    {"boundary_id": "refinement.exact_sol_authority_required", "outcome": "rejected", "note": "Promotion and rollback require exact Sol authority; a generic non-proposer identity is insufficient."},
+    {"boundary_id": "refinement.rollback_history_and_current_state_required", "outcome": "rejected", "note": "Unknown, repeated, intervened or current-state-mismatched rollback targets fail closed."},
+    {"boundary_id": "refinement.decision_generation_reuse_or_skip_rejected", "outcome": "rejected", "note": "Decision histories require unique ordered generations and each new proposal uses the exact next generation."},
     {"boundary_id": "refinement.promotion_does_not_edit_files", "outcome": "rejected", "note": "Promotion emits only a typed decision record and never edits a policy, prompt, skill or source file."}
   ],
   "hostile_mutations": {
-    "attempted": 139,
-    "rejected": 139
+    "attempted": 167,
+    "rejected": 167
   },
   "forbidden": {
     "prime_agent_installed_or_executed": false,

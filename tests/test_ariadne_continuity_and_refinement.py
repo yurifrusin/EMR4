@@ -23,6 +23,7 @@ from orchestration_harness.continuity_and_refinement import (
     validate_refinement_promotion,
     validate_refinement_proposal,
 )
+from scripts.ariadne_continuity_and_refinement import build_parser, run
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +38,12 @@ GATE_SCHEMA = SAFEGUARDS / "gate-attempt.schema.json"
 PROPOSAL_SCHEMA = SAFEGUARDS / "refinement-proposal.schema.json"
 PROMOTION_SCHEMA = SAFEGUARDS / "refinement-promotion.schema.json"
 EVIDENCE = SAFEGUARDS / "provider-free-authored-synthetic-evidence.json"
-POLICY = ROOT / "orchestration" / "harness_settings" / "continuity_and_refinement_safeguards.yaml"
+POLICY = (
+    ROOT
+    / "orchestration"
+    / "harness_settings"
+    / "continuity_and_refinement_safeguards.yaml"
+)
 
 HEAD_1 = "1" * 40
 HEAD_2 = "2" * 40
@@ -214,6 +220,7 @@ def base_proposal(scope: str = "local") -> dict:
         "base_state_digest": DIGEST_A,
         "candidate_digest": DIGEST_B,
         "source_evidence_digests": [DIGEST_C],
+        "source_head": HEAD_1,
         "proposer": "deepseek",
         "validation_manifest_digest": DIGEST_D,
         "status": "quarantined",
@@ -222,17 +229,22 @@ def base_proposal(scope: str = "local") -> dict:
 
 
 def base_promotion_record(decision: str = "promote") -> dict:
+    proposal = base_proposal()
     return {
         "schema_version": "ariadne.refinement_promotion.v1",
         "promotion_id": "prom-ref-1",
         "proposal_id": "ref-1",
+        "proposal_digest": sha256_digest(proposal),
         "decision": decision,
         "generation": 1,
         "scope": "local",
         "candidate_digest": DIGEST_B,
         "base_state_digest": DIGEST_A,
+        "source_head": HEAD_1,
+        "source_evidence_digests": [DIGEST_C],
         "validation_manifest_digest": DIGEST_D,
         "validation_result": "pass",
+        "proposer": "deepseek",
         "promoter": "sol",
         "independent_reviewer": None,
         "promoted_decision_id": None,
@@ -297,12 +309,41 @@ def test_promotion_schema_admits_valid_promote_and_rollback() -> None:
         validate_refinement_promotion(base_promotion_record("promote")), schema
     )
     rollback = assess_rollback(
-        previous_generation=1,
-        promoted_decision_id="prom-ref-1",
-        base_state_digest=DIGEST_A,
+        promoted_record=base_promotion_record("promote"),
+        decision_history=[base_promotion_record("promote")],
+        current_state_digest=DIGEST_B,
         authority="sol",
     )
     jsonschema.validate(validate_refinement_promotion(rollback), schema)
+
+
+def test_refinement_schemas_and_python_reject_same_authority_and_text_bypasses() -> (
+    None
+):
+    jsonschema = pytest.importorskip("jsonschema")
+    proposal_schema = json.loads(PROPOSAL_SCHEMA.read_text(encoding="utf-8"))
+    promotion_schema = json.loads(PROMOTION_SCHEMA.read_text(encoding="utf-8"))
+
+    bad_title = base_proposal()
+    bad_title["title"] = " leading space"
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad_title, proposal_schema)
+    with pytest.raises(ValueError):
+        validate_refinement_proposal(bad_title)
+
+    non_sol = base_promotion_record("promote")
+    non_sol["promoter"] = "gemini"
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(non_sol, promotion_schema)
+    with pytest.raises(ValueError):
+        validate_refinement_promotion(non_sol)
+
+    missing_global_review = base_promotion_record("promote")
+    missing_global_review["scope"] = "global"
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(missing_global_review, promotion_schema)
+    with pytest.raises(ValueError):
+        validate_refinement_promotion(missing_global_review)
 
 
 def test_policy_yaml_parses_and_declares_executes_nothing() -> None:
@@ -311,6 +352,69 @@ def test_policy_yaml_parses_and_declares_executes_nothing() -> None:
     assert policy["schema_version"] == "ariadne.continuity_and_refinement_safeguards.v1"
     assert policy["executes_nothing"] is True
     assert policy["grants_no_command_authority"] is True
+
+
+def test_cli_emits_source_bound_promotion_to_explicit_output(tmp_path: Path) -> None:
+    proposal_path = tmp_path / "proposal.json"
+    prior_path = tmp_path / "prior.json"
+    output_path = tmp_path / "decision.json"
+    proposal_path.write_text(json.dumps(base_proposal()), encoding="utf-8")
+    prior_path.write_text("[]\n", encoding="utf-8")
+    args = build_parser().parse_args(
+        [
+            "assess-promotion",
+            "--proposal",
+            str(proposal_path),
+            "--validation-manifest-digest",
+            DIGEST_D,
+            "--validation-result",
+            "pass",
+            "--candidate-digest",
+            DIGEST_B,
+            "--base-state-digest",
+            DIGEST_A,
+            "--source-head",
+            HEAD_1,
+            "--promoter",
+            "sol",
+            "--prior-decisions",
+            str(prior_path),
+            "--output",
+            str(output_path),
+        ]
+    )
+    assert run(args) == 0
+    decision = json.loads(output_path.read_text(encoding="utf-8"))
+    assert decision["decision"] == "promote"
+    assert decision["source_head"] == HEAD_1
+
+
+def test_cli_rollback_derives_history_bound_generation(tmp_path: Path) -> None:
+    promoted = base_promotion_record("promote")
+    promoted_path = tmp_path / "promoted.json"
+    history_path = tmp_path / "history.json"
+    output_path = tmp_path / "rollback.json"
+    promoted_path.write_text(json.dumps(promoted), encoding="utf-8")
+    history_path.write_text(json.dumps([promoted]), encoding="utf-8")
+    args = build_parser().parse_args(
+        [
+            "assess-rollback",
+            "--promoted-record",
+            str(promoted_path),
+            "--decision-history",
+            str(history_path),
+            "--current-state-digest",
+            DIGEST_B,
+            "--authority",
+            "sol",
+            "--output",
+            str(output_path),
+        ]
+    )
+    assert run(args) == 0
+    rollback = json.loads(output_path.read_text(encoding="utf-8"))
+    assert rollback["generation"] == 2
+    assert rollback["candidate_digest"] == DIGEST_A
 
 
 def test_authored_synthetic_evidence_covers_positive_decisions_and_boundaries() -> None:
@@ -369,6 +473,26 @@ def test_completed_command_exact_replay_returns_recorded_digest() -> None:
 def test_completed_command_differing_request_is_conflict() -> None:
     decision = assess_command_submission(
         base_journal(), command_id="cmd-a", request_digest=DIGEST_C
+    )
+    assert decision["decision"] == "conflict"
+
+
+@pytest.mark.parametrize(
+    "journal",
+    [
+        running_journal(),
+        received_journal(),
+        _terminal_journal("failed"),
+        _terminal_journal("revoked"),
+        _terminal_journal("uncertain"),
+    ],
+)
+def test_differing_request_is_conflict_before_every_state_decision(
+    journal: dict,
+) -> None:
+    command_id = journal["events"][0]["command_id"]
+    decision = assess_command_submission(
+        journal, command_id=command_id, request_digest=DIGEST_H
     )
     assert decision["decision"] == "conflict"
 
@@ -495,9 +619,7 @@ def test_recovery_advances_exactly_once_and_marks_unfinished_uncertain() -> None
     assert recovered_completed["events"][-1]["state"] == "completed"
     assert recovered_completed["events"][-1]["result_digest"] == DIGEST_B
     # no new event is created for a completed command in the new generation
-    gen2_events = [
-        e for e in recovered_completed["events"] if e["generation"] == 2
-    ]
+    gen2_events = [e for e in recovered_completed["events"] if e["generation"] == 2]
     assert gen2_events == []
 
 
@@ -507,6 +629,27 @@ def test_recovered_uncertain_command_never_replays() -> None:
         recovered, command_id="cmd-b", request_digest=DIGEST_C
     )
     assert decision["decision"] == "requires_new_generation"
+
+
+def test_reordered_history_and_retired_live_work_fail_closed() -> None:
+    reordered = base_journal()
+    reordered["events"][0], reordered["events"][1] = (
+        reordered["events"][1],
+        reordered["events"][0],
+    )
+    with pytest.raises(ValueError, match="append-only"):
+        validate_operation_journal(reordered)
+
+    retired_live = running_journal()
+    retired_live["generation"] = 2
+    with pytest.raises(ValueError, match="retired generation"):
+        validate_operation_journal(retired_live)
+
+    skipped_recovery = recover_generation(running_journal())
+    skipped_recovery["events"][-1]["generation"] = 3
+    skipped_recovery["generation"] = 3
+    with pytest.raises(ValueError, match="exact recovery"):
+        validate_operation_journal(skipped_recovery)
 
 
 def test_same_generation_cursor_receives_later_events_only() -> None:
@@ -559,8 +702,6 @@ def _set_path(value: dict, path: tuple[str, ...], replacement: object) -> dict:
 
 def _event(index: int) -> tuple[str, ...]:
     return ("events", index)
-
-
 
 
 def _append_transition_mutations() -> list[tuple[str, dict]]:
@@ -622,7 +763,10 @@ def _append_transition_mutations() -> list[tuple[str, dict]]:
         }
     )
     cases.append(
-        ("journal_received_to_uncertain_same_generation", received_to_uncertain_same_gen)
+        (
+            "journal_received_to_uncertain_same_generation",
+            received_to_uncertain_same_gen,
+        )
     )
 
     double_received = received_journal()
@@ -724,7 +868,9 @@ def journal_mutations() -> list[tuple[str, dict]]:
     cases.append(
         ("journal_zero_generation", _set_path(copy.deepcopy(base), ("generation",), 0))
     )
-    cases.append(("journal_empty_events", _set_path(copy.deepcopy(base), ("events",), [])))
+    cases.append(
+        ("journal_empty_events", _set_path(copy.deepcopy(base), ("events",), []))
+    )
 
     event_keys = (
         "event_id",
@@ -792,9 +938,20 @@ def journal_mutations() -> list[tuple[str, dict]]:
     cases.append(
         (
             "journal_invalid_result_digest",
-            _set_path(copy.deepcopy(base), _event(2) + ("result_digest",), "sha256:nope"),
+            _set_path(
+                copy.deepcopy(base), _event(2) + ("result_digest",), "sha256:nope"
+            ),
         )
     )
+    reordered = copy.deepcopy(base)
+    reordered["events"][0], reordered["events"][1] = (
+        reordered["events"][1],
+        reordered["events"][0],
+    )
+    cases.append(("journal_reordered_coordinate_history", reordered))
+    retired_live = running_journal()
+    retired_live["generation"] = 2
+    cases.append(("journal_retired_generation_live_command", retired_live))
     cases.extend(_append_transition_mutations())
     return cases
 
@@ -847,7 +1004,9 @@ def test_gate_exact_prior_attempt_is_memoized(result: str, expected: str) -> Non
         ("gate_id", "gate-b"),
     ],
 )
-def test_gate_changed_fingerprint_component_runs_gate(key: str, replacement: str) -> None:
+def test_gate_changed_fingerprint_component_runs_gate(
+    key: str, replacement: str
+) -> None:
     fingerprint = dict(base_fingerprint())
     fingerprint[key] = replacement
     decision = assess_gate(
@@ -862,6 +1021,29 @@ def test_gate_partial_fingerprint_fails_closed() -> None:
     fingerprint.pop("gate_id")
     with pytest.raises(ValueError):
         assess_gate(prior_attempts=[], fingerprint=fingerprint)
+
+
+def test_gate_conflicting_or_ambiguous_exact_attempts_fail_closed() -> None:
+    failed = base_gate_attempt("deterministic_failure")
+    passed = base_gate_attempt("deterministic_pass")
+    passed["attempt_id"] = "att-2"
+    passed["generation"] = 2
+    with pytest.raises(ValueError, match="conflicting terminal evidence"):
+        assess_gate(prior_attempts=[failed, passed], fingerprint=base_fingerprint())
+
+    duplicate_id = copy.deepcopy(failed)
+    duplicate_id["generation"] = 2
+    with pytest.raises(ValueError, match="ids must be unique"):
+        assess_gate(
+            prior_attempts=[failed, duplicate_id], fingerprint=base_fingerprint()
+        )
+
+    same_generation = copy.deepcopy(failed)
+    same_generation["attempt_id"] = "att-2"
+    with pytest.raises(ValueError, match="duplicate generations"):
+        assess_gate(
+            prior_attempts=[failed, same_generation], fingerprint=base_fingerprint()
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -965,7 +1147,9 @@ def test_local_promotion_with_distinct_sol_authority_passes() -> None:
         validation_result="pass",
         candidate_digest=DIGEST_B,
         base_state_digest=DIGEST_A,
+        source_head=HEAD_1,
         promoter="sol",
+        prior_decisions=[],
     )
     assert decision["decision"] == "promote"
     assert decision["promoter"] == "sol"
@@ -981,8 +1165,10 @@ def test_global_promotion_requires_distinct_independent_review() -> None:
         validation_result="pass",
         candidate_digest=DIGEST_B,
         base_state_digest=DIGEST_A,
+        source_head=HEAD_1,
         promoter="sol",
         independent_reviewer="gemini",
+        prior_decisions=[],
     )
     assert decision["decision"] == "promote"
     assert decision["independent_reviewer"] == "gemini"
@@ -990,7 +1176,10 @@ def test_global_promotion_requires_distinct_independent_review() -> None:
 
 def test_rejection_is_first_class_terminal_decision() -> None:
     decision = assess_rejection(
-        base_proposal(), authority="sol", reason="evidence insufficient"
+        base_proposal(),
+        authority="sol",
+        reason="evidence insufficient",
+        prior_decisions=[],
     )
     assert decision["decision"] == "reject"
     assert decision["reasons"] == ["evidence insufficient"]
@@ -998,17 +1187,126 @@ def test_rejection_is_first_class_terminal_decision() -> None:
 
 
 def test_rollback_creates_new_generation_and_names_exact_decision() -> None:
+    promoted = base_promotion_record("promote")
     decision = assess_rollback(
-        previous_generation=1,
-        promoted_decision_id="prom-ref-1",
-        base_state_digest=DIGEST_A,
+        promoted_record=promoted,
+        decision_history=[promoted],
+        current_state_digest=DIGEST_B,
         authority="sol",
     )
     assert decision["decision"] == "rollback"
     assert decision["generation"] == 2
     assert decision["promoted_decision_id"] == "prom-ref-1"
-    assert decision["base_state_digest"] == DIGEST_A
+    assert decision["base_state_digest"] == DIGEST_B
+    assert decision["candidate_digest"] == DIGEST_A
     validate_refinement_promotion(decision)
+
+
+def test_rollback_rejects_fabricated_repeated_and_intervening_targets() -> None:
+    promoted = base_promotion_record("promote")
+    with pytest.raises(ValueError, match="current state"):
+        assess_rollback(
+            promoted_record=promoted,
+            decision_history=[promoted],
+            current_state_digest=DIGEST_C,
+            authority="sol",
+        )
+
+    rollback = assess_rollback(
+        promoted_record=promoted,
+        decision_history=[promoted],
+        current_state_digest=DIGEST_B,
+        authority="sol",
+    )
+    with pytest.raises(ValueError, match="already been rolled back"):
+        assess_rollback(
+            promoted_record=promoted,
+            decision_history=[promoted, rollback],
+            current_state_digest=DIGEST_B,
+            authority="sol",
+        )
+
+    later = copy.deepcopy(promoted)
+    later["promotion_id"] = "prom-ref-2"
+    later["proposal_id"] = "ref-2"
+    later["generation"] = 2
+    with pytest.raises(ValueError, match="intervening"):
+        assess_rollback(
+            promoted_record=promoted,
+            decision_history=[promoted, later],
+            current_state_digest=DIGEST_B,
+            authority="sol",
+        )
+
+
+def test_promotion_record_admission_enforces_source_sol_and_global_review() -> None:
+    forged_source = base_promotion_record("promote")
+    forged_source["source_head"] = HEAD_2
+    assert validate_refinement_promotion(forged_source)["source_head"] == HEAD_2
+
+    non_sol = base_promotion_record("promote")
+    non_sol["promoter"] = "gemini"
+    with pytest.raises(ValueError, match="Sol authority"):
+        validate_refinement_promotion(non_sol)
+
+    global_missing_review = base_promotion_record("promote")
+    global_missing_review["scope"] = "global"
+    with pytest.raises(ValueError, match="independent review"):
+        validate_refinement_promotion(global_missing_review)
+
+
+def test_promotion_rejects_source_mismatch_and_prior_terminal_decision() -> None:
+    proposal = base_proposal()
+    decision = assess_promotion(
+        proposal,
+        validation_manifest_digest=DIGEST_D,
+        validation_result="pass",
+        candidate_digest=DIGEST_B,
+        base_state_digest=DIGEST_A,
+        source_head=HEAD_2,
+        promoter="sol",
+        prior_decisions=[],
+    )
+    assert decision["decision"] == "reject"
+    assert "source_head_binding_mismatch" in decision["reasons"]
+
+    with pytest.raises(ValueError, match="already has"):
+        assess_promotion(
+            proposal,
+            validation_manifest_digest=DIGEST_D,
+            validation_result="pass",
+            candidate_digest=DIGEST_B,
+            base_state_digest=DIGEST_A,
+            source_head=HEAD_1,
+            promoter="sol",
+            prior_decisions=[base_promotion_record("promote")],
+        )
+
+
+def test_decision_history_rejects_generation_reuse_and_skipped_generation() -> None:
+    prior = base_promotion_record("promote")
+    duplicate_generation = copy.deepcopy(prior)
+    duplicate_generation["promotion_id"] = "prom-ref-2"
+    duplicate_generation["proposal_id"] = "ref-2"
+    proposal = base_proposal()
+    proposal["proposal_id"] = "ref-3"
+    proposal["generation"] = 2
+    with pytest.raises(ValueError, match="generations must be unique"):
+        assess_rejection(
+            proposal,
+            authority="sol",
+            reason="duplicate history",
+            prior_decisions=[prior, duplicate_generation],
+        )
+
+    proposal["generation"] = 3
+    with pytest.raises(ValueError, match="next immutable"):
+        assess_rejection(
+            proposal,
+            authority="sol",
+            reason="skipped generation",
+            prior_decisions=[prior],
+        )
 
 
 @pytest.mark.parametrize(
@@ -1101,7 +1399,9 @@ def test_rollback_creates_new_generation_and_names_exact_decision() -> None:
 )
 def test_promotion_rejects_fail_closed(kwargs: dict, reason: str) -> None:
     proposal = base_proposal(scope="global")
-    decision = assess_promotion(proposal, **kwargs)
+    decision = assess_promotion(
+        proposal, source_head=HEAD_1, prior_decisions=[], **kwargs
+    )
     assert decision["decision"] == "reject"
     assert reason in decision["reasons"]
 
@@ -1125,6 +1425,7 @@ def proposal_mutations() -> list[tuple[str, dict]]:
         "base_state_digest",
         "candidate_digest",
         "source_evidence_digests",
+        "source_head",
         "proposer",
         "validation_manifest_digest",
         "status",
@@ -1140,11 +1441,18 @@ def proposal_mutations() -> list[tuple[str, dict]]:
         "proposal_invalid_scope": ("scope", "public"),
         "proposal_status_not_quarantined": ("status", "promoted"),
         "proposal_empty_evidence": ("source_evidence_digests", []),
-        "proposal_duplicate_evidence": ("source_evidence_digests", [DIGEST_C, DIGEST_C]),
+        "proposal_duplicate_evidence": (
+            "source_evidence_digests",
+            [DIGEST_C, DIGEST_C],
+        ),
         "proposal_invalid_base_digest": ("base_state_digest", "sha256:short"),
         "proposal_invalid_candidate_digest": ("candidate_digest", "sha256:short"),
+        "proposal_invalid_source_head": ("source_head", "abc"),
         "proposal_empty_proposer": ("proposer", ""),
-        "proposal_invalid_validation_digest": ("validation_manifest_digest", "sha256:short"),
+        "proposal_invalid_validation_digest": (
+            "validation_manifest_digest",
+            "sha256:short",
+        ),
         "proposal_body_with_cr": ("body", "bad\rbody"),
         "proposal_zero_generation": ("generation", 0),
         "proposal_empty_title": ("title", ""),
@@ -1181,13 +1489,17 @@ def promotion_mutations() -> list[tuple[str, dict]]:
         "schema_version",
         "promotion_id",
         "proposal_id",
+        "proposal_digest",
         "decision",
         "generation",
         "scope",
         "candidate_digest",
         "base_state_digest",
+        "source_head",
+        "source_evidence_digests",
         "validation_manifest_digest",
         "validation_result",
+        "proposer",
         "promoter",
         "independent_reviewer",
         "promoted_decision_id",
@@ -1204,6 +1516,11 @@ def promotion_mutations() -> list[tuple[str, dict]]:
         "promotion_duplicate_reasons": ("reasons", ["r", "r"]),
         "promotion_invalid_validation_result": ("validation_result", "fail"),
         "promotion_empty_promoter": ("promoter", ""),
+        "promotion_invalid_proposal_digest": ("proposal_digest", "sha256:short"),
+        "promotion_invalid_source_head": ("source_head", "abc"),
+        "promotion_empty_source_evidence": ("source_evidence_digests", []),
+        "promotion_empty_proposer": ("proposer", ""),
+        "promotion_non_sol_authority": ("promoter", "gemini"),
     }
     for label, (key, replacement) in replacements.items():
         candidate = copy.deepcopy(base)
@@ -1218,7 +1535,9 @@ def promotion_mutations() -> list[tuple[str, dict]]:
     # promote/reject must not carry a promoted_decision_id
     promote_with_reference = base_promotion_record("promote")
     promote_with_reference["promoted_decision_id"] = "prom-other"
-    cases.append(("promotion_promote_with_promoted_decision_id", promote_with_reference))
+    cases.append(
+        ("promotion_promote_with_promoted_decision_id", promote_with_reference)
+    )
 
     return cases
 
@@ -1240,7 +1559,12 @@ def test_promotion_hostile_mutation_count_is_at_least_twenty() -> None:
 
 def submission_fail_closed_labels() -> list[str]:
     return [
-        "submission_conflict",
+        "submission_conflict_completed",
+        "submission_conflict_running",
+        "submission_conflict_received",
+        "submission_conflict_failed",
+        "submission_conflict_revoked",
+        "submission_conflict_uncertain",
         "submission_already_in_progress_running",
         "submission_already_in_progress_received",
         "submission_requires_new_generation_failed",
@@ -1271,6 +1595,9 @@ def gate_decision_fail_closed_labels() -> list[str]:
         "gate_changed_toolchain",
         "gate_changed_gate_id",
         "gate_partial_fingerprint",
+        "gate_duplicate_attempt_id",
+        "gate_duplicate_generation",
+        "gate_conflicting_terminal_evidence",
     ]
 
 
@@ -1284,6 +1611,13 @@ def promotion_reject_fail_closed_labels() -> list[str]:
         "promotion_reject_missing_independent_reviewer",
         "promotion_reject_reviewer_is_proposer",
         "promotion_reject_reviewer_is_promoter",
+        "promotion_reject_source_head_mismatch",
+        "promotion_reject_prior_terminal_decision",
+        "rollback_reject_fabricated_current_state",
+        "rollback_reject_repeated_target",
+        "rollback_reject_intervening_decision",
+        "decision_history_reject_generation_reuse",
+        "decision_history_reject_skipped_generation",
     ]
 
 

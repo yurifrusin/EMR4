@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
+    "completed_stage": "Every independent worker finding is corrected; 200 focused tests, 167 hostile mutations and canonical fast pass.",
+    "next_executable_stage": "Commit exact correction and dispatch one fresh Gemini 3.7 Flash/high veto from a clean named review worktree.",
+    "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+    "resume_after_compaction": true,
+    "source_head": "dd8ccb6b930e6e188268ee5a9070dfc6df45c95a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "correction_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The useful mechanical base is integrated; its underclosed self-pass is corrected and preserved in AER-0331.",
+        "work_packages": [
+          "nine-path mechanical base"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact corrected commit requires one fresh Gemini 3.7 Flash/high veto.",
+        "work_packages": [
+          "authority, history, uncertainty and no-runtime veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Independent overlap, hostile acceptance and exact-code audits found and bounded the correction.",
+        "work_packages": [
+          "three read-only audits",
+          "AER-0331"
+        ]
+      }
+    ],
+    "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "commit result",
+      "verifier worktree preflight",
+      "Gemini veto",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "exact explicit-path commit",
+      "fresh clean review worktree after commit",
+      "Gemini only after local gates",
+      "protected refs unchanged"
+    ]
+  },
+  "planned_action": "commit_corrected_ariadne_continuity_and_refinement_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen plan 961a833b plus its clarified fail-closed interpretations govern the corrected working candidate over integrated base dd8ccb6b. All independent P1/P2 findings are closed by exact tests.",
+    "current_authority_allocation": "Sol completed the one bounded correction and owns commit/integration/acceptance. DeepSeek's self-pass is preserved as AER-0331 untrusted provenance. Gemini 3.7 Flash/high remains the distinct exact-candidate veto.",
+    "git_refs_and_worktree": "Primary base HEAD is dd8ccb6b930e6e188268ee5a9070dfc6df45c95a on codex/ariadne-bernie-davida-parallel-seam with only the exact correction, AER-0331 and precommit evidence pending. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; 627 pre-existing unrelated untracked paths plus the two owned AER additions remain preserved and docs/branding is excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after restored context. Continuity 298 / Compass 280 and Yuri's 2026-08-15 harness-adaptation authority remain controlling.",
+    "protected_evidence_boundaries": "Provider-free authored-synthetic Ariadne harness logic only. No Prime runtime, command execution/replay, executable skill, automatic apply, product/API/database/provider/patient surface, deployment, release, Pages or protected refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

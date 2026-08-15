@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0331",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T18:50:02+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+  "attempt_id": "ariadne-prime-derived-harness-adaptations-deepseek-implementation-001",
+  "provider_or_model_calls": 1,
+  "provider_or_model_call_purpose": "bounded DeepSeek V4 Flash/high implementation worker through Claude Code --bare",
+  "plan_source_head": "961a833b65e57682e10088300f4b7909a5a5aee8",
+  "candidate_head": "7ff8ea25b03b691bad0feef179e9cb05f01c72f4",
+  "candidate_parent": "961a833b65e57682e10088300f4b7909a5a5aee8",
+  "candidate_path_count": 9,
+  "candidate_worktree_clean": true,
+  "worker_decision": "pass",
+  "worker_reported_focused_tests": 173,
+  "worker_reported_hostile_mutations": 139,
+  "independent_admission": "revision_required",
+  "rejected_reasons": [
+    "universal_request_conflict_missing",
+    "journal_reordered_or_retired_unfinished_history_admissible",
+    "conflicting_exact_gate_attempts_latest_wins",
+    "refinement_exact_source_sol_and_global_reviewer_admission_absent_or_rejection_misreported",
+    "rollback_trusts_caller_supplied_coordinates_and_history"
+  ],
+  "detection": "Sol and a bounded native read-only audit reviewed the exact clean candidate after independently confirming its focused test pass and found five semantic fail-closed gaps in the frozen contract.",
+  "containment": "The candidate and worker result remain untrusted provenance. No acceptance, integration, Gemini dispatch, product effect, command execution or automatic refinement application followed the self-pass.",
+  "recovery": "One bounded Sol correction is authorised inside the existing nine-path contract boundary, followed by deterministic re-admission and one fresh Gemini 3.7 Flash/high veto.",
+  "candidate_state": "untrusted_partial_worktree",
+  "forbidden_or_product_effects": false,
+  "status": "contained_for_sol_correction"
+}

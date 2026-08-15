@@ -88,13 +88,18 @@ nothing and grants no command authority.
 - `completed` requires an exact result digest. Other states forbid it.
 - An exact repeat of a completed command returns `replay_completed` and its
   recorded result digest. A differing request under the same command id returns
-  `conflict`. Live `received`/`running` returns `already_in_progress`.
+  `conflict` before any state-specific decision. Live exact `received`/`running`
+  returns `already_in_progress`; exact `failed`, `revoked` or `uncertain`
+  requires a new generation and never replays.
 - Recovery advances generation exactly once. Unfinished prior-generation
   commands become `uncertain`; they are never silently re-executed. Completed,
   failed and revoked outcomes remain immutable.
 - A same-generation cursor receives later events only. A retired, future,
   missing or out-of-range cursor returns `snapshot_required`; the validated
   snapshot, not replay, is authoritative.
+- The supplied event array remains in append-only `(generation, sequence)`
+  order. A retired generation cannot leave a command in `received` or `running`;
+  its exact recovery transition must be present.
 
 ## Frozen unchanged-gate contract
 
@@ -109,6 +114,8 @@ deterministic failures.
   candidate, evidence and manifest;
 - an exact prior failure returns `diagnose_without_rerun`;
 - an exact prior uncertain result returns `resolve_uncertainty`;
+- duplicate attempt ids, ambiguous duplicate generations or contradictory
+  results for one exact fingerprint fail closed rather than using latest-wins;
 - no decision executes the gate or converts failure/uncertainty to success.
 
 The composite fingerprint covers the gate id, exact candidate source HEAD and
@@ -124,8 +131,9 @@ Refinement is a proposal surface, not self-modifying authority.
   `subagent_spec` and `policy_note`. Executable code, dependencies, commands,
   credentials and runtime tools are not representable.
 - A proposal binds a unique id, `local` or `global` scope, exact base-state and
-  candidate digests, source-evidence digests, proposer identity and intended
-  validation manifest.
+  candidate digests, source HEAD, source-evidence digests, proposer identity and
+  intended validation manifest. A decision additionally binds the canonical
+  proposal digest.
 - Every new proposal begins `quarantined`; the proposer cannot promote it.
 - Promotion requires a deterministic validation pass whose manifest digest
   equals the proposal, exact candidate/source HEAD binding, and a distinct Sol
@@ -133,9 +141,11 @@ Refinement is a proposal surface, not self-modifying authority.
   independent review pass.
 - Promotion produces only a typed decision record. It does not edit a policy,
   prompt, skill or source file automatically.
-- Rejection and rollback are first-class terminal decisions. Rollback names the
-  exact promoted decision and restores its recorded base digest; it cannot
-  infer or rewrite content.
+- Rejection and rollback are first-class terminal decisions. Rejection preserves
+  the actual validation result. Rollback validates an exact latest promoted
+  decision against immutable decision history and current state, derives the
+  next generation, and restores its recorded base digest; it cannot infer or
+  rewrite content, repeat a rollback or skip an intervening decision.
 - A new proposal or rollback creates a new immutable generation. In-place
   history rewriting is forbidden.
 

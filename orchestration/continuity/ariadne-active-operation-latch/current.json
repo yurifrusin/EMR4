@@ -4,18 +4,18 @@
   "active_tranche": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
   "objective": "Add the smallest harness-only deterministic contracts for stable generation-scoped command identity, completed replay versus explicit uncertainty, generation-sequence recovery, unchanged failed-gate suppression, and quarantined evidence-gated harness refinement without adding a daemon, executable skill, product runtime or automatic self-modification.",
   "status": "in_progress",
-  "source_head": "37cd378050e16bf49713b436e5d8a7af19321d97",
+  "source_head": "dd8ccb6b930e6e188268ee5a9070dfc6df45c95a",
   "authority_source": "Yuri's 2026-08-15 explicit instruction to implement worthwhile Prime Agent adaptations in the Ariadne harness and then continue the accepted product tranche sequence",
   "checkpoint": {
-    "completed_stage": "DeepSeek candidate 7ff8ea25b03b691bad0feef179e9cb05f01c72f4 is a clean exact nine-path child and passes its 173 focused tests, but independent admission returned revision_required for five bounded fail-closed defects preserved in the worker review.",
-    "next_executable_stage": "Preserve the worker result, integrate its nine-path mechanical base, apply the one authorised bounded Sol correction, rerun deterministic gates, obtain one fresh Gemini 3.7 Flash/high veto, close out, then rehydrate and begin the accepted delete-confirm schema-and-transaction scaffold.",
+    "completed_stage": "The worker base is integrated at dd8ccb6b930e6e188268ee5a9070dfc6df45c95a and the bounded Sol correction closes every independent P1/P2 finding. Two hundred focused checks, 167 distinct hostile mutations, Ruff, schema/CLI checks and the canonical 196-test fast profile pass; AER-0331 preserves the rejected worker self-pass.",
+    "next_executable_stage": "Commit the corrected exact candidate, create a fresh clean Gemini 3.7 Flash/high verifier worktree and veto packet, admit the veto, close out, then rehydrate and begin the accepted delete-confirm schema-and-transaction scaffold.",
     "retry_counters": {
       "planning": 0,
       "implementation": 1,
       "review": 1,
       "verification": 0
     },
-      "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02"
+      "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,

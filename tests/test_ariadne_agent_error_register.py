@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 291
+    assert register["register_revision"] == 292
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 331)
+        f"AER-{index:04d}" for index in range(1, 332)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 228
+    assert len(agent_incidents) == 229
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 330
+    assert report["incident_count"] == 331
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2992,9 +2992,7 @@ def test_aer_0324_rejects_underclosed_deepseek_self_pass() -> None:
 
 
 def test_aer_0325_records_repeated_protected_metadata_scope_breach() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0325"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0325"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "orchestrator"
@@ -3012,9 +3010,7 @@ def test_aer_0325_records_repeated_protected_metadata_scope_breach() -> None:
 
 
 def test_aer_0326_contains_deepseek_inventory_transport_timeout() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0326"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0326"]
 
     assert incident["origin"] == "transport"
     assert incident["resource_id"] == "deepseek-flash-workers"
@@ -3031,9 +3027,7 @@ def test_aer_0326_contains_deepseek_inventory_transport_timeout() -> None:
 
 
 def test_aer_0327_corrects_detached_gemini_worktree_before_model_call() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0327"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0327"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "orchestrator"
@@ -3048,9 +3042,7 @@ def test_aer_0327_corrects_detached_gemini_worktree_before_model_call() -> None:
 
 
 def test_aer_0328_validates_command_manifest_before_gemini_dispatch() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0328"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0328"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "orchestrator"
@@ -3068,9 +3060,7 @@ def test_aer_0328_validates_command_manifest_before_gemini_dispatch() -> None:
 
 
 def test_aer_0329_rejects_inferred_full_head_before_verifier_receipt() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0329"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0329"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "orchestrator"
@@ -3117,9 +3107,7 @@ def test_aer_0275_records_the_stale_behavior_parent_test_correction() -> None:
 
 
 def test_aer_0330_records_prime_harness_preplanning_contract_recovery() -> None:
-    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
-        "AER-0330"
-    ]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0330"]
 
     assert incident["origin"] == "agent_behavior"
     assert incident["role"] == "orchestrator"
@@ -3136,6 +3124,30 @@ def test_aer_0330_records_prime_harness_preplanning_contract_recovery() -> None:
     assert "required_independence" in incident["correction"]["action"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert incident["status"] == "corrected"
+
+
+def test_aer_0331_contains_prime_harness_deepseek_self_pass() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0331"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "implementer"
+    assert incident["resource_id"] == "deepseek-flash-workers"
+    assert incident["stage"] == "implementation"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert incident["related_incident_ids"] == []
+    assert incident["recurrence_signature"] == (
+        "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract"
+    )
+    assert "7ff8ea25b03b691bad0feef179e9cb05f01c72f4" in incident["observed_error"]
+    assert "173 focused tests" in incident["observed_error"]
+    assert "139 hostile mutations" in incident["observed_error"]
+    assert "five fail-closed contract gaps" in incident["detection_method"]
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert "one bounded five-part correction" in incident["correction"]["action"]
+    assert incident["status"] == "contained"
 
 
 def test_aer_0276_reconciles_the_verifier_timeout_value_misreport() -> None:
@@ -3382,11 +3394,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 291
-    assert report["incident_count"] == 330
+    assert report["register_revision"] == 292
+    assert report["incident_count"] == 331
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 228,
+        "agent_behavior": 229,
         "harness": 37,
         "repository": 55,
         "transport": 10,
@@ -3397,14 +3409,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "harness_failure": 37,
         "output_contract_violation": 95,
         "read_only_violation": 3,
-        "reasoning_claim_error": 38,
+        "reasoning_claim_error": 39,
         "repository_defect": 55,
         "transport_timeout": 10,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
         "canonical_unchanged": 203,
-        "untrusted_partial_worktree": 29,
+        "untrusted_partial_worktree": 30,
     }
     receipt_event_recurrence = next(
         row
@@ -3747,6 +3759,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
                 "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
                 "Verifier packets must require all commands and notifications to settle before exactly one terminal line, and the wrapper must continue rejecting every zero-or-duplicate result before candidate acceptance.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0324", "AER-0331"],
+            "origins": ["agent_behavior"],
+            "categories": ["reasoning_claim_error"],
+            "roles": ["implementer"],
+            "resource_ids": ["deepseek-flash-workers"],
+            "prevention_controls": [
+                "Before admitting any worker self-pass for a stateful harness contract, independently probe every command state for identity conflict, preserve literal append order, reject contradictory same-fingerprint gate history, require exact proposal/source/reviewer/promoter binding, and derive rollback solely from validated immutable promotion history; test counts and hostile-mutation totals never substitute for semantic admission.",
+                "Before any worker self-pass is admitted, independently validate canonical temporal relations and enumerate every frozen closed-contract field and nullable success coordinate; focused test success cannot substitute for semantic packet admission.",
             ],
         },
         {

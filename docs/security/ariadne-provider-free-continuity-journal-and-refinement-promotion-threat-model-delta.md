@@ -20,20 +20,24 @@ skill or Raisa product surface.
 |---|---|
 | A duplicate command causes a second effect | Exact completed repeats return only the recorded digest; unfinished or uncertain commands never auto-replay. |
 | One command id is reused for different work | Stable id plus exact request digest; any mismatch is a terminal conflict. |
+| A live or failed state hides a reused command id with changed content | Request identity conflict is decided before any state-specific replay/in-progress/recovery outcome. |
 | A worker restart makes a received command look absent | Recovery marks unfinished prior-generation state explicitly uncertain. |
 | Old events contaminate a new worker generation | Cursors are `(generation, sequence)`; retired/future/out-of-range cursors require an authoritative snapshot. |
 | Missing events are hidden | Sequence must be contiguous inside each generation. |
+| Retired work remains falsely live or history is reordered | Event arrays retain append-only coordinate order and every retired live command requires its exact recovery uncertainty. |
 | A failed test is rerun without any changed evidence | Exact unchanged failure returns `diagnose_without_rerun`. |
 | A transient transport or provider failure is cached as a substantive failure | Only the closed `deterministic_failure` result is memoizable; transient outcomes are `uncertain` and require resolution. |
 | A materially changed input is omitted from a gate fingerprint | The composite requires source HEAD/tree, evidence set, manifest, relevant inputs and toolchain; missing components fail closed. |
 | A stale pass is applied to changed code | Pass reuse requires exact candidate/evidence and manifest fingerprints. |
 | Uncertainty is treated as failure or success | It has its own closed decision `resolve_uncertainty`. |
+| Contradictory exact gate attempts use latest-wins | Duplicate ids/generations and conflicting exact-fingerprint results fail closed as evidence conflict. |
 | A model edits Ariadne policy directly | Refinement emits a quarantined typed proposal only; no apply mechanism exists. |
 | A proposal smuggles executable capability | Closed non-executable kinds and bounded text/digest fields make code, commands, dependencies and credentials unrepresentable. |
 | A proposer certifies itself | Promotion authority must be distinct; global promotion additionally requires a distinct independent reviewer. |
 | Review covers a different candidate | Proposal, deterministic evidence, source HEAD, review and promotion bind exact digests. |
 | A local lesson silently becomes global | Scope is exact and immutable; global promotion has stricter evidence. |
 | Rollback guesses prior content | Rollback names an exact promoted decision and recorded base digest; it applies nothing itself. |
+| A fabricated, repeated or stale rollback is admitted | Rollback validates the exact target in immutable history, exact current state, no prior rollback and no intervening promotion/rollback before deriving the next generation. |
 | History is rewritten | Generations and decisions are append-only inputs to pure validation; in-place mutation is rejected. |
 | Journal evidence is mistaken for command authority | Policy and outputs state that the journal executes nothing and grants nothing. |
 | Harness controls leak into Raisa | Source scope excludes application, migration, API, database and Diary code. |

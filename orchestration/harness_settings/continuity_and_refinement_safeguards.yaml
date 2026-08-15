@@ -15,10 +15,14 @@ operation_journal:
   non_completed_states_forbid_result_digest: true
   exact_completed_repeat: replay_completed
   differing_request_same_command_id: conflict
+  differing_request_conflict_precedes_every_state_decision: true
   live_received_or_running: already_in_progress
   failed_revoked_or_uncertain: requires_new_generation
   recovery_advances_generation_exactly_once: true
+  recovery_transition_advances_exactly_one_generation: true
   unfinished_prior_generation_becomes_uncertain: true
+  retired_generation_may_not_retain_received_or_running: true
+  event_array_is_append_only_coordinate_order: true
   cursor_pair: [generation, sequence]
   same_generation_cursor_receives_later_events_only: true
   stale_future_missing_or_out_of_range_cursor: snapshot_required
@@ -39,6 +43,8 @@ unchanged_gate:
   exact_prior_failure: diagnose_without_rerun
   exact_prior_uncertain: resolve_uncertainty
   partial_fingerprint_fails_closed: true
+  duplicate_attempt_ids_or_generations_fail_closed: true
+  contradictory_exact_fingerprint_results_fail_closed: true
   no_decision_executes_gate_or_converts_failure_to_success: true
 refinement_promotion:
   proposal_schema_version: ariadne.refinement_proposal.v1
@@ -52,13 +58,18 @@ refinement_promotion:
     - deterministic_validation_pass
     - validation_manifest_digest_equals_proposal
     - exact_candidate_and_base_binding
+    - exact_source_head_and_source_evidence_binding
+    - exact_proposal_digest_binding
     - distinct_sol_promotion_decision
     - global_requires_distinct_independent_review
   promotion_emits_typed_decision_record_only: true
   rejection_is_terminal_decision: true
   rollback_creates_new_generation: true
   rollback_names_exact_promoted_decision_and_recorded_base_digest: true
+  rollback_requires_exact_history_and_current_state: true
+  rollback_rejects_intervening_or_repeated_decisions: true
   in_place_history_rewriting_forbidden: true
+  decision_generations_are_unique_and_contiguous: true
 forbidden_surfaces:
   - no_journal_append_by_cli
   - no_process_spawn_or_command_execution

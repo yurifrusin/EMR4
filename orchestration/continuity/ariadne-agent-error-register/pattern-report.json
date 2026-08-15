@@ -1,10 +1,10 @@
 {
-  "canonical_register_sha256": "712a71dd559a3e725b034dfadeabe4dc408f052da742916c0e294a4667e450e7",
+  "canonical_register_sha256": "1117e22361f35c3b917e8fc6e8b26a5f4192d124bae05602a7eb76edf826b520",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
       "canonical_unchanged": 203,
-      "untrusted_partial_worktree": 29
+      "untrusted_partial_worktree": 30
     },
     "by_category": {
       "command_scope_violation": 49,
@@ -12,19 +12,19 @@
       "harness_failure": 37,
       "output_contract_violation": 95,
       "read_only_violation": 3,
-      "reasoning_claim_error": 38,
+      "reasoning_claim_error": 39,
       "repository_defect": 55,
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 228,
+      "agent_behavior": 229,
       "harness": 37,
       "repository": 55,
       "transport": 10
     },
     "by_process_severity": {
       "low": 134,
-      "material": 100,
+      "material": 101,
       "moderate": 96
     },
     "by_resource_and_role": {
@@ -46,7 +46,7 @@
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 9,
+      "deepseek-flash-workers::implementer": 10,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,14 +87,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 24,
+      "implementer": 25,
       "integration_reviewer": 2,
       "orchestrator": 252,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 330,
+  "incident_count": 331,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -618,6 +618,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0324",
+        "AER-0331"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before admitting any worker self-pass for a stateful harness contract, independently probe every command state for identity conflict, preserve literal append order, reject contradictory same-fingerprint gate history, require exact proposal/source/reviewer/promoter binding, and derive rollback solely from validated immutable promotion history; test counts and hostile-mutation totals never substitute for semantic admission.",
+        "Before any worker self-pass is admitted, independently validate canonical temporal relations and enumerate every frozen closed-contract field and nullable success coordinate; focused test success cannot substitute for semantic packet admission."
+      ],
+      "recurrence_signature": "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract",
+      "resource_ids": [
+        "deepseek-flash-workers"
+      ],
+      "roles": [
+        "implementer"
+      ]
+    },
+    {
+      "categories": [
+        "reasoning_claim_error"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0025",
         "AER-0026"
       ],
@@ -840,7 +864,7 @@
       ]
     }
   ],
-  "register_revision": 291,
+  "register_revision": 292,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

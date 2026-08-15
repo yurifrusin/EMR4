@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 291,
+  "register_revision": 292,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13292,6 +13292,47 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0331",
+      "attempt_id": "ariadne-prime-derived-harness-adaptations-deepseek-implementation-001",
+      "observed_on": "2026-08-15",
+      "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A worker may self-report pass only when its exact clean owned-path candidate satisfies the frozen universal command-identity conflict, append-only journal ordering, contradictory-gate evidence, exact refinement-promotion binding and history-derived rollback invariants; Sol semantic admission and a later fresh independent veto remain mandatory.",
+      "observed_error": "DeepSeek returned DECISION pass for clean nine-path candidate 7ff8ea25b03b691bad0feef179e9cb05f01c72f4 with 173 focused tests and 139 hostile mutations, but exact Sol/native read-only review found that request conflicts were not universal, reordered or retired unfinished journal history remained admissible, contradictory exact gate results used latest-wins, refinement promotion omitted exact source/Sol/global-reviewer admission and misreported rejection, and rollback trusted fabricated caller coordinates and history.",
+      "detection_method": "Sol and a bounded native read-only audit reviewed the exact clean child of plan source 961a833b65e57682e10088300f4b7909a5a5aee8 after independently confirming the 173-test pass. Their direct semantic probes returned revision_required for five fail-closed contract gaps before integration or Gemini dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-deepseek-self-pass-incident.json",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-worker-review.md",
+        "orchestration/agent_inbox/deepseek/ariadne-prime-derived-harness-adaptations-worker-result.json",
+        "docs/ariadne-agent-error-correction-register-revision-292.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Preserve candidate 7ff8ea25b03b691bad0feef179e9cb05f01c72f4 and its worker pass only as untrusted provenance, admit no acceptance claim, close same-lane correction, and transfer one bounded five-part correction to Sol before deterministic re-admission and one fresh Gemini 3.7 Flash/high veto.",
+        "prevention_control": "Before admitting any worker self-pass for a stateful harness contract, independently probe every command state for identity conflict, preserve literal append order, reject contradictory same-fingerprint gate history, require exact proposal/source/reviewer/promoter binding, and derive rollback solely from validated immutable promotion history; test counts and hostile-mutation totals never substitute for semantic admission.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-deepseek-self-pass-incident.json",
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-worker-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-292.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

@@ -115,8 +115,10 @@ def build_parser() -> argparse.ArgumentParser:
     assess_promotion_cmd.add_argument("--validation-result", required=True)
     assess_promotion_cmd.add_argument("--candidate-digest", required=True)
     assess_promotion_cmd.add_argument("--base-state-digest", required=True)
+    assess_promotion_cmd.add_argument("--source-head", required=True)
     assess_promotion_cmd.add_argument("--promoter", required=True)
     assess_promotion_cmd.add_argument("--independent-reviewer")
+    assess_promotion_cmd.add_argument("--prior-decisions", type=Path, required=True)
     assess_promotion_cmd.add_argument("--output", type=Path)
 
     assess_rejection_cmd = subparsers.add_parser(
@@ -125,14 +127,15 @@ def build_parser() -> argparse.ArgumentParser:
     assess_rejection_cmd.add_argument("--proposal", type=Path, required=True)
     assess_rejection_cmd.add_argument("--authority", required=True)
     assess_rejection_cmd.add_argument("--reason", required=True)
+    assess_rejection_cmd.add_argument("--prior-decisions", type=Path, required=True)
     assess_rejection_cmd.add_argument("--output", type=Path)
 
     assess_rollback_cmd = subparsers.add_parser(
         "assess-rollback", help="Emit a first-class terminal rollback decision."
     )
-    assess_rollback_cmd.add_argument("--previous-generation", type=int, required=True)
-    assess_rollback_cmd.add_argument("--promoted-decision-id", required=True)
-    assess_rollback_cmd.add_argument("--base-state-digest", required=True)
+    assess_rollback_cmd.add_argument("--promoted-record", type=Path, required=True)
+    assess_rollback_cmd.add_argument("--decision-history", type=Path, required=True)
+    assess_rollback_cmd.add_argument("--current-state-digest", required=True)
     assess_rollback_cmd.add_argument("--authority", required=True)
     assess_rollback_cmd.add_argument("--output", type=Path)
 
@@ -161,9 +164,7 @@ def run(args: argparse.Namespace) -> int:
     if command == "assess-cursor":
         journal = _load_json(args.journal, label="journal")
         return _emit(
-            assess_cursor(
-                journal, generation=args.generation, sequence=args.sequence
-            ),
+            assess_cursor(journal, generation=args.generation, sequence=args.sequence),
             args.output,
         )
     if command == "validate-gate-attempt":
@@ -180,6 +181,7 @@ def run(args: argparse.Namespace) -> int:
         return _emit(validate_refinement_proposal(proposal), args.output)
     if command == "assess-promotion":
         proposal = _load_json(args.proposal, label="proposal")
+        prior_decisions = _load_list(args.prior_decisions, label="prior decisions")
         return _emit(
             assess_promotion(
                 proposal,
@@ -187,23 +189,33 @@ def run(args: argparse.Namespace) -> int:
                 validation_result=args.validation_result,
                 candidate_digest=args.candidate_digest,
                 base_state_digest=args.base_state_digest,
+                source_head=args.source_head,
                 promoter=args.promoter,
                 independent_reviewer=args.independent_reviewer,
+                prior_decisions=prior_decisions,
             ),
             args.output,
         )
     if command == "assess-rejection":
         proposal = _load_json(args.proposal, label="proposal")
+        prior_decisions = _load_list(args.prior_decisions, label="prior decisions")
         return _emit(
-            assess_rejection(proposal, authority=args.authority, reason=args.reason),
+            assess_rejection(
+                proposal,
+                authority=args.authority,
+                reason=args.reason,
+                prior_decisions=prior_decisions,
+            ),
             args.output,
         )
     if command == "assess-rollback":
+        promoted_record = _load_json(args.promoted_record, label="promoted record")
+        decision_history = _load_list(args.decision_history, label="decision history")
         return _emit(
             assess_rollback(
-                previous_generation=args.previous_generation,
-                promoted_decision_id=args.promoted_decision_id,
-                base_state_digest=args.base_state_digest,
+                promoted_record=promoted_record,
+                decision_history=decision_history,
+                current_state_digest=args.current_state_digest,
                 authority=args.authority,
             ),
             args.output,

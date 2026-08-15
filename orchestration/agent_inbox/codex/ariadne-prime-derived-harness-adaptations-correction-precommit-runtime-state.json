@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_corrected_ariadne_continuity_and_refinement_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after restored context. Continuity 298 / Compass 280 and Yuri's 2026-08-15 harness-adaptation authority remain controlling.",
+    "current_authority_allocation": "Sol completed the one bounded correction and owns commit/integration/acceptance. DeepSeek's self-pass is preserved as AER-0331 untrusted provenance. Gemini 3.7 Flash/high remains the distinct exact-candidate veto.",
+    "active_plan_and_acceptance": "Frozen plan 961a833b plus its clarified fail-closed interpretations govern the corrected working candidate over integrated base dd8ccb6b. All independent P1/P2 findings are closed by exact tests.",
+    "protected_evidence_boundaries": "Provider-free authored-synthetic Ariadne harness logic only. No Prime runtime, command execution/replay, executable skill, automatic apply, product/API/database/provider/patient surface, deployment, release, Pages or protected refs.",
+    "git_refs_and_worktree": "Primary base HEAD is dd8ccb6b930e6e188268ee5a9070dfc6df45c95a on codex/ariadne-bernie-davida-parallel-seam with only the exact correction, AER-0331 and precommit evidence pending. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; 627 pre-existing unrelated untracked paths plus the two owned AER additions remain preserved and docs/branding is excluded."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+    "active_tranche": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
+    "objective": "Commit and independently veto the corrected harness-only journal, deterministic-gate and quarantined-refinement contracts without runtime or product authority.",
+    "status": "in_progress",
+    "source_head": "dd8ccb6b930e6e188268ee5a9070dfc6df45c95a",
+    "authority_source": "Yuri's 2026-08-15 instruction, frozen plan 961a833b and its one bounded Sol correction",
+    "checkpoint": {
+      "completed_stage": "Every independent worker finding is corrected; 200 focused tests, 167 hostile mutations and canonical fast pass.",
+      "next_executable_stage": "Commit exact correction and dispatch one fresh Gemini 3.7 Flash/high veto from a clean named review worktree.",
+      "retry_counters": {"planning": 0, "implementation": 1, "review": 1, "verification": 1},
+      "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_authored_synthetic_ariadne_harness_only", "exact_corrected_contract_and_evidence_only", "no_prime_install_daemon_shell_process_network_or_provider", "no_automatic_command_replay_or_self_modification", "no_application_database_api_product_patient_or_clinical_surface", "no_credentials_iam_deployment_production_release_pages_or_protected_ref", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+    "assessed_stage": "correction_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "positive", "rationale": "The useful mechanical base is integrated; its underclosed self-pass is corrected and preserved in AER-0331.", "work_packages": ["nine-path mechanical base"]},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "The exact corrected commit requires one fresh Gemini 3.7 Flash/high veto.", "work_packages": ["authority, history, uncertainty and no-runtime veto"]},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "Independent overlap, hostile acceptance and exact-code audits found and bounded the correction.", "work_packages": ["three read-only audits", "AER-0331"]}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["exact explicit-path commit", "fresh clean review worktree after commit", "Gemini only after local gates", "protected refs unchanged"],
+    "reassessment_triggers": ["commit result", "verifier worktree preflight", "Gemini veto", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_active_tranche_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol correction and exact deterministic admissions pass."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["All three read-only audits and AER task completed."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high reserved; no verifier call yet."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["One worker attempt complete; no retry."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

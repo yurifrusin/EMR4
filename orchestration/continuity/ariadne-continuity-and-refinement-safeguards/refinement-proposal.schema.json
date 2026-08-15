@@ -15,6 +15,7 @@
     "base_state_digest",
     "candidate_digest",
     "source_evidence_digests",
+    "source_head",
     "proposer",
     "validation_manifest_digest",
     "status",
@@ -45,12 +46,14 @@
     "title": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 200
+      "maxLength": 200,
+      "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000-\\u001f\\u007f]+$"
     },
     "body": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 4000
+      "maxLength": 4000,
+      "pattern": "^(?!\\s)[^\\r\\u0000-\\u0009\\u000b-\\u001f\\u007f]*\\S$"
     },
     "base_state_digest": {
       "$ref": "#/$defs/sha256Digest"
@@ -67,10 +70,14 @@
         "$ref": "#/$defs/sha256Digest"
       }
     },
+    "source_head": {
+      "$ref": "#/$defs/gitObjectId"
+    },
     "proposer": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 200
+      "maxLength": 200,
+      "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000-\\u001f\\u007f]+$"
     },
     "validation_manifest_digest": {
       "$ref": "#/$defs/sha256Digest"
@@ -91,6 +98,10 @@
     "sha256Digest": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "gitObjectId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
     }
   }
 }

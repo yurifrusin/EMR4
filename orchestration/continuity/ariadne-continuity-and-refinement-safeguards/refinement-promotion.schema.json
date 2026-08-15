@@ -2,152 +2,120 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://emr4.local/schemas/ariadne-refinement-promotion-v1.json",
   "title": "Ariadne refinement promotion decision record",
-  "description": "A typed, append-only promotion, rejection or rollback decision record. Promotion and rejection are first-class terminal decisions; rollback names the exact promoted decision and its recorded base digest and creates a new generation. The record edits or executes nothing.",
+  "description": "An inert, append-only promotion, rejection or rollback decision bound to one exact quarantined proposal and source. The record edits and executes nothing.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema_version",
     "promotion_id",
     "proposal_id",
+    "proposal_digest",
     "decision",
     "generation",
     "scope",
     "candidate_digest",
     "base_state_digest",
+    "source_head",
+    "source_evidence_digests",
     "validation_manifest_digest",
     "validation_result",
+    "proposer",
     "promoter",
     "independent_reviewer",
     "promoted_decision_id",
     "reasons"
   ],
   "properties": {
-    "schema_version": {
-      "const": "ariadne.refinement_promotion.v1"
+    "schema_version": {"const": "ariadne.refinement_promotion.v1"},
+    "promotion_id": {"$ref": "#/$defs/identifier"},
+    "proposal_id": {"$ref": "#/$defs/identifier"},
+    "proposal_digest": {"$ref": "#/$defs/sha256Digest"},
+    "decision": {"enum": ["promote", "reject", "rollback"]},
+    "generation": {"type": "integer", "minimum": 1},
+    "scope": {"enum": ["local", "global"]},
+    "candidate_digest": {"$ref": "#/$defs/sha256Digest"},
+    "base_state_digest": {"$ref": "#/$defs/sha256Digest"},
+    "source_head": {"$ref": "#/$defs/gitObjectId"},
+    "source_evidence_digests": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/sha256Digest"}
     },
-    "promotion_id": {
-      "$ref": "#/$defs/identifier"
-    },
-    "proposal_id": {
-      "$ref": "#/$defs/identifier"
-    },
-    "decision": {
-      "enum": [
-        "promote",
-        "reject",
-        "rollback"
-      ]
-    },
-    "generation": {
-      "type": "integer",
-      "minimum": 1
-    },
-    "scope": {
-      "enum": [
-        "local",
-        "global"
-      ]
-    },
-    "candidate_digest": {
-      "$ref": "#/$defs/sha256Digest"
-    },
-    "base_state_digest": {
-      "$ref": "#/$defs/sha256Digest"
-    },
-    "validation_manifest_digest": {
-      "$ref": "#/$defs/sha256Digest"
-    },
-    "validation_result": {
-      "const": "pass"
-    },
-    "promoter": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 200
-    },
+    "validation_manifest_digest": {"$ref": "#/$defs/sha256Digest"},
+    "validation_result": {"enum": ["pass", "fail"]},
+    "proposer": {"$ref": "#/$defs/identity"},
+    "promoter": {"$ref": "#/$defs/identity"},
     "independent_reviewer": {
-      "anyOf": [
-        {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 200
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "anyOf": [{"$ref": "#/$defs/identity"}, {"type": "null"}]
     },
     "promoted_decision_id": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/identifier"
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "anyOf": [{"$ref": "#/$defs/identifier"}, {"type": "null"}]
     },
     "reasons": {
       "type": "array",
       "maxItems": 64,
       "uniqueItems": true,
-      "items": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 500
-      }
+      "items": {"$ref": "#/$defs/reason"}
     }
   },
   "allOf": [
     {
-      "if": {
-        "properties": {
-          "decision": {
-            "const": "rollback"
-          }
-        },
-        "required": [
-          "decision"
-        ]
-      },
+      "if": {"properties": {"decision": {"const": "promote"}}, "required": ["decision"]},
       "then": {
         "properties": {
-          "promoted_decision_id": {
-            "$ref": "#/$defs/identifier"
-          }
+          "validation_result": {"const": "pass"},
+          "promoter": {"const": "sol"},
+          "promoted_decision_id": {"type": "null"},
+          "reasons": {"maxItems": 0}
         }
       }
     },
     {
       "if": {
-        "properties": {
-          "decision": {
-            "not": {
-              "const": "rollback"
-            }
-          }
-        },
-        "required": [
-          "decision"
-        ]
+        "properties": {"decision": {"const": "promote"}, "scope": {"const": "global"}},
+        "required": ["decision", "scope"]
       },
+      "then": {"properties": {"independent_reviewer": {"$ref": "#/$defs/identity"}}}
+    },
+    {
+      "if": {"properties": {"decision": {"const": "reject"}}, "required": ["decision"]},
       "then": {
         "properties": {
-          "promoted_decision_id": {
-            "type": "null"
-          }
+          "promoted_decision_id": {"type": "null"},
+          "reasons": {"minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"decision": {"const": "rollback"}}, "required": ["decision"]},
+      "then": {
+        "properties": {
+          "validation_result": {"const": "pass"},
+          "promoter": {"const": "sol"},
+          "independent_reviewer": {"type": "null"},
+          "promoted_decision_id": {"$ref": "#/$defs/identifier"},
+          "reasons": {"maxItems": 0}
         }
       }
     }
   ],
   "$defs": {
-    "identifier": {
+    "identifier": {"type": "string", "pattern": "^[a-z][a-z0-9._-]{0,127}$"},
+    "sha256Digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "gitObjectId": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "identity": {
       "type": "string",
-      "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000-\\u001f\\u007f]+$"
     },
-    "sha256Digest": {
+    "reason": {
       "type": "string",
-      "pattern": "^sha256:[0-9a-f]{64}$"
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000-\\u001f\\u007f]+$"
     }
   }
 }
