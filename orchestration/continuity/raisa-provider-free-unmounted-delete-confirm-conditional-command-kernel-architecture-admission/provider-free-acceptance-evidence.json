@@ -1,0 +1,22 @@
+{
+  "admitted_hostile_mutations": [],
+  "canonical_errors": [],
+  "decision_scenario_count": 45,
+  "effect_boundary": {
+    "application_model_imported": false,
+    "application_route_imported": false,
+    "command_executed": false,
+    "database_driver_imported": false,
+    "database_or_source_opened": false,
+    "mutation_audit_or_receipt_written": false,
+    "product_or_patient_data_used": false,
+    "provider_or_network_used": false,
+    "real_lock_acquired": false,
+    "watcher_or_event_consumed": false
+  },
+  "hostile_mutation_count": 56,
+  "runtime_or_command_authority_granted": false,
+  "schema_version": "raisa.delete_confirm_conditional_command_kernel.evidence.v1",
+  "status": "passed",
+  "transaction_schedule_count": 14
+}

@@ -1,0 +1,2563 @@
+{
+  "artifact_kind": "provider_free_unmounted_authored_synthetic_contract",
+  "cancelled_reason_codes": [
+    "PATIENT_CANCELLED",
+    "PATIENT_RESCHEDULED",
+    "PATIENT_UNWELL",
+    "PATIENT_TRANSPORT",
+    "PRACTITIONER_UNAVAILABLE",
+    "CLINIC_OPERATIONAL",
+    "CLINIC_RESCHEDULED",
+    "ADMIN_ERROR",
+    "DUPLICATE_BOOKING",
+    "OTHER"
+  ],
+  "canonical_ingress": "delete-confirm",
+  "canonical_operation_id": "confirmAppointmentDeleteProposal",
+  "decision_scenarios": [
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "committed",
+        "planned_effect": true,
+        "reason": "first_effect_planned",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-001-clean-commit-no-waiting-area",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "committed",
+        "planned_effect": true,
+        "reason": "first_effect_planned",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-002-clean-commit-with-waiting-area",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "assigned"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "structured_reason_required",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-003-reason-missing",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "missing",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "reason_allowlist_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-004-reason-allowlist-invalid",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "allowlist_invalid",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "status_family_reason_rejected",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-005-reason-status-family",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "status_family_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "legacy_reason_code_rejected",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-006-reason-legacy-unclassified",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "legacy_unclassified",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "cancellation_reason_too_long",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-007-optional-text-too-long",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "optional_text_too_long",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "missing",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "confirmation_required",
+        "planned_effect": false,
+        "reason": "separate_confirmation_missing",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-008-confirmation-missing",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "false",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "confirmation_required",
+        "planned_effect": false,
+        "reason": "separate_confirmation_false",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-009-confirmation-false",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "evidence_tampered",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "signed_evidence_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-010-confirmation-tampered",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "evidence_expired",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "signed_evidence_expired",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-011-confirmation-expired",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "evidence_binding_mismatch",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "signed_evidence_binding_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-012-confirmation-binding-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "warning_unacknowledged",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "confirmation_required",
+        "planned_effect": false,
+        "reason": "warning_acknowledgement_missing",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-013-warning-unacknowledged",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "stale_precondition",
+        "planned_effect": false,
+        "reason": "appointment_source_stale:stale_version",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-014-stale-version",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "stale_version",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "stale_precondition",
+        "planned_effect": false,
+        "reason": "appointment_source_stale:stale_status",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-015-stale-status",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "stale_status",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "stale_precondition",
+        "planned_effect": false,
+        "reason": "appointment_source_stale:stale_waiting_area",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-016-stale-waiting-area",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "stale_waiting_area",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "stale_precondition",
+        "planned_effect": false,
+        "reason": "appointment_source_stale:stale_existing_reason",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-017-stale-existing-reason",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "stale_existing_reason",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "stale_precondition",
+        "planned_effect": false,
+        "reason": "appointment_source_stale:stale_proposed_reason",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-018-stale-proposed-reason",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "stale_proposed_reason",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": false,
+      "authority_all_locks_held": true,
+      "authority_loss": "inactive_actor",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "authority_revoked",
+        "planned_effect": false,
+        "reason": "authority_revoked_after_target_lock:inactive_actor",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-019-inactive-actor",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": false,
+      "authority_loss": "revoked_role",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "authority_revoked",
+        "planned_effect": false,
+        "reason": "authority_revoked_all_locks_held:revoked_role",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-020-revoked-role",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": false,
+      "authority_loss": "revoked_capability",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "authority_revoked",
+        "planned_effect": false,
+        "reason": "authority_revoked_all_locks_held:revoked_capability",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-021-revoked-capability",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "cross_practice_target",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-022-cross-practice-target",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "cross_practice",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "validation_rejected",
+        "planned_effect": false,
+        "reason": "target_not_found",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-023-target-absent",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "missing",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": false,
+      "authority_all_locks_held": true,
+      "authority_loss": "waiting_revoked",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "authority_revoked",
+        "planned_effect": false,
+        "reason": "authority_revoked_after_target_lock:waiting_revoked",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-024-authority-before-replay",
+      "idempotency": "same_digest_completed",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "idempotent_replay",
+        "planned_effect": false,
+        "reason": "same_digest_completed",
+        "receipt_disclosed": true
+      },
+      "id": "ddc-025-same-key-same-digest-replay",
+      "idempotency": "same_digest_completed",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admitted",
+        "outcome": "idempotency_conflict",
+        "planned_effect": false,
+        "reason": "same_key_different_digest",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-026-same-key-different-digest",
+      "idempotency": "different_digest",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "idempotency_identity_missing",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-027-idempotency-identity-missing",
+      "idempotency": "missing",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "non_dedicated_ingress",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-028-raw-delete-rejected",
+      "idempotency": "absent",
+      "ingress": "raw_delete",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "non_dedicated_ingress",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-029-status-fallback-rejected",
+      "idempotency": "absent",
+      "ingress": "status_fallback",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "non_dedicated_ingress",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-030-event-evidence-rejected",
+      "idempotency": "absent",
+      "ingress": "event_evidence",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "non_dedicated_ingress",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-031-model-channel-confirmation-rejected",
+      "idempotency": "absent",
+      "ingress": "model_channel_confirmation",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "non_dedicated_ingress",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-032-raw-delete-target-missing",
+      "idempotency": "absent",
+      "ingress": "raw_delete",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "missing",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "lock_plan_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-033-reordered-locks",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "idempotency_record",
+        "appointment"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "lock_plan_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-034-schedule-domain-not-skipped",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "schedule_domain",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "exact",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "structure_invalid",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-035-structure-rejected",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "invalid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "session_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:session_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-036-binding-session-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "practice_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:practice_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-037-binding-practice-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "actor_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:actor_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-038-binding-actor-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "operation_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:operation_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-039-binding-operation-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "target_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:target_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-040-binding-target-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "state_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:state_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-041-binding-state-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "waiting_area_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:waiting_area_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-042-binding-waiting-area-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "existing_reason_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:existing_reason_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-043-binding-existing-reason-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "proposed_reason_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:proposed_reason_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-044-binding-proposed-reason-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    },
+    {
+      "authority_after_target_lock": true,
+      "authority_all_locks_held": true,
+      "authority_loss": "none",
+      "binding": "digest_mismatch",
+      "confirmation": "valid",
+      "expected": {
+        "admission": "admission_rejected",
+        "outcome": null,
+        "planned_effect": false,
+        "reason": "binding_mismatch:digest_mismatch",
+        "receipt_disclosed": false
+      },
+      "id": "ddc-045-binding-digest-mismatch",
+      "idempotency": "absent",
+      "ingress": "delete_confirm",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "reason": "current_cancelled_code",
+      "source": "current",
+      "structure": "valid",
+      "target": "exists",
+      "waiting_area": "none"
+    }
+  ],
+  "effect_boundary": {
+    "application_model_imported": false,
+    "application_route_imported": false,
+    "command_executed": false,
+    "database_driver_imported": false,
+    "database_or_source_opened": false,
+    "mutation_audit_or_receipt_written": false,
+    "product_or_patient_data_used": false,
+    "provider_or_network_used": false,
+    "real_lock_acquired": false,
+    "watcher_or_event_consumed": false
+  },
+  "fixed_digests": {
+    "command_digest": "52b4445467a24fac803b57852183ce44530b995dc1f453976b7a120acfd6e2f7",
+    "evidence_payload_hash": "958d58fdb60e8d032364c39f13b7e004d438d781d013a6790b4775bc5e21102a",
+    "proposal_digest": "9278443765e727d5fa1fd16abe26ad6d1afbc56b24b10cc7e914297c6e309dd8",
+    "receipt_digest": "64aff566fde72cbbca320b2fa2795caefa132be4e5b21462cc665517db584d1e"
+  },
+  "fixed_timestamps_utc": {
+    "committed_at": "2026-08-15T01:55:04Z",
+    "confirmed_at": "2026-08-15T01:55:04Z",
+    "expires_at": "2026-08-15T01:52:49Z",
+    "proposal_generated_at": "2026-08-15T01:50:49Z",
+    "signed_at": "2026-08-15T01:50:49Z"
+  },
+  "global_lock_order": [
+    "practice",
+    "schedule_domain",
+    "appointment",
+    "idempotency_record"
+  ],
+  "kernel_lock_plan": [
+    "practice",
+    "appointment",
+    "idempotency_record"
+  ],
+  "max_cancellation_reason_length": 500,
+  "next_gate": "provider-free-unmounted-delete-confirm-physical-representability-review",
+  "outcome_vocabulary": [
+    "committed",
+    "idempotent_replay",
+    "stale_precondition",
+    "authority_revoked",
+    "confirmation_required",
+    "validation_rejected",
+    "idempotency_conflict"
+  ],
+  "schema_version": "raisa.delete_confirm_conditional_command_kernel.v1",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-plan.md",
+      "sha256": "8c9551a08751c9596e131f88d17bf2503be555955b4ab36de7c163874f8067b3"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md",
+      "sha256": "8d8e3a388aeda71800f014535dccc63af8da6aaa945834add044dc2a49097a91"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-threat-model-delta.md",
+      "sha256": "011b107fa7e42ea7fa6e025b68f1c6fe7321f384af964c3cce2cfc201c5d0005"
+    },
+    {
+      "path": "docs/raisa-reception-one-cancellation-command-path-readiness-review-closeout.md",
+      "sha256": "0e65d8ac307613c8a53b652225cd6b3d310a393158ab2ff9ada14aad7da4000e"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-reception-one-cancellation-command-path-readiness-review-sol-acceptance.md",
+      "sha256": "66b9bad4d1ee6fe71afd0f56eb7f32eeedc6458b141b2585ef0c5656d0d1997c"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
+    }
+  ],
+  "transaction_schedules": [
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-001-clean-commit-no-waiting-area",
+      "injection": "none",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-002-clean-commit-with-waiting-area",
+      "injection": "none",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": true
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "artifacts": null,
+          "audit_count": 0,
+          "cancellation_reason": null,
+          "claim_state": "none",
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null,
+          "status_reason_code": null,
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "readback": {
+          "authorised": false,
+          "state_version": null,
+          "status": null
+        },
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-003-failure-before-locks",
+      "injection": "before_locks",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "artifacts": null,
+          "audit_count": 0,
+          "cancellation_reason": null,
+          "claim_state": "none",
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null,
+          "status_reason_code": null,
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "readback": {
+          "authorised": false,
+          "state_version": null,
+          "status": null
+        },
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-004-failure-after-mutation",
+      "injection": "after_staged_mutation",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "artifacts": null,
+          "audit_count": 0,
+          "cancellation_reason": null,
+          "claim_state": "none",
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null,
+          "status_reason_code": null,
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "readback": {
+          "authorised": false,
+          "state_version": null,
+          "status": null
+        },
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-005-failure-after-audit",
+      "injection": "after_staged_audit",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Booked",
+          "appointment_version": 7,
+          "artifacts": null,
+          "audit_count": 0,
+          "cancellation_reason": null,
+          "claim_state": "none",
+          "completed_receipt_count": 0,
+          "mutation_count": 0,
+          "receipt_id": null,
+          "status_reason_code": null,
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "transaction_rolled_back"
+        ],
+        "readback": {
+          "authorised": false,
+          "state_version": null,
+          "status": null
+        },
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-006-failure-after-receipt",
+      "injection": "after_staged_receipt",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": false,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-007-response-loss-after-commit",
+      "injection": "after_commit_before_response",
+      "kind": "single_first_effect",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed",
+          "idempotent_replay"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-008-retry-after-lost-response",
+      "injection": "none",
+      "kind": "retry_after_lost_response",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed",
+          "idempotent_replay"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-009-same-key-same-digest",
+      "injection": "none",
+      "kind": "concurrent_same_digest",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed",
+          "idempotency_conflict"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-010-same-key-different-digest",
+      "injection": "none",
+      "kind": "concurrent_different_digest",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed",
+          "stale_precondition"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-011-different-key-overlap",
+      "injection": "none",
+      "kind": "concurrent_different_key",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed",
+          "authority_revoked"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-012-authority-loss-while-waiting",
+      "injection": "none",
+      "kind": "concurrent_authority_loss",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 2,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "readback": {
+          "authorised": true,
+          "state_version": 8,
+          "status": "Cancelled"
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-013-readback-current-authority",
+      "injection": "none",
+      "kind": "post_commit_readback",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "current_authority",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    },
+    {
+      "expected": {
+        "durable_state": {
+          "appointment_status": "Cancelled",
+          "appointment_version": 8,
+          "artifacts": {
+            "appointment": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "state_version": 8,
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "audit": {
+              "action": "delete",
+              "audit_id": "syn-audit-delete-confirm-001",
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            },
+            "receipt": {
+              "cancellation_reason": "Patient requested cancellation due to a schedule change",
+              "receipt_id": "syn-receipt-delete-confirm-001",
+              "status": "Cancelled",
+              "status_reason_code": "PATIENT_CANCELLED",
+              "waiting_area_id": null
+            }
+          },
+          "audit_count": 1,
+          "cancellation_reason": "Patient requested cancellation due to a schedule change",
+          "claim_state": "completed",
+          "completed_receipt_count": 1,
+          "mutation_count": 1,
+          "receipt_id": "syn-receipt-delete-confirm-001",
+          "status_reason_code": "PATIENT_CANCELLED",
+          "waiting_area_id": null
+        },
+        "participant_results": [
+          "committed"
+        ],
+        "readback": {
+          "authorised": false,
+          "state_version": null,
+          "status": null
+        },
+        "response_delivered": true,
+        "trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ]
+      },
+      "id": "ddt-014-readback-denied-after-revocation",
+      "injection": "none",
+      "kind": "post_commit_readback",
+      "lock_plan": [
+        "practice",
+        "appointment",
+        "idempotency_record"
+      ],
+      "participant_count": 1,
+      "readback_policy": "later_revoked",
+      "trace": [
+        "lock:practice",
+        "lock:appointment",
+        "check:authority_after_target_lock",
+        "lock:idempotency_record",
+        "check:authority_all_locks_held",
+        "classify:bindings",
+        "inspect:idempotency",
+        "validate:confirmation_and_evidence",
+        "recheck:appointment_state",
+        "validate:reason_policy",
+        "stage:appointment_mutation",
+        "stage:delete_audit",
+        "stage:completed_receipt",
+        "commit:atomic",
+        "serialize:response",
+        "readback:separate_authorisation"
+      ],
+      "waiting_area_present": false
+    }
+  ],
+  "unused_lock_rule": "skip_schedule_domain_without_reordering"
+}
