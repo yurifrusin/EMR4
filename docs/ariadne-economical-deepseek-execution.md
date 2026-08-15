@@ -1,5 +1,9 @@
 # Ariadne Economical DeepSeek Execution
 
+Date: 2026-08-15
+
+Timestamp: 2026-08-15T15:57:19+10:00 (Australia/Brisbane)
+
 Status: active EMR4 pilot from 2026-07-13.
 
 Sol remains the protected supervisor, routine sprint planner, and integration
@@ -7,7 +11,7 @@ authority. DeepSeek V4 Pro is reserved for compact high-leverage consultation
 at architecture/programme boundaries, material allocation complexity, or
 repeated failure; it is not the default routine coordinator. Bounded
 implementation, tests, review, and handover work prefer DeepSeek V4 Flash.
-Gemini 3.6 Flash/high through Antigravity is the preferred independent verifier,
+Gemini 3.7 Flash/high through Antigravity is the preferred independent verifier,
 especially for fresh-context cross-checks, adversarial review, and independent
 test design. Workers are allocated
 only where there is a distinct bounded surface; neither provider has a mandatory
@@ -44,11 +48,11 @@ compact structured receipts are the worker completion source of truth.
 Neither DeepSeek transport may integrate protected master, push, deploy, change
 scope, or grant itself authority. Sol authorizes the exact tranche manifest.
 
-Gemini 3.6 Flash/high dispatch uses `scripts/ariadne_antigravity.py`. The wrapper
+Gemini 3.7 Flash/high dispatch uses `scripts/ariadne_antigravity.py`. The wrapper
 refuses protected/detached branches and dirty or non-root worktrees, always
 passes `--new-project` and the exact worktree through `--add-dir`, embeds the
 root/branch in the packet, and verifies the root/branch again after execution.
-It passes the stable `gemini-3.6-flash-high` slug plus explicit `--effort high`;
+It passes the advertised `gemini-3.7-flash-high` slug plus explicit `--effort high`;
 the CLI must fail rather than silently substitute another model. Verification
 runs use plan mode and fail if the candidate HEAD or worktree changes or if the
 result does not contain exactly one schema-constrained decision envelope. The
@@ -58,6 +62,11 @@ OS sandboxing is off by default because the S16-S18 Windows runs that used
 explicit option when hard OS isolation is worth interactive Windows approval.
 Without it, isolation is Git/worktree plus post-run verification, not a hard
 filesystem sandbox.
+
+Yuri directly selected Gemini 3.7 Flash/high on 2026-08-15 without a dedicated
+trial gate. Ordinary exact-candidate veto work is its proving surface. The 3.6
+slugs remain accepted by the launcher only for historical compatibility and
+must never be selected as a silent fallback.
 
 ## Disposable Worker Launch Invariants
 

@@ -104,13 +104,13 @@ workers:
     quota_class: low_cost_api
     capabilities: [conductor, architect, test_engineer, code_reviewer, docs_handover_auditor]
     cost_tier: 1
-  - resource_id: antigravity-gemini-flash-3-6-high-verifier
+  - resource_id: antigravity-gemini-flash-3-7-high-verifier
     provider: antigravity
     account_id: antigravity-subscription
     access_mode: subscription
     transport: cli_print
     transport_quirks: [fresh_project_required, exact_worktree_add_dir_required, protected_branch_refusal, plan_mode_required, clean_unchanged_postcondition_required, os_sandbox_optional_may_prompt_for_windows_elevation, cli_artifact_required, quota_is_observed_separately]
-    default_model: gemini-3.6-flash-high
+    default_model: gemini-3.7-flash-high
     default_reasoning: high
     max_instances: 1
     quota_scope: account_window

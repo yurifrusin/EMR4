@@ -67,7 +67,7 @@ def test_three_lane_models_reasoning_and_ownership_are_exact() -> None:
     assert lanes["deepseek_flash"]["transport"] == "claude_code_bare"
     assert "acceptance" in lanes["deepseek_flash"]["may_not"]
 
-    assert lanes["gemini_flash"]["model"] == "gemini-3.6-flash-high"
+    assert lanes["gemini_flash"]["model"] == "gemini-3.7-flash-high"
     assert lanes["gemini_flash"]["reasoning"] == "high"
     assert lanes["gemini_flash"]["transport"] == "antigravity_fresh_project"
     assert "implementation" in lanes["gemini_flash"]["may_not"]
@@ -97,8 +97,8 @@ def test_lane_policy_is_cross_referenced_and_dispatch_is_optional() -> None:
     workers = {item["resource_id"]: item for item in pool["workers"]}
     assert workers["openai-primary-orchestrator"]["default_reasoning"] == "high"
     assert workers["deepseek-flash-workers"]["default_reasoning"] == "high"
-    gemini = workers["antigravity-gemini-flash-3-6-high-verifier"]
-    assert gemini["default_model"] == "gemini-3.6-flash-high"
+    gemini = workers["antigravity-gemini-flash-3-7-high-verifier"]
+    assert gemini["default_model"] == "gemini-3.7-flash-high"
     assert gemini["default_reasoning"] == "high"
     assert "implementer" not in gemini["capabilities"]
 

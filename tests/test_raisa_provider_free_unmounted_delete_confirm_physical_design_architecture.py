@@ -348,10 +348,10 @@ def test_worker_allocation_keeps_deepseek_mechanical_and_gemini_veto_only(contra
     assert allocation["deepseek_authority"]["acceptance"] is False
     assert allocation["deepseek_authority"]["integration"] is False
     assert allocation["deepseek_authority"]["protected_ref"] is False
-    assert allocation["gemini_verifier"] == "gemini_3_6_flash_high"
+    assert allocation["gemini_verifier"] == "gemini_3_7_flash_high"
     assert allocation["gemini_role"] == "fresh_independent_veto_exact_candidate"
     assert allocation["gemini_authority"]["acceptance"] is False
-    assert "not_yet_admitted" in allocation["gemini_3_7_flash_high"]
+    assert "historical_compatibility_only" in allocation["gemini_3_6_flash_high"]
 
 
 def test_all_hostile_mutations_fail_closed(built_evidence):

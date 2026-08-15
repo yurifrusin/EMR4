@@ -47,7 +47,7 @@ roles:
     may_not: [author_acceptance, read_red_artifact, integrate, commit_master, push_protected_refs]
   red:
     required_for_tier: dual_review
-    preferred_resource_id: antigravity-gemini-flash-3-6-high-verifier
+    preferred_resource_id: antigravity-gemini-flash-3-7-high-verifier
     owns: fresh_context_adversarial_review_and_exploit_reproduction
     may_not: [read_blue_artifact, inherit_blue_acceptance_framing, implement_unrequested_scope, integrate, commit_master, push_protected_refs]
   purple:

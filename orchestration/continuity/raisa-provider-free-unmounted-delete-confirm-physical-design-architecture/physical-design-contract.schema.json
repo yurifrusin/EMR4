@@ -756,7 +756,7 @@
         "gemini_verifier",
         "gemini_role",
         "gemini_authority",
-        "gemini_3_7_flash_high",
+        "gemini_3_6_flash_high",
         "native_subagents"
       ],
       "properties": {
@@ -769,10 +769,10 @@
         },
         "deepseek_role": {"const": "bounded_mechanical_implementation_only"},
         "deepseek_authority": {"$ref": "#/$defs/deepseekAuthority"},
-        "gemini_verifier": {"const": "gemini_3_6_flash_high"},
+        "gemini_verifier": {"const": "gemini_3_7_flash_high"},
         "gemini_role": {"const": "fresh_independent_veto_exact_candidate"},
         "gemini_authority": {"$ref": "#/$defs/geminiAuthority"},
-        "gemini_3_7_flash_high": {"const": "not_yet_admitted_no_silent_substitution"},
+        "gemini_3_6_flash_high": {"const": "historical_compatibility_only_no_silent_fallback"},
         "native_subagents": {"const": "not_useful_for_same_closed_mechanical_artifact_set"}
       }
     },

@@ -310,9 +310,10 @@ validator, minimized authored-synthetic evidence and focused tests. They must:
   provider-free validator, evidence and focused tests after this plan is
   committed. It receives no semantic, acceptance, integration or protected-ref
   authority.
-- Gemini 3.6 Flash/high remains the frozen fresh independent veto reviewer for
-  the exact candidate. Gemini 3.7 Flash/high is CLI-advertised but is not yet an
-  admitted allocation and may not be substituted silently.
+- On 2026-08-15 Yuri directly replaced the verifier allocation with Gemini 3.7
+  Flash/high. It owns the fresh independent veto for the exact candidate without
+  a separate trial gate. Gemini 3.6 remains historical compatibility only and
+  may not be selected as a silent fallback.
 - Native subagents are not useful for the same closed mechanical artifact set.
 
 ## Acceptance

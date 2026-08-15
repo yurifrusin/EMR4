@@ -26,7 +26,7 @@
     "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd",
     "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
   },
-  "contract_fingerprint": "sha256:b4ba93f1b1a03fa91c8b1bfe66e64f78374a025d75cf37877deede0b02de0cf5",
+  "contract_fingerprint": "sha256:5d0512a64ecf9c907962b9a86a0cc56023c75363786ba52be9702b63c7018fa5",
   "architecture_facts": {
     "authority_fence_table": "users",
     "generation_owner": "postgresql",

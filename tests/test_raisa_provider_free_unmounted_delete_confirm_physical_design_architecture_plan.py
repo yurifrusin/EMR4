@@ -44,8 +44,8 @@ def test_plan_preserves_closed_surfaces_and_exact_review_allocation() -> None:
         "GraphQL remains read-only",
         "Events remain non-authoritative acceleration hints",
         "import no application, migration, database, network or provider module",
-        "Gemini 3.6 Flash/high remains the frozen",
-        "Gemini 3.7 Flash/high is CLI-advertised",
+        "directly replaced the verifier allocation with Gemini 3.7",
+        "Gemini 3.6 remains historical compatibility only",
         "never stage `docs/branding/`",
         "explicit-path",
     )

@@ -38,14 +38,14 @@ def test_command_always_binds_a_fresh_project_and_exact_worktree():
     command = build_command(
         packet="Review the change.",
         state=_state(),
-        model="gemini-3.6-flash-high",
+        model="gemini-3.7-flash-high",
         os_sandbox=False,
     )
 
     assert command[:2] == ["agy", "-p"]
     assert "--new-project" in command
     assert command[command.index("--add-dir") + 1] == "C:\\worktrees\\bounded"
-    assert command[command.index("--model") + 1] == "gemini-3.6-flash-high"
+    assert command[command.index("--model") + 1] == "gemini-3.7-flash-high"
     assert command[command.index("--effort") + 1] == "high"
     assert command[command.index("--mode") + 1] == "plan"
     assert command[command.index("--output-format") + 1] == "json"
@@ -132,11 +132,11 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
         cwd=tmp_path,
         output_path=output,
         orchestrator_receipt_path=orchestrator_receipt,
-        model="gemini-3.6-flash-high",
+        model="gemini-3.7-flash-high",
         os_sandbox=False,
     )
 
-    assert receipt["model"] == "gemini-3.6-flash-high"
+    assert receipt["model"] == "gemini-3.7-flash-high"
     assert receipt["reasoning_effort"] == "high"
     assert receipt["decision"] == "pass"
     assert receipt["decision_contract"] == "schema_constrained_json_v1"

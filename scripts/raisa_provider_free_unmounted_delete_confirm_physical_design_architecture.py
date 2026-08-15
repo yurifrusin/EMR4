@@ -478,7 +478,7 @@ EXPECTED_WORKER_ALLOCATION = {
         "integration": False,
         "protected_ref": False,
     },
-    "gemini_verifier": "gemini_3_6_flash_high",
+    "gemini_verifier": "gemini_3_7_flash_high",
     "gemini_role": "fresh_independent_veto_exact_candidate",
     "gemini_authority": {
         "semantic_choice": False,
@@ -486,7 +486,7 @@ EXPECTED_WORKER_ALLOCATION = {
         "integration": False,
         "protected_ref": False,
     },
-    "gemini_3_7_flash_high": "not_yet_admitted_no_silent_substitution",
+    "gemini_3_6_flash_high": "historical_compatibility_only_no_silent_fallback",
     "native_subagents": "not_useful_for_same_closed_mechanical_artifact_set",
 }
 
@@ -671,7 +671,7 @@ def hostile_mutations() -> list[tuple[str, Mutation]]:
         ("non_authority_channel", _set(("non_authority_surfaces", "channel_output"), "command_authority")),
         ("non_authority_event", _set(("non_authority_surfaces", "events"), "command_authority")),
         ("non_authority_graphql", _set(("non_authority_surfaces", "graphql"), "mutation")),
-        ("gemini_substitution", _set(("worker_allocation", "gemini_verifier"), "gemini_3_7_flash_high")),
+        ("gemini_silent_fallback", _set(("worker_allocation", "gemini_verifier"), "gemini_3_6_flash_high")),
         ("deepseek_acceptance", _set(("worker_allocation", "deepseek_authority", "acceptance"), True)),
         ("next_runtime", _set(("next_candidate",), "mounted_runtime")),
     ]

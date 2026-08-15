@@ -107,7 +107,7 @@ economical_execution:
   preferred_routine_planner: openai-primary-orchestrator
   deepseek_pro_planning_role: compact_high_leverage_consultant_not_default_coordinator
   preferred_coding_worker: deepseek-flash-workers
-  preferred_workers: [deepseek-flash-workers, antigravity-gemini-flash-3-6-high-verifier]
+  preferred_workers: [deepseek-flash-workers, antigravity-gemini-flash-3-7-high-verifier]
   deepseek_flash_preferred_for: [stable_bounded_implementation_contract, mechanical_test_generation, deterministic_fixture_regeneration, contained_code_repair]
   sol_retained_surfaces: [cross_sprint_taxonomy, frozen_selection_semantics, acceptance_interpretation, authority_allocation, protected_evidence_policy, historical_evidence_reconciliation]
   rejected_flash_candidate:

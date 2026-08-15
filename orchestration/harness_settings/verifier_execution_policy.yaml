@@ -28,8 +28,8 @@ deterministic_gate:
     candidate_worktree: clean
 external_verifier:
   mode: risk_triggered_optional
-  preferred_resource_id: antigravity-gemini-flash-3-6-high-verifier
-  model: gemini-3.6-flash-high
+  preferred_resource_id: antigravity-gemini-flash-3-7-high-verifier
+  model: gemini-3.7-flash-high
   reasoning: high
   project_context: fresh
   worktree_access: exact_bound_read_only
@@ -96,8 +96,8 @@ lane_profile:
       - integration
       - protected_refs
   gemini_flash:
-    resource_id: antigravity-gemini-flash-3-6-high-verifier
-    model: gemini-3.6-flash-high
+    resource_id: antigravity-gemini-flash-3-7-high-verifier
+    model: gemini-3.7-flash-high
     reasoning: high
     transport: antigravity_fresh_project
     owns:

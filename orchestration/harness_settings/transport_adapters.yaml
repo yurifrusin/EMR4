@@ -24,7 +24,7 @@ adapters:
     shell_probe_applicable: true
     authority_boundary: transport_only_no_integration_authority
   - adapter_id: antigravity_cli_print
-    resource_ids: [antigravity-gemini-flash-3-6-high-verifier]
+    resource_ids: [antigravity-gemini-flash-3-7-high-verifier]
     platform: antigravity
     invocation: antigravity_new_project_bound_readonly_worktree
     prompt_entrypoint: python scripts/ariadne_antigravity.py

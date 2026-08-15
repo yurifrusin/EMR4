@@ -19,7 +19,7 @@ from scripts.ariadne_evidence_gate import (
 )
 
 
-DEFAULT_MODEL = "gemini-3.6-flash-high"
+DEFAULT_MODEL = "gemini-3.7-flash-high"
 MODEL_EFFORTS = {
     "gemini-3.5-flash-low": "low",
     "gemini-3.5-flash-medium": "medium",
@@ -27,6 +27,9 @@ MODEL_EFFORTS = {
     "gemini-3.6-flash-low": "low",
     "gemini-3.6-flash-medium": "medium",
     "gemini-3.6-flash-high": "high",
+    "gemini-3.7-flash-low": "low",
+    "gemini-3.7-flash-medium": "medium",
+    "gemini-3.7-flash-high": "high",
 }
 LEGACY_MODEL_ALIASES = {
     "Gemini 3.5 Flash (Low)": "gemini-3.5-flash-low",

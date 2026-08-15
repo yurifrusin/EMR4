@@ -36,7 +36,7 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
         "deepseek-pro-conductor-fallback",
         "deepseek-pro-routine-coordinator",
         "openai-terra-tranche-executor", "openai-luna-mechanical-coordinator",
-        "antigravity-gemini-flash-3-6-high-verifier", "deepseek-flash-verifier", "deepseek-flash-workers",
+        "antigravity-gemini-flash-3-7-high-verifier", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
     assert any(worker.transport.value == "cli_headless" for worker in workers)
     assert Role.CONDUCTOR in next(worker.capabilities for worker in workers if worker.resource_id == "claude-fable-conductor")
@@ -50,7 +50,7 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
     gemini = next(
         worker
         for worker in workers
-        if worker.resource_id == "antigravity-gemini-flash-3-6-high-verifier"
+        if worker.resource_id == "antigravity-gemini-flash-3-7-high-verifier"
     )
     assert Role.IMPLEMENTER not in coordinator.capabilities
     assert Role.IMPLEMENTER in flash.capabilities
@@ -85,7 +85,7 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
 
     assert policy["schema_version"] == "ariadne.sprint_worker_policy.v1"
     assert policy["worker_mix"]["antigravity"]["platform"] == "antigravity"
-    assert policy["worker_mix"]["antigravity"]["default_model"] == "gemini-3.6-flash-high"
+    assert policy["worker_mix"]["antigravity"]["default_model"] == "gemini-3.7-flash-high"
     assert policy["worker_mix"]["antigravity"]["default_reasoning"] == "high"
     assert policy["worker_mix"]["antigravity"]["maximum_instances"] == 1
     assert policy["worker_mix"]["deepseek_flash"]["minimum_instances"] == 0
@@ -94,7 +94,7 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert policy["workspace_preflight"]["failure_posture"] == "revision_required_before_packet_dispatch"
     assert "workspace_receipts" in policy["required_plan_fields"]
 
-    verifier_id = "antigravity-gemini-flash-3-6-high-verifier"
+    verifier_id = "antigravity-gemini-flash-3-7-high-verifier"
     adapters = _yaml("transport_adapters.yaml")
     antigravity = next(
         item

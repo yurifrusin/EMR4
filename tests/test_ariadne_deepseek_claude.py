@@ -149,7 +149,7 @@ def test_economical_pool_keeps_gemini_as_a_peer_worker():
 
     assert economical["preferred_workers"] == [
         "deepseek-flash-workers",
-        "antigravity-gemini-flash-3-6-high-verifier",
+        "antigravity-gemini-flash-3-7-high-verifier",
     ]
     assert economical["worker_allocation_rule"].startswith(
         "allocate_only_distinct_bounded_surfaces"
