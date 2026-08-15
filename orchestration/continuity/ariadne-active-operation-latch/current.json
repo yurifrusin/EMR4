@@ -15,7 +15,7 @@
       "review": 0,
       "verification": 0
     },
-    "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+      "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
