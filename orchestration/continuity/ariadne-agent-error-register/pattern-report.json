@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "d2341bf375f20ee8d982a37c9356b5bdda45da5af4d76edcd1c00dd725adc8e9",
+  "canonical_register_sha256": "712a71dd559a3e725b034dfadeabe4dc408f052da742916c0e294a4667e450e7",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 202,
+      "canonical_unchanged": 203,
       "untrusted_partial_worktree": 29
     },
     "by_category": {
-      "command_scope_violation": 48,
+      "command_scope_violation": 49,
       "evidence_misreport": 43,
       "harness_failure": 37,
       "output_contract_violation": 95,
@@ -17,13 +17,13 @@
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 227,
+      "agent_behavior": 228,
       "harness": 37,
       "repository": 55,
       "transport": 10
     },
     "by_process_severity": {
-      "low": 133,
+      "low": 134,
       "material": 100,
       "moderate": 96
     },
@@ -39,7 +39,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 169,
+      "codex-primary-orchestrator::orchestrator": 170,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -89,12 +89,12 @@
     "by_role": {
       "implementer": 24,
       "integration_reviewer": 2,
-      "orchestrator": 251,
+      "orchestrator": 252,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 329,
+  "incident_count": 330,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -154,16 +154,18 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0314",
-        "AER-0321"
+        "AER-0321",
+        "AER-0330"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+        "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
         "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value."
       ],
       "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
@@ -838,7 +840,7 @@
       ]
     }
   ],
-  "register_revision": 290,
+  "register_revision": 291,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 290
+    assert register["register_revision"] == 291
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 330)
+        f"AER-{index:04d}" for index in range(1, 331)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 227
+    assert len(agent_incidents) == 228
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 329
+    assert report["incident_count"] == 330
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3116,6 +3116,28 @@ def test_aer_0275_records_the_stale_behavior_parent_test_correction() -> None:
     assert "three stale expected binding tuples" in incident["correction"]["action"]
 
 
+def test_aer_0330_records_prime_harness_preplanning_contract_recovery() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0330"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "dispatch"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["process_severity"] == "low"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert incident["recurrence_signature"] == (
+        "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
+    )
+    assert "parallelism_assessment_operation_mismatch" in incident["detection_method"]
+    assert "required_independence" in incident["correction"]["action"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
 def test_aer_0276_reconciles_the_verifier_timeout_value_misreport() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0276"]
 
@@ -3360,17 +3382,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 290
-    assert report["incident_count"] == 329
+    assert report["register_revision"] == 291
+    assert report["incident_count"] == 330
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 227,
+        "agent_behavior": 228,
         "harness": 37,
         "repository": 55,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 48,
+        "command_scope_violation": 49,
         "evidence_misreport": 43,
         "harness_failure": 37,
         "output_contract_violation": 95,
@@ -3381,7 +3403,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 202,
+        "canonical_unchanged": 203,
         "untrusted_partial_worktree": 29,
     }
     receipt_event_recurrence = next(
@@ -3439,14 +3461,15 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
             ),
-            "incident_count": 2,
-            "incident_ids": ["AER-0314", "AER-0321"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0314", "AER-0321", "AER-0330"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
                 "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+                "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
                 "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value.",
             ],
         },

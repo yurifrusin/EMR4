@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 290,
+  "register_revision": 291,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13247,6 +13247,48 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-source-head-draft-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-290.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0330",
+      "attempt_id": "ariadne-prime-derived-harness-adaptations-preplanning-001",
+      "observed_on": "2026-08-15",
+      "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A preplanning parallelism assessment must use the exact live active-operation id and only the configured expected_leverage vocabulary before any native or external worker dispatch.",
+      "observed_error": "The first Ariadne Prime-derived harness-adaptation preplanning state used a parallelism-assessment operation id that did not match the exact live latch and invented expected_leverage values outside the configured vocabulary. Deterministic preflight returned revision_required before any native or external worker dispatch.",
+      "detection_method": "The repository-local orchestrator preflight emitted parallelism_assessment_operation_mismatch together with invalid expected_leverage reasons. Sol corrected the state before dispatch and the fresh receipt passed with exact operation-id alignment and configured positive and required_independence values.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-incident.json",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-291.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Align the parallelism assessment to the exact live operation id, replace the invented leverage values with configured positive for the DeepSeek and native lanes and required_independence for Gemini, then generate and read back a fresh passing receipt before dispatch.",
+        "prevention_control": "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-incident.json",
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-291.md"
         ]
       },
       "status": "corrected"

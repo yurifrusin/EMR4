@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
-  "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
-  "objective": "Freeze the smallest declarative additive practice-authority fence, delete-confirm private receipt, attributable audit correlation, exact transaction lock/check order, reason and appointment-version semantics, and separately authorised fresh readback without editing or executing application, database or product source.",
-  "status": "paused",
-  "source_head": "3fd22ba69f96c0378538ea27c6bea444fcb81936",
-  "authority_source": "Accepted delete-confirm physical-design architecture at reviewed source 3fd22ba69f96c0378538ea27c6bea444fcb81936, Continuity 298 / Compass 280, and Yuri's explicit post-closeout pause",
+  "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+  "active_tranche": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
+  "objective": "Add the smallest harness-only deterministic contracts for stable generation-scoped command identity, completed replay versus explicit uncertainty, generation-sequence recovery, unchanged failed-gate suppression, and quarantined evidence-gated harness refinement without adding a daemon, executable skill, product runtime or automatic self-modification.",
+  "status": "in_progress",
+  "source_head": "ac638c45a3a1916162424cd42518764af39df7f7",
+  "authority_source": "Yuri's 2026-08-15 explicit instruction to implement worthwhile Prime Agent adaptations in the Ariadne harness and then continue the accepted product tranche sequence",
   "checkpoint": {
-    "completed_stage": "The physical-design architecture passed twenty source hashes, 166 hostile mutations, the canonical 196-test fast profile and one fresh Gemini 3.7 Flash/high exact-candidate veto; Sol accepted it at Continuity 298 / Compass 280.",
-    "next_executable_stage": "Keep the next delete-confirm scaffold unopened; complete Yuri's read-only PrimeIntellect prime-agent assessment, then await an explicit product-development resume.",
+    "completed_stage": "The Prime Agent primary-source assessment identified continuity journaling and quarantined refinement promotion as the useful harness-only adaptations; the fresh five-source preplanning receipt passes at task HEAD ac638c45a3a1916162424cd42518764af39df7f7.",
+    "next_executable_stage": "Complete the read-only overlap audit, freeze one narrow provider-free harness plan, implement and verify it, close it out, then rehydrate and begin the accepted delete-confirm schema-and-transaction scaffold.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -24,26 +24,28 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_closeout_and_explicit_post_closeout_pause"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_synthetic_unmounted_architecture_only",
-    "exact_frozen_source_allowlist_only",
-    "no_application_model_migration_service_route_openapi_or_graphql_edit_or_import",
+    "provider_free_authored_synthetic_ariadne_harness_only",
+    "no_prime_agent_installation_execution_or_runtime_dependency",
+    "no_daemon_worker_kernel_shell_process_or_network_runtime",
+    "no_automatic_command_execution_or_blind_replay",
+    "no_automatic_harness_refinement_application_or_executable_skill_creation",
+    "no_application_model_migration_service_route_openapi_graphql_or_diary_edit",
     "no_executable_ddl_database_sql_real_transaction_or_lock",
-    "no_physical_scaffold_or_runtime_composition_implementation",
     "no_source_watcher_event_provider_or_product_runtime",
     "no_patient_product_clinical_historical_diary_or_protected_data",
     "no_command_write_or_executable_tool_against_product_or_database",
-    "dedicated_delete_confirmation_semantics_only",
-    "current_authority_locked_truth_idempotency_audit_receipt_and_readback_remain_backend_owned",
+    "operation_journal_and_refinement_promotion_are_development_workflow_evidence_only",
+    "existing_five_source_receipts_active_latch_and_acceptance_authority_remain_controlling",
     "no_external_adapter_identity_delegation_or_channel_runtime",
     "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
     "docs_branding_and_unrelated_untracked_preserved",

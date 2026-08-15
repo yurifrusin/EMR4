@@ -1,0 +1,89 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "completed_stage": "The physical-design architecture passed twenty source hashes, 166 hostile mutations, the canonical 196-test fast profile and one fresh Gemini 3.7 Flash/high exact-candidate veto; Sol accepted it at Continuity 298 / Compass 280.",
+    "next_executable_stage": "Keep the next delete-confirm scaffold unopened; complete Yuri's read-only PrimeIntellect prime-agent assessment, then await an explicit product-development resume.",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "resume_after_compaction": false,
+    "source_head": "3fd22ba69f96c0378538ea27c6bea444fcb81936",
+    "status": "paused",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "A closed deterministic journal/refinement schema, validator and hostile tests can form a separable mechanical packet once Sol freezes semantics and source scope.",
+        "work_packages": [
+          "bounded implementation and hostile deterministic tests after plan commit"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Generation, uncertain-result and promotion semantics affect Ariadne workflow authority and justify a fresh exact-candidate veto after deterministic gates pass.",
+        "work_packages": [
+          "fresh Gemini 3.7 Flash/high independent veto"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "A bounded read-only overlap audit can run independently while Sol maps the active harness and avoids duplicating existing controls.",
+        "work_packages": [
+          "read-only existing-control overlap and smallest-gap audit"
+        ]
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "parallel_work_packages": [
+      "native read-only overlap audit alongside Sol source mapping",
+      "later DeepSeek mechanical implementation while Sol owns acceptance and integration"
+    ],
+    "reassessment_triggers": [
+      "overlap audit finds the proposed mechanism already exists",
+      "plan semantics change materially",
+      "deterministic failure exposes an authority ambiguity",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes authority and promotion semantics before implementation dispatch",
+      "deterministic admission precedes Gemini review",
+      "product delete-confirm scaffold begins only after harness tranche closeout",
+      "all PostgreSQL-loading product tests remain serial",
+      "explicit-path staging and task-branch-only publication"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_ariadne_continuity_journal_and_refinement_promotion_safeguard_then_resume_the_delete_confirm_scaffold",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted physical-design plan, threat-model delta, closeout and Sol acceptance were reread. Yuri has now explicitly resumed work and authorised useful Prime Agent adaptations in the Ariadne development harness before continuing to the provider-free unmounted delete-confirm schema-and-transaction scaffold. The adaptation remains harness-only and creates no Raisa runtime authority.",
+    "current_authority_allocation": "Sol remains conductor, architecture and acceptance owner. DeepSeek V4 Flash/high is eligible only for a later bounded separable implementation/test packet, Gemini 3.7 Flash/high is reserved for a fresh independent veto after deterministic admission, and a native subagent may perform a bounded read-only overlap audit after this receipt. No worker receives acceptance, integration, baton or protected-ref authority.",
+    "git_refs_and_worktree": "After fetch, task HEAD and origin task are exactly ac638c45a3a1916162424cd42518764af39df7f7 with zero tracked changes and 629 preserved untracked files. Local/origin master and handoff/current are all exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely at task HEAD ac638c45a3a1916162424cd42518764af39df7f7. It records Continuity 298 / Compass 280, the accepted delete-confirm physical design, the paused latch, the live Gemini 3.7 allocation and the unopened schema-and-transaction scaffold.",
+    "protected_evidence_boundaries": "Protected holdouts remain sealed. No patient, clinical, product, historical-diary or protected data; no product provider, ADC, credential/IAM, database, product command, deployment, production, release, Pages or protected-ref movement is opened. Prime Agent will not be installed or executed. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

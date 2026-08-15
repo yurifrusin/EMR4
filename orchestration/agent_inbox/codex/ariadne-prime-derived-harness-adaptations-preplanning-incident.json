@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0330",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T17:38:04+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+  "attempt_id": "ariadne-prime-derived-harness-adaptations-preplanning-001",
+  "provider_or_model_calls": 0,
+  "candidate_head": "ac638c45a3a1916162424cd42518764af39df7f7",
+  "rejected_reasons": [
+    "parallelism_assessment_operation_mismatch",
+    "parallelism_expected_leverage_vocabulary_mismatch"
+  ],
+  "detection": "The first repository-local preplanning receipt returned revision_required before any worker dispatch because the parallelism assessment did not match the live operation id and used invented expected_leverage values.",
+  "correction": "The runtime state was aligned to the exact live operation id, DeepSeek and native-subagent leverage was set to positive, Gemini leverage was set to required_independence, and a fresh repository-local receipt passed before dispatch.",
+  "passing_receipt": "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-preplanning-receipt.json",
+  "candidate_state": "canonical_unchanged",
+  "external_effects": false,
+  "status": "corrected_before_dispatch"
+}
