@@ -1,0 +1,54 @@
+{
+  "schema_version": "ariadne.risk_weighted_baseline.v1",
+  "tranche_id": "ariadne-risk-weighted-workflow-reform",
+  "captured_before_first_implementation_edit": true,
+  "source_head": "1e63ae754c74e2282b0f5938f1dbca160743096c",
+  "source_tree": "e851262175da9df518442f2ae6818bb7acb5663c",
+  "timestamp": "2026-08-16T08:55:30+10:00",
+  "timezone": "Australia/Brisbane",
+  "profile_id": "canonical_fast",
+  "command": [
+    "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+    "scripts/verify_repository.py",
+    "--profile",
+    "fast"
+  ],
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-baseline-1e63ae75",
+  "worktree_clean_after": true,
+  "toolchain": {
+    "python": "Python 3.14.6",
+    "node": "v24.18.0",
+    "verify_repository_sha256": "f491dd7ac2222de4a9493ba43a6144726f85a586d8398947a83a7c0f9c8d4c83",
+    "python_source_state_sha256": "56e909a248efb2eda3f6c922ee6da4950309b43cb803da05fd10fd2263bf4b09"
+  },
+  "result": "passed",
+  "checks": [
+    {
+      "id": "ruff_ordinary_product_infrastructure_baseline",
+      "result": "passed"
+    },
+    {
+      "id": "maintained_python_source_state_compilation",
+      "result": "passed",
+      "source_file_count": 212,
+      "verification_file_count": 35
+    },
+    {
+      "id": "focused_api_spine_handover_receipt_maintenance_tests",
+      "result": "passed",
+      "passed_tests": 196,
+      "warnings": 2
+    },
+    {
+      "id": "diary_javascript_syntax",
+      "result": "passed"
+    },
+    {
+      "id": "git_whitespace",
+      "result": "passed"
+    }
+  ],
+  "known_failure_ids": [],
+  "provider_or_model_calls": 0,
+  "product_runtime_or_database_opened": false
+}

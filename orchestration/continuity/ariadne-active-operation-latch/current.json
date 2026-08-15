@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
-  "active_tranche": "Provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
-  "objective": "Lower the accepted delete-confirm physical design into additive ORM mappings, one inert Alembic descendant, pure receipt helpers and an unmounted authority-first transaction seam without executing a migration, touching a database, mounting a route, granting a capability or completing a product write.",
-  "status": "paused",
-  "source_head": "0a01e93319f302256f2b8af0aa74e494256808a8",
-  "authority_source": "Yuri's standing uninterrupted-development authority, resumed after the accepted Ariadne harness safeguards; Yuri additionally instructed on 2026-08-15 to pause after this tranche closes and before opening the next parse/catalogue tranche",
+  "operation_id": "ariadne-risk-weighted-workflow-reform",
+  "active_tranche": "Ariadne risk-weighted workflow reform",
+  "objective": "Implement the accepted workflow-efficiency recommendations as a repository-only risk-tiered Ariadne policy and deterministic admission surface before Raisa product development resumes, preserving hard authority, privacy, evidence, cleanup and protected-ref controls while reducing redundant receipts, reruns, reviews and closeout synchronization.",
+  "status": "in_progress",
+  "source_head": "1e63ae754c74e2282b0f5938f1dbca160743096c",
+  "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16 before continuing Raisa development, under the standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "The provider-free unmounted delete-confirm physical schema-and-transaction scaffold is accepted at Continuity 300 / Compass 282 from exact reviewed candidate bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7 and integrated source 843769b415597f4545663d78044eaaad303c7692. The corrected Gemini 3.7 veto, 117/117 hostile mutations, 57 focused/conformance tests, 36 API Spine tests, canonical 196-test profile, terminal operation journal and revision-302 agent-error register pass.",
-    "next_executable_stage": "After Yuri explicitly resumes product development, rehydrate afresh and freeze the narrowest provider-free disposable PostgreSQL parse/catalogue rehearsal for exact migration x3y4z5a6b7c8; do not open it during the requested workflow-efficiency review.",
+    "completed_stage": "The delete-confirm scaffold is accepted and the paused workflow-efficiency review concluded that hard semantic controls found material authority defects while approximately 30-50 percent of recent elapsed time may be reducible meta-work.",
+    "next_executable_stage": "Generate the fresh pre-sprint-planning receipt, freeze the narrowest repository-only risk-weighted reform plan, then implement and verify its deterministic policy and automation without opening the deferred PostgreSQL parse/catalogue rehearsal.",
     "retry_counters": {
       "planning": 0,
-      "implementation": 1,
-      "review": 2,
-      "verification": 3
+      "implementation": 0,
+      "review": 0,
+      "verification": 0
     },
     "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
   },
@@ -24,23 +24,23 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "user_requested_pause_after_completed_tranche_for_workflow_efficiency_review"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_synthetic_unmounted_source_scaffold_only",
-    "no_route_schema_openapi_graphql_or_existing_command_service_edit_mount_import_or_call",
-    "no_migration_ddl_sql_database_engine_real_transaction_or_lock_execution",
-    "no_capability_provisioning_or_existing_user_grant",
+    "repository_only_ariadne_workflow_policy_harness_and_tests",
+    "preserve_five_source_rehydration_authority_privacy_immutable_evidence_cleanup_git_and_terminal_latch_controls",
+    "no_raisa_product_source_route_schema_openapi_graphql_or_ui_change",
+    "no_migration_ddl_sql_database_engine_transaction_lock_or_postgresql_rehearsal",
     "no_product_patient_clinical_historical_diary_or_protected_data",
-    "no_provider_adc_credentials_iam_browser_network_or_external_adapter",
-    "no_watcher_event_command_or_product_write_authority",
+    "no_product_provider_call_adc_credentials_iam_browser_network_or_external_adapter",
+    "no_executable_product_tool_command_watcher_event_or_product_write_authority",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

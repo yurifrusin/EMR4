@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0342",
+  "observed_on": "2026-08-16",
+  "timestamp": "2026-08-16T08:44:56+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-risk-weighted-workflow-reform",
+  "attempt_id": "ariadne-risk-weighted-workflow-reform-preplanning-001",
+  "provider_or_model_calls": 0,
+  "candidate_head": "1e63ae754c74e2282b0f5938f1dbca160743096c",
+  "rejected_reasons": [
+    "active_operation_latch_invalid",
+    "parallelism_assessment_operation_mismatch",
+    "parallelism_lane_disposition_invalid:deepseek_flash",
+    "parallelism_lane_disposition_invalid:gemini_verifier"
+  ],
+  "detection": "The first repository-local preplanning receipt failed before planning or dispatch because the new in-progress latch used a provisional fingerprint and noncanonical terminal reason, while two lane dispositions described reservation timing instead of using the configured reserved vocabulary. The operation mismatch was downstream of latch rejection.",
+  "correction": "The latch and runtime state were aligned to the exact current settings fingerprint and canonical unfinished_authorized_operation reason; both future lanes now use the admitted reserved disposition while their bounded timing remains in rationale and work packages. A distinct corrected receipt is required before planning.",
+  "failed_receipt": "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-receipt.json",
+  "candidate_state": "workflow_metadata_only_no_plan_or_dispatch",
+  "external_effects": false,
+  "status": "corrected_before_planning"
+}

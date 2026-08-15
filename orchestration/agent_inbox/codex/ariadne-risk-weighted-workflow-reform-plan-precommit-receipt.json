@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "completed_stage": "The delete-confirm scaffold is accepted and the paused workflow-efficiency review concluded that hard semantic controls found material authority defects while approximately 30-50 percent of recent elapsed time may be reducible meta-work.",
+    "next_executable_stage": "Generate the fresh pre-sprint-planning receipt, freeze the narrowest repository-only risk-weighted reform plan, then implement and verify its deterministic policy and automation without opening the deferred PostgreSQL parse/catalogue rehearsal.",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "resume_after_compaction": true,
+    "source_head": "1e63ae754c74e2282b0f5938f1dbca160743096c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "plan_pre_commit",
+    "lanes": [
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The frozen plan now defines a separable mechanical module, CLI, policy, schema, runner correction and focused-test package for one post-commit dispatch.",
+        "work_packages": [
+          "implement the frozen exact allowlist without changing risk or acceptance semantics"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Tier 2 workflow-authority policy requires one fresh final veto after deterministic admission, never an intermediate planning review.",
+        "work_packages": [
+          "final exact-candidate veto after deterministic admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "A second analytical reviewer would duplicate Sol's frozen semantics and the later Gemini veto, recreating the stacking this reform removes.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre_worker_dispatch",
+      "worker_result",
+      "material_recovery",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "plan and baseline commit before worker worktree creation",
+      "DeepSeek returns before Sol semantic admission",
+      "Gemini remains ineligible before deterministic admission",
+      "shared pytest and all Git integration remain serial"
+    ]
+  },
+  "planned_action": "commit_frozen_risk_weighted_reform_plan_and_exact_baseline",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b",
+  "source_evidence": {
+    "active_plan_and_acceptance": "docs/ariadne-risk-weighted-workflow-reform-plan.md and its threat delta freeze the repository-only four-tier policy, baseline-first rule, change-triggered reruns, review economy, stable semantic bindings, named-threat coverage, incident/tail rules, verifier-root correction and typed closeout renderer. The exact pre-implementation canonical baseline passes at source 1e63ae754c74e2282b0f5938f1dbca160743096c.",
+    "current_authority_allocation": "Sol owns the material workflow plan, integration and acceptance. DeepSeek V4 Flash/high remains reserved for one mechanical implementation package and Gemini 3.7 Flash/high for one final veto; native subagents remain declined as duplicate review.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain exact 1e63ae754c74e2282b0f5938f1dbca160743096c before the plan commit. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit reform plan, threat, latch, baseline, receipt and incident paths are intended for this commit.",
+    "live_handover_current_baton": "AGENTS.md was read completely and retains the accepted delete-confirm scaffold, protected refs and deferred PostgreSQL parse/catalogue successor while Yuri's 2026-08-16 instruction authorises this intervening Ariadne reform.",
+    "protected_evidence_boundaries": "Repository-only workflow plan/baseline commit. No Raisa product source, migration/database, product data, provider, credentials/IAM, executable product command, deployment, release, Pages or protected-ref movement. Preserve docs/branding and every unrelated untracked file; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
