@@ -8,7 +8,7 @@
   },
   "canonical_pass_reuse": {
     "exact": true,
-    "fingerprint_sha256": "sha256:4115d324f3d448df9f0705462908c9299f040aba0cf36d6e2b67b5b832e7e9cb",
+    "fingerprint_sha256": "sha256:a79befcf03833579cba83c8a0bb54ddc2f3541501652c32cc65256298a0a0fb6",
     "reused": false
   },
   "capability": "provider_free_deterministic_workflow_admission_and_closeout_generation",

@@ -250,6 +250,27 @@ def _list_of(value: object, *, label: str) -> list[Any]:
     return value
 
 
+def _string_list(
+    value: object,
+    *,
+    label: str,
+    minimum: int = 0,
+    maximum: int = 256,
+) -> list[str]:
+    entries = _list_of(value, label=label)
+    if not minimum <= len(entries) <= maximum:
+        raise ValueError(f"{label} must contain {minimum}..{maximum} entries")
+    normalized: list[str] = []
+    observed: set[str] = set()
+    for index, raw in enumerate(entries):
+        item = _nonempty_string(raw, label=f"{label}[{index}]")
+        if item in observed:
+            raise ValueError(f"{label}[{index}] duplicates {item!r}")
+        observed.add(item)
+        normalized.append(item)
+    return normalized
+
+
 def _canonical_bytes(value: object) -> bytes:
     return (
         json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
@@ -260,6 +281,25 @@ def profile_sha256(profile: dict[str, Any]) -> str:
     """Return the canonical SHA-256 digest of an admitted profile object."""
     validate_profile(profile)
     return "sha256:" + hashlib.sha256(_canonical_bytes(profile)).hexdigest()
+
+
+def canonical_pass_fingerprint(profile: dict[str, Any]) -> str:
+    """Bind the stable inputs that permit reuse of one canonical pass.
+
+    Volatile receipts, timestamps, closeout paths and baton prose are
+    intentionally excluded. Any semantic source, binding, focused-gate,
+    baseline, threat or toolchain drift changes this digest.
+    """
+    normalized = validate_profile(profile)
+    stable_inputs = {
+        "baseline": normalized["baseline"],
+        "change_families": normalized["change_families"],
+        "change_signals": normalized["change_signals"],
+        "semantic_bindings": normalized["semantic_bindings"],
+        "semantic_freeze": normalized["semantic_freeze"],
+        "threat_ids": normalized["threat_ids"],
+    }
+    return "sha256:" + hashlib.sha256(_canonical_bytes(stable_inputs)).hexdigest()
 
 
 def _validate_change_signals(value: dict[str, Any]) -> dict[str, bool]:
@@ -275,6 +315,8 @@ def _validate_change_families(value: object, *, label: str) -> list[str]:
     for index, family in enumerate(families):
         if not isinstance(family, str) or family not in CHANGE_FAMILIES:
             raise ValueError(f"{label}[{index}] is not an admitted change family")
+        if family in normalized:
+            raise ValueError(f"{label}[{index}] duplicates family {family!r}")
         normalized.append(family)
     return normalized
 
@@ -300,16 +342,22 @@ def _validate_binding_list(value: object, kinds: frozenset[str], *, label: str) 
 
 
 def _derive_tier(
-    signals: dict[str, bool], families: set[str]
+    signals: dict[str, bool],
+    families: set[str],
+    review_triggers: dict[str, bool],
 ) -> str:
     """Derive the highest applicable tier; callers cannot choose or lower it."""
     if any(signals.get(key) for key in TIER3_SIGNALS):
         return TIER_3_OCCUPIED_PROTECTED
     if any(signals.get(key) for key in TIER2_SIGNALS):
         return TIER_2_AUTHORITY_RUNTIME
+    if review_triggers["new_authority_or_security_boundary"]:
+        return TIER_2_AUTHORITY_RUNTIME
     if "migration" in families:
         return TIER_2_AUTHORITY_RUNTIME
     if any(signals.get(key) for key in TIER1_SIGNALS) or bool(families & SEMANTIC_FAMILIES):
+        return TIER_1_PROVIDER_FREE_SOURCE
+    if any(review_triggers.values()):
         return TIER_1_PROVIDER_FREE_SOURCE
     return TIER_0_METADATA
 
@@ -353,12 +401,9 @@ def _validate_baseline(
         {"passed", "passed_with_known_failures", "not_required"},
         label=f"{label}.result",
     )
-    known = _list_of(baseline["known_failure_ids"], label=f"{label}.known_failure_ids")
-    normalized_known: list[str] = []
-    for index, failure_id in enumerate(known):
-        normalized_known.append(
-            _nonempty_string(failure_id, label=f"{label}.known_failure_ids[{index}]")
-        )
+    normalized_known = _string_list(
+        baseline["known_failure_ids"], label=f"{label}.known_failure_ids"
+    )
     _bool(baseline["captured_before_first_edit"], label=f"{label}.captured_before_first_edit")
     return {
         "fingerprint_sha256": baseline["fingerprint_sha256"],
@@ -395,6 +440,7 @@ def _validate_semantic_freeze(value: object, *, label: str) -> dict[str, Any]:
     _digest(freeze["toolchain_sha256"], label=f"{label}.toolchain_sha256")
     focused = _object(freeze["focused_gate_results"], label=f"{label}.focused_gate_results")
     for key, result in focused.items():
+        _nonempty_string(key, label=f"{label}.focused_gate_results key")
         _enum(result, {"passed", "revision_required", "uncertain"}, label=f"{label}.focused_gate_results.{key}")
     return {
         "source_head": freeze["source_head"],
@@ -476,8 +522,16 @@ def validate_profile(value: object) -> dict[str, Any]:
 
     signals = _validate_change_signals(profile["change_signals"])
     families = set(_validate_change_families(profile["change_families"], label="change_families"))
+    review_triggers = _object(profile["review_triggers"], label="review_triggers")
+    _exact_keys(review_triggers, REVIEW_TRIGGER_KEYS, label="review_triggers")
+    normalized_triggers = {
+        key: _bool(review_triggers[key], label=f"review_triggers.{key}")
+        for key in review_triggers
+    }
     _check_contradictions(signals, families)
-    derived_tier = _derive_tier(signals, families)
+    if signals["docs_only"] and normalized_triggers["new_authority_or_security_boundary"]:
+        raise ValueError("docs_only contradicts a new authority or security boundary")
+    derived_tier = _derive_tier(signals, families, normalized_triggers)
     if profile["declared_tier"] != derived_tier:
         raise ValueError(
             "declared tier cannot be caller-chosen or lowered: "
@@ -491,6 +545,8 @@ def validate_profile(value: object) -> dict[str, Any]:
         profile["volatile_bindings"], VOLATILE_KINDS, label="volatile_bindings"
     )
     _validate_disjoint_bindings(semantic_bindings, volatile_bindings)
+    if signals["docs_only"] and semantic_bindings:
+        raise ValueError("docs_only profiles cannot carry semantic bindings")
 
     baseline = _validate_baseline(profile["baseline"], label="baseline")
     freeze = _validate_semantic_freeze(profile["semantic_freeze"], label="semantic_freeze")
@@ -513,51 +569,40 @@ def validate_profile(value: object) -> dict[str, Any]:
     )
     rerun = compute_rerun({"post_freeze_change_families": post_freeze})
 
-    events = _list_of(
-        profile["configured_continuation_events"], label="configured_continuation_events"
+    configured_events = _string_list(
+        profile["configured_continuation_events"],
+        label="configured_continuation_events",
+        minimum=1,
     )
-    configured_events: list[str] = []
-    observed_events: set[str] = set()
-    for index, event in enumerate(events):
-        normalized_event = _nonempty_string(
-            event, label=f"configured_continuation_events[{index}]"
-        )
-        if normalized_event in observed_events:
-            raise ValueError(
-                f"configured_continuation_events[{index}] duplicates event "
-                f"{normalized_event!r}"
-            )
-        observed_events.add(normalized_event)
-        configured_events.append(normalized_event)
 
     threat_ids = _list_of(profile["threat_ids"], label="threat_ids")
     if not threat_ids:
         raise ValueError("threat_ids must name at least one required threat")
     normalized_threats: list[str] = []
     for index, threat_id in enumerate(threat_ids):
-        if not isinstance(threat_id, str) or not threat_id.startswith("RWW-"):
+        if (
+            not isinstance(threat_id, str)
+            or len(threat_id) != 7
+            or not threat_id.startswith("RWW-")
+            or not threat_id[4:].isdigit()
+        ):
             raise ValueError(f"threat_ids[{index}] must be an RWW-\\d{{3}} id")
+        if threat_id in normalized_threats:
+            raise ValueError(f"threat_ids[{index}] duplicates {threat_id!r}")
         normalized_threats.append(threat_id)
 
     mutation_count = profile["mutation_count"]
     if isinstance(mutation_count, bool) or not isinstance(mutation_count, int) or mutation_count < 0:
         raise ValueError("mutation_count must be a nonnegative integer")
 
-    review_triggers = _object(profile["review_triggers"], label="review_triggers")
-    _exact_keys(review_triggers, REVIEW_TRIGGER_KEYS, label="review_triggers")
-    normalized_triggers = {
-        key: _bool(review_triggers[key], label=f"review_triggers.{key}")
-        for key in review_triggers
-    }
-
     parallelism_plan = _object(profile["parallelism_plan"], label="parallelism_plan")
     _exact_keys(parallelism_plan, PARALLELISM_LANE_KEYS, label="parallelism_plan")
     _validate_parallelism_lanes(parallelism_plan, label="parallelism_plan")
 
     capability = _nonempty_string(profile["capability"], label="capability")
-    closed_surfaces = _list_of(profile["closed_surfaces"], label="closed_surfaces")
-    if not closed_surfaces:
-        raise ValueError("closed_surfaces must name at least one closed surface")
+    closed_surfaces = _string_list(
+        profile["closed_surfaces"], label="closed_surfaces", minimum=1
+    )
     place_in_raisa = _nonempty_string(profile["place_in_raisa"], label="place_in_raisa")
     next_tranche = _nonempty_string(profile["next_tranche"], label="next_tranche")
     _enum(profile["attention_status"], {"green", "amber", "red"}, label="attention_status")
@@ -603,6 +648,8 @@ def _validate_change_families_optional(value: object, *, label: str) -> list[str
     for index, family in enumerate(families):
         if not isinstance(family, str) or family not in CHANGE_FAMILIES:
             raise ValueError(f"{label}[{index}] is not an admitted change family")
+        if family in normalized:
+            raise ValueError(f"{label}[{index}] duplicates family {family!r}")
         normalized.append(family)
     return normalized
 
@@ -738,7 +785,7 @@ def _validate_review(value: object, *, label: str) -> dict[str, Any]:
         _nonempty_string(item["veto_id"], label=f"{label}.final_vetoes[{index}].veto_id")
         _enum(
             item["reviewer_lane"],
-            {"gemini_single_final_veto", "deepseek_mechanical", "native_explicit_review_lane"},
+            {"gemini_single_final_veto", "native_explicit_review_lane"},
             label=f"{label}.final_vetoes[{index}].reviewer_lane",
         )
         _enum(item["decision"], {"pass", "revision_required"}, label=f"{label}.final_vetoes[{index}].decision")
@@ -961,8 +1008,17 @@ def validate_result(value: object) -> dict[str, Any]:
         covers = _list_of(item["covers"], label=f"deterministic_gates[{index}].covers")
         normalized_covers: list[str] = []
         for threat_id in covers:
-            if not isinstance(threat_id, str) or not threat_id.startswith("RWW-"):
+            if (
+                not isinstance(threat_id, str)
+                or len(threat_id) != 7
+                or not threat_id.startswith("RWW-")
+                or not threat_id[4:].isdigit()
+            ):
                 raise ValueError(f"deterministic_gates[{index}].covers has invalid threat id")
+            if threat_id in normalized_covers:
+                raise ValueError(
+                    f"deterministic_gates[{index}].covers duplicates {threat_id!r}"
+                )
             normalized_covers.append(threat_id)
         normalized_gates.append(
             {"id": gate_id, "category": item["category"], "result": item["result"], "covers": normalized_covers}
@@ -973,6 +1029,8 @@ def validate_result(value: object) -> dict[str, Any]:
     for index, item in enumerate(required_rerun):
         if not isinstance(item, str) or item not in ALL_RERUN_ITEMS:
             raise ValueError(f"required_rerun[{index}] is not an admitted rerun item")
+        if item in normalized_rerun:
+            raise ValueError(f"required_rerun[{index}] duplicates {item!r}")
         normalized_rerun.append(item)
 
     review = _validate_review(result["review"], label="review")
@@ -989,8 +1047,10 @@ def validate_result(value: object) -> dict[str, Any]:
     parallelism = _validate_parallelism_result(result["parallelism"], label="parallelism")
     capability = _nonempty_string(result["capability"], label="capability")
     technical_result = _nonempty_string(result["technical_result"], label="technical_result")
-    closed_surfaces = _list_of(result["closed_surfaces"], label="closed_surfaces")
-    issues = _list_of(result["issues"], label="issues")
+    closed_surfaces = _string_list(
+        result["closed_surfaces"], label="closed_surfaces", minimum=1
+    )
+    issues = _string_list(result["issues"], label="issues")
     place_in_raisa = _nonempty_string(result["place_in_raisa"], label="place_in_raisa")
     next_tranche = _nonempty_string(result["next_tranche"], label="next_tranche")
     _enum(result["attention_status"], {"green", "amber", "red"}, label="attention_status")
@@ -1048,6 +1108,8 @@ def admit_result(profile_value: object, result_value: object) -> dict[str, Any]:
 
     if result["classified_tier"] != profile["derived_tier"]:
         reasons.append("classified_tier_mismatch")
+    if result["tranche_id"] != profile["tranche_id"]:
+        reasons.append("tranche_id_mismatch")
 
     # Baseline evidence.
     if profile["required_baseline"]:
@@ -1057,16 +1119,24 @@ def admit_result(profile_value: object, result_value: object) -> dict[str, Any]:
             reasons.append("baseline_fingerprint_mismatch")
         if set(result["baseline"]["known_failure_ids"]) != set(profile["baseline"]["known_failure_ids"]):
             reasons.append("baseline_known_failure_ids_mismatch")
-        if result["semantic_freeze"]["semantic_bindings_sha256"] != profile["semantic_freeze"]["semantic_bindings_sha256"]:
-            reasons.append("semantic_freeze_binding_digest_mismatch")
-        if result["semantic_freeze"]["toolchain_sha256"] != profile["semantic_freeze"]["toolchain_sha256"]:
-            reasons.append("semantic_freeze_toolchain_digest_mismatch")
+        if result["baseline"]["captured_before_first_edit"] != profile["baseline"]["captured_before_first_edit"]:
+            reasons.append("baseline_capture_order_mismatch")
     else:
         if result["baseline"]["result"] not in {"passed", "not_required"}:
             reasons.append("baseline_evidence_exceeds_tier_0")
 
-    # Canonical pass reuse must be exact when a canonical result is reused
-    # (RWW-006).
+    if result["semantic_freeze"] != profile["semantic_freeze"]:
+        reasons.append("semantic_freeze_mismatch")
+    for gate_id, gate_result in profile["semantic_freeze"]["focused_gate_results"].items():
+        if gate_result != "passed":
+            reasons.append(f"semantic_freeze_gate_not_passed_{gate_id}")
+
+    # The reuse fingerprint is derived rather than accepted as a caller claim.
+    # It binds stable source/evidence/input/toolchain state while excluding the
+    # volatile closeout surfaces that the reform deliberately decouples.
+    expected_reuse_fingerprint = canonical_pass_fingerprint(profile_value)
+    if result["canonical_pass_reuse"]["fingerprint_sha256"] != expected_reuse_fingerprint:
+        reasons.append("canonical_pass_fingerprint_mismatch")
     if result["canonical_pass_reuse"]["reused"] and not result["canonical_pass_reuse"]["exact"]:
         reasons.append("stale_canonical_pass_reuse")
 
@@ -1138,8 +1208,22 @@ def admit_result(profile_value: object, result_value: object) -> dict[str, Any]:
     # Parallelism must be explicit (RWW-018).
     if result["parallelism"]["planned"] != profile["parallelism_plan"]:
         reasons.append("parallelism_plan_mismatch")
+    if result["parallelism"]["actual"] != result["parallelism"]["planned"]:
+        reasons.append("parallelism_actual_mismatch")
     if result["parallelism"]["planned_vs_actual"] == "deviation_recorded":
         reasons.append("parallelism_deviation_recorded")
+
+    # The result packet cannot silently rewrite the accepted scope or handoff.
+    if result["capability"] != profile["capability"]:
+        reasons.append("capability_mismatch")
+    if result["closed_surfaces"] != profile["closed_surfaces"]:
+        reasons.append("closed_surfaces_mismatch")
+    if result["place_in_raisa"] != profile["place_in_raisa"]:
+        reasons.append("place_in_raisa_mismatch")
+    if result["next_tranche"] != profile["next_tranche"]:
+        reasons.append("next_tranche_mismatch")
+    if result["attention_status"] != profile["attention_status"]:
+        reasons.append("attention_status_mismatch")
 
     # Continuation events must each have a fresh five-source receipt (RWW-017).
     expected_events = set(profile["configured_continuation_events"])
@@ -1148,9 +1232,10 @@ def admit_result(profile_value: object, result_value: object) -> dict[str, Any]:
     if missing_events:
         reasons.append(f"missing_continuation_receipts_{sorted(missing_events)!r}")
 
-    decision = "pass" if not reasons else "revision_required"
-    if result["decision"] != decision:
+    evidence_decision = "pass" if not reasons else "revision_required"
+    if result["decision"] != evidence_decision:
         reasons.append("decision_does_not_match_evidence")
+    decision = "pass" if not reasons else "revision_required"
 
     return {
         "schema_version": RESULT_SCHEMA_VERSION,

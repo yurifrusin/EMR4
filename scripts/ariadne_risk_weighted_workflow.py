@@ -22,6 +22,12 @@ from zoneinfo import ZoneInfo
 import orchestration_harness.risk_weighted_workflow as rw
 
 BRISBANE = ZoneInfo("Australia/Brisbane")
+ROOT = Path(__file__).resolve().parents[1]
+PROTECTED_AUTHORITY_PATHS = (
+    ROOT / "AGENTS.md",
+    ROOT / ".git",
+    ROOT / "orchestration" / "continuity",
+)
 
 
 def _load_json(path: Path, *, label: str) -> dict[str, Any]:
@@ -43,8 +49,33 @@ def _canonical_json(payload: dict[str, Any]) -> str:
 
 
 def _write(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8", newline="\n")
+    resolved = path.resolve()
+    lowered_parts = tuple(part.casefold() for part in resolved.parts)
+    generic_authority_target = (
+        resolved.name.casefold() == "agents.md"
+        or ".git" in lowered_parts
+        or any(
+            lowered_parts[index : index + 2] in {
+                ("orchestration", "continuity"),
+                ("orchestration", "compass"),
+            }
+            for index in range(max(0, len(lowered_parts) - 1))
+        )
+    )
+    if generic_authority_target:
+        raise ValueError(
+            "output path cannot modify AGENTS, Git, Continuity, Compass or "
+            f"the live latch: {resolved}"
+        )
+    for protected in PROTECTED_AUTHORITY_PATHS:
+        protected_resolved = protected.resolve()
+        if resolved == protected_resolved or protected_resolved in resolved.parents:
+            raise ValueError(
+                "output path cannot modify AGENTS, Git, Continuity, Compass or "
+                f"the live latch: {resolved}"
+            )
+    resolved.parent.mkdir(parents=True, exist_ok=True)
+    resolved.write_text(content, encoding="utf-8", newline="\n")
 
 
 def _now_brisbane(timestamp: str | None) -> datetime:
@@ -87,6 +118,24 @@ def render_packet(
     tier = profile["derived_tier"]
     decision = admission["decision"]
     profile_sha256 = admission["profile_sha256"]
+    gate_lines = "\n".join(
+        f"  - {gate['id']} ({gate['category']}): {gate['result']}"
+        for gate in result["deterministic_gates"]
+    )
+    closed_lines = "\n".join(f"  - {item}" for item in result["closed_surfaces"])
+    issue_lines = (
+        "\n".join(f"  - {item}" for item in result["issues"])
+        if result["issues"]
+        else "  - None"
+    )
+    review_lines = (
+        "\n".join(
+            f"  - {item['veto_id']} ({item['reviewer_lane']}): {item['decision']}"
+            for item in result["review"]["final_vetoes"]
+        )
+        if result["review"]["final_vetoes"]
+        else "  - No final veto required"
+    )
 
     technical = (
         _render_markdown_header("Ariadne risk-weighted tranche closeout", rendered_at)
@@ -96,6 +145,15 @@ def render_packet(
         + f"- Deterministic admission: {decision}\n"
         + f"- Source HEAD: {profile['source_head']}\n"
         + f"- Source tree: {profile['source_tree']}\n\n"
+        + f"## Capability\n\n{result['capability']}\n\n"
+        + f"## Technical result\n\n{result['technical_result']}\n\n"
+        + f"## Deterministic gates\n\n{gate_lines}\n\n"
+        + f"## Final review\n\n{review_lines}\n\n"
+        + f"## Issues\n\n{issue_lines}\n\n"
+        + f"## Closed surfaces\n\n{closed_lines}\n\n"
+        + f"## Project position\n\n- Place in Raisa: {result['place_in_raisa']}\n"
+        + f"- Next tranche: {result['next_tranche']}\n"
+        + f"- Attention status: {result['attention_status']}\n\n"
         + "This document is generated evidence only. It does not decide "
         + "acceptance, does not modify AGENTS, Continuity, Compass, Git, the "
         + "latch or any protected ref, and executes no command.\n"
@@ -107,6 +165,10 @@ def render_packet(
         + f"- Classified tier: {tier}\n"
         + f"- Deterministic admission: {decision}\n"
         + f"- Profile SHA-256: {profile_sha256}\n\n"
+        + f"- Technical result: {result['technical_result']}\n"
+        + f"- Required final vetoes: {result['review']['required_final_vetoes']}\n"
+        + f"- Issues recorded: {len(result['issues'])}\n"
+        + f"- Deferred tail items: {len(result['deferred_tail'])}\n\n"
         + "Sol alone owns acceptance and integration. This generated summary "
         + "is candidate evidence and never acceptance.\n"
     )
@@ -116,9 +178,24 @@ def render_packet(
         + f"- Tranche: {tranche_id}\n"
         + f"- Classified tier: {tier}\n"
         + f"- Deterministic admission: {decision}\n\n"
-        + "The risk-weighted workflow reform retains hard controls while "
-        + "removing redundant receipts, full-suite reruns, external-review "
-        + "stacking, volatile hash cascades and mutation-count ceremony.\n"
+        + "## Lay summary\n\n"
+        + "Ariadne now chooses its checks according to the actual risk of a "
+        + "piece of work. It keeps the hard safety and authority boundaries, "
+        + "but removes repeated full-suite runs, stacked reviewers, volatile "
+        + "hash cascades and mutation-count ceremony when those add no useful "
+        + "assurance.\n\n"
+        + f"The next planned tranche is `{result['next_tranche']}` and the "
+        + f"current attention status is `{result['attention_status']}`.\n\n"
+        + "## Technical summary\n\n"
+        + f"- Capability: {result['capability']}\n"
+        + f"- Result: {result['technical_result']}\n"
+        + f"- Deterministic gates: {len(result['deterministic_gates'])}\n"
+        + f"- Final vetoes: {len(result['review']['final_vetoes'])}\n"
+        + f"- Issues: {len(result['issues'])}\n"
+        + f"- Deferred tail items: {len(result['deferred_tail'])}\n"
+        + f"- Place in Raisa: {result['place_in_raisa']}\n\n"
+        + "Closed surfaces remain unchanged:\n"
+        + f"{closed_lines}\n"
     )
 
     continuity = {

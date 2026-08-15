@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 import orchestration_harness.risk_weighted_workflow as rw
+from scripts import ariadne_risk_weighted_workflow as workflow_cli
 from scripts.ariadne_risk_weighted_workflow import render_packet
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -140,7 +141,11 @@ def _result(profile: dict, **overrides: object) -> dict:
                 {"veto_id": "VETO-1", "reviewer_lane": "gemini_single_final_veto", "decision": "pass"}
             ],
         },
-        "canonical_pass_reuse": {"reused": False, "fingerprint_sha256": DIG, "exact": True},
+        "canonical_pass_reuse": {
+            "reused": False,
+            "fingerprint_sha256": rw.canonical_pass_fingerprint(profile),
+            "exact": True,
+        },
         "continuation_receipts": [
             {"event": "five_source_rehydration_at_verifier_admission", "receipt_sha256": DIG2}
         ],
@@ -232,6 +237,21 @@ def test_rww_001_caller_cannot_lower_the_derived_ceremony_tier() -> None:
     with pytest.raises(ValueError, match="declared tier"):
         rw.validate_profile(_profile(declared_tier="tier_0_metadata"))
 
+    # A Tier-0-shaped metadata tranche with an explicit review trigger rises
+    # to Tier 1 instead of silently retaining zero-review metadata treatment.
+    metadata = _profile()
+    metadata["declared_tier"] = "tier_1_provider_free_source"
+    metadata["change_signals"] = {
+        key: key == "docs_only" for key in metadata["change_signals"]
+    }
+    metadata["change_families"] = ["documentation_or_closeout_prose"]
+    metadata["semantic_bindings"] = []
+    metadata["post_freeze_change_families"] = ["documentation_or_closeout_prose"]
+    metadata["review_triggers"]["explicit_risk_trigger"] = True
+    normalized = rw.validate_profile(metadata)
+    assert normalized["derived_tier"] == "tier_1_provider_free_source"
+    assert normalized["required_final_vetoes"] == 1
+
 
 def test_rww_002_docs_only_or_unmounted_labels_fail_closed() -> None:
     signals = _profile()["change_signals"]
@@ -252,6 +272,15 @@ def test_rww_002_docs_only_or_unmounted_labels_fail_closed() -> None:
         rw.validate_profile(
             _profile(
                 change_signals={**signals, "unmounted": True, "authority_or_security_contract": True}
+            )
+        )
+    with pytest.raises(ValueError, match="semantic bindings"):
+        rw.validate_profile(
+            _profile(
+                declared_tier="tier_0_metadata",
+                change_signals={key: key == "docs_only" for key in signals},
+                change_families=["documentation_or_closeout_prose"],
+                post_freeze_change_families=["documentation_or_closeout_prose"],
             )
         )
 
@@ -452,6 +481,50 @@ def test_rww_015_renderer_cannot_change_authority_and_writes_only_explicit_paths
     assert continuity["decision"] == "pass"
     # The renderer must not write unless explicit output paths are supplied.
     assert list(tmp_path.iterdir()) == []
+    for protected in (
+        workflow_cli.ROOT / "AGENTS.md",
+        workflow_cli.ROOT
+        / "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    ):
+        before = protected.read_bytes()
+        with pytest.raises(ValueError, match="cannot modify AGENTS"):
+            workflow_cli._write(protected, "forbidden\n")
+        assert protected.read_bytes() == before
+    with pytest.raises(ValueError, match="cannot modify AGENTS"):
+        workflow_cli._write(tmp_path / "another-worktree/AGENTS.md", "forbidden\n")
+
+
+def test_result_binds_exact_freeze_reuse_scope_and_independent_veto() -> None:
+    profile = _profile()
+
+    stale_freeze = _result(profile)
+    stale_freeze["semantic_freeze"]["source_head"] = "c" * 40
+    _assert_admission_revision(profile, stale_freeze)
+
+    stale_reuse = _result(profile)
+    stale_reuse["canonical_pass_reuse"]["fingerprint_sha256"] = DIG
+    _assert_admission_revision(profile, stale_reuse)
+
+    mechanical_veto = _result(profile)
+    mechanical_veto["review"]["final_vetoes"][0]["reviewer_lane"] = "deepseek_mechanical"
+    with pytest.raises(ValueError, match="reviewer_lane"):
+        rw.admit_result(profile, mechanical_veto)
+
+    actual_drift = _result(profile)
+    actual_drift["parallelism"]["actual"]["gemini_lane"] = "declined"
+    _assert_admission_revision(profile, actual_drift)
+
+    scope_drift = _result(profile)
+    scope_drift["capability"] = "broadened-capability"
+    _assert_admission_revision(profile, scope_drift)
+
+
+def test_declared_revision_required_never_returns_pass_with_reasons() -> None:
+    profile = _profile()
+    result = _result(profile, decision="revision_required")
+    admission = rw.admit_result(profile, result)
+    assert admission["decision"] == "revision_required"
+    assert "decision_does_not_match_evidence" in admission["reasons"]
 
 
 def test_rww_016_result_cannot_claim_pass_without_tier_required_evidence() -> None:

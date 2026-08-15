@@ -106,8 +106,6 @@ def _resolve_candidate_paths(
     exactly to the review worktree; otherwise relative candidate tests behind a
     different checkout are rejected.
     """
-    if candidate_paths is None:
-        return []
     worktree = worktree_root.resolve()
     resolved_paths: list[str] = []
     if serial_repo_root is not None and serial_repo_root.resolve() != worktree:
@@ -115,6 +113,8 @@ def _resolve_candidate_paths(
             "external serial runner must bind --repo-root exactly to the "
             "review worktree"
         )
+    if candidate_paths is None:
+        return []
     for index, raw in enumerate(candidate_paths):
         candidate = Path(raw)
         resolved = (
@@ -129,6 +129,11 @@ def _resolve_candidate_paths(
                 f"candidate_paths[{index}] resolves outside the review "
                 f"worktree: {resolved}"
             ) from error
+        if not resolved.exists():
+            raise ValueError(
+                f"candidate_paths[{index}] does not exist in the review worktree: "
+                f"{resolved}"
+            )
         resolved_paths.append(resolved.as_posix())
     return resolved_paths
 
@@ -143,6 +148,12 @@ def build_preflight(
     candidate_paths: Sequence[str | Path] | None = None,
     serial_repo_root: Path | None = None,
 ) -> dict[str, object]:
+    if branch_prefix != DEFAULT_BRANCH_PREFIX:
+        raise ValueError(
+            f"branch_prefix must remain the exact non-protected review prefix: {DEFAULT_BRANCH_PREFIX}"
+        )
+    if len(expected_head) != 40 or any(char not in "0123456789abcdef" for char in expected_head):
+        raise ValueError("expected_head must be an exact 40-character lowercase Git object id")
     state: WorktreeState = inspect_worktree(cwd, require_clean=True)
     if state.head != expected_head:
         raise ValueError(
@@ -213,7 +224,10 @@ def _parse_repository_paths(value: str) -> list[dict[str, object]]:
         raise ValueError("--repository-paths must be valid JSON") from error
     if not isinstance(parsed, list):
         raise ValueError("--repository-paths must be a JSON array")
-    return [item for item in parsed if isinstance(item, dict)]
+    for index, item in enumerate(parsed):
+        if not isinstance(item, dict):
+            raise ValueError(f"--repository-paths[{index}] must be a JSON object")
+    return parsed
 
 
 def main() -> int:

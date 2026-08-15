@@ -79,6 +79,7 @@
         },
         "known_failure_ids": {
           "type": "array",
+          "uniqueItems": true,
           "items": {
             "type": "string",
             "minLength": 1
@@ -167,6 +168,7 @@
           },
           "covers": {
             "type": "array",
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "pattern": "^RWW-\\d{3}$"
@@ -177,6 +179,7 @@
     },
     "required_rerun": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "enum": [
           "focused_semantic_gates",
@@ -224,7 +227,6 @@
               "reviewer_lane": {
                 "enum": [
                   "gemini_single_final_veto",
-                  "deepseek_mechanical",
                   "native_explicit_review_lane"
                 ]
               },
@@ -262,6 +264,7 @@
     },
     "continuation_receipts": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -470,14 +473,19 @@
     },
     "closed_surfaces": {
       "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     },
     "issues": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     },
     "place_in_raisa": {

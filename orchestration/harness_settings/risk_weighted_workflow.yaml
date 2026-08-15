@@ -37,6 +37,8 @@ classifier:
   highest_applicable_tier_wins: true
   caller_declared_tier_compared_only_for_equality: true
   contradictory_docs_only_or_unmounted_claims_fail_closed: true
+  tier_0_review_trigger_raises_to_tier_1: true
+  new_authority_or_security_boundary_raises_to_at_least_tier_2: true
 change_families:
   - product
   - harness
