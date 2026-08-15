@@ -1,17 +1,18 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
-  "active_tranche": "Reception One cancellation command-path readiness review",
-  "objective": "Inventory and reconcile the exact existing appointment delete/cancel proposal-confirm path, delete-to-status compatibility behavior, backend mounts, confirmation evidence, reason preservation, idempotency, current-authority checks and fresh readback, then freeze the narrowest fail-closed convergence or UI-composition prerequisite without changing product or runtime source.",
-  "status": "complete",
-  "source_head": "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735",
-  "authority_source": "Yuri's 2026-08-15 explicit Yes selecting the recommended Reception One appointment-cancellation direction, AGENTS.md Continuity 294 / Compass 276, and the accepted post-combined-editor programme orientation",
+  "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+  "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+  "objective": "Freeze and deterministically rehearse one authored-synthetic, unmounted cancellation transaction contract that binds explicit confirmation, signed proposal evidence, operation-scoped idempotency, a locked practice appointment, in-transaction current authority, exact reason preservation, atomic soft-cancel/audit/receipt completion, denial rollback and fresh authorised readback without changing mounted product source.",
+  "status": "in_progress",
+  "source_head": "12cda23eb69e9d4451ea23cc437989769e8073ac",
+  "authority_source": "Yuri's 2026-08-15 selection of Reception One appointment cancellation, the accepted readiness review at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735, AGENTS.md Continuity 295 / Compass 277, and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Accepted at Continuity 295 / Compass 277 after deterministic and independent exact-candidate verification",
-    "next_executable_stage": null,
+    "completed_stage": "Fresh five-source receipt passed and the provider-free unmounted plan, exact delete-confirm architecture and threat boundary are frozen",
+    "next_executable_stage": "Commit the exact plan freeze, create a disposable exact-HEAD DeepSeek worktree and dispatch the bounded simulator/schema/test implementation packet",
     "retry_counters": {
       "planning": 0,
-      "review": 1,
+      "implementation": 0,
+      "review": 0,
       "verification": 0
     },
     "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
@@ -23,27 +24,26 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_repository_readiness_review_only",
-    "no_cancellation_ui_or_product_behavior_change",
-    "no_route_openapi_graphql_backend_database_event_or_watcher_change",
-    "no_new_command_family_or_write_authority",
-    "explicit_destructive_confirmation_remains_mandatory",
-    "delete_and_status_family_semantics_must_not_be_conflated",
-    "current_authority_source_truth_idempotency_audit_and_fresh_readback_remain_backend_owned",
+    "provider_free_authored_synthetic_unmounted_rehearsal_only",
+    "no_mounted_route_openapi_graphql_database_product_client_or_ui_change",
+    "no_runtime_broker_adapter_provider_call_source_read_or_watcher",
+    "no_patient_product_clinical_historical_diary_or_protected_data",
+    "no_command_write_or_executable_tool_against_product_or_database",
+    "dedicated_delete_confirmation_semantics_only",
+    "raw_delete_and_status_fallback_are_separate_ingress_candidates_not_kernel_authority",
+    "current_authority_locked_truth_idempotency_audit_and_readback_remain_backend_owned",
     "no_model_channel_or_delegate_self_confirmation",
-    "no_patient_product_clinical_or_protected_data",
-    "no_provider_adc_credentials_iam_or_external_network",
-    "no_deployment_production_release_pages_or_protected_ref_movement",
+    "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
     "docs_branding_and_unrelated_untracked_preserved",
     "explicit_path_staging_only"
   ]

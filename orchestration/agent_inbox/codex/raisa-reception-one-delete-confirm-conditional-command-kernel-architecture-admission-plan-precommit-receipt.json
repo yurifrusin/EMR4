@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "completed_stage": "Fresh five-source receipt passed and the provider-free unmounted plan, exact delete-confirm architecture and threat boundary are frozen",
+    "next_executable_stage": "Commit the exact plan freeze, create a disposable exact-HEAD DeepSeek worktree and dispatch the bounded simulator/schema/test implementation packet",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "resume_after_compaction": true,
+    "source_head": "12cda23eb69e9d4451ea23cc437989769e8073ac",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "plan_freeze_precommit",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The contract is now frozen and leaves a stable bounded pure-Python simulator/schema/test implementation package.",
+        "work_packages": [
+          "unmounted contract/schema/evidence builder, symbolic schedule simulator and focused tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh final veto remains valuable for destructive-command ordering, rollback and disclosure challenges.",
+        "work_packages": [
+          "exact-candidate final veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No remaining package exceeds shared-worktree coordination cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "worker packet freeze",
+      "worker result",
+      "material deterministic failure",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "plan commit precedes exact-HEAD worker worktree",
+      "DeepSeek owns only named pure artifacts",
+      "Gemini waits for deterministic admission",
+      "mounted product sources and protected refs remain closed"
+    ]
+  },
+  "planned_action": "commit_exact_delete_confirm_kernel_architecture_plan_freeze_before_bounded_worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted cancellation readiness chain was read completely. The newly frozen timestamped plan, architecture and threat delta define exact dedicated delete-confirm ingress, practice-appointment-idempotency lock order, two current-authority checks, reason policy, atomic write set, hostile schedules and claim boundary.",
+    "current_authority_allocation": "Sol froze architecture and acceptance. DeepSeek V4 Flash/high is now selected for one bounded mechanical simulator/schema/test candidate in a disposable exact-HEAD worktree. Gemini 3.6 Flash/high remains reserved for fresh final veto. Native subagents remain declined for neutral leverage.",
+    "git_refs_and_worktree": "Before plan freeze the task and origin task matched at 12cda23eb69e9d4451ea23cc437989769e8073ac, required and accepted readiness sources were ancestors, and local/origin master plus handoff/current were exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the named latch, plan, architecture, threat delta and Ariadne pairs will be staged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and names this provider-free unmounted delete-confirm kernel architecture/admission rehearsal as the next dependency-satisfied tranche at Continuity 295 / Compass 277.",
+    "protected_evidence_boundaries": "Only authored-synthetic unmounted protocol artifacts may change. Application routes, OpenAPI/GraphQL, database/source/watcher, product UI/client, providers, data, commands, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
