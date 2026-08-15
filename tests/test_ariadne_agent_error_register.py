@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 292
+    assert register["register_revision"] == 294
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 332)
+        f"AER-{index:04d}" for index in range(1, 334)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 331
+    assert report["incident_count"] == 333
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3150,6 +3150,56 @@ def test_aer_0331_contains_prime_harness_deepseek_self_pass() -> None:
     assert incident["status"] == "contained"
 
 
+def test_aer_0332_corrects_outer_timeout_without_duplicate_gemini_dispatch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0332"]
+
+    assert incident["origin"] == "harness"
+    assert incident["role"] == "orchestrator"
+    assert incident["resource_id"] == "codex-shell-command-timeout-wrapper"
+    assert incident["model"] is None
+    assert incident["stage"] == "independent_review"
+    assert incident["category"] == "harness_failure"
+    assert incident["process_severity"] == "low"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert incident["recurrence_signature"] == (
+        "harness.shell_wrapper_timeout_before_live_external_worker_completion"
+    )
+    assert "30-minute print timeout" in incident["observed_error"]
+    assert "did not retry" in incident["detection_method"]
+    assert "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce" in incident["detection_method"]
+    assert incident["correction"]["status"] == "control_added"
+    assert "forbid duplicate dispatch" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0333_rejects_reused_outer_timeout_and_chained_gate_claims() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0333"]
+
+    assert incident["origin"] == "harness"
+    assert incident["role"] == "orchestrator"
+    assert incident["resource_id"] == "codex-shell-command-timeout-wrapper"
+    assert incident["model"] is None
+    assert incident["stage"] == "deterministic_verification"
+    assert incident["category"] == "harness_failure"
+    assert incident["process_severity"] == "low"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert incident["recurrence_signature"] == (
+        "harness.shell_wrapper_timeout_before_live_external_worker_completion"
+    )
+    assert "123.7 seconds" in incident["observed_error"]
+    assert "stdout-flush OSError" in incident["observed_error"]
+    assert "no surviving Python child" in incident["detection_method"]
+    assert "claimed no Ruff or diff outcome" in incident["detection_method"]
+    assert incident["correction"]["status"] == "control_added"
+    assert "ariadne_serial_pytest" in incident["correction"]["action"]
+    assert "never chain" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
 def test_aer_0276_reconciles_the_verifier_timeout_value_misreport() -> None:
     incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0276"]
 
@@ -3394,19 +3444,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 292
-    assert report["incident_count"] == 331
+    assert report["register_revision"] == 294
+    assert report["incident_count"] == 333
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 229,
-        "harness": 37,
+        "harness": 39,
         "repository": 55,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 49,
         "evidence_misreport": 43,
-        "harness_failure": 37,
+        "harness_failure": 39,
         "output_contract_violation": 95,
         "read_only_violation": 3,
         "reasoning_claim_error": 39,
@@ -3415,7 +3465,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 203,
+        "canonical_unchanged": 205,
         "untrusted_partial_worktree": 30,
     }
     receipt_event_recurrence = next(
@@ -3813,6 +3863,22 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "Database diagnostics should prefer typed catalogue-resolution probes over human-formatted error-text parsing; when text is used, an unrecognized format must emit a bounded unresolved classification rather than erase otherwise valid cleanup and observation evidence.",
                 "Undefined-symbol diagnostics must combine fixed catalogue probes with repository-bounded identifier admission; a historical failure allowlist may be the first classifier but never the sole classifier for a later execution path.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "harness.shell_wrapper_timeout_before_live_external_worker_completion"
+            ),
+            "incident_count": 3,
+            "incident_ids": ["AER-0256", "AER-0332", "AER-0333"],
+            "origins": ["harness"],
+            "categories": ["harness_failure"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-shell-command-timeout-wrapper"],
+            "prevention_controls": [
+                "Never reuse an arbitrary fixed wrapper timeout after a timeout incident. Derive outer timeout greater than inner timeout plus margin, and never chain Ruff, diff or other later gates behind a long pytest process.",
+                "Run future long external worker launchers through a sufficiently long or asynchronous wrapper and monitor their own terminal receipt; a shell timeout is harness evidence, not a worker decision, while the exact authorized process remains live.",
+                "Set every outer orchestration timeout to cover the declared inner adapter timeout. After any outer timeout, inspect the exact process, receipt and worktree before considering recovery; never retry while the original authorized process may still complete.",
             ],
         },
         {

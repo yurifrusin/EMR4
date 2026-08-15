@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 298,
+  "graph_revision": 299,
   "harvests": [],
   "nodes": [
     {
@@ -20281,9 +20281,93 @@
         "Product/patient data, product providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed.",
         "The next scaffold candidate remains paused until Yuri resumes product development after the Prime Agent assessment."
       ]
+    },
+    {
+      "id": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+      "title": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-15T09:47:44Z",
+      "updated_at": "2026-08-15T09:47:44Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-postcompaction-active-operation-latch",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted sidecar emits deterministic harness decisions and does not execute or replay commands.",
+          "Refinement content remains inert and quarantined; promotion and rollback emit immutable decisions only.",
+          "Prime Agent is neither installed nor executed, and no Raisa product authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-continuity-journal-and-refinement-safeguards",
+          "source": "docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md",
+          "status": "accepted",
+          "summary": "Accept append-only operation continuity, exact unchanged-gate decisions and explicitly promoted or rolled-back inert refinements as Ariadne-only safeguards."
+        }
+      ],
+      "claim_scope": [
+        "Exact completed request/result bindings may replay; conflicts, live work and uncertain or failed work never silently execute.",
+        "One exact composite gate fingerprint may reuse a pass, preserve a deterministic failure for diagnosis or preserve uncertainty for resolution.",
+        "Refinement promotion binds exact source/evidence/base/validation and separated Sol/reviewer authority; rollback derives from immutable history.",
+        "Two hundred focused tests, 167 hostile mutations, the canonical fast profile and one fresh Gemini 3.7 Flash/high veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md",
+          "docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/harness_settings/continuity_and_refinement_safeguards.yaml",
+          "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/operation-journal.schema.json",
+          "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/gate-attempt.schema.json",
+          "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-proposal.schema.json",
+          "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-promotion.schema.json",
+          "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/provider-free-authored-synthetic-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-294.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--ariadne-continuity-journal-and-refinement-safeguards.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_continuity_and_refinement.py",
+          "tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/continuity_and_refinement.py",
+          "scripts/ariadne_continuity_and_refinement.py",
+          "scripts/ariadne_continuity_and_refinement_safeguards_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No crash-safe journal store, supervisor, distributed coordination or command-completion claim is proved.",
+        "No refinement applies itself; source, policy, prompt and skill changes remain ordinary explicitly reviewed work.",
+        "No Prime runtime or Raisa application/API/database/provider/data authority is opened."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-15T06:35:48Z"
+  "updated_at": "2026-08-15T09:47:44Z"
 }

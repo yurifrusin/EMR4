@@ -1,0 +1,131 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-ariadne-continuity-safeguards-79f5d6cf",
+  "branch": "codex/review-ariadne-continuity-safeguards-79f5d6cf",
+  "head_before": "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce",
+  "head_after": "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "2bc453f254e5a69971c0df9e1162d0292060fb43cfb5b000e81739d796dfd370",
+  "result": "Fresh Gemini 3.7 Flash/high independent veto for candidate 79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce on branch codex/review-ariadne-continuity-safeguards-79f5d6cf at worktree C:\\Users\\sarashera\\EMR4-worktrees\\review-ariadne-continuity-safeguards-79f5d6cf.\n\n### Invariant Verification\n\n1. **Append-only journal & generation recovery:**\n   - `validate_operation_journal` enforces coordinate-ordered `(generation, sequence)` contiguity, immutable generations, stable command request digests, and validates that unfinished work (`received` / `running`) in a retired generation cannot persist without an explicit `uncertain` recovery event in the subsequent generation (`orchestration_harness/continuity_and_refinement.py`).\n   - `recover_generation` advances the generation counter by exactly one and transitions all live commands to `uncertain` without silent execution or memoized replay.\n\n2. **Submission precedence & conflict resolution:**\n   - `assess_command_submission` checks for `request_digest` mismatches first across all command states, immediately emitting `conflict` for differing requests under an existing command id.\n   - Only exact `completed` records with verified result digests emit `replay_completed`. Live (`received`, `running`), terminal failure (`failed`), revocation (`revoked`), and `uncertain` commands require a new generation and are never silently replayed.\n\n3. **Deterministic cursor assessment:**\n   - `assess_cursor` distinguishes same-generation later events (`events_available`), up-to-date sequences (`up_to_date`), and returns `snapshot_required` for stale, future, missing, or out-of-range cursors.\n\n4. **Unchanged deterministic gate assessment:**\n   - `assess_gate` strictly compares composite fingerprints covering candidate source head, candidate tree, evidence set digest, command manifest digest, relevant input digest, and toolchain digest.\n   - Exact prior failures return `diagnose_without_rerun` to prevent ceremonial reruns without relabelling failure as success; transient failures are represented exclusively as `uncertain` and return `resolve_uncertainty`. Ambiguous duplicate generations or conflicting outcomes fail closed.\n\n5. **Quarantined refinement proposals:**\n   - `validate_refinement_proposal` enforces Draft 2020-12 schema validation, single-line/body bounded text regexes, exact SHA-256 digests, and limits kind to non-executable categories (`prompt_note`, `memory_note`, `skill_description`, `subagent_spec`, `policy_note`). Executable code, commands, credentials, and dependencies remain unrepresentable. All proposals begin strictly in `quarantined` status.\n\n6. **Refinement promotion & separation of authority:**\n   - `validate_refinement_promotion` and `assess_promotion` require exact Sol promoter authority (`sol`), enforce proposer/promoter separation (`promoter != proposer`), and require a third pairwise-distinct independent reviewer for global scope proposals.\n   - Rejections faithfully record the underlying validation failure. Promotion emits typed decision records only without mutating files or policies.\n\n7. **Immutable history & rollback:**\n   - `assess_rollback` strictly checks decision history, verifies that the target was uniquely promoted and not previously rolled back, confirms no intervening promotion/rollback decision exists, matches current state digest to the promoted candidate digest, and increments the immutable generation without inferring or altering text.\n\n8. **AER-0331 containment & register integrity:**\n   - Revision 292 of the error register contains 331 bounded known incidents with zero open items. AER-0331 accurately records the containment and correction of the previous underclosed candidate.\n\n9. **Sidecar isolation & non-executing harness boundaries:**\n   - Standard-library-only implementation (`orchestration_harness/continuity_and_refinement.py`) and thin CLI (`scripts/ariadne_continuity_and_refinement.py`) import no product, database, network, or provider modules, and perform zero command execution or automatic filesystem/policy mutation.\n\n10. **Command manifest verification:**\n    - `FOCUSED_TESTS`: passed (exit code 0).\n    - `HARNESS_TESTS`: passed (exit code 0).\n    - `RUFF`: passed (exit code 0).\n    - `WHITESPACE`: passed (exit code 0).\n\nAll 10 invariants and 167 hostile mutation tests are satisfied. Candidate is coherent, fail-closed, and strictly non-executing.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "Fresh Gemini 3.7 Flash/high independent veto for candidate 79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce on branch codex/review-ariadne-continuity-safeguards-79f5d6cf at worktree C:\\Users\\sarashera\\EMR4-worktrees\\review-ariadne-continuity-safeguards-79f5d6cf.\n\n### Invariant Verification\n\n1. **Append-only journal & generation recovery:**\n   - `validate_operation_journal` enforces coordinate-ordered `(generation, sequence)` contiguity, immutable generations, stable command request digests, and validates that unfinished work (`received` / `running`) in a retired generation cannot persist without an explicit `uncertain` recovery event in the subsequent generation (`orchestration_harness/continuity_and_refinement.py`).\n   - `recover_generation` advances the generation counter by exactly one and transitions all live commands to `uncertain` without silent execution or memoized replay.\n\n2. **Submission precedence & conflict resolution:**\n   - `assess_command_submission` checks for `request_digest` mismatches first across all command states, immediately emitting `conflict` for differing requests under an existing command id.\n   - Only exact `completed` records with verified result digests emit `replay_completed`. Live (`received`, `running`), terminal failure (`failed`), revocation (`revoked`), and `uncertain` commands require a new generation and are never silently replayed.\n\n3. **Deterministic cursor assessment:**\n   - `assess_cursor` distinguishes same-generation later events (`events_available`), up-to-date sequences (`up_to_date`), and returns `snapshot_required` for stale, future, missing, or out-of-range cursors.\n\n4. **Unchanged deterministic gate assessment:**\n   - `assess_gate` strictly compares composite fingerprints covering candidate source head, candidate tree, evidence set digest, command manifest digest, relevant input digest, and toolchain digest.\n   - Exact prior failures return `diagnose_without_rerun` to prevent ceremonial reruns without relabelling failure as success; transient failures are represented exclusively as `uncertain` and return `resolve_uncertainty`. Ambiguous duplicate generations or conflicting outcomes fail closed.\n\n5. **Quarantined refinement proposals:**\n   - `validate_refinement_proposal` enforces Draft 2020-12 schema validation, single-line/body bounded text regexes, exact SHA-256 digests, and limits kind to non-executable categories (`prompt_note`, `memory_note`, `skill_description`, `subagent_spec`, `policy_note`). Executable code, commands, credentials, and dependencies remain unrepresentable. All proposals begin strictly in `quarantined` status.\n\n6. **Refinement promotion & separation of authority:**\n   - `validate_refinement_promotion` and `assess_promotion` require exact Sol promoter authority (`sol`), enforce proposer/promoter separation (`promoter != proposer`), and require a third pairwise-distinct independent reviewer for global scope proposals.\n   - Rejections faithfully record the underlying validation failure. Promotion emits typed decision records only without mutating files or policies.\n\n7. **Immutable history & rollback:**\n   - `assess_rollback` strictly checks decision history, verifies that the target was uniquely promoted and not previously rolled back, confirms no intervening promotion/rollback decision exists, matches current state digest to the promoted candidate digest, and increments the immutable generation without inferring or altering text.\n\n8. **AER-0331 containment & register integrity:**\n   - Revision 292 of the error register contains 331 bounded known incidents with zero open items. AER-0331 accurately records the containment and correction of the previous underclosed candidate.\n\n9. **Sidecar isolation & non-executing harness boundaries:**\n   - Standard-library-only implementation (`orchestration_harness/continuity_and_refinement.py`) and thin CLI (`scripts/ariadne_continuity_and_refinement.py`) import no product, database, network, or provider modules, and perform zero command execution or automatic filesystem/policy mutation.\n\n10. **Command manifest verification:**\n    - `FOCUSED_TESTS`: passed (exit code 0).\n    - `HARNESS_TESTS`: passed (exit code 0).\n    - `RUFF`: passed (exit code 0).\n    - `WHITESPACE`: passed (exit code 0).\n\nAll 10 invariants and 167 hostile mutation tests are satisfied. Candidate is coherent, fail-closed, and strictly non-executing.",
+    "command_results": [
+      {
+        "id": "FOCUSED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "tests/test_ariadne_continuity_and_refinement.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "HARNESS_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_verifier_worktree_preflight.py",
+          "tests/test_ariadne_allocation_schemas.py",
+          "tests/test_ariadne_verifier_execution_policy.py",
+          "tests/test_ariadne_deepseek_claude.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/continuity_and_refinement.py",
+          "scripts/ariadne_continuity_and_refinement.py",
+          "tests/test_ariadne_continuity_and_refinement.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "ac638c45",
+          "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "468f7c61e2c2bcc0d3e99909941ded81b2a52d8465ff3850afbc10d1336ede9f",
+  "command_results": [
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "HARNESS_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/continuity_and_refinement.py",
+        "scripts/ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "ac638c45",
+        "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

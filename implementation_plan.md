@@ -170,6 +170,17 @@ observations for every viable cause before another correction or retry. It did
 not prove restart or unknown-commit recovery; key rotation and retention/purge
 remain blocked.
 
+A subsequent read-only assessment of PrimeIntellect `prime-agent` yielded
+three bounded improvements for Ariadne's development harness only. The
+provider-free continuity sidecar now represents append-only generation-aware
+operation journals, exact unchanged-gate reuse/diagnosis/uncertainty decisions,
+and quarantined inert refinement proposals with separated Sol/reviewer
+promotion authority and history-derived rollback. At reviewed source
+`79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce`, 200 focused tests, all 167 hostile
+mutations, the canonical fast profile and one fresh Gemini 3.7 Flash/high veto
+pass. The sidecar executes no command, applies no refinement and grants no
+Prime runtime or Raisa product authority.
+
 Yuri subsequently selected the independent source-owned-truth reorientation.
 The first Context Fabric runtime is to depend on authoritative source services
 and atomic conditional commands for correctness, while committed events remain

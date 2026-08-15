@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 292,
+  "register_revision": 294,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13333,6 +13333,86 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0332",
+      "attempt_id": "ariadne-prime-derived-harness-adaptations-gemini37-veto-001",
+      "observed_on": "2026-08-15",
+      "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "codex-shell-command-timeout-wrapper",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_shell_command_wrapper",
+      "stage": "independent_review",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "An outer orchestration timeout around Antigravity must cover the launcher's declared inner adapter timeout or yield asynchronously; an outer timeout cannot be treated as terminal while the exact authorized Python and agy process remains active.",
+      "observed_error": "Sol set the first Gemini 3.7 veto launch's outer shell timeout to 120 seconds while the Antigravity launcher carried a 30-minute print timeout. The shell returned exit 124 after 124 seconds even though the exact existing Python and agy process remained active.",
+      "detection_method": "After exit 124, Sol inspected the exact process tree, receipt path and verifier worktree, observed the original process still live and did not retry. That same process completed one valid pass receipt for candidate 79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce, then exact postflight confirmed unchanged HEAD and a clean worktree.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-gemini37-outer-timeout-incident.json",
+        "orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-293.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.shell_wrapper_timeout_before_live_external_worker_completion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Treat the outer exit 124 as non-terminal process-orchestration evidence, inspect the exact process, receipt and worktree, forbid duplicate dispatch, and admit only the original process's later valid receipt plus clean postflight.",
+        "prevention_control": "Set every outer orchestration timeout to cover the declared inner adapter timeout. After any outer timeout, inspect the exact process, receipt and worktree before considering recovery; never retry while the original authorized process may still complete.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-gemini37-outer-timeout-incident.json",
+          "orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-293.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0333",
+      "attempt_id": "ariadne-prime-derived-harness-adaptations-closeout-gate-001",
+      "observed_on": "2026-08-15",
+      "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "codex-shell-command-timeout-wrapper",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_shell_command_wrapper",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "After a wrapper-timeout incident, every long local verification gate must declare an internal timeout and an outer timeout larger than that budget plus margin; later gates must not be chained behind the long-running test.",
+      "observed_error": "Immediately after AER-0332, Sol reused the same fixed 120-second outer shell timeout for a broader six-file local closeout pytest, Ruff and diff chain. The wrapper returned exit 124 after about 123.7 seconds and pytest emitted a stdout-flush OSError before the chained Ruff or diff gates could produce admissible results.",
+      "detection_method": "Exact process inspection after exit 124 found no surviving Python child. Sol therefore rejected the interrupted pytest result and claimed no Ruff or diff outcome from that command, then separated the gates for bounded rerun with ariadne_serial_pytest and an outer timeout demonstrably larger than its internal budget.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-closeout-outer-timeout-recurrence-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-294.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.shell_wrapper_timeout_before_live_external_worker_completion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Admit no result from the interrupted chain. Rerun each gate independently; run pytest only through ariadne_serial_pytest with an explicit internal timeout and an outer timeout larger than the internal budget plus margin, then record each exact result separately.",
+        "prevention_control": "Never reuse an arbitrary fixed wrapper timeout after a timeout incident. Derive outer timeout greater than inner timeout plus margin, and never chain Ruff, diff or other later gates behind a long pytest process.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-closeout-outer-timeout-recurrence-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-294.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

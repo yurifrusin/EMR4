@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 298 / Compass 280. The unmounted delete-confirm physical-design architecture passes with database-owned current authority, an exact private receipt and audit, one ordered transaction and separate readback. The next scaffold is planned but product development is paused at Yuri's request.
+> EMR4 is at Continuity 299 / Compass 281. Ariadne's provider-free continuity journal, unchanged-gate and quarantined-refinement safeguards pass without runtime authority. Product position remains the accepted delete-confirm physical design, and the unmounted scaffold is now the next active candidate.
 
 ## North star
 
@@ -373,15 +373,15 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 **The cancellation safety kernel has one exact physical design and is paused before runtime embodiment — Provider-free unmounted delete-confirm physical-design architecture**
 
-**Why this proof came next:** The exact-file representability review proved additive feasibility, allowing authority, receipt, audit, transaction and readback decisions to be frozen before code or database execution.
+**Why this proof came next:** The delete-confirm physical design passes, the bounded Prime assessment is complete, and Yuri has resumed the planned unmounted scaffold sequence.
 
 The unmounted architecture passes deterministic and fresh Gemini 3.7 veto evidence; Yuri requested a pause before the planned scaffold.
 
 ### What this unlocks
 
-- After Yuri resumes, implement a provider-free unmounted delete-confirm physical schema-and-transaction scaffold.
-- Lower only the exact product authority fence, normalized grants, receipt, audit and unmounted helper contract under deterministic static tests.
-- Keep database and route execution behind later evidence gates.
+- Freeze and implement the provider-free unmounted delete-confirm physical schema-and-transaction scaffold.
+- Verify static representability against the accepted authority, receipt, audit, transaction and readback contract.
+- Keep executable DDL, database behavior, mounted routes and product data behind later evidence gates.
 
 ### What it does not solve
 
@@ -669,6 +669,7 @@ Prerequisites:
 
 ## Map limits
 
+- The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.
 - The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.
 - The delete-confirm representability result selects no physical design and proves no DDL, PostgreSQL behavior, mounted route or client behavior.
 - The delete-confirm kernel result is authored-synthetic and unmounted; it proves no PostgreSQL authority fence, real locking/concurrency, route behavior or client behavior.
@@ -907,6 +908,8 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-288.md`
 - `docs/ariadne-agent-error-correction-register-revision-289.md`
 - `docs/ariadne-agent-error-correction-register-revision-290.md`
+- `docs/ariadne-agent-error-correction-register-revision-293.md`
+- `docs/ariadne-agent-error-correction-register-revision-294.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -926,6 +929,8 @@ Prerequisites:
 - `docs/ariadne-mandatory-parallelism-efficacy-control.md`
 - `docs/ariadne-postcompaction-active-operation-latch-closeout.md`
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
+- `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
+- `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
@@ -1362,6 +1367,7 @@ Prerequisites:
 - `docs/raisa-word-online-authenticated-companion-verification-plan.md`
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
+- `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
 - `docs/security/bernie-reception-one-bureau-runtime-ui-wiring-threat-model-delta.md`
 - `docs/security/bernie-reception-one-default-off-dual-planner-runtime-threat-model-delta.md`
 - `docs/security/bernie-reception-one-extended-proposal-runtime-threat-model-delta.md`
@@ -1497,6 +1503,7 @@ Prerequisites:
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
@@ -1546,6 +1553,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
+- `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json`
+- `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-independent-audit.md`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-preacceptance-receipt.json`
@@ -2017,6 +2027,11 @@ Prerequisites:
 - `orchestration/continuity/ariadne-active-operation-latch/active-operation.schema.json`
 - `orchestration/continuity/ariadne-active-operation-latch/current.json`
 - `orchestration/continuity/ariadne-agent-error-register/agent-error-register.json`
+- `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/gate-attempt.schema.json`
+- `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/operation-journal.schema.json`
+- `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/provider-free-authored-synthetic-evidence.json`
+- `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-promotion.schema.json`
+- `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-proposal.schema.json`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-004-audit-analysis.json`
@@ -2543,6 +2558,7 @@ Prerequisites:
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json`
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json`
 - `orchestration/harness_settings/autonomous_continuation.yaml`
+- `orchestration/harness_settings/continuity_and_refinement_safeguards.yaml`
 - `orchestration/harness_settings/evidence_led_workflow.yaml`
 - `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/harness_settings/orchestrator_requirements.yaml`
@@ -2605,6 +2621,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-practitioner-reassignment.md`
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
+- `orchestration/human_inbox/yuri/2026-08-15--ariadne-continuity-journal-and-refinement-safeguards.md`
 - `orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md`
 - `orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-representability-review.md`
@@ -2622,6 +2639,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review-analysis.json`
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
+- `orchestration_harness/continuity_and_refinement.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_duration_action.py`
 - `review/test_reception_one_practitioner_reassignment_action.py`
@@ -2631,6 +2649,8 @@ Prerequisites:
 - `review/test_reception_one_time_reschedule_action.py`
 - `review/test_two_projection_truth_parity.py`
 - `scripts/ariadne_active_operation_latch.py`
+- `scripts/ariadne_continuity_and_refinement.py`
+- `scripts/ariadne_continuity_and_refinement_safeguards_continuity_update.py`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
@@ -2696,6 +2716,8 @@ Prerequisites:
 - `tests/test_api_spine_status_confirm_idempotency_preflight.py`
 - `tests/test_ariadne_active_operation_latch.py`
 - `tests/test_ariadne_autonomous_continuation.py`
+- `tests/test_ariadne_continuity_and_refinement.py`
+- `tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
@@ -2778,4 +2800,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 280; continuity graph revision 298._
+_Compass map revision 281; continuity graph revision 299._

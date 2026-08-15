@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "HARNESS_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/continuity_and_refinement.py",
+        "scripts/ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "ac638c45",
+        "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce"
+      ]
+    }
+  ]
+}

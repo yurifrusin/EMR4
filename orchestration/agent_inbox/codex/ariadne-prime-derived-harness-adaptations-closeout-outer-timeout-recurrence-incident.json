@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0333",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T20:13:04+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards",
+  "attempt_id": "ariadne-prime-derived-harness-adaptations-closeout-gate-001",
+  "outer_shell_timeout_seconds": 120,
+  "outer_shell_observed_exit": 124,
+  "outer_shell_observed_elapsed_seconds": 123.7,
+  "interrupted_command_shape": "six_file_pytest_then_ruff_then_diff_chain",
+  "pytest_terminal_observation": "stdout_flush_oserror_after_outer_timeout",
+  "surviving_python_child_after_timeout": false,
+  "interrupted_pytest_result_admitted": false,
+  "chained_ruff_result_claimed": false,
+  "chained_diff_result_claimed": false,
+  "provider_or_model_calls": 0,
+  "product_or_evidence_corruption_observed": false,
+  "corrected_gate_contract": {
+    "pytest_runner": "python -m scripts.ariadne_serial_pytest",
+    "pytest_internal_timeout_seconds": 180,
+    "pytest_outer_timeout_seconds": 240,
+    "outer_exceeds_inner_by_seconds": 60,
+    "later_gates_unchained": true
+  },
+  "corrected_gate_results": {
+    "full_aer_test": "passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "pattern_report_byte_match": "passed",
+    "incident_json_validation": "passed",
+    "git_diff_check": "passed"
+  },
+  "detection": "The repeated fixed outer timeout interrupted local pytest and prevented admissible chained-gate results; exact inspection found no surviving Python child.",
+  "correction": "The interrupted chain is unadmitted. Each gate is rerun separately, with pytest using an explicit 180-second internal timeout and a 240-second outer timeout.",
+  "prevention": "Derive every outer timeout from the declared inner budget plus margin and never chain later gates behind a long test process.",
+  "candidate_state": "canonical_unchanged",
+  "status": "corrected_by_unchained_bounded_rerun"
+}

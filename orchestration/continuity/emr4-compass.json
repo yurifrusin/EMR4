@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 280,
-  "updated_at": "2026-08-15T06:35:48Z",
-  "source_graph_revision": 298,
-  "orientation_statement": "EMR4 is at Continuity 298 / Compass 280. The unmounted delete-confirm physical-design architecture passes with database-owned current authority, an exact private receipt and audit, one ordered transaction and separate readback. The next scaffold is planned but product development is paused at Yuri's request.",
+  "map_revision": 281,
+  "updated_at": "2026-08-15T09:47:44Z",
+  "source_graph_revision": 299,
+  "orientation_statement": "EMR4 is at Continuity 299 / Compass 281. Ariadne's provider-free continuity journal, unchanged-gate and quarantined-refinement safeguards pass without runtime authority. Product position remains the accepted delete-confirm physical design, and the unmounted scaffold is now the next active candidate.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3333,12 +3333,12 @@
   "current_position": {
     "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture",
     "strategic_role": "The cancellation safety kernel has one exact physical design and is paused before runtime embodiment",
-    "why_now": "The exact-file representability review proved additive feasibility, allowing authority, receipt, audit, transaction and readback decisions to be frozen before code or database execution.",
+    "why_now": "The delete-confirm physical design passes, the bounded Prime assessment is complete, and Yuri has resumed the planned unmounted scaffold sequence.",
     "outcome": "The unmounted architecture passes deterministic and fresh Gemini 3.7 veto evidence; Yuri requested a pause before the planned scaffold.",
     "unlocks": [
-      "After Yuri resumes, implement a provider-free unmounted delete-confirm physical schema-and-transaction scaffold.",
-      "Lower only the exact product authority fence, normalized grants, receipt, audit and unmounted helper contract under deterministic static tests.",
-      "Keep database and route execution behind later evidence gates."
+      "Freeze and implement the provider-free unmounted delete-confirm physical schema-and-transaction scaffold.",
+      "Verify static representability against the accepted authority, receipt, audit, transaction and readback contract.",
+      "Keep executable DDL, database behavior, mounted routes and product data behind later evidence gates."
     ],
     "does_not_solve": [
       "Executable Alembic lowering, ORM/service correctness, capability provisioning or mounted-route behavior.",
@@ -3478,7 +3478,28 @@
         "tests/test_ariadne_active_operation_latch.py",
         "docs/ariadne-postcompaction-active-operation-latch-closeout.md",
         "orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md",
-        "orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md"
+        "orchestration/human_inbox/yuri/2026-08-13--ariadne-postcompaction-active-operation-latch.md",
+        "docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md",
+        "docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md",
+        "orchestration/harness_settings/continuity_and_refinement_safeguards.yaml",
+        "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/operation-journal.schema.json",
+        "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/gate-attempt.schema.json",
+        "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-proposal.schema.json",
+        "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-promotion.schema.json",
+        "orchestration/continuity/ariadne-continuity-and-refinement-safeguards/provider-free-authored-synthetic-evidence.json",
+        "orchestration_harness/continuity_and_refinement.py",
+        "scripts/ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-15--ariadne-continuity-journal-and-refinement-safeguards.md",
+        "orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-293.md",
+        "scripts/ariadne_continuity_and_refinement_safeguards_continuity_update.py",
+        "tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-294.md"
       ]
     },
     {
@@ -5166,6 +5187,7 @@
     }
   ],
   "map_limits": [
+    "The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.",
     "The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.",
     "The delete-confirm representability result selects no physical design and proves no DDL, PostgreSQL behavior, mounted route or client behavior.",
     "The delete-confirm kernel result is authored-synthetic and unmounted; it proves no PostgreSQL authority fence, real locking/concurrency, route behavior or client behavior.",

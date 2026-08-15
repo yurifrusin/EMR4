@@ -30,10 +30,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 206859,
-  "ledger_line_count": 177,
+  "ledger_byte_count": 209317,
+  "ledger_line_count": 180,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "3530cee36c204b242e2d9ddea078c22aed446acddd64bded8a982e3fe5d088e4",
+  "ledger_sha256": "71ebf85976cfe418ef274679fa85401cc346f1aff14a189bce77684b305f26ba",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -195,14 +195,17 @@
     "Post-combined-editor Compass and baton orientation acceptance",
     "Antigravity independent-verifier allocation",
     "Reception One cancellation command-path readiness review acceptance",
-    "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission acceptance"
+    "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission acceptance",
+    "Ariadne continuity journal and refinement-promotion safeguards acceptance",
+    "Provider-free unmounted delete-confirm physical-design architecture acceptance",
+    "Accepted delete-confirm physical-design source"
   ],
-  "moved_row_count": 161,
+  "moved_row_count": 164,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 74538,
-  "source_agents_git_blob_sha1": "8e168ec89ad712272f73e31ea07adbf092185532",
-  "source_agents_line_count": 482,
+  "source_agents_byte_count": 74965,
+  "source_agents_git_blob_sha1": "f1f663f094e308c7382f000fb213676edb05e18c",
+  "source_agents_line_count": 483,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "cf98f5bef0b2ff1f9f309fc919d47e97fc45786a017f6f201843526ca6613ce3",
-  "source_git_head": "bc066a1b639c5c57cc72f2697c063c5842511840"
+  "source_agents_sha256": "e29c182271c594d8a3be50681dd5803d3f2166e75dd08f4e7bd3e5defb2a219b",
+  "source_git_head": "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce"
 }

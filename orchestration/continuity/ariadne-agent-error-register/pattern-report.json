@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "1117e22361f35c3b917e8fc6e8b26a5f4192d124bae05602a7eb76edf826b520",
+  "canonical_register_sha256": "7593e03b7fe8d2f5afb71bcea21a3097c0ea11d95f37801807062b43ac9ad7dc",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 203,
+      "canonical_unchanged": 205,
       "untrusted_partial_worktree": 30
     },
     "by_category": {
       "command_scope_violation": 49,
       "evidence_misreport": 43,
-      "harness_failure": 37,
+      "harness_failure": 39,
       "output_contract_violation": 95,
       "read_only_violation": 3,
       "reasoning_claim_error": 39,
@@ -18,12 +18,12 @@
     },
     "by_origin": {
       "agent_behavior": 229,
-      "harness": 37,
+      "harness": 39,
       "repository": 55,
       "transport": 10
     },
     "by_process_severity": {
-      "low": 134,
+      "low": 136,
       "material": 101,
       "moderate": 96
     },
@@ -40,7 +40,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 170,
-      "codex-shell-command-timeout-wrapper::orchestrator": 1,
+      "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
@@ -89,12 +89,12 @@
     "by_role": {
       "implementer": 25,
       "integration_reviewer": 2,
-      "orchestrator": 252,
+      "orchestrator": 254,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 331,
+  "incident_count": 333,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -714,6 +714,32 @@
       ],
       "incident_count": 3,
       "incident_ids": [
+        "AER-0256",
+        "AER-0332",
+        "AER-0333"
+      ],
+      "origins": [
+        "harness"
+      ],
+      "prevention_controls": [
+        "Never reuse an arbitrary fixed wrapper timeout after a timeout incident. Derive outer timeout greater than inner timeout plus margin, and never chain Ruff, diff or other later gates behind a long pytest process.",
+        "Run future long external worker launchers through a sufficiently long or asynchronous wrapper and monitor their own terminal receipt; a shell timeout is harness evidence, not a worker decision, while the exact authorized process remains live.",
+        "Set every outer orchestration timeout to cover the declared inner adapter timeout. After any outer timeout, inspect the exact process, receipt and worktree before considering recovery; never retry while the original authorized process may still complete."
+      ],
+      "recurrence_signature": "harness.shell_wrapper_timeout_before_live_external_worker_completion",
+      "resource_ids": [
+        "codex-shell-command-timeout-wrapper"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "harness_failure"
+      ],
+      "incident_count": 3,
+      "incident_ids": [
         "AER-0063",
         "AER-0078",
         "AER-0094"
@@ -864,7 +890,7 @@
       ]
     }
   ],
-  "register_revision": 292,
+  "register_revision": 294,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }
