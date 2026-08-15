@@ -4,15 +4,15 @@
   "active_tranche": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
   "objective": "Add the smallest harness-only deterministic contracts for stable generation-scoped command identity, completed replay versus explicit uncertainty, generation-sequence recovery, unchanged failed-gate suppression, and quarantined evidence-gated harness refinement without adding a daemon, executable skill, product runtime or automatic self-modification.",
   "status": "in_progress",
-  "source_head": "961a833b65e57682e10088300f4b7909a5a5aee8",
+  "source_head": "37cd378050e16bf49713b436e5d8a7af19321d97",
   "authority_source": "Yuri's 2026-08-15 explicit instruction to implement worthwhile Prime Agent adaptations in the Ariadne harness and then continue the accepted product tranche sequence",
   "checkpoint": {
-    "completed_stage": "The read-only overlap audit and frozen provider-free harness plan are committed at exact source 961a833b65e57682e10088300f4b7909a5a5aee8; AER-0330 preserves and corrects the rejected first preplanning state.",
-    "next_executable_stage": "Dispatch one bounded DeepSeek V4 Flash/high mechanical implementation from the exact committed plan, deterministically admit it, obtain one fresh Gemini 3.7 Flash/high veto, close out, then rehydrate and begin the accepted delete-confirm schema-and-transaction scaffold.",
+    "completed_stage": "DeepSeek candidate 7ff8ea25b03b691bad0feef179e9cb05f01c72f4 is a clean exact nine-path child and passes its 173 focused tests, but independent admission returned revision_required for five bounded fail-closed defects preserved in the worker review.",
+    "next_executable_stage": "Preserve the worker result, integrate its nine-path mechanical base, apply the one authorised bounded Sol correction, rerun deterministic gates, obtain one fresh Gemini 3.7 Flash/high veto, close out, then rehydrate and begin the accepted delete-confirm schema-and-transaction scaffold.",
     "retry_counters": {
       "planning": 0,
-      "implementation": 0,
-      "review": 0,
+      "implementation": 1,
+      "review": 1,
       "verification": 0
     },
       "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02"

@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All work complete. Final report follows.\n\n## Handback\n\n**Bound source verified before editing:** `961a833b65e57682e10088300f4b7909a5a5aee8` on branch `codex/worker-ariadne-prime-harness-961a833b`, clean worktree. Plan/threat-delta/receipt read completely and bound; no frozen-statement conflict found (no `revision_required` triggered).\n\n**Exact commit:** `7ff8ea25b03b691bad0feef179e9cb05f01c72f4` \u2014 message `Implement Ariadne continuity safeguards`\n\n**Changed paths (9 owned files, 3116 insertions):**\n1. `orchestration/harness_settings/continuity_and_refinement_safeguards.yaml`\n2. `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/operation-journal.schema.json`\n3. `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/gate-attempt.schema.json`\n4. `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-proposal.schema.json`\n5. `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-promotion.schema.json`\n6. `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/provider-free-authored-synthetic-evidence.json`\n7. `orchestration_harness/continuity_and_refinement.py`\n8. `scripts/ariadne_continuity_and_refinement.py`\n9. `tests/test_ariadne_continuity_and_refinement.py`\n\nNo other files were edited, staged, or committed.\n\n**Test counts:** 173 pytest nodes passed, exit code 0 (focused `tests/test_ariadne_continuity_and_refinement.py`).\n\n**Hostile-mutation count:** 139 semantically distinct mutations rejected across journal transitions/replay/recovery/cursors, gate fingerprints/outcomes, proposal quarantine/separation/bindings, and promotion/rollback (\u226560 required; evidence file records `attempted: 139 / rejected: 139` and the inventory test confirms the match).\n\n**Verification run (only permitted checks):**\n- JSON parse + Draft 2020-12 schema validation: all 4 schemas valid; evidence JSON parses (17 positive decisions, 26 fail-closed boundaries); policy YAML parses.\n- Ruff over the two owned Python files: `All checks passed!`\n- `python -m py_compile` over the two owned Python files: OK\n- `git diff --check`: OK\n- Exact owned-path/status checks: exactly 9 owned files staged via explicit paths; `git status --porcelain` is empty (clean worktree).\n\n**DECISION: pass**",
+  "usage": {
+    "input_tokens": 74590,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 13850496,
+    "output_tokens": 247452,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 13.496848000000004,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
