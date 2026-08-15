@@ -20,6 +20,8 @@ representability only and processes no product, patient or clinical data.
 |---|---|
 | Application or client selects authority generation | PostgreSQL trigger forces insert one, ignores direct submitted updates and owns every qualifying advance. |
 | A grant changes without invalidating an old proposal | Capability insert/delete must first advance and lock the exact parent generation in the same transaction. |
+| An unrelated nested trigger impersonates the grant-owned generation advance | PostgreSQL exposes depth but not parent-trigger identity, so admission is closed-world: the exact `public` grant function is the sole migration source containing the authority generation, runtime DDL/function/trigger mutation remains closed, a maintained source-inventory regression rejects another writer, and the next catalogue gate must verify the exact installed set. |
+| A duplicate `INSERT ... ON CONFLICT DO NOTHING` advances authority despite changing no grant | The capability trigger locks the parent first, detects an already-present exact row and returns without a generation update; a semantic static mutation must reject removal or weakening of this guard. |
 | Capability identity is reassigned in place | Capability update is rejected; delete then insert advances each affected parent. |
 | Role, wildcard, JSON or model output synthesizes authority | Only exact closed grant rows count; both authority checks also require active exact membership, admitted server role and signed current generation. |
 | Existing users receive implicit power | Migration creates an empty grant table and no provisioning path or consumer. |
@@ -50,6 +52,9 @@ representability only and processes no product, patient or clinical data.
 - PostgreSQL parsing/catalogues, trigger behavior, actual locks and wait timing,
   RLS, concurrency, rollback, restart and unknown-commit recovery remain
   unproved until separately admitted disposable rehearsals.
+- The source-only closed-world writer inventory does not prove production role
+  privileges or future deployed catalogue state; those remain closed and must
+  be re-established by later migration/catalogue and deployment gates.
 - The scaffold deliberately does not verify signed proposal evidence, stage a
   cancellation, create an audit row, complete a receipt, mount a route, or
   provision a grant.

@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.operation_journal.v1",
   "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
-  "generation": 1,
+  "generation": 2,
   "events": [
     {
       "event_id": "delete-scaffold-received",
@@ -18,6 +18,33 @@
       "sequence": 2,
       "command_id": "implement-delete-scaffold",
       "request_digest": "sha256:118dbf712dcecb24e47a389fa9df2dbc28aafc7d51d573eadfa73b6b2f727350",
+      "state": "running",
+      "result_digest": null
+    },
+    {
+      "event_id": "evt-recovery-2-1",
+      "generation": 2,
+      "sequence": 1,
+      "command_id": "implement-delete-scaffold",
+      "request_digest": "sha256:118dbf712dcecb24e47a389fa9df2dbc28aafc7d51d573eadfa73b6b2f727350",
+      "state": "uncertain",
+      "result_digest": null
+    },
+    {
+      "event_id": "delete-scaffold-recovery-2-received",
+      "generation": 2,
+      "sequence": 2,
+      "command_id": "implement-delete-scaffold-recovery-2",
+      "request_digest": "sha256:f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8",
+      "state": "received",
+      "result_digest": null
+    },
+    {
+      "event_id": "delete-scaffold-recovery-2-running",
+      "generation": 2,
+      "sequence": 3,
+      "command_id": "implement-delete-scaffold-recovery-2",
+      "request_digest": "sha256:f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8",
       "state": "running",
       "result_digest": null
     }

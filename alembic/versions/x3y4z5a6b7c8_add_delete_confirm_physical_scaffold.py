@@ -40,21 +40,23 @@ def upgrade() -> None:
     )
     # 3. Existing users receive a baseline, never fabricated chronology.
     op.execute(
-        "UPDATE users SET authority_generation = 1 WHERE authority_generation IS NULL"
+        "UPDATE public.users SET authority_generation = 1 "
+        "WHERE authority_generation IS NULL"
     )
     # 4. Validate the positive BIGINT domain before setting NOT NULL.
     op.execute(
-        "ALTER TABLE users ADD CONSTRAINT "
+        "ALTER TABLE public.users ADD CONSTRAINT "
         "ck_users_authority_generation_positive "
         "CHECK (authority_generation >= 1) NOT VALID"
     )
     op.execute(
-        "ALTER TABLE users VALIDATE CONSTRAINT ck_users_authority_generation_positive"
+        "ALTER TABLE public.users VALIDATE CONSTRAINT "
+        "ck_users_authority_generation_positive"
     )
     op.alter_column("users", "authority_generation", nullable=False)
     # 5. Exact composite uniqueness required by the closed grant relation.
     op.execute(
-        "ALTER TABLE users ADD CONSTRAINT uq_users_practice_id_id "
+        "ALTER TABLE public.users ADD CONSTRAINT uq_users_practice_id_id "
         "UNIQUE (practice_id, id)"
     )
 
@@ -89,7 +91,7 @@ def upgrade() -> None:
     # --- PostgreSQL-owned generation -------------------------------------
     op.execute(
         f"""
-        CREATE FUNCTION emr4_user_authority_generation_guard()
+        CREATE FUNCTION public.emr4_user_authority_generation_guard()
         RETURNS trigger
         LANGUAGE plpgsql
         AS $$
@@ -135,23 +137,23 @@ def upgrade() -> None:
     op.execute(
         """
         CREATE TRIGGER trg_users_authority_generation_guard
-        BEFORE INSERT OR UPDATE ON users
+        BEFORE INSERT OR UPDATE ON public.users
         FOR EACH ROW
-        EXECUTE FUNCTION emr4_user_authority_generation_guard()
+        EXECUTE FUNCTION public.emr4_user_authority_generation_guard()
         """
     )
 
     op.execute(
-        """
-        CREATE FUNCTION emr4_user_capability_grant_generation_guard()
+        f"""
+        CREATE FUNCTION public.emr4_user_capability_grant_generation_guard()
         RETURNS trigger
         LANGUAGE plpgsql
         AS $$
         DECLARE
-            v_parent users%ROWTYPE;
+            v_parent public.users%ROWTYPE;
         BEGIN
             IF TG_OP = 'DELETE' THEN
-                SELECT * INTO v_parent FROM users
+                SELECT * INTO v_parent FROM public.users
                 WHERE practice_id = OLD.practice_id AND id = OLD.user_id
                 FOR UPDATE;
                 IF NOT FOUND THEN
@@ -162,23 +164,35 @@ def upgrade() -> None:
                     RAISE EXCEPTION 'authority_generation overflow'
                         USING ERRCODE = '22003';
                 END IF;
-                UPDATE users
+                UPDATE public.users
                 SET authority_generation = users.authority_generation + 1
                 WHERE practice_id = OLD.practice_id AND id = OLD.user_id;
                 RETURN OLD;
             ELSIF TG_OP = 'INSERT' THEN
-                SELECT * INTO v_parent FROM users
+                SELECT * INTO v_parent FROM public.users
                 WHERE practice_id = NEW.practice_id AND id = NEW.user_id
                 FOR UPDATE;
                 IF NOT FOUND THEN
                     RAISE EXCEPTION 'user capability grant parent user missing'
                         USING ERRCODE = '23503';
                 END IF;
+                -- BEFORE INSERT also fires for a duplicate that will later be
+                -- suppressed by ON CONFLICT DO NOTHING. Under the parent lock,
+                -- an already-present exact row proves there is no grant change
+                -- and therefore no generation advance.
+                IF EXISTS (
+                    SELECT 1 FROM public.user_capability_grants
+                    WHERE practice_id = NEW.practice_id
+                      AND user_id = NEW.user_id
+                      AND capability_code = NEW.capability_code
+                ) THEN
+                    RETURN NEW;
+                END IF;
                 IF v_parent.authority_generation >= {GENERATION_MAX} THEN
                     RAISE EXCEPTION 'authority_generation overflow'
                         USING ERRCODE = '22003';
                 END IF;
-                UPDATE users
+                UPDATE public.users
                 SET authority_generation = users.authority_generation + 1
                 WHERE practice_id = NEW.practice_id AND id = NEW.user_id;
                 RETURN NEW;
@@ -191,16 +205,16 @@ def upgrade() -> None:
     op.execute(
         """
         CREATE TRIGGER trg_user_capability_grants_generation
-        BEFORE INSERT OR DELETE ON user_capability_grants
+        BEFORE INSERT OR DELETE ON public.user_capability_grants
         FOR EACH ROW
-        EXECUTE FUNCTION emr4_user_capability_grant_generation_guard()
+        EXECUTE FUNCTION public.emr4_user_capability_grant_generation_guard()
         """
     )
 
     # Grant updates are rejected; reassignment is delete then insert.
     op.execute(
         """
-        CREATE FUNCTION emr4_reject_user_capability_grant_update()
+        CREATE FUNCTION public.emr4_reject_user_capability_grant_update()
         RETURNS trigger
         LANGUAGE plpgsql
         AS $$
@@ -214,9 +228,9 @@ def upgrade() -> None:
     op.execute(
         """
         CREATE TRIGGER trg_user_capability_grants_reject_update
-        BEFORE UPDATE ON user_capability_grants
+        BEFORE UPDATE ON public.user_capability_grants
         FOR EACH ROW
-        EXECUTE FUNCTION emr4_reject_user_capability_grant_update()
+        EXECUTE FUNCTION public.emr4_reject_user_capability_grant_update()
         """
     )
 
@@ -302,27 +316,27 @@ def upgrade() -> None:
         DO $$
         BEGIN
             IF EXISTS (
-                SELECT 1 FROM users
+                SELECT 1 FROM public.users
                 WHERE authority_generation IS NULL
                    OR authority_generation < 1
                    OR authority_generation > {GENERATION_MAX}
             ) THEN
                 RAISE EXCEPTION 'invalid authority_generation after cutover';
             END IF;
-            IF EXISTS (SELECT 1 FROM user_capability_grants) THEN
+            IF EXISTS (SELECT 1 FROM public.user_capability_grants) THEN
                 RAISE EXCEPTION
                     'user_capability_grants must be empty after migration';
             END IF;
             IF EXISTS (
-                SELECT 1 FROM user_capability_grants g
-                LEFT JOIN users u
+                SELECT 1 FROM public.user_capability_grants g
+                LEFT JOIN public.users u
                     ON u.practice_id = g.practice_id AND u.id = g.user_id
                 WHERE u.id IS NULL
             ) THEN
                 RAISE EXCEPTION 'orphan user capability grant';
             END IF;
             IF EXISTS (
-                SELECT 1 FROM user_capability_grants
+                SELECT 1 FROM public.user_capability_grants
                 WHERE capability_code NOT IN
                     ('appointment.cancel.confirm', 'appointment.read')
             ) THEN
@@ -341,12 +355,12 @@ def downgrade() -> None:
         """
         DO $$
         BEGIN
-            IF EXISTS (SELECT 1 FROM user_capability_grants) THEN
+            IF EXISTS (SELECT 1 FROM public.user_capability_grants) THEN
                 RAISE EXCEPTION
                     'user capability grant exists; forward recovery required';
             END IF;
             IF EXISTS (
-                SELECT 1 FROM appointment_command_idempotency
+                SELECT 1 FROM public.appointment_command_idempotency
                 WHERE completed_receipt_version = 1
                   AND route_family = 'delete-confirm'
             ) THEN
@@ -354,7 +368,7 @@ def downgrade() -> None:
                     'delete-confirm receipt v1 exists; forward recovery required';
             END IF;
             IF EXISTS (
-                SELECT 1 FROM appointment_audit_log
+                SELECT 1 FROM public.appointment_audit_log
                 WHERE audit_contract_version = 1
             ) THEN
                 RAISE EXCEPTION
@@ -406,21 +420,22 @@ def downgrade() -> None:
     op.drop_column("appointment_command_idempotency", "authority_generation")
     op.execute(
         "DROP TRIGGER trg_user_capability_grants_reject_update "
-        "ON user_capability_grants"
+        "ON public.user_capability_grants"
     )
-    op.execute("DROP FUNCTION emr4_reject_user_capability_grant_update()")
+    op.execute("DROP FUNCTION public.emr4_reject_user_capability_grant_update()")
     op.execute(
-        "DROP TRIGGER trg_user_capability_grants_generation ON user_capability_grants"
+        "DROP TRIGGER trg_user_capability_grants_generation "
+        "ON public.user_capability_grants"
     )
-    op.execute("DROP FUNCTION emr4_user_capability_grant_generation_guard()")
-    op.execute("DROP TRIGGER trg_users_authority_generation_guard ON users")
-    op.execute("DROP FUNCTION emr4_user_authority_generation_guard()")
+    op.execute("DROP FUNCTION public.emr4_user_capability_grant_generation_guard()")
+    op.execute("DROP TRIGGER trg_users_authority_generation_guard ON public.users")
+    op.execute("DROP FUNCTION public.emr4_user_authority_generation_guard()")
     op.drop_index(
         "ix_user_capability_grants_user",
         table_name="user_capability_grants",
     )
     op.drop_table("user_capability_grants")
-    op.execute("ALTER TABLE users DROP CONSTRAINT uq_users_practice_id_id")
+    op.execute("ALTER TABLE public.users DROP CONSTRAINT uq_users_practice_id_id")
     op.drop_constraint(
         "ck_users_authority_generation_positive",
         "users",

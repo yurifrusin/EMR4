@@ -1,5 +1,4 @@
 import ast
-import copy
 import hashlib
 import importlib.util
 import json
@@ -18,6 +17,10 @@ APPOINTMENTS_PATH = ROOT / "app/models/appointments.py"
 SERVICE_PATH = ROOT / "app/services/appointment_delete_physical.py"
 MIGRATION_PATH = (
     ROOT / "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py"
+)
+VALIDATOR_PATH = (
+    ROOT
+    / "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py"
 )
 OPENAPI_PATH = ROOT / "docs/api-spine/openapi/appointment-commands.yaml"
 CONTRACT_PATH = (
@@ -40,62 +43,14 @@ def _load_service():
     return module
 
 
-def _leaf_paths(value, prefix=()):
-    if isinstance(value, dict):
-        paths = []
-        for key, child in value.items():
-            paths.extend(_leaf_paths(child, (*prefix, key)))
-        return paths
-    if isinstance(value, list):
-        paths = []
-        for index, child in enumerate(value):
-            paths.extend(_leaf_paths(child, (*prefix, index)))
-        return paths
-    return [prefix]
-
-
-def _mutated_leaf(value):
-    if isinstance(value, bool):
-        return not value
-    if isinstance(value, int):
-        return value + 1
-    if isinstance(value, str):
-        return f"{value}-hostile"
-    if value is None:
-        return "hostile-non-null"
-    raise TypeError(f"unsupported contract leaf: {type(value).__name__}")
-
-
-def _mutate_at(candidate, path):
-    parent = candidate
-    for component in path[:-1]:
-        parent = parent[component]
-    final = path[-1]
-    parent[final] = _mutated_leaf(parent[final])
-
-
-def _structured_mismatches(expected, candidate, prefix=()):
-    if type(expected) is not type(candidate):
-        return [prefix]
-    if isinstance(expected, dict):
-        if set(expected) != set(candidate):
-            return [prefix]
-        mismatches = []
-        for key in expected:
-            mismatches.extend(
-                _structured_mismatches(expected[key], candidate[key], (*prefix, key))
-            )
-        return mismatches
-    if isinstance(expected, list):
-        if len(expected) != len(candidate):
-            return [prefix]
-        mismatches = []
-        for index, value in enumerate(expected):
-            mismatches.extend(
-                _structured_mismatches(value, candidate[index], (*prefix, index))
-            )
-        return mismatches
-    return [] if expected == candidate else [prefix]
+def _load_validator():
+    spec = importlib.util.spec_from_file_location(
+        "delete_physical_validator_test_module", VALIDATOR_PATH
+    )
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def test_public_openapi_remains_frozen() -> None:
@@ -146,24 +101,24 @@ def test_migration_has_frozen_revision_and_ordered_cutover() -> None:
     markers = (
         'sa.Column("authority_generation", sa.BigInteger(), nullable=True)',
         'server_default=sa.text("1")',
-        "UPDATE users SET authority_generation = 1",
+        "UPDATE public.users SET authority_generation = 1",
         "CHECK (authority_generation >= 1) NOT VALID",
         'op.alter_column("users", "authority_generation", nullable=False)',
-        "ALTER TABLE users ADD CONSTRAINT uq_users_practice_id_id",
+        "ALTER TABLE public.users ADD CONSTRAINT uq_users_practice_id_id",
         "op.create_table(",
-        "CREATE FUNCTION emr4_user_authority_generation_guard()",
+        "CREATE FUNCTION public.emr4_user_authority_generation_guard()",
         "CREATE TRIGGER trg_users_authority_generation_guard",
-        "CREATE FUNCTION emr4_user_capability_grant_generation_guard()",
+        "CREATE FUNCTION public.emr4_user_capability_grant_generation_guard()",
         "CREATE TRIGGER trg_user_capability_grants_generation",
-        "CREATE FUNCTION emr4_reject_user_capability_grant_update()",
+        "CREATE FUNCTION public.emr4_reject_user_capability_grant_update()",
         "CREATE TRIGGER trg_user_capability_grants_reject_update",
         "invalid authority_generation after cutover",
     )
     positions = [source.index(marker) for marker in markers]
     assert positions == sorted(positions)
-    assert "BEFORE INSERT OR UPDATE ON users" in source
-    assert "BEFORE INSERT OR DELETE ON user_capability_grants" in source
-    assert "BEFORE UPDATE ON user_capability_grants" in source
+    assert "BEFORE INSERT OR UPDATE ON public.users" in source
+    assert "BEFORE INSERT OR DELETE ON public.user_capability_grants" in source
+    assert "BEFORE UPDATE ON public.user_capability_grants" in source
 
 
 def test_migration_triggers_and_guards() -> None:
@@ -183,6 +138,19 @@ def test_migration_triggers_and_guards() -> None:
     # Capability insert/delete locks and advances the exact parent.
     assert "FOR UPDATE" in source
     assert "authority_generation = users.authority_generation + 1" in source
+    assert "FROM public.user_capability_grants" in source
+    assert (
+        'f"""\n        CREATE FUNCTION public.emr4_user_capability_grant_generation_guard()'
+        in source
+    )
+    insert_branch = source.split("ELSIF TG_OP = 'INSERT' THEN", maxsplit=1)[1]
+    parent_lock = insert_branch.index("FOR UPDATE")
+    duplicate_guard = insert_branch.index("SELECT 1 FROM public.user_capability_grants")
+    generation_advance = insert_branch.index("UPDATE public.users")
+    assert parent_lock < duplicate_guard < generation_advance
+    assert "RETURN NEW;" in source
+    assert "ON public.users" in source
+    assert "UPDATE public.users" in source
     assert "user capability grant update is rejected" in source
     assert "user capability grant parent user missing" in source
 
@@ -591,18 +559,16 @@ def test_contract_bindings_match_frozen_source_hashes() -> None:
 def test_hostile_mutations_rejected_at_least_ninety() -> None:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
-    leaf_paths = _leaf_paths(contract)
-    assert len(leaf_paths) >= HOSTILE_MUTATION_TARGET
-    rejected = 0
-    for path in leaf_paths[:HOSTILE_MUTATION_TARGET]:
-        mutated = copy.deepcopy(contract)
-        _mutate_at(mutated, path)
-        schema_errors = [
-            error.message for error in Draft202012Validator(schema).iter_errors(mutated)
-        ]
-        structured_mismatches = _structured_mismatches(contract, mutated)
-        assert schema_errors or structured_mismatches, (
-            f"hostile_mutation_admitted:{path}"
-        )
-        rejected += 1
-    assert rejected >= HOSTILE_MUTATION_TARGET
+    validator = _load_validator()
+    attempted, rejected, admitted = validator.validate_hostile_mutations(
+        contract, schema
+    )
+    assert attempted >= HOSTILE_MUTATION_TARGET
+    assert rejected == attempted
+    assert admitted == []
+
+
+def test_closed_world_authority_writer_inventory_is_exact() -> None:
+    validator = _load_validator()
+    source = MIGRATION_PATH.read_text(encoding="utf-8")
+    assert validator._verify_closed_world_authority_writers(source) == []

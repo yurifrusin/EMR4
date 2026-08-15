@@ -149,6 +149,18 @@ are the only additional exceptions.
   database-owned `OLD + 1` transition is admitted by the user trigger. Grant
   updates are rejected, so reassignment is delete then insert and advances each
   affected parent. Missing parents and overflow abort the whole transaction.
+- PostgreSQL exposes nested trigger depth but not the parent trigger identity.
+  The depth-two admission is therefore closed-world: this migration's exact
+  grant trigger/function is the sole nested writer of
+  `users.authority_generation`; all raw function/table identities are
+  `public`-qualified; runtime roles have no DDL/trigger/function mutation
+  authority; and the static regression inventory must fail if any later
+  migration adds another nested authority-generation writer. The next
+  disposable catalogue gate must verify the same exact trigger/function set.
+- A duplicate capability INSERT, including `ON CONFLICT DO NOTHING`, detects
+  the already-present exact grant under the locked parent and returns without
+  advancing generation. Only a grant row that will actually be added or
+  removed advances the fence.
 - Migration assertions require positive user generations, an empty grant
   table, no orphan and no unknown capability. No role-derived or existing-user
   grant is created.
@@ -222,14 +234,17 @@ AST, two complete internal authority checks, replay classification, unchanged
 OpenAPI/router/schema/generic-idempotency/status-scaffold hashes, no route import
 and an explicit changed-path allowlist.
 
-At least ninety hostile mutations must fail closed, including automatic grants,
+At least ninety named semantic hostile mutations must fail closed through the
+actual contract-policy or source/static validator, including automatic grants,
 wildcards, role-only authority, client generation selection, non-advancing grant
 changes, mutable capability identity, generation overflow/wrap, synthetic-auth
 reuse, weakened composite identity, missing reason, legacy reason promotion,
 full appointment response, JSONB replay, raw sessions, status-branch regression,
 receipt-family widening, merged audit arrays, reset wait budgets, reordered or
 missing locks, one authority check, authority after disclosure, hidden retry,
-readback-as-commit, route mounting and migration/database execution.
+readback-as-commit, route mounting and migration/database execution. A generic
+whole-document digest difference or compare-to-the-object-just-mutated check
+does not count as semantic mutation evidence.
 
 Tests may import the mapped models and pure unmounted helper, but must not
 create an engine, connect to a database, execute DDL/SQL or migration functions,
@@ -286,3 +301,11 @@ change a frozen semantic or authority. A material contradiction stops as
 narrow candidate is a provider-free disposable PostgreSQL parse/catalogue
 rehearsal of this one migration; behavior, route convergence, provisioning and
 product data remain separately gated.
+
+Yuri explicitly instructed on 2026-08-15 that this tranche must close out and
+then pause before that parse/catalogue rehearsal begins. The accepted next
+candidate remains recorded, but the active-operation latch must become
+`paused` at closeout and no next-tranche plan, dispatch or execution may start.
+The first paused-state discussion will review recent tranche throughput and
+whether any workflow safeguards impose disproportionate ceremony or
+diminishing-return latency; it is a workflow review, not product authority.

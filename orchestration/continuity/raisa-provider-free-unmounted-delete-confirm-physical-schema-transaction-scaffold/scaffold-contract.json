@@ -51,7 +51,7 @@
     },
     {
       "path": "tests/test_api_spine_appointment_idempotency_model_migration.py",
-      "sha256": "f2f80b21932ab711ec18dac28545e00d57f43de8a7274746caeabac504c703d6"
+      "sha256": "509c9fd62c4fcae9f1394f29e0a4398b808d4f07deaa313065a6cdb9b173f1e3"
     },
     {
       "path": "tests/test_current_baton_consistency.py",
@@ -61,11 +61,11 @@
   "implementation_bindings": [
     {
       "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
-      "sha256": "d3b94dcc974fd0d2b4f34961ac264082b6c4a3e0ee3f61b07157ec5be9e66b58"
+      "sha256": "f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8"
     },
     {
       "path": "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
-      "sha256": "c72e76b6266190a2bc1f92e63aa305476b346e797875aa8e2414a97e7176218f"
+      "sha256": "89aff32e31e378a34f1a514831e2b0d3ecf76c2e9c32d0072ae5730a41068ef5"
     },
     {
       "path": "app/models/tenancy.py",
@@ -81,11 +81,11 @@
     },
     {
       "path": "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
-      "sha256": "29d107f9ef226ad3bdb005d52f0db20252847142ba3a1337f4e51c32c68b901c"
+      "sha256": "e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb"
     },
     {
       "path": "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
-      "sha256": "eda8294fd4055fe3fcb9f9f0fb8b9ab1e450eb98692b7e2575413fc2dfe241f5"
+      "sha256": "b35a7178d48d3559ad97d41a77d65facb6d0091c01dc3b98ba793e5bcb3f2018"
     }
   ],
   "mapping": {
@@ -108,6 +108,13 @@
       "submitted_generation_policy": "ignored_by_database",
       "nested_grant_advance_admitted": true,
       "nested_advance_signal": "postgresql_pg_trigger_depth_equals_two",
+      "closed_world_nested_writer_proof": {
+        "sole_migration": "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+        "sole_nested_writer_function": "public.emr4_user_capability_grant_generation_guard",
+        "runtime_ddl_trigger_function_mutation_authorized": false,
+        "public_schema_object_identity_required": true,
+        "later_writer_regression_denied": true
+      },
       "synthetic_application_auth_relations_ineligible": true
     },
     "user_capability_grants": {
@@ -136,6 +143,7 @@
       "json_claim_capable": false,
       "client_role_claim_capable": false,
       "update_rejected": true,
+      "duplicate_insert_advances_generation": false,
       "reassignment": "delete_then_insert_advances_each_parent",
       "automatic_grant_to_existing_users": false,
       "capability_rows_after_migration": 0
@@ -228,6 +236,7 @@
       "scope": "user_capability_grants",
       "parent_lock": "users_for_update",
       "parent_advance": "nested_update_old_plus_one",
+      "duplicate_insert_policy": "locked_exact_row_exists_returns_without_generation_advance",
       "missing_parent_aborts": true,
       "update_rejected_trigger": true
     },

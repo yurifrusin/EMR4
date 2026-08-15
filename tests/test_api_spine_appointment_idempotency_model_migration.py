@@ -30,6 +30,12 @@ STATUS_CONFIRM_MIGRATION = (
     / "versions"
     / "w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py"
 )
+DELETE_CONFIRM_MIGRATION = (
+    ROOT
+    / "alembic"
+    / "versions"
+    / "x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py"
+)
 PREFLIGHT_DOC = (
     ROOT
     / "orchestration"
@@ -66,8 +72,8 @@ REQUIRED_COLUMNS = (
     "pre_state_version",
     "post_state_version",
     "response_body_canonical_bytes",
-    "authority_generation",
 )
+ADDITIVE_COLUMNS = ("authority_generation",)
 FORBIDDEN_FIELDS = (
     "raw_idempotency_key",
     "idempotency_key_raw",
@@ -84,7 +90,7 @@ def test_model_declares_appointment_command_idempotency_table_contract():
     table = AppointmentCommandIdempotency.__table__
 
     assert table.name == TABLE_NAME
-    assert tuple(table.columns.keys()) == REQUIRED_COLUMNS
+    assert tuple(table.columns.keys()) == REQUIRED_COLUMNS + ADDITIVE_COLUMNS
     for column in (
         "practice_id",
         "actor_user_id",
@@ -197,6 +203,7 @@ def test_migration_matches_model_contract_and_previous_revision():
     stage2_text = _read(STAGE2_MIGRATION)
     a5_text = _read(A5_MIGRATION)
     status_confirm_text = _read(STATUS_CONFIRM_MIGRATION)
+    delete_confirm_text = _read(DELETE_CONFIRM_MIGRATION)
 
     assert 'revision: str = "l1m2n3o4p5q6"' in text
     assert 'down_revision: Union[str, Sequence[str], None] = "k0l1m2n3o4p5"' in text
@@ -226,6 +233,9 @@ def test_migration_matches_model_contract_and_previous_revision():
         "response_body_canonical_bytes",
     ):
         assert f'"{column}"' in status_confirm_text
+    assert 'sa.Column("authority_generation", sa.BigInteger(), nullable=True)' in (
+        delete_confirm_text
+    )
     assert "ck_appt_cmd_idem_completed_create_correlation" in stage2_text
     assert "uq_appt_cmd_idem_audit_log_id" in stage2_text
     assert "uq_appt_cmd_idem_practice_actor_operation_key" in text
