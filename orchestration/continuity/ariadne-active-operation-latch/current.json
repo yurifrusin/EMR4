@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
-  "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
-  "objective": "Map the accepted delete-confirm abstract practice authority fence, practice-appointment-idempotency lock order, exact structured and nullable free-text reasons, atomic appointment/audit/receipt obligations and separate authorised readback onto exact existing repository structures, identifying additive gaps without selecting or executing a physical design.",
-  "status": "complete",
-  "source_head": "bc066a1b639c5c57cc72f2697c063c5842511840",
-  "authority_source": "The accepted delete-confirm kernel result at 356b28a1750e7a7b379406e864f2a3501606938a, AGENTS.md Continuity 296 / Compass 278, and Yuri's standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+  "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+  "objective": "Freeze the smallest declarative additive practice-authority fence, delete-confirm private receipt, attributable audit correlation, exact transaction lock/check order, reason and appointment-version semantics, and separately authorised fresh readback without editing or executing application, database or product source.",
+  "status": "in_progress",
+  "source_head": "6514d35c465e304a421218890264f61c33ba51bb",
+  "authority_source": "The accepted physical representability result at bc066a1b639c5c57cc72f2697c063c5842511840, AGENTS.md Continuity 297 / Compass 279, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Accepted physical representability review: thirteen hashes, twenty-six observations, six verdicts, fifty-two hostile rejections and independent Gemini pass at unchanged clean source",
-    "next_executable_stage": null,
+    "completed_stage": "Exact provider-free unmounted delete-confirm physical-design plan, threat-model delta and plan guards frozen against source HEAD 6514d35c",
+    "next_executable_stage": "Commit the frozen plan, then dispatch the bounded DeepSeek mechanical contract/schema/validator/test work package from the committed plan HEAD",
     "retry_counters": {
-      "planning": 1,
-      "implementation": 1,
-      "review": 2,
-      "verification": 1
+      "planning": 0,
+      "implementation": 0,
+      "review": 0,
+      "verification": 0
     },
     "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -24,20 +24,21 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_exact_file_read_only_unmounted_review_only",
-    "no_application_model_migration_service_route_openapi_or_graphql_edit",
-    "no_application_import_mount_database_sql_or_real_lock_execution",
-    "no_physical_design_column_type_default_backfill_migration_revision_or_runtime_composition_selection",
+    "provider_free_authored_synthetic_unmounted_architecture_only",
+    "exact_frozen_source_allowlist_only",
+    "no_application_model_migration_service_route_openapi_or_graphql_edit_or_import",
+    "no_executable_ddl_database_sql_real_transaction_or_lock",
+    "no_physical_scaffold_or_runtime_composition_implementation",
     "no_source_watcher_event_provider_or_product_runtime",
     "no_patient_product_clinical_historical_diary_or_protected_data",
     "no_command_write_or_executable_tool_against_product_or_database",
