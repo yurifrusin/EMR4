@@ -1,0 +1,15 @@
+{
+  "schema_version": "raisa.verifier_detached_worktree_incident.v1",
+  "incident_id": "AER-0327",
+  "attempt_id": "raisa-delete-confirm-physical-representability-gemini-worktree-001",
+  "observed_at": "2026-08-15T14:08:08+10:00",
+  "candidate_head": "bc066a1b639c5c57cc72f2697c063c5842511840",
+  "initial_branch": "",
+  "observed_error": "Antigravity refuses protected or detached branch",
+  "provider_or_model_calls": 0,
+  "review_receipt_created": false,
+  "candidate_changed": false,
+  "correction": "Attach the unchanged worktree to codex/review-delete-confirm-representability-bc066a1b and require the exact verifier worktree preflight to pass before regenerating the pre-verifier receipt.",
+  "corrected_preflight": "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-worktree-preflight.json",
+  "claim_boundary": "This receipt records a local orchestration preflight failure before project creation or any provider/model call."
+}

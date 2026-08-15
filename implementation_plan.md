@@ -392,12 +392,19 @@ then passes at exact reviewed source
 `356b28a1750e7a7b379406e864f2a3501606938a`, freezing exact lock order, two
 current-authority checks, signed evidence, reason preservation, atomic
 cancellation/audit/receipt completion, rollback, replay and separate readback.
-The next narrow descendant is a provider-free unmounted physical
-representability review before any mounted route, PostgreSQL behavior or
-Reception One cancellation composition. Patient-channel delegation, check-in,
-Stage 3B, another event family and operational durability remain retained at
-their exact gates. No watcher runtime, product data, external patient client,
-provider, deployment, production or release is opened.
+The provider-free read-only unmounted physical representability review now
+passes at exact reviewed source
+`bc066a1b639c5c57cc72f2697c063c5842511840`. Appointment truth is already
+represented; the practice-authority fence, delete-confirm private receipt,
+audit correlation, ordered atomic boundary and separately authorised readback
+are each representable through bounded additive change. The current mounted
+and compatibility routes remain unadmitted. The next narrow descendant is a
+provider-free unmounted physical-design architecture before inert DDL,
+PostgreSQL behavior, route convergence or Reception One cancellation
+composition. Patient-channel delegation, check-in, Stage 3B, another event
+family and operational durability remain retained at their exact gates. No
+watcher runtime, product data, external patient client, provider, deployment,
+production or release is opened.
 
 The durable product seam is one Raisa authority kernel with replaceable
 interaction adapters. Reception One is the first-party reference client; later

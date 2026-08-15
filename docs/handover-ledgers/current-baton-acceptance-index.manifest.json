@@ -22,6 +22,7 @@
     "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal acceptance",
     "Status-confirm preflight idempotency expectation repair acceptance",
+    "Provider-free read-only unmounted delete-confirm physical representability review acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -29,10 +30,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 204120,
-  "ledger_line_count": 175,
+  "ledger_byte_count": 206859,
+  "ledger_line_count": 177,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "b9ac9ed9f8bf41fbf02cbdecb4091ebeaa1e3a5e617e91ffbcde1fa322b62b49",
+  "ledger_sha256": "3530cee36c204b242e2d9ddea078c22aed446acddd64bded8a982e3fe5d088e4",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -192,14 +193,16 @@
     "Reception One same-update-family multi-change kernel rehearsal acceptance",
     "Reception One same-update-family multi-change editor composition acceptance",
     "Post-combined-editor Compass and baton orientation acceptance",
-    "Antigravity independent-verifier allocation"
+    "Antigravity independent-verifier allocation",
+    "Reception One cancellation command-path readiness review acceptance",
+    "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission acceptance"
   ],
-  "moved_row_count": 159,
+  "moved_row_count": 161,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 75281,
-  "source_agents_git_blob_sha1": "9d8586fa4a216b1f45fd48531c54f9d87a46f10e",
+  "source_agents_byte_count": 74538,
+  "source_agents_git_blob_sha1": "8e168ec89ad712272f73e31ea07adbf092185532",
   "source_agents_line_count": 482,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "638ffda4b9ec1d0a4f9e65ac18a8f9ea5122e725261d13efcbd7709357052674",
-  "source_git_head": "2ca3a111d2ee9277571ea3c905f22ce78c8e9745"
+  "source_agents_sha256": "cf98f5bef0b2ff1f9f309fc919d47e97fc45786a017f6f201843526ca6613ce3",
+  "source_git_head": "bc066a1b639c5c57cc72f2697c063c5842511840"
 }

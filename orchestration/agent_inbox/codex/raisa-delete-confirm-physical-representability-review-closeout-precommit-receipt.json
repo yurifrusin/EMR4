@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_accepted_delete_confirm_physical_representability_closeout_on_non_protected_task_branch",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records Continuity 297 / Compass 279, the accepted reviewed source and the next unmounted physical-design gate; the compactness/index checks pass.",
+    "current_authority_allocation": "Sol owns acceptance, explicit-path commit and task-branch publication. DeepSeek is closed without source, Gemini completed one exact pass and native subagents remain declined for the serial closeout sequence.",
+    "active_plan_and_acceptance": "Thirteen hashes, twenty-six observations, six verdicts, fifty-two hostile rejections, the 58-test closeout packet, 249-test register, five-command Gemini veto and canonical 196-test fast profile pass.",
+    "protected_evidence_boundaries": "No product/database/runtime/data/provider/deployment/release/protected-ref authority is opened. docs/branding and all unrelated untracked files remain unstaged.",
+    "git_refs_and_worktree": "Task candidate is bc066a1b before closeout commit; required 648c8ec remains its ancestor. Local/origin master and handoff/current remain 2e34bdad. Explicit-path staging only is authorised."
+  },
+  "active_operation": {"operation_id": "raisa-reception-one-delete-confirm-physical-representability-review", "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review", "status": "complete", "source_head": "bc066a1b639c5c57cc72f2697c063c5842511840", "completed_stage": "Accepted at Continuity 297 / Compass 279", "next_executable_stage": null, "resume_after_compaction": false, "user_attention_required": false, "terminal_handback_permitted": true},
+  "parallelism_assessment": {"schema_version": "ariadne.parallelism_assessment.v1", "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review", "assessed_stage": "closeout_precommit", "lanes": [{"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "neutral", "rationale": "Closed without admitted source.", "work_packages": []}, {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "Five-command veto passed.", "work_packages": ["exact-candidate veto"]}, {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Closeout Git sequence is serial.", "work_packages": []}], "parallel_work_packages": [], "serial_constraints": ["explicit-path staging only", "non-protected task branch only", "protected refs unchanged"], "reassessment_triggers": ["staging mismatch", "commit failure", "push failure", "ref mismatch"]},
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "worker_dispatch_permitted": false,
+  "terminal_handback_permitted": true,
+  "reasons": []
+}

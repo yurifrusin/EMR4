@@ -44,6 +44,7 @@ ACTIVE_LABELS = (
     "Ariadne CF-D2 workflow incident diagnosis and fluidity repair acceptance",
     "Provider-free disposable PostgreSQL status-confirm scaffold parse/catalogue rehearsal acceptance",
     "Status-confirm preflight idempotency expectation repair acceptance",
+    "Provider-free read-only unmounted delete-confirm physical representability review acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",

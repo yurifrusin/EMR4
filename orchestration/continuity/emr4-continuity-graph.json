@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 296,
+  "graph_revision": 297,
   "harvests": [],
   "nodes": [
     {
@@ -20098,9 +20098,107 @@
         "Reception One cancellation composition and every external adapter remain closed.",
         "Product data, providers, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review",
+      "title": "Provider-free read-only unmounted delete-confirm physical representability review",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-15T04:44:52Z",
+      "updated_at": "2026-08-15T04:44:52Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "bc066a1b639c5c57cc72f2697c063c5842511840",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted result is provider-free, read-only and unmounted.",
+          "Appointment truth is represented; five surrounding domains require bounded additive design.",
+          "The current mounted route and compatibility paths are not the accepted kernel."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-physical-representability-review",
+          "source": "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact physical representability without implementation admission and proceed only to unmounted physical design."
+        }
+      ],
+      "claim_scope": [
+        "Thirteen exact hashes and twenty-six line-bound observations support six closed verdicts.",
+        "Appointment practice ownership, status, waiting area, exact reasons and positive monotonic version are already represented.",
+        "Practice authority, private receipt, audit correlation, atomic ordering and fresh readback are representable with additive change.",
+        "The current mounted route remains unadmitted.",
+        "All fifty-two hostile mutations fail closed and implementation remains not admitted.",
+        "Gemini passed five exact commands at unchanged clean reviewed source."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json",
+            "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md"
+          ],
+          "note": "The cancellation kernel has an exact physical mapping or bounded additive gap in every domain without mounting a command."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-286.md",
+          "docs/ariadne-agent-error-correction-register-revision-287.md",
+          "docs/ariadne-agent-error-correction-register-revision-288.md",
+          "docs/ariadne-agent-error-correction-register-revision-289.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-representability-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-admission.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py",
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json",
+          "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+          "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No additive column, constraint, migration, service or route design is selected yet.",
+        "Real PostgreSQL parse, catalogue, locking, concurrency, rollback and restart behavior remain unproved.",
+        "Mounted delete-confirm route convergence and Reception One cancellation composition remain closed.",
+        "Product data, external adapters, providers, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-15T02:56:41Z"
+  "updated_at": "2026-08-15T04:44:52Z"
 }

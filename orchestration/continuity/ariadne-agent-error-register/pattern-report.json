@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "96f53091f6c78e5f3ec288d9176c7ad2e7591a9f43bb01aac375da373d5fe75d",
+  "canonical_register_sha256": "6671a4aad3ad9f1428de31e82378609805389187e4814a20fc788c510bf60862",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 199,
+      "canonical_unchanged": 201,
       "untrusted_partial_worktree": 29
     },
     "by_category": {
       "command_scope_violation": 48,
       "evidence_misreport": 42,
       "harness_failure": 37,
-      "output_contract_violation": 93,
+      "output_contract_violation": 95,
       "read_only_violation": 3,
       "reasoning_claim_error": 38,
       "repository_defect": 55,
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 224,
+      "agent_behavior": 226,
       "harness": 37,
       "repository": 55,
       "transport": 10
     },
     "by_process_severity": {
-      "low": 130,
+      "low": 132,
       "material": 100,
       "moderate": 96
     },
@@ -39,7 +39,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 166,
+      "codex-primary-orchestrator::orchestrator": 168,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -89,12 +89,12 @@
     "by_role": {
       "implementer": 24,
       "integration_reviewer": 2,
-      "orchestrator": 248,
+      "orchestrator": 250,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 326,
+  "incident_count": 328,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -375,17 +375,19 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0012",
         "AER-0014",
-        "AER-0316"
+        "AER-0316",
+        "AER-0327"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Create every verifier worktree directly on a named non-protected codex/review branch; never use --detach even temporarily before the mandatory preflight.",
+        "Never create an Antigravity verifier worktree with --detach. Create it directly on a named codex/review branch and require scripts.ariadne_verifier_worktree_preflight to pass before constructing the pre-verifier runtime state.",
         "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
         "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
       ],
@@ -834,7 +836,7 @@
       ]
     }
   ],
-  "register_revision": 287,
+  "register_revision": 289,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

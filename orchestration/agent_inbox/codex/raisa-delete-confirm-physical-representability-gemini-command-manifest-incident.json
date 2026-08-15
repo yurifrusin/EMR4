@@ -1,0 +1,16 @@
+{
+  "schema_version": "raisa.verifier_command_manifest_incident.v1",
+  "incident_id": "AER-0328",
+  "attempt_id": "raisa-delete-confirm-physical-representability-gemini-command-manifest-002",
+  "observed_at": "2026-08-15T14:34:20+10:00",
+  "candidate_head": "bc066a1b639c5c57cc72f2697c063c5842511840",
+  "verifier_branch": "codex/review-delete-confirm-representability-bc066a1b",
+  "observed_error": "command[0] id is invalid or duplicated",
+  "required_id_pattern": "^[A-Z][A-Z0-9_-]{0,31}$",
+  "rejected_ids": ["review_acceptance", "focused_tests", "api_spine_tests", "ruff", "whitespace"],
+  "provider_or_model_calls": 0,
+  "review_receipt_created": false,
+  "candidate_changed": false,
+  "correction": "Replace only the five ids with uppercase admitted tokens and pass scripts.ariadne_evidence_gate over the exact manifest before a distinct corrected receipt and fresh dispatch.",
+  "claim_boundary": "This receipt records local command-manifest admission failure before project creation or any provider/model call."
+}

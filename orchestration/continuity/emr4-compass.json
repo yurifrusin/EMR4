@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 278,
-  "updated_at": "2026-08-15T02:56:41Z",
-  "source_graph_revision": 296,
-  "orientation_statement": "EMR4 is at Continuity 296 / Compass 278. The unmounted delete-confirm authority kernel passes; physical representability is next before database, route or Reception One cancellation composition.",
+  "map_revision": 279,
+  "updated_at": "2026-08-15T04:44:52Z",
+  "source_graph_revision": 297,
+  "orientation_statement": "EMR4 is at Continuity 297 / Compass 279. Delete-confirm physical representability passes; unmounted physical design is next before DDL, database behavior, route or Reception One composition.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3279,76 +3279,102 @@
         "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review",
+      "lineage_parent": "raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission",
+      "strategic_role": "Prove the abstract cancellation kernel fits exact physical/API structures before selecting implementation",
+      "outcome": "Appointment truth is already represented and five surrounding domains have bounded additive paths; the current route remains unadmitted.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-plan.md",
+        "docs/security/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-threat-model-delta.md",
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md",
+        "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/review-contract.json",
+        "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json",
+        "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-admission.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-286.md",
+        "docs/ariadne-agent-error-correction-register-revision-287.md",
+        "docs/ariadne-agent-error-correction-register-revision-288.md",
+        "docs/ariadne-agent-error-correction-register-revision-289.md",
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-representability-review.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission",
-    "strategic_role": "Hold cancellation at the authority-kernel seam before physical mapping",
-    "why_now": "The abstract transaction and independent veto pass; PostgreSQL representability is the next dependency.",
-    "outcome": "Proceed to a read-only physical representability review without mounting or executing cancellation.",
+    "node_id": "raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review",
+    "strategic_role": "Hold cancellation at the declarative physical-design gate",
+    "why_now": "Representability passes without weakening the kernel; exact additive structures and ordering must now be selected before any DDL or route work.",
+    "outcome": "Proceed to provider-free unmounted physical-design architecture only.",
     "unlocks": [
-      "An exact mapping or explicit gap list for practice authority fencing and lock order.",
-      "A later inert physical design and disposable PostgreSQL rehearsal if representability passes.",
-      "A stable authority seam for the native Reception One reference client and future separately gated adapters."
+      "An exact declarative practice-authority fence and delete-confirm private receipt design.",
+      "A later inert DDL lowering and disposable PostgreSQL rehearsal if design passes.",
+      "A stable command seam for Reception One and future separately gated adapters."
     ],
     "does_not_solve": [
-      "No PostgreSQL lock, isolation or concurrent behavior is proved.",
-      "No route, OpenAPI, product client or cancellation UI is changed.",
-      "No external adapter, patient identity/delegation, provider, production or release authority is opened."
+      "No schema, migration, service, route or client is changed.",
+      "No PostgreSQL locking, concurrency, rollback or restart behavior is proved.",
+      "No external adapter, product data, provider, production or release authority is opened."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-plan.md",
-      "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md",
-      "docs/security/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/provider-free-acceptance-evidence.json",
-      "scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py",
-      "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py",
-      "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_plan.py",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-postcompaction-closeout-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-gemini-review-worktree-preflight.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-sol-recovery-gemini-review-packet.md",
-      "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-pre-verifier-acceptance-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-285.md",
-      "docs/raisa-authority-kernel-reference-client-adapter-seam.md",
-      "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md"
+      "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-plan.md",
+      "docs/security/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md",
+      "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/review-contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json",
+      "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+      "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+      "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-admission.json",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-286.md",
+      "docs/ariadne-agent-error-correction-register-revision-287.md",
+      "docs/ariadne-agent-error-correction-register-revision-288.md",
+      "docs/ariadne-agent-error-correction-register-revision-289.md",
+      "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-representability-review.md"
     ]
   },
   "decision_horizon": [
     {
-      "id": "reception-one-delete-confirm-physical-representability",
-      "title": "Reception One delete-confirm physical representability",
+      "id": "reception-one-delete-confirm-physical-design-architecture",
+      "title": "Reception One delete-confirm physical-design architecture",
       "status": "active",
-      "strategic_question": "Can the abstract cancellation authority fence, lock order and atomic artifacts be represented exactly by existing repository structures?",
-      "why_it_matters": "Physical mapping must be honest before any database rehearsal, route convergence or destructive UI exposure.",
+      "strategic_question": "What is the smallest declarative additive design that realizes all five representability gaps without mounting the command?",
+      "why_it_matters": "The exact authority fence, receipt, audit and transaction order must be frozen before inert DDL or disposable PostgreSQL behavior work.",
       "prerequisites": [
-        "Provider-free read-only repository inspection only.",
-        "No mounted route, database mutation, product client or UI source change.",
-        "Retain exact authority, evidence, reason, idempotency, audit, receipt and readback contracts."
+        "Use the exact six representability verdicts and twenty-six observations.",
+        "Remain provider-free, authored-synthetic, declarative and unmounted.",
+        "Preserve current-authority non-disclosure, exact lock order, reasons, version advance, atomic artifacts and separate readback."
       ],
       "boundary_changes": [],
       "evidence": [
-        "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-plan.md",
-        "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md",
-        "docs/security/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-threat-model-delta.md",
-        "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md",
-        "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md"
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md",
+        "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json",
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md"
       ]
     },
     {
       "id": "reception-one-appointment-cancellation-direction",
       "title": "Reception One appointment cancellation direction",
       "status": "active",
-      "strategic_question": "Cancellation is selected and its abstract conditional-command kernel passes; how should it cross the remaining physical and product gates?",
+      "strategic_question": "Cancellation is selected and physically representable; how should its exact design cross the remaining database and product gates?",
       "why_it_matters": "The destructive action must retain one backend authority path from physical representation through Reception One composition.",
       "prerequisites": [
-        "Complete the provider-free unmounted physical representability review.",
-        "Keep disposable PostgreSQL behavior, mounted route convergence and Reception One composition as later distinct gates."
+        "Complete the provider-free unmounted physical-design architecture.",
+        "Keep inert DDL, disposable PostgreSQL behavior, mounted route convergence and Reception One composition as later distinct gates."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -3356,7 +3382,12 @@
         "orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json",
         "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md",
         "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md",
-        "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md"
+        "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md",
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review.md",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json",
+        "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-representability-review.md"
       ]
     },
     {
@@ -5104,6 +5135,7 @@
     }
   ],
   "map_limits": [
+    "The delete-confirm representability result selects no physical design and proves no DDL, PostgreSQL behavior, mounted route or client behavior.",
     "The delete-confirm kernel result is authored-synthetic and unmounted; it proves no PostgreSQL authority fence, real locking/concurrency, route behavior or client behavior.",
     "The cancellation readiness result is repository-static; it proves no locked concurrent database transaction, current-authority revocation behavior, mounted route convergence or UI behavior.",
     "The post-editor orientation is repository-static evidence and opens no cancellation command, patient-channel delegation, live revocation, database/watcher runtime or production authority.",

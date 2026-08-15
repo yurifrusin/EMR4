@@ -1,0 +1,135 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\gemini-delete-confirm-representability-bc066a1b",
+  "branch": "codex/review-delete-confirm-representability-bc066a1b",
+  "head_before": "bc066a1b639c5c57cc72f2697c063c5842511840",
+  "head_after": "bc066a1b639c5c57cc72f2697c063c5842511840",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "64054d9eb45bf7acc582fb4206d709df731ffaadac0b822cd4b270ad963063ec",
+  "result": "# Gemini 3.6 Flash/high Veto Review \u2014 Delete-Confirm Physical Representability\n\n- **Candidate HEAD:** `bc066a1b639c5c57cc72f2697c063c5842511840`\n- **Worktree:** `C:/Users/sarashera/EMR4-worktrees/gemini-delete-confirm-representability-bc066a1b`\n- **Branch:** `codex/review-delete-confirm-representability-bc066a1b`\n- **Overall Verdict:** `implementation_not_admitted`\n- **Review Result:** `raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_pass`\n\n---\n\n## Review Question Verification\n\nThe exact candidate `bc066a1b639c5c57cc72f2697c063c5842511840` fully supports the calibrated conclusion that:\n1. **Appointment truth is already represented** (`already_represented` for `appointment_truth_and_lock`): The existing `Appointment` ORM model carries positive monotonic state version (`appointment_state_version >= 1`), practice binding, status, waiting area, structured reason, and nullable free-text cancellation reason without requiring timestamp substitution.\n2. **The other five delete-confirm kernel domains are representable with bounded additive change** (`representable_with_additive_change` for `practice_authority_fence`, `operation_scoped_idempotency_private_receipt`, `attributable_audit_and_exact_reasons`, `ordered_atomic_boundary`, and `fresh_readback_separation`).\n3. **The candidate correctly refuses overclaim:** It does not claim that the current mounted route, authority precheck, generic idempotency receipt, or current GET readback already satisfies the accepted abstract kernel (`overall_verdict: implementation_not_admitted`).\n\n---\n\n## Mandatory Challenges Analysis\n\n1. **Hashes and Line Ranges Verified:**\n   - All 13 exact non-protected source hashes match their SHA-256 digests.\n   - All 26 observations ([OBS-01] through [OBS-26]) accurately cite line ranges and required literal string anchors across the 10 physical source files.\n\n2. **Authored-Synthetic Principal Generation Primitive:**\n   - `ApplicationAuthPrincipalGeneration` ([OBS-01], [OBS-05]) and `ApplicationAuthSyntheticPrincipalTruth` ([OBS-02], [OBS-06]) provide positive lockable practice-user generation primitives.\n   - Grounded in `app/services/application_auth_persistence.py` (L517\u2013555), these structures remain authored-synthetic read primitives that do not yet bind product `User`/practice UUIDs or `appointment.cancel.confirm` capability into the command transaction, correctly yielding `representable_with_additive_change`.\n\n3. **Mounted Route Claims Idempotency Before Target Lock:**\n   - `confirm_delete_proposal_route` ([OBS-15], `app/routers/appointments.py` L5560\u20135581) calls `claim_appointment_command` prior to retrieving or locking the appointment row or evaluating in-transaction current authority. It cannot be called the accepted kernel.\n\n4. **Appointment Truth Structural Representation:**\n   - `Appointment` ([OBS-08], `app/models/appointments.py` L47\u2013103) carries `practice_id`, positive state version (`appointment_state_version >= 1`), `status`, `waiting_area_id`, `status_reason_code`, and `cancellation_reason` with a unique `(practice_id, id)` constraint. State identity is purely monotonic integer version, not a timestamp surrogate.\n\n5. **Private Receipt Scope and Completeness Constraint:**\n   - `AppointmentCommandIdempotency` ([OBS-10], `app/models/appointments.py` L235\u2013326) restricts `ck_appt_cmd_idem_complete_private_receipt` to `operation_id = 'confirmAppointmentStatusProposal'` and `route_family = 'status-confirm'`.\n   - Generic `complete_appointment_command` ([OBS-12], [OBS-18]) leaves `session_binding_digest`, `pre_state_version`, `post_state_version`, and `response_body_canonical_bytes` unpopulated on generic delete completion.\n\n6. **Audit and Reason Correlation:**\n   - `AppointmentAuditLog` ([OBS-13], [OBS-14]) records `cancellation_reason` and `status_reason_code`, but does not yet bind pre/post `appointment_state_version` or pre/post `waiting_area_id` evidence explicitly.\n\n7. **OpenAPI Delete Reason Shape Mismatch:**\n   - `docs/api-spine/openapi/appointment-commands.yaml` ([OBS-23], L941\u2013954) specifies `required: [meta, appointment_id, delete_reason]` with optional `status_reason_code`, which does not match the accepted policy of mandatory structured reason (`status_reason_code`) plus nullable bounded free-text (`cancellation_reason`).\n\n8. **Separate Readback Action/Resource Decision:**\n   - GET `/appointments/{appointment_id}` ([OBS-19], `app/routers/appointments.py` L5087\u20135093) enforces practice scoping via `Depends(get_current_user)`, but lacks an explicit appointment-read action/resource authorization check.\n\n9. **Raw Compatibility DELETE Isolation:**\n   - `@router.delete` ([OBS-20], `app/routers/appointments.py` L5535\u20135553) remains a distinct role-gated path using `RAW_COMPAT_DELETE_SHADOW_ADAPTER_ID` and gains no authority from the dedicated kernel.\n\n10. **Domain Verdict Overclaim Rejection:**\n    - Only `appointment_truth_and_lock` is `already_represented`. The remaining 5 domains require additive composition or schema alignment. Attempting to mark any additive domain as `already_represented` fails deterministic validation.\n\n11. **Closed Surface Integrity:**\n    - `implementation_authorized` is `false` and `overall_verdict` is `implementation_not_admitted`.\n    - The next gate is correctly identified as `provider_free_unmounted_delete_confirm_physical_design_architecture`.\n\n12. **Hostile Mutation Rejection & Workspace Preservation:**\n    - 52 hostile candidate mutations were generated and validated; all 52 failed closed.\n    - Candidate HEAD `bc066a1b639c5c57cc72f2697c063c5842511840` and worktree are clean (`git diff --check` exited 0).\n\n---\n\n## Command Manifest Results\n\n- `REVIEW_ACCEPTANCE`: Exit Code 0\n- `FOCUSED_TESTS`: Exit Code 0\n- `API_SPINE_TESTS`: Exit Code 0\n- `RUFF`: Exit Code 0\n- `WHITESPACE`: Exit Code 0",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.6 Flash/high Veto Review \u2014 Delete-Confirm Physical Representability\n\n- **Candidate HEAD:** `bc066a1b639c5c57cc72f2697c063c5842511840`\n- **Worktree:** `C:/Users/sarashera/EMR4-worktrees/gemini-delete-confirm-representability-bc066a1b`\n- **Branch:** `codex/review-delete-confirm-representability-bc066a1b`\n- **Overall Verdict:** `implementation_not_admitted`\n- **Review Result:** `raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_pass`\n\n---\n\n## Review Question Verification\n\nThe exact candidate `bc066a1b639c5c57cc72f2697c063c5842511840` fully supports the calibrated conclusion that:\n1. **Appointment truth is already represented** (`already_represented` for `appointment_truth_and_lock`): The existing `Appointment` ORM model carries positive monotonic state version (`appointment_state_version >= 1`), practice binding, status, waiting area, structured reason, and nullable free-text cancellation reason without requiring timestamp substitution.\n2. **The other five delete-confirm kernel domains are representable with bounded additive change** (`representable_with_additive_change` for `practice_authority_fence`, `operation_scoped_idempotency_private_receipt`, `attributable_audit_and_exact_reasons`, `ordered_atomic_boundary`, and `fresh_readback_separation`).\n3. **The candidate correctly refuses overclaim:** It does not claim that the current mounted route, authority precheck, generic idempotency receipt, or current GET readback already satisfies the accepted abstract kernel (`overall_verdict: implementation_not_admitted`).\n\n---\n\n## Mandatory Challenges Analysis\n\n1. **Hashes and Line Ranges Verified:**\n   - All 13 exact non-protected source hashes match their SHA-256 digests.\n   - All 26 observations ([OBS-01] through [OBS-26]) accurately cite line ranges and required literal string anchors across the 10 physical source files.\n\n2. **Authored-Synthetic Principal Generation Primitive:**\n   - `ApplicationAuthPrincipalGeneration` ([OBS-01], [OBS-05]) and `ApplicationAuthSyntheticPrincipalTruth` ([OBS-02], [OBS-06]) provide positive lockable practice-user generation primitives.\n   - Grounded in `app/services/application_auth_persistence.py` (L517\u2013555), these structures remain authored-synthetic read primitives that do not yet bind product `User`/practice UUIDs or `appointment.cancel.confirm` capability into the command transaction, correctly yielding `representable_with_additive_change`.\n\n3. **Mounted Route Claims Idempotency Before Target Lock:**\n   - `confirm_delete_proposal_route` ([OBS-15], `app/routers/appointments.py` L5560\u20135581) calls `claim_appointment_command` prior to retrieving or locking the appointment row or evaluating in-transaction current authority. It cannot be called the accepted kernel.\n\n4. **Appointment Truth Structural Representation:**\n   - `Appointment` ([OBS-08], `app/models/appointments.py` L47\u2013103) carries `practice_id`, positive state version (`appointment_state_version >= 1`), `status`, `waiting_area_id`, `status_reason_code`, and `cancellation_reason` with a unique `(practice_id, id)` constraint. State identity is purely monotonic integer version, not a timestamp surrogate.\n\n5. **Private Receipt Scope and Completeness Constraint:**\n   - `AppointmentCommandIdempotency` ([OBS-10], `app/models/appointments.py` L235\u2013326) restricts `ck_appt_cmd_idem_complete_private_receipt` to `operation_id = 'confirmAppointmentStatusProposal'` and `route_family = 'status-confirm'`.\n   - Generic `complete_appointment_command` ([OBS-12], [OBS-18]) leaves `session_binding_digest`, `pre_state_version`, `post_state_version`, and `response_body_canonical_bytes` unpopulated on generic delete completion.\n\n6. **Audit and Reason Correlation:**\n   - `AppointmentAuditLog` ([OBS-13], [OBS-14]) records `cancellation_reason` and `status_reason_code`, but does not yet bind pre/post `appointment_state_version` or pre/post `waiting_area_id` evidence explicitly.\n\n7. **OpenAPI Delete Reason Shape Mismatch:**\n   - `docs/api-spine/openapi/appointment-commands.yaml` ([OBS-23], L941\u2013954) specifies `required: [meta, appointment_id, delete_reason]` with optional `status_reason_code`, which does not match the accepted policy of mandatory structured reason (`status_reason_code`) plus nullable bounded free-text (`cancellation_reason`).\n\n8. **Separate Readback Action/Resource Decision:**\n   - GET `/appointments/{appointment_id}` ([OBS-19], `app/routers/appointments.py` L5087\u20135093) enforces practice scoping via `Depends(get_current_user)`, but lacks an explicit appointment-read action/resource authorization check.\n\n9. **Raw Compatibility DELETE Isolation:**\n   - `@router.delete` ([OBS-20], `app/routers/appointments.py` L5535\u20135553) remains a distinct role-gated path using `RAW_COMPAT_DELETE_SHADOW_ADAPTER_ID` and gains no authority from the dedicated kernel.\n\n10. **Domain Verdict Overclaim Rejection:**\n    - Only `appointment_truth_and_lock` is `already_represented`. The remaining 5 domains require additive composition or schema alignment. Attempting to mark any additive domain as `already_represented` fails deterministic validation.\n\n11. **Closed Surface Integrity:**\n    - `implementation_authorized` is `false` and `overall_verdict` is `implementation_not_admitted`.\n    - The next gate is correctly identified as `provider_free_unmounted_delete_confirm_physical_design_architecture`.\n\n12. **Hostile Mutation Rejection & Workspace Preservation:**\n    - 52 hostile candidate mutations were generated and validated; all 52 failed closed.\n    - Candidate HEAD `bc066a1b639c5c57cc72f2697c063c5842511840` and worktree are clean (`git diff --check` exited 0).\n\n---\n\n## Command Manifest Results\n\n- `REVIEW_ACCEPTANCE`: Exit Code 0\n- `FOCUSED_TESTS`: Exit Code 0\n- `API_SPINE_TESTS`: Exit Code 0\n- `RUFF`: Exit Code 0\n- `WHITESPACE`: Exit Code 0",
+    "command_results": [
+      {
+        "id": "REVIEW_ACCEPTANCE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "FOCUSED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "API_SPINE_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "tests/test_api_spine_artifacts.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+          "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "a014da2eb83839295e9d8a13e8d728e093cac70122d1fe2ff140d8a746af03c1",
+  "command_results": [
+    {
+      "id": "REVIEW_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_api_spine_artifacts.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

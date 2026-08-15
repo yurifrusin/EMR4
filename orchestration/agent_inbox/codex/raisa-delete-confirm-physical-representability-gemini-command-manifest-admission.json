@@ -1,0 +1,7 @@
+{
+  "command_count": 5,
+  "command_manifest_sha256": "a014da2eb83839295e9d8a13e8d728e093cac70122d1fe2ff140d8a746af03c1",
+  "reasons": [],
+  "schema_version": "ariadne.evidence-gate-decision.v1",
+  "status": "passed"
+}

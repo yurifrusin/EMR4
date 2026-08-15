@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "run_one_fresh_exact_candidate_gemini_veto_for_delete_confirm_physical_representability_after_named_branch_correction",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Continuity 296 / Compass 278 accepts the abstract delete-confirm kernel and names this review next. Revision 288 records and corrects the detached-verifier setup incident before any model call.",
+    "current_authority_allocation": "Sol owns acceptance, continuity and Git. DeepSeek is closed under AER-0326 with no source. Gemini 3.6 Flash/high owns one fresh exact-candidate veto after corrected named-branch preflight.",
+    "active_plan_and_acceptance": "The frozen candidate binds thirteen hashes, ten physical sources, twenty-six observations, six verdicts and fifty-two hostile rejections. One domain is already represented and five are additive; implementation remains not admitted. The focused, API, format, compilation and revision-288 register gates pass.",
+    "protected_evidence_boundaries": "Only nineteen literal candidate paths and five exact structured argv commands are admitted. No source edit, directory enumeration, protected evidence, database/runtime/product/provider use, credential, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Candidate and task HEAD are bc066a1b639c5c57cc72f2697c063c5842511840. The verifier is clean on codex/review-delete-confirm-representability-bc066a1b at exact HEAD and passed preflight with zero calls. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; untracked files remain excluded."
+  },
+  "active_operation": {
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+    "status": "in_progress",
+    "source_head": "bc066a1b639c5c57cc72f2697c063c5842511840",
+    "completed_stage": "AER-0327 preserves the rejected detached-worktree attempt; revision 288 passes; the unchanged candidate now has a clean exact-HEAD named review branch and passed preflight",
+    "next_executable_stage": "Run one fresh Gemini 3.6 Flash/high exact-candidate veto with the corrected receipt and five-command manifest",
+    "resume_after_compaction": true,
+    "user_attention_required": false,
+    "terminal_handback_permitted": false
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "assessed_stage": "pre_verifier_corrected",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "AER-0326 closes the zero-candidate timeout.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "AER-0327 is corrected before any model call; one independent veto remains justified.", "work_packages": ["one nineteen-path five-command exact-candidate veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "No separable non-duplicative package remains.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["one Gemini project and one terminal structured decision", "five manifest commands must pass", "verifier HEAD and worktree remain unchanged", "Sol alone accepts and advances continuity", "protected refs remain closed"],
+    "reassessment_triggers": ["verifier transport failure", "revision_required decision", "verifier postflight", "closeout"]
+  },
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "worker_dispatch_permitted": true,
+  "terminal_handback_permitted": false,
+  "reasons": []
+}

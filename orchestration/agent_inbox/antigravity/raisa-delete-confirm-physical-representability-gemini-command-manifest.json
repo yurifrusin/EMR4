@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "REVIEW_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review"
+      ]
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_api_spine_artifacts.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py",
+        "tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_plan.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": ["git", "diff", "--check"]
+    }
+  ]
+}

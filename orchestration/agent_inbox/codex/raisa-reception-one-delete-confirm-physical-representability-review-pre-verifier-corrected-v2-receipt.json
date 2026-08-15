@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "run_one_fresh_exact_candidate_gemini_veto_after_named_branch_and_manifest_admission_corrections",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Continuity 296 / Compass 278 names the representability review next. Revision 289 records both local verifier corrections before any provider/model call.",
+    "current_authority_allocation": "Sol owns acceptance, continuity and Git. DeepSeek is closed with no source. Gemini 3.6 Flash/high owns one fresh exact-candidate veto.",
+    "active_plan_and_acceptance": "The candidate binds thirteen hashes, ten physical sources, twenty-six observations, six verdicts and fifty-two hostile rejections. Revision 289's 249-test register suite, named-branch preflight and five-command manifest admission pass with zero calls.",
+    "protected_evidence_boundaries": "Only nineteen literal candidate paths and five commands at manifest hash a014da2eb83839295e9d8a13e8d728e093cac70122d1fe2ff140d8a746af03c1 are admitted. No source edit, database/runtime/product access, protected evidence, deployment, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Candidate/task HEAD is bc066a1b639c5c57cc72f2697c063c5842511840. The verifier is clean on codex/review-delete-confirm-representability-bc066a1b at exact HEAD with zero calls. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; untracked files remain excluded."
+  },
+  "active_operation": {
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+    "status": "in_progress",
+    "source_head": "bc066a1b639c5c57cc72f2697c063c5842511840",
+    "completed_stage": "AER-0327 and AER-0328 preserve two zero-call local rejections; exact branch, worktree, manifest and revision-289 register pass",
+    "next_executable_stage": "Run one fresh Gemini 3.6 Flash/high exact-candidate veto",
+    "resume_after_compaction": true,
+    "user_attention_required": false,
+    "terminal_handback_permitted": false
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "assessed_stage": "pre_verifier_corrected_v2",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "AER-0326 closes the lane.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "Both local defects are corrected with zero calls; one veto remains justified.", "work_packages": ["one nineteen-path five-command exact-candidate veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "No separable package remains.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["one Gemini project and one structured decision", "five commands must pass", "verifier remains unchanged", "Sol alone accepts", "protected refs remain closed"],
+    "reassessment_triggers": ["verifier transport failure", "revision_required decision", "verifier postflight", "closeout"]
+  },
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "worker_dispatch_permitted": true,
+  "terminal_handback_permitted": false,
+  "reasons": []
+}
