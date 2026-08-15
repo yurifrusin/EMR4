@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One cancellation command-path readiness review",
+    "completed_stage": "Yuri resolved the recorded programme fork; the complete five-source and API Steward rehydration was repeated after compaction, the in-progress latch was validated, and the exact Git/ref and preserved-untracked state was restored",
+    "next_executable_stage": "Regenerate and pass the fresh post-compaction Ariadne preplanning receipt, freeze the provider-free read-only readiness-review plan and inventory the exact cancellation command path",
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "resume_after_compaction": true,
+    "source_head": "c4e28ad03bb22516bd40d110021ac2de9ead1ec8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Exact delete/status-family semantics, authority and prerequisite selection are coupled review judgments; no stable mechanical implementation artifact exists at preplanning.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh read-only exact-candidate veto can challenge the final source inventory, family classification and narrowest safe successor.",
+        "work_packages": [
+          "final exact-candidate cancellation-readiness veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The source set is bounded and tightly coupled; no independent package currently exceeds briefing and reconciliation cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan freeze",
+      "material source contradiction",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone reconciles API Spine, ordinary Diary, Reception One and backend route meaning",
+      "the read-only finding must freeze before independent veto",
+      "no product or runtime source may change",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "freeze_the_provider_free_read_only_cancellation_command_path_readiness_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "After compaction the post-combined-editor orientation plan, report, threat delta, closeout, Sol acceptance, Yuri summary and current in-progress cancellation latch were read completely. Yuri's 2026-08-15 Yes resolves their exact programme fork in favour of cancellation and authorises the named read-only readiness review, not UI exposure, fallback repair, route mutation or a cancellation write.",
+    "current_authority_allocation": "Sol owns source reconciliation, plan, acceptance and Git. DeepSeek V4 Flash/high is declined at preplanning because the exact command-family semantics and authority classification are tightly coupled and no stable mechanical implementation artifact exists. Native subagents are declined because no bounded independent package has positive leverage. Gemini 3.6 Flash/high is reserved for one fresh read-only exact-candidate veto after deterministic admission.",
+    "git_refs_and_worktree": "The main worktree is on codex/ariadne-bernie-davida-parallel-seam at published HEAD c4e28ad03bb22516bd40d110021ac2de9ead1ec8 and origin task matches. The only tracked modification is the expected active cancellation latch. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 624 observed untracked entries, including docs/branding and the cancellation preplanning pair, are preserved.",
+    "live_handover_current_baton": "After compaction AGENTS.md was read completely again and records Continuity 294 / Compass 276, accepted orientation source 2ca3a111d2ee9277571ea3c905f22ce78c8e9745, Yuri's selected appointment-cancellation direction and the provider-free read-only command-path readiness review as its first safe tranche.",
+    "protected_evidence_boundaries": "Protected holdouts, historical Diary/PHI, patient/product/clinical data, live database/source state, external channels, providers/ADC/credentials/IAM/network, product/API/OpenAPI/GraphQL/database/event/watcher/runtime mutation, commands/writes, deployment, production, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
