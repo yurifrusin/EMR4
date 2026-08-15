@@ -96,7 +96,7 @@
     "model_context_fabric_channel_inert_proposals": true,
     "raw_compatibility_delete_ingress_authority": false,
     "status_family_cancellation_ingress_authority": false,
-    "public_response_schema_changed": false,
+    "public_response_schema_edit_authorized": false,
     "private_receipt_fields_publicly_mapped": false
   },
   "product_authority_fence": {

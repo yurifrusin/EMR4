@@ -55,6 +55,11 @@ def test_contract_is_closed_unmounted_and_not_implementation_authority(contract,
     design.validate_schema(contract, schema)
     design.validate_contract_semantics(contract)
     assert contract["implementation_authorized"] is False
+    assert contract["api_boundary"]["public_response_schema_edit_authorized"] is False
+    assert contract["canonical_response"]["current_full_response_not_accepted"] is True
+    assert contract["canonical_response"]["compatibility_or_version_transition"] == (
+        "later_explicit_gate"
+    )
     assert set(contract["forbidden"].values()) == {False}
     assert len(contract["forbidden"]) == 14
 

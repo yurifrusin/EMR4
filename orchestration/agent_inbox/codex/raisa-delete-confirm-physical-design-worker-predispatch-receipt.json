@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "completed_stage": "Frozen physical-design plan committed at 829491fa",
+    "next_executable_stage": "One bounded DeepSeek mechanical artifact implementation",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "resume_after_compaction": true,
+    "source_head": "829491fa54b110168333e0fcc4fdf594e1317c30",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The committed plan removes semantic choice and leaves a separable five-file mechanical evidence package.",
+        "work_packages": [
+          "closed contract, schema, deterministic validator, evidence and focused hostile-mutation tests"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh exact-candidate veto follows deterministic Sol admission.",
+        "work_packages": [
+          "authority and transaction architecture veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No distinct remaining artifact class before independent veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "parallel_work_packages": [
+      "DeepSeek five-file closed mechanical package while Sol prepares deterministic admission criteria"
+    ],
+    "reassessment_triggers": [
+      "worker result",
+      "worker defect classification",
+      "deterministic admission",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "worker starts only from committed plan",
+      "worker does not run alongside shared PostgreSQL tests",
+      "Sol admits before Gemini",
+      "Sol alone integrates and accepts"
+    ]
+  },
+  "planned_action": "dispatch_bounded_delete_confirm_physical_design_artifact_worker",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 829491fa freezes the exact provider-free unmounted delete-confirm physical-design plan, threat delta and plan guards over the accepted representability result. The worker may encode but not alter those decisions.",
+    "current_authority_allocation": "Sol froze material semantics and alone owns acceptance, integration, continuity and Git. DeepSeek V4 Flash/high receives only five mechanical contract/schema/validator/evidence/test paths. Gemini 3.6 Flash/high remains the frozen later independent veto; the CLI-advertised 3.7 model is not silently substituted.",
+    "git_refs_and_worktree": "Primary HEAD is 829491fa54b110168333e0fcc4fdf594e1317c30 on codex/ariadne-bernie-davida-parallel-seam; origin task remains the accepted prior closeout 6514d35c465e304a421218890264f61c33ba51bb until this tranche closes. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The clean worker worktree is C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-physical-design-worker-829491fa on codex/delete-confirm-physical-design-worker-829491fa at exact 829491fa. All unrelated untracked files remain outside and preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely for this active tranche. Continuity 297 / Compass 279 accepts physical representability and names this provider-free unmounted physical-design architecture as the next gate.",
+    "protected_evidence_boundaries": "The worker is limited to authored-synthetic provider-free unmounted declarative artifacts. It may not edit/import/execute application, model, migration, service, router, OpenAPI, database, provider, credential, network, product, patient, clinical, deployment, release, Pages or protected-ref surfaces."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

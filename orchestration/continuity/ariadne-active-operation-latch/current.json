@@ -7,8 +7,8 @@
   "source_head": "6514d35c465e304a421218890264f61c33ba51bb",
   "authority_source": "The accepted physical representability result at bc066a1b639c5c57cc72f2697c063c5842511840, AGENTS.md Continuity 297 / Compass 279, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Exact provider-free unmounted delete-confirm physical-design plan, threat-model delta and plan guards frozen against source HEAD 6514d35c",
-    "next_executable_stage": "Commit the frozen plan, then dispatch the bounded DeepSeek mechanical contract/schema/validator/test work package from the committed plan HEAD",
+    "completed_stage": "DeepSeek exact five-file candidate 817ad386 independently re-ran clean; Sol adopted it as 46613880, clarified no-current-OpenAPI-edit versus later explicit minimized-response transition, and passed 30 focused tests plus Ruff/compile/whitespace",
+    "next_executable_stage": "Commit the Sol-admitted exact candidate and orchestration evidence, run the deterministic pre-veto gate, then dispatch one fresh Gemini 3.6 Flash/high exact-candidate review",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

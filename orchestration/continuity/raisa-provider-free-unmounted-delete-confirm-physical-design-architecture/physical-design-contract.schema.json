@@ -69,7 +69,7 @@
         "model_context_fabric_channel_inert_proposals",
         "raw_compatibility_delete_ingress_authority",
         "status_family_cancellation_ingress_authority",
-        "public_response_schema_changed",
+        "public_response_schema_edit_authorized",
         "private_receipt_fields_publicly_mapped"
       ],
       "properties": {
@@ -82,7 +82,7 @@
         "model_context_fabric_channel_inert_proposals": {"const": true},
         "raw_compatibility_delete_ingress_authority": {"const": false},
         "status_family_cancellation_ingress_authority": {"const": false},
-        "public_response_schema_changed": {"const": false},
+        "public_response_schema_edit_authorized": {"const": false},
         "private_receipt_fields_publicly_mapped": {"const": false}
       }
     },

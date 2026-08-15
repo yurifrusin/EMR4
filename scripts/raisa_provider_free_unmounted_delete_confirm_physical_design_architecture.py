@@ -86,7 +86,7 @@ EXPECTED_API_BOUNDARY = {
     "model_context_fabric_channel_inert_proposals": True,
     "raw_compatibility_delete_ingress_authority": False,
     "status_family_cancellation_ingress_authority": False,
-    "public_response_schema_changed": False,
+    "public_response_schema_edit_authorized": False,
     "private_receipt_fields_publicly_mapped": False,
 }
 
@@ -609,7 +609,7 @@ def hostile_mutations() -> list[tuple[str, Mutation]]:
         ("model_authority", _set(("api_boundary", "model_context_fabric_channel_inert_proposals"), False)),
         ("raw_compat_authority", _set(("api_boundary", "raw_compatibility_delete_ingress_authority"), True)),
         ("status_family_authority", _set(("api_boundary", "status_family_cancellation_ingress_authority"), True)),
-        ("public_schema", _set(("api_boundary", "public_response_schema_changed"), True)),
+        ("public_schema_edit", _set(("api_boundary", "public_response_schema_edit_authorized"), True)),
         ("private_mapped", _set(("api_boundary", "private_receipt_fields_publicly_mapped"), True)),
         ("synthetic_auth_reuse", _set(("product_authority_fence", "synthetic_application_auth_relations_ineligible"), False)),
         ("client_generation_claim", _set(("product_authority_fence", "submitted_generation_policy"), "accepted")),

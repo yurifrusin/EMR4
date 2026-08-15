@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_bounded_delete_confirm_physical_design_artifact_worker",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely for this active tranche. Continuity 297 / Compass 279 accepts physical representability and names this provider-free unmounted physical-design architecture as the next gate.",
+    "current_authority_allocation": "Sol froze material semantics and alone owns acceptance, integration, continuity and Git. DeepSeek V4 Flash/high receives only five mechanical contract/schema/validator/evidence/test paths. Gemini 3.6 Flash/high remains the frozen later independent veto; the CLI-advertised 3.7 model is not silently substituted.",
+    "active_plan_and_acceptance": "Commit 829491fa freezes the exact provider-free unmounted delete-confirm physical-design plan, threat delta and plan guards over the accepted representability result. The worker may encode but not alter those decisions.",
+    "protected_evidence_boundaries": "The worker is limited to authored-synthetic provider-free unmounted declarative artifacts. It may not edit/import/execute application, model, migration, service, router, OpenAPI, database, provider, credential, network, product, patient, clinical, deployment, release, Pages or protected-ref surfaces.",
+    "git_refs_and_worktree": "Primary HEAD is 829491fa54b110168333e0fcc4fdf594e1317c30 on codex/ariadne-bernie-davida-parallel-seam; origin task remains the accepted prior closeout 6514d35c465e304a421218890264f61c33ba51bb until this tranche closes. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The clean worker worktree is C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-physical-design-worker-829491fa on codex/delete-confirm-physical-design-worker-829491fa at exact 829491fa. All unrelated untracked files remain outside and preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "objective": "Encode the frozen additive authority, receipt, audit, transaction and readback architecture as provider-free deterministic evidence without implementing product or database source.",
+    "status": "in_progress",
+    "source_head": "829491fa54b110168333e0fcc4fdf594e1317c30",
+    "authority_source": "Committed frozen plan at 829491fa under accepted representability and Yuri standing authority",
+    "checkpoint": {
+      "completed_stage": "Frozen physical-design plan committed at 829491fa",
+      "next_executable_stage": "One bounded DeepSeek mechanical artifact implementation",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_authored_synthetic_unmounted_architecture_only", "exact_frozen_plan_only", "five_worker_owned_paths_only", "no_application_model_migration_service_route_openapi_or_graphql_edit_or_import", "no_executable_ddl_database_sql_real_transaction_or_lock", "no_provider_network_credentials_product_patient_clinical_data", "no_capability_provisioning_or_product_command", "no_deployment_production_release_pages_or_protected_ref_movement", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "The committed plan removes semantic choice and leaves a separable five-file mechanical evidence package.", "work_packages": ["closed contract, schema, deterministic validator, evidence and focused hostile-mutation tests"]},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "Fresh exact-candidate veto follows deterministic Sol admission.", "work_packages": ["authority and transaction architecture veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "No distinct remaining artifact class before independent veto.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["DeepSeek five-file closed mechanical package while Sol prepares deterministic admission criteria"],
+    "serial_constraints": ["worker starts only from committed plan", "worker does not run alongside shared PostgreSQL tests", "Sol admits before Gemini", "Sol alone integrates and accepts"],
+    "reassessment_triggers": ["worker result", "worker defect classification", "deterministic admission", "pre-verifier gate", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_active_tranche_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed frozen plan at exact 829491fa."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native subagents were explicitly assessed and declined as duplicative for this closed artifact class."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["agy 1.1.13 advertises 3.6 and 3.7; frozen 3.6 remains selected without model call."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Exact clean named worker worktree created at 829491fa."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
