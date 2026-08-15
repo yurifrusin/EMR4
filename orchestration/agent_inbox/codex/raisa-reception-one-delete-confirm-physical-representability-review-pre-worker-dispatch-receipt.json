@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+    "completed_stage": "Plan freeze commit a02e424eac89c12d42ff2c25cfafcc80f3fef077 is exact; a clean same-HEAD disposable worktree and literal-path DeepSeek inventory packet are prepared",
+    "next_executable_stage": "Pass the distinct pre-worker-dispatch receipt, record it, then run the bounded DeepSeek V4 Flash/high exact-file inventory",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "resume_after_compaction": true,
+    "source_head": "a02e424eac89c12d42ff2c25cfafcc80f3fef077",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The committed literal allowlist and fixed no-verdict JSON contract make a line-bounded observation inventory mechanically separable in a clean exact-HEAD worktree.",
+        "work_packages": [
+          "one ten-source read-only inventory JSON"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Fresh veto remains serially gated on deterministic final-candidate admission and a material positive representability claim.",
+        "work_packages": [
+          "conditional exact-candidate representability veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No separate package exceeds coordination cost and native agents receive no acceptance authority.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "parallel_work_packages": [
+      "While DeepSeek inventories the isolated sources, Sol may prepare the closed review schema and validator without editing the worker-owned inventory path."
+    ],
+    "reassessment_triggers": [
+      "worker closeout",
+      "worker timeout or scope breach",
+      "inventory admission",
+      "pre-verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "worker branch remains an exact descendant of a02e424e",
+      "Sol independently admits every line anchor before using the inventory",
+      "Gemini waits for final deterministic admission",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "dispatch_bounded_delete_confirm_exact_file_source_inventory_to_deepseek_flash",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The plan, threat delta, AER-0325 control and exact source hash guards are committed at a02e424eac89c12d42ff2c25cfafcc80f3fef077. The worker packet permits only the plan plus ten physical/API sources and one owned inventory JSON; it explicitly forbids verdict and design selection.",
+    "current_authority_allocation": "Sol retains source admission, six semantic verdicts, recovery, acceptance, continuity and Git. DeepSeek V4 Flash/high receives only one mechanical exact-file observation inventory. Gemini remains reserved for a risk-triggered fresh veto. Native subagents remain declined.",
+    "git_refs_and_worktree": "Main task HEAD is a02e424eac89c12d42ff2c25cfafcc80f3fef077. Disposable worktree C:/Users/sarashera/EMR4-worktrees/deepseek-delete-confirm-representability is tracked-clean on codex/deepseek-delete-confirm-representability at the exact same HEAD. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main-worktree docs/branding and unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and names this provider-free unmounted delete-confirm physical representability review as next at Continuity 296 / Compass 278.",
+    "protected_evidence_boundaries": "The first metadata output is discarded under AER-0325. The worker may read only eleven literal paths and must not enumerate directories, follow imports, open protected evidence, edit source, import application code, collect tests, execute database/runtime/provider/product surfaces, use credentials/network or move refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
