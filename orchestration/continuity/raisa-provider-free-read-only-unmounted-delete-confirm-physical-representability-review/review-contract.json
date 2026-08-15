@@ -1,0 +1,80 @@
+{
+  "schema_version": "raisa.delete_confirm_physical_representability_review_contract.v1",
+  "review_baseline": "a02e424eac89c12d42ff2c25cfafcc80f3fef077",
+  "accepted_parent_result": "raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_pass",
+  "evidence_label": "provider_free_exact_file_read_only_unmounted_review",
+  "implementation_authorized": false,
+  "overall_verdict": "implementation_not_admitted",
+  "verdict_vocabulary": [
+    "already_represented",
+    "representable_with_additive_change",
+    "not_representable_without_contract_change",
+    "insufficient_exact_evidence"
+  ],
+  "source_hashes": {
+    "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md": "8d8e3a388aeda71800f014535dccc63af8da6aaa945834add044dc2a49097a91",
+    "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md": "202da8412733af4fa3c86df69acbac590e42e80b74ca69b19d63d0d02e7787fb",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md": "066587bd4b48630a3f59345a873dbe755c839e1f33acc2ea8368ccd9ad057efe",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "app/routers/appointments.py": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624",
+    "app/models/application_auth.py": "b4671fc5fd82ed06ce4af18b026ab70964a18a48e56157f719be19ce0989107b",
+    "app/services/application_auth_persistence.py": "1dbfa4474178490b19c2332ebac29875641c3ea17742afe77f40aa56189f064b",
+    "app/services/application_auth_role_runtime.py": "cac8a5623a838238cc68ded0c93570581391bf08226d2a312149bfe1cca87cfa",
+    "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a",
+    "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd",
+    "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+  },
+  "physical_source_paths": [
+    "docs/api-spine/openapi/appointment-commands.yaml",
+    "app/models/appointments.py",
+    "app/services/appointment_idempotency.py",
+    "app/routers/appointments.py",
+    "app/models/application_auth.py",
+    "app/services/application_auth_persistence.py",
+    "app/services/application_auth_role_runtime.py",
+    "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py",
+    "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py",
+    "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py"
+  ],
+  "domains": [
+    {
+      "domain_id": "practice_authority_fence",
+      "obligation": "A lockable current generation must stabilize actor activity, exact practice binding, role and appointment.cancel.confirm capability through both in-transaction authority checks."
+    },
+    {
+      "domain_id": "appointment_truth_and_lock",
+      "obligation": "One practice-scoped appointment row must carry positive monotonic state version, status, waiting-area state, structured reason and nullable cancellation text and be lockable without timestamp identity."
+    },
+    {
+      "domain_id": "operation_scoped_idempotency_private_receipt",
+      "obligation": "One locked operation record must classify new, replay and conflict and privately bind target, actor, session digest, request digest, audit, pre/post version and canonical response bytes."
+    },
+    {
+      "domain_id": "attributable_audit_and_exact_reasons",
+      "obligation": "One audit row must bind delete attribution, correlation, pre/post truth, warnings and exact structured and nullable free-text reasons without widening public disclosure."
+    },
+    {
+      "domain_id": "ordered_atomic_boundary",
+      "obligation": "One backend transaction must retain practice, appointment and idempotency locks in order, recheck authority before disclosure and effect, and publish appointment, audit and receipt together or none."
+    },
+    {
+      "domain_id": "fresh_readback_separation",
+      "obligation": "A separate current practice/action/resource-authorised read must reconcile display truth without becoming commit evidence."
+    }
+  ],
+  "required_controls": [
+    "literal_source_allowlist_only",
+    "no_timestamp_as_state_or_authority_identity",
+    "request_claims_and_route_role_precheck_never_grant_final_authority",
+    "authority_and_target_non_disclosure_precede_receipt_disclosure",
+    "structured_and_nullable_free_text_reasons_traced_separately",
+    "raw_delete_and_status_fallback_remain_separate_ingress",
+    "readback_never_proves_commit",
+    "no_physical_design_selection",
+    "no_application_import_or_runtime_execution"
+  ],
+  "minimum_hostile_mutations": 40,
+  "next_gate_if_positive": "provider_free_unmounted_delete_confirm_physical_design_architecture"
+}

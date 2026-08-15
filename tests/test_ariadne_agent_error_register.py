@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 286
+    assert register["register_revision"] == 287
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 326)
+        f"AER-{index:04d}" for index in range(1, 327)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -54,7 +54,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 224
-    assert len(transport_incidents) == 9
+    assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -65,6 +65,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0039",
         "AER-0081",
         "AER-0198",
+        "AER-0326",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -2575,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 325
+    assert report["incident_count"] == 326
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3010,6 +3011,25 @@ def test_aer_0325_records_repeated_protected_metadata_scope_breach() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0326_contains_deepseek_inventory_transport_timeout() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0326"
+    ]
+
+    assert incident["origin"] == "transport"
+    assert incident["resource_id"] == "deepseek-flash-workers"
+    assert incident["transport"] == "claude_code_bare_deepseek"
+    assert incident["category"] == "transport_timeout"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert incident["recurrence_signature"] == (
+        "transport.deepseek_occupied_worker_no_terminal_response"
+    )
+    assert "no owned inventory path" in incident["observed_error"]
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["status"] == "contained"
+
+
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
@@ -3284,14 +3304,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 286
-    assert report["incident_count"] == 325
+    assert report["register_revision"] == 287
+    assert report["incident_count"] == 326
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 224,
         "harness": 37,
         "repository": 55,
-        "transport": 9,
+        "transport": 10,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 48,
@@ -3301,11 +3321,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "read_only_violation": 3,
         "reasoning_claim_error": 38,
         "repository_defect": 55,
-        "transport_timeout": 9,
+        "transport_timeout": 10,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 198,
+        "canonical_unchanged": 199,
         "untrusted_partial_worktree": 29,
     }
     receipt_event_recurrence = next(
@@ -3747,13 +3767,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
-            "incident_count": 2,
-            "incident_ids": ["AER-0036", "AER-0038"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0036", "AER-0038", "AER-0326"],
             "origins": ["transport"],
             "categories": ["transport_timeout"],
             "roles": ["implementer"],
             "resource_ids": ["deepseek-flash-workers"],
             "prevention_controls": [
+                "A recurrent DeepSeek no-terminal transport event triggers direct Sol fallback after exact result-path, owned-path, HEAD and worktree readback; no same-lane retry or late source adoption is permitted without a distinct authorised recovery.",
                 "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
                 "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority.",
             ],

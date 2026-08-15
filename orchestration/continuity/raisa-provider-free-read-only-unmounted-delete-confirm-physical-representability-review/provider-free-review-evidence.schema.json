@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/delete-confirm-physical-representability-review-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_baseline",
+    "evidence_label",
+    "implementation_authorized",
+    "overall_verdict",
+    "source_hashes",
+    "observations",
+    "domain_verdicts",
+    "cross_domain_findings",
+    "hostile_mutations_rejected",
+    "next_gate",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.delete_confirm_physical_representability_review_evidence.v1"},
+    "review_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "evidence_label": {"const": "provider_free_exact_file_read_only_unmounted_review"},
+    "implementation_authorized": {"const": false},
+    "overall_verdict": {"const": "implementation_not_admitted"},
+    "source_hashes": {
+      "type": "object",
+      "minProperties": 13,
+      "maxProperties": 13,
+      "propertyNames": {"type": "string", "minLength": 1},
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 18,
+      "items": {"$ref": "#/$defs/observation"}
+    },
+    "domain_verdicts": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/domainVerdict"}
+    },
+    "cross_domain_findings": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"type": "string", "minLength": 12}
+    },
+    "hostile_mutations_rejected": {"type": "integer", "minimum": 40},
+    "next_gate": {"const": "provider_free_unmounted_delete_confirm_physical_design_architecture"},
+    "claim_boundary": {"type": "string", "minLength": 80}
+  },
+  "$defs": {
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_id", "source_path", "line_start", "line_end", "supports_domains", "finding_type", "claim", "required_anchors"],
+      "properties": {
+        "observation_id": {"type": "string", "pattern": "^OBS-[0-9]{2}$"},
+        "source_path": {"type": "string", "minLength": 1},
+        "line_start": {"type": "integer", "minimum": 1},
+        "line_end": {"type": "integer", "minimum": 1},
+        "supports_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "finding_type": {"enum": ["existing_capability", "missing_or_ambiguous", "compatibility_boundary"]},
+        "claim": {"type": "string", "minLength": 12},
+        "required_anchors": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 2}}
+      }
+    },
+    "domainVerdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain_id", "verdict", "observation_ids", "existing_capabilities", "additive_gaps", "unselected_design_choices"],
+      "properties": {
+        "domain_id": {"type": "string"},
+        "verdict": {"enum": ["already_represented", "representable_with_additive_change", "not_representable_without_contract_change", "insufficient_exact_evidence"]},
+        "observation_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^OBS-[0-9]{2}$"}},
+        "existing_capabilities": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 8}},
+        "additive_gaps": {"type": "array", "items": {"type": "string", "minLength": 8}},
+        "unselected_design_choices": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 8}}
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 286,
+  "register_revision": 287,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13094,6 +13094,44 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0326",
+      "attempt_id": "raisa-delete-confirm-physical-representability-deepseek-inventory-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-physical-representability-review",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded occupied DeepSeek inventory lease must produce its one owned JSON artifact and structured terminal receipt within the observation window, or stop with exact worktree containment before fallback.",
+      "observed_error": "The exact worker call exceeded the 124-second outer observation bound without a terminal result file. Exact readback found the worker still at the frozen source HEAD with no owned inventory path and no tracked change.",
+      "detection_method": "The launcher command returned timeout exit 124. Sol then checked only the exact result path, worker HEAD and owned inventory path and found no candidate or terminal closeout.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-deepseek-timeout-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-287.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Reject the worker attempt, admit no source, preserve the exact unchanged worktree evidence and transfer the mechanical inventory and synthesis to Sol without a same-lane retry.",
+        "prevention_control": "A recurrent DeepSeek no-terminal transport event triggers direct Sol fallback after exact result-path, owned-path, HEAD and worktree readback; no same-lane retry or late source adoption is permitted without a distinct authorised recovery.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-deepseek-timeout-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-287.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

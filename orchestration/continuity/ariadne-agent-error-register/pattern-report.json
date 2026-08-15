@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "625aaf80c05387326ba80065397bf0027858a5eabab0b3c707559db9aea30bda",
+  "canonical_register_sha256": "96f53091f6c78e5f3ec288d9176c7ad2e7591a9f43bb01aac375da373d5fe75d",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 198,
+      "canonical_unchanged": 199,
       "untrusted_partial_worktree": 29
     },
     "by_category": {
@@ -14,18 +14,18 @@
       "read_only_violation": 3,
       "reasoning_claim_error": 38,
       "repository_defect": 55,
-      "transport_timeout": 9
+      "transport_timeout": 10
     },
     "by_origin": {
       "agent_behavior": 224,
       "harness": 37,
       "repository": 55,
-      "transport": 9
+      "transport": 10
     },
     "by_process_severity": {
       "low": 130,
       "material": 100,
-      "moderate": 95
+      "moderate": 96
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -46,7 +46,7 @@
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 8,
+      "deepseek-flash-workers::implementer": 9,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,14 +87,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 23,
+      "implementer": 24,
       "integration_reviewer": 2,
       "orchestrator": 248,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 325,
+  "incident_count": 326,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -781,15 +781,17 @@
       "categories": [
         "transport_timeout"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0036",
-        "AER-0038"
+        "AER-0038",
+        "AER-0326"
       ],
       "origins": [
         "transport"
       ],
       "prevention_controls": [
+        "A recurrent DeepSeek no-terminal transport event triggers direct Sol fallback after exact result-path, owned-path, HEAD and worktree readback; no same-lane retry or late source adoption is permitted without a distinct authorised recovery.",
         "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
         "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority."
       ],
@@ -832,7 +834,7 @@
       ]
     }
   ],
-  "register_revision": 286,
+  "register_revision": 287,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

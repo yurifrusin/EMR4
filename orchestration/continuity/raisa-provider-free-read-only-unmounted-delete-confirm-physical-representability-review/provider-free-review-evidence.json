@@ -1,0 +1,343 @@
+{
+  "schema_version": "raisa.delete_confirm_physical_representability_review_evidence.v1",
+  "review_baseline": "a02e424eac89c12d42ff2c25cfafcc80f3fef077",
+  "evidence_label": "provider_free_exact_file_read_only_unmounted_review",
+  "implementation_authorized": false,
+  "overall_verdict": "implementation_not_admitted",
+  "source_hashes": {
+    "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md": "8d8e3a388aeda71800f014535dccc63af8da6aaa945834add044dc2a49097a91",
+    "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md": "202da8412733af4fa3c86df69acbac590e42e80b74ca69b19d63d0d02e7787fb",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md": "066587bd4b48630a3f59345a873dbe755c839e1f33acc2ea8368ccd9ad057efe",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "app/routers/appointments.py": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624",
+    "app/models/application_auth.py": "b4671fc5fd82ed06ce4af18b026ab70964a18a48e56157f719be19ce0989107b",
+    "app/services/application_auth_persistence.py": "1dbfa4474178490b19c2332ebac29875641c3ea17742afe77f40aa56189f064b",
+    "app/services/application_auth_role_runtime.py": "cac8a5623a838238cc68ded0c93570581391bf08226d2a312149bfe1cca87cfa",
+    "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a",
+    "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd",
+    "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+  },
+  "observations": [
+    {
+      "observation_id": "OBS-01",
+      "source_path": "app/models/application_auth.py",
+      "line_start": 46,
+      "line_end": 75,
+      "supports_domains": ["practice_authority_fence"],
+      "finding_type": "existing_capability",
+      "claim": "A positive generation row is keyed by an exact practice and user reference and is physically suitable for row locking.",
+      "required_anchors": ["class ApplicationAuthPrincipalGeneration", "practice_ref = Column", "user_ref = Column", "generation > 0"]
+    },
+    {
+      "observation_id": "OBS-02",
+      "source_path": "app/models/application_auth.py",
+      "line_start": 78,
+      "line_end": 130,
+      "supports_domains": ["practice_authority_fence"],
+      "finding_type": "existing_capability",
+      "claim": "Authored-synthetic current principal truth carries current role and active user, practice and membership flags plus a positive truth version.",
+      "required_anchors": ["ApplicationAuthSyntheticPrincipalTruth", "current_backend_role", "user_active", "practice_active", "membership_active", "truth_version > 0"]
+    },
+    {
+      "observation_id": "OBS-03",
+      "source_path": "app/models/application_auth.py",
+      "line_start": 133,
+      "line_end": 210,
+      "supports_domains": ["practice_authority_fence"],
+      "finding_type": "existing_capability",
+      "claim": "Parent sessions persist practice, user, current role, generation, active/revoked status and expiry bound to a principal-generation row.",
+      "required_anchors": ["ApplicationAuthParentSession", "current_backend_role", "generation = Column", "status = Column", "fk_app_auth_parent_principal"]
+    },
+    {
+      "observation_id": "OBS-04",
+      "source_path": "app/services/application_auth_persistence.py",
+      "line_start": 342,
+      "line_end": 390,
+      "supports_domains": ["practice_authority_fence", "ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The authentication persistence adapter can execute inside a caller-owned transaction after binding practice and locking one principal generation.",
+      "required_anchors": ["Execute one accepted runtime operation inside the caller transaction", "_bind_practice_context", "_lock_principal_generation", "_load_store", "_persist_state"]
+    },
+    {
+      "observation_id": "OBS-05",
+      "source_path": "app/services/application_auth_persistence.py",
+      "line_start": 418,
+      "line_end": 449,
+      "supports_domains": ["practice_authority_fence", "ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The principal-generation lookup uses SELECT FOR UPDATE and fails closed when the principal row is absent.",
+      "required_anchors": ["_lock_principal_generation", ".with_for_update()", "persistence_principal_required"]
+    },
+    {
+      "observation_id": "OBS-06",
+      "source_path": "app/services/application_auth_persistence.py",
+      "line_start": 517,
+      "line_end": 555,
+      "supports_domains": ["practice_authority_fence"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "The persisted coordinator hydrates an authored-synthetic store and session role; these lines do not establish current production User UUID binding or appointment cancellation capability.",
+      "required_anchors": ["InMemoryAuthoredSyntheticStore", "AUTHORED_SYNTHETIC_DATA_CLASS", "current_backend_role", "SessionStatus"]
+    },
+    {
+      "observation_id": "OBS-07",
+      "source_path": "app/services/application_auth_role_runtime.py",
+      "line_start": 150,
+      "line_end": 176,
+      "supports_domains": ["practice_authority_fence", "fresh_readback_separation"],
+      "finding_type": "existing_capability",
+      "claim": "A role-scoped PostgreSQL adapter already applies transaction-local timeouts, row security and a practice context.",
+      "required_anchors": ["RoleScopedPostgresApplicationAuthRuntime", "lock_timeout", "row_security", "app.current_practice_ref"]
+    },
+    {
+      "observation_id": "OBS-08",
+      "source_path": "app/models/appointments.py",
+      "line_start": 47,
+      "line_end": 103,
+      "supports_domains": ["appointment_truth_and_lock"],
+      "finding_type": "existing_capability",
+      "claim": "One practice-scoped appointment row already carries status, waiting-area state, both reason fields and a positive monotonic state-version field.",
+      "required_anchors": ["class Appointment", "practice_id = Column", "cancellation_reason", "status_reason_code", "waiting_area_id", "appointment_state_version >= 1", "uq_appointments_practice_id_id"]
+    },
+    {
+      "observation_id": "OBS-09",
+      "source_path": "app/models/appointments.py",
+      "line_start": 188,
+      "line_end": 233,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt"],
+      "finding_type": "existing_capability",
+      "claim": "The idempotency row already carries practice, actor, operation, route, key and request digests, target, audit, result and private receipt fields.",
+      "required_anchors": ["AppointmentCommandIdempotency", "operation_id", "route_family", "idempotency_key_hash", "request_body_hash", "audit_log_id", "session_binding_digest", "pre_state_version", "post_state_version", "response_body_canonical_bytes"]
+    },
+    {
+      "observation_id": "OBS-10",
+      "source_path": "app/models/appointments.py",
+      "line_start": 235,
+      "line_end": 326,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt", "ordered_atomic_boundary"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "Strong uniqueness, completion and cross-row constraints exist, but the complete private-receipt constraint is explicitly limited to status-confirm rather than delete-confirm.",
+      "required_anchors": ["uq_appt_cmd_idem_practice_actor_operation_key", "operation_id = 'confirmAppointmentStatusProposal'", "route_family = 'status-confirm'", "fk_appt_cmd_idem_practice_target", "fk_appt_cmd_idem_practice_audit"]
+    },
+    {
+      "observation_id": "OBS-11",
+      "source_path": "app/services/appointment_idempotency.py",
+      "line_start": 76,
+      "line_end": 157,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt", "ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The shared claim inserts conflict-safely, locks the exact idempotency row and distinguishes conflict, replay and in-progress states.",
+      "required_anchors": ["claim_appointment_command", "on_conflict_do_nothing", ".with_for_update()", "kind=\"conflict\"", "kind=\"replay\""]
+    },
+    {
+      "observation_id": "OBS-12",
+      "source_path": "app/services/appointment_idempotency.py",
+      "line_start": 160,
+      "line_end": 183,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt", "attributable_audit_and_exact_reasons"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "Generic completion stores response JSON/hash, target and optional audit identity but does not populate the private canonical bytes, session digest or pre/post versions needed by delete-confirm.",
+      "required_anchors": ["complete_appointment_command", "response_body_hash", "target_appointment_id", "audit_log_id", "db.flush()"]
+    },
+    {
+      "observation_id": "OBS-13",
+      "source_path": "app/models/appointments.py",
+      "line_start": 120,
+      "line_end": 185,
+      "supports_domains": ["attributable_audit_and_exact_reasons"],
+      "finding_type": "existing_capability",
+      "claim": "The audit row supports delete attribution, practice/appointment/user identity, status before/after, both reason fields, warnings and command/session correlation.",
+      "required_anchors": ["delete = \"delete\"", "confirmed_by_user_id", "cancellation_reason", "status_reason_code", "confirmed_warnings", "command_id", "bernie_session_id"]
+    },
+    {
+      "observation_id": "OBS-14",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 896,
+      "line_end": 931,
+      "supports_domains": ["attributable_audit_and_exact_reasons", "ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The audit helper writes both reason fields, warnings, command and session correlation and flushes within the caller transaction.",
+      "required_anchors": ["def _write_audit", "cancellation_reason", "status_reason_code", "command_id", "bernie_session_id", "db.flush()"]
+    },
+    {
+      "observation_id": "OBS-15",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 5560,
+      "line_end": 5581,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt", "ordered_atomic_boundary"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "The current delete-confirm route claims and may disclose idempotency before locking the appointment or establishing an in-transaction authority fence.",
+      "required_anchors": ["confirm_delete_proposal_route", "claim_appointment_command", "_handle_create_confirm_idempotency_decision", "return mapped_decision"]
+    },
+    {
+      "observation_id": "OBS-16",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 575,
+      "line_end": 588,
+      "supports_domains": ["appointment_truth_and_lock", "ordered_atomic_boundary", "fresh_readback_separation"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "The shared appointment lookup is practice-scoped and non-disclosing but performs an ordinary first query without an explicit row lock.",
+      "required_anchors": ["def _get_appointment", "Appointment.practice_id == practice_id", ".first()", "Appointment not found"]
+    },
+    {
+      "observation_id": "OBS-17",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 5494,
+      "line_end": 5532,
+      "supports_domains": ["attributable_audit_and_exact_reasons", "ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The current helper stages Cancelled status, waiting-area clearing, exact submitted reasons and a delete audit in one caller session before flush or commit.",
+      "required_anchors": ["AppointmentStatus.Cancelled", "waiting_area_id = None", "cancellation_reason", "status_reason_code", "AppointmentAuditAction.delete", "db.flush()"]
+    },
+    {
+      "observation_id": "OBS-18",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 5662,
+      "line_end": 5693,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt", "attributable_audit_and_exact_reasons", "ordered_atomic_boundary"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "Appointment, audit and generic idempotency completion share one commit, but the route does not pass audit identity or private receipt fields and does not advance appointment_state_version.",
+      "required_anchors": ["commit=False", "complete_appointment_command", "target_appointment_id=appointment.id", "db.commit()"]
+    },
+    {
+      "observation_id": "OBS-19",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 5087,
+      "line_end": 5093,
+      "supports_domains": ["fresh_readback_separation"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "A separate practice-scoped appointment GET exists, but its visible dependency is general current-user authentication rather than an explicit appointment read action check.",
+      "required_anchors": ["@router.get", "get_appointment", "Depends(get_current_user)", "current_user.practice_id"]
+    },
+    {
+      "observation_id": "OBS-20",
+      "source_path": "app/routers/appointments.py",
+      "line_start": 5535,
+      "line_end": 5553,
+      "supports_domains": ["ordered_atomic_boundary"],
+      "finding_type": "compatibility_boundary",
+      "claim": "Raw compatibility DELETE remains a distinct role-gated path and invokes the generic delete helper directly.",
+      "required_anchors": ["@router.delete", "raw_compat_delete", "_apply_appointment_delete", "RAW_COMPAT_DELETE_SHADOW_ADAPTER_ID"]
+    },
+    {
+      "observation_id": "OBS-21",
+      "source_path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "line_start": 341,
+      "line_end": 383,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt", "ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The API Spine already defines a distinct delete proposal and confirm operation with idempotency and correlation headers.",
+      "required_anchors": ["proposeAppointmentDelete", "confirmAppointmentDeleteProposal", "IdempotencyKey", "CorrelationId"]
+    },
+    {
+      "observation_id": "OBS-22",
+      "source_path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "line_start": 1182,
+      "line_end": 1204,
+      "supports_domains": ["ordered_atomic_boundary"],
+      "finding_type": "existing_capability",
+      "claim": "The public delete confirmation shape requires explicit true confirmation, proposal evidence, warnings and freshness and supports signed confirmation evidence.",
+      "required_anchors": ["AppointmentDeleteConfirmationCommand", "confirmed:", "const: true", "signed_confirmation_evidence", "freshness"]
+    },
+    {
+      "observation_id": "OBS-23",
+      "source_path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "line_start": 941,
+      "line_end": 954,
+      "supports_domains": ["attributable_audit_and_exact_reasons"],
+      "finding_type": "missing_or_ambiguous",
+      "claim": "The current public proposal requires generic delete_reason while status_reason_code is optional, so it does not yet express the accepted mandatory structured and nullable free-text reason policy exactly.",
+      "required_anchors": ["required: [meta, appointment_id, delete_reason]", "delete_reason", "status_reason_code"]
+    },
+    {
+      "observation_id": "OBS-24",
+      "source_path": "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py",
+      "line_start": 19,
+      "line_end": 69,
+      "supports_domains": ["attributable_audit_and_exact_reasons"],
+      "finding_type": "existing_capability",
+      "claim": "The accepted migration lineage creates a practice-scoped attributable audit with delete action, status transition and nullable cancellation reason.",
+      "required_anchors": ["appointment_audit_log", "practice_id", "confirmed_by_user_id", "delete", "cancellation_reason"]
+    },
+    {
+      "observation_id": "OBS-25",
+      "source_path": "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py",
+      "line_start": 20,
+      "line_end": 68,
+      "supports_domains": ["operation_scoped_idempotency_private_receipt"],
+      "finding_type": "existing_capability",
+      "claim": "The accepted migration lineage creates operation-scoped idempotency identity, request/response hashes, target/audit correlation and completion constraints.",
+      "required_anchors": ["appointment_command_idempotency", "operation_id", "idempotency_key_hash", "request_body_hash", "audit_log_id", "uq_appt_cmd_idem_practice_actor_operation_key"]
+    },
+    {
+      "observation_id": "OBS-26",
+      "source_path": "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py",
+      "line_start": 19,
+      "line_end": 23,
+      "supports_domains": ["attributable_audit_and_exact_reasons"],
+      "finding_type": "existing_capability",
+      "claim": "The accepted audit lineage adds a JSONB confirmation-warning field.",
+      "required_anchors": ["appointment_audit_log", "confirmed_warnings", "JSONB"]
+    }
+  ],
+  "domain_verdicts": [
+    {
+      "domain_id": "practice_authority_fence",
+      "verdict": "representable_with_additive_change",
+      "observation_ids": ["OBS-01", "OBS-02", "OBS-03", "OBS-04", "OBS-05", "OBS-06", "OBS-07", "OBS-15"],
+      "existing_capabilities": ["A positive practice-user principal generation can be locked in a caller-owned transaction.", "Current authored-synthetic truth already distinguishes role and active user, practice and membership state.", "Role-scoped persistence already binds transaction-local practice and row-security context."],
+      "additive_gaps": ["Bind the fence to current product User and practice identities rather than authored-synthetic string references.", "Represent and evaluate appointment.cancel.confirm capability inside the same command transaction.", "Perform both current-authority checks after target lock and again while every command lock is held."],
+      "unselected_design_choices": ["Exact product authority table or bridge", "Capability vocabulary and generation-advance trigger", "Lock timeout and denial mapping"]
+    },
+    {
+      "domain_id": "appointment_truth_and_lock",
+      "verdict": "already_represented",
+      "observation_ids": ["OBS-08", "OBS-16", "OBS-17"],
+      "existing_capabilities": ["One practice-scoped row carries positive appointment_state_version, status, waiting area and both reason fields.", "The row can be selected by exact practice and appointment identity and missing targets are non-disclosing."],
+      "additive_gaps": [],
+      "unselected_design_choices": ["Exact SELECT FOR UPDATE expression", "State-version increment enforcement location", "Constraint for terminal waiting-area clearing"]
+    },
+    {
+      "domain_id": "operation_scoped_idempotency_private_receipt",
+      "verdict": "representable_with_additive_change",
+      "observation_ids": ["OBS-09", "OBS-10", "OBS-11", "OBS-12", "OBS-15", "OBS-18", "OBS-21", "OBS-25"],
+      "existing_capabilities": ["Operation-scoped key and request digests, row locking, replay/conflict classification and response storage already exist.", "Target and audit foreign keys plus private session/version/canonical-byte fields already exist for status-confirm."],
+      "additive_gaps": ["Extend the private completed-receipt constraint and population path to dedicated delete-confirm.", "Store a session binding digest, exact pre/post versions, audit identity and canonical response bytes on delete completion.", "Delay replay/conflict disclosure until current authority and target non-disclosure checks pass."],
+      "unselected_design_choices": ["Delete receipt version number", "Canonical response byte encoding", "Conflict-safe insertion after appointment locking"]
+    },
+    {
+      "domain_id": "attributable_audit_and_exact_reasons",
+      "verdict": "representable_with_additive_change",
+      "observation_ids": ["OBS-12", "OBS-13", "OBS-14", "OBS-17", "OBS-18", "OBS-23", "OBS-24", "OBS-26"],
+      "existing_capabilities": ["Delete audits already bind practice, appointment, user, status transition, both reason fields, warnings and optional command/session correlation.", "Appointment mutation and audit staging already occur in one SQLAlchemy session."],
+      "additive_gaps": ["Bind pre/post appointment versions and waiting-area state explicitly in immutable audit evidence.", "Keep proposal warnings distinct from internal audit evidence codes while preserving both.", "Align the public delete reason shape with mandatory structured reason plus nullable bounded free text.", "Require command/audit/receipt correlation on dedicated delete-confirm success."],
+      "unselected_design_choices": ["Typed columns versus closed JSON pre/post snapshots", "Public compatibility versioning", "Session digest placement"]
+    },
+    {
+      "domain_id": "ordered_atomic_boundary",
+      "verdict": "representable_with_additive_change",
+      "observation_ids": ["OBS-04", "OBS-05", "OBS-07", "OBS-10", "OBS-11", "OBS-14", "OBS-15", "OBS-16", "OBS-17", "OBS-18", "OBS-20", "OBS-21", "OBS-22"],
+      "existing_capabilities": ["Caller-owned auth transactions, principal and idempotency row locks, staged appointment/audit/idempotency writes and one final commit are individually present.", "Raw DELETE and dedicated delete-confirm are visibly separate routes."],
+      "additive_gaps": ["Compose the exact practice then appointment then idempotency lock order in one dedicated command-owned transaction.", "Recheck current authority before replay disclosure and immediately before the first effect.", "Advance exactly one appointment state version and require appointment, audit and receipt cross-artifact equality before commit.", "Remove the current claim-first and unlocked-target ordering from dedicated delete-confirm without lending authority to raw compatibility DELETE."],
+      "unselected_design_choices": ["Command service boundary", "Transaction isolation level", "Retry mapping for serialization or unknown delivery"]
+    },
+    {
+      "domain_id": "fresh_readback_separation",
+      "verdict": "representable_with_additive_change",
+      "observation_ids": ["OBS-07", "OBS-16", "OBS-19"],
+      "existing_capabilities": ["A separate practice-scoped appointment GET and a role-scoped transaction-local authorization adapter already exist."],
+      "additive_gaps": ["Require a fresh explicit appointment read action/resource decision after commit rather than only generic current-user authentication.", "Keep readback denial separate from the stored command receipt and committed outcome."],
+      "unselected_design_choices": ["Read capability name", "Readback response projection", "Post-commit revocation user message"]
+    }
+  ],
+  "cross_domain_findings": [
+    "All six domains are at least representable with additive change; no accepted abstract kernel obligation requires weakening.",
+    "The main gap is composition and authority freshness, not an inability of PostgreSQL or the ORM to carry the required truth and correlations.",
+    "The mounted delete-confirm route is a compatibility-stage precursor and is not evidence that the accepted lock order, authority fence or private receipt contract already exists.",
+    "Raw DELETE and status-confirm remain separate ingress families and gain no authority from this review."
+  ],
+  "hostile_mutations_rejected": 52,
+  "next_gate": "provider_free_unmounted_delete_confirm_physical_design_architecture",
+  "claim_boundary": "This exact-file provider-free review proves only that the accepted abstract delete-confirm kernel can be mapped onto current repository structures with bounded additive work. It authorizes no physical design, migration, source edit, route execution, database access, command, product client, provider, deployment, production or release."
+}

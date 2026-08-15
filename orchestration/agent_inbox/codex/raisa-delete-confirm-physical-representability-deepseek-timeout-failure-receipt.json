@@ -1,0 +1,20 @@
+{
+  "schema_version": "raisa.deepseek_timeout_failure_receipt.v1",
+  "incident_id": "AER-0326",
+  "attempt_id": "raisa-delete-confirm-physical-representability-deepseek-inventory-001",
+  "observed_at": "2026-08-15T13:46:00+10:00",
+  "source_head": "a02e424eac89c12d42ff2c25cfafcc80f3fef077",
+  "worker_branch": "codex/deepseek-delete-confirm-representability",
+  "worker_worktree": "C:/Users/sarashera/EMR4-worktrees/deepseek-delete-confirm-representability",
+  "transport": "claude_code_bare_deepseek",
+  "timeout_seconds": 124,
+  "terminal_result_received": false,
+  "result_file_present": false,
+  "owned_inventory_present": false,
+  "worker_head_unchanged": true,
+  "worker_tracked_state_clean": true,
+  "candidate_state": "canonical_unchanged",
+  "disposition": "attempt_rejected_direct_sol_fallback",
+  "retry_authorized": false,
+  "claim_boundary": "This receipt proves only transport containment and absence of an owned candidate or terminal closeout. It makes no claim about model capability or source representability."
+}
