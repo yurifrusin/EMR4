@@ -8,10 +8,10 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-read-only-unmounted-delete-confirm-physical-"
-    "representability-review"
+    "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture"
 )
-SOURCE_HEAD = "bc066a1b639c5c57cc72f2697c063c5842511840"
+SOURCE_HEAD = "3fd22ba69f96c0378538ea27c6bea444fcb81936"
+REPRESENTABILITY_SOURCE_HEAD = "bc066a1b639c5c57cc72f2697c063c5842511840"
 KERNEL_SOURCE_HEAD = "356b28a1750e7a7b379406e864f2a3501606938a"
 READINESS_SOURCE_HEAD = "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735"
 EDITOR_SOURCE_HEAD = "daed421954d65c159871585559f45caa32d95aee"
@@ -39,35 +39,37 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_live_post_editor_orientation() -> None:
+def test_continuity_and_compass_bind_live_physical_design_pause() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 297
+    assert graph["graph_revision"] == 298
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 279
-    assert compass["source_graph_revision"] == 297
+    assert compass["map_revision"] == 280
+    assert compass["source_graph_revision"] == 298
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_physical_review_and_name_design_gate() -> None:
+def test_live_baton_rows_accept_physical_design_and_name_paused_scaffold() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
+    acceptance = _table_row(text, "Accepted delete-confirm physical-design source")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 297 / Compass 279" in current
+    assert "Continuity 298 / Compass 280" in current
     assert (
-        "raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review_pass"
+        "raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass"
         in current
     )
     assert SOURCE_HEAD in current
-    assert "twenty-six observations" in current
-    assert "appointment truth is already represented" in current.lower()
-    assert "implementation remains not admitted" in current.lower()
-    assert "fifty-two hostile rejections" in current.lower()
-    assert SOURCE_HEAD in relation
+    assert "twenty hashes" in current.lower()
+    assert "166 hostile rejections" in current
+    assert "implementation_authorized` remains false" in current
+    assert "gemini 3.7 flash/high" in current.lower()
+    assert SOURCE_HEAD in acceptance
+    assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
     assert READINESS_SOURCE_HEAD in relation
     assert EDITOR_SOURCE_HEAD in relation
@@ -107,9 +109,9 @@ def test_live_baton_rows_accept_physical_review_and_name_design_gate() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free unmounted delete-confirm physical-design architecture" in next_work
-    assert "authority fence" in next_work
-    assert "exact transaction order" in next_work
+    assert "provider-free unmounted delete-confirm physical schema-and-transaction scaffold" in next_work
+    assert "pause" in next_work
+    assert "primeintellect" in next_work.lower()
     assert "no application/ddl execution" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "attempt-016" not in relation.lower()
@@ -147,10 +149,10 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted delete-confirm physical-design architecture",
-        "authority fence",
-        "private receipt",
-        "exact transaction order",
+        "provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
+        "unopened",
+        "pause",
+        "primeintellect",
         "no application/ddl execution",
         "database",
         "ui",

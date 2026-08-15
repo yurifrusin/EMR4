@@ -1,0 +1,81 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "completed_stage": "The physical-design architecture passed twenty source hashes, 166 hostile mutations, the canonical 196-test fast profile and one fresh Gemini 3.7 Flash/high exact-candidate veto; Sol accepted it at Continuity 298 / Compass 280.",
+    "next_executable_stage": "Keep the next delete-confirm scaffold unopened; complete Yuri's read-only PrimeIntellect prime-agent assessment, then await an explicit product-development resume.",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "resume_after_compaction": false,
+    "source_head": "3fd22ba69f96c0378538ea27c6bea444fcb81936",
+    "status": "paused",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Planned leverage was realized: DeepSeek produced the bounded five-file mechanical candidate and Sol independently reran, corrected and admitted it.",
+        "work_packages": [
+          "contract, schema, validator, evidence and focused hostile-mutation tests"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Planned independent leverage was realized: the first ordinary Gemini 3.7 high review returned one exact pass and unchanged clean candidate.",
+        "work_packages": [
+          "fresh exact-candidate architecture and allocation veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No distinct artifact remained after the external implementation and independent-veto packages; native duplication would not improve acceptance evidence.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "precommit verification failure",
+      "prepush verification failure",
+      "Yuri explicitly resumes product development"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol acceptance and continuity update follow worker and veto evidence",
+      "repository pytest processes remain serial",
+      "explicit-path staging preserves all unrelated untracked files",
+      "product work pauses after closeout"
+    ]
+  },
+  "planned_action": "commit_accepted_delete_confirm_physical_design_closeout_and_explicit_product_pause",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Sol accepts raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass at reviewed source 3fd22ba69f96c0378538ea27c6bea444fcb81936 after twenty hashes, 166 hostile rejections, 63 exact reviewer-focused tests, 36 reviewer API Spine tests, the canonical 196-test fast profile and a clean unchanged Gemini 3.7 review postcondition.",
+    "current_authority_allocation": "Sol alone accepted and closes the tranche. DeepSeek completed the bounded five-file implementation package; Gemini 3.7 Flash/high supplied one fresh exact-candidate veto and no fallback; native subagents were assessed and declined as duplicative.",
+    "git_refs_and_worktree": "Primary remains on codex/ariadne-bernie-davida-parallel-seam at reviewed source 3fd22ba69f96c0378538ea27c6bea444fcb81936 with only the bounded closeout, review, continuity, allocation and incident artifacts intended for explicit-path staging. Both owned disposable worktrees were clean and removed; their branches remain recoverable. Origin task remains 6514d35c465e304a421218890264f61c33ba51bb. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md now records Continuity 298 / Compass 280, the accepted delete-confirm physical-design result and Yuri's explicit pause before the planned scaffold.",
+    "protected_evidence_boundaries": "Implementation remains unauthorised. No application/migration/service/route implementation, executable DDL/SQL, database, real lock, capability provisioning, product/patient/clinical/protected data, product provider/ADC, source watcher/event authority, command/write, credentials/IAM, deployment, production, release, Pages or protected-ref movement is opened. docs/branding and unrelated untracked paths remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

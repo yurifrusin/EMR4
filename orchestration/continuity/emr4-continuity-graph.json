@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 297,
+  "graph_revision": 298,
   "harvests": [],
   "nodes": [
     {
@@ -20196,9 +20196,94 @@
         "Mounted delete-confirm route convergence and Reception One cancellation composition remain closed.",
         "Product data, external adapters, providers, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture",
+      "title": "Provider-free unmounted delete-confirm physical-design architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-15T06:35:48Z",
+      "updated_at": "2026-08-15T06:35:48Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3fd22ba69f96c0378538ea27c6bea444fcb81936",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted design is authored-synthetic, provider-free and unmounted; implementation_authorized remains false.",
+          "It selects a product authority generation and normalized grants, versioned private delete receipt, attributable audit, exact canonical bytes, ordered transaction and separate readback without executing them.",
+          "Yuri requested a product-development pause after closeout; the next scaffold candidate is planned but not opened.",
+          "Application/migration/route implementation, database execution, product providers/data/commands and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-physical-design-architecture",
+          "source": "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact additive authority, receipt, audit, transaction and readback design; retain the unmounted scaffold as the next planned candidate but pause before opening it."
+        }
+      ],
+      "claim_scope": [
+        "The users row is a database-owned monotonic authority fence and normalized exact cancellation/read grants default deny without automatic backfill.",
+        "Existing appointment state advances n to n+1 under one exact structured cancellation reason and optional bounded text.",
+        "A family-qualified private receipt and attributable delete audit bind authority, session, request and pre/post state while delivery uses one integrity-checked six-field byte buffer.",
+        "One READ COMMITTED transaction locks authority, appointment and idempotency in order with two authority checks and one cumulative 2000 ms wait budget; readback is separately authorised after commit.",
+        "Twenty hashes, 166 hostile mutations, the canonical 196-test fast profile and one fresh Gemini 3.7 Flash/high exact-candidate veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/provider-free-physical-design-evidence.json",
+          "docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md",
+          "docs/ariadne-agent-error-correction-register-revision-290.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-postchange-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-preacceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-design-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No ORM model, migration, service helper or route embodies the accepted physical design.",
+        "Executable DDL, PostgreSQL catalogue/trigger/lock behavior, capability provisioning and mounted-route parity remain unproved.",
+        "The current full delete-confirm response has not transitioned to the accepted minimized receipt contract.",
+        "Product/patient data, product providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed.",
+        "The next scaffold candidate remains paused until Yuri resumes product development after the Prime Agent assessment."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-15T04:44:52Z"
+  "updated_at": "2026-08-15T06:35:48Z"
 }

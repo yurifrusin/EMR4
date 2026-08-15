@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "completed_stage": "DeepSeek exact five-file candidate 817ad386 was admitted and committed as 46613880/534ed82f; canonical fast verification passed. Yuri directly replaced the live independent verifier allocation with Gemini 3.7 Flash/high, waived a separate trial, retained Gemini 3.6 for historical compatibility only, and requested a pause after this tranche closes.",
+    "next_executable_stage": "Validate and commit the Gemini 3.7 Flash/high allocation change, perform the mandatory post-model-change five-source rehydration, then dispatch the current tranche's first ordinary fresh Gemini 3.7 Flash/high exact-candidate veto.",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "resume_after_compaction": true,
+    "source_head": "6514d35c465e304a421218890264f61c33ba51bb",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded mechanical implementation package completed and was admitted by Sol.",
+        "work_packages": [
+          "contract, schema, validator, evidence and focused hostile-mutation tests"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 returned one exact schema-constrained pass and left the candidate unchanged; Sol must now reconcile rather than delegate acceptance.",
+        "work_packages": [
+          "fresh exact-candidate independent veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No non-duplicative artifact or veto surface remains during serial Sol acceptance.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "evidence mismatch",
+      "acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol machine-reconciles exact command results and worktree postcondition",
+      "Sol alone decides acceptance",
+      "closeout and continuity update follow acceptance serially"
+    ]
+  },
+  "planned_action": "sol_reconciles_and_accepts_the_single_fresh_gemini_3_7_flash_high_delete_confirm_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The schema-constrained receipt reports decision pass at exact candidate 3fd22ba69f96c0378538ea27c6bea444fcb81936 with head_before equal head_after, dirty_after false and all five exact manifest commands exit 0: architecture validator, 63 focused tests, 36 API Spine tests, Ruff and baseline-to-candidate whitespace. Sol's canonical fast gate independently passed 196 focused repository tests at the same candidate.",
+    "current_authority_allocation": "Gemini 3.7 Flash/high supplied one fresh read-only veto only. GPT Sol retains sole semantic, verifier-admission, acceptance, continuity, Git and closeout authority. Gemini 3.6 was not used and no fallback occurred.",
+    "git_refs_and_worktree": "Review worktree and postflight are clean on codex/review-delete-confirm-physical-design-3fd22ba6 at exact 3fd22ba69f96c0378538ea27c6bea444fcb81936. Primary is at the same tracked HEAD with bounded untracked review-orchestration artifacts plus preserved unrelated untracked files. Origin task remains 6514d35c465e304a421218890264f61c33ba51bb. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The fully rehydrated baton keeps this provider-free unmounted physical-design architecture active and unfinished until Sol acceptance and closeout. Yuri requested a pause after, not before, completion.",
+    "protected_evidence_boundaries": "Acceptance is limited to the authored-synthetic provider-free unmounted architecture claim and implementation_authorized false. It opens no application/migration/route implementation, executable DDL/SQL, database, source watcher/event authority, provider-product call, product/patient/clinical/protected data, capability provisioning, command/write, credentials/IAM, deployment, production, release, Pages or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,157 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-physical-design-3fd22ba6",
+  "branch": "codex/review-delete-confirm-physical-design-3fd22ba6",
+  "head_before": "3fd22ba69f96c0378538ea27c6bea444fcb81936",
+  "head_after": "3fd22ba69f96c0378538ea27c6bea444fcb81936",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "e3f687e6a0372a6bce33b430e76eb21ccc1eae9dbf3e8911cb7b3924db94b184",
+  "result": "### Gemini 3.7 Flash/high Independent Veto Assessment\n\n- **Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-physical-design-3fd22ba6`\n- **Branch**: `codex/review-delete-confirm-physical-design-3fd22ba6`\n- **Candidate HEAD**: `3fd22ba69f96c0378538ea27c6bea444fcb81936`\n- **Source HEAD**: `6514d35c465e304a421218890264f61c33ba51bb`\n- **Model / Effort**: Gemini 3.7 Flash / high (`gemini-3.7-flash-high`)\n- **Evidence Label**: `authored_synthetic_provider_free_unmounted_architecture`\n\n---\n\n### Invariant Verification\n\n1. **Product Authority Fence & Capability Grants**:\n   - The product-facing `users` row serves as the lockable authority fence with `authority_generation BIGINT` (domain `1..9223372036854775807`, fail-closed on NULL/zero/negative/overflow).\n   - PostgreSQL owns generation advances: forces baseline `1` on user insert, preserves generation on update unless `practice_id`, `role`, or `is_active` changes, and advances automatically upon capability grant insert/delete in the same transaction. Submitted generations from clients/models are ignored.\n   - Authority is gated by closed `user_capability_grants` relation referencing `users(practice_id, id)`. Admitted capabilities are strictly `appointment.cancel.confirm` and `appointment.read`. Row presence constitutes grant; absence constitutes denial. Wildcards, JSON claims, and client role claims cannot synthesize authority. No automatic capability backfill to existing users occurs.\n\n2. **Appointment Truth & Reason Contract**:\n   - Reuses database-owned positive `appointment_state_version` (`n -> n + 1`), publishing status `Cancelled`, `waiting_area_id = NULL`, mandatory structured reason, and nullable free text (max 500 UTF-8 chars).\n   - Ingress requires exactly one `status_reason_code` from the 10 admitted codes (`PATIENT_CANCELLED`, `PATIENT_RESCHEDULED`, `PATIENT_UNWELL`, `PATIENT_TRANSPORT`, `PRACTITIONER_UNAVAILABLE`, `CLINIC_OPERATIONAL`, `CLINIC_RESCHEDULED`, `ADMIN_ERROR`, `DUPLICATE_BOOKING`, `OTHER`).\n   - `LEGACY_UNCLASSIFIED`, missing codes, and status-family-only codes are strictly rejected. No legacy reason promotion is permitted. `confirmed_warnings` is strictly a human acknowledgement set, not a reason.\n\n3. **Versioned Private Completed Receipt**:\n   - Bound to `appointment_command_idempotency` with family-qualified `completed_receipt_version = 1`, single additive field `authority_generation BIGINT NULL`, and existing private receipt fields (`session_binding_digest`, `pre_state_version`, `post_state_version`, `response_body_canonical_bytes`).\n   - Session binding uses 32 raw bytes of domain-separated HMAC-SHA-256 (`appointment-delete-session:v1`). Raw session identities and secrets are neither stored nor returned.\n   - Replay requires exact matching across actor, role, operation, route, target, request digest, authority generation, and session digest, plus valid stored byte digest and current authority. Unqualified legacy rows fail closed (`legacy_receipt_not_replayable`).\n\n4. **Attributable Delete Audit & Evidence Separation**:\n   - `appointment_audit_log` is extended with 7 additive fields under `audit_contract_version = 1`.\n   - `confirmed_warnings` stores only exact human warning acknowledgements; `audit_evidence_codes` stores only bounded internal evidence codes as a JSON array. Legacy merged arrays are not reinterpreted.\n   - Raw session identifiers are excluded; correlation is achieved via command foreign key. Strict pre-commit cross-artifact equality is enforced across 11 identity, state, version, reason, and warning attributes.\n\n5. **Single Transaction & Ordered Locking**:\n   - Governed by a single backend-owned PostgreSQL `READ COMMITTED` transaction with a cumulative 2000 ms lock wait budget (never resets per acquisition). `NOWAIT`, `SKIP LOCKED`, advisory locks, and hidden effect retries are prohibited.\n   - Strict lock ordering:\n     1. `users` authority fence (`FOR SHARE`)\n     2. `appointment` (`FOR UPDATE`)\n     3. `idempotency_record` (`FOR UPDATE`) via target-bound `INSERT ... ON CONFLICT DO NOTHING RETURNING`\n   - Two complete current-authority checks are enforced: position 5 (after appointment lock) and position 7 (while all locks are held).\n   - Pre-commit failure triggers rollback with non-disclosing generic transient outcome. Post-commit unknown delivery allows client retry with identical key/request to recover the stored canonical receipt.\n\n6. **Separate Fresh Readback**:\n   - Begins strictly after commit in a new, independent transaction.\n   - Requires current active membership, admitted role, and separate `appointment.read` grant. Cancellation authority does not imply read authority.\n   - Readback failure or denial cannot rollback committed truth, alter the stored receipt, or imply command failure. It serves as reconciliation evidence only and never proves commit.\n\n7. **API Boundary & Compatibility**:\n   - Canonical response is strictly 6 fields in fixed order (`appointment_id`, `status`, `status_reason_code`, `cancellation_reason`, `waiting_area_id`, `warning_codes`).\n   - Delivery and replay use the stored byte buffer directly without reserialization; SHA-256 integrity is recomputed and compared in constant time before replay disclosure.\n   - The current full `AppointmentOut` response is not accepted as the minimized receipt; any compatibility or route transition remains a later, explicit gate.\n\n8. **Deterministic Schema, Contract, Validator & Hostile Mutations**:\n   - All 20 exact source hashes verified.\n   - 166 attempted hostile mutations spanning 17 threat families are completely and deterministically rejected by schema and contract semantics.\n   - Authored-synthetic evidence matches validator output bit-for-bit.\n\n9. **Implementation Authority Boundary**:\n   - `implementation_authorized` is strictly `false`.\n   - No application models, migrations, routes, or database modules are edited or executed. No real locks, capability provisioning, IAM/credentials, provider calls, product/patient data, deployments, Pages rebuilds, or protected ref movements occurred.\n\n10. **Ariadne Verifier & Worker Allocation**:\n    - Live allocation binds Gemini 3.7 Flash/high (`gemini-3.7-flash-high`) with reasoning effort `high`.\n    - Gemini 3.6 remains launcher-compatible for immutable historical receipts only and is never used as a silent fallback.\n    - Reviewer acts strictly as an independent verifier supplying evidence without self-acceptance.\n\n---\n\n### Command Manifest Results\n\n1. `ARCHITECTURE_ACCEPTANCE`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"scripts.raisa_provider_free_unmounted_delete_confirm_physical_design_architecture\"]` -> Exit code 0\n2. `FOCUSED_TESTS`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"pytest\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py\", \"tests/test_ariadne_antigravity.py\", \"tests/test_ariadne_allocation_schemas.py\", \"tests/test_ariadne_verifier_execution_policy.py\", \"tests/test_ariadne_deepseek_claude.py\", \"-q\"]` -> Exit code 0 (63 passed)\n3. `API_SPINE_TESTS`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"pytest\", \"tests/test_api_spine_artifacts.py\", \"-q\"]` -> Exit code 0 (36 passed)\n4. `RUFF`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"ruff\", \"check\", \"scripts/ariadne_antigravity.py\", \"scripts/raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py\", \"tests/test_ariadne_antigravity.py\", \"tests/test_ariadne_allocation_schemas.py\", \"tests/test_ariadne_deepseek_claude.py\", \"tests/test_ariadne_verifier_execution_policy.py\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py\"]` -> Exit code 0 (All checks passed)\n5. `WHITESPACE`: `[\"git\", \"diff\", \"--check\", \"6514d35c465e304a421218890264f61c33ba51bb\", \"3fd22ba69f96c0378538ea27c6bea444fcb81936\"]` -> Exit code 0 (Clean)",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Gemini 3.7 Flash/high Independent Veto Assessment\n\n- **Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-physical-design-3fd22ba6`\n- **Branch**: `codex/review-delete-confirm-physical-design-3fd22ba6`\n- **Candidate HEAD**: `3fd22ba69f96c0378538ea27c6bea444fcb81936`\n- **Source HEAD**: `6514d35c465e304a421218890264f61c33ba51bb`\n- **Model / Effort**: Gemini 3.7 Flash / high (`gemini-3.7-flash-high`)\n- **Evidence Label**: `authored_synthetic_provider_free_unmounted_architecture`\n\n---\n\n### Invariant Verification\n\n1. **Product Authority Fence & Capability Grants**:\n   - The product-facing `users` row serves as the lockable authority fence with `authority_generation BIGINT` (domain `1..9223372036854775807`, fail-closed on NULL/zero/negative/overflow).\n   - PostgreSQL owns generation advances: forces baseline `1` on user insert, preserves generation on update unless `practice_id`, `role`, or `is_active` changes, and advances automatically upon capability grant insert/delete in the same transaction. Submitted generations from clients/models are ignored.\n   - Authority is gated by closed `user_capability_grants` relation referencing `users(practice_id, id)`. Admitted capabilities are strictly `appointment.cancel.confirm` and `appointment.read`. Row presence constitutes grant; absence constitutes denial. Wildcards, JSON claims, and client role claims cannot synthesize authority. No automatic capability backfill to existing users occurs.\n\n2. **Appointment Truth & Reason Contract**:\n   - Reuses database-owned positive `appointment_state_version` (`n -> n + 1`), publishing status `Cancelled`, `waiting_area_id = NULL`, mandatory structured reason, and nullable free text (max 500 UTF-8 chars).\n   - Ingress requires exactly one `status_reason_code` from the 10 admitted codes (`PATIENT_CANCELLED`, `PATIENT_RESCHEDULED`, `PATIENT_UNWELL`, `PATIENT_TRANSPORT`, `PRACTITIONER_UNAVAILABLE`, `CLINIC_OPERATIONAL`, `CLINIC_RESCHEDULED`, `ADMIN_ERROR`, `DUPLICATE_BOOKING`, `OTHER`).\n   - `LEGACY_UNCLASSIFIED`, missing codes, and status-family-only codes are strictly rejected. No legacy reason promotion is permitted. `confirmed_warnings` is strictly a human acknowledgement set, not a reason.\n\n3. **Versioned Private Completed Receipt**:\n   - Bound to `appointment_command_idempotency` with family-qualified `completed_receipt_version = 1`, single additive field `authority_generation BIGINT NULL`, and existing private receipt fields (`session_binding_digest`, `pre_state_version`, `post_state_version`, `response_body_canonical_bytes`).\n   - Session binding uses 32 raw bytes of domain-separated HMAC-SHA-256 (`appointment-delete-session:v1`). Raw session identities and secrets are neither stored nor returned.\n   - Replay requires exact matching across actor, role, operation, route, target, request digest, authority generation, and session digest, plus valid stored byte digest and current authority. Unqualified legacy rows fail closed (`legacy_receipt_not_replayable`).\n\n4. **Attributable Delete Audit & Evidence Separation**:\n   - `appointment_audit_log` is extended with 7 additive fields under `audit_contract_version = 1`.\n   - `confirmed_warnings` stores only exact human warning acknowledgements; `audit_evidence_codes` stores only bounded internal evidence codes as a JSON array. Legacy merged arrays are not reinterpreted.\n   - Raw session identifiers are excluded; correlation is achieved via command foreign key. Strict pre-commit cross-artifact equality is enforced across 11 identity, state, version, reason, and warning attributes.\n\n5. **Single Transaction & Ordered Locking**:\n   - Governed by a single backend-owned PostgreSQL `READ COMMITTED` transaction with a cumulative 2000 ms lock wait budget (never resets per acquisition). `NOWAIT`, `SKIP LOCKED`, advisory locks, and hidden effect retries are prohibited.\n   - Strict lock ordering:\n     1. `users` authority fence (`FOR SHARE`)\n     2. `appointment` (`FOR UPDATE`)\n     3. `idempotency_record` (`FOR UPDATE`) via target-bound `INSERT ... ON CONFLICT DO NOTHING RETURNING`\n   - Two complete current-authority checks are enforced: position 5 (after appointment lock) and position 7 (while all locks are held).\n   - Pre-commit failure triggers rollback with non-disclosing generic transient outcome. Post-commit unknown delivery allows client retry with identical key/request to recover the stored canonical receipt.\n\n6. **Separate Fresh Readback**:\n   - Begins strictly after commit in a new, independent transaction.\n   - Requires current active membership, admitted role, and separate `appointment.read` grant. Cancellation authority does not imply read authority.\n   - Readback failure or denial cannot rollback committed truth, alter the stored receipt, or imply command failure. It serves as reconciliation evidence only and never proves commit.\n\n7. **API Boundary & Compatibility**:\n   - Canonical response is strictly 6 fields in fixed order (`appointment_id`, `status`, `status_reason_code`, `cancellation_reason`, `waiting_area_id`, `warning_codes`).\n   - Delivery and replay use the stored byte buffer directly without reserialization; SHA-256 integrity is recomputed and compared in constant time before replay disclosure.\n   - The current full `AppointmentOut` response is not accepted as the minimized receipt; any compatibility or route transition remains a later, explicit gate.\n\n8. **Deterministic Schema, Contract, Validator & Hostile Mutations**:\n   - All 20 exact source hashes verified.\n   - 166 attempted hostile mutations spanning 17 threat families are completely and deterministically rejected by schema and contract semantics.\n   - Authored-synthetic evidence matches validator output bit-for-bit.\n\n9. **Implementation Authority Boundary**:\n   - `implementation_authorized` is strictly `false`.\n   - No application models, migrations, routes, or database modules are edited or executed. No real locks, capability provisioning, IAM/credentials, provider calls, product/patient data, deployments, Pages rebuilds, or protected ref movements occurred.\n\n10. **Ariadne Verifier & Worker Allocation**:\n    - Live allocation binds Gemini 3.7 Flash/high (`gemini-3.7-flash-high`) with reasoning effort `high`.\n    - Gemini 3.6 remains launcher-compatible for immutable historical receipts only and is never used as a silent fallback.\n    - Reviewer acts strictly as an independent verifier supplying evidence without self-acceptance.\n\n---\n\n### Command Manifest Results\n\n1. `ARCHITECTURE_ACCEPTANCE`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"scripts.raisa_provider_free_unmounted_delete_confirm_physical_design_architecture\"]` -> Exit code 0\n2. `FOCUSED_TESTS`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"pytest\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py\", \"tests/test_ariadne_antigravity.py\", \"tests/test_ariadne_allocation_schemas.py\", \"tests/test_ariadne_verifier_execution_policy.py\", \"tests/test_ariadne_deepseek_claude.py\", \"-q\"]` -> Exit code 0 (63 passed)\n3. `API_SPINE_TESTS`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"pytest\", \"tests/test_api_spine_artifacts.py\", \"-q\"]` -> Exit code 0 (36 passed)\n4. `RUFF`: `[\"C:/Users/sarashera/emr4/.venv/Scripts/python.exe\", \"-m\", \"ruff\", \"check\", \"scripts/ariadne_antigravity.py\", \"scripts/raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py\", \"tests/test_ariadne_antigravity.py\", \"tests/test_ariadne_allocation_schemas.py\", \"tests/test_ariadne_deepseek_claude.py\", \"tests/test_ariadne_verifier_execution_policy.py\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py\", \"tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py\"]` -> Exit code 0 (All checks passed)\n5. `WHITESPACE`: `[\"git\", \"diff\", \"--check\", \"6514d35c465e304a421218890264f61c33ba51bb\", \"3fd22ba69f96c0378538ea27c6bea444fcb81936\"]` -> Exit code 0 (Clean)",
+    "command_results": [
+      {
+        "id": "ARCHITECTURE_ACCEPTANCE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_unmounted_delete_confirm_physical_design_architecture"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "FOCUSED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_allocation_schemas.py",
+          "tests/test_ariadne_verifier_execution_policy.py",
+          "tests/test_ariadne_deepseek_claude.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "API_SPINE_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "tests/test_api_spine_artifacts.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/ariadne_antigravity.py",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_allocation_schemas.py",
+          "tests/test_ariadne_deepseek_claude.py",
+          "tests/test_ariadne_verifier_execution_policy.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "6514d35c465e304a421218890264f61c33ba51bb",
+          "3fd22ba69f96c0378538ea27c6bea444fcb81936"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "4ab9fac853c8d18799cba5545e2560c712d0cbc1c5f8fbf3aea2caef5f27f753",
+  "command_results": [
+    {
+      "id": "ARCHITECTURE_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_physical_design_architecture"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_api_spine_artifacts.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/ariadne_antigravity.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "6514d35c465e304a421218890264f61c33ba51bb",
+        "3fd22ba69f96c0378538ea27c6bea444fcb81936"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

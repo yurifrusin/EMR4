@@ -1,0 +1,65 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "ARCHITECTURE_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_physical_design_architecture"
+      ]
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_api_spine_artifacts.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/ariadne_antigravity.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_verifier_execution_policy.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_plan.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "6514d35c465e304a421218890264f61c33ba51bb",
+        "3fd22ba69f96c0378538ea27c6bea444fcb81936"
+      ]
+    }
+  ]
+}

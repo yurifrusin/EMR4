@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 297 / Compass 279. Delete-confirm physical representability passes; unmounted physical design is next before DDL, database behavior, route or Reception One composition.
+> EMR4 is at Continuity 298 / Compass 280. The unmounted delete-confirm physical-design architecture passes with database-owned current authority, an exact private receipt and audit, one ordered transaction and separate readback. The next scaffold is planned but product development is paused at Yuri's request.
 
 ## North star
 
@@ -366,26 +366,29 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The authored-synthetic kernel now owns current authority, locked truth, confirmation, idempotency, atomic audit/receipt and readback semantics. Lineage parent: `raisa-reception-one-cancellation-command-path-readiness-review`.
 175. **Prove the abstract cancellation kernel fits exact physical/API structures before selecting implementation — Provider-free read-only unmounted delete-confirm physical representability review**
    Appointment truth is already represented and five surrounding domains have bounded additive paths; the current route remains unadmitted. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission`.
+176. **Freeze the cancellation authority and atomic transaction boundary before any runtime edit — Provider-free unmounted delete-confirm physical-design architecture**
+   One exact additive authority, receipt, audit, ordered transaction and separate-readback design passes; implementation remains unmounted and the next product tranche is paused. Lineage parent: `raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review`.
 
 ## Current position
 
-**Hold cancellation at the declarative physical-design gate — Provider-free read-only unmounted delete-confirm physical representability review**
+**The cancellation safety kernel has one exact physical design and is paused before runtime embodiment — Provider-free unmounted delete-confirm physical-design architecture**
 
-**Why this proof came next:** Representability passes without weakening the kernel; exact additive structures and ordering must now be selected before any DDL or route work.
+**Why this proof came next:** The exact-file representability review proved additive feasibility, allowing authority, receipt, audit, transaction and readback decisions to be frozen before code or database execution.
 
-Proceed to provider-free unmounted physical-design architecture only.
+The unmounted architecture passes deterministic and fresh Gemini 3.7 veto evidence; Yuri requested a pause before the planned scaffold.
 
 ### What this unlocks
 
-- An exact declarative practice-authority fence and delete-confirm private receipt design.
-- A later inert DDL lowering and disposable PostgreSQL rehearsal if design passes.
-- A stable command seam for Reception One and future separately gated adapters.
+- After Yuri resumes, implement a provider-free unmounted delete-confirm physical schema-and-transaction scaffold.
+- Lower only the exact product authority fence, normalized grants, receipt, audit and unmounted helper contract under deterministic static tests.
+- Keep database and route execution behind later evidence gates.
 
 ### What it does not solve
 
-- No schema, migration, service, route or client is changed.
-- No PostgreSQL locking, concurrency, rollback or restart behavior is proved.
-- No external adapter, product data, provider, production or release authority is opened.
+- Executable Alembic lowering, ORM/service correctness, capability provisioning or mounted-route behavior.
+- PostgreSQL catalogue, trigger, lock-wait, rollback, restart or unknown-commit behavior.
+- The explicit API response/route compatibility transition.
+- Provider/credential activity, patient/product data, watchers/events, product commands, deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -475,10 +478,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve source-owned truth and command-time current-authority checks as the correctness kernel.
-- Preserve the accepted CF-D2 observability, admission, representation, inert-DDL, parse/catalogue and serial behavior evidence.
-- Treat event/cue durability as an optional later acceleration layer; visible product work does not wait for watcher runtime.
-- Keep concurrency, restart, watcher/source access, persistence/runtime, product data and operational retention separately closed.
+- Preserve the accepted source-owned-truth, conditional-command and delete-confirm representability lineage.
+- When Yuri resumes product development, freeze the exact provider-free unmounted delete-confirm physical schema-and-transaction scaffold before implementation.
+- Keep database execution, mounted routes, providers, product data, commands and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -667,6 +669,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.
 - The delete-confirm representability result selects no physical design and proves no DDL, PostgreSQL behavior, mounted route or client behavior.
 - The delete-confirm kernel result is authored-synthetic and unmounted; it proves no PostgreSQL authority fence, real locking/concurrency, route behavior or client behavior.
 - The cancellation readiness result is repository-static; it proves no locked concurrent database transaction, current-authority revocation behavior, mounted route convergence or UI behavior.
@@ -903,9 +906,11 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-287.md`
 - `docs/ariadne-agent-error-correction-register-revision-288.md`
 - `docs/ariadne-agent-error-correction-register-revision-289.md`
+- `docs/ariadne-agent-error-correction-register-revision-290.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
+- `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
 - `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md`
@@ -1250,6 +1255,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md`
+- `docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md`
+- `docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
@@ -1444,6 +1451,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md`
@@ -1522,6 +1530,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-design-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
@@ -1704,6 +1713,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-gemini-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-sol-recovery-gemini-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-architecture-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-postchange-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-preacceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-veto-predispatch-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-admission.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md`
@@ -2227,6 +2240,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/provider-free-physical-design-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json`
@@ -2590,6 +2606,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-14--reception-one-selected-appointment-time-reschedule-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-14--two-projection-truth-parity-conformance.md`
 - `orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md`
+- `orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-representability-review.md`
 - `orchestration/human_inbox/yuri/2026-08-15--post-combined-editor-programme-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-cancellation-command-path-readiness-review.md`
@@ -2761,4 +2778,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 279; continuity graph revision 297._
+_Compass map revision 280; continuity graph revision 298._
