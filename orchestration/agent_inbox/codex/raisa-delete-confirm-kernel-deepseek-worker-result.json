@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "The bounded packet is complete and committed. Let me provide the final handoff summary.\n\n## Summary of work performed\n\n**Read all controlling documents:** `AGENTS.md` (full), the frozen plan, architecture, threat-model delta, readiness closeout, Sol acceptance, API Spine ADR, the OpenAPI delete alignment/paths/schemas, and the status-protocol analogue script/test.\n\n**Built one pure Python module** (`scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py`) using only standard library + `jsonschema`. It:\n- builds a closed contract (`contract.json`) and JSON Schema (`contract.schema.json`);\n- binds exact SHA-256 hashes for all 7 frozen source documents;\n- models only `confirmAppointmentDeleteProposal` / `delete-confirm` ingress;\n- uses the exact lock order `practice -> appointment -> idempotency_record` with schedule-domain skipped;\n- checks current authority after target lock and again with all locks held, before any replay disclosure;\n- validates confirmation/warnings/evidence and every binding;\n- requires a current `Cancelled` reason code and \u2264500-char optional free text, preserved exactly across appointment/audit/receipt;\n- simulates atomic three-part write set, pre-commit rollback, lost-response replay, overlap/concurrency, and separately authorised readback;\n- rejects raw/status/event/model/channel and cross-practice/absent targets;\n- emits deterministic JSON with `--write` (verified byte-identical on regeneration) or a compact evidence report, exit nonzero on failure.\n\n**Evidence packet:** 45 decision scenarios (\u226524), 14 transaction schedules (\u226512), 56 hostile mutations (\u226540), 0 admitted hostile mutations, all 10 effect-boundary flags false, `runtime_or_command_authority_granted=false`.\n\n**Verification (exact packet commands):**\n- `python scripts/...admission.py --write` \u2192 exit 0\n- `pytest tests/test_..._admission.py tests/test_..._plan.py -q` \u2192 19 passed, exit 0\n- `ruff check` on the three source files \u2192 All checks passed\n- `git diff --check` \u2192 clean\n\n---\n\n```text\nDECISION: pass\nCOMMIT: b2d6427582737b126f6c3c8d57a59b88440ca5fc\nTESTS: 19 passed (13 admission kernel tests + 6 plan/architecture/threat guard tests); module --write exit 0; ruff clean; git diff --check clean\nFILES: scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py\ntests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py\ntests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_plan.py\norchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.json\norchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.schema.json\norchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/provider-free-acceptance-evidence.json\nISSUES: none\n```",
+  "usage": {
+    "input_tokens": 74386,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 9135744,
+    "output_tokens": 94856,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 7.328027000000002,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

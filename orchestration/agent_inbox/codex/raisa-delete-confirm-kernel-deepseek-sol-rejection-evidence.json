@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.worker_candidate_rejection_evidence.v1",
+  "observed_at": "2026-08-15T12:14:08+10:00",
+  "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+  "worker": {
+    "resource_id": "deepseek-flash-workers",
+    "model": "deepseek-v4-flash",
+    "transport": "claude_code_bare_deepseek",
+    "candidate_commit": "b2d6427582737b126f6c3c8d57a59b88440ca5fc",
+    "source_head": "717c1233046452abff7d83af68e9949a31cc29b5",
+    "owned_file_count": 6,
+    "worktree_clean": true,
+    "self_reported_decision": "pass",
+    "self_test_result": "19 passed"
+  },
+  "independent_reproduction": {
+    "focused_worker_tests": "19 passed",
+    "confirmed_at": "2026-08-15T01:55:04Z",
+    "expires_at": "2026-08-15T01:52:49Z",
+    "confirmed_before_or_at_expiry": false,
+    "top_level_contract_has_exact_allowed_roles": false,
+    "top_level_contract_has_exact_signed_evidence_fields": false,
+    "successful_optional_null_cancellation_text_scenario_present": false
+  },
+  "classification": "conceptual_acceptance_contract_defect",
+  "decision": "revision_required_sol_recovery_lease",
+  "same_lane_revision_permitted": false,
+  "candidate_state": "untrusted_partial_worktree",
+  "scope_breach": false,
+  "protected_evidence_accessed": false,
+  "product_or_patient_data_used": false,
+  "runtime_or_command_effect": false
+}

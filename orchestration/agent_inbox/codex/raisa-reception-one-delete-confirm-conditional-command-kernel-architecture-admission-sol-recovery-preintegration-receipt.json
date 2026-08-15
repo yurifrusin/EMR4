@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "completed_stage": "DeepSeek candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc is clean and scoped but rejected: its valid confirmation occurs after its own expiry and its closed contract omits exact authority/evidence fields and a successful null optional-text case",
+    "next_executable_stage": "Preserve the rejection, apply the named Sol recovery lease to the six-file candidate, add exact typed contracts and direct regressions, then rerun deterministic admission before any Gemini call",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "resume_after_compaction": true,
+    "source_head": "71264f3fa4e22d2a258da1b20633c672c2625729",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "parallelism_assessment": {
+    "assessed_stage": "sol_recovery_preintegration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker supplied a useful six-file scaffold but its conceptual self-pass was rejected; no same-lane correction is permitted and Sol recovery is mandatory.",
+        "work_packages": [
+          "preserved untrusted six-file candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact-candidate veto is mandatory after recovered deterministic admission.",
+        "work_packages": [
+          "post-recovery destructive-command exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The recovery amendments are tightly coupled to one six-file state machine and a second implementation lane would erase provenance and add reconciliation cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "recovery patch complete",
+      "deterministic gate failure",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol cherry-picks only the exact six-file untrusted commit",
+      "Sol records every amendment before deterministic admission",
+      "Gemini waits for all recovery tests",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "adopt_rejected_six_file_deepseek_candidate_as_untrusted_source_under_sol_recovery_lease",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and architecture require valid unexpired evidence, exact role/capability and signed-evidence fields, and optional cancellation text. Independent review proved candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc contradicts expiry and omits those closed contract fields and a null-text success. The recovery lease lists exact in-boundary amendments.",
+    "current_authority_allocation": "DeepSeek completed the bounded six-file package but its self-pass is rejected. Sol exclusively owns the named recovery amendments, candidate admission, acceptance and Git. Gemini remains reserved for one fresh veto only after deterministic recovery admission; native subagents remain declined.",
+    "git_refs_and_worktree": "Main task HEAD is 71264f3fa4e22d2a258da1b20633c672c2625729 with protected local/origin master and handoff/current exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Worker worktree is clean at b2d6427582737b126f6c3c8d57a59b88440ca5fc, an exact descendant of plan source 717c1233046452abff7d83af68e9949a31cc29b5, and changes exactly six permitted files.",
+    "live_handover_current_baton": "Complete post-compaction rehydration remains current. AGENTS.md Continuity 295 / Compass 277 authorises the provider-free unmounted delete-confirm architecture/admission rehearsal and requires conceptual Flash defects to transfer to Sol recovery without same-lane retry.",
+    "protected_evidence_boundaries": "Recovery is limited to the six unmounted authored-synthetic worker files plus rejection/recovery evidence and tests. No application/OpenAPI/database/product/provider/data/runtime/command/deployment/release/protected surface is opened. docs/branding and unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
