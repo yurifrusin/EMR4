@@ -24,6 +24,26 @@ from typing import Iterator, Sequence
 ROOT = Path(__file__).resolve().parents[1]
 LOCK_PATH = Path(tempfile.gettempdir()) / "emr4-ariadne-shared-pytest-v1.lock"
 LOCK_TIMEOUT_ENV = "EMR4_ARIADNE_SERIAL_PYTEST_TIMEOUT_SECONDS"
+CONFTEST_RELATIVE = Path("tests") / "conftest.py"
+
+
+def resolve_repo_root(repo_root: Path) -> Path:
+    """Resolve and validate an explicit repository root.
+
+    The root must be a repository containing ``tests/conftest.py`` so that
+    relative candidate test paths resolve against the exact candidate checkout
+    and the shared-schema conftest lock is present. Defaults to the repository
+    root of this launcher for backward compatibility.
+    """
+    resolved = repo_root.resolve()
+    if not resolved.is_dir():
+        raise ValueError(f"repo_root is not a directory: {resolved}")
+    if not (resolved / CONFTEST_RELATIVE).is_file():
+        raise ValueError(
+            "repo_root must be a repository containing "
+            f"{CONFTEST_RELATIVE.as_posix()}: {resolved}"
+        )
+    return resolved
 
 
 class SerialPytestLockTimeout(RuntimeError):
@@ -120,6 +140,17 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         description="Run EMR4 pytest under the shared PostgreSQL schema lock."
     )
     parser.add_argument("--timeout-seconds", type=float, default=900.0)
+    parser.add_argument(
+        "--repo-root",
+        type=Path,
+        default=ROOT,
+        help=(
+            "Explicit repository root containing tests/conftest.py. Defaults "
+            "to this launcher's repository root for compatibility; an external "
+            "verifier outside the candidate worktree must bind this exactly to "
+            "the candidate worktree."
+        ),
+    )
     parser.add_argument("pytest_args", nargs=argparse.REMAINDER)
     return parser.parse_args(argv)
 
@@ -127,11 +158,12 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parse_args(sys.argv[1:] if argv is None else argv)
     try:
+        repo_root = resolve_repo_root(args.repo_root)
         command = build_pytest_command(args.pytest_args)
         environment = build_pytest_environment(args.timeout_seconds)
         completed = subprocess.run(
             command,
-            cwd=ROOT,
+            cwd=repo_root,
             check=False,
             env=environment,
         )

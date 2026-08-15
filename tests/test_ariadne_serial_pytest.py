@@ -15,6 +15,8 @@ from scripts.ariadne_serial_pytest import (
     SerialPytestLockTimeout,
     build_pytest_command,
     build_pytest_environment,
+    main as serial_pytest_main,
+    resolve_repo_root,
     serial_pytest_lock,
 )
 
@@ -115,3 +117,29 @@ def test_direct_pytest_entry_cannot_bypass_outer_repository_lock() -> None:
     combined = completed.stdout + completed.stderr
     assert completed.returncode != 0
     assert "shared_pytest_lock_timeout" in combined
+
+
+def test_resolve_repo_root_default_and_explicit() -> None:
+    assert resolve_repo_root(ROOT) == ROOT.resolve()
+    with pytest.raises(ValueError, match="tests/conftest.py"):
+        resolve_repo_root(ROOT / "scripts")
+
+
+def test_resolve_repo_root_requires_repository_with_tests_conftest(tmp_path: Path) -> None:
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    with pytest.raises(ValueError, match="tests/conftest.py"):
+        resolve_repo_root(empty)
+    repo = tmp_path / "repo"
+    (repo / "tests").mkdir(parents=True)
+    (repo / "tests" / "conftest.py").write_text("# conftest", encoding="utf-8")
+    assert resolve_repo_root(repo) == repo.resolve()
+
+
+def test_serial_pytest_main_rejects_repo_root_without_conftest(tmp_path: Path) -> None:
+    empty = tmp_path / "not-a-repo"
+    empty.mkdir()
+    rc = serial_pytest_main(
+        ["--repo-root", str(empty), "--", "tests/test_example.py::test_case", "-q"]
+    )
+    assert rc == 2

@@ -1,0 +1,177 @@
+{
+  "attention_status": "green",
+  "baseline": {
+    "captured_before_first_edit": true,
+    "fingerprint_sha256": "sha256:4115d324f3d448df9f0705462908c9299f040aba0cf36d6e2b67b5b832e7e9cb",
+    "known_failure_ids": [],
+    "result": "passed"
+  },
+  "canonical_pass_reuse": {
+    "exact": true,
+    "fingerprint_sha256": "sha256:4115d324f3d448df9f0705462908c9299f040aba0cf36d6e2b67b5b832e7e9cb",
+    "reused": false
+  },
+  "capability": "provider_free_deterministic_workflow_admission_and_closeout_generation",
+  "classified_tier": "tier_2_authority_runtime",
+  "closed_surfaces": [
+    "database_or_docker_runtime",
+    "provider_or_external_retrieval",
+    "real_product_patient_or_clinical_data",
+    "credentials_or_iam",
+    "executable_product_tool_or_command",
+    "deployment_production_release_pages",
+    "protected_refs"
+  ],
+  "continuation_receipts": [
+    {
+      "event": "five_source_rehydration_at_plan_admission",
+      "receipt_sha256": "sha256:309f6161fa2dfde1be8eb14506b269f99f464b7ce728d59497d4370d9b9c4c9a"
+    },
+    {
+      "event": "five_source_rehydration_at_verifier_admission",
+      "receipt_sha256": "sha256:7fc941e1c5e2a74fe092c5aca3324a5d1127ad64b8036266b663a40279be906a"
+    },
+    {
+      "event": "five_source_rehydration_at_acceptance",
+      "receipt_sha256": "sha256:ca82ff0574d01eb07b0f8b810d8b1a760e01a3eae47cdaedea5ffc5a0bc82f82"
+    }
+  ],
+  "decision": "pass",
+  "deferred_tail": [],
+  "deterministic_gates": [
+    {
+      "category": "focused_semantic_gates",
+      "covers": [
+        "RWW-001",
+        "RWW-002",
+        "RWW-003",
+        "RWW-004",
+        "RWW-005",
+        "RWW-008",
+        "RWW-009",
+        "RWW-010",
+        "RWW-011"
+      ],
+      "id": "GATE-FOCUSED-SEMANTIC",
+      "result": "passed"
+    },
+    {
+      "category": "canonical_final_profile",
+      "covers": [
+        "RWW-003",
+        "RWW-006",
+        "RWW-016"
+      ],
+      "id": "GATE-CANONICAL-FINAL",
+      "result": "passed"
+    },
+    {
+      "category": "manifest_validation",
+      "covers": [
+        "RWW-013",
+        "RWW-014"
+      ],
+      "id": "GATE-MANIFEST-VALIDATION",
+      "result": "passed"
+    },
+    {
+      "category": "verifier_worktree_path_preflight",
+      "covers": [
+        "RWW-013",
+        "RWW-014"
+      ],
+      "id": "GATE-VERIFIER-PREFLIGHT",
+      "result": "passed"
+    },
+    {
+      "category": "focused_semantic_gates",
+      "covers": [
+        "RWW-007",
+        "RWW-008"
+      ],
+      "id": "GATE-REVIEW-ECONOMY",
+      "result": "passed"
+    },
+    {
+      "category": "focused_semantic_gates",
+      "covers": [
+        "RWW-012"
+      ],
+      "id": "GATE-TAIL",
+      "result": "passed"
+    },
+    {
+      "category": "receipt_preflight",
+      "covers": [
+        "RWW-017"
+      ],
+      "id": "GATE-CONTINUITY-RECEIPTS",
+      "result": "passed"
+    },
+    {
+      "category": "document_metadata_link_whitespace",
+      "covers": [
+        "RWW-015"
+      ],
+      "id": "GATE-RENDERER",
+      "result": "passed"
+    },
+    {
+      "category": "focused_semantic_gates",
+      "covers": [
+        "RWW-018"
+      ],
+      "id": "GATE-PARALLELISM",
+      "result": "passed"
+    }
+  ],
+  "incidents": [],
+  "issues": [],
+  "next_tranche": "provider_free_disposable_postgresql_parse_catalogue_rehearsal_of_migration_x3y4z5a6b7c8",
+  "parallelism": {
+    "actual": {
+      "deepseek_lane": "bounded_mechanical_implementation",
+      "gemini_lane": "single_final_veto",
+      "native_lane": "declined"
+    },
+    "planned": {
+      "deepseek_lane": "bounded_mechanical_implementation",
+      "gemini_lane": "single_final_veto",
+      "native_lane": "declined"
+    },
+    "planned_vs_actual": "exact"
+  },
+  "place_in_raisa": "orchestration_harness_workflow_admission_policy",
+  "profile_sha256": "sha256:11d147e59b852fd202e34dfb95f68ba3f2fd500ceb4a12284ff373325d660cee",
+  "required_rerun": [
+    "focused_semantic_gates",
+    "canonical_final_profile",
+    "invalidate_earlier_verifier_result",
+    "manifest_validation",
+    "verifier_worktree_path_preflight"
+  ],
+  "review": {
+    "final_vetoes": [
+      {
+        "decision": "pass",
+        "reviewer_lane": "gemini_single_final_veto",
+        "veto_id": "VETO-GEMINI-2026-08-16-001"
+      }
+    ],
+    "required_final_vetoes": 1
+  },
+  "schema_version": "ariadne.risk_weighted_tranche_result.v1",
+  "semantic_freeze": {
+    "focused_gate_results": {
+      "focused_risk_weighted_semantic_tests": "passed",
+      "focused_serial_pytest_tests": "passed",
+      "focused_verifier_preflight_tests": "passed"
+    },
+    "semantic_bindings_sha256": "sha256:fb0f27e2bf3a933515c883996fe16a64ab2027160a0174bd822bf45456c9cb20",
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "source_tree": "e851262175da9df518442f2ae6818bb7acb5663c",
+    "toolchain_sha256": "sha256:fcad8783e387b8cb0971d5df2ed00d3d39fd471d270f6771868ab16d15504197"
+  },
+  "technical_result": "owned_paths_implemented_tests_ruf_compile_git_whitespace_passed",
+  "tranche_id": "ariadne-risk-weighted-workflow-reform"
+}

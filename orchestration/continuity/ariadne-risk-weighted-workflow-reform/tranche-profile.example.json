@@ -1,0 +1,163 @@
+{
+  "attention_status": "green",
+  "baseline": {
+    "captured_before_first_edit": true,
+    "fingerprint_sha256": "sha256:4115d324f3d448df9f0705462908c9299f040aba0cf36d6e2b67b5b832e7e9cb",
+    "known_failure_ids": [],
+    "result": "passed"
+  },
+  "capability": "provider_free_deterministic_workflow_admission_and_closeout_generation",
+  "change_families": [
+    "harness",
+    "policy",
+    "schema",
+    "semantic_test",
+    "verifier_command_manifest"
+  ],
+  "change_signals": {
+    "authority_or_security_contract": false,
+    "credentials_or_iam": false,
+    "database_runtime": false,
+    "deployment_production_release_pages": false,
+    "docs_only": false,
+    "executable_tool": false,
+    "migration_execution": false,
+    "migration_representation": false,
+    "network_capability": false,
+    "occupied_provider_call": false,
+    "operational_product_derived_data": false,
+    "patient_or_clinical_data": false,
+    "product_command_or_write": false,
+    "protected_ref_movement": false,
+    "provider_free_source_edit": true,
+    "unmounted": false,
+    "workflow_policy_change": true
+  },
+  "closed_surfaces": [
+    "database_or_docker_runtime",
+    "provider_or_external_retrieval",
+    "real_product_patient_or_clinical_data",
+    "credentials_or_iam",
+    "executable_product_tool_or_command",
+    "deployment_production_release_pages",
+    "protected_refs"
+  ],
+  "configured_continuation_events": [
+    "five_source_rehydration_at_plan_admission",
+    "five_source_rehydration_at_verifier_admission",
+    "five_source_rehydration_at_acceptance"
+  ],
+  "declared_tier": "tier_2_authority_runtime",
+  "mutation_count": 52,
+  "next_tranche": "provider_free_disposable_postgresql_parse_catalogue_rehearsal_of_migration_x3y4z5a6b7c8",
+  "parallelism_plan": {
+    "deepseek_lane": "bounded_mechanical_implementation",
+    "gemini_lane": "single_final_veto",
+    "native_lane": "declined"
+  },
+  "place_in_raisa": "orchestration_harness_workflow_admission_policy",
+  "post_freeze_change_families": [
+    "harness",
+    "policy",
+    "schema",
+    "semantic_test",
+    "verifier_command_manifest"
+  ],
+  "review_triggers": {
+    "ambiguous_hard_boundary": false,
+    "explicit_risk_trigger": false,
+    "new_authority_or_security_boundary": false,
+    "prior_substantive_rejection": false
+  },
+  "schema_version": "ariadne.risk_weighted_tranche_profile.v1",
+  "semantic_bindings": [
+    {
+      "kind": "source",
+      "path": "orchestration_harness/risk_weighted_workflow.py"
+    },
+    {
+      "kind": "source",
+      "path": "scripts/ariadne_risk_weighted_workflow.py"
+    },
+    {
+      "kind": "source",
+      "path": "scripts/ariadne_serial_pytest.py"
+    },
+    {
+      "kind": "source",
+      "path": "scripts/ariadne_verifier_worktree_preflight.py"
+    },
+    {
+      "kind": "policy",
+      "path": "orchestration/harness_settings/risk_weighted_workflow.yaml"
+    },
+    {
+      "kind": "schema",
+      "path": "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.schema.json"
+    },
+    {
+      "kind": "schema",
+      "path": "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.schema.json"
+    },
+    {
+      "kind": "semantic_test",
+      "path": "tests/test_ariadne_risk_weighted_workflow.py"
+    },
+    {
+      "kind": "semantic_test",
+      "path": "tests/test_ariadne_verifier_worktree_preflight.py"
+    },
+    {
+      "kind": "semantic_test",
+      "path": "tests/test_ariadne_serial_pytest.py"
+    }
+  ],
+  "semantic_freeze": {
+    "focused_gate_results": {
+      "focused_risk_weighted_semantic_tests": "passed",
+      "focused_serial_pytest_tests": "passed",
+      "focused_verifier_preflight_tests": "passed"
+    },
+    "semantic_bindings_sha256": "sha256:fb0f27e2bf3a933515c883996fe16a64ab2027160a0174bd822bf45456c9cb20",
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "source_tree": "e851262175da9df518442f2ae6818bb7acb5663c",
+    "toolchain_sha256": "sha256:fcad8783e387b8cb0971d5df2ed00d3d39fd471d270f6771868ab16d15504197"
+  },
+  "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+  "source_tree": "e851262175da9df518442f2ae6818bb7acb5663c",
+  "threat_ids": [
+    "RWW-001",
+    "RWW-002",
+    "RWW-003",
+    "RWW-004",
+    "RWW-005",
+    "RWW-006",
+    "RWW-007",
+    "RWW-008",
+    "RWW-009",
+    "RWW-010",
+    "RWW-011",
+    "RWW-012",
+    "RWW-013",
+    "RWW-014",
+    "RWW-015",
+    "RWW-016",
+    "RWW-017",
+    "RWW-018"
+  ],
+  "tranche_id": "ariadne-risk-weighted-workflow-reform",
+  "volatile_bindings": [
+    {
+      "kind": "latch_snapshot",
+      "path": "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    },
+    {
+      "kind": "receipt",
+      "path": "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-corrected-receipt.json"
+    },
+    {
+      "kind": "generated_closeout",
+      "path": "docs/ariadne-risk-weighted-workflow-reform-plan-closeout.md"
+    }
+  ]
+}

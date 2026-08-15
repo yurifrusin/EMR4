@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-risk-weighted-tranche-profile.schema.json",
+  "title": "Ariadne risk-weighted workflow tranche profile",
+  "description": "One exact typed tranche profile declaring change domains and risk signals. The deterministic classifier derives the highest applicable tier; callers cannot choose or lower their own tier.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tranche_id",
+    "source_head",
+    "source_tree",
+    "declared_tier",
+    "change_signals",
+    "change_families",
+    "semantic_bindings",
+    "volatile_bindings",
+    "baseline",
+    "semantic_freeze",
+    "post_freeze_change_families",
+    "configured_continuation_events",
+    "threat_ids",
+    "mutation_count",
+    "review_triggers",
+    "parallelism_plan",
+    "capability",
+    "closed_surfaces",
+    "place_in_raisa",
+    "next_tranche",
+    "attention_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.risk_weighted_tranche_profile.v1"
+    },
+    "tranche_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "source_tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "declared_tier": {
+      "enum": [
+        "tier_0_metadata",
+        "tier_1_provider_free_source",
+        "tier_2_authority_runtime",
+        "tier_3_occupied_protected"
+      ]
+    },
+    "change_signals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "docs_only",
+        "unmounted",
+        "provider_free_source_edit",
+        "workflow_policy_change",
+        "database_runtime",
+        "authority_or_security_contract",
+        "executable_tool",
+        "network_capability",
+        "operational_product_derived_data",
+        "migration_representation",
+        "migration_execution",
+        "product_command_or_write",
+        "patient_or_clinical_data",
+        "occupied_provider_call",
+        "credentials_or_iam",
+        "deployment_production_release_pages",
+        "protected_ref_movement"
+      ],
+      "properties": {
+        "docs_only": {
+          "type": "boolean"
+        },
+        "unmounted": {
+          "type": "boolean"
+        },
+        "provider_free_source_edit": {
+          "type": "boolean"
+        },
+        "workflow_policy_change": {
+          "type": "boolean"
+        },
+        "database_runtime": {
+          "type": "boolean"
+        },
+        "authority_or_security_contract": {
+          "type": "boolean"
+        },
+        "executable_tool": {
+          "type": "boolean"
+        },
+        "network_capability": {
+          "type": "boolean"
+        },
+        "operational_product_derived_data": {
+          "type": "boolean"
+        },
+        "migration_representation": {
+          "type": "boolean"
+        },
+        "migration_execution": {
+          "type": "boolean"
+        },
+        "product_command_or_write": {
+          "type": "boolean"
+        },
+        "patient_or_clinical_data": {
+          "type": "boolean"
+        },
+        "occupied_provider_call": {
+          "type": "boolean"
+        },
+        "credentials_or_iam": {
+          "type": "boolean"
+        },
+        "deployment_production_release_pages": {
+          "type": "boolean"
+        },
+        "protected_ref_movement": {
+          "type": "boolean"
+        }
+      }
+    },
+    "change_families": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "enum": [
+          "product",
+          "harness",
+          "policy",
+          "schema",
+          "migration",
+          "semantic_test",
+          "verifier_command_manifest",
+          "documentation_or_closeout_prose",
+          "continuity_compass_baton_metadata",
+          "receipt_runtime_state",
+          "agent_error_register"
+        ]
+      }
+    },
+    "semantic_bindings": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "kind": {
+            "enum": [
+              "source",
+              "contract",
+              "policy",
+              "schema",
+              "semantic_test"
+            ]
+          }
+        }
+      }
+    },
+    "volatile_bindings": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "kind": {
+            "enum": [
+              "receipt",
+              "timestamp",
+              "latch_snapshot",
+              "generated_closeout",
+              "mailbox_message",
+              "baton_prose"
+            ]
+          }
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fingerprint_sha256",
+        "result",
+        "known_failure_ids",
+        "captured_before_first_edit"
+      ],
+      "properties": {
+        "fingerprint_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "result": {
+          "enum": [
+            "passed",
+            "passed_with_known_failures",
+            "not_required"
+          ]
+        },
+        "known_failure_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "captured_before_first_edit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "semantic_freeze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_head",
+        "source_tree",
+        "semantic_bindings_sha256",
+        "toolchain_sha256",
+        "focused_gate_results"
+      ],
+      "properties": {
+        "source_head": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "source_tree": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "semantic_bindings_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "toolchain_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "focused_gate_results": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "passed",
+              "revision_required",
+              "uncertain"
+            ]
+          }
+        }
+      }
+    },
+    "post_freeze_change_families": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "enum": [
+          "product",
+          "harness",
+          "policy",
+          "schema",
+          "migration",
+          "semantic_test",
+          "verifier_command_manifest",
+          "documentation_or_closeout_prose",
+          "continuity_compass_baton_metadata",
+          "receipt_runtime_state",
+          "agent_error_register"
+        ]
+      }
+    },
+    "configured_continuation_events": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "threat_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^RWW-\\d{3}$"
+      }
+    },
+    "mutation_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "review_triggers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "new_authority_or_security_boundary",
+        "prior_substantive_rejection",
+        "ambiguous_hard_boundary",
+        "explicit_risk_trigger"
+      ],
+      "properties": {
+        "new_authority_or_security_boundary": {
+          "type": "boolean"
+        },
+        "prior_substantive_rejection": {
+          "type": "boolean"
+        },
+        "ambiguous_hard_boundary": {
+          "type": "boolean"
+        },
+        "explicit_risk_trigger": {
+          "type": "boolean"
+        }
+      }
+    },
+    "parallelism_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deepseek_lane",
+        "gemini_lane",
+        "native_lane"
+      ],
+      "properties": {
+        "deepseek_lane": {
+          "enum": [
+            "bounded_mechanical_implementation",
+            "declined"
+          ]
+        },
+        "gemini_lane": {
+          "enum": [
+            "single_final_veto",
+            "declined"
+          ]
+        },
+        "native_lane": {
+          "enum": [
+            "declined",
+            "explicit_review_lane"
+          ]
+        }
+      }
+    },
+    "capability": {
+      "type": "string",
+      "minLength": 1
+    },
+    "closed_surfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "place_in_raisa": {
+      "type": "string",
+      "minLength": 1
+    },
+    "next_tranche": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attention_status": {
+      "enum": [
+        "green",
+        "amber",
+        "red"
+      ]
+    }
+  }
+}

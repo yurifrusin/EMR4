@@ -1,0 +1,154 @@
+schema_version: ariadne.risk_weighted_workflow.v1
+status: frozen_for_repository_only_implementation
+purpose: select_proportionate_deterministic_and_review_evidence_without_removing_hard_controls
+tier_order:
+  - tier_0_metadata
+  - tier_1_provider_free_source
+  - tier_2_authority_runtime
+  - tier_3_occupied_protected
+tier_classification:
+  tier_0_metadata:
+    - documentation_only
+    - receipt_metadata_only
+    - continuity_metadata_only
+    - error_register_packaging_only
+    - no_executable_product_policy_security_or_authority_change
+  tier_1_provider_free_source:
+    - provider_free_unmounted_harness_or_product_source_or_test
+    - no_database_runtime
+    - no_authority_or_security_boundary
+    - no_command_or_real_product_data_or_provider
+    - no_deployment_or_protected_ref_effect
+  tier_2_authority_runtime:
+    - migration_representation_or_execution
+    - database_runtime
+    - product_command_or_write
+    - authority_or_security_contract
+    - executable_tool
+    - network_capability
+    - operational_product_derived_data
+  tier_3_occupied_protected:
+    - patient_or_clinical_or_real_person_data
+    - occupied_provider_call
+    - credentials_or_iam
+    - deployment_production_release_pages
+    - protected_ref_movement
+classifier:
+  highest_applicable_tier_wins: true
+  caller_declared_tier_compared_only_for_equality: true
+  contradictory_docs_only_or_unmounted_claims_fail_closed: true
+change_families:
+  - product
+  - harness
+  - policy
+  - schema
+  - migration
+  - semantic_test
+  - verifier_command_manifest
+  - documentation_or_closeout_prose
+  - continuity_compass_baton_metadata
+  - receipt_runtime_state
+  - agent_error_register
+rerun_matrix:
+  semantic_families: [product, harness, policy, schema, migration, semantic_test]
+  semantic_families_rerun: [focused_semantic_gates, canonical_final_profile, invalidate_earlier_verifier_result]
+  verifier_command_manifest_rerun: [manifest_validation, verifier_worktree_path_preflight]
+  documentation_or_closeout_prose_rerun: [document_metadata_link_whitespace]
+  continuity_compass_baton_metadata_rerun: [continuity_compass_baton]
+  receipt_runtime_state_rerun: [receipt_preflight]
+  agent_error_register_rerun: [register_schema_pattern]
+  mixed_changes_take_union: true
+  unknown_or_falsely_narrowed_classes_fail_closed: true
+baseline_and_freeze:
+  tier_1_through_3_require_canonical_baseline_before_first_edit: true
+  tier_0_requires_only_targeted_baseline: true
+  known_failures_named_by_stable_ids: true
+  rediscovery_is_not_candidate_regression: true
+  semantic_freeze_records_head_tree_binding_digest_toolchain_and_focused_gates: true
+  canonical_full_profile_runs_once_after_freeze: true
+  canonical_pass_reuse_requires_exact_head_tree_bindings_inputs_and_toolchain: true
+review_economy:
+  tier_0_final_vetoes: 0
+  tier_1_final_vetoes:
+    routine: 0
+    risk_triggered: 1
+    triggers:
+      - new_authority_or_security_boundary
+      - prior_substantive_rejection
+      - ambiguous_hard_boundary
+      - explicit_risk_trigger
+  tier_2_and_tier_3_final_vetoes: 1
+  concurrent_or_stacked_reviewers: forbidden
+  substantive_rejection_enters_one_bounded_recovery_with_one_fresh_final_veto: true
+stable_semantic_bindings:
+  semantic_kinds: [source, contract, policy, schema, semantic_test]
+  volatile_kinds: [receipt, timestamp, latch_snapshot, generated_closeout, mailbox_message, baton_prose]
+  semantic_and_volatile_paths_must_be_disjoint: true
+  caller_reclassification_of_a_duplicated_path: forbidden
+incidents_and_tail:
+  qualifying_incident_receives_one_minimal_typed_record_before_correction: true
+  grouping_requires_exact_origin_category_role_resource_signature_equality: true
+  narrative_aggregation_batched_only_at_closeout: true
+  deferral_requires_safety_relevant_false_and_authority_relevant_false: true
+  deferral_requires_owner_and_next_review_boundary: true
+  integrity_privacy_atomicity_authority_protected_evidence_or_irreversible_effect_defects_never_deferred: true
+threat_ids:
+  - RWW-001
+  - RWW-002
+  - RWW-003
+  - RWW-004
+  - RWW-005
+  - RWW-006
+  - RWW-007
+  - RWW-008
+  - RWW-009
+  - RWW-010
+  - RWW-011
+  - RWW-012
+  - RWW-013
+  - RWW-014
+  - RWW-015
+  - RWW-016
+  - RWW-017
+  - RWW-018
+verifier_worktree:
+  exact_command_manifest_v1_validation_required_when_bound: true
+  typed_repository_path_bindings_validate_existence_kind_and_containment: true
+  candidate_paths_resolve_inside_exact_review_worktree: true
+  external_serial_runner_must_bind_repo_root_exactly_to_review_worktree: true
+  relative_candidate_tests_behind_a_different_root: forbidden
+  shared_interpreter_and_allowlisted_tool_paths_may_remain_external: true
+  preflight_executes_no_command: true
+renderer:
+  writes_only_explicit_output_paths: true
+  artifacts:
+    - technical_closeout_markdown
+    - sol_acceptance_markdown
+    - yuri_lay_technical_mailbox_markdown
+    - typed_continuity_update_payload
+    - typed_compass_update_payload
+  executes_no_command: true
+  applies_no_authority_update: true
+  cannot_decide_acceptance: true
+parallelism:
+  deepseek_lane: bounded_mechanical_implementation
+  gemini_lane: single_final_veto
+  native_lane: declined
+  planned_vs_actual_preserved: true
+hard_controls_invariant:
+  - five_source_rehydration_at_configured_continuation_events
+  - protected_evidence_and_real_data_closure
+  - immutable_attempt_evidence_and_exact_cleanup
+  - exact_candidate_worktree_command_manifest_and_git_identity
+  - explicit_path_staging_and_protected_ref_closure
+  - active_operation_latch_and_terminal_response_guard
+  - independent_veto_when_required_by_tier
+closed_surfaces:
+  - database_or_docker_runtime
+  - provider_or_external_retrieval
+  - real_product_patient_or_clinical_data
+  - protected_evidence
+  - credentials_or_iam
+  - executable_product_tool_or_command
+  - deployment_production_release_pages
+  - protected_refs
