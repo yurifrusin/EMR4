@@ -1,0 +1,77 @@
+{
+  "schema_version": "raisa.delete_confirm_physical_design_architecture_evidence.v1",
+  "result": "raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass",
+  "source_head": "6514d35c465e304a421218890264f61c33ba51bb",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_architecture",
+  "implementation_authorized": false,
+  "source_hashes": {
+    "docs/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review-closeout.md": "4122b7b2fbe9d712ef3cea47a2ee4f67ec7d2b55e38d594c85b89fd9d375af38",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md": "3895da022f977bba9259a327bbccf7068c2b281c7a42e4ce36978f1367036975",
+    "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/review-contract.json": "418c4239f7e5a85bcb76d056322ab32a50e46bda00b4b17bbac0ec79be948a2e",
+    "orchestration/continuity/raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review/provider-free-review-evidence.json": "6a5eb85b532a73169432788f59205e55e0b423056484680bb13938acb100dd6c",
+    "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md": "8d8e3a388aeda71800f014535dccc63af8da6aaa945834add044dc2a49097a91",
+    "docs/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-plan.md": "0c7a02078aa360ecc14a6af1af8a12047bad39c68c38862d9e4360c9577556c0",
+    "docs/security/raisa-provider-free-unmounted-status-confirm-physical-design-architecture-threat-model-delta.md": "3ca874ef0215fb57c74bb8e886c9bc48a912666830c9530e4165a21186dfcfc5",
+    "orchestration/api_spine_adr.md": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a",
+    "app/models/tenancy.py": "6be0d9ab4fc33a8709268d2f2a4550b6063e3f3e4188349c5fe3b0b6acd14431",
+    "app/models/appointments.py": "d1f7960e13efb5f87d0f53334cb365bf49c24f3b6d8574ae3fe4c18a9ae22915",
+    "app/schemas/appointments.py": "c35c271e9308f1f57eeeee53eefa6388087e126944ab5100c225f50066e3a0cf",
+    "app/services/appointment_idempotency.py": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410",
+    "app/routers/appointments.py": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624",
+    "app/models/application_auth.py": "b4671fc5fd82ed06ce4af18b026ab70964a18a48e56157f719be19ce0989107b",
+    "app/services/application_auth_persistence.py": "1dbfa4474178490b19c2332ebac29875641c3ea17742afe77f40aa56189f064b",
+    "app/services/application_auth_role_runtime.py": "cac8a5623a838238cc68ded0c93570581391bf08226d2a312149bfe1cca87cfa",
+    "alembic/versions/h8i9j0k1l2m3_add_appointment_audit_log.py": "a77be7e159614a579eb2dec2d3d8e5b401f1c1d1722f5f740367ae74e6a8a59a",
+    "alembic/versions/i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py": "da6493f60b8a8d39186c273db0b9615758b3927cc913d1117d12df0003f245fd",
+    "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+  },
+  "contract_fingerprint": "sha256:18bc7b242397ae03024de6a70bd726686fd4b3dd14ec6122351daefc62ebd62d",
+  "architecture_facts": {
+    "authority_fence_table": "users",
+    "generation_owner": "postgresql",
+    "capability_count": 2,
+    "admitted_roles": [
+      "Receptionist",
+      "GP",
+      "Nurse",
+      "Admin",
+      "PracticeOwner"
+    ],
+    "migration_phase_count": 10,
+    "reason_code_count": 10,
+    "receipt_single_additive_field": "authority_generation",
+    "canonical_field_count": 6,
+    "audit_additive_field_count": 7,
+    "lock_order": [
+      "users_authority_fence",
+      "appointment",
+      "idempotency_record"
+    ],
+    "cumulative_lock_wait_budget_ms": 2000,
+    "authority_check_count": 2,
+    "readback_never_proves_commit": true,
+    "implementation_authorized": false
+  },
+  "hostile_mutations": {
+    "attempted": 166,
+    "rejected": 166
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "application_model_migration_service_or_route_edited": false,
+    "application_or_database_module_imported": false,
+    "executable_ddl_or_sql_emitted": false,
+    "route_or_database_executed": false,
+    "real_transaction_or_lock_opened": false,
+    "capability_provisioned": false,
+    "provider_or_adc_used": false,
+    "credential_iam_or_browser_authorization_used": false,
+    "product_or_patient_data_used": false,
+    "watcher_or_event_authority_added": false,
+    "product_command_executed": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_unmounted_delete_confirm_physical_schema_and_transaction_scaffold_implementation"
+}

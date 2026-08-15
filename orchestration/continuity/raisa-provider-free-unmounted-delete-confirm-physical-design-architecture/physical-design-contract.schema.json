@@ -1,0 +1,915 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-delete-confirm-physical-design-architecture-v1.json",
+  "title": "Raisa delete-confirm physical-design architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "implementation_authorized",
+    "source_bindings",
+    "api_boundary",
+    "product_authority_fence",
+    "user_capability_grants",
+    "authority_check",
+    "authority_migration",
+    "rollback_contract",
+    "appointment_truth",
+    "status_reason_codes",
+    "private_completed_receipt",
+    "canonical_response",
+    "attributable_audit",
+    "transaction_contract",
+    "failure_policy",
+    "fresh_readback",
+    "non_authority_surfaces",
+    "worker_allocation",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.delete_confirm_physical_design_architecture.v1"
+    },
+    "result": {
+      "const": "raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_unmounted_architecture"
+    },
+    "implementation_authorized": {
+      "const": false
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceBinding"
+      }
+    },
+    "api_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "operation_id",
+        "route_family",
+        "dedicated_ingress_only",
+        "graphql_read_only",
+        "events_non_authoritative_acceleration_hints",
+        "model_context_fabric_channel_inert_proposals",
+        "raw_compatibility_delete_ingress_authority",
+        "status_family_cancellation_ingress_authority",
+        "public_response_schema_changed",
+        "private_receipt_fields_publicly_mapped"
+      ],
+      "properties": {
+        "classification": {"type": "string", "minLength": 1},
+        "operation_id": {"const": "confirmAppointmentDeleteProposal"},
+        "route_family": {"const": "delete-confirm"},
+        "dedicated_ingress_only": {"const": true},
+        "graphql_read_only": {"const": true},
+        "events_non_authoritative_acceleration_hints": {"const": true},
+        "model_context_fabric_channel_inert_proposals": {"const": true},
+        "raw_compatibility_delete_ingress_authority": {"const": false},
+        "status_family_cancellation_ingress_authority": {"const": false},
+        "public_response_schema_changed": {"const": false},
+        "private_receipt_fields_publicly_mapped": {"const": false}
+      }
+    },
+    "product_authority_fence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "generation_column",
+        "postgresql_type",
+        "domain_minimum",
+        "domain_maximum",
+        "null_zero_negative_overflow_outcome",
+        "composite_uniqueness",
+        "generation_owner",
+        "insert_policy",
+        "update_policy",
+        "advance_event",
+        "grant_change_advance",
+        "capability_identity_immutable",
+        "capability_reassignment",
+        "overflow_outcome",
+        "submitted_generation_policy",
+        "synthetic_application_auth_relations_ineligible"
+      ],
+      "properties": {
+        "table": {"const": "users"},
+        "generation_column": {"const": "authority_generation"},
+        "postgresql_type": {"const": "BIGINT"},
+        "domain_minimum": {"const": 1},
+        "domain_maximum": {"const": 9223372036854775807},
+        "null_zero_negative_overflow_outcome": {"const": "fail_closed"},
+        "composite_uniqueness": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "generation_owner": {"const": "postgresql"},
+        "insert_policy": {"const": "force_generation_one"},
+        "update_policy": {"const": "preserve_old_generation_unless_practice_role_or_is_active_changes"},
+        "advance_event": {"const": "exactly_once_per_qualifying_update"},
+        "grant_change_advance": {"const": "same_transaction_before_grant_change_commits"},
+        "capability_identity_immutable": {"const": true},
+        "capability_reassignment": {"const": "delete_then_insert_advances_generation_for_each_change"},
+        "overflow_outcome": {"const": "reject_whole_transaction"},
+        "submitted_generation_policy": {"const": "ignored_by_database"},
+        "synthetic_application_auth_relations_ineligible": {"const": true}
+      }
+    },
+    "user_capability_grants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relation",
+        "columns",
+        "primary_key",
+        "composite_foreign_key",
+        "references",
+        "admitted_capabilities",
+        "grant_semantics",
+        "wildcard_representable",
+        "json_claim_capable",
+        "client_role_claim_capable",
+        "model_output_capable",
+        "automatic_grant_to_existing_users",
+        "later_explicit_provisioning_gate_required",
+        "cancel_does_not_imply_read",
+        "read_requires_separate_grant"
+      ],
+      "properties": {
+        "relation": {"const": "user_capability_grants"},
+        "columns": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/capabilityColumn"}
+        },
+        "primary_key": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "composite_foreign_key": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "references": {"const": "users(practice_id, id)"},
+        "admitted_capabilities": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {"enum": ["appointment.cancel.confirm", "appointment.read"]}
+        },
+        "grant_semantics": {"const": "row_presence_is_grant_absence_is_denial"},
+        "wildcard_representable": {"const": false},
+        "json_claim_capable": {"const": false},
+        "client_role_claim_capable": {"const": false},
+        "model_output_capable": {"const": false},
+        "automatic_grant_to_existing_users": {"const": false},
+        "later_explicit_provisioning_gate_required": {"const": true},
+        "cancel_does_not_imply_read": {"const": true},
+        "read_requires_separate_grant": {"const": true}
+      }
+    },
+    "authority_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fence_lock_resource",
+        "fence_lock_predicate",
+        "fence_lock_strength",
+        "lock_prevents_generation_mutation_commit",
+        "admitted_roles",
+        "required_conditions",
+        "check_count"
+      ],
+      "properties": {
+        "fence_lock_resource": {"const": "users"},
+        "fence_lock_predicate": {"const": "practice_id_and_actor_user_id"},
+        "fence_lock_strength": {"const": "FOR SHARE"},
+        "lock_prevents_generation_mutation_commit": {"const": true},
+        "admitted_roles": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"enum": ["Receptionist", "GP", "Nurse", "Admin", "PracticeOwner"]}
+        },
+        "required_conditions": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "check_count": {"const": 2}
+      }
+    },
+    "authority_migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phases",
+        "historical_backfill_claim",
+        "runtime_before_completion",
+        "capability_rows_after_migration",
+        "automatic_capability_grant"
+      ],
+      "properties": {
+        "phases": {
+          "type": "array",
+          "minItems": 10,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "historical_backfill_claim": {"const": "baseline_one_not_authority_chronology"},
+        "runtime_before_completion": {"const": false},
+        "capability_rows_after_migration": {"const": 0},
+        "automatic_capability_grant": {"const": false}
+      }
+    },
+    "rollback_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_only_before_first_use",
+        "permitted_before_first_use",
+        "after_first_use",
+        "automatic_downgrade_after_first_use"
+      ],
+      "properties": {
+        "schema_only_before_first_use": {"const": true},
+        "permitted_before_first_use": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "after_first_use": {"const": "forward_only"},
+        "automatic_downgrade_after_first_use": {"const": "fail_closed"}
+      }
+    },
+    "appointment_truth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "state_version_column",
+        "postgresql_type",
+        "minimum",
+        "maximum",
+        "insert_value",
+        "state_version_owner",
+        "new_version_identity_added",
+        "new_timestamp_identity_added",
+        "effect_locked_at_version",
+        "effect_publishes_version",
+        "status",
+        "waiting_area_id",
+        "mandatory_structured_reason",
+        "nullable_free_text"
+      ],
+      "properties": {
+        "table": {"const": "appointments"},
+        "state_version_column": {"const": "appointment_state_version"},
+        "postgresql_type": {"const": "BIGINT"},
+        "minimum": {"const": 1},
+        "maximum": {"const": 9223372036854775807},
+        "insert_value": {"const": 1},
+        "state_version_owner": {"const": "postgresql_database_owned_positive"},
+        "new_version_identity_added": {"const": false},
+        "new_timestamp_identity_added": {"const": false},
+        "effect_locked_at_version": {"const": "n"},
+        "effect_publishes_version": {"const": "n_plus_one"},
+        "status": {"const": "Cancelled"},
+        "waiting_area_id": {"const": "json_null"},
+        "mandatory_structured_reason": {"const": true},
+        "nullable_free_text": {"const": true}
+      }
+    },
+    "status_reason_codes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_codes",
+        "rejected_codes",
+        "cancellation_reason_encoding",
+        "cancellation_reason_max_length",
+        "signature_and_request_bound",
+        "byte_for_value_copy_targets",
+        "confirmed_warnings"
+      ],
+      "properties": {
+        "accepted_codes": {
+          "type": "array",
+          "minItems": 10,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {"enum": [
+            "PATIENT_CANCELLED",
+            "PATIENT_RESCHEDULED",
+            "PATIENT_UNWELL",
+            "PATIENT_TRANSPORT",
+            "PRACTITIONER_UNAVAILABLE",
+            "CLINIC_OPERATIONAL",
+            "CLINIC_RESCHEDULED",
+            "ADMIN_ERROR",
+            "DUPLICATE_BOOKING",
+            "OTHER"
+          ]}
+        },
+        "rejected_codes": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "cancellation_reason_encoding": {"const": "json_null_or_unicode_string"},
+        "cancellation_reason_max_length": {"const": 500},
+        "signature_and_request_bound": {"const": true},
+        "byte_for_value_copy_targets": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "confirmed_warnings": {"const": "human_acknowledgement_set_not_reason"}
+      }
+    },
+    "private_completed_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "contract_version_column",
+        "contract_version",
+        "family_qualified",
+        "existing_reused_fields",
+        "single_additive_field",
+        "family_qualified_v1_disjunction",
+        "no_other_operation_may_set_version",
+        "legacy_rows",
+        "legacy_replay_outcome",
+        "session_binding",
+        "same_digest_replay_outcome",
+        "legacy_exact_match_outcome",
+        "replay_requires"
+      ],
+      "properties": {
+        "table": {"const": "appointment_command_idempotency"},
+        "contract_version_column": {"const": "completed_receipt_version"},
+        "contract_version": {"const": 1},
+        "family_qualified": {"const": true},
+        "existing_reused_fields": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "single_additive_field": {"$ref": "#/$defs/singleAdditiveField"},
+        "family_qualified_v1_disjunction": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "no_other_operation_may_set_version": {"const": true},
+        "legacy_rows": {"const": "remain_null_not_inferred_or_backfilled"},
+        "legacy_replay_outcome": {"const": "legacy_receipt_not_replayable"},
+        "session_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm",
+            "stored_form",
+            "domain_separator",
+            "message_fields",
+            "raw_session_stored",
+            "secret_stored"
+          ],
+          "properties": {
+            "algorithm": {"const": "HMAC-SHA-256"},
+            "stored_form": {"const": "32_raw_digest_bytes"},
+            "domain_separator": {"const": "appointment-delete-session:v1"},
+            "message_fields": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "raw_session_stored": {"const": false},
+            "secret_stored": {"const": false}
+          }
+        },
+        "same_digest_replay_outcome": {"const": "stored_receipt_only"},
+        "legacy_exact_match_outcome": {"const": "legacy_receipt_not_replayable"},
+        "replay_requires": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 11,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "canonical_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authoritative_storage",
+        "jsonb_is_delivery_authority",
+        "fields_in_order",
+        "status_constant",
+        "encoding",
+        "byte_order_mark",
+        "insignificant_whitespace",
+        "string_escaping",
+        "nullable_encoding",
+        "warning_order",
+        "duplicate_keys_rejected",
+        "extra_fields_rejected",
+        "non_finite_values_rejected",
+        "digest",
+        "digest_compare",
+        "initial_delivery",
+        "replay_delivery",
+        "integrity_failure",
+        "current_full_response_not_accepted",
+        "compatibility_or_version_transition"
+      ],
+      "properties": {
+        "authoritative_storage": {"const": "response_body_canonical_bytes"},
+        "jsonb_is_delivery_authority": {"const": false},
+        "fields_in_order": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "status_constant": {"const": "Cancelled"},
+        "encoding": {"const": "UTF-8"},
+        "byte_order_mark": {"const": false},
+        "insignificant_whitespace": {"const": false},
+        "string_escaping": {"const": "RFC8259"},
+        "nullable_encoding": {"const": "json_null"},
+        "warning_order": {"const": "already_validated_canonical_order"},
+        "duplicate_keys_rejected": {"const": true},
+        "extra_fields_rejected": {"const": true},
+        "non_finite_values_rejected": {"const": true},
+        "digest": {"const": "lowercase_hex_sha256_of_exact_stored_bytes"},
+        "digest_compare": {"const": "constant_time_before_replay"},
+        "initial_delivery": {"const": "exact_stored_byte_buffer_without_reserialization"},
+        "replay_delivery": {"const": "exact_stored_bytes_without_reserialization"},
+        "integrity_failure": {"const": "release_no_body_and_fail_closed"},
+        "current_full_response_not_accepted": {"const": true},
+        "compatibility_or_version_transition": {"const": "later_explicit_gate"}
+      }
+    },
+    "attributable_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "audit_contract_version",
+        "additive_fields",
+        "v1_required",
+        "confirmed_warnings",
+        "audit_evidence_codes",
+        "legacy_merged_array_not_reinterpreted",
+        "command_fk_binds",
+        "raw_authenticated_session_id_in_audit",
+        "precommit_cross_artifact_equality"
+      ],
+      "properties": {
+        "table": {"const": "appointment_audit_log"},
+        "audit_contract_version": {"const": 1},
+        "additive_fields": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/auditAdditiveField"}
+        },
+        "v1_required": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "confirmed_warnings": {"const": "stores_only_exact_human_warning_acknowledgements"},
+        "audit_evidence_codes": {"const": "stores_only_bounded_internal_evidence_codes_as_json_array"},
+        "legacy_merged_array_not_reinterpreted": {"const": true},
+        "command_fk_binds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "raw_authenticated_session_id_in_audit": {"const": false},
+        "precommit_cross_artifact_equality": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 11,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "transaction_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "isolation",
+        "single_transaction",
+        "cumulative_lock_wait_budget_ms",
+        "budget_policy",
+        "nowait",
+        "skip_locked",
+        "advisory_locks",
+        "hidden_effect_retries",
+        "locks",
+        "idempotency_insert",
+        "idempotency_identity",
+        "authority_check_positions",
+        "replay_only",
+        "new_command_verification",
+        "decision_trace",
+        "flush_count",
+        "post_version_requirement",
+        "atomic_write_set",
+        "same_digest_replay_requires",
+        "non_disclosing_outcomes"
+      ],
+      "properties": {
+        "owner": {"const": "backend_delete_confirm_kernel"},
+        "isolation": {"const": "READ COMMITTED"},
+        "single_transaction": {"const": true},
+        "cumulative_lock_wait_budget_ms": {"const": 2000},
+        "budget_policy": {"const": "apply_only_positive_remaining_budget_before_each_lock_budget_never_resets"},
+        "nowait": {"const": false},
+        "skip_locked": {"const": false},
+        "advisory_locks": {"const": false},
+        "hidden_effect_retries": {"const": false},
+        "locks": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/lock"}
+        },
+        "idempotency_insert": {"const": "target_bound_insert_on_conflict_do_nothing_returning_then_lock_winning_row_without_releasing_appointment_lock"},
+        "idempotency_identity": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "authority_check_positions": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 1}
+        },
+        "replay_only": {"const": "complete_integrity_valid_family_qualified_v1_receipt"},
+        "new_command_verification": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "decision_trace": {
+          "type": "array",
+          "minItems": 15,
+          "maxItems": 15,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "flush_count": {"const": "once"},
+        "post_version_requirement": {"const": "database_owned_post_version_equals_pre_plus_one"},
+        "atomic_write_set": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "same_digest_replay_requires": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 11,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "non_disclosing_outcomes": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "failure_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lock_timeout",
+        "deadlock",
+        "serialization_failure",
+        "connection_loss_before_commit",
+        "connection_loss_after_commit",
+        "server_effect_retry",
+        "atomic_write_set"
+      ],
+      "properties": {
+        "lock_timeout": {"const": "rollback_generic_transient_no_receipt_disclosure"},
+        "deadlock": {"const": "rollback_generic_transient_no_receipt_disclosure"},
+        "serialization_failure": {"const": "rollback_generic_transient_no_receipt_disclosure"},
+        "connection_loss_before_commit": {"const": "rollback_generic_transient_no_receipt_disclosure"},
+        "connection_loss_after_commit": {"const": "delivery_unknown_client_retries_same_key"},
+        "server_effect_retry": {"const": false},
+        "atomic_write_set": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "fresh_readback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "begins_after_commit_only",
+        "new_transaction",
+        "re_resolves",
+        "requires",
+        "resource_authorization",
+        "returns",
+        "denial_outcome",
+        "evidence_role",
+        "never_proves_commit",
+        "command_response_contains_no_display_data",
+        "excluded_display_data"
+      ],
+      "properties": {
+        "begins_after_commit_only": {"const": true},
+        "new_transaction": {"const": true},
+        "re_resolves": {"const": "server_authenticated_practice_id_and_actor_user_id"},
+        "requires": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "resource_authorization": {"const": "practice_id_and_appointment_id"},
+        "returns": {"const": "current_appointment_truth"},
+        "denial_outcome": {"const": "cannot_undo_committed_command_or_change_stored_receipt_or_imply_failure"},
+        "evidence_role": {"const": "reconciliation_only"},
+        "never_proves_commit": {"const": true},
+        "command_response_contains_no_display_data": {"const": true},
+        "excluded_display_data": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "non_authority_surfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_compatibility_delete",
+        "status_family_cancellation_path",
+        "model_output",
+        "context_fabric",
+        "channel_output",
+        "events",
+        "graphql",
+        "client_role_claims",
+        "json_claims",
+        "wildcard"
+      ],
+      "properties": {
+        "raw_compatibility_delete": {"const": "separate_ingress_inherits_no_authority"},
+        "status_family_cancellation_path": {"const": "separate_ingress_inherits_no_authority"},
+        "model_output": {"const": "inert_proposal_no_command_authority"},
+        "context_fabric": {"const": "inert_proposal_no_command_authority"},
+        "channel_output": {"const": "inert_proposal_no_command_authority"},
+        "events": {"const": "non_authoritative_acceleration_hints"},
+        "graphql": {"const": "read_only"},
+        "client_role_claims": {"const": "cannot_synthesize_grant"},
+        "json_claims": {"const": "cannot_synthesize_grant"},
+        "wildcard": {"const": "not_representable"}
+      }
+    },
+    "worker_allocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sol_owns",
+        "deepseek_role",
+        "deepseek_authority",
+        "gemini_verifier",
+        "gemini_role",
+        "gemini_authority",
+        "gemini_3_7_flash_high",
+        "native_subagents"
+      ],
+      "properties": {
+        "sol_owns": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "deepseek_role": {"const": "bounded_mechanical_implementation_only"},
+        "deepseek_authority": {"$ref": "#/$defs/deepseekAuthority"},
+        "gemini_verifier": {"const": "gemini_3_6_flash_high"},
+        "gemini_role": {"const": "fresh_independent_veto_exact_candidate"},
+        "gemini_authority": {"$ref": "#/$defs/geminiAuthority"},
+        "gemini_3_7_flash_high": {"const": "not_yet_admitted_no_silent_substitution"},
+        "native_subagents": {"const": "not_useful_for_same_closed_mechanical_artifact_set"}
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 14,
+      "maxProperties": 14,
+      "required": [
+        "protected_path_content_or_metadata_used",
+        "application_model_migration_service_or_route_edited",
+        "application_or_database_module_imported",
+        "executable_ddl_or_sql_emitted",
+        "route_or_database_executed",
+        "real_transaction_or_lock_opened",
+        "capability_provisioned",
+        "provider_or_adc_used",
+        "credential_iam_or_browser_authorization_used",
+        "product_or_patient_data_used",
+        "watcher_or_event_authority_added",
+        "product_command_executed",
+        "deployment_release_or_pages_opened",
+        "protected_ref_moved"
+      ],
+      "properties": {
+        "protected_path_content_or_metadata_used": {"const": false},
+        "application_model_migration_service_or_route_edited": {"const": false},
+        "application_or_database_module_imported": {"const": false},
+        "executable_ddl_or_sql_emitted": {"const": false},
+        "route_or_database_executed": {"const": false},
+        "real_transaction_or_lock_opened": {"const": false},
+        "capability_provisioned": {"const": false},
+        "provider_or_adc_used": {"const": false},
+        "credential_iam_or_browser_authorization_used": {"const": false},
+        "product_or_patient_data_used": {"const": false},
+        "watcher_or_event_authority_added": {"const": false},
+        "product_command_executed": {"const": false},
+        "deployment_release_or_pages_opened": {"const": false},
+        "protected_ref_moved": {"const": false}
+      }
+    },
+    "next_candidate": {
+      "const": "provider_free_unmounted_delete_confirm_physical_schema_and_transaction_scaffold_implementation"
+    }
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "capabilityColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "nullable"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {"enum": ["UUID", "VARCHAR(100)"]},
+        "nullable": {"const": false}
+      }
+    },
+    "singleAdditiveField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "nullable_for_legacy"],
+      "properties": {
+        "name": {"const": "authority_generation"},
+        "type": {"const": "BIGINT"},
+        "nullable_for_legacy": {"const": true}
+      }
+    },
+    "auditAdditiveField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "nullable"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {"enum": ["SMALLINT", "BIGINT", "UUID", "JSONB"]},
+        "nullable": {"const": true}
+      }
+    },
+    "lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource", "strength", "predicate", "position"],
+      "properties": {
+        "resource": {"enum": ["users_authority_fence", "appointment", "idempotency_record"]},
+        "strength": {"enum": ["FOR SHARE", "FOR UPDATE"]},
+        "predicate": {"type": "string", "minLength": 1},
+        "position": {"type": "integer", "minimum": 1}
+      }
+    },
+    "deepseekAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "closed_contract",
+        "schema",
+        "provider_free_validator",
+        "evidence",
+        "focused_tests",
+        "semantic_choice",
+        "acceptance",
+        "integration",
+        "protected_ref"
+      ],
+      "properties": {
+        "closed_contract": {"const": true},
+        "schema": {"const": true},
+        "provider_free_validator": {"const": true},
+        "evidence": {"const": true},
+        "focused_tests": {"const": true},
+        "semantic_choice": {"const": false},
+        "acceptance": {"const": false},
+        "integration": {"const": false},
+        "protected_ref": {"const": false}
+      }
+    },
+    "geminiAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_choice",
+        "acceptance",
+        "integration",
+        "protected_ref"
+      ],
+      "properties": {
+        "semantic_choice": {"const": false},
+        "acceptance": {"const": false},
+        "integration": {"const": false},
+        "protected_ref": {"const": false}
+      }
+    }
+  }
+}
