@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_the_current_cancellation_readiness_task_branch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and the committed closeout now records Continuity 295 / Compass 277, exact accepted source bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735 and the provider-free unmounted delete-confirm kernel architecture/admission as next.",
+    "current_authority_allocation": "Sol alone owns this task-branch push. DeepSeek and native subagents were declined for the coupled review; Gemini completed its exact-candidate read-only veto and left its worktree unchanged clean.",
+    "active_plan_and_acceptance": "Committed closeout HEAD 57c5b46206de38be473468df76e3c73f14ce7b8e accepts raisa_reception_one_cancellation_command_path_readiness_review_pass after seven focused assertions, 188 cancellation/API tests, the 196-test canonical fast profile, 75 continuity/baton checks and Gemini's ten challenges. The non-PHI notification succeeded and the next tranche remains unmounted and provider-free.",
+    "protected_evidence_boundaries": "This push contains only the explicit task-branch readiness and closeout artifacts. No product/API/database/UI runtime, patient/product/clinical/protected data, external channel, provider beyond the consumed verifier, credentials/IAM, deployment, production, release, Pages or protected ref is opened. docs/branding and unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "After a fresh origin fetch, local HEAD is clean at 57c5b46206de38be473468df76e3c73f14ce7b8e and origin task remains c4e28ad03bb22516bd40d110021ac2de9ead1ec8. Required 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 622 unrelated untracked entries including docs/branding remain preserved. The Gemini review worktree is clean at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "active_tranche": "Reception One cancellation command-path readiness review",
+    "objective": "Inventory and reconcile the exact existing appointment delete/cancel proposal-confirm path, delete-to-status compatibility behavior, backend mounts, confirmation evidence, reason preservation, idempotency, current-authority checks and fresh readback, then freeze the narrowest fail-closed convergence or UI-composition prerequisite without changing product or runtime source.",
+    "status": "complete",
+    "source_head": "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735",
+    "authority_source": "Yuri's 2026-08-15 explicit Yes selecting the recommended Reception One appointment-cancellation direction, AGENTS.md Continuity 294 / Compass 276, and the accepted post-combined-editor programme orientation",
+    "checkpoint": {
+      "completed_stage": "Accepted at Continuity 295 / Compass 277 after deterministic and independent exact-candidate verification",
+      "next_executable_stage": null,
+      "retry_counters": {"planning": 0, "review": 1, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "accepted_operation_complete"},
+    "protected_boundaries": ["provider_free_repository_readiness_review_only", "no_cancellation_ui_or_product_behavior_change", "no_route_openapi_graphql_backend_database_event_or_watcher_change", "no_new_command_family_or_write_authority", "explicit_destructive_confirmation_remains_mandatory", "delete_and_status_family_semantics_must_not_be_conflated", "current_authority_source_truth_idempotency_audit_and_fresh_readback_remain_backend_owned", "no_model_channel_or_delegate_self_confirmation", "no_patient_product_clinical_or_protected_data", "no_provider_adc_credentials_iam_or_external_network_except_selected_verifier_transport", "no_deployment_production_release_pages_or_protected_ref_movement", "docs_branding_and_unrelated_untracked_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+    "assessed_stage": "accepted readiness closeout pre-push",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "No stable mechanical package existed in the completed review.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "The fresh veto passed 188 tests and ten challenges at unchanged clean candidate.", "work_packages": ["completed exact-candidate cancellation-readiness veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "No bounded independent package exceeded coordination cost.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["Gemini independent veto"],
+    "serial_constraints": ["Sol pushes only the current task branch", "protected refs remain closed", "the next tranche begins only after a fresh five-source receipt"],
+    "reassessment_triggers": ["post-push verification", "next tranche planning"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_closeout_pre_push_readback", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns the exact task-branch push and post-push verification."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native dispatch selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini review worktree is unchanged clean."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek remained declined."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"resource_id": "gemini-3.6-flash-high-verifier", "worktree": "C:/Users/sarashera/EMR4-worktrees/cancellation-readiness-gemini-bb36e19c", "branch": "codex/review-cancellation-readiness-bb36e19c", "head": "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735", "clean": true}],
+  "assigned_agent_ids": []
+}
