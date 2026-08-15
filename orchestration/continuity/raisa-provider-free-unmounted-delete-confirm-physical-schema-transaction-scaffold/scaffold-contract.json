@@ -77,7 +77,7 @@
     },
     {
       "path": "app/services/appointment_delete_physical.py",
-      "sha256": "aa60ad4d4a55c642cda69b5895a89ef55c4f84a0bab326476bc5ffdcdfd56dfd"
+      "sha256": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533"
     },
     {
       "path": "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
@@ -85,7 +85,7 @@
     },
     {
       "path": "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
-      "sha256": "b35a7178d48d3559ad97d41a77d65facb6d0091c01dc3b98ba793e5bcb3f2018"
+      "sha256": "a12afe1de2ed6b311430f5d81c3098237b12068e0a4550ada60d7619366ad8e4"
     }
   ],
   "mapping": {
@@ -341,6 +341,7 @@
     "new_claim_binds_exact_signed_authority_generation": true,
     "actor_identity_canonicalized_to_uuid": true,
     "lock_timeout_parameterization": "select_set_config_transaction_local",
+    "replay_requires_request_body_canonicalization_version_one": true,
     "replay_requires_complete_integrity_valid_family_qualified_v1": true,
     "legacy_replay": false,
     "in_progress_replay": false,

@@ -385,6 +385,30 @@ def test_exact_three_artifact_write_set_is_complete() -> None:
     assert module._delete_write_set_complete(**_write_set_fixture(module))
 
 
+def test_replay_binding_rejects_other_request_canonicalization_versions() -> None:
+    module = _load_service()
+    arguments = _write_set_fixture(module)
+    record = arguments["record"]
+    assert module._bindings_match(
+        record,
+        actor_role=arguments["actor_role"],
+        target_appointment_id=arguments["target_appointment_id"],
+        request_body_hash=arguments["request_body_hash"],
+        session_binding_digest=arguments["session_binding_digest"],
+        signed_authority_generation=arguments["signed_authority_generation"],
+    )
+    record.request_body_canonicalization_version = 2
+    assert not module._bindings_match(
+        record,
+        actor_role=arguments["actor_role"],
+        target_appointment_id=arguments["target_appointment_id"],
+        request_body_hash=arguments["request_body_hash"],
+        session_binding_digest=arguments["session_binding_digest"],
+        signed_authority_generation=arguments["signed_authority_generation"],
+    )
+    assert not module._delete_receipt_v1_complete(record)
+
+
 @pytest.mark.parametrize(
     ("owner", "field", "hostile"),
     (

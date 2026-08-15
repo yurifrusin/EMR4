@@ -247,6 +247,7 @@ def _delete_receipt_v1_complete(record: AppointmentCommandIdempotency) -> bool:
         and record.operation_id == DELETE_CONFIRM_OPERATION_ID
         and record.route_family == DELETE_CONFIRM_ROUTE_FAMILY
         and record.result_kind == "confirmed_write"
+        and record.request_body_canonicalization_version == 1
         and isinstance(record.authority_generation, int)
         and record.authority_generation >= 1
         and isinstance(record.session_binding_digest, bytes)
@@ -364,6 +365,7 @@ def _bindings_match(
         and record.actor_role == actor_role
         and record.target_appointment_id == target_appointment_id
         and record.request_body_hash == request_body_hash
+        and record.request_body_canonicalization_version == 1
         and record.authority_generation == signed_authority_generation
         and isinstance(record.session_binding_digest, bytes)
         and hmac.compare_digest(record.session_binding_digest, session_binding_digest)

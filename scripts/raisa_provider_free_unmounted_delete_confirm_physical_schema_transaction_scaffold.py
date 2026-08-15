@@ -27,7 +27,7 @@ CONTRACT_PATH = ROOT / (
 )
 SCHEMA_PATH = CONTRACT_PATH.with_name("scaffold-contract.schema.json")
 EXPECTED_CONTRACT_SHA256 = (
-    "bc7c83800d9280656d295d85ed2b72d28edd0f11baa1a41a86587d784fe2e4b7"
+    "769d174c3fbb5faae82f35347e2f7218b74b8d8cef918cc439be620dedce2fc1"
 )
 HOSTILE_MUTATION_TARGET = 90
 
@@ -345,6 +345,14 @@ CONTRACT_SEMANTIC_REQUIREMENTS: tuple[tuple[str, tuple[str, ...], Any], ...] = (
         "lock_timeout_safe",
         ("transaction_seam", "lock_timeout_parameterization"),
         "select_set_config_transaction_local",
+    ),
+    (
+        "replay_canonicalization_version_one",
+        (
+            "transaction_seam",
+            "replay_requires_request_body_canonicalization_version_one",
+        ),
+        True,
     ),
     (
         "replay_complete_only",
@@ -849,6 +857,7 @@ def _verify_static_lowering(
             "authority_generation=signed_authority_generation",
             "actor_user_id=str(actor_uuid)",
             "record.authority_generation == signed_authority_generation",
+            "record.request_body_canonicalization_version == 1",
             "not isinstance(session_binding_digest, bytes)",
         ):
             if required not in transaction_source and required not in service_source:
