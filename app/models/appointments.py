@@ -150,6 +150,15 @@ class AppointmentAuditLog(Base):
         String(64),
         nullable=True,
     )
+    # Private delete-confirm audit v1 fields. These remain NULL for legacy rows
+    # and are never reinterpreted or backfilled.
+    audit_contract_version = Column(SmallInteger, nullable=True)
+    authority_generation = Column(BigInteger, nullable=True)
+    pre_state_version = Column(BigInteger, nullable=True)
+    post_state_version = Column(BigInteger, nullable=True)
+    waiting_area_before_id = Column(UUID(as_uuid=True), nullable=True)
+    waiting_area_after_id = Column(UUID(as_uuid=True), nullable=True)
+    audit_evidence_codes = Column(JSONB, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     __table_args__ = (
@@ -157,6 +166,22 @@ class AppointmentAuditLog(Base):
             "practice_id",
             "id",
             name="uq_appt_audit_log_practice_id_id",
+        ),
+        CheckConstraint(
+            "audit_contract_version IS NULL OR "
+            "(audit_contract_version = 1 AND action = 'delete' AND "
+            "command_id IS NOT NULL AND "
+            "authority_generation IS NOT NULL AND authority_generation >= 1 AND "
+            "pre_state_version IS NOT NULL AND pre_state_version >= 1 AND "
+            "post_state_version IS NOT NULL AND post_state_version >= 1 AND "
+            "post_state_version = pre_state_version + 1 AND "
+            "status_after = 'Cancelled' AND status_reason_code IS NOT NULL AND "
+            "waiting_area_after_id IS NULL AND "
+            "confirmed_warnings IS NOT NULL AND "
+            "jsonb_typeof(confirmed_warnings) = 'array' AND "
+            "audit_evidence_codes IS NOT NULL AND "
+            "jsonb_typeof(audit_evidence_codes) = 'array')",
+            name="ck_appt_audit_log_delete_v1_complete",
         ),
         ForeignKeyConstraint(
             ["practice_id", "appointment_id"],
@@ -231,6 +256,9 @@ class AppointmentCommandIdempotency(Base):
     pre_state_version = Column(BigInteger, nullable=True)
     post_state_version = Column(BigInteger, nullable=True)
     response_body_canonical_bytes = Column(LargeBinary, nullable=True)
+    # Private delete-confirm receipt v1 additive field. Remains NULL for legacy
+    # rows and for in-progress claims; a completed delete v1 requires it.
+    authority_generation = Column(BigInteger, nullable=True)
 
     __table_args__ = (
         UniqueConstraint(
@@ -282,6 +310,21 @@ class AppointmentCommandIdempotency(Base):
             "operation_id = 'confirmAppointmentStatusProposal' AND "
             "route_family = 'status-confirm' AND "
             "result_kind = 'confirmed_write' AND "
+            "session_binding_digest IS NOT NULL AND "
+            "octet_length(session_binding_digest) = 32 AND "
+            "pre_state_version IS NOT NULL AND pre_state_version >= 1 AND "
+            "post_state_version IS NOT NULL AND "
+            "post_state_version = pre_state_version + 1 AND "
+            "response_body_canonical_bytes IS NOT NULL AND "
+            "octet_length(response_body_canonical_bytes) > 0 AND "
+            "target_appointment_id IS NOT NULL AND audit_log_id IS NOT NULL AND "
+            "response_status_code IS NOT NULL AND response_body_hash IS NOT NULL AND "
+            "response_body_json IS NOT NULL) OR "
+            "(state = 'completed' AND "
+            "operation_id = 'confirmAppointmentDeleteProposal' AND "
+            "route_family = 'delete-confirm' AND "
+            "result_kind = 'confirmed_write' AND "
+            "authority_generation IS NOT NULL AND authority_generation >= 1 AND "
             "session_binding_digest IS NOT NULL AND "
             "octet_length(session_binding_digest) = 32 AND "
             "pre_state_version IS NOT NULL AND pre_state_version >= 1 AND "

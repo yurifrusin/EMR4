@@ -1,0 +1,374 @@
+{
+  "schema_version": "raisa.delete_confirm_physical_schema_transaction_scaffold.v1",
+  "result": "raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold_pass",
+  "source_head": "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+  "evidence_label": "authored_synthetic_provider_free_unmounted_scaffold",
+  "implementation_status": "unmounted_scaffold_only",
+  "input_bindings": [
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-plan.md",
+      "sha256": "32bf0e71fff17606686f5b98b0b808ea26baed882a34020f0cd609ee6f341d04"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-threat-model-delta.md",
+      "sha256": "394d3bf9325a94fed599755fea1a7b2b2261abe67f89b5412bd21f23ba8dd449"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md",
+      "sha256": "584405db5d49a56e18061f80fcd1faa72c278cf0d4975cf95febc86783609019"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-architecture-sol-acceptance.md",
+      "sha256": "43b560b6c19beede9bfd12db5a39d0f5698438274e5e7b3cc9cee88a64c1cfed"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.json",
+      "sha256": "235f800deec76aee84f9085447d7b0fb666fcd67f3edea07cc7826f9b64b8f72"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
+    },
+    {
+      "path": "app/models/__init__.py",
+      "sha256": "52650eeb8bc97abd79de78cfc47c78396d38e5f714b512ca065603b1cfefeecc"
+    },
+    {
+      "path": "app/services/appointment_idempotency.py",
+      "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"
+    },
+    {
+      "path": "alembic/versions/l1m2n3o4p5q6_add_appointment_command_idempotency.py",
+      "sha256": "78d730ddf07051f5595c268fc031dea7d454c166a930250255de6aa26e2938ae"
+    },
+    {
+      "path": "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py",
+      "sha256": "bfa72b627061b8e477903ec9fc2cfbb35a4970b26ab7115db18c3daef1d3696c"
+    }
+  ],
+  "implementation_bindings": [
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
+      "sha256": "118dbf712dcecb24e47a389fa9df2dbc28aafc7d51d573eadfa73b6b2f727350"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+      "sha256": "c72e76b6266190a2bc1f92e63aa305476b346e797875aa8e2414a97e7176218f"
+    },
+    {
+      "path": "app/models/tenancy.py",
+      "sha256": "197dfeb5d3a05283617e4040eea8a804623f532434d61b545c685a78bea12783"
+    },
+    {
+      "path": "app/models/appointments.py",
+      "sha256": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794"
+    },
+    {
+      "path": "app/services/appointment_delete_physical.py",
+      "sha256": "57cd96162bc620ef39302f2b09bb719408049124d65981647cb490b1113b22e3"
+    },
+    {
+      "path": "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+      "sha256": "714533f7285f7e324d68866138041118355d313689b4bd395bb95fcdd13e958c"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+      "sha256": "1bde9bed39ca5ff9203b2e47f0d9c3edf79c2980b1b4f9afa24acced01dcc580"
+    }
+  ],
+  "mapping": {
+    "authority_fence": {
+      "table": "users",
+      "generation_column": "authority_generation",
+      "type": "BIGINT",
+      "nullable": false,
+      "server_default": 1,
+      "minimum": 1,
+      "maximum": 9223372036854775807,
+      "composite_uniqueness": [
+        "practice_id",
+        "id"
+      ],
+      "generation_owner": "postgresql",
+      "insert_policy": "force_generation_one",
+      "update_policy": "preserve_old_generation_unless_practice_role_or_is_active_changes",
+      "advance_event": "exactly_once_per_qualifying_update",
+      "submitted_generation_policy": "ignored_by_database",
+      "nested_grant_advance_admitted": true,
+      "nested_advance_signal": "transaction_local_current_setting_emr4_authority_advance_target",
+      "synthetic_application_auth_relations_ineligible": true
+    },
+    "user_capability_grants": {
+      "relation": "user_capability_grants",
+      "columns": [
+        "practice_id",
+        "user_id",
+        "capability_code"
+      ],
+      "primary_key": [
+        "practice_id",
+        "user_id",
+        "capability_code"
+      ],
+      "composite_foreign_key": [
+        "practice_id",
+        "user_id"
+      ],
+      "references": "users(practice_id, id)",
+      "admitted_capabilities": [
+        "appointment.cancel.confirm",
+        "appointment.read"
+      ],
+      "grant_semantics": "row_presence_is_grant_absence_is_denial",
+      "wildcard_representable": false,
+      "json_claim_capable": false,
+      "client_role_claim_capable": false,
+      "update_rejected": true,
+      "reassignment": "delete_then_insert_advances_each_parent",
+      "automatic_grant_to_existing_users": false,
+      "capability_rows_after_migration": 0
+    },
+    "private_receipt_fields": [
+      {
+        "name": "authority_generation",
+        "type": "BIGINT",
+        "nullable": true
+      }
+    ],
+    "family_qualified_v1_constraint": {
+      "name": "ck_appt_cmd_idem_status_receipt_v1_complete",
+      "widen_in_place": true,
+      "status_branch_unchanged": true,
+      "delete_confirm_operation": "confirmAppointmentDeleteProposal",
+      "delete_confirm_route_family": "delete-confirm",
+      "delete_confirm_requires_positive_authority_generation": true,
+      "third_family_may_set_version_one": false
+    },
+    "delete_audit_additive_fields": [
+      {
+        "name": "audit_contract_version",
+        "type": "SMALLINT",
+        "nullable": true
+      },
+      {
+        "name": "authority_generation",
+        "type": "BIGINT",
+        "nullable": true
+      },
+      {
+        "name": "pre_state_version",
+        "type": "BIGINT",
+        "nullable": true
+      },
+      {
+        "name": "post_state_version",
+        "type": "BIGINT",
+        "nullable": true
+      },
+      {
+        "name": "waiting_area_before_id",
+        "type": "UUID",
+        "nullable": true
+      },
+      {
+        "name": "waiting_area_after_id",
+        "type": "UUID",
+        "nullable": true
+      },
+      {
+        "name": "audit_evidence_codes",
+        "type": "JSONB",
+        "nullable": true
+      }
+    ],
+    "legacy_rows": "remain_null_not_inferred_or_backfilled"
+  },
+  "migration": {
+    "revision": "x3y4z5a6b7c8",
+    "down_revision": "w2x3y4z5a6b7",
+    "head_count_observed": 1,
+    "executed": false,
+    "database_contacted": false,
+    "phases": [
+      "add_users_authority_generation_nullable_without_table_rewriting_default",
+      "set_server_default_one_for_subsequent_inserts",
+      "backfill_existing_user_generations_to_baseline_one",
+      "add_and_validate_positive_range_check_then_set_not_null",
+      "add_and_validate_unique_practice_id_id",
+      "create_closed_capability_relation_with_no_rows",
+      "install_generation_owner_and_grant_change_triggers_before_any_consumer",
+      "prove_no_null_or_nonpositive_generation_and_no_orphan_or_unknown_grant",
+      "grant_no_capability_and_mount_no_consumer",
+      "retain_generation_server_default_for_new_users"
+    ],
+    "user_trigger": {
+      "timing": "BEFORE INSERT OR UPDATE",
+      "scope": "users",
+      "insert_policy": "force_generation_one",
+      "direct_submitted_generation": "ignored",
+      "qualifying_advance": "practice_or_role_or_is_active_change_advances_old_plus_one",
+      "nested_grant_advance": "admitted_only_when_marker_and_old_plus_one",
+      "overflow_aborts": true,
+      "event_or_watcher": false
+    },
+    "capability_trigger": {
+      "timing": "BEFORE INSERT OR DELETE",
+      "scope": "user_capability_grants",
+      "parent_lock": "users_for_update",
+      "parent_advance": "nested_update_old_plus_one",
+      "missing_parent_aborts": true,
+      "update_rejected_trigger": true
+    },
+    "receipt_constraint": {
+      "widen_in_place": true,
+      "status_branch_preserved": true,
+      "delete_branch_added": true,
+      "name": "ck_appt_cmd_idem_status_receipt_v1_complete"
+    },
+    "audit_constraint": {
+      "name": "ck_appt_audit_log_delete_v1_complete",
+      "action": "delete",
+      "requires_cancelled": true,
+      "requires_structured_reason": true,
+      "requires_null_waiting_area_after": true,
+      "requires_json_array_warning_evidence": true
+    },
+    "downgrade": {
+      "allowed_before_first_use": true,
+      "fails_closed_when_grant_exists": true,
+      "fails_closed_when_delete_receipt_v1_exists": true,
+      "fails_closed_when_delete_audit_v1_exists": true,
+      "post_adoption_recovery": "forward_only",
+      "restores_status_only_receipt_constraint": true
+    }
+  },
+  "helpers": {
+    "canonical_response": {
+      "fields_in_order": [
+        "appointment_id",
+        "status",
+        "status_reason_code",
+        "cancellation_reason",
+        "waiting_area_id",
+        "warning_codes"
+      ],
+      "status_constant": "Cancelled",
+      "waiting_area": "json_null",
+      "encoding": "UTF-8",
+      "bom": false,
+      "insignificant_whitespace": false,
+      "reason_codes": [
+        "PATIENT_CANCELLED",
+        "PATIENT_RESCHEDULED",
+        "PATIENT_UNWELL",
+        "PATIENT_TRANSPORT",
+        "PRACTITIONER_UNAVAILABLE",
+        "CLINIC_OPERATIONAL",
+        "CLINIC_RESCHEDULED",
+        "ADMIN_ERROR",
+        "DUPLICATE_BOOKING",
+        "OTHER"
+      ],
+      "cancellation_reason_max_length": 500,
+      "warning_codes": "non_empty_unique_strings_preserving_order",
+      "delivery_source": "exact_stored_bytes"
+    },
+    "session_binding": {
+      "algorithm": "HMAC-SHA-256",
+      "domain": "appointment-delete-session:v1",
+      "framing": "unsigned_32_bit_big_endian_length_per_utf8_field",
+      "fields": [
+        "practice_id",
+        "actor_user_id",
+        "authenticated_session_id"
+      ],
+      "stored_bytes": 32,
+      "raw_session_stored": false,
+      "secret_stored": false
+    },
+    "response_integrity": {
+      "digest": "lowercase_hex_sha256",
+      "comparison": "constant_time",
+      "failure_releases_body": false,
+      "jsonb_is_delivery_authority": false
+    }
+  },
+  "transaction_seam": {
+    "mounted": false,
+    "called_by_route": false,
+    "isolation": "READ COMMITTED",
+    "transaction_count": 1,
+    "cumulative_lock_wait_budget_ms": 2000,
+    "budget_policy": "apply_only_positive_remaining_budget_before_each_blocking_statement_budget_never_resets",
+    "nowait": false,
+    "skip_locked": false,
+    "hidden_effect_retry": false,
+    "advisory_locks": false,
+    "lock_order": [
+      "users_authority_fence_for_share",
+      "practice_scoped_appointment_for_update",
+      "idempotency_record_for_update"
+    ],
+    "select_first_then_insert_if_absent": true,
+    "authority_checks": [
+      "before_idempotency_access",
+      "after_idempotency_lock_before_classification"
+    ],
+    "authority_check_count": 2,
+    "authority_check_owner": "internal_not_caller_callback",
+    "classification_after_second_authority_check": true,
+    "replay_requires_complete_integrity_valid_family_qualified_v1": true,
+    "legacy_replay": false,
+    "in_progress_replay": false,
+    "product_mutation_staged": false,
+    "audit_staged": false,
+    "receipt_completion_staged": false,
+    "future_atomic_write_set_required_before_commit": true
+  },
+  "authority_check": {
+    "fence_lock_resource": "users",
+    "fence_lock_predicate": "practice_id_and_actor_user_id",
+    "fence_lock_strength": "FOR SHARE",
+    "admitted_roles": [
+      "Receptionist",
+      "GP",
+      "Nurse",
+      "Admin",
+      "PracticeOwner"
+    ],
+    "required_conditions": [
+      "locked_row_exists_at_authenticated_practice_and_actor_identity",
+      "is_active_true",
+      "locked_role_equals_authenticated_server_role",
+      "locked_role_admitted",
+      "signed_authority_generation_equals_locked_current_generation",
+      "exact_grant_appointment_cancel_confirm_exists"
+    ],
+    "check_count": 2,
+    "internal_only": true
+  },
+  "api_boundary": {
+    "classification": "rest_openapi_delete_confirm_command_security_audit_idempotency",
+    "operation_id": "confirmAppointmentDeleteProposal",
+    "route_family": "delete-confirm",
+    "dedicated_ingress_only": true,
+    "public_openapi_changed": false,
+    "graphql_read_only": true,
+    "events_non_authoritative_acceleration_hints": true,
+    "private_fields_publicly_mapped": false,
+    "public_response_schema_edit_authorized": false
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "route_edited_mounted_or_called": false,
+    "migration_or_database_executed": false,
+    "real_lock_acquired": false,
+    "provider_adc_or_credentials_used": false,
+    "product_or_patient_data_used": false,
+    "watcher_or_event_authority_added": false,
+    "product_command_executed": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal"
+}

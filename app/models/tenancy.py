@@ -2,6 +2,8 @@ import uuid
 import enum
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Enum, ForeignKey, Float, Index, Integer,
+    BigInteger, CheckConstraint, UniqueConstraint, ForeignKeyConstraint,
+    PrimaryKeyConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
@@ -77,14 +79,63 @@ class User(Base):
     role = Column(Enum(UserRole), nullable=False)
     practitioner_id = Column(UUID(as_uuid=True), ForeignKey("practitioners.id"), nullable=True)
     is_active = Column(Boolean, default=True)
+    authority_generation = Column(BigInteger, nullable=False, server_default="1", default=1)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     practice = relationship("Practice", back_populates="users")
     practitioner = relationship("Practitioner", foreign_keys=[practitioner_id])
 
     __table_args__ = (
+        CheckConstraint(
+            "authority_generation >= 1",
+            name="ck_users_authority_generation_positive",
+        ),
+        UniqueConstraint(
+            "practice_id",
+            "id",
+            name="uq_users_practice_id_id",
+        ),
         Index("ix_users_practice_id", "practice_id"),
         Index("ix_users_email", "email"),
+    )
+
+
+class UserCapabilityGrant(Base):
+    """Closed capability grant rows; row presence is grant, absence is denial.
+
+    The composite primary key and composite user foreign key are exact from the
+    accepted delete-confirm physical design. Capability identity is immutable:
+    updates are rejected by the database trigger, so reassignment is delete then
+    insert and each change advances the exact parent generation once.
+    """
+
+    __tablename__ = "user_capability_grants"
+
+    practice_id = Column(UUID(as_uuid=True), nullable=False)
+    user_id = Column(UUID(as_uuid=True), nullable=False)
+    capability_code = Column(String(100), nullable=False)
+
+    __table_args__ = (
+        PrimaryKeyConstraint(
+            "practice_id",
+            "user_id",
+            "capability_code",
+            name="pk_user_capability_grants",
+        ),
+        ForeignKeyConstraint(
+            ["practice_id", "user_id"],
+            ["users.practice_id", "users.id"],
+            name="fk_user_capability_grants_user",
+        ),
+        CheckConstraint(
+            "capability_code IN ('appointment.cancel.confirm', 'appointment.read')",
+            name="ck_user_capability_grants_capability_code",
+        ),
+        Index(
+            "ix_user_capability_grants_user",
+            "practice_id",
+            "user_id",
+        ),
     )
 
 
