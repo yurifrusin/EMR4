@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 294,
+  "register_revision": 295,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13410,6 +13410,44 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-closeout-outer-timeout-recurrence-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-294.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0334",
+      "attempt_id": "raisa-delete-confirm-scaffold-plan-local-validation-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_shell_command_wrapper",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every admission gate must expose its own exit status, package-aware repository CLIs must use their admitted module invocation, and a later successful command must never mask an earlier validation failure.",
+      "observed_error": "Sol chained active-latch validation, journal validation and git diff in one shell command. The first two file-path CLI invocations failed to import orchestration_harness, while the final successful diff made the shell call return zero. An independently captured pytest also rejected the draft latch's non-admitted in-progress terminal reason.",
+      "detection_method": "The separate pytest process returned one explicit failure for terminal_response.reason. Sol then read the validator's exact invariant, corrected the literal, reran both CLIs through python -m and captured latch, journal, focused pytest and diff as four independent passing process results before plan commit or worker dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-chained-validation-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-295.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct terminal_response.reason to unfinished_authorized_operation, invoke package-aware CLIs with python -m, and rerun latch, journal, focused pytest and diff as four separately captured gates before admitting the plan.",
+        "prevention_control": "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-chained-validation-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-295.md"
         ]
       },
       "status": "corrected"

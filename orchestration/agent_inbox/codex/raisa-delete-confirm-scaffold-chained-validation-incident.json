@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.agent_error_incident.v1",
+  "incident_id": "AER-0334",
+  "attempt_id": "raisa-delete-confirm-scaffold-plan-local-validation-001",
+  "observed_on": "2026-08-15",
+  "summary": "A chained local validation command invoked two package-importing scripts by file path and allowed the final successful diff check to mask both import failures; an independent pytest then rejected one invalid active-latch literal.",
+  "candidate_state": "canonical_unchanged",
+  "correction": "Correct the latch terminal reason, invoke package-aware CLIs with python -m, and execute every admission gate as a separately captured command so a later success cannot mask an earlier failure.",
+  "product_or_external_effect": false
+}

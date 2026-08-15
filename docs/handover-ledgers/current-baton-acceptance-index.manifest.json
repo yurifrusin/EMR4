@@ -33,7 +33,7 @@
   "ledger_byte_count": 209317,
   "ledger_line_count": 180,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "71ebf85976cfe418ef274679fa85401cc346f1aff14a189bce77684b305f26ba",
+  "ledger_sha256": "bc75f5482d929624c3fcf31f0874ea0db0b334bf738d394d61237695e9a7bfe0",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -203,9 +203,9 @@
   "moved_row_count": 164,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
   "source_agents_byte_count": 74965,
-  "source_agents_git_blob_sha1": "f1f663f094e308c7382f000fb213676edb05e18c",
+  "source_agents_git_blob_sha1": "601963f9ef6e1bdfe3796b4001885e3da12d2df8",
   "source_agents_line_count": 483,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "e29c182271c594d8a3be50681dd5803d3f2166e75dd08f4e7bd3e5defb2a219b",
-  "source_git_head": "79f5d6cf1cbe4ca9ad4893f257e92eccfd2ac2ce"
+  "source_agents_sha256": "02194d36afde7cb7a4d15d7382d0d147fbd1e8ecf9d5b4055c1cff3186973b59",
+  "source_git_head": "0a01e93319f302256f2b8af0aa74e494256808a8"
 }

@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "7593e03b7fe8d2f5afb71bcea21a3097c0ea11d95f37801807062b43ac9ad7dc",
+  "canonical_register_sha256": "9c1e1165497de416c8b7b30e80dd1c7ac13a7cd8d62f5aa9e626f4faf7ef6811",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 205,
+      "canonical_unchanged": 206,
       "untrusted_partial_worktree": 30
     },
     "by_category": {
-      "command_scope_violation": 49,
+      "command_scope_violation": 50,
       "evidence_misreport": 43,
       "harness_failure": 39,
       "output_contract_violation": 95,
@@ -17,13 +17,13 @@
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 229,
+      "agent_behavior": 230,
       "harness": 39,
       "repository": 55,
       "transport": 10
     },
     "by_process_severity": {
-      "low": 136,
+      "low": 137,
       "material": 101,
       "moderate": 96
     },
@@ -39,7 +39,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 170,
+      "codex-primary-orchestrator::orchestrator": 171,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -89,12 +89,12 @@
     "by_role": {
       "implementer": 25,
       "integration_reviewer": 2,
-      "orchestrator": 254,
+      "orchestrator": 255,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 333,
+  "incident_count": 334,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -890,7 +890,7 @@
       ]
     }
   ],
-  "register_revision": 294,
+  "register_revision": 295,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

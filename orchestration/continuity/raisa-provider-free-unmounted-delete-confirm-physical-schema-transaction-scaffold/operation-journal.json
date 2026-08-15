@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.operation_journal.v1",
+  "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
+  "generation": 1,
+  "events": [
+    {
+      "event_id": "delete-scaffold-received",
+      "generation": 1,
+      "sequence": 1,
+      "command_id": "implement-delete-scaffold",
+      "request_digest": "sha256:118dbf712dcecb24e47a389fa9df2dbc28aafc7d51d573eadfa73b6b2f727350",
+      "state": "received",
+      "result_digest": null
+    },
+    {
+      "event_id": "delete-scaffold-running",
+      "generation": 1,
+      "sequence": 2,
+      "command_id": "implement-delete-scaffold",
+      "request_digest": "sha256:118dbf712dcecb24e47a389fa9df2dbc28aafc7d51d573eadfa73b6b2f727350",
+      "state": "running",
+      "result_digest": null
+    }
+  ]
+}
