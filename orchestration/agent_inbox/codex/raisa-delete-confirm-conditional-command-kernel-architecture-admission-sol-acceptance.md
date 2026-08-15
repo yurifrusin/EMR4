@@ -63,4 +63,3 @@ release remain closed.
 The next executable stage is the provider-free unmounted delete-confirm
 physical representability review. Standing uninterrupted-development authority
 applies and no user-attention fork is present.
-
