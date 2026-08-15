@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "completed_stage": "Accepted at Continuity 296 / Compass 278 after deterministic Sol recovery and one fresh exact-candidate Gemini veto",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "resume_after_compaction": false,
+    "source_head": "356b28a1750e7a7b379406e864f2a3501606938a",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek produced a useful scaffold, but its conceptual self-pass was rejected and same-lane retry was correctly closed before Sol recovery.",
+        "work_packages": [
+          "rejected candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc preserved as untrusted provenance"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini passed all 15 exact-candidate challenges and left the review worktree unchanged and clean.",
+        "work_packages": [
+          "fresh exact-candidate destructive-command veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Continuity, acceptance, notification, exact staging and publication form one serial Sol-owned closeout; delegation would add reconciliation cost without independence beyond Gemini.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "receipt failure",
+      "staging scope mismatch",
+      "protected-ref change",
+      "push failure",
+      "next-tranche plan freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "stage only the exact accepted paths",
+      "commit only after the precommit receipt passes",
+      "fetch and reverify protected refs before task-branch push",
+      "begin physical representability only after publication"
+    ]
+  },
+  "planned_action": "explicit_path_stage_and_commit_accepted_delete_confirm_kernel_closeout",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta, closed contract/schema/evidence and exact candidate 356b28a1750e7a7b379406e864f2a3501606938a satisfy every acceptance item. Post-closeout evidence passes 31 protocol/continuity checks, 188 API/cancellation tests, 245 register tests and the 196-test canonical profile. The Sol acceptance, paired closeout and Yuri summary retain physical representation, runtime and client behavior as closed. The reference-client and provider-qualified meta-harness direction is recorded without a current safety, accreditation or production claim.",
+    "current_authority_allocation": "Sol owns acceptance, Continuity/Compass, explicit-path staging, task-branch commit, publication and next-tranche freeze. DeepSeek's useful scaffold and rejected conceptual self-pass remain preserved; its lane is complete. Gemini completed the required independent exact-candidate veto with one pass. Native subagents were declined for negative closeout leverage.",
+    "git_refs_and_worktree": "The task worktree remains on codex/ariadne-bernie-davida-parallel-seam at exact candidate parent HEAD 356b28a1750e7a7b379406e864f2a3501606938a. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Origin task remains 12cda23eb69e9d4451ea23cc437989769e8073ac. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. There are 635 untracked files: 622 unrelated preserved files plus 13 exact current closeout/verifier artifacts. Git whitespace passes.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted unmounted delete-confirm kernel at Continuity 296 / Compass 278 and names the provider-free unmounted physical representability review next. It preserves protected refs, external adapter closures and the requirement to continue after task-branch publication.",
+    "protected_evidence_boundaries": "No protected fixture, historical diary, patient/product/clinical data, application route, OpenAPI, GraphQL, database source or mutation, watcher, product client/UI, external adapter, My Health Record connection, provider call, credential/IAM, deployment, production, release, Pages or protected-ref authority was opened. The 622 unrelated untracked files, including five docs/branding files, remain excluded; only exact closeout paths may be staged."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

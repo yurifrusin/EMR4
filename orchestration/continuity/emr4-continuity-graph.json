@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 295,
+  "graph_revision": 296,
   "harvests": [],
   "nodes": [
     {
@@ -19998,9 +19998,109 @@
         "Raw compatibility delete remains mounted and must not become a new product-client path.",
         "Patient channels, product data, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission",
+      "title": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-15T02:56:41Z",
+      "updated_at": "2026-08-15T02:56:41Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "356b28a1750e7a7b379406e864f2a3501606938a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-cancellation-command-path-readiness-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted result is authored-synthetic, provider-free and unmounted.",
+          "One future dedicated delete-confirm command owns current authority, locked truth, confirmation, idempotency, audit, receipt and readback semantics.",
+          "Reception One remains a future reference client; no route, database or UI authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-kernel-architecture-admission",
+          "source": "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the closed abstract cancellation transaction contract and proceed only to provider-free physical representability review."
+        }
+      ],
+      "claim_scope": [
+        "Exact practice, appointment and idempotency lock order plus two current-authority checks are frozen.",
+        "One valid explicit human confirmation and exact 24-field signed evidence are required for a first effect.",
+        "Cancellation, audit and completed receipt publish atomically; rollback and response-loss replay are fail closed.",
+        "46 decisions, 15 schedules and 67 hostile mutations pass with zero runtime authority.",
+        "Gemini passed all 15 independent challenges at unchanged clean exact candidate source.",
+        "Reception One is recorded as the first-party reference client around one backend authority kernel; external adapters remain closed.",
+        "EMR4's higher-order direction is a provider-agnostic, provider-qualified general-practice medical-management intelligence harness without a present accreditation or safety claim."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json",
+            "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md"
+          ],
+          "note": "The destructive cancellation command contract is now explicit without mounting any product surface."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-plan.md",
+          "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md",
+          "docs/security/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md",
+          "docs/raisa-authority-kernel-reference-client-adapter-seam.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-conditional-command-kernel-architecture-admission.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-postcompaction-closeout-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-gemini-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-sol-recovery-gemini-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_plan.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/provider-free-acceptance-evidence.json",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py",
+          "docs/ariadne-agent-error-correction-register-revision-285.md",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The abstract practice authority fence has no accepted physical PostgreSQL mapping yet.",
+        "Real locking, isolation, concurrency and mounted delete-confirm route convergence remain unproved and closed.",
+        "Reception One cancellation composition and every external adapter remain closed.",
+        "Product data, providers, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-15T01:33:02Z"
+  "updated_at": "2026-08-15T02:56:41Z"
 }

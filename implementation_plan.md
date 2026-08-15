@@ -386,17 +386,44 @@ at exact reviewed editor source
 `daed421954d65c159871585559f45caa32d95aee`. The subsequent programme
 orientation passes at `2ca3a111d2ee9277571ea3c905f22ce78c8e9745`, Yuri selected
 appointment cancellation, and its repository-static command-path readiness
-review passes at exact reviewed source
-`bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735`. The dedicated delete family is
-the convergence base, but its confirm transaction lacks a locked appointment
-read and explicit in-transaction current-authority recheck; the native Diary's
-404 status fallback also omits free-text cancellation reason. The next narrow
-descendant is a provider-free unmounted delete-confirm conditional-command
-kernel architecture and admission rehearsal before any mounted route,
-PostgreSQL or Reception One UI change. Patient-channel delegation, check-in,
+review passes at `bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735`. The provider-free
+unmounted delete-confirm conditional-command kernel architecture and admission
+then passes at exact reviewed source
+`356b28a1750e7a7b379406e864f2a3501606938a`, freezing exact lock order, two
+current-authority checks, signed evidence, reason preservation, atomic
+cancellation/audit/receipt completion, rollback, replay and separate readback.
+The next narrow descendant is a provider-free unmounted physical
+representability review before any mounted route, PostgreSQL behavior or
+Reception One cancellation composition. Patient-channel delegation, check-in,
 Stage 3B, another event family and operational durability remain retained at
 their exact gates. No watcher runtime, product data, external patient client,
 provider, deployment, production or release is opened.
+
+The durable product seam is one Raisa authority kernel with replaceable
+interaction adapters. Reception One is the first-party reference client; later
+email, messaging, thin-web, voice or third-party assistants may render the same
+versioned typed protocol only after separate identity, delegation, privacy and
+conformance gates. This lets the first production horizon concentrate on the
+core kernel and native Reception One client rather than waiting for every
+possible channel, without granting any client independent command authority.
+Clinician One follows the same principle with its Word/Office workspace as the
+first-party clinical reference client; backend truth, permissions, document
+versioning, clinician attestation, audit and final commit remain non-portable
+authority boundaries.
+My Health Record is a future regulated integration adapter: outbound material
+must derive from explicitly authorised Raisa truth, inbound material remains
+source-labelled external evidence, and all external effects stay behind
+idempotent audited commands and the existing Phase 10 gate.
+At the highest level, this creates a provider-agnostic but provider-qualified
+general-practice medical-management intelligence meta-harness. Model providers
+may supply bounded interpretation, synthesis and dialogue behind stable Bureau
+contracts, while deterministic services retain evidence admission, truth,
+authority, proofreading, human/clinician gates, commands, audit, receipts,
+revocation and explicit degraded operation. “Provider-accredited” remains
+reserved until a formal accreditation owner, criteria, lifecycle and regulatory
+meaning are defined; this direction is not a present safety or certification
+claim.
+See `docs/raisa-authority-kernel-reference-client-adapter-seam.md`.
 
 The bounded read-only architectural-health and conformance pulse now passes at
 reviewed source `95ce6b75723d57e672858619c3621d4a273c1f34`. It confirms the

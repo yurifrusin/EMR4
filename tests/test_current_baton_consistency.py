@@ -7,8 +7,12 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-reception-one-cancellation-command-path-readiness-review"
-SOURCE_HEAD = "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735"
+NODE_ID = (
+    "raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-"
+    "architecture-admission"
+)
+SOURCE_HEAD = "356b28a1750e7a7b379406e864f2a3501606938a"
+READINESS_SOURCE_HEAD = "bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735"
 EDITOR_SOURCE_HEAD = "daed421954d65c159871585559f45caa32d95aee"
 ORIENTATION_ATOMICITY_SOURCE_HEAD = "fbb7ffb46e041bbfc193ff3a76b2f970c06dee58"
 CONSOLE_SOURCE_HEAD = "1d9e58fd2624f87b8b3def538297054999e7bef3"
@@ -38,28 +42,32 @@ def test_continuity_and_compass_bind_live_post_editor_orientation() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 295
+    assert graph["graph_revision"] == 296
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 277
-    assert compass["source_graph_revision"] == 295
+    assert compass["map_revision"] == 278
+    assert compass["source_graph_revision"] == 296
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_cancellation_readiness_and_name_next_kernel() -> None:
+def test_live_baton_rows_accept_delete_kernel_and_name_physical_review() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 295 / Compass 277" in current
-    assert "raisa_reception_one_cancellation_command_path_readiness_review_pass" in current
+    assert "Continuity 296 / Compass 278" in current
+    assert (
+        "raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_pass"
+        in current
+    )
     assert SOURCE_HEAD in current
-    assert "lacks a locked appointment read" in current
-    assert "in-transaction current-authority recheck" in current
-    assert "404 status fallback omits free-text cancellation reason" in current
-    assert "188 cancellation/API tests" in current
+    assert "practice/appointment/idempotency lock order" in current
+    assert "two current-authority checks" in current
+    assert "24-field signed evidence" in current
+    assert "67 hostile mutations" in current
     assert SOURCE_HEAD in relation
+    assert READINESS_SOURCE_HEAD in relation
     assert EDITOR_SOURCE_HEAD in relation
     assert ORIENTATION_ATOMICITY_SOURCE_HEAD in relation
     assert CONSOLE_SOURCE_HEAD in relation
@@ -97,11 +105,11 @@ def test_live_baton_rows_accept_cancellation_readiness_and_name_next_kernel() ->
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free unmounted delete-confirm conditional-command kernel" in next_work
-    assert "locked-truth/current-authority/idempotency/audit" in next_work
-    assert "No mounted route" in next_work
-    assert "Patient-channel identity/delegation" in next_work
-    assert "operational durability" in next_work
+    assert "provider-free unmounted delete-confirm physical representability review" in next_work
+    assert "practice authority fence" in next_work
+    assert "appointment and idempotency lock order" in next_work
+    assert "without mounting or executing the route" in next_work
+    assert "External adapters remain future-closed" in next_work
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
     assert "attempt-016" not in next_work.lower()
@@ -137,15 +145,14 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted delete-confirm conditional-command kernel",
-        "authored-synthetic scenarios only",
-        "no mounted route",
-        "ui exposure",
-        "patient-channel identity/delegation",
-        "check-in/waiting-area",
-        "stage 3b",
-        "another event family",
-        "operational durability",
+        "provider-free unmounted delete-confirm physical representability review",
+        "practice authority fence",
+        "existing repository structures",
+        "without mounting or executing the route",
+        "no openapi/graphql",
+        "database mutation",
+        "product client",
+        "external adapters remain future-closed",
         "docs/branding/",
         "explicit-path staging only",
     ):

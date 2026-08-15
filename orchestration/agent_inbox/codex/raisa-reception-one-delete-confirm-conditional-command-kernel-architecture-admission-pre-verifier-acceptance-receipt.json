@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "completed_stage": "The deterministically admitted Sol recovery and AER-0321 through AER-0324 controls are committed at exact candidate 356b28a1750e7a7b379406e864f2a3501606938a; its named Gemini review worktree passed exact-HEAD, branch and clean-state preflight",
+    "next_executable_stage": "Generate and pass a five-source pre-verifier receipt bound to the clean exact candidate, then launch one fresh Gemini 3.6 Flash/high independent veto and verify unchanged postconditions",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "resume_after_compaction": true,
+    "source_head": "356b28a1750e7a7b379406e864f2a3501606938a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker supplied a useful scaffold, but AER-0324 rejects its conceptual self-pass and the correction-loop rule closes same-lane retry.",
+        "work_packages": [
+          "rejected candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc preserved as untrusted provenance"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto is required to challenge the recovered destructive-command semantics, source bindings, direct regressions and calibrated evidence claim.",
+        "work_packages": [
+          "fifteen-challenge exact-candidate delete-confirm kernel veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The deterministic recovery is complete and the planned Gemini veto supplies the needed fresh independence; another review lane would duplicate the same surface.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier return",
+      "material revision",
+      "post-review worktree check",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Gemini receives read-only exact-candidate authority only",
+      "all exact commands run serially in one clean review worktree",
+      "Sol retains acceptance and Git",
+      "mounted product and database source remain untouched",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_read_only_exact_candidate_gemini_veto_for_recovered_delete_confirm_kernel",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta and named recovery lease require exact authority, signed evidence, nullable reason, atomic artifact, concurrency, rollback, replay and readback semantics. Exact candidate 356b28a1750e7a7b379406e864f2a3501606938a passes 46 decisions, 15 schedules, 67 hostile mutations, 24 protocol tests, 212 cancellation/API tests, 245 register tests and the 196-test canonical fast profile. Its named review packet challenges every repaired defect and claim boundary.",
+    "current_authority_allocation": "Sol owns recovery, acceptance and Git. DeepSeek's candidate and self-pass are preserved but rejected at AER-0324 and its lane is complete without retry. Gemini 3.6 Flash/high is planned for exactly one fresh read-only veto on the clean exact candidate. Native subagents remain declined because they add no independence beyond this veto.",
+    "git_refs_and_worktree": "Candidate and task HEAD are exactly 356b28a1750e7a7b379406e864f2a3501606938a. Review worktree C:/Users/sarashera/EMR4-worktrees/delete-confirm-kernel-gemini-356b28a1 is clean on codex/review-delete-confirm-kernel-356b28a1 at that exact HEAD and its deterministic preflight reports zero provider calls. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main worktree has only the expected post-candidate latch plus verifier packet/preflight evidence; every unrelated untracked file is preserved.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. At Continuity 295 / Compass 277 it authorises the active provider-free unmounted delete-confirm kernel tranche, keeps all product/runtime surfaces closed and assigns independent veto review to Gemini 3.6 Flash/high.",
+    "protected_evidence_boundaries": "Review is limited to the clean exact-candidate worktree, an explicit non-protected path allowlist and exact read-only commands. No product route/OpenAPI/GraphQL/database/source/watcher/UI, command/write, patient/product/clinical/protected data, credentials/IAM, deployment, production, release, Pages or protected ref is opened. The only network/provider surface is the selected Gemini veto transport; docs/branding and unrelated untracked files remain untouched."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

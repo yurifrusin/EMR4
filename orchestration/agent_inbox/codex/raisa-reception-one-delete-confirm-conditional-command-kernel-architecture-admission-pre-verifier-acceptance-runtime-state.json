@@ -1,0 +1,195 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_read_only_exact_candidate_gemini_veto_for_recovered_delete_confirm_kernel",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. At Continuity 295 / Compass 277 it authorises the active provider-free unmounted delete-confirm kernel tranche, keeps all product/runtime surfaces closed and assigns independent veto review to Gemini 3.6 Flash/high.",
+    "current_authority_allocation": "Sol owns recovery, acceptance and Git. DeepSeek's candidate and self-pass are preserved but rejected at AER-0324 and its lane is complete without retry. Gemini 3.6 Flash/high is planned for exactly one fresh read-only veto on the clean exact candidate. Native subagents remain declined because they add no independence beyond this veto.",
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta and named recovery lease require exact authority, signed evidence, nullable reason, atomic artifact, concurrency, rollback, replay and readback semantics. Exact candidate 356b28a1750e7a7b379406e864f2a3501606938a passes 46 decisions, 15 schedules, 67 hostile mutations, 24 protocol tests, 212 cancellation/API tests, 245 register tests and the 196-test canonical fast profile. Its named review packet challenges every repaired defect and claim boundary.",
+    "protected_evidence_boundaries": "Review is limited to the clean exact-candidate worktree, an explicit non-protected path allowlist and exact read-only commands. No product route/OpenAPI/GraphQL/database/source/watcher/UI, command/write, patient/product/clinical/protected data, credentials/IAM, deployment, production, release, Pages or protected ref is opened. The only network/provider surface is the selected Gemini veto transport; docs/branding and unrelated untracked files remain untouched.",
+    "git_refs_and_worktree": "Candidate and task HEAD are exactly 356b28a1750e7a7b379406e864f2a3501606938a. Review worktree C:/Users/sarashera/EMR4-worktrees/delete-confirm-kernel-gemini-356b28a1 is clean on codex/review-delete-confirm-kernel-356b28a1 at that exact HEAD and its deterministic preflight reports zero provider calls. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main worktree has only the expected post-candidate latch plus verifier packet/preflight evidence; every unrelated untracked file is preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "objective": "Freeze and deterministically rehearse one authored-synthetic, unmounted cancellation transaction contract that binds explicit confirmation, signed proposal evidence, operation-scoped idempotency, a locked practice appointment, in-transaction current authority, exact reason preservation, atomic soft-cancel/audit/receipt completion, denial rollback and fresh authorised readback without changing mounted product source.",
+    "status": "in_progress",
+    "source_head": "356b28a1750e7a7b379406e864f2a3501606938a",
+    "authority_source": "Yuri's 2026-08-15 selection of Reception One appointment cancellation, the accepted readiness review at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735, AGENTS.md Continuity 295 / Compass 277, and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "The deterministically admitted Sol recovery and AER-0321 through AER-0324 controls are committed at exact candidate 356b28a1750e7a7b379406e864f2a3501606938a; its named Gemini review worktree passed exact-HEAD, branch and clean-state preflight",
+      "next_executable_stage": "Generate and pass a five-source pre-verifier receipt bound to the clean exact candidate, then launch one fresh Gemini 3.6 Flash/high independent veto and verify unchanged postconditions",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 0,
+        "verification": 1
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_unmounted_rehearsal_only",
+      "no_mounted_route_openapi_graphql_database_product_client_or_ui_change",
+      "no_runtime_broker_adapter_source_read_or_watcher",
+      "one_read_only_gemini_veto_transport_only",
+      "no_patient_product_clinical_historical_diary_or_protected_data",
+      "no_command_write_or_executable_tool_against_product_or_database",
+      "dedicated_delete_confirmation_semantics_only",
+      "raw_delete_and_status_fallback_are_separate_ingress_candidates_not_kernel_authority",
+      "current_authority_locked_truth_idempotency_audit_and_readback_remain_backend_owned",
+      "no_model_channel_or_delegate_self_confirmation",
+      "no_credentials_iam_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "rationale": "The worker supplied a useful scaffold, but AER-0324 rejects its conceptual self-pass and the correction-loop rule closes same-lane retry.",
+        "work_packages": [
+          "rejected candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc preserved as untrusted provenance"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh exact-candidate veto is required to challenge the recovered destructive-command semantics, source bindings, direct regressions and calibrated evidence claim.",
+        "work_packages": [
+          "fifteen-challenge exact-candidate delete-confirm kernel veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The deterministic recovery is complete and the planned Gemini veto supplies the needed fresh independence; another review lane would duplicate the same surface.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Gemini receives read-only exact-candidate authority only",
+      "all exact commands run serially in one clean review worktree",
+      "Sol retains acceptance and Git",
+      "mounted product and database source remain untouched",
+      "protected refs remain closed"
+    ],
+    "reassessment_triggers": [
+      "verifier return",
+      "material revision",
+      "post-review worktree check",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_exact_candidate_pre_verifier_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol's deterministic recovery, exact incident register and candidate commit pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native subagents were reassessed and remain declined."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh clean exact-candidate worktree preflight passed with zero provider calls."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek completed; its self-pass remains rejected and no redispatch is planned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "resource_id": "gemini-3.6-flash-high-verifier",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/delete-confirm-kernel-gemini-356b28a1",
+      "branch": "codex/review-delete-confirm-kernel-356b28a1",
+      "head": "356b28a1750e7a7b379406e864f2a3501606938a",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_divergence": "read-only non-protected review branch at exact task candidate 356b28a1750e7a7b379406e864f2a3501606938a rather than protected handoff/current",
+      "recorded_at": "2026-08-15T12:41:29+10:00"
+    }
+  ],
+  "assigned_agent_ids": []
+}
