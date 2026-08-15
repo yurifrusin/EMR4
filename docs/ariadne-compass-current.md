@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 299 / Compass 281. Ariadne's provider-free continuity journal, unchanged-gate and quarantined-refinement safeguards pass without runtime authority. Product position remains the accepted delete-confirm physical design, and the unmounted scaffold is now the next active candidate.
+> EMR4 is at Continuity 300 / Compass 282. The unmounted delete-confirm physical schema-and-transaction scaffold passes with database-owned current authority, normalized default-deny grants, inert DDL, exact private receipt/audit mappings and an ordered transaction seam. Work is paused before the disposable PostgreSQL parse/catalogue rehearsal.
 
 ## North star
 
@@ -368,27 +368,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Appointment truth is already represented and five surrounding domains have bounded additive paths; the current route remains unadmitted. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission`.
 176. **Freeze the cancellation authority and atomic transaction boundary before any runtime edit — Provider-free unmounted delete-confirm physical-design architecture**
    One exact additive authority, receipt, audit, ordered transaction and separate-readback design passes; implementation remains unmounted and the next product tranche is paused. Lineage parent: `raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review`.
+177. **Embody the cancellation authority and atomic transaction design without opening a database or route — Provider-free unmounted delete-confirm physical schema-and-transaction scaffold**
+   Exact mappings, inert migration, canonical receipt helpers and the ordered transaction seam pass as an unmounted scaffold. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-design-architecture`.
 
 ## Current position
 
-**The cancellation safety kernel has one exact physical design and is paused before runtime embodiment — Provider-free unmounted delete-confirm physical-design architecture**
+**The cancellation safety kernel has an unmounted physical source scaffold and is paused before database embodiment — Provider-free unmounted delete-confirm physical schema-and-transaction scaffold**
 
-**Why this proof came next:** The delete-confirm physical design passes, the bounded Prime assessment is complete, and Yuri has resumed the planned unmounted scaffold sequence.
+**Why this proof came next:** The physical design passed and has now been lowered into exact source without executing a migration, database transaction or route.
 
-The unmounted architecture passes deterministic and fresh Gemini 3.7 veto evidence; Yuri requested a pause before the planned scaffold.
+Database-owned authority mapping, inert DDL, canonical receipt helpers and the authority-first lock seam pass deterministic and fresh independent review evidence.
 
 ### What this unlocks
 
-- Freeze and implement the provider-free unmounted delete-confirm physical schema-and-transaction scaffold.
-- Verify static representability against the accepted authority, receipt, audit, transaction and readback contract.
-- Keep executable DDL, database behavior, mounted routes and product data behind later evidence gates.
+- After Yuri resumes, run a provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal.
+- Verify only empty-instance installation plus exact columns, constraints, functions and triggers.
+- Keep behavior and route execution behind later evidence gates.
 
 ### What it does not solve
 
-- Executable Alembic lowering, ORM/service correctness, capability provisioning or mounted-route behavior.
-- PostgreSQL catalogue, trigger, lock-wait, rollback, restart or unknown-commit behavior.
-- The explicit API response/route compatibility transition.
-- Provider/credential activity, patient/product data, watchers/events, product commands, deployment, production, release, Pages or protected-ref movement.
+- PostgreSQL installation, catalogue, trigger, RLS, real lock, rollback or timing behavior.
+- Capability provisioning, mounted-route behavior or the public response compatibility transition.
+- Provider/credential activity, patient/product data, watchers/events, product commands, deployment, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -478,9 +479,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, conditional-command and delete-confirm representability lineage.
-- When Yuri resumes product development, freeze the exact provider-free unmounted delete-confirm physical schema-and-transaction scaffold before implementation.
-- Keep database execution, mounted routes, providers, product data, commands and protected integration separately gated.
+- Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold lineage.
+- After Yuri resumes, prove only this exact migration in a provider-free disposable PostgreSQL parse/catalogue rehearsal.
+- Keep behavior, provisioning, routes, product data, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -669,6 +670,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted delete-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, capability provisioning, route behavior or product command safety.
 - The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.
 - The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.
 - The delete-confirm representability result selects no physical design and proves no DDL, PostgreSQL behavior, mounted route or client behavior.
@@ -835,11 +837,13 @@ Prerequisites:
 - `alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py`
 - `alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py`
 - `alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py`
+- `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py`
 - `app/dependencies.py`
 - `app/graphql/application_auth_product.py`
 - `app/models/application_auth.py`
 - `app/models/application_identity_oidc_attempt.py`
 - `app/models/appointments.py`
+- `app/models/tenancy.py`
 - `app/routers/application_auth.py`
 - `app/routers/appointments.py`
 - `app/schemas/appointments.py`
@@ -863,6 +867,7 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption.py`
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
+- `app/services/appointment_delete_physical.py`
 - `app/services/appointment_status_composition.py`
 - `app/services/appointment_status_physical.py`
 - `app/services/appointment_status_product_adapter.py`
@@ -910,6 +915,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-290.md`
 - `docs/ariadne-agent-error-correction-register-revision-293.md`
 - `docs/ariadne-agent-error-correction-register-revision-294.md`
+- `docs/ariadne-agent-error-correction-register-revision-302.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -1262,6 +1268,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-plan.md`
+- `docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md`
+- `docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-design.md`
 - `docs/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-fourth-exact-veto-recovery.md`
@@ -1458,6 +1466,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-function-trigger-body-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-durability-migration-transaction-architecture-threat-model-delta.md`
@@ -1539,6 +1548,8 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-design-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
@@ -1730,6 +1741,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-admission.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json`
@@ -2258,6 +2272,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/provider-free-physical-design-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-legacy-route-convergence-kernel-interface/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-pure-route-adapter-differential-rehearsal/contract.json`
@@ -2629,6 +2647,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-cancellation-command-path-readiness-review.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2672,6 +2691,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py`
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
 - `scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py`
+- `scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
@@ -2757,6 +2777,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
 - `tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py`
 - `tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_plan.py`
+- `tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_product_adapter_plan.py`
 - `tests/test_raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
@@ -2800,4 +2821,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 281; continuity graph revision 299._
+_Compass map revision 282; continuity graph revision 300._

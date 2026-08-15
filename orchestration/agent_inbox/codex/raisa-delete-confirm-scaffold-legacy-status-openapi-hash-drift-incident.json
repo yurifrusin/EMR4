@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0338",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T22:21:44+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+  "attempt_id": "raisa-delete-confirm-scaffold-legacy-status-openapi-baseline-001",
+  "plan_source_head": "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+  "candidate_head": "bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7",
+  "mandatory_test": "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+  "mandatory_test_sha256": "28060c2f5b1cb4ff00f62b498511995a35a630963e586920115f34740c5d1ac3",
+  "openapi_path": "docs/api-spine/openapi/appointment-commands.yaml",
+  "stale_expected_sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+  "unchanged_current_sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a",
+  "plan_source_result": "10_passed_1_failed_same_hash_assertion",
+  "candidate_result": "10_passed_1_failed_same_hash_assertion",
+  "test_changed_between_source_and_candidate": false,
+  "openapi_changed_between_source_and_candidate": false,
+  "plan_preflight_ran_mandatory_test": false,
+  "frozen_correction": {
+    "scope": "one_line_test_only_digest_expectation",
+    "from_sha256": "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6",
+    "to_sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a",
+    "product_change": false,
+    "openapi_change": false
+  },
+  "candidate_state": "canonical_unchanged",
+  "status": "contained_pending_test_only_correction"
+}

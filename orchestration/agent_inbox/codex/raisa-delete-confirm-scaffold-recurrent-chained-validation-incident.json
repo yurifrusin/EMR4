@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0337",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T22:21:43+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+  "attempt_id": "raisa-delete-confirm-scaffold-worker-readback-validation-001",
+  "prior_control_incident": "AER-0334",
+  "rejected_command_shape": "semicolon_chained_validation_and_readback",
+  "later_exit_could_mask_earlier_failure": true,
+  "aggregate_chained_results_admitted": false,
+  "correction": "Every affected validation and readback gate was rerun as a separate process with an independently observed exit result.",
+  "corrected_gate_execution": "separate_process_per_gate",
+  "product_or_evidence_corruption_observed": false,
+  "provider_or_model_calls": 0,
+  "candidate_state": "canonical_unchanged",
+  "status": "corrected_by_separate_reruns"
+}

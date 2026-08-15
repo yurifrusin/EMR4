@@ -1,36 +1,36 @@
 {
-  "canonical_register_sha256": "9c1e1165497de416c8b7b30e80dd1c7ac13a7cd8d62f5aa9e626f4faf7ef6811",
+  "canonical_register_sha256": "7d527463a1ec9069d8a44290c2efafe02ae147622273bca7ea92d39d6833cfa0",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 206,
-      "untrusted_partial_worktree": 30
+      "canonical_unchanged": 211,
+      "untrusted_partial_worktree": 32
     },
     "by_category": {
-      "command_scope_violation": 50,
+      "command_scope_violation": 53,
       "evidence_misreport": 43,
       "harness_failure": 39,
-      "output_contract_violation": 95,
+      "output_contract_violation": 98,
       "read_only_violation": 3,
       "reasoning_claim_error": 39,
-      "repository_defect": 55,
+      "repository_defect": 56,
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 230,
+      "agent_behavior": 236,
       "harness": 39,
-      "repository": 55,
+      "repository": 56,
       "transport": 10
     },
     "by_process_severity": {
-      "low": 137,
+      "low": 139,
       "material": 101,
-      "moderate": 96
+      "moderate": 101
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
-      "api-spine-historical-regression-suite::orchestrator": 1,
+      "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "codex-native-architecture-challenger::verifier": 1,
@@ -39,14 +39,14 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 171,
+      "codex-primary-orchestrator::orchestrator": 176,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 10,
+      "deepseek-flash-workers::implementer": 11,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,17 +87,41 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 25,
+      "implementer": 26,
       "integration_reviewer": 2,
-      "orchestrator": 255,
+      "orchestrator": 261,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 334,
+  "incident_count": 341,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0334",
+        "AER-0337"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
+        "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate."
+      ],
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
     {
       "categories": [
         "command_scope_violation"
@@ -355,17 +379,19 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0255",
-        "AER-0318"
+        "AER-0318",
+        "AER-0340"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
-        "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation."
+        "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
+        "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report."
       ],
       "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
       "resource_ids": [
@@ -544,7 +570,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 10,
+      "incident_count": 11,
       "incident_ids": [
         "AER-0024",
         "AER-0030",
@@ -555,7 +581,8 @@
         "AER-0157",
         "AER-0160",
         "AER-0250",
-        "AER-0297"
+        "AER-0297",
+        "AER-0335"
       ],
       "origins": [
         "agent_behavior"
@@ -568,6 +595,7 @@
         "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
         "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
         "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+        "Construct worker predispatch lane and workspace objects from the last passing stage-equivalent receipt, selecting disposition from the configured enum and emitting every required workspace field before preflight.",
         "Copy adapter observation and assignment shapes only from the current harness contract, keep native session coordination out of adapter probes and validate the state before any worker spawn.",
         "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
         "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string."
@@ -764,6 +792,30 @@
       "categories": [
         "repository_defect"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0068",
+        "AER-0338"
+      ],
+      "origins": [
+        "repository"
+      ],
+      "prevention_controls": [
+        "Future cross-programme regression gates must run a source-HEAD baseline preflight and separate pre-existing collection or expectation drift from candidate-caused regressions before using the suite as acceptance evidence.",
+        "Run every mandatory legacy regression at the plan source before worker dispatch, bind frozen digests to the exact current source, and classify any source-identical expectation drift before evaluating descendant causation."
+      ],
+      "recurrence_signature": "repository.api_spine_historical_expectation_drift",
+      "resource_ids": [
+        "api-spine-historical-regression-suite"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "repository_defect"
+      ],
       "incident_count": 3,
       "incident_ids": [
         "AER-0175",
@@ -890,7 +942,7 @@
       ]
     }
   ],
-  "register_revision": 295,
+  "register_revision": 302,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-15"
+  "source_cutoff_on": "2026-08-16"
 }

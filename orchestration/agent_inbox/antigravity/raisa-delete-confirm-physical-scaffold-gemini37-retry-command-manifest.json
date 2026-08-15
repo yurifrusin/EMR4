@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "SCAFFOLD_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold"
+      ]
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_api_spine_appointment_idempotency_model_migration.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_current_baton_consistency.py"
+      ]
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_api_spine_artifacts.py"
+      ]
+    },
+    {
+      "id": "JOURNAL_VALIDATION",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_continuity_and_refinement",
+        "validate-journal",
+        "--journal",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+        "app/models/appointments.py",
+        "app/models/tenancy.py",
+        "app/services/appointment_delete_physical.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_api_spine_appointment_idempotency_model_migration.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+        "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7"
+      ]
+    }
+  ]
+}

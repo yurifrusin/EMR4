@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0340",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T23:09:08+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+  "attempt_id": "ariadne-delete-confirm-scaffold-aer-batch-seed-count-001",
+  "failed_gate": "tests/test_ariadne_agent_error_register.py",
+  "failed_test": "test_seed_separates_agent_behavior_from_transport",
+  "observed_assertion": "assert 234 == 230",
+  "other_focused_failures": 0,
+  "failed_result_admitted": false,
+  "final_register_revision": 301,
+  "final_incident_count": 340,
+  "final_agent_behavior_count": 235,
+  "correction": "All standalone and aggregate population fixtures are reconciled to the freshly generated report before a complete corrected rerun.",
+  "candidate_state": "canonical_unchanged",
+  "status": "corrected_before_acceptance"
+}

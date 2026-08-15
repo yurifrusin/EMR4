@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 281,
-  "updated_at": "2026-08-15T09:47:44Z",
-  "source_graph_revision": 299,
-  "orientation_statement": "EMR4 is at Continuity 299 / Compass 281. Ariadne's provider-free continuity journal, unchanged-gate and quarantined-refinement safeguards pass without runtime authority. Product position remains the accepted delete-confirm physical design, and the unmounted scaffold is now the next active candidate.",
+  "map_revision": 282,
+  "updated_at": "2026-08-15T14:24:19Z",
+  "source_graph_revision": 300,
+  "orientation_statement": "EMR4 is at Continuity 300 / Compass 282. The unmounted delete-confirm physical schema-and-transaction scaffold passes with database-owned current authority, normalized default-deny grants, inert DDL, exact private receipt/audit mappings and an ordered transaction seam. Work is paused before the disposable PostgreSQL parse/catalogue rehearsal.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3328,39 +3328,72 @@
         "docs/ariadne-agent-error-correction-register-revision-290.md",
         "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "lineage_parent": "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture",
+      "strategic_role": "Embody the cancellation authority and atomic transaction design without opening a database or route",
+      "outcome": "Exact mappings, inert migration, canonical receipt helpers and the ordered transaction seam pass as an unmounted scaffold.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
+        "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json",
+        "app/models/tenancy.py",
+        "app/models/appointments.py",
+        "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+        "app/services/appointment_delete_physical.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-302.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture",
-    "strategic_role": "The cancellation safety kernel has one exact physical design and is paused before runtime embodiment",
-    "why_now": "The delete-confirm physical design passes, the bounded Prime assessment is complete, and Yuri has resumed the planned unmounted scaffold sequence.",
-    "outcome": "The unmounted architecture passes deterministic and fresh Gemini 3.7 veto evidence; Yuri requested a pause before the planned scaffold.",
+    "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+    "strategic_role": "The cancellation safety kernel has an unmounted physical source scaffold and is paused before database embodiment",
+    "why_now": "The physical design passed and has now been lowered into exact source without executing a migration, database transaction or route.",
+    "outcome": "Database-owned authority mapping, inert DDL, canonical receipt helpers and the authority-first lock seam pass deterministic and fresh independent review evidence.",
     "unlocks": [
-      "Freeze and implement the provider-free unmounted delete-confirm physical schema-and-transaction scaffold.",
-      "Verify static representability against the accepted authority, receipt, audit, transaction and readback contract.",
-      "Keep executable DDL, database behavior, mounted routes and product data behind later evidence gates."
+      "After Yuri resumes, run a provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal.",
+      "Verify only empty-instance installation plus exact columns, constraints, functions and triggers.",
+      "Keep behavior and route execution behind later evidence gates."
     ],
     "does_not_solve": [
-      "Executable Alembic lowering, ORM/service correctness, capability provisioning or mounted-route behavior.",
-      "PostgreSQL catalogue, trigger, lock-wait, rollback, restart or unknown-commit behavior.",
-      "The explicit API response/route compatibility transition.",
-      "Provider/credential activity, patient/product data, watchers/events, product commands, deployment, production, release, Pages or protected-ref movement."
+      "PostgreSQL installation, catalogue, trigger, RLS, real lock, rollback or timing behavior.",
+      "Capability provisioning, mounted-route behavior or the public response compatibility transition.",
+      "Provider/credential activity, patient/product data, watchers/events, product commands, deployment, release, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-plan.md",
-      "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/physical-design-contract.schema.json",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture/provider-free-physical-design-evidence.json",
-      "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-architecture-sol-acceptance.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-postchange-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-veto-predispatch-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-preacceptance-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-design-gemini37-review-receipt.json",
-      "docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md",
-      "docs/ariadne-agent-error-correction-register-revision-290.md",
-      "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md"
+      "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
+      "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json",
+      "app/models/tenancy.py",
+      "app/models/appointments.py",
+      "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+      "app/services/appointment_delete_physical.py",
+      "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+      "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+      "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-302.md",
+      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md"
     ]
   },
   "decision_horizon": [
@@ -3533,9 +3566,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Preserve the accepted source-owned-truth, conditional-command and delete-confirm representability lineage.",
-        "When Yuri resumes product development, freeze the exact provider-free unmounted delete-confirm physical schema-and-transaction scaffold before implementation.",
-        "Keep database execution, mounted routes, providers, product data, commands and protected integration separately gated."
+        "Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold lineage.",
+        "After Yuri resumes, prove only this exact migration in a provider-free disposable PostgreSQL parse/catalogue rehearsal.",
+        "Keep behavior, provisioning, routes, product data, providers and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -4342,7 +4375,26 @@
         "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-design-gemini37-review-receipt.json",
         "docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md",
         "docs/ariadne-agent-error-correction-register-revision-290.md",
-        "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md"
+        "orchestration/human_inbox/yuri/2026-08-15--delete-confirm-physical-design-architecture.md",
+        "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
+        "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json",
+        "app/models/tenancy.py",
+        "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+        "app/services/appointment_delete_physical.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-302.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md"
       ]
     },
     {
@@ -5187,6 +5239,7 @@
     }
   ],
   "map_limits": [
+    "The accepted delete-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, capability provisioning, route behavior or product command safety.",
     "The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.",
     "The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.",
     "The delete-confirm representability result selects no physical design and proves no DDL, PostgreSQL behavior, mounted route or client behavior.",

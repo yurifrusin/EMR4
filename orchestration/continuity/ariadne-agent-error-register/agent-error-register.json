@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 295,
+  "register_revision": 302,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-15",
+    "source_cutoff_on": "2026-08-16",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -13448,6 +13448,282 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-chained-validation-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-295.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0335",
+      "attempt_id": "raisa-delete-confirm-scaffold-worker-predispatch-receipt-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A worker predispatch state must use the admitted parallelism disposition and a field-complete workspace receipt, including the exact at_handoff_current boolean, before dispatch can be permitted.",
+      "observed_error": "The first DeepSeek predispatch receipt draft used non-admitted disposition active and omitted at_handoff_current from the workspace receipt. Deterministic preflight rejected the draft before any worker dispatch.",
+      "detection_method": "The local orchestrator preflight returned revision_required for the invalid lane disposition and incomplete workspace receipt. Sol corrected the state to disposition dispatched with at_handoff_current true; the distinct regenerated receipt passed before the worker launched.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-deepseek-predispatch-receipt-incident.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-deepseek-predispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-deepseek-predispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-296.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected draft, replace active with admitted dispatched, add at_handoff_current true to the exact workspace receipt, and require a distinct passing predispatch receipt before worker launch.",
+        "prevention_control": "Construct worker predispatch lane and workspace objects from the last passing stage-equivalent receipt, selecting disposition from the configured enum and emitting every required workspace field before preflight.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-deepseek-predispatch-receipt-incident.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-deepseek-predispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-deepseek-predispatch-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-296.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0336",
+      "attempt_id": "raisa-delete-confirm-physical-scaffold-deepseek-worker-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A worker receipt may declare DECISION pass only when every mandatory packet command exits zero; a known or pre-existing required-gate failure must yield revision_required rather than a pass qualified by prose.",
+      "observed_error": "DeepSeek self-declared pass for candidate bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7 even though mandatory legacy status-scaffold command 3 exited 1 with one failed OpenAPI-hash assertion. The receipt described the failure accurately but its terminal pass contradicted the required command result.",
+      "detection_method": "Sol read the structured worker receipt and compared its DECISION pass with the five exact command exits. Command 3 reported 10 passed and 1 failed, so candidate bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7 remained revision_required and no integration or acceptance followed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-deepseek-self-pass-failed-mandatory-gate-incident.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-physical-scaffold-worker-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-297.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.self_pass_despite_failed_mandatory_gate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Reject the worker's terminal pass, preserve its clean nine-path candidate only as untrusted revision-required provenance, admit no source, and transfer the mandatory-gate diagnosis and any bounded correction to Sol.",
+        "prevention_control": "Worker result admission must compare the terminal decision mechanically with every mandatory command exit; any nonzero required gate overrides pass prose and yields revision_required before source adoption.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-deepseek-self-pass-failed-mandatory-gate-incident.json",
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-physical-scaffold-worker-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-297.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0337",
+      "attempt_id": "raisa-delete-confirm-scaffold-worker-readback-validation-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_shell_command_wrapper",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "After AER-0334 and its explicit no-chaining control, every validation and readback gate must run as a separately captured process so a later command cannot mask an earlier nonzero status.",
+      "observed_error": "Sol recurrently chained validation and readback commands with semicolons after AER-0334 and the explicit no-chaining reminder. Even where output appeared expected, the command form allowed a later process status to mask an earlier failure in principle.",
+      "detection_method": "Sol recognized the recurrent command shape before admitting the chained outcomes, rejected those aggregate shell statuses and reran every affected validation and readback gate as a separate process with its own exact exit result.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-recurrent-chained-validation-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-298.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no chained aggregate status and rerun every affected validation and readback gate separately, capturing each exit before using its evidence.",
+        "prevention_control": "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-recurrent-chained-validation-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-298.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0338",
+      "attempt_id": "raisa-delete-confirm-scaffold-legacy-status-openapi-baseline-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "api-spine-historical-regression-suite",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A mandatory legacy status-scaffold regression must run at plan preflight and its frozen OpenAPI digest must match the unchanged current API Spine source before a descendant candidate can use the suite as acceptance evidence.",
+      "observed_error": "Sol's plan preflight at d500f1f86a83695cee0c2aac93aa2e2735e8f799 omitted the mandatory legacy status-scaffold test. The worker later exposed its pre-existing stale expected digest c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6 while the unchanged current appointment-commands OpenAPI digest was c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a.",
+      "detection_method": "Sol reproduced the identical one-test failure at plan source d500f1f86a83695cee0c2aac93aa2e2735e8f799 and candidate bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7. Git confirmed the legacy test and OpenAPI were unchanged between them; the test SHA-256 remained 28060c2f5b1cb4ff00f62b498511995a35a630963e586920115f34740c5d1ac3.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-legacy-status-openapi-hash-drift-incident.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-physical-scaffold-worker-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-299.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.api_spine_historical_expectation_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Freeze one test-only digest correction from c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6 to unchanged current c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a, with no product or OpenAPI edit, then rerun the mandatory legacy gate separately before candidate admission.",
+        "prevention_control": "Run every mandatory legacy regression at the plan source before worker dispatch, bind frozen digests to the exact current source, and classify any source-identical expectation drift before evaluating descendant causation.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-legacy-status-openapi-hash-drift-incident.json",
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-physical-scaffold-worker-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-299.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0339",
+      "attempt_id": "raisa-delete-confirm-scaffold-canonical-fast-profile-baseline-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The canonical fast profile must run at the exact plan source before worker dispatch so pre-existing baton drift is separated from candidate-caused dependency changes and the descendant packet binds every expected additive assertion update.",
+      "observed_error": "Sol did not run the canonical fast profile at plan source d500f1f86a83695cee0c2aac93aa2e2735e8f799 before dispatch. The later exact candidate profile exposed four failures: one candidate-caused dependency assertion that did not yet allow additive authority_generation, and three stale current-baton assertions already failing at the exact plan source after the accepted Ariadne harness closeout.",
+      "detection_method": "Sol ran the complete profile on candidate bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7, isolated all four failures, then reproduced the three current-baton failures at exact plan source d500f1f86a83695cee0c2aac93aa2e2735e8f799 while the authority_generation dependency assertion remained candidate-specific.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-canonical-fast-profile-baseline-omission-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-300.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_preflight_mandatory_regression_profile_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Plan-bind the one candidate dependency assertion and three source-stale current-baton assertions separately, apply only their narrowly scoped expectation corrections, rerun each affected test independently, then rerun the complete canonical fast profile before candidate admission.",
+        "prevention_control": "Every worker plan must run and record the complete canonical fast profile at its exact source before dispatch; descendant failures are classified against that baseline before any candidate repair or acceptance claim.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-canonical-fast-profile-baseline-omission-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-300.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0340",
+      "attempt_id": "ariadne-delete-confirm-scaffold-aer-batch-seed-count-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every agent-error register batch edit must update all exact population fixtures, including the standalone agent-origin length, before the first full focused acceptance run.",
+      "observed_error": "After adding AER-0335 through AER-0339, Sol updated revision, ID range, aggregate dictionaries and recurrence equality but left the standalone agent_incidents length at 230. The first full focused run failed explicitly because the new register contained 234 agent-behavior incidents at that stage.",
+      "detection_method": "The independently bounded full tests/test_ariadne_agent_error_register.py run failed only test_seed_separates_agent_behavior_from_transport with assert 234 == 230. No register result was accepted; adding this incident makes the final exact agent-behavior population 235 before corrected rerun.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-aer-batch-seed-count-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-301.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Update the standalone agent-origin population to final exact 235, reconcile revision 301, incident count 340, aggregate and recurrence fixtures, regenerate the pattern report and rerun the complete focused file.",
+        "prevention_control": "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-aer-batch-seed-count-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-301.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0341",
+      "attempt_id": "raisa-delete-confirm-physical-scaffold-gemini37-veto-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every verifier manifest command must resolve candidate-only paths inside the exact review worktree; a shared serial wrapper anchored to another checkout may not receive relative candidate paths.",
+      "observed_error": "Sol built the first Gemini 3.7 manifest with the primary-checkout ariadne_serial_pytest.py and relative candidate test paths. The wrapper correctly serialized pytest but set cwd to its own primary repository, where the unintegrated delete-confirm focused test did not exist, so one of six commands exited 1 and the verifier returned revision_required.",
+      "detection_method": "The exact clean bdfea42a candidate received one terminal Gemini revision_required decision. Its receipt records five zero exits, one FOCUSED_TESTS file-not-found exit, an unchanged clean worktree and a substantive architecture audit reporting no product defect.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-gemini37-relative-test-path-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-302.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_manifest_relative_candidate_path_bound_to_primary_wrapper",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Keep candidate bdfea42a unchanged, preserve the failed receipt, and issue a fresh manifest whose serial wrapper receives exact absolute test paths inside the review worktree before one fresh Gemini 3.7 Flash/high veto.",
+        "prevention_control": "When a verifier invokes a helper from outside the candidate worktree, every candidate-owned path passed through that helper must be absolute and preflighted for existence under the exact review root; command admission must reject cross-checkout relative paths.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-gemini37-relative-test-path-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-302.md"
         ]
       },
       "status": "corrected"

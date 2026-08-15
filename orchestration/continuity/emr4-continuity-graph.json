@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 299,
+  "graph_revision": 300,
   "harvests": [],
   "nodes": [
     {
@@ -20365,9 +20365,99 @@
         "No refinement applies itself; source, policy, prompt and skill changes remain ordinary explicitly reviewed work.",
         "No Prime runtime or Raisa application/API/database/provider/data authority is opened."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "title": "Provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-15T14:24:19Z",
+      "updated_at": "2026-08-15T14:24:19Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "843769b415597f4545663d78044eaaad303c7692",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted source is authored-synthetic, provider-free and unmounted; runtime authority remains false.",
+          "It maps database-owned current authority, normalized default-deny grants, a private delete receipt, attributable audit, inert migration and an unmounted ordered transaction seam.",
+          "No migration or SQL ran, no database or route opened and no capability was provisioned.",
+          "Yuri requested a pause after closeout before the disposable PostgreSQL parse/catalogue rehearsal."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-physical-schema-transaction-scaffold",
+          "source": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the exact unmounted mapping, inert migration, pure receipt helpers and authority-first transaction seam, then pause before database parse/catalogue proof."
+        }
+      ],
+      "claim_scope": [
+        "PostgreSQL-owned positive authority generation and exact normalized grants default deny without automatic provisioning.",
+        "One inert migration lowers exact receipt and attributable audit additions while preserving the status family.",
+        "Pure helpers bind six-field canonical bytes, domain-separated session HMAC and constant-time replay integrity.",
+        "The unmounted seam uses one cumulative 2000 ms budget, exact lock order, two full current-authority checks and a complete atomic write-set barrier.",
+        "Twenty bindings, 117 hostile mutations, 57 focused tests, 36 API Spine tests, the canonical 196-test fast profile and one corrected clean Gemini 3.7 Flash/high veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/provider-free-scaffold-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json",
+          "docs/ariadne-agent-error-correction-register-revision-302.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold_continuity.py"
+        ],
+        "artifacts": [
+          "app/models/tenancy.py",
+          "app/models/appointments.py",
+          "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+          "app/services/appointment_delete_physical.py",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "PostgreSQL has not parsed or installed the migration; exact catalogues and trigger bodies remain unproved.",
+        "No real lock, transaction, rollback, RLS, concurrency, restart, unknown-commit or route behavior has run.",
+        "Capability provisioning and the public response/route compatibility transition remain closed.",
+        "Product/patient data, providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed.",
+        "The next parse/catalogue tranche is paused pending Yuri's requested workflow-efficiency review."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-15T09:47:44Z"
+  "updated_at": "2026-08-15T14:24:19Z"
 }

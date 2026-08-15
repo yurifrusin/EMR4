@@ -1,0 +1,187 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a",
+  "branch": "codex/review-delete-confirm-scaffold-bdfea42a",
+  "head_before": "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7",
+  "head_after": "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "91d9021e42454c7640a3ff8c9f0471e654740f0485517a39022e63a9d20f4545",
+  "result": "### Independent Review Summary \u2014 Delete-Confirm Physical Schema & Transaction Scaffold\n\n**Candidate Identification:**\n- Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a`\n- Branch: `codex/review-delete-confirm-scaffold-bdfea42a`\n- Candidate HEAD: `bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`\n- Plan-only Source HEAD: `d500f1f86a83695cee0c2aac93aa2e2735e8f799`\n- Reviewer Model & Effort: Gemini 3.7 Flash (`gemini-3.7-flash-high`) at `high` reasoning effort.\n- Evidence Label: `authored_synthetic_provider_free_unmounted_scaffold`\n\n---\n\n### Command Manifest Verification\n\nAll six structured commands in the bound command manifest executed in order with integer exit code 0:\n1. **SCAFFOLD_ACCEPTANCE** (`python -m scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold`): Exit code 0. Verified 20 source bindings and 117/117 named hostile mutations rejected.\n2. **FOCUSED_TESTS** (`ariadne_serial_pytest.py` across scaffold, status scaffold, idempotency migration, and baton consistency test suites): Exit code 0 (57 passing tests).\n3. **API_SPINE_TESTS** (`test_api_spine_artifacts.py`): Exit code 0 (36 passing tests).\n4. **JOURNAL_VALIDATION** (`scripts.ariadne_continuity_and_refinement validate-journal` on operation-journal.json): Exit code 0.\n5. **RUFF** (`ruff check` on all owned and modified paths): Exit code 0 (All checks passed).\n6. **WHITESPACE** (`git diff --check d500f1f86a83695cee0c2aac93aa2e2735e8f799 bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`): Exit code 0 (Clean whitespace).\n\n---\n\n### Invariant Verification & Artifact Inspection\n\n1. **PostgreSQL-Owned Authority Generation & Closed Grant Semantics:**\n   - In `app/models/tenancy.py` and `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py`, `users.authority_generation` is non-null `BigInteger`, server default `1`, constrained positive (`ck_users_authority_generation_positive`) with unique composite key `(practice_id, id)`.\n   - The user before trigger `trg_users_authority_generation_guard` forces generation 1 on insert, ignores caller-submitted generation updates, advances `OLD.authority_generation + 1` exclusively when `practice_id`, `role`, or `is_active` changes, or when triggered at `pg_trigger_depth() = 2` by the grant guard trigger.\n   - `UserCapabilityGrant` enforces row presence as grant and absence as denial. Check constraint restricts capability codes to `'appointment.cancel.confirm'` and `'appointment.read'`. Trigger `trg_user_capability_grants_reject_update` outright rejects in-place updates (forcing delete then insert).\n\n2. **Closed-World Writer Inventory & Trigger Depth:**\n   - The Alembic version inventory scan confirms `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py` is the sole maintained migration writer of `authority_generation`.\n   - Functions and triggers are explicitly `public`-qualified. The grant trigger performs exactly two nested `UPDATE public.users` (one under `INSERT`, one under `DELETE`).\n   - Duplicate `INSERT ... ON CONFLICT DO NOTHING` locks parent user `FOR UPDATE` and returns without advancing generation if the exact capability row already exists.\n\n3. **Receipt and Audit Additive Mappings:**\n   - In `app/models/appointments.py`, `appointment_command_idempotency.authority_generation` is mapped as nullable `BigInteger`.\n   - The check constraint `ck_appt_cmd_idem_status_receipt_v1_complete` is widened in place to an exact disjunction preserving the status-confirm branch unchanged while requiring exact `confirmAppointmentDeleteProposal` / `delete-confirm` fields (completed state, `confirmed_write`, positive authority generation, 32-byte session binding digest, adjacent state versions, non-empty canonical bytes, status code, body hash, and body json). No third family is representable.\n   - `appointment_audit_log` adds private delete-confirm v1 columns (`audit_contract_version`, `authority_generation`, `pre_state_version`, `post_state_version`, `waiting_area_before_id`, `waiting_area_after_id`, `audit_evidence_codes`) with check constraint `ck_appt_audit_log_delete_v1_complete` enforcing `action = 'delete'`, `status_after = 'Cancelled'`, structured reason, null waiting area after, and JSON-array warning and evidence containers. Legacy rows remain null.\n\n4. **Pure Helpers & Session / Integrity Hardening:**\n   - `app/services/appointment_delete_physical.py` implements `canonical_delete_confirm_response_bytes` with an exact 6-field contract (`appointment_id`, `status`=\"Cancelled\", `status_reason_code`, `cancellation_reason`, `waiting_area_id`=null, `warning_codes`), validating one of 10 closed reason codes, cancellation reason string length <= 500 characters, and unique string warnings.\n   - `delete_confirm_session_binding_digest` produces a domain-separated (`appointment-delete-session:v1`), 32-bit length-framed HMAC-SHA-256 digest of practice ID, actor user ID, and authenticated session ID, failing closed on empty inputs without storing raw secrets or session tokens.\n   - `delete_confirm_response_integrity_valid` verifies lowercase 64-hex SHA-256 in constant time (`hmac.compare_digest`).\n\n5. **Unmounted Fail-Closed Transaction Seam:**\n   - `delete_confirm_locked_transaction` establishes a single `READ COMMITTED` transaction with a monotonic cumulative 2000 ms lock wait budget applied before each blocking access via `select(func.set_config('lock_timeout', ...))`.\n   - The execution order strictly adheres to: `User FOR SHARE -> Appointment FOR UPDATE -> first authority check -> existing Idempotency FOR UPDATE -> absent-only insert -> winning Idempotency FOR UPDATE -> second authority check -> classification`.\n   - Replay strictly requires `request_body_canonicalization_version == 1` and current active authority before releasing canonical bytes. Legacy and in-progress records are non-replayable.\n   - On context exit under `new_command`, `_delete_write_set_complete` enforces cross-artifact equality across appointment, audit log, and idempotency record prior to commit, raising `DeleteConfirmScaffoldIncomplete` and rolling back on any omission or divergence.\n\n6. **Scope, Lineage, and Boundary Conformance:**\n   - Migration `x3y4z5a6b7c8` is an inert sole descendant of `w2x3y4z5a6b7`. Downgrade fails closed if any capability grant, delete receipt v1, or delete audit v1 exists.\n   - No route mounts, imports, or references `appointment_delete_physical.py`. No database engine was created, no real locks acquired, and no live SQL/DDL executed.\n   - Public OpenAPI and schemas remain completely unchanged. No product/patient/clinical data, cloud credentials, IAM roles, or protected Git refs were touched.\n\nConclusion: The candidate faithfully lowers the delete-confirm physical design into additive mappings, an inert migration, pure helpers, and an unmounted fail-closed transaction seam. All requirements and invariants are satisfied.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Independent Review Summary \u2014 Delete-Confirm Physical Schema & Transaction Scaffold\n\n**Candidate Identification:**\n- Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a`\n- Branch: `codex/review-delete-confirm-scaffold-bdfea42a`\n- Candidate HEAD: `bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`\n- Plan-only Source HEAD: `d500f1f86a83695cee0c2aac93aa2e2735e8f799`\n- Reviewer Model & Effort: Gemini 3.7 Flash (`gemini-3.7-flash-high`) at `high` reasoning effort.\n- Evidence Label: `authored_synthetic_provider_free_unmounted_scaffold`\n\n---\n\n### Command Manifest Verification\n\nAll six structured commands in the bound command manifest executed in order with integer exit code 0:\n1. **SCAFFOLD_ACCEPTANCE** (`python -m scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold`): Exit code 0. Verified 20 source bindings and 117/117 named hostile mutations rejected.\n2. **FOCUSED_TESTS** (`ariadne_serial_pytest.py` across scaffold, status scaffold, idempotency migration, and baton consistency test suites): Exit code 0 (57 passing tests).\n3. **API_SPINE_TESTS** (`test_api_spine_artifacts.py`): Exit code 0 (36 passing tests).\n4. **JOURNAL_VALIDATION** (`scripts.ariadne_continuity_and_refinement validate-journal` on operation-journal.json): Exit code 0.\n5. **RUFF** (`ruff check` on all owned and modified paths): Exit code 0 (All checks passed).\n6. **WHITESPACE** (`git diff --check d500f1f86a83695cee0c2aac93aa2e2735e8f799 bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`): Exit code 0 (Clean whitespace).\n\n---\n\n### Invariant Verification & Artifact Inspection\n\n1. **PostgreSQL-Owned Authority Generation & Closed Grant Semantics:**\n   - In `app/models/tenancy.py` and `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py`, `users.authority_generation` is non-null `BigInteger`, server default `1`, constrained positive (`ck_users_authority_generation_positive`) with unique composite key `(practice_id, id)`.\n   - The user before trigger `trg_users_authority_generation_guard` forces generation 1 on insert, ignores caller-submitted generation updates, advances `OLD.authority_generation + 1` exclusively when `practice_id`, `role`, or `is_active` changes, or when triggered at `pg_trigger_depth() = 2` by the grant guard trigger.\n   - `UserCapabilityGrant` enforces row presence as grant and absence as denial. Check constraint restricts capability codes to `'appointment.cancel.confirm'` and `'appointment.read'`. Trigger `trg_user_capability_grants_reject_update` outright rejects in-place updates (forcing delete then insert).\n\n2. **Closed-World Writer Inventory & Trigger Depth:**\n   - The Alembic version inventory scan confirms `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py` is the sole maintained migration writer of `authority_generation`.\n   - Functions and triggers are explicitly `public`-qualified. The grant trigger performs exactly two nested `UPDATE public.users` (one under `INSERT`, one under `DELETE`).\n   - Duplicate `INSERT ... ON CONFLICT DO NOTHING` locks parent user `FOR UPDATE` and returns without advancing generation if the exact capability row already exists.\n\n3. **Receipt and Audit Additive Mappings:**\n   - In `app/models/appointments.py`, `appointment_command_idempotency.authority_generation` is mapped as nullable `BigInteger`.\n   - The check constraint `ck_appt_cmd_idem_status_receipt_v1_complete` is widened in place to an exact disjunction preserving the status-confirm branch unchanged while requiring exact `confirmAppointmentDeleteProposal` / `delete-confirm` fields (completed state, `confirmed_write`, positive authority generation, 32-byte session binding digest, adjacent state versions, non-empty canonical bytes, status code, body hash, and body json). No third family is representable.\n   - `appointment_audit_log` adds private delete-confirm v1 columns (`audit_contract_version`, `authority_generation`, `pre_state_version`, `post_state_version`, `waiting_area_before_id`, `waiting_area_after_id`, `audit_evidence_codes`) with check constraint `ck_appt_audit_log_delete_v1_complete` enforcing `action = 'delete'`, `status_after = 'Cancelled'`, structured reason, null waiting area after, and JSON-array warning and evidence containers. Legacy rows remain null.\n\n4. **Pure Helpers & Session / Integrity Hardening:**\n   - `app/services/appointment_delete_physical.py` implements `canonical_delete_confirm_response_bytes` with an exact 6-field contract (`appointment_id`, `status`=\"Cancelled\", `status_reason_code`, `cancellation_reason`, `waiting_area_id`=null, `warning_codes`), validating one of 10 closed reason codes, cancellation reason string length <= 500 characters, and unique string warnings.\n   - `delete_confirm_session_binding_digest` produces a domain-separated (`appointment-delete-session:v1`), 32-bit length-framed HMAC-SHA-256 digest of practice ID, actor user ID, and authenticated session ID, failing closed on empty inputs without storing raw secrets or session tokens.\n   - `delete_confirm_response_integrity_valid` verifies lowercase 64-hex SHA-256 in constant time (`hmac.compare_digest`).\n\n5. **Unmounted Fail-Closed Transaction Seam:**\n   - `delete_confirm_locked_transaction` establishes a single `READ COMMITTED` transaction with a monotonic cumulative 2000 ms lock wait budget applied before each blocking access via `select(func.set_config('lock_timeout', ...))`.\n   - The execution order strictly adheres to: `User FOR SHARE -> Appointment FOR UPDATE -> first authority check -> existing Idempotency FOR UPDATE -> absent-only insert -> winning Idempotency FOR UPDATE -> second authority check -> classification`.\n   - Replay strictly requires `request_body_canonicalization_version == 1` and current active authority before releasing canonical bytes. Legacy and in-progress records are non-replayable.\n   - On context exit under `new_command`, `_delete_write_set_complete` enforces cross-artifact equality across appointment, audit log, and idempotency record prior to commit, raising `DeleteConfirmScaffoldIncomplete` and rolling back on any omission or divergence.\n\n6. **Scope, Lineage, and Boundary Conformance:**\n   - Migration `x3y4z5a6b7c8` is an inert sole descendant of `w2x3y4z5a6b7`. Downgrade fails closed if any capability grant, delete receipt v1, or delete audit v1 exists.\n   - No route mounts, imports, or references `appointment_delete_physical.py`. No database engine was created, no real locks acquired, and no live SQL/DDL executed.\n   - Public OpenAPI and schemas remain completely unchanged. No product/patient/clinical data, cloud credentials, IAM roles, or protected Git refs were touched.\n\nConclusion: The candidate faithfully lowers the delete-confirm physical design into additive mappings, an inert migration, pure helpers, and an unmounted fail-closed transaction seam. All requirements and invariants are satisfied.",
+    "command_results": [
+      {
+        "id": "SCAFFOLD_ACCEPTANCE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "FOCUSED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_api_spine_appointment_idempotency_model_migration.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "API_SPINE_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "JOURNAL_VALIDATION",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_continuity_and_refinement",
+          "validate-journal",
+          "--journal",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+          "app/models/appointments.py",
+          "app/models/tenancy.py",
+          "app/services/appointment_delete_physical.py",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_api_spine_appointment_idempotency_model_migration.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+          "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "135cfa28811207ef2658c09d4170ff6198ad5cee27437b4c9af96bf4be8b31fa",
+  "command_results": [
+    {
+      "id": "SCAFFOLD_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_api_spine_appointment_idempotency_model_migration.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a/tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "JOURNAL_VALIDATION",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_continuity_and_refinement",
+        "validate-journal",
+        "--journal",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+        "app/models/appointments.py",
+        "app/models/tenancy.py",
+        "app/services/appointment_delete_physical.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_api_spine_appointment_idempotency_model_migration.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+        "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

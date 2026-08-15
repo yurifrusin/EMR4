@@ -55,7 +55,7 @@
     },
     {
       "path": "tests/test_current_baton_consistency.py",
-      "sha256": "e1da581b6a911712bf4d5a64fa70fa5b0bd11ce7a1cb02d15bc909fb03da0db8"
+      "sha256": "6b3dc2b349fd46b2605750d02eaf42a7f75f4305154cb61ac906207ac22a3b62"
     }
   ],
   "implementation_bindings": [

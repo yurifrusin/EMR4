@@ -47,6 +47,15 @@
       "request_digest": "sha256:f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8",
       "state": "running",
       "result_digest": null
+    },
+    {
+      "event_id": "delete-scaffold-recovery-2-completed",
+      "generation": 2,
+      "sequence": 4,
+      "command_id": "implement-delete-scaffold-recovery-2",
+      "request_digest": "sha256:f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8",
+      "state": "completed",
+      "result_digest": "sha256:90930e0f4351a70faa8491a8222f04c4f324800aa9ec9510909a1e215ad15afd"
     }
   ]
 }

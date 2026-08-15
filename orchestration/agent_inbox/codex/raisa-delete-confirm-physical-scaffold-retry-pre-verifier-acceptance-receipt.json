@@ -1,0 +1,88 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
+    "completed_stage": "The recovered exact candidate bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7 remains clean and unchanged. Its first Gemini 3.7 veto correctly returned revision_required because Sol's manifest passed relative candidate test paths through a serial wrapper rooted in the primary checkout; five other commands and the substantive architecture audit passed. AER-0341 preserves the harness-command incident and the complete revision-302 register suite passes.",
+    "next_executable_stage": "Admit the corrected manifest with exact absolute candidate test paths, run one fresh no-fallback Gemini 3.7 Flash/high veto against unchanged bdfea42a, reconcile the single terminal decision, integrate and close out the tranche, then set this latch to paused before opening the next tranche.",
+    "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
+    "resume_after_compaction": true,
+    "source_head": "0a01e93319f302256f2b8af0aa74e494256808a8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "corrected_pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded mechanical package and its recovered exact descendant are complete; Sol retained acceptance ownership and deterministic admission now passes at bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7.",
+        "work_packages": [
+          "preserved delete-confirm scaffold candidate"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The first exact-candidate veto failed closed solely on the preserved cross-checkout manifest-path incident AER-0341; one fresh no-fallback veto is reserved after absolute-path command admission.",
+        "work_packages": [
+          "exact source-only authority, schema and transaction veto"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "The read-only delta and final-delta audits passed; the separate bounded AER package is complete without owning product source or acceptance.",
+        "work_packages": [
+          "read-only exact-path delta audit",
+          "agent-error register update"
+        ]
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
+    "parallel_work_packages": [
+      "No implementation package remains parallel; the fresh verifier supplies required independent veto evidence while integration and closeout remain serial"
+    ],
+    "reassessment_triggers": [
+      "corrected Gemini veto",
+      "integrated deterministic admission",
+      "closeout pause"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the failed verifier receipt",
+      "corrected manifest admission before one fresh veto",
+      "unchanged exact candidate",
+      "Gemini before acceptance",
+      "integration and closeout before the user-requested pause",
+      "protected refs unchanged"
+    ]
+  },
+  "planned_action": "admit_and_run_corrected_absolute_path_exact_candidate_gemini37_high_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact plan-only baseline is d500f1f86a83695cee0c2aac93aa2e2735e8f799. The accepted physical design is raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass at 3fd22ba69f96c0378538ea27c6bea444fcb81936. The current worker recovery is mechanical and remains inside the plan-owned mappings, inert migration, pure helpers, unmounted transaction seam, semantic mutation evidence and tests.",
+    "current_authority_allocation": "Sol owns architecture, recovery, integration, acceptance and Git; the consumed DeepSeek V4 Flash/high implementation result remains untrusted candidate provenance; Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto after deterministic admission; native read-only audit and AER packages remain non-accepting evidence lanes.",
+    "git_refs_and_worktree": "Primary and origin task branch remain exact d500f1f86a83695cee0c2aac93aa2e2735e8f799. Worker r192 and the fresh review worktree remain clean at exact candidate bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7 after the failed-closed first veto. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary AER revision-302 and latch edits plus tranche receipts are intentional; every unrelated untracked path remains excluded.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 299 / Compass 281 remains controlling; the active product track is the provider-free unmounted delete-confirm physical schema-and-transaction scaffold.",
+    "protected_evidence_boundaries": "No protected fixture discovery or access; no route/schema/OpenAPI/current command-service edit or call; no migration/DDL/SQL/database/real-lock execution; no capability provisioning; no patient/product/clinical data; no provider/ADC/credential/IAM/network action; no deployment, release, Pages or protected-ref movement. Preserve docs/branding/ and every unrelated untracked path; explicit staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

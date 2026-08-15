@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 295
+    assert register["register_revision"] == 302
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 335)
+        f"AER-{index:04d}" for index in range(1, 342)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 230
+    assert len(agent_incidents) == 236
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 334
+    assert report["incident_count"] == 341
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3211,10 +3211,161 @@ def test_aer_0334_rejects_chained_validation_exit_masking() -> None:
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["workflow_disposition"] == "revision_required"
     assert incident["related_incident_ids"] == []
-    assert incident["recurrence_signature"] == "orchestrator.chained_validation_exit_masking"
+    assert (
+        incident["recurrence_signature"]
+        == "orchestrator.chained_validation_exit_masking"
+    )
     assert "final successful diff" in incident["observed_error"]
     assert "python -m" in incident["correction"]["action"]
     assert "separately captured" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0335_corrects_worker_predispatch_receipt_before_launch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0335"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "dispatch"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["process_severity"] == "low"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert (
+        incident["recurrence_signature"]
+        == "orchestrator.worker_dispatch_runtime_contract"
+    )
+    assert "disposition active" in incident["observed_error"]
+    assert "at_handoff_current" in incident["observed_error"]
+    assert "before any worker dispatch" in incident["observed_error"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "dispatched" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0336_rejects_worker_pass_with_failed_mandatory_gate() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0336"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "implementer"
+    assert incident["resource_id"] == "deepseek-flash-workers"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["process_severity"] == "moderate"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "implementer.self_pass_despite_failed_mandatory_gate"
+    )
+    assert "bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7" in incident["observed_error"]
+    assert "command 3 exited 1" in incident["observed_error"]
+    assert "no integration or acceptance followed" in incident["detection_method"]
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["status"] == "contained"
+
+
+def test_aer_0337_rejects_recurrent_chained_validation_after_control() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0337"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "deterministic_verification"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["process_severity"] == "moderate"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert (
+        incident["recurrence_signature"]
+        == "orchestrator.chained_validation_exit_masking"
+    )
+    assert "after AER-0334" in incident["observed_error"]
+    assert "with semicolons" in incident["observed_error"]
+    assert "reran every affected" in incident["detection_method"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0338_contains_source_identical_status_openapi_hash_drift() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0338"]
+
+    assert incident["origin"] == "repository"
+    assert incident["role"] == "orchestrator"
+    assert incident["resource_id"] == "api-spine-historical-regression-suite"
+    assert incident["category"] == "repository_defect"
+    assert incident["process_severity"] == "moderate"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "repository.api_spine_historical_expectation_drift"
+    )
+    assert "d500f1f86a83695cee0c2aac93aa2e2735e8f799" in incident["observed_error"]
+    assert (
+        "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+        in incident["observed_error"]
+    )
+    assert (
+        "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
+        in incident["observed_error"]
+    )
+    assert incident["correction"]["status"] == "control_implemented_pending_acceptance"
+    assert "one test-only digest correction" in incident["correction"]["action"]
+    assert incident["status"] == "contained"
+
+
+def test_aer_0339_contains_omitted_plan_source_canonical_fast_profile() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0339"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "deterministic_verification"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["process_severity"] == "moderate"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.plan_preflight_mandatory_regression_profile_omitted"
+    )
+    assert "four failures" in incident["observed_error"]
+    assert "one candidate-caused dependency assertion" in incident["observed_error"]
+    assert "three stale current-baton assertions" in incident["observed_error"]
+    assert "reproduced the three" in incident["detection_method"]
+    assert incident["correction"]["status"] == "control_implemented_pending_acceptance"
+    assert "complete canonical fast profile" in incident["correction"]["action"]
+    assert incident["status"] == "contained"
+
+
+def test_aer_0340_corrects_stale_standalone_agent_population_fixture() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0340"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "deterministic_verification"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["process_severity"] == "low"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.agent_error_register_population_fixture_update_incomplete"
+    )
+    assert (
+        "left the standalone agent_incidents length at 230"
+        in incident["observed_error"]
+    )
+    assert "assert 234 == 230" in incident["detection_method"]
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "final exact 235" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0341_preserves_cross_checkout_relative_test_path_veto() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0341"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "independent_review"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "relative candidate test paths" in incident["observed_error"]
+    assert "exact absolute test paths" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 
@@ -3462,29 +3613,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 295
-    assert report["incident_count"] == 334
+    assert report["register_revision"] == 302
+    assert report["incident_count"] == 341
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 230,
+        "agent_behavior": 236,
         "harness": 39,
-        "repository": 55,
+        "repository": 56,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 50,
+        "command_scope_violation": 53,
         "evidence_misreport": 43,
         "harness_failure": 39,
-        "output_contract_violation": 95,
+        "output_contract_violation": 98,
         "read_only_violation": 3,
         "reasoning_claim_error": 39,
-        "repository_defect": 55,
+        "repository_defect": 56,
         "transport_timeout": 10,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 206,
-        "untrusted_partial_worktree": 30,
+        "canonical_unchanged": 211,
+        "untrusted_partial_worktree": 32,
     }
     receipt_event_recurrence = next(
         row
@@ -3507,6 +3658,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         if row["recurrence_signature"]
         != "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch"
     ] == [
+        {
+            "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+            "incident_count": 2,
+            "incident_ids": ["AER-0334", "AER-0337"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
+                "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
+            ],
+        },
         {
             "recurrence_signature": (
                 "orchestrator.overbroad_protected_path_metadata_enumeration"
@@ -3676,8 +3840,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.agent_error_register_population_fixture_update_incomplete"
             ),
-            "incident_count": 2,
-            "incident_ids": ["AER-0255", "AER-0318"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0255", "AER-0318", "AER-0340"],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
             "roles": ["orchestrator"],
@@ -3685,6 +3849,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
                 "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
+                "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report.",
             ],
         },
         {
@@ -3775,7 +3940,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
-            "incident_count": 10,
+            "incident_count": 11,
             "incident_ids": [
                 "AER-0024",
                 "AER-0030",
@@ -3787,6 +3952,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0160",
                 "AER-0250",
                 "AER-0297",
+                "AER-0335",
             ],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
@@ -3800,6 +3966,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Before pre-worker-dispatch receipt construction, copy adapter methods from orchestration/harness_settings/transport_adapters.yaml and require one field-complete workspace_receipt whose agent_id matches every assigned and active worker; never infer these values from transport prose.",
                 "Construct every adapter observation by copying allowed_probe_methods from orchestration/harness_settings/transport_adapters.yaml for that exact adapter_id; never reuse the primary-session method when a native subagent is merely being observed.",
                 "Construct every adapter observation by copying an admitted method from orchestration/harness_settings/transport_adapters.yaml; descriptive transport prose belongs in evidence, never in the method field.",
+                "Construct worker predispatch lane and workspace objects from the last passing stage-equivalent receipt, selecting disposition from the configured enum and emitting every required workspace field before preflight.",
                 "Copy adapter observation and assignment shapes only from the current harness contract, keep native session coordination out of adapter probes and validate the state before any worker spawn.",
                 "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
                 "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string.",
@@ -3911,6 +4078,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
                 "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
                 "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination.",
+            ],
+        },
+        {
+            "recurrence_signature": "repository.api_spine_historical_expectation_drift",
+            "incident_count": 2,
+            "incident_ids": ["AER-0068", "AER-0338"],
+            "origins": ["repository"],
+            "categories": ["repository_defect"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["api-spine-historical-regression-suite"],
+            "prevention_controls": [
+                "Future cross-programme regression gates must run a source-HEAD baseline preflight and separate pre-existing collection or expectation drift from candidate-caused regressions before using the suite as acceptance evidence.",
+                "Run every mandatory legacy regression at the plan source before worker dispatch, bind frozen digests to the exact current source, and classify any source-identical expectation drift before evaluating descendant causation.",
             ],
         },
         {

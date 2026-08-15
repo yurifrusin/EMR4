@@ -408,14 +408,23 @@ passes at exact reviewed source
 `bc066a1b639c5c57cc72f2697c063c5842511840`. Appointment truth is already
 represented; the practice-authority fence, delete-confirm private receipt,
 audit correlation, ordered atomic boundary and separately authorised readback
-are each representable through bounded additive change. The current mounted
-and compatibility routes remain unadmitted. The next narrow descendant is a
-provider-free unmounted physical-design architecture before inert DDL,
-PostgreSQL behavior, route convergence or Reception One cancellation
-composition. Patient-channel delegation, check-in, Stage 3B, another event
-family and operational durability remain retained at their exact gates. No
-watcher runtime, product data, external patient client, provider, deployment,
-production or release is opened.
+are each representable through bounded additive change. The exact physical
+design then passes at reviewed source
+`3fd22ba69f96c0378538ea27c6bea444fcb81936`, and its provider-free unmounted
+schema-and-transaction scaffold now passes at integrated source
+`843769b415597f4545663d78044eaaad303c7692` after exact candidate
+`bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7` received a clean corrected Gemini
+3.7 Flash/high veto. Database-owned current authority, normalized default-deny
+grants, the family-qualified delete receipt, attributable audit additions,
+canonical response/session helpers and the ordered fail-closed transaction seam
+are represented without executing the migration, opening a database or
+mounting a route. The next narrow descendant is a provider-free disposable
+PostgreSQL parse/catalogue rehearsal, but Yuri requested a pause before it
+opens for a workflow-efficiency review. The current mounted and compatibility
+routes remain unadmitted. Patient-channel delegation, check-in, Stage 3B,
+another event family and operational durability remain retained at their exact
+gates. No watcher runtime, product data, external patient client, provider,
+deployment, production or release is opened.
 
 The durable product seam is one Raisa authority kernel with replaceable
 interaction adapters. Reception One is the first-party reference client; later

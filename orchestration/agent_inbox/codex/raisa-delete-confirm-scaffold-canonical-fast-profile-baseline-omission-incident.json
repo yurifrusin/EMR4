@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0339",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T22:21:45+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+  "attempt_id": "raisa-delete-confirm-scaffold-canonical-fast-profile-baseline-001",
+  "plan_source_head": "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+  "candidate_head": "bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7",
+  "plan_preflight_ran_canonical_fast_profile": false,
+  "candidate_fast_profile_failure_count": 4,
+  "failure_classification": {
+    "candidate_caused_dependency_assertions": 1,
+    "candidate_caused_detail": "dependency assertion did not yet admit additive authority_generation",
+    "pre_existing_plan_source_failures": 3,
+    "pre_existing_detail": "stale current-baton assertions after the accepted Ariadne harness closeout"
+  },
+  "three_baton_failures_reproduced_at_plan_source": true,
+  "authority_generation_failure_present_at_plan_source": false,
+  "candidate_admitted": false,
+  "frozen_correction": [
+    "bind each affected test to its exact source or candidate cause",
+    "apply only narrowly scoped expectation corrections",
+    "rerun every affected test independently",
+    "rerun the complete canonical fast profile"
+  ],
+  "candidate_state": "untrusted_partial_worktree",
+  "status": "contained_pending_narrow_corrections_and_full_profile_rerun"
+}

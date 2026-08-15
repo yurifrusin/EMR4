@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-scaffold-bdfea42a",
+  "branch": "codex/review-delete-confirm-scaffold-bdfea42a",
+  "head": "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7",
+  "expected_head": "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

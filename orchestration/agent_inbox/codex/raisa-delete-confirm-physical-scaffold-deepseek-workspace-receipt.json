@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.workspace_receipt.v1",
+  "status": "passed",
+  "agent_id": "deepseek-delete-confirm-physical-scaffold-001",
+  "resource_id": "deepseek-flash-workers",
+  "model": "deepseek-v4-flash",
+  "reasoning_level": "high",
+  "transport": "claude_code_bare_deepseek",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r192",
+  "branch": "codex/worker-delete-confirm-scaffold-d500f1f8",
+  "head": "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+  "clean": true,
+  "at_handoff_current": true,
+  "protected_branch": false,
+  "integration_authority": false,
+  "push_authority": false,
+  "evidence": [
+    "exact branch observed",
+    "exact full HEAD observed",
+    "git status porcelain empty",
+    "target is a disposable non-protected worktree"
+  ]
+}

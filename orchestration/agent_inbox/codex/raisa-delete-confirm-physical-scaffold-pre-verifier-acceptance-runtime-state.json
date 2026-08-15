@@ -1,0 +1,156 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "admit_and_run_one_fresh_exact_candidate_gemini37_high_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Continuity 299 / Compass 281 remains controlling; the active product track is the provider-free unmounted delete-confirm physical schema-and-transaction scaffold.",
+    "current_authority_allocation": "Sol owns architecture, recovery, integration, acceptance and Git; the consumed DeepSeek V4 Flash/high implementation result remains untrusted candidate provenance; Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto after deterministic admission; native read-only audit and AER packages remain non-accepting evidence lanes.",
+    "active_plan_and_acceptance": "The exact plan-only baseline is d500f1f86a83695cee0c2aac93aa2e2735e8f799. The accepted physical design is raisa_provider_free_unmounted_delete_confirm_physical_design_architecture_pass at 3fd22ba69f96c0378538ea27c6bea444fcb81936. The current worker recovery is mechanical and remains inside the plan-owned mappings, inert migration, pure helpers, unmounted transaction seam, semantic mutation evidence and tests.",
+    "protected_evidence_boundaries": "No protected fixture discovery or access; no route/schema/OpenAPI/current command-service edit or call; no migration/DDL/SQL/database/real-lock execution; no capability provisioning; no patient/product/clinical data; no provider/ADC/credential/IAM/network action; no deployment, release, Pages or protected-ref movement. Preserve docs/branding/ and every unrelated untracked path; explicit staging only.",
+    "git_refs_and_worktree": "Primary and origin task branch are exact d500f1f86a83695cee0c2aac93aa2e2735e8f799. Worker r192 and the fresh review worktree are clean at exact candidate bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked AER and active-latch edits plus tranche receipts are intentional and every unrelated untracked path remains excluded.",
+    "user_closeout_pause": "Yuri explicitly instructed that the current tranche should be completed and closed out, then the workflow must pause before the next parse/catalogue tranche begins."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
+    "active_tranche": "Provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
+    "objective": "Lower the accepted delete-confirm physical design into additive ORM mappings, one inert Alembic descendant, pure receipt helpers and an unmounted authority-first transaction seam without executing a migration, touching a database, mounting a route, granting a capability or completing a product write.",
+    "status": "in_progress",
+    "source_head": "0a01e93319f302256f2b8af0aa74e494256808a8",
+    "authority_source": "Yuri's standing uninterrupted-development authority, resumed after the accepted Ariadne harness safeguards; Yuri additionally instructed on 2026-08-15 to pause after this tranche closes and before opening the next parse/catalogue tranche",
+    "checkpoint": {
+      "completed_stage": "The recovered exact candidate bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7 is clean, independently audited and deterministically admitted: 117/117 semantic/static hostile mutations, 57 focused/conformance tests, 36 API Spine tests and the canonical 196-test fast profile pass; the operation journal is reconciled to generation two and the revised plan digest.",
+      "next_executable_stage": "Run one fresh exact-candidate Gemini 3.7 Flash/high veto in the clean non-protected review worktree, reconcile its single terminal decision, integrate and close out the tranche, then set this latch to paused before opening the next tranche.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 1,
+        "verification": 2
+      },
+      "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_unmounted_source_scaffold_only",
+      "no_route_schema_openapi_graphql_or_existing_command_service_edit_mount_import_or_call",
+      "no_migration_ddl_sql_database_engine_real_transaction_or_lock_execution",
+      "no_capability_provisioning_or_existing_user_grant",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_network_or_external_adapter",
+      "no_watcher_event_command_or_product_write_authority",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-delete-confirm-physical-schema-transaction-scaffold",
+    "assessed_stage": "post_compaction_final_verifier_admission",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The bounded mechanical package and its recovered exact descendant are complete; Sol retained acceptance ownership and deterministic admission now passes at bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7.",
+        "work_packages": ["preserved delete-confirm scaffold candidate"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high veto is now eligible and remains mandatory for the exact clean deterministically admitted candidate.",
+        "work_packages": ["exact source-only authority, schema and transaction veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The read-only delta and final-delta audits passed; the separate bounded AER package is complete without owning product source or acceptance.",
+        "work_packages": ["read-only exact-path delta audit", "agent-error register update"]
+      }
+    ],
+    "parallel_work_packages": ["No implementation package remains parallel; the fresh verifier supplies required independent veto evidence while integration and closeout remain serial"],
+    "serial_constraints": ["one product-source recovery owner", "deterministic admission before Gemini", "Gemini before acceptance", "operation-journal digest after final plan bytes", "closeout before the user-requested pause", "protected refs unchanged"],
+    "reassessment_triggers": ["Gemini veto", "integrated deterministic admission", "closeout pause"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_delete_scaffold_postcompaction_five_source_receipt",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Five-source post-compaction rehydration completed; exact refs and both worktrees observed."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Read-only delta audit completed; bounded AER package is the only remaining native lane."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.7 Flash/high is reserved; no verifier call is eligible until deterministic admission passes."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Consumed worker candidate is preserved at bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7 with bounded Sol repair descendants through 780525aed9f0ee27e46f9782da6e5a66765faf2f."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,187 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a",
+  "branch": "codex/review-delete-confirm-scaffold-bdfea42a",
+  "head_before": "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7",
+  "head_after": "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "e8be40ebdc6b6d291f4bf1dd00ea3cf3ccef5fcb7a640336a3358a37230fceae",
+  "result": "# Independent Review / Veto \u2014 Delete-Confirm Physical Schema and Transaction Scaffold\n\n- Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a`\n- Branch: `codex/review-delete-confirm-scaffold-bdfea42a`\n- Candidate HEAD: `bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`\n- Plan-only source: `d500f1f86a83695cee0c2aac93aa2e2735e8f799`\n- Reviewer role: Gemini 3.7 Flash/high fresh independent veto only\n\n---\n\n## 1. Command Manifest Execution Results\n\nThe 6-command bound manifest was executed in sequence within the candidate worktree:\n\n1. **`SCAFFOLD_ACCEPTANCE`** (`python -m scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold`)\n   - Exit Code: **0**\n   - Verified 20 exact source bindings, 117/117 hostile semantic/static mutations rejected, closed-world authority writer inventory confirmed.\n2. **`FOCUSED_TESTS`** (`python ariadne_serial_pytest.py --timeout-seconds 180 -- -q tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py ...`)\n   - Exit Code: **1**\n   - Output: `ERROR: file or directory not found: tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py`\n3. **`API_SPINE_TESTS`** (`python ariadne_serial_pytest.py --timeout-seconds 180 -- -q tests/test_api_spine_artifacts.py`)\n   - Exit Code: **0**\n   - All 36 API Spine artifact tests passed.\n4. **`JOURNAL_VALIDATION`** (`python -m scripts.ariadne_continuity_and_refinement validate-journal --journal .../operation-journal.json`)\n   - Exit Code: **0**\n   - Journal validation passed (5 events, schema v1).\n5. **`RUFF`** (`python -m ruff check ...`)\n   - Exit Code: **0**\n   - All changed and related files passed Ruff lint checks cleanly.\n6. **`WHITESPACE`** (`git diff --check d500f1f86a83695cee0c2aac93aa2e2735e8f799 bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`)\n   - Exit Code: **0**\n   - No whitespace errors detected across the diff range.\n\n---\n\n## 2. Findings and Veto Rationale\n\n### Finding 1: Manifest Command `FOCUSED_TESTS` Failed with Exit Code 1\n\nUnder `orchestration/harness_settings/verifier_execution_policy.yaml` (line 49: `pass_requires_every_exit_code_zero: true`), admission strictly requires every command in the bound manifest to complete with exit code 0.\n\n**Root Cause:**\n`C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py` establishes its working repository root via `Path(__file__).resolve().parents[1]` (`C:/Users/sarashera/emr4`) rather than respecting the caller's working directory / candidate worktree (`C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a`). Consequently, when `ariadne_serial_pytest.py` invokes `pytest`, it attempts to resolve relative test file paths against the main repository root where `tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py` does not exist (as it is exclusively present on the candidate branch in the isolated worker worktree). This caused `pytest` to terminate with `ERROR: file or directory not found` and exit code 1.\n\n---\n\n## 3. Invariant and Substantive Architecture Audit\n\nA thorough examination of the candidate's implementation files against the required invariants revealed that the underlying code changes faithfully satisfy all physical design and security requirements:\n\n1. **Authority Fence & Generation Ownership (`app/models/tenancy.py`, Alembic revision `x3y4z5a6b7c8`):**\n   - `users.authority_generation` mapped as non-null `BigInteger` with `CheckConstraint(\"authority_generation >= 1\")` and unique constraint `(practice_id, id)`.\n   - Migration enforces baseline 1 cutover, `BEFORE INSERT OR UPDATE` trigger forces insert 1, ignores direct client submissions, and advances generation on qualifying role/practice/active changes.\n   - `UserCapabilityGrant` composite PK `(practice_id, user_id, capability_code)` and composite FK to `users(practice_id, id)` with check constraint strictly limiting capability codes to `'appointment.cancel.confirm'` and `'appointment.read'`.\n   - `emr4_user_capability_grant_generation_guard` acquires `users FOR UPDATE`, detects existing duplicate grants without advancing, advances parent `authority_generation = users.authority_generation + 1` on real insert/delete, and rejects updates via `trg_user_capability_grants_reject_update`.\n\n2. **Trigger-Depth Closed-World Boundary:**\n   - Database-owned `OLD + 1` transition in user trigger is gated by `pg_trigger_depth() = 2` without relying on spoofable session GUCs.\n   - Static validator inventory confirms `x3y4z5a6b7c8` is the sole Alembic migration writer of `users.authority_generation`.\n\n3. **Receipt and Audit Model Mappings (`app/models/appointments.py`):**\n   - `AppointmentCommandIdempotency` adds nullable `authority_generation BIGINT`.\n   - `ck_appt_cmd_idem_status_receipt_v1_complete` widened in-place to an exact two-branch disjunction preserving the status-confirm branch and adding the delete-confirm branch requiring positive generation, 32-byte session digest, adjacent version monotonicity, and non-empty canonical bytes.\n   - `AppointmentAuditLog` maps the 7 additive fields and check constraint `ck_appt_audit_log_delete_v1_complete` enforcing version 1, `action = 'delete'`, `status_after = 'Cancelled'`, structured reason, null waiting room after, and JSON-array warning/evidence containers.\n\n4. **Pure Helpers & Session HMAC (`app/services/appointment_delete_physical.py`):**\n   - `canonical_delete_confirm_response_bytes` outputs exactly 6 fields in canonical UTF-8 JSON order with `status=\"Cancelled\"`, `waiting_area_id=null`, verified reason codes, and max 500-char reason string.\n   - `delete_confirm_session_binding_digest` produces deterministic 32-byte HMAC-SHA256 with `appointment-delete-session:v1` domain and 4-byte big-endian length framing.\n   - `delete_confirm_response_integrity_valid` verifies lowercase SHA-256 in constant time.\n\n5. **Unmounted Transaction Seam (`delete_confirm_locked_transaction`):**\n   - Establishes single `READ COMMITTED` boundary with a monotonic cumulative 2000 ms wait budget applied before blocking statements.\n   - Exact lock hierarchy: `User FOR SHARE` -> `Appointment FOR UPDATE` -> first internal authority check -> existing idempotency `FOR UPDATE` -> insert on conflict do nothing -> winner `FOR UPDATE` -> second internal authority check -> classification.\n   - Fail-closed post-yield verification (`_delete_write_set_complete`) ensures complete cross-artifact agreement across appointment, audit log, and idempotency record before transaction commit.\n\n6. **Scope and Lineage Boundaries:**\n   - Unreferenced by routers; no router, OpenAPI, or public schema modified.\n   - Zero SQL/DDL executed, no real database contacted, no credentials or product data accessed.\n   - Lineage is the single inert descendant `x3y4z5a6b7c8` (down revision `w2x3y4z5a6b7`).\n\n---\n\n## 4. Conclusion\n\nWhile the substantive physical schema, migration, helper functions, and transaction seam are architecturally sound and meet all specified design invariants, the candidate cannot receive `pass` due to the non-zero exit code (1) of manifest command `FOCUSED_TESTS`. Remediation of the test runner / manifest invocation path in the harness is required before final admission.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Independent Review / Veto \u2014 Delete-Confirm Physical Schema and Transaction Scaffold\n\n- Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a`\n- Branch: `codex/review-delete-confirm-scaffold-bdfea42a`\n- Candidate HEAD: `bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`\n- Plan-only source: `d500f1f86a83695cee0c2aac93aa2e2735e8f799`\n- Reviewer role: Gemini 3.7 Flash/high fresh independent veto only\n\n---\n\n## 1. Command Manifest Execution Results\n\nThe 6-command bound manifest was executed in sequence within the candidate worktree:\n\n1. **`SCAFFOLD_ACCEPTANCE`** (`python -m scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold`)\n   - Exit Code: **0**\n   - Verified 20 exact source bindings, 117/117 hostile semantic/static mutations rejected, closed-world authority writer inventory confirmed.\n2. **`FOCUSED_TESTS`** (`python ariadne_serial_pytest.py --timeout-seconds 180 -- -q tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py ...`)\n   - Exit Code: **1**\n   - Output: `ERROR: file or directory not found: tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py`\n3. **`API_SPINE_TESTS`** (`python ariadne_serial_pytest.py --timeout-seconds 180 -- -q tests/test_api_spine_artifacts.py`)\n   - Exit Code: **0**\n   - All 36 API Spine artifact tests passed.\n4. **`JOURNAL_VALIDATION`** (`python -m scripts.ariadne_continuity_and_refinement validate-journal --journal .../operation-journal.json`)\n   - Exit Code: **0**\n   - Journal validation passed (5 events, schema v1).\n5. **`RUFF`** (`python -m ruff check ...`)\n   - Exit Code: **0**\n   - All changed and related files passed Ruff lint checks cleanly.\n6. **`WHITESPACE`** (`git diff --check d500f1f86a83695cee0c2aac93aa2e2735e8f799 bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7`)\n   - Exit Code: **0**\n   - No whitespace errors detected across the diff range.\n\n---\n\n## 2. Findings and Veto Rationale\n\n### Finding 1: Manifest Command `FOCUSED_TESTS` Failed with Exit Code 1\n\nUnder `orchestration/harness_settings/verifier_execution_policy.yaml` (line 49: `pass_requires_every_exit_code_zero: true`), admission strictly requires every command in the bound manifest to complete with exit code 0.\n\n**Root Cause:**\n`C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py` establishes its working repository root via `Path(__file__).resolve().parents[1]` (`C:/Users/sarashera/emr4`) rather than respecting the caller's working directory / candidate worktree (`C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-scaffold-bdfea42a`). Consequently, when `ariadne_serial_pytest.py` invokes `pytest`, it attempts to resolve relative test file paths against the main repository root where `tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py` does not exist (as it is exclusively present on the candidate branch in the isolated worker worktree). This caused `pytest` to terminate with `ERROR: file or directory not found` and exit code 1.\n\n---\n\n## 3. Invariant and Substantive Architecture Audit\n\nA thorough examination of the candidate's implementation files against the required invariants revealed that the underlying code changes faithfully satisfy all physical design and security requirements:\n\n1. **Authority Fence & Generation Ownership (`app/models/tenancy.py`, Alembic revision `x3y4z5a6b7c8`):**\n   - `users.authority_generation` mapped as non-null `BigInteger` with `CheckConstraint(\"authority_generation >= 1\")` and unique constraint `(practice_id, id)`.\n   - Migration enforces baseline 1 cutover, `BEFORE INSERT OR UPDATE` trigger forces insert 1, ignores direct client submissions, and advances generation on qualifying role/practice/active changes.\n   - `UserCapabilityGrant` composite PK `(practice_id, user_id, capability_code)` and composite FK to `users(practice_id, id)` with check constraint strictly limiting capability codes to `'appointment.cancel.confirm'` and `'appointment.read'`.\n   - `emr4_user_capability_grant_generation_guard` acquires `users FOR UPDATE`, detects existing duplicate grants without advancing, advances parent `authority_generation = users.authority_generation + 1` on real insert/delete, and rejects updates via `trg_user_capability_grants_reject_update`.\n\n2. **Trigger-Depth Closed-World Boundary:**\n   - Database-owned `OLD + 1` transition in user trigger is gated by `pg_trigger_depth() = 2` without relying on spoofable session GUCs.\n   - Static validator inventory confirms `x3y4z5a6b7c8` is the sole Alembic migration writer of `users.authority_generation`.\n\n3. **Receipt and Audit Model Mappings (`app/models/appointments.py`):**\n   - `AppointmentCommandIdempotency` adds nullable `authority_generation BIGINT`.\n   - `ck_appt_cmd_idem_status_receipt_v1_complete` widened in-place to an exact two-branch disjunction preserving the status-confirm branch and adding the delete-confirm branch requiring positive generation, 32-byte session digest, adjacent version monotonicity, and non-empty canonical bytes.\n   - `AppointmentAuditLog` maps the 7 additive fields and check constraint `ck_appt_audit_log_delete_v1_complete` enforcing version 1, `action = 'delete'`, `status_after = 'Cancelled'`, structured reason, null waiting room after, and JSON-array warning/evidence containers.\n\n4. **Pure Helpers & Session HMAC (`app/services/appointment_delete_physical.py`):**\n   - `canonical_delete_confirm_response_bytes` outputs exactly 6 fields in canonical UTF-8 JSON order with `status=\"Cancelled\"`, `waiting_area_id=null`, verified reason codes, and max 500-char reason string.\n   - `delete_confirm_session_binding_digest` produces deterministic 32-byte HMAC-SHA256 with `appointment-delete-session:v1` domain and 4-byte big-endian length framing.\n   - `delete_confirm_response_integrity_valid` verifies lowercase SHA-256 in constant time.\n\n5. **Unmounted Transaction Seam (`delete_confirm_locked_transaction`):**\n   - Establishes single `READ COMMITTED` boundary with a monotonic cumulative 2000 ms wait budget applied before blocking statements.\n   - Exact lock hierarchy: `User FOR SHARE` -> `Appointment FOR UPDATE` -> first internal authority check -> existing idempotency `FOR UPDATE` -> insert on conflict do nothing -> winner `FOR UPDATE` -> second internal authority check -> classification.\n   - Fail-closed post-yield verification (`_delete_write_set_complete`) ensures complete cross-artifact agreement across appointment, audit log, and idempotency record before transaction commit.\n\n6. **Scope and Lineage Boundaries:**\n   - Unreferenced by routers; no router, OpenAPI, or public schema modified.\n   - Zero SQL/DDL executed, no real database contacted, no credentials or product data accessed.\n   - Lineage is the single inert descendant `x3y4z5a6b7c8` (down revision `w2x3y4z5a6b7`).\n\n---\n\n## 4. Conclusion\n\nWhile the substantive physical schema, migration, helper functions, and transaction seam are architecturally sound and meet all specified design invariants, the candidate cannot receive `pass` due to the non-zero exit code (1) of manifest command `FOCUSED_TESTS`. Remediation of the test runner / manifest invocation path in the harness is required before final admission.",
+    "command_results": [
+      {
+        "id": "SCAFFOLD_ACCEPTANCE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "FOCUSED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_api_spine_appointment_idempotency_model_migration.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "API_SPINE_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "JOURNAL_VALIDATION",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_continuity_and_refinement",
+          "validate-journal",
+          "--journal",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+          "app/models/appointments.py",
+          "app/models/tenancy.py",
+          "app/services/appointment_delete_physical.py",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_api_spine_appointment_idempotency_model_migration.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+          "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "a7ded36a4ed838b31789a715f80b3d1751250fbd239da489e9aa1e1075a67619",
+  "command_results": [
+    {
+      "id": "SCAFFOLD_ACCEPTANCE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "FOCUSED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_api_spine_appointment_idempotency_model_migration.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "JOURNAL_VALIDATION",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_continuity_and_refinement",
+        "validate-journal",
+        "--journal",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/operation-journal.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+        "app/models/appointments.py",
+        "app/models/tenancy.py",
+        "app/services/appointment_delete_physical.py",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_api_spine_appointment_idempotency_model_migration.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+        "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d500f1f86a83695cee0c2aac93aa2e2735e8f799",
+        "bdfea42a47c0ebcbfc9d4ac6ae5685a380079ca7"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

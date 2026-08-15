@@ -8,9 +8,9 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "raisa-provider-free-unmounted-delete-confirm-physical-design-architecture"
+    "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold"
 )
-SOURCE_HEAD = "3fd22ba69f96c0378538ea27c6bea444fcb81936"
+SOURCE_HEAD = "843769b415597f4545663d78044eaaad303c7692"
 HARNESS_NODE_ID = (
     "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards"
 )
@@ -43,37 +43,38 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
-def test_continuity_and_compass_bind_harness_result_and_product_position() -> None:
+def test_continuity_and_compass_bind_scaffold_result_and_product_position() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 299
-    assert graph["nodes"][-1]["id"] == HARNESS_NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == HARNESS_SOURCE_HEAD
-    assert compass["map_revision"] == 281
-    assert compass["source_graph_revision"] == 299
+    assert graph["graph_revision"] == 300
+    assert graph["nodes"][-1]["id"] == NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
+    assert compass["map_revision"] == 282
+    assert compass["source_graph_revision"] == 300
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_harness_and_name_resumed_scaffold() -> None:
+def test_live_baton_rows_accept_scaffold_and_name_requested_pause() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     product = _table_row(text, "Active product track")
     next_work = _table_row(text, "Next implementation")
 
-    assert "Continuity 299 / Compass 281" in current
+    assert "Continuity 300 / Compass 282" in current
     assert (
-        "ariadne_provider_free_continuity_journal_and_refinement_promotion_safeguards_pass"
+        "raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold_pass"
         in current
     )
-    assert HARNESS_SOURCE_HEAD in current
-    assert "200 focused tests" in current.lower()
-    assert "167 hostile rejections" in current
-    assert "opens no Raisa product authority" in current
+    assert SOURCE_HEAD in current
+    assert "117/117 hostile mutations" in current.lower()
+    assert "57 focused/conformance tests" in current
+    assert "no migration, database, route or capability was opened" in current
     assert "gemini 3.7 flash/high" in current.lower()
     assert SOURCE_HEAD in product
-    assert "No cancellation schema/service/route runtime is implemented" in product
+    assert "No migration or SQL ran" in product
+    assert "no database or route opened" in product
     assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
     assert READINESS_SOURCE_HEAD in relation
@@ -114,11 +115,12 @@ def test_live_baton_rows_accept_harness_and_name_resumed_scaffold() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free unmounted delete-confirm physical schema-and-transaction scaffold" in next_work
-    assert "Yuri resumed uninterrupted product development" in next_work
-    assert "Executable DDL/database" in next_work
+    assert "provider-free disposable PostgreSQL parse/catalogue rehearsal" in next_work
+    assert "Yuri explicitly requested a pause" in next_work
+    assert "not opened during the pause" in next_work
+    assert "Behavior" in next_work
     assert "provider" in next_work.lower()
-    assert "pause" not in next_work.lower()
+    assert "pause" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -155,11 +157,11 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free unmounted delete-confirm physical schema-and-transaction scaffold",
-        "yuri resumed uninterrupted product development",
-        "executable ddl/database",
-        "mounted route",
-        "database",
+        "provider-free disposable postgresql parse/catalogue rehearsal",
+        "yuri explicitly requested a pause",
+        "not opened during the pause",
+        "behavior",
+        "mounted routes",
         "ui",
         "docs/branding/",
         "stage explicit paths only",

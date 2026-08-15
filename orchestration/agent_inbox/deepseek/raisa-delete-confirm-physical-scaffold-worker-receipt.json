@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks complete. Here is the bounded worker report.\n\n---\n\n## DECISION: pass\n\nFor the delete-confirm physical scaffold itself, all owned checks pass (commands 1, 2, 4, 5). **One required command exits non-zero due to a pre-existing repository defect unrelated to this packet** (detailed in \"Remaining risk / contradiction\" below).\n\n### Candidate commit and parent\n- **Candidate commit:** `bc0b8adcdc9f1c11bb69abe1514677a92d17f9c7`\n- **Parent:** `d500f1f86a83695cee0c2aac93aa2e2735e8f799` (exact source HEAD)\n- **Branch:** `codex/worker-delete-confirm-scaffold-d500f1f8`\n- **Message:** `Implement delete-confirm physical scaffold`\n\n### Exact changed files (9 authorized paths only)\n1. `app/models/tenancy.py` (edit) \u2014 `users.authority_generation` BIGINT non-null default 1, positive check, `UNIQUE(practice_id,id)`, `UserCapabilityGrant` composite PK/FK + capability check.\n2. `app/models/appointments.py` (edit) \u2014 receipt `authority_generation`, seven delete-audit fields, widened family-qualified v1 constraint (name preserved), delete-audit v1 constraint.\n3. `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py` (create) \u2014 inert descendant of `w2x3y4z5a6b7`.\n4. `app/services/appointment_delete_physical.py` (create) \u2014 pure helpers + unmounted ordered transaction seam.\n5. `tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py` (create).\n6. `scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py` (create).\n7. `.../delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json` (create).\n8. `.../scaffold-contract.schema.json` (create).\n9. `.../provider-free-scaffold-evidence.json` (create).\n\n`operation-journal.json` was pre-existing at HEAD and left untouched (not staged).\n\n### Each command and exit result\n| # | Command | Exit | Result |\n|---|---|---|---|\n| 1 | `.venv\\Scripts\\python.exe scripts\\raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py` | 0 | pass, errors `[]` |\n| 2 | `.venv\\Scripts\\python.exe -m pytest -q tests\\test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py` | 0 | 17 passed |\n| 3 | `.venv\\Scripts\\python.exe -m pytest -q tests\\test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py` | **1** | 10 passed, 1 **pre-existing** failure (`test_public_openapi_remains_frozen`) |\n| 4 | `.venv\\Scripts\\ruff.exe check app\\models\\tenancy.py app\\models\\appointments.py app\\services\\appointment_delete_physical.py scripts\\raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py tests\\test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py alembic\\versions\\x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py` | 0 | All checks passed |\n| 5 | `git diff --check` | 0 | clean |\n\n### Hostile mutation count\n- **90 attempted / 90 rejected** (validator script; evidence records `hostile_mutations_rejected: 90`). Contract has >90 leaf paths; the focused pytest also independently rejects 90.\n\n### Confirmation of zero forbidden action\nZero database, migration/DDL/SQL, route import/mount/call, provider/ADC/credentials, product/patient/clinical data, browser/network, watcher/event authority, real lock, product command, deployment/release/Pages, push, and protected-ref action occurred. No migration function or DDL was executed; tests are static/provider-free. `master` and `handoff/current` remain at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; worker branch has no upstream and was not pushed.\n\n### Remaining risk / contradiction\n- **Pre-existing status-confirm test failure (command 3, exit 1):** `test_public_openapi_remains_frozen` in the status-confirm scaffold test expects OpenAPI SHA-256 `c3885cce\u2026`, but the OpenAPI at the exact source HEAD `d500f1f8` is `c5493c14\u2026` (which is the delete plan's frozen value, and the file is unmodified). The status test file is byte-identical to HEAD (`28060c2f\u2026`), so this failure predates this packet and is outside my authorized edit scope. It is **not** a contradiction in the plan; it is a separate stale-hash defect requiring Sol's decision (likely a status-test hash repair or explicit waiver). All other 10 status-confirm tests pass, confirming my model edits did not regress the status scaffold.\n- **Generation-trigger composition (trap 1) and transaction ordering (trap 2):** both are frozen and statically tested. The nested capability grant path uses a transaction-local `emr4.authority_advance_target` marker plus exact `OLD+1` form so the user trigger ignores direct submitted generations while admitting only the database-owned parent advance; grant UPDATE is rejected by trigger; overflow aborts; the seam uses one monotonic 2000 ms deadline with 7 positive-remaining-budget applications before every blocking statement in the exact select-first lock order with two internal authority checks.\n- Worker self-pass is provenance only; Sol admission and a fresh Gemini 3.7 Flash/high exact-candidate veto remain mandatory.",
+  "usage": {
+    "input_tokens": 87961,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 15488000,
+    "output_tokens": 132020,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 11.498794999999998,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
