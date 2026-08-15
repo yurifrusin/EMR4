@@ -1,0 +1,82 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "completed_stage": "DeepSeek exact five-file candidate 817ad386 was admitted and committed as 46613880/534ed82f; canonical fast verification passed. Yuri directly replaced the live independent verifier allocation with Gemini 3.7 Flash/high, waived a separate trial, retained Gemini 3.6 for historical compatibility only, and requested a pause after this tranche closes.",
+    "next_executable_stage": "Validate and commit the Gemini 3.7 Flash/high allocation change, perform the mandatory post-model-change five-source rehydration, then dispatch the current tranche's first ordinary fresh Gemini 3.7 Flash/high exact-candidate veto.",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "resume_after_compaction": true,
+    "source_head": "6514d35c465e304a421218890264f61c33ba51bb",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "model_or_provider_change",
+  "parallelism_assessment": {
+    "assessed_stage": "post_model_change_pre_verifier",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded five-file mechanical artifact package completed and was independently rerun and admitted by Sol.",
+        "work_packages": [
+          "closed contract, schema, deterministic validator, evidence and focused hostile-mutation tests"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The material authority and transaction architecture requires one fresh exact-candidate veto; Yuri selected Gemini 3.7 Flash/high as the live lane without a separate trial.",
+        "work_packages": [
+          "fresh exact-candidate authority, receipt, audit, transaction and readback veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No separable implementation or review surface remains alongside the required single fresh independent veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic admission",
+      "Gemini terminal decision",
+      "any worktree postcondition failure",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "post-model-change rehydration precedes any external dispatch",
+      "deterministic gate precedes Gemini",
+      "one fresh Antigravity project reviews one exact clean candidate",
+      "Sol alone accepts, integrates and closes the tranche"
+    ]
+  },
+  "planned_action": "rehydrate_and_admit_gemini_3_7_flash_high_for_current_delete_confirm_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and threat delta were reread completely. Exact contract fingerprint sha256:5d0512a64ecf9c907962b9a86a0cc56023c75363786ba52be9702b63c7018fa5 passes 166 of 166 hostile rejections, preserves the six-field response and exact authority/receipt/audit/transaction/readback design, and keeps implementation_authorized false.",
+    "current_authority_allocation": "Yuri directly selected Gemini 3.7 Flash/high through a fresh Antigravity project, exact slug gemini-3.7-flash-high and explicit high effort, waived a separate trial, and retained Gemini 3.6 only for explicit historical compatibility with no silent fallback. Sol retains planning, semantic, acceptance, integration, continuity and Git authority; DeepSeek completed only the bounded mechanical implementation package.",
+    "git_refs_and_worktree": "Primary HEAD is f650204638287776ba32aea44655ca7e1b01809d on codex/ariadne-bernie-davida-parallel-seam; origin task remains 6514d35c465e304a421218890264f61c33ba51bb until tranche closeout. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; all unrelated untracked files, including docs/branding and retained receipt/state evidence, remain preserved and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the live allocation change. Continuity 297 / Compass 279 remains the incoming accepted state, and the current provider-free unmounted delete-confirm physical-design architecture remains the unfinished active tranche.",
+    "protected_evidence_boundaries": "Only authored-synthetic provider-free unmounted architecture evidence and the exact frozen source allowlist are admitted. No application/model/migration/service/route/OpenAPI/GraphQL implementation, executable DDL or SQL, database, real lock, source watcher, event authority, provider-product call, ADC, patient/product/clinical/protected data, capability provisioning, command/write, credential/IAM, deployment, production, release, Pages or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

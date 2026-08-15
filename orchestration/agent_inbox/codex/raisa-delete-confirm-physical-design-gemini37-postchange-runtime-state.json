@@ -1,0 +1,189 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "model_or_provider_change",
+  "planned_action": "rehydrate_and_admit_gemini_3_7_flash_high_for_current_delete_confirm_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the live allocation change. Continuity 297 / Compass 279 remains the incoming accepted state, and the current provider-free unmounted delete-confirm physical-design architecture remains the unfinished active tranche.",
+    "current_authority_allocation": "Yuri directly selected Gemini 3.7 Flash/high through a fresh Antigravity project, exact slug gemini-3.7-flash-high and explicit high effort, waived a separate trial, and retained Gemini 3.6 only for explicit historical compatibility with no silent fallback. Sol retains planning, semantic, acceptance, integration, continuity and Git authority; DeepSeek completed only the bounded mechanical implementation package.",
+    "active_plan_and_acceptance": "The frozen plan and threat delta were reread completely. Exact contract fingerprint sha256:5d0512a64ecf9c907962b9a86a0cc56023c75363786ba52be9702b63c7018fa5 passes 166 of 166 hostile rejections, preserves the six-field response and exact authority/receipt/audit/transaction/readback design, and keeps implementation_authorized false.",
+    "protected_evidence_boundaries": "Only authored-synthetic provider-free unmounted architecture evidence and the exact frozen source allowlist are admitted. No application/model/migration/service/route/OpenAPI/GraphQL implementation, executable DDL or SQL, database, real lock, source watcher, event authority, provider-product call, ADC, patient/product/clinical/protected data, capability provisioning, command/write, credential/IAM, deployment, production, release, Pages or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Primary HEAD is f650204638287776ba32aea44655ca7e1b01809d on codex/ariadne-bernie-davida-parallel-seam; origin task remains 6514d35c465e304a421218890264f61c33ba51bb until tranche closeout. Local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean; all unrelated untracked files, including docs/branding and retained receipt/state evidence, remain preserved and unstaged."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "active_tranche": "Provider-free unmounted delete-confirm physical-design architecture",
+    "objective": "Freeze the smallest declarative additive practice-authority fence, delete-confirm private receipt, attributable audit correlation, exact transaction lock/check order, reason and appointment-version semantics, and separately authorised fresh readback without editing or executing application, database or product source.",
+    "status": "in_progress",
+    "source_head": "6514d35c465e304a421218890264f61c33ba51bb",
+    "authority_source": "The accepted physical representability result at bc066a1b639c5c57cc72f2697c063c5842511840, AGENTS.md Continuity 297 / Compass 279, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "DeepSeek exact five-file candidate 817ad386 was admitted and committed as 46613880/534ed82f; canonical fast verification passed. Yuri directly replaced the live independent verifier allocation with Gemini 3.7 Flash/high, waived a separate trial, retained Gemini 3.6 for historical compatibility only, and requested a pause after this tranche closes.",
+      "next_executable_stage": "Validate and commit the Gemini 3.7 Flash/high allocation change, perform the mandatory post-model-change five-source rehydration, then dispatch the current tranche's first ordinary fresh Gemini 3.7 Flash/high exact-candidate veto.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_unmounted_architecture_only",
+      "exact_frozen_source_allowlist_only",
+      "no_application_model_migration_service_route_openapi_or_graphql_edit_or_import",
+      "no_executable_ddl_database_sql_real_transaction_or_lock",
+      "no_physical_scaffold_or_runtime_composition_implementation",
+      "no_source_watcher_event_provider_or_product_runtime",
+      "no_patient_product_clinical_historical_diary_or_protected_data",
+      "no_command_write_or_executable_tool_against_product_or_database",
+      "dedicated_delete_confirmation_semantics_only",
+      "current_authority_locked_truth_idempotency_audit_receipt_and_readback_remain_backend_owned",
+      "no_external_adapter_identity_delegation_or_channel_runtime",
+      "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-design-architecture",
+    "assessed_stage": "post_model_change_pre_verifier",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The bounded five-file mechanical artifact package completed and was independently rerun and admitted by Sol.",
+        "work_packages": [
+          "closed contract, schema, deterministic validator, evidence and focused hostile-mutation tests"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "The material authority and transaction architecture requires one fresh exact-candidate veto; Yuri selected Gemini 3.7 Flash/high as the live lane without a separate trial.",
+        "work_packages": [
+          "fresh exact-candidate authority, receipt, audit, transaction and readback veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "No separable implementation or review surface remains alongside the required single fresh independent veto.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "post-model-change rehydration precedes any external dispatch",
+      "deterministic gate precedes Gemini",
+      "one fresh Antigravity project reviews one exact clean candidate",
+      "Sol alone accepts, integrates and closes the tranche"
+    ],
+    "reassessment_triggers": [
+      "deterministic admission",
+      "Gemini terminal decision",
+      "any worktree postcondition failure",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_post_model_change_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh five-source post-model-change rehydration at exact candidate HEAD f650204638287776ba32aea44655ca7e1b01809d."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native subagents were reassessed and declined because the remaining review must be one independent external veto."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "agy 1.1.13 advertised gemini-3.7-flash-high; no model call was made for discovery."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact bounded mechanical worker candidate completed and was admitted earlier in this tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

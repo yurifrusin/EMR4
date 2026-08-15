@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0329",
+  "observed_on": "2026-08-15",
+  "timestamp": "2026-08-15T16:19:37+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "raisa-reception-one-delete-confirm-physical-design-architecture",
+  "attempt_id": "raisa-delete-confirm-physical-design-gemini37-postchange-rehydration-001",
+  "provider_or_model_calls": 0,
+  "candidate_head": "f650204638287776ba32aea44655ca7e1b01809d",
+  "incorrect_uncommitted_value": "f6502046c5dcc5b446e63fb9035d91f66d9d993c",
+  "detection": "Sol noticed that the forty-character value had been composed from the commit command's abbreviated display rather than copied from git rev-parse HEAD.",
+  "correction": "The uncommitted runtime-state draft was not admitted. Sol captured literal git rev-parse HEAD output f650204638287776ba32aea44655ca7e1b01809d and replaced both draft occurrences before the passed five-source receipt or any verifier dispatch.",
+  "candidate_state": "canonical_unchanged",
+  "external_effects": false,
+  "status": "corrected_before_receipt_admission"
+}

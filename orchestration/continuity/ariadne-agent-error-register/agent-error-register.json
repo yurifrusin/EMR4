@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 289,
+  "register_revision": 290,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13209,6 +13209,44 @@
           "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-incident.json",
           "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-gemini-command-manifest-admission.json",
           "docs/ariadne-agent-error-correction-register-revision-289.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0329",
+      "attempt_id": "raisa-delete-confirm-physical-design-gemini37-postchange-rehydration-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-physical-design-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_and_repository_edit",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every forty-character Git source binding must be copied from literal git rev-parse output and verified as a commit before it enters any runtime state, receipt or review packet; an abbreviated commit display must never be expanded by inference.",
+      "observed_error": "While drafting an uncommitted post-model-change runtime state, Sol expanded displayed short HEAD f6502046 into nonexistent f6502046c5dcc5b446e63fb9035d91f66d9d993c instead of first capturing the exact object identity.",
+      "detection_method": "Before receipt admission or verifier dispatch, Sol recognized the inferred value, ran git rev-parse HEAD, obtained exact f650204638287776ba32aea44655ca7e1b01809d and replaced both draft occurrences.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-source-head-draft-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-290.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Admit no draft under the inferred value. Capture literal git rev-parse HEAD output f650204638287776ba32aea44655ca7e1b01809d and replace every draft occurrence before receipt admission or dispatch.",
+        "prevention_control": "Capture and retain the forty-character HEAD in a named scalar immediately after every commit and before drafting any source-bound packet, runtime state or receipt; never construct or autocomplete an object ID from abbreviated terminal output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-design-gemini37-source-head-draft-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-290.md"
         ]
       },
       "status": "corrected"
