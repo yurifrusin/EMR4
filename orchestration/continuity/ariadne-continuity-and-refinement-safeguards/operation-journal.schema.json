@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-operation-journal-v1.json",
+  "title": "Ariadne operation journal v1",
+  "description": "Append-only evidence journal distinguishing exact completed replay from in-progress, failed, revoked and uncertain outcomes across immutable generations. It executes nothing and grants no command authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "generation",
+    "events"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.operation_journal.v1"
+    },
+    "operation_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/journalEvent"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+    },
+    "sha256Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "journalState": {
+      "enum": [
+        "received",
+        "running",
+        "completed",
+        "failed",
+        "uncertain",
+        "revoked"
+      ]
+    },
+    "journalEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "generation",
+        "sequence",
+        "command_id",
+        "request_digest",
+        "state",
+        "result_digest"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "command_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "request_digest": {
+          "$ref": "#/$defs/sha256Digest"
+        },
+        "state": {
+          "$ref": "#/$defs/journalState"
+        },
+        "result_digest": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "completed"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_digest": {
+                "$ref": "#/$defs/sha256Digest"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "not": {
+                  "const": "completed"
+                }
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "result_digest": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-gate-attempt-v1.json",
+  "title": "Ariadne unchanged deterministic gate attempt",
+  "description": "One immutable deterministic gate attempt binding an exact composite fingerprint and a closed result. Transient/provider/transport/timeout outcomes are uncertain and are never memoized as substantive deterministic failures.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attempt_id",
+    "fingerprint",
+    "result",
+    "generation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.gate_attempt.v1"
+    },
+    "attempt_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "fingerprint": {
+      "$ref": "#/$defs/gateFingerprint"
+    },
+    "result": {
+      "enum": [
+        "deterministic_pass",
+        "deterministic_failure",
+        "uncertain"
+      ]
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+    },
+    "gitObjectId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "gateFingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gate_id",
+        "candidate_source_head",
+        "candidate_source_tree",
+        "evidence_set_digest",
+        "command_manifest_digest",
+        "relevant_input_digest",
+        "toolchain_digest"
+      ],
+      "properties": {
+        "gate_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "candidate_source_head": {
+          "$ref": "#/$defs/gitObjectId"
+        },
+        "candidate_source_tree": {
+          "$ref": "#/$defs/gitObjectId"
+        },
+        "evidence_set_digest": {
+          "$ref": "#/$defs/sha256Digest"
+        },
+        "command_manifest_digest": {
+          "$ref": "#/$defs/sha256Digest"
+        },
+        "relevant_input_digest": {
+          "$ref": "#/$defs/sha256Digest"
+        },
+        "toolchain_digest": {
+          "$ref": "#/$defs/sha256Digest"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+schema_version: ariadne.continuity_and_refinement_safeguards.v1
+purpose: provider_free_harness_only_deterministic_continuity_journal_and_refinement_promotion_safeguards
+scope: ariadne_development_harness_operations_only
+executes_nothing: true
+grants_no_command_authority: true
+operation_journal:
+  schema_version: ariadne.operation_journal.v1
+  state_vocabulary: [received, running, completed, failed, uncertain, revoked]
+  first_event_is_received: true
+  legal_transitions:
+    received_to: [running, completed, failed, revoked]
+    received_to_uncertain_only_during_generation_recovery: true
+    running_to: [completed, failed, uncertain, revoked]
+  completed_requires_exact_result_digest: true
+  non_completed_states_forbid_result_digest: true
+  exact_completed_repeat: replay_completed
+  differing_request_same_command_id: conflict
+  live_received_or_running: already_in_progress
+  failed_revoked_or_uncertain: requires_new_generation
+  recovery_advances_generation_exactly_once: true
+  unfinished_prior_generation_becomes_uncertain: true
+  cursor_pair: [generation, sequence]
+  same_generation_cursor_receives_later_events_only: true
+  stale_future_missing_or_out_of_range_cursor: snapshot_required
+unchanged_gate:
+  schema_version: ariadne.gate_attempt.v1
+  result_vocabulary: [deterministic_pass, deterministic_failure, uncertain]
+  transient_provider_transport_timeout_only_uncertain: true
+  fingerprint_components:
+    - gate_id
+    - candidate_source_head
+    - candidate_source_tree
+    - evidence_set_digest
+    - command_manifest_digest
+    - relevant_input_digest
+    - toolchain_digest
+  no_prior_attempt_or_changed_fingerprint: run_gate
+  exact_prior_pass: reuse_exact_pass
+  exact_prior_failure: diagnose_without_rerun
+  exact_prior_uncertain: resolve_uncertainty
+  partial_fingerprint_fails_closed: true
+  no_decision_executes_gate_or_converts_failure_to_success: true
+refinement_promotion:
+  proposal_schema_version: ariadne.refinement_proposal.v1
+  promotion_schema_version: ariadne.refinement_promotion.v1
+  editable_kinds: [prompt_note, memory_note, skill_description, subagent_spec, policy_note]
+  executable_code_dependencies_commands_credentials_runtime_tools_not_representable: true
+  scopes: [local, global]
+  new_proposal_begins_quarantined: true
+  proposer_cannot_promote: true
+  promotion_requires:
+    - deterministic_validation_pass
+    - validation_manifest_digest_equals_proposal
+    - exact_candidate_and_base_binding
+    - distinct_sol_promotion_decision
+    - global_requires_distinct_independent_review
+  promotion_emits_typed_decision_record_only: true
+  rejection_is_terminal_decision: true
+  rollback_creates_new_generation: true
+  rollback_names_exact_promoted_decision_and_recorded_base_digest: true
+  in_place_history_rewriting_forbidden: true
+forbidden_surfaces:
+  - no_journal_append_by_cli
+  - no_process_spawn_or_command_execution
+  - no_network_database_or_provider_access
+  - no_repository_or_product_state_modification
+  - no_automatic_policy_prompt_skill_or_source_edit
+  - no_prime_agent_installation_runtime_or_daemon
+  - no_executable_skill_or_self_modification

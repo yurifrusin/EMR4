@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-refinement-promotion-v1.json",
+  "title": "Ariadne refinement promotion decision record",
+  "description": "A typed, append-only promotion, rejection or rollback decision record. Promotion and rejection are first-class terminal decisions; rollback names the exact promoted decision and its recorded base digest and creates a new generation. The record edits or executes nothing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "promotion_id",
+    "proposal_id",
+    "decision",
+    "generation",
+    "scope",
+    "candidate_digest",
+    "base_state_digest",
+    "validation_manifest_digest",
+    "validation_result",
+    "promoter",
+    "independent_reviewer",
+    "promoted_decision_id",
+    "reasons"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.refinement_promotion.v1"
+    },
+    "promotion_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "proposal_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "decision": {
+      "enum": [
+        "promote",
+        "reject",
+        "rollback"
+      ]
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scope": {
+      "enum": [
+        "local",
+        "global"
+      ]
+    },
+    "candidate_digest": {
+      "$ref": "#/$defs/sha256Digest"
+    },
+    "base_state_digest": {
+      "$ref": "#/$defs/sha256Digest"
+    },
+    "validation_manifest_digest": {
+      "$ref": "#/$defs/sha256Digest"
+    },
+    "validation_result": {
+      "const": "pass"
+    },
+    "promoter": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "independent_reviewer": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "promoted_decision_id": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/identifier"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "rollback"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "promoted_decision_id": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "not": {
+              "const": "rollback"
+            }
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "promoted_decision_id": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+    },
+    "sha256Digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}
