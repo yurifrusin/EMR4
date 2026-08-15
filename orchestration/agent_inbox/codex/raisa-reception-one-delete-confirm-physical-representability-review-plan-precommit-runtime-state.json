@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_delete_confirm_physical_representability_plan_and_incident_control",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Continuity 296 / Compass 278 accepts the abstract delete-confirm kernel and names this exact provider-free unmounted representability review as next.",
+    "current_authority_allocation": "Sol owns the literal allowlist, semantic domains, verdicts, recovery, acceptance and Git. DeepSeek is planned only for a post-commit line-bounded inventory. Gemini remains reserved for a risk-triggered fresh veto. Native subagents remain declined for neutral leverage.",
+    "active_plan_and_acceptance": "The accepted parent plan, architecture, closeout and Sol acceptance were read completely. The new plan and threat delta now freeze thirteen exact hashes, ten physical/API sources, six verdict domains, implementation_not_admitted overall status, at least forty hostile mutations and the next physical-design gate only if every domain is representable.",
+    "protected_evidence_boundaries": "AER-0325 records and discards the first scoped-directory metadata output after two protected authoring path names appeared without content access. The corrected plan permits only literal allowlisted files; no directory enumeration, source expansion without plan revision, protected content, runtime, database, provider, product data, implementation, deployment, release, Pages or protected-ref action is allowed.",
+    "git_refs_and_worktree": "Before this planned commit, task HEAD and origin task remain d031f67ac971d583b8b3a9f2cae5d8c4d780e70f; required ancestor 648c8ec9805af63729264ea9c22fd695f062a741 is present. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit current-tranche plan, threat, latch, receipt and AER-0325/register paths are intended; docs/branding and all unrelated untracked files remain excluded."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+    "objective": "Map the accepted delete-confirm abstract practice authority fence, practice-appointment-idempotency lock order, exact structured and nullable free-text reasons, atomic appointment/audit/receipt obligations and separate authorised readback onto exact existing repository structures, identifying additive gaps without selecting or executing a physical design.",
+    "status": "in_progress",
+    "source_head": "d031f67ac971d583b8b3a9f2cae5d8c4d780e70f",
+    "authority_source": "The accepted delete-confirm kernel result at 356b28a1750e7a7b379406e864f2a3501606938a, AGENTS.md Continuity 296 / Compass 278, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "The fresh five-source receipt passed; AER-0325 contained the rejected metadata discovery; the literal thirteen-file allowlist, six closed review domains, threat boundary and worker allocation are frozen",
+      "next_executable_stage": "Validate and commit the frozen plan boundary, then generate a distinct pre-worker-dispatch receipt for the bounded DeepSeek exact-file inventory",
+      "retry_counters": {"planning": 1, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_exact_file_read_only_unmounted_review_only",
+      "literal_thirteen_file_allowlist_only",
+      "no_directory_enumeration_or_unplanned_source_expansion",
+      "no_application_model_migration_service_route_openapi_or_graphql_edit",
+      "no_application_import_mount_database_sql_or_real_lock_execution",
+      "no_physical_design_column_type_default_backfill_migration_revision_or_runtime_composition_selection",
+      "no_source_watcher_event_provider_or_product_runtime",
+      "no_patient_product_clinical_historical_diary_or_protected_data",
+      "no_command_write_or_executable_tool_against_product_or_database",
+      "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "assessed_stage": "plan_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The committed literal allowlist and frozen domains now make a line-bounded observation inventory mechanically separable without delegating verdict meaning.", "work_packages": ["ten-source literal-path representation inventory only"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "A fresh veto remains risk-triggered after deterministic admission if the final map makes a material positive authority or transaction claim.", "work_packages": ["conditional final exact-candidate representability veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "The exact source evidence is one tightly coupled surface and no distinct native implementation package exists.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["plan commit precedes worker dispatch", "a distinct pre_worker_dispatch receipt precedes any external worker call", "DeepSeek may read only ten exact physical/API files and may not edit or select verdicts", "Gemini waits for deterministic exact-candidate admission", "all pytest loading repository conftest remains serial"],
+    "reassessment_triggers": ["worker packet freeze", "inventory conflict", "pre-verifier admission", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "passed_five_source_receipt_and_frozen_literal_allowlist", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol froze the exact-file plan after the passed receipt and registered AER-0325 before corrected source access."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native subagents were reassessed and declined."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini remains reserved pending deterministic candidate admission and risk trigger."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek now has a planned post-commit ten-source inventory package."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

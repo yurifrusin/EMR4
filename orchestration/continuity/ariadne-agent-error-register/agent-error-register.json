@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 285,
+  "register_revision": 286,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -13053,6 +13053,44 @@
           "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-285.md",
           "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0325",
+      "attempt_id": "raisa-delete-confirm-physical-representability-discovery-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-physical-representability-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "git_filename_metadata",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "Protected holdout, fixture, support and authoring surfaces must never be opened, enumerated or searched; physical-representability discovery must begin from exact already-known non-protected paths rather than any directory root.",
+      "observed_error": "During delete-confirm physical-representability discovery, Sol queried Git filename metadata under several scoped application, migration and API directory roots. No file content was opened, but two protected authoring path names appeared among otherwise non-protected candidates. Sol stopped immediately, discarded the output and prohibited its use in planning, implementation, tests or acceptance.",
+      "detection_method": "The metadata output visibly crossed into protected authoring path names. Sol stopped source discovery, preserved a sanitized incident receipt and registered the breach before freezing the representability plan or opening application content.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-protected-metadata-scope-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-286.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.overbroad_protected_path_metadata_enumeration",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discard and prohibit use of the enumerated protected path names, preserve a sanitized incident receipt, register AER-0325 before review planning, and restart only from exact already-known non-protected paths copied from accepted documents.",
+        "prevention_control": "For physical-representability discovery, every filename-metadata and content command must name exact already-known non-protected files. Directory roots are prohibited even when narrowly scoped or filtered. Any expansion must follow an exact link inside an already allowlisted file and requires plan revision before opening.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-representability-protected-metadata-scope-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-286.md"
         ]
       },
       "status": "corrected"

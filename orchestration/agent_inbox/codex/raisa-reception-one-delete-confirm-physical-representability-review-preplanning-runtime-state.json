@@ -1,0 +1,116 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_provider_free_read_only_unmounted_delete_confirm_physical_representability_review",
+  "source_evidence": {
+    "live_handover_current_baton": "After compaction AGENTS.md was read completely. At Continuity 296 / Compass 278 it accepts the delete-confirm kernel at exact reviewed source 356b28a1750e7a7b379406e864f2a3501606938a and names this provider-free unmounted physical representability review as the next dependency-satisfied tranche.",
+    "current_authority_allocation": "Sol owns architecture, exact-source admission, acceptance, recovery and Git. DeepSeek V4 Flash/high is reserved only for a bounded mechanical exact-file inventory after the allowlist and questions are frozen. Gemini 3.6 Flash/high is reserved for one fresh exact-candidate veto if the completed mapping presents a material authority or transaction claim. Native subagents are declined because the shared exact-file review has no independent package whose leverage exceeds briefing and reconciliation cost.",
+    "active_plan_and_acceptance": "The accepted delete-confirm plan, architecture, closeout and Sol acceptance were read completely with the completed prior latch and the status-confirm representability analogue. The accepted parent proves only an authored-synthetic abstract contract and requires this review to map the practice fence, appointment and idempotency locks, exact reasons, audit, receipt and readback onto existing structures without mounting or executing a route.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored completely. Protected holdouts and historical Diary/PHI remain sealed. This tranche is provider-free, exact-file, read-only and unmounted: no application/model/migration/service/route/OpenAPI/GraphQL edit, application import, database/SQL/real-lock execution, physical-design selection, source/watcher/event/provider/product runtime, command/write, patient/product/clinical data, credential/IAM/network, deployment, production, release, Pages or protected-ref action. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "The worktree is on codex/ariadne-bernie-davida-parallel-seam at published HEAD d031f67ac971d583b8b3a9f2cae5d8c4d780e70f and origin task matches. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted source 356b28a1750e7a7b379406e864f2a3501606938a are ancestors. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state was clean before this expected latch update; the preceding closeout's 624 untracked files, including docs/branding and the accepted parent pre-push pair, remain excluded and preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+    "objective": "Map the accepted delete-confirm abstract practice authority fence, practice-appointment-idempotency lock order, exact structured and nullable free-text reasons, atomic appointment/audit/receipt obligations and separate authorised readback onto exact existing repository structures, identifying additive gaps without selecting or executing a physical design.",
+    "status": "in_progress",
+    "source_head": "d031f67ac971d583b8b3a9f2cae5d8c4d780e70f",
+    "authority_source": "The accepted delete-confirm kernel result at 356b28a1750e7a7b379406e864f2a3501606938a, AGENTS.md Continuity 296 / Compass 278, and Yuri's standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "The accepted parent closeout was published; after compaction the complete five-source and API Steward rehydration was repeated and exact Git/protected state was restored",
+      "next_executable_stage": "Generate and pass the fresh preplanning receipt, then freeze an exact non-protected source allowlist and the narrowest read-only representability plan",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_exact_file_read_only_unmounted_review_only",
+      "no_application_model_migration_service_route_openapi_or_graphql_edit",
+      "no_application_import_mount_database_sql_or_real_lock_execution",
+      "no_physical_design_column_type_default_backfill_migration_revision_or_runtime_composition_selection",
+      "no_source_watcher_event_provider_or_product_runtime",
+      "no_patient_product_clinical_historical_diary_or_protected_data",
+      "no_command_write_or_executable_tool_against_product_or_database",
+      "dedicated_delete_confirmation_semantics_only",
+      "current_authority_locked_truth_idempotency_audit_receipt_and_readback_remain_backend_owned",
+      "no_external_adapter_identity_delegation_or_channel_runtime",
+      "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "assessed_stage": "post_compaction_preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "After Sol freezes exact source paths and questions, a mechanical line-bounded inventory can be separated without delegating verdict meaning or design selection.",
+        "work_packages": ["bounded exact-file representation inventory if the frozen source packet is sufficiently stable"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "A fresh veto may materially challenge whether current authority, lock ordering, private receipt correlation and reason persistence are being overclaimed after deterministic admission.",
+        "work_packages": ["final exact-candidate representability veto if risk-triggered"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The exact-file allowlist, observations and closed verdicts form one tightly coupled evidence surface; splitting it would add reconciliation cost without independent authority.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol freezes the exact non-protected source allowlist and closed questions before any content review or worker packet",
+      "all application and migration sources remain read-only and unimported",
+      "DeepSeek inventory, if used, cannot select verdict meaning or physical design",
+      "Gemini veto, if used, waits for deterministic exact-candidate admission",
+      "protected refs and untracked files remain closed"
+    ],
+    "reassessment_triggers": ["exact source allowlist freeze", "inventory packet freeze", "material evidence conflict", "pre-verifier admission", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_and_api_steward_post_compaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol repeated the complete five-source and API Steward readback after compaction and verified exact protected and task refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native subagents were assessed and declined for neutral leverage."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini is reserved; no verifier call is admissible before deterministic exact-candidate admission."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek is reserved only for an exact-file mechanical inventory after source freeze."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

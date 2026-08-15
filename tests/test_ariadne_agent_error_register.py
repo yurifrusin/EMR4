@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 285
+    assert register["register_revision"] == 286
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 325)
+        f"AER-{index:04d}" for index in range(1, 326)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 223
+    assert len(agent_incidents) == 224
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 324
+    assert report["incident_count"] == 325
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2990,6 +2990,26 @@ def test_aer_0324_rejects_underclosed_deepseek_self_pass() -> None:
     assert incident["status"] == "corrected"
 
 
+def test_aer_0325_records_repeated_protected_metadata_scope_breach() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0325"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["transport"] == "git_filename_metadata"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.overbroad_protected_path_metadata_enumeration"
+    )
+    assert "No file content was opened" in incident["observed_error"]
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+
+
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
@@ -3264,17 +3284,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 285
-    assert report["incident_count"] == 324
+    assert report["register_revision"] == 286
+    assert report["incident_count"] == 325
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 223,
+        "agent_behavior": 224,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 47,
+        "command_scope_violation": 48,
         "evidence_misreport": 42,
         "harness_failure": 37,
         "output_contract_violation": 93,
@@ -3285,7 +3305,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 197,
+        "canonical_unchanged": 198,
         "untrusted_partial_worktree": 29,
     }
     receipt_event_recurrence = next(
@@ -3309,6 +3329,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         if row["recurrence_signature"]
         != "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch"
     ] == [
+        {
+            "recurrence_signature": (
+                "orchestrator.overbroad_protected_path_metadata_enumeration"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0292", "AER-0325"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "For physical-representability discovery, every filename-metadata and content command must name exact already-known non-protected files. Directory roots are prohibited even when narrowly scoped or filtered. Any expansion must follow an exact link inside an already allowlisted file and requires plan revision before opening.",
+                "Near protected evidence, every content or filename-metadata command must name exact already-known non-protected files. A directory root may not be used to derive candidates. Any expansion must follow an exact import or migration link found inside a file already authorized by a frozen plan.",
+            ],
+        },
         {
             "recurrence_signature": "orchestrator.overbroad_repository_content_search",
             "incident_count": 4,

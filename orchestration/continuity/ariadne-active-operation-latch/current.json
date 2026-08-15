@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
-  "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
-  "objective": "Freeze and deterministically rehearse one authored-synthetic, unmounted cancellation transaction contract that binds explicit confirmation, signed proposal evidence, operation-scoped idempotency, a locked practice appointment, in-transaction current authority, exact reason preservation, atomic soft-cancel/audit/receipt completion, denial rollback and fresh authorised readback without changing mounted product source.",
-  "status": "complete",
-  "source_head": "356b28a1750e7a7b379406e864f2a3501606938a",
-  "authority_source": "Yuri's 2026-08-15 selection of Reception One appointment cancellation, the accepted readiness review at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735, AGENTS.md Continuity 295 / Compass 277, and standing uninterrupted-development authority",
+  "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+  "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+  "objective": "Map the accepted delete-confirm abstract practice authority fence, practice-appointment-idempotency lock order, exact structured and nullable free-text reasons, atomic appointment/audit/receipt obligations and separate authorised readback onto exact existing repository structures, identifying additive gaps without selecting or executing a physical design.",
+  "status": "in_progress",
+  "source_head": "d031f67ac971d583b8b3a9f2cae5d8c4d780e70f",
+  "authority_source": "The accepted delete-confirm kernel result at 356b28a1750e7a7b379406e864f2a3501606938a, AGENTS.md Continuity 296 / Compass 278, and Yuri's standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "Accepted at Continuity 296 / Compass 278 after deterministic Sol recovery and one fresh exact-candidate Gemini veto",
-    "next_executable_stage": null,
+    "completed_stage": "The fresh five-source receipt passed; AER-0325 contained the rejected metadata discovery; the literal thirteen-file allowlist, six closed review domains, threat boundary and worker allocation are frozen",
+    "next_executable_stage": "Validate and commit the frozen plan boundary, then generate a distinct pre-worker-dispatch receipt for the bounded DeepSeek exact-file inventory",
     "retry_counters": {
       "planning": 0,
-      "implementation": 1,
+      "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },
@@ -24,25 +24,26 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_synthetic_unmounted_rehearsal_only",
-    "no_mounted_route_openapi_graphql_database_product_client_or_ui_change",
-    "no_runtime_broker_adapter_provider_call_source_read_or_watcher",
+    "provider_free_exact_file_read_only_unmounted_review_only",
+    "no_application_model_migration_service_route_openapi_or_graphql_edit",
+    "no_application_import_mount_database_sql_or_real_lock_execution",
+    "no_physical_design_column_type_default_backfill_migration_revision_or_runtime_composition_selection",
+    "no_source_watcher_event_provider_or_product_runtime",
     "no_patient_product_clinical_historical_diary_or_protected_data",
     "no_command_write_or_executable_tool_against_product_or_database",
     "dedicated_delete_confirmation_semantics_only",
-    "raw_delete_and_status_fallback_are_separate_ingress_candidates_not_kernel_authority",
-    "current_authority_locked_truth_idempotency_audit_and_readback_remain_backend_owned",
-    "no_model_channel_or_delegate_self_confirmation",
+    "current_authority_locked_truth_idempotency_audit_receipt_and_readback_remain_backend_owned",
+    "no_external_adapter_identity_delegation_or_channel_runtime",
     "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
     "docs_branding_and_unrelated_untracked_preserved",
     "explicit_path_staging_only"

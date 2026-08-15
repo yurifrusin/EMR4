@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only unmounted delete-confirm physical representability review",
+    "completed_stage": "The fresh five-source receipt passed; AER-0325 contained the rejected metadata discovery; the literal thirteen-file allowlist, six closed review domains, threat boundary and worker allocation are frozen",
+    "next_executable_stage": "Validate and commit the frozen plan boundary, then generate a distinct pre-worker-dispatch receipt for the bounded DeepSeek exact-file inventory",
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "resume_after_compaction": true,
+    "source_head": "d031f67ac971d583b8b3a9f2cae5d8c4d780e70f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "plan_precommit",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The committed literal allowlist and frozen domains now make a line-bounded observation inventory mechanically separable without delegating verdict meaning.",
+        "work_packages": [
+          "ten-source literal-path representation inventory only"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh veto remains risk-triggered after deterministic admission if the final map makes a material positive authority or transaction claim.",
+        "work_packages": [
+          "conditional final exact-candidate representability veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The exact source evidence is one tightly coupled surface and no distinct native implementation package exists.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "worker packet freeze",
+      "inventory conflict",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "plan commit precedes worker dispatch",
+      "a distinct pre_worker_dispatch receipt precedes any external worker call",
+      "DeepSeek may read only ten exact physical/API files and may not edit or select verdicts",
+      "Gemini waits for deterministic exact-candidate admission",
+      "all pytest loading repository conftest remains serial"
+    ]
+  },
+  "planned_action": "commit_the_frozen_delete_confirm_physical_representability_plan_and_incident_control",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted parent plan, architecture, closeout and Sol acceptance were read completely. The new plan and threat delta now freeze thirteen exact hashes, ten physical/API sources, six verdict domains, implementation_not_admitted overall status, at least forty hostile mutations and the next physical-design gate only if every domain is representable.",
+    "current_authority_allocation": "Sol owns the literal allowlist, semantic domains, verdicts, recovery, acceptance and Git. DeepSeek is planned only for a post-commit line-bounded inventory. Gemini remains reserved for a risk-triggered fresh veto. Native subagents remain declined for neutral leverage.",
+    "git_refs_and_worktree": "Before this planned commit, task HEAD and origin task remain d031f67ac971d583b8b3a9f2cae5d8c4d780e70f; required ancestor 648c8ec9805af63729264ea9c22fd695f062a741 is present. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit current-tranche plan, threat, latch, receipt and AER-0325/register paths are intended; docs/branding and all unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Continuity 296 / Compass 278 accepts the abstract delete-confirm kernel and names this exact provider-free unmounted representability review as next.",
+    "protected_evidence_boundaries": "AER-0325 records and discards the first scoped-directory metadata output after two protected authoring path names appeared without content access. The corrected plan permits only literal allowlisted files; no directory enumeration, source expansion without plan revision, protected content, runtime, database, provider, product data, implementation, deployment, release, Pages or protected-ref action is allowed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

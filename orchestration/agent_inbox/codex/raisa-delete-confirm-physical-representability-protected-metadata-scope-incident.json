@@ -1,0 +1,17 @@
+{
+  "schema_version": "raisa.protected_metadata_scope_incident.v1",
+  "incident_id": "AER-0325",
+  "attempt_id": "raisa-delete-confirm-physical-representability-discovery-001",
+  "observed_at": "2026-08-15T13:27:22+10:00",
+  "operation_id": "raisa-reception-one-delete-confirm-physical-representability-review",
+  "source_head": "d031f67ac971d583b8b3a9f2cae5d8c4d780e70f",
+  "boundary": "protected_path_names_must_not_be_enumerated",
+  "observation": "A Git filename-metadata query used several scoped application, migration and API directory roots. Its filtered output included two protected authoring path names beneath an application service directory.",
+  "content_opened": false,
+  "protected_values_persisted": false,
+  "product_or_runtime_effect": false,
+  "disposition": "output_discarded_revision_required",
+  "correction": "Do not use the output to form the review. Restart from exact already-known non-protected paths copied from accepted documents and direct exact-path Git metadata only. Any later expansion must follow one exact import or migration link found inside a frozen allowlisted file and requires plan revision before opening.",
+  "related_control": "AER-0292",
+  "claim_boundary": "This receipt proves only that the filename-scope breach was observed, contained before content access and excluded from review evidence."
+}
