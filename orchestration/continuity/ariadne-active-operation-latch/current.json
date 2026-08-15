@@ -4,16 +4,16 @@
   "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
   "objective": "Freeze and deterministically rehearse one authored-synthetic, unmounted cancellation transaction contract that binds explicit confirmation, signed proposal evidence, operation-scoped idempotency, a locked practice appointment, in-transaction current authority, exact reason preservation, atomic soft-cancel/audit/receipt completion, denial rollback and fresh authorised readback without changing mounted product source.",
   "status": "in_progress",
-  "source_head": "71264f3fa4e22d2a258da1b20633c672c2625729",
+  "source_head": "4237c1f17e6ab27fc64b7394401df047ba07a581",
   "authority_source": "Yuri's 2026-08-15 selection of Reception One appointment cancellation, the accepted readiness review at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735, AGENTS.md Continuity 295 / Compass 277, and standing uninterrupted-development authority",
   "checkpoint": {
-    "completed_stage": "DeepSeek candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc is clean and scoped but rejected: its valid confirmation occurs after its own expiry and its closed contract omits exact authority/evidence fields and a successful null optional-text case",
-    "next_executable_stage": "Preserve the rejection, apply the named Sol recovery lease to the six-file candidate, add exact typed contracts and direct regressions, then rerun deterministic admission before any Gemini call",
+    "completed_stage": "Sol recovery repaired the rejected six-file candidate under the named lease: 46 decisions, 15 schedules, 67 hostile mutations, 24 focused protocol checks, the 212-test cancellation/API packet, the 245-test error-register packet and the 196-test canonical fast profile pass",
+    "next_executable_stage": "Generate and pass the precommit receipt, commit the exact recovered candidate and incident controls, then create a clean exact-HEAD Gemini worktree and pass pre-verifier admission before one independent veto",
     "retry_counters": {
       "planning": 0,
       "implementation": 1,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
   },

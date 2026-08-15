@@ -5,6 +5,96 @@
     "artifact_kind": {
       "const": "provider_free_unmounted_authored_synthetic_contract"
     },
+    "atomic_effect_contract": {
+      "const": {
+        "appointment_required_fields": [
+          "practice_id",
+          "appointment_id",
+          "status",
+          "waiting_area_id",
+          "cancellation_reason",
+          "status_reason_code",
+          "pre_state_version",
+          "post_state_version"
+        ],
+        "audit_required_fields": [
+          "audit_id",
+          "practice_id",
+          "appointment_id",
+          "confirmed_by_user_id",
+          "actor_role",
+          "authenticated_session_digest",
+          "action",
+          "status_before",
+          "status_after",
+          "waiting_area_id_after",
+          "cancellation_reason",
+          "status_reason_code",
+          "confirmed_warning_codes",
+          "correlation_id",
+          "command_digest",
+          "pre_state_version",
+          "post_state_version"
+        ],
+        "post_state_version_rule": "pre_state_version_plus_one",
+        "postcommit_delivery_loss": "retry_same_key_for_stored_receipt",
+        "precommit_failure": "rollback_all_three_and_in_progress_claim",
+        "publish_together": [
+          "appointment_soft_cancel",
+          "attributable_delete_audit",
+          "completed_idempotency_receipt"
+        ],
+        "receipt_required_fields": [
+          "receipt_id",
+          "practice_id",
+          "actor_user_id",
+          "operation_id",
+          "target_appointment_id",
+          "audit_id",
+          "status",
+          "waiting_area_id",
+          "cancellation_reason",
+          "status_reason_code",
+          "pre_state_version",
+          "post_state_version",
+          "canonical_response_digest"
+        ]
+      }
+    },
+    "authority_contract": {
+      "const": {
+        "allowed_actor_roles": [
+          "Receptionist",
+          "GP",
+          "Nurse",
+          "Admin",
+          "PracticeOwner"
+        ],
+        "authority_and_practice_scoped_target_precede_receipt_disclosure": true,
+        "authority_fence": "practice_authority_generation_held_for_entire_transaction",
+        "authority_source": "authenticated_server_session_and_current_authority_store",
+        "check_points": [
+          "after_practice_scoped_appointment_lock",
+          "while_practice_appointment_and_idempotency_locks_held"
+        ],
+        "current_checks": [
+          "actor_active",
+          "practice_active",
+          "actor_practice_binding_exact",
+          "actor_role_current_and_allowed",
+          "appointment_cancel_confirm_capability_current"
+        ],
+        "pretransaction_authentication_is_final_authority": false,
+        "request_body_authority_fields_accepted": [],
+        "required_capability": "appointment.cancel.confirm",
+        "server_owned_identity_fields": [
+          "practice_id",
+          "actor_user_id",
+          "actor_role",
+          "authenticated_session_id"
+        ]
+      }
+    },
     "cancelled_reason_codes": {
       "items": {
         "type": "string"
@@ -16,6 +106,21 @@
     },
     "canonical_operation_id": {
       "const": "confirmAppointmentDeleteProposal"
+    },
+    "compatibility_ingress_policy": {
+      "const": {
+        "adapter_may_weaken_confirmation": false,
+        "admitted_ingress": [
+          "delete-confirm"
+        ],
+        "rejected_direct_ingress": [
+          "raw-delete",
+          "status-fallback",
+          "event-evidence",
+          "model-channel-confirmation"
+        ],
+        "second_cancellation_kernel_allowed": false
+      }
     },
     "decision_scenarios": {
       "items": {
@@ -49,6 +154,13 @@
               "existing_reason_mismatch",
               "proposed_reason_mismatch",
               "digest_mismatch"
+            ]
+          },
+          "cancellation_text": {
+            "enum": [
+              "present",
+              "null",
+              "too_long"
             ]
           },
           "confirmation": {
@@ -129,8 +241,7 @@
               "missing",
               "status_family_code",
               "legacy_unclassified",
-              "allowlist_invalid",
-              "optional_text_too_long"
+              "allowlist_invalid"
             ]
           },
           "source": {
@@ -177,6 +288,7 @@
           "confirmation",
           "source",
           "reason",
+          "cancellation_text",
           "waiting_area",
           "expected"
         ],
@@ -198,8 +310,8 @@
     },
     "fixed_digests": {
       "additionalProperties": false,
-      "maxProperties": 4,
-      "minProperties": 4,
+      "maxProperties": 5,
+      "minProperties": 5,
       "patternProperties": {
         "^[a-z_]+$": {
           "pattern": "^[0-9a-f]{64}$",
@@ -218,7 +330,7 @@
           "const": "2026-08-15T01:55:04Z"
         },
         "expires_at": {
-          "const": "2026-08-15T01:52:49Z"
+          "const": "2026-08-15T02:10:49Z"
         },
         "proposal_generated_at": {
           "const": "2026-08-15T01:50:49Z"
@@ -242,6 +354,27 @@
       },
       "type": "array"
     },
+    "idempotency_contract": {
+      "const": {
+        "claim_order": "after_practice_appointment_and_first_authority_check",
+        "identity_fields": [
+          "practice_id",
+          "actor_user_id",
+          "operation_id",
+          "idempotency_key_hash"
+        ],
+        "in_progress_on_rollback": "discarded_with_transaction",
+        "receipt_disclosure_requires_current_authority": true,
+        "request_binding_fields": [
+          "authenticated_session_digest",
+          "route_family",
+          "target_appointment_id",
+          "request_body_digest"
+        ],
+        "same_key_different_digest": "non_disclosing_idempotency_conflict",
+        "same_key_same_digest": "return_integrity_valid_completed_receipt_only"
+      }
+    },
     "kernel_lock_plan": {
       "items": {
         "type": "string"
@@ -260,8 +393,86 @@
       },
       "type": "array"
     },
+    "readback_contract": {
+      "const": {
+        "later_revocation": "deny_readback_without_undoing_committed_receipt",
+        "purpose": "fresh_display_reconciliation",
+        "requires_fresh_authorisation": [
+          "practice_scope",
+          "appointment_read_action",
+          "appointment_resource"
+        ],
+        "source": "authoritative_appointment_read",
+        "timing": "after_atomic_commit",
+        "transaction_proof": false
+      }
+    },
+    "reason_policy": {
+      "const": {
+        "cancellation_reason": {
+          "maximum_characters": 500,
+          "nullable": true,
+          "preservation": "exact_admitted_json_value",
+          "required": false
+        },
+        "confirmed_warnings_are_reasons": false,
+        "status_reason_code": {
+          "allowed_values": [
+            "PATIENT_CANCELLED",
+            "PATIENT_RESCHEDULED",
+            "PATIENT_UNWELL",
+            "PATIENT_TRANSPORT",
+            "PRACTITIONER_UNAVAILABLE",
+            "CLINIC_OPERATIONAL",
+            "CLINIC_RESCHEDULED",
+            "ADMIN_ERROR",
+            "DUPLICATE_BOOKING",
+            "OTHER"
+          ],
+          "legacy_unclassified_allowed": false,
+          "required_for_new_dedicated_ingress": true,
+          "status_family_codes_allowed": false
+        }
+      }
+    },
     "schema_version": {
       "const": "raisa.delete_confirm_conditional_command_kernel.v1"
+    },
+    "signed_evidence_contract": {
+      "const": {
+        "authenticity": "backend_signature_exact_payload_and_purpose",
+        "event_or_model_evidence_accepted": false,
+        "freshness_interval": "proposal_generated_at_le_signed_at_le_confirmed_at_le_expires_at",
+        "purpose": "appointment_delete_confirm",
+        "required_fields": [
+          "schema_version",
+          "purpose",
+          "key_id",
+          "practice_id",
+          "actor_user_id",
+          "authenticated_session_digest",
+          "operation_id",
+          "route_family",
+          "target_appointment_id",
+          "proposal_nonce",
+          "proposal_generated_at",
+          "signed_at",
+          "expires_at",
+          "pre_state_version",
+          "pre_status",
+          "pre_waiting_area_id",
+          "pre_cancellation_reason",
+          "pre_status_reason_code",
+          "proposed_status_reason_code",
+          "proposed_cancellation_reason",
+          "required_warning_codes",
+          "proposal_freshness_id",
+          "command_digest",
+          "signature"
+        ],
+        "schema_version": "raisa.delete_confirmation_evidence.v1",
+        "warning_acknowledgement": "exact_set_equality"
+      }
     },
     "source_bindings": {
       "items": {
@@ -285,10 +496,54 @@
       "minItems": 7,
       "type": "array"
     },
+    "transaction_contract": {
+      "const": {
+        "authority_fence_physical_mapping_proven": false,
+        "decision_trace": [
+          "lock:practice",
+          "lock:appointment",
+          "check:authority_after_target_lock",
+          "lock:idempotency_record",
+          "check:authority_all_locks_held",
+          "classify:bindings",
+          "inspect:idempotency",
+          "validate:confirmation_and_evidence",
+          "recheck:appointment_state",
+          "validate:reason_policy",
+          "stage:appointment_mutation",
+          "stage:delete_audit",
+          "stage:completed_receipt",
+          "commit:atomic",
+          "serialize:response",
+          "readback:separate_authorisation"
+        ],
+        "global_lock_order": [
+          "practice",
+          "schedule_domain",
+          "appointment",
+          "idempotency_record"
+        ],
+        "kernel_lock_plan": [
+          "practice",
+          "appointment",
+          "idempotency_record"
+        ],
+        "owner": "backend_delete_confirm_kernel",
+        "physical_mapping_next_gate": "provider-free-unmounted-delete-confirm-physical-representability-review",
+        "single_command_owned_transaction": true,
+        "unused_lock_rule": "skip_schedule_domain_without_reordering"
+      }
+    },
     "transaction_schedules": {
       "items": {
         "additionalProperties": false,
         "properties": {
+          "cancellation_text": {
+            "enum": [
+              "present",
+              "null"
+            ]
+          },
           "expected": {
             "additionalProperties": false,
             "properties": {
@@ -311,133 +566,309 @@
                         "properties": {
                           "appointment": {
                             "additionalProperties": false,
+                            "maxProperties": 8,
+                            "minProperties": 8,
                             "properties": {
                               "action": {
-                                "type": "string"
+                                "const": "delete"
+                              },
+                              "actor_role": {
+                                "const": "Receptionist"
+                              },
+                              "actor_user_id": {
+                                "const": "syn-actor-001"
+                              },
+                              "appointment_id": {
+                                "const": "syn-appointment-001"
                               },
                               "audit_id": {
-                                "type": "string"
+                                "const": "syn-audit-delete-confirm-001"
+                              },
+                              "authenticated_session_digest": {
+                                "const": "c9ec73f29090fda1f9e34d8c37e64cb5aa7edf4d5c34af95c5756de791f6f554"
                               },
                               "cancellation_reason": {
-                                "type": [
-                                  "string",
-                                  "null"
+                                "enum": [
+                                  null,
+                                  "Patient requested cancellation due to a schedule change"
                                 ]
+                              },
+                              "canonical_response_digest": {
+                                "const": "64aff566fde72cbbca320b2fa2795caefa132be4e5b21462cc665517db584d1e"
+                              },
+                              "command_digest": {
+                                "const": "52b4445467a24fac803b57852183ce44530b995dc1f453976b7a120acfd6e2f7"
+                              },
+                              "confirmed_by_user_id": {
+                                "const": "syn-actor-001"
+                              },
+                              "confirmed_warning_codes": {
+                                "enum": [
+                                  [],
+                                  [
+                                    "waiting_area_cleared"
+                                  ]
+                                ]
+                              },
+                              "correlation_id": {
+                                "const": "syn-correlation-delete-confirm-001"
+                              },
+                              "operation_id": {
+                                "const": "confirmAppointmentDeleteProposal"
+                              },
+                              "post_state_version": {
+                                "const": 8
+                              },
+                              "practice_id": {
+                                "const": "syn-practice-001"
+                              },
+                              "pre_state_version": {
+                                "const": 7
                               },
                               "receipt_id": {
-                                "type": "string"
-                              },
-                              "state_version": {
-                                "type": "integer"
+                                "const": "syn-receipt-delete-confirm-001"
                               },
                               "status": {
-                                "type": "string"
+                                "const": "Cancelled"
+                              },
+                              "status_after": {
+                                "const": "Cancelled"
+                              },
+                              "status_before": {
+                                "const": "Booked"
                               },
                               "status_reason_code": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
+                                "const": "PATIENT_CANCELLED"
+                              },
+                              "target_appointment_id": {
+                                "const": "syn-appointment-001"
                               },
                               "waiting_area_id": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
+                                "const": null
+                              },
+                              "waiting_area_id_after": {
+                                "const": null
                               }
                             },
                             "required": [
+                              "practice_id",
+                              "appointment_id",
+                              "status",
                               "waiting_area_id",
+                              "cancellation_reason",
                               "status_reason_code",
-                              "cancellation_reason"
+                              "pre_state_version",
+                              "post_state_version"
                             ],
                             "type": "object"
                           },
                           "audit": {
                             "additionalProperties": false,
+                            "maxProperties": 17,
+                            "minProperties": 17,
                             "properties": {
                               "action": {
-                                "type": "string"
+                                "const": "delete"
+                              },
+                              "actor_role": {
+                                "const": "Receptionist"
+                              },
+                              "actor_user_id": {
+                                "const": "syn-actor-001"
+                              },
+                              "appointment_id": {
+                                "const": "syn-appointment-001"
                               },
                               "audit_id": {
-                                "type": "string"
+                                "const": "syn-audit-delete-confirm-001"
+                              },
+                              "authenticated_session_digest": {
+                                "const": "c9ec73f29090fda1f9e34d8c37e64cb5aa7edf4d5c34af95c5756de791f6f554"
                               },
                               "cancellation_reason": {
-                                "type": [
-                                  "string",
-                                  "null"
+                                "enum": [
+                                  null,
+                                  "Patient requested cancellation due to a schedule change"
                                 ]
+                              },
+                              "canonical_response_digest": {
+                                "const": "64aff566fde72cbbca320b2fa2795caefa132be4e5b21462cc665517db584d1e"
+                              },
+                              "command_digest": {
+                                "const": "52b4445467a24fac803b57852183ce44530b995dc1f453976b7a120acfd6e2f7"
+                              },
+                              "confirmed_by_user_id": {
+                                "const": "syn-actor-001"
+                              },
+                              "confirmed_warning_codes": {
+                                "enum": [
+                                  [],
+                                  [
+                                    "waiting_area_cleared"
+                                  ]
+                                ]
+                              },
+                              "correlation_id": {
+                                "const": "syn-correlation-delete-confirm-001"
+                              },
+                              "operation_id": {
+                                "const": "confirmAppointmentDeleteProposal"
+                              },
+                              "post_state_version": {
+                                "const": 8
+                              },
+                              "practice_id": {
+                                "const": "syn-practice-001"
+                              },
+                              "pre_state_version": {
+                                "const": 7
                               },
                               "receipt_id": {
-                                "type": "string"
-                              },
-                              "state_version": {
-                                "type": "integer"
+                                "const": "syn-receipt-delete-confirm-001"
                               },
                               "status": {
-                                "type": "string"
+                                "const": "Cancelled"
+                              },
+                              "status_after": {
+                                "const": "Cancelled"
+                              },
+                              "status_before": {
+                                "const": "Booked"
                               },
                               "status_reason_code": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
+                                "const": "PATIENT_CANCELLED"
+                              },
+                              "target_appointment_id": {
+                                "const": "syn-appointment-001"
                               },
                               "waiting_area_id": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
+                                "const": null
+                              },
+                              "waiting_area_id_after": {
+                                "const": null
                               }
                             },
                             "required": [
-                              "waiting_area_id",
+                              "audit_id",
+                              "practice_id",
+                              "appointment_id",
+                              "confirmed_by_user_id",
+                              "actor_role",
+                              "authenticated_session_digest",
+                              "action",
+                              "status_before",
+                              "status_after",
+                              "waiting_area_id_after",
+                              "cancellation_reason",
                               "status_reason_code",
-                              "cancellation_reason"
+                              "confirmed_warning_codes",
+                              "correlation_id",
+                              "command_digest",
+                              "pre_state_version",
+                              "post_state_version"
                             ],
                             "type": "object"
                           },
                           "receipt": {
                             "additionalProperties": false,
+                            "maxProperties": 13,
+                            "minProperties": 13,
                             "properties": {
                               "action": {
-                                "type": "string"
+                                "const": "delete"
+                              },
+                              "actor_role": {
+                                "const": "Receptionist"
+                              },
+                              "actor_user_id": {
+                                "const": "syn-actor-001"
+                              },
+                              "appointment_id": {
+                                "const": "syn-appointment-001"
                               },
                               "audit_id": {
-                                "type": "string"
+                                "const": "syn-audit-delete-confirm-001"
+                              },
+                              "authenticated_session_digest": {
+                                "const": "c9ec73f29090fda1f9e34d8c37e64cb5aa7edf4d5c34af95c5756de791f6f554"
                               },
                               "cancellation_reason": {
-                                "type": [
-                                  "string",
-                                  "null"
+                                "enum": [
+                                  null,
+                                  "Patient requested cancellation due to a schedule change"
                                 ]
+                              },
+                              "canonical_response_digest": {
+                                "const": "64aff566fde72cbbca320b2fa2795caefa132be4e5b21462cc665517db584d1e"
+                              },
+                              "command_digest": {
+                                "const": "52b4445467a24fac803b57852183ce44530b995dc1f453976b7a120acfd6e2f7"
+                              },
+                              "confirmed_by_user_id": {
+                                "const": "syn-actor-001"
+                              },
+                              "confirmed_warning_codes": {
+                                "enum": [
+                                  [],
+                                  [
+                                    "waiting_area_cleared"
+                                  ]
+                                ]
+                              },
+                              "correlation_id": {
+                                "const": "syn-correlation-delete-confirm-001"
+                              },
+                              "operation_id": {
+                                "const": "confirmAppointmentDeleteProposal"
+                              },
+                              "post_state_version": {
+                                "const": 8
+                              },
+                              "practice_id": {
+                                "const": "syn-practice-001"
+                              },
+                              "pre_state_version": {
+                                "const": 7
                               },
                               "receipt_id": {
-                                "type": "string"
-                              },
-                              "state_version": {
-                                "type": "integer"
+                                "const": "syn-receipt-delete-confirm-001"
                               },
                               "status": {
-                                "type": "string"
+                                "const": "Cancelled"
+                              },
+                              "status_after": {
+                                "const": "Cancelled"
+                              },
+                              "status_before": {
+                                "const": "Booked"
                               },
                               "status_reason_code": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
+                                "const": "PATIENT_CANCELLED"
+                              },
+                              "target_appointment_id": {
+                                "const": "syn-appointment-001"
                               },
                               "waiting_area_id": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
+                                "const": null
+                              },
+                              "waiting_area_id_after": {
+                                "const": null
                               }
                             },
                             "required": [
+                              "receipt_id",
+                              "practice_id",
+                              "actor_user_id",
+                              "operation_id",
+                              "target_appointment_id",
+                              "audit_id",
+                              "status",
                               "waiting_area_id",
+                              "cancellation_reason",
                               "status_reason_code",
-                              "cancellation_reason"
+                              "pre_state_version",
+                              "post_state_version",
+                              "canonical_response_digest"
                             ],
                             "type": "object"
                           }
@@ -613,6 +1044,7 @@
           "lock_plan",
           "waiting_area_present",
           "readback_policy",
+          "cancellation_text",
           "trace",
           "expected"
         ],
@@ -639,6 +1071,14 @@
     "outcome_vocabulary",
     "fixed_timestamps_utc",
     "fixed_digests",
+    "authority_contract",
+    "signed_evidence_contract",
+    "reason_policy",
+    "idempotency_contract",
+    "transaction_contract",
+    "atomic_effect_contract",
+    "readback_contract",
+    "compatibility_ingress_policy",
     "next_gate",
     "decision_scenarios",
     "transaction_schedules",

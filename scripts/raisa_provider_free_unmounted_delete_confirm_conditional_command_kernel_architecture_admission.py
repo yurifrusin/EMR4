@@ -14,6 +14,7 @@ import argparse
 import copy
 import hashlib
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -53,6 +54,14 @@ CANCELLED_REASON_CODES = [
     "ADMIN_ERROR",
     "DUPLICATE_BOOKING",
     "OTHER",
+]
+
+ALLOWED_ACTOR_ROLES = [
+    "Receptionist",
+    "GP",
+    "Nurse",
+    "Admin",
+    "PracticeOwner",
 ]
 
 OUTCOMES = [
@@ -118,7 +127,7 @@ TRACE_STEPS = [
 FIXED_TIMESTAMPS_UTC = {
     "proposal_generated_at": "2026-08-15T01:50:49Z",
     "signed_at": "2026-08-15T01:50:49Z",
-    "expires_at": "2026-08-15T01:52:49Z",
+    "expires_at": "2026-08-15T02:10:49Z",
     "confirmed_at": "2026-08-15T01:55:04Z",
     "committed_at": "2026-08-15T01:55:04Z",
 }
@@ -159,7 +168,11 @@ REASON_STATES = [
     "status_family_code",
     "legacy_unclassified",
     "allowlist_invalid",
-    "optional_text_too_long",
+]
+CANCELLATION_TEXT_STATES = [
+    "present",
+    "null",
+    "too_long",
 ]
 IDEMPOTENCY_STATES = [
     "absent",
@@ -192,11 +205,205 @@ def _fixed_digest(seed: str) -> str:
 
 FIXED_DIGESTS = {
     "proposal_digest": _fixed_digest("delete-confirm:proposal:syn-appointment-001"),
+    "session_digest": _fixed_digest("delete-confirm:session:syn-session-001"),
     "evidence_payload_hash": _fixed_digest(
         "delete-confirm:evidence:syn-practice-001:syn-actor-001:syn-session-001"
     ),
-    "command_digest": _fixed_digest("delete-confirm:command:syn-key-delete-confirm-001"),
-    "receipt_digest": _fixed_digest("delete-confirm:receipt:syn-receipt-delete-confirm-001"),
+    "command_digest": _fixed_digest(
+        "delete-confirm:command:syn-key-delete-confirm-001"
+    ),
+    "receipt_digest": _fixed_digest(
+        "delete-confirm:receipt:syn-receipt-delete-confirm-001"
+    ),
+}
+
+AUTHORITY_CONTRACT = {
+    "pretransaction_authentication_is_final_authority": False,
+    "authority_source": "authenticated_server_session_and_current_authority_store",
+    "authority_fence": "practice_authority_generation_held_for_entire_transaction",
+    "server_owned_identity_fields": [
+        "practice_id",
+        "actor_user_id",
+        "actor_role",
+        "authenticated_session_id",
+    ],
+    "request_body_authority_fields_accepted": [],
+    "allowed_actor_roles": list(ALLOWED_ACTOR_ROLES),
+    "required_capability": "appointment.cancel.confirm",
+    "current_checks": [
+        "actor_active",
+        "practice_active",
+        "actor_practice_binding_exact",
+        "actor_role_current_and_allowed",
+        "appointment_cancel_confirm_capability_current",
+    ],
+    "check_points": [
+        "after_practice_scoped_appointment_lock",
+        "while_practice_appointment_and_idempotency_locks_held",
+    ],
+    "authority_and_practice_scoped_target_precede_receipt_disclosure": True,
+}
+
+SIGNED_EVIDENCE_CONTRACT = {
+    "schema_version": "raisa.delete_confirmation_evidence.v1",
+    "purpose": "appointment_delete_confirm",
+    "required_fields": [
+        "schema_version",
+        "purpose",
+        "key_id",
+        "practice_id",
+        "actor_user_id",
+        "authenticated_session_digest",
+        "operation_id",
+        "route_family",
+        "target_appointment_id",
+        "proposal_nonce",
+        "proposal_generated_at",
+        "signed_at",
+        "expires_at",
+        "pre_state_version",
+        "pre_status",
+        "pre_waiting_area_id",
+        "pre_cancellation_reason",
+        "pre_status_reason_code",
+        "proposed_status_reason_code",
+        "proposed_cancellation_reason",
+        "required_warning_codes",
+        "proposal_freshness_id",
+        "command_digest",
+        "signature",
+    ],
+    "authenticity": "backend_signature_exact_payload_and_purpose",
+    "freshness_interval": "proposal_generated_at_le_signed_at_le_confirmed_at_le_expires_at",
+    "warning_acknowledgement": "exact_set_equality",
+    "event_or_model_evidence_accepted": False,
+}
+
+REASON_POLICY = {
+    "status_reason_code": {
+        "required_for_new_dedicated_ingress": True,
+        "allowed_values": list(CANCELLED_REASON_CODES),
+        "legacy_unclassified_allowed": False,
+        "status_family_codes_allowed": False,
+    },
+    "cancellation_reason": {
+        "required": False,
+        "nullable": True,
+        "maximum_characters": MAX_FREE_TEXT_LENGTH,
+        "preservation": "exact_admitted_json_value",
+    },
+    "confirmed_warnings_are_reasons": False,
+}
+
+IDEMPOTENCY_CONTRACT = {
+    "identity_fields": [
+        "practice_id",
+        "actor_user_id",
+        "operation_id",
+        "idempotency_key_hash",
+    ],
+    "request_binding_fields": [
+        "authenticated_session_digest",
+        "route_family",
+        "target_appointment_id",
+        "request_body_digest",
+    ],
+    "claim_order": "after_practice_appointment_and_first_authority_check",
+    "same_key_same_digest": "return_integrity_valid_completed_receipt_only",
+    "same_key_different_digest": "non_disclosing_idempotency_conflict",
+    "in_progress_on_rollback": "discarded_with_transaction",
+    "receipt_disclosure_requires_current_authority": True,
+}
+
+TRANSACTION_CONTRACT = {
+    "owner": "backend_delete_confirm_kernel",
+    "single_command_owned_transaction": True,
+    "global_lock_order": list(GLOBAL_LOCK_ORDER),
+    "kernel_lock_plan": list(LOCK_ORDER),
+    "unused_lock_rule": UNUSED_LOCK_RULE,
+    "decision_trace": list(TRACE_STEPS),
+    "authority_fence_physical_mapping_proven": False,
+    "physical_mapping_next_gate": "provider-free-unmounted-delete-confirm-physical-representability-review",
+}
+
+ATOMIC_EFFECT_CONTRACT = {
+    "appointment_required_fields": [
+        "practice_id",
+        "appointment_id",
+        "status",
+        "waiting_area_id",
+        "cancellation_reason",
+        "status_reason_code",
+        "pre_state_version",
+        "post_state_version",
+    ],
+    "audit_required_fields": [
+        "audit_id",
+        "practice_id",
+        "appointment_id",
+        "confirmed_by_user_id",
+        "actor_role",
+        "authenticated_session_digest",
+        "action",
+        "status_before",
+        "status_after",
+        "waiting_area_id_after",
+        "cancellation_reason",
+        "status_reason_code",
+        "confirmed_warning_codes",
+        "correlation_id",
+        "command_digest",
+        "pre_state_version",
+        "post_state_version",
+    ],
+    "receipt_required_fields": [
+        "receipt_id",
+        "practice_id",
+        "actor_user_id",
+        "operation_id",
+        "target_appointment_id",
+        "audit_id",
+        "status",
+        "waiting_area_id",
+        "cancellation_reason",
+        "status_reason_code",
+        "pre_state_version",
+        "post_state_version",
+        "canonical_response_digest",
+    ],
+    "publish_together": [
+        "appointment_soft_cancel",
+        "attributable_delete_audit",
+        "completed_idempotency_receipt",
+    ],
+    "precommit_failure": "rollback_all_three_and_in_progress_claim",
+    "postcommit_delivery_loss": "retry_same_key_for_stored_receipt",
+    "post_state_version_rule": "pre_state_version_plus_one",
+}
+
+READBACK_CONTRACT = {
+    "timing": "after_atomic_commit",
+    "transaction_proof": False,
+    "purpose": "fresh_display_reconciliation",
+    "requires_fresh_authorisation": [
+        "practice_scope",
+        "appointment_read_action",
+        "appointment_resource",
+    ],
+    "later_revocation": "deny_readback_without_undoing_committed_receipt",
+    "source": "authoritative_appointment_read",
+}
+
+COMPATIBILITY_INGRESS_POLICY = {
+    "admitted_ingress": ["delete-confirm"],
+    "rejected_direct_ingress": [
+        "raw-delete",
+        "status-fallback",
+        "event-evidence",
+        "model-channel-confirmation",
+    ],
+    "adapter_may_weaken_confirmation": False,
+    "second_cancellation_kernel_allowed": False,
 }
 
 
@@ -234,10 +441,8 @@ def evaluate_decision(scenario: dict[str, Any]) -> dict[str, Any]:
         return _rejected("lock_plan_invalid")
 
     # Target non-disclosure precedes authority and replay disclosure.
-    if scenario["target"] == "missing":
-        return _loser("validation_rejected", "target_not_found")
-    if scenario["target"] == "cross_practice":
-        return _loser("validation_rejected", "cross_practice_target")
+    if scenario["target"] in {"missing", "cross_practice"}:
+        return _loser("validation_rejected", "target_unavailable")
 
     # Both current-authority checks: after target lock and with all locks held.
     if not scenario["authority_after_target_lock"]:
@@ -279,7 +484,9 @@ def evaluate_decision(scenario: dict[str, Any]) -> dict[str, Any]:
 
     # Locked source-state checks.
     if scenario["source"] != "current":
-        return _loser("stale_precondition", f"appointment_source_stale:{scenario['source']}")
+        return _loser(
+            "stale_precondition", f"appointment_source_stale:{scenario['source']}"
+        )
 
     # Reason policy for new dedicated ingress.
     if scenario["reason"] == "missing":
@@ -290,7 +497,7 @@ def evaluate_decision(scenario: dict[str, Any]) -> dict[str, Any]:
         return _loser("validation_rejected", "legacy_reason_code_rejected")
     if scenario["reason"] == "allowlist_invalid":
         return _loser("validation_rejected", "reason_allowlist_invalid")
-    if scenario["reason"] == "optional_text_too_long":
+    if scenario["cancellation_text"] == "too_long":
         return _loser("validation_rejected", "cancellation_reason_too_long")
 
     return {
@@ -318,13 +525,19 @@ def _base_state(waiting_area_present: bool = False) -> dict[str, Any]:
     }
 
 
-def _committed_state() -> dict[str, Any]:
+def _committed_state(
+    cancellation_text: str = "present",
+    waiting_area_present: bool = False,
+) -> dict[str, Any]:
+    cancellation_reason = (
+        None if cancellation_text == "null" else FICTIONAL_CANCELLATION_TEXT
+    )
     return {
         "appointment_status": "Cancelled",
         "appointment_version": 8,
         "waiting_area_id": None,
         "status_reason_code": "PATIENT_CANCELLED",
-        "cancellation_reason": FICTIONAL_CANCELLATION_TEXT,
+        "cancellation_reason": cancellation_reason,
         "mutation_count": 1,
         "audit_count": 1,
         "completed_receipt_count": 1,
@@ -332,25 +545,50 @@ def _committed_state() -> dict[str, Any]:
         "claim_state": "completed",
         "artifacts": {
             "appointment": {
+                "practice_id": "syn-practice-001",
+                "appointment_id": "syn-appointment-001",
                 "status": "Cancelled",
-                "state_version": 8,
                 "waiting_area_id": None,
                 "status_reason_code": "PATIENT_CANCELLED",
-                "cancellation_reason": FICTIONAL_CANCELLATION_TEXT,
+                "cancellation_reason": cancellation_reason,
+                "pre_state_version": 7,
+                "post_state_version": 8,
             },
             "audit": {
-                "action": "delete",
                 "audit_id": "syn-audit-delete-confirm-001",
-                "waiting_area_id": None,
+                "practice_id": "syn-practice-001",
+                "appointment_id": "syn-appointment-001",
+                "confirmed_by_user_id": "syn-actor-001",
+                "actor_role": "Receptionist",
+                "authenticated_session_digest": FIXED_DIGESTS["session_digest"],
+                "action": "delete",
+                "status_before": "Booked",
+                "status_after": "Cancelled",
+                "waiting_area_id_after": None,
                 "status_reason_code": "PATIENT_CANCELLED",
-                "cancellation_reason": FICTIONAL_CANCELLATION_TEXT,
+                "cancellation_reason": cancellation_reason,
+                "confirmed_warning_codes": (
+                    ["waiting_area_cleared"] if waiting_area_present else []
+                ),
+                "correlation_id": "syn-correlation-delete-confirm-001",
+                "command_digest": FIXED_DIGESTS["command_digest"],
+                "pre_state_version": 7,
+                "post_state_version": 8,
             },
             "receipt": {
                 "receipt_id": "syn-receipt-delete-confirm-001",
+                "practice_id": "syn-practice-001",
+                "actor_user_id": "syn-actor-001",
+                "operation_id": CANONICAL_OPERATION_ID,
+                "target_appointment_id": "syn-appointment-001",
+                "audit_id": "syn-audit-delete-confirm-001",
                 "status": "Cancelled",
                 "waiting_area_id": None,
                 "status_reason_code": "PATIENT_CANCELLED",
-                "cancellation_reason": FICTIONAL_CANCELLATION_TEXT,
+                "cancellation_reason": cancellation_reason,
+                "pre_state_version": 7,
+                "post_state_version": 8,
+                "canonical_response_digest": FIXED_DIGESTS["receipt_digest"],
             },
         },
     }
@@ -362,6 +600,7 @@ def simulate_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
     injection = schedule["injection"]
     trace = list(schedule["trace"])
     waiting_area_present = schedule.get("waiting_area_present", False)
+    cancellation_text = schedule.get("cancellation_text", "present")
 
     if kind == "single_first_effect":
         if injection in {
@@ -374,12 +613,16 @@ def simulate_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
                 "durable_state": _base_state(waiting_area_present),
                 "participant_results": ["transaction_rolled_back"],
                 "response_delivered": False,
-                "readback": {"authorised": False, "status": None, "state_version": None},
+                "readback": {
+                    "authorised": False,
+                    "status": None,
+                    "state_version": None,
+                },
                 "trace": trace,
             }
         response_delivered = injection != "after_commit_before_response"
         return {
-            "durable_state": _committed_state(),
+            "durable_state": _committed_state(cancellation_text, waiting_area_present),
             "participant_results": ["committed"],
             "response_delivered": response_delivered,
             "readback": {
@@ -392,7 +635,7 @@ def simulate_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
 
     if kind == "retry_after_lost_response":
         return {
-            "durable_state": _committed_state(),
+            "durable_state": _committed_state(cancellation_text, waiting_area_present),
             "participant_results": ["committed", "idempotent_replay"],
             "response_delivered": True,
             "readback": {
@@ -416,7 +659,7 @@ def simulate_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
             "concurrent_authority_loss": ["committed", "authority_revoked"],
         }[kind]
         return {
-            "durable_state": _committed_state(),
+            "durable_state": _committed_state(cancellation_text, waiting_area_present),
             "participant_results": results,
             "response_delivered": True,
             "readback": {
@@ -438,7 +681,7 @@ def simulate_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
                 "state_version": 8,
             }
         return {
-            "durable_state": _committed_state(),
+            "durable_state": _committed_state(cancellation_text, waiting_area_present),
             "participant_results": ["committed"],
             "response_delivered": True,
             "readback": readback,
@@ -463,6 +706,7 @@ def _decision(
     confirmation: str = "valid",
     source: str = "current",
     reason: str = "current_cancelled_code",
+    cancellation_text: str = "present",
     waiting_area: str = "none",
 ) -> dict[str, Any]:
     scenario = {
@@ -479,6 +723,7 @@ def _decision(
         "confirmation": confirmation,
         "source": source,
         "reason": reason,
+        "cancellation_text": cancellation_text,
         "waiting_area": waiting_area,
     }
     scenario["expected"] = evaluate_decision(scenario)
@@ -493,6 +738,7 @@ def _schedule(
     *,
     waiting_area_present: bool = False,
     readback_policy: str = "current_authority",
+    cancellation_text: str = "present",
 ) -> dict[str, Any]:
     schedule = {
         "id": schedule_id,
@@ -502,6 +748,7 @@ def _schedule(
         "lock_plan": list(LOCK_ORDER),
         "waiting_area_present": waiting_area_present,
         "readback_policy": readback_policy,
+        "cancellation_text": cancellation_text,
         "trace": list(TRACE_STEPS),
     }
     schedule["expected"] = simulate_schedule(schedule)
@@ -518,7 +765,7 @@ def build_packet() -> dict[str, Any]:
         _decision("ddc-004-reason-allowlist-invalid", reason="allowlist_invalid"),
         _decision("ddc-005-reason-status-family", reason="status_family_code"),
         _decision("ddc-006-reason-legacy-unclassified", reason="legacy_unclassified"),
-        _decision("ddc-007-optional-text-too-long", reason="optional_text_too_long"),
+        _decision("ddc-007-optional-text-too-long", cancellation_text="too_long"),
         # Confirmation and signed-evidence states.
         _decision("ddc-008-confirmation-missing", confirmation="missing"),
         _decision("ddc-009-confirmation-false", confirmation="false"),
@@ -565,7 +812,9 @@ def build_packet() -> dict[str, Any]:
             authority_loss="waiting_revoked",
         ),
         # Replay and conflict classification.
-        _decision("ddc-025-same-key-same-digest-replay", idempotency="same_digest_completed"),
+        _decision(
+            "ddc-025-same-key-same-digest-replay", idempotency="same_digest_completed"
+        ),
         _decision("ddc-026-same-key-different-digest", idempotency="different_digest"),
         _decision("ddc-027-idempotency-identity-missing", idempotency="missing"),
         # Non-dedicated ingress families rejected before command evaluation.
@@ -576,7 +825,9 @@ def build_packet() -> dict[str, Any]:
             "ddc-031-model-channel-confirmation-rejected",
             ingress="model_channel_confirmation",
         ),
-        _decision("ddc-032-raw-delete-target-missing", ingress="raw_delete", target="missing"),
+        _decision(
+            "ddc-032-raw-delete-target-missing", ingress="raw_delete", target="missing"
+        ),
         # Lock-order violations.
         _decision(
             "ddc-033-reordered-locks",
@@ -584,7 +835,12 @@ def build_packet() -> dict[str, Any]:
         ),
         _decision(
             "ddc-034-schedule-domain-not-skipped",
-            lock_plan=["practice", "schedule_domain", "appointment", "idempotency_record"],
+            lock_plan=[
+                "practice",
+                "schedule_domain",
+                "appointment",
+                "idempotency_record",
+            ],
         ),
         # Structural and binding failures.
         _decision("ddc-035-structure-rejected", structure="invalid"),
@@ -594,13 +850,24 @@ def build_packet() -> dict[str, Any]:
         _decision("ddc-039-binding-operation-mismatch", binding="operation_mismatch"),
         _decision("ddc-040-binding-target-mismatch", binding="target_mismatch"),
         _decision("ddc-041-binding-state-mismatch", binding="state_mismatch"),
-        _decision("ddc-042-binding-waiting-area-mismatch", binding="waiting_area_mismatch"),
-        _decision("ddc-043-binding-existing-reason-mismatch", binding="existing_reason_mismatch"),
-        _decision("ddc-044-binding-proposed-reason-mismatch", binding="proposed_reason_mismatch"),
+        _decision(
+            "ddc-042-binding-waiting-area-mismatch", binding="waiting_area_mismatch"
+        ),
+        _decision(
+            "ddc-043-binding-existing-reason-mismatch",
+            binding="existing_reason_mismatch",
+        ),
+        _decision(
+            "ddc-044-binding-proposed-reason-mismatch",
+            binding="proposed_reason_mismatch",
+        ),
         _decision("ddc-045-binding-digest-mismatch", binding="digest_mismatch"),
+        _decision("ddc-046-optional-null-text-commit", cancellation_text="null"),
     ]
     schedules = [
-        _schedule("ddt-001-clean-commit-no-waiting-area", "single_first_effect", "none", 1),
+        _schedule(
+            "ddt-001-clean-commit-no-waiting-area", "single_first_effect", "none", 1
+        ),
         _schedule(
             "ddt-002-clean-commit-with-waiting-area",
             "single_first_effect",
@@ -608,14 +875,21 @@ def build_packet() -> dict[str, Any]:
             1,
             waiting_area_present=True,
         ),
-        _schedule("ddt-003-failure-before-locks", "single_first_effect", "before_locks", 1),
+        _schedule(
+            "ddt-003-failure-before-locks", "single_first_effect", "before_locks", 1
+        ),
         _schedule(
             "ddt-004-failure-after-mutation",
             "single_first_effect",
             "after_staged_mutation",
             1,
         ),
-        _schedule("ddt-005-failure-after-audit", "single_first_effect", "after_staged_audit", 1),
+        _schedule(
+            "ddt-005-failure-after-audit",
+            "single_first_effect",
+            "after_staged_audit",
+            1,
+        ),
         _schedule(
             "ddt-006-failure-after-receipt",
             "single_first_effect",
@@ -628,11 +902,25 @@ def build_packet() -> dict[str, Any]:
             "after_commit_before_response",
             1,
         ),
-        _schedule("ddt-008-retry-after-lost-response", "retry_after_lost_response", "none", 2),
+        _schedule(
+            "ddt-008-retry-after-lost-response", "retry_after_lost_response", "none", 2
+        ),
         _schedule("ddt-009-same-key-same-digest", "concurrent_same_digest", "none", 2),
-        _schedule("ddt-010-same-key-different-digest", "concurrent_different_digest", "none", 2),
-        _schedule("ddt-011-different-key-overlap", "concurrent_different_key", "none", 2),
-        _schedule("ddt-012-authority-loss-while-waiting", "concurrent_authority_loss", "none", 2),
+        _schedule(
+            "ddt-010-same-key-different-digest",
+            "concurrent_different_digest",
+            "none",
+            2,
+        ),
+        _schedule(
+            "ddt-011-different-key-overlap", "concurrent_different_key", "none", 2
+        ),
+        _schedule(
+            "ddt-012-authority-loss-while-waiting",
+            "concurrent_authority_loss",
+            "none",
+            2,
+        ),
         _schedule(
             "ddt-013-readback-current-authority",
             "post_commit_readback",
@@ -646,6 +934,13 @@ def build_packet() -> dict[str, Any]:
             "none",
             1,
             readback_policy="later_revoked",
+        ),
+        _schedule(
+            "ddt-015-clean-commit-null-cancellation-text",
+            "single_first_effect",
+            "none",
+            1,
+            cancellation_text="null",
         ),
     ]
     return {
@@ -662,6 +957,14 @@ def build_packet() -> dict[str, Any]:
         "outcome_vocabulary": list(OUTCOMES),
         "fixed_timestamps_utc": copy.deepcopy(FIXED_TIMESTAMPS_UTC),
         "fixed_digests": copy.deepcopy(FIXED_DIGESTS),
+        "authority_contract": copy.deepcopy(AUTHORITY_CONTRACT),
+        "signed_evidence_contract": copy.deepcopy(SIGNED_EVIDENCE_CONTRACT),
+        "reason_policy": copy.deepcopy(REASON_POLICY),
+        "idempotency_contract": copy.deepcopy(IDEMPOTENCY_CONTRACT),
+        "transaction_contract": copy.deepcopy(TRANSACTION_CONTRACT),
+        "atomic_effect_contract": copy.deepcopy(ATOMIC_EFFECT_CONTRACT),
+        "readback_contract": copy.deepcopy(READBACK_CONTRACT),
+        "compatibility_ingress_policy": copy.deepcopy(COMPATIBILITY_INGRESS_POLICY),
         "next_gate": "provider-free-unmounted-delete-confirm-physical-representability-review",
         "decision_scenarios": decisions,
         "transaction_schedules": schedules,
@@ -694,21 +997,44 @@ def _expected_decision_schema() -> dict[str, Any]:
     }
 
 
-def _artifact_schema() -> dict[str, Any]:
+def _artifact_schema(required_fields: list[str]) -> dict[str, Any]:
+    properties: dict[str, Any] = {
+        "practice_id": {"const": "syn-practice-001"},
+        "appointment_id": {"const": "syn-appointment-001"},
+        "status": {"const": "Cancelled"},
+        "waiting_area_id": {"const": None},
+        "cancellation_reason": {
+            "enum": [None, FICTIONAL_CANCELLATION_TEXT],
+        },
+        "status_reason_code": {"const": "PATIENT_CANCELLED"},
+        "pre_state_version": {"const": 7},
+        "post_state_version": {"const": 8},
+        "audit_id": {"const": "syn-audit-delete-confirm-001"},
+        "confirmed_by_user_id": {"const": "syn-actor-001"},
+        "actor_role": {"const": "Receptionist"},
+        "authenticated_session_digest": {"const": FIXED_DIGESTS["session_digest"]},
+        "action": {"const": "delete"},
+        "status_before": {"const": "Booked"},
+        "status_after": {"const": "Cancelled"},
+        "waiting_area_id_after": {"const": None},
+        "confirmed_warning_codes": {
+            "enum": [[], ["waiting_area_cleared"]],
+        },
+        "correlation_id": {"const": "syn-correlation-delete-confirm-001"},
+        "command_digest": {"const": FIXED_DIGESTS["command_digest"]},
+        "receipt_id": {"const": "syn-receipt-delete-confirm-001"},
+        "actor_user_id": {"const": "syn-actor-001"},
+        "operation_id": {"const": CANONICAL_OPERATION_ID},
+        "target_appointment_id": {"const": "syn-appointment-001"},
+        "canonical_response_digest": {"const": FIXED_DIGESTS["receipt_digest"]},
+    }
     return {
         "type": "object",
         "additionalProperties": False,
-        "required": ["waiting_area_id", "status_reason_code", "cancellation_reason"],
-        "properties": {
-            "waiting_area_id": {"type": ["string", "null"]},
-            "status_reason_code": {"type": ["string", "null"]},
-            "cancellation_reason": {"type": ["string", "null"]},
-            "status": {"type": "string"},
-            "state_version": {"type": "integer"},
-            "action": {"type": "string"},
-            "audit_id": {"type": "string"},
-            "receipt_id": {"type": "string"},
-        },
+        "required": list(required_fields),
+        "minProperties": len(required_fields),
+        "maxProperties": len(required_fields),
+        "properties": properties,
     }
 
 
@@ -748,9 +1074,15 @@ def _state_schema() -> dict[str, Any]:
                         "additionalProperties": False,
                         "required": ["appointment", "audit", "receipt"],
                         "properties": {
-                            "appointment": _artifact_schema(),
-                            "audit": _artifact_schema(),
-                            "receipt": _artifact_schema(),
+                            "appointment": _artifact_schema(
+                                ATOMIC_EFFECT_CONTRACT["appointment_required_fields"]
+                            ),
+                            "audit": _artifact_schema(
+                                ATOMIC_EFFECT_CONTRACT["audit_required_fields"]
+                            ),
+                            "receipt": _artifact_schema(
+                                ATOMIC_EFFECT_CONTRACT["receipt_required_fields"]
+                            ),
                         },
                     },
                 ]
@@ -809,14 +1141,26 @@ def build_schema() -> dict[str, Any]:
             "outcome_vocabulary",
             "fixed_timestamps_utc",
             "fixed_digests",
+            "authority_contract",
+            "signed_evidence_contract",
+            "reason_policy",
+            "idempotency_contract",
+            "transaction_contract",
+            "atomic_effect_contract",
+            "readback_contract",
+            "compatibility_ingress_policy",
             "next_gate",
             "decision_scenarios",
             "transaction_schedules",
             "effect_boundary",
         ],
         "properties": {
-            "schema_version": {"const": "raisa.delete_confirm_conditional_command_kernel.v1"},
-            "artifact_kind": {"const": "provider_free_unmounted_authored_synthetic_contract"},
+            "schema_version": {
+                "const": "raisa.delete_confirm_conditional_command_kernel.v1"
+            },
+            "artifact_kind": {
+                "const": "provider_free_unmounted_authored_synthetic_contract"
+            },
             "source_bindings": {
                 "type": "array",
                 "minItems": 7,
@@ -852,7 +1196,7 @@ def build_schema() -> dict[str, Any]:
                 "properties": {
                     "proposal_generated_at": {"const": "2026-08-15T01:50:49Z"},
                     "signed_at": {"const": "2026-08-15T01:50:49Z"},
-                    "expires_at": {"const": "2026-08-15T01:52:49Z"},
+                    "expires_at": {"const": "2026-08-15T02:10:49Z"},
                     "confirmed_at": {"const": "2026-08-15T01:55:04Z"},
                     "committed_at": {"const": "2026-08-15T01:55:04Z"},
                 },
@@ -860,11 +1204,23 @@ def build_schema() -> dict[str, Any]:
             "fixed_digests": {
                 "type": "object",
                 "additionalProperties": False,
-                "minProperties": 4,
-                "maxProperties": 4,
-                "patternProperties": {"^[a-z_]+$": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+                "minProperties": len(FIXED_DIGESTS),
+                "maxProperties": len(FIXED_DIGESTS),
+                "patternProperties": {
+                    "^[a-z_]+$": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+                },
             },
-            "next_gate": {"const": "provider-free-unmounted-delete-confirm-physical-representability-review"},
+            "authority_contract": {"const": AUTHORITY_CONTRACT},
+            "signed_evidence_contract": {"const": SIGNED_EVIDENCE_CONTRACT},
+            "reason_policy": {"const": REASON_POLICY},
+            "idempotency_contract": {"const": IDEMPOTENCY_CONTRACT},
+            "transaction_contract": {"const": TRANSACTION_CONTRACT},
+            "atomic_effect_contract": {"const": ATOMIC_EFFECT_CONTRACT},
+            "readback_contract": {"const": READBACK_CONTRACT},
+            "compatibility_ingress_policy": {"const": COMPATIBILITY_INGRESS_POLICY},
+            "next_gate": {
+                "const": "provider-free-unmounted-delete-confirm-physical-representability-review"
+            },
             "decision_scenarios": {
                 "type": "array",
                 "minItems": 24,
@@ -885,6 +1241,7 @@ def build_schema() -> dict[str, Any]:
                         "confirmation",
                         "source",
                         "reason",
+                        "cancellation_text",
                         "waiting_area",
                         "expected",
                     ],
@@ -918,6 +1275,7 @@ def build_schema() -> dict[str, Any]:
                         "confirmation": {"enum": CONFIRMATION_STATES},
                         "source": {"enum": SOURCE_STATES},
                         "reason": {"enum": REASON_STATES},
+                        "cancellation_text": {"enum": CANCELLATION_TEXT_STATES},
                         "waiting_area": {"enum": ["none", "assigned"]},
                         "expected": _expected_decision_schema(),
                     },
@@ -937,6 +1295,7 @@ def build_schema() -> dict[str, Any]:
                         "lock_plan",
                         "waiting_area_present",
                         "readback_policy",
+                        "cancellation_text",
                         "trace",
                         "expected",
                     ],
@@ -969,6 +1328,7 @@ def build_schema() -> dict[str, Any]:
                         "readback_policy": {
                             "enum": ["current_authority", "later_revoked"]
                         },
+                        "cancellation_text": {"enum": ["present", "null"]},
                         "trace": string_array,
                         "expected": _expected_schedule_schema(),
                     },
@@ -986,7 +1346,9 @@ def build_schema() -> dict[str, Any]:
 
 
 def validate_packet(packet: dict[str, Any], schema: dict[str, Any]) -> list[str]:
-    errors = [error.message for error in Draft202012Validator(schema).iter_errors(packet)]
+    errors = [
+        error.message for error in Draft202012Validator(schema).iter_errors(packet)
+    ]
     if errors:
         return sorted(errors)
 
@@ -1014,6 +1376,35 @@ def validate_packet(packet: dict[str, Any], schema: dict[str, Any]) -> list[str]
         errors.append("outcome_vocabulary_mismatch")
     if packet["fixed_digests"] != FIXED_DIGESTS:
         errors.append("fixed_digests_mismatch")
+    closed_contracts = {
+        "authority_contract": AUTHORITY_CONTRACT,
+        "signed_evidence_contract": SIGNED_EVIDENCE_CONTRACT,
+        "reason_policy": REASON_POLICY,
+        "idempotency_contract": IDEMPOTENCY_CONTRACT,
+        "transaction_contract": TRANSACTION_CONTRACT,
+        "atomic_effect_contract": ATOMIC_EFFECT_CONTRACT,
+        "readback_contract": READBACK_CONTRACT,
+        "compatibility_ingress_policy": COMPATIBILITY_INGRESS_POLICY,
+    }
+    for name, expected_contract in closed_contracts.items():
+        if packet[name] != expected_contract:
+            errors.append(f"{name}_mismatch")
+    try:
+        timestamps = {
+            name: datetime.fromisoformat(value.replace("Z", "+00:00"))
+            for name, value in packet["fixed_timestamps_utc"].items()
+        }
+        if not (
+            timestamps["proposal_generated_at"]
+            <= timestamps["signed_at"]
+            <= timestamps["confirmed_at"]
+            <= timestamps["expires_at"]
+        ):
+            errors.append("evidence_freshness_interval_invalid")
+        if timestamps["committed_at"] < timestamps["confirmed_at"]:
+            errors.append("commit_precedes_confirmation")
+    except (KeyError, TypeError, ValueError):
+        errors.append("fixed_timestamp_parse_invalid")
     if any(packet["effect_boundary"].values()):
         errors.append("effect_boundary_open")
 
@@ -1030,11 +1421,17 @@ def validate_packet(packet: dict[str, Any], schema: dict[str, Any]) -> list[str]
         if evaluate_decision(scenario) != scenario["expected"]:
             errors.append(f"decision_mismatch:{scenario['id']}")
         expected = scenario["expected"]
-        if expected["admission"] == "admission_rejected" and expected["outcome"] is not None:
+        if (
+            expected["admission"] == "admission_rejected"
+            and expected["outcome"] is not None
+        ):
             errors.append(f"rejected_decision_has_outcome:{scenario['id']}")
         if expected["planned_effect"] != (expected["outcome"] == "committed"):
             errors.append(f"effect_not_commit_only:{scenario['id']}")
-        if not scenario["authority_after_target_lock"] or not scenario["authority_all_locks_held"]:
+        if (
+            not scenario["authority_after_target_lock"]
+            or not scenario["authority_all_locks_held"]
+        ):
             if expected["receipt_disclosed"]:
                 errors.append(f"revoked_authority_receipt_disclosed:{scenario['id']}")
         if scenario["ingress"] != "delete_confirm":
@@ -1047,8 +1444,23 @@ def validate_packet(packet: dict[str, Any], schema: dict[str, Any]) -> list[str]
     if not has_all_locks_failure:
         errors.append("missing_authority_all_locks_held_failure_scenario")
 
+    null_text = next(
+        (
+            scenario
+            for scenario in packet["decision_scenarios"]
+            if scenario["id"] == "ddc-046-optional-null-text-commit"
+        ),
+        None,
+    )
+    if null_text is None or null_text["expected"]["outcome"] != "committed":
+        errors.append("missing_optional_null_text_commit_scenario")
+
     replay = next(
-        (s for s in packet["decision_scenarios"] if s["id"] == "ddc-024-authority-before-replay"),
+        (
+            s
+            for s in packet["decision_scenarios"]
+            if s["id"] == "ddc-024-authority-before-replay"
+        ),
         None,
     )
     if replay is None:
@@ -1079,6 +1491,18 @@ def validate_packet(packet: dict[str, Any], schema: dict[str, Any]) -> list[str]
             if artifacts is None:
                 errors.append(f"completed_without_artifacts:{schedule['id']}")
                 continue
+            exact_field_sets = {
+                "appointment": set(
+                    ATOMIC_EFFECT_CONTRACT["appointment_required_fields"]
+                ),
+                "audit": set(ATOMIC_EFFECT_CONTRACT["audit_required_fields"]),
+                "receipt": set(ATOMIC_EFFECT_CONTRACT["receipt_required_fields"]),
+            }
+            for artifact_name, expected_fields in exact_field_sets.items():
+                if set(artifacts[artifact_name]) != expected_fields:
+                    errors.append(
+                        f"artifact_field_set_mismatch:{schedule['id']}:{artifact_name}"
+                    )
             reasons = {
                 artifacts["appointment"]["cancellation_reason"],
                 artifacts["audit"]["cancellation_reason"],
@@ -1093,8 +1517,68 @@ def validate_packet(packet: dict[str, Any], schema: dict[str, Any]) -> list[str]
             }
             if len(codes) != 1:
                 errors.append(f"cross_artifact_reason_code_mismatch:{schedule['id']}")
-            if any(artifacts[key]["waiting_area_id"] is not None for key in ("appointment", "audit", "receipt")):
+            if (
+                artifacts["appointment"]["waiting_area_id"] is not None
+                or artifacts["audit"]["waiting_area_id_after"] is not None
+                or artifacts["receipt"]["waiting_area_id"] is not None
+            ):
                 errors.append(f"waiting_area_not_cleared:{schedule['id']}")
+            if not (
+                artifacts["appointment"]["practice_id"]
+                == artifacts["audit"]["practice_id"]
+                == artifacts["receipt"]["practice_id"]
+                == "syn-practice-001"
+            ):
+                errors.append(f"cross_artifact_practice_mismatch:{schedule['id']}")
+            if not (
+                artifacts["appointment"]["appointment_id"]
+                == artifacts["audit"]["appointment_id"]
+                == artifacts["receipt"]["target_appointment_id"]
+                == "syn-appointment-001"
+            ):
+                errors.append(f"cross_artifact_target_mismatch:{schedule['id']}")
+            if artifacts["audit"]["audit_id"] != artifacts["receipt"]["audit_id"]:
+                errors.append(
+                    f"cross_artifact_audit_identity_mismatch:{schedule['id']}"
+                )
+            pre_versions = {
+                artifacts[name]["pre_state_version"]
+                for name in ("appointment", "audit", "receipt")
+            }
+            post_versions = {
+                artifacts[name]["post_state_version"]
+                for name in ("appointment", "audit", "receipt")
+            }
+            if len(pre_versions) != 1 or len(post_versions) != 1:
+                errors.append(f"cross_artifact_version_mismatch:{schedule['id']}")
+            elif next(iter(post_versions)) != next(iter(pre_versions)) + 1:
+                errors.append(f"post_state_version_not_incremented:{schedule['id']}")
+            if (
+                artifacts["appointment"]["status"] != "Cancelled"
+                or artifacts["audit"]["status_before"] != "Booked"
+                or artifacts["audit"]["status_after"] != "Cancelled"
+                or artifacts["audit"]["action"] != "delete"
+                or artifacts["receipt"]["status"] != "Cancelled"
+            ):
+                errors.append(f"atomic_status_or_action_mismatch:{schedule['id']}")
+
+    null_text_schedule = next(
+        (
+            schedule
+            for schedule in packet["transaction_schedules"]
+            if schedule["id"] == "ddt-015-clean-commit-null-cancellation-text"
+        ),
+        None,
+    )
+    if null_text_schedule is None:
+        errors.append("missing_optional_null_text_transaction_schedule")
+    else:
+        artifacts = null_text_schedule["expected"]["durable_state"]["artifacts"]
+        if artifacts is None or any(
+            artifacts[name]["cancellation_reason"] is not None
+            for name in ("appointment", "audit", "receipt")
+        ):
+            errors.append("optional_null_text_not_preserved")
 
     return sorted(set(errors))
 
@@ -1125,89 +1609,318 @@ def hostile_mutations(packet: dict[str, Any]) -> list[tuple[str, dict[str, Any]]
     # Packet-level constants and source bindings.
     mutate("operation_id", ("canonical_operation_id",), "rawDeleteAppointment")
     mutate("ingress_family", ("canonical_ingress",), "status-confirm")
-    mutate("global_order", ("global_lock_order",), list(reversed(packet["global_lock_order"])))
-    mutate("kernel_lock_plan", ("kernel_lock_plan",), ["practice", "idempotency_record", "appointment"])
+    mutate(
+        "global_order",
+        ("global_lock_order",),
+        list(reversed(packet["global_lock_order"])),
+    )
+    mutate(
+        "kernel_lock_plan",
+        ("kernel_lock_plan",),
+        ["practice", "idempotency_record", "appointment"],
+    )
     mutate("unused_lock_rule", ("unused_lock_rule",), "include_schedule_domain")
     mutate("outcome_vocabulary", ("outcome_vocabulary",), OUTCOMES[:-1])
-    mutate("reason_codes", ("cancelled_reason_codes",), CANCELLED_REASON_CODES + ["LEGACY_UNCLASSIFIED"])
+    mutate(
+        "reason_codes",
+        ("cancelled_reason_codes",),
+        CANCELLED_REASON_CODES + ["LEGACY_UNCLASSIFIED"],
+    )
     mutate("max_reason_length", ("max_cancellation_reason_length",), 501)
     mutate("next_gate", ("next_gate",), "runtime-convergence-review")
     mutate("source_hash", ("source_bindings", 0, "sha256"), "0" * 64)
     mutate("source_path", ("source_bindings", 0, "path"), "app/routers/appointments.py")
+    mutate(
+        "expiry_before_confirmation",
+        ("fixed_timestamps_utc", "expires_at"),
+        "2026-08-15T01:52:49Z",
+    )
+    mutate(
+        "authority_roles_widened",
+        ("authority_contract", "allowed_actor_roles"),
+        ALLOWED_ACTOR_ROLES + ["ExternalDelegate"],
+    )
+    mutate(
+        "authority_capability_widened",
+        ("authority_contract", "required_capability"),
+        "appointment.*",
+    )
+    evidence_fields = SIGNED_EVIDENCE_CONTRACT["required_fields"]
+    mutate(
+        "evidence_session_binding_removed",
+        ("signed_evidence_contract", "required_fields"),
+        [field for field in evidence_fields if field != "authenticated_session_digest"],
+    )
+    mutate(
+        "optional_text_made_required",
+        ("reason_policy", "cancellation_reason", "required"),
+        True,
+    )
+    mutate(
+        "receipt_disclosure_without_authority",
+        ("idempotency_contract", "receipt_disclosure_requires_current_authority"),
+        False,
+    )
+    mutate(
+        "authority_fence_claimed_physical",
+        ("transaction_contract", "authority_fence_physical_mapping_proven"),
+        True,
+    )
+    mutate(
+        "atomic_audit_identity_removed",
+        ("atomic_effect_contract", "audit_required_fields"),
+        [
+            field
+            for field in ATOMIC_EFFECT_CONTRACT["audit_required_fields"]
+            if field != "authenticated_session_digest"
+        ],
+    )
+    mutate(
+        "readback_made_transaction_proof",
+        ("readback_contract", "transaction_proof"),
+        True,
+    )
+    mutate(
+        "status_fallback_admitted",
+        ("compatibility_ingress_policy", "admitted_ingress"),
+        ["delete-confirm", "status-fallback"],
+    )
     for key in packet["effect_boundary"]:
         mutate(f"effect_{key}", ("effect_boundary", key), True)
 
     # Decision expected-outcome and admission mutations.
     i = decision_index("ddc-001-clean-commit-no-waiting-area")
-    mutate("commit_expected_replay", ("decision_scenarios", i, "expected", "outcome"), "idempotent_replay")
-    mutate("commit_no_effect", ("decision_scenarios", i, "expected", "planned_effect"), False)
+    mutate(
+        "commit_expected_replay",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "idempotent_replay",
+    )
+    mutate(
+        "commit_no_effect",
+        ("decision_scenarios", i, "expected", "planned_effect"),
+        False,
+    )
     i = decision_index("ddc-025-same-key-same-digest-replay")
-    mutate("replay_effect", ("decision_scenarios", i, "expected", "planned_effect"), True)
-    mutate("replay_hidden", ("decision_scenarios", i, "expected", "receipt_disclosed"), False)
+    mutate(
+        "replay_effect", ("decision_scenarios", i, "expected", "planned_effect"), True
+    )
+    mutate(
+        "replay_hidden",
+        ("decision_scenarios", i, "expected", "receipt_disclosed"),
+        False,
+    )
     i = decision_index("ddc-024-authority-before-replay")
-    mutate("authority_replay", ("decision_scenarios", i, "expected", "outcome"), "idempotent_replay")
-    mutate("authority_disclosure", ("decision_scenarios", i, "expected", "receipt_disclosed"), True)
+    mutate(
+        "authority_replay",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "idempotent_replay",
+    )
+    mutate(
+        "authority_disclosure",
+        ("decision_scenarios", i, "expected", "receipt_disclosed"),
+        True,
+    )
     i = decision_index("ddc-003-reason-missing")
-    mutate("reason_missing_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "reason_missing_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-004-reason-allowlist-invalid")
-    mutate("reason_allowlist_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "reason_allowlist_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-006-reason-legacy-unclassified")
-    mutate("reason_legacy_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "reason_legacy_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-007-optional-text-too-long")
-    mutate("reason_text_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "reason_text_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-008-confirmation-missing")
-    mutate("confirmation_missing_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "confirmation_missing_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-010-confirmation-tampered")
-    mutate("confirmation_tampered_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "confirmation_tampered_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-011-confirmation-expired")
-    mutate("confirmation_expired_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "confirmation_expired_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-012-confirmation-binding-mismatch")
-    mutate("confirmation_binding_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "confirmation_binding_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-014-stale-version")
-    mutate("stale_version_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "stale_version_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-022-cross-practice-target")
-    mutate("cross_practice_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "cross_practice_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-023-target-absent")
-    mutate("target_absent_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "target_absent_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-027-idempotency-identity-missing")
-    mutate("idem_missing_admitted", ("decision_scenarios", i, "expected", "admission"), "admitted")
+    mutate(
+        "idem_missing_admitted",
+        ("decision_scenarios", i, "expected", "admission"),
+        "admitted",
+    )
     i = decision_index("ddc-028-raw-delete-rejected")
-    mutate("raw_delete_admitted", ("decision_scenarios", i, "expected", "admission"), "admitted")
-    mutate("raw_delete_commit", ("decision_scenarios", i, "expected", "outcome"), "committed")
+    mutate(
+        "raw_delete_admitted",
+        ("decision_scenarios", i, "expected", "admission"),
+        "admitted",
+    )
+    mutate(
+        "raw_delete_commit",
+        ("decision_scenarios", i, "expected", "outcome"),
+        "committed",
+    )
     i = decision_index("ddc-033-reordered-locks")
-    mutate("reordered_locks_admitted", ("decision_scenarios", i, "expected", "admission"), "admitted")
+    mutate(
+        "reordered_locks_admitted",
+        ("decision_scenarios", i, "expected", "admission"),
+        "admitted",
+    )
     i = decision_index("ddc-034-schedule-domain-not-skipped")
-    mutate("schedule_domain_admitted", ("decision_scenarios", i, "expected", "admission"), "admitted")
+    mutate(
+        "schedule_domain_admitted",
+        ("decision_scenarios", i, "expected", "admission"),
+        "admitted",
+    )
 
     # Schedule durable-state and participant-result mutations.
     i = schedule_index("ddt-003-failure-before-locks")
-    mutate("rollback_mutation", ("transaction_schedules", i, "expected", "durable_state", "mutation_count"), 1)
+    mutate(
+        "rollback_mutation",
+        ("transaction_schedules", i, "expected", "durable_state", "mutation_count"),
+        1,
+    )
     i = schedule_index("ddt-004-failure-after-mutation")
-    mutate("rollback_audit", ("transaction_schedules", i, "expected", "durable_state", "audit_count"), 1)
+    mutate(
+        "rollback_audit",
+        ("transaction_schedules", i, "expected", "durable_state", "audit_count"),
+        1,
+    )
     i = schedule_index("ddt-005-failure-after-audit")
-    mutate("rollback_receipt", ("transaction_schedules", i, "expected", "durable_state", "completed_receipt_count"), 1)
+    mutate(
+        "rollback_receipt",
+        (
+            "transaction_schedules",
+            i,
+            "expected",
+            "durable_state",
+            "completed_receipt_count",
+        ),
+        1,
+    )
     i = schedule_index("ddt-006-failure-after-receipt")
-    mutate("rollback_claim", ("transaction_schedules", i, "expected", "durable_state", "claim_state"), "completed")
+    mutate(
+        "rollback_claim",
+        ("transaction_schedules", i, "expected", "durable_state", "claim_state"),
+        "completed",
+    )
     i = schedule_index("ddt-007-response-loss-after-commit")
-    mutate("lost_response_rollback", ("transaction_schedules", i, "expected", "durable_state", "mutation_count"), 0)
+    mutate(
+        "lost_response_rollback",
+        ("transaction_schedules", i, "expected", "durable_state", "mutation_count"),
+        0,
+    )
     i = schedule_index("ddt-008-retry-after-lost-response")
-    mutate("retry_second_mutation", ("transaction_schedules", i, "expected", "durable_state", "mutation_count"), 2)
-    mutate("retry_second_audit", ("transaction_schedules", i, "expected", "durable_state", "audit_count"), 2)
+    mutate(
+        "retry_second_mutation",
+        ("transaction_schedules", i, "expected", "durable_state", "mutation_count"),
+        2,
+    )
+    mutate(
+        "retry_second_audit",
+        ("transaction_schedules", i, "expected", "durable_state", "audit_count"),
+        2,
+    )
     i = schedule_index("ddt-009-same-key-same-digest")
-    mutate("same_digest_second_audit", ("transaction_schedules", i, "expected", "durable_state", "audit_count"), 2)
+    mutate(
+        "same_digest_second_audit",
+        ("transaction_schedules", i, "expected", "durable_state", "audit_count"),
+        2,
+    )
     i = schedule_index("ddt-010-same-key-different-digest")
-    mutate("different_digest_second_commit", ("transaction_schedules", i, "expected", "participant_results", 1), "committed")
+    mutate(
+        "different_digest_second_commit",
+        ("transaction_schedules", i, "expected", "participant_results", 1),
+        "committed",
+    )
     i = schedule_index("ddt-011-different-key-overlap")
-    mutate("different_key_second_commit", ("transaction_schedules", i, "expected", "participant_results", 1), "committed")
+    mutate(
+        "different_key_second_commit",
+        ("transaction_schedules", i, "expected", "participant_results", 1),
+        "committed",
+    )
     i = schedule_index("ddt-012-authority-loss-while-waiting")
-    mutate("authority_loss_second_replay", ("transaction_schedules", i, "expected", "participant_results", 1), "idempotent_replay")
+    mutate(
+        "authority_loss_second_replay",
+        ("transaction_schedules", i, "expected", "participant_results", 1),
+        "idempotent_replay",
+    )
     i = schedule_index("ddt-014-readback-denied-after-revocation")
-    mutate("readback_denied_reversed", ("transaction_schedules", i, "expected", "readback", "authorised"), True)
+    mutate(
+        "readback_denied_reversed",
+        ("transaction_schedules", i, "expected", "readback", "authorised"),
+        True,
+    )
     i = schedule_index("ddt-002-clean-commit-with-waiting-area")
     mutate(
         "waiting_area_not_cleared",
-        ("transaction_schedules", i, "expected", "durable_state", "artifacts", "appointment", "waiting_area_id"),
+        (
+            "transaction_schedules",
+            i,
+            "expected",
+            "durable_state",
+            "artifacts",
+            "appointment",
+            "waiting_area_id",
+        ),
         "syn-waiting-area-001",
+    )
+    i = schedule_index("ddt-015-clean-commit-null-cancellation-text")
+    mutate(
+        "optional_null_text_materialized",
+        (
+            "transaction_schedules",
+            i,
+            "expected",
+            "durable_state",
+            "artifacts",
+            "receipt",
+            "cancellation_reason",
+        ),
+        FICTIONAL_CANCELLATION_TEXT,
     )
 
     return mutations
@@ -1222,7 +1935,9 @@ def build_report(packet: dict[str, Any], schema: dict[str, Any]) -> dict[str, An
     ]
     return {
         "schema_version": "raisa.delete_confirm_conditional_command_kernel.evidence.v1",
-        "status": "passed" if not canonical_errors and not admitted_mutations else "failed",
+        "status": "passed"
+        if not canonical_errors and not admitted_mutations
+        else "failed",
         "canonical_errors": canonical_errors,
         "decision_scenario_count": len(packet["decision_scenarios"]),
         "transaction_schedule_count": len(packet["transaction_schedules"]),

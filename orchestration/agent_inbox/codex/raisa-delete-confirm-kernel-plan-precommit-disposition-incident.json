@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.orchestrator_incident_evidence.v1",
+  "incident_id": "AER-0322",
+  "observed_at": "2026-08-15T11:52:17+10:00",
+  "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+  "attempt": "plan-precommit-receipt-001",
+  "expected": "configured parallelism disposition vocabulary",
+  "observed": "selected",
+  "preflight_status": "revision_required",
+  "reason": "parallelism_lane_disposition_invalid:deepseek_flash",
+  "stopped_before": [
+    "plan_commit",
+    "worker_dispatch",
+    "external_model_call"
+  ],
+  "correction": "Use the admitted planned disposition for the not-yet-dispatched DeepSeek lane.",
+  "candidate_state": "canonical_unchanged",
+  "protected_ref_or_product_effect": false
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 281,
+  "register_revision": 285,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-15",
@@ -12883,6 +12883,176 @@
           "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-post-combined-editor-compass-baton-orientation-pre-verifier-acceptance-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-281.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0321",
+      "attempt_id": "raisa-delete-confirm-kernel-preplanning-leverage-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne parallelism assessment must use the configured expected_leverage vocabulary; timing or qualification belongs in rationale text rather than a new enum value.",
+      "observed_error": "Sol wrote expected_leverage as positive_after_contract_freeze for the reserved DeepSeek lane. The orchestrator preflight returned revision_required before plan freeze, worker dispatch, external model use or Git commit.",
+      "detection_method": "The local Ariadne preflight emitted parallelism_lane_leverage_invalid:deepseek_flash; the corrected state changed only the enum to positive and then passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-preplanning-leverage-vocabulary-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-285.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the invalid value with configured expected_leverage positive, retain after-contract-freeze timing in rationale, regenerate the receipt and require passed before plan freeze.",
+        "prevention_control": "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-preplanning-leverage-vocabulary-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-285.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0322",
+      "attempt_id": "raisa-delete-confirm-kernel-plan-precommit-disposition-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A not-yet-dispatched worker lane must use an admitted Ariadne parallelism disposition in the plan-precommit runtime state.",
+      "observed_error": "Sol labelled the future DeepSeek lane selected, which is outside the configured disposition vocabulary. The preflight returned revision_required before plan commit or dispatch.",
+      "detection_method": "The local Ariadne preflight emitted parallelism_lane_disposition_invalid:deepseek_flash; the regenerated state used planned and passed before the plan commit.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-plan-precommit-disposition-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-plan-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-plan-precommit-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-285.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_precommit_parallelism_disposition_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace selected with the admitted planned disposition, retain the exact future work package and regenerate a passing plan-precommit receipt before commit.",
+        "prevention_control": "Reuse the last passing stage-equivalent parallelism object and validate its disposition vocabulary locally before any plan, dispatch or verifier boundary.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-plan-precommit-disposition-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-plan-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-plan-precommit-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-285.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0323",
+      "attempt_id": "raisa-delete-confirm-kernel-worker-predispatch-workspace-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An external worker worktree intentionally based on the frozen task-plan source must carry the exact resource-bound receipt, explicit permitted divergence and no internal assigned-agent id.",
+      "observed_error": "Sol first represented the deliberately divergent DeepSeek worktree as if it had to equal handoff/current, producing workspace_not_at_handoff, then populated an assigned-agent id without the exact resource receipt and received workspace_receipt_missing. Both states stopped before dispatch.",
+      "detection_method": "Two local Ariadne preflight attempts returned the exact workspace reasons; the passing descendant recorded at_handoff_current false, the plan-source divergence and recorded_at timestamp while leaving assigned_agent_ids empty.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-worker-predispatch-workspace-receipt-incident.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-pre-worker-dispatch-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-pre-worker-dispatch-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-285.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.external_worker_workspace_receipt_divergence_shape_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Record at_handoff_current false, the exact frozen-plan divergence and recorded_at timestamp in the resource-bound worktree receipt, leave assigned_agent_ids empty for the external adapter, and require a passing pre-dispatch receipt.",
+        "prevention_control": "External worker receipts must use the last passing resource-bound schema, explicitly record every permitted non-handoff source relation and keep internal assignment inventory separate from external adapter dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-worker-predispatch-workspace-receipt-incident.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-pre-worker-dispatch-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission-pre-worker-dispatch-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-285.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0324",
+      "attempt_id": "raisa-delete-confirm-kernel-deepseek-implementation-001",
+      "observed_on": "2026-08-15",
+      "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "A worker may self-report pass only when the canonical authored-synthetic evidence is internally valid and the closed contract exactly represents the frozen authority, signed-evidence, optional-reason and atomic artifact requirements.",
+      "observed_error": "DeepSeek returned pass with 19 focused tests, but its canonical confirmation occurred after its own evidence expiry, its top-level contract omitted exact current-role/capability and signed-evidence field sets, and it represented no successful null optional cancellation-text path.",
+      "detection_method": "Sol reran the focused tests, read all six owned files and used direct packet probes to compare confirmed_at with expires_at, inspect closed contract keys and search for a successful null-text decision and atomic schedule. The tests passed while all four semantic probes failed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-sol-rejection-evidence.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-worker-result.json",
+        "docs/ariadne-agent-error-correction-register-revision-285.md",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Preserve the worker commit as rejected untrusted provenance, close the same-lane correction loop, adopt only its six-file source under the named Sol recovery lease, repair the expiry relation and exact authority/evidence/atomic/null-text contracts, add direct regressions and require a fresh exact-candidate Gemini veto after deterministic admission.",
+        "prevention_control": "Before any worker self-pass is admitted, independently validate canonical temporal relations and enumerate every frozen closed-contract field and nullable success coordinate; focused test success cannot substitute for semantic packet admission.",
+        "evidence_paths": [
+          "docs/ariadne-orchestrator-recovery-lease.md",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-sol-rejection-evidence.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-285.md",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py"
         ]
       },
       "status": "corrected"

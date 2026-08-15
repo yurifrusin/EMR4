@@ -1,6 +1,7 @@
 import ast
 import hashlib
 import json
+from datetime import datetime
 from pathlib import Path
 
 from scripts.raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission import (
@@ -23,11 +24,15 @@ def _load(path: Path) -> dict:
 
 
 def _decision(packet: dict, scenario_id: str) -> dict:
-    return next(item for item in packet["decision_scenarios"] if item["id"] == scenario_id)
+    return next(
+        item for item in packet["decision_scenarios"] if item["id"] == scenario_id
+    )
 
 
 def _schedule(packet: dict, schedule_id: str) -> dict:
-    return next(item for item in packet["transaction_schedules"] if item["id"] == schedule_id)
+    return next(
+        item for item in packet["transaction_schedules"] if item["id"] == schedule_id
+    )
 
 
 def test_packet_schema_and_evidence_gate_pass() -> None:
@@ -82,7 +87,127 @@ def test_both_authority_checks_and_authority_before_replay_non_disclosure() -> N
     assert replay["expected"]["planned_effect"] is False
 
 
-def test_exact_lock_order_on_every_schedule_and_both_authority_checks_before_replay() -> None:
+def test_exact_current_authority_and_signed_evidence_contracts_are_closed() -> None:
+    packet = _load(PACKET_PATH)
+    authority = packet["authority_contract"]
+    evidence = packet["signed_evidence_contract"]
+
+    assert authority["server_owned_identity_fields"] == [
+        "practice_id",
+        "actor_user_id",
+        "actor_role",
+        "authenticated_session_id",
+    ]
+    assert authority["request_body_authority_fields_accepted"] == []
+    assert authority["allowed_actor_roles"] == [
+        "Receptionist",
+        "GP",
+        "Nurse",
+        "Admin",
+        "PracticeOwner",
+    ]
+    assert authority["required_capability"] == "appointment.cancel.confirm"
+    assert authority["check_points"] == [
+        "after_practice_scoped_appointment_lock",
+        "while_practice_appointment_and_idempotency_locks_held",
+    ]
+    assert authority["authority_and_practice_scoped_target_precede_receipt_disclosure"]
+
+    assert evidence["required_fields"] == [
+        "schema_version",
+        "purpose",
+        "key_id",
+        "practice_id",
+        "actor_user_id",
+        "authenticated_session_digest",
+        "operation_id",
+        "route_family",
+        "target_appointment_id",
+        "proposal_nonce",
+        "proposal_generated_at",
+        "signed_at",
+        "expires_at",
+        "pre_state_version",
+        "pre_status",
+        "pre_waiting_area_id",
+        "pre_cancellation_reason",
+        "pre_status_reason_code",
+        "proposed_status_reason_code",
+        "proposed_cancellation_reason",
+        "required_warning_codes",
+        "proposal_freshness_id",
+        "command_digest",
+        "signature",
+    ]
+    assert evidence["freshness_interval"] == (
+        "proposal_generated_at_le_signed_at_le_confirmed_at_le_expires_at"
+    )
+    assert evidence["event_or_model_evidence_accepted"] is False
+
+
+def test_canonical_confirmation_time_is_inside_evidence_validity_interval() -> None:
+    packet = _load(PACKET_PATH)
+    timestamps = {
+        key: datetime.fromisoformat(value.replace("Z", "+00:00"))
+        for key, value in packet["fixed_timestamps_utc"].items()
+    }
+    assert (
+        timestamps["proposal_generated_at"]
+        <= timestamps["signed_at"]
+        <= timestamps["confirmed_at"]
+        <= timestamps["expires_at"]
+    )
+    assert timestamps["committed_at"] >= timestamps["confirmed_at"]
+
+    schema = _load(SCHEMA_PATH)
+    expired = json.loads(json.dumps(packet))
+    expired["fixed_timestamps_utc"]["expires_at"] = "2026-08-15T01:52:49Z"
+    assert validate_packet(expired, schema)
+
+
+def test_transaction_idempotency_atomic_readback_and_ingress_contracts_are_exact() -> (
+    None
+):
+    packet = _load(PACKET_PATH)
+    assert packet["transaction_contract"]["global_lock_order"] == [
+        "practice",
+        "schedule_domain",
+        "appointment",
+        "idempotency_record",
+    ]
+    assert packet["transaction_contract"]["kernel_lock_plan"] == LOCK_ORDER
+    assert (
+        packet["transaction_contract"]["authority_fence_physical_mapping_proven"]
+        is False
+    )
+    assert packet["idempotency_contract"][
+        "receipt_disclosure_requires_current_authority"
+    ]
+    assert packet["idempotency_contract"]["in_progress_on_rollback"] == (
+        "discarded_with_transaction"
+    )
+    assert packet["atomic_effect_contract"]["publish_together"] == [
+        "appointment_soft_cancel",
+        "attributable_delete_audit",
+        "completed_idempotency_receipt",
+    ]
+    assert packet["atomic_effect_contract"]["post_state_version_rule"] == (
+        "pre_state_version_plus_one"
+    )
+    assert packet["readback_contract"]["transaction_proof"] is False
+    assert packet["readback_contract"]["timing"] == "after_atomic_commit"
+    assert packet["compatibility_ingress_policy"]["admitted_ingress"] == [
+        "delete-confirm"
+    ]
+    assert (
+        packet["compatibility_ingress_policy"]["second_cancellation_kernel_allowed"]
+        is False
+    )
+
+
+def test_exact_lock_order_on_every_schedule_and_both_authority_checks_before_replay() -> (
+    None
+):
     packet = _load(PACKET_PATH)
     assert packet["kernel_lock_plan"] == LOCK_ORDER
     assert packet["global_lock_order"] == [
@@ -96,15 +221,23 @@ def test_exact_lock_order_on_every_schedule_and_both_authority_checks_before_rep
         assert schedule["lock_plan"] == LOCK_ORDER
         trace = schedule["trace"]
         assert trace.index("lock:practice") < trace.index("lock:appointment")
-        assert trace.index("lock:appointment") < trace.index("check:authority_after_target_lock")
+        assert trace.index("lock:appointment") < trace.index(
+            "check:authority_after_target_lock"
+        )
         assert trace.index("check:authority_after_target_lock") < trace.index(
             "lock:idempotency_record"
         )
-        assert trace.index("lock:idempotency_record") < trace.index("check:authority_all_locks_held")
-        assert trace.index("check:authority_all_locks_held") < trace.index("inspect:idempotency")
+        assert trace.index("lock:idempotency_record") < trace.index(
+            "check:authority_all_locks_held"
+        )
+        assert trace.index("check:authority_all_locks_held") < trace.index(
+            "inspect:idempotency"
+        )
 
 
-def test_structured_reason_allowlist_optional_text_bound_and_cross_artifact_preservation() -> None:
+def test_structured_reason_allowlist_optional_text_bound_and_cross_artifact_preservation() -> (
+    None
+):
     packet = _load(PACKET_PATH)
     missing = _decision(packet, "ddc-003-reason-missing")
     assert missing["expected"]["outcome"] == "validation_rejected"
@@ -144,6 +277,19 @@ def test_structured_reason_allowlist_optional_text_bound_and_cross_artifact_pres
     assert code_values.pop() in CANCELLED_REASON_CODES
 
 
+def test_optional_null_cancellation_text_commits_and_is_preserved_exactly() -> None:
+    packet = _load(PACKET_PATH)
+    decision = _decision(packet, "ddc-046-optional-null-text-commit")
+    assert decision["cancellation_text"] == "null"
+    assert decision["expected"]["outcome"] == "committed"
+    schedule = _schedule(packet, "ddt-015-clean-commit-null-cancellation-text")
+    assert schedule["cancellation_text"] == "null"
+    artifacts = schedule["expected"]["durable_state"]["artifacts"]
+    assert artifacts is not None
+    for name in ("appointment", "audit", "receipt"):
+        assert artifacts[name]["cancellation_reason"] is None
+
+
 def test_waiting_area_is_cleared_in_appointment_audit_and_receipt() -> None:
     packet = _load(PACKET_PATH)
     with_waiting = _schedule(packet, "ddt-002-clean-commit-with-waiting-area")
@@ -152,13 +298,46 @@ def test_waiting_area_is_cleared_in_appointment_audit_and_receipt() -> None:
     assert state["appointment_status"] == "Cancelled"
     assert state["waiting_area_id"] is None
     artifacts = state["artifacts"]
+    assert artifacts["appointment"]["waiting_area_id"] is None
+    assert artifacts["audit"]["waiting_area_id_after"] is None
+    assert artifacts["receipt"]["waiting_area_id"] is None
     for key in ("appointment", "audit", "receipt"):
-        assert artifacts[key]["waiting_area_id"] is None, key
         assert artifacts[key]["cancellation_reason"] is not None
         assert artifacts[key]["status_reason_code"] == "PATIENT_CANCELLED"
+    assert artifacts["audit"]["confirmed_warning_codes"] == ["waiting_area_cleared"]
 
 
-def test_every_precommit_injection_rolls_back_appointment_audit_receipt_and_claim() -> None:
+def test_completed_artifacts_have_exact_identity_and_field_sets() -> None:
+    packet = _load(PACKET_PATH)
+    required = packet["atomic_effect_contract"]
+    state = _schedule(packet, "ddt-001-clean-commit-no-waiting-area")["expected"][
+        "durable_state"
+    ]
+    artifacts = state["artifacts"]
+    assert artifacts is not None
+    assert set(artifacts["appointment"]) == set(required["appointment_required_fields"])
+    assert set(artifacts["audit"]) == set(required["audit_required_fields"])
+    assert set(artifacts["receipt"]) == set(required["receipt_required_fields"])
+    assert artifacts["appointment"]["practice_id"] == artifacts["audit"]["practice_id"]
+    assert artifacts["audit"]["practice_id"] == artifacts["receipt"]["practice_id"]
+    assert (
+        artifacts["appointment"]["appointment_id"]
+        == artifacts["audit"]["appointment_id"]
+    )
+    assert (
+        artifacts["audit"]["appointment_id"]
+        == artifacts["receipt"]["target_appointment_id"]
+    )
+    assert artifacts["audit"]["audit_id"] == artifacts["receipt"]["audit_id"]
+    for name in ("appointment", "audit", "receipt"):
+        assert artifacts[name]["post_state_version"] == (
+            artifacts[name]["pre_state_version"] + 1
+        )
+
+
+def test_every_precommit_injection_rolls_back_appointment_audit_receipt_and_claim() -> (
+    None
+):
     packet = _load(PACKET_PATH)
     precommit = {
         "before_locks",
@@ -234,7 +413,9 @@ def test_post_commit_readback_is_separately_authorised() -> None:
     assert denied_result["durable_state"]["mutation_count"] == 1
 
 
-def test_raw_status_event_model_channel_ingress_cannot_self_confirm_or_execute() -> None:
+def test_raw_status_event_model_channel_ingress_cannot_self_confirm_or_execute() -> (
+    None
+):
     packet = _load(PACKET_PATH)
     for scenario_id in (
         "ddc-028-raw-delete-rejected",
@@ -260,7 +441,10 @@ def test_every_hostile_mutation_fails_closed() -> None:
 
 def test_script_has_no_application_database_network_or_provider_import() -> None:
     tree = ast.parse(
-        (ROOT / "scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py").read_text(encoding="utf-8")
+        (
+            ROOT
+            / "scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py"
+        ).read_text(encoding="utf-8")
     )
     imported: set[str] = set()
     for node in ast.walk(tree):

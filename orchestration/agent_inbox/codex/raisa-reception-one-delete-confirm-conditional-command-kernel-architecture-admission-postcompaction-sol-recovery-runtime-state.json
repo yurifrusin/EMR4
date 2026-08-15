@@ -1,0 +1,193 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_named_sol_recovery_of_rejected_delete_confirm_kernel_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. At Continuity 295 / Compass 277 it retains the provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal as the next dependency-satisfied tranche and requires conceptual Flash defects to transfer to Sol recovery without a same-lane retry.",
+    "current_authority_allocation": "Sol owns the frozen architecture, recovery amendments, deterministic admission, acceptance and Git. DeepSeek completed its bounded package but its conceptual self-pass is rejected and its lane is closed. Gemini 3.6 Flash/high remains reserved for one fresh exact-candidate veto after deterministic recovery admission. Native subagents remain declined because recovery is tightly coupled to one six-file state machine.",
+    "active_plan_and_acceptance": "The frozen 2026-08-15 plan, architecture and threat-model delta were reread completely together with the in-progress latch. The accepted cancellation-readiness result at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735 requires this exact unmounted locked-truth/current-authority/idempotency/audit kernel before any physical representation, mounted route or Reception One cancellation UI. The preserved rejection and recovery lease require valid unexpired evidence, exact authority/evidence contracts and a successful nullable cancellation-text path.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored. Recovery is authored-synthetic, provider-free and unmounted and is limited to the six candidate protocol files plus exact rejection, register, receipt and test evidence. No application route, OpenAPI, GraphQL, database/source/watcher, product client/UI, command/write, provider, patient/product/clinical/protected data, credential/IAM/network, deployment, production, release, Pages or protected-ref action is opened. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "The task worktree is on codex/ariadne-bernie-davida-parallel-seam at HEAD 4237c1f17e6ab27fc64b7394401df047ba07a581 with the expected in-progress Sol modification to the unmounted simulator. The local task ref matches HEAD and origin task remains 12cda23eb69e9d4451ea23cc437989769e8073ac. Required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 622 unrelated untracked files, including five under docs/branding, remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "objective": "Freeze and deterministically rehearse one authored-synthetic, unmounted cancellation transaction contract that binds explicit confirmation, signed proposal evidence, operation-scoped idempotency, a locked practice appointment, in-transaction current authority, exact reason preservation, atomic soft-cancel/audit/receipt completion, denial rollback and fresh authorised readback without changing mounted product source.",
+    "status": "in_progress",
+    "source_head": "4237c1f17e6ab27fc64b7394401df047ba07a581",
+    "authority_source": "Yuri's 2026-08-15 selection of Reception One appointment cancellation, the accepted readiness review at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735, AGENTS.md Continuity 295 / Compass 277, and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "DeepSeek candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc was preserved at task commit 4237c1f17e6ab27fc64b7394401df047ba07a581 as untrusted source after its conceptual self-pass was rejected; Sol recovery amendments are partially applied",
+      "next_executable_stage": "Complete the exact artifact contracts, closed schema, nullable-text and hostile-mutation regressions under the named Sol recovery lease, then rerun deterministic admission before any Gemini call",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_unmounted_rehearsal_only",
+      "no_mounted_route_openapi_graphql_database_product_client_or_ui_change",
+      "no_runtime_broker_adapter_provider_call_source_read_or_watcher",
+      "no_patient_product_clinical_historical_diary_or_protected_data",
+      "no_command_write_or_executable_tool_against_product_or_database",
+      "dedicated_delete_confirmation_semantics_only",
+      "raw_delete_and_status_fallback_are_separate_ingress_candidates_not_kernel_authority",
+      "current_authority_locked_truth_idempotency_audit_and_readback_remain_backend_owned",
+      "no_model_channel_or_delegate_self_confirmation",
+      "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "assessed_stage": "post_compaction_sol_recovery",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "rationale": "The worker supplied a useful six-file scaffold but its conceptual self-pass was rejected; the correction-loop rule closes same-lane retry and transfers recovery to Sol.",
+        "work_packages": [
+          "preserved untrusted candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "A fresh exact-candidate veto is mandatory after the repaired destructive-command contract passes every deterministic gate.",
+        "work_packages": [
+          "post-recovery exact-candidate delete-confirm kernel veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The remaining amendments are tightly coupled across one simulator, generated contract/schema/evidence and direct tests; another implementation lane would add merge ambiguity and erase recovery provenance.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol completes and tests the named recovery amendments serially",
+      "Gemini remains blocked until deterministic exact-candidate admission",
+      "repository pytest processes that load conftest remain serial",
+      "mounted product and database sources remain untouched",
+      "protected refs remain closed"
+    ],
+    "reassessment_triggers": [
+      "recovery patch complete",
+      "deterministic gate failure",
+      "pre-verifier admission",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_post_compaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol repeated complete AGENTS.md, active-plan, latch, protected-boundary, API Steward and exact Git rehydration after compaction."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native subagents were reassessed and declined for negative recovery leverage."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini is reserved and not admissible before deterministic recovery passes."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek completed its bounded candidate; its self-pass is rejected and its correction lane is closed."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek-v4-flash-high-delete-confirm-kernel",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/delete-confirm-kernel-deepseek-717c1233",
+      "branch": "codex/worker-delete-confirm-kernel-717c1233",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_divergence": "rejected untrusted candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc from frozen plan source 717c1233046452abff7d83af68e9949a31cc29b5",
+      "recorded_at": "2026-08-15T12:14:08+10:00"
+    }
+  ],
+  "assigned_agent_ids": []
+}

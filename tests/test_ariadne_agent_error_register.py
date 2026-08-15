@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 281
+    assert register["register_revision"] == 285
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 321)
+        f"AER-{index:04d}" for index in range(1, 325)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 219
+    assert len(agent_incidents) == 223
     assert len(transport_incidents) == 9
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2575,7 +2575,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 320
+    assert report["incident_count"] == 324
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -2942,6 +2942,54 @@ def test_aer_0320_records_rejected_pre_verifier_runtime_state() -> None:
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
 
 
+def test_aer_0321_through_0323_preserve_fail_closed_receipt_recoveries() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    leverage = incidents["AER-0321"]
+    assert leverage["origin"] == "agent_behavior"
+    assert leverage["category"] == "command_scope_violation"
+    assert leverage["candidate_state"] == "canonical_unchanged"
+    assert leverage["workflow_disposition"] == "revision_required"
+    assert leverage["recurrence_signature"] == (
+        "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
+    )
+    assert "positive_after_contract_freeze" in leverage["observed_error"]
+    assert leverage["correction"]["status"] == "corrected_fresh_attempt"
+
+    disposition = incidents["AER-0322"]
+    assert disposition["category"] == "output_contract_violation"
+    assert disposition["candidate_state"] == "canonical_unchanged"
+    assert disposition["workflow_disposition"] == "revision_required"
+    assert "selected" in disposition["observed_error"]
+    assert "planned" in disposition["correction"]["action"]
+
+    workspace = incidents["AER-0323"]
+    assert workspace["category"] == "output_contract_violation"
+    assert workspace["candidate_state"] == "canonical_unchanged"
+    assert workspace["workflow_disposition"] == "revision_required"
+    assert "workspace_not_at_handoff" in workspace["observed_error"]
+    assert "workspace_receipt_missing" in workspace["observed_error"]
+    assert "at_handoff_current false" in workspace["correction"]["action"]
+
+
+def test_aer_0324_rejects_underclosed_deepseek_self_pass() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0324"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "implementer"
+    assert incident["resource_id"] == "deepseek-flash-workers"
+    assert incident["model"] == "deepseek-v4-flash"
+    assert incident["transport"] == "claude_code_bare_deepseek"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["workflow_disposition"] == "recovery_lease_invoked"
+    assert "after its own evidence expiry" in incident["observed_error"]
+    assert "null optional cancellation-text" in incident["observed_error"]
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["status"] == "corrected"
+
+
 def test_aer_0273_and_0274_preserve_cf_d2_planning_stops() -> None:
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
@@ -3216,29 +3264,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 281
-    assert report["incident_count"] == 320
+    assert report["register_revision"] == 285
+    assert report["incident_count"] == 324
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 219,
+        "agent_behavior": 223,
         "harness": 37,
         "repository": 55,
         "transport": 9,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 46,
+        "command_scope_violation": 47,
         "evidence_misreport": 42,
         "harness_failure": 37,
-        "output_contract_violation": 91,
+        "output_contract_violation": 93,
         "read_only_violation": 3,
-        "reasoning_claim_error": 37,
+        "reasoning_claim_error": 38,
         "repository_defect": 55,
         "transport_timeout": 9,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 194,
-        "untrusted_partial_worktree": 28,
+        "canonical_unchanged": 197,
+        "untrusted_partial_worktree": 29,
     }
     receipt_event_recurrence = next(
         row
@@ -3274,6 +3322,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Every content-search command in this and later protected-evidence-adjacent work must supply an explicit exact-file allowlist assembled from already known non-protected baton/API paths. Searching a directory root such as tests, docs or the repository root is prohibited even when the textual pattern appears narrow.",
                 "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
                 "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0314", "AER-0321"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+                "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value.",
             ],
         },
         {

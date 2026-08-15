@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.orchestrator_incident_evidence.v1",
+  "incident_id": "AER-0321",
+  "observed_at": "2026-08-15T11:41:18+10:00",
+  "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+  "attempt": "preplanning-receipt-001",
+  "expected": "configured expected_leverage vocabulary",
+  "observed": "positive_after_contract_freeze",
+  "preflight_status": "revision_required",
+  "reason": "parallelism_lane_leverage_invalid:deepseek_flash",
+  "stopped_before": [
+    "plan_freeze",
+    "worker_dispatch",
+    "external_model_call",
+    "git_commit"
+  ],
+  "correction": "Use expected_leverage positive and retain the timing qualification in rationale text.",
+  "candidate_state": "canonical_unchanged",
+  "protected_ref_or_product_effect": false
+}

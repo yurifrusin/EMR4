@@ -1,0 +1,194 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_deterministically_admitted_sol_recovery_candidate_and_incident_controls",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now retains the accepted cancellation-readiness result at Continuity 295 / Compass 277, the active unmounted delete-confirm kernel tranche and agent-error register revision 285 without changing the current product result or next-work authority.",
+    "current_authority_allocation": "Sol owns the conceptual recovery, deterministic admission, commit and acceptance. DeepSeek's self-pass is rejected and its lane is complete without retry. Gemini 3.6 Flash/high is reserved for one fresh exact-candidate veto only after this deterministic candidate is committed into a clean review worktree. Native subagents remain declined for negative coupled-recovery leverage.",
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta, preserved worker rejection and named Sol recovery lease require exact unexpired evidence, current roles/capability, signed fields, nullable text, exact atomic artifacts and direct regressions. The recovered packet now passes 46 decisions, 15 schedules and 67 hostile mutations; 24 focused protocol tests, 212 cancellation/API tests, 245 register tests and the 196-test canonical fast profile pass.",
+    "protected_evidence_boundaries": "The candidate remains authored-synthetic, provider-free and unmounted. No application route, OpenAPI, GraphQL, database/source/watcher, product client/UI, command/write, provider, patient/product/clinical/protected data, credential/IAM/network, deployment, production, release, Pages or protected-ref action occurred. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "Task HEAD and local task ref remain 4237c1f17e6ab27fc64b7394401df047ba07a581; origin task is 12cda23eb69e9d4451ea23cc437989769e8073ac and required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Ten expected tracked paths are modified and six recovery/incident files are newly untracked before this state; the other 622 untracked files, including five under docs/branding, are preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "objective": "Freeze and deterministically rehearse one authored-synthetic, unmounted cancellation transaction contract that binds explicit confirmation, signed proposal evidence, operation-scoped idempotency, a locked practice appointment, in-transaction current authority, exact reason preservation, atomic soft-cancel/audit/receipt completion, denial rollback and fresh authorised readback without changing mounted product source.",
+    "status": "in_progress",
+    "source_head": "4237c1f17e6ab27fc64b7394401df047ba07a581",
+    "authority_source": "Yuri's 2026-08-15 selection of Reception One appointment cancellation, the accepted readiness review at bb36e19c774eb1bc4ace8cafc6ae2b5c35bc8735, AGENTS.md Continuity 295 / Compass 277, and standing uninterrupted-development authority",
+    "checkpoint": {
+      "completed_stage": "Sol recovery repaired the rejected six-file candidate under the named lease: 46 decisions, 15 schedules, 67 hostile mutations, 24 focused protocol checks, the 212-test cancellation/API packet, the 245-test error-register packet and the 196-test canonical fast profile pass",
+      "next_executable_stage": "Generate and pass the precommit receipt, commit the exact recovered candidate and incident controls, then create a clean exact-HEAD Gemini worktree and pass pre-verifier admission before one independent veto",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 0,
+        "verification": 1
+      },
+      "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_unmounted_rehearsal_only",
+      "no_mounted_route_openapi_graphql_database_product_client_or_ui_change",
+      "no_runtime_broker_adapter_provider_call_source_read_or_watcher",
+      "no_patient_product_clinical_historical_diary_or_protected_data",
+      "no_command_write_or_executable_tool_against_product_or_database",
+      "dedicated_delete_confirmation_semantics_only",
+      "raw_delete_and_status_fallback_are_separate_ingress_candidates_not_kernel_authority",
+      "current_authority_locked_truth_idempotency_audit_and_readback_remain_backend_owned",
+      "no_model_channel_or_delegate_self_confirmation",
+      "no_credentials_iam_network_deployment_production_release_pages_or_protected_ref_movement",
+      "docs_branding_and_unrelated_untracked_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "assessed_stage": "sol_recovery_precommit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "rationale": "The useful six-file scaffold is preserved, its self-pass and conceptual defects are recorded at AER-0324, and the Flash lane is closed without correction retry.",
+        "work_packages": [
+          "rejected candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc preserved as untrusted provenance"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "The deterministic recovery is now admissible for one fresh exact-commit veto after a clean review worktree and pre-verifier receipt pass.",
+        "work_packages": [
+          "exact recovered delete-confirm contract veto after candidate commit"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Recovery and incident-register changes are already mechanically complete and another lane would add reconciliation cost without new independence beyond the planned Gemini veto.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "explicit-path candidate commit follows passing precommit receipt",
+      "Gemini waits for a clean exact-commit review worktree and passing pre-verifier receipt",
+      "repository pytest processes remain serial",
+      "mounted product and database source remain untouched",
+      "protected refs remain closed"
+    ],
+    "reassessment_triggers": [
+      "candidate commit",
+      "clean review worktree preflight",
+      "pre-verifier admission",
+      "Gemini decision",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_post_compaction_rehydration_and_deterministic_recovery_admission",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the named recovery and independently reproduced every deterministic gate."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native subagents remain declined after precommit reassessment."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini is planned only after exact candidate commit and pre-verifier admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek completed its candidate; AER-0324 rejects the self-pass and closes same-lane retry."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek-v4-flash-high-delete-confirm-kernel",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/delete-confirm-kernel-deepseek-717c1233",
+      "branch": "codex/worker-delete-confirm-kernel-717c1233",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_divergence": "rejected untrusted candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc from frozen plan source 717c1233046452abff7d83af68e9949a31cc29b5",
+      "recorded_at": "2026-08-15T12:14:08+10:00"
+    }
+  ],
+  "assigned_agent_ids": []
+}

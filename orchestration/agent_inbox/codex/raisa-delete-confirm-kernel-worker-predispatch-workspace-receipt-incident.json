@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.orchestrator_incident_evidence.v1",
+  "incident_id": "AER-0323",
+  "observed_at": "2026-08-15T11:58:44+10:00",
+  "tranche": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+  "attempt": "worker-predispatch-receipt-001",
+  "expected": "external worker worktree receipt with explicit recorded divergence and no internal assigned-agent id",
+  "observed": [
+    "workspace_not_at_handoff",
+    "workspace_receipt_missing"
+  ],
+  "preflight_status": "revision_required",
+  "stopped_before": [
+    "DeepSeek dispatch",
+    "external model call",
+    "worker source change"
+  ],
+  "correction": "Record at_handoff_current false, the exact task-plan divergence and recorded_at timestamp in the workspace receipt, and keep assigned_agent_ids empty for the external adapter.",
+  "candidate_state": "canonical_unchanged",
+  "protected_ref_or_product_effect": false
+}

@@ -1,30 +1,30 @@
 {
-  "canonical_register_sha256": "089834211ecbdfa89d851f8a43295f0d1ed347dc9819b7fa8ceb4aaa61fd06a8",
+  "canonical_register_sha256": "e77539460e61d944f7c75be0ded6b7078a93de988650998631d81ce1206ef529",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 194,
-      "untrusted_partial_worktree": 28
+      "canonical_unchanged": 197,
+      "untrusted_partial_worktree": 29
     },
     "by_category": {
-      "command_scope_violation": 46,
+      "command_scope_violation": 47,
       "evidence_misreport": 42,
       "harness_failure": 37,
-      "output_contract_violation": 91,
+      "output_contract_violation": 93,
       "read_only_violation": 3,
-      "reasoning_claim_error": 37,
+      "reasoning_claim_error": 38,
       "repository_defect": 55,
       "transport_timeout": 9
     },
     "by_origin": {
-      "agent_behavior": 219,
+      "agent_behavior": 223,
       "harness": 37,
       "repository": 55,
       "transport": 9
     },
     "by_process_severity": {
-      "low": 127,
-      "material": 98,
+      "low": 130,
+      "material": 99,
       "moderate": 95
     },
     "by_resource_and_role": {
@@ -39,14 +39,14 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 162,
+      "codex-primary-orchestrator::orchestrator": 165,
       "codex-shell-command-timeout-wrapper::orchestrator": 1,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 7,
+      "deepseek-flash-workers::implementer": 8,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,14 +87,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 22,
+      "implementer": 23,
       "integration_reviewer": 2,
-      "orchestrator": 244,
+      "orchestrator": 247,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 320,
+  "incident_count": 324,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -119,6 +119,30 @@
         "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file."
       ],
       "recurrence_signature": "orchestrator.overbroad_repository_content_search",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0314",
+        "AER-0321"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+        "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value."
+      ],
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -784,7 +808,7 @@
       ]
     }
   ],
-  "register_revision": 281,
+  "register_revision": 285,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-15"
 }

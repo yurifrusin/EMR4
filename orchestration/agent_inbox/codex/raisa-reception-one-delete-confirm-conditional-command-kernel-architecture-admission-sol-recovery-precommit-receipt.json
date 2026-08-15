@@ -1,0 +1,84 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm conditional-command kernel architecture and admission rehearsal",
+    "completed_stage": "Sol recovery repaired the rejected six-file candidate under the named lease: 46 decisions, 15 schedules, 67 hostile mutations, 24 focused protocol checks, the 212-test cancellation/API packet, the 245-test error-register packet and the 196-test canonical fast profile pass",
+    "next_executable_stage": "Generate and pass the precommit receipt, commit the exact recovered candidate and incident controls, then create a clean exact-HEAD Gemini worktree and pass pre-verifier admission before one independent veto",
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "resume_after_compaction": true,
+    "source_head": "4237c1f17e6ab27fc64b7394401df047ba07a581",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "sol_recovery_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The useful six-file scaffold is preserved, its self-pass and conceptual defects are recorded at AER-0324, and the Flash lane is closed without correction retry.",
+        "work_packages": [
+          "rejected candidate b2d6427582737b126f6c3c8d57a59b88440ca5fc preserved as untrusted provenance"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The deterministic recovery is now admissible for one fresh exact-commit veto after a clean review worktree and pre-verifier receipt pass.",
+        "work_packages": [
+          "exact recovered delete-confirm contract veto after candidate commit"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Recovery and incident-register changes are already mechanically complete and another lane would add reconciliation cost without new independence beyond the planned Gemini veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-delete-confirm-conditional-command-kernel-architecture-admission",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate commit",
+      "clean review worktree preflight",
+      "pre-verifier admission",
+      "Gemini decision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path candidate commit follows passing precommit receipt",
+      "Gemini waits for a clean exact-commit review worktree and passing pre-verifier receipt",
+      "repository pytest processes remain serial",
+      "mounted product and database source remain untouched",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "commit_exact_deterministically_admitted_sol_recovery_candidate_and_incident_controls",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0ec4410bad05929fd2e7d3649a70aeeab65bd86c9fa8c9ecc70a6b61f5306acc",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan, architecture, threat delta, preserved worker rejection and named Sol recovery lease require exact unexpired evidence, current roles/capability, signed fields, nullable text, exact atomic artifacts and direct regressions. The recovered packet now passes 46 decisions, 15 schedules and 67 hostile mutations; 24 focused protocol tests, 212 cancellation/API tests, 245 register tests and the 196-test canonical fast profile pass.",
+    "current_authority_allocation": "Sol owns the conceptual recovery, deterministic admission, commit and acceptance. DeepSeek's self-pass is rejected and its lane is complete without retry. Gemini 3.6 Flash/high is reserved for one fresh exact-candidate veto only after this deterministic candidate is committed into a clean review worktree. Native subagents remain declined for negative coupled-recovery leverage.",
+    "git_refs_and_worktree": "Task HEAD and local task ref remain 4237c1f17e6ab27fc64b7394401df047ba07a581; origin task is 12cda23eb69e9d4451ea23cc437989769e8073ac and required 648c8ec9805af63729264ea9c22fd695f062a741 is an ancestor. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Ten expected tracked paths are modified and six recovery/incident files are newly untracked before this state; the other 622 untracked files, including five under docs/branding, are preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now retains the accepted cancellation-readiness result at Continuity 295 / Compass 277, the active unmounted delete-confirm kernel tranche and agent-error register revision 285 without changing the current product result or next-work authority.",
+    "protected_evidence_boundaries": "The candidate remains authored-synthetic, provider-free and unmounted. No application route, OpenAPI, GraphQL, database/source/watcher, product client/UI, command/write, provider, patient/product/clinical/protected data, credential/IAM/network, deployment, production, release, Pages or protected-ref action occurred. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
