@@ -25,7 +25,7 @@ CONTRACT_PATH = ROOT / (
 )
 SCHEMA_PATH = CONTRACT_PATH.with_name("scaffold-contract.schema.json")
 EXPECTED_CONTRACT_SHA256 = (
-    "be51a13e65d5cbdce9a08d567802a3064b5485c270f2b41e35472b33bcfbecae"
+    "51e9cd78e5a6927dd82fddb7bfa6f6395654713797f42b00f3e5483c24fec014"
 )
 HOSTILE_MUTATION_TARGET = 90
 
@@ -46,8 +46,7 @@ def _canonical_digest(value: Any) -> str:
 
 def _contract_errors(candidate: Any, schema: dict[str, Any]) -> list[str]:
     errors = [
-        error.message
-        for error in Draft202012Validator(schema).iter_errors(candidate)
+        error.message for error in Draft202012Validator(schema).iter_errors(candidate)
     ]
     if _canonical_digest(candidate) != EXPECTED_CONTRACT_SHA256:
         errors.append("contract_digest_mismatch")
@@ -88,6 +87,35 @@ def _mutate_at(candidate: Any, path: tuple[Any, ...]) -> None:
     parent[final] = _mutated_leaf(parent[final])
 
 
+def _structured_mismatches(
+    expected: Any,
+    candidate: Any,
+    prefix: tuple[Any, ...] = (),
+) -> list[tuple[Any, ...]]:
+    """Return exact structured deviations from the digest-admitted baseline."""
+    if type(expected) is not type(candidate):
+        return [prefix]
+    if isinstance(expected, dict):
+        if set(expected) != set(candidate):
+            return [prefix]
+        mismatches: list[tuple[Any, ...]] = []
+        for key in expected:
+            mismatches.extend(
+                _structured_mismatches(expected[key], candidate[key], (*prefix, key))
+            )
+        return mismatches
+    if isinstance(expected, list):
+        if len(expected) != len(candidate):
+            return [prefix]
+        mismatches = []
+        for index, value in enumerate(expected):
+            mismatches.extend(
+                _structured_mismatches(value, candidate[index], (*prefix, index))
+            )
+        return mismatches
+    return [] if expected == candidate else [prefix]
+
+
 def _verify_source_bindings(contract: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     for group in ("input_bindings", "implementation_bindings"):
@@ -103,16 +131,15 @@ def _verify_source_bindings(contract: dict[str, Any]) -> list[str]:
 def _verify_static_lowering() -> list[str]:
     errors: list[str] = []
     tenancy_source = (ROOT / "app/models/tenancy.py").read_text(encoding="utf-8")
-    appointments_source = (
-        ROOT / "app/models/appointments.py"
-    ).read_text(encoding="utf-8")
+    appointments_source = (ROOT / "app/models/appointments.py").read_text(
+        encoding="utf-8"
+    )
     migration_source = (
-        ROOT
-        / "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py"
+        ROOT / "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py"
     ).read_text(encoding="utf-8")
-    service_source = (
-        ROOT / "app/services/appointment_delete_physical.py"
-    ).read_text(encoding="utf-8")
+    service_source = (ROOT / "app/services/appointment_delete_physical.py").read_text(
+        encoding="utf-8"
+    )
 
     for token in (
         "authority_generation = Column(BigInteger, nullable=False",
@@ -174,7 +201,7 @@ def _verify_static_lowering() -> list[str]:
         "v_submitted := NEW.authority_generation",
         "NEW.authority_generation := OLD.authority_generation",
         "NEW.authority_generation := 1",
-        "emr4.authority_advance_target",
+        "pg_trigger_depth() = 2",
         "v_submitted = OLD.authority_generation + 1",
         "authority_generation overflow",
         "authority_generation = users.authority_generation + 1",
@@ -207,7 +234,7 @@ def _verify_static_lowering() -> list[str]:
         ordered = (
             "with db.begin():",
             "SET TRANSACTION ISOLATION LEVEL READ COMMITTED",
-            "SET LOCAL lock_timeout",
+            'select(func.set_config("lock_timeout"',
             "db.query(User)",
             ".with_for_update(read=True)",
             "db.query(Appointment)",
@@ -238,6 +265,22 @@ def _verify_static_lowering() -> list[str]:
             errors.append("cumulative_deadline_constant_missing")
         if "time.monotonic()" not in transaction_source:
             errors.append("monotonic_deadline_missing")
+        for required in (
+            "authority_generation=signed_authority_generation",
+            "actor_user_id=str(actor_uuid)",
+            "record.authority_generation == signed_authority_generation",
+            "not isinstance(session_binding_digest, bytes)",
+        ):
+            if required not in transaction_source and required not in service_source:
+                errors.append(f"transaction_binding_guard_missing:{required}")
+        for forbidden in (
+            "emr4.authority_advance_target",
+            "current_setting(",
+            "SET LOCAL lock_timeout = :timeout",
+            "record.authority_generation is None",
+        ):
+            if forbidden in migration_source or forbidden in service_source:
+                errors.append(f"spoofable_or_weak_binding_present:{forbidden}")
         for forbidden in (
             "nowait",
             "skip_locked",
@@ -250,8 +293,35 @@ def _verify_static_lowering() -> list[str]:
                 errors.append(f"transaction_forbidden_token:{forbidden}")
     if "@router" in service_source or "FastAPI" in service_source:
         errors.append("service_route_surface_present")
-    if "AppointmentAuditLog(" in service_source or 'record.state = "completed"' in service_source:
+    if (
+        "AppointmentAuditLog(" in service_source
+        or 'record.state = "completed"' in service_source
+    ):
         errors.append("service_product_write_staged")
+    for token in (
+        'record.state == "completed"',
+        "db.query(AppointmentAuditLog)",
+        "def _delete_write_set_complete(",
+        "audit.command_id == record.id",
+        "audit.practice_id == practice_id",
+        "audit.appointment_id == target_appointment_id",
+        "audit.confirmed_by_user_id == actor_user_id",
+        "audit.authority_generation == signed_authority_generation",
+        "audit.pre_state_version == pre_state_version",
+        "audit.post_state_version == post_state_version",
+        "audit.status_reason_code == appointment.status_reason_code",
+        "audit.cancellation_reason == appointment.cancellation_reason",
+        "audit.waiting_area_before_id == waiting_area_before_id",
+        "audit.waiting_area_after_id is None",
+        "appointment.appointment_state_version == post_state_version",
+        "appointment.waiting_area_id is None",
+        "record.response_body_canonical_bytes == expected_response",
+        "record.response_body_json == expected_json",
+        "record.idempotency_key_hash == idempotency_key_hash",
+        "record.request_body_canonicalization_version == 1",
+    ):
+        if token not in service_source:
+            errors.append(f"cross_artifact_guard_missing:{token}")
     return errors
 
 
@@ -269,7 +339,12 @@ def validate(output_path: Path | None = None) -> dict[str, Any]:
     for path in leaf_paths[:HOSTILE_MUTATION_TARGET]:
         mutated = copy.deepcopy(contract)
         _mutate_at(mutated, path)
-        if _contract_errors(mutated, schema):
+        # The canonical contract is first authenticated by its frozen digest.
+        # Mutants are then rejected by schema or exact structured deviation,
+        # rather than by the tautology that their whole-document digest changed.
+        if list(Draft202012Validator(schema).iter_errors(mutated)) or (
+            _structured_mismatches(contract, mutated)
+        ):
             hostile_rejected += 1
         else:
             errors.append(f"hostile_mutation_admitted:{path}")
@@ -287,11 +362,10 @@ def validate(output_path: Path | None = None) -> dict[str, Any]:
         "contract_sha256": _sha256(CONTRACT_PATH),
         "source_bindings_checked": len(contract["input_bindings"])
         + len(contract["implementation_bindings"]),
-        "hostile_mutations_attempted": min(
-            len(leaf_paths), HOSTILE_MUTATION_TARGET
-        ),
+        "hostile_mutations_attempted": min(len(leaf_paths), HOSTILE_MUTATION_TARGET),
         "hostile_mutations_rejected": hostile_rejected,
-        "focused_tests_passed": 17,
+        "focused_test_file_bound": True,
+        "focused_test_execution_reported_by_validator": False,
         "migration_executed": False,
         "database_contacted": False,
         "real_lock_acquired": False,

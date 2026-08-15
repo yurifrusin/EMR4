@@ -79,7 +79,7 @@ class User(Base):
     role = Column(Enum(UserRole), nullable=False)
     practitioner_id = Column(UUID(as_uuid=True), ForeignKey("practitioners.id"), nullable=True)
     is_active = Column(Boolean, default=True)
-    authority_generation = Column(BigInteger, nullable=False, server_default="1", default=1)
+    authority_generation = Column(BigInteger, nullable=False, server_default="1")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     practice = relationship("Practice", back_populates="users")

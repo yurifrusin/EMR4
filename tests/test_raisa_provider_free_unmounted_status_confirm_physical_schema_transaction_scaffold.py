@@ -29,7 +29,7 @@ def _load_service():
 
 def test_public_openapi_remains_frozen() -> None:
     assert hashlib.sha256(OPENAPI_PATH.read_bytes()).hexdigest() == (
-        "c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6"
+        "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
     )
 
 

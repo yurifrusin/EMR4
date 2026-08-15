@@ -17,11 +17,15 @@ from dataclasses import dataclass
 from typing import Iterator, Literal, Sequence
 from uuid import UUID
 
-from sqlalchemy import text
+from sqlalchemy import func, select, text
 from sqlalchemy.dialects.postgresql import insert as postgresql_insert
 from sqlalchemy.orm import Session
 
-from app.models.appointments import Appointment, AppointmentCommandIdempotency
+from app.models.appointments import (
+    Appointment,
+    AppointmentAuditLog,
+    AppointmentCommandIdempotency,
+)
 from app.models.tenancy import User, UserCapabilityGrant
 
 
@@ -126,6 +130,21 @@ def _as_uuid(value: UUID | str, field_name: str) -> UUID:
     raise ValueError(f"{field_name} must be a UUID or non-empty UUID string")
 
 
+def _lowercase_sha256(value: str, field_name: str) -> str:
+    if (
+        not isinstance(value, str)
+        or len(value) != 64
+        or value != value.lower()
+        or any(character not in "0123456789abcdef" for character in value)
+    ):
+        raise ValueError(f"{field_name} must be lowercase hexadecimal SHA-256")
+    try:
+        bytes.fromhex(value)
+    except ValueError as exc:
+        raise ValueError(f"{field_name} must be lowercase hexadecimal SHA-256") from exc
+    return value
+
+
 def delete_confirm_session_binding_digest(
     *,
     secret: bytes,
@@ -161,9 +180,7 @@ def canonical_delete_confirm_response_bytes(
     caller supplied. UTF-8 compact JSON is the sole byte representation.
     """
     if status_reason_code not in DELETE_CONFIRM_REASON_CODES:
-        raise ValueError(
-            "status_reason_code must be one of the ten dedicated codes"
-        )
+        raise ValueError("status_reason_code must be one of the ten dedicated codes")
     if cancellation_reason is not None:
         if not isinstance(cancellation_reason, str):
             raise ValueError("cancellation_reason must be a string or null")
@@ -225,7 +242,8 @@ def delete_confirm_response_integrity_valid(
 def _delete_receipt_v1_complete(record: AppointmentCommandIdempotency) -> bool:
     response_bytes = record.response_body_canonical_bytes
     return bool(
-        record.completed_receipt_version == DELETE_CONFIRM_RECEIPT_VERSION
+        record.state == "completed"
+        and record.completed_receipt_version == DELETE_CONFIRM_RECEIPT_VERSION
         and record.operation_id == DELETE_CONFIRM_OPERATION_ID
         and record.route_family == DELETE_CONFIRM_ROUTE_FAMILY
         and record.result_kind == "confirmed_write"
@@ -246,6 +264,91 @@ def _delete_receipt_v1_complete(record: AppointmentCommandIdempotency) -> bool:
     )
 
 
+def _enum_value(value: object) -> object:
+    return getattr(value, "value", value)
+
+
+def _delete_write_set_complete(
+    *,
+    record: AppointmentCommandIdempotency,
+    audit: AppointmentAuditLog | None,
+    appointment: Appointment,
+    practice_id: UUID,
+    target_appointment_id: UUID,
+    actor_user_id: UUID,
+    actor_role: str,
+    signed_authority_generation: int,
+    request_body_hash: str,
+    idempotency_key_hash: str,
+    session_binding_digest: bytes,
+    pre_state_version: int,
+    pre_status: object,
+    waiting_area_before_id: UUID | None,
+) -> bool:
+    """Require the exact three-artifact delete write set before commit."""
+    if audit is None or not _delete_receipt_v1_complete(record):
+        return False
+    warning_codes = audit.confirmed_warnings
+    if (
+        not isinstance(warning_codes, list)
+        or any(not isinstance(code, str) or not code for code in warning_codes)
+        or len(warning_codes) != len(set(warning_codes))
+        or not isinstance(audit.audit_evidence_codes, list)
+    ):
+        return False
+    try:
+        expected_response = canonical_delete_confirm_response_bytes(
+            appointment_id=target_appointment_id,
+            status_reason_code=appointment.status_reason_code,
+            cancellation_reason=appointment.cancellation_reason,
+            warning_codes=warning_codes,
+        )
+        expected_json = json.loads(expected_response.decode("utf-8"))
+    except (TypeError, ValueError, UnicodeError):
+        return False
+    post_state_version = pre_state_version + 1
+    return bool(
+        record.practice_id == practice_id
+        and record.actor_user_id == str(actor_user_id)
+        and record.actor_role == actor_role
+        and record.target_appointment_id == target_appointment_id
+        and record.authority_generation == signed_authority_generation
+        and record.request_body_hash == request_body_hash
+        and record.idempotency_key_hash == idempotency_key_hash
+        and record.request_body_canonicalization_version == 1
+        and isinstance(record.session_binding_digest, bytes)
+        and hmac.compare_digest(record.session_binding_digest, session_binding_digest)
+        and record.pre_state_version == pre_state_version
+        and record.post_state_version == post_state_version
+        and appointment.practice_id == practice_id
+        and appointment.id == target_appointment_id
+        and appointment.appointment_state_version == post_state_version
+        and _enum_value(appointment.status) == DELETE_CONFIRM_STATUS
+        and appointment.waiting_area_id is None
+        and audit.id == record.audit_log_id
+        and audit.command_id == record.id
+        and audit.practice_id == practice_id
+        and audit.appointment_id == target_appointment_id
+        and audit.confirmed_by_user_id == actor_user_id
+        and _enum_value(audit.action) == "delete"
+        and audit.audit_contract_version == DELETE_CONFIRM_RECEIPT_VERSION
+        and audit.authority_generation == signed_authority_generation
+        and audit.pre_state_version == pre_state_version
+        and audit.post_state_version == post_state_version
+        and _enum_value(audit.status_before) == pre_status
+        and _enum_value(audit.status_after) == DELETE_CONFIRM_STATUS
+        and audit.status_reason_code == appointment.status_reason_code
+        and audit.cancellation_reason == appointment.cancellation_reason
+        and audit.waiting_area_before_id == waiting_area_before_id
+        and audit.waiting_area_after_id is None
+        and record.response_body_canonical_bytes == expected_response
+        and record.response_body_json == expected_json
+        and delete_confirm_response_integrity_valid(
+            expected_response, record.response_body_hash
+        )
+    )
+
+
 def _bindings_match(
     record: AppointmentCommandIdempotency,
     *,
@@ -261,10 +364,7 @@ def _bindings_match(
         and record.actor_role == actor_role
         and record.target_appointment_id == target_appointment_id
         and record.request_body_hash == request_body_hash
-        and (
-            record.authority_generation is None
-            or record.authority_generation == signed_authority_generation
-        )
+        and record.authority_generation == signed_authority_generation
         and isinstance(record.session_binding_digest, bytes)
         and hmac.compare_digest(record.session_binding_digest, session_binding_digest)
     )
@@ -291,17 +391,15 @@ def _authority_valid(
         return False
     if user.authority_generation != signed_authority_generation:
         return False
-    grant_exists = (
-        db.query(
-            db.query(UserCapabilityGrant)
-            .filter(
-                UserCapabilityGrant.practice_id == user.practice_id,
-                UserCapabilityGrant.user_id == user.id,
-                UserCapabilityGrant.capability_code == DELETE_CONFIRM_CAPABILITY,
-            )
-            .exists()
-        ).scalar()
-    )
+    grant_exists = db.query(
+        db.query(UserCapabilityGrant)
+        .filter(
+            UserCapabilityGrant.practice_id == user.practice_id,
+            UserCapabilityGrant.user_id == user.id,
+            UserCapabilityGrant.capability_code == DELETE_CONFIRM_CAPABILITY,
+        )
+        .exists()
+    ).scalar()
     return bool(grant_exists)
 
 
@@ -309,8 +407,8 @@ def _authority_valid(
 def delete_confirm_locked_transaction(
     db: Session,
     *,
-    practice_id: UUID,
-    target_appointment_id: UUID,
+    practice_id: UUID | str,
+    target_appointment_id: UUID | str,
     actor_user_id: UUID | str,
     actor_role: str,
     idempotency_key_hash: str,
@@ -333,7 +431,29 @@ def delete_confirm_locked_transaction(
     seam verifies that the complete write set and database-owned adjacent version
     exist; otherwise it raises and the transaction rolls back.
     """
-    if len(session_binding_digest) != 32:
+    practice_uuid = _as_uuid(practice_id, "practice_id")
+    target_uuid = _as_uuid(target_appointment_id, "target_appointment_id")
+    actor_uuid = _as_uuid(actor_user_id, "actor_user_id")
+    if (
+        not isinstance(actor_role, str)
+        or actor_role not in DELETE_CONFIRM_ADMITTED_ROLES
+    ):
+        raise ValueError("actor_role is not admitted")
+    if (
+        isinstance(signed_authority_generation, bool)
+        or not isinstance(signed_authority_generation, int)
+        or signed_authority_generation < 1
+        or signed_authority_generation > DELETE_CONFIRM_GENERATION_MAX
+    ):
+        raise ValueError(
+            "signed_authority_generation is outside the positive BIGINT range"
+        )
+    _lowercase_sha256(idempotency_key_hash, "idempotency_key_hash")
+    _lowercase_sha256(request_body_hash, "request_body_hash")
+    if (
+        not isinstance(session_binding_digest, bytes)
+        or len(session_binding_digest) != 32
+    ):
         raise ValueError("session_binding_digest must contain 32 bytes")
 
     with db.begin():
@@ -347,16 +467,15 @@ def delete_confirm_locked_transaction(
                     "cumulative lock wait budget exhausted"
                 )
             db.execute(
-                text("SET LOCAL lock_timeout = :timeout"),
-                {"timeout": f"{remaining_ms}ms"},
-            )
+                select(func.set_config("lock_timeout", f"{remaining_ms}ms", True))
+            ).scalar_one()
 
         _apply_lock_budget()
         user = (
             db.query(User)
             .filter(
-                User.practice_id == practice_id,
-                User.id == _as_uuid(actor_user_id, "actor_user_id"),
+                User.practice_id == practice_uuid,
+                User.id == actor_uuid,
             )
             .with_for_update(read=True)
             .one_or_none()
@@ -368,8 +487,8 @@ def delete_confirm_locked_transaction(
         appointment = (
             db.query(Appointment)
             .filter(
-                Appointment.practice_id == practice_id,
-                Appointment.id == target_appointment_id,
+                Appointment.practice_id == practice_uuid,
+                Appointment.id == target_uuid,
             )
             .with_for_update()
             .one_or_none()
@@ -387,12 +506,10 @@ def delete_confirm_locked_transaction(
             raise DeleteConfirmAuthorityRevoked("current authority unavailable")
 
         identity_filter = (
-            AppointmentCommandIdempotency.practice_id == practice_id,
-            AppointmentCommandIdempotency.actor_user_id == str(actor_user_id),
-            AppointmentCommandIdempotency.operation_id
-            == DELETE_CONFIRM_OPERATION_ID,
-            AppointmentCommandIdempotency.idempotency_key_hash
-            == idempotency_key_hash,
+            AppointmentCommandIdempotency.practice_id == practice_uuid,
+            AppointmentCommandIdempotency.actor_user_id == str(actor_uuid),
+            AppointmentCommandIdempotency.operation_id == DELETE_CONFIRM_OPERATION_ID,
+            AppointmentCommandIdempotency.idempotency_key_hash == idempotency_key_hash,
         )
         _apply_lock_budget()
         record = (
@@ -408,8 +525,8 @@ def delete_confirm_locked_transaction(
                 postgresql_insert(AppointmentCommandIdempotency)
                 .values(
                     id=uuid.uuid4(),
-                    practice_id=practice_id,
-                    actor_user_id=str(actor_user_id),
+                    practice_id=practice_uuid,
+                    actor_user_id=str(actor_uuid),
                     actor_role=actor_role,
                     operation_id=DELETE_CONFIRM_OPERATION_ID,
                     route_family=DELETE_CONFIRM_ROUTE_FAMILY,
@@ -417,8 +534,9 @@ def delete_confirm_locked_transaction(
                     request_body_hash=request_body_hash,
                     request_body_canonicalization_version=1,
                     state="in_progress",
-                    target_appointment_id=target_appointment_id,
+                    target_appointment_id=target_uuid,
                     session_binding_digest=session_binding_digest,
+                    authority_generation=signed_authority_generation,
                 )
                 .on_conflict_do_nothing(
                     constraint="uq_appt_cmd_idem_practice_actor_operation_key"
@@ -451,6 +569,8 @@ def delete_confirm_locked_transaction(
         pre_state_version = appointment.appointment_state_version
         if not isinstance(pre_state_version, int) or pre_state_version < 1:
             raise DeleteConfirmPhysicalError("appointment state version is invalid")
+        pre_status = _enum_value(appointment.status)
+        waiting_area_before_id = appointment.waiting_area_id
 
         if inserted:
             decision = DeleteConfirmPhysicalDecision(
@@ -463,7 +583,7 @@ def delete_confirm_locked_transaction(
         elif not _bindings_match(
             record,
             actor_role=actor_role,
-            target_appointment_id=target_appointment_id,
+            target_appointment_id=target_uuid,
             request_body_hash=request_body_hash,
             session_binding_digest=session_binding_digest,
             signed_authority_generation=signed_authority_generation,
@@ -491,12 +611,11 @@ def delete_confirm_locked_transaction(
                 record=record,
                 pre_state_version=pre_state_version,
             )
-        elif (
-            not _delete_receipt_v1_complete(record)
-            or not delete_confirm_response_integrity_valid(
-                record.response_body_canonical_bytes,
-                record.response_body_hash,
-            )
+        elif not _delete_receipt_v1_complete(
+            record
+        ) or not delete_confirm_response_integrity_valid(
+            record.response_body_canonical_bytes,
+            record.response_body_hash,
         ):
             decision = DeleteConfirmPhysicalDecision(
                 kind="receipt_integrity_failure",
@@ -519,15 +638,29 @@ def delete_confirm_locked_transaction(
 
         if decision.kind == "new_command":
             db.flush()
-            if (
-                not _delete_receipt_v1_complete(record)
-                or record.pre_state_version != pre_state_version
-                or appointment.appointment_state_version != pre_state_version + 1
-                or record.post_state_version != appointment.appointment_state_version
-                or not delete_confirm_response_integrity_valid(
-                    record.response_body_canonical_bytes,
-                    record.response_body_hash,
+            audit = (
+                db.query(AppointmentAuditLog)
+                .filter(
+                    AppointmentAuditLog.practice_id == practice_uuid,
+                    AppointmentAuditLog.id == record.audit_log_id,
                 )
+                .one_or_none()
+            )
+            if not _delete_write_set_complete(
+                record=record,
+                audit=audit,
+                appointment=appointment,
+                practice_id=practice_uuid,
+                target_appointment_id=target_uuid,
+                actor_user_id=actor_uuid,
+                actor_role=actor_role,
+                signed_authority_generation=signed_authority_generation,
+                request_body_hash=request_body_hash,
+                idempotency_key_hash=idempotency_key_hash,
+                session_binding_digest=session_binding_digest,
+                pre_state_version=pre_state_version,
+                pre_status=pre_status,
+                waiting_area_before_id=waiting_area_before_id,
             ):
                 raise DeleteConfirmScaffoldIncomplete(
                     "atomic delete-confirm v1 write set is incomplete"

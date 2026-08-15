@@ -44,12 +44,16 @@
     {
       "path": "alembic/versions/w2x3y4z5a6b7_add_status_confirm_physical_scaffold.py",
       "sha256": "bfa72b627061b8e477903ec9fc2cfbb35a4970b26ab7115db18c3daef1d3696c"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py",
+      "sha256": "f350bcec600d024fe52ffaae640369debfca9668003ef496c8a3f1ca316d7e93"
     }
   ],
   "implementation_bindings": [
     {
       "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
-      "sha256": "118dbf712dcecb24e47a389fa9df2dbc28aafc7d51d573eadfa73b6b2f727350"
+      "sha256": "6c59a4715876d0e9e1b8c40d67f9eb12c2b0c1d52c5b4eeb9ea4aad470e51168"
     },
     {
       "path": "docs/security/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-threat-model-delta.md",
@@ -57,7 +61,7 @@
     },
     {
       "path": "app/models/tenancy.py",
-      "sha256": "197dfeb5d3a05283617e4040eea8a804623f532434d61b545c685a78bea12783"
+      "sha256": "e411c816565bdddfbb25beca62439c5bba7a44a90e348cd7e9f4296a65fb65e2"
     },
     {
       "path": "app/models/appointments.py",
@@ -65,15 +69,15 @@
     },
     {
       "path": "app/services/appointment_delete_physical.py",
-      "sha256": "57cd96162bc620ef39302f2b09bb719408049124d65981647cb490b1113b22e3"
+      "sha256": "aa60ad4d4a55c642cda69b5895a89ef55c4f84a0bab326476bc5ffdcdfd56dfd"
     },
     {
       "path": "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
-      "sha256": "714533f7285f7e324d68866138041118355d313689b4bd395bb95fcdd13e958c"
+      "sha256": "29d107f9ef226ad3bdb005d52f0db20252847142ba3a1337f4e51c32c68b901c"
     },
     {
       "path": "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
-      "sha256": "1bde9bed39ca5ff9203b2e47f0d9c3edf79c2980b1b4f9afa24acced01dcc580"
+      "sha256": "eda8294fd4055fe3fcb9f9f0fb8b9ab1e450eb98692b7e2575413fc2dfe241f5"
     }
   ],
   "mapping": {
@@ -95,7 +99,7 @@
       "advance_event": "exactly_once_per_qualifying_update",
       "submitted_generation_policy": "ignored_by_database",
       "nested_grant_advance_admitted": true,
-      "nested_advance_signal": "transaction_local_current_setting_emr4_authority_advance_target",
+      "nested_advance_signal": "postgresql_pg_trigger_depth_equals_two",
       "synthetic_application_auth_relations_ineligible": true
     },
     "user_capability_grants": {
@@ -207,7 +211,7 @@
       "insert_policy": "force_generation_one",
       "direct_submitted_generation": "ignored",
       "qualifying_advance": "practice_or_role_or_is_active_change_advances_old_plus_one",
-      "nested_grant_advance": "admitted_only_when_marker_and_old_plus_one",
+      "nested_grant_advance": "admitted_only_at_trigger_depth_two_and_old_plus_one",
       "overflow_aborts": true,
       "event_or_watcher": false
     },
@@ -317,13 +321,30 @@
     "authority_check_count": 2,
     "authority_check_owner": "internal_not_caller_callback",
     "classification_after_second_authority_check": true,
+    "new_claim_binds_exact_signed_authority_generation": true,
+    "actor_identity_canonicalized_to_uuid": true,
+    "lock_timeout_parameterization": "select_set_config_transaction_local",
     "replay_requires_complete_integrity_valid_family_qualified_v1": true,
     "legacy_replay": false,
     "in_progress_replay": false,
     "product_mutation_staged": false,
     "audit_staged": false,
     "receipt_completion_staged": false,
-    "future_atomic_write_set_required_before_commit": true
+    "future_atomic_write_set_required_before_commit": true,
+    "precommit_cross_artifact_equality": [
+      "practice",
+      "target",
+      "actor",
+      "authority_generation",
+      "pre_state_version",
+      "post_state_version",
+      "statuses",
+      "waiting_area_transition",
+      "structured_reason",
+      "nullable_cancellation_text",
+      "warning_codes",
+      "canonical_response_bytes"
+    ]
   },
   "authority_check": {
     "fence_lock_resource": "users",

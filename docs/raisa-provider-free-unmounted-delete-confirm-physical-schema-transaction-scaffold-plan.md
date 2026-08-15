@@ -8,6 +8,8 @@ Source HEAD: `0a01e93319f302256f2b8af0aa74e494256808a8`
 
 Status: `frozen_for_provider_free_unmounted_implementation`
 
+Plan correction timestamp: 2026-08-15T22:06:25+10:00 (Australia/Brisbane)
+
 Reasoning level: material authority / migration / transaction implementation / Extra High
 
 ## Purpose
@@ -75,6 +77,18 @@ Existing application paths that may be edited:
 - `app/models/tenancy.py`;
 - `app/models/appointments.py`.
 
+One pre-existing test-only conformance path may receive exactly one mechanical
+repair after its failure is reproduced at both the plan source and candidate:
+
+- `tests/test_raisa_provider_free_unmounted_status_confirm_physical_schema_transaction_scaffold.py`
+  may change only the expected frozen OpenAPI SHA-256 from
+  `c3885ccee077df8f316b8ee8167d56a00673473841cbd57401df980d2a61c4b6`
+  to the already-current, independently bound and unchanged OpenAPI digest
+  `c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a`.
+  Its admitted pre-repair file digest is
+  `28060c2f5b1cb4ff00f62b498511995a35a630963e586920115f34740c5d1ac3`.
+  No other line in that test and no OpenAPI/product path may change.
+
 New application and deterministic evidence paths that may be created:
 
 - `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py`;
@@ -90,6 +104,8 @@ This plan, its threat delta, tranche receipts, worker/reviewer packets and
 receipts, eventual closeout, Sol acceptance, continuity updater/test and Yuri
 summary are also tranche-owned evidence. No router, schema, OpenAPI, current
 idempotency service, status-confirm service or earlier migration may change.
+The single corrected stale hash assertion above is the sole exception and does
+not alter status-confirm behavior.
 
 ## Frozen implementation
 

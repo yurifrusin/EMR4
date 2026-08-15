@@ -40,8 +40,7 @@ def upgrade() -> None:
     )
     # 3. Existing users receive a baseline, never fabricated chronology.
     op.execute(
-        "UPDATE users SET authority_generation = 1 "
-        "WHERE authority_generation IS NULL"
+        "UPDATE users SET authority_generation = 1 WHERE authority_generation IS NULL"
     )
     # 4. Validate the positive BIGINT domain before setting NOT NULL.
     op.execute(
@@ -50,8 +49,7 @@ def upgrade() -> None:
         "CHECK (authority_generation >= 1) NOT VALID"
     )
     op.execute(
-        "ALTER TABLE users VALIDATE CONSTRAINT "
-        "ck_users_authority_generation_positive"
+        "ALTER TABLE users VALIDATE CONSTRAINT ck_users_authority_generation_positive"
     )
     op.alter_column("users", "authority_generation", nullable=False)
     # 5. Exact composite uniqueness required by the closed grant relation.
@@ -78,8 +76,7 @@ def upgrade() -> None:
             name="fk_user_capability_grants_user",
         ),
         sa.CheckConstraint(
-            "capability_code IN "
-            "('appointment.cancel.confirm', 'appointment.read')",
+            "capability_code IN ('appointment.cancel.confirm', 'appointment.read')",
             name="ck_user_capability_grants_capability_code",
         ),
     )
@@ -98,7 +95,6 @@ def upgrade() -> None:
         AS $$
         DECLARE
             v_submitted bigint;
-            v_advance_target text;
         BEGIN
             IF TG_OP = 'INSERT' THEN
                 NEW.authority_generation := 1;
@@ -108,15 +104,17 @@ def upgrade() -> None:
             v_submitted := NEW.authority_generation;
             NEW.authority_generation := OLD.authority_generation;
 
-            v_advance_target := current_setting(
-                'emr4.authority_advance_target', true);
-            IF v_advance_target = OLD.practice_id::text || ':' || OLD.id::text
-               AND v_submitted = OLD.authority_generation + 1 THEN
+            -- Only the nested UPDATE issued by the grant trigger may submit an
+            -- OLD + 1 generation. Unlike a custom GUC, trigger depth cannot be
+            -- supplied or retained by an application session.
+            IF pg_trigger_depth() = 2 THEN
                 IF OLD.authority_generation >= {GENERATION_MAX} THEN
                     RAISE EXCEPTION 'authority_generation overflow'
                         USING ERRCODE = '22003';
                 END IF;
-                NEW.authority_generation := OLD.authority_generation + 1;
+                IF v_submitted = OLD.authority_generation + 1 THEN
+                    NEW.authority_generation := OLD.authority_generation + 1;
+                END IF;
             END IF;
 
             IF NEW.practice_id IS DISTINCT FROM OLD.practice_id
@@ -160,11 +158,10 @@ def upgrade() -> None:
                     RAISE EXCEPTION 'user capability grant parent user missing'
                         USING ERRCODE = '23503';
                 END IF;
-                PERFORM set_config(
-                    'emr4.authority_advance_target',
-                    OLD.practice_id::text || ':' || OLD.user_id::text,
-                    true
-                );
+                IF v_parent.authority_generation >= {GENERATION_MAX} THEN
+                    RAISE EXCEPTION 'authority_generation overflow'
+                        USING ERRCODE = '22003';
+                END IF;
                 UPDATE users
                 SET authority_generation = users.authority_generation + 1
                 WHERE practice_id = OLD.practice_id AND id = OLD.user_id;
@@ -177,11 +174,10 @@ def upgrade() -> None:
                     RAISE EXCEPTION 'user capability grant parent user missing'
                         USING ERRCODE = '23503';
                 END IF;
-                PERFORM set_config(
-                    'emr4.authority_advance_target',
-                    NEW.practice_id::text || ':' || NEW.user_id::text,
-                    true
-                );
+                IF v_parent.authority_generation >= {GENERATION_MAX} THEN
+                    RAISE EXCEPTION 'authority_generation overflow'
+                        USING ERRCODE = '22003';
+                END IF;
                 UPDATE users
                 SET authority_generation = users.authority_generation + 1
                 WHERE practice_id = NEW.practice_id AND id = NEW.user_id;
@@ -414,13 +410,10 @@ def downgrade() -> None:
     )
     op.execute("DROP FUNCTION emr4_reject_user_capability_grant_update()")
     op.execute(
-        "DROP TRIGGER trg_user_capability_grants_generation "
-        "ON user_capability_grants"
+        "DROP TRIGGER trg_user_capability_grants_generation ON user_capability_grants"
     )
     op.execute("DROP FUNCTION emr4_user_capability_grant_generation_guard()")
-    op.execute(
-        "DROP TRIGGER trg_users_authority_generation_guard ON users"
-    )
+    op.execute("DROP TRIGGER trg_users_authority_generation_guard ON users")
     op.execute("DROP FUNCTION emr4_user_authority_generation_guard()")
     op.drop_index(
         "ix_user_capability_grants_user",
