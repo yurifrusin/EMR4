@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_bounded_ariadne_continuity_and_refinement_mechanical_worker",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after context restoration. Continuity 298 / Compass 280 names the product successor, while Yuri's 2026-08-15 instruction first authorises useful Prime-derived Ariadne harness adaptations and then continuation.",
+    "current_authority_allocation": "Sol owns semantics, acceptance, integration and Git. DeepSeek V4 Flash/high receives only nine frozen mechanical harness paths. Gemini 3.7 Flash/high remains the required later exact-candidate independent veto.",
+    "active_plan_and_acceptance": "Commit 961a833b65e57682e10088300f4b7909a5a5aee8 freezes the provider-free continuity journal, deterministic failed-gate and quarantined refinement-promotion plan plus threat delta. AER-0330 records the corrected rejected first preplanning state.",
+    "protected_evidence_boundaries": "Harness-only authored-synthetic pure decisions. No Prime installation, daemon, automatic command/replay, executable skill, automatic self-modification, application, database, API, provider, patient/product data, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Primary plan HEAD is 961a833b65e57682e10088300f4b7909a5a5aee8 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Clean worker C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-prime-harness-worker-961a833b is on codex/worker-ariadne-prime-harness-961a833b at exact plan HEAD. All unrelated untracked files remain preserved outside it."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+    "active_tranche": "Ariadne provider-free continuity journal and refinement-promotion safeguards",
+    "objective": "Implement the frozen harness-only journal, uncertainty, deterministic-gate and quarantined-refinement decision contracts without runtime or product authority.",
+    "status": "in_progress",
+    "source_head": "961a833b65e57682e10088300f4b7909a5a5aee8",
+    "authority_source": "Yuri's 2026-08-15 instruction and committed frozen plan 961a833b65e57682e10088300f4b7909a5a5aee8",
+    "checkpoint": {
+      "completed_stage": "Read-only overlap audit and frozen plan committed; AER-0330 corrected before dispatch.",
+      "next_executable_stage": "One bounded DeepSeek V4 Flash/high mechanical implementation in the exact clean worker worktree.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:2ed8aa56590489880acf2875043792740cac662f3c8195f40000a251f4257d02"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_authored_synthetic_ariadne_harness_only", "exact_frozen_plan_and_nine_owned_paths_only", "no_prime_install_daemon_shell_process_network_or_provider", "no_automatic_command_replay_or_self_modification", "no_application_database_api_product_patient_or_clinical_surface", "no_credentials_iam_deployment_production_release_pages_or_protected_ref", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-prime-derived-continuity-and-refinement-safeguards",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "The committed plan removes semantic choice and leaves nine isolated mechanical harness artifacts.", "work_packages": ["policy, four schemas, authored-synthetic evidence, pure module, thin CLI and hostile tests"]},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "A fresh Gemini 3.7 Flash/high exact-candidate veto remains mandatory after deterministic Sol admission.", "work_packages": ["exact-candidate authority and fail-closed veto"]},
+      {"lane_id": "native_subagents", "disposition": "completed", "expected_leverage": "positive", "rationale": "The read-only overlap audit completed and prevented redundant latch/reviewer machinery.", "work_packages": ["existing-control overlap audit"]}
+    ],
+    "parallel_work_packages": ["DeepSeek mechanical implementation while Sol prepares exact deterministic admission checks"],
+    "serial_constraints": ["worker starts from committed plan", "Sol admits candidate before Gemini", "Sol alone integrates and accepts", "no shared PostgreSQL tests run concurrently"],
+    "reassessment_triggers": ["worker result", "scope mismatch", "deterministic admission", "Gemini veto", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_complete_five_source_active_tranche_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed the exact frozen plan and verified protected refs."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["One read-only overlap audit completed without source edits."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high is reserved for the later veto; no call has occurred."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Exact clean named worker worktree created at plan HEAD."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
