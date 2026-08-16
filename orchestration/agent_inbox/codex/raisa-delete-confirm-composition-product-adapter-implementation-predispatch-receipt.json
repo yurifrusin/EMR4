@@ -1,0 +1,92 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "completed_stage": "Fresh five-source rehydration and protected-ref verification pass at exact source 44a91b7239ac9f38510c10cb57729ac5312d32f9. The narrow provider-free unmounted implementation plan and twelve-binding machine contract are frozen. Yuri's continuous harness self-correction decision is encoded and its focused provider-free test passes.",
+    "next_executable_stage": "Generate a fresh pre-worker-dispatch receipt, dispatch the exact four-path DeepSeek V4 Flash/high implementation and test package, then reconcile it without opening any route, schema, database or runtime surface.",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "resume_after_compaction": true,
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "reason_codes": [],
+    "resolved_commit": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "44a91b7239ac9f38510c10cb57729ac5312d32f9"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The frozen two-service and two-test package is bounded, separable mechanical implementation work with useful leverage after Sol fixed every authority and response decision.",
+        "work_packages": [
+          "exact four-path unmounted delete-confirm implementation and provider-free tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A single fresh Gemini 3.7 Flash/high veto remains valuable only after the reconciled exact candidate passes deterministic admission.",
+        "work_packages": [
+          "final exact-candidate authority response privacy and isolation veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The developer constraint does not authorise native delegation, and no distinct allowed package remains outside the selected worker and verifier lanes.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "worker result",
+      "material recovery",
+      "pre-verifier acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "frozen plan and contract before implementation dispatch",
+      "one bounded DeepSeek package before Sol reconciliation",
+      "deterministic provider-free admission before one Gemini veto",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6dd00ac383cd3a01c476848892335aecf0393002cc05ec71c80583dbbd187980",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen implementation plan and machine contract bind twelve exact accepted inputs, two new unmounted service paths and two focused test paths. They inherit the accepted response/product-adapter architecture without changing it.",
+    "current_authority_allocation": "Sol owns semantics, reconciliation, recovery, acceptance and Git. DeepSeek V4 Flash/high owns only the frozen four-path implementation/test package. Gemini 3.7 Flash/high remains reserved for one final fresh veto. Native subagents remain declined.",
+    "git_refs_and_worktree": "HEAD and origin task remain exact 44a91b7239ac9f38510c10cb57729ac5312d32f9. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the active latch, frozen plan/contract and accepted narrow harness-policy/test paths are tracked working changes before dispatch.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after the predecessor closeout and now also records Yuri's accepted continuous harness repair-and-resume rule. The active delete-confirm implementation remains the controlling operation.",
+    "protected_evidence_boundaries": "No route, schema, model, migration, API Spine, database, Docker, SQL, capability, product command/data, protected evidence, provider, credential, network, deployment, release, Pages or protected-ref authority is open. All unrelated untracked paths and docs/branding remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

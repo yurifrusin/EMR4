@@ -279,6 +279,14 @@ tranche immediately after the report without waiting for acknowledgement.
 
 The durable active-operation latch is `orchestration/continuity/ariadne-active-operation-latch/current.json`. Update it at named tranche/checkpoint transitions, not internal microsteps, and copy its complete validated object into every configured continuation-event runtime state. Prompt recency alone never changes it: answer side/status questions then resume, merge additions then resume, and record explicit pause/redirect before terminal handback or replacement.
 
+Continuous harness self-correction is part of uninterrupted development. When
+an active tranche exposes a repeatable orchestration defect or missing workflow
+invariant, preserve the failure, contain it, register the incident when it meets
+the error-register criteria, add the narrowest automated guard, verify that
+guard, and resume the latched product operation. The repair must not broaden
+product, data, provider, deployment or protected-ref authority, and it creates
+no ceremonial Yuri pause unless an existing user-attention condition is met.
+
 Yuri's durable tranche mailbox is `orchestration/human_inbox/yuri/`. Before
 each task-branch closeout commit and publication, write one dated Markdown
 message there with paired lay and technical summaries, issues, deliberately

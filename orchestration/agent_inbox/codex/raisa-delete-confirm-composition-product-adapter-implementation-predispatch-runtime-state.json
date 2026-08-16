@@ -1,0 +1,117 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after the predecessor closeout and now also records Yuri's accepted continuous harness repair-and-resume rule. The active delete-confirm implementation remains the controlling operation.",
+    "current_authority_allocation": "Sol owns semantics, reconciliation, recovery, acceptance and Git. DeepSeek V4 Flash/high owns only the frozen four-path implementation/test package. Gemini 3.7 Flash/high remains reserved for one final fresh veto. Native subagents remain declined.",
+    "active_plan_and_acceptance": "The frozen implementation plan and machine contract bind twelve exact accepted inputs, two new unmounted service paths and two focused test paths. They inherit the accepted response/product-adapter architecture without changing it.",
+    "protected_evidence_boundaries": "No route, schema, model, migration, API Spine, database, Docker, SQL, capability, product command/data, protected evidence, provider, credential, network, deployment, release, Pages or protected-ref authority is open. All unrelated untracked paths and docs/branding remain preserved.",
+    "git_refs_and_worktree": "HEAD and origin task remain exact 44a91b7239ac9f38510c10cb57729ac5312d32f9. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the active latch, frozen plan/contract and accepted narrow harness-policy/test paths are tracked working changes before dispatch."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "objective": "Implement and prove the accepted delete-confirm pure public-envelope projection, server-owned ingress packet, proposal and locked re-admission composition, physical-seam call boundary and closed outcome mapping in unmounted product source; edit or call no route, change no schema, execute no database and open no capability, product-data or provider runtime authority.",
+    "status": "in_progress",
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "authority_source": "The accepted Continuity 305 / Compass 287 closeout and Yuri's standing uninterrupted-development authority name this exact provider-free unmounted implementation as the next dependency-satisfied tranche.",
+    "checkpoint": {
+      "completed_stage": "Fresh five-source rehydration and protected-ref verification pass at exact source 44a91b7239ac9f38510c10cb57729ac5312d32f9. The narrow provider-free unmounted implementation plan and twelve-binding machine contract are frozen. Yuri's continuous harness self-correction decision is encoded and its focused provider-free test passes.",
+      "next_executable_stage": "Generate a fresh pre-worker-dispatch receipt, dispatch the exact four-path DeepSeek V4 Flash/high implementation and test package, then reconcile it without opening any route, schema, database or runtime surface.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:6dd00ac383cd3a01c476848892335aecf0393002cc05ec71c80583dbbd187980"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_unmounted_authored_synthetic_implementation_and_static_contract_evidence_only",
+      "product_edits_limited_to_separately_frozen_delete_confirm_service_and_test_paths",
+      "no_route_edit_mount_call_or_http_transport_opening",
+      "no_schema_model_migration_database_docker_sql_execution_or_product_command",
+      "no_capability_provisioning_or_client_supplied_authority",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "raw_delete_compatibility_ingress_remains_isolated",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "The frozen two-service and two-test package is bounded, separable mechanical implementation work with useful leverage after Sol fixed every authority and response decision.",
+        "work_packages": ["exact four-path unmounted delete-confirm implementation and provider-free tests"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "A single fresh Gemini 3.7 Flash/high veto remains valuable only after the reconciled exact candidate passes deterministic admission.",
+        "work_packages": ["final exact-candidate authority response privacy and isolation veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The developer constraint does not authorise native delegation, and no distinct allowed package remains outside the selected worker and verifier lanes.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "frozen plan and contract before implementation dispatch",
+      "one bounded DeepSeek package before Sol reconciliation",
+      "deterministic provider-free admission before one Gemini veto",
+      "Sol alone accepts and publishes"
+    ],
+    "reassessment_triggers": ["worker result", "material recovery", "pre-verifier acceptance", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_rehydration_and_exact_plan_freeze",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Selected for exactly one frozen four-path implementation/test package."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Reserved for one final Gemini 3.7 Flash/high veto after deterministic admission."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol froze the accepted plan and machine contract and owns reconciliation."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined under the developer constraint."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
