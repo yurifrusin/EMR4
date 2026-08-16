@@ -8,7 +8,7 @@
   "authority_source": "The frozen Tier-2 behavior/transaction plan is committed at 2a5042f80941e2bd191999c430ff2517ba7e8cb2 under AGENTS.md and Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
     "completed_stage": "DeepSeek candidate 8f595bd1b336c6c891f6e11651d43c24d84f1b25 is preserved revision_required before runtime: it exposed one CRLF-versus-LF source-binding defect and used then cleaned one unapproved temporary test directory. Sol corrected the plan to canonical LF text hashing, froze a transaction-local AUTH-S08 boundary fixture, and recorded AER-0348 through AER-0350.",
-    "next_executable_stage": "Commit the Sol plan-recovery checkpoint, create a corrected pre-dispatch receipt, then use the one permitted same-lane mechanical revision for canonical source hashing, transaction-local overflow setup and approved repo-root test execution only.",
+    "next_executable_stage": "Open the explicit Sol recovery lease, adopt only worker commit 8f595bd1's six paths as untrusted source in a disposable recovery worktree, apply the frozen canonical-hash and transaction-local overflow corrections, then perform deterministic admission before any occupied database execution.",
     "retry_counters": {
       "planning": 0,
       "implementation": 1,
