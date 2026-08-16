@@ -2,22 +2,23 @@
   "schema_version": "ariadne.risk_weighted_semantic_freeze.v1",
   "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
   "classified_tier": "tier_2_authority_runtime",
-  "source_head": "8b253037da2133c8b68f05a33c30c97d53324270",
-  "source_tree": "7a96ed34f942333e1a5f7e737f52c4a70c90a374",
-  "timestamp": "2026-08-16T13:20:56.3744481+10:00",
+  "source_head": "b64874b036ebdc16a80b56448fe4c815b7f22bb6",
+  "source_tree": "354435a7b06ba206d825114a54f2d4ac2c9387f8",
+  "timestamp": "2026-08-16T13:40:36.4851883+10:00",
   "timezone": "Australia/Brisbane",
-  "semantic_bindings_sha256": "sha256:e05f4cceeb24fb33576d252fdae9dbd1e2645080fd204cf8a388dd0c9d56630e",
+  "semantic_bindings_sha256": "sha256:1bd64c7cb497274b9c8cc0e7df1e783273d0bb124b825dcaabe65d4696d0dda5",
   "toolchain_sha256": "sha256:b2b9b207aaf40a6071fe39b93a9508fd139ff3c3bce4862ef8228ae4d3174b98",
   "semantic_bindings": [
     {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md", "kind": "contract", "sha256": "4fde7121a548f7f574e56506e0e3a4f3303b8cc0b18a7fd80948b84b9c99498c"},
     {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md", "kind": "contract", "sha256": "30830f56eee984b4e0f1c04791dc2a624d3015daaaafeba941f1485cde36620f"},
     {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md", "kind": "contract", "sha256": "88c3278b4fce683e78aac4823f1936780d6783a16c70ae154a180e0b2236a366"},
     {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-threat-model-delta.md", "kind": "contract", "sha256": "9fcdf09bec64eee535c4479c2c65bdf7df09502dda8930e768c9166c30aec062"},
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md", "kind": "contract", "sha256": "def3b30a6464e11b2ceb88ef18d671cd78d41fda70dfe9b2d717d62cb642ed3f"},
     {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json", "kind": "contract", "sha256": "99c88349cecbaeeec12b601e33615fb55e8bb7d71fcb764c3ca1a5f8939f0b0a"},
     {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json", "kind": "schema", "sha256": "c325c523380cb9882a026a43e3e4c68ce009eefc72aec6768db1b377234548b4"},
     {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json", "kind": "schema", "sha256": "b31899f32258e1c45d9af441994124e90ea6842bf4d542b626f5cf4897139d51"},
-    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "source", "sha256": "50018f6461d523b591ae7ee3ce0ad2671bbe614f29abd6423d553aa59bf173bd"},
-    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "semantic_test", "sha256": "dafb03b9a75ac088a4256b4a36e0ad22bc604bff9eda1e034e0fac743fc0e227"},
+    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "source", "sha256": "854bfd4a83d8f6ba6f6cc6de21f25abbb71fa2110808bf52808ae8f3f55be90c"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "semantic_test", "sha256": "db9e5c2b67676fc44110d857ce63ad11a237a814e906ce6b9031db21dea97661"},
     {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py", "kind": "semantic_test", "sha256": "4864fddc734d793d42d8ce4dbae2d11ff44021d787cfbaee310eb16953dbbe96"}
   ],
   "toolchain": {
@@ -27,7 +28,7 @@
     "postgres_image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
   },
   "focused_gate_results": {
-    "owned_tests": "passed_34_with_one_intentional_runtime_skip",
+    "owned_tests": "passed_37_with_one_intentional_runtime_skip",
     "current_lineage_api_spine_union": "passed_with_one_known_immutable_hash_assertion_excluded",
     "ruff": "passed",
     "python_compilation": "passed_213_maintained_sources",
@@ -42,8 +43,8 @@
     "KNOWN-DELETE-SCAFFOLD-IMMUTABLE-CURRENT-BATON-HASH-DRIFT-001": "The accepted predecessor scaffold contract pins an earlier tests/test_current_baton_consistency.py digest. The legitimate advancing baton changes that maintained test; the exact historical binding assertion alone is excluded and the immutable accepted contract is not rewritten."
   },
   "discarded_overbroad_lineage_sweep": "Historical continuity tests that intentionally pin their own former baton positions and source hashes were not treated as current gates; the maintained canonical profile and current lineage union pass.",
-  "recovery_incident_ids": ["AER-0351", "AER-0352"],
-  "recovery_evidence": "Attempts 001 and 002 preserved AER-0351 and exact cleanup; attempt 003 verified all nine authority groups, then preserved AER-0352 and exact cleanup. The bounded diagnostic identified TX-S06 pre-grant authority revocation: the service correctly denies stale generation or role mismatch before the grant query. This final repair freeze admits that exact two-token fail-fast trace, rejects reordered traces, retains closed diagnostics and binds the unchanged product service hash.",
+  "recovery_incident_ids": ["AER-0351", "AER-0352", "AER-0353"],
+  "recovery_evidence": "Attempts 001 and 002 preserved AER-0351 and exact cleanup; attempt 003 verified all nine authority groups, then preserved AER-0352 and exact cleanup. The bounded diagnostic identified TX-S06 pre-grant authority revocation and the first post-diagnostic attempt preserved AER-0353 after proving that the harness counted downstream grant SQL rather than complete authority-check invocations. Yuri explicitly authorized one exact correction and one final attempt. This freeze binds the process-local _authority_valid wrapper, independent SQL trace, finally restoration, early-denial and complete-path count regressions, the unchanged product service hash and the passing 196-test canonical profile.",
   "post_freeze_semantic_changes_authorized": false,
   "canonical_profile_rerun_required_without_semantic_change": false
 }
