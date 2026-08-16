@@ -1,0 +1,103 @@
+{
+  "schema_version": "raisa.delete_confirm_http_route_convergence_worker_receipt.v1",
+  "status": "completed",
+  "source_head": "f78524b41c909c74acc93b2818be8fc871ed8fd3",
+  "result_commit": "abdbcd5f28d39d21084bbc86b22f7201217226b0",
+  "model": "DeepSeek V4 Flash/high via Claude Code --bare",
+  "changed_paths": [
+    "app/routers/appointments.py",
+    "app/schemas/appointments.py",
+    "app/services/diary/confirm_actions.py",
+    "docs/api-spine/openapi/appointment-commands.yaml",
+    "orchestration/api_spine_appointment_command_alignment_inventory.md",
+    "scripts/raisa_provider_free_delete_confirm_http_route_convergence.py",
+    "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+    "tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py",
+    "orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/provider-free-route-convergence-evidence.json",
+    "orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-report.md",
+    "tests/test_api_spine_appointment_command_alignment_inventory.py",
+    "tests/test_api_spine_appointment_idempotency_gap.py",
+    "tests/test_api_spine_appointment_idempotency_route_integration_preflight.py",
+    "tests/test_api_spine_appointment_openapi_drift_guard.py",
+    "tests/test_api_spine_confirmation_contract_matrix.py",
+    "tests/test_api_spine_confirmation_family_idempotency_checkpoint.py",
+    "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+    "tests/test_api_spine_delete_confirm_idempotency_route_contract.py",
+    "tests/test_api_spine_openapi_backend_alignment.py",
+    "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py",
+    "tests/test_appointment_audit.py",
+    "tests/test_appointment_status_mutations.py",
+    "tests/test_diary_confirm_actions.py",
+    "tests/test_reason_code_backend.py"
+  ],
+  "checks": [
+    {
+      "command": "python -m pytest --noconftest -q tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py",
+      "exit_code": 0,
+      "count": "15 passed"
+    },
+    {
+      "command": "python -m pytest --noconftest -q <12 provider-free API Spine files>",
+      "exit_code": 0,
+      "count": "78 passed (10 static provider-free files)",
+      "note": "2 DB-fixture files excluded: test_api_spine_delete_confirm_idempotency_route_contract.py and test_api_spine_staff_create_confirm_idempotency_route_contract.py require repository database fixtures (client/db/gp_user/practice/practitioner/patient); 31 fixture-resolution errors reported for Sol's ordinary regression pass."
+    },
+    {
+      "command": "python -m scripts.raisa_provider_free_delete_confirm_http_route_convergence --no-write",
+      "exit_code": 0,
+      "count": "16/16 checks passed; hostile mutations rejected=149"
+    },
+    {
+      "command": "python -m ruff check <every changed Python file>",
+      "exit_code": 0,
+      "count": "All checks passed"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "count": "clean"
+    },
+    {
+      "command": "python -m compileall <every changed Python file>",
+      "exit_code": 0,
+      "count": "compile OK"
+    }
+  ],
+  "hostile_mutations_rejected": 149,
+  "scenario_outcomes": {
+    "DHC-S01": "passed",
+    "DHC-S02": "passed",
+    "DHC-S03": "passed",
+    "DHC-S04": "passed",
+    "DHC-S05": "passed",
+    "DHC-S06": "passed",
+    "DHC-S07": "passed",
+    "DHC-S08": "passed",
+    "DHC-S09": "passed",
+    "DHC-S10": "passed",
+    "DHC-S11": "passed",
+    "DHC-S12": "passed"
+  },
+  "containment": {
+    "no_database_opened": true,
+    "no_docker_used": true,
+    "no_network_opened": true,
+    "no_provider_used": true,
+    "no_protected_evidence_accessed": true,
+    "no_sql_executed": true,
+    "private_stored_bytes_not_delivered": true,
+    "one_handler_for_canonical_and_alias": true,
+    "one_accepted_adapter_call": true,
+    "raw_delete_unchanged": true
+  },
+  "issues": [
+    "test_api_spine_delete_confirm_idempotency_route_contract.py and test_api_spine_staff_create_confirm_idempotency_route_contract.py contain DB-fixture-dependent tests that cannot run under --noconftest in this worker envelope; their static assertions were repaired for the new canonical path/adapter ownership/minimal response, and their DB behavior should be exercised in Sol's ordinary regression pass.",
+    "test_appointment_status_mutations.py, test_appointment_audit.py and test_reason_code_backend.py were repaired to recognize the minimal public receipt envelope and adapter-owned audit labels; they are DB-fixture tests and are deferred to Sol's ordinary regression pass.",
+    "No application behavior change to the accepted adapter, composition or physical seam; raw DELETE is byte-for-byte unchanged."
+  ],
+  "narrow_repairs": [
+    "test_diary_confirm_actions.py: status endpoint pre-existing mismatch fixed to canonical /proposals/status/confirm; delete endpoint now canonical /proposals/delete/confirm.",
+    "test_api_spine_delete_confirm_idempotency_route_contract.py: route static assertions recognize adapter ownership; ledger response_body_json is the private six-field receipt distinct from the public HTTP envelope.",
+    "test_appointment_status_mutations.py / test_appointment_audit.py / test_reason_code_backend.py: success responses assert receipt envelope and DELETE_CONFIRM_AUDIT_LABELS instead of AppointmentOut and route-local evidence labels."
+  ]
+}
