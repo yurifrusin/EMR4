@@ -1,0 +1,205 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-http-postgresql-gemini-fe5dbcb3",
+  "branch": "codex/review-delete-confirm-http-postgresql-fe5dbcb3",
+  "head_before": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+  "head_after": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "8866b7383934d312aa6f6fff5ec3a25a6efe555123d969bcf0d22294079f8440",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review: Delete-Confirm HTTP/PostgreSQL Integration\n\n- **Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-http-postgresql-gemini-fe5dbcb3`\n- **Branch**: `codex/review-delete-confirm-http-postgresql-fe5dbcb3`\n- **HEAD**: `fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db`\n- **Plan Source**: `341d89b9a70c85f54247de364baf842b84543c8d`\n- **Accepted HTTP Source**: `c7a01edd96ebabf3ea2c07be89a5b405c9629853`\n- **Accepted Database Source**: `49dd2aaa72877adb844da4d0d5d5bb28039c90c8`\n- **Evidence Label**: `live_local_backend_postgres`\n\n---\n\n### Evaluation Against Review Criteria\n\n1. **Route Convergence and Single Physical Transaction Path**:\n   - Both the canonical endpoint (`/api/v1/appointments/proposals/delete/confirm`) and the compatibility alias (`/api/v1/appointments/proposals/delete-confirm`, marked `include_in_schema=False`) route directly into `confirm_delete_proposal_route` in [app/routers/appointments.py](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/routers/appointments.py).\n   - The route handler delegates exclusively to `compose_product_delete_confirm` with no route-local mutations, reads, or fallback branches.\n\n2. **Verified Pre-Command Ingress and Transaction-Local Tenant Context**:\n   - Ingress verification enforces verified/exact proposal evidence, signature validation, and freshness/version binding.\n   - In [app/services/appointment_delete_physical.py](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/services/appointment_delete_physical.py), the command transaction begins with explicit `READ COMMITTED` isolation followed immediately by `set_config('app.current_practice_id', str(practice_uuid), true)` (with `is_local=True`) prior to reading user state, appointment records, or capability grants.\n\n3. **Twelve DHI Rehearsal Scenarios**:\n   - All 12 scenarios (`DHI-S01` through `DHI-S12`) are tested serially and validated:\n     - `DHI-S01`: Non-mutating verified exact proposal generation.\n     - `DHI-S02`: Atomic commit and public/private byte separation.\n     - `DHI-S03`: Compatibility alias parity using the same underlying handler.\n     - `DHI-S04`: Response loss replay with byte-identical public and private receipt payloads.\n     - `DHI-S05`: Idempotency key requirement and conflict handling.\n     - `DHI-S06`: Authentication/authorization denial without state mutation.\n     - `DHI-S07`: Cross-practice access denial returning standard 404 (non-disclosure).\n     - `DHI-S08`: Proposal version binding mismatch rejection.\n     - `DHI-S09`: Warning acknowledgement atomic block enforcement.\n     - `DHI-S10`: Default denial and authority generation revocation.\n     - `DHI-S11`: Forced scaffold failure causing complete atomic rollback (HTTP 503) and trigger recovery.\n     - `DHI-S12`: Route and receipt contract schema compliance.\n\n4. **Public vs. Private Receipt Separation and Stability**:\n   - Public responses are projected via `delete_confirm_envelope_projection` and canonically serialized with `canonical_delete_confirm_envelope_bytes`.\n   - Private receipts are strictly 6-field canonical compact UTF-8 records (`validate_delete_confirm_private_receipt_bytes` / `canonical_delete_confirm_response_bytes`) stored in `appointment_command_idempotency.response_body_canonical_bytes`.\n   - Repeated requests demonstrate byte-identical public and private representations independently.\n\n5. **Role Privileges, Row-Level Security, and Connection Cleanliness**:\n   - The application role is configured as `NOSUPERUSER NOBYPASSRLS`.\n   - Forced Row-Level Security (`FORCE ROW LEVEL SECURITY`) is installed on all eight required tables: `appointments`, `users`, `practitioners`, `patients`, `appointment_types`, `user_capability_grants`, `appointment_command_idempotency`, and `appointment_audit_log`.\n   - Scaffold migration `x3y4z5a6b7c8` and associated integrity triggers/constraints are verified.\n   - Post-command checks on two fresh pooled connections confirm that `app.current_practice_id` does not leak across sessions.\n\n6. **Harness Containment, Bounded Resources, and Hostile Mutation Rejection**:\n   - The harness rejects all caller-supplied arguments and disallows dynamic discovery.\n   - Docker configuration enforces `--pull never`, an internal unrouted bridge network, ephemeral container tmpfs storage, no published host ports, and an in-process IPv4 loopback relay.\n   - All 135 hostile contract mutations fail closed before container or transaction initialization.\n\n7. **Evidence Artifact Sanitization and Claim Boundaries**:\n   - Both `provider-free-http-postgresql-evidence.json` and `provider-free-http-postgresql-failure-evidence.json` adhere to closed Draft 2020-12 schemas.\n   - Evidence records strictly exclude JWTs, credentials, secrets, SQL statements, connection strings, container IDs, synthetic row values, and raw exception messages.\n   - Claims are strictly limited to the local authored-synthetic test lifecycle.\n\n8. **Scope and System Boundary Invariants**:\n   - Legacy compatibility DELETE routes, patient/clinical data, external cloud providers, IAM credentials, frontend UI, deployment configurations, and protected repository refs remain unaffected.\n\n### Verification Execution Summary\nAll manifest commands (C01\u2013C08) completed cleanly with exit code 0:\n- C01: `git status --short --branch` -> Clean on `codex/review-delete-confirm-http-postgresql-fe5dbcb3` (0)\n- C02: `git rev-parse HEAD` -> `fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db` (0)\n- C03: Provider-free pytest integration rehearsal and plan tests -> 40 passed (0)\n- C04: Provider-free pytest route convergence and unmounted scaffold tests -> 58 passed (0)\n- C05: Provider-free pytest agent error register tests -> 286 passed (0)\n- C06: Ruff lint check -> All checks passed (0)\n- C07: `git diff --check 341d89b9a70c85f54247de364baf842b84543c8d..fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db` -> Clean (0)\n- C08: `git status --short --branch` -> Clean (0)",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review: Delete-Confirm HTTP/PostgreSQL Integration\n\n- **Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-http-postgresql-gemini-fe5dbcb3`\n- **Branch**: `codex/review-delete-confirm-http-postgresql-fe5dbcb3`\n- **HEAD**: `fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db`\n- **Plan Source**: `341d89b9a70c85f54247de364baf842b84543c8d`\n- **Accepted HTTP Source**: `c7a01edd96ebabf3ea2c07be89a5b405c9629853`\n- **Accepted Database Source**: `49dd2aaa72877adb844da4d0d5d5bb28039c90c8`\n- **Evidence Label**: `live_local_backend_postgres`\n\n---\n\n### Evaluation Against Review Criteria\n\n1. **Route Convergence and Single Physical Transaction Path**:\n   - Both the canonical endpoint (`/api/v1/appointments/proposals/delete/confirm`) and the compatibility alias (`/api/v1/appointments/proposals/delete-confirm`, marked `include_in_schema=False`) route directly into `confirm_delete_proposal_route` in [app/routers/appointments.py](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/routers/appointments.py).\n   - The route handler delegates exclusively to `compose_product_delete_confirm` with no route-local mutations, reads, or fallback branches.\n\n2. **Verified Pre-Command Ingress and Transaction-Local Tenant Context**:\n   - Ingress verification enforces verified/exact proposal evidence, signature validation, and freshness/version binding.\n   - In [app/services/appointment_delete_physical.py](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/services/appointment_delete_physical.py), the command transaction begins with explicit `READ COMMITTED` isolation followed immediately by `set_config('app.current_practice_id', str(practice_uuid), true)` (with `is_local=True`) prior to reading user state, appointment records, or capability grants.\n\n3. **Twelve DHI Rehearsal Scenarios**:\n   - All 12 scenarios (`DHI-S01` through `DHI-S12`) are tested serially and validated:\n     - `DHI-S01`: Non-mutating verified exact proposal generation.\n     - `DHI-S02`: Atomic commit and public/private byte separation.\n     - `DHI-S03`: Compatibility alias parity using the same underlying handler.\n     - `DHI-S04`: Response loss replay with byte-identical public and private receipt payloads.\n     - `DHI-S05`: Idempotency key requirement and conflict handling.\n     - `DHI-S06`: Authentication/authorization denial without state mutation.\n     - `DHI-S07`: Cross-practice access denial returning standard 404 (non-disclosure).\n     - `DHI-S08`: Proposal version binding mismatch rejection.\n     - `DHI-S09`: Warning acknowledgement atomic block enforcement.\n     - `DHI-S10`: Default denial and authority generation revocation.\n     - `DHI-S11`: Forced scaffold failure causing complete atomic rollback (HTTP 503) and trigger recovery.\n     - `DHI-S12`: Route and receipt contract schema compliance.\n\n4. **Public vs. Private Receipt Separation and Stability**:\n   - Public responses are projected via `delete_confirm_envelope_projection` and canonically serialized with `canonical_delete_confirm_envelope_bytes`.\n   - Private receipts are strictly 6-field canonical compact UTF-8 records (`validate_delete_confirm_private_receipt_bytes` / `canonical_delete_confirm_response_bytes`) stored in `appointment_command_idempotency.response_body_canonical_bytes`.\n   - Repeated requests demonstrate byte-identical public and private representations independently.\n\n5. **Role Privileges, Row-Level Security, and Connection Cleanliness**:\n   - The application role is configured as `NOSUPERUSER NOBYPASSRLS`.\n   - Forced Row-Level Security (`FORCE ROW LEVEL SECURITY`) is installed on all eight required tables: `appointments`, `users`, `practitioners`, `patients`, `appointment_types`, `user_capability_grants`, `appointment_command_idempotency`, and `appointment_audit_log`.\n   - Scaffold migration `x3y4z5a6b7c8` and associated integrity triggers/constraints are verified.\n   - Post-command checks on two fresh pooled connections confirm that `app.current_practice_id` does not leak across sessions.\n\n6. **Harness Containment, Bounded Resources, and Hostile Mutation Rejection**:\n   - The harness rejects all caller-supplied arguments and disallows dynamic discovery.\n   - Docker configuration enforces `--pull never`, an internal unrouted bridge network, ephemeral container tmpfs storage, no published host ports, and an in-process IPv4 loopback relay.\n   - All 135 hostile contract mutations fail closed before container or transaction initialization.\n\n7. **Evidence Artifact Sanitization and Claim Boundaries**:\n   - Both `provider-free-http-postgresql-evidence.json` and `provider-free-http-postgresql-failure-evidence.json` adhere to closed Draft 2020-12 schemas.\n   - Evidence records strictly exclude JWTs, credentials, secrets, SQL statements, connection strings, container IDs, synthetic row values, and raw exception messages.\n   - Claims are strictly limited to the local authored-synthetic test lifecycle.\n\n8. **Scope and System Boundary Invariants**:\n   - Legacy compatibility DELETE routes, patient/clinical data, external cloud providers, IAM credentials, frontend UI, deployment configurations, and protected repository refs remain unaffected.\n\n### Verification Execution Summary\nAll manifest commands (C01\u2013C08) completed cleanly with exit code 0:\n- C01: `git status --short --branch` -> Clean on `codex/review-delete-confirm-http-postgresql-fe5dbcb3` (0)\n- C02: `git rev-parse HEAD` -> `fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db` (0)\n- C03: Provider-free pytest integration rehearsal and plan tests -> 40 passed (0)\n- C04: Provider-free pytest route convergence and unmounted scaffold tests -> 58 passed (0)\n- C05: Provider-free pytest agent error register tests -> 286 passed (0)\n- C06: Ruff lint check -> All checks passed (0)\n- C07: `git diff --check 341d89b9a70c85f54247de364baf842b84543c8d..fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db` -> Clean (0)\n- C08: `git status --short --branch` -> Clean (0)",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "341d89b9a70c85f54247de364baf842b84543c8d..fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "4853a19fafb4c8e042f372e7fc9b8afc025f5a78d9e8a7e546f2d74902964b78",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "341d89b9a70c85f54247de364baf842b84543c8d..fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

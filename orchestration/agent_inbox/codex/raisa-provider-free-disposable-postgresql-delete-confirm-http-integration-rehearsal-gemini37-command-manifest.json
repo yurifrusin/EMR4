@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--check", "341d89b9a70c85f54247de364baf842b84543c8d..fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"]},
+    {"id": "C08", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

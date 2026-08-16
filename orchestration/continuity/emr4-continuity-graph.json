@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 308,
+  "graph_revision": 309,
   "harvests": [],
   "nodes": [
     {
@@ -21200,9 +21200,127 @@
         "Raw compatibility DELETE remains separate and outside the accepted confirmation envelope.",
         "No product data, provider, UI, deployment, Pages or protected-ref authority is opened."
       ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "title": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-16T23:22:02Z",
+      "updated_at": "2026-08-16T23:22:02Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-delete-confirm-http-route-convergence",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Provider-free authored-synthetic local HTTP/backend/PostgreSQL evidence only.",
+          "The server-authenticated practice is transaction-local before protected reads and absent on fresh pooled connections.",
+          "Raw DELETE, reusable runtime, product data, UI, provider, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-http-postgresql-integration",
+          "source": "orchestration/agent_inbox/codex/raisa-delete-confirm-http-postgresql-integration-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact canonical/hidden-alias authored-synthetic HTTP/PostgreSQL integration proof and review Ariadne effectiveness before more product work."
+        }
+      ],
+      "claim_scope": [
+        "All twelve DHI scenarios pass against owned disposable PostgreSQL 16.",
+        "All 135 hostile contract mutations fail closed.",
+        "Non-superuser non-BYPASSRLS role, forced RLS on eight tables, six constraints and four triggers pass.",
+        "Public/private bytes remain distinct and independently byte-identical on replay; second and rollback effects are zero.",
+        "The 40-test integration/plan, 58-test route/physical, 286-test register, 37-test API Spine/Diary and 130-test maintenance profiles pass.",
+        "Exact container/network cleanup and one clean eight-command Gemini 3.7 Flash/high veto pass at unchanged candidate HEAD."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+            "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+            "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md"
+          ],
+          "note": "Delete confirmation rechecks current appointment version and authority under the physical lock plan; cancellation does not create a reschedule availability claim."
+        },
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+            "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+            "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+            "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md"
+          ],
+          "note": "The minimal cancellation projection exposes no mutable patient, practitioner, time or duration state and leaves update families unchanged."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-329.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-postgresql-integration-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-http-postgresql-integration-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-http-postgresql-worker-result.json",
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-http-postgresql-correction-result.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-pre-verifier-v2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "app/routers/appointments.py",
+          "app/services/appointment_delete_physical.py",
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-command-manifest.json",
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Raw compatibility DELETE remains separate from the accepted confirmation envelope.",
+        "Visible Reception One cancellation, concurrency/crash recovery and unknown-commit behavior remain unproved.",
+        "No product data, reusable runtime, provider, deployment, Pages or protected-ref authority is opened.",
+        "The authorised Ariadne effectiveness and DeepSeek Harness review precedes further product work."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T20:42:01Z"
+  "updated_at": "2026-08-16T23:22:02Z"
 }

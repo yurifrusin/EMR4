@@ -1,0 +1,101 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "Exact candidate fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db contains the passing 12-scenario/135-mutation live evidence, exact cleanup and revision-329 verification corrections. Focused, 37 API Spine/Diary, 130 maintenance and static gates pass. The fresh codex/review- worktree, exact eight-command manifest and provider-free preflight pass cleanly with Gemini still unopened.",
+    "next_executable_stage": "Pass a fresh pre-verifier continuation receipt, dispatch exactly one Gemini 3.7 Flash/high veto against the unchanged clean candidate, then accept or recover from its single decision. After tranche closeout, review Ariadne effectiveness and DeepSeek Harness adaptation versus migration before further product work.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+    "reason_codes": [],
+    "resolved_commit": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Bounded implementation and correction are complete; no further package is open.",
+        "work_packages": [
+          "delete_confirm_http_postgresql_harness_and_tests_completed_at_worker_commit_891ac1608c34b0619fd009b04628e652d9c217fc"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Tier-2 database/authority integration requires one fresh exact-candidate Gemini 3.7 Flash/high veto now that deterministic and occupied evidence pass.",
+        "work_packages": [
+          "one_exact_eight_command_read_only_veto_at_fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native delegation and concurrent reviewers are forbidden.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "worktree postcondition",
+      "closeout",
+      "post-closeout Ariadne effectiveness and DeepSeek Harness review"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one exact Gemini veto",
+      "unchanged worktree proof",
+      "Sol acceptance or bounded recovery",
+      "closeout integration"
+    ]
+  },
+  "planned_action": "dispatch_exactly_one_gemini37_flash_high_veto_against_the_clean_fe5dbcb3_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-worktree-preflight.json",
+      "docs/ariadne-agent-error-correction-register-revision-329.md"
+    ],
+    "current_authority_allocation": "Sol owns acceptance and recovery. DeepSeek V4 Flash/high completed its bounded implementation package and correction. Gemini 3.7 Flash/high now owns exactly one fresh read-only veto over the exact clean candidate with no fallback. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "The exact review candidate is machine-resolved fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db in clean worktree C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3 on branch codex/review-delete-confirm-http-postgresql-fe5dbcb3. Primary tracked tree is clean before volatile review artifacts. Required ancestors remain present. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Current Baton directs this Tier-2 provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal and requires one fresh independent veto after deterministic and occupied evidence pass. Yuri's post-closeout Ariadne effectiveness and DeepSeek Harness assessment remains the next latched work.",
+    "protected_evidence_boundaries": "Gemini may inspect only the exact packet allowlist in the clean non-protected worktree and execute only the exact eight-command manifest. No Docker, SQL, route call, repository conftest, product/patient/clinical/protected data, provider other than the single reviewer, ADC/credential/IAM change, UI, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+  "branch": "codex/review-delete-confirm-http-postgresql-fe5dbcb3",
+  "head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+  "expected_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "4853a19fafb4c8e042f372e7fc9b8afc025f5a78d9e8a7e546f2d74902964b78",
+  "command_count": 8,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/routers/appointments.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/services/appointment_delete_product_adapter.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/app/services/appointment_delete_physical.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+    "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3/tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-postgresql-gemini-fe5dbcb3",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

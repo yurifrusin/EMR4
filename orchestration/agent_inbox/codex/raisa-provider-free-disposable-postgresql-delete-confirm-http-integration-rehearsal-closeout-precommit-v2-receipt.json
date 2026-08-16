@@ -1,0 +1,96 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "Exact candidate fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db passed all twelve authored-synthetic local HTTP/PostgreSQL scenarios, 135 hostile mutations, exact cleanup, deterministic profiles and one clean eight-command Gemini 3.7 Flash/high veto. Sol acceptance, paired closeout and Continuity 309 / Compass 291 are complete.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+    "reason_codes": [],
+    "resolved_commit": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded harness/test package and one mechanical correction completed; later occupied recovery remained Sol-serial.",
+        "work_packages": [
+          "delete_confirm_http_postgresql_harness_and_tests"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one fresh eight-command Gemini 3.7 Flash/high veto passed at unchanged clean candidate.",
+        "work_packages": [
+          "one_exact_candidate_veto_at_fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibited native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "new Ariadne effectiveness and DeepSeek Harness review operation"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "owned disposable PostgreSQL lifecycle",
+      "Sol acceptance",
+      "explicit-path commit and publication"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_accepted_delete_confirm_http_postgresql_closeout_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-http-postgresql-integration-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-postgresql-integration-rehearsal.md"
+    ],
+    "current_authority_allocation": "Sol owns acceptance, closeout and task-branch publication. DeepSeek completed its bounded implementation package; Gemini 3.7 Flash/high completed exactly one clean independent veto; native subagents were declined by developer policy.",
+    "git_refs_and_worktree": "Exact reviewed candidate fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db remains the task-branch product source. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The Gemini review worktree remained clean at the exact candidate.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted authored-synthetic local delete-confirm HTTP/PostgreSQL result at Continuity 309 / Compass 291 and directs the separate Ariadne effectiveness and DeepSeek Harness review next.",
+    "protected_evidence_boundaries": "No protected evidence was opened or enumerated. Raw DELETE, product/patient/clinical/historical data, provider product call, credential/IAM work, UI, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}
