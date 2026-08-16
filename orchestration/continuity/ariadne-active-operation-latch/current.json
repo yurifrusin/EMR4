@@ -4,11 +4,11 @@
   "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
   "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
   "status": "in_progress",
-  "source_head": "b64874b036ebdc16a80b56448fe4c815b7f22bb6",
+  "source_head": "1ccb739e91283606f93102b399bd43e30716e230",
   "authority_source": "Yuri explicitly authorized one further bounded AER-0353 harness-counter repair and one final occupied attempt after stop commit b4b772dd07a91e89db57fdd23bb1b4afb199a7e7; all parent Tier-2 boundaries remain in force.",
   "checkpoint": {
-    "completed_stage": "The exact AER-0353 repair is committed at b64874b036ebdc16a80b56448fe4c815b7f22bb6. Thirty-seven focused tests passed with one intentional runtime skip, static gates passed, the canonical 196-test fast profile passed and the final semantic freeze binds eleven exact sources including the authority-counter addendum. Product source remains unchanged.",
-    "next_executable_stage": "Commit the final semantic freeze checkpoint, generate and validate the five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure.",
+    "completed_stage": "The exact AER-0353 repair is committed at b64874b036ebdc16a80b56448fe4c815b7f22bb6 and the validated final semantic freeze is committed at exact Git-read source 1ccb739e91283606f93102b399bd43e30716e230 after thirty-seven focused passes, one intentional skip, static gates and the canonical 196-test fast profile. AER-0354 preserves and corrects the preexecution metadata's invented full-hash suffix before runtime. Product source remains unchanged.",
+    "next_executable_stage": "Generate and commit the five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure or cleanup ambiguity.",
     "retry_counters": {
       "planning": 2,
       "implementation": 6,

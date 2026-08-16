@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0354",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-final-occupied-preexecution",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "orchestrator_evidence_defect",
+  "role": "sol_orchestrator",
+  "resource_id": "final-freeze-precommit-and-preexecution-metadata",
+  "model": "gpt-sol",
+  "reasoning_level": "high",
+  "stage": "preexecution_receipt_admission",
+  "category": "future_commit_hash_invented_from_short_prefix",
+  "expected_invariant": "Every full Git object ID in continuation evidence is read exactly from Git; a precommit receipt describes the commit as pending and never predicts its future object ID.",
+  "observed_error": "The final-freeze precommit metadata and first uncommitted preexecution state expanded short prefix 1ccb739e with an invented suffix 721419bec2a41f717cd02aa8ed63250f. After commit, git rev-parse HEAD returned exact 1ccb739e91283606f93102b399bd43e30716e230.",
+  "detection_method": "The preexecution five-source Git check compared the state claim with direct git rev-parse HEAD before any database runtime was opened.",
+  "evidence_paths": [
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-final-freeze-precommit-runtime-state.json",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-final-freeze-precommit-receipt.json",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-final-occupied-preexecution-runtime-state.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "candidate_state": "no_occupied_runtime_opened_metadata_correction_required_before_attempt",
+  "workflow_disposition": "bounded_evidence_correction_before_preexecution_admission",
+  "recurrence_signature": "git_evidence.future_commit_full_hash_invented_from_short_prefix",
+  "correction": {
+    "status": "corrected",
+    "action": "Preserve the committed precommit misreport, replace every live preexecution occurrence with direct git rev-parse output, regenerate the five-source receipt and commit the correction before runtime.",
+    "prevention_control": "Precommit evidence may name only the current exact HEAD and a pending commit; post-commit full hashes must be copied from direct Git output and mechanically compared before receipt admission."
+  },
+  "status": "corrected_before_occupied_runtime"
+}

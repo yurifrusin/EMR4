@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "The exact AER-0353 repair is committed at b64874b036ebdc16a80b56448fe4c815b7f22bb6 and the validated final semantic freeze is committed at exact Git-read source 1ccb739e91283606f93102b399bd43e30716e230 after thirty-seven focused passes, one intentional skip, static gates and the canonical 196-test fast profile. AER-0354 preserves and corrects the preexecution metadata's invented full-hash suffix before runtime. Product source remains unchanged.",
+    "next_executable_stage": "Generate and commit the five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure or cleanup ambiguity.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "1ccb739e91283606f93102b399bd43e30716e230",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "final_occupied_preexecution",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The implementation lane is closed; reopening it would violate the one-repair boundary and add no leverage to the serial database lifecycle.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one Gemini 3.7 Flash/high veto remains mandatory only after the occupied attempt passes and exact cleanup is proved.",
+        "work_packages": [
+          "one post-pass exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "One owned database lifecycle and exact attempt budget are inherently serial; native delegation is not authorized.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "exactly one owned database lifecycle",
+      "stop on any failure or cleanup ambiguity",
+      "Gemini only after pass",
+      "Sol alone accepts"
+    ]
+  },
+  "planned_action": "commit_five_source_preexecution_checkpoint_then_run_exactly_one_final_occupied_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The repair commit b64874b036ebdc16a80b56448fe4c815b7f22bb6 and exact Git-read final-freeze commit 1ccb739e91283606f93102b399bd43e30716e230 passed 37 focused tests plus one intentional skip, Ruff, no-write compilation, schema/whitespace gates and the canonical 196-test profile. AER-0354 corrects the preexecution hash-reporting defect. Exactly one final occupied attempt remains.",
+    "current_authority_allocation": "Sol alone owns the serial occupied attempt and acceptance. DeepSeek is not applicable; Gemini 3.7 Flash/high is reserved for exactly one veto only after a pass; native subagents are declined.",
+    "git_refs_and_worktree": "Task HEAD is exact Git-read 1ccb739e91283606f93102b399bd43e30716e230 with only this latch, AER-0354 and preexecution receipt checkpoint pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67; all 635 pre-existing untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The active tranche remains the provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal under Yuri's explicit one-repair, one-final-attempt authorization.",
+    "protected_evidence_boundaries": "The attempt may create only one labelled internal Docker network, one portless tmpfs PostgreSQL 16 container and one fixed loopback relay for authored-synthetic serial fixtures. Any failure or cleanup ambiguity stops. Product data, routes, providers, external networks, deployments, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
