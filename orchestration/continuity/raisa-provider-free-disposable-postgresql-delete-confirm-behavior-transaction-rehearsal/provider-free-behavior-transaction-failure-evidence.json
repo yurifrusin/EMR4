@@ -18,28 +18,15 @@
   ],
   "failure": {
     "stage": "transaction",
-    "code": "lock_authority_order_mismatch",
-    "detail_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "diagnostic": {
-      "group_id": "TX-S06",
-      "outcome": "authority_revoked",
-      "expected_statement_tokens": [
-        "user_for_share",
-        "appointment_for_update",
-        "grant_authority_check"
-      ],
-      "observed_statement_tokens": [
-        "user_for_share",
-        "appointment_for_update"
-      ]
-    }
+    "code": "TX-S06_authority_count_mismatch",
+    "detail_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "cleanup": {
     "status": "cleanup_verified",
     "container": "container_absent",
     "network": "network_absent",
-    "container_id_sha256": "28d915aaaf21aad97f2e31298c768ad41087d42fbaf5b86e654b0fe98232a8d6",
-    "network_id_sha256": "a840a7c18d24329f5632ec4b7b99fa773d1634009826c3e7f263018c470e726b"
+    "container_id_sha256": "bac33aca595254b3fde17c8d10b3c8406c1bc30ed264c32c92b87e897febaaf4",
+    "network_id_sha256": "e5812c431f19757ac5f85a81778dc96238c50b8538f3342398d76dd3781789e8"
   },
   "claim_boundary": "Exact serial unmounted SQLAlchemy/PostgreSQL delete-confirm authority and transaction behavior only; no route, product database, concurrency, restart, unknown commit, deployment or production claim."
 }

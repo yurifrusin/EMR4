@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "The final bounded attempt passed all nine authority groups and the repaired TX-S06 token order, then failed closed at TX-S06_authority_count_mismatch and proved exact cleanup. AER-0353 shows the harness counted downstream grant SQL instead of complete conceptual authority-check invocations; the product service remains unchanged. The trace-recovery attempt budget is exhausted and no pass claim was released.",
+    "next_executable_stage": "Await Yuri's decision whether to authorize one further bounded harness-counter repair and one final occupied attempt; otherwise retain the incomplete tranche and redirect under an explicitly chosen programme option.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "a49faa40a5e90405c17c0f969d452380636855f4",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "bounded_stop",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker lane is closed and cannot authorize or improve the diagnosed conceptual counter repair.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The single final veto remains reserved but cannot run because no occupied candidate passed.",
+        "work_packages": [
+          "one final veto only after a future authorized pass"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "No further implementation or database execution is authorized at the stop, and native delegation is not authorized.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "user_decision_response",
+      "resumed_material_recovery",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "user decision precedes any new repair",
+      "no database or verifier activity while blocked",
+      "Sol preserves evidence only"
+    ]
+  },
+  "planned_action": "commit_fail_closed_bounded_stop_and_request_user_direction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The parent plan 2a5042f8 and trace-recovery plan 8ab671ba allowed one diagnostic and one evidence-proven repair attempt. The diagnostic proved TX-S06's fail-fast token trace; the final attempt then stopped at TX-S06_authority_count_mismatch. AER-0353 proves the harness counted grant SQL rather than conceptual _authority_valid invocations. Product source is unchanged, cleanup passed and no behavior claim was released.",
+    "current_authority_allocation": "Sol may preserve the stop but cannot authorize another occupied attempt. DeepSeek is closed; Gemini remains unused because no candidate passed; native subagents remain declined. Yuri must choose whether to extend the bounded harness repair.",
+    "git_refs_and_worktree": "Task branch retains semantic freeze a49faa40a5e90405c17c0f969d452380636855f4 and final-attempt checkpoint e2c05029; bounded-stop evidence is pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding/ and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Its no-ceremonial-pause rule permits a stop only at a genuine attention fork; the accepted trace-recovery attempt budget is now exhausted.",
+    "protected_evidence_boundaries": "No further database execution is admitted. All attempts used only authored-synthetic serial fixtures in an owned internal-only, portless, tmpfs PostgreSQL container and proved cleanup. Real data, routes, providers, deployments and protected refs remained closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

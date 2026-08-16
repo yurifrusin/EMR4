@@ -3,12 +3,12 @@
   "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
   "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
   "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "a49faa40a5e90405c17c0f969d452380636855f4",
   "authority_source": "The Tier-2 parent plan at 2a5042f80941e2bd191999c430ff2517ba7e8cb2 and evidence-proven AER-0352 classifier-repair freeze at a49faa40a5e90405c17c0f969d452380636855f4 proceed under AGENTS.md and Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "The bounded diagnostic identified TX-S06 pre-grant authority revocation: stale-generation and role mismatch correctly deny after user FOR SHARE and appointment FOR UPDATE, before any grant query. Product source remains byte-identical. Source 8b253037da2133c8b68f05a33c30c97d53324270 admits only that exact two-token trace alongside missing-grant's three-token trace and rejects reordering; freeze a49faa40a5e90405c17c0f969d452380636855f4 passes 34 focused tests and the canonical 196-test profile.",
-    "next_executable_stage": "Commit the fresh five-source final-attempt checkpoint, run the one final occupied attempt permitted by the trace-recovery plan, prove all twenty groups and exact cleanup, then proceed to exactly one Gemini 3.7 Flash/high veto if it passes.",
+    "completed_stage": "The final bounded attempt passed all nine authority groups and the repaired TX-S06 token order, then failed closed at TX-S06_authority_count_mismatch and proved exact cleanup. AER-0353 shows the harness counted downstream grant SQL instead of complete conceptual authority-check invocations; the product service remains unchanged. The trace-recovery attempt budget is exhausted and no pass claim was released.",
+    "next_executable_stage": "Await Yuri's decision whether to authorize one further bounded harness-counter repair and one final occupied attempt; otherwise retain the incomplete tranche and redirect under an explicitly chosen programme option.",
     "retry_counters": {
       "planning": 0,
       "implementation": 1,
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "The accepted trace-recovery plan's attempt budget is exhausted; another database attempt requires explicit authority despite the diagnosed harness-only correction."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "genuine_user_attention_fork_after_bounded_attempt_exhaustion"
   },
   "protected_boundaries": [
     "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",

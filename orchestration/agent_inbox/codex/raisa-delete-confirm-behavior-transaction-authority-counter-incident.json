@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0353",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-final-occupied-001",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "implementation_defect",
+  "role": "sol_recovered_harness",
+  "resource_id": "owned-disposable-postgresql-16-behavior-transaction-final-attempt",
+  "model": "gpt-sol",
+  "reasoning_level": "high",
+  "stage": "transaction_group_assertion",
+  "category": "conceptual_authority_check_counted_as_grant_query_count",
+  "expected_invariant": "The authority_calls evidence field counts complete authority-check invocations, including fail-fast role or generation denials that correctly return before a grant query.",
+  "observed_error": "TX-S06 contains three complete first-check authority decisions, but the harness incremented authority_calls only when its SQL observer saw a grant-table query. Missing-grant reached that query; stale-generation and role-mismatch correctly returned first, so the harness reported one call against the contract's three.",
+  "detection_method": "The bounded final attempt passed all nine authority groups and the repaired TX-S06 token-order gate, then failed closed at exact code TX-S06_authority_count_mismatch. Static comparison of _authority_valid with the SQL-event counter proves the semantic mismatch. Exact relay, container and internal-network cleanup passed.",
+  "evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+    "app/services/appointment_delete_physical.py",
+    "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md"
+  ],
+  "candidate_state": "final_attempt_failed_closed_cleanup_verified_product_source_unchanged_no_pass_claim",
+  "workflow_disposition": "attempt_budget_exhausted_user_attention_required_before_further_runtime",
+  "recurrence_signature": "authority_check.conceptual_invocation_miscounted_as_downstream_grant_sql",
+  "correction": {
+    "status": "not_authorized",
+    "action": "If Yuri authorizes one further bounded repair, instrument the exact private _authority_valid function invocation during the harness call, restore it in finally, retain SQL tokens independently, add fail-fast and two-check count tests, and permit one final occupied attempt only.",
+    "prevention_control": "Evidence counters must bind to the semantic event named by the contract, not to one downstream implementation side effect that valid early-return paths may skip."
+  },
+  "status": "contained_cleanup_verified_awaiting_authority"
+}

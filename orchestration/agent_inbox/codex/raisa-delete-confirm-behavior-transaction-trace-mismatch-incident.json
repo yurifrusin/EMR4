@@ -23,9 +23,9 @@
   "workflow_disposition": "one_exact_classifier_repair_and_final_attempt_admitted_by_trace_recovery_plan",
   "recurrence_signature": "transaction_trace.generic_order_mismatch_without_group_or_closed_token_diagnostic",
   "correction": {
-    "status": "correction_in_progress",
+    "status": "trace_attribution_corrected",
     "action": "Admit the exact two-token pre-grant authority-revocation trace alongside the existing three-token missing-grant trace, reject reordered variants, preserve the unchanged service hash, and run the one final occupied attempt allowed by the trace-recovery plan.",
     "prevention_control": "Stateful multi-scenario rehearsals must attribute failures to a scenario and retain only allowlisted diagnostic classes sufficient to distinguish harness classification from source-contract defects."
   },
-  "status": "contained_cleanup_verified"
+  "status": "trace_diagnostic_corrected_follow_on_counter_defect_separately_contained"
 }
