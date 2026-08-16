@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-risk-weighted-workflow-reform",
-  "active_tranche": "Ariadne risk-weighted workflow reform",
-  "objective": "Implement the accepted workflow-efficiency recommendations as a repository-only risk-tiered Ariadne policy and deterministic admission surface before Raisa product development resumes, preserving hard authority, privacy, evidence, cleanup and protected-ref controls while reducing redundant receipts, reruns, reviews and closeout synchronization.",
-  "status": "complete",
-  "source_head": "51866ce084c33fce600b792c66b180927658ed9e",
-  "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16; exact reviewed implementation 51866ce084c33fce600b792c66b180927658ed9e is accepted under the standing uninterrupted-development authority.",
+  "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+  "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+  "objective": "Execute exact migration x3y4z5a6b7c8 once over minimum empty authored-synthetic prerequisite relations inside one owned networkless tmpfs PostgreSQL 16 container, prove its exact catalogue/function/trigger representation and atomic installation, then remove the exact owned container without opening behavior, routes or product authority.",
+  "status": "in_progress",
+  "source_head": "274c42adf575f7f07aea759e79a6bd3f2ec25e54",
+  "authority_source": "AGENTS.md names this dependency-satisfied parse/catalogue rehearsal as the next implementation under Yuri's standing uninterrupted-development authority after the accepted Ariadne reform.",
   "checkpoint": {
-    "completed_stage": "Risk-weighted admission, corrected Gemini 3.7 Flash/high veto, exact fast-forward integration, result rendering, AER revision 308, Continuity 301, Compass 283, baton update and selected post-freeze gates all passed for exact implementation 51866ce084c33fce600b792c66b180927658ed9e.",
-    "next_executable_stage": null,
+    "completed_stage": "The fresh five-source preplanning receipt passed, the canonical pre-edit fast baseline passed, and the narrow Tier-2 representation-only plan and threat boundary are frozen with DeepSeek reserved for one mechanical package and Gemini reserved for one final veto.",
+    "next_executable_stage": "Commit the frozen planning boundary with explicit paths, generate the fresh pre-worker-dispatch receipt at that exact HEAD, then dispatch only the bounded harness/contract/schema/test package to DeepSeek V4 Flash/high.",
     "retry_counters": {
       "planning": 0,
-      "implementation": 1,
-      "review": 1,
+      "implementation": 0,
+      "review": 0,
       "verification": 0
     },
-    "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
+    "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -24,23 +24,23 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "completed_authorized_operation"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "repository_only_ariadne_workflow_policy_harness_and_tests",
-    "preserve_five_source_rehydration_authority_privacy_immutable_evidence_cleanup_git_and_terminal_latch_controls",
-    "no_raisa_product_source_route_schema_openapi_graphql_or_ui_change",
-    "no_migration_ddl_sql_database_engine_transaction_lock_or_postgresql_rehearsal",
-    "no_product_patient_clinical_historical_diary_or_protected_data",
-    "no_product_provider_call_adc_credentials_iam_browser_network_or_external_adapter",
-    "no_executable_product_tool_command_watcher_event_or_product_write_authority",
+    "exact_x3y4z5a6b7c8_offline_lowering_and_one_owned_disposable_postgresql_16_parse_catalogue_installation_only",
+    "minimum_empty_authored_synthetic_prerequisite_relations_and_allowlisted_catalogue_metadata_only",
+    "network_none_no_published_port_tmpfs_only_no_bind_or_named_volume_and_pull_never",
+    "no_database_behavior_probe_user_grant_receipt_audit_or_appointment_row",
+    "no_application_model_service_route_openapi_graphql_ui_watcher_event_or_product_command_change",
+    "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+    "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

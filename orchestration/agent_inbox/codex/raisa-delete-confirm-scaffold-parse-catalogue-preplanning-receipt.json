@@ -1,0 +1,87 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+    "completed_stage": "The Ariadne risk-weighted workflow reform is accepted at exact source 51866ce084c33fce600b792c66b180927658ed9e and published at task-branch descendant 274c42adf575f7f07aea759e79a6bd3f2ec25e54; the fresh canonical pre-edit fast baseline passed at that descendant.",
+    "next_executable_stage": "Generate the fresh five-source pre-sprint-planning receipt, freeze the narrow Tier-2 parse/catalogue-only plan and threat delta, then implement its fixed-path provider-free harness and evidence gates.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "274c42adf575f7f07aea759e79a6bd3f2ec25e54",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "After Sol freezes the exact catalogue boundary, the fixed-path harness, closed contract/schema and focused hostile tests form one separable mechanical package with clear file ownership.",
+        "work_packages": [
+          "implement the frozen fixed-path harness, closed contract/schema and focused tests without broadening database behavior or product authority"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Executing a migration in a database is Tier 2 and therefore requires exactly one fresh final independent veto on the semantically frozen exact candidate after deterministic admission.",
+        "work_packages": [
+          "review the final exact candidate against the frozen plan, API Spine classification, containment profile and minimized evidence"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The plan semantics and one stateful disposable-container run are serial conductor responsibilities; an additional concurrent analytical lane would duplicate the final veto and raise shared-worktree collision risk.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "the frozen plan reveals no sufficiently separable DeepSeek package",
+      "a material recovery changes owned paths or acceptance meaning",
+      "pre-verifier acceptance",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact empty-instance catalogue assertions and forbidden behavior boundary before DeepSeek dispatch",
+      "DeepSeek returns one bounded mechanical candidate before Sol performs semantic admission and the single disposable PostgreSQL run",
+      "the owned container lifecycle and exact cleanup are one serial stateful operation",
+      "Gemini is ineligible until deterministic admission and the occupied rehearsal pass on the exact candidate"
+    ]
+  },
+  "planned_action": "freeze_and_execute_provider_free_disposable_postgresql_delete_confirm_parse_catalogue_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md, its threat delta, closeout, Sol acceptance and scaffold-contract.json bind exact migration x3y4z5a6b7c8 and leave only a provider-free disposable PostgreSQL parse/catalogue rehearsal as the next candidate.",
+      "docs/ariadne-risk-weighted-workflow-reform-plan.md, orchestration/harness_settings/risk_weighted_workflow.yaml, its closeout and Sol acceptance classify migration execution/database runtime as Tier 2: one canonical pre-edit baseline, one semantic freeze and exactly one final independent veto.",
+      "docs/api-spine/openapi/appointment-commands.yaml preserves confirmAppointmentDeleteProposal as the private REST/OpenAPI command classification; GraphQL remains read-only and committed events remain non-authoritative acceleration hints.",
+      "Yuri approved the Ariadne reform and then continuation of the planned Raisa tranches under standing uninterrupted-development authority."
+    ],
+    "current_authority_allocation": "GPT Sol owns material plan semantics, integration and acceptance. DeepSeek V4 Flash/high through Claude Code --bare may implement only a frozen separable harness/contract/test package. Gemini 3.7 Flash/high through Antigravity supplies the one final Tier-2 independent veto. Native subagents are declined because another concurrent analytical lane would add collision and review overhead without a separate authority question.",
+    "git_refs_and_worktree": "Task branch HEAD and origin task are exact 274c42adf575f7f07aea759e79a6bd3f2ec25e54. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree was clean before opening the latch, with 631 preserved untracked paths including docs/branding/.",
+    "live_handover_current_baton": "AGENTS.md at SHA-256 d5f6390315fa13c2891e83f264d05c81efa8ebff00d9b56060618e4203d757fa records the accepted delete-confirm scaffold at integrated source 843769b415597f4545663d78044eaaad303c7692, the accepted risk-weighted Ariadne reform at source 51866ce084c33fce600b792c66b180927658ed9e, and this parse/catalogue rehearsal as the next dependency-satisfied implementation.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. This tranche may run only exact offline migration lowering and one owned networkless tmpfs PostgreSQL 16 empty-instance installation with allowlisted catalogue reads. It opens no behavior probe, product row, existing database, route, command, UI, provider, ADC, credential/IAM, browser, external network, protected fixture, deployment, release, Pages or protected ref. Preserve docs/branding/ and every unrelated untracked file; use explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
