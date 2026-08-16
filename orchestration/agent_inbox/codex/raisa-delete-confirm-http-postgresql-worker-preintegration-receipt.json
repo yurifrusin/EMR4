@@ -1,0 +1,94 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "The one bounded correction returned clean commit 891ac1608c34b0619fd009b04628e652d9c217fc over exact worker parent d67ad6b4df64099de85928c4c599fb16bfb2d808. Sol verified the two-commit diff is confined to three frozen paths and reproduced 39 passed/1 expected evidence-absent skip plus Ruff, compilation and whitespace. No database process has started.",
+    "next_executable_stage": "Pass pre-integration receipt, cherry-pick exact worker commits d67ad6b4df64099de85928c4c599fb16bfb2d808 and 891ac1608c34b0619fd009b04628e652d9c217fc, then run the integrated deterministic and database preexecution gates.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "4bdc09698a39065e3207f01cb759759c51995201",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "git_object_resolution": {
+    "observed_head": "4bdc09698a39065e3207f01cb759759c51995201",
+    "reason_codes": [],
+    "resolved_commit": "4bdc09698a39065e3207f01cb759759c51995201",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4bdc09698a39065e3207f01cb759759c51995201"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "corrected_worker_preintegration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek delivered the exact three-path package and one bounded correction; Sol independently reviewed and reproduced its deterministic gates.",
+        "work_packages": [
+          "completed corrected three-path delete-confirm HTTP PostgreSQL harness and tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One clean Gemini veto remains useful only after integration, live-local evidence and deterministic admission pass.",
+        "work_packages": [
+          "one final exact-candidate Gemini 3.7 Flash/high veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native subagent delegation and the next mutable database lifecycle is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "integration_result",
+      "database_preexecution",
+      "occupied_result",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol exact-path integration",
+      "integrated deterministic gates",
+      "Sol-owned database preexecution and lifecycle",
+      "Gemini after occupied pass only",
+      "Sol final acceptance"
+    ]
+  },
+  "planned_action": "integrate_exact_corrected_delete_confirm_http_postgresql_worker_lineage",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The corrected lineage is d67ad6b4df64099de85928c4c599fb16bfb2d808 then 891ac1608c34b0619fd009b04628e652d9c217fc over source 265497a0add219588a3372d4f40366fda4e94d22. Sol verified exact paths and parentage, read the correction diff, and reproduced 39 passed/1 evidence-absent skip, Ruff, compilation and whitespace. AER-0371 contains the first worker's environment violation; it does not change candidate bytes.",
+    "current_authority_allocation": "Sol owns integration and acceptance. DeepSeek completed the bounded three-file package and its one correction; it has no integration authority. Gemini 3.7 Flash/high remains reserved for a later exact-candidate veto after occupied evidence. Native subagents remain declined by policy.",
+    "git_refs_and_worktree": "Primary HEAD is exact 4bdc09698a39065e3207f01cb759759c51995201. Worker commits d67ad6b4df64099de85928c4c599fb16bfb2d808 and 891ac1608c34b0619fd009b04628e652d9c217fc are clean local commits with exact lineage from 265497a0add219588a3372d4f40366fda4e94d22. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md Current Baton and the in-progress latch direct completion of the provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal.",
+    "protected_evidence_boundaries": "Integration may cherry-pick only the exact two worker commits whose cumulative diff contains the three frozen harness/test paths. No database starts during integration; product source, plan, schemas, product/patient/clinical data, providers, credentials/IAM, browser, UI, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All corrections are complete, verified, and committed. Here is the bounded report.\n\n## Summary\n\n**Commit:** `891ac1608c34b0619fd009b04628e652d9c217fc`\n**Parent:** `d67ad6b4df64099de85928c4c599fb16bfb2d808` (exact clean HEAD verified before editing)\n**Branch:** `codex/worker-delete-confirm-http-pg-265497a0`\n**Working tree:** clean (0 changes)\n\n## Files changed (same three owned files)\n\n1. `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py` (modified)\n2. `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py` (modified)\n3. `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py` (unchanged; staged no-op)\n\nNo other paths were written. Read-only sources were only opened for understanding.\n\n## Corrections applied\n\n1. **DHI-S04** \u2014 removed the direct `replay_four.content != _stored_bytes(...)` comparison that could pass even when public bytes equaled the private receipt; now requires public first/replay identical, private first/replay identical, exactly one audit/receipt/appointment effect (`status Cancelled`, `version +1`, `idempotency_rows 1`, `completed_v1 1`), and invokes the existing `_public_private_proof`.\n2. **DHI-S05** \u2014 missing/blank key probes are proved non-mutating via `_assert_unchanged` before the first valid commit; a second sibling appointment is seeded under the same practice/actor/practitioner (`_seed(..., appointment_only=True)`), valid evidence is obtained for it, the first command's idempotency key is reused, exact `409 idempotency_key_conflict` is required, and the sibling is proved zero-effect.\n3. **DHI-S08** \u2014 absent required binding is now required to return exact `422` (field removed, before handler); malformed/tampered bindings are required to return 200-blocked; zero command-session construction and zero effects are asserted for every structural probe.\n4. **`_assert_unchanged`** strengthened to require Booked, version 1, zero audit, zero idempotency rows, zero completed v1; applied to authentication/inactive, non-mutating role, cross-practice (target + actor), warning mismatch, default-denial, revocation, and forced-trigger rollback partitions.\n5. **DHI-S02** \u2014 seeds a waiting-area value, acknowledges `waiting_area_cleared` through the actual proposal `confirm_payload`, and requires it cleared alongside adjacent version, one audit, and one complete receipt. **DHI-S03** \u2014 proves one adjacent effect, audit, and complete receipt through the alias.\n6. **`run_rehearsal`** now validates both pass and failure evidence against the closed evidence schema unconditionally before returning.\n7. Added six focused regressions: public-vs-private direct-comparison guard, sibling-target idempotency-conflict guard, exact absent-binding 422, complete zero-effect fields, waiting-area clearing, and unconditional final evidence validation (plus added `422` to the status-code guard test).\n\n## Checks run (no package installation, no network, no Docker/PostgreSQL/browser)\n\n| Check | Command | Result |\n|---|---|---|\n| Two owned tests | `...\\.venv\\Scripts\\python.exe -m pytest tests/test_..._integration_rehearsal.py tests/test_..._integration_rehearsal_plan.py --noconftest -q` | 39 passed, 1 skipped, exit 0 |\n| Ruff | `...\\.venv\\Scripts\\python.exe -m ruff check <three files>` | All checks passed |\n| Compilation | `...\\.venv\\Scripts\\python.exe -m py_compile <three files>` | exit 0 |\n| Whitespace | `git diff --check` | exit 0 (only CRLF normalization warnings) |\n\nOnly the existing interpreter `C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe` was used. No `pip`/`uv`/Poetry/Conda, no installers, no browser, no Docker, no PostgreSQL, and no external network or provider calls. The occupied harness was not run.\n\n**DECISION: pass**",
+  "usage": {
+    "input_tokens": 86728,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 6918912,
+    "output_tokens": 69283,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 5.6362960000000015,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
