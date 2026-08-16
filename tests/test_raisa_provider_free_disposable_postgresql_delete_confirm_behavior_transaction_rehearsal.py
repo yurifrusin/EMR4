@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import copy
+import hashlib
 import json
 from pathlib import Path
 
@@ -23,6 +24,15 @@ CONTRACT = rehearsal._load_json(rehearsal.CONTRACT_PATH)  # noqa: SLF001
 SCHEMA = rehearsal._load_json(rehearsal.SCHEMA_PATH)  # noqa: SLF001
 EVIDENCE_SCHEMA = rehearsal._load_json(rehearsal.EVIDENCE_SCHEMA_PATH)  # noqa: SLF001
 PROFILE = CONTRACT["docker_profile"]
+TRACE_RECOVERY_PLAN = ROOT / "docs" / (
+    "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-"
+    "transaction-trace-recovery-plan.md"
+)
+TRACE_RECOVERY_THREAT = ROOT / "docs" / "security" / (
+    "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-"
+    "transaction-trace-recovery-threat-model-delta.md"
+)
+DELETE_SERVICE = ROOT / "app" / "services" / "appointment_delete_physical.py"
 
 
 def test_contract_schema_sources_groups_and_hostile_gate_pass() -> None:
@@ -38,6 +48,18 @@ def test_contract_schema_sources_groups_and_hostile_gate_pass() -> None:
         f"TX-S{index:02d}" for index in range(1, 12)
     ]
     assert sum(CONTRACT["scenario_categories"].values()) == 20
+
+
+def test_trace_recovery_plan_is_frozen_and_product_service_is_unchanged() -> None:
+    assert hashlib.sha256(TRACE_RECOVERY_PLAN.read_bytes()).hexdigest() == (
+        "88c3278b4fce683e78aac4823f1936780d6783a16c70ae154a180e0b2236a366"
+    )
+    assert hashlib.sha256(TRACE_RECOVERY_THREAT.read_bytes()).hexdigest() == (
+        "9fcdf09bec64eee535c4479c2c65bdf7df09502dda8930e768c9166c30aec062"
+    )
+    assert hashlib.sha256(DELETE_SERVICE.read_bytes()).hexdigest() == (
+        "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533"
+    )
 
 
 def test_verify_contract_accepts_checkout_stable_lf_hashes() -> None:
@@ -270,6 +292,51 @@ def test_owned_network_and_container_profiles_fail_closed() -> None:
 )
 def test_statement_classification_is_value_free(statement: str, expected: str | None) -> None:
     assert rehearsal._statement_token(statement) == expected  # noqa: SLF001
+
+
+def test_order_mismatch_evidence_is_group_attributed_and_schema_closed() -> None:
+    with pytest.raises(rehearsal.RehearsalFailure) as excinfo:
+        rehearsal._assert_token_order(  # noqa: SLF001
+            "new_command", ("user_for_share", "appointment_for_update")
+        )
+    error = excinfo.value
+    assert error.diagnostic is not None
+    error.diagnostic = {"group_id": "TX-S01", **error.diagnostic}
+    evidence = rehearsal._failure_evidence(  # noqa: SLF001
+        error,
+        lifecycle=["nine_authority_groups_verified"],
+        cleanup={
+            "status": "cleanup_verified",
+            "container_id_sha256": "0" * 64,
+            "network_id_sha256": "1" * 64,
+        },
+    )
+    Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+    diagnostic = evidence["failure"]["diagnostic"]
+    assert diagnostic["group_id"] == "TX-S01"
+    assert diagnostic["outcome"] == "new_command"
+    assert diagnostic["observed_statement_tokens"] == [
+        "user_for_share",
+        "appointment_for_update",
+    ]
+    for mutate in ("group", "outcome", "token", "extra"):
+        candidate = copy.deepcopy(evidence)
+        target = candidate["failure"]["diagnostic"]
+        if mutate == "group":
+            target["group_id"] = "TX-S99"
+        elif mutate == "outcome":
+            target["outcome"] = "unknown"
+        elif mutate == "token":
+            target["observed_statement_tokens"] = ["SELECT raw_sql"]
+        else:
+            target["raw_sql"] = "SELECT * FROM patients"
+        assert list(Draft202012Validator(EVIDENCE_SCHEMA).iter_errors(candidate))
+
+
+def test_transaction_case_runtime_attributes_closed_trace_to_group() -> None:
+    source = Path(rehearsal.__file__).read_text(encoding="utf-8")
+    assert "_run_tx_case_attributed(engine, group, index)" in source
+    assert 'exc.diagnostic = {"group_id": group["id"], **exc.diagnostic}' in source
 
 
 def test_cleanup_uses_captured_ids_container_then_empty_network(monkeypatch) -> None:

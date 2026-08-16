@@ -42,7 +42,7 @@ An order mismatch must retain only:
 
 - one exact group ID from `TX-S01` through `TX-S11`;
 - one exact outcome already admitted by the rehearsal contract;
-- expected and observed arrays drawn only from the seven existing statement
+- expected and observed arrays drawn only from the six existing statement
   token enums; and
 - the existing stage, code and detail digest.
 

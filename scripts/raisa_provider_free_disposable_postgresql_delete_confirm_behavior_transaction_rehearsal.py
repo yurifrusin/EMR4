@@ -250,10 +250,18 @@ CREATE UNIQUE INDEX uq_appt_cmd_idem_audit_log_id
 
 
 class RehearsalFailure(RuntimeError):
-    def __init__(self, stage: str, code: str, detail: str | bytes = "") -> None:
+    def __init__(
+        self,
+        stage: str,
+        code: str,
+        detail: str | bytes = "",
+        *,
+        diagnostic: dict[str, Any] | None = None,
+    ) -> None:
         self.stage = stage
         self.code = code
         self.detail = detail.encode("utf-8") if isinstance(detail, str) else detail
+        self.diagnostic = diagnostic
         super().__init__(f"{stage}:{code}")
 
 
@@ -1375,7 +1383,15 @@ def _assert_token_order(outcome: str, tokens: tuple[str, ...]) -> None:
     else:
         raise RehearsalFailure("transaction", "unknown_token_outcome")
     if tokens != expected:
-        raise RehearsalFailure("transaction", "lock_authority_order_mismatch")
+        raise RehearsalFailure(
+            "transaction",
+            "lock_authority_order_mismatch",
+            diagnostic={
+                "outcome": outcome,
+                "expected_statement_tokens": list(expected),
+                "observed_statement_tokens": list(tokens),
+            },
+        )
 
 
 def _invoke_tx(
@@ -1541,6 +1557,18 @@ def _assert_tx_outcome(
             raise RehearsalFailure("transaction", f"{group['id']}_write_set_mismatch")
     elif after != before:
         raise RehearsalFailure("transaction", f"{group['id']}_rollback_or_no_effect_mismatch")
+
+
+def _run_tx_case_attributed(
+    engine: Engine, group: dict[str, Any], index: int
+) -> dict[str, Any]:
+    """Attach one frozen transaction group to closed trace diagnostics."""
+    try:
+        return _run_tx_case(engine, group, index)
+    except RehearsalFailure as exc:
+        if exc.diagnostic is not None:
+            exc.diagnostic = {"group_id": group["id"], **exc.diagnostic}
+        raise
 
 
 def _case_result(
@@ -1880,17 +1908,20 @@ def _failure_evidence(
     cleanup: dict[str, Any],
 ) -> dict[str, Any]:
     detail = error.detail if isinstance(error.detail, bytes) else str(error.detail).encode()
+    failure = {
+        "stage": error.stage,
+        "code": error.code,
+        "detail_sha256": _sha256(detail),
+    }
+    if error.diagnostic is not None:
+        failure["diagnostic"] = error.diagnostic
     return {
         "schema_version": "raisa.delete_confirm_behavior_transaction_evidence.v1",
         "result": "rehearsal_failed",
         "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction",
         "source_head": SOURCE_HEAD,
         "lifecycle": lifecycle,
-        "failure": {
-            "stage": error.stage,
-            "code": error.code,
-            "detail_sha256": _sha256(detail),
-        },
+        "failure": failure,
         "cleanup": cleanup,
         "claim_boundary": CLAIM_BOUNDARY,
     }
@@ -1995,7 +2026,7 @@ def run_rehearsal() -> dict[str, Any]:
         ]
         lifecycle.append("nine_authority_groups_verified")
         tx_results = [
-            _run_tx_case(engine, group, index)
+            _run_tx_case_attributed(engine, group, index)
             for index, group in enumerate(contract["transaction_groups"], start=20)
         ]
         lifecycle.append("eleven_transaction_groups_verified")

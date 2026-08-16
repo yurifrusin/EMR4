@@ -11,7 +11,7 @@ plan and physical scaffold remain in force.
 
 | Threat | Failure mode | Required control |
 |---|---|---|
-| `DCTR-001` | Diagnostic evidence leaks SQL, parameters or synthetic row values | Persist only closed group/outcome enums and the seven existing value-free statement tokens; schema rejects all extra keys and raw strings. |
+| `DCTR-001` | Diagnostic evidence leaks SQL, parameters or synthetic row values | Persist only closed group/outcome enums and the six existing value-free statement tokens; schema rejects all extra keys and raw strings. |
 | `DCTR-002` | Generic mismatch evidence cannot distinguish harness error from service-order error | Attribute the mismatch to one exact `TX-S01..TX-S11` group and retain both expected and observed closed token arrays. |
 | `DCTR-003` | Recovery silently changes product authority semantics | Byte-bind `app/services/appointment_delete_physical.py`; allow edits only to harness, its focused test, the evidence schema and metadata. |
 | `DCTR-004` | Repeated stateful attempts become an unbounded debugging loop | Permit one diagnostic attempt and at most one evidence-proven classifier repair attempt; any other or repeated failure stops. |

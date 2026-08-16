@@ -257,7 +257,55 @@
       "properties": {
         "stage": {"type": "string", "minLength": 1},
         "code": {"type": "string", "minLength": 1},
-        "detail_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        "detail_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "diagnostic": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "group_id",
+            "outcome",
+            "expected_statement_tokens",
+            "observed_statement_tokens"
+          ],
+          "properties": {
+            "group_id": {
+              "enum": [
+                "TX-S01", "TX-S02", "TX-S03", "TX-S04", "TX-S05", "TX-S06",
+                "TX-S07", "TX-S08", "TX-S09", "TX-S10", "TX-S11"
+              ]
+            },
+            "outcome": {
+              "enum": [
+                "new_command", "replay", "conflict", "in_progress_not_replayable",
+                "legacy_receipt_not_replayable", "receipt_integrity_failure",
+                "authority_revoked", "target_unavailable", "wait_budget_exhausted",
+                "scaffold_incomplete", "outer_abort"
+              ]
+            },
+            "expected_statement_tokens": {
+              "type": "array",
+              "maxItems": 7,
+              "items": {
+                "enum": [
+                  "user_for_share", "appointment_for_update", "grant_authority_check",
+                  "idempotency_select_for_update", "idempotency_insert_on_conflict",
+                  "idempotency_winner_for_update"
+                ]
+              }
+            },
+            "observed_statement_tokens": {
+              "type": "array",
+              "maxItems": 14,
+              "items": {
+                "enum": [
+                  "user_for_share", "appointment_for_update", "grant_authority_check",
+                  "idempotency_select_for_update", "idempotency_insert_on_conflict",
+                  "idempotency_winner_for_update"
+                ]
+              }
+            }
+          }
+        }
       }
     }
   },
