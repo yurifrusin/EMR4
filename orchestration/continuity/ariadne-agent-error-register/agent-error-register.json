@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 325,
+  "register_revision": 327,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15004,6 +15004,81 @@
           "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.schema.json",
           "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
           "docs/ariadne-agent-error-correction-register-revision-325.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0375",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-occupied-run-002",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "delete-confirm-http-postgresql-harness",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_owned_disposable_postgresql16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Every authored-synthetic scenario helper must call the exact source-bound evidence primitive exported by its owning module before an occupied lifecycle is admitted.",
+      "observed_error": "After Docker, scaffold, RLS and catalogue admission, the corrected occupied run reached DHI-S07 and stopped because the manual cross-practice probe called mint_signed_confirmation_evidence on the delete adapter module, which does not export that primitive.",
+      "detection_method": "The occupied run released only sanitized failed_attributeerror_none evidence and verified cleanup. After an independent zero-resource postflight, one bounded traced lifecycle localized the AttributeError to _manual_cross_practice_body at DHI-S07; that lifecycle also verified exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-326.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.scenario_helper_calls_unexported_evidence_primitive",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Import mint_signed_confirmation_evidence directly from the already source-bound bernie_turn_evidence module, use that exact primitive in the cross-practice probe and add a provider-free regression that constructs and validates the signed probe body before another occupied run.",
+        "prevention_control": "Every scenario-only helper that depends on a source-bound primitive must be executed by a provider-free focused regression before occupied admission; module presence in the source-binding list does not prove the selected export path.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-326.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0376",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-helper-repair-preexecution-draft-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_receipt_builder",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every full commit ID written into continuation Git-ref evidence must be copied from machine-resolved git rev-parse output; a displayed short prefix must never be manually expanded.",
+      "observed_error": "After AER-0370, Sol again manually expanded displayed commit prefix 50016230 into a nonexistent forty-character value while updating the active-operation latch, before running git rev-parse HEAD.",
+      "detection_method": "An immediate separately captured git rev-parse HEAD returned exact commit 50016230060aa15884a09b2d6e707b431d0835fa and exposed the uncommitted mismatch before any receipt generation, staging, database run or external review.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-327.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the invented latch value with the exact full commit returned by git rev-parse HEAD, preserve the stopped draft incident and generate continuation evidence only from the corrected latch.",
+        "prevention_control": "The post-closeout Ariadne effectiveness review must prioritize machine-populating all Git-ref fields from one resolved-ref snapshot so the orchestrator never manually transcribes a full object ID.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-327.md"
         ]
       },
       "status": "corrected"

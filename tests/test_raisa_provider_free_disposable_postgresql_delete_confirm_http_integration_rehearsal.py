@@ -89,6 +89,19 @@ def test_repair_semantics_require_adapter_delegation_and_tenant_context_order() 
     }
 
 
+def test_cross_practice_probe_uses_the_bound_evidence_minter() -> None:
+    body = rehearsal._manual_cross_practice_body(  # noqa: SLF001
+        rehearsal._fixture(107),  # noqa: SLF001
+        rehearsal._fixture(108),  # noqa: SLF001
+    )
+
+    assert body["signed_confirmation_evidence_required"] is True
+    evidence = body["signed_confirmation_evidence"]
+    assert evidence["schema_version"] == "bernie.confirmation_evidence.v1"
+    assert evidence["purpose"] == rehearsal.adapter.DELETE_CONFIRM_EVIDENCE_PURPOSE
+    assert evidence["signature"]
+
+
 def test_internal_network_container_and_fixed_relay_argv_are_exact() -> None:
     network = foundation.build_network_argv(
         r"C:\Docker\docker.exe",

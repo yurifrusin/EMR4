@@ -4,7 +4,7 @@
   "evidence_label": "live_local_backend_postgres",
   "data_posture": "provider_free_authored_synthetic_only",
   "source_head": "341d89b9a70c85f54247de364baf842b84543c8d",
-  "contract_sha256": "011855bd9827d00ad0d9c3db5873de1ee9165633e197079d24978669d6961efe",
+  "contract_sha256": "54b81d57e3519150c99e2cdd9c737edbb6fdb727c2f049611a46dc54c3ba1b58",
   "source_hashes": {
     "app/dependencies.py": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc",
     "app/main.py": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2",
@@ -31,13 +31,13 @@
     "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py": "1e3c72b312f80689a43fe5252f4a1ddebf28ab0b03f70f03a0aa06ea2ea62590"
   },
   "implementation_hashes": {
-    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py": "1166915fa1460f3f99aec85bf1f411aed6edb0c72128b04b10b2b49b29b2f105",
-    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py": "38aaef424d1c0a73edced2f94577881fb8ef3240cdfc6d2063b5c140802e7d6b",
-    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py": "d74a4d21bd621d6362af8d834105877ed36fc6bedfaa1eb09373b4d6cc1520cf"
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py": "9e2461c63d1af12f45a4a6b50656fcea25f7153ba8cd81a313beed246f822f6e",
+    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py": "4bf0b40f8d4b8faca45f3db45b60c9995ccce7250ba0e5a8ebaa7e4468dee6b0",
+    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py": "2865f5eb8714f167ae04f943b283eb86e3d52cdaa02f531bb36ddb99bf6fa3eb"
   },
   "hostile_mutations": {
-    "attempted": 134,
-    "rejected": 134,
+    "attempted": 135,
+    "rejected": 135,
     "minimum_required": 120
   },
   "environment": {
@@ -72,11 +72,15 @@
     "rollback_effect_count": 0
   },
   "lifecycle": [
-    "contract_sources_and_134_mutations_verified",
+    "contract_sources_and_135_mutations_verified",
     "cached_image_verified",
     "owned_internal_network_verified",
     "owned_tmpfs_container_verified",
-    "failed_keyerror_none",
+    "delete_scaffold_projection_role_and_rls_installed",
+    "fixed_loopback_relay_started",
+    "restricted_application_role_catalogue_verified",
+    "failed_attributeerror_none",
+    "fixed_loopback_relay_stopped",
     "cleanup_verified"
   ],
   "cleanup": {

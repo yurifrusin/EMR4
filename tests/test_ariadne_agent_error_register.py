@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 325
+    assert register["register_revision"] == 327
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 375)
+        f"AER-{index:04d}" for index in range(1, 377)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 260
+    assert len(agent_incidents) == 261
     assert len(transport_incidents) == 11
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2577,7 +2577,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 374
+    assert report["incident_count"] == 376
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3614,19 +3614,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 325
-    assert report["incident_count"] == 374
+    assert report["register_revision"] == 327
+    assert report["incident_count"] == 376
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 260,
-        "harness": 45,
+        "agent_behavior": 261,
+        "harness": 46,
         "repository": 58,
         "transport": 11,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 59,
-        "evidence_misreport": 52,
-        "harness_failure": 45,
+        "evidence_misreport": 53,
+        "harness_failure": 46,
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
@@ -3634,8 +3634,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "transport_timeout": 11,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 107,
-        "canonical_unchanged": 227,
+        "accepted_candidate_changed": 108,
+        "canonical_unchanged": 228,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3789,8 +3789,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix"
             ),
-            "incident_count": 4,
-            "incident_ids": ["AER-0354", "AER-0356", "AER-0363", "AER-0370"],
+            "incident_count": 5,
+            "incident_ids": [
+                "AER-0354",
+                "AER-0356",
+                "AER-0363",
+                "AER-0370",
+                "AER-0376",
+            ],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
             "roles": ["orchestrator"],
@@ -3800,6 +3806,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
                 "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output.",
                 "The existing Git-object-resolution preflight remains fail-closed for every continuation event. Orchestrator evidence authoring must capture the full object first and paste only that machine output; short displayed prefixes are presentation only.",
+                "The post-closeout Ariadne effectiveness review must prioritize machine-populating all Git-ref fields from one resolved-ref snapshot so the orchestrator never manually transcribes a full object ID.",
             ],
         },
         {
@@ -5550,6 +5557,7 @@ def test_aer_0348_through_0356_bind_delete_confirm_behavior_recovery() -> None:
         "AER-0356",
         "AER-0363",
         "AER-0370",
+        "AER-0376",
     ]
 
 
@@ -5923,6 +5931,39 @@ def test_aer_0374_repairs_missing_inherited_docker_context() -> None:
     assert incident["status"] == "corrected"
     assert "KeyError('context')" in incident["detection_method"]
     assert "context=default" in incident["correction"]["action"]
+
+
+def test_aer_0375_repairs_cross_practice_evidence_minter_owner() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0375"
+    ]
+
+    assert incident["origin"] == "harness"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "harness_failure"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["causal_claim_level"] == "observation_only"
+    assert incident["status"] == "corrected"
+    assert "DHI-S07" in incident["observed_error"]
+    assert "bernie_turn_evidence" in incident["correction"]["action"]
+
+
+def test_aer_0376_records_recurrent_short_hash_expansion() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0376"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        incidents["AER-0370"]["recurrence_signature"]
+    )
+    assert incident["related_incident_ids"] == []
+    assert incident["status"] == "corrected"
+    assert "git rev-parse HEAD" in incident["detection_method"]
+    assert "machine-populating" in incident["correction"]["prevention_control"]
 
 
 

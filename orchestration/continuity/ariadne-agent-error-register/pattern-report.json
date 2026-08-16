@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "b898f2edf748151299b0e8a1b0441c98a6d64afe7aa4ebdb577eca449cdf11b4",
+  "canonical_register_sha256": "8fe14548fa1a71455c8eceb9b9f516d4fb90f13367a10a903d532183ae3cbb27",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 107,
-      "canonical_unchanged": 227,
+      "accepted_candidate_changed": 108,
+      "canonical_unchanged": 228,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 59,
-      "evidence_misreport": 52,
-      "harness_failure": 45,
+      "evidence_misreport": 53,
+      "harness_failure": 46,
       "output_contract_violation": 106,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
@@ -17,15 +17,15 @@
       "transport_timeout": 11
     },
     "by_origin": {
-      "agent_behavior": 260,
-      "harness": 45,
+      "agent_behavior": 261,
+      "harness": 46,
       "repository": 58,
       "transport": 11
     },
     "by_process_severity": {
       "low": 142,
       "material": 114,
-      "moderate": 118
+      "moderate": 120
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -41,7 +41,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 193,
+      "codex-primary-orchestrator::orchestrator": 194,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -55,7 +55,7 @@
       "deepseek-v4-flash-implementation-worker::implementer": 6,
       "deepseek-v4-flash-worker-delete-confirm-btr::implementer": 1,
       "delete-confirm-behavior-transaction-harness::implementer": 4,
-      "delete-confirm-http-postgresql-harness::orchestrator": 1,
+      "delete-confirm-http-postgresql-harness::orchestrator": 2,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 3,
       "emr4-behavior-evidence-schema::orchestrator": 1,
@@ -95,12 +95,12 @@
     "by_role": {
       "implementer": 38,
       "integration_reviewer": 3,
-      "orchestrator": 281,
+      "orchestrator": 283,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 374,
+  "incident_count": 376,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -295,12 +295,13 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0354",
         "AER-0356",
         "AER-0363",
-        "AER-0370"
+        "AER-0370",
+        "AER-0376"
       ],
       "origins": [
         "agent_behavior"
@@ -309,7 +310,8 @@
         "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
         "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
         "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output.",
-        "The existing Git-object-resolution preflight remains fail-closed for every continuation event. Orchestrator evidence authoring must capture the full object first and paste only that machine output; short displayed prefixes are presentation only."
+        "The existing Git-object-resolution preflight remains fail-closed for every continuation event. Orchestrator evidence authoring must capture the full object first and paste only that machine output; short displayed prefixes are presentation only.",
+        "The post-closeout Ariadne effectiveness review must prioritize machine-populating all Git-ref fields from one resolved-ref snapshot so the orchestrator never manually transcribes a full object ID."
       ],
       "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
       "resource_ids": [
@@ -1028,7 +1030,7 @@
       ]
     }
   ],
-  "register_revision": 325,
+  "register_revision": 327,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

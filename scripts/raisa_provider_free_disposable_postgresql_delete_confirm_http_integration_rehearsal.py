@@ -59,6 +59,7 @@ from app.services.appointment_delete_physical import (
     delete_confirm_response_digest,
 )
 from app.services.auth_service import create_access_token
+from app.services.bernie_turn_evidence import mint_signed_confirmation_evidence
 from scripts import (
     raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal
     as delete_btr,
@@ -951,7 +952,7 @@ def _manual_cross_practice_body(
         "source_version": 1,
     }
     freshness_id = adapter.delete_proposal_freshness_id(command, state)
-    evidence = adapter.mint_signed_confirmation_evidence(
+    evidence = mint_signed_confirmation_evidence(
         adapter.delete_signed_confirmation_payload(
             practice_id=actor.practice_id,
             actor_id=actor.actor_id,
