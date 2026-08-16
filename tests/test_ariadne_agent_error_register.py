@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 313
+    assert register["register_revision"] == 314
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 363)
+        f"AER-{index:04d}" for index in range(1, 364)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 252
+    assert len(agent_incidents) == 253
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 362
+    assert report["incident_count"] == 363
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3613,18 +3613,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 313
-    assert report["incident_count"] == 362
+    assert report["register_revision"] == 314
+    assert report["incident_count"] == 363
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 252,
+        "agent_behavior": 253,
         "harness": 44,
         "repository": 56,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 57,
-        "evidence_misreport": 48,
+        "evidence_misreport": 49,
         "harness_failure": 44,
         "output_contract_violation": 104,
         "read_only_violation": 3,
@@ -3634,7 +3634,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 105,
-        "canonical_unchanged": 220,
+        "canonical_unchanged": 221,
         "untrusted_partial_worktree": 37,
     }
     receipt_event_recurrence = next(
@@ -3776,14 +3776,15 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix"
             ),
-            "incident_count": 2,
-            "incident_ids": ["AER-0354", "AER-0356"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0354", "AER-0356", "AER-0363"],
             "origins": ["agent_behavior"],
             "categories": ["evidence_misreport"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
                 "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
+                "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
                 "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output.",
             ],
         },
@@ -5529,7 +5530,11 @@ def test_aer_0348_through_0356_bind_delete_confirm_behavior_recovery() -> None:
         if row["recurrence_signature"]
         == "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix"
     )
-    assert hash_recurrence["incident_ids"] == ["AER-0354", "AER-0356"]
+    assert hash_recurrence["incident_ids"] == [
+        "AER-0354",
+        "AER-0356",
+        "AER-0363",
+    ]
 
 
 def test_aer_0357_records_checkout_hash_recurrence_and_canonical_lf_control() -> None:
@@ -5708,6 +5713,26 @@ def test_aer_0362_rejects_stale_latched_settings_fingerprint() -> None:
     assert incident["correction"]["status"] == "control_added"
     assert "active-operation checkpoint" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
+
+
+def test_aer_0363_requires_local_commit_resolution_for_git_ref_evidence() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0363"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["stage"] == "closeout"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["causal_claim_level"] == "observation_only"
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+    assert (
+        incident["recurrence_signature"]
+        == incidents["AER-0354"]["recurrence_signature"]
+        == incidents["AER-0356"]["recurrence_signature"]
+    )
+    assert "git cat-file" in incident["correction"]["prevention_control"]
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

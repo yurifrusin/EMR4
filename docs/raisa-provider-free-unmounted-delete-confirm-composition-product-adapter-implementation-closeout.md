@@ -41,7 +41,7 @@ Spine file changed.
 - all twelve strict UTF-8 canonical-LF input bindings match;
 - the forbidden route/schema/model/migration/API Spine diff is empty from the
   published architecture parent;
-- the consolidated provider-free population passes 517 tests through the
+- the final consolidated provider-free population passes 523 tests through the
   no-conftest runner;
 - focused hostile cases prove zero command-session and zero physical entry for
   each freshness/evidence mismatch;
@@ -70,8 +70,12 @@ AER-0361 records that the new standing self-correction paragraph briefly
 exceeded the compact handover ceiling. The text was compressed without
 weakening authority and every future handover edit now requires the existing
 acceptance-index guard. AER-0362 adds a missing fail-closed equality check
-between copied latch and current receipt settings fingerprints. Both controls
-pass and the active product operation resumed without a ceremonial pause.
+between copied latch and current receipt settings fingerprints. AER-0363
+preserves a third short-prefix expansion recurrence caught in uncommitted
+pre-push evidence; preflight now resolves every full Git object ID named in
+`git_refs_and_worktree` as a local commit before a receipt can pass. All three
+controls pass and the active product operation resumed without a ceremonial
+pause.
 
 ## Parallelism outcome
 

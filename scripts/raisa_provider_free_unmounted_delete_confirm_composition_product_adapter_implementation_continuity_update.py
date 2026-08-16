@@ -34,6 +34,7 @@ REJECTION = "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-pr
 LEASE = "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md"
 REGISTER_312 = "docs/ariadne-agent-error-correction-register-revision-312.md"
 REGISTER_313 = "docs/ariadne-agent-error-correction-register-revision-313.md"
+REGISTER_314 = "docs/ariadne-agent-error-correction-register-revision-314.md"
 PREVERIFIER = "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-pre-verifier-acceptance-receipt.json"
 PACKET = "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-review-packet.md"
 MANIFEST = "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest.json"
@@ -70,6 +71,7 @@ def _all_evidence() -> list[str]:
         LEASE,
         REGISTER_312,
         REGISTER_313,
+        REGISTER_314,
         PREVERIFIER,
         PACKET,
         MANIFEST,
@@ -117,15 +119,24 @@ def _node() -> dict[str, Any]:
         "claim_scope": [
             "Twelve canonical-LF input bindings match and forbidden route/schema/model/migration/API Spine paths are unchanged.",
             "Both freshness coordinates and the proposal evidence copy must equal recomputed signed truth before a command session.",
-            "The consolidated provider-free profile passes 517 tests with Ruff, compilation and whitespace.",
+            "The final consolidated provider-free profile passes 523 tests with Ruff, compilation and whitespace.",
             "One clean seven-command Gemini 3.7 Flash/high veto passes at the unchanged exact candidate.",
-            "AER-0359 through AER-0362 preserve both worker rejections, the Sol recovery and two harness guards.",
+            "AER-0359 through AER-0363 preserve both worker rejections, the Sol recovery and three harness guards.",
             "Exact Python 3.11 runtime execution is unclaimed on this host.",
         ],
         "contract_evidence": [],
         "evidence": {
             "plans": [PLAN],
-            "findings": [CONTRACT, COMPOSITION, ADAPTER, REJECTION, LEASE, REGISTER_312, REGISTER_313],
+            "findings": [
+                CONTRACT,
+                COMPOSITION,
+                ADAPTER,
+                REJECTION,
+                LEASE,
+                REGISTER_312,
+                REGISTER_313,
+                REGISTER_314,
+            ],
             "closeouts": [CLOSEOUT, MAILBOX],
             "acceptances": [ACCEPTANCE],
             "receipts": [WORKER, CORRECTION, PREVERIFIER, MANIFEST_ADMISSION, REVIEW],

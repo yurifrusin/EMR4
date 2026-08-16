@@ -44,12 +44,13 @@ in Reception One.
   freshness coordinates plus the proposal evidence copy to remain exact;
 - pre-command and locked admissions fail closed; the physical seam owns two
   current-authority checks and the cancellation/audit/private-receipt write set;
-- 12/12 canonical-LF bindings, empty forbidden-route/schema diff, 517
+- 12/12 canonical-LF bindings, empty forbidden-route/schema diff, the final 523
   provider-free tests, Ruff, compilation and whitespace pass;
 - Gemini 3.7 Flash/high returns one pass after seven exact commands with an
   unchanged clean worktree;
-- AER-0359 through AER-0362 are closed, including the Sol recovery lease and
-  both new harness guards; and
+- AER-0359 through AER-0363 are closed, including the Sol recovery lease and
+  three narrow harness guards; the last makes every full Git ID in continuation
+  evidence resolve locally before a receipt may pass; and
 - routes, schemas, database execution, capability provisioning, product data,
   providers, UI, deployment, release, Pages and protected refs remain closed.
 

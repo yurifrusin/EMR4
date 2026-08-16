@@ -38,7 +38,7 @@ def test_implementation_remains_unmounted_and_provider_free() -> None:
     for phrase in (
         "server-owned ingress",
         "six-field private receipt",
-        "517 tests",
+        "523 tests",
         "seven-command gemini 3.7",
         "no canonical or hidden alias route",
         "product data",
@@ -56,6 +56,7 @@ def test_recovery_and_clean_veto_are_preserved() -> None:
     assert "orchestration/agent_inbox/antigravity/raisa-delete-confirm-composition-product-adapter-gemini37-review-receipt.json" in receipts
     assert "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md" in findings
     assert "docs/ariadne-agent-error-correction-register-revision-313.md" in findings
+    assert "docs/ariadne-agent-error-correction-register-revision-314.md" in findings
     assert "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-composition-product-adapter-implementation.md" in node["evidence"]["closeouts"]
 
 

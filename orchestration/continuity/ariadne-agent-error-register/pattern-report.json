@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "22a84a76557c6cf1f5896c723a106bb1d28d493028ae136495f895c043031af7",
+  "canonical_register_sha256": "f5d1d7d4345663763055a093de4435080a23d20af0d26e3cf3f09d2743cab3a3",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 105,
-      "canonical_unchanged": 220,
+      "canonical_unchanged": 221,
       "untrusted_partial_worktree": 37
     },
     "by_category": {
       "command_scope_violation": 57,
-      "evidence_misreport": 48,
+      "evidence_misreport": 49,
       "harness_failure": 44,
       "output_contract_violation": 104,
       "read_only_violation": 3,
@@ -17,14 +17,14 @@
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 252,
+      "agent_behavior": 253,
       "harness": 44,
       "repository": 56,
       "transport": 10
     },
     "by_process_severity": {
       "low": 142,
-      "material": 111,
+      "material": 112,
       "moderate": 109
     },
     "by_resource_and_role": {
@@ -40,7 +40,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 188,
+      "codex-primary-orchestrator::orchestrator": 189,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -92,12 +92,12 @@
     "by_role": {
       "implementer": 34,
       "integration_reviewer": 2,
-      "orchestrator": 274,
+      "orchestrator": 275,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 362,
+  "incident_count": 363,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -290,16 +290,18 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0354",
-        "AER-0356"
+        "AER-0356",
+        "AER-0363"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
+        "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
         "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output."
       ],
       "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
@@ -993,7 +995,7 @@
       ]
     }
   ],
-  "register_revision": 313,
+  "register_revision": 314,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-16"
 }

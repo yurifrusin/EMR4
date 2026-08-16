@@ -17,11 +17,12 @@ recomputed signed truth before a command session. The physical seam remains
 the sole capability/current-authority and atomic write-set owner; replay has no
 effect and uses only validated private bytes.
 
-Twelve bindings, forbidden-route/schema isolation, the 517-test provider-free
+Twelve bindings, forbidden-route/schema isolation, the final 523-test provider-free
 profile, Ruff, compilation and whitespace pass. Gemini 3.7 Flash/high executes
 seven admitted commands, returns one `pass`, and leaves the exact worktree
-unchanged and clean. AER-0359 through AER-0362 preserve both worker rejections
-and the two narrow harness corrections. The Sol recovery lease is closed.
+unchanged and clean. AER-0359 through AER-0363 preserve both worker rejections
+and the three narrow harness corrections, including local commit resolution
+for full Git IDs in continuation evidence. The Sol recovery lease is closed.
 
 No route/schema/database/capability/product-data/provider/deployment/release,
 Pages or protected-ref authority is opened. The next admissible work is only a

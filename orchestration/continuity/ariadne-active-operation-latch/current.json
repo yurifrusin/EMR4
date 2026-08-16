@@ -7,7 +7,7 @@
   "source_head": "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb",
   "authority_source": "The accepted Continuity 305 / Compass 287 closeout and Yuri's standing uninterrupted-development authority name this exact provider-free unmounted implementation as the next dependency-satisfied tranche.",
   "checkpoint": {
-    "completed_stage": "At Continuity 306 / Compass 288, exact candidate 43e993a98ffec3f9ffe2740b0b38816bcb2d6adb passes twelve bindings, 517 provider-free tests, Ruff, compilation, forbidden-route/schema isolation and one clean seven-command Gemini 3.7 Flash/high veto. The Sol recovery lease and AER-0359 through AER-0362 are closed.",
+    "completed_stage": "At Continuity 306 / Compass 288, exact candidate 43e993a98ffec3f9ffe2740b0b38816bcb2d6adb passes twelve bindings, the final 523-test provider-free profile, Ruff, compilation, forbidden-route/schema isolation and one clean seven-command Gemini 3.7 Flash/high veto. The Sol recovery lease and AER-0359 through AER-0363 are closed; AER-0363 adds local Git commit-resolution admission for full object IDs in continuation evidence.",
     "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
@@ -15,7 +15,7 @@
       "review": 0,
       "verification": 0
     },
-      "settings_fingerprint": "sha256:5ff0bd573d708c99782c1cb0d4536a5b5630d4ec79f49664c2881aa0a95220c4"
+      "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,

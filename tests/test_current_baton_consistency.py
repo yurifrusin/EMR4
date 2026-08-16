@@ -79,8 +79,8 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
         "adapter_implementation_pass"
     ) in current
     assert SOURCE_HEAD in current
-    assert "517 provider-free tests" in current.lower()
-    assert "aer-0359 through aer-0362" in current.lower()
+    assert "523-test provider-free profile" in current.lower()
+    assert "aer-0359 through aer-0363" in current.lower()
     assert "closed sol recovery" in current.lower()
     assert (
         "no route, schema, database, capability, product data or runtime is opened"

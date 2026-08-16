@@ -20943,9 +20943,9 @@
       "claim_scope": [
         "Twelve canonical-LF input bindings match and forbidden route/schema/model/migration/API Spine paths are unchanged.",
         "Both freshness coordinates and the proposal evidence copy must equal recomputed signed truth before a command session.",
-        "The consolidated provider-free profile passes 517 tests with Ruff, compilation and whitespace.",
+        "The final consolidated provider-free profile passes 523 tests with Ruff, compilation and whitespace.",
         "One clean seven-command Gemini 3.7 Flash/high veto passes at the unchanged exact candidate.",
-        "AER-0359 through AER-0362 preserve both worker rejections, the Sol recovery and two harness guards.",
+        "AER-0359 through AER-0363 preserve both worker rejections, the Sol recovery and three harness guards.",
         "Exact Python 3.11 runtime execution is unclaimed on this host."
       ],
       "contract_evidence": [],
@@ -20960,7 +20960,8 @@
           "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json",
           "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
           "docs/ariadne-agent-error-correction-register-revision-312.md",
-          "docs/ariadne-agent-error-correction-register-revision-313.md"
+          "docs/ariadne-agent-error-correction-register-revision-313.md",
+          "docs/ariadne-agent-error-correction-register-revision-314.md"
         ],
         "closeouts": [
           "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-closeout.md",

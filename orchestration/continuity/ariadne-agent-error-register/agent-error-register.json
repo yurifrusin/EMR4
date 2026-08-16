@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 313,
+  "register_revision": 314,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -14535,6 +14535,46 @@
           "orchestration/harness_settings/evidence_led_workflow.yaml",
           "tests/test_ariadne_evidence_gate.py",
           "docs/ariadne-agent-error-correction-register-revision-313.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0363",
+      "attempt_id": "raisa-delete-confirm-composition-product-adapter-closeout-prepush",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every full Git object ID in continuation Git-ref evidence must come from direct Git output and resolve as a local commit before receipt generation.",
+      "observed_error": "While preparing uncommitted pre-push evidence, the orchestrator again expanded short closeout prefix f5bff32a into a nonexistent full object ID instead of using the exact full HEAD returned by Git. Direct Git exposed the mismatch before receipt generation, staging or publication.",
+      "detection_method": "The mandatory pre-push git rev-parse HEAD check returned f5bff32ac79f367cb0c0796f44c30f89409d03a5 and was compared with the uncommitted runtime-state sentence before receipt generation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-prepush-hash-reporting-incident.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the uncommitted value with direct Git output and make every continuation preflight reject a full object ID in git_refs_and_worktree evidence unless the local repository resolves it as a commit.",
+        "prevention_control": "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-prepush-hash-reporting-incident.json",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "orchestration/harness_settings/evidence_led_workflow.yaml",
+          "tests/test_ariadne_evidence_gate.py",
+          "docs/ariadne-agent-error-correction-register-revision-314.md"
         ]
       },
       "status": "corrected"

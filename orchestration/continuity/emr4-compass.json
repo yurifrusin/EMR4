@@ -3511,6 +3511,7 @@
         "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
         "docs/ariadne-agent-error-correction-register-revision-312.md",
         "docs/ariadne-agent-error-correction-register-revision-313.md",
+        "docs/ariadne-agent-error-correction-register-revision-314.md",
         "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-pre-verifier-acceptance-receipt.json",
         "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-review-packet.md",
         "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest.json",
@@ -3551,6 +3552,7 @@
       "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
       "docs/ariadne-agent-error-correction-register-revision-312.md",
       "docs/ariadne-agent-error-correction-register-revision-313.md",
+      "docs/ariadne-agent-error-correction-register-revision-314.md",
       "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-pre-verifier-acceptance-receipt.json",
       "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-review-packet.md",
       "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest.json",
@@ -4652,7 +4654,8 @@
         "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-implementation-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-composition-product-adapter-implementation.md",
         "scripts/raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity_update.py",
-        "tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py"
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-314.md"
       ]
     },
     {

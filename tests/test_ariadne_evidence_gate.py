@@ -99,6 +99,9 @@ def test_evidence_led_policy_keeps_hard_controls_separate_from_adaptive_flow() -
         "active_operation_settings_fingerprint_matches_receipt"
         in policy["hard_controls"]
     )
+    assert "git_refs_evidence_full_commit_ids_resolve_locally" in policy[
+        "hard_controls"
+    ]
     assert policy["adaptive_flow"]["external_review"].startswith("one_final")
     assert policy["adaptive_flow"]["qualifying_harness_defect"] == (
         "preserve_contain_register_guard_verify_then_resume_active_operation"

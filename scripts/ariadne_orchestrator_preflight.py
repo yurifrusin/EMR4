@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -23,6 +25,7 @@ from orchestration_harness.git_object_resolution import (
 from orchestration_harness.settings_fingerprint import settings_fingerprint
 
 SETTINGS_DIR = REPO_ROOT / "orchestration" / "harness_settings"
+_FULL_COMMIT_ID = re.compile(r"(?<![0-9a-f])[0-9a-f]{40}(?![0-9a-f])")
 
 
 def _yaml(path: Path) -> dict[str, Any]:
@@ -46,6 +49,35 @@ def configured_continuation_events(
     ):
         raise ValueError("configured continuation_events must be unique text values")
     return tuple(events)
+
+
+def unresolved_git_ref_evidence_commit(
+    runtime_state: dict[str, Any],
+    *,
+    repository_root: Path,
+) -> str | None:
+    """Return the first full Git-ref evidence ID that is not a local commit."""
+    source_evidence = runtime_state.get("source_evidence")
+    if not isinstance(source_evidence, dict):
+        return None
+    evidence = source_evidence.get("git_refs_and_worktree")
+    if not isinstance(evidence, str):
+        return None
+    for object_id in sorted(set(_FULL_COMMIT_ID.findall(evidence))):
+        try:
+            completed = subprocess.run(  # noqa: S603
+                ["git", "cat-file", "-e", f"{object_id}^{{commit}}"],
+                cwd=repository_root,
+                check=False,
+                capture_output=True,
+                shell=False,
+                timeout=5,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            return object_id
+        if completed.returncode != 0:
+            return object_id
+    return None
 
 
 def build_receipt(
@@ -81,6 +113,17 @@ def build_receipt(
                 reasons.append(reason)
             receipt["status"] = "revision_required"
             receipt["worker_dispatch_permitted"] = False
+    unresolved_evidence_commit = unresolved_git_ref_evidence_commit(
+        runtime_state,
+        repository_root=repository_root,
+    )
+    if unresolved_evidence_commit is not None:
+        reason = "git_refs_evidence_object_unresolvable"
+        reasons = receipt.setdefault("reasons", [])
+        if reason not in reasons:
+            reasons.append(reason)
+        receipt["status"] = "revision_required"
+        receipt["worker_dispatch_permitted"] = False
     policy = requirements.get("git_object_resolution")
     continuation_event = runtime_state.get("continuation_event")
     required = isinstance(policy, dict) and continuation_event in policy.get(

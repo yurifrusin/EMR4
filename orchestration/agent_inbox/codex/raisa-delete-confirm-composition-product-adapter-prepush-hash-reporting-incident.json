@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.harness_incident.v1",
+  "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+  "observed_on": "2026-08-16",
+  "stage": "pre_push",
+  "invariant": "Every full Git object ID in continuation Git-ref evidence must come from direct Git output and resolve as a local commit before receipt generation.",
+  "reported_uncommitted_value": "f5bff32a347f7fc83f99dafaf6f559c028c5667e",
+  "direct_git_value": "f5bff32ac79f367cb0c0796f44c30f89409d03a5",
+  "detection": "The orchestrator ran direct git rev-parse HEAD before receipt generation and compared it with the newly authored runtime-state evidence sentence.",
+  "scope_effect": "uncommitted_continuation_evidence_only",
+  "candidate_effect": false,
+  "provider_calls_after_detection": 0,
+  "correction": {
+    "action": "Replace the uncommitted value with direct Git output and make preflight reject any full object ID in git_refs_and_worktree evidence that does not resolve locally as a commit.",
+    "expected_result": "The wrong value fails closed before receipt generation; the corrected evidence and all existing valid IDs pass."
+  }
+}
