@@ -1,0 +1,153 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r193",
+  "branch": "codex/review-delete-confirm-convergence-corrected-1cc75672",
+  "head_before": "1cc75672abba6e011e0de03f26a3ad2ba9bae396",
+  "head_after": "1cc75672abba6e011e0de03f26a3ad2ba9bae396",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "a4b7a06e2e964de4a25621ea4f255bb2bf74202249ce7be756458247c8145cf0",
+  "result": "# Independent Review Report: Delete-Confirm Route Convergence and Git-Object Resolution (Corrected Candidate)\n\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\r193`\n- **Branch:** `codex/review-delete-confirm-convergence-corrected-1cc75672`\n- **HEAD:** `1cc75672abba6e011e0de03f26a3ad2ba9bae396`\n- **Tree:** `53d2373dac627127f208ebdd6681f8ec6c6f6421`\n- **Tranche Base:** `c05fb57f17bf8b55fb02b34bd48b0ce18530ec86`\n- **Rejected Predecessor:** `c4b8c9be292f06a5c593362b5d655169144ff007`\n- **Reviewer:** Gemini 3.7 Flash (High)\n\n---\n\n## Evaluation of Review Questions\n\n### 1. Route Evidence Matrix and Classification Verdict\nThe deterministic review evaluated the delete-confirm route against the 10 frozen dimensions using exact hash-bound text sources:\n- **Satisfied Dimensions (3):**\n  1. `literal_mounting`: The appointments router is included in [`app/main.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/app/main.py) and a `POST /proposals/delete-confirm` handler is mounted in [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/app/routers/appointments.py).\n  2. `raw_delete_isolation`: Raw `DELETE /appointments/{appointment_id}` remains an isolated legacy handler using `_apply_appointment_delete` without dedicated idempotency or capability authority.\n  3. `serial_postgresql_foundation`: Accepted unmounted physical behavior and transaction rehearsal (Continuity 303) is preserved and consumed without runtime re-execution.\n- **Partial Gap Dimension (1):**\n  1. `canonical_identity_and_alias`: Operation identity `confirmAppointmentDeleteProposal` is aligned across the router, physical service, and OpenAPI specification [`docs/api-spine/openapi/appointment-commands.yaml`](file:///C:/Users/sarashera/EMR4-worktrees/r193/docs/api-spine/openapi/appointment-commands.yaml), but only the hyphenated alias is mounted while OpenAPI defines canonical `/appointments/proposals/delete/confirm`.\n- **Blocking Gap Dimensions (6):**\n  1. `physical_seam_composition`: The mounted route handler imports neither `appointment_delete_physical` nor `delete_confirm_locked_transaction`, retaining legacy route-local claim, mutation, completion, and direct commit.\n  2. `server_authority_ingress`: The route lacks server-owned command session derivation, signed authority generation, and exact two-phase `appointment.cancel.confirm` capability checks.\n  3. `locked_proposal_readmission`: Freshness and waiting-area checks execute against unlocked reads without `with_for_update` or opaque proposal-version binding.\n  4. `atomic_effect_audit_receipt`: Legacy execution does not stage delete audit v1 or complete private canonical receipt correlations inside the locked transaction.\n  5. `response_contract_compatibility`: The physical seam produces a 6-field minimized canonical receipt (`DELETE_CONFIRM_RESPONSE_FIELDS`), whereas the public route expects `AppointmentConfirmDeleteProposalOut` with full `AppointmentOut`. This contract difference cannot be silently blurred or reconstructed from mutable post-commit data.\n  6. `stored_delivery_and_http_mapping`: Initial responses are freshly constructed Pydantic models and replay returns legacy JSON; no closed mapper translates physical canonical stored bytes or failure outcomes.\n- **Verdict:** Correctly evaluates to `unmounted_adapter_and_response_transition_required`, mandating `provider_free_unmounted_delete_confirm_response_compatibility_and_product_adapter_architecture` as the next step.\n\n### 2. Ariadne Read-Only Git Object Resolution\nInspection of [`orchestration_harness/git_object_resolution.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/orchestration_harness/git_object_resolution.py) and [`scripts/ariadne_orchestrator_preflight.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/scripts/ariadne_orchestrator_preflight.py) confirms:\n- Enforces strict 40-character lowercase hexadecimal format via regex `^[0-9a-f]{40}$`.\n- Executes only fixed, read-only Git commands (`rev-parse --show-toplevel`, `rev-parse --verify <id>^{commit}`, `cat-file -t`, `rev-parse --verify HEAD`, `merge-base --is-ancestor`) with `shell=False`, strict UTF-8 decoding, and bounded timeout.\n- Strictly validates that the resolved commit matches the input ID byte-for-byte, is of type `commit`, and is an ancestor of observed `HEAD`.\n- Emits typed receipt evidence (`git_object_resolution`) and fails closed on any error, timeout, non-commit object (e.g. blob), non-ancestor commit, or non-repository path, transitioning receipts to `revision_required` and setting `worker_dispatch_permitted: false`.\n- Operates strictly as a receipt narrowing control without mutating repository state, staging files, checking out commits, or moving refs.\n\n### 3. Checkout-Stable Hash Accountability (AER-0357 Recurrence Repair)\n- [`scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py) enforces canonical LF SHA-256 calculation (`_sha256_text_lf`):\n  - Decodes strict UTF-8 bytes.\n  - Rejects bare carriage returns (`\\r` outside `\\r\\n`).\n  - Normalizes `\\r\\n` to `\\n` before SHA-256 calculation.\n- All 18 bound product and documentation sources in [`orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/r193/orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json) match their canonical LF digests across both CRLF and LF checkouts.\n- Regression tests in [`tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py) verify LF/CRLF equivalence and bare-CR rejection.\n- Incident AER-0357 is formally recorded in [`docs/ariadne-agent-error-correction-register-revision-310.md`](file:///C:/Users/sarashera/EMR4-worktrees/r193/docs/ariadne-agent-error-correction-register-revision-310.md) and [`orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json`](file:///C:/Users/sarashera/EMR4-worktrees/r193/orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json) while keeping the original rejected receipt immutable.\n\n---\n\n## Verification Commands Execution Summary\n\nAll four commands from the bound manifest executed in exact order and passed with exit code 0:\n1. `ROUTE_REVIEW_TESTS`: `scripts/ariadne_serial_pytest.py` running `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py` and `tests/test_api_spine_artifacts.py` -> exit code 0 (52 tests passed).\n2. `ARIADNE_RESOLUTION_TESTS`: `scripts/ariadne_serial_pytest.py` running `tests/test_ariadne_git_object_resolution.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_ariadne_active_operation_latch.py`, `tests/test_ariadne_risk_weighted_workflow.py`, and `tests/test_ariadne_agent_error_register.py` -> exit code 0 (145 tests passed).\n3. `RUFF`: `ruff check` on all modified implementation and test modules -> exit code 0 (All checks passed).\n4. `WHITESPACE`: `git diff --check c05fb57f17bf8b55fb02b34bd48b0ce18530ec86 1cc75672abba6e011e0de03f26a3ad2ba9bae396` -> exit code 0 (no trailing whitespace or conflict markers).\n\nAll candidate invariants are satisfied, no product source or database modifications occurred, and the candidate is sound.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Review Report: Delete-Confirm Route Convergence and Git-Object Resolution (Corrected Candidate)\n\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\r193`\n- **Branch:** `codex/review-delete-confirm-convergence-corrected-1cc75672`\n- **HEAD:** `1cc75672abba6e011e0de03f26a3ad2ba9bae396`\n- **Tree:** `53d2373dac627127f208ebdd6681f8ec6c6f6421`\n- **Tranche Base:** `c05fb57f17bf8b55fb02b34bd48b0ce18530ec86`\n- **Rejected Predecessor:** `c4b8c9be292f06a5c593362b5d655169144ff007`\n- **Reviewer:** Gemini 3.7 Flash (High)\n\n---\n\n## Evaluation of Review Questions\n\n### 1. Route Evidence Matrix and Classification Verdict\nThe deterministic review evaluated the delete-confirm route against the 10 frozen dimensions using exact hash-bound text sources:\n- **Satisfied Dimensions (3):**\n  1. `literal_mounting`: The appointments router is included in [`app/main.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/app/main.py) and a `POST /proposals/delete-confirm` handler is mounted in [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/app/routers/appointments.py).\n  2. `raw_delete_isolation`: Raw `DELETE /appointments/{appointment_id}` remains an isolated legacy handler using `_apply_appointment_delete` without dedicated idempotency or capability authority.\n  3. `serial_postgresql_foundation`: Accepted unmounted physical behavior and transaction rehearsal (Continuity 303) is preserved and consumed without runtime re-execution.\n- **Partial Gap Dimension (1):**\n  1. `canonical_identity_and_alias`: Operation identity `confirmAppointmentDeleteProposal` is aligned across the router, physical service, and OpenAPI specification [`docs/api-spine/openapi/appointment-commands.yaml`](file:///C:/Users/sarashera/EMR4-worktrees/r193/docs/api-spine/openapi/appointment-commands.yaml), but only the hyphenated alias is mounted while OpenAPI defines canonical `/appointments/proposals/delete/confirm`.\n- **Blocking Gap Dimensions (6):**\n  1. `physical_seam_composition`: The mounted route handler imports neither `appointment_delete_physical` nor `delete_confirm_locked_transaction`, retaining legacy route-local claim, mutation, completion, and direct commit.\n  2. `server_authority_ingress`: The route lacks server-owned command session derivation, signed authority generation, and exact two-phase `appointment.cancel.confirm` capability checks.\n  3. `locked_proposal_readmission`: Freshness and waiting-area checks execute against unlocked reads without `with_for_update` or opaque proposal-version binding.\n  4. `atomic_effect_audit_receipt`: Legacy execution does not stage delete audit v1 or complete private canonical receipt correlations inside the locked transaction.\n  5. `response_contract_compatibility`: The physical seam produces a 6-field minimized canonical receipt (`DELETE_CONFIRM_RESPONSE_FIELDS`), whereas the public route expects `AppointmentConfirmDeleteProposalOut` with full `AppointmentOut`. This contract difference cannot be silently blurred or reconstructed from mutable post-commit data.\n  6. `stored_delivery_and_http_mapping`: Initial responses are freshly constructed Pydantic models and replay returns legacy JSON; no closed mapper translates physical canonical stored bytes or failure outcomes.\n- **Verdict:** Correctly evaluates to `unmounted_adapter_and_response_transition_required`, mandating `provider_free_unmounted_delete_confirm_response_compatibility_and_product_adapter_architecture` as the next step.\n\n### 2. Ariadne Read-Only Git Object Resolution\nInspection of [`orchestration_harness/git_object_resolution.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/orchestration_harness/git_object_resolution.py) and [`scripts/ariadne_orchestrator_preflight.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/scripts/ariadne_orchestrator_preflight.py) confirms:\n- Enforces strict 40-character lowercase hexadecimal format via regex `^[0-9a-f]{40}$`.\n- Executes only fixed, read-only Git commands (`rev-parse --show-toplevel`, `rev-parse --verify <id>^{commit}`, `cat-file -t`, `rev-parse --verify HEAD`, `merge-base --is-ancestor`) with `shell=False`, strict UTF-8 decoding, and bounded timeout.\n- Strictly validates that the resolved commit matches the input ID byte-for-byte, is of type `commit`, and is an ancestor of observed `HEAD`.\n- Emits typed receipt evidence (`git_object_resolution`) and fails closed on any error, timeout, non-commit object (e.g. blob), non-ancestor commit, or non-repository path, transitioning receipts to `revision_required` and setting `worker_dispatch_permitted: false`.\n- Operates strictly as a receipt narrowing control without mutating repository state, staging files, checking out commits, or moving refs.\n\n### 3. Checkout-Stable Hash Accountability (AER-0357 Recurrence Repair)\n- [`scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py) enforces canonical LF SHA-256 calculation (`_sha256_text_lf`):\n  - Decodes strict UTF-8 bytes.\n  - Rejects bare carriage returns (`\\r` outside `\\r\\n`).\n  - Normalizes `\\r\\n` to `\\n` before SHA-256 calculation.\n- All 18 bound product and documentation sources in [`orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/r193/orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json) match their canonical LF digests across both CRLF and LF checkouts.\n- Regression tests in [`tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`](file:///C:/Users/sarashera/EMR4-worktrees/r193/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py) verify LF/CRLF equivalence and bare-CR rejection.\n- Incident AER-0357 is formally recorded in [`docs/ariadne-agent-error-correction-register-revision-310.md`](file:///C:/Users/sarashera/EMR4-worktrees/r193/docs/ariadne-agent-error-correction-register-revision-310.md) and [`orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json`](file:///C:/Users/sarashera/EMR4-worktrees/r193/orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json) while keeping the original rejected receipt immutable.\n\n---\n\n## Verification Commands Execution Summary\n\nAll four commands from the bound manifest executed in exact order and passed with exit code 0:\n1. `ROUTE_REVIEW_TESTS`: `scripts/ariadne_serial_pytest.py` running `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py` and `tests/test_api_spine_artifacts.py` -> exit code 0 (52 tests passed).\n2. `ARIADNE_RESOLUTION_TESTS`: `scripts/ariadne_serial_pytest.py` running `tests/test_ariadne_git_object_resolution.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_ariadne_active_operation_latch.py`, `tests/test_ariadne_risk_weighted_workflow.py`, and `tests/test_ariadne_agent_error_register.py` -> exit code 0 (145 tests passed).\n3. `RUFF`: `ruff check` on all modified implementation and test modules -> exit code 0 (All checks passed).\n4. `WHITESPACE`: `git diff --check c05fb57f17bf8b55fb02b34bd48b0ce18530ec86 1cc75672abba6e011e0de03f26a3ad2ba9bae396` -> exit code 0 (no trailing whitespace or conflict markers).\n\nAll candidate invariants are satisfied, no product source or database modifications occurred, and the candidate is sound.",
+    "command_results": [
+      {
+        "id": "ROUTE_REVIEW_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r193",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "ARIADNE_RESOLUTION_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r193",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_git_object_resolution.py",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_orchestrator_preflight.py",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_active_operation_latch.py",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_risk_weighted_workflow.py",
+          "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/git_object_resolution.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "tests/test_ariadne_git_object_resolution.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+          "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "66b30130156b24a4c9c7d07ffb46f2f7d4cda20506270ed0bdd3aed80eeedfed",
+  "command_results": [
+    {
+      "id": "ROUTE_REVIEW_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r193",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "ARIADNE_RESOLUTION_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r193",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_git_object_resolution.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_orchestrator_preflight.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_active_operation_latch.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_risk_weighted_workflow.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_object_resolution.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "tests/test_ariadne_git_object_resolution.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+        "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

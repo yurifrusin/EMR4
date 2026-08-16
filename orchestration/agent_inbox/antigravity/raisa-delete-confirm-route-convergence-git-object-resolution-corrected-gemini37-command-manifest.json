@@ -1,0 +1,64 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "ROUTE_REVIEW_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r193",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_api_spine_artifacts.py"
+      ]
+    },
+    {
+      "id": "ARIADNE_RESOLUTION_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r193",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_git_object_resolution.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_orchestrator_preflight.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_active_operation_latch.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_risk_weighted_workflow.py",
+        "C:/Users/sarashera/EMR4-worktrees/r193/tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_object_resolution.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "tests/test_ariadne_git_object_resolution.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+        "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
+      ]
+    }
+  ]
+}

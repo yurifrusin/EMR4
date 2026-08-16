@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 303 / Compass 285. The exact serial unmounted delete-confirm authority and transaction seam now passes PostgreSQL 16 generation, denial, revocation, ordered atomic effect, replay, rollback and timeout evidence with complete disposable cleanup. Read-only route-convergence admission is next; route execution and product commands remain closed.
+> EMR4 is at Continuity 304 / Compass 286. Delete-confirm route convergence remains blocked by six coupled authority, lock, atomicity and response-delivery gaps; one unmounted response/product-adapter architecture is next. Ariadne now resolves structured source commits mechanically before continuation receipts pass.
 
 ## North star
 
@@ -376,26 +376,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Migration x3y4z5a6b7c8 installs atomically over empty synthetic prerequisites and its exact columns, constraints, index, functions, triggers, head and zero-row state pass with exact cleanup. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold`.
 180. **Prove the exact delete-confirm authority and transaction seam against PostgreSQL before any route convergence is considered — Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal**
    Nine authority and eleven transaction groups, exact cleanup and one independent final veto pass. Lineage parent: `raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal`.
+181. **Separate literal delete-confirm mounting from safe authority-kernel and response convergence while hardening Ariadne provenance — Provider-free read-only delete-confirm route convergence and Ariadne Git-object resolution**
+   The route remains blocked by six coupled adapter/response gaps; exact Git commit provenance now fails closed mechanically. Lineage parent: `raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal`.
 
 ## Current position
 
-**The unmounted delete-confirm authority and transaction seam is PostgreSQL-proved; route convergence remains unopened — Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal**
+**Route readiness is reduced to one bounded unmounted response and product-adapter architecture — Provider-free read-only delete-confirm route convergence and Ariadne Git-object resolution**
 
-**Why this proof came next:** The exact physical catalogue already passed, permitting one isolated serial proof of the trigger and transaction behavior.
+**Why this proof came next:** The serial physical transaction foundation is settled, but literal mounting still bypasses its authority and response contracts.
 
-Authority generation, default denial, revocation, ordered atomic appointment/audit/receipt effects, replay, rollback, timeout and exact cleanup pass.
+Three satisfied, one partial and six blocking dimensions are accepted; Ariadne source commit provenance is now machine-resolved and fail closed.
 
 ### What this unlocks
 
-- Run a provider-free read-only delete-confirm route-convergence admission review.
-- Inspect and classify only the exact route, dependency, adapter, kernel and transaction gaps.
-- Return an evidence-backed converge/block decision without editing, mounting or calling a route.
+- Freeze one provider-free unmounted delete-confirm response-compatibility and product-adapter architecture.
+- Reconcile server-owned authority and locked proposal truth with byte-exact full public response replay off-route.
 
 ### What it does not solve
 
-- Mounted-route, adapter, real command, product-database or product-data safety.
-- Concurrency, restart, crash, unknown commit, retention, performance or production operations.
-- Provider/credential activity, patient/product data, watchers/events, deployment, release, Pages or protected-ref movement.
+- Route editing, mounting, calling or product execution.
+- Capability provisioning, real product data or additional database behavior.
+- Provider/credential activity, deployment, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -485,9 +486,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, conditional-command and delete-confirm physical/behavior lineage.
-- Run a provider-free read-only delete-confirm route-convergence admission review next.
-- Keep route edits/calls, product data/commands, concurrency, providers and protected integration separately gated.
+- Preserve the accepted serial PostgreSQL delete-confirm foundation and raw DELETE isolation.
+- Design one provider-free unmounted response-compatibility and product-adapter architecture for the six route blockers.
+- Keep route execution, product data, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -676,6 +677,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted delete-confirm route review opens no route or product runtime; literal mounting remains distinct from authority-kernel and byte-authoritative response convergence.
 - The accepted delete-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL authority and transaction seam only, not route, concurrency or product-command safety.
 - The accepted delete-confirm parse/catalogue rehearsal proves empty-instance PostgreSQL 16 installation and representation only, not trigger, authority, receipt/audit, replay, rollback, concurrency, restart, route or product behavior.
 - The accepted delete-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, capability provisioning, route behavior or product command safety.
@@ -927,6 +929,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-308.md`
 - `docs/ariadne-agent-error-correction-register-revision-309.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
+- `docs/ariadne-agent-error-correction-register-revision-310.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1239,6 +1242,9 @@ Prerequisites:
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md`
+- `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md`
+- `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`
+- `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md`
@@ -1471,6 +1477,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-threat-model-delta.md`
@@ -1575,6 +1582,8 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
@@ -1776,6 +1785,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-veto-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-pre-verifier-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json`
@@ -2192,6 +2206,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-cloud-run-public-https-dev-host-readiness/local-container-browser-evidence.json`
 - `orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.json`
 - `orchestration/continuity/raisa-context-fabric-source-owned-truth-conditional-command-reorientation/architecture-contract.schema.json`
+- `orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json`
+- `orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json`
 - `orchestration/continuity/raisa-dual-host-foundation/feature-inventory.json`
 - `orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json`
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
@@ -2697,6 +2713,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-behavior-transaction-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md`
+- `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2709,6 +2726,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/continuity_and_refinement.py`
+- `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/risk_weighted_workflow.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_duration_action.py`
@@ -2736,6 +2754,8 @@ Prerequisites:
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_office_practitioner_directory_consumer.py`
+- `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity_update.py`
+- `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py`
@@ -2792,6 +2812,7 @@ Prerequisites:
 - `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_continuity_and_refinement.py`
 - `tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py`
+- `tests/test_ariadne_git_object_resolution.py`
 - `tests/test_ariadne_risk_weighted_workflow.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
@@ -2822,6 +2843,8 @@ Prerequisites:
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
+- `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py`
+- `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py`
@@ -2880,4 +2903,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 285; continuity graph revision 303._
+_Compass map revision 286; continuity graph revision 304._

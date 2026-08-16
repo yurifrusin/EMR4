@@ -51,7 +51,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal"
+        "raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]

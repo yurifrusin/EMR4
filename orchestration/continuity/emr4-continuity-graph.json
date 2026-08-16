@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 303,
+  "graph_revision": 304,
   "harvests": [],
   "nodes": [
     {
@@ -20728,9 +20728,95 @@
         "No product command/database/data, capability provisioning, concurrency, restart, crash, unknown-commit, performance, retention or operations behavior is proved.",
         "Providers, credentials, patient/product data, watchers/events, deployment, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+      "title": "Provider-free read-only delete-confirm route convergence and Ariadne Git-object resolution",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-16T06:13:48Z",
+      "updated_at": "2026-08-16T06:13:48Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "1cc75672abba6e011e0de03f26a3ad2ba9bae396",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Provider-free exact-file read-only product review and repository-only Ariadne control; no product runtime authority.",
+          "The mounted route remains blocked pending one unmounted response-compatibility and product-adapter architecture.",
+          "Git resolution proves exact commit identity/type/ancestry only and cannot move refs or infer semantic acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-route-block-and-git-object-resolution",
+          "source": "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md",
+          "status": "accepted",
+          "summary": "Accept three satisfied, one partial and six blocking route dimensions plus fail-closed machine Git commit resolution; continue only to an unmounted response/product-adapter architecture."
+        }
+      ],
+      "claim_scope": [
+        "The deterministic route verdict is unmounted_adapter_and_response_transition_required.",
+        "The minimized six-field private receipt cannot be silently relabelled or reconstructed from later mutable state as the full public response.",
+        "Strict-UTF-8 canonical-LF hashing binds eighteen sources across clean Windows checkouts and rejects bare CR.",
+        "Every configured Ariadne continuation event resolves exact commit/type/ancestry and fails closed with dispatch false.",
+        "The corrected canonical 197-test profile and one clean Gemini 3.7 Flash/high veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md",
+          "docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json",
+          "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json",
+          "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-310.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "tests/test_ariadne_git_object_resolution.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "orchestration_harness/git_object_resolution.py",
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Server-owned authority ingress, locked proposal re-admission, physical-seam composition and response mapping remain absent from the mounted route.",
+        "The private six-field receipt and full public confirmation envelope need one byte-authoritative off-route replay architecture.",
+        "No route edit/call, product data, database execution, capability provisioning, provider, deployment, release, Pages or protected-ref authority is open."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T14:56:08.8155653+10:00"
+  "updated_at": "2026-08-16T06:13:48Z"
 }

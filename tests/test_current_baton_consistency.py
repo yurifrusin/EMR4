@@ -7,9 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal"
-SOURCE_HEAD = "49dd2aaa72877adb844da4d0d5d5bb28039c90c8"
-EVIDENCE_HEAD = SOURCE_HEAD
+NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution"
+SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
+BEHAVIOR_SOURCE_HEAD = "49dd2aaa72877adb844da4d0d5d5bb28039c90c8"
 RISK_REFORM_SOURCE_HEAD = "51866ce084c33fce600b792c66b180927658ed9e"
 SCAFFOLD_SOURCE_HEAD = "843769b415597f4545663d78044eaaad303c7692"
 HARNESS_NODE_ID = (
@@ -50,11 +50,11 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 303
+    assert graph["graph_revision"] == 304
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 285
-    assert compass["source_graph_revision"] == 303
+    assert compass["map_revision"] == 286
+    assert compass["source_graph_revision"] == 304
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -68,25 +68,21 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_acceptance = _table_row(
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
-    assert "Continuity 303 / Compass 285" in current
+    assert "Continuity 304 / Compass 286" in current
     assert (
-        "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_"
-        "parse_catalogue_rehearsal_pass"
-    ) not in current
-    assert (
-        "raisa_provider_free_disposable_postgresql_delete_confirm_behavior_"
-        "transaction_rehearsal_pass"
+        "raisa_provider_free_read_only_delete_confirm_route_convergence_and_"
+        "ariadne_git_object_resolution_pass"
     ) in current
     assert SOURCE_HEAD in current
-    assert EVIDENCE_HEAD in current
-    assert "one hundred twenty-two hostile mutations" in current.lower()
-    assert "canonical 196-test profile" in current
-    assert "proves serial unmounted behavior only" in current.lower()
+    assert "three satisfied, one partial and six blocking" in current.lower()
+    assert "unmounted_adapter_and_response_transition_required" in current
+    assert "197-test profile" in current
+    assert "no route or product runtime is opened" in current.lower()
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
-    assert SOURCE_HEAD in reform_relation
-    assert EVIDENCE_HEAD in reform_relation
+    assert BEHAVIOR_SOURCE_HEAD in reform_relation
     assert "risk_weighted_workflow.yaml" in reform_acceptance
+    assert SOURCE_HEAD in relation
     assert SOURCE_HEAD in product
     assert (
         "product rows, capability provisioning and routes remain unadmitted"
@@ -133,11 +129,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert (
-        "provider-free read-only delete-confirm route-convergence admission review"
+        "provider_free_unmounted_delete_confirm_response_compatibility_and_product_adapter_architecture"
         in next_work
     )
     assert "standing uninterrupted-development authority" in next_work
-    assert "route, dependency, adapter, kernel and transaction gap" in next_work
+    assert "server-owned command session/generation/capability" in next_work
+    assert "byte-authoritative full public response replay" in next_work
     assert "may not edit, mount or call a route" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected refs remain closed" in next_work.lower()
@@ -177,7 +174,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free read-only delete-confirm route-convergence admission review",
+        "provider_free_unmounted_delete_confirm_response_compatibility_and_product_adapter_architecture",
         "standing uninterrupted-development authority",
         "capability provisioning",
         "may not edit, mount or call a route",
