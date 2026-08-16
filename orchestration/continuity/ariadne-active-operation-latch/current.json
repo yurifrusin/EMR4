@@ -3,14 +3,14 @@
   "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
   "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
   "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
-  "status": "blocked",
-  "source_head": "37a57345d8f8449474c8ea39d518741ecc814b09",
-  "authority_source": "Yuri explicitly authorized one further bounded AER-0353 harness-counter repair and one final occupied attempt after stop commit b4b772dd07a91e89db57fdd23bb1b4afb199a7e7; all parent Tier-2 boundaries remain in force.",
+  "status": "in_progress",
+  "source_head": "9bb094e88076d4fe601d5a10ac4ce2d38512ef62",
+  "authority_source": "After the published TX-S09 fail-closed stop, Yuri explicitly answered yes to the recommended one candidate-versus-release accounting repair and exactly one fresh occupied PostgreSQL attempt; all parent Tier-2 boundaries remain in force.",
   "checkpoint": {
-    "completed_stage": "Stop commit 37a57345d8f8449474c8ea39d518741ecc814b09 preserves the consumed final attempt: the repaired counter passed, TX-S09 stopped fail-closed at TX-S09_disclosed_bytes, rollback and exact relay/container/network cleanup passed, and no pass or Gemini review was released. AER-0355 records candidate bytes retained after scaffold_incomplete; the non-PHI pause alert was delivered.",
-    "next_executable_stage": "Await Yuri's decision whether to authorize a new narrowly bounded harness release-accounting correction and a fresh occupied attempt, or leave this rehearsal stopped. No further repair, runtime attempt or Gemini review is authorized under the consumed boundary.",
+    "completed_stage": "The blocked TX-S09 stop is preserved at published source 9bb094e88076d4fe601d5a10ac4ce2d38512ef62 with exact cleanup. Yuri has now reopened only the diagnosed response-release accounting boundary for one repair and one fresh occupied attempt; post-compaction five-source rehydration and exact Git/Docker checks pass.",
+    "next_executable_stage": "Freeze and commit the response-release accounting recovery addendum and fresh receipt, then implement the harness-only candidate-versus-released byte separation and run deterministic admission before the single authorized occupied attempt.",
     "retry_counters": {
-      "planning": 2,
+      "planning": 3,
       "implementation": 6,
       "review": 0,
       "verification": 9
@@ -26,15 +26,15 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "single_authorized_final_attempt_consumed_by_distinct_tx_s09_release_accounting_failure"
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "blocked_after_consumed_attempt_budget_with_exact_cleanup"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "user_authorized_final_database_attempt_consumed_no_further_repair_or_retry_authorized",
+    "one_candidate_versus_release_accounting_repair_and_one_fresh_occupied_attempt_only",
     "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
     "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
     "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",

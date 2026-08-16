@@ -1,0 +1,179 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "freeze_implement_and_admit_delete_confirm_response_release_accounting_recovery",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. The live baton keeps the provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal as the active product tranche and preserves protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "current_authority_allocation": "GPT Sol owns this already-diagnosed serial recovery and acceptance. DeepSeek is not applicable because the worker lane is closed and the repair is tiny; Gemini 3.7 Flash/high is reserved for exactly one post-pass veto; native subagents are declined because the repair and database lifecycle are tightly coupled.",
+    "active_plan_and_acceptance": "The original behavior plan, trace-recovery plan, authority-counter addendum, both threat deltas, current semantic freeze, AER-0355, AER-0356, retained TX-S09 failure evidence and stop summary were reread. Yuri explicitly answered yes to one response-release accounting repair and exactly one fresh occupied attempt. The new addendum freezes candidate construction, successful context exit and external release as separate states.",
+    "protected_evidence_boundaries": "Only authored-synthetic serial delete-confirm harness evidence is open. No product service, migration, route, public API, GraphQL, UI, product/patient/clinical data, provider, ADC, credential/IAM, external network, concurrency, restart, unknown commit, deployment, release, Pages or protected-ref action is authorized. The product service remains byte-bound. Preserve docs/branding and every unrelated untracked path; explicit-path staging only.",
+    "git_refs_and_worktree": "Direct Git output after fetch reports task HEAD and origin task exact 9bb094e88076d4fe601d5a10ac4ce2d38512ef62 with tree 8359f8869f55adcf42b45b1f7b32b9fda75718e2 and a clean tracked tree. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. All 635 untracked paths, including five docs/branding paths, are preserved. Label-filtered Docker checks report zero owned containers and networks."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+    "status": "in_progress",
+    "source_head": "9bb094e88076d4fe601d5a10ac4ce2d38512ef62",
+    "authority_source": "After the published TX-S09 fail-closed stop, Yuri explicitly answered yes to the recommended one candidate-versus-release accounting repair and exactly one fresh occupied PostgreSQL attempt; all parent Tier-2 boundaries remain in force.",
+    "checkpoint": {
+      "completed_stage": "The blocked TX-S09 stop is preserved at published source 9bb094e88076d4fe601d5a10ac4ce2d38512ef62 with exact cleanup. Yuri has now reopened only the diagnosed response-release accounting boundary for one repair and one fresh occupied attempt; post-compaction five-source rehydration and exact Git/Docker checks pass.",
+      "next_executable_stage": "Freeze and commit the response-release accounting recovery addendum and fresh receipt, then implement the harness-only candidate-versus-released byte separation and run deterministic admission before the single authorized occupied attempt.",
+      "retry_counters": {
+        "planning": 3,
+        "implementation": 6,
+        "review": 0,
+        "verification": 9
+      },
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "one_candidate_versus_release_accounting_repair_and_one_fresh_occupied_attempt_only",
+      "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+      "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+      "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",
+      "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+      "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "assessed_stage": "release_accounting_recovery_post_compaction",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "rationale": "The worker lane is closed and the diagnosed variable-state repair is smaller than its dispatch and review packet.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "Tier-2 authority/runtime evidence retains exactly one independent Gemini 3.7 Flash/high veto after an occupied pass.",
+        "work_packages": [
+          "review the final exact candidate and minimized occupied pass evidence against the parent plans and response-release accounting addendum"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The repair and one mutable disposable database lifecycle are serial and tightly coupled; delegation adds coordination without an independent artifact.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze and commit the narrow recovery boundary before semantic code edits",
+      "candidate bytes may be promoted only after successful transaction-context exit",
+      "deterministic admission must pass before the single fresh occupied attempt",
+      "Gemini is ineligible until occupied evidence and exact cleanup pass"
+    ],
+    "reassessment_triggers": [
+      "material recovery changes acceptance meaning",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_post_compaction_five_source_rehydration_api_spine_git_docker_and_blocked_operation_reopen",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Worker lane remains closed for this tiny diagnosed serial repair."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.7 Flash/high is reserved only for one post-pass veto."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed fresh five-source rehydration and owns the narrow repair."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native delegation selected because the repair and database lifecycle are serial."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
