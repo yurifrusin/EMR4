@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "Attempt 003 verified all nine authority groups, then stopped on AER-0352's generic transaction-order mismatch and proved exact cleanup. The Sol-owned trace-recovery plan freezes source 8b553762f5d8953356d9472e71472470a511d829 and semantic freeze c0f1d1abfda8af95b3410196183943c1b71db73e: no product source changed; mismatch evidence is limited to exact group, outcome and closed expected/observed tokens. Thirty-two focused tests plus the canonical 196-test profile pass.",
+    "next_executable_stage": "Commit a fresh five-source trace-diagnostic checkpoint, run the one authorized occupied diagnostic from freeze c0f1d1abfda8af95b3410196183943c1b71db73e, then either accept a full pass, make one evidence-proven classifier repair, or stop for an architectural source-order fork.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "c0f1d1abfda8af95b3410196183943c1b71db73e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "trace_diagnostic_preexecution",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker lane is closed and the remaining issue is a tiny stateful trace interpretation; another transport cycle would add cost without authority value.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one Gemini 3.7 Flash/high veto remains reserved after a full occupied pass, not for iterative diagnosis.",
+        "work_packages": [
+          "one final exact-candidate veto after pass and cleanup"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The one database lifecycle and closed token interpretation are serial, and native delegation is not authorized for this stage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "material_recovery",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one owned network/container/relay lifecycle",
+      "no model review before a pass",
+      "Sol alone interprets closed trace and accepts"
+    ]
+  },
+  "planned_action": "commit_trace_diagnostic_checkpoint_before_one_bounded_occupied_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The parent plan is 2a5042f80941e2bd191999c430ff2517ba7e8cb2. The frozen trace-recovery plan at 8ab671ba and diagnostic source 8b553762f5d8953356d9472e71472470a511d829 admit one attempt that can release only exact TX group, outcome and closed expected/observed tokens. Semantic freeze c0f1d1abfda8af95b3410196183943c1b71db73e records 32 focused tests, schema hostility, unchanged service hash and the canonical 196-test profile passing.",
+    "current_authority_allocation": "Sol owns AER-0352 trace diagnosis and acceptance. DeepSeek is closed; Gemini 3.7 Flash/high remains reserved for exactly one final veto after an occupied pass; native subagents remain declined for this serial database stage.",
+    "git_refs_and_worktree": "Task semantic-freeze HEAD is c0f1d1abfda8af95b3410196183943c1b71db73e with only latch and receipt checkpoint metadata pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67; docs/branding/ and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The in-progress latch retains the provider-free disposable PostgreSQL delete-confirm behavior/transaction objective under Yuri's standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "No product source may change during diagnosis. The attempt uses one cached PostgreSQL 16 container, one owned internal-only network, no published port, tmpfs and a fixed loopback relay with authored-synthetic serial fixtures. All real data, routes, providers, deployments and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
