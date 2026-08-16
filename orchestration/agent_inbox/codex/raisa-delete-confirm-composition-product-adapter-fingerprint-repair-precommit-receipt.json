@@ -1,0 +1,90 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "completed_stage": "Sol adopted the preserved worker source under the explicit recovery lease and applied only the exact two-path freshness, evidence-copy and cross-practice-test amendments. Twelve canonical-LF bindings, forbidden-route/schema isolation, Ruff, compilation and the consolidated 491-test provider-free profile pass. AER-0359 through AER-0361 preserve both worker rejections and the corrected handover-size guard; no incident is open.",
+    "next_executable_stage": "Freeze the exact recovered candidate in Git, generate the fresh pre-verifier receipt and dispatch one Gemini 3.7 Flash/high exact-candidate veto in a fresh read-only non-protected worktree.",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "resume_after_compaction": true,
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "e06c123375a1cf890e9ba2d71d446eae961b33c5",
+    "reason_codes": [],
+    "resolved_commit": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "44a91b7239ac9f38510c10cb57729ac5312d32f9"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "settings_fingerprint_repair_pre_commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Worker source is preserved and the implementation lane is exhausted.",
+        "work_packages": [
+          "preserved source provenance"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Dispatch waits for this exact fail-closed harness repair and a fresh receipt.",
+        "work_packages": [
+          "one Gemini 3.7 Flash/high final veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Native delegation remains unavailable under the current developer constraint.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-verifier acceptance",
+      "verifier result",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit exact harness repair",
+      "fresh pre-verifier receipt",
+      "one Gemini veto"
+    ]
+  },
+  "planned_action": "commit_settings_fingerprint_fail_closed_repair_before_verifier",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5ff0bd573d708c99782c1cb0d4536a5b5630d4ec79f49664c2881aa0a95220c4",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The product recovery and 491-test provider-free admission remain unchanged. AER-0362 requires exact latch/receipt settings-fingerprint equality before the planned verifier dispatch.",
+    "current_authority_allocation": "Sol owns this narrow harness repair and candidate refreeze. DeepSeek remains closed; Gemini remains reserved and has not been dispatched.",
+    "git_refs_and_worktree": "Current task HEAD is e06c123375a1cf890e9ba2d71d446eae961b33c5. Required HEAD remains an ancestor; local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding remains preserved and untracked.",
+    "live_handover_current_baton": "The live baton keeps the delete-confirm implementation in progress and records register revision 313 after the pre-verifier harness finding.",
+    "protected_evidence_boundaries": "The repair changes only continuation controls, fixtures, tests, register evidence and the latch; it opens no product/runtime/provider/protected surface."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

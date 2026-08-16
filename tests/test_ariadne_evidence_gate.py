@@ -95,6 +95,10 @@ def test_evidence_led_policy_keeps_hard_controls_separate_from_adaptive_flow() -
     assert policy["schema_version"] == "ariadne.evidence_led_workflow.v1"
     assert "immutable_attempt_evidence" in policy["hard_controls"]
     assert "handover_edits_require_acceptance_index_guard" in policy["hard_controls"]
+    assert (
+        "active_operation_settings_fingerprint_matches_receipt"
+        in policy["hard_controls"]
+    )
     assert policy["adaptive_flow"]["external_review"].startswith("one_final")
     assert policy["adaptive_flow"]["qualifying_harness_defect"] == (
         "preserve_contain_register_guard_verify_then_resume_active_operation"

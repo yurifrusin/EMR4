@@ -58,13 +58,29 @@ def build_receipt(
     if not isinstance(runtime_state, dict):
         raise ValueError("runtime state must be a JSON object")
     requirements = _yaml(settings_dir / "orchestrator_requirements.yaml")
+    current_settings_fingerprint = settings_fingerprint(settings_dir)
     receipt = build_orchestrator_receipt(
         requirements=requirements,
         adapters=_yaml(settings_dir / "transport_adapters.yaml"),
         worker_pool=_yaml(settings_dir / "worker_pool.yaml"),
         runtime_state=runtime_state,
-        settings_fingerprint=settings_fingerprint(settings_dir),
+        settings_fingerprint=current_settings_fingerprint,
     )
+    runtime_active_operation = runtime_state.get("active_operation")
+    if isinstance(runtime_active_operation, dict) and runtime_active_operation:
+        checkpoint = runtime_active_operation.get("checkpoint")
+        latched_settings_fingerprint = (
+            checkpoint.get("settings_fingerprint")
+            if isinstance(checkpoint, dict)
+            else None
+        )
+        if latched_settings_fingerprint != current_settings_fingerprint:
+            reason = "active_operation_settings_fingerprint_mismatch"
+            reasons = receipt.setdefault("reasons", [])
+            if reason not in reasons:
+                reasons.append(reason)
+            receipt["status"] = "revision_required"
+            receipt["worker_dispatch_permitted"] = False
     policy = requirements.get("git_object_resolution")
     continuation_event = runtime_state.get("continuation_event")
     required = isinstance(policy, dict) and continuation_event in policy.get(

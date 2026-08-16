@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 312,
+  "register_revision": 313,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -14493,6 +14493,47 @@
           "tests/test_ariadne_evidence_gate.py",
           "tests/test_agents_acceptance_index.py",
           "docs/ariadne-agent-error-correction-register-revision-312.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0362",
+      "attempt_id": "raisa-delete-confirm-composition-product-adapter-precommit-fingerprint-admission",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "ariadne-orchestrator-preflight",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_receipt_builder",
+      "stage": "acceptance",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "Every continuation receipt must fail closed when its copied active-operation checkpoint fingerprint differs from the current harness-settings fingerprint emitted by that same receipt.",
+      "observed_error": "After a harness-settings repair, the pre-commit receipt emitted the new 820a6c7f fingerprint but still returned passed while the copied latch retained the earlier 6dd00ac3 fingerprint.",
+      "detection_method": "Before verifier dispatch, Sol directly compared the receipt settings_fingerprint with active_operation.checkpoint.settings_fingerprint and observed the unequal values.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-settings-fingerprint-incident.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-recovery-precommit-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.orchestrator_receipt_did_not_compare_latched_settings_fingerprint",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Compute the current settings fingerprint once, compare it with the copied active-operation checkpoint before continuation admission, return revision_required on mismatch, and update the exact fixture and live latch only after the new settings fingerprint is known.",
+        "prevention_control": "Every configured continuation event now mechanically rejects a stale copied latch fingerprint before worker/verifier dispatch; the workflow policy and focused preflight test preserve the invariant.",
+        "evidence_paths": [
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json",
+          "orchestration/harness_settings/evidence_led_workflow.yaml",
+          "tests/test_ariadne_evidence_gate.py",
+          "docs/ariadne-agent-error-correction-register-revision-313.md"
         ]
       },
       "status": "corrected"

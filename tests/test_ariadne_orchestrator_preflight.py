@@ -300,6 +300,23 @@ def test_inconsistent_active_operation_latch_fails_closed(tmp_path: Path) -> Non
     assert "active_operation_latch_invalid" in receipt["reasons"]
 
 
+def test_stale_active_operation_settings_fingerprint_fails_closed(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["active_operation"]["checkpoint"]["settings_fingerprint"] = (
+        "sha256:" + "f" * 64
+    )
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert receipt["worker_dispatch_permitted"] is False
+    assert "active_operation_settings_fingerprint_mismatch" in receipt["reasons"]
+
+
 def test_named_source_without_evidence_fails_closed(tmp_path: Path):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["source_evidence"]["active_plan_and_acceptance"] = []

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 312
+    assert register["register_revision"] == 313
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 362)
+        f"AER-{index:04d}" for index in range(1, 363)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 361
+    assert report["incident_count"] == 362
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3613,19 +3613,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 312
-    assert report["incident_count"] == 361
+    assert report["register_revision"] == 313
+    assert report["incident_count"] == 362
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 252,
-        "harness": 43,
+        "harness": 44,
         "repository": 56,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 57,
         "evidence_misreport": 48,
-        "harness_failure": 43,
+        "harness_failure": 44,
         "output_contract_violation": 104,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
@@ -3633,7 +3633,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "transport_timeout": 10,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 104,
+        "accepted_candidate_changed": 105,
         "canonical_unchanged": 220,
         "untrusted_partial_worktree": 37,
     }
@@ -5695,6 +5695,20 @@ def test_aer_0361_requires_acceptance_index_guard_for_handover_edits() -> None:
     assert "handover_edits_require_acceptance_index_guard" in (
         incident["correction"]["action"]
     )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0362_rejects_stale_latched_settings_fingerprint() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0362"
+    ]
+
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["causal_claim_level"] == "observation_only"
+    assert incident["correction"]["status"] == "control_added"
+    assert "active-operation checkpoint" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

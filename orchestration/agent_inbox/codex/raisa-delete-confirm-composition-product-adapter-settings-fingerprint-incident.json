@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.harness_incident.v1",
+  "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+  "observed_on": "2026-08-16",
+  "stage": "pre_verifier_acceptance",
+  "invariant": "The active operation checkpoint settings fingerprint must equal the current fingerprint emitted by every continuation receipt.",
+  "latched_fingerprint": "sha256:6dd00ac383cd3a01c476848892335aecf0393002cc05ec71c80583dbbd187980",
+  "receipt_fingerprint": "sha256:820a6c7f01305aba7f37d3e2d44a40198d8219275b87f0136636c48ebfc0756c",
+  "detection": "Sol compared the generated pre-commit receipt with its copied active-operation latch after the handover guard changed evidence_led_workflow.yaml.",
+  "scope_effect": "continuation_evidence_only",
+  "product_effect": false,
+  "provider_calls_after_detection": 0,
+  "correction": {
+    "action": "Make orchestrator preflight fail closed on any latch/receipt settings-fingerprint mismatch, update the fixture and current latch to the newly computed fingerprint, and add focused regression coverage plus a workflow hard control.",
+    "expected_result": "A stale copied latch returns revision_required before worker or verifier dispatch; an exact current latch passes."
+  }
+}
