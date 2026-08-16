@@ -22,9 +22,9 @@
   "workflow_disposition": "bounded_harness_repair_authorized",
   "recurrence_signature": "authored_synthetic.secondary_uuid_overlaps_later_primary_fixture_partition",
   "correction": {
-    "status": "correction_in_progress",
+    "status": "corrected",
     "action": "Move AUTH-S01 and AUTH-S02 auxiliary users into fixed high disjoint salt domains, prove their union disjoint from every scenario actor, and attribute any unexpected SQL error to its exact authority group before a final bounded runtime attempt.",
     "prevention_control": "Behavior rehearsals with derived fixture identities must prove disjointness against every primary and subcase fixture index before runtime admission."
   },
-  "status": "contained_cleanup_verified"
+  "status": "corrected_and_verified_by_nine_authority_groups"
 }

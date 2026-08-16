@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0352",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-occupied-003",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "implementation_or_source_contract_unresolved",
+  "role": "sol_recovered_harness",
+  "resource_id": "owned-disposable-postgresql-16-behavior-transaction-attempt-003",
+  "model": "gpt-sol",
+  "reasoning_level": "high",
+  "stage": "transaction_group_execution",
+  "category": "value_free_transaction_trace_mismatch_without_group_attribution",
+  "expected_invariant": "Every transaction scenario emits the frozen lock, idempotency and two-check authority token order, and any mismatch identifies its exact group plus expected and observed value-free tokens.",
+  "observed_error": "Attempt 003 passed all nine authority groups, then failed closed with generic lock_authority_order_mismatch before the eleven-transaction checkpoint. The failure schema retained no group ID or allowlisted expected/observed token sequence, so the evidence cannot distinguish a classifier defect from a transaction-source order defect.",
+  "detection_method": "The schema-valid occupied failure evidence names transaction lock_authority_order_mismatch after nine_authority_groups_verified and before eleven_transaction_groups_verified; exact relay, container and internal-network cleanup passed.",
+  "evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+    "app/services/appointment_delete_physical.py"
+  ],
+  "candidate_state": "attempt_003_failed_closed_cleanup_verified_authority_groups_passed_transaction_claim_unreleased",
+  "workflow_disposition": "sol_owned_plan_revision_required_before_any_rerun",
+  "recurrence_signature": "transaction_trace.generic_order_mismatch_without_group_or_closed_token_diagnostic",
+  "correction": {
+    "status": "correction_in_progress",
+    "action": "Freeze a provider-free trace-recovery plan that permits only exact group attribution and schema-closed expected/observed value-free tokens, then diagnose the mismatch before deciding whether any behavior rerun is admissible.",
+    "prevention_control": "Stateful multi-scenario rehearsals must attribute failures to a scenario and retain only allowlisted diagnostic classes sufficient to distinguish harness classification from source-contract defects."
+  },
+  "status": "contained_cleanup_verified"
+}

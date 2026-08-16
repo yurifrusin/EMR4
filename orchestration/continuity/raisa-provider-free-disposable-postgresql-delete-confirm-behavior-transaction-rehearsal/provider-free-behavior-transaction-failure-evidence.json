@@ -12,20 +12,21 @@
     "transaction_schema_installed",
     "fixed_loopback_relay_started",
     "host_sqlalchemy_catalogue_verified",
+    "nine_authority_groups_verified",
     "fixed_loopback_relay_stopped",
     "cleanup_verified"
   ],
   "failure": {
-    "stage": "harness",
-    "code": "unexpected_exception",
-    "detail_sha256": "cacde3d4f2fd0b72498eed624e5a64142187afe76a72c37de6256743cc0e175f"
+    "stage": "transaction",
+    "code": "lock_authority_order_mismatch",
+    "detail_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "cleanup": {
     "status": "cleanup_verified",
     "container": "container_absent",
     "network": "network_absent",
-    "container_id_sha256": "a9a16a3eba4baf4eca755e25f0dd0ba452a4aef3e17c81fff08d9e7b30f05a8f",
-    "network_id_sha256": "0d693dc5a0add8625ffa3902464b654958e1eae63d8c23029b5a63b7ede5fca3"
+    "container_id_sha256": "3bcd27560b09c841e27f98ae04bf4e41b19b4689cb5c47af2ba85f69a1b777e1",
+    "network_id_sha256": "523965e1d180858b87daceceb03b18e91778ef4a21073c0210adcd32ab607603"
   },
   "claim_boundary": "Exact serial unmounted SQLAlchemy/PostgreSQL delete-confirm authority and transaction behavior only; no route, product database, concurrency, restart, unknown commit, deployment or production claim."
 }
