@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 327,
+  "register_revision": 328,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15079,6 +15079,44 @@
         "evidence_paths": [
           "orchestration/continuity/ariadne-active-operation-latch/current.json",
           "docs/ariadne-agent-error-correction-register-revision-327.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0377",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-occupied-run-003",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "delete-confirm-http-postgresql-harness",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_owned_disposable_postgresql16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A manually constructed proposal-confirmation probe must carry byte-equivalent signed evidence in both the nested proposal and top-level confirmation fields required by the accepted adapter ingress.",
+      "observed_error": "The DHI-S07 helper-owner repair reached the cross-practice scenario, but the manual proposal omitted its nested signed_confirmation_evidence copy. The adapter therefore returned the fail-closed signed_confirmation_evidence_invalid block before the physical RLS boundary rather than the frozen appointment_not_found result.",
+      "detection_method": "The occupied run released sanitized DHI-S07 failure evidence and verified cleanup. Two bounded status/code diagnostics, each with exact cleanup and zero label postflight, first identified HTTP 200 and then the non-sensitive block code signed_confirmation_evidence_invalid with no receipt.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-328.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.manual_confirm_probe_omitted_nested_signed_evidence_copy",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Copy the exact minted evidence into the nested AppointmentDeleteProposalOut, set its required flag and strengthen the provider-free probe regression to require nested/top-level equality before another occupied run.",
+        "prevention_control": "Every manually constructed confirmation probe must pass the accepted adapter's complete pure pre-command ingress in a focused test, including all duplicated nested/top-level equality invariants, before occupied execution.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-328.md"
         ]
       },
       "status": "corrected"

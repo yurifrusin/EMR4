@@ -977,6 +977,10 @@ def _manual_cross_practice_body(
         command=command,
         warnings=[],
         blocks=[],
+        delete_proposal_freshness_id=freshness_id,
+        delete_proposal_version_binding=binding,
+        signed_confirmation_evidence=evidence,
+        signed_confirmation_evidence_required=True,
     )
     return AppointmentDeleteProposalConfirmationIn(
         confirmed=True,

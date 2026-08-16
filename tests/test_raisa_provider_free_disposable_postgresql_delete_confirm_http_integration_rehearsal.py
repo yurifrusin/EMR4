@@ -90,9 +90,9 @@ def test_repair_semantics_require_adapter_delegation_and_tenant_context_order() 
 
 
 def test_cross_practice_probe_uses_the_bound_evidence_minter() -> None:
+    actor = rehearsal._fixture(108)  # noqa: SLF001
     body = rehearsal._manual_cross_practice_body(  # noqa: SLF001
-        rehearsal._fixture(107),  # noqa: SLF001
-        rehearsal._fixture(108),  # noqa: SLF001
+        rehearsal._fixture(107), actor  # noqa: SLF001
     )
 
     assert body["signed_confirmation_evidence_required"] is True
@@ -100,6 +100,32 @@ def test_cross_practice_probe_uses_the_bound_evidence_minter() -> None:
     assert evidence["schema_version"] == "bernie.confirmation_evidence.v1"
     assert evidence["purpose"] == rehearsal.adapter.DELETE_CONFIRM_EVIDENCE_PURPOSE
     assert evidence["signature"]
+    assert body["delete_proposal"]["signed_confirmation_evidence"] == evidence
+    assert body["delete_proposal"]["signed_confirmation_evidence_required"] is True
+    assert body["delete_proposal"]["delete_proposal_freshness_id"] == body[
+        "delete_proposal_freshness_id"
+    ]
+    assert body["delete_proposal"]["delete_proposal_version_binding"] == body[
+        "delete_proposal_version_binding"
+    ]
+    ingress = rehearsal.adapter._proposal_server_ingress(  # noqa: SLF001
+        body=rehearsal.AppointmentDeleteProposalConfirmationIn.model_validate(body),
+        authenticated_user=rehearsal.SimpleNamespace(
+            id=actor.actor_id,
+            practice_id=actor.practice_id,
+            role=rehearsal.UserRole.Receptionist,
+            is_active=True,
+            authority_generation=1,
+        ),
+        session_reference="a" * 64,
+        evidence_secret=rehearsal.appointment_router._delete_confirm_evidence_secret(),  # noqa: SLF001
+        proposal_version_binding=body["delete_proposal_version_binding"],
+        proposal_version_binding_secret=rehearsal.appointment_router._delete_confirm_domain_secret(  # noqa: SLF001
+            "proposal-version"
+        ),
+    )
+    assert ingress.evidence_status == "verified"
+    assert ingress.evidence_binding == "exact"
 
 
 def test_internal_network_container_and_fixed_relay_argv_are_exact() -> None:

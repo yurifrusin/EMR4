@@ -1,0 +1,101 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "The helper-owner repair reached DHI-S07 but the manual proposal lacked its nested evidence/freshness/version copies, so accepted ingress blocked before RLS. AER-0377 preserves the occupied stop and bounded typed diagnostics; all lifecycles cleaned and label postflight is zero. The repair now carries exact nested/top-level fields and its focused test passes complete verified/exact adapter ingress; revision-328 register tests pass.",
+    "next_executable_stage": "Pass static gates and a fresh database-preexecution receipt, commit the complete DHI-S07 proposal-shape repair, then run one corrected owned disposable PostgreSQL 16 lifecycle. After tranche closeout, review Ariadne effectiveness and the DeepSeek Harness from primary sources, assess adaptation versus migration, and implement only the highest-leverage approved workflow corrections before further product work.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "0bee9cc587b8e23c2853a608fc299475f814b157",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "git_object_resolution": {
+    "observed_head": "0bee9cc587b8e23c2853a608fc299475f814b157",
+    "reason_codes": [],
+    "resolved_commit": "0bee9cc587b8e23c2853a608fc299475f814b157",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "0bee9cc587b8e23c2853a608fc299475f814b157"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "dhi_s07_complete_shape_repair_preexecution",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its bounded package and correction are complete; the live recovery is Sol-owned and serial.",
+        "work_packages": [
+          "delete_confirm_http_postgresql_harness_and_tests_completed_at_worker_commit_891ac1608c34b0619fd009b04628e652d9c217fc"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high veto remains required only after occupied evidence and cleanup pass.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native subagent delegation and the mutable lifecycle is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "corrected occupied result",
+      "cleanup result",
+      "pre-verifier gate",
+      "closeout",
+      "post-closeout Ariadne effectiveness and DeepSeek Harness review"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path shape-repair commit",
+      "one owned disposable lifecycle",
+      "twelve ordered HTTP/PostgreSQL scenarios",
+      "sanitized evidence validation",
+      "exact cleanup/postflight",
+      "deterministic admission before Gemini veto"
+    ]
+  },
+  "planned_action": "commit_the_complete_dhi_s07_nested_proposal_shape_repair_then_execute_one_corrected_owned_disposable_postgresql16_lifecycle",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-http-route-convergence-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json",
+      "docs/ariadne-agent-error-correction-register-revision-328.md"
+    ],
+    "current_authority_allocation": "Sol owns the serial occupied recovery, integration and acceptance. DeepSeek V4 Flash/high completed its bounded package and permitted correction; no external implementation package remains. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto after occupied evidence and cleanup pass. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "The exact committed recovery parent is machine-resolved HEAD 0bee9cc587b8e23c2853a608fc299475f814b157 on codex/ariadne-bernie-davida-parallel-seam; origin task remains 341d89b9a70c85f54247de364baf842b84543c8d. Required 648c8ec9805af63729264ea9c22fd695f062a741 and accepted HTTP/database ancestors remain present. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intended changes are the complete manual-proposal shape repair/test, current sanitized failure evidence, revision-328 register artifacts, latch and this receipt pair; unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md Current Baton directs this provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal and narrow fail-closed harness recovery. Yuri adds the post-closeout Ariadne effectiveness and DeepSeek Harness adaptation-versus-migration review; his latest observation makes subscription/authentication compatibility an explicit migration constraint.",
+    "protected_evidence_boundaries": "The run remains limited to cached postgres:16-bookworm in Docker context default with pull disabled, one exactly labelled internal network and tmpfs-backed container, fixed authored-synthetic rows, local loopback application transport, non-superuser non-BYPASSRLS sessions, sanitized evidence and exact owned cleanup. No existing/product database, product/patient/clinical/protected data, raw DELETE convergence, provider, ADC, credential/IAM change, browser, external service, UI, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
