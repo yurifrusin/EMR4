@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.provider_free_pytest_boundary_incident.v1",
+  "incident_id": "AER-0358",
+  "observed_on": "2026-08-16",
+  "operation_id": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+  "boundary": "no_database_docker_sql_or_migration_execution",
+  "affected_entrypoints": [
+    "ordinary repository pytest through the active .venv",
+    "scripts/ariadne_serial_pytest.py"
+  ],
+  "affected_session_count": 3,
+  "mechanism": {
+    "path": "tests/conftest.py",
+    "session_fixture": "engine",
+    "autouse_fixture": "clean_db",
+    "database": "local authored-synthetic gp_pms_test only",
+    "effects": [
+      "CREATE EXTENSION IF NOT EXISTS vector",
+      "Base.metadata.create_all",
+      "CREATE OR REPLACE FUNCTION and trigger",
+      "TRUNCATE practices RESTART IDENTITY CASCADE",
+      "Base.metadata.drop_all"
+    ]
+  },
+  "contained_scope": {
+    "product_database_accessed": false,
+    "product_patient_or_clinical_data_accessed": false,
+    "provider_or_network_accessed": false,
+    "protected_ref_moved": false,
+    "test_schema_teardown_completed": true
+  },
+  "correction": {
+    "entrypoint": "python -m scripts.ariadne_provider_free_pytest",
+    "controls": [
+      "literal repository-relative tests/*.py allowlist",
+      "--noconftest",
+      "third-party plugin autoload disabled",
+      "pytest cache plugin disabled",
+      "inherited PYTEST_ADDOPTS cleared",
+      "database and credential environment omitted",
+      "shell false"
+    ],
+    "replacement_profile_status": "passed",
+    "replacement_profile_provider_or_database_effects": 0
+  },
+  "claim_boundary": "workflow_scope_incident_only_no_product_or_provider_claim"
+}

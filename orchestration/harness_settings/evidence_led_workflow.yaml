@@ -10,6 +10,7 @@ hard_controls:
   - exact_candidate_worktree_and_ref_binding
   - explicit_path_staging_and_protected_ref_closure
   - active_operation_precedence_and_terminal_response_guard
+  - provider_free_pytest_disables_conftest_plugins_and_database_environment
 adaptive_flow:
   active_boundary_artifacts: one_plan_and_one_machine_contract
   external_review: one_final_risk_triggered_veto_unless_a_hard_boundary_is_ambiguous
@@ -38,6 +39,7 @@ review_command_evidence:
   result_ids_and_argv_must_equal_manifest: true
   pass_requires_every_exit_code_zero: true
   manifest_digest_in_receipt: required_when_manifest_bound
+  provider_free_database_closed_test_entrypoint: python -m scripts.ariadne_provider_free_pytest
 receipt_authoring:
   configured_event_discovery_command: python -m scripts.ariadne_orchestrator_preflight --list-continuation-events
   inferred_or_abbreviated_event_names: forbidden

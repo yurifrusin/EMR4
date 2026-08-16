@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 310,
+  "register_revision": 311,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -14335,6 +14335,47 @@
           "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json",
           "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
           "docs/ariadne-agent-error-correction-register-revision-310.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0358",
+      "attempt_id": "raisa-delete-confirm-response-architecture-sol-independent-pytest-admission",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "A provider-free architecture tranche whose database authority is closed must run static pytest through an entry point that disables repository conftest, plugin autoload and inherited database environment before collection.",
+      "observed_error": "Sol independently reran the architecture and API Spine tests through ordinary repository pytest and later ariadne_serial_pytest. The autouse tests/conftest.py fixture therefore created, truncated and dropped the local gp_pms_test schema during three passing verification sessions even though this tranche explicitly forbade database execution.",
+      "detection_method": "Before the pre-verifier gate, Sol inspected tests/conftest.py after noticing the worker had deliberately used --noconftest. The file proves a session engine plus autouse clean_db fixture executes CREATE EXTENSION, metadata create/drop, trigger DDL and TRUNCATE for every ordinary repository pytest session; the earlier lock messages identify the affected runs.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-architecture-provider-free-pytest-boundary-incident.json",
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "docs/ariadne-agent-error-correction-register-revision-311.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_static_pytest_loaded_database_autouse_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace every affected test result with the new provider-free pytest entry point, which accepts only literal tests/*.py paths, forces --noconftest, disables plugin autoload/cache and inherited pytest options, drops database and credential environment and runs with shell=False.",
+        "prevention_control": "Whenever database authority is closed, deterministic and verifier manifests must invoke python -m scripts.ariadne_provider_free_pytest rather than pytest or ariadne_serial_pytest; ordinary repository pytest is reserved for tranches whose plan explicitly admits the local test database.",
+        "evidence_paths": [
+          "orchestration/harness_settings/evidence_led_workflow.yaml",
+          "scripts/ariadne_provider_free_pytest.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "docs/ariadne-agent-error-correction-register-revision-311.md"
         ]
       },
       "status": "corrected"
