@@ -1,14 +1,14 @@
 {
-  "canonical_register_sha256": "4f1c420c560f7fb22ec1c3343469fd911bd83b1d87e8fffebaca0042e72b1300",
+  "canonical_register_sha256": "99ce4e806167935fbeeb3586be15f10509e76b6b98d4ac6f3034db105983ecb8",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 105,
-      "canonical_unchanged": 222,
+      "canonical_unchanged": 223,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 57,
-      "evidence_misreport": 50,
+      "evidence_misreport": 51,
       "harness_failure": 44,
       "output_contract_violation": 106,
       "read_only_violation": 3,
@@ -17,7 +17,7 @@
       "transport_timeout": 11
     },
     "by_origin": {
-      "agent_behavior": 256,
+      "agent_behavior": 257,
       "harness": 44,
       "repository": 56,
       "transport": 11
@@ -25,7 +25,7 @@
     "by_process_severity": {
       "low": 142,
       "material": 113,
-      "moderate": 112
+      "moderate": 113
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -40,7 +40,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 190,
+      "codex-primary-orchestrator::orchestrator": 191,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -92,12 +92,12 @@
     "by_role": {
       "implementer": 37,
       "integration_reviewer": 2,
-      "orchestrator": 276,
+      "orchestrator": 277,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 367,
+  "incident_count": 368,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -305,6 +305,30 @@
         "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output."
       ],
       "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "evidence_misreport"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0365",
+        "AER-0368"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "The AER-0363 guard remains fail-closed. Pre-verifier runtime templates must carry candidate tree identity only in the dedicated worktree-preflight artifact or review packet, never in source_evidence.git_refs_and_worktree.",
+        "The AER-0363 local commit-resolution guard remains the prevention control; continuation evidence must describe tree identity outside the commit-ref field or omit it when the exact commit already binds the tree."
+      ],
+      "recurrence_signature": "orchestrator.git_refs_evidence_included_noncommit_tree_object",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -997,7 +1021,7 @@
       ]
     }
   ],
-  "register_revision": 318,
+  "register_revision": 319,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

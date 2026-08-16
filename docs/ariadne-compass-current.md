@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 307 / Compass 289. Delete-confirm has no remaining lower-layer route blocker; one provider-free HTTP route-convergence candidate is next.
+> EMR4 is at Continuity 308 / Compass 290. Delete-confirm now has one provider-free canonical/hidden-alias HTTP composition with strict public/private receipt separation. Disposable PostgreSQL HTTP integration is the next dependency-satisfied proof.
 
 ## North star
 
@@ -384,29 +384,33 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The pure projection and server-owned locked composition now exist as tested unmounted product services. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture`.
 184. **Prove delete-confirm route readiness without opening route authority — Provider-free read-only delete-confirm route-mounting readiness review**
    No hidden lower-layer blocker remains; five exact route-transition gaps are frozen. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation`.
+185. **Close delete-confirm transport composition before disposable HTTP/PostgreSQL integration — Provider-free delete-confirm HTTP route convergence**
+   Canonical and historical delete-confirm paths now share one strict adapter-owned transport; database execution remains the next bounded proof. Lineage parent: `raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review`.
 
 ## Current position
 
-**Delete-confirm is ready for bounded HTTP route convergence — Provider-free read-only delete-confirm route-mounting readiness review**
+**Delete-confirm HTTP composition accepted; disposable PostgreSQL integration is next — Provider-free delete-confirm HTTP route convergence**
 
-**Why this proof came next:** The unmounted physical, authority, composition and response foundations pass and no lower-layer blocker remains.
+**Why this proof came next:** The five frozen route-transition gaps close without changing the accepted lower transaction seams or raw DELETE.
 
-Five route-transition gaps are exact: canonical alias, version binding, server dependencies, public schema and canonical public bytes.
+One server-owned canonical/alias transport emits only canonical minimal public bytes while private receipt truth remains internal.
 
 ### What this unlocks
 
-- Freeze one provider-free delete-confirm HTTP route-convergence plan.
-- Connect one canonical/hidden-alias handler to the accepted adapter without reopening database foundations.
+- Freeze the narrowest provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal.
+- Exercise committed, replay, denial, rollback and cleanup through the exact canonical route and accepted transaction seam.
 
 ### What it does not solve
 
-- Mounted route behavior, HTTP execution or product command runtime.
-- Database execution, capability provisioning or product data.
-- Provider/credential activity, UI, deployment, release, Pages or protected refs.
+- Mounted HTTP/database behavior, concurrency or unknown-commit recovery.
+- Raw compatibility DELETE convergence or visible Reception One cancellation UI.
+- Product/patient data, provider access, deployment, release, Pages or protected refs.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -492,9 +496,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted private-receipt/public-projection separation and raw DELETE isolation.
-- Converge the five frozen transition gaps through one provider-free route handler and adapter call.
-- Keep database execution, capability, product data, providers and protected integration separately gated.
+- Preserve the accepted canonical/hidden-alias handler, strict public envelope and private receipt boundary.
+- Prove the exact delete-confirm HTTP path against disposable authored-synthetic PostgreSQL with atomic cleanup.
+- Keep raw DELETE, product data, providers, deployment and protected integration separately closed.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -683,6 +687,7 @@ Prerequisites:
 
 ## Map limits
 
+- Delete-confirm HTTP convergence proves provider-free composition only, not database execution, raw DELETE convergence or visible client behavior.
 - The delete-confirm readiness result is read-only evidence; no route, schema behavior, database, capability or product runtime is opened.
 - The accepted delete-confirm services remain unmounted and provider-free; route/schema/database/capability/product-data authority is still closed.
 - The accepted delete-confirm response architecture opens no route, schema, database, capability or product runtime; its next implementation remains provider-free and unmounted.
@@ -946,6 +951,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-313.md`
 - `docs/ariadne-agent-error-correction-register-revision-314.md`
 - `docs/ariadne-agent-error-correction-register-revision-316.md`
+- `docs/ariadne-agent-error-correction-register-revision-319.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1190,6 +1196,8 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-plan.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture.md`
+- `docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md`
+- `docs/raisa-provider-free-delete-confirm-http-route-convergence-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-plan.md`
@@ -1478,6 +1486,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
+- `docs/security/raisa-provider-free-delete-confirm-http-route-convergence-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md`
@@ -1614,6 +1623,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json`
@@ -1807,6 +1817,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-http-route-convergence-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-gemini-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-sol-recovery-gemini-review-packet.md`
@@ -1859,6 +1870,13 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-deepseek-mechanical-correction-failure-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-pre-verifier-acceptance-v2-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-sol-recovery-lease.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-closeout-prepush-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-closeout-prepush-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-status-confirm-behavior-transaction-precommit-receipt.json`
@@ -2131,6 +2149,7 @@ Prerequisites:
 - `orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-worker-result.json`
 - `orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-mechanical-correction-worker-receipt.json`
 - `orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json`
+- `orchestration/agent_inbox/deepseek/raisa-provider-free-delete-confirm-http-route-convergence-worker-receipt.json`
 - `orchestration/agent_inbox/deepseek/raisa-reception-one-duration-test-worker-receipt.json`
 - `orchestration/agent_inbox/deepseek/raisa-reception-one-time-reschedule-test-worker-receipt.json`
 - `orchestration/api_spine_adr.md`
@@ -2275,6 +2294,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/provider-free-route-convergence-evidence.json`
+- `orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-contract.json`
+- `orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-report.md`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal/rehearsal-contract.json`
@@ -2778,6 +2801,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2811,6 +2835,8 @@ Prerequisites:
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
 - `scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py`
+- `scripts/raisa_provider_free_delete_confirm_http_route_convergence.py`
+- `scripts/raisa_provider_free_delete_confirm_http_route_convergence_continuity_update.py`
 - `scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py`
@@ -2905,6 +2931,9 @@ Prerequisites:
 - `tests/test_raisa_post_status_action_compass_baton_orientation.py`
 - `tests/test_raisa_post_status_action_compass_baton_orientation_plan.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
+- `tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py`
+- `tests/test_raisa_provider_free_delete_confirm_http_route_convergence_continuity.py`
+- `tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py`
@@ -2982,4 +3011,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 289; continuity graph revision 307._
+_Compass map revision 290; continuity graph revision 308._

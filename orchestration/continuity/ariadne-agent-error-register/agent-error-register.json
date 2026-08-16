@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 318,
+  "register_revision": 319,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -14738,6 +14738,44 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0368",
+      "attempt_id": "raisa-delete-confirm-http-route-convergence-pre-verifier-acceptance-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-delete-confirm-http-route-convergence",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_receipt_builder",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "The continuation source_evidence.git_refs_and_worktree field may name full object IDs only when they are commit refs resolvable by the existing AER-0363 guard, and the accepted AER-0365 correction must not recur.",
+      "observed_error": "The first route-convergence pre-verifier runtime repeated AER-0365 by placing the exact candidate tree object ID in the commit-ref evidence field. The existing guard returned revision_required before Gemini dispatch while the active-operation source commit itself resolved correctly.",
+      "detection_method": "The pre-verifier continuation receipt returned git_refs_evidence_object_unresolvable, worker_dispatch_permitted false and no model call; direct inspection found the non-commit tree object only in the git-ref evidence sentence.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-pre-verifier-acceptance-runtime-state.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_refs_evidence_included_noncommit_tree_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the tree object ID from the commit-ref evidence sentence, retain the exact commit HEAD and separate worktree preflight binding, preserve the failed receipt, and require a distinct passing v2 receipt before Gemini dispatch.",
+        "prevention_control": "The AER-0363 guard remains fail-closed. Pre-verifier runtime templates must carry candidate tree identity only in the dedicated worktree-preflight artifact or review packet, never in source_evidence.git_refs_and_worktree.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-pre-verifier-acceptance-v2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-319.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

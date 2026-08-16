@@ -1,0 +1,251 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-http-route-gemini-c7a01edd",
+  "branch": "codex/review-delete-confirm-http-route-c7a01edd",
+  "head_before": "c7a01edd96ebabf3ea2c07be89a5b405c9629853",
+  "head_after": "c7a01edd96ebabf3ea2c07be89a5b405c9629853",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "62c3ec49eab3f41c745df2fad91c4f9355e9296c9d3914868a5274a6be81476e",
+  "result": "### Gemini 3.7 Flash/high Independent Veto Review: Delete-Confirm HTTP Route Convergence\n\n- **Candidate Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-http-route-gemini-c7a01edd`\n- **Candidate Branch**: `codex/review-delete-confirm-http-route-c7a01edd`\n- **Candidate HEAD**: `c7a01edd96ebabf3ea2c07be89a5b405c9629853`\n- **Candidate Tree**: `49df84972527446afde2ffa5e2d20eb6e9ced2e0`\n- **Frozen Plan Source**: `f78524b41c909c74acc93b2818be8fc871ed8fd3`\n- **Evidence Label**: `provider_free_delete_confirm_http_route_composition`\n- **Date**: 2026-08-17\n\n---\n\n### Detailed Review Findings Against the Eight Mandated Review Invariants\n\n1. **Single Handler Binding and Route-Local Purity**:\n   - In [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/routers/appointments.py#L5565-L5619), canonical `POST /api/v1/appointments/proposals/delete/confirm` and historical alias `/api/v1/appointments/proposals/delete-confirm` (`include_in_schema=False`) bind the exact same function `confirm_delete_proposal_route`.\n   - The handler invokes `compose_product_delete_confirm` exactly once.\n   - It performs zero route-local claim (`claim_appointment_command`), read (`_get_appointment`), mutation (`_apply_appointment_delete`), audit record writing, receipt assembly, database commits (`db.commit()`), or fallback paths. All blocked and error outcomes return the typed adapter result directly.\n\n2. **Server-Minted Version Binding Invariant**:\n   - In `_attach_delete_confirmation_evidence` ([`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/routers/appointments.py#L5451-L5501)), proposal generation server-mints `raisa.delete_proposal_version_binding.v1` covering the signed evidence signature and the database-owned positive `appointment_state_version`.\n   - In [`app/schemas/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/schemas/appointments.py#L695-L703), `AppointmentDeleteProposalConfirmationIn` requires `delete_proposal_version_binding`.\n   - In `_verified_proposal_state` ([`app/services/appointment_delete_product_adapter.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/services/appointment_delete_product_adapter.py#L449-L524)), absent, blank, malformed, tampered, or evidence-mismatched bindings fail closed during pre-command ingress verification before any command session factory is called.\n\n3. **Strict Ingress and Secret Derivation**:\n   - Ingress into `compose_product_delete_confirm` is limited to server-owned bearer token, current authenticated user, command session factory, normalized `Idempotency-Key`, and five domain-separated secrets derived via HMAC-SHA256 from `settings.secret_key` (`emr4.delete-confirm.<purpose>.v1`).\n   - No client-supplied capability, raw session ID, or new environment variable is accepted or required.\n\n4. **Dedicated and Recursively Closed Response Envelopes**:\n   - [`AppointmentConfirmDeleteProposalOut`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/schemas/appointments.py#L746-L804) has `extra=\"forbid\"`, schema version `raisa.delete_confirm_public_envelope.v1`, intent `confirm_delete_appointment`, and strictly bounded audit labels (`delete_product_adapter_v1`, `delete_signed_confirmation_evidence_verified`, `delete_current_authority_rechecked`).\n   - [`AppointmentDeleteConfirmationReceipt`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/schemas/appointments.py#L705-L744) has `extra=\"forbid\"`, schema version `appointment.delete_confirmation_receipt.v1`, `status=\"Cancelled\"`, dedicated reason code validation (`DELETE_CONFIRM_REASON_CODES`), optional cancellation reason (max 500 chars), strictly `waiting_area_id: None = None`, and sorted unique `warning_codes` (only `waiting_area_cleared`).\n   - In [`docs/api-spine/openapi/appointment-commands.yaml`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/docs/api-spine/openapi/appointment-commands.yaml#L1276-L1381), `AppointmentDeleteConfirmResultEnvelope` and `AppointmentDeleteConfirmationReceipt` mirror these constraints with `additionalProperties: false` and `waiting_area_id: type: \"null\"`. No appointment, patient, practitioner, schedule, note, or identity projection is exposed.\n\n5. **Canonical Public Bytes and Private Invariant Separation**:\n   - Both `committed` and `replay` outcomes serialize the public body through `canonical_delete_confirm_envelope_bytes`.\n   - The route enforces that `result.stored_response_bytes` is present on `committed`/`replay` and raises a `RuntimeError` if missing.\n   - On non-success outcomes, the route enforces that `result.stored_response_bytes` is `None` and raises a `RuntimeError` if private bytes are unexpectedly present.\n   - `stored_response_bytes` is never passed as HTTP content.\n\n6. **Comprehensive Scenario and Hostile Mutation Verification**:\n   - All 12 frozen scenarios (`DHC-S01` through `DHC-S12`) pass.\n   - 149 hostile mutations (113 hostile contract schema mutations + 36 hostile public envelope mutations) are rejected by the validation harness.\n   - Hostile mutations targeting nested receipt leaves, unknown fields, non-null waiting areas, reason code widening, and response schema tampering fail closed.\n\n7. **Spine, Inventory, and Diary Alignment**:\n   - OpenAPI specification ([`docs/api-spine/openapi/appointment-commands.yaml`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/docs/api-spine/openapi/appointment-commands.yaml#L363-L384)), alignment inventory ([`orchestration/api_spine_appointment_command_alignment_inventory.md`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/orchestration/api_spine_appointment_command_alignment_inventory.md)), Diary confirm action catalog ([`app/services/diary/confirm_actions.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/services/diary/confirm_actions.py#L77-L83)), and drift guard tests agree on canonical path `/api/v1/appointments/proposals/delete/confirm`, hidden alias `/api/v1/appointments/proposals/delete-confirm`, and minimal public response envelope.\n\n8. **Compatibility and Closed Boundary Preservation**:\n   - Raw `DELETE /api/v1/appointments/{appointment_id}` (`cancel_appointment`) remains unchanged and tagged `raw_compat_delete`.\n   - Pre-edit hashes of all read-only files (`app/services/appointment_delete_product_adapter.py`, `app/services/appointment_delete_composition.py`, `app/services/appointment_delete_physical.py`, `app/services/bernie_turn_evidence.py`, `app/dependencies.py`, `app/config.py`) match the frozen plan hashes.\n   - No database connections, SQL fixtures, Docker containers, IAM credentials, or protected ref updates were used or modified.\n\n---\n\n### Command Execution Summary\n\n- **C01** (`git status --short --branch`): Clean worktree on `codex/review-delete-confirm-http-route-c7a01edd`. Exit code 0.\n- **C02** (`git rev-parse HEAD`): Matched exact candidate `c7a01edd96ebabf3ea2c07be89a5b405c9629853`. Exit code 0.\n- **C03** (`pytest` on delete-confirm tests): 27 passed. Exit code 0.\n- **C04** (`pytest` on static API Spine tests): 78 passed. Exit code 0.\n- **C05** (`ruff check`): All checks passed. Exit code 0.\n- **C06** (`scripts.raisa_provider_free_delete_confirm_http_route_convergence --no-write`): 16/16 checks passed; 149 hostile mutations rejected. Exit code 0.\n- **C07** (`git diff --check`): Clean commit range `f78524b41c909c74acc93b2818be8fc871ed8fd3..c7a01edd96ebabf3ea2c07be89a5b405c9629853` with zero whitespace defects. Exit code 0.\n- **C08** (`git status --short --branch`): Clean worktree confirmed. Exit code 0.\n\nThe exact recovery candidate satisfies all 8 invariant criteria without defect.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Gemini 3.7 Flash/high Independent Veto Review: Delete-Confirm HTTP Route Convergence\n\n- **Candidate Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\delete-confirm-http-route-gemini-c7a01edd`\n- **Candidate Branch**: `codex/review-delete-confirm-http-route-c7a01edd`\n- **Candidate HEAD**: `c7a01edd96ebabf3ea2c07be89a5b405c9629853`\n- **Candidate Tree**: `49df84972527446afde2ffa5e2d20eb6e9ced2e0`\n- **Frozen Plan Source**: `f78524b41c909c74acc93b2818be8fc871ed8fd3`\n- **Evidence Label**: `provider_free_delete_confirm_http_route_composition`\n- **Date**: 2026-08-17\n\n---\n\n### Detailed Review Findings Against the Eight Mandated Review Invariants\n\n1. **Single Handler Binding and Route-Local Purity**:\n   - In [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/routers/appointments.py#L5565-L5619), canonical `POST /api/v1/appointments/proposals/delete/confirm` and historical alias `/api/v1/appointments/proposals/delete-confirm` (`include_in_schema=False`) bind the exact same function `confirm_delete_proposal_route`.\n   - The handler invokes `compose_product_delete_confirm` exactly once.\n   - It performs zero route-local claim (`claim_appointment_command`), read (`_get_appointment`), mutation (`_apply_appointment_delete`), audit record writing, receipt assembly, database commits (`db.commit()`), or fallback paths. All blocked and error outcomes return the typed adapter result directly.\n\n2. **Server-Minted Version Binding Invariant**:\n   - In `_attach_delete_confirmation_evidence` ([`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/routers/appointments.py#L5451-L5501)), proposal generation server-mints `raisa.delete_proposal_version_binding.v1` covering the signed evidence signature and the database-owned positive `appointment_state_version`.\n   - In [`app/schemas/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/schemas/appointments.py#L695-L703), `AppointmentDeleteProposalConfirmationIn` requires `delete_proposal_version_binding`.\n   - In `_verified_proposal_state` ([`app/services/appointment_delete_product_adapter.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/services/appointment_delete_product_adapter.py#L449-L524)), absent, blank, malformed, tampered, or evidence-mismatched bindings fail closed during pre-command ingress verification before any command session factory is called.\n\n3. **Strict Ingress and Secret Derivation**:\n   - Ingress into `compose_product_delete_confirm` is limited to server-owned bearer token, current authenticated user, command session factory, normalized `Idempotency-Key`, and five domain-separated secrets derived via HMAC-SHA256 from `settings.secret_key` (`emr4.delete-confirm.<purpose>.v1`).\n   - No client-supplied capability, raw session ID, or new environment variable is accepted or required.\n\n4. **Dedicated and Recursively Closed Response Envelopes**:\n   - [`AppointmentConfirmDeleteProposalOut`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/schemas/appointments.py#L746-L804) has `extra=\"forbid\"`, schema version `raisa.delete_confirm_public_envelope.v1`, intent `confirm_delete_appointment`, and strictly bounded audit labels (`delete_product_adapter_v1`, `delete_signed_confirmation_evidence_verified`, `delete_current_authority_rechecked`).\n   - [`AppointmentDeleteConfirmationReceipt`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/schemas/appointments.py#L705-L744) has `extra=\"forbid\"`, schema version `appointment.delete_confirmation_receipt.v1`, `status=\"Cancelled\"`, dedicated reason code validation (`DELETE_CONFIRM_REASON_CODES`), optional cancellation reason (max 500 chars), strictly `waiting_area_id: None = None`, and sorted unique `warning_codes` (only `waiting_area_cleared`).\n   - In [`docs/api-spine/openapi/appointment-commands.yaml`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/docs/api-spine/openapi/appointment-commands.yaml#L1276-L1381), `AppointmentDeleteConfirmResultEnvelope` and `AppointmentDeleteConfirmationReceipt` mirror these constraints with `additionalProperties: false` and `waiting_area_id: type: \"null\"`. No appointment, patient, practitioner, schedule, note, or identity projection is exposed.\n\n5. **Canonical Public Bytes and Private Invariant Separation**:\n   - Both `committed` and `replay` outcomes serialize the public body through `canonical_delete_confirm_envelope_bytes`.\n   - The route enforces that `result.stored_response_bytes` is present on `committed`/`replay` and raises a `RuntimeError` if missing.\n   - On non-success outcomes, the route enforces that `result.stored_response_bytes` is `None` and raises a `RuntimeError` if private bytes are unexpectedly present.\n   - `stored_response_bytes` is never passed as HTTP content.\n\n6. **Comprehensive Scenario and Hostile Mutation Verification**:\n   - All 12 frozen scenarios (`DHC-S01` through `DHC-S12`) pass.\n   - 149 hostile mutations (113 hostile contract schema mutations + 36 hostile public envelope mutations) are rejected by the validation harness.\n   - Hostile mutations targeting nested receipt leaves, unknown fields, non-null waiting areas, reason code widening, and response schema tampering fail closed.\n\n7. **Spine, Inventory, and Diary Alignment**:\n   - OpenAPI specification ([`docs/api-spine/openapi/appointment-commands.yaml`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/docs/api-spine/openapi/appointment-commands.yaml#L363-L384)), alignment inventory ([`orchestration/api_spine_appointment_command_alignment_inventory.md`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/orchestration/api_spine_appointment_command_alignment_inventory.md)), Diary confirm action catalog ([`app/services/diary/confirm_actions.py`](file:///C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd/app/services/diary/confirm_actions.py#L77-L83)), and drift guard tests agree on canonical path `/api/v1/appointments/proposals/delete/confirm`, hidden alias `/api/v1/appointments/proposals/delete-confirm`, and minimal public response envelope.\n\n8. **Compatibility and Closed Boundary Preservation**:\n   - Raw `DELETE /api/v1/appointments/{appointment_id}` (`cancel_appointment`) remains unchanged and tagged `raw_compat_delete`.\n   - Pre-edit hashes of all read-only files (`app/services/appointment_delete_product_adapter.py`, `app/services/appointment_delete_composition.py`, `app/services/appointment_delete_physical.py`, `app/services/bernie_turn_evidence.py`, `app/dependencies.py`, `app/config.py`) match the frozen plan hashes.\n   - No database connections, SQL fixtures, Docker containers, IAM credentials, or protected ref updates were used or modified.\n\n---\n\n### Command Execution Summary\n\n- **C01** (`git status --short --branch`): Clean worktree on `codex/review-delete-confirm-http-route-c7a01edd`. Exit code 0.\n- **C02** (`git rev-parse HEAD`): Matched exact candidate `c7a01edd96ebabf3ea2c07be89a5b405c9629853`. Exit code 0.\n- **C03** (`pytest` on delete-confirm tests): 27 passed. Exit code 0.\n- **C04** (`pytest` on static API Spine tests): 78 passed. Exit code 0.\n- **C05** (`ruff check`): All checks passed. Exit code 0.\n- **C06** (`scripts.raisa_provider_free_delete_confirm_http_route_convergence --no-write`): 16/16 checks passed; 149 hostile mutations rejected. Exit code 0.\n- **C07** (`git diff --check`): Clean commit range `f78524b41c909c74acc93b2818be8fc871ed8fd3..c7a01edd96ebabf3ea2c07be89a5b405c9629853` with zero whitespace defects. Exit code 0.\n- **C08** (`git status --short --branch`): Clean worktree confirmed. Exit code 0.\n\nThe exact recovery candidate satisfies all 8 invariant criteria without defect.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_api_spine_openapi_backend_alignment.py",
+          "tests/test_api_spine_confirmation_contract_matrix.py",
+          "tests/test_api_spine_confirmation_family_idempotency_checkpoint.py",
+          "tests/test_api_spine_appointment_idempotency_route_integration_preflight.py",
+          "tests/test_api_spine_appointment_command_alignment_inventory.py",
+          "tests/test_api_spine_appointment_idempotency_gap.py",
+          "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+          "tests/test_api_spine_proposal_only_idempotency_preflight.py",
+          "tests/test_diary_confirm_actions.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "app/routers/appointments.py",
+          "app/schemas/appointments.py",
+          "app/services/diary/confirm_actions.py",
+          "scripts/raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_api_spine_appointment_command_alignment_inventory.py",
+          "tests/test_api_spine_appointment_idempotency_gap.py",
+          "tests/test_api_spine_appointment_idempotency_route_integration_preflight.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_api_spine_confirmation_contract_matrix.py",
+          "tests/test_api_spine_confirmation_family_idempotency_checkpoint.py",
+          "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+          "tests/test_api_spine_delete_confirm_idempotency_route_contract.py",
+          "tests/test_api_spine_openapi_backend_alignment.py",
+          "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py",
+          "tests/test_appointment_audit.py",
+          "tests/test_appointment_status_mutations.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_diary_confirm_actions.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py",
+          "tests/test_reason_code_backend.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_delete_confirm_http_route_convergence",
+          "--no-write"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "f78524b41c909c74acc93b2818be8fc871ed8fd3..c7a01edd96ebabf3ea2c07be89a5b405c9629853"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "419aa0a75afeb2735281e5f54d21ec415ee0a4299a1b3c99cd919d747cddea97",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-gemini-c7a01edd",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py",
+        "tests/test_api_spine_openapi_backend_alignment.py",
+        "tests/test_api_spine_confirmation_contract_matrix.py",
+        "tests/test_api_spine_confirmation_family_idempotency_checkpoint.py",
+        "tests/test_api_spine_appointment_idempotency_route_integration_preflight.py",
+        "tests/test_api_spine_appointment_command_alignment_inventory.py",
+        "tests/test_api_spine_appointment_idempotency_gap.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_proposal_only_idempotency_preflight.py",
+        "tests/test_diary_confirm_actions.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/routers/appointments.py",
+        "app/schemas/appointments.py",
+        "app/services/diary/confirm_actions.py",
+        "scripts/raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_api_spine_appointment_command_alignment_inventory.py",
+        "tests/test_api_spine_appointment_idempotency_gap.py",
+        "tests/test_api_spine_appointment_idempotency_route_integration_preflight.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py",
+        "tests/test_api_spine_confirmation_contract_matrix.py",
+        "tests/test_api_spine_confirmation_family_idempotency_checkpoint.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_delete_confirm_idempotency_route_contract.py",
+        "tests/test_api_spine_openapi_backend_alignment.py",
+        "tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py",
+        "tests/test_appointment_audit.py",
+        "tests/test_appointment_status_mutations.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_diary_confirm_actions.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py",
+        "tests/test_reason_code_backend.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_delete_confirm_http_route_convergence",
+        "--no-write"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "f78524b41c909c74acc93b2818be8fc871ed8fd3..c7a01edd96ebabf3ea2c07be89a5b405c9629853"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}
