@@ -1,0 +1,124 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_completed_delete_confirm_parse_catalogue_closeout_to_task_branch_then_send_non_phi_pushover",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and now accepts the delete-confirm parse/catalogue rehearsal at Continuity 302 / Compass 284, semantic source f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 and reviewed evidence descendant d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8, with behavior/transaction rehearsal next.",
+    "current_authority_allocation": "GPT Sol owns exact task-branch publication, non-PHI Pushover closeout and subsequent fresh rehydration. DeepSeek and Gemini lanes are complete; native subagents remain declined. No protected integration or Pages authority is open.",
+    "active_plan_and_acceptance": "Tier-2 risk-weighted admission passes. The semantic source passed 25 owned tests, the 155-test focused union and canonical 196-test profile; exact PostgreSQL 16 representation evidence and cleanup pass; one Gemini 3.7 Flash/high final veto passes. Closeout commit 08c40a727d8094d567f93aa06f904c11641b4f22 advances Continuity 302 / Compass 284 and marks the latch complete.",
+    "protected_evidence_boundaries": "Publication is a fast-forward push of codex/ariadne-bernie-davida-parallel-seam only. No protected ref, Pages, deployment, product route, command, database, patient/clinical/product data, provider/ADC, credential/IAM, browser or external adapter is opened. docs/branding/ and all 635 unrelated untracked paths remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "Task branch HEAD is exact clean-tracked closeout 08c40a727d8094d567f93aa06f904c11641b4f22; origin task is 274c42adf575f7f07aea759e79a6bd3f2ec25e54. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean with 635 preserved untracked paths."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+    "objective": "Execute exact migration x3y4z5a6b7c8 once over minimum empty authored-synthetic prerequisite relations inside one owned networkless tmpfs PostgreSQL 16 container, prove its exact catalogue/function/trigger representation and atomic installation, then remove the exact owned container without opening behavior, routes or product authority.",
+    "status": "complete",
+    "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+    "authority_source": "AGENTS.md accepts the Tier-2 parse/catalogue result at semantic source f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 and reviewed evidence descendant d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8 under Yuri's standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "Exact migration x3y4z5a6b7c8 passed empty-instance PostgreSQL 16 installation and closed catalogue representability after one immutable fail-closed presentation-matcher attempt and narrow evidence-led repair. Exact cleanup, 80 hostile mutations, 25 owned tests, the 155-test focused union, canonical 196-test profile, one clean Gemini 3.7 Flash/high veto, risk-weighted admission and Continuity 302 / Compass 284 all pass.",
+      "next_executable_stage": null,
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 2,
+        "review": 1,
+        "verification": 2
+      },
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": true,
+      "reason": "operation_complete"
+    },
+    "protected_boundaries": [
+      "exact_x3y4z5a6b7c8_offline_lowering_and_one_owned_disposable_postgresql_16_parse_catalogue_installation_only",
+      "minimum_empty_authored_synthetic_prerequisite_relations_and_allowlisted_catalogue_metadata_only",
+      "network_none_no_published_port_tmpfs_only_no_bind_or_named_volume_and_pull_never",
+      "no_database_behavior_probe_user_grant_receipt_audit_or_appointment_row",
+      "no_application_model_service_route_openapi_graphql_ui_watcher_event_or_product_command_change",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "assessed_stage": "pre_push",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The bounded mechanical implementation package is integrated and accepted; no publication work remains for the worker.",
+        "work_packages": ["fixed-path harness, closed contract/schema and focused tests"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "The sole permitted Tier-2 Gemini 3.7 Flash/high veto passed the exact clean evidence descendant and left it unchanged.",
+        "work_packages": ["one final independent exact-candidate veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "A second reviewer would have duplicated the final veto; publication is one serial Git operation owned by Sol.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "push only the exact non-protected task branch",
+      "verify remote task branch and protected refs after push",
+      "send one non-PHI Pushover closeout after successful publication",
+      "perform fresh rehydration before opening the next tranche"
+    ],
+    "reassessment_triggers": ["push_failure", "protected_ref_drift", "new_tranche_opening"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_closeout_prepush_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Completed implementation receipt is bound in the accepted closeout."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback was not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback was not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high returned one schema-constrained pass on exact descendant d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol accepted and committed exact closeout 08c40a727d8094d567f93aa06f904c11641b4f22 with clean tracked state."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined as negative-leverage stacked review."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

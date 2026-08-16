@@ -88,3 +88,8 @@ No behavior probe or product row ran. No route, API, UI, capability provision,
 patient/clinical/product data, provider/ADC, credential/IAM, browser, external
 network, deployment, production, release, Pages or protected ref was opened.
 `docs/branding/` and every unrelated untracked path remained excluded.
+
+## Notification
+
+After exact task-branch publication, the usual non-PHI continuing Pushover
+notification succeeded with request `74459e81-e587-4931-bcc5-ad062e86c53a`.
