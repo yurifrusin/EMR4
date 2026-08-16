@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 328,
+  "register_revision": 329,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15117,6 +15117,43 @@
           "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-328.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0378",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-api-spine-closeout-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Fixture-dependent repository tests must run through the admitted serial pytest launcher with tests/conftest.py loaded; --noconftest is limited to explicitly provider-free pure test files.",
+      "observed_error": "Sol issued four excluded closeout invocations with the wrong pytest envelope: two fixture-dependent API/appointment profiles used --noconftest, then the maintenance profile was run directly and once through the serial wrapper while still suppressing conftest. The first pair produced missing client/db fixtures; the second pair invalidated the serial-lock self-test assumption.",
+      "detection_method": "Pytest exposed the missing fixtures and then the serial-lock self-test's unexpected direct-pytest success. Sol excluded all four invocations, ran the exact five-file API Spine/Diary profile through ariadne_serial_pytest.py with conftest for 37/37, and ran the five-file maintenance profile the same way for 130/130.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-329.md",
+        "scripts/ariadne_serial_pytest.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.fixture_dependent_pytest_invoked_without_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude all four wrongly enveloped runs and rerun both the current 37-test API Spine/Diary profile and 130-test maintenance profile through the admitted serial launcher with tests/conftest.py loaded; retain only the passing serial results.",
+        "prevention_control": "The post-closeout effectiveness repair must make each named pytest profile declare conftest_required and have the launcher reject --noconftest when any selected file is fixture-dependent.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-329.md",
+          "scripts/ariadne_serial_pytest.py"
         ]
       },
       "status": "corrected"
