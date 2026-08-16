@@ -1,0 +1,88 @@
+{
+  "active_operation": {},
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": null,
+    "reason_codes": [
+      "git_object_resolution_active_operation_unavailable"
+    ],
+    "resolved_commit": null,
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": null,
+    "status": "revision_required",
+    "supplied_object_id": null
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The exact proof package and one allowed correction are integrated and independently admitted; no further worker call is permitted or useful.",
+        "work_packages": [
+          "completed five-file proof and exact-byte correction"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh read-only Gemini veto is the remaining Tier-2 independence gate for authority, response identity, exact-byte replay, test-boundary and scope claims.",
+        "work_packages": [
+          "one exact-candidate provider-free architecture veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The developer constraint does not authorize native delegation and a second reviewer would exceed the frozen one-veto budget.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "review worktree preflight",
+      "verifier result",
+      "scope breach or revision required",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "create fresh exact-candidate clean review worktree",
+      "execute only the admitted provider-free manifest",
+      "one terminal Gemini decision",
+      "Sol alone interprets and accepts"
+    ]
+  },
+  "planned_action": "admit_exact_delete_confirm_response_architecture_candidate_for_one_gemini_37_high_veto",
+  "reasons": [
+    "active_operation_latch_invalid",
+    "parallelism_assessment_operation_mismatch",
+    "git_object_resolution_active_operation_unavailable"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:9619d27534046dc994fe4e4379711b61d564302debdf1333819681fdf298907e",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 9f0c166be2276d4e236dbdb4ed5657074ffbd0aa contains the frozen architecture, corrected five-file proof and AER-0358 no-conftest control. The 191 canonical static tests and 424 focused tests pass provider-free with Ruff, source compilation, deterministic evidence and whitespace.",
+    "current_authority_allocation": "Sol owns candidate admission and final acceptance. DeepSeek is complete after one bounded correction; Gemini 3.7 Flash/high owns one read-only exact-candidate veto; native subagents remain declined.",
+    "git_refs_and_worktree": "Main HEAD is exact 9f0c166be2276d4e236dbdb4ed5657074ffbd0aa. Protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktree r195 will be created clean at the exact candidate; every unrelated untracked main-worktree path remains preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely; Continuity 304 / Compass 286 and standing uninterrupted authority permit this final provider-free unmounted Tier-2 veto only.",
+    "protected_evidence_boundaries": "Reviewer access is an exact non-protected path allowlist and fixed provider-free command manifest only. No conftest, DB/Docker/SQL, product route/data, provider fallback, credentials, deployment or protected-ref authority is open."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": null,
+  "worker_dispatch_permitted": false
+}

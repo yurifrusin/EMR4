@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 286,
-  "updated_at": "2026-08-16T06:13:48Z",
-  "source_graph_revision": 304,
-  "orientation_statement": "EMR4 is at Continuity 304 / Compass 286. Delete-confirm route convergence remains blocked by six coupled authority, lock, atomicity and response-delivery gaps; one unmounted response/product-adapter architecture is next. Ariadne now resolves structured source commits mechanically before continuation receipts pass.",
+  "map_revision": 287,
+  "updated_at": "2026-08-16T08:12:23Z",
+  "source_graph_revision": 305,
+  "orientation_statement": "EMR4 is at Continuity 305 / Compass 287. Delete-confirm now has an accepted minimal byte-authoritative response and server-owned product-adapter architecture; one provider-free unmounted implementation is next before route work.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3460,44 +3460,79 @@
         "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity_update.py",
         "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture",
+      "lineage_parent": "raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+      "strategic_role": "Settle stable minimal delete-confirm delivery and server-owned adapter authority before implementation",
+      "outcome": "The off-route architecture now binds exact private command truth to byte-identical public replay and locked current-authority composition.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-plan.md",
+        "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md",
+        "docs/security/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.schema.json",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-worker-result.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-correction-worker-result.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-architecture-provider-free-pytest-boundary-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-311.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-pre-verifier-acceptance-corrected-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-veto-predispatch-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-receipt.json",
+        "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity_update.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
-    "strategic_role": "Route readiness is reduced to one bounded unmounted response and product-adapter architecture",
-    "why_now": "The serial physical transaction foundation is settled, but literal mounting still bypasses its authority and response contracts.",
-    "outcome": "Three satisfied, one partial and six blocking dimensions are accepted; Ariadne source commit provenance is now machine-resolved and fail closed.",
+    "node_id": "raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture",
+    "strategic_role": "Delete-confirm response and adapter meaning are frozen before any product implementation",
+    "why_now": "The route review identified six coupled blockers; stable response replay and server-owned authority now have one accepted off-route contract.",
+    "outcome": "The minimal public v1 envelope is a byte-deterministic projection of exact private command truth, with locked current-authority re-admission and raw DELETE isolation.",
     "unlocks": [
-      "Freeze one provider-free unmounted delete-confirm response-compatibility and product-adapter architecture.",
-      "Reconcile server-owned authority and locked proposal truth with byte-exact full public response replay off-route."
+      "Freeze one provider-free unmounted delete-confirm composition and product-adapter implementation tranche.",
+      "Implement pure projection, server-owned ingress, locked re-admission composition and closed outcome mapping without a route or database."
     ],
     "does_not_solve": [
-      "Route editing, mounting, calling or product execution.",
-      "Capability provisioning, real product data or additional database behavior.",
+      "Route or schema editing, mounting, calling or product execution.",
+      "Capability provisioning, product data or additional database behavior.",
       "Provider/credential activity, deployment, release, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md",
-      "docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md",
-      "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json",
-      "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json",
-      "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
-      "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
-      "orchestration_harness/git_object_resolution.py",
-      "tests/test_ariadne_git_object_resolution.py",
-      "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md",
-      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-gemini37-review-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json",
-      "docs/ariadne-agent-error-correction-register-revision-310.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-pre-verifier-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-review-worktree-preflight.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-veto-predispatch-receipt.json",
-      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-corrected-gemini37-review-receipt.json",
-      "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md",
-      "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity_update.py",
-      "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py"
+      "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-plan.md",
+      "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md",
+      "docs/security/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.schema.json",
+      "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+      "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+      "scripts/ariadne_provider_free_pytest.py",
+      "tests/test_ariadne_provider_free_pytest.py",
+      "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-worker-result.json",
+      "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-correction-worker-result.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-response-architecture-provider-free-pytest-boundary-incident.json",
+      "docs/ariadne-agent-error-correction-register-revision-311.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-pre-verifier-acceptance-corrected-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-veto-predispatch-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md",
+      "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity_update.py",
+      "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity.py"
     ]
   },
   "decision_horizon": [
@@ -3671,8 +3706,8 @@
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
         "Preserve the accepted serial PostgreSQL delete-confirm foundation and raw DELETE isolation.",
-        "Design one provider-free unmounted response-compatibility and product-adapter architecture for the six route blockers.",
-        "Keep route execution, product data, providers and protected integration separately gated."
+        "Implement the accepted response/product-adapter architecture in one provider-free unmounted composition tranche.",
+        "Keep route/schema execution, product data, capabilities, providers and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -4543,7 +4578,31 @@
         "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md",
         "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity_update.py",
-        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py"
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py",
+        "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-plan.md",
+        "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md",
+        "docs/security/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.schema.json",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-worker-result.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-correction-worker-result.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-architecture-provider-free-pytest-boundary-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-311.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-pre-verifier-acceptance-corrected-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-veto-predispatch-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-receipt.json",
+        "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity_update.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity.py"
       ]
     },
     {
@@ -5388,6 +5447,7 @@
     }
   ],
   "map_limits": [
+    "The accepted delete-confirm response architecture opens no route, schema, database, capability or product runtime; its next implementation remains provider-free and unmounted.",
     "The accepted delete-confirm route review opens no route or product runtime; literal mounting remains distinct from authority-kernel and byte-authoritative response convergence.",
     "The accepted delete-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL authority and transaction seam only, not route, concurrency or product-command safety.",
     "The accepted delete-confirm parse/catalogue rehearsal proves empty-instance PostgreSQL 16 installation and representation only, not trigger, authority, receipt/audit, replay, rollback, concurrency, restart, route or product behavior.",

@@ -1,0 +1,177 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r195",
+  "branch": "codex/review-delete-confirm-response-architecture-9f0c166b",
+  "head_before": "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa",
+  "head_after": "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "40cb2050fe7f25f0a5690bb46e44b7fea1b633ad8e59cc87fa9d3296fffc840e",
+  "result": "# Independent Review Receipt: Delete-Confirm Response/Product-Adapter Architecture\n\n- **Reviewer Role:** Gemini 3.7 Flash/high independent Tier-2 veto\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\r195`\n- **Branch:** `codex/review-delete-confirm-response-architecture-9f0c166b`\n- **HEAD:** `9f0c166be2276d4e236dbdb4ed5657074ffbd0aa`\n- **Tree:** `5216361f49dbfd317751872e905ccd7b49b4786b`\n- **Semantic Base:** `5aaed2a859c64062d40dd2fe1b419d48dcc5d821`\n- **Evidence Label:** `provider_free_unmounted_authored_synthetic_architecture`\n\n---\n\n## Evaluation Against Review Criteria\n\n### 1. Persisted Response Authority and Minimization\nThe persisted response authority remains strictly and solely the accepted six-field private canonical bytes (`appointment_id`, `status` = `\"Cancelled\"`, `status_reason_code`, `cancellation_reason`, `waiting_area_id` = `null`, `warning_codes` = sorted unique list). The architecture explicitly prohibits storing or reconstructing `AppointmentOut`, mutable patient/practitioner data, schedule, notes, reason, audit identity, or live database projections.\n\n### 2. Deterministic Public Projection & Replay Parity\nFirst delivery and subsequent replays project the minimal public v1 envelope (`raisa.delete_confirm_public_envelope.v1` containing `appointment.delete_confirmation_receipt.v1`) exclusively from integrity-validated private bytes and fixed registries (`waiting_area_cleared`). Replay performs no current database reads, ensuring byte-identical public bodies across executions.\n\n### 3. Server-Owned Authority Ingress & Locked Re-Admission\nAll client-supplied authority is rejected (`client_authority_fields: []`). Command practice, actor, role, authority generation, and session reference are server-derived. The capability constant `appointment.cancel.confirm` is owned and evaluated twice exclusively within `delete_confirm_locked_transaction`. Pre-command admission (9 checks) and locked re-admission (7 checks) fail closed before any physical transaction seam effect.\n\n### 4. Single-Valued Outcome Mapping & Raw DELETE Isolation\nOutcome mapping defines 7 single-valued, non-disclosing mappings where cross-practice target access returns an indistinguishable 404. Canonical (`/appointments/proposals/delete/confirm`) and compatibility (`/appointments/proposals/delete-confirm`) paths share a single future handler and envelope without divergence. Raw `DELETE /appointments/{appointment_id}` remains strictly isolated with no adapter import, capability inheritance, or replay behavior.\n\n### 5. Contract, Schemas, Mutations, and Exact-Byte Validation\nBoth JSON schemas close all objects with `additionalProperties: false`. 14 source bindings and 4 semantic-output digests match their frozen canonical-LF hashes. 136 contract hostile mutations and 20 evidence hostile mutations all fail closed. Exact-byte tests enforce compact physical insertion order and reject reordered keys, whitespace, CRLF, duplicate keys, and alternate Unicode escaping without product/runtime side effects.\n\n### 6. Provider-Free PyTest Control (AER-0358 Remediation)\n`scripts/ariadne_provider_free_pytest.py` restricts test paths to literal `tests/*.py`, forces `--noconftest`, disables plugin autoload and cache, clears inherited flags, strips database/credential environment variables, and executes with `shell=False`. This completely closes the AER-0358 implicit database loading path without broadening test or environment authority.\n\n### 7. Boundary Integrity\nNo product source, route, schema, migration, database runtime, capability provisioning, patient/clinical data, external provider/credential/network, deployment, Pages build, or protected ref was modified or opened.\n\n---\n\n## Conclusion\nThe candidate satisfies all seven review criteria without defect.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Review Receipt: Delete-Confirm Response/Product-Adapter Architecture\n\n- **Reviewer Role:** Gemini 3.7 Flash/high independent Tier-2 veto\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\r195`\n- **Branch:** `codex/review-delete-confirm-response-architecture-9f0c166b`\n- **HEAD:** `9f0c166be2276d4e236dbdb4ed5657074ffbd0aa`\n- **Tree:** `5216361f49dbfd317751872e905ccd7b49b4786b`\n- **Semantic Base:** `5aaed2a859c64062d40dd2fe1b419d48dcc5d821`\n- **Evidence Label:** `provider_free_unmounted_authored_synthetic_architecture`\n\n---\n\n## Evaluation Against Review Criteria\n\n### 1. Persisted Response Authority and Minimization\nThe persisted response authority remains strictly and solely the accepted six-field private canonical bytes (`appointment_id`, `status` = `\"Cancelled\"`, `status_reason_code`, `cancellation_reason`, `waiting_area_id` = `null`, `warning_codes` = sorted unique list). The architecture explicitly prohibits storing or reconstructing `AppointmentOut`, mutable patient/practitioner data, schedule, notes, reason, audit identity, or live database projections.\n\n### 2. Deterministic Public Projection & Replay Parity\nFirst delivery and subsequent replays project the minimal public v1 envelope (`raisa.delete_confirm_public_envelope.v1` containing `appointment.delete_confirmation_receipt.v1`) exclusively from integrity-validated private bytes and fixed registries (`waiting_area_cleared`). Replay performs no current database reads, ensuring byte-identical public bodies across executions.\n\n### 3. Server-Owned Authority Ingress & Locked Re-Admission\nAll client-supplied authority is rejected (`client_authority_fields: []`). Command practice, actor, role, authority generation, and session reference are server-derived. The capability constant `appointment.cancel.confirm` is owned and evaluated twice exclusively within `delete_confirm_locked_transaction`. Pre-command admission (9 checks) and locked re-admission (7 checks) fail closed before any physical transaction seam effect.\n\n### 4. Single-Valued Outcome Mapping & Raw DELETE Isolation\nOutcome mapping defines 7 single-valued, non-disclosing mappings where cross-practice target access returns an indistinguishable 404. Canonical (`/appointments/proposals/delete/confirm`) and compatibility (`/appointments/proposals/delete-confirm`) paths share a single future handler and envelope without divergence. Raw `DELETE /appointments/{appointment_id}` remains strictly isolated with no adapter import, capability inheritance, or replay behavior.\n\n### 5. Contract, Schemas, Mutations, and Exact-Byte Validation\nBoth JSON schemas close all objects with `additionalProperties: false`. 14 source bindings and 4 semantic-output digests match their frozen canonical-LF hashes. 136 contract hostile mutations and 20 evidence hostile mutations all fail closed. Exact-byte tests enforce compact physical insertion order and reject reordered keys, whitespace, CRLF, duplicate keys, and alternate Unicode escaping without product/runtime side effects.\n\n### 6. Provider-Free PyTest Control (AER-0358 Remediation)\n`scripts/ariadne_provider_free_pytest.py` restricts test paths to literal `tests/*.py`, forces `--noconftest`, disables plugin autoload and cache, clears inherited flags, strips database/credential environment variables, and executes with `shell=False`. This completely closes the AER-0358 implicit database loading path without broadening test or environment authority.\n\n### 7. Boundary Integrity\nNo product source, route, schema, migration, database runtime, capability provisioning, patient/clinical data, external provider/credential/network, deployment, Pages build, or protected ref was modified or opened.\n\n---\n\n## Conclusion\nThe candidate satisfies all seven review criteria without defect.",
+    "command_results": [
+      {
+        "id": "ARCHITECTURE_PROFILE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r195",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "ARIADNE_PROFILE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r195",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_agents_acceptance_index.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "SOURCE_STATE",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.python_source_state"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "DETERMINISTIC_VALIDATOR",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+          "scripts/ariadne_provider_free_pytest.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+          "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "3526152a42174da2f628306ca595044f9cb8e4d05178a4eb8e31731a0a7342bb",
+  "command_results": [
+    {
+      "id": "ARCHITECTURE_PROFILE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r195",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "ARIADNE_PROFILE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r195",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_agents_acceptance_index.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "SOURCE_STATE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.python_source_state"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "DETERMINISTIC_VALIDATOR",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+        "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

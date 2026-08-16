@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "ARCHITECTURE_PROFILE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r195",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_artifacts.py"
+      ]
+    },
+    {
+      "id": "ARIADNE_PROFILE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r195",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_agents_acceptance_index.py"
+      ]
+    },
+    {
+      "id": "SOURCE_STATE",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.python_source_state"
+      ]
+    },
+    {
+      "id": "DETERMINISTIC_VALIDATOR",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+        "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
+      ]
+    }
+  ]
+}

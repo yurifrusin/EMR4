@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 304,
+  "graph_revision": 305,
   "harvests": [],
   "nodes": [
     {
@@ -20814,9 +20814,99 @@
         "The private six-field receipt and full public confirmation envelope need one byte-authoritative off-route replay architecture.",
         "No route edit/call, product data, database execution, capability provisioning, provider, deployment, release, Pages or protected-ref authority is open."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture",
+      "title": "Provider-free unmounted delete-confirm response compatibility and product-adapter architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-16T08:12:23Z",
+      "updated_at": "2026-08-16T08:12:23Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Provider-free unmounted architecture and authored-synthetic contract proof only; no product runtime authority.",
+          "The six-field private canonical bytes remain sole persisted command truth; the public v1 envelope is a pure deterministic projection.",
+          "Raw DELETE remains isolated and no route, schema, database or capability is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-response-and-product-adapter-architecture",
+          "source": "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-closeout.md",
+          "status": "accepted",
+          "summary": "Accept server-owned ingress, locked proposal re-admission, physical-seam composition and byte-identical minimal public response replay; continue only to a provider-free unmounted implementation."
+        }
+      ],
+      "claim_scope": [
+        "Fourteen canonical-LF input bindings and four semantic-output digests match.",
+        "The exact six-field private receipt rejects reordered, whitespace-altered, CRLF, duplicate-key and alternate-escape JSON.",
+        "All 136 contract and 20 evidence hostile mutations fail closed.",
+        "Provider-free 191-test canonical-static and 424-test focused profiles pass; exact Python 3.11 runtime validation is unclaimed on this host.",
+        "One clean six-command Gemini 3.7 Flash/high veto passes at the unchanged exact candidate.",
+        "AER-0358 is corrected by the provider-free no-conftest pytest entry point."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-plan.md",
+          "docs/security/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.schema.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-response-architecture-provider-free-pytest-boundary-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-311.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-worker-result.json",
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-correction-worker-result.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-pre-verifier-acceptance-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-response-compatibility-product-adapter-architecture-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+          "scripts/ariadne_provider_free_pytest.py",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The response projection, server-owned ingress and locked re-admission composition are architecture only and remain unimplemented in product source.",
+        "No route/schema edit, route call, database execution, capability provisioning or product data is admitted.",
+        "Provider, deployment, release, Pages and protected-ref authority remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T06:13:48Z"
+  "updated_at": "2026-08-16T08:12:23Z"
 }
