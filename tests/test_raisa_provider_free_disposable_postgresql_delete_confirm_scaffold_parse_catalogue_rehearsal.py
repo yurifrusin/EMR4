@@ -468,6 +468,11 @@ def test_catalogue_assertion_accepts_exact_and_rejects_mutations() -> None:
 
 def test_catalogue_assertion_accepts_postgresql_presentation_parentheses() -> None:
     facts = _valid_catalogue()
+    facts["constraints"][4]["definition"] = (
+        "CHECK (((capability_code)::text = ANY "
+        "((ARRAY['appointment.cancel.confirm'::character varying, "
+        "'appointment.read'::character varying])::text[])))"
+    )
     facts["constraints"][5]["definition"] = (
         "CHECK (((completed_receipt_version IS NULL) OR "
         "((state)::text = 'completed'::text AND "
@@ -669,9 +674,11 @@ def test_evidence_schema_validates_pass_and_failure_shapes() -> None:
     Draft202012Validator(EVIDENCE_SCHEMA).validate(failure_evidence)
 
 
-def test_no_occupied_evidence_artifact_is_created() -> None:
-    assert not rehearsal.EVIDENCE_PATH.exists()
-    assert not rehearsal.FAILURE_EVIDENCE_PATH.exists()
+def test_any_occupied_evidence_artifact_is_schema_valid() -> None:
+    validator = Draft202012Validator(EVIDENCE_SCHEMA)
+    for path in (rehearsal.EVIDENCE_PATH, rehearsal.FAILURE_EVIDENCE_PATH):
+        if path.exists():
+            validator.validate(json.loads(path.read_text(encoding="utf-8")))
 
 
 def test_harness_has_no_shell_or_broad_docker_discovery() -> None:

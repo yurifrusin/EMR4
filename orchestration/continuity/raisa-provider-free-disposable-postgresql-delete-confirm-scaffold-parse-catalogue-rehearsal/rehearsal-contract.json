@@ -194,7 +194,6 @@
       ],
       "ck_user_capability_grants_capability_code": [
         "capability_code",
-        "IN",
         "appointment.cancel.confirm",
         "appointment.read"
       ],
