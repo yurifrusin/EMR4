@@ -1,0 +1,45 @@
+{
+  "schema_version": "ariadne.risk_weighted_semantic_freeze.v1",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "classified_tier": "tier_2_authority_runtime",
+  "source_head": "681dd3c78b36c7128c366ccf43d34fbe7e9e8d11",
+  "source_tree": "90625566adc68fa1fc643d472b7a30760254465f",
+  "timestamp": "2026-08-16T12:50:32.9815193+10:00",
+  "timezone": "Australia/Brisbane",
+  "semantic_bindings_sha256": "sha256:7b35b92bd1b3e9faeb9f67e93db24c854f1b93463532f81956941907efab22c4",
+  "toolchain_sha256": "sha256:b2b9b207aaf40a6071fe39b93a9508fd139ff3c3bce4862ef8228ae4d3174b98",
+  "semantic_bindings": [
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md", "kind": "contract", "sha256": "4fde7121a548f7f574e56506e0e3a4f3303b8cc0b18a7fd80948b84b9c99498c"},
+    {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md", "kind": "contract", "sha256": "30830f56eee984b4e0f1c04791dc2a624d3015daaaafeba941f1485cde36620f"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json", "kind": "contract", "sha256": "99c88349cecbaeeec12b601e33615fb55e8bb7d71fcb764c3ca1a5f8939f0b0a"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json", "kind": "schema", "sha256": "c325c523380cb9882a026a43e3e4c68ce009eefc72aec6768db1b377234548b4"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json", "kind": "schema", "sha256": "a61869e74d32b71386d013cdbad26beaa3002ac6e5497d332d4f208402fd6fad"},
+    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "source", "sha256": "a1c3177d973b8f21af9fbc2c22b52b8922e415f419c9f5051056055f60b7ece0"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "semantic_test", "sha256": "afde32170e1c60e0e60b12029a364f2729262dff61776621eaedce3261064698"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py", "kind": "semantic_test", "sha256": "4864fddc734d793d42d8ce4dbae2d11ff44021d787cfbaee310eb16953dbbe96"}
+  ],
+  "toolchain": {
+    "python": "3.14.6",
+    "node": "v24.18.0",
+    "verify_repository_sha256": "f491dd7ac2222de4a9493ba43a6144726f85a586d8398947a83a7c0f9c8d4c83",
+    "postgres_image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
+  },
+  "focused_gate_results": {
+    "owned_tests": "passed_27_with_one_intentional_runtime_skip",
+    "current_lineage_api_spine_union": "passed_with_one_known_immutable_hash_assertion_excluded",
+    "ruff": "passed",
+    "python_compilation": "passed_213_maintained_sources",
+    "json_and_json_schema": "passed",
+    "git_whitespace": "passed",
+    "canonical_fast_profile_196": "passed"
+  },
+  "known_failure_ids": [
+    "KNOWN-DELETE-SCAFFOLD-IMMUTABLE-CURRENT-BATON-HASH-DRIFT-001"
+  ],
+  "known_failure_evidence": {
+    "KNOWN-DELETE-SCAFFOLD-IMMUTABLE-CURRENT-BATON-HASH-DRIFT-001": "The accepted predecessor scaffold contract pins an earlier tests/test_current_baton_consistency.py digest. The legitimate advancing baton changes that maintained test; the exact historical binding assertion alone is excluded and the immutable accepted contract is not rewritten."
+  },
+  "discarded_overbroad_lineage_sweep": "Historical continuity tests that intentionally pin their own former baton positions and source hashes were not treated as current gates; the maintained canonical profile and current lineage union pass.",
+  "post_freeze_semantic_changes_authorized": false,
+  "canonical_profile_rerun_required_without_semantic_change": false
+}
