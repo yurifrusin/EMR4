@@ -12,18 +12,18 @@
   "stage": "authority_group_execution",
   "category": "authored_synthetic_fixture_identity_collision",
   "expected_invariant": "Every serial authority and transaction scenario owns a disjoint authored-synthetic UUID partition.",
-  "observed_error": "AUTH-S02 derived its four auxiliary user UUIDs by adding 1 through 4 to its actor UUID. Those values exactly collided with the primary actor UUIDs reserved for AUTH-S03 through AUTH-S06, so the next authority partition insert raised PostgreSQL unique-integrity failure before the nine-group checkpoint.",
-  "detection_method": "Attempt 001 failed closed with hashed IntegrityError evidence after schema/catalogue admission; deterministic UUID comparison proved AUTH-S02 actor+1..4 equals AUTH-S03..AUTH-S06 actor identities. Exact owned relay, container and internal network cleanup passed.",
+  "observed_error": "AUTH-S01 derived its auxiliary user as actor+1, exactly overlapping AUTH-S02's primary actor; AUTH-S02 likewise used actor+1..4, overlapping AUTH-S03 through AUTH-S06. Attempt 001 stopped at the earliest overlap. The initial correction covered only the later AUTH-S02 overlaps, so attempt 002 reproduced the same earliest PostgreSQL unique-integrity failure.",
+  "detection_method": "Attempts 001 and 002 both failed closed with hashed IntegrityError evidence after schema/catalogue admission and exact cleanup. A complete deterministic inventory then proved both derived-user families overlapped the primary actor partition and showed why the first partial correction could not affect the earliest collision.",
   "evidence_paths": [
     "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
     "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py"
   ],
-  "candidate_state": "attempt_001_failed_closed_cleanup_verified_no_pass_claim",
+  "candidate_state": "attempts_001_and_002_failed_closed_cleanup_verified_no_pass_claim",
   "workflow_disposition": "bounded_harness_repair_authorized",
   "recurrence_signature": "authored_synthetic.secondary_uuid_overlaps_later_primary_fixture_partition",
   "correction": {
     "status": "correction_in_progress",
-    "action": "Move AUTH-S02 auxiliary users into a fixed high disjoint salt domain and add a deterministic cross-scenario UUID-partition regression test before the single permitted occupied rerun.",
+    "action": "Move AUTH-S01 and AUTH-S02 auxiliary users into fixed high disjoint salt domains, prove their union disjoint from every scenario actor, and attribute any unexpected SQL error to its exact authority group before a final bounded runtime attempt.",
     "prevention_control": "Behavior rehearsals with derived fixture identities must prove disjointness against every primary and subcase fixture index before runtime admission."
   },
   "status": "contained_cleanup_verified"

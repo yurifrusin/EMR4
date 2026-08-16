@@ -68,18 +68,30 @@ def test_overflow_fixture_is_transaction_local_and_proves_trigger_restore() -> N
     assert "t.tgenabled = 'O'" in source
 
 
-def test_auth_s02_auxiliary_user_partition_is_disjoint_from_scenario_actors() -> None:
+def test_all_auth_auxiliary_users_are_disjoint_from_scenario_actors() -> None:
+    auth_s01_actor = rehearsal._fixture(1).actor_id  # noqa: SLF001
     auth_s02_actor = rehearsal._fixture(2).actor_id  # noqa: SLF001
     auxiliary = {
         rehearsal._sub_uuid(auth_s02_actor, salt)  # noqa: SLF001
         for salt in rehearsal.AUTH_S02_AUXILIARY_USER_SALTS
     }
+    auxiliary.add(
+        rehearsal._sub_uuid(  # noqa: SLF001
+            auth_s01_actor, rehearsal.AUTH_S01_AUXILIARY_USER_SALT
+        )
+    )
     scenario_actors = {
         rehearsal._fixture(index).actor_id  # noqa: SLF001
         for index in range(1, 401)
     }
-    assert len(auxiliary) == 4
+    assert len(auxiliary) == 5
     assert auxiliary.isdisjoint(scenario_actors)
+
+
+def test_auth_group_runtime_attributes_unexpected_sql_errors() -> None:
+    source = Path(rehearsal.__file__).read_text(encoding="utf-8")
+    assert "_run_auth_case_attributed(engine, group, index)" in source
+    assert "unexpected_sql_error" in source
 
 
 def test_contract_rejects_added_reordered_or_widened_surfaces() -> None:

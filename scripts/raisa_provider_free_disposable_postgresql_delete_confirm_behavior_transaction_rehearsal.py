@@ -100,6 +100,7 @@ FIRST_AUTH_REVOKED_TOKENS = (
 
 AUTH_GROUP_IDS = tuple(f"AUTH-S{index:02d}" for index in range(1, 10))
 TX_GROUP_IDS = tuple(f"TX-S{index:02d}" for index in range(1, 12))
+AUTH_S01_AUXILIARY_USER_SALT = 0x2000
 AUTH_S02_AUXILIARY_USER_SALTS = (0x1000, 0x1001, 0x1002, 0x1003)
 
 
@@ -923,10 +924,28 @@ def _run_auth_case(
     raise RehearsalFailure("auth", "unknown_auth_group", group["id"])
 
 
+def _run_auth_case_attributed(
+    engine: Engine, group: dict[str, Any], index: int
+) -> AuthResult:
+    """Preserve the exact authority group when an unexpected SQL error occurs."""
+    try:
+        return _run_auth_case(engine, group, index)
+    except RehearsalFailure:
+        raise
+    except Exception as exc:  # noqa: BLE001 - bounded SQLSTATE attribution only
+        try:
+            sqlstate = _pgcode(exc)
+        except RehearsalFailure:
+            sqlstate = "unavailable"
+        raise RehearsalFailure(
+            "auth", f"{group['id']}_unexpected_sql_error", sqlstate
+        ) from None
+
+
 def _auth_s01(engine: Engine, group: dict[str, Any], index: int) -> AuthResult:
     fixture = _fixture(index)
     _seed_auth_partition(engine, fixture)
-    user2 = _sub_uuid(fixture.actor_id, 1)
+    user2 = _sub_uuid(fixture.actor_id, AUTH_S01_AUXILIARY_USER_SALT)
     with engine.begin() as connection:
         connection.execute(
             text(
@@ -1971,7 +1990,7 @@ def run_rehearsal() -> dict[str, Any]:
         catalogue_facts = _catalogue_check(engine)
         lifecycle.append("host_sqlalchemy_catalogue_verified")
         auth_results = [
-            _run_auth_case(engine, group, index)
+            _run_auth_case_attributed(engine, group, index)
             for index, group in enumerate(contract["authority_groups"], start=1)
         ]
         lifecycle.append("nine_authority_groups_verified")
