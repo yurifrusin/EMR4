@@ -15,6 +15,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import math
 import os
 import re
 import secrets
@@ -43,7 +44,7 @@ PASS_RESULT = (
     "parse_catalogue_rehearsal_pass"
 )
 EXPECTED_CONTRACT_DIGEST = (
-    "31c6f814ba5fbdd1a9c1e5ddc15c5446ffa2197f101aa6e0deee5072406be288"
+    "86159800454d514fc4aec6310acb9c86892528ca26b9581c7dd0f9b56202bd09"
 )
 HOSTILE_MUTATION_TARGET = 80
 CLAIM_BOUNDARY = (
@@ -271,6 +272,27 @@ class RehearsalFailure(RuntimeError):
 
 Runner = Callable[[list[str], bytes | None, int, int], ProcessResult]
 
+DOCKER_ENV_KEYS = (
+    "DOCKER_CERT_PATH",
+    "DOCKER_CONTEXT",
+    "DOCKER_HOST",
+    "DOCKER_TLS_VERIFY",
+)
+
+EXPECTED_CONSTRAINT_TABLES = {
+    "ck_users_authority_generation_positive": "users",
+    "uq_users_practice_id_id": "users",
+    "pk_user_capability_grants": "user_capability_grants",
+    "fk_user_capability_grants_user": "user_capability_grants",
+    "ck_user_capability_grants_capability_code": "user_capability_grants",
+    "ck_appt_cmd_idem_status_receipt_v1_complete": (
+        "appointment_command_idempotency"
+    ),
+    "ck_appt_audit_log_delete_v1_complete": "appointment_audit_log",
+}
+
+CLEANUP_COMMAND_COUNT = 3
+
 
 def _sha256(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
@@ -286,21 +308,38 @@ def _canonical_digest(value: Any) -> str:
 def _run(
     argv: list[str], stdin: bytes | None, timeout: int, cap: int
 ) -> ProcessResult:
-    completed = subprocess.run(
-        argv,
-        input=stdin,
-        cwd=ROOT,
-        env=os.environ.copy(),
-        shell=False,
-        capture_output=True,
-        timeout=timeout,
-        check=False,
-    )
+    env = os.environ.copy()
+    for key in DOCKER_ENV_KEYS:
+        env.pop(key, None)
+    try:
+        completed = subprocess.run(
+            argv,
+            input=stdin,
+            cwd=ROOT,
+            env=env,
+            shell=False,
+            capture_output=True,
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as error:
+        stdout = error.stdout if isinstance(error.stdout, bytes) else b""
+        stderr = error.stderr if isinstance(error.stderr, bytes) else b""
+        return ProcessResult(124, stdout[:cap], (stderr + b"process_timeout")[:cap])
+    except OSError as error:
+        return ProcessResult(127, b"", str(error).encode("utf-8")[:cap])
     return ProcessResult(
         completed.returncode,
         completed.stdout[:cap],
         completed.stderr[:cap],
     )
+
+
+def _remaining_timeout(deadline: float, requested_seconds: int) -> int:
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise RehearsalFailure("runtime", "total_timeout_exceeded")
+    return max(1, min(requested_seconds, math.ceil(remaining)))
 
 
 def _load_contract() -> dict[str, Any]:
@@ -370,25 +409,38 @@ def verify_contract() -> tuple[dict[str, Any], dict[str, str]]:
     return contract, observed
 
 
-def _generate_offline_sql(contract: dict[str, Any]) -> bytes:
+def _generate_offline_sql(
+    contract: dict[str, Any], *, deadline: float | None = None
+) -> bytes:
     env = os.environ.copy()
     env["DATABASE_URL"] = contract["alembic"]["synthetic_url"]
-    completed = subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "alembic",
-            "upgrade",
-            contract["alembic"]["offline_range"],
-            "--sql",
-        ],
-        cwd=ROOT,
-        env=env,
-        shell=False,
-        capture_output=True,
-        timeout=30,
-        check=False,
-    )
+    timeout = 30 if deadline is None else _remaining_timeout(deadline, 30)
+    try:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "alembic",
+                "upgrade",
+                contract["alembic"]["offline_range"],
+                "--sql",
+            ],
+            cwd=ROOT,
+            env=env,
+            shell=False,
+            capture_output=True,
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as error:
+        detail = error.stderr if isinstance(error.stderr, bytes) else b""
+        raise RehearsalFailure(
+            "offline_sql", "alembic_generation_timeout", detail
+        ) from None
+    except OSError as error:
+        raise RehearsalFailure(
+            "offline_sql", "alembic_generation_unavailable", str(error)
+        ) from None
     if completed.returncode != 0:
         raise RehearsalFailure("offline_sql", "alembic_generation_failed")
     sql = completed.stdout.replace(b"\r\n", b"\n")
@@ -440,6 +492,8 @@ def build_container_argv(
     profile = contract["docker_profile"]
     return [
         docker,
+        "--context",
+        profile["context"],
         "run",
         "--detach",
         "--pull",
@@ -475,10 +529,22 @@ def build_container_argv(
 
 
 def _inspect(
-    runner: Runner, docker: str, target: str, timeout: int
+    runner: Runner,
+    docker: str,
+    context: str,
+    target: str,
+    timeout: int,
+    *,
+    deadline: float | None = None,
 ) -> tuple[ProcessResult, dict[str, Any] | None]:
+    bounded_timeout = (
+        timeout if deadline is None else _remaining_timeout(deadline, timeout)
+    )
     result = runner(
-        [docker, "container", "inspect", target], None, timeout, 256_000
+        [docker, "--context", context, "container", "inspect", target],
+        None,
+        bounded_timeout,
+        256_000,
     )
     if result.returncode != 0:
         return result, None
@@ -555,6 +621,8 @@ def _psql_argv(
 ) -> list[str]:
     argv = [
         docker,
+        "--context",
+        profile["context"],
         "exec",
         "-i",
         "--env",
@@ -591,6 +659,7 @@ def _psql(
     expect_success: bool = True,
     single_transaction: bool = False,
     tuples_only: bool = False,
+    deadline: float | None = None,
 ) -> ProcessResult:
     payload = sql.encode("utf-8") if isinstance(sql, str) else sql
     result = runner(
@@ -602,7 +671,11 @@ def _psql(
             tuples_only=tuples_only,
         ),
         payload,
-        profile["command_timeout_seconds"],
+        (
+            profile["command_timeout_seconds"]
+            if deadline is None
+            else _remaining_timeout(deadline, profile["command_timeout_seconds"])
+        ),
         256_000,
     )
     if expect_success and result.returncode != 0:
@@ -613,7 +686,11 @@ def _psql(
 
 
 def _stdout_value(result: ProcessResult) -> str:
-    lines = [line.strip() for line in result.stdout.decode("utf-8").splitlines()]
+    try:
+        text_value = result.stdout.decode("utf-8")
+    except UnicodeDecodeError:
+        raise RehearsalFailure("psql", "result_not_utf8") from None
+    lines = [line.strip() for line in text_value.splitlines()]
     values = [line for line in lines if line]
     if len(values) != 1:
         raise RehearsalFailure("psql", "unexpected_result_shape")
@@ -662,6 +739,10 @@ def _assert_catalogue(facts: dict[str, Any], contract: dict[str, Any]) -> None:
     if set(constraints) != set(expected["constraints"]):
         raise RehearsalFailure("catalogue", "constraint_set_mismatch")
     for name, tokens in expected["constraints"].items():
+        if constraints[name].get("table_name") != EXPECTED_CONSTRAINT_TABLES[name]:
+            raise RehearsalFailure(
+                "catalogue", "constraint_table_mismatch", name
+            )
         # pg_get_constraintdef() inserts presentation-only parentheses and
         # explicit casts around comparisons and column references.  The bound
         # migration source fixes the executable DDL, so this catalogue check
@@ -764,10 +845,20 @@ def _cleanup(
     nonce: str,
     image_id: str,
     profile: dict[str, Any],
+    *,
+    deadline: float | None = None,
 ) -> dict[str, Any]:
-    inspected_result, inspected = _inspect(
-        runner, docker, container_id, profile["command_timeout_seconds"]
-    )
+    try:
+        inspected_result, inspected = _inspect(
+            runner,
+            docker,
+            profile["context"],
+            container_id,
+            profile["command_timeout_seconds"],
+            deadline=deadline,
+        )
+    except RehearsalFailure:
+        return {"status": "cleanup_deadline_exceeded", "container_id": container_id}
     if inspected_result.returncode != 0 or inspected is None:
         return {"status": "cleanup_ownership_unverified", "container_id": container_id}
     if not _container_owned(
@@ -779,17 +870,41 @@ def _cleanup(
         profile=profile,
     ):
         return {"status": "cleanup_ownership_unverified", "container_id": container_id}
-    removed = runner(
-        [docker, "container", "rm", "--force", container_id],
-        None,
-        profile["command_timeout_seconds"],
-        16_384,
-    )
+    try:
+        remove_timeout = (
+            profile["command_timeout_seconds"]
+            if deadline is None
+            else _remaining_timeout(deadline, profile["command_timeout_seconds"])
+        )
+        removed = runner(
+            [
+                docker,
+                "--context",
+                profile["context"],
+                "container",
+                "rm",
+                "--force",
+                container_id,
+            ],
+            None,
+            remove_timeout,
+            16_384,
+        )
+    except RehearsalFailure:
+        return {"status": "cleanup_deadline_exceeded", "container_id": container_id}
     if removed.returncode != 0:
         return {"status": "cleanup_remove_failed", "container_id": container_id}
-    absent, _ = _inspect(
-        runner, docker, container_id, profile["command_timeout_seconds"]
-    )
+    try:
+        absent, _ = _inspect(
+            runner,
+            docker,
+            profile["context"],
+            container_id,
+            profile["command_timeout_seconds"],
+            deadline=deadline,
+        )
+    except RehearsalFailure:
+        return {"status": "cleanup_deadline_exceeded", "container_id": container_id}
     if not _is_exact_absence(absent):
         return {"status": "cleanup_absence_unproved", "container_id": container_id}
     return {"status": "cleanup_verified", "container_id_sha256": _sha256(container_id.encode())}
@@ -838,16 +953,32 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
     try:
         contract, source_hashes = verify_contract()
         lifecycle.append("contract_and_sources_verified")
-        offline_sql = _generate_offline_sql(contract)
-        lifecycle.append("offline_sql_generated")
         profile = contract["docker_profile"]
+        total_deadline = time.monotonic() + profile["total_timeout_seconds"]
+        cleanup_reserve = (
+            CLEANUP_COMMAND_COUNT * profile["command_timeout_seconds"]
+        )
+        active_deadline = total_deadline - cleanup_reserve
+        if active_deadline <= time.monotonic():
+            raise RehearsalFailure("runtime", "total_timeout_budget_invalid")
+        offline_sql = _generate_offline_sql(contract, deadline=active_deadline)
+        lifecycle.append("offline_sql_generated")
         docker = shutil.which(profile["executable"]) or ""
         if not docker:
             raise RehearsalFailure("environment", "docker_client_missing")
         image = runner(
-            [docker, "image", "inspect", profile["image_reference"]],
+            [
+                docker,
+                "--context",
+                profile["context"],
+                "image",
+                "inspect",
+                profile["image_reference"],
+            ],
             None,
-            profile["command_timeout_seconds"],
+            _remaining_timeout(
+                active_deadline, profile["command_timeout_seconds"]
+            ),
             256_000,
         )
         if image.returncode != 0:
@@ -866,18 +997,28 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
         created = runner(
             build_container_argv(docker, name, nonce, contract),
             None,
-            profile["command_timeout_seconds"],
+            _remaining_timeout(
+                active_deadline, profile["command_timeout_seconds"]
+            ),
             16_384,
         )
         if created.returncode != 0:
             raise RehearsalFailure("container", "create_failed", created.stderr)
-        container_id = created.stdout.decode("ascii", errors="strict").strip()
+        try:
+            container_id = created.stdout.decode("ascii", errors="strict").strip()
+        except UnicodeDecodeError:
+            raise RehearsalFailure("container", "captured_id_invalid") from None
         if not re.fullmatch(r"[0-9a-f]{64}", container_id):
             raise RehearsalFailure("container", "captured_id_invalid")
         lifecycle.append("container_created")
 
         inspected_result, inspected = _inspect(
-            runner, docker, container_id, profile["command_timeout_seconds"]
+            runner,
+            docker,
+            profile["context"],
+            container_id,
+            profile["command_timeout_seconds"],
+            deadline=active_deadline,
         )
         if inspected_result.returncode != 0 or inspected is None or not _container_owned(
             inspected,
@@ -890,12 +1031,20 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
             raise RehearsalFailure("container", "ownership_or_profile_mismatch")
         lifecycle.append("container_profile_verified")
 
-        deadline = time.monotonic() + profile["startup_timeout_seconds"]
+        readiness_deadline = min(
+            time.monotonic() + profile["startup_timeout_seconds"],
+            active_deadline,
+        )
         observations = 0
-        while time.monotonic() < deadline and observations < profile["readiness_observations"]:
+        while (
+            time.monotonic() < readiness_deadline
+            and observations < profile["readiness_observations"]
+        ):
             ready = runner(
                 [
                     docker,
+                    "--context",
+                    profile["context"],
                     "exec",
                     "--env",
                     f"PGPASSWORD={profile['postgres_password']}",
@@ -910,12 +1059,12 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
                     "/var/run/postgresql",
                 ],
                 None,
-                5,
+                _remaining_timeout(readiness_deadline, 5),
                 4096,
             )
             if ready.returncode != 0:
                 observations = 0
-                time.sleep(1)
+                time.sleep(min(1, max(0, readiness_deadline - time.monotonic())))
                 continue
             version = _psql(
                 runner,
@@ -924,14 +1073,15 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
                 profile,
                 "SELECT current_setting('server_version_num')::integer / 10000;\n",
                 tuples_only=True,
+                deadline=readiness_deadline,
             )
             if _stdout_value(version) != "16":
                 observations = 0
-                time.sleep(1)
+                time.sleep(min(1, max(0, readiness_deadline - time.monotonic())))
                 continue
             observations += 1
             if observations < profile["readiness_observations"]:
-                time.sleep(1)
+                time.sleep(min(1, max(0, readiness_deadline - time.monotonic())))
         if observations != profile["readiness_observations"]:
             raise RehearsalFailure("readiness", "postgresql_16_not_ready")
         lifecycle.append("postgresql_16_ready")
@@ -943,6 +1093,7 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
             profile,
             PREREQUISITE_SQL,
             single_transaction=True,
+            deadline=active_deadline,
         )
         lifecycle.append("synthetic_prerequisites_installed")
         _psql(
@@ -952,6 +1103,7 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
             profile,
             offline_sql,
             single_transaction=True,
+            deadline=active_deadline,
         )
         lifecycle.append("migration_installed")
 
@@ -962,6 +1114,7 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
             profile,
             CATALOGUE_SQL,
             tuples_only=True,
+            deadline=active_deadline,
         )
         try:
             facts = json.loads(_stdout_value(catalogue_result))
@@ -1016,6 +1169,7 @@ def run_rehearsal(runner: Runner = _run) -> dict[str, Any]:
                 nonce,
                 image_id,
                 contract["docker_profile"],
+                deadline=total_deadline,
             )
             if cleanup["status"] != "cleanup_verified":
                 evidence = _failure_evidence(

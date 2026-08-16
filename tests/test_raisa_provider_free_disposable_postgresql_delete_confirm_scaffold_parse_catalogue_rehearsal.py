@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 import pytest
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, ValidationError
 
 from scripts import (
     raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal
@@ -49,6 +49,9 @@ def test_contract_binds_plan_threat_and_all_plan_sources() -> None:
 
 
 def test_offline_alembic_range_is_exact_and_database_free() -> None:
+    assert CONTRACT["alembic"]["synthetic_url"].endswith(
+        "@127.0.0.1:1/synthetic"
+    )
     body = rehearsal._generate_offline_sql(CONTRACT)  # noqa: SLF001
     assert body.startswith(b"-- Running upgrade w2x3y4z5a6b7 -> x3y4z5a6b7c8")
     assert b"BEGIN;" not in body
@@ -67,6 +70,7 @@ def test_offline_alembic_range_is_exact_and_database_free() -> None:
 
 
 def test_container_argv_is_networkless_tmpfs_bounded_and_no_pull() -> None:
+    assert CONTRACT["docker_profile"]["context"] == "default"
     argv = rehearsal.build_container_argv(
         r"C:\Docker\docker.exe",
         "emr4-delete-confirm-pg16-catalogue-0123456789abcdef",
@@ -74,7 +78,13 @@ def test_container_argv_is_networkless_tmpfs_bounded_and_no_pull() -> None:
         CONTRACT,
     )
     joined = " ".join(argv)
-    assert argv[:3] == [r"C:\Docker\docker.exe", "run", "--detach"]
+    assert argv[:5] == [
+        r"C:\Docker\docker.exe",
+        "--context",
+        "default",
+        "run",
+        "--detach",
+    ]
     assert "--pull never" in joined
     assert "--network none" in joined
     assert "--tmpfs /var/lib/postgresql/data:" in joined
@@ -185,6 +195,8 @@ def test_exact_owned_cleanup_uses_only_captured_id() -> None:
     assert result["status"] == "cleanup_verified"
     assert calls[1] == [
         r"C:\Docker\docker.exe",
+        "--context",
+        "default",
         "container",
         "rm",
         "--force",
@@ -343,10 +355,7 @@ def _valid_catalogue() -> dict:
                 "security_definer": False,
                 "volatility": "v",
                 "definition": (
-                    "OLD.authority_generation >= 9223372036854775807 "
-                    "NEW.authority_generation := OLD.authority_generation + 1 "
-                    "ERRCODE = '22003' pg_trigger_depth() = 2 "
-                    "authority_generation overflow"
+                    " ".join(CONTRACT["catalogue"]["functions"][0]["tokens"])
                 ),
             },
             {
@@ -358,9 +367,7 @@ def _valid_catalogue() -> dict:
                 "security_definer": False,
                 "volatility": "v",
                 "definition": (
-                    "FOR UPDATE user capability grant parent user missing "
-                    "ERRCODE = '23503' authority_generation overflow "
-                    "authority_generation = users.authority_generation + 1"
+                    " ".join(CONTRACT["catalogue"]["functions"][1]["tokens"])
                 ),
             },
             {
@@ -371,8 +378,8 @@ def _valid_catalogue() -> dict:
                 "language": "plpgsql",
                 "security_definer": False,
                 "volatility": "v",
-                "definition": (
-                    "user capability grant update is rejected ERRCODE = '55000'"
+                "definition": " ".join(
+                    CONTRACT["catalogue"]["functions"][2]["tokens"]
                 ),
             },
         ],
@@ -429,6 +436,7 @@ def test_catalogue_assertion_accepts_exact_and_rejects_mutations() -> None:
         "head",
         "column",
         "constraint",
+        "constraint_table",
         "index",
         "function",
         "trigger",
@@ -442,6 +450,8 @@ def test_catalogue_assertion_accepts_exact_and_rejects_mutations() -> None:
             facts["columns"][0]["type"] = "int4"
         elif mutate == "constraint":
             facts["constraints"][0]["definition"] = "CHECK (true)"
+        elif mutate == "constraint_table":
+            facts["constraints"][0]["table_name"] = "appointment_audit_log"
         elif mutate == "index":
             facts["index"][0]["definition"] = "CREATE INDEX other"
         elif mutate == "function":
@@ -523,7 +533,7 @@ def test_psql_transport_has_no_host_port_or_caller_database_url() -> None:
         tuples_only=True,
     )
     joined = " ".join(argv)
-    assert "docker.exe exec -i" in joined
+    assert "docker.exe --context default exec -i" in joined
     assert "--host /var/run/postgresql" in joined
     assert "--single-transaction" in argv
     assert "--file=-" in argv
@@ -532,7 +542,11 @@ def test_psql_transport_has_no_host_port_or_caller_database_url() -> None:
 
 
 def test_environment_stop_never_calls_docker(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(rehearsal, "_generate_offline_sql", lambda _contract: b"ddl")
+    monkeypatch.setattr(
+        rehearsal,
+        "_generate_offline_sql",
+        lambda _contract, *, deadline: b"ddl",
+    )
     monkeypatch.setattr(rehearsal.shutil, "which", lambda _name: None)
 
     def forbidden_runner(*_args, **_kwargs):
@@ -543,6 +557,45 @@ def test_environment_stop_never_calls_docker(monkeypatch: pytest.MonkeyPatch) ->
     assert evidence["failure"]["code"] == "docker_client_missing"
     assert evidence["cleanup"]["status"] == "not_needed"
     Draft202012Validator(EVIDENCE_SCHEMA).validate(evidence)
+
+
+def test_active_lifecycle_uses_one_total_deadline(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, float] = {}
+    monkeypatch.setattr(rehearsal.time, "monotonic", lambda: 100.0)
+
+    def offline(_contract, *, deadline):
+        captured["deadline"] = deadline
+        return b"ddl"
+
+    monkeypatch.setattr(rehearsal, "_generate_offline_sql", offline)
+    monkeypatch.setattr(rehearsal.shutil, "which", lambda _name: None)
+    evidence = rehearsal.run_rehearsal()
+    assert captured["deadline"] == 250.0
+    assert evidence["failure"]["code"] == "docker_client_missing"
+    assert rehearsal._remaining_timeout(130.0, 60) == 30  # noqa: SLF001
+    with pytest.raises(rehearsal.RehearsalFailure, match="total_timeout_exceeded"):
+        rehearsal._remaining_timeout(100.0, 1)  # noqa: SLF001
+
+
+def test_subprocess_timeout_is_bounded_and_docker_environment_is_sanitized(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    for key in rehearsal.DOCKER_ENV_KEYS:
+        monkeypatch.setenv(key, "hostile")
+
+    def timed_out(*_args, env, timeout, **_kwargs):
+        assert all(key not in env for key in rehearsal.DOCKER_ENV_KEYS)
+        raise rehearsal.subprocess.TimeoutExpired(
+            cmd=["docker"], timeout=timeout, output=b"bounded", stderr=b"timeout"
+        )
+
+    monkeypatch.setattr(rehearsal.subprocess, "run", timed_out)
+    result = rehearsal._run(["docker"], None, 1, 64)  # noqa: SLF001
+    assert result.returncode == 124
+    assert result.stdout == b"bounded"
+    assert b"process_timeout" in result.stderr
 
 
 def test_evidence_schema_validates_pass_and_failure_shapes() -> None:
@@ -595,6 +648,13 @@ def test_evidence_schema_validates_pass_and_failure_shapes() -> None:
         "claim_boundary": rehearsal.CLAIM_BOUNDARY,
     }
     Draft202012Validator(EVIDENCE_SCHEMA).validate(pass_evidence)
+    invalid_pass = json.loads(json.dumps(pass_evidence))
+    del invalid_pass["cleanup"]["container_id_sha256"]
+    with pytest.raises(ValidationError):
+        Draft202012Validator(EVIDENCE_SCHEMA).validate(invalid_pass)
+    invalid_pass["cleanup"]["container_id"] = "0" * 64
+    with pytest.raises(ValidationError):
+        Draft202012Validator(EVIDENCE_SCHEMA).validate(invalid_pass)
 
     failure_evidence = {
         "schema_version": rehearsal.EVIDENCE_SCHEMA_VERSION,

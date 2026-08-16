@@ -72,7 +72,7 @@
           "const": "w2x3y4z5a6b7:x3y4z5a6b7c8"
         },
         "synthetic_url": {
-          "const": "postgresql+psycopg://synthetic:synthetic@localhost/synthetic"
+          "const": "postgresql+psycopg://synthetic:synthetic@127.0.0.1:1/synthetic"
         },
         "strip_exact_outer_transaction_wrapper": {
           "const": true
@@ -87,6 +87,7 @@
       "additionalProperties": false,
       "required": [
         "executable",
+        "context",
         "image_reference",
         "pull_policy",
         "network_mode",
@@ -110,6 +111,9 @@
       "properties": {
         "executable": {
           "const": "docker.exe"
+        },
+        "context": {
+          "const": "default"
         },
         "image_reference": {
           "const": "postgres:16-bookworm"

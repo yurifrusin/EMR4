@@ -53,12 +53,13 @@
     "from_revision": "w2x3y4z5a6b7",
     "to_revision": "x3y4z5a6b7c8",
     "offline_range": "w2x3y4z5a6b7:x3y4z5a6b7c8",
-    "synthetic_url": "postgresql+psycopg://synthetic:synthetic@localhost/synthetic",
+    "synthetic_url": "postgresql+psycopg://synthetic:synthetic@127.0.0.1:1/synthetic",
     "strip_exact_outer_transaction_wrapper": true,
     "psql_single_transaction": true
   },
   "docker_profile": {
     "executable": "docker.exe",
+    "context": "default",
     "image_reference": "postgres:16-bookworm",
     "pull_policy": "never",
     "network_mode": "none",
@@ -239,10 +240,15 @@
         "security_definer": false,
         "volatility": "v",
         "tokens": [
+          "IF TG_OP = 'INSERT'",
+          "NEW.authority_generation := 1",
           "OLD.authority_generation >= 9223372036854775807",
           "NEW.authority_generation := OLD.authority_generation + 1",
           "ERRCODE = '22003'",
           "pg_trigger_depth() = 2",
+          "NEW.practice_id IS DISTINCT FROM OLD.practice_id",
+          "NEW.role IS DISTINCT FROM OLD.role",
+          "NEW.is_active IS DISTINCT FROM OLD.is_active",
           "authority_generation overflow"
         ]
       },
@@ -254,11 +260,17 @@
         "security_definer": false,
         "volatility": "v",
         "tokens": [
+          "IF TG_OP = 'DELETE'",
+          "ELSIF TG_OP = 'INSERT'",
           "FOR UPDATE",
           "user capability grant parent user missing",
           "ERRCODE = '23503'",
           "authority_generation overflow",
-          "authority_generation = users.authority_generation + 1"
+          "authority_generation = users.authority_generation + 1",
+          "IF EXISTS (",
+          "FROM public.user_capability_grants",
+          "capability_code = NEW.capability_code",
+          "RETURN NEW"
         ]
       },
       {

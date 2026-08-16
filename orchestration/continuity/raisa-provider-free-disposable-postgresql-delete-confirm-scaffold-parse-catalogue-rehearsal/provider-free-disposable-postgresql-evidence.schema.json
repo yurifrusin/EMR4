@@ -46,7 +46,8 @@
             "cleanup_verified",
             "cleanup_ownership_unverified",
             "cleanup_remove_failed",
-            "cleanup_absence_unproved"
+            "cleanup_absence_unproved",
+            "cleanup_deadline_exceeded"
           ]
         },
         "container_id_sha256": {
@@ -57,7 +58,28 @@
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {"const": "cleanup_verified"}
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["container_id_sha256"],
+            "properties": {
+              "container_id": false
+            }
+          },
+          "else": {
+            "properties": {
+              "container_id_sha256": false
+            }
+          }
+        }
+      ]
     },
     "claim_boundary": {
       "type": "string",
@@ -70,6 +92,7 @@
     "source_hashes": {
       "type": "object",
       "minProperties": 11,
+      "maxProperties": 11,
       "additionalProperties": {
         "type": "string",
         "pattern": "^[0-9a-f]{64}$"
@@ -156,16 +179,28 @@
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
+          "uniqueItems": true,
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "emr4_user_authority_generation_guard",
+              "emr4_user_capability_grant_generation_guard",
+              "emr4_reject_user_capability_grant_update"
+            ]
           }
         },
         "triggers": {
           "type": "array",
           "minItems": 3,
           "maxItems": 3,
+          "uniqueItems": true,
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "trg_users_authority_generation_guard",
+              "trg_user_capability_grants_generation",
+              "trg_user_capability_grants_reject_update"
+            ]
           }
         },
         "head": {
