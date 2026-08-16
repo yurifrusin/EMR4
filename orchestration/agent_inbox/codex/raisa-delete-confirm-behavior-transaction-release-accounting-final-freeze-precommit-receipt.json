@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "The response-release correction is committed at exact Git-read source bf5699966d4211828ce4252c313539b52f0f747e. Candidate and released bytes are separate, promotion occurs only after successful transaction-context exit, four focused boundary cases and the current API Spine/lineage union pass, the product service hash is unchanged, and the canonical 196-test profile passes.",
+    "next_executable_stage": "Commit the validated replacement semantic freeze and fresh precommit receipt, then generate an exact-head preexecution receipt and run the single authorized occupied PostgreSQL attempt.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "bf5699966d4211828ce4252c313539b52f0f747e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "release_accounting_final_freeze_precommit",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The diagnosed repair is complete and the worker lane is closed.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one Gemini 3.7 Flash/high independent veto remains after occupied pass evidence.",
+        "work_packages": [
+          "review the final exact candidate and minimized occupied evidence after the database rehearsal passes"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Freeze publication and the next database lifecycle are serial and offer no separable work package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_pass",
+      "occupied_failure",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit exact semantic freeze before preexecution",
+      "run one occupied attempt only",
+      "Gemini remains ineligible until occupied pass and cleanup"
+    ]
+  },
+  "planned_action": "commit_validated_delete_confirm_response_release_semantic_freeze",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Yuri authorized one candidate-versus-release correction and one fresh occupied attempt. Exact repair source bf5699966d4211828ce4252c313539b52f0f747e separates candidate_response_bytes from released_response_bytes and promotes only after successful context exit. Forty-two owned tests pass with one intentional runtime skip, the current API Spine/lineage union passes, Ruff and maintained compilation pass through the canonical profile, and the canonical 196-test profile passes.",
+    "current_authority_allocation": "Sol owns the tiny diagnosed repair, freeze and stateful execution. DeepSeek remains not applicable, Gemini 3.7 Flash/high remains reserved for one post-pass veto, and native subagents remain declined under the serial database constraint.",
+    "git_refs_and_worktree": "Direct Git output reports exact semantic source bf5699966d4211828ce4252c313539b52f0f747e and tree b30c38454ef0e7bf34549e468d665a71c09386f4 before the pending freeze metadata commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked difference is limited to the latch, semantic freeze and this precommit evidence.",
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated. The active baton permits only the bounded provider-free delete-confirm behavior/transaction recovery and keeps all protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "protected_evidence_boundaries": "The product service is unchanged at SHA-256 8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533. Product data, routes, API/GraphQL/UI edits, providers, credentials, external networks, concurrency, deployment, release, Pages and protected refs remain closed. Preserve all 635 unrelated untracked paths including docs/branding; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

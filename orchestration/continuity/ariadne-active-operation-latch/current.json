@@ -4,16 +4,16 @@
   "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
   "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
   "status": "in_progress",
-  "source_head": "9bb094e88076d4fe601d5a10ac4ce2d38512ef62",
+  "source_head": "bf5699966d4211828ce4252c313539b52f0f747e",
   "authority_source": "After the published TX-S09 fail-closed stop, Yuri explicitly answered yes to the recommended one candidate-versus-release accounting repair and exactly one fresh occupied PostgreSQL attempt; all parent Tier-2 boundaries remain in force.",
   "checkpoint": {
-    "completed_stage": "The blocked TX-S09 stop is preserved at published source 9bb094e88076d4fe601d5a10ac4ce2d38512ef62 with exact cleanup. Yuri has now reopened only the diagnosed response-release accounting boundary for one repair and one fresh occupied attempt; post-compaction five-source rehydration and exact Git/Docker checks pass.",
-    "next_executable_stage": "Freeze and commit the response-release accounting recovery addendum and fresh receipt, then implement the harness-only candidate-versus-released byte separation and run deterministic admission before the single authorized occupied attempt.",
+    "completed_stage": "The response-release correction is committed at exact Git-read source bf5699966d4211828ce4252c313539b52f0f747e. Candidate and released bytes are separate, promotion occurs only after successful transaction-context exit, four focused boundary cases and the current API Spine/lineage union pass, the product service hash is unchanged, and the canonical 196-test profile passes.",
+    "next_executable_stage": "Commit the validated replacement semantic freeze and fresh precommit receipt, then generate an exact-head preexecution receipt and run the single authorized occupied PostgreSQL attempt.",
     "retry_counters": {
       "planning": 3,
       "implementation": 6,
       "review": 0,
-      "verification": 9
+      "verification": 10
     },
     "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
   },

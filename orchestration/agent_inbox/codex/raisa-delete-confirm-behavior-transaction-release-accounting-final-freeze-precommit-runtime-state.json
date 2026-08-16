@@ -1,0 +1,167 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_validated_delete_confirm_response_release_semantic_freeze",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated. The active baton permits only the bounded provider-free delete-confirm behavior/transaction recovery and keeps all protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "current_authority_allocation": "Sol owns the tiny diagnosed repair, freeze and stateful execution. DeepSeek remains not applicable, Gemini 3.7 Flash/high remains reserved for one post-pass veto, and native subagents remain declined under the serial database constraint.",
+    "active_plan_and_acceptance": "Yuri authorized one candidate-versus-release correction and one fresh occupied attempt. Exact repair source bf5699966d4211828ce4252c313539b52f0f747e separates candidate_response_bytes from released_response_bytes and promotes only after successful context exit. Forty-two owned tests pass with one intentional runtime skip, the current API Spine/lineage union passes, Ruff and maintained compilation pass through the canonical profile, and the canonical 196-test profile passes.",
+    "protected_evidence_boundaries": "The product service is unchanged at SHA-256 8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533. Product data, routes, API/GraphQL/UI edits, providers, credentials, external networks, concurrency, deployment, release, Pages and protected refs remain closed. Preserve all 635 unrelated untracked paths including docs/branding; explicit-path staging only.",
+    "git_refs_and_worktree": "Direct Git output reports exact semantic source bf5699966d4211828ce4252c313539b52f0f747e and tree b30c38454ef0e7bf34549e468d665a71c09386f4 before the pending freeze metadata commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked difference is limited to the latch, semantic freeze and this precommit evidence."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+    "status": "in_progress",
+    "source_head": "bf5699966d4211828ce4252c313539b52f0f747e",
+    "authority_source": "After the published TX-S09 fail-closed stop, Yuri explicitly answered yes to the recommended one candidate-versus-release accounting repair and exactly one fresh occupied PostgreSQL attempt; all parent Tier-2 boundaries remain in force.",
+    "checkpoint": {
+      "completed_stage": "The response-release correction is committed at exact Git-read source bf5699966d4211828ce4252c313539b52f0f747e. Candidate and released bytes are separate, promotion occurs only after successful transaction-context exit, four focused boundary cases and the current API Spine/lineage union pass, the product service hash is unchanged, and the canonical 196-test profile passes.",
+      "next_executable_stage": "Commit the validated replacement semantic freeze and fresh precommit receipt, then generate an exact-head preexecution receipt and run the single authorized occupied PostgreSQL attempt.",
+      "retry_counters": {
+        "planning": 3,
+        "implementation": 6,
+        "review": 0,
+        "verification": 10
+      },
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "one_candidate_versus_release_accounting_repair_and_one_fresh_occupied_attempt_only",
+      "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+      "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+      "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",
+      "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+      "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "assessed_stage": "release_accounting_final_freeze_precommit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "rationale": "The diagnosed repair is complete and the worker lane is closed.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "Exactly one Gemini 3.7 Flash/high independent veto remains after occupied pass evidence.",
+        "work_packages": [
+          "review the final exact candidate and minimized occupied evidence after the database rehearsal passes"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Freeze publication and the next database lifecycle are serial and offer no separable work package.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "commit exact semantic freeze before preexecution",
+      "run one occupied attempt only",
+      "Gemini remains ineligible until occupied pass and cleanup"
+    ],
+    "reassessment_triggers": [
+      "occupied_pass",
+      "occupied_failure",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_five_source_rehydration_exact_semantic_candidate_deterministic_admission_and_precommit_freeze",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Closed worker lane preserved."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini remains reserved for one post-pass veto."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the exact repair and deterministic admission."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native delegation selected for the serial recovery."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
