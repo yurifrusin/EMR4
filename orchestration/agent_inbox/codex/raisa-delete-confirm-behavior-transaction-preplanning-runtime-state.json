@@ -1,0 +1,124 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md at SHA-256 ca6c79831e0218b2adb304c92d89afbaba200abfbe04eb800dcbcb9e2fb9e924 records the accepted delete-confirm parse/catalogue result at semantic source f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 and reviewed descendant d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8, the accepted risk-weighted workflow source 51866ce084c33fce600b792c66b180927658ed9e, and this serial behavior/transaction rehearsal as the next dependency-satisfied implementation.",
+    "current_authority_allocation": "GPT Sol owns material plan semantics, database-execution containment, integration and acceptance. DeepSeek V4 Flash/high through Claude Code --bare is reserved only for one frozen separable mechanical contract/harness/test package. Gemini 3.7 Flash/high through Antigravity is reserved for exactly one final Tier-2 independent veto. Native subagents are declined because the database lifecycle and authority/transaction evidence are serial and another review lane would duplicate the single final veto.",
+    "active_plan_and_acceptance": [
+      "The accepted parse/catalogue plan, exact contract, closeout and Sol acceptance prove empty-instance PostgreSQL 16 representation only and name this provider-free behavior/transaction rehearsal as the next candidate.",
+      "The accepted unmounted delete-confirm scaffold plan and scaffold-contract.json freeze database-owned authority generation, normalized exact grants, private receipt, attributable audit, two current-authority checks, cumulative timeout, replay classification, rollback and ordered single-transaction behavior.",
+      "The Ariadne risk-weighted workflow plan and risk_weighted_workflow.yaml classify database runtime and authority/security contracts as Tier 2: one pre-edit canonical baseline, one semantic freeze, change-triggered reruns and exactly one final independent veto.",
+      "docs/api-spine/openapi/appointment-commands.yaml preserves confirmAppointmentDeleteProposal as the dedicated REST/OpenAPI command ingress; GraphQL remains read-only and events remain non-authoritative acceleration hints.",
+      "Yuri's standing uninterrupted-development authority applies, and Yuri's latest observation that the tightened workflow feels smoother is qualitative workflow evidence to record without treating it as a proven throughput claim."
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. This tranche may exercise only authored-synthetic serial authority-generation, exact grant, trigger, private receipt, attributable audit, current-authority, replay, rollback, cumulative timeout and ordered atomic transaction behavior in one owned networkless tmpfs PostgreSQL 16 container against exact migration x3y4z5a6b7c8. Concurrency, restart, unknown-commit, provisioning, mounted routes, UI, product/patient/clinical data, providers, ADC, credentials/IAM, external network, protected evidence, deployment, production, release, Pages and protected refs remain closed. Preserve docs/branding/ and every unrelated untracked file; use explicit-path staging only.",
+    "git_refs_and_worktree": "Task branch HEAD and origin task are exact 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree was clean before opening the tranche, with 635 preserved untracked paths including docs/branding/."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+    "status": "in_progress",
+    "source_head": "87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67",
+    "authority_source": "AGENTS.md names this dependency-satisfied provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal under Yuri's standing uninterrupted-development authority after the accepted parse/catalogue result.",
+    "checkpoint": {
+      "completed_stage": "Fresh five-source rehydration completed after compaction; exact refs and the prior complete latch were verified; the required pre-edit canonical fast baseline passed with 196 tests and no known failure.",
+      "next_executable_stage": "Generate the fresh five-source pre-sprint-planning receipt, inspect the accepted serial behavior precedents and exact delete-confirm source seam, then freeze the narrowest Tier-2 behavior/transaction plan before any implementation dispatch.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+      "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+      "one_owned_network_none_no_published_port_tmpfs_postgresql_16_container_pull_never",
+      "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+      "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "After Sol freezes the exact serial behavior matrix, a closed contract/schema, fixed-path harness and focused tests are a bounded mechanical package with clear ownership; DeepSeek will not execute the occupied database run or decide acceptance.",
+        "work_packages": ["implement the frozen closed behavior contract/schema, fixed-path disposable PostgreSQL harness and focused hostile tests without broadening the serial authored-synthetic boundary"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "Database runtime plus an authority/security contract is Tier 2 and requires exactly one fresh final Gemini 3.7 Flash/high veto after deterministic admission and the occupied evidence pass.",
+        "work_packages": ["review the final exact candidate, minimized occupied evidence and unchanged-worktree postconditions against the frozen plan and API Spine boundary"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The behavior matrix, one mutable PostgreSQL lifecycle and acceptance chain are serial; a native analytical or implementation lane would duplicate DeepSeek/Gemini separation and increase shared-state collision and monitoring cost.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol freezes the smallest coherent serial authority and transaction behavior matrix before DeepSeek dispatch",
+      "DeepSeek returns one bounded mechanical candidate before Sol performs semantic admission and any occupied database execution",
+      "the owned container lifecycle, ordered transactions and exact cleanup remain one serial stateful operation",
+      "Gemini is ineligible until deterministic admission and the occupied evidence pass on the exact candidate"
+    ],
+    "reassessment_triggers": [
+      "the frozen plan reveals no sufficiently separable DeepSeek package",
+      "a material recovery changes owned paths or acceptance meaning",
+      "pre-verifier acceptance",
+      "tranche closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_live_handover_current_acceptance_contracts_api_spine_git_latch_and_post_compaction_baseline_read",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Reserved for one post-plan bounded mechanical implementation package; no worker dispatch occurred before semantic freeze."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini 3.7 Flash/high is reserved for exactly one final Tier-2 veto after deterministic admission."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["The five authority sources, protected boundaries, exact refs, clean tracked worktree, completed predecessor latch, accepted contracts and canonical baseline were reread or executed after compaction."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined because the stateful database run is serial and DeepSeek plus one Gemini veto already supply implementation/review separation."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

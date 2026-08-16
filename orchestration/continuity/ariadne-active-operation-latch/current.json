@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
-  "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
-  "objective": "Execute exact migration x3y4z5a6b7c8 once over minimum empty authored-synthetic prerequisite relations inside one owned networkless tmpfs PostgreSQL 16 container, prove its exact catalogue/function/trigger representation and atomic installation, then remove the exact owned container without opening behavior, routes or product authority.",
-  "status": "complete",
-  "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
-  "authority_source": "AGENTS.md accepts the Tier-2 parse/catalogue result at semantic source f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 and reviewed evidence descendant d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8 under Yuri's standing uninterrupted-development authority.",
+  "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+  "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+  "status": "in_progress",
+  "source_head": "87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67",
+  "authority_source": "AGENTS.md names this dependency-satisfied provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal under Yuri's standing uninterrupted-development authority after the accepted parse/catalogue result.",
   "checkpoint": {
-    "completed_stage": "Exact migration x3y4z5a6b7c8 passed empty-instance PostgreSQL 16 installation and closed catalogue representability after one immutable fail-closed presentation-matcher attempt and narrow evidence-led repair. Exact cleanup, 80 hostile mutations, 25 owned tests, the 155-test focused union, canonical 196-test profile, one clean Gemini 3.7 Flash/high veto, risk-weighted admission and Continuity 302 / Compass 284 all pass.",
-    "next_executable_stage": null,
+    "completed_stage": "Fresh five-source receipt and pre-edit canonical baseline pass. The Tier-2 plan is frozen into nine authority/trigger groups and eleven transaction groups, with fixed provider-free containment, exact owned paths, one DeepSeek mechanical package and one final Gemini 3.7 Flash/high veto.",
+    "next_executable_stage": "Commit the frozen plan checkpoint, generate the exact DeepSeek worker packet and pre-dispatch receipt, then dispatch only the closed contract/schema/harness/test package.",
     "retry_counters": {
       "planning": 0,
-      "implementation": 2,
-      "review": 1,
-      "verification": 2
+      "implementation": 0,
+      "review": 0,
+      "verification": 0
     },
     "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
   },
@@ -24,21 +24,21 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "exact_x3y4z5a6b7c8_offline_lowering_and_one_owned_disposable_postgresql_16_parse_catalogue_installation_only",
-    "minimum_empty_authored_synthetic_prerequisite_relations_and_allowlisted_catalogue_metadata_only",
-    "network_none_no_published_port_tmpfs_only_no_bind_or_named_volume_and_pull_never",
-    "no_database_behavior_probe_user_grant_receipt_audit_or_appointment_row",
-    "no_application_model_service_route_openapi_graphql_ui_watcher_event_or_product_command_change",
+    "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+    "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+    "one_owned_network_none_no_published_port_tmpfs_postgresql_16_container_pull_never",
+    "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+    "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
     "no_existing_product_patient_clinical_historical_diary_or_protected_data",
     "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
     "no_deployment_production_release_pages_or_protected_ref_movement",
