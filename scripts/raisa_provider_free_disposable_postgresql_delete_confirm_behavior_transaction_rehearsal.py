@@ -100,6 +100,7 @@ FIRST_AUTH_REVOKED_TOKENS = (
 
 AUTH_GROUP_IDS = tuple(f"AUTH-S{index:02d}" for index in range(1, 10))
 TX_GROUP_IDS = tuple(f"TX-S{index:02d}" for index in range(1, 12))
+AUTH_S02_AUXILIARY_USER_SALTS = (0x1000, 0x1001, 0x1002, 0x1003)
 
 
 BOOTSTRAP_SQL = r"""
@@ -963,10 +964,10 @@ def _auth_s02(engine: Engine, group: dict[str, Any], index: int) -> AuthResult:
     fixture = _fixture(index)
     _seed_auth_partition(engine, fixture)
     second_practice = _sub_uuid(fixture.practice_id, 0x10)
-    role_user = _sub_uuid(fixture.actor_id, 1)
-    active_user = _sub_uuid(fixture.actor_id, 2)
-    practice_user = _sub_uuid(fixture.actor_id, 3)
-    unrelated_user = _sub_uuid(fixture.actor_id, 4)
+    role_user, active_user, practice_user, unrelated_user = (
+        _sub_uuid(fixture.actor_id, salt)
+        for salt in AUTH_S02_AUXILIARY_USER_SALTS
+    )
     with engine.begin() as connection:
         connection.execute(
             text(

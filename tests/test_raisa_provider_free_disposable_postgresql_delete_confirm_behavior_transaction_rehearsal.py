@@ -68,6 +68,20 @@ def test_overflow_fixture_is_transaction_local_and_proves_trigger_restore() -> N
     assert "t.tgenabled = 'O'" in source
 
 
+def test_auth_s02_auxiliary_user_partition_is_disjoint_from_scenario_actors() -> None:
+    auth_s02_actor = rehearsal._fixture(2).actor_id  # noqa: SLF001
+    auxiliary = {
+        rehearsal._sub_uuid(auth_s02_actor, salt)  # noqa: SLF001
+        for salt in rehearsal.AUTH_S02_AUXILIARY_USER_SALTS
+    }
+    scenario_actors = {
+        rehearsal._fixture(index).actor_id  # noqa: SLF001
+        for index in range(1, 401)
+    }
+    assert len(auxiliary) == 4
+    assert auxiliary.isdisjoint(scenario_actors)
+
+
 def test_contract_rejects_added_reordered_or_widened_surfaces() -> None:
     mutations = []
     added = copy.deepcopy(CONTRACT)

@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0351",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-occupied-001",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "implementation_defect",
+  "role": "sol_recovered_harness",
+  "resource_id": "owned-disposable-postgresql-16-behavior-transaction-attempt-001",
+  "model": "gpt-sol",
+  "reasoning_level": "high",
+  "stage": "authority_group_execution",
+  "category": "authored_synthetic_fixture_identity_collision",
+  "expected_invariant": "Every serial authority and transaction scenario owns a disjoint authored-synthetic UUID partition.",
+  "observed_error": "AUTH-S02 derived its four auxiliary user UUIDs by adding 1 through 4 to its actor UUID. Those values exactly collided with the primary actor UUIDs reserved for AUTH-S03 through AUTH-S06, so the next authority partition insert raised PostgreSQL unique-integrity failure before the nine-group checkpoint.",
+  "detection_method": "Attempt 001 failed closed with hashed IntegrityError evidence after schema/catalogue admission; deterministic UUID comparison proved AUTH-S02 actor+1..4 equals AUTH-S03..AUTH-S06 actor identities. Exact owned relay, container and internal network cleanup passed.",
+  "evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py"
+  ],
+  "candidate_state": "attempt_001_failed_closed_cleanup_verified_no_pass_claim",
+  "workflow_disposition": "bounded_harness_repair_authorized",
+  "recurrence_signature": "authored_synthetic.secondary_uuid_overlaps_later_primary_fixture_partition",
+  "correction": {
+    "status": "correction_in_progress",
+    "action": "Move AUTH-S02 auxiliary users into a fixed high disjoint salt domain and add a deterministic cross-scenario UUID-partition regression test before the single permitted occupied rerun.",
+    "prevention_control": "Behavior rehearsals with derived fixture identities must prove disjointness against every primary and subcase fixture index before runtime admission."
+  },
+  "status": "contained_cleanup_verified"
+}

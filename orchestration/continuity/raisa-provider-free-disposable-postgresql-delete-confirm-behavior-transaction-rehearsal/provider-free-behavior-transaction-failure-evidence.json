@@ -1,0 +1,31 @@
+{
+  "schema_version": "raisa.delete_confirm_behavior_transaction_evidence.v1",
+  "result": "rehearsal_failed",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction",
+  "source_head": "2a5042f80941e2bd191999c430ff2517ba7e8cb2",
+  "lifecycle": [
+    "contract_and_sources_verified",
+    "local_image_verified",
+    "owned_internal_network_verified",
+    "internal_container_profile_verified",
+    "postgresql_16_ready",
+    "transaction_schema_installed",
+    "fixed_loopback_relay_started",
+    "host_sqlalchemy_catalogue_verified",
+    "fixed_loopback_relay_stopped",
+    "cleanup_verified"
+  ],
+  "failure": {
+    "stage": "harness",
+    "code": "unexpected_exception",
+    "detail_sha256": "cacde3d4f2fd0b72498eed624e5a64142187afe76a72c37de6256743cc0e175f"
+  },
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container": "container_absent",
+    "network": "network_absent",
+    "container_id_sha256": "ec4d65eb914af2a1c37ce60411a68efaa74dd0f37ead8646c3bf4332f570ae1a",
+    "network_id_sha256": "1a98abb463eaa0e32a3cb64f094b50d92ca95786b97db6c57b5ba12f776cdb11"
+  },
+  "claim_boundary": "Exact serial unmounted SQLAlchemy/PostgreSQL delete-confirm authority and transaction behavior only; no route, product database, concurrency, restart, unknown commit, deployment or production claim."
+}
