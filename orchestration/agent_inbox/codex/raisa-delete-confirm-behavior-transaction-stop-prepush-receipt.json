@@ -1,0 +1,74 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "Stop commit 37a57345d8f8449474c8ea39d518741ecc814b09 preserves the consumed final attempt: the repaired counter passed, TX-S09 stopped fail-closed at TX-S09_disclosed_bytes, rollback and exact relay/container/network cleanup passed, and no pass or Gemini review was released. AER-0355 records candidate bytes retained after scaffold_incomplete; the non-PHI pause alert was delivered.",
+    "next_executable_stage": "Await Yuri's decision whether to authorize a new narrowly bounded harness release-accounting correction and a fresh occupied attempt, or leave this rehearsal stopped. No further repair, runtime attempt or Gemini review is authorized under the consumed boundary.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "37a57345d8f8449474c8ea39d518741ecc814b09",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "parallelism_assessment": {
+    "assessed_stage": "blocked_stop_prepush",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No worker repair or runtime is authorized at the blocked gate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "Occupied evidence failed, so the independent veto is not admitted.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Task-branch publication is a short serial Git action and cannot expand authority.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "explicit_user_recovery_decision"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "task branch push only",
+      "no protected ref movement",
+      "await Yuri decision"
+    ]
+  },
+  "planned_action": "push_blocked_stop_evidence_to_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Stop commit 37a57345d8f8449474c8ea39d518741ecc814b09 preserves TX-S09_disclosed_bytes, exact cleanup, AER-0355 and the Yuri stop summary. AER-0356 contains a recurrent uncommitted hash-reporting error before this receipt; no further repair or attempt is authorized.",
+    "current_authority_allocation": "Sol may publish the accepted stop evidence to the task branch only. DeepSeek and native subagents have no work; Gemini is not admitted after occupied failure. No protected integration authority is open.",
+    "git_refs_and_worktree": "Direct git rev-parse reports current stop source 37a57345d8f8449474c8ea39d518741ecc814b09 before the pending pre-push receipt commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; all pre-existing untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Yuri's one-repair, one-final-attempt authority is consumed and the operation is blocked at the resulting user-attention gate.",
+    "protected_evidence_boundaries": "No owned container or network remains. Push is limited to codex/ariadne-bernie-davida-parallel-seam; master, handoff/current, Pages, product data, routes, providers, deployment and release remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

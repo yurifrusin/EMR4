@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0356",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-stop-prepush",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "orchestrator_evidence_defect",
+  "role": "sol_orchestrator",
+  "resource_id": "blocked-stop-prepush-metadata",
+  "model": "gpt-sol",
+  "reasoning_level": "high",
+  "stage": "prepush_receipt_preparation",
+  "category": "future_commit_hash_invented_from_short_prefix",
+  "expected_invariant": "Every full Git object ID is copied from direct Git output and mechanically compared before it enters live continuation evidence.",
+  "observed_error": "While updating the blocked latch for pre-push, the orchestrator again expanded short prefix 37a57345 with an invented suffix before running git rev-parse HEAD. Direct Git immediately returned exact 37a57345d8f8449474c8ea39d518741ecc814b09; the invented value was never committed or admitted to a receipt.",
+  "detection_method": "The mandatory pre-push direct git rev-parse check ran before receipt generation, staging or publication and exposed the mismatch.",
+  "evidence_paths": [
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-preexecution-hash-reporting-incident.json"
+  ],
+  "candidate_state": "uncommitted_live_latch_corrected_before_receipt_staging_or_push",
+  "workflow_disposition": "recurrent_metadata_error_contained_prepush",
+  "recurrence_signature": "git_evidence.future_commit_full_hash_invented_from_short_prefix",
+  "correction": {
+    "status": "contained_with_stronger_manual_stop",
+    "action": "Replace the uncommitted value with direct git rev-parse output, record the recurrence, regenerate pre-push evidence and forbid any manually completed full hash in the remaining closeout.",
+    "prevention_control": "The next Ariadne workflow repair must make Git object IDs machine-populated or machine-compared fields; prose instruction alone has now proved insufficient."
+  },
+  "status": "contained_before_receipt_or_push"
+}
