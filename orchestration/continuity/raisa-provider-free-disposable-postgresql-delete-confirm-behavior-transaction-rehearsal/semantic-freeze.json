@@ -2,20 +2,22 @@
   "schema_version": "ariadne.risk_weighted_semantic_freeze.v1",
   "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
   "classified_tier": "tier_2_authority_runtime",
-  "source_head": "1a90b837f59b95288be219f83f1987a21c78905b",
-  "source_tree": "16f939914a70e019b7c5570bb2aebeae246c9e49",
-  "timestamp": "2026-08-16T13:05:41.8101099+10:00",
+  "source_head": "8b553762f5d8953356d9472e71472470a511d829",
+  "source_tree": "118ae814b5d342590e8a3fff15b57eaac1019008",
+  "timestamp": "2026-08-16T13:15:28.6734610+10:00",
   "timezone": "Australia/Brisbane",
-  "semantic_bindings_sha256": "sha256:36887510e033a97a7d04a588d81e912d1b78f17ffeec81a229a6bc234039ffac",
+  "semantic_bindings_sha256": "sha256:91aa8f810277b0e424270ef808bbcbd10c7febe7c5667924c9a7a6ecaa56d9bc",
   "toolchain_sha256": "sha256:b2b9b207aaf40a6071fe39b93a9508fd139ff3c3bce4862ef8228ae4d3174b98",
   "semantic_bindings": [
     {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md", "kind": "contract", "sha256": "4fde7121a548f7f574e56506e0e3a4f3303b8cc0b18a7fd80948b84b9c99498c"},
     {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md", "kind": "contract", "sha256": "30830f56eee984b4e0f1c04791dc2a624d3015daaaafeba941f1485cde36620f"},
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md", "kind": "contract", "sha256": "88c3278b4fce683e78aac4823f1936780d6783a16c70ae154a180e0b2236a366"},
+    {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-threat-model-delta.md", "kind": "contract", "sha256": "9fcdf09bec64eee535c4479c2c65bdf7df09502dda8930e768c9166c30aec062"},
     {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json", "kind": "contract", "sha256": "99c88349cecbaeeec12b601e33615fb55e8bb7d71fcb764c3ca1a5f8939f0b0a"},
     {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json", "kind": "schema", "sha256": "c325c523380cb9882a026a43e3e4c68ce009eefc72aec6768db1b377234548b4"},
-    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json", "kind": "schema", "sha256": "a61869e74d32b71386d013cdbad26beaa3002ac6e5497d332d4f208402fd6fad"},
-    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "source", "sha256": "d70cfbf35126a4b3e56b99f983714da1dd89a4a9196ac0818baff3ead23c0cf3"},
-    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "semantic_test", "sha256": "af97671e1e5130b844ff288404d956d353d92d347fe294c829a1d97c0b07ad2c"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json", "kind": "schema", "sha256": "b31899f32258e1c45d9af441994124e90ea6842bf4d542b626f5cf4897139d51"},
+    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "source", "sha256": "7d7b259456b9f99ee6dc1b3cd3a8446377eedec624b58fa6b542c7d44e47b396"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py", "kind": "semantic_test", "sha256": "762be006d6b949c76ee4cdca2d977cf215365e68d241b73779262c3439580084"},
     {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py", "kind": "semantic_test", "sha256": "4864fddc734d793d42d8ce4dbae2d11ff44021d787cfbaee310eb16953dbbe96"}
   ],
   "toolchain": {
@@ -25,7 +27,7 @@
     "postgres_image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
   },
   "focused_gate_results": {
-    "owned_tests": "passed_29_with_one_intentional_runtime_skip",
+    "owned_tests": "passed_32_with_one_intentional_runtime_skip",
     "current_lineage_api_spine_union": "passed_with_one_known_immutable_hash_assertion_excluded",
     "ruff": "passed",
     "python_compilation": "passed_213_maintained_sources",
@@ -40,8 +42,8 @@
     "KNOWN-DELETE-SCAFFOLD-IMMUTABLE-CURRENT-BATON-HASH-DRIFT-001": "The accepted predecessor scaffold contract pins an earlier tests/test_current_baton_consistency.py digest. The legitimate advancing baton changes that maintained test; the exact historical binding assertion alone is excluded and the immutable accepted contract is not rewritten."
   },
   "discarded_overbroad_lineage_sweep": "Historical continuity tests that intentionally pin their own former baton positions and source hashes were not treated as current gates; the maintained canonical profile and current lineage union pass.",
-  "recovery_incident_ids": ["AER-0351"],
-  "recovery_evidence": "Occupied attempts 001 and 002 failed closed before authority completion and proved exact cleanup. A complete derived-identity inventory showed AUTH-S01 actor+1 overlapped AUTH-S02 and AUTH-S02 actor+1..4 overlapped AUTH-S03..AUTH-S06; the first partial repair covered only the latter. This replacement freeze binds both high-salt domains, a whole-partition regression test and exact authority-group error attribution.",
+  "recovery_incident_ids": ["AER-0351", "AER-0352"],
+  "recovery_evidence": "Attempts 001 and 002 preserved AER-0351 and exact cleanup; attempt 003 verified all nine authority groups, then preserved AER-0352's unattributed transaction-order mismatch and exact cleanup. This freeze adds no product-source edit: it binds the trace-recovery plan, closed group/outcome/token diagnostics, hostile schema tests and the unchanged appointment-delete service hash before one diagnostic attempt.",
   "post_freeze_semantic_changes_authorized": false,
   "canonical_profile_rerun_required_without_semantic_change": false
 }
