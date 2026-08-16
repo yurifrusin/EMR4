@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks are green. The worktree is clean and the commit contains exactly the five owned files. Here is the concise report.\n\n## DeepSeek worker closeout \u2014 delete-confirm response/product-adapter architecture proof\n\n**Exact commit:** `aabb6b26e4a216092c4c7efbc79f6c5caa01ba79`\n**Tree:** `45c9fde0f87ebca7ea545055f9b9750dbdc71813`\n**Branch:** `codex/worker-delete-confirm-response-architecture-5aaed2a8` (no push performed)\n\n### Changed paths (exactly the five owned files)\n1. `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/architecture-contract.schema.json`\n2. `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.schema.json`\n3. `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture/provider-free-architecture-evidence.json`\n4. `scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py`\n5. `tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py`\n\nNo frozen plan/architecture/threat/contract, AGENTS.md, product code, routes, schemas, migrations, or any other path was edited. `docs/branding/` and unrelated untracked paths remain untouched; working tree is clean.\n\n### What the proof binds / proves\n- Contract schema closes every object with `additionalProperties: false`, requires every frozen field, constrains exact constants and ordered arrays (14 input bindings via ordered `prefixItems`, 7 outcome-mapping entries, all constant arrays), and rejects authority/response-surface expansion.\n- Evidence binds exact source commit `5aaed2a859c64062d40dd2fe1b419d48dcc5d821`, the 14 canonical-LF input digests, the four frozen semantic-output digests recorded by the pre-commit receipt (recomputed from the four frozen docs and confirmed present in the receipt), the private six-field receipt, the minimal v1 public envelope, server-owned authority ingress, double authority/admission checks, one physical write set, replay effect count `0`, closed outcome mapping, alias convergence, and raw DELETE isolation.\n- Validator uses strict UTF-8, canonicalizes CRLF\u2192LF, rejects bare CR, validates both JSON schemas, recomputes all bound hashes, and emits one deterministic canonical JSON result. It performs no network/provider/credential/database/Docker/SQL/migration/route/subprocess operation.\n- Evidence and validator results are deterministic (two runs byte-identical; `verify_evidence()` admits the committed evidence).\n\n### Tests run\n- Focused suite: **31 passed** \u2014 includes 136 contract hostile mutations (all rejected, \u2265100 required), 20 evidence hostile mutations (all rejected), every DPA-001\u2026DPA-014 family represented, unknown/missing key, reordered/expanded array, changed constant, client authority, stale-generation check, AppointmentOut/current-projection leakage, replay drift, warning-registry drift, cross-practice disclosure, partial-receipt path, raw DELETE inheritance, alias divergence, route-local fallback, input/output digest mismatch, bare CR, and malformed/non-UTF-8 rejection; plus deterministic pure-projection tests of the public envelope from validated six-field private bytes.\n- `ruff check` on the script and test: **passed**.\n- `git diff --check` (unstaged and staged): **passed**.\n- Directly relevant provider-free API Spine test `test_api_spine_delete_confirm_idempotency_preflight.py`: **6 passed**.\n\n### Limitations\n- The repository `tests/conftest.py` requires the full runtime stack (`authlib` plus a PostgreSQL test schema) that is not present in this sandbox. The focused test and the API Spine preflight test are provider-free and were run through a temporary `--confcutdir` directory (removed afterward) so the DB conftest was not loaded; both use the committed file byte-for-byte. The DB-backed `test_api_spine_delete_confirm_idempotency_route_contract.py` was not run because it imports app/DB modules and needs the test database.\n- The validator embeds the frozen source commit as a constant (no subprocess/git), so it cannot independently prove the worktree HEAD equals that commit; HEAD was verified manually before commit.\n- The broader 197-test repository profile was not run due to the missing runtime stack; the packet-scoped focused, ruff, diff, and provider-free API Spine checks all pass.",
+  "usage": {
+    "input_tokens": 88144,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 7202816,
+    "output_tokens": 86530,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 6.217498000000001,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

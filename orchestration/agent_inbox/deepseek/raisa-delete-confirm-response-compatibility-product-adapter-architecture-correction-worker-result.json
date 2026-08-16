@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Correction complete. All checks pass and the commit is in place.\n\n## Correction commit\n- **Commit:** `576e343f7d75b046c2d5ac8c5a71a8b82d60fa49`\n- **Tree:** `9c1369c747a2a5d3e659779adabac47d6647e790`\n- **Parent:** `aabb6b26` (the rejected candidate \u2014 **not** amended, new commit on top)\n- **Not pushed.**\n\n## Changed paths (exactly two, explicit-path staging)\n1. `scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py`\n2. `tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py`\n\nWorking tree is clean; no other path was staged or modified.\n\n## What changed\n**Architecture script \u2014 `project_public_envelope`:**\n- Added `_canonical_private_receipt_bytes()` which reconstructs the private payload strictly in the frozen insertion order (`appointment_id`, `status`, `status_reason_code`, `cancellation_reason`, `waiting_area_id`, `warning_codes`) and serializes with `ensure_ascii=False`, `allow_nan=False`, compact separators `(',', ':')`.\n- After the existing strict decode, field-set, field/value, warning-registry and no-leakage checks, it now requires **byte-for-byte equality** between the supplied receipt bytes and that canonical sequence. Any sorted/reordered keys, added whitespace, CRLF, duplicate keys or alternate Unicode escaping now fail closed (`ValueError: private receipt bytes are not the canonical six-field physical sequence`).\n\n**Tests:**\n- Clean projection input replaced with the exact compact physical bytes (`CLEAN_RECEIPT_BYTES`).\n- Added a direct assertion that the clean bytes use the frozen six-field order.\n- Added explicit negative tests: sorted/reordered keys, added whitespace (indented + spaced separators), CRLF, duplicate keys, and alternate Unicode escaping (`ensure_ascii=True` vs literal UTF-8).\n\nAll hostile evidence, schemas, evidence JSON and existing semantics are unchanged.\n\n## Tests run\n- `tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py` \u2014 **37 passed** (`--noconftest`, per repo provider-free pattern)\n- `tests/test_api_spine_delete_confirm_idempotency_preflight.py` (relevant provider-free API Spine preflight) \u2014 **6 passed**\n- Ruff on both files \u2014 **All checks passed**\n- `git diff --check` (against `HEAD~1..HEAD`) \u2014 **clean**\n- Independent reproduction of the admission finding: canonical compact bytes are **accepted**; the previously-admitted sorted/whitespace `json.dumps(..., sort_keys=True)` sequence is now **rejected**.\n\nNo database/Docker/SQL, no product/route/schema/migration edits, no provider/credential/network access, no push, and no protected refs were touched.",
+  "usage": {
+    "input_tokens": 76783,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 3209728,
+    "output_tokens": 35293,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 2.8820589999999995,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

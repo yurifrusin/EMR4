@@ -1,0 +1,92 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm response-compatibility and product-adapter architecture",
+    "completed_stage": "Rejected candidate aabb6b26e4a216092c4c7efbc79f6c5caa01ba79 is preserved beneath correction 576e343f7d75b046c2d5ac8c5a71a8b82d60fa49. The corrected five-file candidate is clean, exact-scope and independently passes 78 focused/API Spine tests, Ruff, deterministic validation, whitespace and canonical-success/noncanonical-rejection reproduction.",
+    "next_executable_stage": "Commit the dispatch, rejection and correction-admission evidence with explicit paths after a machine-resolved pre-commit receipt, then pass pre-integration and cherry-pick both worker commits in order.",
+    "operation_id": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+    "resume_after_compaction": true,
+    "source_head": "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+    "reason_codes": [],
+    "resolved_commit": "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5aaed2a859c64062d40dd2fe1b419d48dcc5d821"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "corrected_worker_admission_pre_commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The isolated lane delivered the five-file proof and one bounded two-file correction; Sol independently verified and admitted the corrected exact candidate.",
+        "work_packages": [
+          "completed deterministic proof package and exact-byte correction"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini remains necessary for one final exact-integrated-candidate veto after integration and deterministic profile completion.",
+        "work_packages": [
+          "final authority, replay, exact-byte, raw DELETE isolation and scope veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The developer constraint does not authorize native delegation and the independent admission work is complete.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-integration",
+      "material integration conflict",
+      "pre-verifier acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit orchestration evidence before integration",
+      "cherry-pick rejected candidate then exact correction",
+      "Gemini waits for integrated deterministic admission",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "commit_delete_confirm_architecture_worker_dispatch_rejection_and_corrected_admission_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:9944bab0bdb1f24084e40ef5e2d315c5734a2a15fbc08c4b1dbb6744a953b644",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan permits one same-lane correction. Exact final candidate 576e343f descends from semantic source 5aaed2a8 and changes only the five owned proof files; 78 focused/API Spine tests, Ruff, validator, diff and exact-byte reproduction pass.",
+    "current_authority_allocation": "Sol independently rejected aabb6b26, admitted corrected candidate 576e343f, and retains Git/acceptance. DeepSeek has completed its single bounded correction; Gemini remains reserved; native subagents remain declined.",
+    "git_refs_and_worktree": "Main HEAD remains 5aaed2a859c64062d40dd2fe1b419d48dcc5d821. Worker r194 is clean at 576e343f7d75b046c2d5ac8c5a71a8b82d60fa49. Protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and all unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely and Continuity 304 / Compass 286 keeps the active architecture provider-free, unmounted and outside all protected/runtime surfaces.",
+    "protected_evidence_boundaries": "No product, route, schema, migration, database, capability, patient/clinical/product/protected data, provider/network, UI, deployment, release, Pages or protected-ref surface opened. Only orchestration evidence and latch are committed now."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

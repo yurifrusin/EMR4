@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_bounded_exact_private_receipt_byte_admission_correction",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely; Continuity 304 / Compass 286 keeps this architecture provider-free and unmounted with runtime and protected surfaces closed.",
+    "current_authority_allocation": "Sol rejected candidate aabb6b26 after independent exact-byte admission. DeepSeek V4 Flash/high receives the plan-authorised single two-file correction; Gemini remains reserved for final veto; native subagents remain declined.",
+    "active_plan_and_acceptance": "Semantic freeze 5aaed2a is unchanged. Independent reproduction proved the candidate admitted both exact compact physical bytes and reordered whitespace-padded bytes, violating the plan requirement that the pure projection validate the accepted exact six-field physical byte sequence.",
+    "protected_evidence_boundaries": "The correction may edit only the existing validator and focused test. No semantic contract, evidence/schema, product/route/schema/migration, database, capability, protected data, provider/network, deployment or protected-ref authority is open.",
+    "git_refs_and_worktree": "Main source remains 5aaed2a859c64062d40dd2fe1b419d48dcc5d821. Clean worktree r194 is at rejected candidate aabb6b26e4a216092c4c7efbc79f6c5caa01ba79. Protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602 and all unrelated untracked main-worktree paths remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+    "active_tranche": "Provider-free unmounted delete-confirm response-compatibility and product-adapter architecture",
+    "objective": "Freeze and prove the narrowest off-route architecture that derives server-owned delete-confirm authority ingress, re-admits proposal and target truth under the physical lock, composes the accepted physical seam, and delivers byte-authoritative replay of the full public confirmation envelope while preserving raw DELETE isolation; open no route, database execution, product data or runtime authority.",
+    "status": "in_progress",
+    "source_head": "5aaed2a859c64062d40dd2fe1b419d48dcc5d821",
+    "authority_source": "The accepted Continuity 304 / Compass 286 closeout and Yuri's standing uninterrupted-development authority name this exact provider-free unmounted architecture as the next dependency-satisfied tranche.",
+    "checkpoint": {
+      "completed_stage": "DeepSeek candidate aabb6b26e4a216092c4c7efbc79f6c5caa01ba79 stayed within the five-file allowlist and passed its checks, but independent admission rejected it because the public projection accepted reordered whitespace-padded private JSON instead of the exact canonical physical receipt bytes.",
+      "next_executable_stage": "Pass a fresh machine-resolved correction-dispatch receipt, run the single allowed same-lane repair on only the validator and focused test, then independently verify exact-byte fail-closed behavior before candidate admission.",
+      "retry_counters": {"planning": 0, "implementation": 1, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:9944bab0bdb1f24084e40ef5e2d315c5734a2a15fbc08c4b1dbb6744a953b644"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_unmounted_architecture_and_authored_synthetic_contract_evidence_only",
+      "no_route_edit_mount_call_or_http_transport_opening",
+      "no_database_docker_sql_migration_execution_or_product_command",
+      "no_capability_provisioning_or_client_supplied_authority",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "raw_delete_compatibility_ingress_remains_isolated",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-delete-confirm-response-compatibility-and-product-adapter-architecture",
+    "assessed_stage": "bounded_same_lane_correction_pre_worker_dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The defect is reproduced and reduces to one exact two-file canonical-byte correction within the already isolated worker branch.", "work_packages": ["validator and focused-test exact private-receipt byte admission correction"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Gemini independence remains valuable only after Sol admits the corrected exact candidate and the deterministic profile passes.", "work_packages": ["final authority, replay, exact-byte and raw DELETE isolation veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "The developer constraint does not authorize native delegation, and adding another lane to a two-file repair would increase coordination cost.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["only one same-lane correction is allowed", "Sol reruns the independent reproduction and full focused profile", "Gemini waits for corrected candidate admission", "protected refs remain closed"],
+    "reassessment_triggers": ["correction closeout", "scope breach or failed correction", "candidate admission", "pre-verifier acceptance", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_receipt_plus_exact_candidate_defect_reproduction", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol independently reproduced and bounded the exact-byte defect."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane remains declined."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high remains reserved for final veto."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["The first lane completed cleanly and its exact two-file correction is prepared."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Anthropic transport not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"agent_id": "deepseek-v4-flash-high-delete-confirm-response-architecture-correction", "worktree": "C:/Users/sarashera/EMR4-worktrees/r194", "branch": "codex/worker-delete-confirm-response-architecture-5aaed2a8", "clean": true, "at_handoff_current": false, "recorded_divergence": "rejected candidate aabb6b26e4a216092c4c7efbc79f6c5caa01ba79 descends from exact non-protected semantic source 5aaed2a859c64062d40dd2fe1b419d48dcc5d821", "recorded_at": "2026-08-16T17:00:07.6054524+10:00"}],
+  "assigned_agent_ids": []
+}
