@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "29e88c9542e52228bec94db4afd48490da9f83dbb939526a8b82302012c7810f",
+  "canonical_register_sha256": "4f1c420c560f7fb22ec1c3343469fd911bd83b1d87e8fffebaca0042e72b1300",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 105,
       "canonical_unchanged": 222,
-      "untrusted_partial_worktree": 38
+      "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 57,
       "evidence_misreport": 50,
       "harness_failure": 44,
-      "output_contract_violation": 105,
+      "output_contract_violation": 106,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
       "repository_defect": 56,
-      "transport_timeout": 10
+      "transport_timeout": 11
     },
     "by_origin": {
-      "agent_behavior": 255,
+      "agent_behavior": 256,
       "harness": 44,
       "repository": 56,
-      "transport": 10
+      "transport": 11
     },
     "by_process_severity": {
       "low": 142,
-      "material": 112,
-      "moderate": 111
+      "material": 113,
+      "moderate": 112
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -47,11 +47,11 @@
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 12,
+      "deepseek-flash-workers::implementer": 13,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
-      "deepseek-v4-flash-implementation-worker::implementer": 5,
+      "deepseek-v4-flash-implementation-worker::implementer": 6,
       "deepseek-v4-flash-worker-delete-confirm-btr::implementer": 1,
       "delete-confirm-behavior-transaction-harness::implementer": 4,
       "docker-desktop-windows::orchestrator": 1,
@@ -90,14 +90,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 35,
+      "implementer": 37,
       "integration_reviewer": 2,
       "orchestrator": 276,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 365,
+  "incident_count": 367,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -942,16 +942,18 @@
       "categories": [
         "transport_timeout"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0036",
         "AER-0038",
-        "AER-0326"
+        "AER-0326",
+        "AER-0367"
       ],
       "origins": [
         "transport"
       ],
       "prevention_controls": [
+        "A failed bounded Flash correction receives no further same-lane retry. Exact HEAD, changed-path and receipt readback remain mandatory; partial source stays quarantined while Sol independently reimplements and verifies the correction.",
         "A recurrent DeepSeek no-terminal transport event triggers direct Sol fallback after exact result-path, owned-path, HEAD and worktree readback; no same-lane retry or late source adoption is permitted without a distinct authorised recovery.",
         "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
         "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority."
@@ -995,7 +997,7 @@
       ]
     }
   ],
-  "register_revision": 316,
+  "register_revision": 318,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

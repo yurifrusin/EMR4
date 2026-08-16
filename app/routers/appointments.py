@@ -5600,12 +5600,20 @@ def confirm_delete_proposal_route(
         session_binding_secret=_delete_confirm_domain_secret("stored-session-binding"),
         evidence_secret=_delete_confirm_evidence_secret(),
     )
-    if result.stored_response_bytes is not None:
+    if result.kind in {"committed", "replay"}:
+        if result.stored_response_bytes is None:
+            raise RuntimeError(
+                "delete-confirm success is missing its private receipt invariant"
+            )
         public_bytes = canonical_delete_confirm_envelope_bytes(result.body)
         return Response(
             content=public_bytes,
             status_code=result.status_code,
             media_type="application/json",
+        )
+    if result.stored_response_bytes is not None:
+        raise RuntimeError(
+            "delete-confirm non-success unexpectedly carried private receipt bytes"
         )
     return JSONResponse(status_code=result.status_code, content=dict(result.body))
 

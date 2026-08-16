@@ -580,10 +580,7 @@ def test_delete_confirm_blocks_tampered_signed_evidence_without_write(
     data = confirm_resp.json()
     assert data["safe"] is False
     assert any(
-        block["code"] in {
-            "stale_delete_proposal_freshness_id",
-            "signed_evidence_mismatch",
-        }
+        block["code"] == "stale_delete_proposal_freshness_id"
         for block in data["blocks"]
     )
     db.refresh(appt)

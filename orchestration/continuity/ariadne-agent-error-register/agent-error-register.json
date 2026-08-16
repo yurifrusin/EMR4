@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 316,
+  "register_revision": 318,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -14657,6 +14657,87 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0366",
+      "attempt_id": "raisa-delete-confirm-http-route-convergence-deepseek-implementation-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-delete-confirm-http-route-convergence",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-implementation-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "A completed delete-confirm route candidate must bind the dedicated minimal OpenAPI success envelope, reject nested receipt extras and non-null waiting-area values, and make its deterministic reviewer fail on either omission before self-reporting all scenarios passed.",
+      "observed_error": "The worker reported all checks and twelve scenarios passed, but the OpenAPI delete response still referenced the generic appointment envelope and the nested Pydantic receipt admitted unknown fields and a non-null waiting-area value. Its reviewer did not inspect those exact leaves and also marked hostile-envelope coverage passed without requiring every enumerated mutation to be rejected.",
+      "detection_method": "Sol read the exact source and OpenAPI candidate, directly validated a nested extra and non-null waiting-area value against the response model, and compared the delete response reference and reviewer pass predicate with the frozen private/public boundary before admission.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-provider-free-delete-confirm-http-route-convergence-launcher-receipt.json",
+        "orchestration/agent_inbox/deepseek/raisa-provider-free-delete-confirm-http-route-convergence-worker-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-sol-recovery-lease.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.delete_confirm_minimal_response_schema_and_reviewer_widened",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Adopt the initial worker commits only as untrusted source, implement the strict nested receipt and dedicated OpenAPI envelope under Sol identity, make committed/replay and private-byte presence reciprocal invariants, and add focused plus deterministic reviewer guards for every original omission before independent veto.",
+        "prevention_control": "The focused response-model tests now reject nested extras, non-null waiting-area values, unknown or null reason codes, widened warnings and audit labels; the API Spine test pins the dedicated response reference, and the reviewer requires every enumerated hostile envelope mutation to be rejected.",
+        "evidence_paths": [
+          "app/schemas/appointments.py",
+          "app/routers/appointments.py",
+          "docs/api-spine/openapi/appointment-commands.yaml",
+          "scripts/raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-318.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0367",
+      "attempt_id": "raisa-delete-confirm-http-route-convergence-deepseek-mechanical-correction-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-delete-confirm-http-route-convergence",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "The sole bounded mechanical correction must return a non-transferable terminal receipt and commit, or stop with exact worktree containment and no source admission before the Flash lane is closed.",
+      "observed_error": "The correction remained without a terminal closeout during the bounded observation interval and ended with launcher exit code 1 after interruption. It produced no receipt or commit and left two uncommitted partial files at unchanged worker HEAD 45311f8c238d935716574abae96d9715a070782d.",
+      "detection_method": "Sol observed the launcher termination, verified the correction receipt and commit were absent, then read exact worker HEAD and status and found only app/schemas/appointments.py and docs/api-spine/openapi/appointment-commands.yaml modified.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-deepseek-mechanical-correction-failure-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-sol-recovery-lease.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Close the exhausted DeepSeek correction lane, preserve its unchanged HEAD and two-file partial worktree without admission, and complete the mechanical repair under the explicit Sol recovery lease with deterministic tests and a required fresh independent veto.",
+        "prevention_control": "A failed bounded Flash correction receives no further same-lane retry. Exact HEAD, changed-path and receipt readback remain mandatory; partial source stays quarantined while Sol independently reimplements and verifies the correction.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-deepseek-mechanical-correction-failure-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-sol-recovery-lease.md",
+          "docs/ariadne-agent-error-correction-register-revision-318.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

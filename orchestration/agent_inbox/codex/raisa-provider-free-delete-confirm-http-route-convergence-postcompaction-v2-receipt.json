@@ -1,0 +1,101 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free delete-confirm HTTP route convergence",
+    "completed_stage": "DeepSeek produced clean candidate 45311f8c238d935716574abae96d9715a070782d, which Sol rejected for two mechanical schema omissions. The one permitted same-lane correction then ended with exit 1, no correction receipt or commit, and untrusted partial edits limited to app/schemas/appointments.py and docs/api-spine/openapi/appointment-commands.yaml in the preserved worker worktree.",
+    "next_executable_stage": "Preserve both worker failures, open the Sol recovery lease, register the qualifying incidents, adopt or reimplement only independently reviewed source, and rerun deterministic admission before any Gemini veto.",
+    "operation_id": "raisa-provider-free-delete-confirm-http-route-convergence",
+    "resume_after_compaction": true,
+    "source_head": "f78524b41c909c74acc93b2818be8fc871ed8fd3",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "f78524b41c909c74acc93b2818be8fc871ed8fd3",
+    "reason_codes": [],
+    "resolved_commit": "f78524b41c909c74acc93b2818be8fc871ed8fd3",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f78524b41c909c74acc93b2818be8fc871ed8fd3"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "postcompaction_recovery",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The initial bounded candidate was useful but incomplete, and the single allowed correction transport ended without a transferable closeout. The lane is closed for this recovery under the Flash correction-loop rule.",
+        "work_packages": [
+          "preserved initial candidate and failed correction evidence"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Recovered authenticated transport and private/public byte-boundary changes require one fresh exact-candidate veto after deterministic admission.",
+        "work_packages": [
+          "provider-free exact-candidate route, authority and byte-separation veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native subagent delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-delete-confirm-http-route-convergence",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic recovery failure",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol recovery lease and incident registration",
+      "Sol source adoption or reimplementation",
+      "deterministic admission",
+      "Gemini veto",
+      "Sol acceptance and publication"
+    ]
+  },
+  "planned_action": "continue",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-plan.md",
+      "docs/security/raisa-provider-free-delete-confirm-http-route-convergence-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-contract.json",
+      "orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-contract.schema.json",
+      "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md"
+    ],
+    "current_authority_allocation": "Sol owns recovery, source adoption, integration and acceptance. The DeepSeek V4 Flash/high lane has consumed its one bounded correction and is closed for this recovery. Gemini 3.7 Flash/high remains reserved for a fresh exact-candidate veto after deterministic admission. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task HEAD is exact plan commit f78524b41c909c74acc93b2818be8fc871ed8fd3 on codex/ariadne-bernie-davida-parallel-seam; origin task remains accepted predecessor d4a360640b2a50ae7c26ff5d020eca68c60c4533 pending ordinary closeout publication. Required resumed source 648c8ec9805af63729264ea9c22fd695f062a741 and readiness source da03039f637d3808c8785a6d6fc95309650044d9 remain ancestors. Local/origin master and handoff/current remain exact protected commit 2e34bdad732fdab32fbf778280b3d3c70d66d602. The dirty tree contains the active latch and named tranche evidence plus preserved unrelated untracked files; no broad staging is permitted.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Its Current Baton accepts Continuity 307 / Compass 289 and directs the narrowest provider-free delete-confirm HTTP route-convergence candidate while protected refs remain closed.",
+    "protected_evidence_boundaries": "The frozen tranche closes only the five accepted route-transition gaps. No database, Docker, SQL, source watcher, accepted adapter/composition/physical edit, raw DELETE convergence, capability provisioning, patient/clinical/product/protected data, provider, ADC, credential, IAM, browser, external network, UI, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

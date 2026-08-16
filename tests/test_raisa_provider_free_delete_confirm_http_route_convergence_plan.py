@@ -9,6 +9,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = ROOT / "docs" / "raisa-provider-free-delete-confirm-http-route-convergence-plan.md"
 THREAT_DELTA = (
@@ -25,6 +27,7 @@ CONTRACT = (
     / "route-convergence-contract.json"
 )
 REVIEWER = ROOT / "scripts" / "raisa_provider_free_delete_confirm_http_route_convergence.py"
+OPENAPI = ROOT / "docs" / "api-spine" / "openapi" / "appointment-commands.yaml"
 
 
 def _read_text(path: Path) -> str:
@@ -80,6 +83,28 @@ def test_contract_pins_route_and_public_response_contract():
     assert contract["public_response"]["private_receipt_may_be_http_content"] is False
     assert "appointment" in contract["public_response"]["forbidden_fields"]
     assert set(contract["scenarios"]) == {f"DHC-S{i:02d}" for i in range(1, 13)}
+
+
+def test_openapi_uses_dedicated_strict_delete_confirm_response():
+    document = yaml.safe_load(_read_text(OPENAPI))
+    response_schema = document["paths"]["/appointments/proposals/delete/confirm"][
+        "post"
+    ]["responses"]["200"]["content"]["application/json"]["schema"]
+    assert response_schema == {
+        "$ref": "#/components/schemas/AppointmentDeleteConfirmResultEnvelope"
+    }
+
+    schemas = document["components"]["schemas"]
+    result = schemas["AppointmentDeleteConfirmResultEnvelope"]
+    receipt = schemas["AppointmentDeleteConfirmationReceipt"]
+    assert result["additionalProperties"] is False
+    assert "appointment" not in result["properties"]
+    assert receipt["additionalProperties"] is False
+    assert receipt["properties"]["waiting_area_id"]["type"] == "null"
+    assert receipt["properties"]["warning_codes"]["items"]["enum"] == [
+        "waiting_area_cleared"
+    ]
+    assert receipt["properties"]["warning_codes"]["maxItems"] == 1
 
 
 def test_reviewer_no_write_returns_zero_and_changes_nothing():

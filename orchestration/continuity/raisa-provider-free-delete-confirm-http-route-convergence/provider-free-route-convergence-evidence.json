@@ -38,7 +38,7 @@
     },
     {
       "description": "minimal public schema admits exact receipt envelope and rejects forbidden fields",
-      "details": "exact receipt envelope admitted; forbidden/extra fields rejected",
+      "details": "exact receipt envelope admitted; top-level, nested receipt and bounded-audit mutations rejected",
       "id": "DHC-S05",
       "passed": true
     },

@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "integrate_untrusted_worker_candidate_under_sol_recovery_lease",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton directs the frozen provider-free delete-confirm HTTP route-convergence tranche from exact plan HEAD f78524b41c909c74acc93b2818be8fc871ed8fd3.",
+    "current_authority_allocation": "Sol owns the recovery lease, source adoption or reimplementation, deterministic admission, integration and acceptance. DeepSeek closeout provenance remains non-transferable and its correction lane is exhausted. Gemini 3.7 Flash/high remains a later independent exact-candidate veto. Native subagents are declined by developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-plan.md",
+      "docs/security/raisa-provider-free-delete-confirm-http-route-convergence-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-contract.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-sol-recovery-lease.md",
+      "orchestration/agent_inbox/deepseek/raisa-provider-free-delete-confirm-http-route-convergence-launcher-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-deepseek-mechanical-correction-failure-receipt.json"
+    ],
+    "protected_evidence_boundaries": "Integration adopts only exact worker commits abdbcd5f28d39d21084bbc86b22f7201217226b0 and 45311f8c238d935716574abae96d9715a070782d as untrusted source. No database, Docker, SQL, source watcher, accepted adapter/composition/physical edit, raw DELETE convergence, capability, product/protected data, provider, credential, UI, deployment, release, Pages or protected refs are opened. docs/branding and unrelated untracked files remain preserved; staging stays explicit-path only.",
+    "git_refs_and_worktree": "Primary task HEAD is exact f78524b41c909c74acc93b2818be8fc871ed8fd3 on codex/ariadne-bernie-davida-parallel-seam. The initial worker result and receipt commits resolve locally as abdbcd5f28d39d21084bbc86b22f7201217226b0 and 45311f8c238d935716574abae96d9715a070782d. The preserved worker worktree remains at receipt commit 45311f8c238d935716574abae96d9715a070782d with only two uncommitted partial correction paths. Local/origin master and handoff/current remain exact protected commit 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-delete-confirm-http-route-convergence",
+    "active_tranche": "Provider-free delete-confirm HTTP route convergence",
+    "objective": "Close exactly the five accepted delete-confirm route-transition gaps through one canonical and hidden-alias handler, one server-minted proposal-version binding, server-owned authentication/session/secret ingress, the accepted delete product adapter, the minimal public receipt schema and canonical public bytes, without executing a database command or changing raw DELETE behavior.",
+    "status": "in_progress",
+    "source_head": "f78524b41c909c74acc93b2818be8fc871ed8fd3",
+    "authority_source": "The Continuity 307 / Compass 289 readiness acceptance, AGENTS.md Current Baton and Yuri's standing uninterrupted-development authority direct the narrowest provider-free delete-confirm HTTP route-convergence candidate.",
+    "checkpoint": {
+      "completed_stage": "DeepSeek produced clean candidate 45311f8c238d935716574abae96d9715a070782d, which Sol rejected for two mechanical schema omissions. The one permitted same-lane correction then ended with exit 1, no correction receipt or commit, and untrusted partial edits limited to app/schemas/appointments.py and docs/api-spine/openapi/appointment-commands.yaml in the preserved worker worktree.",
+      "next_executable_stage": "Preserve both worker failures, open the Sol recovery lease, register the qualifying incidents, adopt or reimplement only independently reviewed source, and rerun deterministic admission before any Gemini veto.",
+      "retry_counters": {"planning": 0, "implementation": 1, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_and_static_route_evidence_only",
+      "no_database_docker_sql_source_or_watcher_execution",
+      "no_accepted_delete_adapter_composition_or_physical_edit",
+      "no_raw_delete_convergence_or_route_local_write_fallback",
+      "no_capability_provisioning_or_client_selected_authority",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_or_external_network",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-delete-confirm-http-route-convergence",
+    "assessed_stage": "sol_recovery_preintegration",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "neutral", "rationale": "The initial candidate is preserved as untrusted source and the one permitted correction ended without a transferable closeout; no further same-lane work is authorised.", "work_packages": ["preserved initial candidate and failed correction evidence"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "The recovered authenticated transport and private/public byte boundary require a fresh exact-candidate veto after deterministic admission.", "work_packages": ["provider-free exact-candidate route, authority and byte-separation veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits native subagent delegation.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["preintegration receipt", "exact worker commit adoption", "Sol amendments", "deterministic admission", "Gemini veto", "Sol acceptance/publication"],
+    "reassessment_triggers": ["integration conflict", "deterministic recovery failure", "pre-verifier gate", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh five-source post-compaction receipt plus explicit recovery lease", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is adopting only the exact rejected candidate under explicit recovery provenance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined by policy."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "unreachable", "evidence": ["Initial source and failed correction are preserved; the correction lane is closed."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high is serially gated on recovered deterministic admission."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

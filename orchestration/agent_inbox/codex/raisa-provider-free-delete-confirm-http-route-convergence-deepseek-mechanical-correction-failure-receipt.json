@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.worker_transport_failure_receipt.v1",
+  "status": "contained",
+  "attempt_id": "raisa-delete-confirm-http-route-convergence-deepseek-mechanical-correction-001",
+  "observed_on": "2026-08-17",
+  "source_head": "45311f8c238d935716574abae96d9715a070782d",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-route-convergence-deepseek-f78524b4",
+  "branch": "codex/worker-delete-confirm-http-route-f78524b4",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "exit_code": 1,
+  "terminal_receipt_present": false,
+  "result_commit_present": false,
+  "head_unchanged": true,
+  "observed_head": "45311f8c238d935716574abae96d9715a070782d",
+  "partial_changed_paths": [
+    "app/schemas/appointments.py",
+    "docs/api-spine/openapi/appointment-commands.yaml"
+  ],
+  "candidate_state": "untrusted_partial_worktree",
+  "containment": {
+    "same_lane_retry_permitted": false,
+    "partial_source_admitted": false,
+    "worker_worktree_preserved": true,
+    "protected_refs_changed": false,
+    "database_or_provider_opened": false
+  },
+  "next_action": "Apply the explicit Sol recovery lease; independently adopt or reimplement only reviewed source, add deterministic guards, and require a fresh Gemini veto before acceptance."
+}

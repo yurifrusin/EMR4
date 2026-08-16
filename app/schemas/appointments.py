@@ -3,6 +3,10 @@ from datetime import datetime, date, time
 from typing import Any, Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel, AppointmentAuditAction
+from app.services.appointment_delete_physical import (
+    DELETE_CONFIRM_CANCELLATION_REASON_MAX,
+    DELETE_CONFIRM_REASON_CODES,
+)
 from app.services.diary.confirm_gate import ConfirmAffordanceDecision
 
 
@@ -699,15 +703,44 @@ class AppointmentDeleteProposalConfirmationIn(BaseModel):
 
 
 class AppointmentDeleteConfirmationReceipt(BaseModel):
+    """Strict minimal public projection of the private delete receipt."""
+
+    model_config = ConfigDict(extra="forbid")
+
     schema_version: Literal[
         "appointment.delete_confirmation_receipt.v1"
     ] = "appointment.delete_confirmation_receipt.v1"
     appointment_id: uuid.UUID
     status: Literal["Cancelled"] = "Cancelled"
-    status_reason_code: Optional[str] = None
-    cancellation_reason: Optional[str] = None
-    waiting_area_id: Optional[uuid.UUID] = None
-    warning_codes: list[str] = Field(default_factory=list)
+    status_reason_code: str = Field(max_length=50)
+    cancellation_reason: Optional[str] = Field(
+        default=None,
+        max_length=DELETE_CONFIRM_CANCELLATION_REASON_MAX,
+    )
+    waiting_area_id: None = None
+    warning_codes: list[Literal["waiting_area_cleared"]] = Field(
+        default_factory=list,
+        max_length=1,
+    )
+
+    @field_validator("status_reason_code")
+    @classmethod
+    def validate_delete_reason_code(cls, value: str) -> str:
+        if value not in DELETE_CONFIRM_REASON_CODES:
+            raise ValueError(
+                "status_reason_code must be one of the dedicated delete-confirm codes"
+            )
+        return value
+
+    @field_validator("warning_codes")
+    @classmethod
+    def validate_delete_warning_codes(
+        cls,
+        value: list[Literal["waiting_area_cleared"]],
+    ) -> list[Literal["waiting_area_cleared"]]:
+        if value != sorted(value) or len(value) != len(set(value)):
+            raise ValueError("delete-confirm warning codes must be sorted and unique")
+        return value
 
 
 class AppointmentConfirmDeleteProposalOut(BaseModel):
@@ -718,7 +751,7 @@ class AppointmentConfirmDeleteProposalOut(BaseModel):
     schedule, notes, mutable identity or unknown extra field.
     """
 
-    model_config = {"extra": "forbid"}
+    model_config = ConfigDict(extra="forbid")
 
     schema_version: Literal[
         "raisa.delete_confirm_public_envelope.v1"
@@ -731,7 +764,42 @@ class AppointmentConfirmDeleteProposalOut(BaseModel):
     receipt: Optional[AppointmentDeleteConfirmationReceipt] = None
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
-    audit_evidence: list[str] = Field(default_factory=list)
+    audit_evidence: list[
+        Literal[
+            "delete_product_adapter_v1",
+            "delete_signed_confirmation_evidence_verified",
+            "delete_current_authority_rechecked",
+        ]
+    ] = Field(default_factory=list, max_length=3)
+
+    @field_validator("audit_evidence")
+    @classmethod
+    def validate_delete_audit_evidence(
+        cls,
+        value: list[
+            Literal[
+                "delete_product_adapter_v1",
+                "delete_signed_confirmation_evidence_verified",
+                "delete_current_authority_rechecked",
+            ]
+        ],
+    ) -> list[
+        Literal[
+            "delete_product_adapter_v1",
+            "delete_signed_confirmation_evidence_verified",
+            "delete_current_authority_rechecked",
+        ]
+    ]:
+        expected = [
+            "delete_product_adapter_v1",
+            "delete_signed_confirmation_evidence_verified",
+            "delete_current_authority_rechecked",
+        ]
+        if value not in ([], expected):
+            raise ValueError(
+                "delete-confirm audit evidence must be empty or the exact bounded labels"
+            )
+        return value
 
 
 class AppointmentAuditLogOut(BaseModel):

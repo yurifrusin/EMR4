@@ -321,7 +321,42 @@ def _scenario_dhc_s05() -> CheckResult:
             pass
         else:
             return CheckResult("DHC-S05", "minimal public schema admits exact receipt envelope and rejects forbidden fields", False, f"forbidden field {field} accepted")
-    return CheckResult("DHC-S05", "minimal public schema admits exact receipt envelope and rejects forbidden fields", True, "exact receipt envelope admitted; forbidden/extra fields rejected")
+    receipt_mutations = (
+        ("nested_extra", lambda receipt: receipt.__setitem__("unknown", True)),
+        ("waiting_area_non_null", lambda receipt: receipt.__setitem__("waiting_area_id", "33333333-3333-4333-8333-333333333333")),
+        ("reason_null", lambda receipt: receipt.__setitem__("status_reason_code", None)),
+        ("reason_unknown", lambda receipt: receipt.__setitem__("status_reason_code", "UNKNOWN")),
+        ("cancellation_too_long", lambda receipt: receipt.__setitem__("cancellation_reason", "x" * 501)),
+        ("warning_unknown", lambda receipt: receipt.__setitem__("warning_codes", ["unknown"])),
+        ("warning_duplicate", lambda receipt: receipt.__setitem__("warning_codes", ["waiting_area_cleared", "waiting_area_cleared"])),
+    )
+    for label, mutate in receipt_mutations:
+        hostile = copy.deepcopy(envelope)
+        mutate(hostile["receipt"])
+        try:
+            AppointmentConfirmDeleteProposalOut.model_validate(hostile)
+        except ValidationError:
+            continue
+        return CheckResult(
+            "DHC-S05",
+            "minimal public schema admits exact receipt envelope and rejects forbidden fields",
+            False,
+            f"nested receipt mutation {label} accepted",
+        )
+    hostile = copy.deepcopy(envelope)
+    hostile["audit_evidence"] = ["unknown_audit_label"]
+    try:
+        AppointmentConfirmDeleteProposalOut.model_validate(hostile)
+    except ValidationError:
+        pass
+    else:
+        return CheckResult(
+            "DHC-S05",
+            "minimal public schema admits exact receipt envelope and rejects forbidden fields",
+            False,
+            "unknown audit label accepted",
+        )
+    return CheckResult("DHC-S05", "minimal public schema admits exact receipt envelope and rejects forbidden fields", True, "exact receipt envelope admitted; top-level, nested receipt and bounded-audit mutations rejected")
 
 
 def _scenario_dhc_s06() -> CheckResult:
@@ -458,6 +493,18 @@ def _scenario_dhc_s10() -> CheckResult:
     route = _handler_body(router_text, HANDLER_NAME, "def propose_delete_appointment(")
     if "content=result.stored_response_bytes" in route:
         return CheckResult("DHC-S10", "projection/serialization failure releases no private bytes and yields no route-local write", False, "stored_response_bytes passed as HTTP content")
+    for fragment in (
+        'if result.kind in {"committed", "replay"}:',
+        "if result.stored_response_bytes is None:",
+        "if result.stored_response_bytes is not None:",
+    ):
+        if fragment not in route:
+            return CheckResult(
+                "DHC-S10",
+                "projection/serialization failure releases no private bytes and yields no route-local write",
+                False,
+                f"missing private-receipt invariant {fragment}",
+            )
     for frag in ("db.add(", "db.commit(", "_apply_appointment_delete("):
         if frag in route:
             return CheckResult("DHC-S10", "projection/serialization failure releases no private bytes and yields no route-local write", False, f"route-local write {frag}")
@@ -465,6 +512,8 @@ def _scenario_dhc_s10() -> CheckResult:
 
 
 def _scenario_dhc_s11() -> CheckResult:
+    import yaml
+
     router_text = _read_text(ROUTER_PATH)
     openapi_text = _read_text(OPENAPI_PATH)
     inventory_text = _read_text(INVENTORY_PATH)
@@ -476,6 +525,22 @@ def _scenario_dhc_s11() -> CheckResult:
         return CheckResult("DHC-S11", "API Spine/backend inventory/schema/Diary descriptor agree on canonical identity", False, "router missing alias")
     if "/appointments/proposals/delete/confirm" not in openapi_text:
         return CheckResult("DHC-S11", "API Spine/backend inventory/schema/Diary descriptor agree on canonical identity", False, "openapi missing canonical path")
+    document = yaml.safe_load(openapi_text)
+    response_ref = document["paths"]["/appointments/proposals/delete/confirm"]["post"]["responses"]["200"]["content"]["application/json"]["schema"].get("$ref")
+    if response_ref != "#/components/schemas/AppointmentDeleteConfirmResultEnvelope":
+        return CheckResult("DHC-S11", "API Spine/backend inventory/schema/Diary descriptor agree on canonical identity", False, f"delete response ref is {response_ref}")
+    schemas = document["components"]["schemas"]
+    receipt_schema = schemas.get("AppointmentDeleteConfirmationReceipt", {})
+    result_schema = schemas.get("AppointmentDeleteConfirmResultEnvelope", {})
+    warning_items = receipt_schema.get("properties", {}).get("warning_codes", {}).get("items", {})
+    if (
+        receipt_schema.get("additionalProperties") is not False
+        or result_schema.get("additionalProperties") is not False
+        or receipt_schema.get("properties", {}).get("waiting_area_id", {}).get("type") != "null"
+        or warning_items.get("enum") != ["waiting_area_cleared"]
+        or "appointment" in result_schema.get("properties", {})
+    ):
+        return CheckResult("DHC-S11", "API Spine/backend inventory/schema/Diary descriptor agree on canonical identity", False, "dedicated delete response schema is widened or incomplete")
     if "/proposals/delete/confirm" not in inventory_text or "/proposals/delete-confirm" not in inventory_text:
         return CheckResult("DHC-S11", "API Spine/backend inventory/schema/Diary descriptor agree on canonical identity", False, "inventory missing canonical/alias")
     if "/api/v1/appointments/proposals/delete/confirm" not in confirm_actions_text:
@@ -643,10 +708,11 @@ def _hostile_envelope_mutations() -> CheckResult:
             canonical_delete_confirm_envelope_bytes(mutated)
         except (ValueError, TypeError, AssertionError):
             rejected += 1
+    all_rejected = rejected == len(mutations)
     return CheckResult(
         "hostile_envelope_mutations",
         "hostile public-envelope mutations rejected by the canonical serializer",
-        True,
+        all_rejected,
         f"{rejected}/{len(mutations)} hostile envelope mutations rejected",
     )
 

@@ -745,11 +745,7 @@ def test_waiting_area_clear_true_without_waiting_area_blocks(
     assert resp.status_code == 200, resp.text
     assert resp.json()["safe"] is False
     assert any(
-        block["code"] in {
-            "stale_delete_proposal_freshness_id",
-            "stale_delete_waiting_area_state",
-            "waiting_area_clear_flag_mismatch",
-        }
+        block["code"] == "stale_delete_proposal_freshness_id"
         for block in resp.json()["blocks"]
     )
     assert _row_counts(db) == before
@@ -770,11 +766,7 @@ def test_waiting_area_clear_false_with_waiting_area_blocks(
     assert resp.status_code == 200, resp.text
     assert resp.json()["safe"] is False
     assert any(
-        block["code"] in {
-            "stale_delete_proposal_freshness_id",
-            "stale_delete_waiting_area_state",
-            "waiting_area_clear_flag_mismatch",
-        }
+        block["code"] == "stale_delete_proposal_freshness_id"
         for block in resp.json()["blocks"]
     )
     assert _row_counts(db) == before
@@ -795,7 +787,7 @@ def test_concurrent_different_keys_on_same_delete_are_appointment_write_concurre
     assert second.status_code == 200, second.text
     assert second.json()["safe"] is False
     assert any(
-        block["code"] in {"stale_delete_proposal_freshness_id", "stale_delete_waiting_area_state"}
+        block["code"] == "stale_delete_proposal_freshness_id"
         for block in second.json()["blocks"]
     )
     assert _row_counts(db) == after_first

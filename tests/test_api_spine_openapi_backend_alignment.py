@@ -1,5 +1,4 @@
 from pathlib import Path
-import re
 
 import pytest
 
@@ -22,8 +21,10 @@ def test_openapi_records_current_backend_alignment_extension():
     alignment = doc["x-emr4-current-backend-alignment"]
 
     assert alignment["sprint"] == 123
-    assert alignment["status"] == "canonical_status_confirm_runtime_alias_mounted"
-    assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", alignment["reviewed_on"])
+    assert alignment["status"] == (
+        "canonical_status_and_delete_confirm_runtime_aliases_mounted"
+    )
+    assert alignment["reviewed_on"] == "2026-08-17"
     assert alignment["backend_prefix"] == "/api/v1"
     assert alignment["source_inventory"] == (
         "orchestration/api_spine_appointment_command_alignment_inventory.md"

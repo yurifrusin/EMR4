@@ -23,8 +23,8 @@ tags:
 
 x-emr4-current-backend-alignment:
   sprint: 123
-  status: canonical_status_confirm_runtime_alias_mounted
-  reviewed_on: "2026-08-13"
+  status: canonical_status_and_delete_confirm_runtime_aliases_mounted
+  reviewed_on: "2026-08-17"
   backend_prefix: /api/v1
   source_inventory: orchestration/api_spine_appointment_command_alignment_inventory.md
   guard_test: tests/test_api_spine_appointment_openapi_drift_guard.py
@@ -380,7 +380,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AppointmentConfirmResultEnvelope"
+                $ref: "#/components/schemas/AppointmentDeleteConfirmResultEnvelope"
 
   /appointments/proposals/slot-search/normalize:
     post:
@@ -1272,6 +1272,112 @@ components:
           description: >
             Successful create confirmations may return the stored v1 receipt.
             Blocked confirmations and non-create confirmation families omit it.
+
+    AppointmentDeleteConfirmationReceipt:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - appointment_id
+        - status
+        - status_reason_code
+        - cancellation_reason
+        - waiting_area_id
+        - warning_codes
+      properties:
+        schema_version:
+          const: appointment.delete_confirmation_receipt.v1
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        status:
+          const: Cancelled
+        status_reason_code:
+          type: string
+          maxLength: 50
+          enum:
+            - PATIENT_CANCELLED
+            - PATIENT_RESCHEDULED
+            - PATIENT_UNWELL
+            - PATIENT_TRANSPORT
+            - PRACTITIONER_UNAVAILABLE
+            - CLINIC_OPERATIONAL
+            - CLINIC_RESCHEDULED
+            - ADMIN_ERROR
+            - DUPLICATE_BOOKING
+            - OTHER
+        cancellation_reason:
+          type: [string, "null"]
+          maxLength: 500
+        waiting_area_id:
+          type: "null"
+          description: Delete confirmation always clears the waiting area.
+        warning_codes:
+          type: array
+          maxItems: 1
+          uniqueItems: true
+          items:
+            type: string
+            enum: [waiting_area_cleared]
+      description: >
+        Strict minimal public projection of the private six-field delete
+        receipt. Unknown fields, non-null waiting-area values, unknown reasons
+        and widened warning codes fail closed.
+
+    AppointmentDeleteConfirmResultEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - intent
+        - safe
+        - requires_confirmation
+        - autonomy_tier
+        - summary
+        - receipt
+        - warnings
+        - blocks
+        - audit_evidence
+      properties:
+        schema_version:
+          const: raisa.delete_confirm_public_envelope.v1
+        intent:
+          const: confirm_delete_appointment
+        safe:
+          type: boolean
+        requires_confirmation:
+          type: boolean
+        autonomy_tier:
+          type: string
+          enum: [confirmed_write, blocked]
+        summary:
+          type: string
+        receipt:
+          oneOf:
+            - $ref: "#/components/schemas/AppointmentDeleteConfirmationReceipt"
+            - type: "null"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        audit_evidence:
+          type: array
+          maxItems: 3
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+              - delete_product_adapter_v1
+              - delete_signed_confirmation_evidence_verified
+              - delete_current_authority_rechecked
+      description: >
+        Dedicated versioned minimal delete-confirm public envelope. Successful
+        first delivery and replay share this exact patient-free projection; it
+        never exposes an appointment read model, patient, practitioner,
+        schedule, notes, mutable identity or unknown extra field.
 
     SlotSearchNormalizeCommand:
       type: object

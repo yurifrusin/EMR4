@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 316
+    assert register["register_revision"] == 318
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 366)
+        f"AER-{index:04d}" for index in range(1, 368)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,8 +53,8 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 255
-    assert len(transport_incidents) == 10
+    assert len(agent_incidents) == 256
+    assert len(transport_incidents) == 11
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -66,6 +66,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0081",
         "AER-0198",
         "AER-0326",
+        "AER-0367",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -2576,7 +2577,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 365
+    assert report["incident_count"] == 367
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3613,29 +3614,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 316
-    assert report["incident_count"] == 365
+    assert report["register_revision"] == 318
+    assert report["incident_count"] == 367
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 255,
+        "agent_behavior": 256,
         "harness": 44,
         "repository": 56,
-        "transport": 10,
+        "transport": 11,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 57,
         "evidence_misreport": 50,
         "harness_failure": 44,
-        "output_contract_violation": 105,
+        "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
         "repository_defect": 56,
-        "transport_timeout": 10,
+        "transport_timeout": 11,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 105,
         "canonical_unchanged": 222,
-        "untrusted_partial_worktree": 38,
+        "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
         row
@@ -4171,13 +4172,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
-            "incident_count": 3,
-            "incident_ids": ["AER-0036", "AER-0038", "AER-0326"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0036", "AER-0038", "AER-0326", "AER-0367"],
             "origins": ["transport"],
             "categories": ["transport_timeout"],
             "roles": ["implementer"],
             "resource_ids": ["deepseek-flash-workers"],
             "prevention_controls": [
+                "A failed bounded Flash correction receives no further same-lane retry. Exact HEAD, changed-path and receipt readback remain mandatory; partial source stays quarantined while Sol independently reimplements and verifies the correction.",
                 "A recurrent DeepSeek no-terminal transport event triggers direct Sol fallback after exact result-path, owned-path, HEAD and worktree readback; no same-lane retry or late source adoption is permitted without a distinct authorised recovery.",
                 "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
                 "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority.",
@@ -5759,6 +5761,33 @@ def test_aer_0365_records_tree_object_in_commit_ref_evidence() -> None:
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert "tree object id" in incident["observed_error"].lower()
     assert "before any model call" in incident["observed_error"].lower()
+
+
+def test_aer_0366_and_0367_preserve_delete_route_recovery() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    candidate = incidents["AER-0366"]
+    assert candidate["origin"] == "agent_behavior"
+    assert candidate["role"] == "implementer"
+    assert candidate["category"] == "output_contract_violation"
+    assert candidate["candidate_state"] == "untrusted_partial_worktree"
+    assert candidate["workflow_disposition"] == "recovery_lease_invoked"
+    assert candidate["correction"]["status"] == "recovery_lease_applied"
+    assert candidate["status"] == "corrected"
+    assert "generic appointment envelope" in candidate["observed_error"]
+    assert "nested" in candidate["correction"]["prevention_control"]
+
+    correction = incidents["AER-0367"]
+    assert correction["origin"] == "transport"
+    assert correction["role"] == "implementer"
+    assert correction["category"] == "transport_timeout"
+    assert correction["candidate_state"] == "untrusted_partial_worktree"
+    assert correction["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert correction["correction"]["status"] == "contained_then_escalated"
+    assert correction["status"] == "contained"
+    assert correction["recurrence_signature"] == (
+        "transport.deepseek_occupied_worker_no_terminal_response"
+    )
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

@@ -265,6 +265,17 @@ def test_alias_reaches_same_handler_and_returns_same_public_bytes():
     assert mocked.call_count == 2
 
 
+def test_generated_openapi_contains_only_canonical_delete_confirm_path():
+    paths = APP.openapi()["paths"]
+
+    assert CANONICAL_URL in paths
+    assert ALIAS_URL not in paths
+    response_schema = paths[CANONICAL_URL]["post"]["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]
+    assert response_schema["$ref"].endswith("AppointmentConfirmDeleteProposalOut")
+
+
 def test_blocked_outcome_returns_exact_adapter_status_and_body_no_fallback():
     client = _client()
     body = _signed_request_body()
@@ -342,6 +353,34 @@ def test_serialization_failure_of_bad_public_body_releases_no_private_bytes():
     assert b"private" not in response.content
 
 
+@pytest.mark.parametrize(
+    ("kind", "stored_response_bytes"),
+    (("committed", None), ("error", b'{"private":"secret"}')),
+)
+def test_private_receipt_presence_is_exact_success_invariant(
+    kind: str,
+    stored_response_bytes: bytes | None,
+):
+    client = _client()
+    body = _signed_request_body()
+    public_body = _public_body()
+    result = DeleteConfirmCompositionResult(
+        kind,
+        200,
+        public_body,
+        stored_response_bytes,
+    )
+
+    with patch(
+        "app.routers.appointments.compose_product_delete_confirm",
+        return_value=result,
+    ):
+        response = client.post(CANONICAL_URL, json=body, headers=_auth_headers())
+
+    assert response.status_code == 500
+    assert b"private" not in response.content
+
+
 # ── DHC-S05 minimal public schema ────────────────────────────────────────────
 
 def test_public_schema_forbids_extra_and_appointment_fields():
@@ -355,6 +394,41 @@ def test_public_schema_forbids_extra_and_appointment_fields():
         hostile[forbidden] = {"leak": True}
         with pytest.raises(ValidationError):
             AppointmentConfirmDeleteProposalOut.model_validate(hostile)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    (
+        ("unknown", True),
+        ("waiting_area_id", "44444444-4444-4444-8444-444444444444"),
+        ("status_reason_code", None),
+        ("status_reason_code", "UNKNOWN"),
+        ("cancellation_reason", "x" * 501),
+        ("warning_codes", ["unknown"]),
+        ("warning_codes", ["waiting_area_cleared", "waiting_area_cleared"]),
+    ),
+)
+def test_public_schema_rejects_widened_nested_receipt(field: str, value: object):
+    from pydantic import ValidationError
+
+    public_body = _public_body()
+    public_body["receipt"][field] = value
+
+    with pytest.raises(ValidationError):
+        AppointmentConfirmDeleteProposalOut.model_validate(public_body)
+
+
+def test_public_schema_rejects_unknown_or_partial_audit_labels():
+    from pydantic import ValidationError
+
+    for audit_evidence in (
+        ["unknown_audit_label"],
+        ["delete_product_adapter_v1"],
+    ):
+        public_body = _public_body()
+        public_body["audit_evidence"] = audit_evidence
+        with pytest.raises(ValidationError):
+            AppointmentConfirmDeleteProposalOut.model_validate(public_body)
 
 
 # ── DHC-S12 raw DELETE isolation ─────────────────────────────────────────────

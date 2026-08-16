@@ -24,7 +24,7 @@ Status: provider-free route convergence candidate
 | DHC-S02 | yes | exactly one adapter call with server-owned ingress and no route-local behavior |
 | DHC-S03 | yes | both paths bind one handler; alias absent from OpenAPI |
 | DHC-S04 | yes | byte-identical public bytes; private stored bytes differ and are never HTTP content |
-| DHC-S05 | yes | exact receipt envelope admitted; forbidden/extra fields rejected |
+| DHC-S05 | yes | exact receipt envelope admitted; top-level, nested receipt and bounded-audit mutations rejected |
 | DHC-S06 | yes | all five hostile binding variants rejected |
 | DHC-S07 | yes | all invalid contexts returned closed 403 adapter outcomes |
 | DHC-S08 | yes | blank idempotency returned 409 idempotency_key_required; route missing/blank maps to 400 |
