@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "The authorized AER-0353 harness-only correction is implemented: authority_calls now counts exact private _authority_valid invocations, SQL tokens remain independent and the original callable is restored in finally. Thirty-seven focused tests passed with one intentional runtime skip; Ruff, no-write compilation, schema validation and whitespace passed. Product source remains unchanged.",
+    "next_executable_stage": "Commit the exact repair checkpoint, run the one required canonical final profile, freeze the exact candidate and create a five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "1662f7f5ee169b9d1b35060ac62938b850afa5a3",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "authority_counter_repair_precommit",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker lane is closed and the exact serial correction now passes its focused gates.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one Gemini 3.7 Flash/high veto remains mandatory after the final occupied attempt passes and cleans up.",
+        "work_packages": [
+          "one post-pass exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The counter wrapper and database lifecycle are serial and native delegation is not authorized.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "canonical_profile_result",
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one exact harness correction",
+      "one final owned database lifecycle",
+      "Gemini only after pass",
+      "Sol alone accepts"
+    ]
+  },
+  "planned_action": "commit_exact_authority_counter_repair_checkpoint_before_canonical_profile_and_final_freeze",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The authority-counter addendum permits the implemented process-local physical._authority_valid wrapper, independent SQL tracing and guaranteed finally restoration. Thirty-seven focused tests passed with one intentional runtime skip; Ruff, no-write compilation, schema validation and whitespace passed.",
+    "current_authority_allocation": "Sol owns the exact AER-0353 harness counter repair and final attempt. DeepSeek is closed; Gemini 3.7 Flash/high remains reserved for exactly one post-pass veto; native subagents remain declined for the serial stage.",
+    "git_refs_and_worktree": "Task HEAD is 1662f7f5ee169b9d1b35060ac62938b850afa5a3 on codex/ariadne-bernie-davida-parallel-seam with only explicit repair, latch and receipt paths pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task is 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67; all 635 pre-existing untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The Current Baton keeps this delete-confirm behavior/transaction rehearsal active under Yuri's explicit one-repair, one-final-attempt authorization.",
+    "protected_evidence_boundaries": "No occupied runtime has been opened by this repair. The later single attempt remains authored-synthetic, internal-only, portless and tmpfs; product data, routes, providers, deployments, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

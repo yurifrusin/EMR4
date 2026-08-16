@@ -3,8 +3,12 @@ from __future__ import annotations
 import ast
 import copy
 import hashlib
+import inspect
 import json
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -345,6 +349,84 @@ def test_authority_revocation_trace_distinguishes_pre_grant_denial() -> None:
             "authority_revoked",
             ("appointment_for_update", "user_for_share"),
         )
+
+
+def test_authority_call_counter_wraps_semantic_check_and_restores_in_finally() -> None:
+    invocation_source = inspect.getsource(rehearsal._invoke_tx)  # noqa: SLF001
+    assert "original_authority_valid = physical._authority_valid" in invocation_source
+    assert "def counting_authority_valid" in invocation_source
+    assert "authority_calls += 1" in invocation_source
+    assert "return original_authority_valid(*args, **kwargs)" in invocation_source
+    assert "physical._authority_valid = counting_authority_valid" in invocation_source
+    assert "physical._authority_valid = original_authority_valid" in invocation_source
+    assert 'elif token == "grant_authority_check"' not in invocation_source
+    tree = ast.parse(invocation_source)
+    assert any(
+        isinstance(node, ast.Try)
+        and any(
+            "physical._authority_valid = original_authority_valid"
+            in (ast.get_source_segment(invocation_source, item) or "")
+            for item in node.finalbody
+        )
+        for node in ast.walk(tree)
+    )
+
+
+@pytest.mark.parametrize(
+    ("decision_kind", "expected_calls"),
+    [("authority_revoked", 1), ("new_command", 2), ("replay", 2)],
+)
+def test_authority_call_counter_counts_early_and_complete_checks_without_leaking(
+    monkeypatch: pytest.MonkeyPatch,
+    decision_kind: str,
+    expected_calls: int,
+) -> None:
+    def fixed_authority(*_args: object, **_kwargs: object) -> bool:
+        return True
+
+    @contextmanager
+    def fake_session(*_args: object, **_kwargs: object) -> Iterator[object]:
+        yield object()
+
+    @contextmanager
+    def fake_transaction(*_args: object, **_kwargs: object) -> Iterator[SimpleNamespace]:
+        assert rehearsal.physical._authority_valid(  # noqa: SLF001
+            object(),
+            object(),
+            actor_role="Receptionist",
+            signed_authority_generation=2,
+        )
+        if decision_kind == "authority_revoked":
+            raise rehearsal.physical.DeleteConfirmAuthorityRevoked(
+                "current authority unavailable"
+            )
+        assert rehearsal.physical._authority_valid(  # noqa: SLF001
+            object(),
+            object(),
+            actor_role="Receptionist",
+            signed_authority_generation=2,
+        )
+        yield SimpleNamespace(
+            kind=decision_kind,
+            response_body_canonical_bytes=None,
+        )
+
+    def ignore(*_args: object, **_kwargs: object) -> None:
+        return None
+
+    monkeypatch.setattr(rehearsal.physical, "_authority_valid", fixed_authority)
+    monkeypatch.setattr(
+        rehearsal.physical, "delete_confirm_locked_transaction", fake_transaction
+    )
+    monkeypatch.setattr(rehearsal, "Session", fake_session)
+    monkeypatch.setattr(rehearsal.event, "listen", ignore)
+    monkeypatch.setattr(rehearsal.event, "remove", ignore)
+    monkeypatch.setattr(rehearsal, "_assert_token_order", ignore)
+
+    invocation = rehearsal._invoke_tx(object(), rehearsal._fixture(900))  # noqa: SLF001
+
+    assert invocation.authority_calls == expected_calls
+    assert rehearsal.physical._authority_valid is fixed_authority  # noqa: SLF001
 
 
 def test_transaction_case_runtime_attributes_closed_trace_to_group() -> None:

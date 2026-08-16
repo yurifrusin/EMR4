@@ -4,16 +4,16 @@
   "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
   "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
   "status": "in_progress",
-  "source_head": "b4b772dd07a91e89db57fdd23bb1b4afb199a7e7",
+  "source_head": "1662f7f5ee169b9d1b35060ac62938b850afa5a3",
   "authority_source": "Yuri explicitly authorized one further bounded AER-0353 harness-counter repair and one final occupied attempt after stop commit b4b772dd07a91e89db57fdd23bb1b4afb199a7e7; all parent Tier-2 boundaries remain in force.",
   "checkpoint": {
-    "completed_stage": "Yuri explicitly authorized the recommended narrow continuation after the preserved b4b772dd stop. AER-0353 has an exact harness-only correction: count private _authority_valid invocations rather than downstream grant SQL, retain SQL tokens independently and restore the wrapper in finally. No product-source edit or broader attempt budget is authorized.",
-    "next_executable_stage": "Freeze the explicit authority-counter addendum, implement and test the semantic counter wrapper, create one final semantic freeze and five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure.",
+    "completed_stage": "The authorized AER-0353 harness-only correction is implemented: authority_calls now counts exact private _authority_valid invocations, SQL tokens remain independent and the original callable is restored in finally. Thirty-seven focused tests passed with one intentional runtime skip; Ruff, no-write compilation, schema validation and whitespace passed. Product source remains unchanged.",
+    "next_executable_stage": "Commit the exact repair checkpoint, run the one required canonical final profile, freeze the exact candidate and create a five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure.",
     "retry_counters": {
       "planning": 2,
-      "implementation": 5,
+      "implementation": 6,
       "review": 0,
-      "verification": 6
+      "verification": 7
     },
     "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
   },

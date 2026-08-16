@@ -21,12 +21,12 @@
     "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md"
   ],
   "candidate_state": "final_attempt_failed_closed_cleanup_verified_product_source_unchanged_no_pass_claim",
-  "workflow_disposition": "attempt_budget_exhausted_user_attention_required_before_further_runtime",
+  "workflow_disposition": "explicit_one_repair_one_final_attempt_authorized",
   "recurrence_signature": "authority_check.conceptual_invocation_miscounted_as_downstream_grant_sql",
   "correction": {
-    "status": "not_authorized",
-    "action": "If Yuri authorizes one further bounded repair, instrument the exact private _authority_valid function invocation during the harness call, restore it in finally, retain SQL tokens independently, add fail-fast and two-check count tests, and permit one final occupied attempt only.",
+    "status": "correction_in_progress",
+    "action": "Under Yuri's explicit one-repair authorization, instrument the exact private _authority_valid function invocation during the harness call, restore it in finally, retain SQL tokens independently, add fail-fast and two-check count tests, and permit one final occupied attempt only.",
     "prevention_control": "Evidence counters must bind to the semantic event named by the contract, not to one downstream implementation side effect that valid early-return paths may skip."
   },
-  "status": "contained_cleanup_verified_awaiting_authority"
+  "status": "contained_cleanup_verified_repair_authorized"
 }

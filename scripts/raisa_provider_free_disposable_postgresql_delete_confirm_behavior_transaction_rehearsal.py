@@ -1418,12 +1418,15 @@ def _invoke_tx(
     response_bytes: bytes | None = None
     outcome = "unknown"
     original_monotonic = physical.time.monotonic
+    original_authority_valid = physical._authority_valid  # noqa: SLF001
+    observer_listening = False
+    revoke_listener_listening = False
     effective_generation = (
         signed_generation if signed_generation is not None else fixture.signed_generation
     )
 
     def observe(_conn, _cursor, statement, _parameters, _context, _executemany) -> None:
-        nonlocal inserted_seen, authority_calls
+        nonlocal inserted_seen
         token = _statement_token(statement)
         if token == "idempotency_for_update":
             token = (
@@ -1435,8 +1438,11 @@ def _invoke_tx(
             tokens.append(token)
             if token == "idempotency_insert_on_conflict":
                 inserted_seen = True
-            elif token == "grant_authority_check":
-                authority_calls += 1
+
+    def counting_authority_valid(*args: Any, **kwargs: Any) -> bool:
+        nonlocal authority_calls
+        authority_calls += 1
+        return original_authority_valid(*args, **kwargs)
 
     def revoke_hook(_conn, _cursor, statement, _parameters, _context, _executemany) -> None:
         # The winner FOR UPDATE is the second idempotency FOR UPDATE (after the
@@ -1450,10 +1456,13 @@ def _invoke_tx(
                 {"p": fixture.practice_id, "u": fixture.actor_id},
             )
 
-    event.listen(engine, "before_cursor_execute", observe)
-    if revoke_second_check:
-        event.listen(engine, "after_cursor_execute", revoke_hook)
     try:
+        physical._authority_valid = counting_authority_valid  # type: ignore[attr-defined]  # noqa: SLF001
+        event.listen(engine, "before_cursor_execute", observe)
+        observer_listening = True
+        if revoke_second_check:
+            event.listen(engine, "after_cursor_execute", revoke_hook)
+            revoke_listener_listening = True
         if clock_exhaust:
             counter = [0]
 
@@ -1521,8 +1530,10 @@ def _invoke_tx(
     finally:
         if clock_exhaust:
             physical.time.monotonic = original_monotonic
-        event.remove(engine, "before_cursor_execute", observe)
-        if revoke_second_check:
+        physical._authority_valid = original_authority_valid  # type: ignore[attr-defined]  # noqa: SLF001
+        if observer_listening:
+            event.remove(engine, "before_cursor_execute", observe)
+        if revoke_listener_listening:
             event.remove(engine, "after_cursor_execute", revoke_hook)
     _assert_token_order(outcome, tuple(tokens))
     return Invocation(

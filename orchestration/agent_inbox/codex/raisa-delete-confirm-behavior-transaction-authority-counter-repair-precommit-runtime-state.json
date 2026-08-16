@@ -1,0 +1,180 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_authority_counter_repair_checkpoint_before_canonical_profile_and_final_freeze",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The Current Baton keeps this delete-confirm behavior/transaction rehearsal active under Yuri's explicit one-repair, one-final-attempt authorization.",
+    "current_authority_allocation": "Sol owns the exact AER-0353 harness counter repair and final attempt. DeepSeek is closed; Gemini 3.7 Flash/high remains reserved for exactly one post-pass veto; native subagents remain declined for the serial stage.",
+    "active_plan_and_acceptance": "The authority-counter addendum permits the implemented process-local physical._authority_valid wrapper, independent SQL tracing and guaranteed finally restoration. Thirty-seven focused tests passed with one intentional runtime skip; Ruff, no-write compilation, schema validation and whitespace passed.",
+    "protected_evidence_boundaries": "No occupied runtime has been opened by this repair. The later single attempt remains authored-synthetic, internal-only, portless and tmpfs; product data, routes, providers, deployments, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Task HEAD is 1662f7f5ee169b9d1b35060ac62938b850afa5a3 on codex/ariadne-bernie-davida-parallel-seam with only explicit repair, latch and receipt paths pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task is 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67; all 635 pre-existing untracked paths remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+    "status": "in_progress",
+    "source_head": "1662f7f5ee169b9d1b35060ac62938b850afa5a3",
+    "authority_source": "Yuri explicitly authorized one further bounded AER-0353 harness-counter repair and one final occupied attempt after stop commit b4b772dd07a91e89db57fdd23bb1b4afb199a7e7; all parent Tier-2 boundaries remain in force.",
+    "checkpoint": {
+      "completed_stage": "The authorized AER-0353 harness-only correction is implemented: authority_calls now counts exact private _authority_valid invocations, SQL tokens remain independent and the original callable is restored in finally. Thirty-seven focused tests passed with one intentional runtime skip; Ruff, no-write compilation, schema validation and whitespace passed. Product source remains unchanged.",
+      "next_executable_stage": "Commit the exact repair checkpoint, run the one required canonical final profile, freeze the exact candidate and create a five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure.",
+      "retry_counters": {
+        "planning": 2,
+        "implementation": 6,
+        "review": 0,
+        "verification": 7
+      },
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "exactly_one_user_authorized_final_database_attempt_after_aer_0353_repair",
+      "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+      "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+      "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",
+      "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+      "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "assessed_stage": "authority_counter_repair_precommit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "rationale": "The worker lane is closed and the exact serial correction now passes its focused gates.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "Exactly one Gemini 3.7 Flash/high veto remains mandatory after the final occupied attempt passes and cleans up.",
+        "work_packages": [
+          "one post-pass exact-candidate veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The counter wrapper and database lifecycle are serial and native delegation is not authorized.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "one exact harness correction",
+      "one final owned database lifecycle",
+      "Gemini only after pass",
+      "Sol alone accepts"
+    ],
+    "reassessment_triggers": [
+      "canonical_profile_result",
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_post_compaction_five_source_rehydration_and_passing_repair_gates",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Closed revision_required worker receipt preserved; no new dispatch."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini remains reserved and unused until an occupied pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the authorized repair and deterministic focused gates."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Declined under serial and authorization constraints."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
