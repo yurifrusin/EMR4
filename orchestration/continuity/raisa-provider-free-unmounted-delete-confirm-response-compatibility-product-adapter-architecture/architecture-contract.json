@@ -1,0 +1,186 @@
+{
+  "schema_version": "raisa.delete_confirm_response_product_adapter_architecture.v1",
+  "operation_id": "confirmAppointmentDeleteProposal",
+  "route_family": "delete-confirm",
+  "mode": "provider_free_unmounted_architecture_only",
+  "source_head": "f0c98682568784441991b080681f9beb3b9354c2",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "input_bindings": [
+    {"path": "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md", "sha256": "6b146f64a715738ff4729588bb77f9fb3c7edfcf04edba272888ad2972f50b6f"},
+    {"path": "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md", "sha256": "2e2941e5bbe8574dd044067140d66bc8ded2b49215376763ed53716423ed6713"},
+    {"path": "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-sol-acceptance.md", "sha256": "fcd9e11be52b3c4bf261f944e196a4cb32f142be1c302b37e76b060381c8eab2"},
+    {"path": "app/services/appointment_delete_physical.py", "sha256": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533"},
+    {"path": "app/services/appointment_status_product_adapter.py", "sha256": "a067e05802a74461fb14571c26e02bb72f34fcdd4624ee2a5ebcadd0266cdf55"},
+    {"path": "app/services/appointment_status_composition.py", "sha256": "42221f72df9290b663b81bd8925afc448d4857733a8029914e09e0b905e9774a"},
+    {"path": "app/schemas/appointments.py", "sha256": "c35c271e9308f1f57eeeee53eefa6388087e126944ab5100c225f50066e3a0cf"},
+    {"path": "app/models/appointments.py", "sha256": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794"},
+    {"path": "app/routers/appointments.py", "sha256": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"},
+    {"path": "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-plan.md", "sha256": "4988e5c694d6b9a4ad07b31d619088a1f7b216d4e6b91f63215a82a5a0dc0704"},
+    {"path": "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md", "sha256": "ff975620aa9dc531b04389f89963759a5decc0e80ab853d6688e5501924e3366"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md", "sha256": "584405db5d49a56e18061f80fcd1faa72c278cf0d4975cf95febc86783609019"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md", "sha256": "8d8e3a388aeda71800f014535dccc63af8da6aaa945834add044dc2a49097a91"}
+  ],
+  "private_receipt": {
+    "schema_version": "appointment.delete_confirmation_private_receipt.v1",
+    "persistence_authority": "sole",
+    "canonical_field_order": [
+      "appointment_id",
+      "status",
+      "status_reason_code",
+      "cancellation_reason",
+      "waiting_area_id",
+      "warning_codes"
+    ],
+    "status_constant": "Cancelled",
+    "waiting_area_constant": null,
+    "warning_code_order": "sorted_unique",
+    "forbidden_fields": [
+      "appointment",
+      "patient",
+      "practitioner",
+      "appointment_date",
+      "start_time",
+      "notes",
+      "reason",
+      "audit_identity"
+    ]
+  },
+  "public_projection": {
+    "schema_version": "raisa.delete_confirm_public_envelope.v1",
+    "receipt_schema_version": "appointment.delete_confirmation_receipt.v1",
+    "source": "validated_private_receipt_bytes_only",
+    "serialization": "utf8_json_sorted_keys_compact_no_nan",
+    "initial_and_replay_use_same_projection": true,
+    "current_appointment_read_for_response": false,
+    "success_fields": [
+      "schema_version",
+      "intent",
+      "safe",
+      "requires_confirmation",
+      "autonomy_tier",
+      "summary",
+      "receipt",
+      "warnings",
+      "blocks",
+      "audit_evidence"
+    ],
+    "success_constants": {
+      "intent": "confirm_delete_appointment",
+      "safe": true,
+      "requires_confirmation": false,
+      "autonomy_tier": "confirmed_write",
+      "summary": "Confirmed delete proposal and cancelled one appointment.",
+      "blocks": [],
+      "audit_evidence": [
+        "delete_product_adapter_v1",
+        "delete_signed_confirmation_evidence_verified",
+        "delete_current_authority_rechecked"
+      ]
+    },
+    "warning_registry": {
+      "waiting_area_cleared": {
+        "code": "waiting_area_cleared",
+        "severity": "warning",
+        "message": "Deleting this appointment will remove the patient from the waiting area."
+      }
+    },
+    "forbidden_success_fields": ["appointment", "audit_event", "live_projection"]
+  },
+  "authority_ingress": {
+    "server_owned_fields": [
+      "practice_id",
+      "actor_id",
+      "actor_role",
+      "authority_generation",
+      "authenticated_session_reference"
+    ],
+    "client_authority_fields": [],
+    "capability_constant": "appointment.cancel.confirm",
+    "capability_check_owner": "delete_confirm_locked_transaction",
+    "current_authority_check_count": 2,
+    "command_session": "distinct_server_owned_close_after_use",
+    "effect_authority_before_physical_seam": false
+  },
+  "proposal_binding": {
+    "schema_version": "raisa.delete_proposal_version_binding.v1",
+    "server_hmac_fields": ["source_version", "evidence_signature"],
+    "client_posture": "opaque_return_unchanged",
+    "positive_source_version_required": true
+  },
+  "admission": {
+    "pre_command_checks": [
+      "exact_delete_proposal_type",
+      "operation_and_route_binding",
+      "explicit_confirmation",
+      "idempotency_key_present",
+      "proposal_safe_and_requires_confirmation",
+      "signed_evidence_exact_purpose_and_binding",
+      "opaque_positive_source_version_binding",
+      "freshness_binding",
+      "unique_sorted_warning_acknowledgement"
+    ],
+    "locked_checks": [
+      "practice_actor_target_binding",
+      "same_positive_source_version",
+      "status_not_cancelled",
+      "waiting_area_and_clears_flag",
+      "reason_and_cancellation_text_command",
+      "freshness_and_signed_evidence",
+      "warning_acknowledgement"
+    ],
+    "effect_authority": false
+  },
+  "composition": {
+    "transaction_factory": "delete_confirm_locked_transaction",
+    "new_command_write_set": ["appointment_cancellation", "attributable_delete_audit", "complete_private_receipt"],
+    "replay_effect_count": 0,
+    "route_local_fallback": false
+  },
+  "outcome_mapping": [
+    {"outcomes": ["committed", "replay"], "http_status": 200, "body": "canonical_public_projection_bytes"},
+    {"outcomes": ["proposal_stop", "admission_stop"], "http_status": 200, "body": "typed_blocked_envelope"},
+    {"outcomes": ["idempotency_key_missing", "idempotency_conflict"], "http_status": 409, "body": "stable_non_sensitive_error"},
+    {"outcomes": ["current_authority_unavailable"], "http_status": 403, "body": "stable_non_sensitive_error"},
+    {"outcomes": ["target_unavailable", "cross_practice_target"], "http_status": 404, "body": "indistinguishable_unavailable"},
+    {"outcomes": ["in_progress_not_replayable", "legacy_receipt_not_replayable"], "http_status": 409, "body": "no_partial_receipt"},
+    {"outcomes": ["wait_budget_exhausted", "scaffold_incomplete", "receipt_integrity_failure", "projection_failure"], "http_status": 503, "body": "no_stored_or_current_appointment_disclosure"}
+  ],
+  "compatibility": {
+    "future_canonical_path": "/appointments/proposals/delete/confirm",
+    "future_hidden_alias": "/appointments/proposals/delete-confirm",
+    "one_future_handler": true,
+    "one_public_envelope_version": true,
+    "raw_delete_path": "/appointments/{appointment_id}",
+    "raw_delete_isolation": [
+      "no_dedicated_adapter_import_or_call",
+      "no_dedicated_capability_inheritance",
+      "no_dedicated_receipt_or_replay_inheritance"
+    ]
+  },
+  "claim_boundary": {
+    "proves": [
+      "coherent_provider_free_unmounted_response_and_product_adapter_architecture",
+      "privacy_minimized_byte_deterministic_public_projection_design",
+      "server_owned_authority_and_locked_readmission_design"
+    ],
+    "does_not_prove": [
+      "adapter_or_schema_implementation",
+      "route_or_http_behavior",
+      "database_execution",
+      "capability_provisioning",
+      "client_compatibility",
+      "deployment_or_production"
+    ]
+  },
+  "forbidden_surfaces": [
+    "product_source_edit",
+    "route_edit_mount_or_call",
+    "database_docker_sql_or_migration_execution",
+    "capability_provisioning_or_product_command",
+    "product_patient_clinical_historical_or_protected_data",
+    "provider_adc_credentials_iam_browser_or_external_network",
+    "ui_deployment_production_release_pages_or_protected_refs",
+    "broad_staging_or_docs_branding"
+  ]
+}
