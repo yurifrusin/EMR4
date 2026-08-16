@@ -1,0 +1,92 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "completed_stage": "DeepSeek candidate d9df95874ea674420b626f5182a68a07e96e6d91 is preserved and rejected during Sol reconciliation: public receipt semantics were under-validated, evidence failures were misclassified as authentication failures, some pre-command stops opened a command session, and the proposal-generation HMAC covered one field beyond the frozen two-field material.",
+    "next_executable_stage": "Run the one permitted same-lane mechanical correction against the preserved four-path candidate, then repeat provider-free deterministic admission. Any remaining conceptual or second correction failure moves to Sol recovery without another worker loop.",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "resume_after_compaction": true,
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "eac9846ee77b4f2621897c1efa84c5ce76c63f59",
+    "reason_codes": [],
+    "resolved_commit": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "44a91b7239ac9f38510c10cb57729ac5312d32f9"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "bounded_worker_correction",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "All four rejected findings are localized mechanical deviations in the worker-owned files, so the single allowed correction has positive leverage.",
+        "work_packages": [
+          "one exact four-path correction for public validation pre-command admission and HMAC material"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini remains serially reserved for a fresh veto only if the corrected candidate passes deterministic admission.",
+        "work_packages": [
+          "one final corrected-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Native delegation remains unavailable and would overlap the bounded correction or independent veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "correction completion",
+      "second failure",
+      "pre-verifier acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one worker correction only",
+      "Sol deterministic admission",
+      "one Gemini veto",
+      "Sol acceptance"
+    ]
+  },
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6dd00ac383cd3a01c476848892335aecf0393002cc05ec71c80583dbbd187980",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and machine contract remain unchanged. Sol's rejection evidence names four local mechanical deviations and no conceptual fork or scope breach.",
+    "current_authority_allocation": "Sol rejected and classified the first candidate. DeepSeek V4 Flash/high receives only one same-lane four-path mechanical correction. Gemini remains reserved for a final veto; native subagents remain declined.",
+    "git_refs_and_worktree": "Task HEAD is planning checkpoint eac9846ee77b4f2621897c1efa84c5ce76c63f59. Worker HEAD is clean rejected candidate d9df95874ea674420b626f5182a68a07e96e6d91. All local/origin protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The fully rehydrated Current Baton keeps the unmounted delete-confirm implementation active and authorises one bounded mechanical worker correction under the Flash correction-loop rule.",
+    "protected_evidence_boundaries": "The correction remains provider-free, unmounted and limited to the same four new files. Every route, schema, model, migration, database, product-data/provider/runtime and protected surface remains closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

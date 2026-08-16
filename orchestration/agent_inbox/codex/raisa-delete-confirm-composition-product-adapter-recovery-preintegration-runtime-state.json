@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "source_evidence": {
+    "live_handover_current_baton": "The active operation remains the provider-free unmounted delete-confirm implementation; the Current Baton and latch require uninterrupted recovery after a bounded worker correction is exhausted.",
+    "current_authority_allocation": "Sol owns the explicit recovery lease, exact amendments, deterministic admission and acceptance. DeepSeek is complete with no further correction. Gemini remains reserved for the mandatory fresh veto.",
+    "active_plan_and_acceptance": "The frozen plan and machine contract are unchanged. The recovery lease preserves both worker commits and permits only two product-test paths for exact freshness/evidence and cross-practice-double amendments.",
+    "protected_evidence_boundaries": "Adoption is source-only and unmounted. No route, schema, model, migration, database, capability, product data, provider, network, deployment, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "Task HEAD is eac9846ee77b4f2621897c1efa84c5ce76c63f59; worker descendant is 5dd9adef40bbc54c9737d0de83b3949c9b95539a with parent d9df95874ea674420b626f5182a68a07e96e6d91. All protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "objective": "Implement and prove the accepted delete-confirm pure public-envelope projection, server-owned ingress packet, proposal and locked re-admission composition, physical-seam call boundary and closed outcome mapping in unmounted product source; edit or call no route, change no schema, execute no database and open no capability, product-data or provider runtime authority.",
+    "status": "in_progress",
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "authority_source": "The accepted Continuity 305 / Compass 287 closeout and Yuri's standing uninterrupted-development authority name this exact provider-free unmounted implementation as the next dependency-satisfied tranche.",
+    "checkpoint": {
+      "completed_stage": "The sole worker correction is preserved at 5dd9adef40bbc54c9737d0de83b3949c9b95539a and closes the four original findings with 63/63 worker tests. Sol reconciliation found two residual conformance gaps: both returned freshness coordinates and the proposal evidence copy are not all required exact, and the fake physical test double misclassifies cross-practice absence. The correction budget is exhausted.",
+      "next_executable_stage": "Adopt the two preserved worker commits under the explicit Sol recovery lease, apply only the exact freshness/evidence and cross-practice-test amendments, then run the full provider-free deterministic admission before any verifier dispatch.",
+      "retry_counters": {"planning": 0, "implementation": 1, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:6dd00ac383cd3a01c476848892335aecf0393002cc05ec71c80583dbbd187980"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_unmounted_authored_synthetic_implementation_and_static_contract_evidence_only", "product_edits_limited_to_separately_frozen_delete_confirm_service_and_test_paths", "no_route_edit_mount_call_or_http_transport_opening", "no_schema_model_migration_database_docker_sql_execution_or_product_command", "no_capability_provisioning_or_client_supplied_authority", "no_product_patient_clinical_historical_diary_or_protected_data", "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network", "no_ui_deployment_production_release_pages_or_protected_ref_movement", "raw_delete_compatibility_ingress_remains_isolated", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "assessed_stage": "sol_recovery_pre_integration",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "positive", "rationale": "The worker supplied the bounded source and one correction; its lane is now closed and preserved for Sol recovery.", "work_packages": ["preserved original and corrected four-path candidate"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Runtime-boundary recovery requires the planned independent veto after deterministic admission.", "work_packages": ["fresh exact recovered-candidate Gemini 3.7 Flash high veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Native delegation remains unavailable and cannot replace the required independent verifier.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["adopt preserved worker commits", "apply exact Sol recovery", "deterministic provider-free admission", "one Gemini veto"],
+    "reassessment_triggers": ["Sol amendment", "deterministic failure", "pre-verifier acceptance", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_recovery_lease_and_five_source_evidence", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Worker lane complete; no further correction permitted."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Reserved for recovered-candidate final veto."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol recovery lease is active."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

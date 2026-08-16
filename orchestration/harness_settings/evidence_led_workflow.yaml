@@ -11,6 +11,7 @@ hard_controls:
   - explicit_path_staging_and_protected_ref_closure
   - active_operation_precedence_and_terminal_response_guard
   - provider_free_pytest_disables_conftest_plugins_and_database_environment
+  - handover_edits_require_acceptance_index_guard
 adaptive_flow:
   active_boundary_artifacts: one_plan_and_one_machine_contract
   external_review: one_final_risk_triggered_veto_unless_a_hard_boundary_is_ambiguous

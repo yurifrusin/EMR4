@@ -493,6 +493,13 @@ def _verified_proposal_state(
     current_state = {key: signed_state[key] for key in sorted(required_state_keys)}
     current_state["source_version"] = source_version
     freshness_id = delete_proposal_freshness_id(proposal.command, current_state)
+    if (
+        proposal.delete_proposal_freshness_id != freshness_id
+        or body.delete_proposal_freshness_id != freshness_id
+    ):
+        raise _DeleteConfirmProposalBlocked(
+            "stale_delete_proposal_freshness_id"
+        )
     expected_payload = delete_signed_confirmation_payload(
         practice_id=authenticated_user.practice_id,
         actor_id=authenticated_user.id,
@@ -506,7 +513,7 @@ def _verified_proposal_state(
         expected_purpose=DELETE_CONFIRM_EVIDENCE_PURPOSE,
         secret=_require_evidence_secret(evidence_secret),
     )
-    if proposal.signed_confirmation_evidence not in (None, dict(evidence)):
+    if proposal.signed_confirmation_evidence != dict(evidence):
         raise _DeleteConfirmProposalBlocked("signed_confirmation_evidence_invalid")
     if result.verified and binding_verified:
         return current_state, freshness_id, "verified", "exact"

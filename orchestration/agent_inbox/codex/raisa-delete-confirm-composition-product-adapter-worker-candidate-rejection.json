@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.worker_candidate_rejection.v1",
+  "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+  "candidate_commit": "d9df95874ea674420b626f5182a68a07e96e6d91",
+  "candidate_parent": "eac9846ee77b4f2621897c1efa84c5ce76c63f59",
+  "worker_receipt": "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-worker-receipt.json",
+  "worker_advisory_decision": "pass",
+  "sol_decision": "revision_required",
+  "defects": [
+    {
+      "id": "DPA-IMPLEMENT-001",
+      "classification": "mechanical",
+      "finding": "canonical_delete_confirm_envelope_bytes checked envelope shape and warning membership but did not enforce the frozen private receipt status, waiting-area, dedicated reason, cancellation-text and sorted-unique warning semantics."
+    },
+    {
+      "id": "DPA-IMPLEMENT-002",
+      "classification": "mechanical",
+      "finding": "Signed-evidence, proposal-version and freshness verification failures were collapsed into authenticated-context 403 instead of a typed 200 proposal/admission stop."
+    },
+    {
+      "id": "DPA-IMPLEMENT-003",
+      "classification": "mechanical",
+      "finding": "Missing idempotency, warning mismatch, explicit-confirmation and other deterministic proposal stops reached command_session_factory before admission rejected them, contrary to the frozen pre-command boundary."
+    },
+    {
+      "id": "DPA-IMPLEMENT-004",
+      "classification": "mechanical",
+      "finding": "The proposal-generation signature material included schema_version in addition to the frozen source_version and evidence_signature fields."
+    }
+  ],
+  "scope_breach": false,
+  "product_effect": false,
+  "provider_calls_after_detection": 0,
+  "recovery": "one_bounded_same_lane_mechanical_correction_then_sol_admission",
+  "claim_boundary": "The original four-path commit remains unintegrated and grants no product, route, database or runtime claim."
+}

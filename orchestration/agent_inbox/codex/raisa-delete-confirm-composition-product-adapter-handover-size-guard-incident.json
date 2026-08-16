@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.harness_incident.v1",
+  "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+  "observed_on": "2026-08-16",
+  "stage": "deterministic_verification",
+  "invariant": "AGENTS.md must remain below the existing 80000-byte compact-handover ceiling and every handover edit must run the acceptance-index guard.",
+  "observed_bytes": 80096,
+  "required_strict_upper_bound": 80000,
+  "detection": "tests/test_agents_acceptance_index.py failed after the new continuous self-correction paragraph was committed in the planning checkpoint.",
+  "scope_effect": "continuity_guard_only",
+  "product_effect": false,
+  "provider_calls_after_detection": 0,
+  "correction": {
+    "action": "Compact the paragraph without changing authority meaning and make the acceptance-index test an explicit hard control for handover edits.",
+    "expected_result": "AGENTS.md below 80000 bytes and focused acceptance-index plus evidence-gate tests pass."
+  }
+}

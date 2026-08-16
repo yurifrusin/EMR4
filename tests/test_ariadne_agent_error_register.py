@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 311
+    assert register["register_revision"] == 312
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 359)
+        f"AER-{index:04d}" for index in range(1, 362)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 249
+    assert len(agent_incidents) == 252
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 358
+    assert report["incident_count"] == 361
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3613,11 +3613,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 311
-    assert report["incident_count"] == 358
+    assert report["register_revision"] == 312
+    assert report["incident_count"] == 361
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 249,
+        "agent_behavior": 252,
         "harness": 43,
         "repository": 56,
         "transport": 10,
@@ -3626,16 +3626,16 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 57,
         "evidence_misreport": 48,
         "harness_failure": 43,
-        "output_contract_violation": 101,
+        "output_contract_violation": 104,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
         "repository_defect": 56,
         "transport_timeout": 10,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 103,
+        "accepted_candidate_changed": 104,
         "canonical_unchanged": 220,
-        "untrusted_partial_worktree": 35,
+        "untrusted_partial_worktree": 37,
     }
     receipt_event_recurrence = next(
         row
@@ -5656,6 +5656,46 @@ def test_aer_0358_records_provider_free_pytest_database_boundary() -> None:
     assert "ariadne_provider_free_pytest" in (
         incident["correction"]["prevention_control"]
     )
+
+
+def test_aer_0359_and_0360_preserve_delete_confirm_worker_recovery() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    original = incidents["AER-0359"]
+    assert original["role"] == "implementer"
+    assert original["category"] == "output_contract_violation"
+    assert original["workflow_disposition"] == "revision_required"
+    assert original["correction"]["status"] == "corrected_fresh_attempt"
+    assert original["status"] == "corrected"
+
+    corrected = incidents["AER-0360"]
+    assert corrected["role"] == "implementer"
+    assert corrected["category"] == "output_contract_violation"
+    assert corrected["workflow_disposition"] == "recovery_lease_invoked"
+    assert corrected["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert corrected["status"] == "contained"
+    assert "both freshness coordinates" in corrected["correction"]["action"]
+    assert "physical-seam ordering" in (
+        corrected["correction"]["prevention_control"]
+    )
+
+
+def test_aer_0361_requires_acceptance_index_guard_for_handover_edits() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0361"
+    ]
+
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["correction"]["status"] == "control_added"
+    assert "handover_edits_require_acceptance_index_guard" in (
+        incident["correction"]["action"]
+    )
+    assert incident["status"] == "corrected"
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

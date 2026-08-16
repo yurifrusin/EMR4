@@ -180,7 +180,10 @@ class FakeDeleteTransaction:
     @contextmanager
     def __call__(self, db: FakeCommandSession, **arguments: object):
         self.entries += 1
-        if str(self.appointment.id) != str(arguments["target_appointment_id"]):
+        if (
+            str(self.appointment.practice_id) != str(arguments["practice_id"])
+            or str(self.appointment.id) != str(arguments["target_appointment_id"])
+        ):
             raise DeleteConfirmTargetUnavailable("target unavailable")
 
         key = (
@@ -554,7 +557,8 @@ def test_current_practice_mismatch_is_rejected_inside_authority_boundary() -> No
     result, db, physical, session_calls = _run(body, binding, appointment, user)
 
     assert result.kind == "error"
-    assert result.status_code == 403
+    assert result.status_code == 404
+    assert result.body["detail"]["code"] == "appointment_not_found"
     assert session_calls["count"] == 1
     assert physical.entries == 1
     assert db.audits == []
@@ -703,6 +707,56 @@ def test_stale_freshness_or_tampered_freshness_id_stops_closed() -> None:
     assert result.kind == "blocked"
     assert result.status_code == 200
     assert result.body["blocks"][0]["code"] == "stale_delete_proposal_freshness_id"
+    assert session_calls["count"] == 0
+    assert physical.entries == 0
+
+
+@pytest.mark.parametrize("field", ["proposal", "confirmation"])
+def test_each_returned_freshness_coordinate_must_remain_exact_before_session(
+    field: str,
+) -> None:
+    appointment = _appointment()
+    user = _user(appointment)
+    body, binding = _body(appointment, user)
+    if field == "proposal":
+        body.delete_proposal.delete_proposal_freshness_id = "0" * 32
+    else:
+        body.delete_proposal_freshness_id = "0" * 32
+
+    result, _db, physical, session_calls = _run(
+        body,
+        binding,
+        appointment,
+        user,
+    )
+
+    assert result.kind == "blocked"
+    assert result.status_code == 200
+    assert result.body["blocks"][0]["code"] == (
+        "stale_delete_proposal_freshness_id"
+    )
+    assert session_calls["count"] == 0
+    assert physical.entries == 0
+
+
+def test_proposal_evidence_copy_must_equal_confirmation_evidence_before_session() -> None:
+    appointment = _appointment()
+    user = _user(appointment)
+    body, binding = _body(appointment, user)
+    body.delete_proposal.signed_confirmation_evidence = None
+
+    result, _db, physical, session_calls = _run(
+        body,
+        binding,
+        appointment,
+        user,
+    )
+
+    assert result.kind == "blocked"
+    assert result.status_code == 200
+    assert result.body["blocks"][0]["code"] == (
+        "signed_confirmation_evidence_invalid"
+    )
     assert session_calls["count"] == 0
     assert physical.entries == 0
 

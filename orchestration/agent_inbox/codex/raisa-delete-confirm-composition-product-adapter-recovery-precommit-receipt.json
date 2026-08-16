@@ -1,0 +1,90 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "completed_stage": "Sol adopted the preserved worker source under the explicit recovery lease and applied only the exact two-path freshness, evidence-copy and cross-practice-test amendments. Twelve canonical-LF bindings, forbidden-route/schema isolation, Ruff, compilation and the consolidated 491-test provider-free profile pass. AER-0359 through AER-0361 preserve both worker rejections and the corrected handover-size guard; no incident is open.",
+    "next_executable_stage": "Freeze the exact recovered candidate in Git, generate the fresh pre-verifier receipt and dispatch one Gemini 3.7 Flash/high exact-candidate veto in a fresh read-only non-protected worktree.",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "resume_after_compaction": true,
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "afe0cc98059c5cfe08f1db776869e4c6bca34bd2",
+    "reason_codes": [],
+    "resolved_commit": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "44a91b7239ac9f38510c10cb57729ac5312d32f9"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "recovered_candidate_pre_commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Both preserved worker attempts are closed and the correction budget is exhausted.",
+        "work_packages": [
+          "preserved source provenance"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto follows this commit and a distinct pre-verifier receipt.",
+        "work_packages": [
+          "Gemini 3.7 Flash/high final veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Native delegation remains unavailable under the current developer constraint.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre-verifier acceptance",
+      "verifier result",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "exact recovery commit",
+      "fresh pre-verifier receipt",
+      "one Gemini veto"
+    ]
+  },
+  "planned_action": "commit_recovered_delete_confirm_candidate_for_independent_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:820a6c7f01305aba7f37d3e2d44a40198d8219275b87f0136636c48ebfc0756c",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen implementation plan and machine contract remain unchanged. The exact Sol recovery amendments and the 491-test provider-free admission pass; AER-0359 through AER-0361 preserve the rejected candidates and harness correction.",
+    "current_authority_allocation": "Sol owns the recovered candidate, deterministic admission and commit. DeepSeek is complete and exhausted; Gemini 3.7 Flash/high remains reserved for one final veto.",
+    "git_refs_and_worktree": "Task HEAD before the recovery commit is afe0cc98059c5cfe08f1db776869e4c6bca34bd2. Required HEAD 648c8ec9805af63729264ea9c22fd695f062a741 remains an ancestor. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 44a91b7239ac9f38510c10cb57729ac5312d32f9. Explicit scoped changes only; docs/branding remains preserved and untracked.",
+    "live_handover_current_baton": "The Current Baton retains the provider-free unmounted delete-confirm implementation as the active operation and now records agent-error register revision 312.",
+    "protected_evidence_boundaries": "The candidate remains provider-free and unmounted. No protected evidence, route, schema, model, migration, database, capability, product data, provider, network, UI, deployment, Pages or protected ref was opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

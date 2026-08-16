@@ -1,0 +1,92 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "completed_stage": "The sole worker correction is preserved at 5dd9adef40bbc54c9737d0de83b3949c9b95539a and closes the four original findings with 63/63 worker tests. Sol reconciliation found two residual conformance gaps: both returned freshness coordinates and the proposal evidence copy are not all required exact, and the fake physical test double misclassifies cross-practice absence. The correction budget is exhausted.",
+    "next_executable_stage": "Adopt the two preserved worker commits under the explicit Sol recovery lease, apply only the exact freshness/evidence and cross-practice-test amendments, then run the full provider-free deterministic admission before any verifier dispatch.",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "resume_after_compaction": true,
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "git_object_resolution": {
+    "observed_head": "eac9846ee77b4f2621897c1efa84c5ce76c63f59",
+    "reason_codes": [],
+    "resolved_commit": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "44a91b7239ac9f38510c10cb57729ac5312d32f9"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "sol_recovery_pre_integration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker supplied the bounded source and one correction; its lane is now closed and preserved for Sol recovery.",
+        "work_packages": [
+          "preserved original and corrected four-path candidate"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Runtime-boundary recovery requires the planned independent veto after deterministic admission.",
+        "work_packages": [
+          "fresh exact recovered-candidate Gemini 3.7 Flash high veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Native delegation remains unavailable and cannot replace the required independent verifier.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Sol amendment",
+      "deterministic failure",
+      "pre-verifier acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "adopt preserved worker commits",
+      "apply exact Sol recovery",
+      "deterministic provider-free admission",
+      "one Gemini veto"
+    ]
+  },
+  "planned_action": "integration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6dd00ac383cd3a01c476848892335aecf0393002cc05ec71c80583dbbd187980",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and machine contract are unchanged. The recovery lease preserves both worker commits and permits only two product-test paths for exact freshness/evidence and cross-practice-double amendments.",
+    "current_authority_allocation": "Sol owns the explicit recovery lease, exact amendments, deterministic admission and acceptance. DeepSeek is complete with no further correction. Gemini remains reserved for the mandatory fresh veto.",
+    "git_refs_and_worktree": "Task HEAD is eac9846ee77b4f2621897c1efa84c5ce76c63f59; worker descendant is 5dd9adef40bbc54c9737d0de83b3949c9b95539a with parent d9df95874ea674420b626f5182a68a07e96e6d91. All protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The active operation remains the provider-free unmounted delete-confirm implementation; the Current Baton and latch require uninterrupted recovery after a bounded worker correction is exhausted.",
+    "protected_evidence_boundaries": "Adoption is source-only and unmounted. No route, schema, model, migration, database, capability, product data, provider, network, deployment, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

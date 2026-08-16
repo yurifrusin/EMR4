@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All mandated checks pass. Here is the bounded-correction report.\n\n## Full commit SHA\n`5dd9adef40bbc54c9737d0de83b3949c9b95539a`\n\n**Parent (required starting HEAD, preserved):** `d9df95874ea674420b626f5182a68a07e96e6d91` \u2014 the original candidate commit `d9df9587` was **not** amended; the correction is a new descendant.\n\n**Branch:** `codex/worker-delete-confirm-adapter-eac9846e`\n\n## Exact paths changed (only the four owned)\n1. `app/services/appointment_delete_composition.py`\n2. `app/services/appointment_delete_product_adapter.py`\n3. `tests/test_appointment_delete_composition.py`\n4. `tests/test_appointment_delete_product_adapter.py`\n\nNo other files staged or changed.\n\n## Test counts (exact provider-free command)\n`python -m scripts.ariadne_provider_free_pytest --repo-root ... tests/test_appointment_delete_composition.py tests/test_appointment_delete_product_adapter.py`\n\n- Composition: **37 tests**\n- Product adapter: **26 tests**\n- **Total: 63 tests, 63 passed (0 failures)**\n\n## Checks\n- **Provider-free pytest:** PASS (63/63)\n- **Ruff** on the four owned files: PASS (`All checks passed!`)\n- **Compilation** (`py_compile`): PASS\n- **`git diff --check`:** PASS\n- **Post-commit `git show --check`:** PASS\n- **Protected refs:** `master` and `handoff/current` unchanged at `2e34bdad732fdab32fbf778280b3d3c70d66d602`\n- **Working tree:** clean post-commit\n\n## Corrections delivered\n1. **Envelope full-receipt validation** \u2014 `canonical_delete_confirm_envelope_bytes` now rebuilds exact canonical private bytes from every receipt field via `canonical_delete_confirm_response_bytes`, validates those bytes, projects the one expected public envelope, and requires exact equality. Rejects wrong status, non-null waiting area, invalid/null reason code, non-string/overlong cancellation text, blank target, unknown/duplicate/reordered warnings, wrong registry text, every changed constant, and every disclosure/extra field. Added a 18-case hostile public-envelope parametrized test.\n2. **Pre-command admission boundary** \u2014 `compose_product_delete_confirm` now closes 403 for invalid bearer/session secrets, server HMAC/idempotency/session-binding/evidence secrets, missing identity, inactive/unrecognised role, or non-positive generation; closes 409 for missing/blank idempotency key; closes 200-blocked for unsupported/blocked/unsafe/unconfirmed proposals, warning mismatch, signed-evidence failure, binding failure, and freshness/state admission failure \u2014 all before opening a command session. `delete_confirm_admission_adapter` is called once against the pre-command ingress; the composition's independent repeated admission and locked re-admission are retained; a command-session factory exception fails closed as 503. Tests now assert zero session calls and zero physical entries for every pre-command stop and distinguish blocked (200) from authenticated-context 403.\n3. **Two-field proposal-version HMAC** \u2014 the HMAC covers exactly `source_version` and `evidence_signature`; `schema_version` stays in the returned envelope and exact shape check but is excluded from signature material. Added an independent-recompute test proving the two-field binding and schema/signature/output-shape separation.\n\n## Advisory decision\nThe correction is complete and internally consistent: all required tests, Ruff, compilation, diff checks, and `git show --check` pass; only the four owned paths changed; no push, no protected-ref movement, and no forbidden runtime was opened. **Recommend Sol acceptance review.**",
+  "usage": {
+    "input_tokens": 77712,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 5966592,
+    "output_tokens": 73803,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 5.225051000000001,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 311,
+  "register_revision": 312,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -14376,6 +14376,123 @@
           "scripts/ariadne_provider_free_pytest.py",
           "tests/test_ariadne_provider_free_pytest.py",
           "docs/ariadne-agent-error-correction-register-revision-311.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0359",
+      "attempt_id": "raisa-delete-confirm-composition-product-adapter-deepseek-implementation-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-implementation-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "The bounded implementation must enforce the complete frozen private-receipt semantics, classify deterministic proposal failures as typed blocked outcomes before any command session, and sign exactly the two frozen proposal-version fields.",
+      "observed_error": "The original advisory-pass candidate under-validated receipt semantics, mapped signed-evidence failures to 403, opened command sessions for deterministic pre-command stops, and included schema_version in proposal-version HMAC material.",
+      "detection_method": "Sol reconciled the exact four-file candidate against the frozen implementation plan and machine contract before integration and recorded four localized mechanical defects.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-worker-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.delete_confirm_adapter_frozen_contract_partially_implemented",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the original candidate and apply the plan-authorised sole mechanical correction for exact receipt validation, pre-command outcome/session ordering and two-field proposal-version HMAC material.",
+        "prevention_control": "Runtime-boundary worker admission must independently mutate every frozen response constant, assert zero command-session calls for every pre-command stop and recompute cryptographic material from the exact contract field list before advisory pass is accepted.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-correction-worker-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json",
+          "docs/ariadne-agent-error-correction-register-revision-312.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0360",
+      "attempt_id": "raisa-delete-confirm-composition-product-adapter-deepseek-correction-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-implementation-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "The sole corrected candidate must require both returned freshness coordinates and the proposal evidence copy to equal recomputed signed truth before opening a command session, while its test double must reproduce the physical seam's practice-scoped target lookup order.",
+      "observed_error": "The corrected advisory-pass candidate still accepted a mismatched proposal freshness coordinate, allowed an absent proposal evidence copy when body evidence verified, and let its fake physical transaction yield a cross-practice target that the real seam would classify as indistinguishable 404 before locked admission.",
+      "detection_method": "Sol independently traced the corrected pre-command verifier and compared the fake transaction's ordering with delete_confirm_locked_transaction after all 63 worker tests passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-correction-worker-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "implementer.delete_confirm_adapter_duplicate_authority_coordinates_and_physical_order_underchecked",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Exhaust the DeepSeek correction lane; under the explicit Sol recovery lease require both freshness coordinates and the proposal evidence copy exactly, practice-scope the physical test double before yield and add zero-session/zero-physical hostile tests.",
+        "prevention_control": "A corrected runtime-boundary candidate must receive Sol invariant-by-invariant reconciliation after worker tests, including independent mutation of every duplicated authority coordinate and parity between test-double and real physical-seam ordering, before verifier dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
+          "app/services/appointment_delete_product_adapter.py",
+          "tests/test_appointment_delete_product_adapter.py",
+          "docs/ariadne-agent-error-correction-register-revision-312.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0361",
+      "attempt_id": "raisa-delete-confirm-composition-product-adapter-handover-self-correction-guard",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every AGENTS.md change must preserve the existing compact-handover byte ceiling and run the acceptance-index guard before the checkpoint is treated as complete.",
+      "observed_error": "The new continuous harness self-correction paragraph was committed after its focused policy test passed, but AGENTS.md reached 80096 bytes and failed the pre-existing strict 80000-byte acceptance-index ceiling.",
+      "detection_method": "The restored risk-proportional continuity profile ran tests/test_agents_acceptance_index.py before verifier admission and reported the exact 80096-byte size.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-handover-size-guard-incident.json",
+        "tests/test_agents_acceptance_index.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.handover_policy_edit_omitted_compact_size_guard",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Compact the self-correction paragraph without weakening its authority meaning and add handover_edits_require_acceptance_index_guard to the evidence-led workflow hard controls.",
+        "prevention_control": "Every future handover mutation must run tests/test_agents_acceptance_index.py alongside the focused policy test before checkpoint or verifier admission.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "orchestration/harness_settings/evidence_led_workflow.yaml",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_agents_acceptance_index.py",
+          "docs/ariadne-agent-error-correction-register-revision-312.md"
         ]
       },
       "status": "corrected"
