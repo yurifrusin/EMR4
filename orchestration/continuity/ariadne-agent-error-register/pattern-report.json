@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "2331265326ac7118b540cb165fe4f35fc2fa79b45dd2e8d60f3f1cfe005197e4",
+  "canonical_register_sha256": "1a11ba7f7c33e95024aa76e6fa9e4a3d6e368bb2706106a78cbba3f8748bd512",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 106,
-      "canonical_unchanged": 225,
+      "canonical_unchanged": 227,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
-      "command_scope_violation": 58,
+      "command_scope_violation": 59,
       "evidence_misreport": 52,
       "harness_failure": 44,
       "output_contract_violation": 106,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
-      "repository_defect": 57,
+      "repository_defect": 58,
       "transport_timeout": 11
     },
     "by_origin": {
-      "agent_behavior": 259,
+      "agent_behavior": 260,
       "harness": 44,
-      "repository": 57,
+      "repository": 58,
       "transport": 11
     },
     "by_process_severity": {
       "low": 142,
       "material": 114,
-      "moderate": 115
+      "moderate": 117
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -41,7 +41,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 192,
+      "codex-primary-orchestrator::orchestrator": 193,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -82,6 +82,7 @@
       "emr4-disposable-postgresql-harness::orchestrator": 23,
       "emr4-disposable-postgresql-parse-evidence-router::orchestrator": 1,
       "emr4-durability-ddl-renderer::orchestrator": 3,
+      "emr4-maintenance-test-suite::orchestrator": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
@@ -93,12 +94,12 @@
     "by_role": {
       "implementer": 38,
       "integration_reviewer": 3,
-      "orchestrator": 278,
+      "orchestrator": 280,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 371,
+  "incident_count": 373,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -106,17 +107,19 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0334",
-        "AER-0337"
+        "AER-0337",
+        "AER-0372"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
-        "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate."
+        "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
+        "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent."
       ],
       "recurrence_signature": "orchestrator.chained_validation_exit_masking",
       "resource_ids": [
@@ -1024,7 +1027,7 @@
       ]
     }
   ],
-  "register_revision": 322,
+  "register_revision": 324,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

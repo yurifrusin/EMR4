@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 322,
+  "register_revision": 324,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -14894,6 +14894,80 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0372",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-integrated-deterministic-gate-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_validation",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Each admitted validation gate must name only exact plan-derived paths, run as a separately captured process and stop the sequence immediately on any nonzero exit.",
+      "observed_error": "After AER-0334 and AER-0337, Sol again composed independent validation commands with semicolons and included nonexistent tests/test_api_spine_appointment_commands.py; its nonzero pytest result was followed by successful Ruff, compilation and whitespace commands, allowing the shell process to report the final success instead of failing closed on the first error.",
+      "detection_method": "Sol read the complete combined-command output, observed pytest's explicit file-not-found error before the later successful commands, excluded the combined run from candidate evidence and reran the exact frozen 36-test API Spine artifact gate as its own process, which passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-post-compaction-resumption-v2-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-323.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Reject the combined command as acceptance evidence, retain only separately captured successful gates, rerun the exact plan-derived API Spine path independently, and require every remaining canonical, preexecution and occupied gate to execute in a separate fail-closed process.",
+        "prevention_control": "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-323.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0373",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-canonical-profile-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-maintenance-test-suite",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The current-baton consistency test must track the accepted terminal Continuity and Compass node and the exact current and next-work rows in AGENTS.md.",
+      "observed_error": "The canonical profile found three stale assertions still fixed to the pre-HTTP readiness result at Continuity 307 / Compass 289 and its obsolete route-convergence next step, while the accepted repository state is the HTTP route-convergence result at Continuity 308 / Compass 290 with disposable PostgreSQL integration next.",
+      "detection_method": "A separately captured canonical pytest process failed only the three stale tests/test_current_baton_consistency.py assertions after 369 other checks passed; direct reads of AGENTS.md, the Continuity graph and Compass established the accepted replacement values.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-324.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_baton_consistency_expectation_stale_after_accepted_continuity_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Update only the stale maintenance expectations to Continuity 308 / Compass 290, the exact accepted HTTP node/source and the disposable PostgreSQL integration next-work boundary; preserve all historical lineage and protected-boundary assertions.",
+        "prevention_control": "Every Continuity/Compass closeout that advances the Current Baton must include tests/test_current_baton_consistency.py in its exact closeout profile and update its terminal-node and next-work assertions in the same candidate.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-324.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

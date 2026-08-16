@@ -9,6 +9,8 @@ GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review"
 SOURCE_HEAD = "da03039f637d3808c8785a6d6fc95309650044d9"
+HTTP_NODE_ID = "raisa-provider-free-delete-confirm-http-route-convergence"
+HTTP_SOURCE_HEAD = "c7a01edd96ebabf3ea2c07be89a5b405c9629853"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
@@ -53,12 +55,12 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 307
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 289
-    assert compass["source_graph_revision"] == 307
-    assert compass["current_position"]["node_id"] == NODE_ID
+    assert graph["graph_revision"] == 308
+    assert graph["nodes"][-1]["id"] == HTTP_NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == HTTP_SOURCE_HEAD
+    assert compass["map_revision"] == 290
+    assert compass["source_graph_revision"] == 308
+    assert compass["current_position"]["node_id"] == HTTP_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -74,23 +76,18 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_acceptance = _table_row(
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
-    assert "Continuity 307 / Compass 289" in current
-    assert (
-        "raisa_provider_free_read_only_delete_confirm_route_mounting_"
-        "readiness_review_pass"
-    ) in current
-    assert SOURCE_HEAD in current
-    assert "all 23 bindings" in current.lower()
-    assert "7/5/0 matrix" in current.lower()
-    assert "167 hostile" in current.lower()
-    assert "final 412-test provider-free profile" in current.lower()
-    assert "aer-0364/0365" in _table_row(
+    assert "Continuity 308 / Compass 290" in current
+    assert "raisa_provider_free_delete_confirm_http_route_convergence_pass" in current
+    assert HTTP_SOURCE_HEAD in current
+    assert "all 12 scenarios" in current.lower()
+    assert "149 hostile" in current.lower()
+    assert "27 focused tests" in current.lower()
+    assert "78 api spine/diary tests" in current.lower()
+    assert "integrated 439-test closeout profile" in current.lower()
+    assert "aer-0366/0367" in _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
-    assert (
-        "no route or runtime is opened"
-        in current.lower()
-    )
+    assert "no database command or raw delete convergence is opened" in current.lower()
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
@@ -98,11 +95,11 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert ARCHITECTURE_SOURCE_HEAD in relation
     assert SOURCE_HEAD in implementation_relation
     assert UNMOUNTED_SOURCE_HEAD in implementation_relation
-    assert SOURCE_HEAD in product
-    assert UNMOUNTED_SOURCE_HEAD in product
+    assert HTTP_SOURCE_HEAD in implementation_relation
+    assert HTTP_SOURCE_HEAD in product
     assert ROUTE_REVIEW_SOURCE_HEAD in relation
     assert (
-        "routes, capabilities and product runtime remain closed"
+        "mounted http/postgresql execution remains unproved"
         in product.lower()
     )
     assert REPRESENTABILITY_SOURCE_HEAD in relation
@@ -146,11 +143,11 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert (
-        "provider-free delete-confirm http route-convergence candidate"
+        "provider-free disposable postgresql delete-confirm http integration rehearsal"
         in next_work.lower()
     )
     assert "standing authority" in next_work.lower()
-    assert "canonical/hidden-alias handler" in next_work.lower()
+    assert "exact canonical route" in next_work.lower()
     assert "raw delete convergence" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected refs" in next_work.lower()
@@ -190,9 +187,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free delete-confirm http route-convergence candidate",
+        "provider-free disposable postgresql delete-confirm http integration rehearsal",
         "standing authority",
-        "capability provisioning",
+        "reusable capability",
         "raw delete convergence",
         "ui",
         "docs/branding/",

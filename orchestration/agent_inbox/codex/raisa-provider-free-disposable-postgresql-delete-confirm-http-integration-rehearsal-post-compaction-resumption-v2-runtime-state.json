@@ -1,0 +1,183 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "record_validation_masking_recurrence_then_run_delete_confirm_http_postgresql_preexecution_gates",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after this compaction. Its Current Baton accepts Continuity 308 / Compass 290, requires the delete-confirm HTTP/PostgreSQL rehearsal next and makes continuous narrow harness self-correction part of uninterrupted development.",
+    "current_authority_allocation": "Sol owns integration, the serial disposable database lifecycle, recovery and acceptance. DeepSeek V4 Flash/high completed its bounded three-file harness/test package and one permitted mechanical correction; it receives no further package in this tranche. Gemini 3.7 Flash/high remains reserved for one fresh exact-candidate veto only after deterministic evidence and cleanup pass. Native subagents are declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-http-route-convergence-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json"
+    ],
+    "protected_evidence_boundaries": "Only one owned disposable PostgreSQL 16 server, fixed authored-synthetic rows, local loopback application transport, the frozen route/adapter/transaction boundary and sanitized evidence may be used. No existing or product database, product/patient/clinical/protected data, raw DELETE convergence, provider, ADC, credential/IAM change, browser, external service, UI, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD is exact beca979956e3e1ad636af3ca1b41b9d20ff7e350 on codex/ariadne-bernie-davida-parallel-seam; origin task remains 341d89b9a70c85f54247de364baf842b84543c8d. Required source 648c8ec9805af63729264ea9c22fd695f062a741, accepted HTTP c7a01edd96ebabf3ea2c07be89a5b405c9629853 and accepted database behavior 49dd2aaa72877adb844da4d0d5d5bb28039c90c8 remain ancestors. Local/origin master and handoff/current remain exact protected commit 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked source was clean before this latch and receipt refresh; unrelated untracked files remain excluded and docs/branding remains present."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "objective": "Repair the proved route-producer canonicalization mismatch and missing transaction-local tenant context at the accepted delete physical seam, then exercise the exact canonical delete-confirm HTTP route and hidden alias against one owned disposable PostgreSQL 16 server using fixed authored-synthetic rows and prove non-mutating proposal, committed/replay/denial/rollback behavior and exact cleanup without changing raw DELETE, adapter/composition/schema/public meaning or opening product data, providers, deployment or protected refs.",
+    "status": "in_progress",
+    "source_head": "beca979956e3e1ad636af3ca1b41b9d20ff7e350",
+    "authority_source": "The Continuity 308 / Compass 290 HTTP route-convergence acceptance, AGENTS.md Current Baton and Yuri's standing uninterrupted-development authority direct the next disposable PostgreSQL integration rehearsal.",
+    "checkpoint": {
+      "completed_stage": "The corrected DeepSeek harness package is integrated at exact candidate beca979956e3e1ad636af3ca1b41b9d20ff7e350. Sol reproduced the focused integration, route, physical, register and exact 36-test API Spine artifact gates plus Ruff, maintained-source compilation and whitespace. The first combined validation command also exposed a contained recurrence of chained exit masking that must enter the error register before database preexecution. No database process has started.",
+      "next_executable_stage": "Record and guard the chained-validation masking recurrence as AER-0372, then pass the canonical fast profile and a fresh database-preexecution receipt before starting the one owned disposable PostgreSQL lifecycle.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_owned_disposable_postgresql16_and_authored_synthetic_only",
+      "no_existing_product_database_or_external_database_access",
+      "only_route_producer_canonicalization_may_change_to_delegate_to_the_accepted_adapter_helpers",
+      "only_physical_transaction_context_may_change_to_set_the_authenticated_practice_transaction_locally_after_isolation_begins",
+      "no_adapter_composition_schema_public_contract_or_raw_delete_edit",
+      "no_raw_delete_convergence_or_route_local_write_fallback",
+      "no_capability_provisioning_or_client_selected_authority",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_or_external_network_except_owned_loopback_database_transport",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "assessed_stage": "post_compaction",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "DeepSeek completed the frozen three-file mechanical harness/test package and its one permitted correction; Sol integrated and independently reproduced it. The live database lifecycle and acceptance are outside that lane.",
+        "work_packages": [
+          "delete_confirm_http_postgresql_harness_and_tests_completed_at_worker_commit_891ac1608c34b0619fd009b04628e652d9c217fc"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate veto is required only after deterministic live-local evidence, canonical tests and cleanup pass.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits native subagent delegation, and the one mutable disposable PostgreSQL lifecycle is necessarily serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "AER-0372 registration and guard",
+      "canonical fast profile",
+      "database preexecution receipt",
+      "one owned disposable PostgreSQL lifecycle",
+      "real local HTTP execution",
+      "sanitized evidence and exact cleanup",
+      "deterministic admission before independent veto"
+    ],
+    "reassessment_triggers": [
+      "database preexecution gate",
+      "deterministic occupied result",
+      "pre-verifier gate",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh post-compaction five-source rehydration at integrated candidate beca979956e3e1ad636af3ca1b41b9d20ff7e350",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol rehydrated all five authority sources and resumes the exact latched checkpoint."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native lane declined by current developer policy."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.7 Flash/high remains reserved for the final exact-candidate veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Bounded harness package and one permitted correction completed; no further package is open."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

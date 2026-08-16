@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 322
+    assert register["register_revision"] == 324
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 372)
+        f"AER-{index:04d}" for index in range(1, 374)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 259
+    assert len(agent_incidents) == 260
     assert len(transport_incidents) == 11
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2577,7 +2577,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 371
+    assert report["incident_count"] == 373
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3614,28 +3614,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 322
-    assert report["incident_count"] == 371
+    assert report["register_revision"] == 324
+    assert report["incident_count"] == 373
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 259,
+        "agent_behavior": 260,
         "harness": 44,
-        "repository": 57,
+        "repository": 58,
         "transport": 11,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 58,
+        "command_scope_violation": 59,
         "evidence_misreport": 52,
         "harness_failure": 44,
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
-        "repository_defect": 57,
+        "repository_defect": 58,
         "transport_timeout": 11,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 106,
-        "canonical_unchanged": 225,
+        "canonical_unchanged": 227,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3672,8 +3672,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     ] == [
         {
             "recurrence_signature": "orchestrator.chained_validation_exit_masking",
-            "incident_count": 2,
-            "incident_ids": ["AER-0334", "AER-0337"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0334", "AER-0337", "AER-0372"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
@@ -3681,6 +3681,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
                 "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
+                "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
             ],
         },
         {
@@ -5872,6 +5873,42 @@ def test_aer_0371_contains_worker_package_install_outside_worktree() -> None:
     assert "package installation is forbidden" in incident["correction"][
         "prevention_control"
     ]
+
+
+def test_aer_0372_records_recurrent_chained_validation_exit_masking() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0372"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["recurrence_signature"] == (
+        incidents["AER-0334"]["recurrence_signature"]
+    )
+    assert incident["related_incident_ids"] == []
+    assert incident["status"] == "corrected"
+    assert "file-not-found" in incident["detection_method"]
+    assert "separate fail-closed process" in incident["correction"]["action"]
+
+
+def test_aer_0373_repairs_stale_current_baton_consistency_expectations() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0373"
+    ]
+
+    assert incident["origin"] == "repository"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["status"] == "corrected"
+    assert "Continuity 307 / Compass 289" in incident["observed_error"]
+    assert "Continuity 308 / Compass 290" in incident["correction"]["action"]
+    assert "same candidate" in incident["correction"]["prevention_control"]
+
+
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:
