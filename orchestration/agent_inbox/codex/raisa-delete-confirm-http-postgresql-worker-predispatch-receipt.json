@@ -1,0 +1,96 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "The exact source-precondition repair commit is 265497a0add219588a3372d4f40366fda4e94d22. Route evidence reaches exact adapter ingress, command sessions set local tenant context before reads, and 334 focused/register tests plus static gates pass. A clean isolated worker worktree exists at that exact commit. No database process has started.",
+    "next_executable_stage": "Pass a distinct pre-worker-dispatch receipt, then dispatch one bounded DeepSeek V4 Flash/high worker for only the three frozen harness/test paths before Sol source admission and live database execution.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "265497a0add219588a3372d4f40366fda4e94d22",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "265497a0add219588a3372d4f40366fda4e94d22",
+    "reason_codes": [],
+    "resolved_commit": "265497a0add219588a3372d4f40366fda4e94d22",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "265497a0add219588a3372d4f40366fda4e94d22"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The repaired exact source removes semantic choice and leaves a separable three-path harness and deterministic-test package in a clean isolated worktree.",
+        "work_packages": [
+          "three-path delete-confirm HTTP PostgreSQL harness and deterministic contract tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "This authenticated database boundary requires one fresh final exact-candidate Gemini 3.7 Flash/high veto after deterministic evidence and cleanup pass.",
+        "work_packages": [
+          "one final exact-candidate Gemini 3.7 Flash/high veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native subagent delegation, while the live mutable PostgreSQL lifecycle must remain Sol-serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek implements only the three mechanical files while Sol prepares source-admission and preexecution checks without editing worker-owned paths"
+    ],
+    "reassessment_triggers": [
+      "worker_result",
+      "scope_mismatch",
+      "material_recovery",
+      "database_preexecution",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "DeepSeek returns before Sol source admission",
+      "Sol alone runs the owned PostgreSQL container",
+      "Gemini follows deterministic admission and occupied pass only",
+      "Sol alone integrates and accepts"
+    ]
+  },
+  "planned_action": "dispatch_bounded_delete_confirm_http_postgresql_harness_worker",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Plan revision 2, threat delta, frozen contract and schemas bind DHI-S01 through DHI-S12. Exact source-precondition repair commit 265497a0add219588a3372d4f40366fda4e94d22 passes 334 focused/register tests, Ruff, compilation and whitespace. No Docker or database process has started.",
+    "current_authority_allocation": "Sol owns source semantics, database execution, recovery, acceptance, integration and Git publication. DeepSeek V4 Flash/high receives only three frozen harness/test paths. Gemini 3.7 Flash/high remains reserved for one later exact-candidate veto. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Primary HEAD and clean worker source are exact 265497a0add219588a3372d4f40366fda4e94d22. Worker worktree C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-pg-worker-265497a0 is on codex/worker-delete-confirm-http-pg-265497a0 and clean. Origin task is 341d89b9a70c85f54247de364baf842b84543c8d. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Its Current Baton directs the provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal under standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "The worker may create only the exact harness and two test files and must not run Docker or PostgreSQL. Product source, plan, schemas, database execution, product/patient/clinical data, ADC/IAM/browser, external network beyond the authorised DeepSeek transport, UI, deployment, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

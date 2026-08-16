@@ -4,11 +4,11 @@
   "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
   "objective": "Repair the proved route-producer canonicalization mismatch and missing transaction-local tenant context at the accepted delete physical seam, then exercise the exact canonical delete-confirm HTTP route and hidden alias against one owned disposable PostgreSQL 16 server using fixed authored-synthetic rows and prove non-mutating proposal, committed/replay/denial/rollback behavior and exact cleanup without changing raw DELETE, adapter/composition/schema/public meaning or opening product data, providers, deployment or protected refs.",
   "status": "in_progress",
-  "source_head": "5240772599c2f4c794cce32eb54ce577c0313879",
+  "source_head": "265497a0add219588a3372d4f40366fda4e94d22",
   "authority_source": "The Continuity 308 / Compass 290 HTTP route-convergence acceptance, AGENTS.md Current Baton and Yuri's standing uninterrupted-development authority direct the next disposable PostgreSQL integration rehearsal.",
   "checkpoint": {
-    "completed_stage": "Plan freeze 5240772599c2f4c794cce32eb54ce577c0313879 and both Sol-owned integration preconditions pass: route evidence reaches exact adapter ingress and the physical transaction sets local practice context before reads. Historical scaffold evidence remains immutable. AER-0369 and AER-0370 are corrected at register revision 321. The 334-test focused/register profile, Ruff, compilation and whitespace pass. No database process has started.",
-    "next_executable_stage": "Commit the source-precondition repairs plus AER-0369/AER-0370, then issue the exact DeepSeek V4 Flash/high packet for only the separable integration harness and contract tests before the Sol-owned live database run.",
+    "completed_stage": "The exact source-precondition repair commit is 265497a0add219588a3372d4f40366fda4e94d22. Route evidence reaches exact adapter ingress, command sessions set local tenant context before reads, and 334 focused/register tests plus static gates pass. A clean isolated worker worktree exists at that exact commit. No database process has started.",
+    "next_executable_stage": "Pass a distinct pre-worker-dispatch receipt, then dispatch one bounded DeepSeek V4 Flash/high worker for only the three frozen harness/test paths before Sol source admission and live database execution.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

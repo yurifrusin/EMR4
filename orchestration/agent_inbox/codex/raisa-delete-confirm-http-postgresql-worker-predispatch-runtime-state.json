@@ -1,0 +1,82 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_bounded_delete_confirm_http_postgresql_harness_worker",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. Its Current Baton directs the provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal under standing uninterrupted-development authority.",
+    "current_authority_allocation": "Sol owns source semantics, database execution, recovery, acceptance, integration and Git publication. DeepSeek V4 Flash/high receives only three frozen harness/test paths. Gemini 3.7 Flash/high remains reserved for one later exact-candidate veto. Native subagents are declined by current developer policy.",
+    "active_plan_and_acceptance": "Plan revision 2, threat delta, frozen contract and schemas bind DHI-S01 through DHI-S12. Exact source-precondition repair commit 265497a0add219588a3372d4f40366fda4e94d22 passes 334 focused/register tests, Ruff, compilation and whitespace. No Docker or database process has started.",
+    "protected_evidence_boundaries": "The worker may create only the exact harness and two test files and must not run Docker or PostgreSQL. Product source, plan, schemas, database execution, product/patient/clinical data, ADC/IAM/browser, external network beyond the authorised DeepSeek transport, UI, deployment, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "Primary HEAD and clean worker source are exact 265497a0add219588a3372d4f40366fda4e94d22. Worker worktree C:/Users/sarashera/EMR4-worktrees/delete-confirm-http-pg-worker-265497a0 is on codex/worker-delete-confirm-http-pg-265497a0 and clean. Origin task is 341d89b9a70c85f54247de364baf842b84543c8d. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary unrelated untracked files remain excluded."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "objective": "Repair the proved route-producer canonicalization mismatch and missing transaction-local tenant context, then exercise the exact delete-confirm HTTP route and hidden alias against one owned disposable PostgreSQL 16 server using fixed authored-synthetic rows without changing raw DELETE, adapter/composition/schema/public meaning or opening product data, providers, deployment or protected refs.",
+    "status": "in_progress",
+    "source_head": "265497a0add219588a3372d4f40366fda4e94d22",
+    "authority_source": "Continuity 308 / Compass 290, the frozen plan and Yuri's standing uninterrupted-development authority direct this exact correction and rehearsal.",
+    "checkpoint": {
+      "completed_stage": "The exact source-precondition repair commit is 265497a0add219588a3372d4f40366fda4e94d22. Route evidence reaches exact adapter ingress, command sessions set local tenant context before reads, and 334 focused/register tests plus static gates pass. A clean isolated worker worktree exists at that exact commit. No database process has started.",
+      "next_executable_stage": "Pass a distinct pre-worker-dispatch receipt, then dispatch one bounded DeepSeek V4 Flash/high worker for only the three frozen harness/test paths before Sol source admission and live database execution.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_owned_disposable_postgresql16_and_authored_synthetic_only",
+      "worker_owns_only_three_frozen_harness_and_test_paths_and_runs_no_database",
+      "no_existing_product_database_or_external_database_access",
+      "no_adapter_composition_schema_migration_public_contract_or_raw_delete_edit",
+      "no_capability_provisioning_or_client_selected_authority",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_adc_credentials_iam_browser_or_external_network_except_authorized_deepseek_transport",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "dispatched", "expected_leverage": "positive", "rationale": "The repaired exact source removes semantic choice and leaves a separable three-path harness and deterministic-test package in a clean isolated worktree.", "work_packages": ["three-path delete-confirm HTTP PostgreSQL harness and deterministic contract tests"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "This authenticated database boundary requires one fresh final exact-candidate Gemini 3.7 Flash/high veto after deterministic evidence and cleanup pass.", "work_packages": ["one final exact-candidate Gemini 3.7 Flash/high veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits native subagent delegation, while the live mutable PostgreSQL lifecycle must remain Sol-serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["DeepSeek implements only the three mechanical files while Sol prepares source-admission and preexecution checks without editing worker-owned paths"],
+    "serial_constraints": ["DeepSeek returns before Sol source admission", "Sol alone runs the owned PostgreSQL container", "Gemini follows deterministic admission and occupied pass only", "Sol alone integrates and accepts"],
+    "reassessment_triggers": ["worker_result", "scope_mismatch", "material_recovery", "database_preexecution", "pre_verifier_acceptance", "tranche_closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "fresh_five_source_rehydration_exact_source_repair_and_clean_worker_worktree", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Exact clean named worker worktree exists at the machine-resolved source commit and the bounded packet is frozen."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high is reserved for one final veto; no call has occurred."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact refs, source tests, worktree and boundaries before dispatch."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined by current developer policy."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
