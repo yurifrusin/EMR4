@@ -29,7 +29,7 @@
     {
       "path": "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
       "sha256": "a12afe1de2ed6b311430f5d81c3098237b12068e0a4550ada60d7619366ad8e4",
-      "repair": "guard_transaction_local_tenant_context_order_and_scope"
+      "repair": "guard_transaction_local_tenant_context_order_and_scope_and_reconcile_historical_openapi_binding"
     }
   ],
   "read_only_bindings": {

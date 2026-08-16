@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 319,
+  "register_revision": 321,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -14773,6 +14773,86 @@
           "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-pre-verifier-acceptance-v2-receipt.json",
           "orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-worktree-preflight.json",
           "docs/ariadne-agent-error-correction-register-revision-319.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0369",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-integration-preexecution-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "repository",
+      "role": "integration_reviewer",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_preexecution_probe",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "A route-generated delete proposal must use the accepted adapter's exact command, freshness and signed-evidence canonicalization, and a fresh command-owned transaction must establish the authenticated practice as transaction-local RLS context before its first authority or target read.",
+      "observed_error": "The route-local command encoder omitted the adapter-required kind=delete discriminator and its prepared nested proposal omitted the signed evidence that the adapter compares with the top-level evidence, so valid route output stopped before a command session. Separately, the physical command transaction established no app.current_practice_id and would therefore be correctly denied by forced RLS on its fresh session.",
+      "detection_method": "Sol compared the exact route producer and accepted adapter canonicalizers, ran a provider-free route-to-adapter ingress probe that first stopped as stale and then exposed the nested-evidence mismatch, and inspected the physical transaction order against the accepted forced-RLS status-confirm integration pattern before any Docker or SQL execution.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+        "app/routers/appointments.py",
+        "app/services/appointment_delete_physical.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.delete_confirm_route_adapter_and_command_rls_integration_gap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Delegate route command, freshness and signed-payload production to the accepted adapter helpers, carry the exact signed evidence in the prepared nested proposal, and set the authenticated practice transaction-locally in the physical command transaction immediately after isolation and before any reads.",
+        "prevention_control": "A pure route-to-adapter regression now requires verified/exact ingress from actual route-produced evidence, and the physical AST guard requires one transaction-local authenticated-practice setting in the exact isolation-before-context-before-lock/read order. The live disposable PostgreSQL rehearsal remains required before acceptance.",
+        "evidence_paths": [
+          "app/routers/appointments.py",
+          "app/services/appointment_delete_physical.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+          "docs/ariadne-agent-error-correction-register-revision-320.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0370",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-source-repair-precommit-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_receipt_builder",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every full commit ID written into continuation Git-ref evidence must be copied from machine-resolved git rev-parse output; a displayed short prefix must never be manually expanded.",
+      "observed_error": "While drafting the uncommitted source-repair precommit state, Sol manually expanded displayed plan-freeze prefix 52407725 into a nonexistent forty-character object ID instead of first copying the exact git rev-parse result.",
+      "detection_method": "A direct git rev-parse HEAD check immediately after authoring returned exact commit 5240772599c2f4c794cce32eb54ce577c0313879 and exposed the mismatch before preflight, staging or commit.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-source-repair-precommit-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-321.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the invented value with the exact full commit returned by git rev-parse HEAD, preserve this stopped draft incident, and require the existing commit-resolution preflight before the source-repair commit.",
+        "prevention_control": "The existing Git-object-resolution preflight remains fail-closed for every continuation event. Orchestrator evidence authoring must capture the full object first and paste only that machine output; short displayed prefixes are presentation only.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-source-repair-precommit-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-321.md"
         ]
       },
       "status": "corrected"

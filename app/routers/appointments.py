@@ -96,7 +96,11 @@ from app.services.appointment_status_product_adapter import (
     mint_status_proposal_version_binding,
 )
 from app.services.appointment_delete_product_adapter import (
+    appointment_delete_state,
     compose_product_delete_confirm,
+    delete_command_payload,
+    delete_proposal_freshness_id,
+    delete_signed_confirmation_payload,
     mint_delete_proposal_version_binding,
 )
 from app.services.appointment_delete_composition import (
@@ -5385,22 +5389,11 @@ def update_appointment_status(
 
 
 def _appointment_delete_command_payload(command: AppointmentDeleteCommand) -> dict[str, object]:
-    return {
-        "appointment_id": str(command.appointment_id),
-        "clears_waiting_area": command.clears_waiting_area,
-        "cancellation_reason": command.cancellation_reason,
-        "status_reason_code": command.status_reason_code,
-    }
+    return delete_command_payload(command)
 
 
 def _appointment_delete_state_payload(appt: Appointment) -> dict[str, object]:
-    return {
-        "appointment_id": str(appt.id),
-        "status": appt.status.value,
-        "waiting_area_id": _uuid_or_none(appt.waiting_area_id),
-        "cancellation_reason": appt.cancellation_reason,
-        "status_reason_code": appt.status_reason_code,
-    }
+    return appointment_delete_state(appt)
 
 
 def _compute_delete_proposal_freshness_id(
@@ -5408,13 +5401,7 @@ def _compute_delete_proposal_freshness_id(
     command: AppointmentDeleteCommand,
     current_state: dict[str, object],
 ) -> str:
-    payload = {
-        "kind": "delete_proposal_v1",
-        "current_state": current_state,
-        "command": _appointment_delete_command_payload(command),
-    }
-    material = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
-    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:32]
+    return delete_proposal_freshness_id(command, current_state)
 
 
 def _delete_signed_confirmation_payload(
@@ -5425,13 +5412,13 @@ def _delete_signed_confirmation_payload(
     current_state: dict[str, object],
     delete_proposal_freshness_id: Optional[str],
 ) -> dict[str, object]:
-    return {
-        "practice_id": str(practice_id),
-        "staff_user_id": str(staff_user_id),
-        "current_state": current_state,
-        "command": _appointment_delete_command_payload(command),
-        "delete_proposal_freshness_id": delete_proposal_freshness_id,
-    }
+    return delete_signed_confirmation_payload(
+        practice_id=practice_id,
+        actor_id=staff_user_id,
+        command=command,
+        current_state=current_state,
+        freshness_id=delete_proposal_freshness_id,
+    )
 
 
 _DELETE_CONFIRM_METADATA_FIELDS = {
@@ -5487,6 +5474,7 @@ def _attach_delete_confirmation_evidence(
     proposal.signed_confirmation_evidence_required = True
     confirmation_proposal = _delete_proposal_evidence_payload(proposal)
     confirmation_proposal["delete_proposal_freshness_id"] = delete_proposal_freshness_id
+    confirmation_proposal["signed_confirmation_evidence"] = signed_confirmation_evidence
     confirmation_proposal["signed_confirmation_evidence_required"] = True
     proposal.confirm_payload = {
         "confirmed": False,

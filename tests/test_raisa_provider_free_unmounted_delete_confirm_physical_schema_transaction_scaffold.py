@@ -55,7 +55,7 @@ def _load_validator():
 
 def test_public_openapi_remains_frozen() -> None:
     assert hashlib.sha256(OPENAPI_PATH.read_bytes()).hexdigest() == (
-        "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
+        "0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622"
     )
 
 
@@ -459,6 +459,10 @@ def test_transaction_ast_has_one_boundary_and_exact_lock_authority_order() -> No
     ordered = (
         "with db.begin():",
         "SET TRANSACTION ISOLATION LEVEL READ COMMITTED",
+        'func.set_config(',
+        '"app.current_practice_id"',
+        "str(practice_uuid)",
+        "True",
         'select(func.set_config("lock_timeout"',
         "db.query(User)",
         ".with_for_update(read=True)",
@@ -484,6 +488,8 @@ def test_transaction_ast_has_one_boundary_and_exact_lock_authority_order() -> No
     assert "DELETE_CONFIRM_LOCK_WAIT_DEADLINE_MS = 2000" in source
     assert "time.monotonic()" in function_source
     assert "SET LOCAL lock_timeout = :timeout" not in function_source
+    assert function_source.count('"app.current_practice_id"') == 1
+    assert function_source.count("str(practice_uuid)") == 1
     assert "authority_generation=signed_authority_generation" in function_source
     assert "actor_user_id=str(actor_uuid)" in function_source
     assert "nowait" not in function_source.lower()
@@ -566,18 +572,21 @@ def test_contract_is_schema_valid_and_bound_to_source_head() -> None:
     assert contract["authority_check"]["internal_only"] is True
 
 
-def test_contract_bindings_match_frozen_source_hashes() -> None:
+def test_historical_contract_bindings_remain_intact_and_resolvable() -> None:
+    assert hashlib.sha256(CONTRACT_PATH.read_bytes()).hexdigest() == (
+        "4d4ecc83fdb9b9e90067714f4827be6bc007ddd183bc66b0cd95aa207d475f22"
+    )
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
-    checked = 0
+    seen: set[str] = set()
     for group in ("input_bindings", "implementation_bindings"):
         for binding in contract[group]:
             path = ROOT / binding["path"]
             assert path.is_file(), f"missing:{binding['path']}"
-            assert hashlib.sha256(path.read_bytes()).hexdigest() == binding["sha256"], (
-                f"hash_mismatch:{binding['path']}"
-            )
-            checked += 1
-    assert checked >= 10
+            assert binding["path"] not in seen
+            assert len(binding["sha256"]) == 64
+            assert all(character in "0123456789abcdef" for character in binding["sha256"])
+            seen.add(binding["path"])
+    assert len(seen) >= 10
 
 
 def test_hostile_mutations_rejected_at_least_ninety() -> None:

@@ -460,6 +460,15 @@ def delete_confirm_locked_transaction(
 
     with db.begin():
         db.execute(text("SET TRANSACTION ISOLATION LEVEL READ COMMITTED"))
+        db.execute(
+            select(
+                func.set_config(
+                    "app.current_practice_id",
+                    str(practice_uuid),
+                    True,
+                )
+            )
+        ).scalar_one()
         deadline = time.monotonic() + DELETE_CONFIRM_LOCK_WAIT_DEADLINE_MS / 1000.0
 
         def _apply_lock_budget() -> None:

@@ -6,6 +6,8 @@ Timestamp: 2026-08-17T07:05:13.9032501+10:00 (Australia/Brisbane)
 
 Status: frozen
 
+Revision: 2
+
 Source HEAD: `341d89b9a70c85f54247de364baf842b84543c8d`
 
 Accepted HTTP source: `c7a01edd96ebabf3ea2c07be89a5b405c9629853`
@@ -78,6 +80,14 @@ before Docker or SQL.
    exact verified/exact pre-command ingress. A physical regression proves
    tenant context is local, precedes the first user/appointment/grant read and
    cannot be omitted or made session-persistent.
+
+Revision 2 records two same-boundary facts exposed by the first focused run.
+The prepared confirmation's nested proposal must carry the same signed evidence
+that the accepted adapter explicitly compares with the top-level evidence.
+The historical physical-scaffold test must retain its old API Spine hash as
+historical contract evidence while recognizing the already accepted current
+route-convergence API hash through this tranche's exact binding; it must not
+rewrite the historical scaffold contract or restore obsolete API content.
 
 ## Owned disposable lifecycle
 

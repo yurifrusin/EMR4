@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "99ce4e806167935fbeeb3586be15f10509e76b6b98d4ac6f3034db105983ecb8",
+  "canonical_register_sha256": "c161fbf256479e00a4ec4adc681a7a1fa7edb736d207d7f7b1e9bed8575e9718",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 105,
-      "canonical_unchanged": 223,
+      "accepted_candidate_changed": 106,
+      "canonical_unchanged": 224,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 57,
-      "evidence_misreport": 51,
+      "evidence_misreport": 52,
       "harness_failure": 44,
       "output_contract_violation": 106,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
-      "repository_defect": 56,
+      "repository_defect": 57,
       "transport_timeout": 11
     },
     "by_origin": {
-      "agent_behavior": 257,
+      "agent_behavior": 258,
       "harness": 44,
-      "repository": 56,
+      "repository": 57,
       "transport": 11
     },
     "by_process_severity": {
       "low": 142,
-      "material": 113,
-      "moderate": 113
+      "material": 114,
+      "moderate": 114
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -40,7 +40,8 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 191,
+      "codex-primary-orchestrator::integration_reviewer": 1,
+      "codex-primary-orchestrator::orchestrator": 192,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -91,13 +92,13 @@
     },
     "by_role": {
       "implementer": 37,
-      "integration_reviewer": 2,
-      "orchestrator": 277,
+      "integration_reviewer": 3,
+      "orchestrator": 278,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 368,
+  "incident_count": 370,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -290,11 +291,12 @@
       "categories": [
         "evidence_misreport"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0354",
         "AER-0356",
-        "AER-0363"
+        "AER-0363",
+        "AER-0370"
       ],
       "origins": [
         "agent_behavior"
@@ -302,7 +304,8 @@
       "prevention_controls": [
         "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
         "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
-        "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output."
+        "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output.",
+        "The existing Git-object-resolution preflight remains fail-closed for every continuation event. Orchestrator evidence authoring must capture the full object first and paste only that machine output; short displayed prefixes are presentation only."
       ],
       "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
       "resource_ids": [
@@ -1021,7 +1024,7 @@
       ]
     }
   ],
-  "register_revision": 319,
+  "register_revision": 321,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

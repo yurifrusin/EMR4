@@ -174,6 +174,75 @@ def _auth_headers(token: str = "test-bearer-token") -> dict[str, str]:
 
 # ── DHC-S02 / DHC-S04 / DHC-S10 route transport tests ───────────────────────
 
+def test_route_produced_proposal_passes_exact_adapter_precommand_ingress():
+    import uuid
+
+    from app.models.appointments import AppointmentStatus
+    from app.routers import appointments as route_module
+    from app.schemas.appointments import (
+        AppointmentDeleteCommand,
+        AppointmentDeleteProposalOut,
+    )
+    from app.services import appointment_delete_product_adapter as adapter
+
+    appointment = SimpleNamespace(
+        id=uuid.UUID("33333333-3333-4333-8333-333333333333"),
+        status=AppointmentStatus.Booked,
+        waiting_area_id=None,
+        cancellation_reason=None,
+        status_reason_code=None,
+        appointment_state_version=7,
+    )
+    user = SimpleNamespace(
+        id=uuid.UUID("11111111-1111-4111-8111-111111111111"),
+        practice_id=uuid.UUID("22222222-2222-4222-8222-222222222222"),
+        role=UserRole.Receptionist,
+        is_active=True,
+        authority_generation=3,
+    )
+    proposal = AppointmentDeleteProposalOut(
+        safe=True,
+        requires_confirmation=True,
+        autonomy_tier="proposal",
+        summary="Authored-synthetic cancellation proposal.",
+        command=AppointmentDeleteCommand(
+            appointment_id=appointment.id,
+            clears_waiting_area=False,
+            cancellation_reason="Authored-synthetic cancellation.",
+            status_reason_code="PATIENT_CANCELLED",
+        ),
+        warnings=[],
+        blocks=[],
+    )
+    attached = route_module._attach_delete_confirmation_evidence(  # noqa: SLF001
+        proposal=proposal,
+        appt=appointment,
+        practice_id=user.practice_id,
+        current_user=user,
+    )
+    body = AppointmentDeleteProposalConfirmationIn.model_validate(
+        {**attached.confirm_payload, "confirmed": True}
+    )
+
+    ingress = adapter._proposal_server_ingress(  # noqa: SLF001
+        body=body,
+        authenticated_user=user,
+        session_reference="a" * 64,
+        evidence_secret=route_module._delete_confirm_evidence_secret(),  # noqa: SLF001
+        proposal_version_binding=body.delete_proposal_version_binding,
+        proposal_version_binding_secret=route_module._delete_confirm_domain_secret(  # noqa: SLF001
+            "proposal-version"
+        ),
+    )
+
+    assert ingress.evidence_status == "verified"
+    assert ingress.evidence_binding == "exact"
+    assert ingress.current_state["source_version"] == 7
+    assert route_module._appointment_delete_command_payload(  # noqa: SLF001
+        body.delete_proposal.command
+    ) == adapter.delete_command_payload(body.delete_proposal.command)
+
+
 def test_route_calls_accepted_adapter_exactly_once_with_server_owned_ingress():
     client = _client()
     body = _signed_request_body()
