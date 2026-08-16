@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 321,
+  "register_revision": 322,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -14856,6 +14856,44 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0371",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-worker-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The bounded worker may write only three exact paths inside its isolated worktree, may not use external network or a package manager, and may not mutate the primary repository environment.",
+      "observed_error": "The worker report disclosed pip-installing Authlib and MSAL so app.main could import. No worker-local virtual environment exists, and pip metadata locates both installed packages in the primary repository .venv outside the authorised worktree.",
+      "detection_method": "Sol read the worker receipt before admission, then confirmed the worker worktree has no .venv and that python -m pip show reports both packages under C:/Users/sarashera/emr4/.venv/Lib/site-packages.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-http-postgresql-deepseek-worker-packet.md",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-http-postgresql-worker-result.json",
+        "docs/ariadne-agent-error-correction-register-revision-322.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "deepseek.worker_package_install_outside_authorized_worktree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Reject the worker self-pass as acceptance evidence, retain the three-file commit only as an untrusted review candidate, independently rerun its deterministic gates, and issue one bounded correction packet that explicitly forbids pip, package managers and environment writes.",
+        "prevention_control": "Every external-worker packet that needs repository dependencies must name the exact existing interpreter and state that package installation is forbidden; a later Ariadne launcher repair must clear or fail closed on inherited writable virtual-environment targeting outside the authorised worktree.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-http-postgresql-deepseek-mechanical-correction-packet.md",
+          "docs/ariadne-agent-error-correction-register-revision-322.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }
