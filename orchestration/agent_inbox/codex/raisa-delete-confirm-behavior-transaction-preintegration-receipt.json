@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "DeepSeek candidate 8f595bd1b336c6c891f6e11651d43c24d84f1b25 remains revision_required. Sol recovered its six paths, corrected checkout-stable hashing and transaction-local AUTH-S08 restoration, and froze semantic source 681dd3c78b36c7128c366ccf43d34fbe7e9e8d11 at descendant 658a2f5bb0e6df6e20f7280f97556baaa934c6f6. Owned, current-lineage/API Spine, Ruff, compilation, schema, whitespace and canonical 196-test gates pass.",
+    "next_executable_stage": "Generate the fresh five-source pre-integration receipt for exact candidate 658a2f5bb0e6df6e20f7280f97556baaa934c6f6, fast-forward only the task branch, then execute the single owned internal-only disposable PostgreSQL behavior rehearsal and prove cleanup before the one Gemini 3.7 Flash/high veto.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "658a2f5bb0e6df6e20f7280f97556baaa934c6f6",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_integration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek delivered the bounded six-path mechanical base, but required Sol semantic recovery and consumed substantially more time and tokens than forecast. The immutable worker receipt is preserved without another worker loop.",
+        "work_packages": [
+          "six-path contract, schema, harness and focused-test implementation"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one Gemini 3.7 Flash/high veto remains mandatory after deterministic admission and the occupied PostgreSQL result pass.",
+        "work_packages": [
+          "one final exact-candidate veto after occupied cleanup"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The semantic source is frozen and the remaining database lifecycle is necessarily serial; an extra agent would duplicate review and increase shared-state overhead.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "integration_result",
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "material_recovery",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Task-branch fast-forward precedes occupied execution",
+      "one owned network/container/relay lifecycle runs at a time",
+      "Gemini follows deterministic admission and occupied cleanup",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "fast_forward_exact_recovered_delete_confirm_behavior_transaction_candidate_into_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen plan source 2a5042f80941e2bd191999c430ff2517ba7e8cb2 limits the tranche to nine exact authority groups and eleven exact serial transaction groups. DeepSeek source 8f595bd1b336c6c891f6e11651d43c24d84f1b25 was revision_required. Sol recovery 681dd3c78b36c7128c366ccf43d34fbe7e9e8d11 corrects checkout-stable UTF-8 hashing and transaction-local AUTH-S08 restoration proof; semantic-freeze descendant 658a2f5bb0e6df6e20f7280f97556baaa934c6f6 records passing owned, current-lineage/API Spine, Ruff, compilation, schema, whitespace and canonical 196-test gates.",
+    "current_authority_allocation": "Sol owns semantic recovery, deterministic admission, occupied database execution, integration and acceptance. DeepSeek V4 Flash/high completed one bounded six-path implementation and is now closed; Gemini 3.7 Flash/high remains reserved for exactly one final Tier-2 veto; native subagents remain declined under the recorded serial database constraint.",
+    "git_refs_and_worktree": "Primary task HEAD is recovery-lease source 8f82a9cfa23fd4698351d19b7cfb558d3fb55e2c. Clean recovery branch codex/recovery-delete-confirm-btr-8f82a9cf is exact semantic-freeze candidate 658a2f5bb0e6df6e20f7280f97556baaa934c6f6 and a descendant of the primary task branch. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67; docs/branding/ and all 631 unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Its live baton leaves the exact provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal as the dependency-satisfied continuation after the accepted parse/catalogue result, under Yuri's standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "Integration affects the task branch only. No database has run for this tranche. The occupied step remains one cached PostgreSQL 16 container on one owned Docker internal-only network, no published port, tmpfs, fixed loopback relay and authored-synthetic serial rows only. No concurrency, restart, unknown commit, product provisioning, mounted route, public API/GraphQL/UI, real data, provider/ADC/IAM, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
