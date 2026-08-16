@@ -1,0 +1,74 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "The single authorized final attempt at 31fcedf48e81bc896cc5ea9ab5ab7312a77f4768 passed the repaired authority counter, reached TX-S09 and stopped fail-closed at TX-S09_disclosed_bytes. The harness retained locally staged candidate bytes after the transaction context raised scaffold_incomplete. Rollback and exact relay/container/network cleanup passed; no pass or Gemini review was released. AER-0355 preserves the distinct release-accounting defect.",
+    "next_executable_stage": "Await Yuri's decision whether to authorize a new narrowly bounded harness release-accounting correction and a fresh occupied attempt, or leave this rehearsal stopped. No further repair, runtime attempt or Gemini review is authorized under the consumed boundary.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "31fcedf48e81bc896cc5ea9ab5ab7312a77f4768",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "blocked_final_attempt_stop",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The implementation and attempt budget is exhausted; no worker repair is authorized.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "Occupied evidence failed, so the reserved independent veto is not admitted and no model call may run.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The latch is blocked at a user-owned attempt-budget decision; delegation cannot expand authority.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "explicit_user_recovery_decision"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "no further repair or occupied attempt",
+      "no Gemini review",
+      "await Yuri decision"
+    ]
+  },
+  "planned_action": "commit_immutable_final_attempt_failure_cleanup_and_user_attention_stop",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The final attempt reached TX-S09 and stopped at TX-S09_disclosed_bytes. AER-0355 shows the harness retained locally staged candidate bytes after scaffold_incomplete rather than proving an external release. The plan's stop rule now controls; no pass or veto is admitted.",
+    "current_authority_allocation": "Sol owns failure reconciliation and the blocked latch. DeepSeek remains closed; Gemini is not admitted because occupied evidence failed; native subagents remain declined. Any further repair or attempt requires Yuri's decision.",
+    "git_refs_and_worktree": "Exact preexecution source is 31fcedf48e81bc896cc5ea9ab5ab7312a77f4768. Only the minimized failure evidence, AER metadata, blocked latch, stop receipt and Yuri stop summary are pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; all pre-existing untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Yuri authorized one repair and one final attempt; that attempt is now consumed by a distinct fail-closed TX-S09 harness release-accounting failure.",
+    "protected_evidence_boundaries": "Rollback and exact relay/container/internal-network cleanup passed, and label-filtered inspection shows no resource remains. Product data, routes, providers, external networks, deployments, Pages and protected refs stayed closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": true
+}

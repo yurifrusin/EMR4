@@ -1,0 +1,174 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_immutable_final_attempt_failure_cleanup_and_user_attention_stop",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Yuri authorized one repair and one final attempt; that attempt is now consumed by a distinct fail-closed TX-S09 harness release-accounting failure.",
+    "current_authority_allocation": "Sol owns failure reconciliation and the blocked latch. DeepSeek remains closed; Gemini is not admitted because occupied evidence failed; native subagents remain declined. Any further repair or attempt requires Yuri's decision.",
+    "active_plan_and_acceptance": "The final attempt reached TX-S09 and stopped at TX-S09_disclosed_bytes. AER-0355 shows the harness retained locally staged candidate bytes after scaffold_incomplete rather than proving an external release. The plan's stop rule now controls; no pass or veto is admitted.",
+    "protected_evidence_boundaries": "Rollback and exact relay/container/internal-network cleanup passed, and label-filtered inspection shows no resource remains. Product data, routes, providers, external networks, deployments, Pages and protected refs stayed closed.",
+    "git_refs_and_worktree": "Exact preexecution source is 31fcedf48e81bc896cc5ea9ab5ab7312a77f4768. Only the minimized failure evidence, AER metadata, blocked latch, stop receipt and Yuri stop summary are pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; all pre-existing untracked paths remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+    "status": "blocked",
+    "source_head": "31fcedf48e81bc896cc5ea9ab5ab7312a77f4768",
+    "authority_source": "Yuri explicitly authorized one further bounded AER-0353 harness-counter repair and one final occupied attempt after stop commit b4b772dd07a91e89db57fdd23bb1b4afb199a7e7; all parent Tier-2 boundaries remain in force.",
+    "checkpoint": {
+      "completed_stage": "The single authorized final attempt at 31fcedf48e81bc896cc5ea9ab5ab7312a77f4768 passed the repaired authority counter, reached TX-S09 and stopped fail-closed at TX-S09_disclosed_bytes. The harness retained locally staged candidate bytes after the transaction context raised scaffold_incomplete. Rollback and exact relay/container/network cleanup passed; no pass or Gemini review was released. AER-0355 preserves the distinct release-accounting defect.",
+      "next_executable_stage": "Await Yuri's decision whether to authorize a new narrowly bounded harness release-accounting correction and a fresh occupied attempt, or leave this rehearsal stopped. No further repair, runtime attempt or Gemini review is authorized under the consumed boundary.",
+      "retry_counters": {
+        "planning": 2,
+        "implementation": 6,
+        "review": 0,
+        "verification": 9
+      },
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": true,
+      "reason": "single_authorized_final_attempt_consumed_by_distinct_tx_s09_release_accounting_failure"
+    },
+    "terminal_response": {
+      "permitted": true,
+      "reason": "blocked_after_consumed_attempt_budget_with_exact_cleanup"
+    },
+    "protected_boundaries": [
+      "user_authorized_final_database_attempt_consumed_no_further_repair_or_retry_authorized",
+      "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+      "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+      "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",
+      "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+      "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "assessed_stage": "blocked_final_attempt_stop",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "rationale": "The implementation and attempt budget is exhausted; no worker repair is authorized.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "rationale": "Occupied evidence failed, so the reserved independent veto is not admitted and no model call may run.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The latch is blocked at a user-owned attempt-budget decision; delegation cannot expand authority.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "no further repair or occupied attempt",
+      "no Gemini review",
+      "await Yuri decision"
+    ],
+    "reassessment_triggers": [
+      "explicit_user_recovery_decision"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_post_compaction_five_source_rehydration_and_exact_failure_reconciliation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Closed worker lane preserved; no new dispatch."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini veto not admitted after occupied failure."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reconciled the fail-closed attempt and exact cleanup without retry."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No delegation can expand the consumed attempt boundary."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

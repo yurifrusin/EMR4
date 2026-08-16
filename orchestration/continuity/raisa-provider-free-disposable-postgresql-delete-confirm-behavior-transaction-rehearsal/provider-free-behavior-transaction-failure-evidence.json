@@ -18,15 +18,15 @@
   ],
   "failure": {
     "stage": "transaction",
-    "code": "TX-S06_authority_count_mismatch",
+    "code": "TX-S09_disclosed_bytes",
     "detail_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "cleanup": {
     "status": "cleanup_verified",
     "container": "container_absent",
     "network": "network_absent",
-    "container_id_sha256": "bac33aca595254b3fde17c8d10b3c8406c1bc30ed264c32c92b87e897febaaf4",
-    "network_id_sha256": "e5812c431f19757ac5f85a81778dc96238c50b8538f3342398d76dd3781789e8"
+    "container_id_sha256": "a7a7b7a78aac4e2837661a5044bb785c97b99244683aed257b0be06d85d6f602",
+    "network_id_sha256": "2c1084f57c675219dc02850d3750f2335da45fb756f3e7734b5b54c2020585d9"
   },
   "claim_boundary": "Exact serial unmounted SQLAlchemy/PostgreSQL delete-confirm authority and transaction behavior only; no route, product database, concurrency, restart, unknown commit, deployment or production claim."
 }

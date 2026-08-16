@@ -24,9 +24,9 @@
   "workflow_disposition": "explicit_one_repair_one_final_attempt_authorized",
   "recurrence_signature": "authority_check.conceptual_invocation_miscounted_as_downstream_grant_sql",
   "correction": {
-    "status": "correction_in_progress",
+    "status": "corrected_and_verified",
     "action": "Under Yuri's explicit one-repair authorization, instrument the exact private _authority_valid function invocation during the harness call, restore it in finally, retain SQL tokens independently, add fail-fast and two-check count tests, and permit one final occupied attempt only.",
     "prevention_control": "Evidence counters must bind to the semantic event named by the contract, not to one downstream implementation side effect that valid early-return paths may skip."
   },
-  "status": "contained_cleanup_verified_repair_authorized"
+  "status": "corrected_and_verified_before_distinct_tx_s09_stop"
 }

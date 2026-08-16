@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0355",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-final-occupied-002",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "implementation_defect",
+  "role": "sol_recovered_harness",
+  "resource_id": "owned-disposable-postgresql-16-behavior-transaction-final-attempt-after-aer-0353",
+  "model": "gpt-sol",
+  "reasoning_level": "high",
+  "stage": "transaction_group_assertion",
+  "category": "staged_response_bytes_misclassified_as_external_release",
+  "expected_invariant": "A response counts as released only after the transaction context exits successfully; candidate bytes staged inside a transaction that raises scaffold_incomplete or rolls back must never populate release evidence.",
+  "observed_error": "In TX-S09 cross_artifact_mismatched, the harness assigned _stage_complete output to response_bytes before delete_confirm_locked_transaction completed. The context then correctly raised DeleteConfirmScaffoldIncomplete and rolled back, but the local candidate remained non-null, so the harness failed at TX-S09_disclosed_bytes even though no external response was released.",
+  "detection_method": "The one final authorized occupied attempt stopped at exact minimized code TX-S09_disclosed_bytes with empty-detail digest and cleanup_verified. Static inspection shows response_bytes is assigned inside the transaction context and is not cleared when scaffold_incomplete is caught; no product-service contradiction is identified by this evidence.",
+  "evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+    "app/services/appointment_delete_physical.py"
+  ],
+  "candidate_state": "final_authorized_attempt_failed_closed_cleanup_verified_no_pass_claim_attempt_budget_consumed",
+  "workflow_disposition": "user_attention_required_before_any_further_repair_or_runtime",
+  "recurrence_signature": "transaction_evidence.candidate_bytes_counted_as_release_before_context_success",
+  "correction": {
+    "status": "not_authorized",
+    "action": "If Yuri authorizes a new bounded recovery, separate candidate_response_bytes from released_response_bytes, promote the candidate only after successful transaction-context exit, prove incomplete and outer-abort paths release zero bytes, and define a new exact attempt budget before runtime.",
+    "prevention_control": "Transaction rehearsals must model candidate construction, durable commit and external release as separate states; only post-context-success promotion may enter disclosure evidence."
+  },
+  "status": "contained_cleanup_verified_awaiting_user_decision"
+}
