@@ -1,5 +1,5 @@
 {
-  "canonical_register_sha256": "90c9b3cac680cf2f4c7d868237936a96f123c8c5a6168ca6e0f37cd419acf6ea",
+  "canonical_register_sha256": "22a84a76557c6cf1f5896c723a106bb1d28d493028ae136495f895c043031af7",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 105,

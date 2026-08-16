@@ -14445,17 +14445,18 @@
       "recurrence_signature": "implementer.delete_confirm_adapter_duplicate_authority_coordinates_and_physical_order_underchecked",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "recovery_lease_applied",
         "action": "Exhaust the DeepSeek correction lane; under the explicit Sol recovery lease require both freshness coordinates and the proposal evidence copy exactly, practice-scope the physical test double before yield and add zero-session/zero-physical hostile tests.",
         "prevention_control": "A corrected runtime-boundary candidate must receive Sol invariant-by-invariant reconciliation after worker tests, including independent mutation of every duplicated authority coordinate and parity between test-double and real physical-seam ordering, before verifier dispatch.",
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
           "app/services/appointment_delete_product_adapter.py",
           "tests/test_appointment_delete_product_adapter.py",
-          "docs/ariadne-agent-error-correction-register-revision-312.md"
+          "docs/ariadne-agent-error-correction-register-revision-312.md",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-composition-product-adapter-gemini37-review-receipt.json"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0361",

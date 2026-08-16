@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture"
-SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
+NODE_ID = "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation"
+SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
+ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
 BEHAVIOR_SOURCE_HEAD = "49dd2aaa72877adb844da4d0d5d5bb28039c90c8"
 RISK_REFORM_SOURCE_HEAD = "51866ce084c33fce600b792c66b180927658ed9e"
@@ -51,11 +52,11 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 305
+    assert graph["graph_revision"] == 306
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 287
-    assert compass["source_graph_revision"] == 305
+    assert compass["map_revision"] == 288
+    assert compass["source_graph_revision"] == 306
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -65,34 +66,36 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     relation = _table_row(text, "Required Git relation")
     product = _table_row(text, "Active product track")
     next_work = _table_row(text, "Next implementation")
+    implementation_relation = _table_row(
+        text, "Current delete-confirm implementation source"
+    )
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     reform_acceptance = _table_row(
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
-    assert "Continuity 305 / Compass 287" in current
+    assert "Continuity 306 / Compass 288" in current
     assert (
-        "raisa_provider_free_unmounted_delete_confirm_response_compatibility_"
-        "product_adapter_architecture_pass"
+        "raisa_provider_free_unmounted_delete_confirm_composition_product_"
+        "adapter_implementation_pass"
     ) in current
     assert SOURCE_HEAD in current
-    assert "six-field private bytes" in current.lower()
-    assert "136 contract plus 20 evidence hostile mutations" in current.lower()
-    assert "191-test and 424-test profiles" in current.lower()
-    assert "aer-0358" in current.lower()
-    assert "python 3.11 runtime validation is unclaimed" in current.lower()
+    assert "517 provider-free tests" in current.lower()
+    assert "aer-0359 through aer-0362" in current.lower()
+    assert "closed sol recovery" in current.lower()
     assert (
-        "no route, schema, database, capability or product runtime is opened"
+        "no route, schema, database, capability, product data or runtime is opened"
         in current.lower()
     )
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
     assert "risk_weighted_workflow.yaml" in reform_acceptance
-    assert SOURCE_HEAD in relation
+    assert ARCHITECTURE_SOURCE_HEAD in relation
+    assert SOURCE_HEAD in implementation_relation
     assert SOURCE_HEAD in product
     assert ROUTE_REVIEW_SOURCE_HEAD in relation
     assert (
-        "product rows, capability provisioning, adapter implementation and routes remain unadmitted"
+        "routes, capabilities and product runtime remain closed"
         in product.lower()
     )
     assert REPRESENTABILITY_SOURCE_HEAD in relation
@@ -136,16 +139,14 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert (
-        "provider_free_unmounted_delete_confirm_composition_and_product_adapter_implementation"
-        in next_work
+        "provider-free read-only delete-confirm route-mounting readiness review"
+        in next_work.lower()
     )
-    assert "standing uninterrupted-development authority" in next_work
-    assert "pure public-envelope projection" in next_work
-    assert "server-owned ingress packet" in next_work
-    assert "locked re-admission composition" in next_work
+    assert "standing authority" in next_work.lower()
+    assert "canonical/hidden alias convergence" in next_work.lower()
     assert "may not edit, mount or call a route" in next_work.lower()
     assert "provider" in next_work.lower()
-    assert "protected refs remain closed" in next_work.lower()
+    assert "protected refs" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -182,9 +183,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider_free_unmounted_delete_confirm_composition_and_product_adapter_implementation",
-        "standing uninterrupted-development authority",
-        "capability provisioning",
+        "provider-free read-only delete-confirm route-mounting readiness review",
+        "standing authority",
+        "provision capability",
         "may not edit, mount or call a route",
         "ui",
         "docs/branding/",

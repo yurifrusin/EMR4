@@ -6,9 +6,8 @@ Timestamp: 2026-08-16T20:43:39.3173841+10:00 (Australia/Brisbane)
 
 ## Result
 
-Revision 313 preserves 362 bounded known incidents. AER-0362 is corrected;
-AER-0360 remains contained by the active Sol recovery lease pending its fresh
-exact-candidate veto. No incident is open.
+Revision 313 preserves 362 bounded known incidents. AER-0360 and AER-0362 are
+corrected; no incident is open or contained.
 
 AER-0362 records a continuation-evidence harness gap found before verifier
 dispatch. The pre-commit receipt correctly computed the changed harness
@@ -23,6 +22,11 @@ requires exact equality with
 event. The workflow hard controls, exact fixture and current latch are updated
 to the newly computed fingerprint, and focused hostile/pass coverage protects
 the invariant.
+
+AER-0360's recovery is now closed at exact candidate
+`43e993a98ffec3f9ffe2740b0b38816bcb2d6adb`. The 517-test provider-free
+profile and one clean seven-command Gemini 3.7 Flash/high veto pass; every
+recovery amendment remains limited to the two lease-owned paths.
 
 ## Boundary
 

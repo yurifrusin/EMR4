@@ -1,0 +1,182 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "admit_exact_recovered_delete_confirm_candidate_for_one_gemini_37_high_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction; the live baton keeps this implementation in progress and records register revision 313.",
+    "current_authority_allocation": "Sol owns final admission and acceptance. DeepSeek is complete and exhausted; Gemini 3.7 Flash/high owns one read-only exact-candidate veto; native subagents remain declined.",
+    "active_plan_and_acceptance": "Exact candidate 43e993a98ffec3f9ffe2740b0b38816bcb2d6adb contains the preserved worker commits, exact two-path Sol recovery and the two narrow harness guards. Twelve bindings, route/schema isolation, Ruff, compilation and 517 provider-free tests pass.",
+    "protected_evidence_boundaries": "Reviewer access is limited to an exact non-protected allowlist and fixed provider-free manifest. No conftest, database, product route/data, capability, credentials, provider fallback, deployment or protected ref is open.",
+    "git_refs_and_worktree": "Main HEAD is exact 43e993a98ffec3f9ffe2740b0b38816bcb2d6adb and tree bfb6a6de54fe42ce9eff5315c2ec9378e79b8310. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 44a91b7239ac9f38510c10cb57729ac5312d32f9. Review worktree r196 will be created clean at the exact candidate; unrelated untracked paths remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "active_tranche": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+    "objective": "Implement and prove the accepted delete-confirm pure public-envelope projection, server-owned ingress packet, proposal and locked re-admission composition, physical-seam call boundary and closed outcome mapping in unmounted product source; edit or call no route, change no schema, execute no database and open no capability, product-data or provider runtime authority.",
+    "status": "in_progress",
+    "source_head": "44a91b7239ac9f38510c10cb57729ac5312d32f9",
+    "authority_source": "The accepted Continuity 305 / Compass 287 closeout and Yuri's standing uninterrupted-development authority name this exact provider-free unmounted implementation as the next dependency-satisfied tranche.",
+    "checkpoint": {
+      "completed_stage": "Exact recovered candidate 43e993a98ffec3f9ffe2740b0b38816bcb2d6adb preserves both worker commits, applies only the two-path Sol recovery and closes the handover-size plus settings-fingerprint harness gaps. Twelve canonical-LF bindings, forbidden-route/schema isolation, Ruff, compilation and the consolidated 517-test provider-free profile pass. AER-0359 through AER-0362 preserve every rejection and repair; no incident is open.",
+      "next_executable_stage": "Generate the fresh pre-verifier receipt, create one clean exact-candidate review worktree and dispatch one Gemini 3.7 Flash/high provider-free veto through the admitted manifest.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5ff0bd573d708c99782c1cb0d4536a5b5630d4ec79f49664c2881aa0a95220c4"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_unmounted_authored_synthetic_implementation_and_static_contract_evidence_only",
+      "product_edits_limited_to_separately_frozen_delete_confirm_service_and_test_paths",
+      "no_route_edit_mount_call_or_http_transport_opening",
+      "no_schema_model_migration_database_docker_sql_execution_or_product_command",
+      "no_capability_provisioning_or_client_supplied_authority",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "raw_delete_compatibility_ingress_remains_isolated",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-delete-confirm-composition-product-adapter-implementation",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "Both worker attempts are preserved and the implementation lane is closed.",
+        "work_packages": [
+          "completed four-path implementation provenance"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "A fresh read-only exact-candidate veto is the remaining Tier-2 independence gate after Sol recovery.",
+        "work_packages": [
+          "one exact-candidate provider-free implementation veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Native delegation remains unavailable under the current developer constraint and cannot replace the required verifier.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "create fresh exact-candidate review worktree",
+      "execute only the admitted provider-free manifest",
+      "one terminal Gemini decision",
+      "Sol alone interprets and accepts"
+    ],
+    "reassessment_triggers": [
+      "review worktree preflight",
+      "verifier result",
+      "scope breach or revision required",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_exact_candidate_five_source_and_provider_free_profile",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol admitted exact candidate 43e993a9 after the 517-test provider-free profile."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane remains declined."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Gemini 3.7 Flash/high is selected for one final veto."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "DeepSeek lane completed and is closed."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

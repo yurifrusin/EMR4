@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r196",
+        "tests/test_appointment_delete_composition.py",
+        "tests/test_appointment_delete_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_appointment_command_alignment_inventory.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r196",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_agents_handover_archive.py",
+        "tests/test_current_baton_consistency.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/services/appointment_delete_composition.py",
+        "app/services/appointment_delete_product_adapter.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "tests/test_appointment_delete_composition.py",
+        "tests/test_appointment_delete_product_adapter.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "44a91b7239ac9f38510c10cb57729ac5312d32f9..43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

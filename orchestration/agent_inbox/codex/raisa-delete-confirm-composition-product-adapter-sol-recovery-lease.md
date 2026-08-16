@@ -4,7 +4,7 @@ Date: 2026-08-16
 
 Timestamp: 2026-08-16T20:19:05.2199314+10:00 (Australia/Brisbane)
 
-Status: `active`
+Status: `closed`
 
 ## Preserved worker provenance
 
@@ -48,6 +48,16 @@ The amendments are exactly:
    target-unavailable result rather than a later 403 locked-admission result.
 
 No other semantics, path or test expectation may change.
+
+## Closure
+
+Exact recovered candidate `43e993a98ffec3f9ffe2740b0b38816bcb2d6adb`
+and tree `bfb6a6de54fe42ce9eff5315c2ec9378e79b8310` pass the full closure
+conditions. The consolidated provider-free profile passes 517 tests; Ruff,
+compilation, twelve canonical-LF bindings and forbidden route/schema isolation
+pass. The fresh Gemini 3.7 Flash/high veto executes all seven admitted commands,
+returns one schema-constrained `pass`, and leaves the exact review HEAD and
+worktree unchanged and clean. No further recovery amendment is required.
 
 ## Closure conditions
 

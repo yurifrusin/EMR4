@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 305 / Compass 287. Delete-confirm now has an accepted minimal byte-authoritative response and server-owned product-adapter architecture; one provider-free unmounted implementation is next before route work.
+> EMR4 is at Continuity 306 / Compass 288. Delete-confirm now has accepted unmounted composition and server-owned adapter services; a provider-free read-only route-mounting readiness review is next.
 
 ## North star
 
@@ -380,25 +380,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The route remains blocked by six coupled adapter/response gaps; exact Git commit provenance now fails closed mechanically. Lineage parent: `raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal`.
 182. **Settle stable minimal delete-confirm delivery and server-owned adapter authority before implementation — Provider-free unmounted delete-confirm response compatibility and product-adapter architecture**
    The off-route architecture now binds exact private command truth to byte-identical public replay and locked current-authority composition. Lineage parent: `raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution`.
+183. **Implement the accepted delete-confirm truth-kernel adapter before route work — Provider-free unmounted delete-confirm composition and product-adapter implementation**
+   The pure projection and server-owned locked composition now exist as tested unmounted product services. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture`.
 
 ## Current position
 
-**Delete-confirm response and adapter meaning are frozen before any product implementation — Provider-free unmounted delete-confirm response compatibility and product-adapter architecture**
+**Delete-confirm composition is implemented off-route before mounting decisions — Provider-free unmounted delete-confirm composition and product-adapter implementation**
 
-**Why this proof came next:** The route review identified six coupled blockers; stable response replay and server-owned authority now have one accepted off-route contract.
+**Why this proof came next:** The accepted architecture could now be realized without opening database or route authority.
 
-The minimal public v1 envelope is a byte-deterministic projection of exact private command truth, with locked current-authority re-admission and raw DELETE isolation.
+Unmounted services enforce server-owned ingress, exact proposal/locked re-admission and byte-stable private-to-public replay.
 
 ### What this unlocks
 
-- Freeze one provider-free unmounted delete-confirm composition and product-adapter implementation tranche.
-- Implement pure projection, server-owned ingress, locked re-admission composition and closed outcome mapping without a route or database.
+- Freeze one provider-free read-only route-mounting readiness review.
+- Measure canonical/hidden alias convergence against the implemented services without route edits.
 
 ### What it does not solve
 
-- Route or schema editing, mounting, calling or product execution.
-- Capability provisioning, product data or additional database behavior.
-- Provider/credential activity, deployment, release, Pages or protected-ref movement.
+- Route editing, mounting, calling or product execution.
+- Schema/database execution, capability provisioning or product data.
+- Provider/credential activity, UI, deployment, release, Pages or protected refs.
 
 ## Continuity and authority
 
@@ -488,9 +490,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted serial PostgreSQL delete-confirm foundation and raw DELETE isolation.
-- Implement the accepted response/product-adapter architecture in one provider-free unmounted composition tranche.
-- Keep route/schema execution, product data, capabilities, providers and protected integration separately gated.
+- Preserve the accepted delete-confirm physical seam, private receipt and raw DELETE isolation.
+- Review route-mounting readiness read-only before any canonical/hidden alias edit.
+- Keep database execution, capabilities, product data, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -679,6 +681,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted delete-confirm services remain unmounted and provider-free; route/schema/database/capability/product-data authority is still closed.
 - The accepted delete-confirm response architecture opens no route, schema, database, capability or product runtime; its next implementation remains provider-free and unmounted.
 - The accepted delete-confirm route review opens no route or product runtime; literal mounting remains distinct from authority-kernel and byte-authoritative response convergence.
 - The accepted delete-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL authority and transaction seam only, not route, concurrency or product-command safety.
@@ -880,7 +883,9 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption.py`
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
+- `app/services/appointment_delete_composition.py`
 - `app/services/appointment_delete_physical.py`
+- `app/services/appointment_delete_product_adapter.py`
 - `app/services/appointment_status_composition.py`
 - `app/services/appointment_status_physical.py`
 - `app/services/appointment_status_product_adapter.py`
@@ -934,6 +939,8 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-310.md`
 - `docs/ariadne-agent-error-correction-register-revision-311.md`
+- `docs/ariadne-agent-error-correction-register-revision-312.md`
+- `docs/ariadne-agent-error-correction-register-revision-313.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1292,6 +1299,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-plan.md`
 - `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture.md`
+- `docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-closeout.md`
+- `docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-plan.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md`
@@ -1585,6 +1594,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-behavior-transaction-gemini37-final-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-composition-product-adapter-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-design-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json`
@@ -1780,6 +1790,13 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-preexecution-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest-admission.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-implementation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-conditional-command-kernel-architecture-admission-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-deepseek-rejection-and-sol-recovery.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-kernel-gemini-review-worktree-preflight.json`
@@ -2093,6 +2110,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-word-hybrid-contextual-launch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-result-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-sol-acceptance.md`
+- `orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-correction-worker-receipt.json`
+- `orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-worker-receipt.json`
 - `orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-correction-worker-result.json`
 - `orchestration/agent_inbox/deepseek/raisa-delete-confirm-response-compatibility-product-adapter-architecture-worker-result.json`
 - `orchestration/agent_inbox/deepseek/raisa-reception-one-duration-test-worker-receipt.json`
@@ -2344,6 +2363,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture/contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation/implementation-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission/provider-free-acceptance-evidence.json`
@@ -2732,6 +2752,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-behavior-transaction-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-composition-product-adapter-implementation.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md`
@@ -2786,6 +2807,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py`
 - `scripts/raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
+- `scripts/raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity_update.py`
 - `scripts/raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py`
 - `scripts/raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py`
 - `scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py`
@@ -2832,6 +2854,8 @@ Prerequisites:
 - `scripts/reception_one_receptionist_first_v6_isolation.py`
 - `scripts/reception_one_structured_source_plan_language.py`
 - `tests/test_api_spine_status_confirm_idempotency_preflight.py`
+- `tests/test_appointment_delete_composition.py`
+- `tests/test_appointment_delete_product_adapter.py`
 - `tests/test_ariadne_active_operation_latch.py`
 - `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_continuity_and_refinement.py`
@@ -2882,6 +2906,7 @@ Prerequisites:
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
+- `tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py`
 - `tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission.py`
 - `tests/test_raisa_provider_free_unmounted_delete_confirm_conditional_command_kernel_architecture_admission_plan.py`
 - `tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py`
@@ -2930,4 +2955,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 287; continuity graph revision 305._
+_Compass map revision 288; continuity graph revision 306._

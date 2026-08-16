@@ -1,0 +1,213 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r196",
+  "branch": "codex/review-delete-confirm-adapter-43e993a9",
+  "head_before": "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb",
+  "head_after": "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "a3dcf3b39395c64240cb09e58e19abe8f527cb0ae03251b986e437f61226ebd5",
+  "result": "# Gemini 3.7 Flash/high Independent Tier-2 Veto Assessment\n\nCandidate:\n- Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\r196`\n- Branch: `codex/review-delete-confirm-adapter-43e993a9`\n- HEAD: `43e993a98ffec3f9ffe2740b0b38816bcb2d6adb`\n- Published architecture parent: `44a91b7239ac9f38510c10cb57729ac5312d32f9`\n\n---\n\n### Evaluation of Review Criteria\n\n1. **Private receipt validation and byte-identical minimal public envelope:**\n   - In [`app/services/appointment_delete_composition.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/app/services/appointment_delete_composition.py), `validate_delete_confirm_private_receipt_bytes` enforces strict UTF-8 JSON parsing, exact 6-field key order (`DELETE_CONFIRM_PRIVATE_FIELDS`), `status == \"Cancelled\"`, `waiting_area_id is None`, dedicated reason code membership in `DELETE_CONFIRM_REASON_CODES`, bounded cancellation text length, sorted and unique canonical warning codes in `DELETE_CONFIRM_WARNING_CODES`, and exact byte round-trip equality against `canonical_delete_confirm_response_bytes`.\n   - `delete_confirm_envelope_projection` and `canonical_delete_confirm_envelope_bytes` derive the public success and replay responses exclusively from validated private receipt bytes. No live appointment query, `AppointmentOut`, patient, practitioner, scheduling, notes, or audit identity fields are reconstructed or disclosed.\n   - First execution and response replay return byte-identical envelopes verified by [`tests/test_appointment_delete_composition.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/tests/test_appointment_delete_composition.py) and [`tests/test_appointment_delete_product_adapter.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/tests/test_appointment_delete_product_adapter.py).\n\n2. **Server-owned authority and HMAC cryptographic bindings:**\n   - In [`app/services/appointment_delete_product_adapter.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/app/services/appointment_delete_product_adapter.py), `practice_id`, `actor_id`, `actor_role`, and positive integer `authority_generation` are derived strictly from the authenticated `User` context. Client attempts to supply authority coordinates are ignored or rejected.\n   - Session reference minimization uses domain-separated HMAC-SHA256 (`DELETE_SESSION_REFERENCE_DOMAIN`) over length-framed bearer token, actor, and practice identifiers.\n   - `_proposal_version_material`, `mint_delete_proposal_version_binding`, and `verify_delete_proposal_version_binding` cover exactly two fields (`source_version` and `evidence_signature`) with HMAC-SHA256, leaving `schema_version` in the envelope while rejecting tampering.\n\n3. **Pre-session freshness, evidence copy, and fail-closed admission:**\n   - In `_verified_proposal_state`, both `proposal.delete_proposal_freshness_id` and `body.delete_proposal_freshness_id` must match the recomputed signed-state freshness ID before any command session opens.\n   - The proposal's own `signed_confirmation_evidence` copy must match the verified confirmation evidence mapping.\n   - In `compose_delete_confirm`, admission is verified prior to opening the database command session and repeated against the locked target under transaction lock with identical digest verification (`locked_request_digest_changed`). Mismatches and stops fail closed to typed 200 blocked envelopes without state mutation.\n\n4. **Physical staging, idempotent replay, and cross-practice isolation:**\n   - For new commands, `_stage_effect` stages exactly appointment status cancellation, clears waiting area, sets reason fields, emits an attributable `AppointmentAuditLog`, verifies adjacent `appointment_state_version == pre_state_version + 1`, and writes the 6-field private receipt.\n   - Replay performs zero side-effects and returns stored canonical bytes directly.\n   - Cross-practice target requests fail the practice-scoped boundary and raise `DeleteConfirmTargetUnavailable`, which maps to an indistinguishable 404 `appointment_not_found` error response.\n\n5. **Route, schema, model, and API Spine isolation:**\n   - Existing routes, schemas, models, migrations, and API Spine files remain byte-unchanged and import none of the unmounted delete-confirm modules (verified by `test_route_does_not_import_or_call_delete_confirm_services` and API Spine drift guards).\n\n6. **Handover-size and settings-fingerprint controls:**\n   - `AGENTS.md` remains strictly within the 80,000-byte limit (79,956 bytes) protected by `test_agents_handover_archive.py` and `test_agents_acceptance_index.py`.\n   - In [`scripts/ariadne_orchestrator_preflight.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/scripts/ariadne_orchestrator_preflight.py), settings fingerprint calculation verifies exact equality with `active_operation.checkpoint.settings_fingerprint`, failing closed to `revision_required` on mismatch without weakening the active latch. AER-0359, AER-0360, AER-0361, and AER-0362 accurately capture this history.\n\n7. **Verification and source bindings:**\n   - All 12 source bindings match strict canonical-LF hashes.\n   - All 7 command manifest steps (C01 through C07) completed cleanly with exit code 0, including 135 provider-free domain tests, 122 continuity/harness tests, Ruff linting, and whitespace check.\n\nThe exact candidate substantiates the unmounted implementation claim without opening routes, databases, or external network surfaces.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Tier-2 Veto Assessment\n\nCandidate:\n- Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\r196`\n- Branch: `codex/review-delete-confirm-adapter-43e993a9`\n- HEAD: `43e993a98ffec3f9ffe2740b0b38816bcb2d6adb`\n- Published architecture parent: `44a91b7239ac9f38510c10cb57729ac5312d32f9`\n\n---\n\n### Evaluation of Review Criteria\n\n1. **Private receipt validation and byte-identical minimal public envelope:**\n   - In [`app/services/appointment_delete_composition.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/app/services/appointment_delete_composition.py), `validate_delete_confirm_private_receipt_bytes` enforces strict UTF-8 JSON parsing, exact 6-field key order (`DELETE_CONFIRM_PRIVATE_FIELDS`), `status == \"Cancelled\"`, `waiting_area_id is None`, dedicated reason code membership in `DELETE_CONFIRM_REASON_CODES`, bounded cancellation text length, sorted and unique canonical warning codes in `DELETE_CONFIRM_WARNING_CODES`, and exact byte round-trip equality against `canonical_delete_confirm_response_bytes`.\n   - `delete_confirm_envelope_projection` and `canonical_delete_confirm_envelope_bytes` derive the public success and replay responses exclusively from validated private receipt bytes. No live appointment query, `AppointmentOut`, patient, practitioner, scheduling, notes, or audit identity fields are reconstructed or disclosed.\n   - First execution and response replay return byte-identical envelopes verified by [`tests/test_appointment_delete_composition.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/tests/test_appointment_delete_composition.py) and [`tests/test_appointment_delete_product_adapter.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/tests/test_appointment_delete_product_adapter.py).\n\n2. **Server-owned authority and HMAC cryptographic bindings:**\n   - In [`app/services/appointment_delete_product_adapter.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/app/services/appointment_delete_product_adapter.py), `practice_id`, `actor_id`, `actor_role`, and positive integer `authority_generation` are derived strictly from the authenticated `User` context. Client attempts to supply authority coordinates are ignored or rejected.\n   - Session reference minimization uses domain-separated HMAC-SHA256 (`DELETE_SESSION_REFERENCE_DOMAIN`) over length-framed bearer token, actor, and practice identifiers.\n   - `_proposal_version_material`, `mint_delete_proposal_version_binding`, and `verify_delete_proposal_version_binding` cover exactly two fields (`source_version` and `evidence_signature`) with HMAC-SHA256, leaving `schema_version` in the envelope while rejecting tampering.\n\n3. **Pre-session freshness, evidence copy, and fail-closed admission:**\n   - In `_verified_proposal_state`, both `proposal.delete_proposal_freshness_id` and `body.delete_proposal_freshness_id` must match the recomputed signed-state freshness ID before any command session opens.\n   - The proposal's own `signed_confirmation_evidence` copy must match the verified confirmation evidence mapping.\n   - In `compose_delete_confirm`, admission is verified prior to opening the database command session and repeated against the locked target under transaction lock with identical digest verification (`locked_request_digest_changed`). Mismatches and stops fail closed to typed 200 blocked envelopes without state mutation.\n\n4. **Physical staging, idempotent replay, and cross-practice isolation:**\n   - For new commands, `_stage_effect` stages exactly appointment status cancellation, clears waiting area, sets reason fields, emits an attributable `AppointmentAuditLog`, verifies adjacent `appointment_state_version == pre_state_version + 1`, and writes the 6-field private receipt.\n   - Replay performs zero side-effects and returns stored canonical bytes directly.\n   - Cross-practice target requests fail the practice-scoped boundary and raise `DeleteConfirmTargetUnavailable`, which maps to an indistinguishable 404 `appointment_not_found` error response.\n\n5. **Route, schema, model, and API Spine isolation:**\n   - Existing routes, schemas, models, migrations, and API Spine files remain byte-unchanged and import none of the unmounted delete-confirm modules (verified by `test_route_does_not_import_or_call_delete_confirm_services` and API Spine drift guards).\n\n6. **Handover-size and settings-fingerprint controls:**\n   - `AGENTS.md` remains strictly within the 80,000-byte limit (79,956 bytes) protected by `test_agents_handover_archive.py` and `test_agents_acceptance_index.py`.\n   - In [`scripts/ariadne_orchestrator_preflight.py`](file:///C:/Users/sarashera/EMR4-worktrees/r196/scripts/ariadne_orchestrator_preflight.py), settings fingerprint calculation verifies exact equality with `active_operation.checkpoint.settings_fingerprint`, failing closed to `revision_required` on mismatch without weakening the active latch. AER-0359, AER-0360, AER-0361, and AER-0362 accurately capture this history.\n\n7. **Verification and source bindings:**\n   - All 12 source bindings match strict canonical-LF hashes.\n   - All 7 command manifest steps (C01 through C07) completed cleanly with exit code 0, including 135 provider-free domain tests, 122 continuity/harness tests, Ruff linting, and whitespace check.\n\nThe exact candidate substantiates the unmounted implementation claim without opening routes, databases, or external network surfaces.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r196",
+          "tests/test_appointment_delete_composition.py",
+          "tests/test_appointment_delete_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+          "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+          "tests/test_api_spine_appointment_command_alignment_inventory.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r196",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "app/services/appointment_delete_composition.py",
+          "app/services/appointment_delete_product_adapter.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_appointment_delete_composition.py",
+          "tests/test_appointment_delete_product_adapter.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "44a91b7239ac9f38510c10cb57729ac5312d32f9..43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "3bff068f64066c9995cd87d07d335e65114457c3177a0fe9f722bde8b0f1522d",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r196",
+        "tests/test_appointment_delete_composition.py",
+        "tests/test_appointment_delete_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_appointment_command_alignment_inventory.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r196",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_agents_handover_archive.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/services/appointment_delete_composition.py",
+        "app/services/appointment_delete_product_adapter.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "tests/test_appointment_delete_composition.py",
+        "tests/test_appointment_delete_product_adapter.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "44a91b7239ac9f38510c10cb57729ac5312d32f9..43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

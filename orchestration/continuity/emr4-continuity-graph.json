@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 305,
+  "graph_revision": 306,
   "harvests": [],
   "nodes": [
     {
@@ -20904,9 +20904,97 @@
         "No route/schema edit, route call, database execution, capability provisioning or product data is admitted.",
         "Provider, deployment, release, Pages and protected-ref authority remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "title": "Provider-free unmounted delete-confirm composition and product-adapter implementation",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-16T12:07:55Z",
+      "updated_at": "2026-08-16T12:07:55Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Provider-free unmounted authored-synthetic implementation only; no route or product runtime authority.",
+          "Server-owned ingress and locked re-admission compose only through the accepted physical seam.",
+          "The six-field private receipt remains sole persisted command truth and replay has no effect."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-composition-product-adapter-implementation",
+          "source": "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the unmounted pure projection and server-owned product adapter; continue only to a provider-free read-only route-mounting readiness review."
+        }
+      ],
+      "claim_scope": [
+        "Twelve canonical-LF input bindings match and forbidden route/schema/model/migration/API Spine paths are unchanged.",
+        "Both freshness coordinates and the proposal evidence copy must equal recomputed signed truth before a command session.",
+        "The consolidated provider-free profile passes 517 tests with Ruff, compilation and whitespace.",
+        "One clean seven-command Gemini 3.7 Flash/high veto passes at the unchanged exact candidate.",
+        "AER-0359 through AER-0362 preserve both worker rejections, the Sol recovery and two harness guards.",
+        "Exact Python 3.11 runtime execution is unclaimed on this host."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-plan.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation/implementation-contract.json",
+          "app/services/appointment_delete_composition.py",
+          "app/services/appointment_delete_product_adapter.py",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
+          "docs/ariadne-agent-error-correction-register-revision-312.md",
+          "docs/ariadne-agent-error-correction-register-revision-313.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-composition-product-adapter-implementation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-implementation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-worker-receipt.json",
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-correction-worker-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest-admission.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-composition-product-adapter-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_appointment_delete_composition.py",
+          "tests/test_appointment_delete_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-review-packet.md",
+          "scripts/raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No canonical or hidden alias route is edited, mounted or called; raw DELETE remains isolated.",
+        "No schema, database execution, capability provisioning or product data is admitted.",
+        "Provider, UI, deployment, release, Pages and protected-ref authority remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T08:12:23Z"
+  "updated_at": "2026-08-16T12:07:55Z"
 }

@@ -5672,10 +5672,8 @@ def test_aer_0359_and_0360_preserve_delete_confirm_worker_recovery() -> None:
     assert corrected["role"] == "implementer"
     assert corrected["category"] == "output_contract_violation"
     assert corrected["workflow_disposition"] == "recovery_lease_invoked"
-    assert corrected["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
-    assert corrected["status"] == "contained"
+    assert corrected["correction"]["status"] == "recovery_lease_applied"
+    assert corrected["status"] == "corrected"
     assert "both freshness coordinates" in corrected["correction"]["action"]
     assert "physical-seam ordering" in (
         corrected["correction"]["prevention_control"]
