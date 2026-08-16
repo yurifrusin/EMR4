@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/raisa.delete-confirm-http-route-convergence-contract.v1.json",
+  "title": "Raisa provider-free delete-confirm HTTP route convergence contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "input_hash_mode",
+    "inputs",
+    "route_contract",
+    "proposal_contract",
+    "server_ingress",
+    "public_response",
+    "scenarios",
+    "acceptance",
+    "forbidden_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.delete_confirm_http_route_convergence_contract.v1"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "input_hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "inputs": {
+      "type": "array",
+      "minItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "posture"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "posture": {"enum": ["editable", "read_only"]}
+        }
+      }
+    },
+    "route_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_path", "compatibility_alias", "alias_hidden_from_openapi", "single_handler", "adapter", "adapter_call_count", "raw_delete_path", "raw_delete_unchanged"],
+      "properties": {
+        "canonical_path": {"const": "/api/v1/appointments/proposals/delete/confirm"},
+        "compatibility_alias": {"const": "/api/v1/appointments/proposals/delete-confirm"},
+        "alias_hidden_from_openapi": {"const": true},
+        "single_handler": {"const": "confirm_delete_proposal_route"},
+        "adapter": {"const": "compose_product_delete_confirm"},
+        "adapter_call_count": {"const": 1},
+        "raw_delete_path": {"const": "/api/v1/appointments/{appointment_id}"},
+        "raw_delete_unchanged": {"const": true}
+      }
+    },
+    "proposal_contract": {"type": "object"},
+    "server_ingress": {"type": "object"},
+    "public_response": {"type": "object"},
+    "scenarios": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "DHC-S01"}, {"const": "DHC-S02"}, {"const": "DHC-S03"},
+        {"const": "DHC-S04"}, {"const": "DHC-S05"}, {"const": "DHC-S06"},
+        {"const": "DHC-S07"}, {"const": "DHC-S08"}, {"const": "DHC-S09"},
+        {"const": "DHC-S10"}, {"const": "DHC-S11"}, {"const": "DHC-S12"}
+      ],
+      "minItems": 12,
+      "maxItems": 12
+    },
+    "acceptance": {"type": "object"},
+    "forbidden_surfaces": {"type": "array", "minItems": 8, "items": {"type": "string", "minLength": 1}}
+  }
+}

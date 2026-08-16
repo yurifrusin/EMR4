@@ -1,0 +1,109 @@
+{
+  "schema_version": "raisa.delete_confirm_http_route_convergence_contract.v1",
+  "source_head": "d4a360640b2a50ae7c26ff5d020eca68c60c4533",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "inputs": [
+    {"path": "app/routers/appointments.py", "sha256": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624", "posture": "editable"},
+    {"path": "app/schemas/appointments.py", "sha256": "c35c271e9308f1f57eeeee53eefa6388087e126944ab5100c225f50066e3a0cf", "posture": "editable"},
+    {"path": "app/services/diary/confirm_actions.py", "sha256": "9c7afeea930ce349edfc22dc2a1cd38fedf52c8cd8ae96be9c56e2deb634ec86", "posture": "editable"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a", "posture": "editable"},
+    {"path": "orchestration/api_spine_appointment_command_alignment_inventory.md", "sha256": "10b71418a8d0c492def5c412d7aae1b79d69ea93e8566f3ce67408172fdfe8ea", "posture": "editable"},
+    {"path": "app/services/appointment_delete_product_adapter.py", "sha256": "a7e1702c61258acfb51f634883086ad5993c8ab63989eace9cfa1102b2532c59", "posture": "read_only"},
+    {"path": "app/services/appointment_delete_composition.py", "sha256": "ed6a5e705808c71ecf4edcec837c6be2ec790660bf32a85357bda68c2159aa15", "posture": "read_only"},
+    {"path": "app/services/appointment_delete_physical.py", "sha256": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533", "posture": "read_only"},
+    {"path": "app/services/bernie_turn_evidence.py", "sha256": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467", "posture": "read_only"},
+    {"path": "app/dependencies.py", "sha256": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc", "posture": "read_only"},
+    {"path": "app/config.py", "sha256": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e", "posture": "read_only"},
+    {"path": "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md", "sha256": "9629f593629133b8f8a5ed178ccb474ff2ccd824859bb1f3f4bb0d4504e064c0", "posture": "read_only"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json", "sha256": "59c7c84177a38c76d0606183736af1843cce6481a72a19d8710d7a992b6a039f", "posture": "read_only"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md", "sha256": "e60101a4d60019daee4471088d1fcdc48b7a28e9320ead00eaea6899b4765ded", "posture": "read_only"},
+    {"path": "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md", "sha256": "27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5", "posture": "read_only"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md", "sha256": "ad4b440bd8a6a01194a32bc27ec0872993630505f4026626a5ba186598813197", "posture": "read_only"}
+  ],
+  "route_contract": {
+    "canonical_path": "/api/v1/appointments/proposals/delete/confirm",
+    "compatibility_alias": "/api/v1/appointments/proposals/delete-confirm",
+    "alias_hidden_from_openapi": true,
+    "single_handler": "confirm_delete_proposal_route",
+    "adapter": "compose_product_delete_confirm",
+    "adapter_call_count": 1,
+    "raw_delete_path": "/api/v1/appointments/{appointment_id}",
+    "raw_delete_unchanged": true
+  },
+  "proposal_contract": {
+    "binding_schema": "raisa.delete_proposal_version_binding.v1",
+    "binding_required_on_confirmation": true,
+    "binding_material": ["source_version", "evidence_signature"],
+    "evidence_secret_domain": "emr4.delete-confirm.evidence.v1",
+    "proposal_version_secret_domain": "emr4.delete-confirm.proposal-version.v1"
+  },
+  "server_ingress": {
+    "required": [
+      "authenticated_bearer_token",
+      "authenticated_current_user",
+      "command_session_factory",
+      "idempotency_key",
+      "authenticated_session_secret",
+      "proposal_version_binding_secret",
+      "idempotency_secret",
+      "session_binding_secret",
+      "evidence_secret"
+    ],
+    "client_capability_allowed": false,
+    "new_environment_secret_allowed": false
+  },
+  "public_response": {
+    "schema_version": "raisa.delete_confirm_public_envelope.v1",
+    "serializer": "canonical_delete_confirm_envelope_bytes",
+    "success_kinds": ["committed", "replay"],
+    "private_receipt_field": "stored_response_bytes",
+    "private_receipt_may_be_http_content": false,
+    "forbidden_fields": ["appointment", "patient", "practitioner", "schedule", "notes", "audit_identity"],
+    "required_top_level_fields": [
+      "schema_version",
+      "intent",
+      "safe",
+      "requires_confirmation",
+      "autonomy_tier",
+      "summary",
+      "receipt",
+      "warnings",
+      "blocks",
+      "audit_evidence"
+    ]
+  },
+  "scenarios": [
+    "DHC-S01",
+    "DHC-S02",
+    "DHC-S03",
+    "DHC-S04",
+    "DHC-S05",
+    "DHC-S06",
+    "DHC-S07",
+    "DHC-S08",
+    "DHC-S09",
+    "DHC-S10",
+    "DHC-S11",
+    "DHC-S12"
+  ],
+  "acceptance": {
+    "minimum_hostile_mutations": 100,
+    "require_all_scenarios": true,
+    "require_single_handler": true,
+    "require_single_adapter_call": true,
+    "require_canonical_public_bytes_for_success": true,
+    "require_private_public_byte_separation": true,
+    "require_no_route_local_write": true,
+    "require_no_database_execution": true
+  },
+  "forbidden_surfaces": [
+    "accepted_adapter_composition_or_physical_edit",
+    "database_docker_sql_source_or_watcher_execution",
+    "raw_delete_convergence",
+    "capability_provisioning_or_client_selected_authority",
+    "patient_clinical_product_or_protected_data",
+    "provider_adc_credentials_iam_browser_or_external_network",
+    "ui_deployment_production_release_pages_or_protected_refs",
+    "docs_branding_or_unrelated_untracked_files"
+  ]
+}
