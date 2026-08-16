@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/delete-confirm-behavior-transaction-evidence-v1.json",
+  "title": "delete-confirm behavior/transaction rehearsal evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "source_head",
+    "lifecycle",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.delete_confirm_behavior_transaction_evidence.v1"
+    },
+    "result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_pass",
+        "rehearsal_failed"
+      ]
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction"
+    },
+    "source_head": {
+      "const": "2a5042f80941e2bd191999c430ff2517ba7e8cb2"
+    },
+    "lifecycle": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_needed",
+            "cleanup_verified",
+            "cleanup_ownership_unverified",
+            "cleanup_absence_unverified"
+          ]
+        },
+        "container_id_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "network_id_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "container": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string"
+        },
+        "object": {
+          "type": "string",
+          "enum": ["container", "network"]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {"const": "cleanup_verified"}
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["container_id_sha256", "network_id_sha256"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {"const": "cleanup_ownership_unverified"}
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["object"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {"const": "cleanup_absence_unverified"}
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["object"]
+          }
+        }
+      ]
+    },
+    "claim_boundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_hashes": {
+      "type": "object",
+      "minProperties": 16,
+      "maxProperties": 16,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "hostile_mutations_rejected": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "postgresql_major",
+        "image_reference",
+        "image_id_sha256",
+        "network_internal",
+        "docker_published_ports",
+        "host_transport",
+        "storage"
+      ],
+      "properties": {
+        "postgresql_major": {"const": 16},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "image_id_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "network_internal": {"const": true},
+        "docker_published_ports": {"const": false},
+        "host_transport": {"const": "fixed_in_process_ipv4_loopback_relay"},
+        "storage": {"const": "container_local_tmpfs"}
+      }
+    },
+    "offline_sql": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["range", "body_sha256", "body_bytes"],
+      "properties": {
+        "range": {"const": "w2x3y4z5a6b7:x3y4z5a6b7c8"},
+        "body_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "body_bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["head", "selected_constraints", "correlation_indexes", "trigger_inventory"],
+      "properties": {
+        "head": {"const": "x3y4z5a6b7c8"},
+        "selected_constraints": {"const": 5},
+        "correlation_indexes": {"const": 2},
+        "trigger_inventory": {"const": 4}
+      }
+    },
+    "authority_groups": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": {
+            "enum": ["AUTH-S01", "AUTH-S02", "AUTH-S03", "AUTH-S04", "AUTH-S05", "AUTH-S06", "AUTH-S07", "AUTH-S08", "AUTH-S09"]
+          },
+          "status": {"const": "passed"},
+          "generation": {"type": ["integer", "null"]},
+          "grant_count": {"type": "integer"},
+          "subcases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "label"],
+              "properties": {
+                "id": {"type": "string"},
+                "label": {"type": "string"},
+                "generation": {"type": ["integer", "null"]},
+                "grant_count": {"type": "integer"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "transaction_groups": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": {
+            "enum": ["TX-S01", "TX-S02", "TX-S03", "TX-S04", "TX-S05", "TX-S06", "TX-S07", "TX-S08", "TX-S09", "TX-S10", "TX-S11"]
+          },
+          "status": {"const": "passed"},
+          "outcome": {"type": "string"},
+          "appointment_version_before": {"type": ["integer", "null"]},
+          "appointment_version_after": {"type": ["integer", "null"]},
+          "audit_delta": {"type": "integer"},
+          "completed_receipt_delta": {"type": "integer"},
+          "disclosure_count": {"type": "integer"},
+          "authority_calls": {"type": "integer"},
+          "statement_tokens": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "user_for_share",
+                "appointment_for_update",
+                "grant_authority_check",
+                "idempotency_select_for_update",
+                "idempotency_insert_on_conflict",
+                "idempotency_winner_for_update"
+              ]
+            }
+          },
+          "subcases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "label", "outcome"],
+              "properties": {
+                "id": {"type": "string"},
+                "label": {"type": "string"},
+                "outcome": {"type": "string"},
+                "authority_calls": {"type": "integer"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "detail_sha256"],
+      "properties": {
+        "stage": {"type": "string", "minLength": 1},
+        "code": {"type": "string", "minLength": 1},
+        "detail_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_pass"
+          }
+        },
+        "required": ["result"]
+      },
+      "then": {
+        "required": [
+          "contract_sha256",
+          "source_hashes",
+          "hostile_mutations_rejected",
+          "environment",
+          "offline_sql",
+          "catalogue",
+          "authority_groups",
+          "transaction_groups"
+        ],
+        "properties": {
+          "failure": false
+        }
+      },
+      "else": {
+        "required": ["failure"],
+        "properties": {
+          "contract_sha256": false,
+          "source_hashes": false,
+          "hostile_mutations_rejected": false,
+          "environment": false,
+          "offline_sql": false,
+          "catalogue": false,
+          "authority_groups": false,
+          "transaction_groups": false
+        }
+      }
+    }
+  ]
+}
