@@ -1,0 +1,97 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only delete-confirm route-convergence admission and Ariadne Git-object resolution control",
+    "completed_stage": "Exact candidate c4b8c9be292f06a5c593362b5d655169144ff007 / tree cf6d50cb79775c8a9887fe6fa88cced57e978584 is committed and semantically frozen; the read-only route verdict is unmounted_adapter_and_response_transition_required; focused gates and the single post-freeze canonical profile pass with 197 tests.",
+    "next_executable_stage": "Generate a machine-resolved pre-verifier receipt, bind a fresh exact clean non-protected worktree and dispatch exactly one Gemini 3.7 Flash/high final veto; admit no fallback or second decision.",
+    "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+    "resume_after_compaction": true,
+    "source_head": "c4b8c9be292f06a5c593362b5d655169144ff007",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "c4b8c9be292f06a5c593362b5d655169144ff007",
+    "reason_codes": [],
+    "resolved_commit": "c4b8c9be292f06a5c593362b5d655169144ff007",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c4b8c9be292f06a5c593362b5d655169144ff007"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Implementation is frozen; redispatch would add no value and would threaten candidate identity.",
+        "work_packages": []
+      },
+      {
+        "disposition": "selected",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One exact Gemini 3.7 Flash/high final veto is the Tier-2 independent gate after deterministic admission.",
+        "work_packages": [
+          "review the exact frozen route verdict and Git-object resolver against the explicit allowlist and command manifest"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "No separable package remains and the developer constraint does not authorize delegation for this task.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "worktree preflight failure",
+      "verifier transport or decision failure",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh review worktree creation at the exact candidate",
+      "exact command manifest and path allowlist preflight",
+      "pre-worker-dispatch receipt after worktree admission",
+      "one terminal decision with unchanged HEAD and clean worktree"
+    ]
+  },
+  "planned_action": "admit_one_exact_gemini37_final_veto_after_semantic_freeze",
+  "reasons": [
+    "parallelism_lane_disposition_invalid:gemini_verifier"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:9944bab0bdb1f24084e40ef5e2d315c5734a2a15fbc08c4b1dbb6744a953b644",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "Frozen plan and threat delta require one final independent veto because the candidate changes an Ariadne authority/security hard gate.",
+      "Exact candidate c4b8c9be292f06a5c593362b5d655169144ff007 and tree cf6d50cb79775c8a9887fe6fa88cced57e978584 are semantically frozen with fourteen SHA-256 bindings.",
+      "The route review passes its closed evidence schema with verdict unmounted_adapter_and_response_transition_required, three satisfied, one partial and six blocking dimensions.",
+      "The post-freeze canonical profile passes Ruff, compilation, 197 tests, Diary JavaScript syntax and whitespace.",
+      "The veto may review only the explicit allowlist and exact command manifest; it cannot implement, accept, publish, access protected evidence or call any product/provider runtime."
+    ],
+    "current_authority_allocation": "GPT Sol retains plan, recovery and acceptance. DeepSeek V4 Flash/high is declined for negative leverage. Gemini 3.7 Flash/high is now admitted for exactly one fresh final Tier-2 veto on the unchanged committed candidate. Native subagents remain declined under the developer constraint and neutral leverage.",
+    "git_refs_and_worktree": "Candidate HEAD is exact c4b8c9be292f06a5c593362b5d655169144ff007 with tree cf6d50cb79775c8a9887fe6fa88cced57e978584 and parent c05fb57f17bf8b55fb02b34bd48b0ce18530ec86. The task tracked tree was clean at candidate freeze; local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The fresh verifier worktree has not yet been created; creation and exact preflight remain serial prerequisites.",
+    "live_handover_current_baton": "AGENTS.md SHA-256 55a29921b28a5668b98fa70df39a73819d5aebcf0dc5cfb407c9d189237315db names the Continuity 303 predecessor and the combined read-only route review plus AER-0356 Git-object repair.",
+    "protected_evidence_boundaries": "Protected holdouts remain sealed. Gemini receives only an exact non-protected candidate allowlist and repository-local tests. No route/database/provider execution, product/patient/clinical/historical data, credentials/IAM, browser, deployment, release, Pages or protected refs. The worktree must remain clean and unchanged, with one terminal decision and no Gemini 3.6 fallback."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

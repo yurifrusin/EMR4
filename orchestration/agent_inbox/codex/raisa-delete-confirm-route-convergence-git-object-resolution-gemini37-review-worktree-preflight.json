@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be",
+  "branch": "codex/review-delete-confirm-convergence-c4b8c9be",
+  "head": "c4b8c9be292f06a5c593362b5d655169144ff007",
+  "expected_head": "c4b8c9be292f06a5c593362b5d655169144ff007",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "0c3d64a581197cfb48d715d8234289773aee2b51dc88c3ee5ff07ce4c477a41d",
+  "command_count": 4,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

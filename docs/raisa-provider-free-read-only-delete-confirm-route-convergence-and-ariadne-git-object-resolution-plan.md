@@ -82,15 +82,17 @@ this plan is frozen:
 | `4768d438c3031b4a726bcdbc8236330a05db51b3c3c3c504a06da40453a1a2c6` | `orchestration/api_spine_appointment_idempotency_delete_confirm_route_tests.md` | existing semantic obligations |
 | `90d42d80d06d1c173fde25b7da153173b195cbc118e672cac6746493ef0aa507` | `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md` | accepted serial physical behavior |
 | `41603381260b72a61f5976305f132846897541b4ca31b9884bb10eebfa4f178e` | `orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-sol-acceptance.md` | accepted claim boundary |
-| `c82a96d7ddc241f9526bbb36578bf7a8f21a0dd5b373dda3406d680e4aee79f0` | `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md` | review-dimension analogue |
+| `5f6c602f68594996635648db55f5e473e303593b2df8e8bb26c3bf7785c71fa9` | `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md` | review-dimension analogue |
 | `c75c7c707ab0023cf8d4bf4a90dfe638c36179fbd1a87b81397cda51fea5e10f` | `docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md` | coupled-adapter precedent |
 | `27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5` | `docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md` | bounded route-convergence precedent |
 | `f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8` | `docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md` | deferred response-transition boundary |
 | `584405db5d49a56e18061f80fcd1faa72c278cf0d4975cf95febc86783609019` | `docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md` | minimized-receipt decision |
 
-No product source in this table may change. The deterministic reviewer may read
-only these files and must not import `app`, open configuration, call a route or
-connect to a database.
+No product source in this table may change. Every text binding uses strict
+UTF-8 with CRLF canonicalized to LF and rejects any bare carriage return, so
+equal committed content is stable across clean worktrees. The deterministic
+reviewer may read only these files and must not import `app`, open
+configuration, call a route or connect to a database.
 
 ## Frozen route-convergence dimensions
 

@@ -61,8 +61,15 @@ def _validate(value: dict[str, Any], schema: dict[str, Any], label: str) -> None
         raise ReviewError(f"{label} schema rejected: {errors[0].message}")
 
 
-def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def _sha256_text_lf(path: Path) -> str:
+    try:
+        text = path.read_bytes().decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ReviewError(f"bound source is not UTF-8 text: {path.name}") from exc
+    if "\r" in text.replace("\r\n", ""):
+        raise ReviewError(f"bound source contains bare carriage return: {path.name}")
+    canonical = text.replace("\r\n", "\n").encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
 
 
 def _function_block(source: str, marker: str, next_marker: str) -> str:
@@ -95,7 +102,7 @@ def evaluate(
             raise ReviewError("bound source escapes repository root") from exc
         if not path.is_file():
             raise ReviewError(f"bound source missing: {relative}")
-        digest = _sha256(path)
+        digest = _sha256_text_lf(path)
         if digest != binding["sha256"]:
             raise ReviewError(f"bound source hash mismatch: {relative}")
         observed_hashes[relative] = digest

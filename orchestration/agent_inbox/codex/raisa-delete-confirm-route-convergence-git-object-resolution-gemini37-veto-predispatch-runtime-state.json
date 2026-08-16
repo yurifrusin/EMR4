@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_read_only_gemini37_route_convergence_and_git_resolution_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md SHA-256 55a29921b28a5668b98fa70df39a73819d5aebcf0dc5cfb407c9d189237315db requires one risk-triggered independent veto for the Tier-2 combined candidate and keeps protected integration closed.",
+    "current_authority_allocation": "Gemini 3.7 Flash/high through a fresh Antigravity project owns exactly one independent veto. Sol retains acceptance and Git authority. DeepSeek and native lanes are closed; Gemini 3.6 and every other provider/model are ineligible fallbacks.",
+    "active_plan_and_acceptance": "Exact candidate c4b8c9be292f06a5c593362b5d655169144ff007 / tree cf6d50cb79775c8a9887fe6fa88cced57e978584 is semantically frozen. Focused gates and the post-freeze 197-test canonical profile pass. The hash-bound route review yields the required blocking verdict and the resolver fails closed across every continuation event.",
+    "protected_evidence_boundaries": "The reviewer receives one exact allowlisted provider-free read-only repository packet and four-command manifest. No repository enumeration, protected evidence, source edit, route/database/Docker/SQL execution, product data, credentials/IAM, deployment, release, Pages or protected refs. One terminal decision only; no fallback.",
+    "git_refs_and_worktree": "Review worktree C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-convergence-c4b8c9be is clean on codex/review-delete-confirm-convergence-c4b8c9be at exact candidate c4b8c9be292f06a5c593362b5d655169144ff007 and tree cf6d50cb79775c8a9887fe6fa88cced57e978584. The manifest has four validated commands and SHA-256 0c3d64a581197cfb48d715d8234289773aee2b51dc88c3ee5ff07ce4c477a41d. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; branding and unrelated untracked paths remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+    "active_tranche": "Provider-free read-only delete-confirm route-convergence admission and Ariadne Git-object resolution control",
+    "objective": "Decide from exact repository evidence whether delete-confirm can safely converge through the existing dedicated command route into its accepted authority kernel and physical transaction seam, while adding the narrow Ariadne control that mechanically resolves structured full Git commit object IDs before continuation receipts pass; open no route, product data, provider or protected integration authority.",
+    "status": "in_progress",
+    "source_head": "c4b8c9be292f06a5c593362b5d655169144ff007",
+    "authority_source": "The accepted Continuity 303 / Compass 285 closeout names the provider-free read-only delete-confirm route-convergence admission review as the next dependency-satisfied product tranche, AER-0356 admits the narrow Git-object-ID control, and Yuri explicitly confirmed the standing harness self-correction direction.",
+    "checkpoint": {
+      "completed_stage": "Candidate c4b8c9be292f06a5c593362b5d655169144ff007 / tree cf6d50cb79775c8a9887fe6fa88cced57e978584 is semantically frozen; focused and 197-test canonical gates pass; the corrected pre-verifier receipt machine-resolves the candidate; and the fresh review worktree plus four-command manifest pass exact clean preflight.",
+      "next_executable_stage": "Generate the fresh pre-worker-dispatch receipt and dispatch exactly one Gemini 3.7 Flash/high final veto through the structured launcher; then verify one terminal decision, unchanged HEAD and clean worktree before Sol acceptance.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 1},
+      "settings_fingerprint": "sha256:9944bab0bdb1f24084e40ef5e2d315c5734a2a15fbc08c4b1dbb6744a953b644"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_read_only_exact_route_dependency_adapter_kernel_and_transaction_gap_review_only",
+      "structured_full_git_commit_object_resolution_or_ref_comparison_in_ariadne_continuation_preflight_only",
+      "no_route_edit_mount_call_or_product_capability_provisioning",
+      "no_database_docker_sql_migration_execution_or_product_command",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+    "assessed_stage": "pre_verifier_dispatch",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "not_applicable", "expected_leverage": "negative", "rationale": "Implementation is frozen and no worker package remains.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "dispatched", "expected_leverage": "required_independence", "rationale": "One fresh exact-candidate veto is the only remaining independent gate before Sol acceptance.", "work_packages": ["route-convergence classification, response blocker and Git-object resolution veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "A native peer would stack review, cannot replace the required Gemini veto and is not authorized by the developer constraint.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["one fresh project", "one exact clean worktree", "four exact read-only commands", "one terminal decision", "Sol alone reconciles and accepts"],
+    "reassessment_triggers": ["Gemini terminal decision", "command failure", "worktree postcondition failure", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "passed_corrected_pre_verifier_receipt_exact_worktree_manifest_packet_and_preflight", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Closed implementation lane preserved."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Launcher admits exact gemini-3.7-flash-high and the exact clean worktree/manifest preflight passes."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol admitted exact candidate c4b8c9be292f06a5c593362b5d655169144ff007."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No stacked native review selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

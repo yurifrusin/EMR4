@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 309,
+  "register_revision": 310,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -14300,6 +14300,44 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0357",
+      "attempt_id": "raisa-delete-confirm-route-convergence-gemini-veto-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "antigravity",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every bound text source must identify equal committed content across the primary and every fresh exact-HEAD worktree by strict UTF-8 canonical LF hashing with bare carriage returns rejected.",
+      "observed_error": "The route-review contract bound one Markdown analogue to the primary worktree's raw CRLF bytes. The fresh clean Gemini worktree materialized equal committed LF content, so the exact deterministic route command failed its source hash before verdict admission.",
+      "detection_method": "The single Gemini 3.7 Flash/high veto returned revision_required with ROUTE_REVIEW_TESTS exit 1; Sol then proved that all eighteen canonical LF hashes matched across worktrees and only the one raw byte hash differed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-gemini37-review-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.raw_text_hash_bound_to_primary_crlf_worktree_bytes",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace raw worktree-byte hashing with strict UTF-8 CRLF-to-LF canonical hashing, reject bare carriage returns, update the one affected binding, regenerate evidence and add a focused LF/CRLF equivalence plus bare-CR rejection test before freezing a distinct candidate.",
+        "prevention_control": "Every future text-bound review must reuse a checkout-stable canonical LF helper and prove its bindings in a fresh exact-HEAD worktree before verifier dispatch; raw SHA-256 remains only for explicitly binary artifacts.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-checkout-hash-recurrence-incident.json",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "docs/ariadne-agent-error-correction-register-revision-310.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

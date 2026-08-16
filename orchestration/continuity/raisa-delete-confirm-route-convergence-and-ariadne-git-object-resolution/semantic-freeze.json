@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.semantic_freeze.v1",
+  "created_at": "2026-08-16T15:41:24.5782011+10:00",
+  "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+  "candidate_commit": "c4b8c9be292f06a5c593362b5d655169144ff007",
+  "candidate_tree": "cf6d50cb79775c8a9887fe6fa88cced57e978584",
+  "parent_commit": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+  "product_source_head": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+  "settings_fingerprint": "sha256:9944bab0bdb1f24084e40ef5e2d315c5734a2a15fbc08c4b1dbb6744a953b644",
+  "focused_admission": {
+    "status": "passed",
+    "suites": [
+      "tests/test_ariadne_git_object_resolution.py",
+      "tests/test_ariadne_orchestrator_preflight.py",
+      "tests/test_ariadne_active_operation_latch.py",
+      "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+      "tests/test_ariadne_risk_weighted_workflow.py",
+      "tests/test_current_baton_consistency.py"
+    ],
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "diff_check": "passed"
+  },
+  "semantic_bindings": {
+    "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md": "84b39166faa76eef8aa16ccfcb14fdd8f1444cde61c39618f7460bfc620604f3",
+    "docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md": "72ad9249b657b4e46914424deafefa70a5148bc30fbb0a7a4b964cc7d3b35a6d",
+    "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json": "f57208b4c5241207a0fee5fbfaf28e5c04edcf8eca0f8a879dcf71c6d5386bbb",
+    "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.schema.json": "bf79ef6528e1a19af9572888d67f19f56f605f710f6e1675826d3f12167dfdc7",
+    "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json": "5de0ef833340aa569c3976b178308a4b604bcbc18835d0bea189d4d70cdece67",
+    "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.schema.json": "6bd9642bb27a6e6bdec854a6e5372010a022b807e52d7b758db408d676b62028",
+    "orchestration_harness/git_object_resolution.py": "3b00265bda438d814271568b82204be38302cee5d9039d28e086b92dc7188751",
+    "orchestration/harness_settings/orchestrator_requirements.yaml": "b772f3d0844a1efbbef63947c55c6bb9bc47e7a30a70be4d4bbc69ede0b4d826",
+    "scripts/ariadne_orchestrator_preflight.py": "9c2e71f2f373bba454df1bea4ccbaa5d90123b740350812ec9a785b45a08681e",
+    "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py": "ff231de6d90623f0cb817d9ede0964e36a3bade3e9cabce8c8003a89031cd53d",
+    "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json": "14d92fe5e07d8e6769ead702af2c1f8999f2eb7ea1687b427a3c19f0cde17765",
+    "tests/test_ariadne_git_object_resolution.py": "0478e13dd5763d0b2131d629178ab9a4a807894f6aff3d2fb3f7ee187728c546",
+    "tests/test_ariadne_orchestrator_preflight.py": "4136db580fffc31e8c27abd4a1f8f3b2e71fa58eea6fff19865b9ddecfb0a5c9",
+    "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py": "eda4b317a863360ca5c9c01fefa66e550ce91f2ffddf5fdf22de6663a4449c2a"
+  },
+  "claim_boundary": "Exact provider-free read-only route-convergence admission and repository-only Git commit resolution control; no route, database, product-data, provider, deployment, release or protected-ref authority."
+}

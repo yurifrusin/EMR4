@@ -12,6 +12,7 @@ from scripts.raisa_provider_free_read_only_delete_confirm_route_convergence_revi
     EVIDENCE_SCHEMA_PATH,
     ROOT,
     ReviewError,
+    _sha256_text_lf,
     evaluate,
 )
 
@@ -58,6 +59,21 @@ def test_reviewer_imports_no_application_runtime() -> None:
     assert "import app" not in source
     assert "TestClient" not in source
     assert "sqlalchemy" not in source.lower()
+
+
+def test_text_source_hash_is_checkout_stable_and_rejects_bare_cr(
+    tmp_path: Path,
+) -> None:
+    lf = tmp_path / "lf.txt"
+    crlf = tmp_path / "crlf.txt"
+    bare_cr = tmp_path / "bare-cr.txt"
+    lf.write_bytes(b"one\ntwo\n")
+    crlf.write_bytes(b"one\r\ntwo\r\n")
+    bare_cr.write_bytes(b"one\rtwo\n")
+
+    assert _sha256_text_lf(lf) == _sha256_text_lf(crlf)
+    with pytest.raises(ReviewError, match="bare carriage return"):
+        _sha256_text_lf(bare_cr)
 
 
 @pytest.mark.parametrize(

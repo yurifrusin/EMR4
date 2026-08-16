@@ -1,0 +1,149 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-convergence-c4b8c9be",
+  "branch": "codex/review-delete-confirm-convergence-c4b8c9be",
+  "head_before": "c4b8c9be292f06a5c593362b5d655169144ff007",
+  "head_after": "c4b8c9be292f06a5c593362b5d655169144ff007",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "3ae4e1997deaeff249f829f8d7c6e1e905872843bdfeb4abd3962ff5f1dce3e4",
+  "result": "# Independent Review: Delete-Confirm Route Convergence and Ariadne Git-Object Resolution\n\n**Reviewer Model:** `gemini-3.7-flash-high`  \n**Review Effort:** `high`  \n**Evidence Label:** `provider_free_read_only_repository_review`  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-convergence-c4b8c9be`  \n**Candidate Branch:** `codex/review-delete-confirm-convergence-c4b8c9be`  \n**Candidate HEAD:** `c4b8c9be292f06a5c593362b5d655169144ff007`  \n**Candidate Parent:** `c05fb57f17bf8b55fb02b34bd48b0ce18530ec86`  \n\n---\n\n## Executive Summary\n\nThe exact candidate commit `c4b8c9be292f06a5c593362b5d655169144ff007` evaluated two discrete components:\n1. A provider-free read-only review of the current `confirmAppointmentDeleteProposal` delete-confirm route against the accepted unmounted physical transaction seam.\n2. An Ariadne repository continuation control resolving structured full lowercase Git commit IDs before passing continuation receipts.\n\nWhile the Ariadne Git-object resolution harness, preflight CLI integration, Ruff linter, and whitespace check all executed cleanly with exit code 0, the deterministic route review test suite (`ROUTE_REVIEW_TESTS`) failed with exit code 1 due to a SHA-256 bound source hash mismatch on `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md`.\n\nIn accordance with the frozen verification criteria requiring all frozen product and harness input hashes and all focused test suites to pass deterministically, the candidate requires revision.\n\n---\n\n## Command Manifest Execution Results\n\n| Command ID | Target / Test Suite | Exit Code | Status |\n|---|---|---|---|\n| `ROUTE_REVIEW_TESTS` | `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`, `tests/test_api_spine_artifacts.py` | `1` | **FAILED** |\n| `ARIADNE_RESOLUTION_TESTS` | `tests/test_ariadne_git_object_resolution.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_ariadne_active_operation_latch.py`, `tests/test_ariadne_risk_weighted_workflow.py` | `0` | **PASSED** |\n| `RUFF` | `orchestration_harness/git_object_resolution.py`, `scripts/ariadne_orchestrator_preflight.py`, `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`, `tests/test_ariadne_git_object_resolution.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py` | `0` | **PASSED** |\n| `WHITESPACE` | `git diff --check c05fb57f17bf8b55fb02b34bd48b0ce18530ec86 c4b8c9be292f06a5c593362b5d655169144ff007` | `0` | **PASSED** |\n\n---\n\n## Detailed Findings\n\n### 1. Route Review Source Hash Mismatch (`ROUTE_REVIEW_TESTS`)\n- **Allowlisted Path:** [docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md)\n- **Affecting Artifacts:**\n  - [orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json#L21)\n  - [docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md#L85)\n  - [scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py#L98-L101)\n- **Observed Error:**\n  ```text\n  scripts.raisa_provider_free_read_only_delete_confirm_route_convergence_review.ReviewError: bound source hash mismatch: docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md\n  ```\n- **Analysis:**\n  `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py` validates SHA-256 digests of all 18 bound input sources against `route-convergence-contract.json`. The expected digest recorded in the contract (`c82a96d7ddc241f9526bbb36578bf7a8f21a0dd5b373dda3406d680e4aee79f0`) fails validation against the file contents on disk. Consequently:\n  - `test_exact_read_only_route_review_passes` raises `ReviewError` during evaluation.\n  - `test_verdict_cannot_ignore_a_blocker` fails due to encountering the hash mismatch error before reaching the verdict validation assertions.\n\n---\n\n## Evaluation of Evaluated Dimensions & Controls\n\n1. **Delete-Confirm Route Matrix (Conceptual):**\n   - The route classification logic properly identifies 3 satisfied dimensions (`literal_mounting`, `raw_delete_isolation`, `serial_postgresql_foundation`), 1 partial gap (`canonical_identity_and_alias`), and 6 blocking gaps (`physical_seam_composition`, `server_authority_ingress`, `locked_proposal_readmission`, `atomic_effect_audit_receipt`, `response_contract_compatibility`, `stored_delivery_and_http_mapping`).\n   - The mapped verdict `unmounted_adapter_and_response_transition_required` is structurally sound, but cannot be validated by the deterministic runner until the bound source hash is aligned.\n\n2. **Ariadne Git-Object Resolution (`ARIADNE_RESOLUTION_TESTS`):**\n   - [orchestration_harness/git_object_resolution.py](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/orchestration_harness/git_object_resolution.py) correctly enforces:\n     - 40-character lowercase hexadecimal regular expression filtering.\n     - Fixed `git` command invocation with `shell=False` and strict timeouts.\n     - Byte-exact resolution via `<id>^{commit}` and verification against `cat-file -t commit`.\n     - Ancestry validation against machine-observed full `HEAD` via `git merge-base --is-ancestor`.\n     - Closed typed failure projections that narrow receipt outcomes to `revision_required` and prevent worker dispatch.\n   - All 35 tests across `test_ariadne_git_object_resolution.py`, `test_ariadne_orchestrator_preflight.py`, `test_ariadne_active_operation_latch.py`, and `test_ariadne_risk_weighted_workflow.py` passed.\n\n---\n\n## Required Remediation\n\n1. Recalculate and update the exact SHA-256 hash for [docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md) across:\n   - `orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json`\n   - `orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json`\n   - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`\n2. Re-run `ROUTE_REVIEW_TESTS` to verify that `test_exact_read_only_route_review_passes` and `test_verdict_cannot_ignore_a_blocker` both exit with code 0.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Independent Review: Delete-Confirm Route Convergence and Ariadne Git-Object Resolution\n\n**Reviewer Model:** `gemini-3.7-flash-high`  \n**Review Effort:** `high`  \n**Evidence Label:** `provider_free_read_only_repository_review`  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-convergence-c4b8c9be`  \n**Candidate Branch:** `codex/review-delete-confirm-convergence-c4b8c9be`  \n**Candidate HEAD:** `c4b8c9be292f06a5c593362b5d655169144ff007`  \n**Candidate Parent:** `c05fb57f17bf8b55fb02b34bd48b0ce18530ec86`  \n\n---\n\n## Executive Summary\n\nThe exact candidate commit `c4b8c9be292f06a5c593362b5d655169144ff007` evaluated two discrete components:\n1. A provider-free read-only review of the current `confirmAppointmentDeleteProposal` delete-confirm route against the accepted unmounted physical transaction seam.\n2. An Ariadne repository continuation control resolving structured full lowercase Git commit IDs before passing continuation receipts.\n\nWhile the Ariadne Git-object resolution harness, preflight CLI integration, Ruff linter, and whitespace check all executed cleanly with exit code 0, the deterministic route review test suite (`ROUTE_REVIEW_TESTS`) failed with exit code 1 due to a SHA-256 bound source hash mismatch on `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md`.\n\nIn accordance with the frozen verification criteria requiring all frozen product and harness input hashes and all focused test suites to pass deterministically, the candidate requires revision.\n\n---\n\n## Command Manifest Execution Results\n\n| Command ID | Target / Test Suite | Exit Code | Status |\n|---|---|---|---|\n| `ROUTE_REVIEW_TESTS` | `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`, `tests/test_api_spine_artifacts.py` | `1` | **FAILED** |\n| `ARIADNE_RESOLUTION_TESTS` | `tests/test_ariadne_git_object_resolution.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_ariadne_active_operation_latch.py`, `tests/test_ariadne_risk_weighted_workflow.py` | `0` | **PASSED** |\n| `RUFF` | `orchestration_harness/git_object_resolution.py`, `scripts/ariadne_orchestrator_preflight.py`, `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`, `tests/test_ariadne_git_object_resolution.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py` | `0` | **PASSED** |\n| `WHITESPACE` | `git diff --check c05fb57f17bf8b55fb02b34bd48b0ce18530ec86 c4b8c9be292f06a5c593362b5d655169144ff007` | `0` | **PASSED** |\n\n---\n\n## Detailed Findings\n\n### 1. Route Review Source Hash Mismatch (`ROUTE_REVIEW_TESTS`)\n- **Allowlisted Path:** [docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md)\n- **Affecting Artifacts:**\n  - [orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json#L21)\n  - [docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md#L85)\n  - [scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py#L98-L101)\n- **Observed Error:**\n  ```text\n  scripts.raisa_provider_free_read_only_delete_confirm_route_convergence_review.ReviewError: bound source hash mismatch: docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md\n  ```\n- **Analysis:**\n  `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py` validates SHA-256 digests of all 18 bound input sources against `route-convergence-contract.json`. The expected digest recorded in the contract (`c82a96d7ddc241f9526bbb36578bf7a8f21a0dd5b373dda3406d680e4aee79f0`) fails validation against the file contents on disk. Consequently:\n  - `test_exact_read_only_route_review_passes` raises `ReviewError` during evaluation.\n  - `test_verdict_cannot_ignore_a_blocker` fails due to encountering the hash mismatch error before reaching the verdict validation assertions.\n\n---\n\n## Evaluation of Evaluated Dimensions & Controls\n\n1. **Delete-Confirm Route Matrix (Conceptual):**\n   - The route classification logic properly identifies 3 satisfied dimensions (`literal_mounting`, `raw_delete_isolation`, `serial_postgresql_foundation`), 1 partial gap (`canonical_identity_and_alias`), and 6 blocking gaps (`physical_seam_composition`, `server_authority_ingress`, `locked_proposal_readmission`, `atomic_effect_audit_receipt`, `response_contract_compatibility`, `stored_delivery_and_http_mapping`).\n   - The mapped verdict `unmounted_adapter_and_response_transition_required` is structurally sound, but cannot be validated by the deterministic runner until the bound source hash is aligned.\n\n2. **Ariadne Git-Object Resolution (`ARIADNE_RESOLUTION_TESTS`):**\n   - [orchestration_harness/git_object_resolution.py](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/orchestration_harness/git_object_resolution.py) correctly enforces:\n     - 40-character lowercase hexadecimal regular expression filtering.\n     - Fixed `git` command invocation with `shell=False` and strict timeouts.\n     - Byte-exact resolution via `<id>^{commit}` and verification against `cat-file -t commit`.\n     - Ancestry validation against machine-observed full `HEAD` via `git merge-base --is-ancestor`.\n     - Closed typed failure projections that narrow receipt outcomes to `revision_required` and prevent worker dispatch.\n   - All 35 tests across `test_ariadne_git_object_resolution.py`, `test_ariadne_orchestrator_preflight.py`, `test_ariadne_active_operation_latch.py`, and `test_ariadne_risk_weighted_workflow.py` passed.\n\n---\n\n## Required Remediation\n\n1. Recalculate and update the exact SHA-256 hash for [docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md](file:///C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md) across:\n   - `orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json`\n   - `orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json`\n   - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`\n2. Re-run `ROUTE_REVIEW_TESTS` to verify that `test_exact_read_only_route_review_passes` and `test_verdict_cannot_ignore_a_blocker` both exit with code 0.",
+    "command_results": [
+      {
+        "id": "ROUTE_REVIEW_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "ARIADNE_RESOLUTION_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_git_object_resolution.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_orchestrator_preflight.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_active_operation_latch.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_risk_weighted_workflow.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/git_object_resolution.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+          "tests/test_ariadne_git_object_resolution.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+          "c4b8c9be292f06a5c593362b5d655169144ff007"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "0c3d64a581197cfb48d715d8234289773aee2b51dc88c3ee5ff07ce4c477a41d",
+  "command_results": [
+    {
+      "id": "ROUTE_REVIEW_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "ARIADNE_RESOLUTION_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_git_object_resolution.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_orchestrator_preflight.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_active_operation_latch.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-convergence-c4b8c9be/tests/test_ariadne_risk_weighted_workflow.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_object_resolution.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py",
+        "tests/test_ariadne_git_object_resolution.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+        "c4b8c9be292f06a5c593362b5d655169144ff007"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

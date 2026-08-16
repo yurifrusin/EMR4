@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.canonical_profile_evidence.v1",
+  "recorded_at": "2026-08-16T15:43:07.9219531+10:00",
+  "candidate_commit": "c4b8c9be292f06a5c593362b5d655169144ff007",
+  "candidate_tree": "cf6d50cb79775c8a9887fe6fa88cced57e978584",
+  "command": ".\\.venv\\Scripts\\python.exe scripts/verify_repository.py --profile fast",
+  "status": "passed",
+  "checks": {
+    "ruff": "passed",
+    "maintained_source_compilation": {
+      "status": "passed",
+      "source_file_count": 214,
+      "verification_file_count": 35,
+      "target_python": "3.11",
+      "protected_paths_enumerated": false
+    },
+    "focused_repository_tests": {
+      "status": "passed",
+      "passed": 197,
+      "warnings": 2,
+      "elapsed_seconds": 61.86
+    },
+    "diary_javascript_syntax": "passed",
+    "git_whitespace": "passed"
+  }
+}
