@@ -97,6 +97,10 @@ FIRST_AUTH_REVOKED_TOKENS = (
     "appointment_for_update",
     "grant_authority_check",
 )
+FIRST_AUTH_PRE_GRANT_REVOKED_TOKENS = (
+    "user_for_share",
+    "appointment_for_update",
+)
 
 AUTH_GROUP_IDS = tuple(f"AUTH-S{index:02d}" for index in range(1, 10))
 TX_GROUP_IDS = tuple(f"TX-S{index:02d}" for index in range(1, 12))
@@ -1368,8 +1372,10 @@ def _assert_token_order(outcome: str, tokens: tuple[str, ...]) -> None:
             expected = NEW_COMMAND_TOKENS
         elif len(tokens) == len(REPLAY_TOKENS):
             expected = REPLAY_TOKENS
-        else:
+        elif len(tokens) == len(FIRST_AUTH_REVOKED_TOKENS):
             expected = FIRST_AUTH_REVOKED_TOKENS
+        else:
+            expected = FIRST_AUTH_PRE_GRANT_REVOKED_TOKENS
     elif outcome == "target_unavailable":
         expected = (
             ("user_for_share", "appointment_for_update")

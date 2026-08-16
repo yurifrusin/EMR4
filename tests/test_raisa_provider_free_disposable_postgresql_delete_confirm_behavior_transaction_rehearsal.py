@@ -333,6 +333,20 @@ def test_order_mismatch_evidence_is_group_attributed_and_schema_closed() -> None
         assert list(Draft202012Validator(EVIDENCE_SCHEMA).iter_errors(candidate))
 
 
+def test_authority_revocation_trace_distinguishes_pre_grant_denial() -> None:
+    rehearsal._assert_token_order(  # noqa: SLF001
+        "authority_revoked", rehearsal.FIRST_AUTH_PRE_GRANT_REVOKED_TOKENS
+    )
+    rehearsal._assert_token_order(  # noqa: SLF001
+        "authority_revoked", rehearsal.FIRST_AUTH_REVOKED_TOKENS
+    )
+    with pytest.raises(rehearsal.RehearsalFailure):
+        rehearsal._assert_token_order(  # noqa: SLF001
+            "authority_revoked",
+            ("appointment_for_update", "user_for_share"),
+        )
+
+
 def test_transaction_case_runtime_attributes_closed_trace_to_group() -> None:
     source = Path(rehearsal.__file__).read_text(encoding="utf-8")
     assert "_run_tx_case_attributed(engine, group, index)" in source
