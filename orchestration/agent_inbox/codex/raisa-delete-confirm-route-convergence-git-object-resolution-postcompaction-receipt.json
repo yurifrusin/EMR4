@@ -1,0 +1,96 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only delete-confirm route-convergence admission and Ariadne Git-object resolution control",
+    "completed_stage": "The five-source preplanning receipt and 196-test pre-edit baseline pass; the Tier-2 plan and threat delta are frozen; the exact-file route review returns three satisfied, one partial and six blocking dimensions; and the Git source-object resolver plus focused deterministic gates pass without route, database or provider execution.",
+    "next_executable_stage": "Generate a passing pre-commit receipt carrying machine-resolved source-object evidence, commit only the explicit candidate paths, freeze the exact candidate commit/tree and run the one post-freeze canonical profile before independent review.",
+    "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+    "resume_after_compaction": true,
+    "source_head": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+    "reason_codes": [],
+    "resolved_commit": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction_resume_pre_commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The architectural route verdict is frozen and the remaining resolver/evidence work is small, tightly coupled and serial; a worker packet and recovery cycle would cost more than it saves.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The resolver changes an Ariadne authority/security hard gate, so exactly one Gemini 3.7 Flash/high final veto remains reserved after the exact candidate and post-freeze deterministic profile pass.",
+        "work_packages": [
+          "independently review the frozen route-convergence verdict and structured Git-object resolution control on one exact unchanged candidate"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "The current developer constraint does not authorize delegation for this task, and no state-independent package remains whose leverage exceeds shared authority-packet coordination.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "material deterministic recovery",
+      "pre-verifier acceptance",
+      "independent veto result",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the post-compaction five-source receipt must pass before candidate preparation resumes",
+      "the pre-commit receipt must machine-resolve the exact latch source before commit",
+      "the exact candidate commit and tree must be frozen before the post-freeze canonical profile",
+      "Gemini remains ineligible until deterministic admission passes on the unchanged exact candidate"
+    ]
+  },
+  "planned_action": "resume_exact_checkpoint_and_prepare_machine_resolved_precommit_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:9944bab0bdb1f24084e40ef5e2d315c5734a2a15fbc08c4b1dbb6744a953b644",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "The frozen combined plan and threat-model delta at source HEAD c05fb57f17bf8b55fb02b34bd48b0ce18530ec86 permit only an exact-file provider-free read-only route-convergence decision and a repository-only structured Git commit resolution control.",
+      "The accepted delete-confirm behavior/transaction closeout and Sol acceptance at semantic source 49dd2aaa72877adb844da4d0d5d5bb28039c90c8 prove serial unmounted PostgreSQL authority and transaction behavior only and name this route-convergence review as the next candidate.",
+      "The deterministic route review returns three satisfied, one partial and six blocking dimensions with verdict unmounted_adapter_and_response_transition_required; the current route remains legacy-owned and the minimized private receipt cannot reconstruct the full mutable public confirmation envelope.",
+      "The focused Ariadne resolver gates pass for exact lowercase full commit resolution, commit type, source ancestry, fixed shell-free read-only argv and fail-closed continuation receipts.",
+      "Yuri's standing uninterrupted-development authority and explicit confirmation of continuous harness self-correction remain controlling; no user-attention condition is active."
+    ],
+    "current_authority_allocation": "GPT Sol owns the architectural admission decision, Ariadne hard-gate implementation and acceptance. DeepSeek V4 Flash/high remains declined because briefing and recovery cost exceed leverage for the small tightly coupled candidate. Gemini 3.7 Flash/high remains reserved for exactly one final independent veto after deterministic admission. Native subagents remain declined under the current developer constraint and because there is no state-independent work package.",
+    "git_refs_and_worktree": "After a fresh origin fetch, branch codex/ariadne-bernie-davida-parallel-seam and origin task remain exact c05fb57f17bf8b55fb02b34bd48b0ce18530ec86 with tree 578f8b8ebf5473f54a5bf6c3ea2c0810318a7424; required source 648c8ec9805af63729264ea9c22fd695f062a741 and accepted semantic source 49dd2aaa72877adb844da4d0d5d5bb28039c90c8 are ancestors. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intended tracked edits and tranche-owned untracked files are present; 648 total untracked paths including docs/branding/ remain preserved.",
+    "live_handover_current_baton": "AGENTS.md at SHA-256 55a29921b28a5668b98fa70df39a73819d5aebcf0dc5cfb407c9d189237315db records Continuity 303 / Compass 285, the active provider-free read-only delete-confirm route-convergence review, and the admitted AER-0356 Git-object-resolution repair.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are freshly restored. The product lane remains exact-file, provider-free and read-only; the Ariadne lane remains repository-only. No protected holdout access, route edit/mount/call, database/Docker/SQL/migration execution, product command/data, patient/clinical/historical evidence, provider/ADC/credential/IAM work, browser/external network, UI, deployment, production, release, Pages or protected-ref movement is permitted. docs/branding/ and every unrelated untracked path are preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

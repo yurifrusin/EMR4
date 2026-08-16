@@ -49,10 +49,22 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
     assert receipt["active_operation"]["operation_id"] == "fixture-operation"
     assert receipt["active_operation"]["status"] == "in_progress"
     assert receipt["parallelism_assessment"]["operation_id"] == "fixture-operation"
-    assert [
-        lane["lane_id"] for lane in receipt["parallelism_assessment"]["lanes"]
-    ] == ["deepseek_flash", "gemini_verifier", "native_subagents"]
+    assert [lane["lane_id"] for lane in receipt["parallelism_assessment"]["lanes"]] == [
+        "deepseek_flash",
+        "gemini_verifier",
+        "native_subagents",
+    ]
     assert receipt["terminal_handback_permitted"] is False
+    assert receipt["git_object_resolution"] == {
+        "schema_version": "ariadne.git_object_resolution.v1",
+        "status": "passed",
+        "source_field": "active_operation.source_head",
+        "supplied_object_id": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
+        "resolved_commit": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
+        "observed_head": receipt["git_object_resolution"]["observed_head"],
+        "source_is_ancestor_of_head": True,
+        "reason_codes": [],
+    }
 
 
 def test_every_continuation_fails_closed_without_parallelism_assessment(
@@ -236,6 +248,25 @@ def test_every_configured_continuation_event_requires_and_emits_five_sources(
         assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
         assert receipt["active_operation"]["operation_id"] == "fixture-operation"
         assert receipt["terminal_handback_permitted"] is False
+        assert receipt["git_object_resolution"]["status"] == "passed"
+
+
+def test_every_continuation_fails_closed_for_unresolvable_full_source_object(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["active_operation"]["source_head"] = "f" * 40
+    for event in CONTINUATION_EVENTS:
+        runtime_state["continuation_event"] = event
+        path = tmp_path / f"unresolvable-{event}.json"
+        path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+        receipt = build_receipt(runtime_state_path=path)
+
+        assert receipt["status"] == "revision_required"
+        assert receipt["worker_dispatch_permitted"] is False
+        assert receipt["git_object_resolution"]["status"] == "revision_required"
+        assert "git_object_command_failed" in receipt["reasons"]
 
 
 def test_every_continuation_event_fails_closed_without_active_operation_latch(

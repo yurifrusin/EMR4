@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/delete-confirm-route-convergence-review-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_head", "operation_id", "mounted_path", "canonical_path", "sources", "dimensions", "verdict", "next_candidate"],
+  "properties": {
+    "schema_version": {"const": "raisa.delete_confirm_route_convergence_review.v1"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "operation_id": {"const": "confirmAppointmentDeleteProposal"},
+    "mounted_path": {"const": "/appointments/proposals/delete-confirm"},
+    "canonical_path": {"const": "/appointments/proposals/delete/confirm"},
+    "sources": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "classification", "observation", "prerequisite"],
+        "properties": {
+          "id": {"enum": ["literal_mounting", "canonical_identity_and_alias", "physical_seam_composition", "server_authority_ingress", "locked_proposal_readmission", "atomic_effect_audit_receipt", "response_contract_compatibility", "stored_delivery_and_http_mapping", "raw_delete_isolation", "serial_postgresql_foundation"]},
+          "classification": {"enum": ["satisfied", "partial_gap", "blocking_gap"]},
+          "observation": {"type": "string", "minLength": 1},
+          "prerequisite": {"type": ["string", "null"], "minLength": 1}
+        }
+      }
+    },
+    "verdict": {"enum": ["unmounted_adapter_and_response_transition_required", "ready_for_bounded_unmounted_route_candidate", "ready_for_bounded_route_convergence_candidate"]},
+    "next_candidate": {"type": "string", "minLength": 1}
+  }
+}

@@ -26,6 +26,14 @@ parallelism_assessment:
   admitted_leverage: [positive, required_independence, neutral, negative]
   require_distinct_rationale_per_lane: true
   require_serial_constraints_or_positive_parallel_work: true
+git_object_resolution:
+  schema_version: ariadne.git_object_resolution_policy.v1
+  required_events: *continuation_events
+  source_field: active_operation.source_head
+  require_full_lowercase_object_id: true
+  expected_object_type: commit
+  require_ancestor_of_head: true
+  timeout_seconds: 5
 required_adapter_observations: all_declared
 worker_slot_management:
   # This is an EMR4 profile choice. The receipt core is resource-neutral.
@@ -67,6 +75,7 @@ orchestrator_rules:
   - require_a_new_receipt_at_each_continuation_event
   - require_valid_active_operation_latch_at_each_continuation_event
   - require_explicit_parallelism_assessment_at_each_continuation_event
+  - require_machine_resolved_active_operation_source_commit_at_each_continuation_event
   - never_default_to_solo_serial_work_without_recorded_lane_dispositions_and_serial_constraints
   - reassess_deepseek_gemini_and_native_subagents_at_each_named_tranche_boundary
   - never_treat_prompt_recency_alone_as_operation_replacement

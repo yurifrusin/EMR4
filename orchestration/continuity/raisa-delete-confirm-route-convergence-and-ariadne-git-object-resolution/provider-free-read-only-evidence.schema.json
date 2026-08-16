@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/delete-confirm-route-convergence-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "source_head", "source_bindings", "checks", "dimension_counts", "verdict", "next_candidate", "runtime_boundaries"],
+  "properties": {
+    "schema_version": {"const": "raisa.delete_confirm_route_convergence_evidence.v1"},
+    "result": {"const": "raisa_provider_free_read_only_delete_confirm_route_convergence_review_pass"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {
+      "type": "object",
+      "minProperties": 18,
+      "maxProperties": 18,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "checks": {
+      "type": "object",
+      "minProperties": 20,
+      "additionalProperties": {"const": true}
+    },
+    "dimension_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satisfied", "partial_gap", "blocking_gap"],
+      "properties": {
+        "satisfied": {"const": 3},
+        "partial_gap": {"const": 1},
+        "blocking_gap": {"const": 6}
+      }
+    },
+    "verdict": {"const": "unmounted_adapter_and_response_transition_required"},
+    "next_candidate": {"const": "provider_free_unmounted_delete_confirm_response_compatibility_and_product_adapter_architecture"},
+    "runtime_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["app_imported", "route_called", "database_opened", "provider_called", "product_data_opened"],
+      "properties": {
+        "app_imported": {"const": false},
+        "route_called": {"const": false},
+        "database_opened": {"const": false},
+        "provider_called": {"const": false},
+        "product_data_opened": {"const": false}
+      }
+    }
+  }
+}

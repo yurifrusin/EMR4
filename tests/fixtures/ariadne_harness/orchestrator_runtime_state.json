@@ -34,7 +34,7 @@
     "active_tranche": "Fixture active tranche",
     "objective": "Prove unfinished-operation precedence in the orchestrator receipt fixture.",
     "status": "in_progress",
-    "source_head": "1111111111111111111111111111111111111111",
+    "source_head": "17add9baf2cc3616f7ee4fb8eda3481e2eb13715",
     "authority_source": "authored fixture authority",
     "checkpoint": {
       "completed_stage": "fixture rehydration complete",

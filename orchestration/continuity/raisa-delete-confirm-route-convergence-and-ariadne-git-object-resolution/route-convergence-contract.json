@@ -1,0 +1,91 @@
+{
+  "schema_version": "raisa.delete_confirm_route_convergence_review.v1",
+  "source_head": "c05fb57f17bf8b55fb02b34bd48b0ce18530ec86",
+  "operation_id": "confirmAppointmentDeleteProposal",
+  "mounted_path": "/appointments/proposals/delete-confirm",
+  "canonical_path": "/appointments/proposals/delete/confirm",
+  "sources": [
+    {"path": "app/main.py", "sha256": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2"},
+    {"path": "app/routers/appointments.py", "sha256": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624"},
+    {"path": "app/dependencies.py", "sha256": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc"},
+    {"path": "app/schemas/appointments.py", "sha256": "c35c271e9308f1f57eeeee53eefa6388087e126944ab5100c225f50066e3a0cf"},
+    {"path": "app/models/appointments.py", "sha256": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794"},
+    {"path": "app/models/tenancy.py", "sha256": "e411c816565bdddfbb25beca62439c5bba7a44a90e348cd7e9f4296a65fb65e2"},
+    {"path": "app/services/appointment_delete_physical.py", "sha256": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533"},
+    {"path": "app/services/appointment_status_product_adapter.py", "sha256": "a067e05802a74461fb14571c26e02bb72f34fcdd4624ee2a5ebcadd0266cdf55"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"},
+    {"path": "orchestration/api_spine_appointment_idempotency_delete_confirm_preflight.md", "sha256": "fbfe46f27d733e017d4f21734ad653a72e4fdeb27fd64820604b5bb199a41774"},
+    {"path": "orchestration/api_spine_appointment_idempotency_delete_confirm_route_tests.md", "sha256": "4768d438c3031b4a726bcdbc8236330a05db51b3c3c3c504a06da40453a1a2c6"},
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md", "sha256": "90d42d80d06d1c173fde25b7da153173b195cbc118e672cac6746493ef0aa507"},
+    {"path": "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-sol-acceptance.md", "sha256": "41603381260b72a61f5976305f132846897541b4ca31b9884bb10eebfa4f178e"},
+    {"path": "docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review.md", "sha256": "c82a96d7ddc241f9526bbb36578bf7a8f21a0dd5b373dda3406d680e4aee79f0"},
+    {"path": "docs/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-closeout.md", "sha256": "c75c7c707ab0023cf8d4bf4a90dfe638c36179fbd1a87b81397cda51fea5e10f"},
+    {"path": "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md", "sha256": "27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md", "sha256": "f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md", "sha256": "584405db5d49a56e18061f80fcd1faa72c278cf0d4975cf95febc86783609019"}
+  ],
+  "dimensions": [
+    {
+      "id": "literal_mounting",
+      "classification": "satisfied",
+      "observation": "The appointments router is included and one POST /proposals/delete-confirm handler is mounted.",
+      "prerequisite": null
+    },
+    {
+      "id": "canonical_identity_and_alias",
+      "classification": "partial_gap",
+      "observation": "The operation ID agrees, but only the hyphenated alias candidate is mounted while OpenAPI names /proposals/delete/confirm canonical.",
+      "prerequisite": "A future convergence change must mount the canonical spelling and retain the current spelling only as a hidden alias over the same handler."
+    },
+    {
+      "id": "physical_seam_composition",
+      "classification": "blocking_gap",
+      "observation": "The route imports neither appointment_delete_physical nor delete_confirm_locked_transaction and still owns legacy claim, mutation, completion and commit.",
+      "prerequisite": "Build one unmounted composition/product adapter that alone enters the accepted physical transaction seam."
+    },
+    {
+      "id": "server_authority_ingress",
+      "classification": "blocking_gap",
+      "observation": "The route has request-user role admission but no command-owned session, authenticated-session minimisation, signed authority generation or exact cancel-capability ingress.",
+      "prerequisite": "Derive server-owned session binding and proposal generation, then let the physical seam recheck the locked user and exact appointment.cancel.confirm grant twice."
+    },
+    {
+      "id": "locked_proposal_readmission",
+      "classification": "blocking_gap",
+      "observation": "Freshness and waiting-area checks read through _get_appointment without the physical appointment lock or an opaque version binding.",
+      "prerequisite": "Mint an opaque proposal-version binding and re-admit signed evidence, target state, reason, warnings and waiting-area truth against the locked appointment."
+    },
+    {
+      "id": "atomic_effect_audit_receipt",
+      "classification": "blocking_gap",
+      "observation": "The route stages a legacy soft cancel and audit plus generic ledger completion, but it does not populate the accepted delete v1 audit and private-receipt correlations.",
+      "prerequisite": "Stage the adjacent appointment version, exact delete audit v1 and complete private receipt inside the physical context before one commit."
+    },
+    {
+      "id": "response_contract_compatibility",
+      "classification": "blocking_gap",
+      "observation": "The physical seam treats a six-field minimized cancellation buffer as initial/replay authority, while the mounted API returns a larger AppointmentConfirmDeleteProposalOut with an AppointmentOut.",
+      "prerequisite": "Freeze one explicit response transition that preserves minimized authority and byte-exact replay without rebuilding a larger envelope from mutable post-commit state."
+    },
+    {
+      "id": "stored_delivery_and_http_mapping",
+      "classification": "blocking_gap",
+      "observation": "Initial success returns a newly constructed model and legacy replay returns stored JSON; no closed mapper consumes physical canonical bytes or physical failure decisions.",
+      "prerequisite": "Create one unmounted stored-byte delivery and typed physical-outcome mapper before any route edit."
+    },
+    {
+      "id": "raw_delete_isolation",
+      "classification": "satisfied",
+      "observation": "Raw DELETE remains a separate handler using the legacy helper and has no dedicated delete-confirm idempotency or capability path.",
+      "prerequisite": null
+    },
+    {
+      "id": "serial_postgresql_foundation",
+      "classification": "satisfied",
+      "observation": "Continuity 303 accepts all nine authority and eleven transaction groups plus exact cleanup for the unmounted physical seam.",
+      "prerequisite": null
+    }
+  ],
+  "verdict": "unmounted_adapter_and_response_transition_required",
+  "next_candidate": "provider_free_unmounted_delete_confirm_response_compatibility_and_product_adapter_architecture"
+}
