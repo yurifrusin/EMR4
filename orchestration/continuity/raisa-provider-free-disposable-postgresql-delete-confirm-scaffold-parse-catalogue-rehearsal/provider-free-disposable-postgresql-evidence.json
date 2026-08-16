@@ -1,0 +1,73 @@
+{
+  "schema_version": "raisa.delete_confirm_scaffold_parse_catalogue_evidence.v1",
+  "result": "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue",
+  "source_head": "38f2fbb054736cbd63627daea6951d676907461c",
+  "contract_sha256": "2970edf7c04ce0988c0904c8cc02bcd2176fdafccc5b1d745ce9240ca4f8f007",
+  "source_hashes": {
+    "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md": "71486b39e69bdab10e23b22bafa9d48a348c816b0270ad4e11c38700dcd06b62",
+    "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md": "653658d228eecdd48389d7158cfa5b211f062a35ab9af0ba85a9db4a91a68edd",
+    "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md": "f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8",
+    "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md": "caad279b52f915bbfc1d554c2460725044c34fee945c0601e30a0cde52c4d250",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md": "986de83a97449a5aeecd39b37594ab1eca740780f9c4016ae7d5b75f954428b5",
+    "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json": "4d4ecc83fdb9b9e90067714f4827be6bc007ddd183bc66b0cd95aa207d475f22",
+    "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py": "e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb",
+    "alembic.ini": "8a70641ffa66bb1c228e16a62d8b7a2111810888819c9c662c17ea72e2d70b49",
+    "alembic/env.py": "5f8f7f752287ce47b507555c43065499fe797c37f724ed827c1d43ebfc5fe346",
+    "docs/api-spine/openapi/appointment-commands.yaml": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a",
+    "orchestration/harness_settings/risk_weighted_workflow.yaml": "a4bc7f92d1caecbd0b421cd40438d64916a7945197e02d2f8b9232d2162c2284"
+  },
+  "hostile_mutations_rejected": 80,
+  "environment": {
+    "postgresql_major": 16,
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "network_mode": "none",
+    "storage": "container_local_tmpfs"
+  },
+  "offline_sql": {
+    "range": "w2x3y4z5a6b7:x3y4z5a6b7c8",
+    "body_sha256": "205370bcb2dc2983db176cbbcd5916a82e3d0d102d4a98cb9e827dc20c751e6f",
+    "body_bytes": 10592
+  },
+  "catalogue": {
+    "status": "exact_match",
+    "facts_sha256": "f0e0107600492a979844aa58e8699ede1a009b16513f160198a6bc12dbdb7d93",
+    "columns": 12,
+    "constraints": 7,
+    "functions": [
+      "emr4_reject_user_capability_grant_update",
+      "emr4_user_authority_generation_guard",
+      "emr4_user_capability_grant_generation_guard"
+    ],
+    "triggers": [
+      "trg_user_capability_grants_generation",
+      "trg_user_capability_grants_reject_update",
+      "trg_users_authority_generation_guard"
+    ],
+    "head": "x3y4z5a6b7c8",
+    "zero_rows": {
+      "users": 0,
+      "user_capability_grants": 0,
+      "appointment_command_idempotency": 0,
+      "appointment_audit_log": 0
+    }
+  },
+  "lifecycle": [
+    "contract_and_sources_verified",
+    "offline_sql_generated",
+    "local_image_verified",
+    "container_created",
+    "container_profile_verified",
+    "postgresql_16_ready",
+    "synthetic_prerequisites_installed",
+    "migration_installed",
+    "catalogue_verified",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container_id_sha256": "201078a34ece5cd5534c37a9dd0a742b931e0fe5a6163f85cdcc129e778ddbff"
+  },
+  "claim_boundary": "Exact delete-confirm migration parse/catalogue and empty authored-synthetic database invariants only; no full application schema, route, command, behavior probe, product data, concurrency, restart, unknown-commit, deployment or production claim."
+}

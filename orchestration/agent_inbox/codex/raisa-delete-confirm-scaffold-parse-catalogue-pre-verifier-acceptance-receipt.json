@@ -1,0 +1,81 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+    "completed_stage": "The repaired semantic candidate passed focused and canonical deterministic gates, then passed one occupied networkless tmpfs PostgreSQL 16 representation rehearsal with exact cleanup. Both the immutable fail-closed attempt and the successful evidence packet validate against the closed evidence schema.",
+    "next_executable_stage": "Generate this fresh five-source pre-verifier receipt, commit only the exact evidence/receipt descendant, materialize a clean exact review worktree and dispatch exactly one Gemini 3.7 Flash/high final veto.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek completed the bounded implementation package; its lane is closed and no second implementation worker is useful after semantic freeze.",
+        "work_packages": [
+          "fixed-path representation harness, closed contract and schemas, and fake-runner tests"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Tier 2 requires exactly one independent final veto after deterministic and occupied admission; Gemini 3.7 Flash/high owns that single bounded review.",
+        "work_packages": [
+          "review the exact semantic source, immutable failure evidence, successful occupied evidence, cleanup proof, API Spine classification and protected boundaries"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "A native review would duplicate the admitted Gemini veto and violate the no-stacked-review economy of the accepted workflow reform.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier_rejection",
+      "material_semantic_change",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the exact evidence descendant must be committed before clean-worktree review",
+      "exactly one final independent veto is permitted",
+      "any substantive rejection enters one bounded recovery before one fresh final veto",
+      "Sol alone performs final acceptance and publication"
+    ]
+  },
+  "planned_action": "dispatch_exactly_one_gemini_37_flash_high_final_veto_for_delete_confirm_parse_catalogue_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen plan 38f2fbb054736cbd63627daea6951d676907461c and evidence-led repaired semantic source f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 bind representation-only execution. Twenty-five owned tests, the 155-test focused union with one named immutable predecessor hash drift excluded, and the complete canonical 196-test profile passed. The first occupied attempt failed closed only on equivalent PostgreSQL constraint rendering and cleaned up exactly; the normalized candidate then passed exact migration installation, closed catalogue/function/trigger assertions, four zero-row assertions and exact cleanup.",
+    "current_authority_allocation": "GPT Sol owns semantic containment, occupied execution, integration and final acceptance. DeepSeek V4 Flash/high completed the bounded mechanical implementation package. Exactly one Gemini 3.7 Flash/high Antigravity veto is now admitted under Tier 2. Native subagents remain declined because a stacked or duplicate review lane is forbidden and has negative leverage.",
+    "git_refs_and_worktree": "Task branch exact semantic HEAD is f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 with source tree 5c9d5a8c5afa37df1134a3b9fd9659edb2802164; origin task remains 274c42adf575f7f07aea759e79a6bd3f2ec25e54 until closeout. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tranche evidence and receipts are the only intended additions; all unrelated untracked paths are preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Its current baton names the accepted unmounted delete-confirm physical scaffold and the provider-free disposable PostgreSQL parse/catalogue rehearsal of exact migration x3y4z5a6b7c8 as the next dependency-satisfied tranche after the accepted Ariadne risk-weighted reform.",
+    "protected_evidence_boundaries": "Review is restricted to exact authored-synthetic pass/failure evidence, semantic source and the frozen API Spine classification. No behavior probe, product row, existing database, patient/clinical data, route, command, UI, provider/ADC/IAM, browser, external network, deployment, release, Pages or protected ref is opened. docs/branding/ and every unrelated untracked path remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

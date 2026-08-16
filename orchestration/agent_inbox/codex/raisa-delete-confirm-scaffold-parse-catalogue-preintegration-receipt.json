@@ -1,0 +1,83 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+    "completed_stage": "DeepSeek returned exact six-path candidate 7dfa8d8a646e1b78eea033239716bdbc2d5b9272; Sol repaired total-deadline, local-Docker-context, inert-offline-URL, catalogue-identity and evidence-schema containment at descendant 43f026c4ecb2b8d79fa6ad7d2749c3103326f5a1. Twenty-five direct tests, the 155-test focused union, Ruff, compilation, schema checks, whitespace and the canonical 196-test final profile passed. One immutable predecessor hash drift is named and excluded as non-regression.",
+    "next_executable_stage": "Generate the fresh five-source pre-integration receipt for exact candidate 43f026c4ecb2b8d79fa6ad7d2749c3103326f5a1, fast-forward only the task branch, then execute the one owned disposable PostgreSQL representation rehearsal and verify exact cleanup before the single Gemini veto.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "43f026c4ecb2b8d79fa6ad7d2749c3103326f5a1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_integration",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek delivered the exact six-path mechanical package and clean commit; Sol then performed the bounded semantic containment repair permitted by conductor recovery authority.",
+        "work_packages": [
+          "six-path representation-only mechanical implementation and fake-runner tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one final Gemini 3.7 Flash/high veto remains required after task-branch integration and the occupied representation pass.",
+        "work_packages": [
+          "one final exact-candidate veto after occupied evidence"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The exact candidate is semantically frozen and the remaining container lifecycle is serial; a third review lane would add no independent authority value.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "integration_result",
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "material_recovery",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Fast-forward task integration precedes the occupied run",
+      "one owned container lifecycle runs at a time",
+      "Gemini follows deterministic admission and occupied cleanup only",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "fast_forward_exact_repaired_delete_confirm_parse_catalogue_candidate_into_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen plan commit 38f2fbb054736cbd63627daea6951d676907461c permits empty-instance representation only. Exact repaired candidate 43f026c4ecb2b8d79fa6ad7d2749c3103326f5a1 passes 25 owned tests, the 155-test focused union, Ruff, compilation, schemas, whitespace and the one canonical final 196-test profile. Semantic freeze 213513926c8a008f35c843b0520a4e3b11ec94ed9f23006e0098ec63c4fd5abf names one immutable predecessor hash drift as non-regression.",
+    "current_authority_allocation": "Sol owns semantic repair, deterministic admission, database execution, integration and acceptance. DeepSeek V4 Flash/high completed its bounded six-path mechanical implementation; Gemini 3.7 Flash/high remains reserved for exactly one final Tier-2 veto; native subagents remain declined.",
+    "git_refs_and_worktree": "Primary task HEAD is planning source 38f2fbb054736cbd63627daea6951d676907461c with only tranche metadata/untracked preserved paths. Clean worker branch codex/worker-delete-confirm-catalogue-38f2fbb0 is exact candidate 43f026c4ecb2b8d79fa6ad7d2749c3103326f5a1, descendant of 38f2fbb0. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding/ and all unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. It names the provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8 as the next dependency-satisfied product tranche after the accepted Ariadne risk-weighted reform.",
+    "protected_evidence_boundaries": "Integration is a fast-forward of the task branch only. The exact migration remains unchanged; no database has yet run. The future occupied step remains one locally cached PostgreSQL 16, default Docker context, network none, tmpfs, empty synthetic relations and catalogue reads only. No behavior, product row, route, command, UI, protected data, provider/ADC/IAM, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

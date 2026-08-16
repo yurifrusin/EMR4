@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.risk_weighted_semantic_freeze.v1",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+  "classified_tier": "tier_2_authority_runtime",
+  "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+  "source_tree": "5c9d5a8c5afa37df1134a3b9fd9659edb2802164",
+  "timestamp": "2026-08-16T11:15:42+10:00",
+  "timezone": "Australia/Brisbane",
+  "semantic_bindings_sha256": "sha256:5124cb6687d952259f908f65ed442e1cb11f962555b6ff6b1be1c45ebb7ccf95",
+  "toolchain_sha256": "sha256:b2b9b207aaf40a6071fe39b93a9508fd139ff3c3bce4862ef8228ae4d3174b98",
+  "semantic_bindings": [
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md", "kind": "contract", "sha256": "71486b39e69bdab10e23b22bafa9d48a348c816b0270ad4e11c38700dcd06b62"},
+    {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md", "kind": "contract", "sha256": "653658d228eecdd48389d7158cfa5b211f062a35ab9af0ba85a9db4a91a68edd"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json", "kind": "contract", "sha256": "2970edf7c04ce0988c0904c8cc02bcd2176fdafccc5b1d745ce9240ca4f8f007"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json", "kind": "schema", "sha256": "83c77b625a8b8dfd8e7cc5736cf8ecc05330b0a819827b5203733b477b4a94e5"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json", "kind": "schema", "sha256": "f9e9ed098bbe4a784c061d5ce88d8ca11f4bad5261533af0121cbfc2900a74b5"},
+    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py", "kind": "source", "sha256": "41abded0e169f339ea581a90aba061b4896e322dad2962e252ef0c069a0439e4"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py", "kind": "semantic_test", "sha256": "ce2859ad7d5490264fb81a7a8de8172dd79035601d7fd6aa62f427e8aff4ba47"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py", "kind": "semantic_test", "sha256": "ec9135951dcd1a53121ed64a72710f4cb8a5a6232411accd5784a13786b81426"}
+  ],
+  "toolchain": {
+    "python": "3.14.6",
+    "node": "v24.18.0",
+    "verify_repository_sha256": "f491dd7ac2222de4a9493ba43a6144726f85a586d8398947a83a7c0f9c8d4c83",
+    "postgres_image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"
+  },
+  "focused_gate_results": {
+    "owned_tests_25": "passed",
+    "focused_union_155": "passed",
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "json_and_json_schema": "passed",
+    "git_whitespace": "passed",
+    "canonical_fast_profile_196": "passed"
+  },
+  "known_failure_ids": [
+    "KNOWN-DELETE-SCAFFOLD-IMMUTABLE-CURRENT-BATON-HASH-DRIFT-001"
+  ],
+  "known_failure_evidence": {
+    "KNOWN-DELETE-SCAFFOLD-IMMUTABLE-CURRENT-BATON-HASH-DRIFT-001": "The accepted predecessor scaffold contract pins SHA-256 6b3dc2b349fd46b2605750d02eaf42a7f75f4305154cb61ac906207ac22a3b62 for tests/test_current_baton_consistency.py; the later legitimate baton test is b925591a186ebb96ee6d7c781e670fa2488da175dfcd39d1aefedda86de249fa. The exact historical binding assertion alone is excluded; the immutable accepted contract is not rewritten."
+  },
+  "post_freeze_semantic_changes_authorized": false,
+  "canonical_profile_rerun_required_without_semantic_change": false
+}

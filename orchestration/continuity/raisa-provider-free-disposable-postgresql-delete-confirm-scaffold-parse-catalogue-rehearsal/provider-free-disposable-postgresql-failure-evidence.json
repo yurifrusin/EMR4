@@ -1,0 +1,27 @@
+{
+  "schema_version": "raisa.delete_confirm_scaffold_parse_catalogue_evidence.v1",
+  "result": "rehearsal_failed",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue",
+  "source_head": "38f2fbb054736cbd63627daea6951d676907461c",
+  "lifecycle": [
+    "contract_and_sources_verified",
+    "offline_sql_generated",
+    "local_image_verified",
+    "container_created",
+    "container_profile_verified",
+    "postgresql_16_ready",
+    "synthetic_prerequisites_installed",
+    "migration_installed",
+    "cleanup_verified"
+  ],
+  "failure": {
+    "stage": "catalogue",
+    "code": "constraint_definition_mismatch",
+    "detail_sha256": "c205383954908edae761ef53e86e323bb878d0087b1fef9ea85892700e8cd38d"
+  },
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container_id_sha256": "c17eff076f7b700e3ec6e820b714c5f71cb5c6e14b19ba0e4d6e60a95d36fc9b"
+  },
+  "claim_boundary": "Exact delete-confirm migration parse/catalogue and empty authored-synthetic database invariants only; no full application schema, route, command, behavior probe, product data, concurrency, restart, unknown-commit, deployment or production claim."
+}

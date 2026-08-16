@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+    "completed_stage": "The fresh five-source preplanning receipt and 209 focused planning/API/latch tests passed; the Tier-2 representation-only plan, threat delta and baseline are frozen at exact commit 38f2fbb054736cbd63627daea6951d676907461c; a clean isolated worker worktree exists at that source.",
+    "next_executable_stage": "Generate the fresh pre-worker-dispatch receipt, dispatch exactly one bounded DeepSeek V4 Flash/high harness/contract/schema/test package, then perform Sol semantic admission before any database execution or Gemini veto.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "38f2fbb054736cbd63627daea6951d676907461c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The committed plan removes semantic choice and leaves six exact fixed-path harness, contract, schema and test files in a clean isolated worktree.",
+        "work_packages": [
+          "six-path representation-only mechanical implementation and fake-runner tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The Tier-2 migration execution requires exactly one fresh final exact-candidate veto after deterministic admission and the occupied run.",
+        "work_packages": [
+          "one final exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "A third analytical lane would duplicate Sol admission and Gemini's veto while the only stateful container operation must remain serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek implements the six mechanical files while Sol prepares exact source-admission and occupied-run checks without editing worker-owned paths"
+    ],
+    "reassessment_triggers": [
+      "worker_result",
+      "scope_mismatch",
+      "material_recovery",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "DeepSeek returns before Sol semantic admission",
+      "Sol alone runs the owned PostgreSQL container",
+      "Gemini follows deterministic admission and occupied pass only",
+      "Sol alone integrates and accepts"
+    ]
+  },
+  "planned_action": "dispatch_bounded_delete_confirm_parse_catalogue_mechanical_worker",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact plan commit 38f2fbb054736cbd63627daea6951d676907461c freezes an empty-instance representation-only PostgreSQL 16 rehearsal: no behavior probe or product row, one exact offline migration range, allowlisted catalogue facts, zero-row proof and exact cleanup. The pre-edit canonical baseline and 209 focused planning/API/latch tests passed.",
+    "current_authority_allocation": "Sol owns semantics, occupied execution, recovery, acceptance, integration and Git. DeepSeek V4 Flash/high receives only six frozen mechanical paths. Gemini 3.7 Flash/high remains the one later final veto; native subagents remain declined.",
+    "git_refs_and_worktree": "Primary planning HEAD is exact 38f2fbb054736cbd63627daea6951d676907461c. Clean worker C:/Users/sarashera/EMR4-worktrees/delete-confirm-catalogue-worker-38f2fbb0 is on codex/worker-delete-confirm-catalogue-38f2fbb0 at that exact HEAD with zero tracked and zero untracked paths. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary's unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely and names the exact provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8 as the next implementation after the accepted risk-weighted Ariadne reform.",
+    "protected_evidence_boundaries": "Only the six frozen provider-free harness/contract/schema/test paths may change. Worker execution may not run Docker/PostgreSQL, insert any row, edit migration/application/API/UI, access protected or product/patient/clinical data, use ADC/IAM/browser/network adapters, execute a product command, deploy, release, rebuild Pages or move a protected ref."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

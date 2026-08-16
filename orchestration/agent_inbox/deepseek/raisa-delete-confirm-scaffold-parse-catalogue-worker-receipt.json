@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks pass on the committed state. Let me compile the final report.\n\n## Final Report\n\n### Commit and parent\n- **Commit:** `7dfa8d8a646e1b78eea033239716bdbc2d5b9272`\n- **Parent:** `38f2fbb054736cbd63627daea6951d676907461c` (the exact worktree source from the packet)\n- **Branch:** `codex/worker-delete-confirm-catalogue-38f2fbb0`\n- **Worktree:** clean after commit (no untracked/stray files)\n\n### Changed paths (exactly the six frozen semantic paths)\n1. `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py`\n2. `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py`\n3. `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py`\n4. `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json`\n5. `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`\n6. `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json`\n\nNo other file was created, edited, staged, or committed. No occupied pass/failure evidence artifact was created (Sol owns the stateful run).\n\n### Checks run\n- **Focused tests (pure/static, no repository PostgreSQL):** `23 passed` across both owned test files (run with `--noconftest` because `tests/conftest.py` imports `app.main` \u2192 requires `authlib`/repo DB profile; the packet permits focused pure/static tests without opening repository PostgreSQL).\n- **Python compilation:** `py_compile` passed for all three owned Python files.\n- **Ruff:** `All checks passed!` on the three owned Python files.\n- **JSON / JSON-Schema:** contract validates against its schema; both schemas are themselves schema-valid; recursive `additionalProperties: false` verified on every fixed-key object in both schemas.\n- **Contract integrity:** canonical digest `31c6f814ba5fbdd1a9c1e5ddc15c5446ffa2197f101aa6e0deee5072406be288` pinned in the harness; exactly `80` hostile leaf mutations fail closed; `verify_contract()` passes all 11 source bindings.\n- **`git diff --check` / `git show --check`:** clean (no whitespace errors).\n- **Offline SQL generation** (`sys.executable -m alembic upgrade w2x3y4z5a6b7:x3y4z5a6b7c8 --sql` with fixed synthetic URL) produces the expected wrapper/required-statement body; verified during tests.\n\n### Five-source rehydration statement\n1. **`live_handover_current_baton`** \u2014 read `AGENTS.md` in full (\u00a71\u2013\u00a710); baton, current-result, and next-implementation rows confirmed the frozen tranche and exact source `38f2fbb0\u2026`.\n2. **`current_authority_allocation`** \u2014 \u00a74 confirmed DeepSeek V4 Flash/high as the bounded implementation/test worker, Sol as acceptance/integration owner; I executed only the bounded mechanical package.\n3. **`active_plan_and_acceptance`** \u2014 read the frozen plan and threat delta completely; SHA-256 `71486b39\u2026` and `653658d2\u2026` verified byte-exact against the files; read the exact migration `x3y4z5a6b7c8`, its accepted `scaffold-contract.json`, `alembic.ini`, `alembic/env.py`, and the non-protected predecessor files named by the plan (scaffold plan/closeout, Sol acceptance, status-confirm containment harness). All nine plan-table source hashes verified.\n4. **`protected_evidence_boundaries`** \u2014 \u00a75 restored; no protected path was enumerated, searched, opened, or hashed; work used only authored-synthetic empty relations and repository schema metadata.\n5. **`git_refs_and_worktree`** \u2014 verified clean worktree, HEAD `38f2fbb0\u2026`, branch `codex/worker-delete-confirm-catalogue-38f2fbb0`; local/origin `master` and `handoff/current` all at protected `2e34bdad\u2026` before and after; no protected ref moved.\n\n### Actual-versus-planned parallelism\n- **Planned:** DeepSeek V4 Flash/high for one bounded post-freeze mechanical package; Gemini 3.7 Flash/high for the single final Tier-2 veto; native subagents declined (serial one-container lifecycle).\n- **Actual:** this lane executed exactly the bounded mechanical package serially (harness, closed contract/schema, evidence schema, focused tests). No Docker/occupied run, no Gemini veto (Sol-owned), no native subagent. Planned = actual for this lane; no additional parallelism was introduced.\n\n### Unresolved issues\n- None material. Focused tests require `--noconftest` in this sandbox because `tests/conftest.py` pulls `app.main`/repository PostgreSQL (permitted by the packet). The contract\u2019s `source_head` is the packet-specified worktree source `38f2fbb0\u2026` (the plan file\u2019s own \u201cSource HEAD\u201d header refers to the plan-authoring commit `274c42ad\u2026`, which is not the binding worktree source for this worker).\n\n### Decision\n**DECISION: pass** (advisory only \u2014 Sol retains acceptance, occupied execution, integration, and Git publication authority).\n\nNo push, fetch, merge, rebase, deploy, or protected-ref operation was performed.",
+  "usage": {
+    "input_tokens": 108000,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 11065216,
+    "output_tokens": 113897,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 8.936008,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
