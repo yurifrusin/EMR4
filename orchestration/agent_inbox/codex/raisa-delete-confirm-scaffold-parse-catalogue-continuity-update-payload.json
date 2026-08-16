@@ -1,0 +1,10 @@
+{
+  "authority_boundary": "generated_payload_applied_by_sol_only",
+  "classified_tier": "tier_2_authority_runtime",
+  "decision": "pass",
+  "generated_at": "2026-08-16T11:28:10+10:00",
+  "profile_sha256": "sha256:1bd66b4dfba3bc4b2cd0b998d4b0b244e88372593778abe5dc9562c4d676a14b",
+  "schema_version": "ariadne.continuity_update.v1",
+  "timezone": "Australia/Brisbane",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal"
+}

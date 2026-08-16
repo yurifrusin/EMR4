@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 283,
-  "updated_at": "2026-08-16T00:05:15Z",
-  "source_graph_revision": 301,
-  "orientation_statement": "EMR4 is at Continuity 301 / Compass 283. Ariadne now admits tranches through four derived risk tiers, a pre-edit baseline, semantic freeze, targeted post-freeze reruns, zero-or-one independent final veto and protected deterministic closeout rendering. The workflow review pause is resolved; the next safe Raisa direction is the provider-free disposable PostgreSQL parse/catalogue rehearsal of the unmounted delete-confirm scaffold.",
+  "map_revision": 284,
+  "updated_at": "2026-08-16T01:28:10Z",
+  "source_graph_revision": 302,
+  "orientation_statement": "EMR4 is at Continuity 302 / Compass 284. Exact delete-confirm migration x3y4z5a6b7c8 now passes empty-instance PostgreSQL 16 installation and closed catalogue representability with exact cleanup. Database behavior, product rows and routes remain closed; the next safe direction is a provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3377,37 +3377,60 @@
         "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+      "lineage_parent": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+      "strategic_role": "Prove the exact cancellation scaffold is physically representable in PostgreSQL before admitting any mutation behavior",
+      "outcome": "Migration x3y4z5a6b7c8 installs atomically over empty synthetic prerequisites and its exact columns, constraints, index, functions, triggers, head and zero-row state pass with exact cleanup.",
+      "evidence": [
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-profile.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-result.json",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-risk-weighted-workflow-reform",
-    "strategic_role": "Ariadne now scales evidence effort to the actual tranche risk while retaining hard fail-closed boundaries",
-    "why_now": "The workflow-efficiency pause found that repeated full-profile and reviewer ceremony could be replaced by derived risk, exact baseline/freeze bindings and change-family-targeted reruns without weakening authority controls.",
-    "outcome": "The accepted control plane derives four tiers, refuses tier lowering, reuses only exact canonical evidence, permits at most one independent final veto and blocks protected closeout write targets.",
+    "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+    "strategic_role": "The cancellation authority scaffold is now physically represented in PostgreSQL but remains behaviorally and operationally closed",
+    "why_now": "The unmounted source scaffold was already accepted, so empty-instance parse/catalogue proof was the narrow dependency before any trigger or transaction behavior could be trusted.",
+    "outcome": "One networkless tmpfs PostgreSQL 16 installation proves the exact migration catalogue shape and zero-row state, with immutable fail-closed recovery evidence and exact cleanup.",
     "unlocks": [
-      "Resume Raisa with a risk-classified provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8.",
-      "Use the pre-edit baseline and post-freeze change-family union instead of reflexively rerunning every historical gate.",
-      "Measure actual tranche duration and correction yield so later evidence can tune the policy without self-modification."
+      "Freeze a provider-free disposable PostgreSQL behavior/transaction rehearsal for the exact delete-confirm functions, triggers, authority fence, receipt and audit seam.",
+      "Exercise only authored-synthetic mutation, rollback, timeout and replay classifications before considering any mounted route.",
+      "Continue measuring the risk-weighted Ariadne protocol against real tranche duration and correction yield."
     ],
     "does_not_solve": [
-      "It does not prove a productivity gain until later tranches supply comparative timing and correction evidence.",
-      "It does not waive evidence for database behavior, authority, provider, credential, deployment, release or protected-ref boundaries.",
-      "It opens no Raisa runtime, route, migration execution, patient/product data, provider call, deployment, Pages or protected-ref movement."
+      "It does not prove trigger bodies, authority generation, grant mutation, receipt/audit writes, replay, rollback or real transaction ordering.",
+      "It does not prove concurrency, restart, unknown commit, RLS, capability provisioning, mounted route or UI behavior.",
+      "It opens no patient/product data, provider/credential activity, deployment, production, release, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/ariadne-risk-weighted-workflow-reform-plan.md",
-      "docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md",
-      "orchestration/harness_settings/risk_weighted_workflow.yaml",
-      "orchestration_harness/risk_weighted_workflow.py",
-      "scripts/ariadne_risk_weighted_workflow.py",
-      "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.json",
-      "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.json",
-      "tests/test_ariadne_risk_weighted_workflow.py",
-      "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-308.md",
-      "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
-      "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md"
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-profile.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-result.json",
+      "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md"
     ]
   },
   "decision_horizon": [
@@ -3580,9 +3603,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold lineage.",
-        "After Yuri resumes, prove only this exact migration in a provider-free disposable PostgreSQL parse/catalogue rehearsal.",
-        "Keep behavior, provisioning, routes, product data, providers and protected integration separately gated."
+        "Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold/parse-catalogue lineage.",
+        "Prove only exact delete-confirm trigger and transaction behavior next in a provider-free disposable PostgreSQL rehearsal.",
+        "Keep concurrency/restart, provisioning, routes, product data, providers and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -5253,6 +5276,7 @@
     }
   ],
   "map_limits": [
+    "The accepted delete-confirm parse/catalogue rehearsal proves empty-instance PostgreSQL 16 installation and representation only, not trigger, authority, receipt/audit, replay, rollback, concurrency, restart, route or product behavior.",
     "The accepted delete-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, capability provisioning, route behavior or product command safety.",
     "The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.",
     "The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.",

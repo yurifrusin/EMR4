@@ -1,0 +1,115 @@
+{
+  "schema_version": "ariadne.risk_weighted_tranche_profile.v1",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+  "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+  "source_tree": "5c9d5a8c5afa37df1134a3b9fd9659edb2802164",
+  "declared_tier": "tier_2_authority_runtime",
+  "change_signals": {
+    "docs_only": false,
+    "unmounted": false,
+    "provider_free_source_edit": true,
+    "workflow_policy_change": false,
+    "database_runtime": true,
+    "authority_or_security_contract": true,
+    "executable_tool": true,
+    "network_capability": false,
+    "operational_product_derived_data": false,
+    "migration_representation": true,
+    "migration_execution": true,
+    "product_command_or_write": false,
+    "patient_or_clinical_data": false,
+    "occupied_provider_call": false,
+    "credentials_or_iam": false,
+    "deployment_production_release_pages": false,
+    "protected_ref_movement": false
+  },
+  "change_families": [
+    "harness",
+    "schema",
+    "semantic_test"
+  ],
+  "semantic_bindings": [
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md", "kind": "contract"},
+    {"path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md", "kind": "contract"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json", "kind": "contract"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json", "kind": "schema"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json", "kind": "schema"},
+    {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py", "kind": "source"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py", "kind": "semantic_test"},
+    {"path": "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py", "kind": "semantic_test"}
+  ],
+  "volatile_bindings": [
+    {"path": "orchestration/continuity/ariadne-active-operation-latch/current.json", "kind": "latch_snapshot"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/baseline-fast-profile.json", "kind": "receipt"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/semantic-freeze.json", "kind": "receipt"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json", "kind": "receipt"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json", "kind": "receipt"},
+    {"path": "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-preplanning-receipt.json", "kind": "receipt"},
+    {"path": "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-preintegration-receipt.json", "kind": "receipt"},
+    {"path": "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-pre-verifier-acceptance-receipt.json", "kind": "receipt"},
+    {"path": "orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json", "kind": "receipt"},
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md", "kind": "generated_closeout"},
+    {"path": "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md", "kind": "mailbox_message"},
+    {"path": "AGENTS.md", "kind": "baton_prose"}
+  ],
+  "baseline": {
+    "fingerprint_sha256": "sha256:e9ad5a2dcd54d771b36d9c244a825ef1e39c414601f25abce53b0e09f0abe4ac",
+    "result": "passed",
+    "known_failure_ids": [],
+    "captured_before_first_edit": true
+  },
+  "semantic_freeze": {
+    "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+    "source_tree": "5c9d5a8c5afa37df1134a3b9fd9659edb2802164",
+    "semantic_bindings_sha256": "sha256:5124cb6687d952259f908f65ed442e1cb11f962555b6ff6b1be1c45ebb7ccf95",
+    "toolchain_sha256": "sha256:b2b9b207aaf40a6071fe39b93a9508fd139ff3c3bce4862ef8228ae4d3174b98",
+    "focused_gate_results": {
+      "owned_tests_25": "passed",
+      "focused_union_155": "passed",
+      "ruff": "passed",
+      "python_compilation": "passed",
+      "json_and_json_schema": "passed",
+      "git_whitespace": "passed",
+      "canonical_fast_profile_196": "passed"
+    }
+  },
+  "post_freeze_change_families": [
+    "verifier_command_manifest",
+    "documentation_or_closeout_prose",
+    "continuity_compass_baton_metadata",
+    "receipt_runtime_state"
+  ],
+  "configured_continuation_events": [
+    "five_source_rehydration_at_plan_admission",
+    "five_source_rehydration_at_integration",
+    "five_source_rehydration_at_verifier_admission"
+  ],
+  "threat_ids": [
+    "RWW-001", "RWW-002", "RWW-003", "RWW-004", "RWW-005", "RWW-006",
+    "RWW-007", "RWW-008", "RWW-009", "RWW-010", "RWW-011", "RWW-012",
+    "RWW-013", "RWW-014", "RWW-015", "RWW-016", "RWW-017", "RWW-018"
+  ],
+  "mutation_count": 80,
+  "review_triggers": {
+    "new_authority_or_security_boundary": false,
+    "prior_substantive_rejection": false,
+    "ambiguous_hard_boundary": false,
+    "explicit_risk_trigger": true
+  },
+  "parallelism_plan": {
+    "deepseek_lane": "bounded_mechanical_implementation",
+    "gemini_lane": "single_final_veto",
+    "native_lane": "declined"
+  },
+  "capability": "provider_free_disposable_postgresql_delete_confirm_empty_instance_parse_and_exact_catalogue_representation",
+  "closed_surfaces": [
+    "database behavior grant mutation and product rows",
+    "mounted routes public API UI and product commands",
+    "patient clinical product or protected data",
+    "providers ADC credentials IAM browser and external network",
+    "deployment production release Pages and protected refs"
+  ],
+  "place_in_raisa": "Physical representability evidence beneath the unmounted Reception One cancellation authority kernel",
+  "next_tranche": "provider-free disposable PostgreSQL delete-confirm behavior and transaction rehearsal",
+  "attention_status": "green"
+}

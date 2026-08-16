@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 301 / Compass 283. Ariadne now admits tranches through four derived risk tiers, a pre-edit baseline, semantic freeze, targeted post-freeze reruns, zero-or-one independent final veto and protected deterministic closeout rendering. The workflow review pause is resolved; the next safe Raisa direction is the provider-free disposable PostgreSQL parse/catalogue rehearsal of the unmounted delete-confirm scaffold.
+> EMR4 is at Continuity 302 / Compass 284. Exact delete-confirm migration x3y4z5a6b7c8 now passes empty-instance PostgreSQL 16 installation and closed catalogue representability with exact cleanup. Database behavior, product rows and routes remain closed; the next safe direction is a provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal.
 
 ## North star
 
@@ -372,26 +372,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Exact mappings, inert migration, canonical receipt helpers and the ordered transaction seam pass as an unmounted scaffold. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-design-architecture`.
 178. **Reduce Ariadne ceremony while preserving fail-closed evidence at the boundaries whose failure would materially change authority or truth — Ariadne risk-weighted workflow reform**
    Four derived tiers, baseline-first semantic freeze, targeted reruns, at most one independent final veto and protected closeout generation pass at exact reviewed source 51866ce084c33fce600b792c66b180927658ed9e. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold`.
+179. **Prove the exact cancellation scaffold is physically representable in PostgreSQL before admitting any mutation behavior — Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal**
+   Migration x3y4z5a6b7c8 installs atomically over empty synthetic prerequisites and its exact columns, constraints, index, functions, triggers, head and zero-row state pass with exact cleanup. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold`.
 
 ## Current position
 
-**Ariadne now scales evidence effort to the actual tranche risk while retaining hard fail-closed boundaries — Ariadne risk-weighted workflow reform**
+**The cancellation authority scaffold is now physically represented in PostgreSQL but remains behaviorally and operationally closed — Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal**
 
-**Why this proof came next:** The workflow-efficiency pause found that repeated full-profile and reviewer ceremony could be replaced by derived risk, exact baseline/freeze bindings and change-family-targeted reruns without weakening authority controls.
+**Why this proof came next:** The unmounted source scaffold was already accepted, so empty-instance parse/catalogue proof was the narrow dependency before any trigger or transaction behavior could be trusted.
 
-The accepted control plane derives four tiers, refuses tier lowering, reuses only exact canonical evidence, permits at most one independent final veto and blocks protected closeout write targets.
+One networkless tmpfs PostgreSQL 16 installation proves the exact migration catalogue shape and zero-row state, with immutable fail-closed recovery evidence and exact cleanup.
 
 ### What this unlocks
 
-- Resume Raisa with a risk-classified provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8.
-- Use the pre-edit baseline and post-freeze change-family union instead of reflexively rerunning every historical gate.
-- Measure actual tranche duration and correction yield so later evidence can tune the policy without self-modification.
+- Freeze a provider-free disposable PostgreSQL behavior/transaction rehearsal for the exact delete-confirm functions, triggers, authority fence, receipt and audit seam.
+- Exercise only authored-synthetic mutation, rollback, timeout and replay classifications before considering any mounted route.
+- Continue measuring the risk-weighted Ariadne protocol against real tranche duration and correction yield.
 
 ### What it does not solve
 
-- It does not prove a productivity gain until later tranches supply comparative timing and correction evidence.
-- It does not waive evidence for database behavior, authority, provider, credential, deployment, release or protected-ref boundaries.
-- It opens no Raisa runtime, route, migration execution, patient/product data, provider call, deployment, Pages or protected-ref movement.
+- It does not prove trigger bodies, authority generation, grant mutation, receipt/audit writes, replay, rollback or real transaction ordering.
+- It does not prove concurrency, restart, unknown commit, RLS, capability provisioning, mounted route or UI behavior.
+- It opens no patient/product data, provider/credential activity, deployment, production, release, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -481,9 +483,9 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold lineage.
-- After Yuri resumes, prove only this exact migration in a provider-free disposable PostgreSQL parse/catalogue rehearsal.
-- Keep behavior, provisioning, routes, product data, providers and protected integration separately gated.
+- Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold/parse-catalogue lineage.
+- Prove only exact delete-confirm trigger and transaction behavior next in a provider-free disposable PostgreSQL rehearsal.
+- Keep concurrency/restart, provisioning, routes, product data, providers and protected integration separately gated.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
 
@@ -672,6 +674,7 @@ Prerequisites:
 
 ## Map limits
 
+- The accepted delete-confirm parse/catalogue rehearsal proves empty-instance PostgreSQL 16 installation and representation only, not trigger, authority, receipt/audit, replay, rollback, concurrency, restart, route or product behavior.
 - The accepted delete-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, capability provisioning, route behavior or product command safety.
 - The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.
 - The accepted delete-confirm physical design proves a closed architecture, not executable DDL, PostgreSQL behavior, ORM/service wiring, capability provisioning, response transition or a mounted route.
@@ -1170,6 +1173,8 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md`
+- `docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
+- `docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan-closeout.md`
@@ -1437,6 +1442,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-concurrency-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-threat-model-delta.md`
@@ -1557,6 +1563,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-representability-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-retry-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
@@ -1752,6 +1759,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json`
@@ -2191,6 +2199,11 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-profile.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-result.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence-admission-replay-recovery-pass.json`
@@ -2660,6 +2673,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md`
+- `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2692,6 +2706,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py`
 - `scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
+- `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
@@ -2773,6 +2788,8 @@ Prerequisites:
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_cf_d2_event_cue_parse_catalogue_rehearsal.py`
+- `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py`
+- `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py`
@@ -2836,4 +2853,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 283; continuity graph revision 301._
+_Compass map revision 284; continuity graph revision 302._

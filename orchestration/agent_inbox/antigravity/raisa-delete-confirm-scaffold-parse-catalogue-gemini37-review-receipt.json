@@ -1,0 +1,137 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-catalogue-d45ac8ed",
+  "branch": "codex/review-delete-confirm-catalogue-d45ac8ed",
+  "head_before": "d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8",
+  "head_after": "d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "cc54fbfa1467be03b967c09d8a2c20c23c0a989f9d0e790a06bb02dff48b44d0",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review: Delete-Confirm Parse/Catalogue Rehearsal\n\n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-catalogue-d45ac8ed`  \n**Branch:** `codex/review-delete-confirm-catalogue-d45ac8ed`  \n**Evidence Descendant HEAD:** `d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8`  \n**Evidence Descendant Tree:** `cad8f4bc48be66a060d57274d48f8bfbea4eeb73`  \n**Exact Semantic Source:** `f695ddfd156bca4db6298fc54dcfd40aa9d7aa48`  \n**Frozen Plan Source:** `38f2fbb054736cbd63627daea6951d676907461c`  \n**Model & Effort:** `gemini-3.7-flash-high` at `high`  \n**Evidence Label:** `authored_synthetic_provider_free_disposable_postgresql_parse_catalogue`  \n\n---\n\n### Invariant and Evidence Verification\n\n1. **Migration Source and Lowering:**  \n   Migration `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py` hash matches exact `e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb`. Offline lowering is bounded to `w2x3y4z5a6b7:x3y4z5a6b7c8` using inert `127.0.0.1:1` URL with single-transaction psql installation.\n2. **Prerequisite and Table Isolation:**  \n   Only 4 empty synthetic prerequisite tables (`users`, `appointment_command_idempotency`, `appointment_audit_log`, `alembic_version`) are created. No `appointments` relation, product row, or behavior fixture exists. Zero-row counts for users, grants, idempotency, and audit tables remain verified.\n3. **Docker Containment:**  \n   Docker profile specifies local `default` context, ambient endpoint variables stripped, image `postgres:16-bookworm` with `--pull=never`, `--network=none`, no exposed ports, tmpfs storage at `/var/lib/postgresql/data`, bounded resources (1 CPU, 512 MiB, 128 pids), and no restart policy.\n4. **Lifecycle and Cleanup:**  \n   240s total timeout budget with 3x30s cleanup reserve, container ownership reverification before forced deletion, and post-removal exact-ID absence verification.\n5. **Catalogue and Trigger Invariants:**  \n   Closed catalogue inspection verifies 12 columns, 7 constraints, 1 index (`ix_user_capability_grants_user`), 3 PL/pgSQL functions (`emr4_user_authority_generation_guard`, `emr4_user_capability_grant_generation_guard`, `emr4_reject_user_capability_grant_update`), 3 row triggers, 0 unexpected functions/triggers in `emr4_user_` namespace, and Alembic version `x3y4z5a6b7c8`.\n6. **Fail-Closed Evidence Schema:**  \n   Both immutable failure evidence (`provider-free-disposable-postgresql-failure-evidence.json`) and pass evidence (`provider-free-disposable-postgresql-evidence.json`) validate against `provider-free-disposable-postgresql-evidence.schema.json`.\n7. **Representation Envelope & API Spine:**  \n   Execution is strictly representation-only. OpenAPI command authority remains unchanged, GraphQL read-only, events non-authoritative. No product/patient/clinical data, provider credentials/IAM, external network, deployment, or protected refs were touched.\n\nAll four manifest command checks (OWNED_TESTS, API_SPINE_TESTS, RUFF, WHITESPACE) executed and exited 0.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review: Delete-Confirm Parse/Catalogue Rehearsal\n\n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-catalogue-d45ac8ed`  \n**Branch:** `codex/review-delete-confirm-catalogue-d45ac8ed`  \n**Evidence Descendant HEAD:** `d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8`  \n**Evidence Descendant Tree:** `cad8f4bc48be66a060d57274d48f8bfbea4eeb73`  \n**Exact Semantic Source:** `f695ddfd156bca4db6298fc54dcfd40aa9d7aa48`  \n**Frozen Plan Source:** `38f2fbb054736cbd63627daea6951d676907461c`  \n**Model & Effort:** `gemini-3.7-flash-high` at `high`  \n**Evidence Label:** `authored_synthetic_provider_free_disposable_postgresql_parse_catalogue`  \n\n---\n\n### Invariant and Evidence Verification\n\n1. **Migration Source and Lowering:**  \n   Migration `alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py` hash matches exact `e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb`. Offline lowering is bounded to `w2x3y4z5a6b7:x3y4z5a6b7c8` using inert `127.0.0.1:1` URL with single-transaction psql installation.\n2. **Prerequisite and Table Isolation:**  \n   Only 4 empty synthetic prerequisite tables (`users`, `appointment_command_idempotency`, `appointment_audit_log`, `alembic_version`) are created. No `appointments` relation, product row, or behavior fixture exists. Zero-row counts for users, grants, idempotency, and audit tables remain verified.\n3. **Docker Containment:**  \n   Docker profile specifies local `default` context, ambient endpoint variables stripped, image `postgres:16-bookworm` with `--pull=never`, `--network=none`, no exposed ports, tmpfs storage at `/var/lib/postgresql/data`, bounded resources (1 CPU, 512 MiB, 128 pids), and no restart policy.\n4. **Lifecycle and Cleanup:**  \n   240s total timeout budget with 3x30s cleanup reserve, container ownership reverification before forced deletion, and post-removal exact-ID absence verification.\n5. **Catalogue and Trigger Invariants:**  \n   Closed catalogue inspection verifies 12 columns, 7 constraints, 1 index (`ix_user_capability_grants_user`), 3 PL/pgSQL functions (`emr4_user_authority_generation_guard`, `emr4_user_capability_grant_generation_guard`, `emr4_reject_user_capability_grant_update`), 3 row triggers, 0 unexpected functions/triggers in `emr4_user_` namespace, and Alembic version `x3y4z5a6b7c8`.\n6. **Fail-Closed Evidence Schema:**  \n   Both immutable failure evidence (`provider-free-disposable-postgresql-failure-evidence.json`) and pass evidence (`provider-free-disposable-postgresql-evidence.json`) validate against `provider-free-disposable-postgresql-evidence.schema.json`.\n7. **Representation Envelope & API Spine:**  \n   Execution is strictly representation-only. OpenAPI command authority remains unchanged, GraphQL read-only, events non-authoritative. No product/patient/clinical data, provider credentials/IAM, external network, deployment, or protected refs were touched.\n\nAll four manifest command checks (OWNED_TESTS, API_SPINE_TESTS, RUFF, WHITESPACE) executed and exited 0.",
+    "command_results": [
+      {
+        "id": "OWNED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "API_SPINE_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "38f2fbb054736cbd63627daea6951d676907461c",
+          "d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "bf9225272aab3fc6a5894a9ca05226eb43ef47b2bd8ddb60b3d2700d002f6fa1",
+  "command_results": [
+    {
+      "id": "OWNED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "38f2fbb054736cbd63627daea6951d676907461c",
+        "d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

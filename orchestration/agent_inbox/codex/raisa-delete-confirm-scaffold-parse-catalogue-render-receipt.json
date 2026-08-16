@@ -1,0 +1,13 @@
+{
+  "artifacts": [
+    "closeout",
+    "sol_acceptance",
+    "yuri_summary",
+    "continuity_payload",
+    "compass_payload"
+  ],
+  "authority_boundary": "no_authority_source_modified",
+  "schema_version": "ariadne.risk_weighted_render.v1",
+  "status": "rendered",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal"
+}

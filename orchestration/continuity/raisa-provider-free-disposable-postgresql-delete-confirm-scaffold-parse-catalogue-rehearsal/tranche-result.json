@@ -1,0 +1,136 @@
+{
+  "schema_version": "ariadne.risk_weighted_tranche_result.v1",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+  "profile_sha256": "sha256:1bd66b4dfba3bc4b2cd0b998d4b0b244e88372593778abe5dc9562c4d676a14b",
+  "classified_tier": "tier_2_authority_runtime",
+  "decision": "pass",
+  "baseline": {
+    "fingerprint_sha256": "sha256:e9ad5a2dcd54d771b36d9c244a825ef1e39c414601f25abce53b0e09f0abe4ac",
+    "result": "passed",
+    "known_failure_ids": [],
+    "captured_before_first_edit": true
+  },
+  "semantic_freeze": {
+    "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+    "source_tree": "5c9d5a8c5afa37df1134a3b9fd9659edb2802164",
+    "semantic_bindings_sha256": "sha256:5124cb6687d952259f908f65ed442e1cb11f962555b6ff6b1be1c45ebb7ccf95",
+    "toolchain_sha256": "sha256:b2b9b207aaf40a6071fe39b93a9508fd139ff3c3bce4862ef8228ae4d3174b98",
+    "focused_gate_results": {
+      "owned_tests_25": "passed",
+      "focused_union_155": "passed",
+      "ruff": "passed",
+      "python_compilation": "passed",
+      "json_and_json_schema": "passed",
+      "git_whitespace": "passed",
+      "canonical_fast_profile_196": "passed"
+    }
+  },
+  "deterministic_gates": [
+    {
+      "id": "GATE-FOCUSED-SEMANTIC",
+      "category": "focused_semantic_gates",
+      "result": "passed",
+      "covers": ["RWW-001", "RWW-002", "RWW-003", "RWW-004", "RWW-005", "RWW-006", "RWW-007", "RWW-008", "RWW-009", "RWW-010", "RWW-011", "RWW-012", "RWW-016", "RWW-018"]
+    },
+    {
+      "id": "GATE-CANONICAL-FINAL",
+      "category": "canonical_final_profile",
+      "result": "passed",
+      "covers": ["RWW-003", "RWW-004", "RWW-005", "RWW-006", "RWW-016"]
+    },
+    {
+      "id": "GATE-MANIFEST-VALIDATION",
+      "category": "manifest_validation",
+      "result": "passed",
+      "covers": ["RWW-013", "RWW-014", "RWW-016"]
+    },
+    {
+      "id": "GATE-VERIFIER-ROOT-PREFLIGHT",
+      "category": "verifier_worktree_path_preflight",
+      "result": "passed",
+      "covers": ["RWW-013", "RWW-014"]
+    },
+    {
+      "id": "GATE-RENDERER-METADATA",
+      "category": "document_metadata_link_whitespace",
+      "result": "passed",
+      "covers": ["RWW-005", "RWW-015"]
+    },
+    {
+      "id": "GATE-CONTINUITY-COMPASS-BATON",
+      "category": "continuity_compass_baton",
+      "result": "passed",
+      "covers": ["RWW-004", "RWW-017"]
+    },
+    {
+      "id": "GATE-RECEIPT-PREFLIGHT",
+      "category": "receipt_preflight",
+      "result": "passed",
+      "covers": ["RWW-010", "RWW-017"]
+    }
+  ],
+  "required_rerun": [
+    "continuity_compass_baton",
+    "document_metadata_link_whitespace",
+    "receipt_preflight",
+    "manifest_validation",
+    "verifier_worktree_path_preflight"
+  ],
+  "review": {
+    "required_final_vetoes": 1,
+    "final_vetoes": [
+      {
+        "veto_id": "GEMINI-37-DELETE-CATALOGUE-D45AC8ED",
+        "reviewer_lane": "gemini_single_final_veto",
+        "decision": "pass"
+      }
+    ]
+  },
+  "canonical_pass_reuse": {
+    "reused": false,
+    "fingerprint_sha256": "sha256:3b014ee14a48e70e673bf6b0956f39f95b92c601595368943bcc4ae5e4018a44",
+    "exact": true
+  },
+  "continuation_receipts": [
+    {
+      "event": "five_source_rehydration_at_plan_admission",
+      "receipt_sha256": "sha256:4b3136fd51521470ce985bd23cf6634b1ba34c440bf6fe7b3685fcd2d1856545"
+    },
+    {
+      "event": "five_source_rehydration_at_integration",
+      "receipt_sha256": "sha256:d1ca62a29b93971de90943669443ba77302c8cc8a2c0d432f40235b5aa289dc2"
+    },
+    {
+      "event": "five_source_rehydration_at_verifier_admission",
+      "receipt_sha256": "sha256:cc54fbfa1467be03b967c09d8a2c20c23c0a989f9d0e790a06bb02dff48b44d0"
+    }
+  ],
+  "incidents": [],
+  "deferred_tail": [],
+  "parallelism": {
+    "planned": {
+      "deepseek_lane": "bounded_mechanical_implementation",
+      "gemini_lane": "single_final_veto",
+      "native_lane": "declined"
+    },
+    "actual": {
+      "deepseek_lane": "bounded_mechanical_implementation",
+      "gemini_lane": "single_final_veto",
+      "native_lane": "declined"
+    },
+    "planned_vs_actual": "exact"
+  },
+  "capability": "provider_free_disposable_postgresql_delete_confirm_empty_instance_parse_and_exact_catalogue_representation",
+  "technical_result": "Exact migration x3y4z5a6b7c8 installs atomically over four empty authored-synthetic prerequisite relations in one local networkless tmpfs PostgreSQL 16 container; 12 columns, seven constraints, one index, three functions, three triggers, exact Alembic head, zero unexpected family objects and four zero-row assertions match, with exact cleanup. Eighty hostile mutations, 25 owned tests, the 155-test focused union, the canonical 196-test profile and one clean Gemini 3.7 Flash/high final veto pass.",
+  "closed_surfaces": [
+    "database behavior grant mutation and product rows",
+    "mounted routes public API UI and product commands",
+    "patient clinical product or protected data",
+    "providers ADC credentials IAM browser and external network",
+    "deployment production release Pages and protected refs"
+  ],
+  "issues": [],
+  "place_in_raisa": "Physical representability evidence beneath the unmounted Reception One cancellation authority kernel",
+  "next_tranche": "provider-free disposable PostgreSQL delete-confirm behavior and transaction rehearsal",
+  "attention_status": "green"
+}

@@ -1,0 +1,8 @@
+{
+  "classified_tier": "tier_2_authority_runtime",
+  "decision": "pass",
+  "profile_sha256": "sha256:1bd66b4dfba3bc4b2cd0b998d4b0b244e88372593778abe5dc9562c4d676a14b",
+  "reasons": [],
+  "schema_version": "ariadne.risk_weighted_tranche_result.v1",
+  "tranche_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal"
+}

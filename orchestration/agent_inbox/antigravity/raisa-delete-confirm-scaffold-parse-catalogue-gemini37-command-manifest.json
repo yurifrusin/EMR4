@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "OWNED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+      ]
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-catalogue-d45ac8ed/tests/test_api_spine_artifacts.py"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+      ]
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "38f2fbb054736cbd63627daea6951d676907461c",
+        "d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8"
+      ]
+    }
+  ]
+}

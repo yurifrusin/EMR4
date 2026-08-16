@@ -8,9 +8,11 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 NODE_ID = (
-    "ariadne-risk-weighted-workflow-reform"
+    "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal"
 )
-SOURCE_HEAD = "51866ce084c33fce600b792c66b180927658ed9e"
+SOURCE_HEAD = "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48"
+EVIDENCE_HEAD = "d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8"
+RISK_REFORM_SOURCE_HEAD = "51866ce084c33fce600b792c66b180927658ed9e"
 SCAFFOLD_SOURCE_HEAD = "843769b415597f4545663d78044eaaad303c7692"
 HARNESS_NODE_ID = (
     "ariadne-provider-free-continuity-journal-and-refinement-promotion-safeguards"
@@ -48,15 +50,15 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 301
+    assert graph["graph_revision"] == 302
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 283
-    assert compass["source_graph_revision"] == 301
+    assert compass["map_revision"] == 284
+    assert compass["source_graph_revision"] == 302
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
-def test_live_baton_rows_accept_reform_and_resume_narrow_product_work() -> None:
+def test_live_baton_rows_accept_catalogue_and_resume_narrow_product_work() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
@@ -64,19 +66,24 @@ def test_live_baton_rows_accept_reform_and_resume_narrow_product_work() -> None:
     next_work = _table_row(text, "Next implementation")
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     reform_acceptance = _table_row(text, "Ariadne risk-weighted workflow reform acceptance")
-
-    assert "Continuity 301 / Compass 283" in current
-    assert "ariadne_risk_weighted_workflow_reform_pass" in current
+    assert "Continuity 302 / Compass 284" in current
+    assert (
+        "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_"
+        "parse_catalogue_rehearsal_pass"
+    ) in current
     assert SOURCE_HEAD in current
-    assert "121 focused tests" in current.lower()
+    assert EVIDENCE_HEAD in current
+    assert "eighty hostile mutations" in current.lower()
     assert "canonical 196-test profile" in current
-    assert "No Raisa runtime or protected boundary was opened" in current
+    assert "proves representation only" in current.lower()
     assert "gemini 3.7 flash/high" in current.lower()
+    assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert SOURCE_HEAD in reform_relation
+    assert EVIDENCE_HEAD in reform_relation
     assert "risk_weighted_workflow.yaml" in reform_acceptance
     assert SCAFFOLD_SOURCE_HEAD in product
-    assert "No migration or SQL ran" in product
-    assert "no database or route opened" in product
+    assert SOURCE_HEAD in product
+    assert "migration behavior, product rows and routes remain unadmitted" in product.lower()
     assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
     assert READINESS_SOURCE_HEAD in relation
@@ -117,11 +124,10 @@ def test_live_baton_rows_accept_reform_and_resume_narrow_product_work() -> None:
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free disposable PostgreSQL parse/catalogue rehearsal" in next_work
-    assert "workflow-efficiency pause is resolved" in next_work
+    assert "provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal" in next_work
     assert "standing uninterrupted-development authority" in next_work
-    assert "x3y4z5a6b7c8" in next_work
-    assert "Behavior" in next_work
+    assert "authority-generation" in next_work
+    assert "receipt" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected refs remain closed" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
@@ -160,10 +166,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free disposable postgresql parse/catalogue rehearsal",
-        "workflow-efficiency pause is resolved",
+        "provider-free disposable postgresql delete-confirm behavior/transaction rehearsal",
         "standing uninterrupted-development authority",
-        "behavior",
+        "concurrency/restart/unknown-commit",
         "mounted routes",
         "ui",
         "docs/branding/",

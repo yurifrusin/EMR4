@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 301,
+  "graph_revision": 302,
   "harvests": [],
   "nodes": [
     {
@@ -20547,9 +20547,100 @@
         "The reform does not waive explicit evidence at authority, database, provider, credential, deployment, release or protected-ref boundaries.",
         "Raisa's next disposable PostgreSQL parse/catalogue rehearsal remains a separate product-evidence tranche."
       ]
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+      "title": "Provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-16T01:28:10Z",
+      "updated_at": "2026-08-16T01:28:10Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f695ddfd156bca4db6298fc54dcfd40aa9d7aa48",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The accepted evidence is provider-free, authored-synthetic and restricted to one owned networkless tmpfs PostgreSQL 16 container.",
+          "Exact migration x3y4z5a6b7c8 installed atomically over minimum empty prerequisites and produced the closed expected catalogue representation.",
+          "No behavior probe or product row ran; route, API, UI and product command authority remain closed.",
+          "Exact cleanup passed and no provider, credential, patient/product data, deployment, Pages or protected ref was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-scaffold-parse-catalogue-rehearsal",
+          "source": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept exact empty-instance PostgreSQL 16 installation and catalogue representability, then proceed to a separately bounded behavior/transaction rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "The exact migration installs with one psql single transaction after offline lowering from w2x3y4z5a6b7 to x3y4z5a6b7c8.",
+        "Twelve columns, seven constraints, one index, three functions, three triggers and the exact Alembic head match the closed contract.",
+        "Users, capability grants, idempotency and audit relations remain at zero rows, with no appointments relation or behavior fixture.",
+        "The first PostgreSQL presentation mismatch failed closed and cleaned up; the narrow matcher correction reran focused and canonical gates before the passing occupied attempt.",
+        "Eighty hostile mutations, 25 owned tests, the 155-test focused union, the canonical 196-test profile and one clean Gemini 3.7 Flash/high veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/baseline-fast-profile.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/semantic-freeze.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-profile.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-result.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-scaffold-parse-catalogue-worker-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-preintegration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-risk-weighted-admission.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py"
+        ],
+        "artifacts": [
+          "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Trigger bodies, authority generation, grant insert/delete/update and overflow behavior have not run.",
+        "Private receipt, attributable audit, replay, rollback, timeout and ordered transaction behavior remain unproved.",
+        "Concurrency, restart, unknown commit, RLS and mounted route behavior remain separate later gates.",
+        "Capability provisioning, public API/UI, patient/product data, providers, credentials, deployment, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T00:05:15Z"
+  "updated_at": "2026-08-16T01:28:10Z"
 }
