@@ -72,7 +72,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "executable", "image_reference", "pull_policy", "network_internal",
+        "executable", "context", "image_reference", "pull_policy", "network_internal",
         "network_name_prefix", "container_name_prefix", "harness_label",
         "published_ports", "relay_host_ip", "relay_dynamic_host_port",
         "relay_container_executable", "relay_container_command",
@@ -86,6 +86,7 @@
       ],
       "properties": {
         "executable": {"const": "docker.exe"},
+        "context": {"const": "default"},
         "image_reference": {"const": "postgres:16-bookworm"},
         "pull_policy": {"const": "never"},
         "network_internal": {"const": true},

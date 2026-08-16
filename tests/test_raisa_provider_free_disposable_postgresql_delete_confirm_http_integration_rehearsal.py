@@ -154,7 +154,7 @@ def test_main_rejects_caller_selected_arguments(monkeypatch) -> None:
 def test_exact_lifecycle_markers_are_wired_in_order() -> None:
     source = Path(rehearsal.__file__).read_text(encoding="utf-8")
     markers = (
-        "contract_sources_and_134_mutations_verified",
+        "contract_sources_and_135_mutations_verified",
         "cached_image_verified",
         "owned_internal_network_verified",
         "owned_tmpfs_container_verified",
@@ -462,7 +462,7 @@ def test_failure_evidence_is_schema_closed_and_sanitized() -> None:
     evidence = rehearsal._failure_evidence(  # noqa: SLF001
         error,
         lifecycle=[
-            "contract_sources_and_134_mutations_verified",
+            "contract_sources_and_135_mutations_verified",
             "failed_scenario_dhi_s02_commit_failed",
         ],
         cleanup={"status": "cleanup_ownership_unverified", "object": "container"},

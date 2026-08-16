@@ -119,6 +119,7 @@ def test_plan_freezes_owned_paths_containment_and_twelve_scenarios() -> None:
 
 def test_contract_docker_profile_pins_exact_bounded_resources() -> None:
     profile = _load(CONTRACT)["docker_profile"]
+    assert profile["context"] == "default"
     assert profile["memory_bytes"] == 536870912
     assert profile["nano_cpus"] == 1000000000
     assert profile["pids_limit"] == 128
@@ -128,6 +129,10 @@ def test_contract_docker_profile_pins_exact_bounded_resources() -> None:
     assert profile["pull_policy"] == "never"
     assert profile["relay_container_executable"] == "bash"
     assert profile["relay_container_command"].startswith("exec 3<>/dev/tcp/127.0.0.1/5432")
+    psql_argv = rehearsal.catalogue._psql_argv(  # noqa: SLF001
+        "docker.exe", "0" * 64, profile
+    )
+    assert psql_argv[:4] == ["docker.exe", "--context", "default", "exec"]
 
 
 def test_threat_delta_freezes_fail_closed_controls() -> None:

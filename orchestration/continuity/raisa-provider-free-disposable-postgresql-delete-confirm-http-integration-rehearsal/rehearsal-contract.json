@@ -62,6 +62,7 @@
   ],
   "docker_profile": {
     "executable": "docker.exe",
+    "context": "default",
     "image_reference": "postgres:16-bookworm",
     "pull_policy": "never",
     "network_internal": true,

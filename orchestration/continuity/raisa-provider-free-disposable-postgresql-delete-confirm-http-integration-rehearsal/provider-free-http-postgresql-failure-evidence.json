@@ -1,0 +1,90 @@
+{
+  "schema_version": "raisa.delete_confirm_http_postgresql_integration_evidence.v1",
+  "result": "rehearsal_failed",
+  "evidence_label": "live_local_backend_postgres",
+  "data_posture": "provider_free_authored_synthetic_only",
+  "source_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+  "contract_sha256": "011855bd9827d00ad0d9c3db5873de1ee9165633e197079d24978669d6961efe",
+  "source_hashes": {
+    "app/dependencies.py": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc",
+    "app/main.py": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2",
+    "app/schemas/appointments.py": "ce7a9819e4947fb288c79009a08b7d9f2502b8d096ff5e2eb005796a250aee90",
+    "app/config.py": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e",
+    "app/services/auth_service.py": "c7380e744bc42be006b34546769b76eb3b8f010b8602513a64f3865c76c1f33c",
+    "app/services/appointment_delete_product_adapter.py": "a7e1702c61258acfb51f634883086ad5993c8ab63989eace9cfa1102b2532c59",
+    "app/services/appointment_delete_composition.py": "ed6a5e705808c71ecf4edcec837c6be2ec790660bf32a85357bda68c2159aa15",
+    "app/services/bernie_turn_evidence.py": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467",
+    "app/models/tenancy.py": "e411c816565bdddfbb25beca62439c5bba7a44a90e348cd7e9f4296a65fb65e2",
+    "app/models/appointments.py": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794",
+    "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py": "e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb",
+    "docs/api-spine/openapi/appointment-commands.yaml": "0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622",
+    "app/services/diary/confirm_actions.py": "7f4bdd108c3e0039d19341e76e1cf7eb8e491adaa1e5691b5590a59008a09989",
+    "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md": "c6a05ec770cd29adc7bc0316c92e94bbd45ff03610d4ef43194b9d45d6b64f82",
+    "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md": "90d42d80d06d1c173fde25b7da153173b195cbc118e672cac6746493ef0aa507",
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py": "b906e4029157b39058d7466dcaea772051df54815f6172abfe2f4e6c1b099306",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json": "99c88349cecbaeeec12b601e33615fb55e8bb7d71fcb764c3ca1a5f8939f0b0a",
+    "scripts/raisa_provider_free_status_confirm_http_route_convergence.py": "2463467bb45220bceead366735c320c751babf460803de75b230d39c1846c8ec",
+    "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md": "27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5",
+    "app/routers/appointments.py": "87a67fd718ac9233f6b1e089d708969749afda0124713e8621d542939f5d605f",
+    "app/services/appointment_delete_physical.py": "912735084eb5ac9fb8d62adfa4ad8568f17495a30a0a68829146fce11f8cba67",
+    "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py": "deee4f54ef89be06921e20b1392437230ba745426791932a1e71ee228aa9c51a",
+    "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py": "1e3c72b312f80689a43fe5252f4a1ddebf28ab0b03f70f03a0aa06ea2ea62590"
+  },
+  "implementation_hashes": {
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py": "1166915fa1460f3f99aec85bf1f411aed6edb0c72128b04b10b2b49b29b2f105",
+    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py": "38aaef424d1c0a73edced2f94577881fb8ef3240cdfc6d2063b5c140802e7d6b",
+    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py": "d74a4d21bd621d6362af8d834105877ed36fc6bedfaa1eb09373b4d6cc1520cf"
+  },
+  "hostile_mutations": {
+    "attempted": 134,
+    "rejected": 134,
+    "minimum_required": 120
+  },
+  "environment": {
+    "postgresql_major": 16,
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "network_internal": true,
+    "published_ports": false,
+    "storage": "container_local_tmpfs",
+    "host_transport": "fixed_in_process_ipv4_loopback_relay",
+    "transport": "fastapi_testclient_real_route",
+    "provider_calls": 0,
+    "product_rows": 0
+  },
+  "catalogue": {
+    "migration_head": "x3y4z5a6b7c8",
+    "application_role_superuser": false,
+    "application_role_bypass_rls": false,
+    "forced_rls_table_count": 8,
+    "selected_constraint_count": 6,
+    "selected_trigger_count": 4,
+    "transaction_context_local": true,
+    "two_connection_tenant_context_absent": false
+  },
+  "scenarios": [],
+  "aggregate": {
+    "scenario_count": 0,
+    "public_private_bytes_distinct": false,
+    "public_replay_bytes_identical": false,
+    "private_replay_bytes_identical": false,
+    "second_effect_count": 0,
+    "rollback_effect_count": 0
+  },
+  "lifecycle": [
+    "contract_sources_and_134_mutations_verified",
+    "cached_image_verified",
+    "owned_internal_network_verified",
+    "owned_tmpfs_container_verified",
+    "failed_keyerror_none",
+    "cleanup_verified"
+  ],
+  "cleanup": {
+    "status": "cleanup_verified",
+    "container_removed": true,
+    "network_removed": true,
+    "container_absent": true,
+    "network_absent": true
+  },
+  "claim_boundary": "Exact authored-synthetic provider-free delete-confirm HTTP/PostgreSQL integration over one disposable PostgreSQL 16 server; no UI, product data, raw DELETE, provider, deployment, production or protected-ref claim."
+}

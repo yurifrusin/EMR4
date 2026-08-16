@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 324
+    assert register["register_revision"] == 325
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 374)
+        f"AER-{index:04d}" for index in range(1, 375)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2577,7 +2577,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 373
+    assert report["incident_count"] == 374
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3614,19 +3614,19 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 324
-    assert report["incident_count"] == 373
+    assert report["register_revision"] == 325
+    assert report["incident_count"] == 374
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 260,
-        "harness": 44,
+        "harness": 45,
         "repository": 58,
         "transport": 11,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 59,
         "evidence_misreport": 52,
-        "harness_failure": 44,
+        "harness_failure": 45,
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
@@ -3634,7 +3634,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "transport_timeout": 11,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 106,
+        "accepted_candidate_changed": 107,
         "canonical_unchanged": 227,
         "untrusted_partial_worktree": 40,
     }
@@ -5907,6 +5907,23 @@ def test_aer_0373_repairs_stale_current_baton_consistency_expectations() -> None
     assert "Continuity 307 / Compass 289" in incident["observed_error"]
     assert "Continuity 308 / Compass 290" in incident["correction"]["action"]
     assert "same candidate" in incident["correction"]["prevention_control"]
+
+
+def test_aer_0374_repairs_missing_inherited_docker_context() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0374"
+    ]
+
+    assert incident["origin"] == "harness"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "harness_failure"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["causal_claim_level"] == "observation_only"
+    assert incident["status"] == "corrected"
+    assert "KeyError('context')" in incident["detection_method"]
+    assert "context=default" in incident["correction"]["action"]
+
 
 
 

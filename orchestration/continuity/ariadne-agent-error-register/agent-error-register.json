@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 324,
+  "register_revision": 325,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -14965,6 +14965,45 @@
         "evidence_paths": [
           "tests/test_current_baton_consistency.py",
           "docs/ariadne-agent-error-correction-register-revision-324.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0374",
+      "attempt_id": "raisa-delete-confirm-http-postgresql-occupied-run-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "delete-confirm-http-postgresql-harness",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_owned_disposable_postgresql16",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The frozen Docker profile must include every exact field required by the inherited accepted PostgreSQL helpers before the first owned container is opened.",
+      "observed_error": "The first occupied run failed before scenario execution with sanitized failed_keyerror_none because the HTTP rehearsal docker_profile omitted the inherited mandatory context field required by the delete-scaffold helper's docker exec argv builder.",
+      "detection_method": "The first run produced schema-valid failure evidence and verified cleanup. After an independent zero-resource postflight, one bounded traced diagnostic lifecycle localized KeyError('context') to catalogue._psql_argv during projection installation; that lifecycle also verified exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-325.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.inherited_docker_profile_required_context_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add exact context=default to the rehearsal contract and closed schema, bind it in deterministic validation, add one hostile mutation and assert that the inherited psql argv starts with docker.exe --context default exec before any rerun.",
+        "prevention_control": "Every harness that reuses an accepted Docker lifecycle helper must validate the complete helper-required profile key set and directly test the generated argv before occupied execution; schema acceptance alone is insufficient when the schema was independently re-declared.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.schema.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-325.md"
         ]
       },
       "status": "corrected"

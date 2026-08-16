@@ -87,7 +87,7 @@ PASS_RESULT = (
     "integration_rehearsal_pass"
 )
 EXPECTED_CONTRACT_DIGEST = (
-    "248ffec62392503fd8dd692fd47b00f581280a35d5945e2b34dec812484ae6dc"
+    "88034f0eae5ad1597e2f1ae43ae9d0d1ec1989df4151674f222fbd951821b775"
 )
 EXPECTED_SOURCE_HEAD = "341d89b9a70c85f54247de364baf842b84543c8d"
 EXPECTED_SCENARIOS = (
@@ -111,7 +111,7 @@ CLAIM_BOUNDARY = (
     "integration over one disposable PostgreSQL 16 server; no UI, product data, "
     "raw DELETE, provider, deployment, production or protected-ref claim."
 )
-HOSTILE_MUTATION_TARGET = 134
+HOSTILE_MUTATION_TARGET = 135
 EXPECTED_READ_ONLY_BINDING_COUNT = 19
 EXPECTED_EDITABLE_PRECONDITION_COUNT = 4
 EXPECTED_ACCEPTED_HTTP_SOURCE = "c7a01edd96ebabf3ea2c07be89a5b405c9629853"
@@ -286,6 +286,8 @@ def _validate_contract(value: dict[str, Any], *, require_digest: bool) -> None:
         raise RehearsalFailure("preflight", "read_only_binding_contract_mismatch")
     if value["docker_profile"]["network_name_prefix"] != EXPECTED_NETWORK_NAME_PREFIX:
         raise RehearsalFailure("preflight", "network_name_prefix_mismatch")
+    if value["docker_profile"]["context"] != "default":
+        raise RehearsalFailure("preflight", "docker_context_mismatch")
     if value["docker_profile"]["container_name_prefix"] != EXPECTED_CONTAINER_NAME_PREFIX:
         raise RehearsalFailure("preflight", "container_name_prefix_mismatch")
     if tuple(value["evidence_allowlist"]) != EXPECTED_EVIDENCE_ALLOWLIST:
@@ -340,6 +342,7 @@ def hostile_mutations_rejected(contract: dict[str, Any]) -> int:
         (("raw_delete_path",), "/api/v1/appointments/{id}"),
         (("minimum_hostile_mutations",), 119),
         (("docker_profile", "executable"), "podman.exe"),
+        (("docker_profile", "context"), "product"),
         (("docker_profile", "image_reference"), "postgres:latest"),
         (("docker_profile", "pull_policy"), "always"),
         (("docker_profile", "network_internal"), False),
@@ -1720,7 +1723,7 @@ def run_rehearsal() -> dict[str, Any]:
     started = time.monotonic()
     try:
         contract, source_hashes, implementation_hashes = verify_contract()
-        lifecycle.append("contract_sources_and_134_mutations_verified")
+        lifecycle.append("contract_sources_and_135_mutations_verified")
         profile = contract["docker_profile"]
         delete_contract = _load_json(delete_btr.CONTRACT_PATH)
         docker = shutil.which(profile["executable"]) or ""
