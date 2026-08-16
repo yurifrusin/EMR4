@@ -1,0 +1,137 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-behavior-49dd2aaa",
+  "branch": "codex/review-delete-confirm-behavior-49dd2aaa",
+  "head_before": "49dd2aaa72877adb844da4d0d5d5bb28039c90c8",
+  "head_after": "49dd2aaa72877adb844da4d0d5d5bb28039c90c8",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "01519bd7a02c756d33e3ebf3099be15af21456f8fe02c3a670e139e39a0b9690",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review\n\n**Evaluation Target:** Provider-free disposable PostgreSQL delete-confirm serial behavior and transaction rehearsal.\n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-behavior-49dd2aaa`\n**Candidate Branch:** `codex/review-delete-confirm-behavior-49dd2aaa`\n**Candidate HEAD:** `49dd2aaa72877adb844da4d0d5d5bb28039c90c8`\n**Parent Plan Source:** `2a5042f80941e2bd191999c430ff2517ba7e8cb2`\n**Model / Effort:** Gemini 3.7 Flash / High\n**Review Role:** Exactly one fresh independent Tier-2 veto\n\n---\n\n### Command Manifest Verification\n\nAll four structured argv commands in the bound command manifest executed in order with exit code 0:\n1. `OWNED_TESTS`: 43/43 tests passed across `test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py` and `test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py`.\n2. `API_SPINE_TESTS`: 36/36 tests passed in `tests/test_api_spine_artifacts.py`.\n3. `RUFF`: Linter checks passed cleanly on all owned rehearsal and test files with zero errors.\n4. `WHITESPACE`: `git diff --check` between parent `2a5042f80941e2bd191999c430ff2517ba7e8cb2` and candidate HEAD `49dd2aaa72877adb844da4d0d5d5bb28039c90c8` passed with zero whitespace or formatting anomalies.\n\n---\n\n### Invariant & Artifact Review\n\n1. **Candidate Construction vs. External Response Release Separation (AER-0355)**:\n   - In `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py`, `candidate_response_bytes` is maintained as transaction-local staging state.\n   - Assignment to `released_response_bytes` occurs strictly outside the context manager block (`with physical.delete_confirm_locked_transaction(...) as decision:`), inside the enclosing `try:` block.\n   - Any exception raised upon context manager exit (including `DeleteConfirmScaffoldIncomplete` on mismatched write sets or `OuterAbort` on outer-scope abortion) prevents execution from reaching `released_response_bytes = candidate_response_bytes`, ensuring `released_response_bytes` remains `None` and yielding zero disclosure evidence.\n   - Unit test `test_response_bytes_promote_only_after_successful_transaction_context_exit` explicitly validates this boundary across `new_command`, `replay`, `mismatched` (scaffold incomplete), and `abort_complete`.\n\n2. **Semantic Authority Counter Wrapper (AER-0353)**:\n   - The harness wraps `physical._authority_valid` with a counting wrapper that increments `authority_calls` per complete authority check invocation, independent of downstream SQL statement execution.\n   - The original callable `original_authority_valid` is saved before execution and unconditionally restored in `finally:`.\n   - Verified by AST inspection and unit tests `test_authority_call_counter_wraps_semantic_check_and_restores_in_finally` and `test_authority_call_counter_counts_early_and_complete_checks_without_leaking`.\n\n3. **Authority Groups (AUTH-S01 .. AUTH-S09)**:\n   - All nine database-owned authority generation and capability grant groups faithfully prove immutable generation initialization, qualifying trigger advancement, duplicate grant idempotency, grant deletion denial restoration, grant update rejection (SQLSTATE 55000), parent foreign key and constraint failure (SQLSTATE 23514 / 23503), overflow protection rollback (SQLSTATE 22003), and delete-then-insert capability reassignment.\n\n4. **Transaction Groups (TX-S01 .. TX-S11)**:\n   - All eleven transaction groups faithfully prove authority-first lock ordering (`user_for_share`, `appointment_for_update`, `grant_authority_check`, `idempotency_select_for_update`, etc.), two current authority checks, target-before-idempotency denial, exact private receipt/audit/appointment correlation, byte-exact replay, incomplete-set rollback, outer-abort rollback, and single cumulative wait budget exhaustion.\n\n5. **Containment, Cleanup, and Evidence Minimization**:\n   - The disposable environment strictly adhered to `--internal` network isolation, portless tmpfs PostgreSQL 16 containerization, and a fixed in-process IPv4 loopback relay.\n   - Post-execution cleanup verified the complete absence of owned containers and networks.\n   - Pass evidence `provider-free-behavior-transaction-evidence.json` conforms strictly to `provider-free-behavior-transaction-evidence.schema.json`, containing only digest, count, and categorical status records with no raw SQL, database credentials, secrets, or patient/clinical data.\n\n6. **Product Source Preservation & Scope Boundaries**:\n   - `app/services/appointment_delete_physical.py` is byte-identical at SHA-256 `8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533`.\n   - No models, migrations, routes, API Spine contracts, or UI files were modified.\n   - Serial unmounted behavior evidence remains bounded; no claim of concurrency, deployment, production readiness, or external provider authority is made.\n\n---\n\n### Conclusion\n\nThe candidate artifacts faithfully prove the frozen delete-confirm authority and transaction behaviors within the provider-free disposable PostgreSQL envelope, correctly enforce the separation between candidate construction and response release, and maintain all containment, cleanup, and evidence invariants.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review\n\n**Evaluation Target:** Provider-free disposable PostgreSQL delete-confirm serial behavior and transaction rehearsal.\n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-behavior-49dd2aaa`\n**Candidate Branch:** `codex/review-delete-confirm-behavior-49dd2aaa`\n**Candidate HEAD:** `49dd2aaa72877adb844da4d0d5d5bb28039c90c8`\n**Parent Plan Source:** `2a5042f80941e2bd191999c430ff2517ba7e8cb2`\n**Model / Effort:** Gemini 3.7 Flash / High\n**Review Role:** Exactly one fresh independent Tier-2 veto\n\n---\n\n### Command Manifest Verification\n\nAll four structured argv commands in the bound command manifest executed in order with exit code 0:\n1. `OWNED_TESTS`: 43/43 tests passed across `test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py` and `test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py`.\n2. `API_SPINE_TESTS`: 36/36 tests passed in `tests/test_api_spine_artifacts.py`.\n3. `RUFF`: Linter checks passed cleanly on all owned rehearsal and test files with zero errors.\n4. `WHITESPACE`: `git diff --check` between parent `2a5042f80941e2bd191999c430ff2517ba7e8cb2` and candidate HEAD `49dd2aaa72877adb844da4d0d5d5bb28039c90c8` passed with zero whitespace or formatting anomalies.\n\n---\n\n### Invariant & Artifact Review\n\n1. **Candidate Construction vs. External Response Release Separation (AER-0355)**:\n   - In `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py`, `candidate_response_bytes` is maintained as transaction-local staging state.\n   - Assignment to `released_response_bytes` occurs strictly outside the context manager block (`with physical.delete_confirm_locked_transaction(...) as decision:`), inside the enclosing `try:` block.\n   - Any exception raised upon context manager exit (including `DeleteConfirmScaffoldIncomplete` on mismatched write sets or `OuterAbort` on outer-scope abortion) prevents execution from reaching `released_response_bytes = candidate_response_bytes`, ensuring `released_response_bytes` remains `None` and yielding zero disclosure evidence.\n   - Unit test `test_response_bytes_promote_only_after_successful_transaction_context_exit` explicitly validates this boundary across `new_command`, `replay`, `mismatched` (scaffold incomplete), and `abort_complete`.\n\n2. **Semantic Authority Counter Wrapper (AER-0353)**:\n   - The harness wraps `physical._authority_valid` with a counting wrapper that increments `authority_calls` per complete authority check invocation, independent of downstream SQL statement execution.\n   - The original callable `original_authority_valid` is saved before execution and unconditionally restored in `finally:`.\n   - Verified by AST inspection and unit tests `test_authority_call_counter_wraps_semantic_check_and_restores_in_finally` and `test_authority_call_counter_counts_early_and_complete_checks_without_leaking`.\n\n3. **Authority Groups (AUTH-S01 .. AUTH-S09)**:\n   - All nine database-owned authority generation and capability grant groups faithfully prove immutable generation initialization, qualifying trigger advancement, duplicate grant idempotency, grant deletion denial restoration, grant update rejection (SQLSTATE 55000), parent foreign key and constraint failure (SQLSTATE 23514 / 23503), overflow protection rollback (SQLSTATE 22003), and delete-then-insert capability reassignment.\n\n4. **Transaction Groups (TX-S01 .. TX-S11)**:\n   - All eleven transaction groups faithfully prove authority-first lock ordering (`user_for_share`, `appointment_for_update`, `grant_authority_check`, `idempotency_select_for_update`, etc.), two current authority checks, target-before-idempotency denial, exact private receipt/audit/appointment correlation, byte-exact replay, incomplete-set rollback, outer-abort rollback, and single cumulative wait budget exhaustion.\n\n5. **Containment, Cleanup, and Evidence Minimization**:\n   - The disposable environment strictly adhered to `--internal` network isolation, portless tmpfs PostgreSQL 16 containerization, and a fixed in-process IPv4 loopback relay.\n   - Post-execution cleanup verified the complete absence of owned containers and networks.\n   - Pass evidence `provider-free-behavior-transaction-evidence.json` conforms strictly to `provider-free-behavior-transaction-evidence.schema.json`, containing only digest, count, and categorical status records with no raw SQL, database credentials, secrets, or patient/clinical data.\n\n6. **Product Source Preservation & Scope Boundaries**:\n   - `app/services/appointment_delete_physical.py` is byte-identical at SHA-256 `8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533`.\n   - No models, migrations, routes, API Spine contracts, or UI files were modified.\n   - Serial unmounted behavior evidence remains bounded; no claim of concurrency, deployment, production readiness, or external provider authority is made.\n\n---\n\n### Conclusion\n\nThe candidate artifacts faithfully prove the frozen delete-confirm authority and transaction behaviors within the provider-free disposable PostgreSQL envelope, correctly enforce the separation between candidate construction and response release, and maintain all containment, cleanup, and evidence invariants.",
+    "command_results": [
+      {
+        "id": "OWNED_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "API_SPINE_TESTS",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa",
+          "--timeout-seconds",
+          "180",
+          "--",
+          "-q",
+          "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa/tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "RUFF",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "WHITESPACE",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "2a5042f80941e2bd191999c430ff2517ba7e8cb2",
+          "49dd2aaa72877adb844da4d0d5d5bb28039c90c8"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "0cec151e14ac47ff75e59ade686ae67c66bcb18d659ac6f8854ea9b52f48f680",
+  "command_results": [
+    {
+      "id": "OWNED_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa/tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "API_SPINE_TESTS",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa",
+        "--timeout-seconds",
+        "180",
+        "--",
+        "-q",
+        "C:/Users/sarashera/EMR4-worktrees/review-delete-confirm-behavior-49dd2aaa/tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "WHITESPACE",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2a5042f80941e2bd191999c430ff2517ba7e8cb2",
+        "49dd2aaa72877adb844da4d0d5d5bb28039c90c8"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

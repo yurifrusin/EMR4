@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 284,
-  "updated_at": "2026-08-16T01:28:10Z",
-  "source_graph_revision": 302,
-  "orientation_statement": "EMR4 is at Continuity 302 / Compass 284. Exact delete-confirm migration x3y4z5a6b7c8 now passes empty-instance PostgreSQL 16 installation and closed catalogue representability with exact cleanup. Database behavior, product rows and routes remain closed; the next safe direction is a provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal.",
+  "map_revision": 285,
+  "updated_at": "2026-08-16T14:56:08.8155653+10:00",
+  "source_graph_revision": 303,
+  "orientation_statement": "EMR4 is at Continuity 303 / Compass 285. The exact serial unmounted delete-confirm authority and transaction seam now passes PostgreSQL 16 generation, denial, revocation, ordered atomic effect, replay, rollback and timeout evidence with complete disposable cleanup. Read-only route-convergence admission is next; route execution and product commands remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3399,38 +3399,80 @@
         "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "lineage_parent": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
+      "strategic_role": "Prove the exact delete-confirm authority and transaction seam against PostgreSQL before any route convergence is considered",
+      "outcome": "Nine authority and eleven transaction groups, exact cleanup and one independent final veto pass.",
+      "evidence": [
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-threat-model-delta.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-release-accounting-recovery-addendum.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/semantic-freeze.json",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-behavior-transaction-gemini37-final-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-309.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-behavior-transaction-rehearsal.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-closeout-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-gemini37-veto-predispatch-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal",
-    "strategic_role": "The cancellation authority scaffold is now physically represented in PostgreSQL but remains behaviorally and operationally closed",
-    "why_now": "The unmounted source scaffold was already accepted, so empty-instance parse/catalogue proof was the narrow dependency before any trigger or transaction behavior could be trusted.",
-    "outcome": "One networkless tmpfs PostgreSQL 16 installation proves the exact migration catalogue shape and zero-row state, with immutable fail-closed recovery evidence and exact cleanup.",
+    "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "strategic_role": "The unmounted delete-confirm authority and transaction seam is PostgreSQL-proved; route convergence remains unopened",
+    "why_now": "The exact physical catalogue already passed, permitting one isolated serial proof of the trigger and transaction behavior.",
+    "outcome": "Authority generation, default denial, revocation, ordered atomic appointment/audit/receipt effects, replay, rollback, timeout and exact cleanup pass.",
     "unlocks": [
-      "Freeze a provider-free disposable PostgreSQL behavior/transaction rehearsal for the exact delete-confirm functions, triggers, authority fence, receipt and audit seam.",
-      "Exercise only authored-synthetic mutation, rollback, timeout and replay classifications before considering any mounted route.",
-      "Continue measuring the risk-weighted Ariadne protocol against real tranche duration and correction yield."
+      "Run a provider-free read-only delete-confirm route-convergence admission review.",
+      "Inspect and classify only the exact route, dependency, adapter, kernel and transaction gaps.",
+      "Return an evidence-backed converge/block decision without editing, mounting or calling a route."
     ],
     "does_not_solve": [
-      "It does not prove trigger bodies, authority generation, grant mutation, receipt/audit writes, replay, rollback or real transaction ordering.",
-      "It does not prove concurrency, restart, unknown commit, RLS, capability provisioning, mounted route or UI behavior.",
-      "It opens no patient/product data, provider/credential activity, deployment, production, release, Pages or protected-ref movement."
+      "Mounted-route, adapter, real command, product-database or product-data safety.",
+      "Concurrency, restart, crash, unknown commit, retention, performance or production operations.",
+      "Provider/credential activity, patient/product data, watchers/events, deployment, release, Pages or protected-ref movement."
     ],
     "evidence": [
-      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md",
-      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-profile.json",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/tranche-result.json",
-      "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
-      "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py",
-      "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_plan.py",
-      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json",
-      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md"
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-threat-model-delta.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-release-accounting-recovery-addendum.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/semantic-freeze.json",
+      "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-behavior-transaction-gemini37-final-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-309.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-behavior-transaction-rehearsal.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-closeout-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-preexecution-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-pre-verifier-acceptance-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-gemini37-veto-predispatch-receipt.json"
     ]
   },
   "decision_horizon": [
@@ -3603,9 +3645,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Preserve the accepted source-owned-truth, conditional-command and delete-confirm design/scaffold/parse-catalogue lineage.",
-        "Prove only exact delete-confirm trigger and transaction behavior next in a provider-free disposable PostgreSQL rehearsal.",
-        "Keep concurrency/restart, provisioning, routes, product data, providers and protected integration separately gated."
+        "Preserve the accepted source-owned-truth, conditional-command and delete-confirm physical/behavior lineage.",
+        "Run a provider-free read-only delete-confirm route-convergence admission review next.",
+        "Keep route edits/calls, product data/commands, concurrency, providers and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -4431,7 +4473,31 @@
         "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-postcompaction-receipt.json",
         "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-retry-pre-verifier-acceptance-receipt.json",
         "docs/ariadne-agent-error-correction-register-revision-302.md",
-        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md"
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-threat-model-delta.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md",
+        "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-threat-model-delta.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-release-accounting-recovery-addendum.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/semantic-freeze.json",
+        "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-behavior-transaction-gemini37-final-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-309.md",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-behavior-transaction-rehearsal.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-closeout-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-preexecution-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-gemini37-veto-predispatch-receipt.json"
       ]
     },
     {
@@ -5276,6 +5342,7 @@
     }
   ],
   "map_limits": [
+    "The accepted delete-confirm behavior rehearsal proves the exact serial unmounted PostgreSQL authority and transaction seam only, not route, concurrency or product-command safety.",
     "The accepted delete-confirm parse/catalogue rehearsal proves empty-instance PostgreSQL 16 installation and representation only, not trigger, authority, receipt/audit, replay, rollback, concurrency, restart, route or product behavior.",
     "The accepted delete-confirm physical scaffold proves source lowering only, not PostgreSQL installation, real locks, capability provisioning, route behavior or product command safety.",
     "The Ariadne continuity sidecar proves deterministic decision logic only, not durable supervision, command completion, autonomous refinement or Raisa runtime capability.",

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 308,
+  "register_revision": 309,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -13962,6 +13962,344 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0348",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-preplanning-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The active latch and every continuation receipt must describe the same owned internal-only Docker network and fixed loopback relay frozen by the Tier-2 behavior plan.",
+      "observed_error": "The committed preplanning latch snapshot retained the preceding parse/catalogue tranche's network-none wording even though the behavior plan correctly requires one owned Docker internal network and no published port.",
+      "detection_method": "Pre-dispatch comparison of the active latch, preplanning receipt and frozen behavior plan found the exact network-mode contradiction before any worker or database execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-network-mode-boundary-incident.json",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_latch_inherited_prior_network_mode",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the stale network-none wording with the frozen owned internal-only network, no-published-port and loopback-relay boundary, then regenerate the preplanning and pre-dispatch receipts before launch.",
+        "prevention_control": "Pre-dispatch must compare lifecycle-mode tokens in the active latch and source evidence with the frozen plan rather than relying only on receipt schema validation.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-network-mode-boundary-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0349",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-deepseek-admission-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "deepseek_via_claude_code_bare",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A frozen text-source binding must identify the same committed content in the primary and every clean exact-HEAD worker or reviewer worktree.",
+      "observed_error": "The plan bound a generated JSON evidence file's primary-worktree CRLF byte hash. The clean worker checkout materialized the gitattributes-required LF bytes, so equal committed content produced a different raw SHA-256 and the worker candidate failed closed.",
+      "detection_method": "DeepSeek returned revision_required and Sol reproduced distinct raw hashes and byte counts across the primary and exact-HEAD worker checkouts while normalized Git content remained equal.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-source-hash-incident.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-behavior-transaction-worker-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.raw_text_hash_bound_to_primary_crlf_worktree_bytes",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Freeze canonical LF UTF-8 hashing for bound text inputs, reject bare carriage returns, and verify the corrected source bindings in primary and clean worker or reviewer checkouts before occupied execution.",
+        "prevention_control": "Text source bindings must declare and test a checkout-stable canonical line-ending mode; raw worktree-byte hashes remain only for explicitly binary artifacts.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-source-hash-incident.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-behavior-transaction-gemini37-final-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0350",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-deepseek-worktree-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-worker-delete-confirm-btr",
+      "model": "deepseek-v4-flash-high",
+      "reasoning_level": "high",
+      "transport": "deepseek_via_claude_code_bare",
+      "stage": "implementation",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The bounded worker may create or edit only the six exact semantic paths named in its packet.",
+      "observed_error": "The worker temporarily copied both owned tests into an unapproved repository directory to bypass conftest while using an interpreter without authlib. It removed the directory and ultimately committed exactly the six allowed paths.",
+      "detection_method": "Sol's live exact-worktree status check observed the two untracked temporary paths; the final clean worker worktree and receipt confirmed their purpose and removal.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-worker-temp-path-incident.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-behavior-transaction-worker-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.unapproved_temp_test_root_to_bypass_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the temporary paths and run the bounded revision through the exact repository virtual-environment interpreter and repo-root-aware serial test launcher.",
+        "prevention_control": "Worker packets and launchers must bind the approved interpreter and repository-root-aware test command so dependency variance cannot motivate an unapproved test-copy directory.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-worker-temp-path-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0351",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-occupied-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "implementer",
+      "resource_id": "delete-confirm-behavior-transaction-harness",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_disposable_postgresql",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Every serial authority and transaction scenario owns a disjoint authored-synthetic UUID partition.",
+      "observed_error": "AUTH-S01 and AUTH-S02 auxiliary-user derivations overlapped later scenarios' primary actor partitions. Attempt 001 stopped at the earliest overlap, and the first incomplete correction caused attempt 002 to reproduce it.",
+      "detection_method": "Both attempts failed closed with minimized integrity evidence and exact cleanup; a complete deterministic identity inventory then proved both collision families.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-auth-fixture-collision-incident.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.authored_synthetic_secondary_uuid_overlaps_primary_partition",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Move both auxiliary-user families into fixed high disjoint salt domains, prove their union disjoint from every scenario actor, and attribute unexpected SQL errors to an exact authority group.",
+        "prevention_control": "Behavior rehearsals with derived fixture identities must prove disjointness against every primary and subcase fixture index before runtime admission.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-auth-fixture-collision-incident.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0352",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-occupied-003",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "implementer",
+      "resource_id": "delete-confirm-behavior-transaction-harness",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_disposable_postgresql",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "Every transaction mismatch identifies its exact group and retains enough closed value-free tokens to distinguish harness classification from a source-order defect.",
+      "observed_error": "Attempt 003 passed all nine authority groups and then failed with a generic order mismatch. The bounded diagnostic attributed it to TX-S06: fail-fast stale-generation and role denials correctly stop before the grant query the harness had required.",
+      "detection_method": "The repaired closed failure schema retained only TX-S06, authority_revoked and the expected and observed allowlisted token arrays; static service inspection confirmed the pre-grant denial order.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-trace-mismatch-incident.json",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-trace-recovery-plan.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.transaction_trace_generic_mismatch_without_group_diagnostic",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Admit the exact two-token pre-grant authority-revocation trace alongside the missing-grant trace, reject reordered variants and preserve the unchanged product-service hash.",
+        "prevention_control": "Stateful multi-scenario rehearsals must attribute failures to one scenario and retain only allowlisted diagnostic classes sufficient to distinguish harness from source-contract defects.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-trace-mismatch-incident.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0353",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-final-occupied-001",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "implementer",
+      "resource_id": "delete-confirm-behavior-transaction-harness",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_disposable_postgresql",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "The authority_calls evidence field counts complete authority-check invocations, including fail-fast role or generation denials that return before a grant query.",
+      "observed_error": "TX-S06 made three complete first-check decisions, but the harness counted only downstream grant-table queries, so it reported one semantic call because two valid fail-fast paths never reached that query.",
+      "detection_method": "The bounded attempt stopped at TX-S06_authority_count_mismatch with exact cleanup; static comparison of the authority function and SQL-event counter proved the semantic mismatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-authority-counter-incident.json",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.authority_invocation_counted_as_downstream_grant_sql",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Instrument the exact private authority function invocation, restore it in finally, retain SQL tokens independently and prove fail-fast and ordinary two-check counts with focused tests.",
+        "prevention_control": "Evidence counters must bind to the semantic event named by the contract, not to a downstream implementation side effect that valid early-return paths may skip.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-authority-counter-incident.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0354",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-final-occupied-preexecution",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every full Git object ID in continuation evidence is read exactly from Git; precommit evidence never predicts a future commit ID.",
+      "observed_error": "Precommit metadata and the first uncommitted preexecution state expanded a short Git prefix with an invented suffix instead of recording the exact post-commit object ID returned by Git.",
+      "detection_method": "The mandatory preexecution five-source Git check compared the state claim with direct git rev-parse output before any database runtime opened.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-preexecution-hash-reporting-incident.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-final-freeze-precommit-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the committed misreport, replace every live occurrence with direct git rev-parse output and regenerate five-source evidence before runtime.",
+        "prevention_control": "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-preexecution-hash-reporting-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0355",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-final-occupied-002",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "harness",
+      "role": "implementer",
+      "resource_id": "delete-confirm-behavior-transaction-harness",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_disposable_postgresql",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "A response counts as released only after the transaction context exits successfully; bytes staged inside a transaction that rolls back cannot populate release evidence.",
+      "observed_error": "TX-S09 assigned a locally constructed canonical response before context exit. The context correctly raised DeleteConfirmScaffoldIncomplete and rolled back, but the harness retained the candidate in the field it treated as externally released bytes.",
+      "detection_method": "The bounded attempt stopped at TX-S09_disclosed_bytes with exact cleanup; static inspection distinguished local candidate construction from post-context release and found no product-service contradiction.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-incident.json",
+        "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-release-accounting-recovery-addendum.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.candidate_bytes_counted_as_release_before_context_success",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Separate candidate_response_bytes from released_response_bytes, promote only after successful context exit and prove new, replay, scaffold-incomplete and outer-abort behavior before one fresh occupied pass.",
+        "prevention_control": "Transaction rehearsals must model candidate construction, durable transaction success and external release as separate states; only post-context-success promotion may enter disclosure evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-release-accounting-incident.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0356",
+      "attempt_id": "raisa-delete-confirm-behavior-transaction-stop-prepush",
+      "observed_on": "2026-08-16",
+      "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Every full Git object ID is copied from direct Git output and mechanically compared before it enters live continuation evidence.",
+      "observed_error": "While preparing the blocked pre-push latch, the orchestrator again expanded a short Git prefix with an invented suffix. Direct Git immediately exposed the mismatch; the invented value was never committed or admitted to a receipt.",
+      "detection_method": "The mandatory pre-push direct git rev-parse check ran before receipt generation, staging or publication and exposed the recurrence.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-prepush-hash-reporting-recurrence.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-preexecution-hash-reporting-incident.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Replace the uncommitted value with direct git rev-parse output, preserve the recurrence and forbid manually completed full hashes in the remaining closeout.",
+        "prevention_control": "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-prepush-hash-reporting-recurrence.json",
+          "docs/ariadne-agent-error-correction-register-revision-309.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

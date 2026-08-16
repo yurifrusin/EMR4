@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "f895eec903e9e151da6c02057116676aad863adb91a8fce9f343a72cf787275e",
+  "canonical_register_sha256": "6e58f7b4f075553f39607d46532d33b6aa5078daf5c424de30623604470d39e1",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 98,
-      "canonical_unchanged": 216,
-      "untrusted_partial_worktree": 33
+      "accepted_candidate_changed": 102,
+      "canonical_unchanged": 219,
+      "untrusted_partial_worktree": 35
     },
     "by_category": {
-      "command_scope_violation": 55,
-      "evidence_misreport": 44,
-      "harness_failure": 39,
-      "output_contract_violation": 100,
+      "command_scope_violation": 56,
+      "evidence_misreport": 47,
+      "harness_failure": 43,
+      "output_contract_violation": 101,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
       "repository_defect": 56,
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 242,
-      "harness": 39,
+      "agent_behavior": 247,
+      "harness": 43,
       "repository": 56,
       "transport": 10
     },
     "by_process_severity": {
       "low": 142,
-      "material": 102,
-      "moderate": 103
+      "material": 107,
+      "moderate": 107
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -39,7 +39,7 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 181,
+      "codex-primary-orchestrator::orchestrator": 185,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -51,6 +51,8 @@
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 2,
+      "deepseek-v4-flash-worker-delete-confirm-btr::implementer": 1,
+      "delete-confirm-behavior-transaction-harness::implementer": 4,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 3,
       "emr4-behavior-evidence-schema::orchestrator": 1,
@@ -87,14 +89,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 27,
+      "implementer": 32,
       "integration_reviewer": 2,
-      "orchestrator": 266,
+      "orchestrator": 270,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 347,
+  "incident_count": 356,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -276,6 +278,30 @@
         "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task."
       ],
       "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "evidence_misreport"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0354",
+        "AER-0356"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
+        "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output."
+      ],
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -942,7 +968,7 @@
       ]
     }
   ],
-  "register_revision": 308,
+  "register_revision": 309,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-16"
 }

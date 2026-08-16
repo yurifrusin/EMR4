@@ -51,7 +51,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal"
+        "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
@@ -62,7 +62,9 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
         == "active"
     )
     assert (
-        horizon_by_id["reception-one-delete-confirm-physical-design-architecture"]["status"]
+        horizon_by_id["reception-one-delete-confirm-physical-design-architecture"][
+            "status"
+        ]
         == "active"
     )
     assert "reception-one-yuri-internal-walkthrough-completion" not in horizon_by_id
