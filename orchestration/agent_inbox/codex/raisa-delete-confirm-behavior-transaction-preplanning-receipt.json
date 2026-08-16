@@ -1,11 +1,11 @@
 {
   "active_operation": {
     "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
-    "completed_stage": "Fresh five-source rehydration completed after compaction; exact refs and the prior complete latch were verified; the required pre-edit canonical fast baseline passed with 196 tests and no known failure.",
-    "next_executable_stage": "Generate the fresh five-source pre-sprint-planning receipt, inspect the accepted serial behavior precedents and exact delete-confirm source seam, then freeze the narrowest Tier-2 behavior/transaction plan before any implementation dispatch.",
+    "completed_stage": "The fresh five-source rehydration and pre-edit canonical baseline pass; the Tier-2 plan and threat delta are frozen at exact commit 2a5042f80941e2bd191999c430ff2517ba7e8cb2; pre-dispatch comparison contained and corrected the inherited network-mode wording before any worker or runtime execution.",
+    "next_executable_stage": "Generate corrected preplanning and pre-worker-dispatch receipts, then dispatch exactly one bounded DeepSeek V4 Flash/high contract/schema/harness/test package before Sol semantic admission.",
     "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
     "resume_after_compaction": true,
-    "source_head": "87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67",
+    "source_head": "2a5042f80941e2bd191999c430ff2517ba7e8cb2",
     "status": "in_progress",
     "terminal_handback_permitted": false,
     "user_attention_required": false
@@ -78,9 +78,9 @@
       "Yuri's standing uninterrupted-development authority applies, and Yuri's latest observation that the tightened workflow feels smoother is qualitative workflow evidence to record without treating it as a proven throughput claim."
     ],
     "current_authority_allocation": "GPT Sol owns material plan semantics, database-execution containment, integration and acceptance. DeepSeek V4 Flash/high through Claude Code --bare is reserved only for one frozen separable mechanical contract/harness/test package. Gemini 3.7 Flash/high through Antigravity is reserved for exactly one final Tier-2 independent veto. Native subagents are declined because the database lifecycle and authority/transaction evidence are serial and another review lane would duplicate the single final veto.",
-    "git_refs_and_worktree": "Task branch HEAD and origin task are exact 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree was clean before opening the tranche, with 635 preserved untracked paths including docs/branding/.",
+    "git_refs_and_worktree": "The tranche opened from exact task/origin source 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67 with a clean tracked tree and 635 preserved untracked paths. The frozen plan is now committed at local task HEAD 2a5042f80941e2bd191999c430ff2517ba7e8cb2 while origin task remains the accepted predecessor pending normal publication. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding remains preserved.",
     "live_handover_current_baton": "AGENTS.md at SHA-256 ca6c79831e0218b2adb304c92d89afbaba200abfbe04eb800dcbcb9e2fb9e924 records the accepted delete-confirm parse/catalogue result at semantic source f695ddfd156bca4db6298fc54dcfd40aa9d7aa48 and reviewed descendant d45ac8ed92c97d1b4c25ac71da52fc5adfa9a1b8, the accepted risk-weighted workflow source 51866ce084c33fce600b792c66b180927658ed9e, and this serial behavior/transaction rehearsal as the next dependency-satisfied implementation.",
-    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. This tranche may exercise only authored-synthetic serial authority-generation, exact grant, trigger, private receipt, attributable audit, current-authority, replay, rollback, cumulative timeout and ordered atomic transaction behavior in one owned networkless tmpfs PostgreSQL 16 container against exact migration x3y4z5a6b7c8. Concurrency, restart, unknown-commit, provisioning, mounted routes, UI, product/patient/clinical data, providers, ADC, credentials/IAM, external network, protected evidence, deployment, production, release, Pages and protected refs remain closed. Preserve docs/branding/ and every unrelated untracked file; use explicit-path staging only."
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. This tranche may exercise only authored-synthetic serial authority-generation, exact grant, trigger, private receipt, attributable audit, current-authority, replay, rollback, cumulative timeout and ordered atomic transaction behavior in one owned internal-only, no-published-port, tmpfs PostgreSQL 16 container through the fixed IPv4-loopback relay against exact migration x3y4z5a6b7c8. Concurrency, restart, unknown-commit, provisioning, mounted routes, UI, product/patient/clinical data, providers, ADC, credentials/IAM, external network, protected evidence, deployment, production, release, Pages and protected refs remain closed. Preserve docs/branding/ and every unrelated untracked file; use explicit-path staging only."
   },
   "status": "passed",
   "terminal_handback_permitted": false,

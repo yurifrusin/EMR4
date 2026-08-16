@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Commit created: `8f595bd1b336c6c891f6e11651d43c24d84f1b25` with parent `2a5042f80941e2bd191999c430ff2517ba7e8cb2`. Working tree clean. Let me produce the final report.\n\n---\n\n## Worker final report \u2014 delete-confirm behavior/transaction rehearsal\n\n### Five-source rehydration (performed before editing)\n1. **`live_handover_current_baton`** \u2014 AGENTS.md \u00a73 read; active latch `current.json` read (`in_progress`, operation `raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal`).\n2. **`current_authority_allocation`** \u2014 AGENTS.md \u00a74 read (DeepSeek Flash bounded worker; Sol owns execution/acceptance).\n3. **`active_plan_and_acceptance`** \u2014 frozen plan and threat delta read completely; both SHA-256s verified (`694da1\u2026a019`, `a67906\u20262106a`).\n4. **`protected_evidence_boundaries`** \u2014 AGENTS.md \u00a75 read; no protected path enumerated/searched/opened.\n5. **`git_refs_and_worktree`** \u2014 branch `codex/worker-delete-confirm-btr-2a5042f8`, HEAD `2a5042f80941e2bd191999c430ff2517ba7e8cb2`, clean tree before/after; protected `master`/`handoff/current` untouched.\n\n### Commit\n- **Commit:** `8f595bd1b336c6c891f6e11651d43c24d84f1b25`\n- **Parent:** `2a5042f80941e2bd191999c430ff2517ba7e8cb2` (exact source HEAD)\n- **Changed paths (exactly six, staged explicitly):**\n  1. `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py`\n  2. `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py`\n  3. `tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_plan.py`\n  4. `orchestration/continuity/\u2026-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json`\n  5. `\u2026/rehearsal-contract.schema.json`\n  6. `\u2026/provider-free-behavior-transaction-evidence.schema.json`\n\n### Checks (all run)\n- **Two owned test files:** 25 passed, 1 skipped (occupied evidence not generated; Sol owns the single occupied run). Run from a temp root-dir copy because the repo `tests/conftest.py` imports `app.main` which requires `authlib` (not installed in this bare Python); the owned tests don't use conftest fixtures.\n- **Python compilation:** `py_compile` OK for the script and both tests.\n- **Ruff:** all owned Python files pass.\n- **Whole-document JSON/JSON-Schema:** contract valid vs. closed contract schema (0 errors); evidence schema valid; PASS/FALL evidence branch exclusivity verified (cross-field rejection).\n- **`git diff --check`:** clean.\n\n### Actual-vs-planned parallelism\nPlanned: one DeepSeek Flash closed mechanical package (this worker), one Gemini 3.7 Flash/high final veto (Sol-dispatched after deterministic admission). Actual: the worker produced only the closed contract/schemas/harness/tests package; no parallel lane was opened by the worker, and the occupied run remains Sol-owned. Consistent with the plan.\n\n### Unresolved issues (Sol-owned)\n1. **Frozen-plan source-hash defect (blocks occupied preflight).** The plan's \"Exact source bindings\" table lists `34e9c7f9\u2026c4` for `\u2026delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json`, but the actual file hashes to `4dd6cd63\u2026b0b` at both plan-freeze HEAD `87f352aa` and current HEAD `2a5042f8`. Per the packet, the contract binds the plan-listed hash verbatim; `verify_contract()` therefore fails closed at preflight (`source_hash_mismatch`) for exactly that one path (the other 15 bindings match). This requires Sol to reconcile the plan's hash (or regenerate that evidence file) before the occupied run can pass. The harness test documents this fail-closed behavior.\n2. **AUTH-S08 fixture setup note.** Reaching BIGINT-max generation is impossible through trigger-preserving DML (requires ~9.2e18 increments); the harness uses one fixed, session-scoped fixture helper (`SET session_replication_role = replica` for a single UPDATE, restored immediately) \u2014 not a durable grant, schema change, or caller surface. Documented in the harness.\n\n### Decision\nThe owned package is mechanically complete, faithfully binds the frozen plan (including every plan-listed source hash), passes all deterministic checks, and fails closed on the one frozen-plan inconsistency it is not permitted to repair. Because that inconsistency blocks occupied execution until Sol reconciles the plan's source-hash table, the advisory terminal decision is:\n\n**DECISION: revision_required**\n\n(Advisory only; cannot self-accept the tranche. The required revision is Sol-owned: correct the frozen plan's recorded hash for the delete-confirm catalogue evidence file \u2014 or regenerate that file to match \u2014 then re-verify the contract binding before occupied execution.)",
+  "usage": {
+    "input_tokens": 143834,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 22410752,
+    "output_tokens": 242971,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 18.011016,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

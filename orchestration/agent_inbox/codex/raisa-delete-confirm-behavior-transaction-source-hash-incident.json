@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0349",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-deepseek-001",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "agent_behavior",
+  "role": "orchestrator",
+  "resource_id": "codex-primary-orchestrator",
+  "model": "gpt-sol",
+  "reasoning_level": "extra_high",
+  "stage": "worker_candidate_admission",
+  "category": "evidence_binding_error",
+  "expected_invariant": "A frozen text-source binding must identify the same committed content in the primary and every clean exact-HEAD worker/reviewer worktree.",
+  "observed_error": "The plan bound one generated JSON evidence file's primary-worktree CRLF byte hash. The clean worker checkout correctly materialized the .gitattributes-required LF bytes, so exact content produced a different raw SHA-256 and the worker candidate failed closed.",
+  "detection_method": "DeepSeek returned revision_required and Sol reproduced 4143 CRLF bytes at SHA-256 34e9c7f9... in the primary versus 4070 LF bytes at SHA-256 4dd6cd63... in the exact-HEAD worker, with normalized Git diff equality.",
+  "evidence_paths": [
+    "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md",
+    "orchestration/agent_inbox/deepseek/raisa-delete-confirm-behavior-transaction-worker-receipt.json",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json"
+  ],
+  "candidate_state": "worker_commit_8f595bd1_preserved_not_admitted",
+  "workflow_disposition": "revision_required",
+  "recurrence_signature": "orchestrator.raw_text_hash_bound_to_primary_crlf_worktree_bytes",
+  "correction": {
+    "status": "correction_in_progress",
+    "action": "Freeze canonical LF UTF-8 hashing for all bound text inputs, bind the committed LF digest 4dd6cd63..., reject bare carriage returns, and require the corrected worker harness/tests to prove primary/worker invariance before occupied execution.",
+    "prevention_control": "Text source bindings must declare and test a checkout-stable canonical line-ending mode; raw worktree-byte hashes remain available only for explicitly binary artifacts."
+  },
+  "status": "contained_before_runtime"
+}

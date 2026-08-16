@@ -12,8 +12,8 @@
       "docs/api-spine/openapi/appointment-commands.yaml preserves confirmAppointmentDeleteProposal as the dedicated REST/OpenAPI command ingress; GraphQL remains read-only and events remain non-authoritative acceleration hints.",
       "Yuri's standing uninterrupted-development authority applies, and Yuri's latest observation that the tightened workflow feels smoother is qualitative workflow evidence to record without treating it as a proven throughput claim."
     ],
-    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. This tranche may exercise only authored-synthetic serial authority-generation, exact grant, trigger, private receipt, attributable audit, current-authority, replay, rollback, cumulative timeout and ordered atomic transaction behavior in one owned networkless tmpfs PostgreSQL 16 container against exact migration x3y4z5a6b7c8. Concurrency, restart, unknown-commit, provisioning, mounted routes, UI, product/patient/clinical data, providers, ADC, credentials/IAM, external network, protected evidence, deployment, production, release, Pages and protected refs remain closed. Preserve docs/branding/ and every unrelated untracked file; use explicit-path staging only.",
-    "git_refs_and_worktree": "Task branch HEAD and origin task are exact 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree was clean before opening the tranche, with 635 preserved untracked paths including docs/branding/."
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 are restored. This tranche may exercise only authored-synthetic serial authority-generation, exact grant, trigger, private receipt, attributable audit, current-authority, replay, rollback, cumulative timeout and ordered atomic transaction behavior in one owned internal-only, no-published-port, tmpfs PostgreSQL 16 container through the fixed IPv4-loopback relay against exact migration x3y4z5a6b7c8. Concurrency, restart, unknown-commit, provisioning, mounted routes, UI, product/patient/clinical data, providers, ADC, credentials/IAM, external network, protected evidence, deployment, production, release, Pages and protected refs remain closed. Preserve docs/branding/ and every unrelated untracked file; use explicit-path staging only.",
+    "git_refs_and_worktree": "The tranche opened from exact task/origin source 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67 with a clean tracked tree and 635 preserved untracked paths. The frozen plan is now committed at local task HEAD 2a5042f80941e2bd191999c430ff2517ba7e8cb2 while origin task remains the accepted predecessor pending normal publication. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding remains preserved."
   },
   "active_operation": {
     "schema_version": "ariadne.active_operation_latch.v1",
@@ -21,11 +21,11 @@
     "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
     "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
     "status": "in_progress",
-    "source_head": "87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67",
-    "authority_source": "AGENTS.md names this dependency-satisfied provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal under Yuri's standing uninterrupted-development authority after the accepted parse/catalogue result.",
+    "source_head": "2a5042f80941e2bd191999c430ff2517ba7e8cb2",
+    "authority_source": "The frozen Tier-2 behavior/transaction plan is committed at 2a5042f80941e2bd191999c430ff2517ba7e8cb2 under AGENTS.md and Yuri's standing uninterrupted-development authority.",
     "checkpoint": {
-      "completed_stage": "Fresh five-source rehydration completed after compaction; exact refs and the prior complete latch were verified; the required pre-edit canonical fast baseline passed with 196 tests and no known failure.",
-      "next_executable_stage": "Generate the fresh five-source pre-sprint-planning receipt, inspect the accepted serial behavior precedents and exact delete-confirm source seam, then freeze the narrowest Tier-2 behavior/transaction plan before any implementation dispatch.",
+      "completed_stage": "The fresh five-source rehydration and pre-edit canonical baseline pass; the Tier-2 plan and threat delta are frozen at exact commit 2a5042f80941e2bd191999c430ff2517ba7e8cb2; pre-dispatch comparison contained and corrected the inherited network-mode wording before any worker or runtime execution.",
+      "next_executable_stage": "Generate corrected preplanning and pre-worker-dispatch receipts, then dispatch exactly one bounded DeepSeek V4 Flash/high contract/schema/harness/test package before Sol semantic admission.",
       "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
       "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
     },
@@ -42,7 +42,7 @@
     "protected_boundaries": [
       "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
       "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
-      "one_owned_network_none_no_published_port_tmpfs_postgresql_16_container_pull_never",
+      "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",
       "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
       "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
       "no_existing_product_patient_clinical_historical_diary_or_protected_data",

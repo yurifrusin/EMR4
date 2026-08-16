@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0348",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-preplanning-001",
+  "observed_on": "2026-08-16",
+  "observed_at": "2026-08-16T11:57:30+10:00",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "agent_behavior",
+  "role": "orchestrator",
+  "resource_id": "codex-primary-orchestrator",
+  "model": "gpt-sol",
+  "reasoning_level": "extra_high",
+  "stage": "pre_worker_dispatch",
+  "category": "evidence_boundary_conflict",
+  "expected_invariant": "The active latch and every continuation receipt must describe the same owned internal-only Docker network and fixed loopback relay frozen by the Tier-2 behavior plan.",
+  "observed_error": "The committed preplanning latch snapshot retained the preceding parse/catalogue tranche's network-none wording even though the behavior plan correctly requires one owned Docker internal network and no published port.",
+  "detection_method": "Pre-dispatch comparison of the active latch, preplanning receipt and frozen behavior plan found the exact network-mode contradiction before any worker or database execution.",
+  "evidence_paths": [
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-preplanning-runtime-state.json",
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-preplanning-receipt.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md"
+  ],
+  "candidate_state": "no_worker_or_runtime_started",
+  "workflow_disposition": "revision_required",
+  "recurrence_signature": "orchestrator.preplanning_latch_inherited_prior_network_mode",
+  "correction": {
+    "status": "corrected_fresh_receipts",
+    "action": "Replace only the stale network-none/networkless wording with the frozen owned internal-only network/no-published-port/loopback-relay boundary, regenerate the preplanning receipt, and require the corrected pre-dispatch receipt before worker launch.",
+    "prevention_control": "Pre-dispatch must compare lifecycle mode tokens in the active latch and source evidence against the frozen plan rather than relying only on receipt schema validation."
+  },
+  "status": "corrected"
+}

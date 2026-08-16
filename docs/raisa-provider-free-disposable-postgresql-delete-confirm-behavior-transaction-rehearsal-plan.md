@@ -8,6 +8,8 @@ Source HEAD: `87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67`
 
 Status: `frozen_for_tier_2_provider_free_disposable_postgresql_execution`
 
+Plan correction timestamp: 2026-08-16T12:35:30+10:00 (Australia/Brisbane)
+
 Reasoning level: material database authority and transaction execution / Extra High
 
 Risk classification: Tier 2 (`database_runtime`,
@@ -66,7 +68,7 @@ closed rehearsal contract:
 |---|---|
 | `4881910f3fa3fd133f753ccb43f20417e38dc3cf1b6eeac740904ed16708a53e` | `docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md` |
 | `07970f0dac2c68abe0a537c3ee1855192eef1e02a61773fc4ca0cd1594204def` | `orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md` |
-| `34e9c7f955aef327e6b2da863e7d15b6e457c4ec2c7c0c658b15c93c426f32c4` | `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json` |
+| `4dd6cd6389bc91286de67091fc05417cc818a6d234b5d1a203b3eec90268be0b` | `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json` |
 | `41abded0e169f339ea581a90aba061b4896e322dad2962e252ef0c069a0439e4` | `scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py` |
 | `2970edf7c04ce0988c0904c8cc02bcd2176fdafccc5b1d745ce9240ca4f8f007` | `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json` |
 | `f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8` | `docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md` |
@@ -85,6 +87,12 @@ The accepted status-confirm harness is reusable only as exact containment,
 relay and transaction-fixture support. Its status semantics are not imported as
 delete-confirm evidence. Reusing its fixed helpers avoids another independent
 Docker lifecycle implementation without weakening the delete-specific contract.
+
+Every source in this table is UTF-8 text. Its digest is computed after rejecting
+bare carriage returns and canonicalizing CRLF to LF, matching the repository's
+`.gitattributes` checkout contract. This makes one committed source identity
+stable across the primary Windows checkout and clean worker/reviewer worktrees;
+it does not normalize JSON meaning, whitespace, field order or any other byte.
 
 ## Exact owned artifacts
 
@@ -162,6 +170,14 @@ generation/grant counts or a before/after digest:
 
 These prove only serial trigger effects. They do not claim contention, event
 delivery, watcher behavior or administrative provisioning safety.
+
+`AUTH-S08` alone may establish its otherwise unreachable boundary fixture with
+one fixed transaction-local `SET LOCAL session_replication_role = replica`, one
+parameterized update of the exact synthetic parent generation to BIGINT maximum,
+and automatic transaction-end restoration. Before either overflow action, a new
+connection must prove `session_replication_role = origin` and all three exact
+authority/grant triggers enabled. No caller-selectable bypass, persistent
+setting, DDL change or other scenario may use this helper.
 
 ## Frozen transaction case groups
 

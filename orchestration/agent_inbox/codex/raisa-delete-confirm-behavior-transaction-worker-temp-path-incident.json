@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.minimal_incident.v1",
+  "incident_id": "AER-0350",
+  "attempt_id": "raisa-delete-confirm-behavior-transaction-deepseek-001",
+  "observed_on": "2026-08-16",
+  "tranche": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+  "origin": "agent_behavior",
+  "role": "implementation_worker",
+  "resource_id": "deepseek-v4-flash-worker-delete-confirm-btr-2a5042f8",
+  "model": "deepseek-v4-flash-high",
+  "reasoning_level": "high",
+  "stage": "focused_test_execution",
+  "category": "file_scope_violation",
+  "expected_invariant": "The bounded worker may create or edit only the six exact semantic paths named in its packet.",
+  "observed_error": "The worker temporarily copied both owned tests into an unapproved _owned_worker_run directory to bypass repository conftest while using an interpreter without authlib. It later removed the directory and committed exactly six allowed paths.",
+  "detection_method": "Sol's live exact-worktree status check observed the two untracked temporary paths; the final clean worktree and worker receipt confirmed their test-copy purpose and removal.",
+  "evidence_paths": [
+    "orchestration/agent_inbox/codex/raisa-delete-confirm-behavior-transaction-deepseek-worker-packet.md",
+    "orchestration/agent_inbox/deepseek/raisa-delete-confirm-behavior-transaction-worker-receipt.json"
+  ],
+  "candidate_state": "temporary_paths_removed_clean_six_path_commit_preserved",
+  "workflow_disposition": "revision_required",
+  "recurrence_signature": "implementation_worker.unapproved_temp_test_root_to_bypass_conftest",
+  "correction": {
+    "status": "correction_in_progress",
+    "action": "Use the exact repository virtual-environment interpreter and serial pytest launcher rooted at the worker worktree; create no temporary repository path during the bounded revision.",
+    "prevention_control": "Worker packets and launcher checks must bind the approved interpreter plus repo-root-aware test command so missing packages cannot motivate an unapproved test-copy directory."
+  },
+  "status": "contained_and_cleaned"
+}

@@ -6,6 +6,8 @@ Timestamp: 2026-08-16T11:52:20+10:00 (Australia/Brisbane)
 
 Source HEAD: `87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67`
 
+Correction timestamp: 2026-08-16T12:35:30+10:00 (Australia/Brisbane)
+
 ## Scope
 
 This delta covers one serial authored-synthetic execution of exact migration
@@ -26,6 +28,7 @@ network, tmpfs PostgreSQL 16 container through a fixed loopback relay.
 | Fixture grant DML becomes product provisioning | Only fixed partitioned synthetic cases may create transient rows in the owned database. No application administration path, product user or durable grant exists. |
 | Caller claims or role membership grant cancellation | PostgreSQL row presence is the only grant; absent grant, stale generation, inactive user and role mismatch all fail before idempotency access. |
 | Generation can be selected, skipped or wrapped | Insert forces one; direct submitted generations are ignored; each qualifying membership/grant change advances once; duplicates do not advance; overflow aborts and rollback digests must match. |
+| The overflow fixture disables authority triggers beyond setup | Only `AUTH-S08` may use one fixed transaction-local replication-role setting to place the exact synthetic parent at BIGINT maximum. Transaction end restores it automatically; a new connection must prove origin mode and all three triggers enabled before the actual overflow actions. |
 | Capability identity is broadened or reassigned silently | The closed check admits two exact codes, updates are rejected, and reassignment is delete then insert with each parent independently fenced. |
 | Receipt bytes leak after revocation or corruption | Both complete current-authority checks precede classification; replay requires exact family-qualified complete v1 fields and constant-time canonical-byte integrity; denial cases retain zero disclosure. |
 | Lock order is inferred from source rather than exercised | The real SQLAlchemy connection records only value-free statement classes and must reproduce user, appointment, grant, select-first idempotency, insert-if-absent, winner-lock and second-authority order. |
@@ -33,6 +36,7 @@ network, tmpfs PostgreSQL 16 container through a fixed loopback relay.
 | A partial or mismatched write survives | Empty, partial and cross-artifact-mismatched sets must trigger the seam's completeness guard and restore exact before digests; a complete-set outer abort must also restore all three artifacts. |
 | Replay performs a second cancellation | Response-loss retry must return only the stored canonical-byte digest with unchanged appointment version and audit/receipt counts. |
 | Evidence retains credentials or sensitive fixture values | Evidence is schema-closed to fixed IDs, categorical results, counts, state versions, hashes, value-free statement tokens and cleanup facts. Raw SQL, URLs, passwords, session digests, response bodies, logs and rows are forbidden. |
+| Text hashes vary by Windows checkout line endings | Reject bare carriage returns and hash exact bytes after CRLF-to-LF canonicalization, consistent with `.gitattributes`; no whitespace or semantic JSON normalization is allowed. |
 | Workflow reform removes a hard Tier-2 control | The pre-edit baseline, semantic freeze, deterministic admission, immutable failures, exact cleanup, protected-ref checks and exactly one final independent veto remain mandatory; only redundant reruns and stacked reviews are removed. |
 
 ## Residual risks
