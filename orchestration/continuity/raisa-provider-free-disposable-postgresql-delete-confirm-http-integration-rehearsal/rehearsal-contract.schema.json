@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-delete-confirm-http-postgresql-integration-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "accepted_http_source",
+    "accepted_database_behavior_source",
+    "input_hash_mode",
+    "evidence_label",
+    "data_posture",
+    "canonical_path",
+    "compatibility_alias",
+    "raw_delete_path",
+    "editable_preconditions",
+    "read_only_bindings",
+    "new_output_paths",
+    "docker_profile",
+    "tenant_contract",
+    "public_private_contract",
+    "scenarios",
+    "minimum_hostile_mutations",
+    "evidence_allowlist",
+    "evidence_forbidden",
+    "cleanup",
+    "forbidden_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.delete_confirm_http_postgresql_integration_contract.v1"},
+    "result": {"const": "contract_frozen"},
+    "source_head": {"$ref": "#/$defs/commit"},
+    "accepted_http_source": {"$ref": "#/$defs/commit"},
+    "accepted_database_behavior_source": {"$ref": "#/$defs/commit"},
+    "input_hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "evidence_label": {"const": "live_local_backend_postgres"},
+    "data_posture": {"const": "provider_free_authored_synthetic_only"},
+    "canonical_path": {"const": "/api/v1/appointments/proposals/delete/confirm"},
+    "compatibility_alias": {"const": "/api/v1/appointments/proposals/delete-confirm"},
+    "raw_delete_path": {"const": "/api/v1/appointments/{appointment_id}"},
+    "editable_preconditions": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "repair"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "repair": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "read_only_bindings": {
+      "type": "object",
+      "minProperties": 19,
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "new_output_paths": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "docker_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable", "image_reference", "pull_policy", "network_internal",
+        "network_name_prefix", "container_name_prefix", "harness_label",
+        "published_ports", "relay_host_ip", "relay_dynamic_host_port",
+        "relay_container_executable", "relay_container_command",
+        "postgres_container_port", "sqlalchemy_driver", "data_destination",
+        "tmpfs_options", "memory_bytes", "nano_cpus", "pids_limit",
+        "restart_policy", "postgres_user", "postgres_password",
+        "postgres_database", "pgdata", "application_user",
+        "application_password", "startup_timeout_seconds",
+        "command_timeout_seconds", "total_timeout_seconds",
+        "readiness_observations"
+      ],
+      "properties": {
+        "executable": {"const": "docker.exe"},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "pull_policy": {"const": "never"},
+        "network_internal": {"const": true},
+        "network_name_prefix": {"type": "string", "minLength": 8},
+        "container_name_prefix": {"type": "string", "minLength": 8},
+        "harness_label": {"const": "delete-confirm-http-postgresql-v1"},
+        "published_ports": {"const": false},
+        "relay_host_ip": {"const": "127.0.0.1"},
+        "relay_dynamic_host_port": {"const": true},
+        "relay_container_executable": {"const": "bash"},
+        "relay_container_command": {"type": "string", "minLength": 20},
+        "postgres_container_port": {"const": 5432},
+        "sqlalchemy_driver": {"const": "psycopg2"},
+        "data_destination": {"const": "/var/lib/postgresql/data"},
+        "tmpfs_options": {"const": "rw,noexec,nosuid,size=268435456"},
+        "memory_bytes": {"const": 536870912},
+        "nano_cpus": {"const": 1000000000},
+        "pids_limit": {"const": 128},
+        "restart_policy": {"const": "no"},
+        "postgres_user": {"const": "emr4_delete_confirm_btr"},
+        "postgres_password": {"type": "string", "minLength": 24},
+        "postgres_database": {"const": "delete_confirm_behavior"},
+        "pgdata": {"const": "/var/lib/postgresql/data/pgdata"},
+        "application_user": {"const": "emr4_delete_http_app"},
+        "application_password": {"type": "string", "minLength": 24},
+        "startup_timeout_seconds": {"const": 90},
+        "command_timeout_seconds": {"const": 30},
+        "total_timeout_seconds": {"const": 360},
+        "readiness_observations": {"const": 3}
+      }
+    },
+    "tenant_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "setting", "transaction_local", "context_after_isolation_before_reads",
+        "forced_rls_tables", "application_role_superuser",
+        "application_role_bypass_rls"
+      ],
+      "properties": {
+        "setting": {"const": "app.current_practice_id"},
+        "transaction_local": {"const": true},
+        "context_after_isolation_before_reads": {"const": true},
+        "forced_rls_tables": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "application_role_superuser": {"const": false},
+        "application_role_bypass_rls": {"const": false}
+      }
+    },
+    "public_private_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "public_schema", "private_schema", "public_bytes_are_private_bytes",
+        "private_bytes_may_be_http_content", "replay_public_bytes_identical",
+        "replay_private_bytes_identical"
+      ],
+      "properties": {
+        "public_schema": {"const": "raisa.delete_confirm_public_envelope.v1"},
+        "private_schema": {"const": "appointment.delete_confirmation_receipt.v1"},
+        "public_bytes_are_private_bytes": {"const": false},
+        "private_bytes_may_be_http_content": {"const": false},
+        "replay_public_bytes_identical": {"const": true},
+        "replay_private_bytes_identical": {"const": true}
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "expected"],
+        "properties": {
+          "id": {"pattern": "^DHI-S(0[1-9]|1[0-2])$"},
+          "kind": {"type": "string", "minLength": 1},
+          "expected": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "minimum_hostile_mutations": {"const": 120},
+    "evidence_allowlist": {"$ref": "#/$defs/string_set"},
+    "evidence_forbidden": {"$ref": "#/$defs/string_set"},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "container_target", "network_target", "engine_relay_before_container",
+        "post_remove_exact_id_absence_required"
+      ],
+      "properties": {
+        "container_target": {"const": "captured_container_id_only"},
+        "network_target": {"const": "captured_network_id_only_after_empty_reverification"},
+        "engine_relay_before_container": {"const": true},
+        "post_remove_exact_id_absence_required": {"const": true}
+      }
+    },
+    "forbidden_surfaces": {"$ref": "#/$defs/string_set"}
+  },
+  "$defs": {
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "string_set": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

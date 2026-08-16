@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-delete-confirm-http-postgresql-integration-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "data_posture",
+    "source_head",
+    "contract_sha256",
+    "source_hashes",
+    "implementation_hashes",
+    "hostile_mutations",
+    "environment",
+    "catalogue",
+    "scenarios",
+    "aggregate",
+    "lifecycle",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.delete_confirm_http_postgresql_integration_evidence.v1"},
+    "result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_pass",
+        "rehearsal_failed"
+      ]
+    },
+    "evidence_label": {"const": "live_local_backend_postgres"},
+    "data_posture": {"const": "provider_free_authored_synthetic_only"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "contract_sha256": {"$ref": "#/$defs/sha256"},
+    "source_hashes": {"$ref": "#/$defs/hash_map"},
+    "implementation_hashes": {"$ref": "#/$defs/hash_map"},
+    "hostile_mutations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "rejected", "minimum_required"],
+      "properties": {
+        "attempted": {"type": "integer", "minimum": 120},
+        "rejected": {"type": "integer", "minimum": 120},
+        "minimum_required": {"const": 120}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "postgresql_major", "image_reference", "image_id_sha256",
+        "network_internal", "published_ports", "storage", "host_transport",
+        "transport", "provider_calls", "product_rows"
+      ],
+      "properties": {
+        "postgresql_major": {"const": 16},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "image_id_sha256": {"$ref": "#/$defs/sha256"},
+        "network_internal": {"const": true},
+        "published_ports": {"const": false},
+        "storage": {"const": "container_local_tmpfs"},
+        "host_transport": {"const": "fixed_in_process_ipv4_loopback_relay"},
+        "transport": {"const": "fastapi_testclient_real_route"},
+        "provider_calls": {"const": 0},
+        "product_rows": {"const": 0}
+      }
+    },
+    "catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "migration_head", "application_role_superuser",
+        "application_role_bypass_rls", "forced_rls_table_count",
+        "selected_constraint_count", "selected_trigger_count",
+        "transaction_context_local", "two_connection_tenant_context_absent"
+      ],
+      "properties": {
+        "migration_head": {"const": "x3y4z5a6b7c8"},
+        "application_role_superuser": {"const": false},
+        "application_role_bypass_rls": {"const": false},
+        "forced_rls_table_count": {"const": 8},
+        "selected_constraint_count": {"type": "integer", "minimum": 1},
+        "selected_trigger_count": {"type": "integer", "minimum": 4},
+        "transaction_context_local": {"const": true},
+        "two_connection_tenant_context_absent": {"type": "boolean"}
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "outcome", "assertion_count"],
+        "properties": {
+          "id": {"pattern": "^DHI-S(0[1-9]|1[0-2])$"},
+          "status": {"const": "passed"},
+          "outcome": {
+            "enum": [
+              "non_mutating_verified_exact_proposal",
+              "atomic_commit_public_private_separation",
+              "same_handler_commit",
+              "byte_identical_public_and_private_replay",
+              "required_and_conflict",
+              "unauthorized_inactive_nonmutating",
+              "appointment_not_found",
+              "structural_pre_session_and_stale_no_effect",
+              "atomic_block",
+              "default_denial_and_revocation",
+              "rollback_503_and_trigger_restored",
+              "canonical_visible_alias_hidden_raw_delete_unchanged"
+            ]
+          },
+          "assertion_count": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_count", "public_private_bytes_distinct",
+        "public_replay_bytes_identical", "private_replay_bytes_identical",
+        "second_effect_count", "rollback_effect_count"
+      ],
+      "properties": {
+        "scenario_count": {"type": "integer", "minimum": 0, "maximum": 12},
+        "public_private_bytes_distinct": {"type": "boolean"},
+        "public_replay_bytes_identical": {"type": "boolean"},
+        "private_replay_bytes_identical": {"type": "boolean"},
+        "second_effect_count": {"type": "integer", "minimum": 0},
+        "rollback_effect_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "lifecycle": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status", "container_removed", "network_removed",
+        "container_absent", "network_absent"
+      ],
+      "properties": {
+        "status": {
+          "enum": ["not_needed", "cleanup_verified", "cleanup_failed", "ownership_mismatch"]
+        },
+        "container_removed": {"type": "boolean"},
+        "network_removed": {"type": "boolean"},
+        "container_absent": {"type": "boolean"},
+        "network_absent": {"type": "boolean"}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 40, "maxLength": 500}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {"const": "raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_pass"}
+        }
+      },
+      "then": {
+        "properties": {
+          "scenarios": {"minItems": 12, "maxItems": 12},
+          "aggregate": {
+            "properties": {
+              "scenario_count": {"const": 12},
+              "public_private_bytes_distinct": {"const": true},
+              "public_replay_bytes_identical": {"const": true},
+              "private_replay_bytes_identical": {"const": true},
+              "second_effect_count": {"const": 0},
+              "rollback_effect_count": {"const": 0}
+            }
+          },
+          "cleanup": {
+            "properties": {
+              "status": {"const": "cleanup_verified"},
+              "container_removed": {"const": true},
+              "network_removed": {"const": true},
+              "container_absent": {"const": true},
+              "network_absent": {"const": true}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hash_map": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    }
+  }
+}

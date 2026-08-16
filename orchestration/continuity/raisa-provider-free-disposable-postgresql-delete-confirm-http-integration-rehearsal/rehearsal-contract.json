@@ -1,0 +1,175 @@
+{
+  "schema_version": "raisa.delete_confirm_http_postgresql_integration_contract.v1",
+  "result": "contract_frozen",
+  "source_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+  "accepted_http_source": "c7a01edd96ebabf3ea2c07be89a5b405c9629853",
+  "accepted_database_behavior_source": "49dd2aaa72877adb844da4d0d5d5bb28039c90c8",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "evidence_label": "live_local_backend_postgres",
+  "data_posture": "provider_free_authored_synthetic_only",
+  "canonical_path": "/api/v1/appointments/proposals/delete/confirm",
+  "compatibility_alias": "/api/v1/appointments/proposals/delete-confirm",
+  "raw_delete_path": "/api/v1/appointments/{appointment_id}",
+  "editable_preconditions": [
+    {
+      "path": "app/routers/appointments.py",
+      "sha256": "9b51623969bfdc657d6af2fda21b36a5ecb4973a3d1146e32460d8ebdaa7634e",
+      "repair": "delegate_delete_producer_canonicalization_to_accepted_adapter_helpers"
+    },
+    {
+      "path": "app/services/appointment_delete_physical.py",
+      "sha256": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533",
+      "repair": "set_authenticated_practice_transaction_locally_after_isolation_before_reads"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+      "sha256": "a77b80a81aff7ed18226d31c39413f4287cf44f794152ed2b4001f52b8ba4db2",
+      "repair": "guard_route_producer_to_adapter_verified_exact_ingress"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_unmounted_delete_confirm_physical_schema_transaction_scaffold.py",
+      "sha256": "a12afe1de2ed6b311430f5d81c3098237b12068e0a4550ada60d7619366ad8e4",
+      "repair": "guard_transaction_local_tenant_context_order_and_scope"
+    }
+  ],
+  "read_only_bindings": {
+    "app/dependencies.py": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc",
+    "app/main.py": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2",
+    "app/schemas/appointments.py": "ce7a9819e4947fb288c79009a08b7d9f2502b8d096ff5e2eb005796a250aee90",
+    "app/config.py": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e",
+    "app/services/auth_service.py": "c7380e744bc42be006b34546769b76eb3b8f010b8602513a64f3865c76c1f33c",
+    "app/services/appointment_delete_product_adapter.py": "a7e1702c61258acfb51f634883086ad5993c8ab63989eace9cfa1102b2532c59",
+    "app/services/appointment_delete_composition.py": "ed6a5e705808c71ecf4edcec837c6be2ec790660bf32a85357bda68c2159aa15",
+    "app/services/bernie_turn_evidence.py": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467",
+    "app/models/tenancy.py": "e411c816565bdddfbb25beca62439c5bba7a44a90e348cd7e9f4296a65fb65e2",
+    "app/models/appointments.py": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794",
+    "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py": "e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb",
+    "docs/api-spine/openapi/appointment-commands.yaml": "0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622",
+    "app/services/diary/confirm_actions.py": "7f4bdd108c3e0039d19341e76e1cf7eb8e491adaa1e5691b5590a59008a09989",
+    "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md": "c6a05ec770cd29adc7bc0316c92e94bbd45ff03610d4ef43194b9d45d6b64f82",
+    "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md": "90d42d80d06d1c173fde25b7da153173b195cbc118e672cac6746493ef0aa507",
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py": "b906e4029157b39058d7466dcaea772051df54815f6172abfe2f4e6c1b099306",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/rehearsal-contract.json": "99c88349cecbaeeec12b601e33615fb55e8bb7d71fcb764c3ca1a5f8939f0b0a",
+    "scripts/raisa_provider_free_status_confirm_http_route_convergence.py": "2463467bb45220bceead366735c320c751babf460803de75b230d39c1846c8ec",
+    "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md": "27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5"
+  },
+  "new_output_paths": [
+    "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal.py",
+    "tests/test_raisa_provider_free_disposable_postgresql_delete_confirm_http_integration_rehearsal_plan.py",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.json",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json"
+  ],
+  "docker_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_internal": true,
+    "network_name_prefix": "emr4-delete-http-dhi-net-",
+    "container_name_prefix": "emr4-delete-http-dhi-pg16-",
+    "harness_label": "delete-confirm-http-postgresql-v1",
+    "published_ports": false,
+    "relay_host_ip": "127.0.0.1",
+    "relay_dynamic_host_port": true,
+    "relay_container_executable": "bash",
+    "relay_container_command": "exec 3<>/dev/tcp/127.0.0.1/5432; cat <&3 & cat >&3; wait",
+    "postgres_container_port": 5432,
+    "sqlalchemy_driver": "psycopg2",
+    "data_destination": "/var/lib/postgresql/data",
+    "tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "memory_bytes": 536870912,
+    "nano_cpus": 1000000000,
+    "pids_limit": 128,
+    "restart_policy": "no",
+    "postgres_user": "emr4_delete_confirm_btr",
+    "postgres_password": "delete-confirm-behavior-authored-synthetic-only",
+    "postgres_database": "delete_confirm_behavior",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "application_user": "emr4_delete_http_app",
+    "application_password": "delete-http-authored-synthetic-only",
+    "startup_timeout_seconds": 90,
+    "command_timeout_seconds": 30,
+    "total_timeout_seconds": 360,
+    "readiness_observations": 3
+  },
+  "tenant_contract": {
+    "setting": "app.current_practice_id",
+    "transaction_local": true,
+    "context_after_isolation_before_reads": true,
+    "forced_rls_tables": [
+      "appointments",
+      "users",
+      "practitioners",
+      "patients",
+      "appointment_types",
+      "user_capability_grants",
+      "appointment_command_idempotency",
+      "appointment_audit_log"
+    ],
+    "application_role_superuser": false,
+    "application_role_bypass_rls": false
+  },
+  "public_private_contract": {
+    "public_schema": "raisa.delete_confirm_public_envelope.v1",
+    "private_schema": "appointment.delete_confirmation_receipt.v1",
+    "public_bytes_are_private_bytes": false,
+    "private_bytes_may_be_http_content": false,
+    "replay_public_bytes_identical": true,
+    "replay_private_bytes_identical": true
+  },
+  "scenarios": [
+    {"id": "DHI-S01", "kind": "proposal_binding", "expected": "non_mutating_verified_exact_proposal"},
+    {"id": "DHI-S02", "kind": "canonical_commit", "expected": "atomic_commit_public_private_separation"},
+    {"id": "DHI-S03", "kind": "compatibility_alias", "expected": "same_handler_commit"},
+    {"id": "DHI-S04", "kind": "response_loss_retry", "expected": "byte_identical_public_and_private_replay"},
+    {"id": "DHI-S05", "kind": "idempotency", "expected": "required_and_conflict"},
+    {"id": "DHI-S06", "kind": "authentication", "expected": "unauthorized_inactive_nonmutating"},
+    {"id": "DHI-S07", "kind": "cross_practice", "expected": "appointment_not_found"},
+    {"id": "DHI-S08", "kind": "version_binding", "expected": "structural_pre_session_and_stale_no_effect"},
+    {"id": "DHI-S09", "kind": "warning_acknowledgement", "expected": "atomic_block"},
+    {"id": "DHI-S10", "kind": "current_authority", "expected": "default_denial_and_revocation"},
+    {"id": "DHI-S11", "kind": "forced_scaffold_failure", "expected": "rollback_503_and_trigger_restored"},
+    {"id": "DHI-S12", "kind": "route_and_receipt_contract", "expected": "canonical_visible_alias_hidden_raw_delete_unchanged"}
+  ],
+  "minimum_hostile_mutations": 120,
+  "evidence_allowlist": [
+    "scenario_ids",
+    "decision_codes",
+    "http_status_classes",
+    "counts",
+    "versions",
+    "hashes",
+    "endpoint_names",
+    "containment_booleans",
+    "rls_catalogue_facts",
+    "cleanup_results"
+  ],
+  "evidence_forbidden": [
+    "jwt_or_bearer_values",
+    "hmac_or_secret_material",
+    "request_or_response_bodies",
+    "private_receipt_bytes",
+    "sql_or_connection_urls",
+    "passwords",
+    "container_network_or_runtime_ids",
+    "synthetic_row_values",
+    "unrestricted_database_output",
+    "raw_exception_text"
+  ],
+  "cleanup": {
+    "container_target": "captured_container_id_only",
+    "network_target": "captured_network_id_only_after_empty_reverification",
+    "engine_relay_before_container": true,
+    "post_remove_exact_id_absence_required": true
+  },
+  "forbidden_surfaces": [
+    "product_patient_clinical_historical_diary_or_protected_data",
+    "existing_or_product_database",
+    "adapter_composition_schema_migration_or_public_contract_edit",
+    "raw_delete_convergence",
+    "provider_adc_credentials_iam_browser_or_external_network",
+    "reusable_capability_or_client_selected_authority",
+    "ui_deployment_production_release_pages_or_protected_refs",
+    "docs_branding_or_unrelated_untracked_files"
+  ]
+}

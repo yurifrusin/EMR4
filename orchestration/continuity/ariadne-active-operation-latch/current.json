@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-delete-confirm-http-route-convergence",
-  "active_tranche": "Provider-free delete-confirm HTTP route convergence",
-  "objective": "Close exactly the five accepted delete-confirm route-transition gaps through one canonical and hidden-alias handler, one server-minted proposal-version binding, server-owned authentication/session/secret ingress, the accepted delete product adapter, the minimal public receipt schema and canonical public bytes, without executing a database command or changing raw DELETE behavior.",
-  "status": "complete",
-  "source_head": "c7a01edd96ebabf3ea2c07be89a5b405c9629853",
-  "authority_source": "The Continuity 307 / Compass 289 readiness acceptance, AGENTS.md Current Baton and Yuri's standing uninterrupted-development authority direct the narrowest provider-free delete-confirm HTTP route-convergence candidate.",
+  "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+  "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+  "objective": "Repair the proved route-producer canonicalization mismatch and missing transaction-local tenant context at the accepted delete physical seam, then exercise the exact canonical delete-confirm HTTP route and hidden alias against one owned disposable PostgreSQL 16 server using fixed authored-synthetic rows and prove non-mutating proposal, committed/replay/denial/rollback behavior and exact cleanup without changing raw DELETE, adapter/composition/schema/public meaning or opening product data, providers, deployment or protected refs.",
+  "status": "in_progress",
+  "source_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+  "authority_source": "The Continuity 308 / Compass 290 HTTP route-convergence acceptance, AGENTS.md Current Baton and Yuri's standing uninterrupted-development authority direct the next disposable PostgreSQL integration rehearsal.",
   "checkpoint": {
-    "completed_stage": "Provider-free delete-confirm HTTP route convergence is accepted at exact candidate c7a01edd96ebabf3ea2c07be89a5b405c9629853. Twelve scenarios, 149 hostile rejections, the 439-test closeout profile, 16/16 deterministic checks and one clean Gemini 3.7 Flash/high veto pass; Continuity 308 / Compass 290 and paired closeout summaries are prepared.",
-    "next_executable_stage": null,
+    "completed_stage": "The Extra-High plan, threat delta, exact four-file precondition boundary, twelve-scenario contract, evidence schema, serial PostgreSQL lifecycle, redaction rules, cleanup and worker allocation are frozen and schema/hash validated. No database process has started.",
+    "next_executable_stage": "Commit the frozen plan package, apply the two Sol-owned source repairs with their pure/static regressions, then re-evaluate and dispatch only the separable DeepSeek harness/test package.",
     "retry_counters": {
       "planning": 0,
-      "implementation": 1,
+      "implementation": 0,
       "review": 0,
       "verification": 0
     },
@@ -24,23 +24,25 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_synthetic_and_static_route_evidence_only",
-    "no_database_docker_sql_source_or_watcher_execution",
-    "no_accepted_delete_adapter_composition_or_physical_edit",
+    "provider_free_owned_disposable_postgresql16_and_authored_synthetic_only",
+    "no_existing_product_database_or_external_database_access",
+    "only_route_producer_canonicalization_may_change_to_delegate_to_the_accepted_adapter_helpers",
+    "only_physical_transaction_context_may_change_to_set_the_authenticated_practice_transaction_locally_after_isolation_begins",
+    "no_adapter_composition_schema_public_contract_or_raw_delete_edit",
     "no_raw_delete_convergence_or_route_local_write_fallback",
     "no_capability_provisioning_or_client_selected_authority",
     "no_product_patient_clinical_historical_diary_or_protected_data",
-    "no_provider_adc_credentials_iam_browser_or_external_network",
+    "no_provider_adc_credentials_iam_browser_or_external_network_except_owned_loopback_database_transport",
     "no_ui_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

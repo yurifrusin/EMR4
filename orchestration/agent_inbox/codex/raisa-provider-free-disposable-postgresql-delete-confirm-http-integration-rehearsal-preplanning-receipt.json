@@ -1,0 +1,97 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "The provider-free delete-confirm HTTP route composition is accepted and published at task HEAD 341d89b9a70c85f54247de364baf842b84543c8d; Continuity 308 / Compass 290 direct the disposable PostgreSQL HTTP integration rehearsal next.",
+    "next_executable_stage": "Derive and freeze the narrowest authored-synthetic disposable PostgreSQL 16 plan, exact scenario contract, serial lifecycle, evidence redaction and cleanup boundary before any database process starts.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+    "reason_codes": [],
+    "resolved_commit": "341d89b9a70c85f54247de364baf842b84543c8d",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "341d89b9a70c85f54247de364baf842b84543c8d"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The disposable database and application route share one mutable serial lifecycle; reserve DeepSeek only for separable static harness/test construction if freeze exposes a positive-leverage package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact-candidate veto is expected after deterministic live-local evidence and cleanup pass, but no review may start before plan freeze and admission.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native subagent delegation, and the shared disposable lifecycle is not a safe parallel package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan freeze",
+      "separable static harness package identified",
+      "database preexecution gate",
+      "deterministic candidate result",
+      "pre-verifier gate"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "plan and threat boundary",
+      "one owned disposable PostgreSQL lifecycle",
+      "real local HTTP execution",
+      "sanitized evidence and exact cleanup",
+      "deterministic admission before independent veto"
+    ]
+  },
+  "planned_action": "derive_and_freeze_provider_free_disposable_postgresql_delete_confirm_http_integration_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-http-route-convergence-sol-acceptance.md",
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-plan.md",
+      "orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/route-convergence-contract.json",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md",
+      "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md"
+    ],
+    "current_authority_allocation": "Sol owns plan meaning, the serial disposable database lifecycle, integration, recovery and acceptance. DeepSeek is reserved only for a later separable static harness package if leverage becomes positive after freeze. Gemini 3.7 Flash/high is reserved for a fresh independent veto after deterministic admission. Native subagents are declined by developer policy.",
+    "git_refs_and_worktree": "Task and origin task HEAD are exact 341d89b9a70c85f54247de364baf842b84543c8d on codex/ariadne-bernie-davida-parallel-seam. Accepted HTTP candidate c7a01edd96ebabf3ea2c07be89a5b405c9629853 and required source 648c8ec9805af63729264ea9c22fd695f062a741 remain ancestors. Local/origin master and handoff/current remain exact protected commit 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree was clean before the new latch/runtime state; unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after the continuing closeout. Its Current Baton accepts Continuity 308 / Compass 290 and directs the narrowest provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal.",
+    "protected_evidence_boundaries": "Only one owned disposable PostgreSQL 16 server, fixed authored-synthetic rows, local loopback application transport, accepted route/adapter/transaction source and sanitized evidence may be used. No existing or product database, product/patient/clinical/protected data, raw DELETE convergence, provider, ADC, credential/IAM change, browser, external service, UI, deployment, production, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

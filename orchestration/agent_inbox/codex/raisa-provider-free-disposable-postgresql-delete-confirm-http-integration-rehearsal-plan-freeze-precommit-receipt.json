@@ -1,0 +1,100 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
+    "completed_stage": "The Extra-High plan, threat delta, exact four-file precondition boundary, twelve-scenario contract, evidence schema, serial PostgreSQL lifecycle, redaction rules, cleanup and worker allocation are frozen and schema/hash validated. No database process has started.",
+    "next_executable_stage": "Commit the frozen plan package, apply the two Sol-owned source repairs with their pure/static regressions, then re-evaluate and dispatch only the separable DeepSeek harness/test package.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "341d89b9a70c85f54247de364baf842b84543c8d",
+    "reason_codes": [],
+    "resolved_commit": "341d89b9a70c85f54247de364baf842b84543c8d",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "341d89b9a70c85f54247de364baf842b84543c8d"
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "plan_freeze",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "After Sol's two short source repairs, the new lifecycle harness and contract tests form one stable separable mechanical package modeled on accepted delete-database and status-HTTP harnesses.",
+        "work_packages": [
+          "delete_confirm_http_postgresql_harness_and_contract_tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto is required only after deterministic live-local evidence, redaction and cleanup pass.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native subagent delegation, and no additional independent package exceeds coordination cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "source repair pass",
+      "DeepSeek candidate result",
+      "database preexecution gate",
+      "deterministic candidate result",
+      "pre-verifier gate"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol source precondition repairs before worker branch",
+      "one owned disposable PostgreSQL lifecycle",
+      "real local HTTP execution",
+      "sanitized evidence and exact cleanup",
+      "deterministic admission before independent veto"
+    ]
+  },
+  "planned_action": "commit_frozen_delete_confirm_http_postgresql_integration_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/rehearsal-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-evidence.schema.json",
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md"
+    ],
+    "current_authority_allocation": "Sol owns plan meaning, the two narrow integration preconditions, live database execution, recovery and acceptance. DeepSeek is allocated only the separable mechanical harness/test package after Sol's source repairs pass. Gemini 3.7 Flash/high remains reserved for the final independent veto. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task and origin task remain exact commit 341d89b9a70c85f54247de364baf842b84543c8d before the plan-freeze commit. Required commit 648c8ec9805af63729264ea9c22fd695f062a741 and accepted HTTP commit c7a01edd96ebabf3ea2c07be89a5b405c9629853 remain ancestors. Local/origin master and handoff/current remain exact protected commit 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the latch and named plan evidence are intentional; unrelated untracked files are excluded by explicit-path staging.",
+    "live_handover_current_baton": "AGENTS.md Current Baton directs the provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal after Continuity 308 / Compass 290.",
+    "protected_evidence_boundaries": "Only two narrow source precondition repairs, fixed authored-synthetic rows, one owned disposable PostgreSQL 16 server, local TestClient HTTP and sanitized evidence are admitted. No product or existing database, patient/clinical/protected data, adapter/composition/schema/migration/public meaning, raw DELETE, provider/credential/IAM, browser, external network, UI, deployment, production, release, Pages or protected-ref action is authorised. docs/branding and all unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
