@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "The single authorized occupied attempt passed all nine authority groups, all eleven transaction groups and 122 hostile mutations. AER-0355's candidate-versus-release correction is verified, the minimized evidence schema passes, the fixed loopback relay stopped, the owned container and internal network are absent, and the product service remains unchanged.",
+    "next_executable_stage": "Commit the occupied pass evidence and fresh pre-verifier acceptance receipt, bind one exact clean non-protected review candidate, then run exactly one fresh Gemini 3.7 Flash/high final veto with no fallback.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "56d0709a2a213e25093e9e2eaca4f2cb4947a1b9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "occupied_pass_pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker lane is closed and the recovery implementation plus occupied evidence are complete.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Tier-2 acceptance now requires the single fresh Gemini 3.7 Flash/high exact-candidate veto.",
+        "work_packages": [
+          "review exact clean source, minimized pass evidence and candidate-versus-release boundary"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "A second reviewer would stack review and cannot replace the required Gemini veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini veto result",
+      "review worktree postflight",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit occupied evidence",
+      "bind exact clean review candidate",
+      "one Gemini veto with no fallback",
+      "Sol accepts only after unchanged-worktree postflight"
+    ]
+  },
+  "planned_action": "commit_occupied_pass_and_admit_one_fresh_gemini_37_flash_high_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The response-release addendum, semantic freeze and exact-head preexecution receipt admitted one fresh attempt. That attempt passed all nine authority and eleven transaction groups, 122 hostile mutations, minimized schema validation and exact cleanup. The current focused suite passes 43/43 with the occupied evidence present, and the canonical 196-test profile passed before runtime.",
+    "current_authority_allocation": "Sol retains acceptance and integration ownership. DeepSeek is not applicable and complete for this recovery. Gemini 3.7 Flash/high through a fresh Antigravity project is now eligible for exactly one veto with no silent fallback. Native subagents remain declined.",
+    "git_refs_and_worktree": "Direct preexecution Git source was 56d0709a2a213e25093e9e2eaca4f2cb4947a1b9 before the pending occupied-evidence commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. All prior 635 untracked paths including docs/branding remain preserved; the sole additional untracked path is the newly generated minimized pass evidence. Label-filtered Docker checks report zero owned containers and networks.",
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated. The active Tier-2 delete-confirm behavior tranche requires exactly one final independent veto after deterministic and occupied pass evidence while protected integration remains closed.",
+    "protected_evidence_boundaries": "Review may inspect only the exact non-protected candidate, authored-synthetic minimized evidence, plans, harness and tests. It receives no implementation, acceptance, product data, route, provider, credential, protected-ref, deployment or release authority. The product service remains unchanged at SHA-256 8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

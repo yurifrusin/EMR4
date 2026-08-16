@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "commit_occupied_pass_and_admit_one_fresh_gemini_37_flash_high_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated. The active Tier-2 delete-confirm behavior tranche requires exactly one final independent veto after deterministic and occupied pass evidence while protected integration remains closed.",
+    "current_authority_allocation": "Sol retains acceptance and integration ownership. DeepSeek is not applicable and complete for this recovery. Gemini 3.7 Flash/high through a fresh Antigravity project is now eligible for exactly one veto with no silent fallback. Native subagents remain declined.",
+    "active_plan_and_acceptance": "The response-release addendum, semantic freeze and exact-head preexecution receipt admitted one fresh attempt. That attempt passed all nine authority and eleven transaction groups, 122 hostile mutations, minimized schema validation and exact cleanup. The current focused suite passes 43/43 with the occupied evidence present, and the canonical 196-test profile passed before runtime.",
+    "protected_evidence_boundaries": "Review may inspect only the exact non-protected candidate, authored-synthetic minimized evidence, plans, harness and tests. It receives no implementation, acceptance, product data, route, provider, credential, protected-ref, deployment or release authority. The product service remains unchanged at SHA-256 8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533.",
+    "git_refs_and_worktree": "Direct preexecution Git source was 56d0709a2a213e25093e9e2eaca4f2cb4947a1b9 before the pending occupied-evidence commit. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. All prior 635 untracked paths including docs/branding remain preserved; the sole additional untracked path is the newly generated minimized pass evidence. Label-filtered Docker checks report zero owned containers and networks."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "objective": "Exercise the exact accepted delete-confirm scaffold with authored-synthetic serial PostgreSQL behavior probes for database-owned authority generation and grants, current-authority checking, private receipt and attributable audit integrity, replay, rollback, cumulative timeout and ordered atomic transaction behavior, while opening no route, product data, concurrency or provider authority.",
+    "status": "in_progress",
+    "source_head": "56d0709a2a213e25093e9e2eaca4f2cb4947a1b9",
+    "authority_source": "After the published TX-S09 fail-closed stop, Yuri explicitly answered yes to the recommended one candidate-versus-release accounting repair and exactly one fresh occupied PostgreSQL attempt; all parent Tier-2 boundaries remain in force.",
+    "checkpoint": {
+      "completed_stage": "The single authorized occupied attempt passed all nine authority groups, all eleven transaction groups and 122 hostile mutations. AER-0355's candidate-versus-release correction is verified, the minimized evidence schema passes, the fixed loopback relay stopped, the owned container and internal network are absent, and the product service remains unchanged.",
+      "next_executable_stage": "Commit the occupied pass evidence and fresh pre-verifier acceptance receipt, bind one exact clean non-protected review candidate, then run exactly one fresh Gemini 3.7 Flash/high final veto with no fallback.",
+      "retry_counters": {
+        "planning": 3,
+        "implementation": 6,
+        "review": 0,
+        "verification": 11
+      },
+      "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "one_candidate_versus_release_accounting_repair_and_one_fresh_occupied_attempt_only",
+      "exact_x3y4z5a6b7c8_and_accepted_unmounted_delete_confirm_scaffold_only",
+      "authored_synthetic_serial_authority_grant_trigger_receipt_audit_replay_rollback_timeout_and_ordered_transaction_behavior_only",
+      "one_owned_internal_only_network_no_published_port_fixed_loopback_relay_tmpfs_postgresql_16_container_pull_never",
+      "no_concurrency_restart_unknown_commit_or_product_provisioning_claim",
+      "no_mounted_route_public_api_graphql_ui_watcher_event_or_product_command",
+      "no_existing_product_patient_clinical_historical_diary_or_protected_data",
+      "no_provider_adc_credentials_iam_browser_external_adapter_or_external_network",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "assessed_stage": "occupied_pass_pre_verifier_acceptance",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "not_applicable", "expected_leverage": "negative", "rationale": "The worker lane is closed and the recovery implementation plus occupied evidence are complete.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Tier-2 acceptance now requires the single fresh Gemini 3.7 Flash/high exact-candidate veto.", "work_packages": ["review exact clean source, minimized pass evidence and candidate-versus-release boundary"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "A second reviewer would stack review and cannot replace the required Gemini veto.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["commit occupied evidence", "bind exact clean review candidate", "one Gemini veto with no fallback", "Sol accepts only after unchanged-worktree postflight"],
+    "reassessment_triggers": ["Gemini veto result", "review worktree postflight", "tranche closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "fresh_five_source_rehydration_single_occupied_pass_schema_validation_cleanup_and_pre_verifier_acceptance", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Closed worker lane preserved."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high is eligible for one fresh final veto after occupied pass."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol validated the occupied pass and exact cleanup."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No stacked native review selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

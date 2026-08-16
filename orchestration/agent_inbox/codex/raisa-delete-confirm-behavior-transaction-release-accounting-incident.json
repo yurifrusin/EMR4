@@ -19,13 +19,13 @@
     "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal.py",
     "app/services/appointment_delete_physical.py"
   ],
-  "candidate_state": "bounded_release_accounting_correction_implemented_focused_admission_passed_occupied_verification_pending",
+  "candidate_state": "bounded_release_accounting_correction_verified_by_focused_and_single_occupied_pass_with_exact_cleanup",
   "workflow_disposition": "yuri_authorized_one_exact_correction_and_one_fresh_occupied_attempt",
   "recurrence_signature": "transaction_evidence.candidate_bytes_counted_as_release_before_context_success",
   "correction": {
-    "status": "implemented_pending_occupied_verification",
-    "action": "Yuri authorized the exact bounded recovery. The harness now separates candidate_response_bytes from released_response_bytes, promotes only after successful transaction-context exit, and has focused dynamic proof that new and replay success release only after exit while incomplete and outer-abort outcomes release zero bytes. Exactly one fresh occupied attempt remains before correction acceptance.",
+    "status": "corrected_and_verified",
+    "action": "Yuri authorized the exact bounded recovery. The harness separates candidate_response_bytes from released_response_bytes, promotes only after successful transaction-context exit, and has focused dynamic proof that new and replay success release only after exit while incomplete and outer-abort outcomes release zero bytes. The single authorized occupied attempt then passed all nine authority and eleven transaction groups with exact cleanup.",
     "prevention_control": "Transaction rehearsals must model candidate construction, durable commit and external release as separate states; only post-context-success promotion may enter disclosure evidence."
   },
-  "status": "correction_implemented_focused_verified_occupied_attempt_pending"
+  "status": "corrected_verified_occupied_pass_cleanup_verified"
 }
