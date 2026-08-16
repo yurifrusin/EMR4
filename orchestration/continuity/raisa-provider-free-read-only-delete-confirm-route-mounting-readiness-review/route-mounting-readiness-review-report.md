@@ -1,6 +1,7 @@
 # Provider-free read-only delete-confirm route-mounting readiness review report
 
 Date: 2026-08-17
+Timestamp: 2026-08-17T00:46:11.8521710+10:00 (Australia/Brisbane)
 
 Status: frozen evidence
 

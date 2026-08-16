@@ -1066,6 +1066,7 @@ def render_report(results: Dict[str, Any]) -> str:
     lines.append("# Provider-free read-only delete-confirm route-mounting readiness review report")
     lines.append("")
     lines.append("Date: 2026-08-17")
+    lines.append("Timestamp: 2026-08-17T00:46:11.8521710+10:00 (Australia/Brisbane)")
     lines.append("")
     lines.append("Status: frozen evidence")
     lines.append("")

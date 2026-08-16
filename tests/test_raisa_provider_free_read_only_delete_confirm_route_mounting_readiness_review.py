@@ -192,3 +192,18 @@ def test_released_evidence_json_conforms():
         assert set(dim) == {"order", "id", "classification", "citations", "markers"}
         assert isinstance(dim["citations"], list) and dim["citations"]
     assert all(isinstance(k, str) and isinstance(v, str) for k, v in payload["source_bindings"].items())
+
+
+def test_report_contains_date_and_timestamp_in_order():
+    report = review.render_report(_result())
+    lines = report.splitlines()
+    date_line = "Date: 2026-08-17"
+    timestamp_line = "Timestamp: 2026-08-17T00:46:11.8521710+10:00 (Australia/Brisbane)"
+    assert date_line in lines
+    assert timestamp_line in lines
+    date_idx = lines.index(date_line)
+    timestamp_idx = lines.index(timestamp_line)
+    # The timestamp must appear immediately after the date, near the top of the
+    # report, matching AGENTS.md section 10 item 8.
+    assert timestamp_idx == date_idx + 1
+    assert date_idx < 5
