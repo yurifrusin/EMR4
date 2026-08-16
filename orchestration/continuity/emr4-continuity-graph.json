@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 306,
+  "graph_revision": 307,
   "harvests": [],
   "nodes": [
     {
@@ -20993,9 +20993,98 @@
         "No schema, database execution, capability provisioning or product data is admitted.",
         "Provider, UI, deployment, release, Pages and protected-ref authority remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review",
+      "title": "Provider-free read-only delete-confirm route-mounting readiness review",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-16T17:27:22Z",
+      "updated_at": "2026-08-16T17:27:22Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "da03039f637d3808c8785a6d6fc95309650044d9",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Provider-free read-only static route-readiness evidence only; no route or product runtime authority.",
+          "Seven lower-layer dimensions are satisfied and five bounded route-transition gaps remain.",
+          "Private six-field receipt bytes remain command truth; future HTTP delivery uses only the canonical validated public projection."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-delete-confirm-route-mounting-readiness-review",
+          "source": "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept no lower-layer blocker and continue to one bounded provider-free delete-confirm HTTP route-convergence candidate."
+        }
+      ],
+      "claim_scope": [
+        "All 23 canonical-LF bindings match before the exact twelve-dimension classification.",
+        "The accepted matrix is seven satisfied, five route-transition gaps and zero blocking gaps.",
+        "167 hostile contract mutations fail closed.",
+        "The final 412-test provider-free profile, Ruff, compilation, whitespace and byte-identical regeneration pass.",
+        "One clean eight-command Gemini 3.7 Flash/high veto passes at unchanged exact candidate HEAD and tree.",
+        "AER-0364 and AER-0365 preserve the corrected timestamp and commit-ref evidence incidents."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-316.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json",
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-mechanical-correction-worker-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-worktree-preflight-v2.json",
+          "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-command-manifest.json",
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Canonical and hidden-alias route convergence is not implemented by this review.",
+        "Raw compatibility DELETE remains separate and outside the accepted confirmation envelope.",
+        "No schema/database execution, capability, product data, provider, deployment, Pages or protected-ref authority is opened."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T12:07:55Z"
+  "updated_at": "2026-08-16T17:27:22Z"
 }

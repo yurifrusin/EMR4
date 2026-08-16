@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 288,
-  "updated_at": "2026-08-16T12:07:55Z",
-  "source_graph_revision": 306,
-  "orientation_statement": "EMR4 is at Continuity 306 / Compass 288. Delete-confirm now has accepted unmounted composition and server-owned adapter services; a provider-free read-only route-mounting readiness review is next.",
+  "map_revision": 289,
+  "updated_at": "2026-08-16T17:27:22Z",
+  "source_graph_revision": 307,
+  "orientation_statement": "EMR4 is at Continuity 307 / Compass 289. Delete-confirm has no remaining lower-layer route blocker; one provider-free HTTP route-convergence candidate is next.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3523,46 +3523,77 @@
         "scripts/raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity_update.py",
         "tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review",
+      "lineage_parent": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
+      "strategic_role": "Prove delete-confirm route readiness without opening route authority",
+      "outcome": "No hidden lower-layer blocker remains; five exact route-transition gaps are frozen.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md",
+        "docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-mechanical-correction-worker-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-316.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-packet.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-command-manifest.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-worktree-preflight-v2.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json",
+        "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity_update.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation",
-    "strategic_role": "Delete-confirm composition is implemented off-route before mounting decisions",
-    "why_now": "The accepted architecture could now be realized without opening database or route authority.",
-    "outcome": "Unmounted services enforce server-owned ingress, exact proposal/locked re-admission and byte-stable private-to-public replay.",
+    "node_id": "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review",
+    "strategic_role": "Delete-confirm is ready for bounded HTTP route convergence",
+    "why_now": "The unmounted physical, authority, composition and response foundations pass and no lower-layer blocker remains.",
+    "outcome": "Five route-transition gaps are exact: canonical alias, version binding, server dependencies, public schema and canonical public bytes.",
     "unlocks": [
-      "Freeze one provider-free read-only route-mounting readiness review.",
-      "Measure canonical/hidden alias convergence against the implemented services without route edits."
+      "Freeze one provider-free delete-confirm HTTP route-convergence plan.",
+      "Connect one canonical/hidden-alias handler to the accepted adapter without reopening database foundations."
     ],
     "does_not_solve": [
-      "Route editing, mounting, calling or product execution.",
-      "Schema/database execution, capability provisioning or product data.",
+      "Mounted route behavior, HTTP execution or product command runtime.",
+      "Database execution, capability provisioning or product data.",
       "Provider/credential activity, UI, deployment, release, Pages or protected refs."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-plan.md",
-      "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation/implementation-contract.json",
-      "app/services/appointment_delete_composition.py",
-      "app/services/appointment_delete_product_adapter.py",
-      "tests/test_appointment_delete_composition.py",
-      "tests/test_appointment_delete_product_adapter.py",
-      "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-worker-receipt.json",
-      "orchestration/agent_inbox/deepseek/raisa-delete-confirm-composition-product-adapter-implementation-correction-worker-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-worker-candidate-rejection.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-sol-recovery-lease.md",
-      "docs/ariadne-agent-error-correction-register-revision-312.md",
-      "docs/ariadne-agent-error-correction-register-revision-313.md",
-      "docs/ariadne-agent-error-correction-register-revision-314.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-pre-verifier-acceptance-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-review-packet.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest.json",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-gemini37-command-manifest-admission.json",
-      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-composition-product-adapter-gemini37-review-receipt.json",
-      "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-delete-confirm-composition-product-adapter-implementation-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-composition-product-adapter-implementation.md",
-      "scripts/raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity_update.py",
-      "tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py"
+      "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md",
+      "docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json",
+      "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+      "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+      "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py",
+      "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md",
+      "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json",
+      "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-mechanical-correction-worker-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-316.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-worktree-preflight-v2.json",
+      "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md",
+      "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity_update.py",
+      "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity.py"
     ]
   },
   "decision_horizon": [
@@ -3735,9 +3766,9 @@
       "strategic_question": "How should Raisa give each authorised Bureau the smallest current practice-scoped context projection it needs while preserving source, freshness, authority and privacy boundaries?",
       "why_it_matters": "A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinician One, Consultant and future Bureaus reuse typed operational, institutional and evidence context without creating shared model memory, a shadow source of truth or cross-Bureau authority.",
       "prerequisites": [
-        "Preserve the accepted delete-confirm physical seam, private receipt and raw DELETE isolation.",
-        "Review route-mounting readiness read-only before any canonical/hidden alias edit.",
-        "Keep database execution, capabilities, product data, providers and protected integration separately gated."
+        "Preserve the accepted private-receipt/public-projection separation and raw DELETE isolation.",
+        "Converge the five frozen transition gaps through one provider-free route handler and adapter call.",
+        "Keep database execution, capability, product data, providers and protected integration separately gated."
       ],
       "boundary_changes": [],
       "evidence": [
@@ -4655,7 +4686,30 @@
         "orchestration/human_inbox/yuri/2026-08-16--delete-confirm-composition-product-adapter-implementation.md",
         "scripts/raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity_update.py",
         "tests/test_raisa_provider_free_unmounted_delete_confirm_composition_product_adapter_implementation_continuity.py",
-        "docs/ariadne-agent-error-correction-register-revision-314.md"
+        "docs/ariadne-agent-error-correction-register-revision-314.md",
+        "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md",
+        "docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json",
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-mechanical-correction-worker-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-316.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-packet.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-command-manifest.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-gemini37-worktree-preflight-v2.json",
+        "orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json",
+        "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity_update.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity.py"
       ]
     },
     {
@@ -5500,6 +5554,7 @@
     }
   ],
   "map_limits": [
+    "The delete-confirm readiness result is read-only evidence; no route, schema behavior, database, capability or product runtime is opened.",
     "The accepted delete-confirm services remain unmounted and provider-free; route/schema/database/capability/product-data authority is still closed.",
     "The accepted delete-confirm response architecture opens no route, schema, database, capability or product runtime; its next implementation remains provider-free and unmounted.",
     "The accepted delete-confirm route review opens no route or product runtime; literal mounting remains distinct from authority-kernel and byte-authoritative response convergence.",

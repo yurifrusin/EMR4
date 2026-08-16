@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 314
+    assert register["register_revision"] == 316
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 364)
+        f"AER-{index:04d}" for index in range(1, 366)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 253
+    assert len(agent_incidents) == 255
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 363
+    assert report["incident_count"] == 365
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3613,20 +3613,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 314
-    assert report["incident_count"] == 363
+    assert report["register_revision"] == 316
+    assert report["incident_count"] == 365
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 253,
+        "agent_behavior": 255,
         "harness": 44,
         "repository": 56,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 57,
-        "evidence_misreport": 49,
+        "evidence_misreport": 50,
         "harness_failure": 44,
-        "output_contract_violation": 104,
+        "output_contract_violation": 105,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
         "repository_defect": 56,
@@ -3634,8 +3634,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 105,
-        "canonical_unchanged": 221,
-        "untrusted_partial_worktree": 37,
+        "canonical_unchanged": 222,
+        "untrusted_partial_worktree": 38,
     }
     receipt_event_recurrence = next(
         row
@@ -5733,6 +5733,32 @@ def test_aer_0363_requires_local_commit_resolution_for_git_ref_evidence() -> Non
         == incidents["AER-0356"]["recurrence_signature"]
     )
     assert "git cat-file" in incident["correction"]["prevention_control"]
+
+
+def test_aer_0364_records_report_timestamp_correction() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0364"
+    ]
+
+    assert incident["role"] == "implementer"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "timestamp" in incident["observed_error"].lower()
+    assert "adjacent" in incident["correction"]["prevention_control"].lower()
+
+
+def test_aer_0365_records_tree_object_in_commit_ref_evidence() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0365"
+    ]
+
+    assert incident["role"] == "orchestrator"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "tree object id" in incident["observed_error"].lower()
+    assert "before any model call" in incident["observed_error"].lower()
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

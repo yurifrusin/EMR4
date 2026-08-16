@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 314,
+  "register_revision": 316,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-16",
+    "source_cutoff_on": "2026-08-17",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -14575,6 +14575,85 @@
           "orchestration/harness_settings/evidence_led_workflow.yaml",
           "tests/test_ariadne_evidence_gate.py",
           "docs/ariadne-agent-error-correction-register-revision-314.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0364",
+      "attempt_id": "raisa-delete-confirm-route-readiness-deepseek-implementation-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-implementation-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every newly authored tranche report must carry both a Date and an ISO 8601 Timestamp with explicit Australia/Brisbane offset, while remaining reproducible from frozen inputs.",
+      "observed_error": "The original completed five-output candidate generated a reproducible readiness report with Date but omitted the mandatory Timestamp line.",
+      "detection_method": "Sol read all five worker outputs completely and compared the report header with AGENTS.md section 10 item 8 before candidate admission.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-deepseek-mechanical-correction-packet.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.generated_tranche_report_omitted_mandatory_timestamp",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use the sole bounded same-lane correction to add the frozen ISO timestamp to the report renderer, regenerate the report and add an exact ordered header assertion.",
+        "prevention_control": "The focused report test now rejects a generated readiness report unless its exact Date and Timestamp lines are adjacent near the top; the corrected candidate then passed deterministic admission and a fresh Gemini veto.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-mechanical-correction-worker-receipt.json",
+          "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+          "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-316.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0365",
+      "attempt_id": "raisa-delete-confirm-route-readiness-pre-verifier-acceptance-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_receipt_builder",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "The continuation source_evidence.git_refs_and_worktree field may name full object IDs only when they are commit refs resolvable by the existing AER-0363 guard.",
+      "observed_error": "The first pre-verifier runtime sentence included the exact candidate tree object ID in the commit-ref evidence field, so the existing commit-resolution guard correctly returned revision_required before any model call.",
+      "detection_method": "The pre-verifier continuation receipt returned git_refs_evidence_object_unresolvable while the active-operation source commit itself resolved and remained an ancestor of HEAD.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-runtime-state.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_refs_evidence_included_noncommit_tree_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the tree object ID from the commit-ref evidence field, retain the exact commit HEAD, preserve the failed receipt and generate a distinct passing v2 receipt before verifier dispatch.",
+        "prevention_control": "The AER-0363 local commit-resolution guard remains the prevention control; continuation evidence must describe tree identity outside the commit-ref field or omit it when the exact commit already binds the tree.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "docs/ariadne-agent-error-correction-register-revision-316.md"
         ]
       },
       "status": "corrected"

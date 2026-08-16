@@ -7,8 +7,9 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-NODE_ID = "raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation"
-SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
+NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review"
+SOURCE_HEAD = "da03039f637d3808c8785a6d6fc95309650044d9"
+UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
 BEHAVIOR_SOURCE_HEAD = "49dd2aaa72877adb844da4d0d5d5bb28039c90c8"
@@ -52,11 +53,11 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 306
+    assert graph["graph_revision"] == 307
     assert graph["nodes"][-1]["id"] == NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == SOURCE_HEAD
-    assert compass["map_revision"] == 288
-    assert compass["source_graph_revision"] == 306
+    assert compass["map_revision"] == 289
+    assert compass["source_graph_revision"] == 307
     assert compass["current_position"]["node_id"] == NODE_ID
 
 
@@ -73,17 +74,21 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_acceptance = _table_row(
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
-    assert "Continuity 306 / Compass 288" in current
+    assert "Continuity 307 / Compass 289" in current
     assert (
-        "raisa_provider_free_unmounted_delete_confirm_composition_product_"
-        "adapter_implementation_pass"
+        "raisa_provider_free_read_only_delete_confirm_route_mounting_"
+        "readiness_review_pass"
     ) in current
     assert SOURCE_HEAD in current
-    assert "523-test provider-free profile" in current.lower()
-    assert "aer-0359 through aer-0363" in current.lower()
-    assert "closed sol recovery" in current.lower()
+    assert "all 23 bindings" in current.lower()
+    assert "7/5/0 matrix" in current.lower()
+    assert "167 hostile" in current.lower()
+    assert "final 412-test provider-free profile" in current.lower()
+    assert "aer-0364/0365" in _table_row(
+        text, "Ariadne agent error and correction register acceptance"
+    ).lower()
     assert (
-        "no route, schema, database, capability, product data or runtime is opened"
+        "no route or runtime is opened"
         in current.lower()
     )
     assert "gemini 3.7 flash/high" in current.lower()
@@ -92,7 +97,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "risk_weighted_workflow.yaml" in reform_acceptance
     assert ARCHITECTURE_SOURCE_HEAD in relation
     assert SOURCE_HEAD in implementation_relation
+    assert UNMOUNTED_SOURCE_HEAD in implementation_relation
     assert SOURCE_HEAD in product
+    assert UNMOUNTED_SOURCE_HEAD in product
     assert ROUTE_REVIEW_SOURCE_HEAD in relation
     assert (
         "routes, capabilities and product runtime remain closed"
@@ -139,12 +146,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert (
-        "provider-free read-only delete-confirm route-mounting readiness review"
+        "provider-free delete-confirm http route-convergence candidate"
         in next_work.lower()
     )
     assert "standing authority" in next_work.lower()
-    assert "canonical/hidden alias convergence" in next_work.lower()
-    assert "may not edit, mount or call a route" in next_work.lower()
+    assert "canonical/hidden-alias handler" in next_work.lower()
+    assert "raw delete convergence" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected refs" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
@@ -183,10 +190,10 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free read-only delete-confirm route-mounting readiness review",
+        "provider-free delete-confirm http route-convergence candidate",
         "standing authority",
-        "provision capability",
-        "may not edit, mount or call a route",
+        "capability provisioning",
+        "raw delete convergence",
         "ui",
         "docs/branding/",
         "stage explicit paths only",

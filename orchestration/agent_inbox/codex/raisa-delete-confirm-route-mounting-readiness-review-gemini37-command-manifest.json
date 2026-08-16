@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/delete-confirm-route-readiness-gemini-da03039f",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/delete-confirm-route-readiness-gemini-da03039f",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py",
+        "tests/test_api_spine_appointment_command_alignment_inventory.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_agents_acceptance_index.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check",
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py"
+      ]
+    },
+    {"id": "C06", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review", "--no-write"]},
+    {"id": "C07", "argv": ["git", "diff", "--check", "76f06373393c7084c5c4b230e8d8d5f6f426734a..da03039f637d3808c8785a6d6fc95309650044d9"]},
+    {"id": "C08", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

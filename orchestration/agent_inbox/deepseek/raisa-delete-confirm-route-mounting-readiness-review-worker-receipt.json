@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All done. Here is the final report.\n\n## Result\n\n**Commit:** `726ae609ee655c5922eeef855d827fe6d57b8a57` on branch `codex/worker-delete-confirm-route-readiness-76f06373` (not pushed).\n\n**Exact changed paths (5 owned outputs, committed):**\n1. `scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py`\n2. `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py`\n3. `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py`\n4. `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json`\n5. `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md`\n\nNo frozen plan/threat-delta/contract/schema/latch/AGENTS/source/test was edited. Working tree is clean after commit.\n\n## Verification results\n\n- **Ariadne provider-free pytest** (exact command): `........................  [100%]` \u2014 **24/24 tests passed** (12 focused review + 12 plan-freeze).\n- **Ruff** (`ruff.exe check` on the three .py owned outputs): **All checks passed!**\n- **`git diff --check`**: clean.\n- Also verified: `py_compile` on all three `.py` files passes; standalone `python scripts/... --no-write` exits 0.\n\n## Implementation highlights\n\n- **Strict UTF-8 canonical-LF hashing with bare-CR rejection** proves all 23 contract bindings before any classification (verified live against the frozen contract).\n- **No `app` import**: script and tests use stdlib only; an AST-based test enforces no `app` import.\n- **12 dimensions emitted in exact order** with classification, exact source citations (paths), and concise evidence markers \u2014 7 `satisfied`, 5 `route_transition_gap`, 0 `blocking_gap`, verdict **`ready_for_bounded_route_convergence_candidate`**; fails closed on any deviation.\n- **Five transition gaps proved** (none claimed implemented): `canonical_identity_and_alias`, `proposal_version_binding_carriage`, `server_authority_and_session_ingress`, `public_response_schema`, `canonical_public_byte_delivery`.\n- **Private/public byte separation explicitly proved**: the six-field private stored receipt bytes are carried separately as `stored_response_bytes`; the public HTTP envelope is derived via `delete_confirm_envelope_projection` + `canonical_delete_confirm_envelope_bytes`, which the future route must use for both first delivery and replay.\n- **Hostile mutation suite**: **167** deterministic contract mutations generated and all rejected (\u2265 72 required); count recorded in the released JSON (`hostile_mutations_rejected: 167`).\n- **Reproducible regeneration**: rerunning the script regenerates byte-identical JSON and Markdown (verified by repeated SHA-256).\n\n## Blockers\n\nNone. The expected evidence-led matrix holds, so no `blocking_gap` and no narrower unmounted prerequisite is claimed. No integration or acceptance authority was exercised.",
+  "usage": {
+    "input_tokens": 106275,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 11388800,
+    "output_tokens": 111985,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 9.035400000000003,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
