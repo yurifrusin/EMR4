@@ -36,7 +36,7 @@ x-emr4-current-backend-alignment:
     - current_backend_path: /appointments/proposals/delete-confirm
       canonical_openapi_path: /appointments/proposals/delete/confirm
       operation_id: confirmAppointmentDeleteProposal
-      disposition: documented_current_backend_alias_candidate
+      disposition: canonical_runtime_path_mounted_compatibility_alias_retained
     - current_backend_path: /appointments/proposals/slot-search/selection
       canonical_openapi_path: /appointments/proposals/slot-search/select
       operation_id: selectSlotForCreateProposal
@@ -938,6 +938,28 @@ components:
           maxLength: 64
           readOnly: true
 
+    DeleteProposalVersionBinding:
+      type: object
+      required: [schema_version, source_version, evidence_signature, signature]
+      additionalProperties: false
+      properties:
+        schema_version:
+          const: raisa.delete_proposal_version_binding.v1
+        source_version:
+          type: integer
+          minimum: 1
+          readOnly: true
+        evidence_signature:
+          type: string
+          minLength: 64
+          maxLength: 64
+          readOnly: true
+        signature:
+          type: string
+          minLength: 64
+          maxLength: 64
+          readOnly: true
+
     AppointmentDeleteProposalCommand:
       type: object
       required: [meta, appointment_id, delete_reason]
@@ -959,6 +981,8 @@ components:
           properties:
             intent:
               const: delete_appointment
+            delete_proposal_version_binding:
+              $ref: "#/components/schemas/DeleteProposalVersionBinding"
 
     AppointmentCreateConfirmationCommand:
       type: object
@@ -1181,7 +1205,7 @@ components:
 
     AppointmentDeleteConfirmationCommand:
       type: object
-      required: [meta, confirmer, confirmed, delete_proposal, confirmed_warnings, freshness]
+      required: [meta, confirmer, confirmed, delete_proposal, confirmed_warnings, freshness, delete_proposal_version_binding]
       additionalProperties: false
       properties:
         meta:
@@ -1192,6 +1216,8 @@ components:
           const: true
         delete_proposal:
           $ref: "#/components/schemas/AppointmentDeleteProposalEnvelope"
+        delete_proposal_version_binding:
+          $ref: "#/components/schemas/DeleteProposalVersionBinding"
         confirmed_warnings:
           type: array
           items:

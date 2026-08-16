@@ -111,8 +111,9 @@ def test_delete_confirm_preflight_keeps_closed_gates_and_records_sprint_144_wiri
 
     assert "Header(" in delete_route
     assert "Idempotency-Key" in delete_route
-    assert "claim_appointment_command(" in delete_route
-    assert "complete_appointment_command(" in delete_route
+    assert "compose_product_delete_confirm(" in delete_route
+    assert "claim_appointment_command(" not in delete_route
+    assert "complete_appointment_command(" not in delete_route
     assert "Idempotency-Key" not in raw_delete_route
 
 

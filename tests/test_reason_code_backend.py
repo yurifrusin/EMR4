@@ -196,9 +196,9 @@ def test_delete_proposal_confirm_persists_status_reason_code_and_text_reason(
 
     confirm_resp = client.post(DELETE_CONFIRM_URL, json=payload, headers=_auth_delete_confirm(token))
     assert confirm_resp.status_code == 200, confirm_resp.text
-    appointment = confirm_resp.json()["appointment"]
-    assert appointment["status_reason_code"] == "DUPLICATE_BOOKING"
-    assert appointment["cancellation_reason"] == "Duplicate booking"
+    receipt = confirm_resp.json()["receipt"]
+    assert receipt["status_reason_code"] == "DUPLICATE_BOOKING"
+    assert receipt["cancellation_reason"] == "Duplicate booking"
 
     entries = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id

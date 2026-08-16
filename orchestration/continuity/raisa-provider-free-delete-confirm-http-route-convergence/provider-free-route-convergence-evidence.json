@@ -1,0 +1,169 @@
+{
+  "checks": [
+    {
+      "description": "frozen route-convergence contract validates against its JSON schema",
+      "details": "jsonschema validation passed",
+      "id": "contract_schema",
+      "passed": true
+    },
+    {
+      "description": "read-only pre-edit hashes still match the frozen contract",
+      "details": "11 read-only inputs verified",
+      "id": "pre_edit_hashes",
+      "passed": true
+    },
+    {
+      "description": "safe proposal carries canonical endpoint/signed evidence/opaque positive-version binding",
+      "details": "canonical endpoint, signed evidence and opaque positive-version binding carried",
+      "id": "DHC-S01",
+      "passed": true
+    },
+    {
+      "description": "canonical handler calls accepted adapter exactly once with server-owned ingress",
+      "details": "exactly one adapter call with server-owned ingress and no route-local behavior",
+      "id": "DHC-S02",
+      "passed": true
+    },
+    {
+      "description": "historical alias resolves to same handler and is absent from generated OpenAPI",
+      "details": "both paths bind one handler; alias absent from OpenAPI",
+      "id": "DHC-S03",
+      "passed": true
+    },
+    {
+      "description": "committed and replay return byte-identical canonical public-envelope bytes; private stored bytes differ and are never delivered",
+      "details": "byte-identical public bytes; private stored bytes differ and are never HTTP content",
+      "id": "DHC-S04",
+      "passed": true
+    },
+    {
+      "description": "minimal public schema admits exact receipt envelope and rejects forbidden fields",
+      "details": "exact receipt envelope admitted; forbidden/extra fields rejected",
+      "id": "DHC-S05",
+      "passed": true
+    },
+    {
+      "description": "absent/blank/malformed/tampered/evidence-mismatched version bindings fail closed",
+      "details": "all five hostile binding variants rejected",
+      "id": "DHC-S06",
+      "passed": true
+    },
+    {
+      "description": "invalid auth/inactive/non-mutating role/missing secret is a closed adapter outcome",
+      "details": "all invalid contexts returned closed 403 adapter outcomes",
+      "id": "DHC-S07",
+      "passed": true
+    },
+    {
+      "description": "missing/blank/conflicting idempotency preserves adapter closed mapping",
+      "details": "blank idempotency returned 409 idempotency_key_required; route missing/blank maps to 400",
+      "id": "DHC-S08",
+      "passed": true
+    },
+    {
+      "description": "warning acknowledgement and stale source-version checks remain owned by the adapter",
+      "details": "route carries no warning/stale/source-version logic; adapter owns it",
+      "id": "DHC-S09",
+      "passed": true
+    },
+    {
+      "description": "projection/serialization failure releases no private bytes and yields no route-local write",
+      "details": "invalid envelopes fail closed; route has no write and never serves stored bytes",
+      "id": "DHC-S10",
+      "passed": true
+    },
+    {
+      "description": "API Spine/backend inventory/schema/Diary descriptor agree on canonical identity",
+      "details": "router, OpenAPI, inventory, Diary descriptor and drift guard agree",
+      "id": "DHC-S11",
+      "passed": true
+    },
+    {
+      "description": "raw DELETE and non-delete families unchanged",
+      "details": "raw DELETE route and all non-delete confirm families remain present",
+      "id": "DHC-S12",
+      "passed": true
+    },
+    {
+      "description": "at least 100 meaningful hostile contract mutations rejected",
+      "details": "113/134 hostile contract mutations rejected",
+      "id": "hostile_contract_mutations",
+      "passed": true
+    },
+    {
+      "description": "hostile public-envelope mutations rejected by the canonical serializer",
+      "details": "36/36 hostile envelope mutations rejected",
+      "id": "hostile_envelope_mutations",
+      "passed": true
+    }
+  ],
+  "closed_boundaries": {
+    "database_opened": false,
+    "docker_used": false,
+    "network_opened": false,
+    "protected_evidence_accessed": false,
+    "provider_used": false,
+    "sql_executed": false
+  },
+  "contract_schema": "raisa.delete_confirm_http_route_convergence_contract.v1",
+  "hostile_mutations_rejected": 149,
+  "one_adapter_call": true,
+  "one_handler": true,
+  "private_public_byte_separation": true,
+  "private_public_byte_separation_markers": [
+    "public_body_serialized_through_canonical_delete_confirm_envelope_bytes",
+    "stored_response_bytes_never_http_content",
+    "committed_and_replay_share_pure_public_projection"
+  ],
+  "raw_delete_unchanged": true,
+  "read_only_input_hashes": {
+    "app/config.py": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e",
+    "app/dependencies.py": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc",
+    "app/services/appointment_delete_composition.py": "ed6a5e705808c71ecf4edcec837c6be2ec790660bf32a85357bda68c2159aa15",
+    "app/services/appointment_delete_physical.py": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533",
+    "app/services/appointment_delete_product_adapter.py": "a7e1702c61258acfb51f634883086ad5993c8ab63989eace9cfa1102b2532c59",
+    "app/services/bernie_turn_evidence.py": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467",
+    "docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md": "9629f593629133b8f8a5ed178ccb474ff2ccd824859bb1f3f4bb0d4504e064c0",
+    "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md": "27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5",
+    "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md": "ad4b440bd8a6a01194a32bc27ec0872993630505f4026626a5ba186598813197",
+    "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json": "59c7c84177a38c76d0606183736af1843cce6481a72a19d8710d7a992b6a039f",
+    "orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md": "e60101a4d60019daee4471088d1fcdc48b7a28e9320ead00eaea6899b4765ded"
+  },
+  "result": "raisa_provider_free_delete_confirm_http_route_convergence_pass",
+  "scenario_outcomes": {
+    "DHC-S01": "passed",
+    "DHC-S02": "passed",
+    "DHC-S03": "passed",
+    "DHC-S04": "passed",
+    "DHC-S05": "passed",
+    "DHC-S06": "passed",
+    "DHC-S07": "passed",
+    "DHC-S08": "passed",
+    "DHC-S09": "passed",
+    "DHC-S10": "passed",
+    "DHC-S11": "passed",
+    "DHC-S12": "passed"
+  },
+  "schema_version": "raisa.delete_confirm_http_route_convergence_evidence.v1",
+  "source_head": "f78524b41c909c74acc93b2818be8fc871ed8fd3",
+  "summary": {
+    "checks_failed": 0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "hostile_mutations_rejected": 149,
+    "scenario_outcomes": {
+      "DHC-S01": "passed",
+      "DHC-S02": "passed",
+      "DHC-S03": "passed",
+      "DHC-S04": "passed",
+      "DHC-S05": "passed",
+      "DHC-S06": "passed",
+      "DHC-S07": "passed",
+      "DHC-S08": "passed",
+      "DHC-S09": "passed",
+      "DHC-S10": "passed",
+      "DHC-S11": "passed",
+      "DHC-S12": "passed"
+    }
+  }
+}

@@ -81,7 +81,7 @@ CONFIRMATION_CONTRACT_MATRIX = {
     },
     "delete": {
         "handler": "confirm_delete_proposal_route",
-        "route": "POST /api/v1/appointments/proposals/delete-confirm",
+        "route": "POST /api/v1/appointments/proposals/delete/confirm",
         "operation_id_constant": "_DELETE_CONFIRM_OPERATION_ID",
         "operation_id_value": "confirmAppointmentDeleteProposal",
         "route_family_constant": "_DELETE_CONFIRM_ROUTE_FAMILY",
@@ -90,6 +90,7 @@ CONFIRMATION_CONTRACT_MATRIX = {
         "end_marker": "def propose_delete_appointment(",
         "has_confirm_body_check": True,
         "has_freshness_revalidation": True,
+        "execution_mode": "product_adapter",
     },
 }
 
@@ -318,6 +319,23 @@ def test_status_confirmation_uses_the_accepted_product_adapter_once():
     assert 'authenticated_bearer_token: str = Depends(oauth2_scheme)' in route
     assert '_status_confirm_domain_secret("proposal-version")' in route
     assert "result.stored_response_bytes" in route
+    assert "claim_appointment_command(" not in route
+    assert "complete_appointment_command(" not in route
+    assert "db.commit()" not in route
+
+
+def test_delete_confirmation_uses_the_accepted_product_adapter_once():
+    router_text = _read(ROUTER)
+    details = CONFIRMATION_CONTRACT_MATRIX["delete"]
+    route = _route_body(router_text, details["handler"], details["end_marker"])
+
+    assert route.count("compose_product_delete_confirm(") == 1
+    assert "command_session_factory=command_session_factory" in route
+    assert "proposal_version_binding=body.delete_proposal_version_binding" in route
+    assert 'authenticated_bearer_token: str = Depends(oauth2_scheme)' in route
+    assert '_delete_confirm_domain_secret("proposal-version")' in route
+    assert "result.stored_response_bytes" in route
+    assert "canonical_delete_confirm_envelope_bytes(" in route
     assert "claim_appointment_command(" not in route
     assert "complete_appointment_command(" not in route
     assert "db.commit()" not in route

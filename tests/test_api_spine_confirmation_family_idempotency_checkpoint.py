@@ -96,6 +96,11 @@ def test_router_wires_each_confirmation_family_to_owned_idempotency_seam():
             assert "claim_appointment_command(" not in route
             assert "complete_appointment_command(" not in route
             continue
+        if name == "delete":
+            assert "compose_product_delete_confirm(" in route
+            assert "claim_appointment_command(" not in route
+            assert "complete_appointment_command(" not in route
+            continue
         assert "claim_appointment_command(" in route
         assert "complete_appointment_command(" in route
         assert f"operation_id={details['operation']}" in route

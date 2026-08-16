@@ -55,12 +55,11 @@ def test_openapi_records_canonical_path_alignment_and_remaining_drift():
     assert drift["/appointments/proposals/status-confirm"]["disposition"] == (
         "canonical_runtime_path_mounted_compatibility_alias_retained"
     )
-    assert all(
-        drift[path]["disposition"] == "documented_current_backend_alias_candidate"
-        for path in (
-            "/appointments/proposals/delete-confirm",
-            "/appointments/proposals/slot-search/selection",
-        )
+    assert drift["/appointments/proposals/delete-confirm"]["disposition"] == (
+        "canonical_runtime_path_mounted_compatibility_alias_retained"
+    )
+    assert drift["/appointments/proposals/slot-search/selection"]["disposition"] == (
+        "documented_current_backend_alias_candidate"
     )
 
 

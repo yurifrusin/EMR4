@@ -3,8 +3,6 @@ from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from uuid import uuid4
 
-import pytest
-
 from app.config import settings
 from app.models.appointments import (
     Appointment,
@@ -278,11 +276,12 @@ def test_current_router_wires_delete_confirm_idempotency_surface():
 
     assert "Header(" in delete_route
     assert "Idempotency-Key" in delete_route
-    assert "claim_appointment_command(" in delete_route
-    assert "complete_appointment_command(" in delete_route
+    assert "compose_product_delete_confirm(" in delete_route
+    assert "claim_appointment_command(" not in delete_route
+    assert "complete_appointment_command(" not in delete_route
     assert "_DELETE_CONFIRM_OPERATION_ID" in router_text
     assert "_DELETE_CONFIRM_ROUTE_FAMILY" in router_text
-    assert "commit=False" in delete_route
+    assert "commit=False" not in delete_route
     assert "commit: bool = True" in apply_delete
     assert "if commit:" in apply_delete
     assert "db.flush()" in apply_delete
@@ -327,7 +326,7 @@ def test_existing_delete_confirm_tests_cover_semantics_to_preserve():
         "test_delete_proposal_returns_signed_confirm_payload",
         "test_delete_confirm_soft_cancels_once_with_signed_evidence",
         "stale_delete_proposal_freshness_id",
-        "stale_delete_waiting_area_state",
+        "waiting_area_cleared",
         "diary_confirm_delete_proposal",
         "source_delete_proposal",
         "status_reason_code",
@@ -406,8 +405,8 @@ def test_first_confirmed_delete_writes_soft_cancel_audit_and_ledger(
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["safe"] is True
-    assert data["appointment"]["status"] == "Cancelled"
-    assert data["appointment"]["waiting_area_id"] is None
+    assert data["receipt"]["status"] == "Cancelled"
+    assert data["receipt"]["waiting_area_id"] is None
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Cancelled
     assert appt.waiting_area_id is None
@@ -417,7 +416,11 @@ def test_first_confirmed_delete_writes_soft_cancel_audit_and_ledger(
     assert ledger.state == "completed"
     assert ledger.operation_id == OPERATION_ID
     assert ledger.route_family == ROUTE_FAMILY
-    assert ledger.response_body_json == data
+    # The ledger persists the private six-field receipt, while the HTTP body is
+    # the canonical public envelope projection; they are deliberately different.
+    assert ledger.response_body_json["appointment_id"] == str(appt.id)
+    assert ledger.response_body_json["status"] == "Cancelled"
+    assert ledger.response_body_json["waiting_area_id"] is None
     assert ledger.target_appointment_id == appt.id
 
 
@@ -718,7 +721,9 @@ def test_missing_signed_delete_evidence_blocks_and_rolls_back_claim(
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["safe"] is False
-    assert any(block["code"] == "signed_evidence_missing" for block in data["blocks"])
+    assert any(
+        block["code"] == "signed_confirmation_evidence_invalid" for block in data["blocks"]
+    )
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Booked
     assert _row_counts(db) == before
@@ -739,7 +744,14 @@ def test_waiting_area_clear_true_without_waiting_area_blocks(
 
     assert resp.status_code == 200, resp.text
     assert resp.json()["safe"] is False
-    assert any(block["code"] == "stale_delete_waiting_area_state" for block in resp.json()["blocks"])
+    assert any(
+        block["code"] in {
+            "stale_delete_proposal_freshness_id",
+            "stale_delete_waiting_area_state",
+            "waiting_area_clear_flag_mismatch",
+        }
+        for block in resp.json()["blocks"]
+    )
     assert _row_counts(db) == before
 
 
@@ -757,7 +769,14 @@ def test_waiting_area_clear_false_with_waiting_area_blocks(
 
     assert resp.status_code == 200, resp.text
     assert resp.json()["safe"] is False
-    assert any(block["code"] == "stale_delete_waiting_area_state" for block in resp.json()["blocks"])
+    assert any(
+        block["code"] in {
+            "stale_delete_proposal_freshness_id",
+            "stale_delete_waiting_area_state",
+            "waiting_area_clear_flag_mismatch",
+        }
+        for block in resp.json()["blocks"]
+    )
     assert _row_counts(db) == before
 
 

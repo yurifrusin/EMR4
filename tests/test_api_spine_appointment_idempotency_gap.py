@@ -93,7 +93,8 @@ def test_current_appointments_router_has_bounded_staff_create_confirm_binding():
     assert "Idempotency-Key" in update_route
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
     assert "Idempotency-Key" in delete_route
-    assert "_DELETE_CONFIRM_ROUTE_FAMILY" in delete_route
+    assert "compose_product_delete_confirm(" in delete_route
+    assert "_DELETE_CONFIRM_ROUTE_FAMILY" in router_text
     # Proposal handlers now have Idempotency-Key syntactic validation but
     # must not contain claim/complete ledger calls
     assert "claim_appointment_command(" not in non_create_confirm_later_routes

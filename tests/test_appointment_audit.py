@@ -293,10 +293,9 @@ def test_signed_delete_confirm_writes_delete_audit_evidence(
     data = confirm_resp.json()
     assert data["safe"] is True
     assert data["audit_evidence"] == [
-        "diary_confirm_delete_proposal",
-        "source_delete_proposal",
-        "source_current_appointment_state",
+        "delete_product_adapter_v1",
         "delete_signed_confirmation_evidence_verified",
+        "delete_current_authority_rechecked",
     ]
     e = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
@@ -305,11 +304,11 @@ def test_signed_delete_confirm_writes_delete_audit_evidence(
     assert e.status_before == AppointmentStatus.Booked
     assert e.status_after == AppointmentStatus.Cancelled
     assert e.cancellation_reason == "Patient request"
-    assert e.confirmed_warnings == [
-        "diary_confirm_delete_proposal",
-        "source_delete_proposal",
-        "source_current_appointment_state",
+    assert e.confirmed_warnings == []
+    assert e.audit_evidence_codes == [
+        "delete_product_adapter_v1",
         "delete_signed_confirmation_evidence_verified",
+        "delete_current_authority_rechecked",
     ]
 
 

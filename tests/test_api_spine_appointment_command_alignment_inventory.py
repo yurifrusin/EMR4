@@ -40,6 +40,7 @@ def test_inventory_covers_current_router_route_families():
         ("/proposals/status/confirm", "/proposals/status/confirm"),
         ("/proposals/status-confirm", "/proposals/status-confirm"),
         ("/proposals/delete/{appointment_id}", "/proposals/delete/{appointment_id}"),
+        ("/proposals/delete/confirm", "/proposals/delete/confirm"),
         ("/proposals/delete-confirm", "/proposals/delete-confirm"),
         ("/proposals/slot-search/normalize", "/proposals/slot-search/normalize"),
         ("/proposals/slot-search", "/proposals/slot-search"),

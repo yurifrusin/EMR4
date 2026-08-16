@@ -30,11 +30,11 @@ def test_diary_confirm_actions_pin_current_endpoints_and_evidence_purposes():
             SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
         ),
         DiaryConfirmAction.status: (
-            "/api/v1/appointments/proposals/status-confirm",
+            "/api/v1/appointments/proposals/status/confirm",
             SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
         ),
         DiaryConfirmAction.delete: (
-            "/api/v1/appointments/proposals/delete-confirm",
+            "/api/v1/appointments/proposals/delete/confirm",
             SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
         ),
     }

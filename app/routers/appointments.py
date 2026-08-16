@@ -95,6 +95,13 @@ from app.services.appointment_status_product_adapter import (
     compose_product_status_confirm,
     mint_status_proposal_version_binding,
 )
+from app.services.appointment_delete_product_adapter import (
+    compose_product_delete_confirm,
+    mint_delete_proposal_version_binding,
+)
+from app.services.appointment_delete_composition import (
+    canonical_delete_confirm_envelope_bytes,
+)
 from app.services.bernie import (
     BernieReceptionPolicyDecision,
     evaluate_confirm_affordance,
@@ -1429,6 +1436,19 @@ def _status_confirm_domain_secret(purpose: str) -> bytes:
 
 def _status_confirm_evidence_secret() -> str:
     return _status_confirm_domain_secret("evidence").hex()
+
+
+def _delete_confirm_domain_secret(purpose: str) -> bytes:
+    """Derive one purpose-separated delete-confirm key from backend config."""
+    return hmac.new(
+        settings.secret_key.encode("utf-8"),
+        f"emr4.delete-confirm.{purpose}.v1".encode("utf-8"),
+        hashlib.sha256,
+    ).digest()
+
+
+def _delete_confirm_evidence_secret() -> str:
+    return _delete_confirm_domain_secret("evidence").hex()
 
 
 def _handle_create_confirm_idempotency_decision(
@@ -5418,6 +5438,7 @@ _DELETE_CONFIRM_METADATA_FIELDS = {
     "confirm_endpoint",
     "confirm_payload",
     "delete_proposal_freshness_id",
+    "delete_proposal_version_binding",
     "signed_confirmation_evidence",
     "signed_confirmation_evidence_required",
 }
@@ -5452,43 +5473,31 @@ def _attach_delete_confirmation_evidence(
     signed_confirmation_evidence = mint_signed_confirmation_evidence(
         signed_payload,
         evidence_purpose=_DELETE_CONFIRM_ACTION.evidence_purpose,
+        secret=_delete_confirm_evidence_secret(),
+    )
+    delete_proposal_version_binding = mint_delete_proposal_version_binding(
+        signed_confirmation_evidence,
+        source_version=appt.appointment_state_version,
+        secret=_delete_confirm_domain_secret("proposal-version"),
     )
     proposal.confirm_endpoint = _DELETE_CONFIRM_ACTION.endpoint
     proposal.delete_proposal_freshness_id = delete_proposal_freshness_id
+    proposal.delete_proposal_version_binding = delete_proposal_version_binding
     proposal.signed_confirmation_evidence = signed_confirmation_evidence
     proposal.signed_confirmation_evidence_required = True
+    confirmation_proposal = _delete_proposal_evidence_payload(proposal)
+    confirmation_proposal["delete_proposal_freshness_id"] = delete_proposal_freshness_id
+    confirmation_proposal["signed_confirmation_evidence_required"] = True
     proposal.confirm_payload = {
         "confirmed": False,
-        "delete_proposal": _delete_proposal_evidence_payload(proposal),
+        "delete_proposal": confirmation_proposal,
         "confirmed_warnings": [issue.code for issue in proposal.warnings],
         "delete_proposal_freshness_id": delete_proposal_freshness_id,
+        "delete_proposal_version_binding": delete_proposal_version_binding,
         "signed_confirmation_evidence": signed_confirmation_evidence,
         "signed_confirmation_evidence_required": True,
     }
     return proposal
-
-
-def _block_delete_confirmation(
-    blocks: list[AppointmentProposalIssue],
-    warnings: Optional[list[AppointmentProposalIssue]] = None,
-    audit_evidence: Optional[list[str]] = None,
-) -> AppointmentConfirmDeleteProposalOut:
-    return AppointmentConfirmDeleteProposalOut(
-        safe=False,
-        requires_confirmation=True,
-        autonomy_tier="blocked",
-        summary=_DELETE_CONFIRM_ACTION.blocked_summary,
-        appointment=None,
-        warnings=warnings or [],
-        blocks=blocks,
-        audit_evidence=audit_evidence or [],
-    )
-
-
-def _confirm_delete_block(code: str, message: str) -> AppointmentProposalIssue:
-    return AppointmentProposalIssue(
-        **_DELETE_CONFIRM_ACTION.blocked_issue_payload(code, message)
-    )
 
 
 def _apply_appointment_delete(
@@ -5556,141 +5565,49 @@ def cancel_appointment(
 @router.post(
     "/proposals/delete-confirm",
     response_model=AppointmentConfirmDeleteProposalOut,
+    include_in_schema=False,
+)
+@router.post(
+    "/proposals/delete/confirm",
+    response_model=AppointmentConfirmDeleteProposalOut,
 )
 def confirm_delete_proposal_route(
     body: AppointmentDeleteProposalConfirmationIn,
     idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
-    db: Session = Depends(get_db),
+    authenticated_bearer_token: str = Depends(oauth2_scheme),
+    command_session_factory: Callable[[], Session] = Depends(get_command_session_factory),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    """Transport-only delete-confirm route over the accepted delete product adapter.
+
+    The route carries only server-owned identity/session/secrets into
+    ``compose_product_delete_confirm``. It performs no route-local claim, read,
+    evidence verification, mutation, audit, receipt or commit. Success delivery
+    serializes the adapter's public envelope through the canonical serializer;
+    the private ``stored_response_bytes`` are never returned as HTTP content.
+    """
     normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
-    decision = claim_appointment_command(
-        db,
-        practice_id=current_user.practice_id,
-        actor_user_id=str(current_user.id),
-        actor_role=current_user.role.value if current_user.role else "unknown",
-        operation_id=_DELETE_CONFIRM_OPERATION_ID,
-        route_family=_DELETE_CONFIRM_ROUTE_FAMILY,
-        raw_idempotency_key=normalized_idempotency_key,
-        request_body=body.model_dump(mode="json"),
-        secret=_staff_create_confirm_idempotency_secret(),
-        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    result = compose_product_delete_confirm(
+        body,
+        authenticated_user=current_user,
+        authenticated_bearer_token=authenticated_bearer_token,
+        idempotency_key=normalized_idempotency_key,
+        proposal_version_binding=body.delete_proposal_version_binding,
+        command_session_factory=command_session_factory,
+        authenticated_session_secret=_delete_confirm_domain_secret("authenticated-session"),
+        proposal_version_binding_secret=_delete_confirm_domain_secret("proposal-version"),
+        idempotency_secret=_delete_confirm_domain_secret("idempotency"),
+        session_binding_secret=_delete_confirm_domain_secret("stored-session-binding"),
+        evidence_secret=_delete_confirm_evidence_secret(),
     )
-    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
-    if mapped_decision is not None:
-        return mapped_decision
-
-    audit_evidence = list(_DELETE_CONFIRM_BASE_EVIDENCE)
-    blocks: list[AppointmentProposalIssue] = []
-    proposal = body.delete_proposal
-    command = proposal.command
-
-    if body.confirmed is not True:
-        blocks.append(_confirm_delete_block(
-            "explicit_confirmation_required",
-            "confirmed=true is required before deleting this appointment.",
-        ))
-
-    if (
-        not proposal.safe
-        or proposal.autonomy_tier == "blocked"
-        or not proposal.requires_confirmation
-    ):
-        blocks.append(_confirm_delete_block(
-            "delete_proposal_not_safe",
-            "The delete proposal is not safe to confirm.",
-        ))
-
-    try:
-        appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
-    except HTTPException:
-        db.rollback()
-        raise
-    current_state = _appointment_delete_state_payload(appt)
-    submitted_freshness_id = (
-        body.delete_proposal_freshness_id
-        or proposal.delete_proposal_freshness_id
-    )
-    expected_freshness_id = _compute_delete_proposal_freshness_id(
-        command=command,
-        current_state=current_state,
-    )
-    expected_signed_payload = _delete_signed_confirmation_payload(
-        practice_id=current_user.practice_id,
-        staff_user_id=current_user.id,
-        command=command,
-        current_state=current_state,
-        delete_proposal_freshness_id=expected_freshness_id,
-    )
-    ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
-        evidence=body.signed_confirmation_evidence,
-        evidence_required=body.signed_confirmation_evidence_required,
-        expected_payload=expected_signed_payload,
-        expected_purpose=_DELETE_CONFIRM_ACTION.evidence_purpose,
-        block_builder=_confirm_delete_block,
-        audit_tag="delete_signed_confirmation_evidence_verified",
-        missing_message="Signed confirmation evidence is required before deleting this appointment.",
-    )
-    if ev_audit_tag is not None:
-        audit_evidence.append(ev_audit_tag)
-    blocks.extend(ev_blocks)
-
-    if submitted_freshness_id != expected_freshness_id:
-        blocks.append(_confirm_delete_block(
-            "stale_delete_proposal_freshness_id",
-            "Confirmation blocked: delete proposal freshness id does not match current appointment state.",
-        ))
-
-    if command.clears_waiting_area != (appt.waiting_area_id is not None):
-        blocks.append(_confirm_delete_block(
-            "stale_delete_waiting_area_state",
-            "Confirmation blocked: the appointment waiting-area state has changed.",
-        ))
-
-    if blocks:
-        db.rollback()
-        return _block_delete_confirmation(
-            blocks,
-            warnings=proposal.warnings,
-            audit_evidence=audit_evidence,
+    if result.stored_response_bytes is not None:
+        public_bytes = canonical_delete_confirm_envelope_bytes(result.body)
+        return Response(
+            content=public_bytes,
+            status_code=result.status_code,
+            media_type="application/json",
         )
-
-    confirmed_warnings = [
-        *[issue.code for issue in proposal.warnings],
-        *body.confirmed_warnings,
-    ]
-    appointment = _apply_appointment_delete(
-        appointment_id=command.appointment_id,
-        body=AppointmentDeleteIn(
-            cancellation_reason=command.cancellation_reason,
-            status_reason_code=command.status_reason_code,
-            confirmed_warnings=confirmed_warnings,
-        ),
-        db=db,
-        current_user=current_user,
-        audit_evidence=audit_evidence,
-        commit=False,
-    )
-    response_body = AppointmentConfirmDeleteProposalOut(
-        safe=True,
-        requires_confirmation=False,
-        autonomy_tier="confirmed_write",
-        summary="Confirmed delete proposal and cancelled one appointment.",
-        appointment=appointment,
-        warnings=proposal.warnings,
-        blocks=[],
-        audit_evidence=audit_evidence,
-    )
-    complete_appointment_command(
-        db,
-        decision.record,
-        response_status_code=status.HTTP_200_OK,
-        response_body=response_body.model_dump(mode="json"),
-        result_kind="confirmed_write",
-        target_appointment_id=appointment.id,
-    )
-    db.commit()
-    return response_body
+    return JSONResponse(status_code=result.status_code, content=dict(result.body))
 
 
 @router.post("/proposals/delete/{appointment_id}", response_model=AppointmentDeleteProposalOut)

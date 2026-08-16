@@ -506,8 +506,10 @@ def test_delete_proposal_returns_signed_confirm_payload(
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["safe"] is True
-    assert data["confirm_endpoint"] == DELETE_CONFIRM_URL
+    assert data["confirm_endpoint"] == "/api/v1/appointments/proposals/delete/confirm"
     assert data["delete_proposal_freshness_id"]
+    assert data["delete_proposal_version_binding"]["schema_version"] == "raisa.delete_proposal_version_binding.v1"
+    assert data["delete_proposal_version_binding"]["source_version"] == 1
     assert data["signed_confirmation_evidence_required"] is True
     assert data["signed_confirmation_evidence"]["purpose"] == "diary_confirm_delete_proposal"
     assert data["confirm_payload"]["confirmed"] is False
@@ -515,6 +517,7 @@ def test_delete_proposal_returns_signed_confirm_payload(
     assert data["confirm_payload"]["delete_proposal"]["command"]["clears_waiting_area"] is True
     assert data["confirm_payload"]["delete_proposal"]["command"]["cancellation_reason"] == "Patient request"
     assert data["confirm_payload"]["delete_proposal_freshness_id"] == data["delete_proposal_freshness_id"]
+    assert data["confirm_payload"]["delete_proposal_version_binding"] == data["delete_proposal_version_binding"]
     assert data["confirm_payload"]["signed_confirmation_evidence"] == data["signed_confirmation_evidence"]
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Booked
@@ -576,7 +579,13 @@ def test_delete_confirm_blocks_tampered_signed_evidence_without_write(
     assert confirm_resp.status_code == 200, confirm_resp.text
     data = confirm_resp.json()
     assert data["safe"] is False
-    assert any(block["code"] == "signed_evidence_mismatch" for block in data["blocks"])
+    assert any(
+        block["code"] in {
+            "stale_delete_proposal_freshness_id",
+            "signed_evidence_mismatch",
+        }
+        for block in data["blocks"]
+    )
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Booked
     assert appt.cancellation_reason is None
@@ -642,11 +651,12 @@ def test_delete_confirm_soft_cancels_once_with_signed_evidence(
     data = confirm_resp.json()
     assert data["safe"] is True
     assert data["autonomy_tier"] == "confirmed_write"
-    assert data["appointment"]["status"] == "Cancelled"
-    assert data["appointment"]["waiting_area_id"] is None
-    assert data["appointment"]["cancellation_reason"] == "Patient had transport issues"
-    assert "diary_confirm_delete_proposal" in data["audit_evidence"]
+    assert data["receipt"]["status"] == "Cancelled"
+    assert data["receipt"]["waiting_area_id"] is None
+    assert data["receipt"]["cancellation_reason"] == "Patient had transport issues"
+    assert "delete_product_adapter_v1" in data["audit_evidence"]
     assert "delete_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    assert "delete_current_authority_rechecked" in data["audit_evidence"]
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Cancelled
     assert appt.waiting_area_id is None
@@ -656,12 +666,11 @@ def test_delete_confirm_soft_cancels_once_with_signed_evidence(
     ).all()
     assert db.query(AppointmentAuditLog).count() == before_audits + 1
     assert len(entries) == 1
-    assert entries[0].confirmed_warnings == [
-        "diary_confirm_delete_proposal",
-        "source_delete_proposal",
-        "source_current_appointment_state",
+    assert entries[0].confirmed_warnings == ["waiting_area_cleared"]
+    assert entries[0].audit_evidence_codes == [
+        "delete_product_adapter_v1",
         "delete_signed_confirmation_evidence_verified",
-        "waiting_area_cleared",
+        "delete_current_authority_rechecked",
     ]
 
 
@@ -933,8 +942,8 @@ def test_r9_delete_confirm_allows_past_date_with_signed_evidence_and_audit(
     data = confirm_resp.json()
     assert data["safe"] is True
     assert data["autonomy_tier"] == "confirmed_write"
-    assert data["appointment"]["status"] == "Cancelled"
-    assert "diary_confirm_delete_proposal" in data["audit_evidence"]
+    assert data["receipt"]["status"] == "Cancelled"
+    assert "delete_product_adapter_v1" in data["audit_evidence"]
     assert "delete_signed_confirmation_evidence_verified" in data["audit_evidence"]
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Cancelled

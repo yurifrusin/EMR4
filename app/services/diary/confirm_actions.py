@@ -76,7 +76,7 @@ DIARY_CONFIRM_ACTIONS: dict[DiaryConfirmAction, DiaryConfirmActionDescriptor] = 
     ),
     DiaryConfirmAction.delete: DiaryConfirmActionDescriptor(
         action=DiaryConfirmAction.delete,
-        endpoint="/api/v1/appointments/proposals/delete-confirm",
+        endpoint="/api/v1/appointments/proposals/delete/confirm",
         evidence_purpose=SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
         blocked_summary="Cannot confirm delete proposal. See blocked issues.",
     ),

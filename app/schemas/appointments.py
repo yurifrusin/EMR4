@@ -683,6 +683,7 @@ class AppointmentDeleteProposalOut(BaseModel):
     confirm_endpoint: Optional[str] = None
     confirm_payload: Optional[dict[str, Any]] = None
     delete_proposal_freshness_id: Optional[str] = None
+    delete_proposal_version_binding: Optional[dict[str, Any]] = None
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
 
@@ -692,17 +693,42 @@ class AppointmentDeleteProposalConfirmationIn(BaseModel):
     delete_proposal: AppointmentDeleteProposalOut
     confirmed_warnings: list[str] = Field(default_factory=list)
     delete_proposal_freshness_id: Optional[str] = None
+    delete_proposal_version_binding: dict[str, Any]
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
 
 
+class AppointmentDeleteConfirmationReceipt(BaseModel):
+    schema_version: Literal[
+        "appointment.delete_confirmation_receipt.v1"
+    ] = "appointment.delete_confirmation_receipt.v1"
+    appointment_id: uuid.UUID
+    status: Literal["Cancelled"] = "Cancelled"
+    status_reason_code: Optional[str] = None
+    cancellation_reason: Optional[str] = None
+    waiting_area_id: Optional[uuid.UUID] = None
+    warning_codes: list[str] = Field(default_factory=list)
+
+
 class AppointmentConfirmDeleteProposalOut(BaseModel):
+    """Versioned minimal public delete-confirm envelope.
+
+    Success delivery and replay share this exact patient-free receipt envelope.
+    It never exposes an ``appointment`` read model, patient, practitioner,
+    schedule, notes, mutable identity or unknown extra field.
+    """
+
+    model_config = {"extra": "forbid"}
+
+    schema_version: Literal[
+        "raisa.delete_confirm_public_envelope.v1"
+    ] = "raisa.delete_confirm_public_envelope.v1"
     intent: Literal["confirm_delete_appointment"] = "confirm_delete_appointment"
     safe: bool
     requires_confirmation: bool
     autonomy_tier: Literal["confirmed_write", "blocked"]
     summary: str
-    appointment: Optional[AppointmentOut] = None
+    receipt: Optional[AppointmentDeleteConfirmationReceipt] = None
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
     audit_evidence: list[str] = Field(default_factory=list)
