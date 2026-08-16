@@ -1,0 +1,79 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "Exact repair source bf5699966d4211828ce4252c313539b52f0f747e and validated replacement semantic freeze descendant dc5c3819c34a70ec085f46900a6cb2724bb8ec23 pass forty-two owned tests with one intentional runtime skip, the current API Spine/lineage union, Ruff, maintained compilation, schema/whitespace gates and the canonical 196-test profile. Product source remains unchanged and no owned Docker object exists.",
+    "next_executable_stage": "Commit the fresh exact-head preexecution receipt, then run exactly one authorized occupied PostgreSQL attempt. Any failure or cleanup ambiguity stops; Gemini is admitted only after an occupied pass.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "dc5c3819c34a70ec085f46900a6cb2724bb8ec23",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "release_accounting_occupied_preexecution",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The implementation worker lane is closed and deterministic admission is complete.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one independent veto is reserved after an occupied pass and exact cleanup.",
+        "work_packages": [
+          "review the final exact candidate and minimized occupied pass evidence"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The one disposable database lifecycle is serial and no native delegation is authorized or useful.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "exactly one owned database lifecycle",
+      "stop on any failure or cleanup ambiguity",
+      "Gemini only after occupied pass",
+      "Sol alone accepts"
+    ]
+  },
+  "planned_action": "commit_exact_head_preexecution_checkpoint_then_run_one_occupied_postgresql_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact repair source bf5699966d4211828ce4252c313539b52f0f747e and semantic-freeze descendant dc5c3819c34a70ec085f46900a6cb2724bb8ec23 bind candidate-versus-released byte separation and post-context promotion. Forty-two owned tests pass with one intentional runtime skip, the current API Spine/lineage union passes, all static gates pass, and the canonical 196-test profile passes. Exactly one occupied attempt remains.",
+    "current_authority_allocation": "Sol owns the serial occupied run and acceptance. DeepSeek is not applicable, Gemini 3.7 Flash/high is reserved for exactly one post-pass veto, and native subagents are declined because the single disposable database lifecycle cannot be split safely.",
+    "git_refs_and_worktree": "Direct Git output reports clean tracked exact source dc5c3819c34a70ec085f46900a6cb2724bb8ec23 and tree 557d69f0367474db40ce2cdc52f48ca3bc46b862 before this pending preexecution checkpoint. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains the published stop at 9bb094e88076d4fe601d5a10ac4ce2d38512ef62. All 635 untracked files including five docs/branding paths are preserved, and label-filtered Docker checks report zero owned containers and networks.",
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated. The active baton and Yuri's explicit yes admit one response-release correction and one fresh occupied PostgreSQL attempt only; protected integration remains closed.",
+    "protected_evidence_boundaries": "The attempt is limited to fixed authored-synthetic serial authority and transaction cases in one owned internal-only portless tmpfs PostgreSQL 16 container through the fixed loopback relay. Product service SHA-256 remains 8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533. No route, real/product data, provider, external network, deployment, release, Pages or protected ref is open."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
