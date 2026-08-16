@@ -672,8 +672,33 @@ def reject_hostile_evidence_mutations(
     return {"attempted": len(mutations), "rejected": rejected}
 
 
+def _canonical_private_receipt_bytes(receipt: dict[str, Any]) -> bytes:
+    """Serialize the six-field receipt in the frozen canonical physical order.
+
+    The exact accepted private-receipt byte contract is compact, follows the
+    frozen six-field insertion order, never sorts or reorders keys, adds no
+    whitespace, emits literal UTF-8 (``ensure_ascii=False``) and rejects
+    non-finite JSON constants (``allow_nan=False``). Any other physical
+    representation (sorted/reordered keys, whitespace, CRLF, duplicate keys,
+    alternate Unicode escaping) is noncanonical and must fail closed.
+    """
+    ordered = {field: receipt[field] for field in PRIVATE_RECEIPT_FIELDS}
+    return json.dumps(
+        ordered,
+        ensure_ascii=False,
+        allow_nan=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
 def project_public_envelope(receipt_bytes: bytes) -> bytes:
-    """Project the v1 public envelope purely from validated six-field bytes."""
+    """Project the v1 public envelope purely from validated six-field bytes.
+
+    The supplied bytes must be the exact canonical physical private-receipt
+    sequence: strict UTF-8, the frozen six-field insertion order, compact
+    separators ``(',', ':')``, literal non-escaped Unicode and no reordered
+    keys, added whitespace, CRLF, duplicate keys or alternate escaping.
+    """
     try:
         text = receipt_bytes.decode("utf-8")
     except UnicodeDecodeError as exc:
@@ -708,6 +733,10 @@ def project_public_envelope(receipt_bytes: bytes) -> bytes:
     for code in warning_codes:
         if code not in WARNING_REGISTRY:
             raise ValueError(f"unknown warning code: {code}")
+    if receipt_bytes != _canonical_private_receipt_bytes(receipt):
+        raise ValueError(
+            "private receipt bytes are not the canonical six-field physical sequence"
+        )
     receipt_projection = {
         "appointment_id": receipt["appointment_id"],
         "cancellation_reason": receipt["cancellation_reason"],

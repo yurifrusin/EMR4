@@ -18,6 +18,27 @@ PLAN = (
     / "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-"
     "product-adapter-architecture-plan.md"
 )
+
+# The exact compact canonical private-receipt physical bytes: frozen six-field
+# insertion order (appointment_id, status, status_reason_code,
+# cancellation_reason, waiting_area_id, warning_codes), compact separators
+# (",", ":"), literal UTF-8 and no whitespace.
+CLEAN_RECEIPT_BYTES = (
+    b'{"appointment_id":"3f3f3f3f-0000-0000-0000-000000000003",'
+    b'"status":"Cancelled","status_reason_code":"PATIENT_CANCELLED",'
+    b'"cancellation_reason":null,"waiting_area_id":null,"warning_codes":[]}'
+)
+
+
+def _canonical_bytes(receipt: dict) -> bytes:
+    return json.dumps(
+        receipt,
+        ensure_ascii=False,
+        allow_nan=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
 ARCHITECTURE = (
     ROOT
     / "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-"
@@ -312,17 +333,18 @@ def test_evidence_schema_requires_complete_shape_and_closes_objects(evidence_sch
 
 
 def test_public_envelope_is_deterministic_pure_projection_of_private_bytes():
-    receipt = {
-        "appointment_id": "3f3f3f3f-0000-0000-0000-000000000003",
-        "status": "Cancelled",
-        "status_reason_code": "PATIENT_CANCELLED",
-        "cancellation_reason": None,
-        "waiting_area_id": None,
-        "warning_codes": [],
-    }
-    receipt_bytes = json.dumps(receipt, sort_keys=True).encode("utf-8")
-    first = architecture.project_public_envelope(receipt_bytes)
-    second = architecture.project_public_envelope(receipt_bytes)
+    assert CLEAN_RECEIPT_BYTES == _canonical_bytes(
+        {
+            "appointment_id": "3f3f3f3f-0000-0000-0000-000000000003",
+            "status": "Cancelled",
+            "status_reason_code": "PATIENT_CANCELLED",
+            "cancellation_reason": None,
+            "waiting_area_id": None,
+            "warning_codes": [],
+        }
+    )
+    first = architecture.project_public_envelope(CLEAN_RECEIPT_BYTES)
+    second = architecture.project_public_envelope(CLEAN_RECEIPT_BYTES)
     assert first == second
     envelope = json.loads(first.decode("utf-8"))
     assert envelope["schema_version"] == "raisa.delete_confirm_public_envelope.v1"
@@ -388,9 +410,7 @@ def test_public_envelope_projects_registered_warnings():
         "warning_codes": ["waiting_area_cleared"],
     }
     envelope = json.loads(
-        architecture.project_public_envelope(
-            json.dumps(receipt, sort_keys=True).encode("utf-8")
-        ).decode("utf-8")
+        architecture.project_public_envelope(_canonical_bytes(receipt)).decode("utf-8")
     )
     assert envelope["warnings"] == [
         {
@@ -399,6 +419,117 @@ def test_public_envelope_projects_registered_warnings():
             "message": "Deleting this appointment will remove the patient from the waiting area.",
         }
     ]
+
+
+def test_clean_bytes_use_frozen_six_field_order():
+    assert architecture.PRIVATE_RECEIPT_FIELDS == [
+        "appointment_id",
+        "status",
+        "status_reason_code",
+        "cancellation_reason",
+        "waiting_area_id",
+        "warning_codes",
+    ]
+    assert list(json.loads(CLEAN_RECEIPT_BYTES.decode("utf-8")).keys()) == (
+        architecture.PRIVATE_RECEIPT_FIELDS
+    )
+
+
+def test_public_envelope_rejects_sorted_or_reordered_keys():
+    receipt = {
+        "appointment_id": "3f3f3f3f-0000-0000-0000-000000000003",
+        "status": "Cancelled",
+        "status_reason_code": "PATIENT_CANCELLED",
+        "cancellation_reason": None,
+        "waiting_area_id": None,
+        "warning_codes": [],
+    }
+    sorted_bytes = json.dumps(
+        receipt, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    reordered = {
+        "status": "Cancelled",
+        "appointment_id": "3f3f3f3f-0000-0000-0000-000000000003",
+        "status_reason_code": "PATIENT_CANCELLED",
+        "cancellation_reason": None,
+        "waiting_area_id": None,
+        "warning_codes": [],
+    }
+    reordered_bytes = _canonical_bytes(reordered)
+    assert sorted_bytes != CLEAN_RECEIPT_BYTES
+    assert reordered_bytes != CLEAN_RECEIPT_BYTES
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(sorted_bytes)
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(reordered_bytes)
+
+
+def test_public_envelope_rejects_added_whitespace():
+    receipt = {
+        "appointment_id": "3f3f3f3f-0000-0000-0000-000000000003",
+        "status": "Cancelled",
+        "status_reason_code": "PATIENT_CANCELLED",
+        "cancellation_reason": None,
+        "waiting_area_id": None,
+        "warning_codes": [],
+    }
+    padded_bytes = json.dumps(
+        receipt, ensure_ascii=False, allow_nan=False, indent=2
+    ).encode("utf-8")
+    spaced_bytes = json.dumps(
+        receipt, ensure_ascii=False, allow_nan=False
+    ).encode("utf-8")
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(padded_bytes)
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(spaced_bytes)
+
+
+def test_public_envelope_rejects_crlf():
+    crlf_bytes = (
+        b'{"appointment_id":\r\n'
+        b'"3f3f3f3f-0000-0000-0000-000000000003",\r\n'
+        b'"status":\r\n"Cancelled",\r\n'
+        b'"status_reason_code":\r\n"PATIENT_CANCELLED",\r\n'
+        b'"cancellation_reason":\r\nnull,\r\n'
+        b'"waiting_area_id":\r\nnull,\r\n'
+        b'"warning_codes":\r\n[]}'
+    )
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(crlf_bytes)
+
+
+def test_public_envelope_rejects_duplicate_keys():
+    duplicate_bytes = (
+        b'{"appointment_id":"3f3f3f3f-0000-0000-0000-000000000003",'
+        b'"appointment_id":"3f3f3f3f-0000-0000-0000-000000000003",'
+        b'"status":"Cancelled","status_reason_code":"PATIENT_CANCELLED",'
+        b'"cancellation_reason":null,"waiting_area_id":null,"warning_codes":[]}'
+    )
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(duplicate_bytes)
+
+
+def test_public_envelope_rejects_alternate_unicode_escaping():
+    receipt = {
+        "appointment_id": "3f3f3f3f-0000-0000-0000-000000000003",
+        "status": "Cancelled",
+        "status_reason_code": "PATIENT_CANCELLED",
+        "cancellation_reason": "Cancelled: café",
+        "waiting_area_id": None,
+        "warning_codes": [],
+    }
+    canonical = _canonical_bytes(receipt)
+    escaped = json.dumps(
+        receipt, ensure_ascii=True, allow_nan=False, separators=(",", ":")
+    ).encode("utf-8")
+    assert escaped != canonical
+    envelope = json.loads(
+        architecture.project_public_envelope(canonical).decode("utf-8")
+    )
+    assert envelope["receipt"]["cancellation_reason"] == "Cancelled: café"
+    with pytest.raises(ValueError):
+        architecture.project_public_envelope(escaped)
 
 
 def test_canonical_lf_hashing_rejects_bare_cr(tmp_path):
