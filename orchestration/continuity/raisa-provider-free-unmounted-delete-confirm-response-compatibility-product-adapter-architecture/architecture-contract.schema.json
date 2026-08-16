@@ -1,0 +1,851 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-delete-confirm-response-product-adapter-architecture-v1.json",
+  "title": "Raisa delete-confirm response-compatibility and product-adapter architecture contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "route_family",
+    "mode",
+    "source_head",
+    "input_hash_mode",
+    "input_bindings",
+    "private_receipt",
+    "public_projection",
+    "authority_ingress",
+    "proposal_binding",
+    "admission",
+    "composition",
+    "outcome_mapping",
+    "compatibility",
+    "claim_boundary",
+    "forbidden_surfaces"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.delete_confirm_response_product_adapter_architecture.v1"
+    },
+    "operation_id": {
+      "const": "confirmAppointmentDeleteProposal"
+    },
+    "route_family": {
+      "const": "delete-confirm"
+    },
+    "mode": {
+      "const": "provider_free_unmounted_architecture_only"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "input_hash_mode": {
+      "const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"
+    },
+    "input_bindings": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": false,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "orchestration/agent_inbox/codex/raisa-delete-confirm-route-convergence-git-object-resolution-sol-acceptance.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "app/services/appointment_delete_physical.py"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "app/services/appointment_status_product_adapter.py"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "app/services/appointment_status_composition.py"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "app/schemas/appointments.py"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "app/models/appointments.py"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "app/routers/appointments.py"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/api-spine/openapi/appointment-commands.yaml"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-plan.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/raisa-provider-free-unmounted-status-confirm-product-adapter-rehearsal-closeout.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/raisa-provider-free-unmounted-delete-confirm-physical-design-architecture-closeout.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "const": "docs/raisa-provider-free-unmounted-delete-confirm-conditional-command-kernel-architecture-admission.md"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      ]
+    },
+    "private_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "persistence_authority",
+        "canonical_field_order",
+        "status_constant",
+        "waiting_area_constant",
+        "warning_code_order",
+        "forbidden_fields"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "appointment.delete_confirmation_private_receipt.v1"
+        },
+        "persistence_authority": {
+          "const": "sole"
+        },
+        "canonical_field_order": {
+          "const": [
+            "appointment_id",
+            "status",
+            "status_reason_code",
+            "cancellation_reason",
+            "waiting_area_id",
+            "warning_codes"
+          ]
+        },
+        "status_constant": {
+          "const": "Cancelled"
+        },
+        "waiting_area_constant": {
+          "const": null
+        },
+        "warning_code_order": {
+          "const": "sorted_unique"
+        },
+        "forbidden_fields": {
+          "const": [
+            "appointment",
+            "patient",
+            "practitioner",
+            "appointment_date",
+            "start_time",
+            "notes",
+            "reason",
+            "audit_identity"
+          ]
+        }
+      }
+    },
+    "public_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "receipt_schema_version",
+        "source",
+        "serialization",
+        "initial_and_replay_use_same_projection",
+        "current_appointment_read_for_response",
+        "success_fields",
+        "success_constants",
+        "warning_registry",
+        "forbidden_success_fields"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "raisa.delete_confirm_public_envelope.v1"
+        },
+        "receipt_schema_version": {
+          "const": "appointment.delete_confirmation_receipt.v1"
+        },
+        "source": {
+          "const": "validated_private_receipt_bytes_only"
+        },
+        "serialization": {
+          "const": "utf8_json_sorted_keys_compact_no_nan"
+        },
+        "initial_and_replay_use_same_projection": {
+          "const": true
+        },
+        "current_appointment_read_for_response": {
+          "const": false
+        },
+        "success_fields": {
+          "const": [
+            "schema_version",
+            "intent",
+            "safe",
+            "requires_confirmation",
+            "autonomy_tier",
+            "summary",
+            "receipt",
+            "warnings",
+            "blocks",
+            "audit_evidence"
+          ]
+        },
+        "success_constants": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "intent",
+            "safe",
+            "requires_confirmation",
+            "autonomy_tier",
+            "summary",
+            "blocks",
+            "audit_evidence"
+          ],
+          "properties": {
+            "intent": {
+              "const": "confirm_delete_appointment"
+            },
+            "safe": {
+              "const": true
+            },
+            "requires_confirmation": {
+              "const": false
+            },
+            "autonomy_tier": {
+              "const": "confirmed_write"
+            },
+            "summary": {
+              "const": "Confirmed delete proposal and cancelled one appointment."
+            },
+            "blocks": {
+              "const": []
+            },
+            "audit_evidence": {
+              "const": [
+                "delete_product_adapter_v1",
+                "delete_signed_confirmation_evidence_verified",
+                "delete_current_authority_rechecked"
+              ]
+            }
+          }
+        },
+        "warning_registry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "waiting_area_cleared"
+          ],
+          "properties": {
+            "waiting_area_cleared": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "code",
+                "severity",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "const": "waiting_area_cleared"
+                },
+                "severity": {
+                  "const": "warning"
+                },
+                "message": {
+                  "const": "Deleting this appointment will remove the patient from the waiting area."
+                }
+              }
+            }
+          }
+        },
+        "forbidden_success_fields": {
+          "const": [
+            "appointment",
+            "audit_event",
+            "live_projection"
+          ]
+        }
+      }
+    },
+    "authority_ingress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "server_owned_fields",
+        "client_authority_fields",
+        "capability_constant",
+        "capability_check_owner",
+        "current_authority_check_count",
+        "command_session",
+        "effect_authority_before_physical_seam"
+      ],
+      "properties": {
+        "server_owned_fields": {
+          "const": [
+            "practice_id",
+            "actor_id",
+            "actor_role",
+            "authority_generation",
+            "authenticated_session_reference"
+          ]
+        },
+        "client_authority_fields": {
+          "const": []
+        },
+        "capability_constant": {
+          "const": "appointment.cancel.confirm"
+        },
+        "capability_check_owner": {
+          "const": "delete_confirm_locked_transaction"
+        },
+        "current_authority_check_count": {
+          "const": 2
+        },
+        "command_session": {
+          "const": "distinct_server_owned_close_after_use"
+        },
+        "effect_authority_before_physical_seam": {
+          "const": false
+        }
+      }
+    },
+    "proposal_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "server_hmac_fields",
+        "client_posture",
+        "positive_source_version_required"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "raisa.delete_proposal_version_binding.v1"
+        },
+        "server_hmac_fields": {
+          "const": [
+            "source_version",
+            "evidence_signature"
+          ]
+        },
+        "client_posture": {
+          "const": "opaque_return_unchanged"
+        },
+        "positive_source_version_required": {
+          "const": true
+        }
+      }
+    },
+    "admission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pre_command_checks",
+        "locked_checks",
+        "effect_authority"
+      ],
+      "properties": {
+        "pre_command_checks": {
+          "const": [
+            "exact_delete_proposal_type",
+            "operation_and_route_binding",
+            "explicit_confirmation",
+            "idempotency_key_present",
+            "proposal_safe_and_requires_confirmation",
+            "signed_evidence_exact_purpose_and_binding",
+            "opaque_positive_source_version_binding",
+            "freshness_binding",
+            "unique_sorted_warning_acknowledgement"
+          ]
+        },
+        "locked_checks": {
+          "const": [
+            "practice_actor_target_binding",
+            "same_positive_source_version",
+            "status_not_cancelled",
+            "waiting_area_and_clears_flag",
+            "reason_and_cancellation_text_command",
+            "freshness_and_signed_evidence",
+            "warning_acknowledgement"
+          ]
+        },
+        "effect_authority": {
+          "const": false
+        }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transaction_factory",
+        "new_command_write_set",
+        "replay_effect_count",
+        "route_local_fallback"
+      ],
+      "properties": {
+        "transaction_factory": {
+          "const": "delete_confirm_locked_transaction"
+        },
+        "new_command_write_set": {
+          "const": [
+            "appointment_cancellation",
+            "attributable_delete_audit",
+            "complete_private_receipt"
+          ]
+        },
+        "replay_effect_count": {
+          "const": 0
+        },
+        "route_local_fallback": {
+          "const": false
+        }
+      }
+    },
+    "outcome_mapping": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": false,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "committed",
+                "replay"
+              ]
+            },
+            "http_status": {
+              "const": 200
+            },
+            "body": {
+              "const": "canonical_public_projection_bytes"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "proposal_stop",
+                "admission_stop"
+              ]
+            },
+            "http_status": {
+              "const": 200
+            },
+            "body": {
+              "const": "typed_blocked_envelope"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "idempotency_key_missing",
+                "idempotency_conflict"
+              ]
+            },
+            "http_status": {
+              "const": 409
+            },
+            "body": {
+              "const": "stable_non_sensitive_error"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "current_authority_unavailable"
+              ]
+            },
+            "http_status": {
+              "const": 403
+            },
+            "body": {
+              "const": "stable_non_sensitive_error"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "target_unavailable",
+                "cross_practice_target"
+              ]
+            },
+            "http_status": {
+              "const": 404
+            },
+            "body": {
+              "const": "indistinguishable_unavailable"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "in_progress_not_replayable",
+                "legacy_receipt_not_replayable"
+              ]
+            },
+            "http_status": {
+              "const": 409
+            },
+            "body": {
+              "const": "no_partial_receipt"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcomes",
+            "http_status",
+            "body"
+          ],
+          "properties": {
+            "outcomes": {
+              "const": [
+                "wait_budget_exhausted",
+                "scaffold_incomplete",
+                "receipt_integrity_failure",
+                "projection_failure"
+              ]
+            },
+            "http_status": {
+              "const": 503
+            },
+            "body": {
+              "const": "no_stored_or_current_appointment_disclosure"
+            }
+          }
+        }
+      ]
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "future_canonical_path",
+        "future_hidden_alias",
+        "one_future_handler",
+        "one_public_envelope_version",
+        "raw_delete_path",
+        "raw_delete_isolation"
+      ],
+      "properties": {
+        "future_canonical_path": {
+          "const": "/appointments/proposals/delete/confirm"
+        },
+        "future_hidden_alias": {
+          "const": "/appointments/proposals/delete-confirm"
+        },
+        "one_future_handler": {
+          "const": true
+        },
+        "one_public_envelope_version": {
+          "const": true
+        },
+        "raw_delete_path": {
+          "const": "/appointments/{appointment_id}"
+        },
+        "raw_delete_isolation": {
+          "const": [
+            "no_dedicated_adapter_import_or_call",
+            "no_dedicated_capability_inheritance",
+            "no_dedicated_receipt_or_replay_inheritance"
+          ]
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proves",
+        "does_not_prove"
+      ],
+      "properties": {
+        "proves": {
+          "const": [
+            "coherent_provider_free_unmounted_response_and_product_adapter_architecture",
+            "privacy_minimized_byte_deterministic_public_projection_design",
+            "server_owned_authority_and_locked_readmission_design"
+          ]
+        },
+        "does_not_prove": {
+          "const": [
+            "adapter_or_schema_implementation",
+            "route_or_http_behavior",
+            "database_execution",
+            "capability_provisioning",
+            "client_compatibility",
+            "deployment_or_production"
+          ]
+        }
+      }
+    },
+    "forbidden_surfaces": {
+      "const": [
+        "product_source_edit",
+        "route_edit_mount_or_call",
+        "database_docker_sql_or_migration_execution",
+        "capability_provisioning_or_product_command",
+        "product_patient_clinical_historical_or_protected_data",
+        "provider_adc_credentials_iam_browser_or_external_network",
+        "ui_deployment_production_release_pages_or_protected_refs",
+        "broad_staging_or_docs_branding"
+      ]
+    }
+  }
+}
