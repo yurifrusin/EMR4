@@ -1415,7 +1415,8 @@ def _invoke_tx(
     tokens: list[str] = []
     authority_calls = 0
     inserted_seen = False
-    response_bytes: bytes | None = None
+    candidate_response_bytes: bytes | None = None
+    released_response_bytes: bytes | None = None
     outcome = "unknown"
     original_monotonic = physical.time.monotonic
     original_authority_valid = physical._authority_valid  # noqa: SLF001
@@ -1486,7 +1487,7 @@ def _invoke_tx(
                 outcome = decision.kind
                 if decision.kind == "new_command":
                     if action == "complete":
-                        response_bytes = _stage_complete(
+                        candidate_response_bytes = _stage_complete(
                             db, decision, fixture, signed_generation=effective_generation
                         )
                     elif action == "appointment":
@@ -1503,7 +1504,7 @@ def _invoke_tx(
                         )
                         db.flush()
                     elif action == "mismatched":
-                        response_bytes = _stage_complete(
+                        candidate_response_bytes = _stage_complete(
                             db, decision, fixture, signed_generation=effective_generation
                         )
                         decision.record.response_body_hash = "0" * 64
@@ -1516,7 +1517,8 @@ def _invoke_tx(
                     elif action != "none":
                         raise AssertionError("unknown transaction action")
                 elif decision.response_body_canonical_bytes is not None:
-                    response_bytes = decision.response_body_canonical_bytes
+                    candidate_response_bytes = decision.response_body_canonical_bytes
+            released_response_bytes = candidate_response_bytes
     except physical.DeleteConfirmTargetUnavailable:
         outcome = "target_unavailable"
     except physical.DeleteConfirmAuthorityRevoked:
@@ -1539,8 +1541,8 @@ def _invoke_tx(
     return Invocation(
         outcome=outcome,
         response_digest=(
-            physical.delete_confirm_response_digest(response_bytes)
-            if response_bytes is not None
+            physical.delete_confirm_response_digest(released_response_bytes)
+            if released_response_bytes is not None
             else None
         ),
         authority_calls=authority_calls,

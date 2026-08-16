@@ -36,6 +36,10 @@ TRACE_RECOVERY_THREAT = ROOT / "docs" / "security" / (
     "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-"
     "transaction-trace-recovery-threat-model-delta.md"
 )
+RELEASE_ACCOUNTING_ADDENDUM = ROOT / "docs" / (
+    "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-"
+    "transaction-release-accounting-recovery-addendum.md"
+)
 DELETE_SERVICE = ROOT / "app" / "services" / "appointment_delete_physical.py"
 
 
@@ -64,6 +68,14 @@ def test_trace_recovery_plan_is_frozen_and_product_service_is_unchanged() -> Non
     assert hashlib.sha256(DELETE_SERVICE.read_bytes()).hexdigest() == (
         "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533"
     )
+
+
+def test_release_accounting_recovery_addendum_freezes_post_context_promotion() -> None:
+    text = RELEASE_ACCOUNTING_ADDENDUM.read_text(encoding="utf-8")
+    assert "Status: `explicitly_authorized_one_repair_one_fresh_attempt`" in text
+    assert "candidate_response_bytes" in text
+    assert "released_response_bytes" in text
+    assert "successful exit from `delete_confirm_locked_transaction`" in text
 
 
 def test_verify_contract_accepts_checkout_stable_lf_hashes() -> None:
@@ -426,6 +438,109 @@ def test_authority_call_counter_counts_early_and_complete_checks_without_leaking
     invocation = rehearsal._invoke_tx(object(), rehearsal._fixture(900))  # noqa: SLF001
 
     assert invocation.authority_calls == expected_calls
+    assert rehearsal.physical._authority_valid is fixed_authority  # noqa: SLF001
+
+
+@pytest.mark.parametrize(
+    ("action", "decision_kind", "exit_failure", "expected_events", "released"),
+    [
+        ("complete", "new_command", False, ["stage", "context_exit", "digest"], True),
+        ("none", "replay", False, ["context_exit", "digest"], True),
+        (
+            "mismatched",
+            "new_command",
+            True,
+            ["stage", "context_exit_failed"],
+            False,
+        ),
+        ("abort_complete", "new_command", False, ["stage"], False),
+    ],
+)
+def test_response_bytes_promote_only_after_successful_transaction_context_exit(
+    monkeypatch: pytest.MonkeyPatch,
+    action: str,
+    decision_kind: str,
+    exit_failure: bool,
+    expected_events: list[str],
+    released: bool,
+) -> None:
+    candidate = b'{"result":"authored-synthetic"}'
+    digest = "d" * 64
+    events: list[str] = []
+
+    def fixed_authority(*_args: object, **_kwargs: object) -> bool:
+        return True
+
+    fake_db = SimpleNamespace(flush=lambda: None)
+
+    @contextmanager
+    def fake_session(*_args: object, **_kwargs: object) -> Iterator[object]:
+        yield fake_db
+
+    @contextmanager
+    def fake_transaction(*_args: object, **_kwargs: object) -> Iterator[SimpleNamespace]:
+        assert rehearsal.physical._authority_valid(  # noqa: SLF001
+            object(),
+            object(),
+            actor_role="Receptionist",
+            signed_authority_generation=2,
+        )
+        assert rehearsal.physical._authority_valid(  # noqa: SLF001
+            object(),
+            object(),
+            actor_role="Receptionist",
+            signed_authority_generation=2,
+        )
+        try:
+            yield SimpleNamespace(
+                kind=decision_kind,
+                record=SimpleNamespace(response_body_hash=None),
+                response_body_canonical_bytes=(
+                    candidate if decision_kind == "replay" else None
+                ),
+            )
+        except BaseException:
+            raise
+        else:
+            if exit_failure:
+                events.append("context_exit_failed")
+                raise rehearsal.physical.DeleteConfirmScaffoldIncomplete(
+                    "authored-synthetic incomplete write set"
+                )
+            events.append("context_exit")
+
+    def fake_stage(*_args: object, **_kwargs: object) -> bytes:
+        events.append("stage")
+        return candidate
+
+    def fake_digest(value: bytes) -> str:
+        assert value == candidate
+        events.append("digest")
+        return digest
+
+    def ignore(*_args: object, **_kwargs: object) -> None:
+        return None
+
+    monkeypatch.setattr(rehearsal.physical, "_authority_valid", fixed_authority)
+    monkeypatch.setattr(
+        rehearsal.physical, "delete_confirm_locked_transaction", fake_transaction
+    )
+    monkeypatch.setattr(
+        rehearsal.physical, "delete_confirm_response_digest", fake_digest
+    )
+    monkeypatch.setattr(rehearsal, "_stage_complete", fake_stage)
+    monkeypatch.setattr(rehearsal, "Session", fake_session)
+    monkeypatch.setattr(rehearsal.event, "listen", ignore)
+    monkeypatch.setattr(rehearsal.event, "remove", ignore)
+    monkeypatch.setattr(rehearsal, "_assert_token_order", ignore)
+
+    invocation = rehearsal._invoke_tx(  # noqa: SLF001
+        object(), rehearsal._fixture(901), action=action
+    )
+
+    assert events == expected_events
+    assert invocation.response_digest == (digest if released else None)
+    assert invocation.authority_calls == 2
     assert rehearsal.physical._authority_valid is fixed_authority  # noqa: SLF001
 
 
