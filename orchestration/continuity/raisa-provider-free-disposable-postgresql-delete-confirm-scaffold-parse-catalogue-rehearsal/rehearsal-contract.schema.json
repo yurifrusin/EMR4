@@ -1,0 +1,450 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/delete-confirm-scaffold-parse-catalogue-rehearsal-contract-v1.json",
+  "title": "delete-confirm scaffold parse/catalogue rehearsal contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "evidence_label",
+    "source_bindings",
+    "alembic",
+    "docker_profile",
+    "catalogue",
+    "cleanup",
+    "forbidden",
+    "next_candidate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.delete_confirm_scaffold_parse_catalogue_rehearsal.v1"
+    },
+    "result": {
+      "const": "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_pass"
+    },
+    "source_head": {
+      "const": "38f2fbb054736cbd63627daea6951d676907461c"
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "alembic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_revision",
+        "to_revision",
+        "offline_range",
+        "synthetic_url",
+        "strip_exact_outer_transaction_wrapper",
+        "psql_single_transaction"
+      ],
+      "properties": {
+        "from_revision": {
+          "const": "w2x3y4z5a6b7"
+        },
+        "to_revision": {
+          "const": "x3y4z5a6b7c8"
+        },
+        "offline_range": {
+          "const": "w2x3y4z5a6b7:x3y4z5a6b7c8"
+        },
+        "synthetic_url": {
+          "const": "postgresql+psycopg://synthetic:synthetic@localhost/synthetic"
+        },
+        "strip_exact_outer_transaction_wrapper": {
+          "const": true
+        },
+        "psql_single_transaction": {
+          "const": true
+        }
+      }
+    },
+    "docker_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable",
+        "image_reference",
+        "pull_policy",
+        "network_mode",
+        "container_name_prefix",
+        "harness_label",
+        "data_destination",
+        "tmpfs_options",
+        "memory_bytes",
+        "nano_cpus",
+        "pids_limit",
+        "restart_policy",
+        "postgres_user",
+        "postgres_password",
+        "postgres_database",
+        "pgdata",
+        "startup_timeout_seconds",
+        "command_timeout_seconds",
+        "total_timeout_seconds",
+        "readiness_observations"
+      ],
+      "properties": {
+        "executable": {
+          "const": "docker.exe"
+        },
+        "image_reference": {
+          "const": "postgres:16-bookworm"
+        },
+        "pull_policy": {
+          "const": "never"
+        },
+        "network_mode": {
+          "const": "none"
+        },
+        "container_name_prefix": {
+          "const": "emr4-delete-confirm-pg16-catalogue-"
+        },
+        "harness_label": {
+          "const": "delete-confirm-pg16-catalogue-v1"
+        },
+        "data_destination": {
+          "const": "/var/lib/postgresql/data"
+        },
+        "tmpfs_options": {
+          "const": "rw,noexec,nosuid,size=268435456"
+        },
+        "memory_bytes": {
+          "const": 536870912
+        },
+        "nano_cpus": {
+          "const": 1000000000
+        },
+        "pids_limit": {
+          "const": 128
+        },
+        "restart_policy": {
+          "const": "no"
+        },
+        "postgres_user": {
+          "type": "string",
+          "minLength": 1
+        },
+        "postgres_password": {
+          "type": "string",
+          "minLength": 1
+        },
+        "postgres_database": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pgdata": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startup_timeout_seconds": {
+          "const": 90
+        },
+        "command_timeout_seconds": {
+          "const": 30
+        },
+        "total_timeout_seconds": {
+          "const": 240
+        },
+        "readiness_observations": {
+          "const": 3
+        }
+      }
+    },
+    "catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "head",
+        "columns",
+        "constraints",
+        "index",
+        "functions",
+        "triggers",
+        "unexpected_function_family",
+        "unexpected_function_count",
+        "unexpected_trigger_count",
+        "zero_rows"
+      ],
+      "properties": {
+        "head": {
+          "const": "x3y4z5a6b7c8"
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["table", "name", "type", "nullable", "default"],
+            "properties": {
+              "table": {
+                "type": "string",
+                "enum": [
+                  "users",
+                  "user_capability_grants",
+                  "appointment_command_idempotency",
+                  "appointment_audit_log"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "enum": ["int8", "int2", "uuid", "varchar", "jsonb"]
+              },
+              "nullable": {
+                "type": "boolean"
+              },
+              "default": {
+                "type": ["string", "null"]
+              }
+            }
+          }
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ck_users_authority_generation_positive",
+            "uq_users_practice_id_id",
+            "pk_user_capability_grants",
+            "fk_user_capability_grants_user",
+            "ck_user_capability_grants_capability_code",
+            "ck_appt_cmd_idem_status_receipt_v1_complete",
+            "ck_appt_audit_log_delete_v1_complete"
+          ],
+          "properties": {
+            "ck_users_authority_generation_positive": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "uq_users_practice_id_id": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "pk_user_capability_grants": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "fk_user_capability_grants_user": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "ck_user_capability_grants_capability_code": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "ck_appt_cmd_idem_status_receipt_v1_complete": {
+              "type": "array",
+              "minItems": 9,
+              "items": {"type": "string"}
+            },
+            "ck_appt_audit_log_delete_v1_complete": {
+              "type": "array",
+              "minItems": 11,
+              "items": {"type": "string"}
+            }
+          }
+        },
+        "index": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "tokens"],
+          "properties": {
+            "name": {
+              "const": "ix_user_capability_grants_user"
+            },
+            "tokens": {
+              "type": "array",
+              "minItems": 3,
+              "items": {"type": "string"}
+            }
+          }
+        },
+        "functions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "arguments",
+              "result",
+              "language",
+              "security_definer",
+              "volatility",
+              "tokens"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^emr4_(user_authority_generation_guard|user_capability_grant_generation_guard|reject_user_capability_grant_update)$"
+              },
+              "arguments": {
+                "const": ""
+              },
+              "result": {
+                "const": "trigger"
+              },
+              "language": {
+                "const": "plpgsql"
+              },
+              "security_definer": {
+                "const": false
+              },
+              "volatility": {
+                "const": "v"
+              },
+              "tokens": {
+                "type": "array",
+                "minItems": 1,
+                "items": {"type": "string"}
+              }
+            }
+          }
+        },
+        "triggers": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "table", "enabled", "tokens"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^trg_(users_authority_generation_guard|user_capability_grants_generation|user_capability_grants_reject_update)$"
+              },
+              "table": {
+                "type": "string",
+                "enum": ["users", "user_capability_grants"]
+              },
+              "enabled": {
+                "const": "O"
+              },
+              "tokens": {
+                "type": "array",
+                "minItems": 2,
+                "items": {"type": "string"}
+              }
+            }
+          }
+        },
+        "unexpected_function_family": {
+          "const": "emr4_user_"
+        },
+        "unexpected_function_count": {
+          "const": 0
+        },
+        "unexpected_trigger_count": {
+          "const": 0
+        },
+        "zero_rows": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "users",
+            "user_capability_grants",
+            "appointment_command_idempotency",
+            "appointment_audit_log"
+          ],
+          "properties": {
+            "users": {"const": 0},
+            "user_capability_grants": {"const": 0},
+            "appointment_command_idempotency": {"const": 0},
+            "appointment_audit_log": {"const": 0}
+          }
+        }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target",
+        "ownership_reverification_required",
+        "post_remove_exact_id_absence_required",
+        "remove_image_volume_network_or_workspace"
+      ],
+      "properties": {
+        "target": {
+          "const": "captured_container_id_only"
+        },
+        "ownership_reverification_required": {
+          "const": true
+        },
+        "post_remove_exact_id_absence_required": {
+          "const": true
+        },
+        "remove_image_volume_network_or_workspace": {
+          "const": false
+        }
+      }
+    },
+    "forbidden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protected_path_content_or_metadata_used",
+        "existing_or_product_database_used",
+        "host_database_url_used",
+        "external_network_or_image_pull_used",
+        "bind_or_named_volume_used",
+        "patient_product_or_protected_data_used",
+        "provider_adc_credentials_or_browser_used",
+        "route_service_helper_or_command_called",
+        "behavior_or_dml_probe_run",
+        "watcher_or_event_authority_added",
+        "deployment_release_or_pages_opened",
+        "protected_ref_moved"
+      ],
+      "properties": {
+        "protected_path_content_or_metadata_used": {"const": false},
+        "existing_or_product_database_used": {"const": false},
+        "host_database_url_used": {"const": false},
+        "external_network_or_image_pull_used": {"const": false},
+        "bind_or_named_volume_used": {"const": false},
+        "patient_product_or_protected_data_used": {"const": false},
+        "provider_adc_credentials_or_browser_used": {"const": false},
+        "route_service_helper_or_command_called": {"const": false},
+        "behavior_or_dml_probe_run": {"const": false},
+        "watcher_or_event_authority_added": {"const": false},
+        "deployment_release_or_pages_opened": {"const": false},
+        "protected_ref_moved": {"const": false}
+      }
+    },
+    "next_candidate": {
+      "const": "provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal"
+    }
+  }
+}

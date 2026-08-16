@@ -1,0 +1,337 @@
+{
+  "schema_version": "raisa.delete_confirm_scaffold_parse_catalogue_rehearsal.v1",
+  "result": "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_pass",
+  "source_head": "38f2fbb054736cbd63627daea6951d676907461c",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-plan.md",
+      "sha256": "71486b39e69bdab10e23b22bafa9d48a348c816b0270ad4e11c38700dcd06b62"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-threat-model-delta.md",
+      "sha256": "653658d228eecdd48389d7158cfa5b211f062a35ab9af0ba85a9db4a91a68edd"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md",
+      "sha256": "f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-closeout.md",
+      "sha256": "caad279b52f915bbfc1d554c2460725044c34fee945c0601e30a0cde52c4d250"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-schema-transaction-scaffold-sol-acceptance.md",
+      "sha256": "986de83a97449a5aeecd39b37594ab1eca740780f9c4016ae7d5b75f954428b5"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold/scaffold-contract.json",
+      "sha256": "4d4ecc83fdb9b9e90067714f4827be6bc007ddd183bc66b0cd95aa207d475f22"
+    },
+    {
+      "path": "alembic/versions/x3y4z5a6b7c8_add_delete_confirm_physical_scaffold.py",
+      "sha256": "e6542c960a9378cf7c1c3c22dd876a1c9f242b68047a180f9f383c1c62d348bb"
+    },
+    {
+      "path": "alembic.ini",
+      "sha256": "8a70641ffa66bb1c228e16a62d8b7a2111810888819c9c662c17ea72e2d70b49"
+    },
+    {
+      "path": "alembic/env.py",
+      "sha256": "5f8f7f752287ce47b507555c43065499fe797c37f724ed827c1d43ebfc5fe346"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"
+    },
+    {
+      "path": "orchestration/harness_settings/risk_weighted_workflow.yaml",
+      "sha256": "a4bc7f92d1caecbd0b421cd40438d64916a7945197e02d2f8b9232d2162c2284"
+    }
+  ],
+  "alembic": {
+    "from_revision": "w2x3y4z5a6b7",
+    "to_revision": "x3y4z5a6b7c8",
+    "offline_range": "w2x3y4z5a6b7:x3y4z5a6b7c8",
+    "synthetic_url": "postgresql+psycopg://synthetic:synthetic@localhost/synthetic",
+    "strip_exact_outer_transaction_wrapper": true,
+    "psql_single_transaction": true
+  },
+  "docker_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "container_name_prefix": "emr4-delete-confirm-pg16-catalogue-",
+    "harness_label": "delete-confirm-pg16-catalogue-v1",
+    "data_destination": "/var/lib/postgresql/data",
+    "tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "memory_bytes": 536870912,
+    "nano_cpus": 1000000000,
+    "pids_limit": 128,
+    "restart_policy": "no",
+    "postgres_user": "emr4_delete_confirm",
+    "postgres_password": "delete-confirm-authored-synthetic-only",
+    "postgres_database": "delete_confirm_rehearsal",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "startup_timeout_seconds": 90,
+    "command_timeout_seconds": 30,
+    "total_timeout_seconds": 240,
+    "readiness_observations": 3
+  },
+  "catalogue": {
+    "head": "x3y4z5a6b7c8",
+    "columns": [
+      {
+        "table": "users",
+        "name": "authority_generation",
+        "type": "int8",
+        "nullable": false,
+        "default": "1"
+      },
+      {
+        "table": "user_capability_grants",
+        "name": "practice_id",
+        "type": "uuid",
+        "nullable": false,
+        "default": null
+      },
+      {
+        "table": "user_capability_grants",
+        "name": "user_id",
+        "type": "uuid",
+        "nullable": false,
+        "default": null
+      },
+      {
+        "table": "user_capability_grants",
+        "name": "capability_code",
+        "type": "varchar",
+        "nullable": false,
+        "default": null
+      },
+      {
+        "table": "appointment_command_idempotency",
+        "name": "authority_generation",
+        "type": "int8",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "audit_contract_version",
+        "type": "int2",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "authority_generation",
+        "type": "int8",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "pre_state_version",
+        "type": "int8",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "post_state_version",
+        "type": "int8",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "waiting_area_before_id",
+        "type": "uuid",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "waiting_area_after_id",
+        "type": "uuid",
+        "nullable": true,
+        "default": null
+      },
+      {
+        "table": "appointment_audit_log",
+        "name": "audit_evidence_codes",
+        "type": "jsonb",
+        "nullable": true,
+        "default": null
+      }
+    ],
+    "constraints": {
+      "ck_users_authority_generation_positive": [
+        "authority_generation >= 1"
+      ],
+      "uq_users_practice_id_id": [
+        "UNIQUE",
+        "practice_id",
+        "id"
+      ],
+      "pk_user_capability_grants": [
+        "PRIMARY KEY",
+        "practice_id",
+        "user_id",
+        "capability_code"
+      ],
+      "fk_user_capability_grants_user": [
+        "FOREIGN KEY",
+        "practice_id",
+        "user_id",
+        "REFERENCES",
+        "users",
+        "practice_id",
+        "id"
+      ],
+      "ck_user_capability_grants_capability_code": [
+        "capability_code",
+        "IN",
+        "appointment.cancel.confirm",
+        "appointment.read"
+      ],
+      "ck_appt_cmd_idem_status_receipt_v1_complete": [
+        "confirmAppointmentStatusProposal",
+        "status-confirm",
+        "confirmAppointmentDeleteProposal",
+        "delete-confirm",
+        "authority_generation IS NOT NULL",
+        "authority_generation >= 1",
+        "octet_length(session_binding_digest) = 32",
+        "post_state_version = pre_state_version + 1",
+        "octet_length(response_body_canonical_bytes) > 0"
+      ],
+      "ck_appt_audit_log_delete_v1_complete": [
+        "audit_contract_version = 1",
+        "action = 'delete'",
+        "command_id IS NOT NULL",
+        "authority_generation >= 1",
+        "pre_state_version >= 1",
+        "post_state_version = pre_state_version + 1",
+        "status_after = 'Cancelled'",
+        "status_reason_code IS NOT NULL",
+        "waiting_area_after_id IS NULL",
+        "jsonb_typeof(confirmed_warnings) = 'array'",
+        "jsonb_typeof(audit_evidence_codes) = 'array'"
+      ]
+    },
+    "index": {
+      "name": "ix_user_capability_grants_user",
+      "tokens": [
+        "user_capability_grants",
+        "practice_id",
+        "user_id"
+      ]
+    },
+    "functions": [
+      {
+        "name": "emr4_user_authority_generation_guard",
+        "arguments": "",
+        "result": "trigger",
+        "language": "plpgsql",
+        "security_definer": false,
+        "volatility": "v",
+        "tokens": [
+          "OLD.authority_generation >= 9223372036854775807",
+          "NEW.authority_generation := OLD.authority_generation + 1",
+          "ERRCODE = '22003'",
+          "pg_trigger_depth() = 2",
+          "authority_generation overflow"
+        ]
+      },
+      {
+        "name": "emr4_user_capability_grant_generation_guard",
+        "arguments": "",
+        "result": "trigger",
+        "language": "plpgsql",
+        "security_definer": false,
+        "volatility": "v",
+        "tokens": [
+          "FOR UPDATE",
+          "user capability grant parent user missing",
+          "ERRCODE = '23503'",
+          "authority_generation overflow",
+          "authority_generation = users.authority_generation + 1"
+        ]
+      },
+      {
+        "name": "emr4_reject_user_capability_grant_update",
+        "arguments": "",
+        "result": "trigger",
+        "language": "plpgsql",
+        "security_definer": false,
+        "volatility": "v",
+        "tokens": [
+          "user capability grant update is rejected",
+          "ERRCODE = '55000'"
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "name": "trg_users_authority_generation_guard",
+        "table": "users",
+        "enabled": "O",
+        "tokens": [
+          "BEFORE INSERT OR UPDATE ON users FOR EACH ROW",
+          "EXECUTE FUNCTION emr4_user_authority_generation_guard()"
+        ]
+      },
+      {
+        "name": "trg_user_capability_grants_generation",
+        "table": "user_capability_grants",
+        "enabled": "O",
+        "tokens": [
+          "BEFORE INSERT OR DELETE ON user_capability_grants FOR EACH ROW",
+          "EXECUTE FUNCTION emr4_user_capability_grant_generation_guard()"
+        ]
+      },
+      {
+        "name": "trg_user_capability_grants_reject_update",
+        "table": "user_capability_grants",
+        "enabled": "O",
+        "tokens": [
+          "BEFORE UPDATE ON user_capability_grants FOR EACH ROW",
+          "EXECUTE FUNCTION emr4_reject_user_capability_grant_update()"
+        ]
+      }
+    ],
+    "unexpected_function_family": "emr4_user_",
+    "unexpected_function_count": 0,
+    "unexpected_trigger_count": 0,
+    "zero_rows": {
+      "users": 0,
+      "user_capability_grants": 0,
+      "appointment_command_idempotency": 0,
+      "appointment_audit_log": 0
+    }
+  },
+  "cleanup": {
+    "target": "captured_container_id_only",
+    "ownership_reverification_required": true,
+    "post_remove_exact_id_absence_required": true,
+    "remove_image_volume_network_or_workspace": false
+  },
+  "forbidden": {
+    "protected_path_content_or_metadata_used": false,
+    "existing_or_product_database_used": false,
+    "host_database_url_used": false,
+    "external_network_or_image_pull_used": false,
+    "bind_or_named_volume_used": false,
+    "patient_product_or_protected_data_used": false,
+    "provider_adc_credentials_or_browser_used": false,
+    "route_service_helper_or_command_called": false,
+    "behavior_or_dml_probe_run": false,
+    "watcher_or_event_authority_added": false,
+    "deployment_release_or_pages_opened": false,
+    "protected_ref_moved": false
+  },
+  "next_candidate": "provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal"
+}

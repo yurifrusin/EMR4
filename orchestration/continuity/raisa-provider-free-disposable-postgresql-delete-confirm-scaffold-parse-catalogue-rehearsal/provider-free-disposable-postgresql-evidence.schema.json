@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/delete-confirm-scaffold-parse-catalogue-evidence-v1.json",
+  "title": "delete-confirm scaffold parse/catalogue rehearsal evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "source_head",
+    "lifecycle",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.delete_confirm_scaffold_parse_catalogue_evidence.v1"
+    },
+    "result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_pass",
+        "rehearsal_failed"
+      ]
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_provider_free_disposable_postgresql_parse_catalogue"
+    },
+    "source_head": {
+      "const": "38f2fbb054736cbd63627daea6951d676907461c"
+    },
+    "lifecycle": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_needed",
+            "cleanup_verified",
+            "cleanup_ownership_unverified",
+            "cleanup_remove_failed",
+            "cleanup_absence_unproved"
+          ]
+        },
+        "container_id_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "container_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "claim_boundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_hashes": {
+      "type": "object",
+      "minProperties": 11,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "hostile_mutations_rejected": {
+      "const": 80
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "postgresql_major",
+        "image_reference",
+        "image_id_sha256",
+        "network_mode",
+        "storage"
+      ],
+      "properties": {
+        "postgresql_major": {
+          "const": 16
+        },
+        "image_reference": {
+          "const": "postgres:16-bookworm"
+        },
+        "image_id_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "network_mode": {
+          "const": "none"
+        },
+        "storage": {
+          "const": "container_local_tmpfs"
+        }
+      }
+    },
+    "offline_sql": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["range", "body_sha256", "body_bytes"],
+      "properties": {
+        "range": {
+          "const": "w2x3y4z5a6b7:x3y4z5a6b7c8"
+        },
+        "body_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "body_bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "facts_sha256",
+        "columns",
+        "constraints",
+        "functions",
+        "triggers",
+        "head",
+        "zero_rows"
+      ],
+      "properties": {
+        "status": {
+          "const": "exact_match"
+        },
+        "facts_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "columns": {
+          "const": 12
+        },
+        "constraints": {
+          "const": 7
+        },
+        "functions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        },
+        "triggers": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        },
+        "head": {
+          "const": "x3y4z5a6b7c8"
+        },
+        "zero_rows": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "users",
+            "user_capability_grants",
+            "appointment_command_idempotency",
+            "appointment_audit_log"
+          ],
+          "properties": {
+            "users": {"const": 0},
+            "user_capability_grants": {"const": 0},
+            "appointment_command_idempotency": {"const": 0},
+            "appointment_audit_log": {"const": 0}
+          }
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "detail_sha256"],
+      "properties": {
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal_pass"
+          }
+        },
+        "required": ["result"]
+      },
+      "then": {
+        "required": [
+          "contract_sha256",
+          "source_hashes",
+          "hostile_mutations_rejected",
+          "environment",
+          "offline_sql",
+          "catalogue"
+        ],
+        "properties": {
+          "failure": false
+        }
+      },
+      "else": {
+        "required": ["failure"],
+        "properties": {
+          "contract_sha256": false,
+          "source_hashes": false,
+          "hostile_mutations_rejected": false,
+          "environment": false,
+          "offline_sql": false,
+          "catalogue": false
+        }
+      }
+    }
+  ]
+}
