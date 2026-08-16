@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import hmac
 import json
@@ -57,6 +58,14 @@ MUTATING_ROLES = {
 
 UserLoader = Callable[[Any, Any], Any]
 TransactionFactory = Callable[..., Any]
+
+
+class _DeleteConfirmProposalBlocked(RuntimeError):
+    """Proposal-level admission failure that must map to a typed 200 blocked result."""
+
+    def __init__(self, reason: str) -> None:
+        super().__init__(reason)
+        self.reason = reason
 
 
 def _canonical_digest(value: Mapping[str, Any]) -> str:
@@ -127,12 +136,16 @@ def _require_evidence_secret(secret: str) -> str:
 
 
 def _proposal_version_material(*, evidence_signature: str, source_version: int) -> dict[str, Any]:
+    """Return exactly the two HMAC-covered proposal-version fields.
+
+    ``schema_version`` is intentionally excluded from signature material; it is
+    carried only in the returned envelope and the exact shape check.
+    """
     if not isinstance(evidence_signature, str) or len(evidence_signature) != 64:
         raise ValueError("signed evidence signature is invalid")
     if isinstance(source_version, bool) or not isinstance(source_version, int) or source_version < 1:
         raise ValueError("proposal source version is invalid")
     return {
-        "schema_version": DELETE_PROPOSAL_VERSION_BINDING_SCHEMA,
         "source_version": source_version,
         "evidence_signature": evidence_signature,
     }
@@ -154,7 +167,11 @@ def mint_delete_proposal_version_binding(
         json.dumps(material, sort_keys=True, separators=(",", ":")).encode("utf-8"),
         hashlib.sha256,
     ).hexdigest()
-    return {**material, "signature": digest}
+    return {
+        "schema_version": DELETE_PROPOSAL_VERSION_BINDING_SCHEMA,
+        **material,
+        "signature": digest,
+    }
 
 
 def verify_delete_proposal_version_binding(
@@ -171,6 +188,8 @@ def verify_delete_proposal_version_binding(
         "signature",
     }:
         raise ValueError("proposal version binding shape is invalid")
+    if value.get("schema_version") != DELETE_PROPOSAL_VERSION_BINDING_SCHEMA:
+        raise ValueError("proposal version binding schema is invalid")
     material = _proposal_version_material(
         evidence_signature=value.get("evidence_signature"),
         source_version=value.get("source_version"),
@@ -402,14 +421,14 @@ def _transport(
 ) -> dict[str, Any]:
     proposal = body.delete_proposal
     if not isinstance(proposal, AppointmentDeleteProposalOut):
-        raise ValueError("only AppointmentDeleteProposalOut is supported")
+        raise _DeleteConfirmProposalBlocked("unsupported_delete_confirm_variant")
     if proposal.blocks:
-        raise ValueError("blocked delete proposals cannot enter confirmation")
+        raise _DeleteConfirmProposalBlocked("delete_proposal_not_safe")
     if (
         proposal.signed_confirmation_evidence_required is not True
         or body.signed_confirmation_evidence_required is not True
     ):
-        raise ValueError("signed confirmation evidence must remain mandatory")
+        raise _DeleteConfirmProposalBlocked("signed_confirmation_evidence_invalid")
     return {
         "operation_id": DELETE_CONFIRM_OPERATION_ID,
         "route_family": DELETE_CONFIRM_ROUTE_FAMILY,
@@ -434,16 +453,23 @@ def _verified_proposal_state(
     evidence_secret: str,
     proposal_version_binding: Mapping[str, Any],
     proposal_version_binding_secret: bytes,
-) -> tuple[dict[str, Any], str]:
+) -> tuple[dict[str, Any], str, str, str]:
+    """Return ``(current_state, freshness_id, evidence_status, evidence_binding)``.
+
+    Structural proposal defects raise ``_DeleteConfirmProposalBlocked``. Evidence
+    and proposal-generation binding failures are reflected in the returned
+    status/binding fields so the pre-command admission adapter can issue the
+    exact typed blocked stop before any command session is opened.
+    """
     proposal = body.delete_proposal
     if not isinstance(proposal, AppointmentDeleteProposalOut):
-        raise ValueError("only AppointmentDeleteProposalOut is supported")
+        raise _DeleteConfirmProposalBlocked("unsupported_delete_confirm_variant")
     evidence = body.signed_confirmation_evidence
     if not isinstance(evidence, Mapping):
-        raise ValueError("signed confirmation evidence is required")
+        raise _DeleteConfirmProposalBlocked("signed_confirmation_evidence_invalid")
     payload = evidence.get("payload")
     if not isinstance(payload, Mapping):
-        raise ValueError("signed confirmation evidence payload is invalid")
+        raise _DeleteConfirmProposalBlocked("signed_confirmation_evidence_invalid")
     signed_state = payload.get("current_state")
     required_state_keys = {
         "appointment_id",
@@ -453,20 +479,20 @@ def _verified_proposal_state(
         "cancellation_reason",
     }
     if not isinstance(signed_state, Mapping) or set(signed_state) != required_state_keys:
-        raise ValueError("signed proposal state shape is invalid")
-    source_version = verify_delete_proposal_version_binding(
-        proposal_version_binding,
-        signed_confirmation_evidence=evidence,
-        secret=proposal_version_binding_secret,
-    )
+        raise _DeleteConfirmProposalBlocked("signed_confirmation_evidence_invalid")
+    try:
+        source_version = verify_delete_proposal_version_binding(
+            proposal_version_binding,
+            signed_confirmation_evidence=evidence,
+            secret=proposal_version_binding_secret,
+        )
+        binding_verified = True
+    except ValueError:
+        source_version = None
+        binding_verified = False
     current_state = {key: signed_state[key] for key in sorted(required_state_keys)}
     current_state["source_version"] = source_version
     freshness_id = delete_proposal_freshness_id(proposal.command, current_state)
-    if (
-        proposal.delete_proposal_freshness_id != freshness_id
-        or body.delete_proposal_freshness_id != freshness_id
-    ):
-        raise ValueError("proposal freshness fields do not match signed state")
     expected_payload = delete_signed_confirmation_payload(
         practice_id=authenticated_user.practice_id,
         actor_id=authenticated_user.id,
@@ -480,11 +506,13 @@ def _verified_proposal_state(
         expected_purpose=DELETE_CONFIRM_EVIDENCE_PURPOSE,
         secret=_require_evidence_secret(evidence_secret),
     )
-    if not result.verified:
-        raise ValueError(result.code)
     if proposal.signed_confirmation_evidence not in (None, dict(evidence)):
-        raise ValueError("proposal and confirmation evidence differ")
-    return current_state, freshness_id
+        raise _DeleteConfirmProposalBlocked("signed_confirmation_evidence_invalid")
+    if result.verified and binding_verified:
+        return current_state, freshness_id, "verified", "exact"
+    if not result.verified:
+        return current_state, freshness_id, result.code, "invalid"
+    return current_state, freshness_id, "signed_evidence_binding_invalid", "invalid"
 
 
 def _proposal_server_ingress(
@@ -496,7 +524,12 @@ def _proposal_server_ingress(
     proposal_version_binding: Mapping[str, Any],
     proposal_version_binding_secret: bytes,
 ) -> DeleteConfirmServerIngress:
-    current_state, freshness_id = _verified_proposal_state(
+    (
+        current_state,
+        freshness_id,
+        evidence_status,
+        evidence_binding,
+    ) = _verified_proposal_state(
         body=body,
         authenticated_user=authenticated_user,
         evidence_secret=evidence_secret,
@@ -525,10 +558,10 @@ def _proposal_server_ingress(
         authority_current=authority_current,
         current_state=current_state,
         expected_freshness_id=freshness_id,
-        evidence_status="verified",
+        evidence_status=evidence_status,
         evidence_purpose=DELETE_CONFIRM_EVIDENCE_PURPOSE,
         expected_evidence_purpose=DELETE_CONFIRM_EVIDENCE_PURPOSE,
-        evidence_binding="exact",
+        evidence_binding=evidence_binding,
     )
 
 
@@ -713,6 +746,16 @@ def _error(status_code: int, code: str) -> DeleteConfirmCompositionResult:
     )
 
 
+def _map_admission_stop(admission: Mapping[str, Any]) -> DeleteConfirmCompositionResult:
+    outcome = admission.get("outcome")
+    reason = str(admission.get("reason") or "validation_rejected")
+    if outcome == "authority_revoked":
+        return _error(403, "current_authority_unavailable")
+    if outcome == "idempotency_conflict":
+        return _error(409, "idempotency_key_required")
+    return _blocked(reason)
+
+
 def compose_product_delete_confirm(
     body: AppointmentDeleteProposalConfirmationIn,
     *,
@@ -731,15 +774,45 @@ def compose_product_delete_confirm(
     """Compose one delete-only product confirmation without mounting a route."""
     if not isinstance(body.delete_proposal, AppointmentDeleteProposalOut):
         return _blocked("unsupported_delete_confirm_variant")
+
+    # ---- Stage A: server-owned secrets, bearer minimization and identity ----
     try:
         _require_hmac_secret(idempotency_secret, label="idempotency secret")
         _require_hmac_secret(session_binding_secret, label="session binding secret")
+        _require_hmac_secret(
+            proposal_version_binding_secret, label="proposal version binding secret"
+        )
+        _require_evidence_secret(evidence_secret)
+        if authenticated_user is None:
+            raise ValueError("authenticated user identity is missing")
+        authority_generation = getattr(
+            authenticated_user, "authority_generation", None
+        )
+        if (
+            isinstance(authority_generation, bool)
+            or not isinstance(authority_generation, int)
+            or authority_generation < 1
+        ):
+            raise ValueError("authenticated authority generation is invalid")
+        if not authenticated_user.is_active:
+            raise ValueError("authenticated user is inactive")
+        if authenticated_user.role not in MUTATING_ROLES:
+            raise ValueError("authenticated role is not admitted")
         session_reference = authenticated_session_reference(
             authenticated_bearer_token,
             secret=authenticated_session_secret,
             actor_id=authenticated_user.id,
             practice_id=authenticated_user.practice_id,
         )
+    except (AttributeError, TypeError, ValueError):
+        return _error(403, "authenticated_delete_context_unavailable")
+
+    # ---- Stage B: idempotency key presence ----
+    if not isinstance(idempotency_key, str) or not idempotency_key.strip():
+        return _error(409, "idempotency_key_required")
+
+    # ---- Stage C: transport and pre-command ingress ----
+    try:
         transport = _transport(body, idempotency_key=idempotency_key)
         ingress = _proposal_server_ingress(
             body=body,
@@ -749,10 +822,29 @@ def compose_product_delete_confirm(
             proposal_version_binding=proposal_version_binding,
             proposal_version_binding_secret=proposal_version_binding_secret,
         )
+    except _DeleteConfirmProposalBlocked as exc:
+        return _blocked(exc.reason)
     except (AttributeError, TypeError, ValueError):
-        return _error(403, "authenticated_delete_context_unavailable")
+        return _blocked("unsupported_delete_confirm_variant")
 
-    command_db = command_session_factory()
+    # ---- Stage D: pre-command admission gate ----
+    adapter_input = {
+        "structure": "valid",
+        "transport": copy.deepcopy(dict(transport)),
+        "server": ingress.as_adapter_mapping(),
+    }
+    try:
+        admission = delete_confirm_admission_adapter(adapter_input)
+    except (AttributeError, KeyError, TypeError, ValueError):
+        return _blocked("admission_input_invalid")
+    if admission.get("kind") != "kernel_request_ready":
+        return _map_admission_stop(admission)
+
+    # ---- Stage E: open the command session and compose ----
+    try:
+        command_db = command_session_factory()
+    except Exception:
+        return _error(503, "delete_confirm_transaction_unavailable")
     with closing(command_db):
         return compose_delete_confirm(
             transport,

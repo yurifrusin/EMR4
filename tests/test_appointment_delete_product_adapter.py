@@ -274,6 +274,8 @@ def _run(
     bearer: str = "synthetic-authenticated-bearer",
     session_secret: bytes = SESSION_SECRET,
     version_secret: bytes = VERSION_SECRET,
+    idempotency_key: str = "synthetic-idempotency-key",
+    session_factory: Callable[[], FakeCommandSession] | None = None,
 ):
     db = db or FakeCommandSession(appointment)
     physical = physical or FakeDeleteTransaction(appointment)
@@ -281,13 +283,15 @@ def _run(
 
     def command_session_factory() -> FakeCommandSession:
         session_calls["count"] += 1
+        if session_factory is not None:
+            return session_factory()
         return db
 
     result = compose_product_delete_confirm(
         body,
         authenticated_user=user,
         authenticated_bearer_token=bearer,
-        idempotency_key="synthetic-idempotency-key",
+        idempotency_key=idempotency_key,
         proposal_version_binding=binding,
         command_session_factory=command_session_factory,
         authenticated_session_secret=session_secret,
@@ -441,10 +445,11 @@ def test_initial_inactive_or_unrecognised_role_stops_before_transaction() -> Non
         user = _user(appointment, **overrides)
         body, binding = _body(appointment, user)
 
-        result, db, physical, _session_calls = _run(body, binding, appointment, user)
+        result, db, physical, session_calls = _run(body, binding, appointment, user)
 
         assert result.kind == "error"
         assert result.status_code == 403
+        assert session_calls["count"] == 0
         assert physical.entries == 0
         assert db.audits == []
 
@@ -454,9 +459,11 @@ def test_warning_mismatch_and_signed_evidence_tamper_fail_closed() -> None:
     user = _user(appointment)
     body, binding = _body(appointment, user, confirmed_warnings=[])
 
-    warning_result, db, _physical, _session = _run(body, binding, appointment, user)
+    warning_result, db, _physical, session_calls = _run(body, binding, appointment, user)
     assert warning_result.kind == "blocked"
+    assert warning_result.status_code == 200
     assert warning_result.body["blocks"][0]["code"] == "warning_acknowledgement_mismatch"
+    assert session_calls["count"] == 0
     assert db.audits == []
 
     tampered_body = body.model_copy(deep=True)
@@ -467,8 +474,9 @@ def test_warning_mismatch_and_signed_evidence_tamper_fail_closed() -> None:
         appointment,
         user,
     )
-    assert evidence_result.kind == "error"
-    assert evidence_result.status_code == 403
+    assert evidence_result.kind == "blocked"
+    assert evidence_result.status_code == 200
+    assert evidence_result.body["blocks"][0]["code"] == "signed_confirmation_evidence_invalid"
     assert session_calls["count"] == 0
     assert physical.entries == 0
 
@@ -480,10 +488,11 @@ def test_changed_locked_generation_stops_without_effect() -> None:
     locked = copy.deepcopy(proposal_snapshot)
     locked.appointment_state_version = 8
 
-    result, db, physical, _ = _run(body, binding, locked, user)
+    result, db, physical, session_calls = _run(body, binding, locked, user)
 
     assert result.kind == "blocked"
     assert result.body["blocks"][0]["code"] == "locked_request_digest_changed"
+    assert session_calls["count"] == 1
     assert db.audits == []
     assert locked.appointment_state_version == 8
     assert physical.records == {}
@@ -542,10 +551,11 @@ def test_current_practice_mismatch_is_rejected_inside_authority_boundary() -> No
     user = _user(appointment, practice_id=uuid.uuid4())
     body, binding = _body(appointment, user)
 
-    result, db, physical, _ = _run(body, binding, appointment, user)
+    result, db, physical, session_calls = _run(body, binding, appointment, user)
 
     assert result.kind == "error"
     assert result.status_code == 403
+    assert session_calls["count"] == 1
     assert physical.entries == 1
     assert db.audits == []
     assert physical.records == {}
@@ -690,8 +700,9 @@ def test_stale_freshness_or_tampered_freshness_id_stops_closed() -> None:
 
     result, _db, physical, session_calls = _run(tampered, binding, appointment, user)
 
-    assert result.kind == "error"
-    assert result.status_code == 403
+    assert result.kind == "blocked"
+    assert result.status_code == 200
+    assert result.body["blocks"][0]["code"] == "stale_delete_proposal_freshness_id"
     assert session_calls["count"] == 0
     assert physical.entries == 0
 
@@ -701,9 +712,115 @@ def test_already_cancelled_status_is_blocked_before_effect() -> None:
     user = _user(appointment)
     body, binding = _body(appointment, user)
 
-    result, db, physical, _ = _run(body, binding, appointment, user)
+    result, db, physical, session_calls = _run(body, binding, appointment, user)
 
     assert result.kind == "blocked"
+    assert result.status_code == 200
     assert result.body["blocks"][0]["code"] == "already_cancelled"
+    assert session_calls["count"] == 0
     assert db.audits == []
     assert physical.entries == 0
+
+
+@pytest.mark.parametrize("idempotency_key", ["", "   ", None])
+def test_missing_or_blank_idempotency_key_returns_409_before_session(
+    idempotency_key: str | None,
+) -> None:
+    appointment = _appointment()
+    user = _user(appointment)
+    body, binding = _body(appointment, user)
+
+    result, _db, physical, session_calls = _run(
+        body,
+        binding,
+        appointment,
+        user,
+        idempotency_key=idempotency_key,
+    )
+
+    assert result.kind == "error"
+    assert result.status_code == 409
+    assert result.body["detail"]["code"] == "idempotency_key_required"
+    assert session_calls["count"] == 0
+    assert physical.entries == 0
+
+
+def test_command_session_factory_exception_fails_closed_503() -> None:
+    appointment = _appointment()
+    user = _user(appointment)
+    body, binding = _body(appointment, user)
+
+    def raising_factory() -> FakeCommandSession:
+        raise RuntimeError("command session unavailable")
+
+    result, _db, physical, session_calls = _run(
+        body,
+        binding,
+        appointment,
+        user,
+        session_factory=raising_factory,
+    )
+
+    assert result.kind == "error"
+    assert result.status_code == 503
+    assert result.body["detail"]["code"] == "delete_confirm_transaction_unavailable"
+    assert session_calls["count"] == 1
+    assert physical.entries == 0
+
+
+def test_proposal_generation_binding_failure_is_blocked_before_session() -> None:
+    appointment = _appointment()
+    user = _user(appointment)
+    body, binding = _body(appointment, user)
+    tampered_binding = dict(binding)
+    tampered_binding["source_version"] = 8
+
+    result, _db, physical, session_calls = _run(
+        body,
+        tampered_binding,
+        appointment,
+        user,
+    )
+
+    assert result.kind == "blocked"
+    assert result.status_code == 200
+    assert result.body["blocks"][0]["code"] == "signed_confirmation_evidence_invalid"
+    assert session_calls["count"] == 0
+    assert physical.entries == 0
+
+
+def test_proposal_version_hmac_covers_exactly_two_fields() -> None:
+    appointment = _appointment(version=7)
+    user = _user(appointment)
+    body, binding = _body(appointment, user)
+    evidence = body.signed_confirmation_evidence
+    material = {
+        "evidence_signature": evidence["signature"],
+        "source_version": 7,
+    }
+    expected = hmac.new(
+        VERSION_SECRET,
+        json.dumps(material, sort_keys=True, separators=(",", ":")).encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    assert binding["signature"] == expected
+    # schema_version is carried in the envelope but excluded from the HMAC.
+    assert binding["schema_version"] == DELETE_PROPOSAL_VERSION_BINDING_SCHEMA
+    assert set(binding) == {
+        "schema_version",
+        "source_version",
+        "evidence_signature",
+        "signature",
+    }
+    assert binding["source_version"] == 7
+    assert binding["evidence_signature"] == evidence["signature"]
+    # A schema-only tamper leaves the two-field HMAC unchanged (schema is excluded
+    # from signature material) but the exact shape check still rejects it.
+    schema_only = {**binding, "schema_version": "raisa.tampered.v1"}
+    assert schema_only["signature"] == expected
+    with pytest.raises(ValueError, match="schema"):
+        verify_delete_proposal_version_binding(
+            schema_only,
+            signed_confirmation_evidence=evidence,
+            secret=VERSION_SECRET,
+        )

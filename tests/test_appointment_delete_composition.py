@@ -657,6 +657,65 @@ def test_hostile_public_envelope_mutations_fail_closed() -> None:
             canonical_delete_confirm_envelope_bytes(mutator(copy.deepcopy(envelope)))
 
 
+@pytest.mark.parametrize(
+    "mutator",
+    [
+        lambda v: {**v, "receipt": {**v["receipt"], "status": "Booked"}},
+        lambda v: {
+            **v,
+            "receipt": {**v["receipt"], "waiting_area_id": str(uuid.uuid4())},
+        },
+        lambda v: {
+            **v,
+            "receipt": {**v["receipt"], "status_reason_code": "LEGACY_UNCLASSIFIED"},
+        },
+        lambda v: {**v, "receipt": {**v["receipt"], "status_reason_code": None}},
+        lambda v: {**v, "receipt": {**v["receipt"], "cancellation_reason": 123}},
+        lambda v: {
+            **v,
+            "receipt": {**v["receipt"], "cancellation_reason": "x" * 501},
+        },
+        lambda v: {**v, "receipt": {**v["receipt"], "appointment_id": ""}},
+        lambda v: {**v, "receipt": {**v["receipt"], "appointment_id": "   "}},
+        lambda v: {**v, "receipt": {**v["receipt"], "appointment_id": 123}},
+        lambda v: {
+            **v,
+            "receipt": {**v["receipt"], "warning_codes": ["unknown_code"]},
+        },
+        lambda v: {
+            **v,
+            "receipt": {
+                **v["receipt"],
+                "warning_codes": ["waiting_area_cleared", "waiting_area_cleared"],
+            },
+        },
+        lambda v: {
+            **v,
+            "warnings": [
+                {
+                    "code": "waiting_area_cleared",
+                    "severity": "info",
+                    "message": "Tampered.",
+                }
+            ],
+        },
+        lambda v: {**v, "intent": "tampered_intent"},
+        lambda v: {**v, "summary": "Tampered summary."},
+        lambda v: {**v, "autonomy_tier": "confirmed_write_tampered"},
+        lambda v: {**v, "blocks": [{"code": "x", "severity": "blocked"}]},
+        lambda v: {**v, "schema_version": "raisa.tampered.v1"},
+        lambda v: {**v, "receipt": {**v["receipt"], "patient": "disclosure"}},
+        lambda v: {**v, "appointment": {"id": str(uuid.uuid4())}},
+    ],
+)
+def test_hostile_public_envelope_full_semantics_fail_closed(mutator) -> None:
+    envelope = delete_confirm_envelope_projection(
+        _private_receipt(warnings=["waiting_area_cleared"])
+    )
+    with pytest.raises(ValueError):
+        canonical_delete_confirm_envelope_bytes(mutator(copy.deepcopy(envelope)))
+
+
 def test_bad_effect_audit_identity_maps_to_503_and_rolls_back() -> None:
     appointment = _appointment()
     ingress = _ingress()

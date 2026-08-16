@@ -220,9 +220,12 @@ def delete_confirm_envelope_projection(response_bytes: bytes) -> dict[str, Any]:
 def canonical_delete_confirm_envelope_bytes(envelope: Mapping[str, Any]) -> bytes:
     """Validate and canonically serialize the complete public envelope.
 
-    Serialization is sorted-key compact UTF-8 JSON without NaN. The envelope may
-    not contain an ``appointment``, patient, practitioner, schedule, notes,
-    reason, audit identity or live projection field.
+    Serialization is sorted-key compact UTF-8 JSON without NaN. The envelope must
+    be exactly the deterministic projection of one validated private six-field
+    receipt: every receipt field must round-trip through the canonical private
+    bytes, every constant must be exact, and the envelope may not contain an
+    ``appointment``, patient, practitioner, schedule, notes, reason, audit
+    identity or live projection field.
     """
     if not isinstance(envelope, Mapping):
         raise ValueError("delete-confirm public envelope must be a mapping")
@@ -266,20 +269,32 @@ def canonical_delete_confirm_envelope_bytes(envelope: Mapping[str, Any]) -> byte
         raise ValueError("delete-confirm public receipt is invalid")
     if receipt["schema_version"] != DELETE_CONFIRM_RECEIPT_SCHEMA:
         raise ValueError("delete-confirm public receipt schema is invalid")
-    warnings = supplied["warnings"]
-    if not isinstance(warnings, list):
-        raise ValueError("delete-confirm public warnings must be a list")
-    receipt_warning_codes = receipt["warning_codes"]
-    if (
-        not isinstance(receipt_warning_codes, list)
-        or any(code not in DELETE_CONFIRM_WARNING_CODES for code in receipt_warning_codes)
-    ):
-        raise ValueError("delete-confirm public receipt warnings are invalid")
-    expected_warnings = [
-        dict(DELETE_CONFIRM_WARNING_REGISTRY[code]) for code in receipt_warning_codes
-    ]
-    if warnings != expected_warnings:
-        raise ValueError("delete-confirm public warnings are not the registry projection")
+    target = receipt["appointment_id"]
+    if isinstance(target, UUID):
+        target_text = str(target)
+    elif isinstance(target, str):
+        target_text = target
+    else:
+        raise ValueError("delete-confirm public receipt target is invalid")
+    if not target_text.strip():
+        raise ValueError("delete-confirm public receipt target is blank")
+    try:
+        response_bytes = canonical_delete_confirm_response_bytes(
+            appointment_id=target_text,
+            status_reason_code=receipt["status_reason_code"],
+            cancellation_reason=receipt["cancellation_reason"],
+            warning_codes=receipt["warning_codes"],
+        )
+    except (TypeError, ValueError) as exc:
+        raise ValueError(
+            "delete-confirm public receipt is not the canonical private receipt"
+        ) from exc
+    validate_delete_confirm_private_receipt_bytes(response_bytes)
+    expected = delete_confirm_envelope_projection(response_bytes)
+    if supplied != expected:
+        raise ValueError(
+            "delete-confirm public envelope is not the exact private receipt projection"
+        )
     raw = json.dumps(
         supplied,
         ensure_ascii=False,
