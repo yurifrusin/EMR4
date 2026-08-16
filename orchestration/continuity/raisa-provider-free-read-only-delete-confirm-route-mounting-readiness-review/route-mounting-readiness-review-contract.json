@@ -1,0 +1,68 @@
+{
+  "schema_version": "raisa.delete_confirm_route_mounting_readiness_review_contract.v1",
+  "source_head": "0e627d7347e4a0370931d29b3e705eefe12fd881",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "inputs": [
+    {"path": "app/main.py", "sha256": "0e0f42290688943bc9dd7d5711826acf10430133be0b309eae94bad15da46ca2"},
+    {"path": "app/routers/appointments.py", "sha256": "f81fc3acc96f21efa64e1d694331792feebadf08f6384c8ac79542bb196d6624"},
+    {"path": "app/dependencies.py", "sha256": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc"},
+    {"path": "app/config.py", "sha256": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e"},
+    {"path": "app/schemas/appointments.py", "sha256": "c35c271e9308f1f57eeeee53eefa6388087e126944ab5100c225f50066e3a0cf"},
+    {"path": "app/services/diary/confirm_actions.py", "sha256": "9c7afeea930ce349edfc22dc2a1cd38fedf52c8cd8ae96be9c56e2deb634ec86"},
+    {"path": "app/services/appointment_delete_product_adapter.py", "sha256": "a7e1702c61258acfb51f634883086ad5993c8ab63989eace9cfa1102b2532c59"},
+    {"path": "app/services/appointment_delete_composition.py", "sha256": "ed6a5e705808c71ecf4edcec837c6be2ec790660bf32a85357bda68c2159aa15"},
+    {"path": "app/services/appointment_delete_physical.py", "sha256": "8e0f0e06471560b328e5ab7af6cc9981c20ca4a58ec9eec74dbd412979f85533"},
+    {"path": "app/services/bernie_turn_evidence.py", "sha256": "e72e4052ce4f9bc2d3e6f308401a439b84987422b4003ddfbed34059a98cd467"},
+    {"path": "app/services/appointment_idempotency.py", "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "c5493c14efd92b3d3fc3d8a0ef33d3e3a266fa1d0961ad90ebbc37e4b4065a3a"},
+    {"path": "orchestration/api_spine_appointment_command_alignment_inventory.md", "sha256": "10b71418a8d0c492def5c412d7aae1b79d69ea93e8566f3ce67408172fdfe8ea"},
+    {"path": "tests/test_api_spine_appointment_openapi_drift_guard.py", "sha256": "2afc312a1c59a321ce758ca59a8865e61761811da731cd6f0233703db19ab4a3"},
+    {"path": "tests/test_api_spine_appointment_command_alignment_inventory.py", "sha256": "0c89fea55bb3904fb9e2126b7b60a0702cb021ed82709aa0ccf28c0c3595cb73"},
+    {"path": "docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md", "sha256": "6b146f64a715738ff4729588bb77f9fb3c7edfcf04edba272888ad2972f50b6f"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-response-compatibility-product-adapter-architecture.md", "sha256": "ad4b440bd8a6a01194a32bc27ec0872993630505f4026626a5ba186598813197"},
+    {"path": "docs/raisa-provider-free-unmounted-delete-confirm-composition-product-adapter-implementation-closeout.md", "sha256": "c2eab520a8ab69d3929c7a615988f4464a6a7e81ce38b7dd9498ee34b207c3ca"},
+    {"path": "docs/raisa-provider-free-status-confirm-http-route-convergence-plan.md", "sha256": "27f7f033b20db36e06bad285bd0318f5f41e7c5d849ba786e6f3aae1363b3db5"},
+    {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md", "sha256": "90d42d80d06d1c173fde25b7da153173b195cbc118e672cac6746493ef0aa507"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json", "sha256": "a5544c054389726c5f6f39b6a01f1598e2c509ab7d508c7ca52567d11ca19cd3"},
+    {"path": "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/route-convergence-contract.json", "sha256": "a308bd52b305a4e02793da739748ca321a3df97368b0935735d9b11a3d95b5ac"},
+    {"path": "orchestration/continuity/raisa-delete-confirm-route-convergence-and-ariadne-git-object-resolution/provider-free-read-only-evidence.json", "sha256": "827a4b7e82c7761f6e5e4b447041b06ac3266e19d9548fa5f438a312cae8c287"}
+  ],
+  "classifications": ["satisfied", "route_transition_gap", "blocking_gap"],
+  "verdict_rules": {
+    "any_blocking_gap": "route_mounting_not_ready",
+    "no_blocker_with_transition_gap": "ready_for_bounded_route_convergence_candidate",
+    "all_satisfied": "route_convergence_already_complete"
+  },
+  "dimensions": [
+    {"order": 1, "id": "literal_mounting", "expected_classification": "satisfied", "question": "Is the appointments router included and is the historical delete-confirm route literally mounted?"},
+    {"order": 2, "id": "canonical_identity_and_alias", "expected_classification": "route_transition_gap", "question": "Does canonical /proposals/delete/confirm exist while /proposals/delete-confirm is a hidden alias over one handler?"},
+    {"order": 3, "id": "proposal_version_binding_carriage", "expected_classification": "route_transition_gap", "question": "Does proposal generation mint and confirmation carry the opaque source-version/evidence binding required by the adapter?"},
+    {"order": 4, "id": "server_authority_and_session_ingress", "expected_classification": "route_transition_gap", "question": "Does the mounted handler supply authenticated bearer context, current user, distinct command-session factory and domain-separated secrets to the adapter?"},
+    {"order": 5, "id": "physical_seam_composition", "expected_classification": "satisfied", "question": "Does the accepted product adapter compose only through the accepted delete-confirm physical transaction by default?"},
+    {"order": 6, "id": "locked_current_truth_readmission", "expected_classification": "satisfied", "question": "Are current authority, source version, target, freshness, evidence and warnings re-admitted under the physical lock?"},
+    {"order": 7, "id": "atomic_effect_audit_private_receipt", "expected_classification": "satisfied", "question": "Does the physical seam own atomic cancellation, attributable audit and canonical six-field private receipt completion?"},
+    {"order": 8, "id": "public_response_schema", "expected_classification": "route_transition_gap", "question": "Does the mounted response schema expose only the minimal public receipt envelope instead of AppointmentOut?"},
+    {"order": 9, "id": "canonical_public_byte_delivery", "expected_classification": "route_transition_gap", "question": "Do first success and replay return identical canonical public-envelope bytes without returning private receipt bytes directly?"},
+    {"order": 10, "id": "closed_outcome_http_mapping", "expected_classification": "satisfied", "question": "Does the accepted adapter expose closed 200/403/404/409/503 status/body outcomes for a route transport?"},
+    {"order": 11, "id": "raw_delete_isolation", "expected_classification": "satisfied", "question": "Does raw compatibility DELETE remain a separate legacy ingress with no accepted kernel authority?"},
+    {"order": 12, "id": "accepted_postgresql_foundation", "expected_classification": "satisfied", "question": "Is the exact serial PostgreSQL behavior/transaction evidence accepted and consumable without rerun?"}
+  ],
+  "acceptance": {
+    "expected_counts": {"satisfied": 7, "route_transition_gap": 5, "blocking_gap": 0},
+    "expected_verdict": "ready_for_bounded_route_convergence_candidate",
+    "minimum_hostile_mutations": 72,
+    "require_exact_dimension_order": true,
+    "require_exact_source_citations": true,
+    "require_private_public_byte_separation": true,
+    "require_no_app_import": true
+  },
+  "forbidden_surfaces": [
+    "route_edit_mount_call_or_http_transport",
+    "schema_model_migration_or_api_spine_edit",
+    "database_docker_sql_source_or_watcher_access",
+    "capability_product_command_or_product_data",
+    "provider_adc_credentials_iam_browser_or_network",
+    "ui_deployment_production_release_pages_or_protected_refs",
+    "protected_evidence_and_docs_branding"
+  ]
+}
