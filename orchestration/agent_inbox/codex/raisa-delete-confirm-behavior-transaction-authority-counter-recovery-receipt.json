@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "Yuri explicitly authorized the recommended narrow continuation after the preserved b4b772dd stop. AER-0353 has an exact harness-only correction: count private _authority_valid invocations rather than downstream grant SQL, retain SQL tokens independently and restore the wrapper in finally. No product-source edit or broader attempt budget is authorized.",
+    "next_executable_stage": "Freeze the explicit authority-counter addendum, implement and test the semantic counter wrapper, create one final semantic freeze and five-source preexecution receipt, then run exactly one occupied attempt and stop on any failure.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "b4b772dd07a91e89db57fdd23bb1b4afb199a7e7",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "user_authorized_counter_recovery",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker lane is closed and the semantic counter defect is already exactly diagnosed; another transport cycle would add cost without leverage.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one Gemini 3.7 Flash/high veto remains mandatory after the final occupied attempt passes and cleans up.",
+        "work_packages": [
+          "one post-pass exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The counter wrapper and database lifecycle are serial and native delegation is not authorized.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "repair_result",
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one exact harness correction",
+      "one final owned database lifecycle",
+      "Gemini only after pass",
+      "Sol alone accepts"
+    ]
+  },
+  "planned_action": "commit_user_authorized_authority_counter_addendum_then_implement_exact_harness_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The new authority-counter addendum records Yuri's explicit override of the exhausted attempt cap. It permits only counting physical._authority_valid semantic invocations, independent SQL tokens, guaranteed finally restoration, regression gates and one final occupied attempt. No product source may change.",
+    "current_authority_allocation": "Sol owns the exact AER-0353 harness counter repair and final attempt. DeepSeek is closed; Gemini 3.7 Flash/high remains reserved for exactly one post-pass veto; native subagents remain declined for the serial stage.",
+    "git_refs_and_worktree": "Task HEAD is preserved stop b4b772dd07a91e89db57fdd23bb1b4afb199a7e7 with only the addendum/latch/receipt checkpoint pending. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding/ and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Yuri answered yes to the genuine attention fork and explicitly authorized the recommended one-repair, one-final-attempt continuation.",
+    "protected_evidence_boundaries": "One authored-synthetic, internal-only, portless, tmpfs PostgreSQL 16 attempt may follow successful gates. Product data, routes, providers, external networks, deployments, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
