@@ -1,0 +1,81 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "Attempts 001 and 002 failed closed before authority completion and proved exact cleanup. AER-0351 now binds the complete collision inventory: AUTH-S01 overlapped AUTH-S02, while AUTH-S02 overlapped AUTH-S03 through AUTH-S06. Source 1a90b837f59b95288be219f83f1987a21c78905b assigns both derived families disjoint high salts, tests the whole partition and attributes future SQL failures by group; freeze 90b5217df12d239ef76cf145bd4787299a7b8abf passes focused and canonical gates.",
+    "next_executable_stage": "Commit the fresh five-source recovery checkpoint, run one final bounded occupied attempt from semantic freeze 90b5217df12d239ef76cf145bd4787299a7b8abf, and proceed to exactly one Gemini 3.7 Flash/high veto only if all twenty groups and exact cleanup pass.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "90b5217df12d239ef76cf145bd4787299a7b8abf",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "material_recovery_preexecution",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The worker supplied a mechanical base but the stateful defects required Sol recovery; reopening it would repeat transport and context cost during a bounded same-root-cause repair.",
+        "work_packages": [
+          "closed six-path implementation candidate"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high veto remains useful and mandatory only after deterministic and occupied evidence pass.",
+        "work_packages": [
+          "one final exact-candidate veto after successful cleanup"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "The remaining network, relay and database lifecycle must be serial and the complete collision proof is already deterministic; delegation would add shared-state risk.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_rehearsal_result",
+      "pre_verifier_acceptance",
+      "material_recovery",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one owned network/container/relay lifecycle runs at a time",
+      "no verifier call before occupied pass and cleanup",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "commit_recovery_checkpoint_before_final_bounded_delete_confirm_behavior_occupied_attempt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Frozen plan 2a5042f80941e2bd191999c430ff2517ba7e8cb2 permits one bounded harness-only recovery. Attempts 001 and 002 both failed closed before authority completion and cleaned up exactly. Complete semantic repair source 1a90b837f59b95288be219f83f1987a21c78905b and replacement freeze 90b5217df12d239ef76cf145bd4787299a7b8abf bind disjoint AUTH-S01/AUTH-S02 auxiliary identities, whole-partition regression coverage and authority-group SQL attribution; 29 owned tests with one intentional runtime skip and the canonical 196-test profile pass.",
+    "current_authority_allocation": "Sol owns the AER-0351 repair, final bounded occupied execution and acceptance. DeepSeek is closed after one revision_required candidate; Gemini 3.7 Flash/high remains reserved for exactly one final veto after a pass; native subagents remain declined for the serial database lifecycle.",
+    "git_refs_and_worktree": "Task branch semantic-freeze HEAD is 90b5217df12d239ef76cf145bd4787299a7b8abf with only the recovery checkpoint metadata pending. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 87f352aa1d2a9bc9366e20032f6c9a2fd1b6fe67; docs/branding/ and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the active operation latch remains in_progress for the provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal under Yuri's standing uninterrupted-development authority.",
+    "protected_evidence_boundaries": "The final bounded attempt remains one cached PostgreSQL 16 container on one owned Docker internal-only network, no published port, tmpfs, fixed loopback relay and authored-synthetic serial rows only. No concurrency, restart, unknown commit, product provisioning, mounted route, public API/GraphQL/UI, real data, provider/ADC/IAM, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
