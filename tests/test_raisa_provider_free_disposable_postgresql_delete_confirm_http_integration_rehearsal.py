@@ -453,7 +453,7 @@ def test_scenario_http_status_and_decision_codes_are_exact() -> None:
     # asserts the status class without reimplementing the route error body.
     router_source = (ROOT / "app/routers/appointments.py").read_text(encoding="utf-8")
     assert "idempotency_key_required" in router_source
-    for status in ("400", "401", "403", "404", "409", "503"):
+    for status in ("400", "401", "403", "404", "409", "422", "503"):
         assert f"status_code != {status}" in source or f"status_code == {status}" in source
 
 
@@ -513,3 +513,77 @@ def test_pass_evidence_when_present_is_complete_and_minimized() -> None:
         "select *",
     ):
         assert forbidden not in rendered
+
+
+def test_dhi_s04_uses_public_private_proof_not_direct_stored_bytes_comparison() -> None:
+    """Guard DHI-S04 against comparing public HTTP replay bytes directly with the private stored receipt."""
+    run = inspect.getsource(rehearsal._run_scenarios)  # noqa: SLF001
+    section = run[run.index("# ── DHI-S04"):run.index("# ── DHI-S05")]
+    # The private/public proof must be invoked for the replay response.
+    assert "_public_private_proof(admin, four, replay_four.content)" in section
+    # Public HTTP bytes must never be compared directly against the private
+    # stored receipt bytes; only the private/public proof may assert distinctness.
+    for probe in ("replay_four.content", "first_four.content"):
+        assert f"{probe} != _stored_bytes(" not in section
+        assert f"{probe} == _stored_bytes(" not in section
+
+
+def test_dhi_s05_conflict_targets_sibling_appointment_and_has_zero_effect() -> None:
+    """Guard DHI-S05 idempotency conflict against asking the route for a new
+    proposal on an already-Cancelled target."""
+    run = inspect.getsource(rehearsal._run_scenarios)  # noqa: SLF001
+    section = run[run.index("# ── DHI-S05"):run.index("# ── DHI-S06")]
+    assert "five_sibling" in section
+    assert "appointment_only=True" in section
+    assert "practice_id=five.practice_id" in section
+    assert "actor_id=five.actor_id" in section
+    assert "practitioner_id=five.practitioner_id" in section
+    # The same idempotency key is reused against the sibling target.
+    assert 'headers=_headers(token_five, "shared-conflict")' in section
+    assert 'conflict.json().get("detail", {}).get("code")' in section
+    assert '!= "idempotency_key_conflict"' in section
+    assert "_assert_unchanged(admin, five_sibling)" in section
+
+
+def test_dhi_s08_absent_binding_returns_exact_422_and_tampered_malformed_block() -> None:
+    """Guard DHI-S08 structural probes: absent binding is 422 before the
+    handler; malformed/tampered bindings are 200 blocked with no session."""
+    run = inspect.getsource(rehearsal._run_scenarios)  # noqa: SLF001
+    section = run[run.index("# ── DHI-S08"):run.index("# ── DHI-S09")]
+    assert '("absent", None)' in section
+    assert '("malformed", {"source_version": 1})' in section
+    assert '("tampered", tampered_binding)' in section
+    assert "stopped.status_code != 422" in section
+    assert "_assert_unchanged(admin, eight)" in section
+    assert "command_sessions != 0" in section
+
+
+def test_assert_unchanged_requires_complete_zero_effect_fields() -> None:
+    """Guard the strengthened zero-effect proof fields."""
+    source = inspect.getsource(rehearsal._assert_unchanged)  # noqa: SLF001
+    assert 'snapshot["status"] != "Booked"' in source
+    assert 'snapshot["version"] != 1' in source
+    assert 'snapshot["audit_count"] != 0' in source
+    assert 'snapshot["idempotency_rows"] != 0' in source
+    assert 'snapshot["completed_v1_count"] != 0' in source
+
+
+def test_dhi_s02_seeds_waiting_area_acknowledges_warning_and_requires_cleared() -> None:
+    """Guard DHI-S02 waiting-area clearing through the actual proposal payload."""
+    run = inspect.getsource(rehearsal._run_scenarios)  # noqa: SLF001
+    section = run[run.index("# ── DHI-S02"):run.index("# ── DHI-S03")]
+    assert "waiting_area=True" in section
+    assert "DHI-S02_warning_missing" in section
+    assert "DHI-S02_warning_not_acknowledged" in section
+    assert 'after_two["waiting_area_id"] is not None' in section
+    assert 'body_two.get("confirmed_warnings", [])' in section
+
+
+def test_run_rehearsal_validates_failure_and_pass_evidence_unconditionally() -> None:
+    """Guard unconditional final evidence schema validation for pass and failure."""
+    source = Path(rehearsal.__file__).read_text(encoding="utf-8")
+    start = source.rindex("assert evidence is not None")
+    end = source.index("return evidence", start)
+    tail = source[start:end]
+    assert "Draft202012Validator(_load_json(EVIDENCE_SCHEMA_PATH)).validate(evidence)" in tail
+    assert 'if evidence["result"] == PASS_RESULT:' not in tail

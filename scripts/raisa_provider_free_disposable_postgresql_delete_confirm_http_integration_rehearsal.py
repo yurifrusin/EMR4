@@ -759,50 +759,55 @@ def _seed(
     role: str = "Receptionist",
     waiting_area: bool = False,
     second_practice_id: UUID | None = None,
+    appointment_only: bool = False,
 ) -> None:
     with admin.begin() as connection:
-        connection.execute(
-            text(
-                "INSERT INTO practices(id, name, timezone, hive_mind_opt_in) "
-                "VALUES (:id, :name, 'Australia/Sydney', false)"
-            ),
-            {"id": fixture.practice_id, "name": f"Synthetic Practice {fixture.index:02d}"},
-        )
-        if second_practice_id is not None:
+        if not appointment_only:
             connection.execute(
                 text(
                     "INSERT INTO practices(id, name, timezone, hive_mind_opt_in) "
                     "VALUES (:id, :name, 'Australia/Sydney', false)"
                 ),
                 {
-                    "id": second_practice_id,
-                    "name": f"Synthetic Practice {fixture.index:02d} secondary",
+                    "id": fixture.practice_id,
+                    "name": f"Synthetic Practice {fixture.index:02d}",
                 },
             )
-        connection.execute(
-            text(
-                "INSERT INTO users(id, practice_id, email, password_hash, role, is_active) "
-                "VALUES (:id, :practice_id, :email, :pw, :role, :active)"
-            ),
-            {
-                "id": fixture.actor_id,
-                "practice_id": fixture.practice_id,
-                "email": f"synthetic-user-{fixture.index:02d}",
-                "pw": "0" * 64,
-                "role": role,
-                "active": active,
-            },
-        )
-        connection.execute(
-            text(
-                "INSERT INTO practitioners(id, practice_id, first_name, last_name) "
-                "VALUES (:id, :practice_id, 'Synthetic', 'Practitioner')"
-            ),
-            {
-                "id": fixture.practitioner_id,
-                "practice_id": fixture.practice_id,
-            },
-        )
+            if second_practice_id is not None:
+                connection.execute(
+                    text(
+                        "INSERT INTO practices(id, name, timezone, hive_mind_opt_in) "
+                        "VALUES (:id, :name, 'Australia/Sydney', false)"
+                    ),
+                    {
+                        "id": second_practice_id,
+                        "name": f"Synthetic Practice {fixture.index:02d} secondary",
+                    },
+                )
+            connection.execute(
+                text(
+                    "INSERT INTO users(id, practice_id, email, password_hash, role, is_active) "
+                    "VALUES (:id, :practice_id, :email, :pw, :role, :active)"
+                ),
+                {
+                    "id": fixture.actor_id,
+                    "practice_id": fixture.practice_id,
+                    "email": f"synthetic-user-{fixture.index:02d}",
+                    "pw": "0" * 64,
+                    "role": role,
+                    "active": active,
+                },
+            )
+            connection.execute(
+                text(
+                    "INSERT INTO practitioners(id, practice_id, first_name, last_name) "
+                    "VALUES (:id, :practice_id, 'Synthetic', 'Practitioner')"
+                ),
+                {
+                    "id": fixture.practitioner_id,
+                    "practice_id": fixture.practice_id,
+                },
+            )
         if appointment:
             waiting_value = (
                 UUID(int=0x90000000000040008000000000000000 + fixture.index)
@@ -825,7 +830,7 @@ def _seed(
                     "waiting_value": waiting_value,
                 },
             )
-        if with_grant:
+        if with_grant and not appointment_only:
             connection.execute(
                 text(
                     "INSERT INTO user_capability_grants(practice_id, user_id, capability_code) "
@@ -880,7 +885,9 @@ def _assert_unchanged(admin: Engine, fixture: Fixture) -> None:
     snapshot = _snapshot(admin, fixture)
     if (
         snapshot["status"] != "Booked"
+        or snapshot["version"] != 1
         or snapshot["audit_count"] != 0
+        or snapshot["idempotency_rows"] != 0
         or snapshot["completed_v1_count"] != 0
     ):
         raise RehearsalFailure("scenario", "unexpected_database_effect")
@@ -1060,12 +1067,20 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
 
             # ── DHI-S02 ────────────────────────────────────────────────
             two = _fixture(102)
-            _seed(admin, two)
+            _seed(admin, two, waiting_area=True)
             token_two = _token(two)
             before_two = _snapshot(admin, two)
+            proposal_two = _proposal(client, two, token_two)
+            if "waiting_area_cleared" not in [
+                issue.get("code") for issue in proposal_two.get("warnings", [])
+            ]:
+                raise RehearsalFailure("scenario", "DHI-S02_warning_missing")
+            body_two = _confirm_payload(proposal_two)
+            if "waiting_area_cleared" not in body_two.get("confirmed_warnings", []):
+                raise RehearsalFailure("scenario", "DHI-S02_warning_not_acknowledged")
             response_two = client.post(
                 CANONICAL_URL,
-                json=_confirm_payload(_proposal(client, two, token_two)),
+                json=body_two,
                 headers=_headers(token_two, "canonical-commit"),
             )
             after_two = _snapshot(admin, two)
@@ -1075,6 +1090,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 or after_two["version"] != before_two["version"] + 1
                 or after_two["audit_count"] != 1
                 or after_two["completed_v1_count"] != 1
+                or after_two["waiting_area_id"] is not None
             ):
                 raise RehearsalFailure("scenario", "DHI-S02_commit_failed")
             _public_private_proof(admin, two, response_two.content)
@@ -1083,7 +1099,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                     "id": "DHI-S02",
                     "status": "passed",
                     "outcome": "atomic_commit_public_private_separation",
-                    "assertion_count": 8,
+                    "assertion_count": 10,
                 }
             )
 
@@ -1091,6 +1107,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
             three = _fixture(103)
             _seed(admin, three)
             token_three = _token(three)
+            before_three = _snapshot(admin, three)
             response_three = client.post(
                 ALIAS_URL,
                 json=_confirm_payload(_proposal(client, three, token_three)),
@@ -1100,6 +1117,8 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
             if (
                 response_three.status_code != 200
                 or after_three["status"] != "Cancelled"
+                or after_three["version"] != before_three["version"] + 1
+                or after_three["audit_count"] != 1
                 or after_three["completed_v1_count"] != 1
             ):
                 raise RehearsalFailure("scenario", "DHI-S03_alias_failed")
@@ -1109,7 +1128,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                     "id": "DHI-S03",
                     "status": "passed",
                     "outcome": "same_handler_commit",
-                    "assertion_count": 5,
+                    "assertion_count": 7,
                 }
             )
 
@@ -1118,6 +1137,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
             _seed(admin, four)
             token_four = _token(four)
             body_four = _confirm_payload(_proposal(client, four, token_four))
+            before_four = _snapshot(admin, four)
             first_four = client.post(
                 CANONICAL_URL,
                 json=body_four,
@@ -1136,17 +1156,20 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 or replay_four.status_code != 200
                 or first_four.content != replay_four.content
                 or stored_first != stored_replay
-                or replay_four.content != _stored_bytes(admin, four.appointment_id)
+                or after_four["status"] != "Cancelled"
+                or after_four["version"] != before_four["version"] + 1
                 or after_four["audit_count"] != 1
+                or after_four["idempotency_rows"] != 1
                 or after_four["completed_v1_count"] != 1
             ):
                 raise RehearsalFailure("scenario", "DHI-S04_replay_failed")
+            _public_private_proof(admin, four, replay_four.content)
             results.append(
                 {
                     "id": "DHI-S04",
                     "status": "passed",
                     "outcome": "byte_identical_public_and_private_replay",
-                    "assertion_count": 8,
+                    "assertion_count": 11,
                 }
             )
 
@@ -1165,29 +1188,43 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 json=body_five,
                 headers=_headers(token_five, " "),
             )
+            _assert_unchanged(admin, five)
             committed = client.post(
                 CANONICAL_URL,
                 json=body_five,
                 headers=_headers(token_five, "shared-conflict"),
             )
             after_five = _snapshot(admin, five)
-            conflict_body = _confirm_payload(
-                _proposal(client, five, token_five, reason_code="PATIENT_RESCHEDULED")
-            )
-            conflict = client.post(
-                CANONICAL_URL,
-                json=conflict_body,
-                headers=_headers(token_five, "shared-conflict"),
-            )
-            after_five_conflict = _snapshot(admin, five)
             if (
                 missing.status_code != 400
                 or blank.status_code != 400
                 or committed.status_code != 200
-                or conflict.status_code != 409
-                or conflict.json().get("detail", {}).get("code") != "idempotency_key_conflict"
-                or after_five_conflict["audit_count"] != 1
-                or after_five_conflict["completed_v1_count"] != 1
+                or after_five["status"] != "Cancelled"
+                or after_five["audit_count"] != 1
+                or after_five["completed_v1_count"] != 1
+            ):
+                raise RehearsalFailure("scenario", "DHI-S05_commit_failed")
+            five_sibling = Fixture(
+                index=115,
+                practice_id=five.practice_id,
+                appointment_id=UUID(int=0x20000000000040008000000000000000 + 115),
+                actor_id=five.actor_id,
+                actor_text=five.actor_text,
+                practitioner_id=five.practitioner_id,
+                audit_id=UUID(int=0x40000000000040008000000000000000 + 115),
+            )
+            _seed(admin, five_sibling, appointment_only=True)
+            sibling_body = _confirm_payload(_proposal(client, five_sibling, token_five))
+            conflict = client.post(
+                CANONICAL_URL,
+                json=sibling_body,
+                headers=_headers(token_five, "shared-conflict"),
+            )
+            _assert_unchanged(admin, five_sibling)
+            if (
+                conflict.status_code != 409
+                or conflict.json().get("detail", {}).get("code")
+                != "idempotency_key_conflict"
             ):
                 raise RehearsalFailure("scenario", "DHI-S05_idempotency_failed")
             results.append(
@@ -1195,7 +1232,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                     "id": "DHI-S05",
                     "status": "passed",
                     "outcome": "required_and_conflict",
-                    "assertion_count": 7,
+                    "assertion_count": 11,
                 }
             )
 
@@ -1273,12 +1310,13 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 or session_opened
             ):
                 raise RehearsalFailure("scenario", "DHI-S06_non_mutating_role_failed")
+            _assert_unchanged(admin, six_non)
             results.append(
                 {
                     "id": "DHI-S06",
                     "status": "passed",
                     "outcome": "unauthorized_inactive_nonmutating",
-                    "assertion_count": 7,
+                    "assertion_count": 8,
                 }
             )
 
@@ -1298,12 +1336,13 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
             ):
                 raise RehearsalFailure("scenario", "DHI-S07_cross_practice_failed")
             _assert_unchanged(admin, seven_target)
+            _assert_unchanged(admin, seven_actor)
             results.append(
                 {
                     "id": "DHI-S07",
                     "status": "passed",
                     "outcome": "appointment_not_found",
-                    "assertion_count": 4,
+                    "assertion_count": 5,
                 }
             )
 
@@ -1327,20 +1366,28 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
             tampered_binding = dict(body_eight["delete_proposal_version_binding"])
             tampered_binding["signature"] = "0" * 64
             structural_specs = (
-                ("absent", {}),
+                ("absent", None),
                 ("malformed", {"source_version": 1}),
                 ("tampered", tampered_binding),
             )
             for label, binding in structural_specs:
                 candidate = copy.deepcopy(body_eight)
-                candidate["delete_proposal_version_binding"] = binding
+                if binding is None:
+                    candidate.pop("delete_proposal_version_binding", None)
+                else:
+                    candidate["delete_proposal_version_binding"] = binding
                 stopped = client.post(
                     CANONICAL_URL,
                     json=candidate,
                     headers=_headers(token_eight, f"structural-{label}"),
                 )
-                if stopped.status_code != 200 or not stopped.json().get("blocks"):
-                    raise RehearsalFailure("scenario", f"DHI-S08_{label}_not_blocked")
+                if label == "absent":
+                    if stopped.status_code != 422:
+                        raise RehearsalFailure("scenario", "DHI-S08_absent_not_422")
+                else:
+                    if stopped.status_code != 200 or not stopped.json().get("blocks"):
+                        raise RehearsalFailure("scenario", f"DHI-S08_{label}_not_blocked")
+            _assert_unchanged(admin, eight)
             if command_sessions != 0:
                 raise RehearsalFailure("scenario", "DHI-S08_structural_opened_session")
             app.dependency_overrides[get_command_session_factory] = override_factory
@@ -1369,7 +1416,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                     "id": "DHI-S08",
                     "status": "passed",
                     "outcome": "structural_pre_session_and_stale_no_effect",
-                    "assertion_count": 7,
+                    "assertion_count": 9,
                 }
             )
 
@@ -1406,12 +1453,13 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 or after_nine["waiting_area_id"] is None
             ):
                 raise RehearsalFailure("scenario", "DHI-S09_warning_block_failed")
+            _assert_unchanged(admin, nine)
             results.append(
                 {
                     "id": "DHI-S09",
                     "status": "passed",
                     "outcome": "atomic_block",
-                    "assertion_count": 6,
+                    "assertion_count": 7,
                 }
             )
 
@@ -1454,12 +1502,14 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 or after_revoked["audit_count"] != 0
             ):
                 raise RehearsalFailure("scenario", "DHI-S10_authority_failed")
+            _assert_unchanged(admin, ten_default)
+            _assert_unchanged(admin, ten_revoke)
             results.append(
                 {
                     "id": "DHI-S10",
                     "status": "passed",
                     "outcome": "default_denial_and_revocation",
-                    "assertion_count": 7,
+                    "assertion_count": 9,
                 }
             )
 
@@ -1497,6 +1547,7 @@ def _run_scenarios(admin: Engine, application: Engine) -> list[dict[str, Any]]:
                 or after_eleven["completed_v1_count"] != 0
             ):
                 raise RehearsalFailure("scenario", "DHI-S11_rollback_failed")
+            _assert_unchanged(admin, eleven)
             with admin.connect() as connection:
                 enabled = connection.execute(
                     text(
@@ -1845,8 +1896,7 @@ def run_rehearsal() -> dict[str, Any]:
             evidence["lifecycle"] = lifecycle
             evidence["cleanup"] = _normalize_cleanup(cleanup)
     assert evidence is not None
-    if evidence["result"] == PASS_RESULT:
-        Draft202012Validator(_load_json(EVIDENCE_SCHEMA_PATH)).validate(evidence)
+    Draft202012Validator(_load_json(EVIDENCE_SCHEMA_PATH)).validate(evidence)
     return evidence
 
 def write_evidence(evidence: dict[str, Any]) -> Path:
