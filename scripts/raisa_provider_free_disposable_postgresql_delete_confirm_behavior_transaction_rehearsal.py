@@ -64,7 +64,7 @@ PASS_RESULT = (
 )
 SOURCE_HEAD = "2a5042f80941e2bd191999c430ff2517ba7e8cb2"
 EXPECTED_CONTRACT_DIGEST = (
-    "53ec90e0193d85a7749a503b44c0952242c64b457f2eb581661833c1774b6944"
+    "f327b4fdee3f0f7f17ffd8643813d2ca2cc5f50f5fd133f4cb37c7e1df188a27"
 )
 CLAIM_BOUNDARY = (
     "Exact serial unmounted SQLAlchemy/PostgreSQL delete-confirm authority and "
@@ -303,6 +303,18 @@ def _canonical_digest(value: Any) -> str:
     )
 
 
+def _source_text_sha256_bytes(payload: bytes) -> str:
+    """Hash UTF-8 text after checkout-stable CRLF-to-LF conversion."""
+    normalized = payload.replace(b"\r\n", b"\n")
+    if b"\r" in normalized:
+        raise RehearsalFailure("preflight", "source_bare_carriage_return")
+    try:
+        normalized.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RehearsalFailure("preflight", "source_not_utf8_text") from exc
+    return _sha256(normalized)
+
+
 def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -348,6 +360,7 @@ def hostile_mutations_rejected(contract: dict[str, Any]) -> int:
         (("result",), "rehearsal_failed"),
         (("source_head",), "0" * 40),
         (("evidence_label",), "product"),
+        (("source_hash_mode",), "raw_worktree_bytes"),
         (("alembic", "from_revision"), "x9y9z9a9b9c9"),
         (("alembic", "to_revision"), "w9x9y9z9a9b9"),
         (("alembic", "offline_range"), "x9y9z9a9b9c9:z9a9b9c9d9e9"),
@@ -434,7 +447,7 @@ def hostile_mutations_rejected(contract: dict[str, Any]) -> int:
     return rejected
 
 
-HOSTILE_MUTATION_TARGET = 44 + 4 + 9 * 2 + 11 * 5
+HOSTILE_MUTATION_TARGET = 45 + 4 + 9 * 2 + 11 * 5
 
 
 def verify_contract() -> tuple[dict[str, Any], dict[str, str]]:
@@ -447,7 +460,7 @@ def verify_contract() -> tuple[dict[str, Any], dict[str, str]]:
         path = ROOT / binding["path"]
         if not path.is_file():
             raise RehearsalFailure("preflight", "source_missing", binding["path"])
-        digest = _sha256(path.read_bytes())
+        digest = _source_text_sha256_bytes(path.read_bytes())
         observed[binding["path"]] = digest
         if digest != binding["sha256"]:
             raise RehearsalFailure(
@@ -717,11 +730,12 @@ def _force_authority_generation_max(engine: Engine, fixture: Fixture) -> None:
 
     The accepted triggers deliberately reject direct generation writes, so the
     only way to reach the overflow boundary is to suspend trigger firing for one
-    session-scoped fixture UPDATE. This is not a durable grant, schema change,
-    product path or caller surface; it is the exact frozen AUTH-S08 setup.
+    transaction-local fixture UPDATE. Transaction end restores the setting
+    automatically. This is not a durable grant, schema change, product path or
+    caller surface; it is the exact frozen AUTH-S08 setup.
     """
     with engine.begin() as connection:
-        connection.execute(text("SET session_replication_role = replica"))
+        connection.execute(text("SET LOCAL session_replication_role = replica"))
         connection.execute(
             text(
                 "UPDATE public.users SET authority_generation = :max "
@@ -733,7 +747,28 @@ def _force_authority_generation_max(engine: Engine, fixture: Fixture) -> None:
                 "u": fixture.actor_id,
             },
         )
-        connection.execute(text("SET session_replication_role = origin"))
+
+
+def _assert_authority_trigger_restored(engine: Engine) -> None:
+    """Prove AUTH-S08 setup ended before either overflow action."""
+    with engine.connect() as connection:
+        role = connection.execute(text("SHOW session_replication_role")).scalar_one()
+        enabled = connection.execute(
+            text(
+                "SELECT count(*) FROM pg_trigger t "
+                "JOIN pg_class c ON c.oid = t.tgrelid "
+                "JOIN pg_namespace n ON n.oid = c.relnamespace "
+                "WHERE n.nspname = 'public' "
+                "AND ((c.relname = 'users' AND "
+                "t.tgname = 'trg_users_authority_generation_guard') "
+                "OR (c.relname = 'user_capability_grants' AND t.tgname IN "
+                "('trg_user_capability_grants_generation', "
+                "'trg_user_capability_grants_reject_update'))) "
+                "AND NOT t.tgisinternal AND t.tgenabled = 'O'"
+            )
+        ).scalar_one()
+    if role != "origin" or enabled != 3:
+        raise RehearsalFailure("auth", "AUTH-S08_trigger_restore_unproved")
 
 
 def _statement_token(statement: str) -> str | None:
@@ -1085,6 +1120,7 @@ def _auth_s08(engine: Engine, group: dict[str, Any], index: int) -> AuthResult:
     fixture = _fixture(index)
     _seed_auth_partition(engine, fixture)
     _force_authority_generation_max(engine, fixture)
+    _assert_authority_trigger_restored(engine)
     _expect_pgcode(lambda: _update_user_role(engine, fixture, "GP"), "22003")
     after_role = _auth_snapshot(engine, fixture)
     if after_role["generation"] != GENERATION_MAX:

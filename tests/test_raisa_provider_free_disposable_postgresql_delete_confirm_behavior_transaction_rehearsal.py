@@ -40,26 +40,32 @@ def test_contract_schema_sources_groups_and_hostile_gate_pass() -> None:
     assert sum(CONTRACT["scenario_categories"].values()) == 20
 
 
-def test_verify_contract_fails_closed_on_frozen_source_hash_defect() -> None:
-    with pytest.raises(rehearsal.RehearsalFailure) as excinfo:
-        rehearsal.verify_contract()
-    assert excinfo.value.stage == "preflight"
-    assert excinfo.value.code == "source_hash_mismatch"
-    assert excinfo.value.detail.decode() == (
-        "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
-        "delete-confirm-scaffold-parse-catalogue-rehearsal/"
-        "provider-free-disposable-postgresql-evidence.json"
+def test_verify_contract_accepts_checkout_stable_lf_hashes() -> None:
+    verified, observed = rehearsal.verify_contract()
+    assert verified == CONTRACT
+    assert observed == {
+        binding["path"]: binding["sha256"] for binding in CONTRACT["source_bindings"]
+    }
+    lf = b'{\n  "result": "pass"\n}\n'
+    crlf = lf.replace(b"\n", b"\r\n")
+    assert rehearsal._source_text_sha256_bytes(lf) == rehearsal._source_text_sha256_bytes(  # noqa: SLF001
+        crlf
     )
-    mismatches = []
-    for binding in CONTRACT["source_bindings"]:
-        actual = rehearsal._sha256((ROOT / binding["path"]).read_bytes())  # noqa: SLF001
-        if actual != binding["sha256"]:
-            mismatches.append(binding["path"])
-    assert mismatches == [
-        "orchestration/continuity/raisa-provider-free-disposable-postgresql-"
-        "delete-confirm-scaffold-parse-catalogue-rehearsal/"
-        "provider-free-disposable-postgresql-evidence.json"
-    ]
+
+
+def test_source_hash_rejects_bare_carriage_return() -> None:
+    with pytest.raises(rehearsal.RehearsalFailure) as excinfo:
+        rehearsal._source_text_sha256_bytes(b"left\rright")  # noqa: SLF001
+    assert excinfo.value.code == "source_bare_carriage_return"
+
+
+def test_overflow_fixture_is_transaction_local_and_proves_trigger_restore() -> None:
+    source = Path(rehearsal.__file__).read_text(encoding="utf-8")
+    assert "SET LOCAL session_replication_role = replica" in source
+    assert 'text("SET session_replication_role = replica")' not in source
+    assert "SHOW session_replication_role" in source
+    assert "AUTH-S08_trigger_restore_unproved" in source
+    assert "t.tgenabled = 'O'" in source
 
 
 def test_contract_rejects_added_reordered_or_widened_surfaces() -> None:

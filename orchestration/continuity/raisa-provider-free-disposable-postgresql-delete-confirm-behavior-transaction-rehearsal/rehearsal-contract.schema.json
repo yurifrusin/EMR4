@@ -9,6 +9,7 @@
     "result",
     "source_head",
     "evidence_label",
+    "source_hash_mode",
     "source_bindings",
     "alembic",
     "docker_profile",
@@ -33,6 +34,9 @@
     },
     "evidence_label": {
       "const": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction"
+    },
+    "source_hash_mode": {
+      "const": "utf8_text_crlf_to_lf_reject_bare_cr"
     },
     "source_bindings": {
       "type": "array",

@@ -29,8 +29,8 @@ EVIDENCE_SCHEMA = ROOT / (
     "provider-free-behavior-transaction-evidence.schema.json"
 )
 
-PLAN_HASH = "694da1434ec797b13c602509c3efcaae56f6619724e8b1e74cf8eaceea67a019"
-THREAT_HASH = "a6790631ee26ad9d19fbbac06ed1a3daea050e4ffc1d264d72f16d35f9c2106a"
+PLAN_HASH = "4fde7121a548f7f574e56506e0e3a4f3303b8cc0b18a7fd80948b84b9c99498c"
+THREAT_HASH = "30830f56eee984b4e0f1c04791dc2a624d3015daaaafeba941f1485cde36620f"
 SOURCE_HEAD = "2a5042f80941e2bd191999c430ff2517ba7e8cb2"
 
 OWNED_PATHS = (
@@ -64,6 +64,7 @@ def test_contract_binds_plan_source_hashes_and_exact_head() -> None:
     assert len(plan_bindings) == 16
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
     assert contract["source_head"] == SOURCE_HEAD
+    assert contract["source_hash_mode"] == "utf8_text_crlf_to_lf_reject_bare_cr"
     contract_bindings = {
         item["path"]: item["sha256"] for item in contract["source_bindings"]
     }

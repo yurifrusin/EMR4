@@ -3,10 +3,11 @@
   "result": "raisa_provider_free_disposable_postgresql_delete_confirm_behavior_transaction_rehearsal_pass",
   "source_head": "2a5042f80941e2bd191999c430ff2517ba7e8cb2",
   "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_behavior_transaction",
+  "source_hash_mode": "utf8_text_crlf_to_lf_reject_bare_cr",
   "source_bindings": [
     {"path": "docs/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal-closeout.md", "sha256": "4881910f3fa3fd133f753ccb43f20417e38dc3cf1b6eeac740904ed16708a53e"},
     {"path": "orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md", "sha256": "07970f0dac2c68abe0a537c3ee1855192eef1e02a61773fc4ca0cd1594204def"},
-    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json", "sha256": "34e9c7f955aef327e6b2da863e7d15b6e457c4ec2c7c0c658b15c93c426f32c4"},
+    {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence.json", "sha256": "4dd6cd6389bc91286de67091fc05417cc818a6d234b5d1a203b3eec90268be0b"},
     {"path": "scripts/raisa_provider_free_disposable_postgresql_delete_confirm_scaffold_parse_catalogue_rehearsal.py", "sha256": "41abded0e169f339ea581a90aba061b4896e322dad2962e252ef0c069a0439e4"},
     {"path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json", "sha256": "2970edf7c04ce0988c0904c8cc02bcd2176fdafccc5b1d745ce9240ca4f8f007"},
     {"path": "docs/raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold-plan.md", "sha256": "f6e75c7428dc5c1327166bc0e900c2804f3201ea1b32cd5577d1f8134b16c2a8"},
