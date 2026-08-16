@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL delete-confirm behavior/transaction rehearsal",
+    "completed_stage": "Occupied pass evidence and pre-verifier acceptance are committed at exact candidate 49dd2aaa72877adb844da4d0d5d5bb28039c90c8. The fresh review worktree is clean at that exact HEAD, the four-command manifest and allowlisted packet pass local preflight, and Gemini 3.7 Flash/high is the sole admitted verifier.",
+    "next_executable_stage": "Commit the verifier packet, manifest, preflight and fresh five-source predispatch receipt, then dispatch exactly one Gemini 3.7 Flash/high veto. Reconcile the terminal decision and unchanged-worktree postflight before Sol acceptance.",
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "49dd2aaa72877adb844da4d0d5d5bb28039c90c8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_dispatch",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Implementation and occupied evidence are complete; no worker package remains.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate veto is the only remaining independent evidence surface before Sol acceptance.",
+        "work_packages": [
+          "authority, transaction, response-release, evidence and containment veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "A native peer would stack review and cannot replace the required Gemini veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "command failure",
+      "worktree postcondition failure",
+      "tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one fresh project",
+      "one exact clean worktree",
+      "four exact read-only commands",
+      "Sol alone reconciles and accepts"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_read_only_gemini_3_7_flash_high_delete_confirm_behavior_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:d75a3408e21a8930a36d336e538a995c88c7d618c3602efdc1996211c614da41",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact candidate 49dd2aaa72877adb844da4d0d5d5bb28039c90c8 contains the repaired candidate-versus-release boundary, frozen semantic evidence, one occupied pass over nine authority and eleven transaction groups, 122 hostile mutations, 43/43 current owned tests and exact cleanup. The canonical 196-test profile passed before runtime.",
+    "current_authority_allocation": "Gemini 3.7 Flash/high through a fresh Antigravity project owns one independent veto only. Sol retains acceptance and Git ownership. DeepSeek is not applicable, native subagents are declined, Gemini 3.6 is not a fallback, and no other provider/model is admitted.",
+    "git_refs_and_worktree": "Review worktree C:\\Users\\sarashera\\EMR4-worktrees\\review-delete-confirm-behavior-49dd2aaa is clean on branch codex/review-delete-confirm-behavior-49dd2aaa at exact candidate 49dd2aaa72877adb844da4d0d5d5bb28039c90c8. Primary local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary unrelated untracked files including docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated. The active Tier-2 tranche requires exactly one final independent veto after the accepted deterministic and occupied pass evidence, while protected integration remains closed.",
+    "protected_evidence_boundaries": "The reviewer receives one exact allowlisted, authored-synthetic, provider-free database-evidence packet and four-command read-only manifest. No protected discovery, source edit, Docker/database execution, product data, route, credential/IAM, deployment, release, Pages or protected-ref action is allowed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
