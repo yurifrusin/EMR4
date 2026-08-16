@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0345",
+  "observed_on": "2026-08-16",
+  "timestamp": "2026-08-16T09:32:28+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-risk-weighted-workflow-reform",
+  "attempt_id": "ariadne-risk-weighted-workflow-reform-deepseek-candidate-admission-001",
+  "provider_or_model_calls": 1,
+  "candidate_head": "85a0877face2f16af80a07217918bf86b370febd",
+  "rejected_reasons": [
+    "semantic_freeze_not_bound_end_to_end",
+    "canonical_reuse_fingerprint_self_asserted",
+    "independent_veto_lane_not_enforced",
+    "actual_parallelism_not_bound_to_plan",
+    "decision_mismatch_could_return_pass",
+    "renderer_authority_path_overwrite_not_rejected",
+    "verifier_preflight_input_narrowing"
+  ],
+  "detection": "Sol review and hostile reasoning found that the first worker candidate could admit stale freeze details, accept a self-asserted reuse fingerprint, count a mechanical implementation lane as an independent veto, fail to compare actual parallelism with the plan, return pass after a declared-decision mismatch, and let explicit renderer output paths overwrite AGENTS or the live latch. Verifier preflight also silently discarded non-object repository bindings and did not always enforce its candidate-root contract.",
+  "correction": "The worker result remains immutable candidate evidence. Sol owns one bounded recovery over the exact candidate: bind baseline/freeze/reuse and actual plan data, restrict independent veto lanes, make every admission reason fail closed, reject protected renderer targets before writes, harden verifier-root parsing, and add direct regression tests before a new exact candidate is admitted.",
+  "candidate_state": "worker_candidate_rejected_pending_sol_recovery",
+  "external_effects": false,
+  "status": "recorded_before_correction"
+}

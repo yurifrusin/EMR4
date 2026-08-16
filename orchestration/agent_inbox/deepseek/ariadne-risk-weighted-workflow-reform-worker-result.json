@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All work is complete, committed, and verified. Final result:\n\n```json\n{\n  \"decision\": \"candidate_ready\",\n  \"commit\": \"85a0877face2f16af80a07217918bf86b370febd\",\n  \"branch\": \"codex/worker-ariadne-risk-weighted-721f4cf1\",\n  \"changed_paths\": [\n    \"orchestration/harness_settings/risk_weighted_workflow.yaml\",\n    \"orchestration_harness/risk_weighted_workflow.py\",\n    \"scripts/ariadne_risk_weighted_workflow.py\",\n    \"scripts/ariadne_verifier_worktree_preflight.py\",\n    \"scripts/ariadne_serial_pytest.py\",\n    \"tests/test_ariadne_risk_weighted_workflow.py\",\n    \"tests/test_ariadne_verifier_worktree_preflight.py\",\n    \"tests/test_ariadne_serial_pytest.py\",\n    \"orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.schema.json\",\n    \"orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.schema.json\",\n    \"orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.example.json\",\n    \"orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.example.json\",\n    \"orchestration/continuity/ariadne-risk-weighted-workflow-reform/provider-free-authored-synthetic-evidence.json\"\n  ],\n  \"tests\": {\n    \"pytest\": \"118 passed, exit 0\",\n    \"ruff_check\": \"all checks passed, exit 0\",\n    \"git_diff_check\": \"exit 0\",\n    \"compile\": \"py_compile all owned modules, ok\"\n  },\n  \"threat_ids_covered\": [\n    \"RWW-001\",\"RWW-002\",\"RWW-003\",\"RWW-004\",\"RWW-005\",\"RWW-006\",\n    \"RWW-007\",\"RWW-008\",\"RWW-009\",\"RWW-010\",\"RWW-011\",\"RWW-012\",\n    \"RWW-013\",\"RWW-014\",\"RWW-015\",\"RWW-016\",\"RWW-017\",\"RWW-018\"\n  ],\n  \"hostile_semantic_mutation_count\": 73,\n  \"ambiguities_or_deviations\": [\n    \"The pure core is standard-library-only and performs inline structural/semantic validation rather than loading the JSON Schema files at runtime; the exact schema files are validated against the examples via jsonschema inside the owned tests.\",\n    \"verifier-worktree preflight command_manifest_sha256 is the raw 64-hex digest (no 'sha256:' prefix), consistent with scripts/ariadne_evidence_gate.command_manifest_sha256.\",\n    \"CLI render timestamp defaults to current Australia/Brisbane time; a deterministic --timestamp override is provided for tests/replay.\"\n  ],\n  \"forbidden_surfaces\": \"none touched; only the 13 exact owned paths staged/committed; protected refs master/handoff/current remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602; no database/provider/network/deployment/authority source accessed.\"\n}\n```\n\n**Summary of what was delivered:**\n\n1. **`orchestration_harness/risk_weighted_workflow.py`** \u2014 standard-library-only pure module: validates exact profile/result structures, derives the highest tier (RWW-001/002), enforces baseline-before-edit (RWW-003), computes the union rerun matrix and stable semantic-vs-volatile binding disjointness (RWW-004/005), stale-pass reuse rejection (RWW-006), review economy (RWW-007/008), threat coverage (RWW-009), incident grouping (RWW-010/011), safe tail deferral (RWW-012), parallel/continuation-receipt/evidence-completeness admission (RWW-016/017/018).\n2. **`scripts/ariadne_risk_weighted_workflow.py`** \u2014 thin CLI with `validate/classify/rerun/admit/render`; render writes only explicit output paths, executes no command, applies no authority update.\n3. **Machine policy YAML + exact JSON schemas/examples + provider-free synthetic evidence.**\n4. **`ariadne_serial_pytest.py`** \u2014 explicit `--repo-root` resolving to a repo containing `tests/conftest.py`, used as subprocess cwd; default compatibility retained.\n5. **`ariadne_verifier_worktree_preflight.py`** \u2014 optional v1 command-manifest validation, typed repository-path bindings (existence/kind/containment), candidate-path containment, and exact `--repo-root` binding for an external serial runner; no execution.\n6. **Tests** \u2014 every threat RWW-001\u2026RWW-018 plus 73 named hostile semantic mutations, all fail-closed; examples validated against schemas.\n\nThis self-result is candidate evidence only and is not acceptance.",
+  "usage": {
+    "input_tokens": 62581,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 10925056,
+    "output_tokens": 142754,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 9.358678000000003,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

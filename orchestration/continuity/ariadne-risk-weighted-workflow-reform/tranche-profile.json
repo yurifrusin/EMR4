@@ -1,0 +1,113 @@
+{
+  "schema_version": "ariadne.risk_weighted_tranche_profile.v1",
+  "tranche_id": "ariadne-risk-weighted-workflow-reform",
+  "source_head": "51866ce084c33fce600b792c66b180927658ed9e",
+  "source_tree": "1dc69f23c8e93fe33de2289e563b2363fcd03539",
+  "declared_tier": "tier_2_authority_runtime",
+  "change_signals": {
+    "docs_only": false,
+    "unmounted": false,
+    "provider_free_source_edit": true,
+    "workflow_policy_change": true,
+    "database_runtime": false,
+    "authority_or_security_contract": true,
+    "executable_tool": true,
+    "network_capability": false,
+    "operational_product_derived_data": false,
+    "migration_representation": false,
+    "migration_execution": false,
+    "product_command_or_write": false,
+    "patient_or_clinical_data": false,
+    "occupied_provider_call": false,
+    "credentials_or_iam": false,
+    "deployment_production_release_pages": false,
+    "protected_ref_movement": false
+  },
+  "change_families": [
+    "harness",
+    "policy",
+    "schema",
+    "semantic_test",
+    "verifier_command_manifest"
+  ],
+  "semantic_bindings": [
+    {"path": "orchestration/harness_settings/risk_weighted_workflow.yaml", "kind": "policy"},
+    {"path": "orchestration_harness/risk_weighted_workflow.py", "kind": "source"},
+    {"path": "scripts/ariadne_risk_weighted_workflow.py", "kind": "source"},
+    {"path": "scripts/ariadne_serial_pytest.py", "kind": "source"},
+    {"path": "scripts/ariadne_verifier_worktree_preflight.py", "kind": "source"},
+    {"path": "tests/test_ariadne_risk_weighted_workflow.py", "kind": "semantic_test"},
+    {"path": "tests/test_ariadne_serial_pytest.py", "kind": "semantic_test"},
+    {"path": "tests/test_ariadne_verifier_worktree_preflight.py", "kind": "semantic_test"},
+    {"path": "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.schema.json", "kind": "schema"},
+    {"path": "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.schema.json", "kind": "schema"}
+  ],
+  "volatile_bindings": [
+    {"path": "orchestration/continuity/ariadne-active-operation-latch/current.json", "kind": "latch_snapshot"},
+    {"path": "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-corrected-receipt.json", "kind": "receipt"},
+    {"path": "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-review-receipt.json", "kind": "receipt"},
+    {"path": "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json", "kind": "receipt"},
+    {"path": "docs/ariadne-risk-weighted-workflow-reform-closeout.md", "kind": "generated_closeout"},
+    {"path": "orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md", "kind": "mailbox_message"},
+    {"path": "AGENTS.md", "kind": "baton_prose"}
+  ],
+  "baseline": {
+    "fingerprint_sha256": "sha256:4115d324f3d448df9f0705462908c9299f040aba0cf36d6e2b67b5b832e7e9cb",
+    "result": "passed",
+    "known_failure_ids": [],
+    "captured_before_first_edit": true
+  },
+  "semantic_freeze": {
+    "source_head": "51866ce084c33fce600b792c66b180927658ed9e",
+    "source_tree": "1dc69f23c8e93fe33de2289e563b2363fcd03539",
+    "semantic_bindings_sha256": "sha256:42cdb69535f7578e2d3f82e21e00fed14b73de19436bf773167d2a0d5c3d1bae",
+    "toolchain_sha256": "sha256:b79f9ebc7ca5f00e99d3a8877a6a819e0abd1cc546199e8ce8d8f0cae19416b8",
+    "focused_gate_results": {
+      "focused_121_tests": "passed",
+      "ruff": "passed",
+      "json_and_schema": "passed",
+      "git_whitespace": "passed",
+      "canonical_fast_profile_196_tests": "passed"
+    }
+  },
+  "post_freeze_change_families": [
+    "verifier_command_manifest",
+    "documentation_or_closeout_prose",
+    "continuity_compass_baton_metadata",
+    "receipt_runtime_state",
+    "agent_error_register"
+  ],
+  "configured_continuation_events": [
+    "five_source_rehydration_at_plan_admission",
+    "five_source_rehydration_at_verifier_admission",
+    "five_source_rehydration_at_integration"
+  ],
+  "threat_ids": [
+    "RWW-001", "RWW-002", "RWW-003", "RWW-004", "RWW-005", "RWW-006",
+    "RWW-007", "RWW-008", "RWW-009", "RWW-010", "RWW-011", "RWW-012",
+    "RWW-013", "RWW-014", "RWW-015", "RWW-016", "RWW-017", "RWW-018"
+  ],
+  "mutation_count": 52,
+  "review_triggers": {
+    "new_authority_or_security_boundary": true,
+    "prior_substantive_rejection": true,
+    "ambiguous_hard_boundary": false,
+    "explicit_risk_trigger": true
+  },
+  "parallelism_plan": {
+    "deepseek_lane": "bounded_mechanical_implementation",
+    "gemini_lane": "single_final_veto",
+    "native_lane": "declined"
+  },
+  "capability": "provider_free_deterministic_risk_weighted_workflow_admission_and_closeout_generation",
+  "closed_surfaces": [
+    "Raisa product runtime and source",
+    "database and migration execution",
+    "product patient clinical or protected data",
+    "credentials IAM and occupied product providers",
+    "deployment production release Pages and protected refs"
+  ],
+  "place_in_raisa": "Ariadne development-orchestration control plane above product tranches",
+  "next_tranche": "provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8",
+  "attention_status": "green"
+}

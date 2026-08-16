@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0343",
+  "observed_on": "2026-08-16",
+  "timestamp": "2026-08-16T09:00:00+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-risk-weighted-workflow-reform",
+  "attempt_id": "ariadne-risk-weighted-worker-worktree-create-001",
+  "provider_or_model_calls": 0,
+  "candidate_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+  "rejected_reasons": [
+    "manual_short_sha_expansion_forbidden",
+    "invalid_git_reference"
+  ],
+  "detection": "The first local worker-worktree creation command used a manually invented full object ID beginning with the displayed short commit 721f4cf1. Git rejected the nonexistent reference before creating a worktree or branch.",
+  "correction": "The exact object ID 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 was obtained literally from git rev-parse HEAD and rebound into the latch and worker packet before a distinct creation attempt or worker dispatch.",
+  "candidate_state": "plan_commit_unchanged_no_worker_created",
+  "external_effects": false,
+  "status": "corrected_before_dispatch"
+}

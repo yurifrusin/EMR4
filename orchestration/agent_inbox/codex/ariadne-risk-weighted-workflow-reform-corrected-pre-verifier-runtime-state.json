@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_external_verifier",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely; the current Ariadne reform remains active, the Raisa successor remains deferred, and protected refs remain closed.",
+    "current_authority_allocation": "Sol owns recovery and acceptance. DeepSeek is complete, native subagents are declined, and Gemini 3.7 Flash/high may perform one corrected final veto after the manifest-only rejection.",
+    "active_plan_and_acceptance": "The Tier 2 plan permits one fresh veto after evidence-backed recovery. The first veto found the source invariants satisfied and failed only because C03 selected the old primary runner; AER-0347 predates the corrected manifest.",
+    "protected_evidence_boundaries": "Unchanged provider-free repository-only candidate. No product runtime, database, migration execution, product/patient/clinical data, credential/IAM, deployment, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Candidate 51866ce084c33fce600b792c66b180927658ed9e and clean review branch codex/review-ariadne-risk-weighted-51866ce0 are unchanged. Corrected manifest and exact-root preflight agree at SHA-256 b97a742fd18a4ec0d6da3c882b7654d99cb4d02f15b153dff7e4cf43cb3f44e2. Protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "objective": "Implement the accepted workflow-efficiency recommendations as a repository-only risk-tiered Ariadne policy and deterministic admission surface before Raisa product development resumes, preserving hard authority, privacy, evidence, cleanup and protected-ref controls while reducing redundant receipts, reruns, reviews and closeout synchronization.",
+    "status": "in_progress",
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16; the exact plan and baseline are frozen at task commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 under the standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "The first Gemini veto found all source invariants satisfied but returned revision_required because command C03 used the primary checkout's old serial runner. Immutable AER-0347 and the failed receipt preserve that result. The unchanged exact candidate now has a distinct corrected manifest bound to its own runner; manifest admission and exact-root preflight both pass at digest b97a742fd18a4ec0d6da3c882b7654d99cb4d02f15b153dff7e4cf43cb3f44e2.",
+      "next_executable_stage": "Generate a fresh corrected pre-verifier five-source receipt and issue the single allowed fresh final veto against unchanged candidate 51866ce084c33fce600b792c66b180927658ed9e; no fallback, source change or additional reviewer is permitted.",
+      "retry_counters": {"planning": 0, "implementation": 1, "review": 1, "verification": 0},
+      "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "repository_only_ariadne_workflow_policy_harness_and_tests",
+      "preserve_five_source_rehydration_authority_privacy_immutable_evidence_cleanup_git_and_terminal_latch_controls",
+      "no_raisa_product_source_route_schema_openapi_graphql_or_ui_change",
+      "no_migration_ddl_sql_database_engine_transaction_lock_or_postgresql_rehearsal",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_product_provider_call_adc_credentials_iam_browser_network_or_external_adapter",
+      "no_executable_product_tool_command_watcher_event_or_product_write_authority",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "assessed_stage": "corrected_pre_verifier_acceptance",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "positive", "rationale": "The single bounded implementation package remains complete and no same-lane retry is allowed.", "work_packages": ["implemented the frozen mechanical package"]},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "One fresh corrected veto is required because the prior source-clean review was rejected by a manifest-root error, not a source defect.", "work_packages": ["rerun exactly once with corrected candidate-owned serial runner"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "No additional reviewer is admissible; it would stack review without new independent value.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["corrected veto follows corrected manifest preflight", "no additional reviewer or fallback", "integration waits for the fresh result"],
+    "reassessment_triggers": ["corrected_verifier_result", "material_recovery", "tranche_closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "complete_five_source_rehydration_and_manifest_recovery", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Single package complete; no further call."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["First Gemini call completed revision_required; one exact corrected call is planned."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol preserved the failed receipt, recorded AER-0347 and validated the corrected manifest/root."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane remains declined."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

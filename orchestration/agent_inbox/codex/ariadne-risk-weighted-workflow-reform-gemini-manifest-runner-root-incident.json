@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0347",
+  "observed_on": "2026-08-16",
+  "timestamp": "2026-08-16T09:49:00+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-risk-weighted-workflow-reform",
+  "attempt_id": "ariadne-risk-weighted-workflow-reform-gemini-veto-001",
+  "provider_or_model_calls": 1,
+  "candidate_head": "51866ce084c33fce600b792c66b180927658ed9e",
+  "rejected_reasons": [
+    "command_C03_exit_1",
+    "primary_checkout_serial_runner_lacked_candidate_repo_root_option"
+  ],
+  "detection": "The first Gemini 3.7 Flash/high veto completed revision_required. Its source review found all ten required invariant groups satisfied, but manifest command C03 invoked C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py from the unintegrated primary plan commit; that old runner rejected the candidate-only --repo-root option.",
+  "correction": "Preserve the first receipt and manifest unchanged. Bind a distinct corrected manifest to the exact candidate worktree's own scripts/ariadne_serial_pytest.py, revalidate the manifest and exact-root worktree preflight, issue a fresh five-source pre-verifier receipt, then use the one allowed corrected final veto against the unchanged candidate with no fallback or additional reviewer.",
+  "candidate_state": "source_semantics_reviewed_clean_candidate_unchanged_manifest_recovery_only",
+  "external_effects": false,
+  "status": "recorded_before_corrected_veto"
+}

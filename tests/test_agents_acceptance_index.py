@@ -62,7 +62,10 @@ def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> N
 
     # Keep only current authority, active acceptance and future-direction rows
     # in the live rehydration surface; historical acceptance remains hash-bound.
-    assert len(live_bytes) < 75_000
+    # The live surface now includes one current risk-policy acceptance and its
+    # exact reviewed Git binding; keep the bounded envelope without forcing
+    # those active controls into the historical-only ledger.
+    assert len(live_bytes) < 80_000
     assert len(live.splitlines()) < 500
     assert "Current Baton acceptance index" in live_labels
     for label in manifest["active_labels"]:

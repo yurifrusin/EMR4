@@ -1,0 +1,85 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "completed_stage": "The corrected five-source preplanning receipt passes; the Tier 2 reform plan and threat delta are frozen at commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954; the exact pre-implementation canonical baseline passed 196 tests plus Ruff, compilation, Diary syntax and whitespace.",
+    "next_executable_stage": "Dispatch one bounded DeepSeek V4 Flash/high mechanical implementation package in an exact clean worker worktree, then perform Sol deterministic semantic admission before any Gemini veto.",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "resume_after_compaction": true,
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The committed plan removes semantic choice and leaves a closed module, CLI, policy, schema, runner, preflight and focused-test package in an isolated worktree.",
+        "work_packages": [
+          "thirteen-path mechanical implementation and tests under the frozen plan"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The Tier 2 workflow-authority change requires one fresh exact-candidate veto only after deterministic Sol admission.",
+        "work_packages": [
+          "one final exact-candidate veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "A third analytical lane would duplicate Sol's semantic admission and Gemini's later veto and would recreate review stacking.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "parallel_work_packages": [
+      "DeepSeek mechanical implementation while Sol prepares exact deterministic admission and diff checks"
+    ],
+    "reassessment_triggers": [
+      "worker_result",
+      "scope_mismatch",
+      "material_recovery",
+      "pre_verifier_acceptance",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "DeepSeek returns before Sol admission",
+      "Gemini follows deterministic admission only",
+      "shared pytest is serial",
+      "Sol alone integrates and accepts"
+    ]
+  },
+  "planned_action": "dispatch_bounded_risk_weighted_workflow_mechanical_worker",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact plan commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 freezes the four-tier policy, baseline/rerun/review/binding/threat/incident/tail/result contracts and verifier-root correction. The exact pre-implementation baseline passes all 196 canonical tests.",
+    "current_authority_allocation": "Sol owns workflow semantics, recovery, acceptance, integration and Git. DeepSeek V4 Flash/high receives only the thirteen frozen mechanical paths; Gemini 3.7 Flash/high remains one later final veto and native subagents remain declined.",
+    "git_refs_and_worktree": "Primary plan HEAD is exact 721f4cf1dd7bce27429ed97fdeb6028ba85ed954. Clean worker C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-worker-721f4cf1 is on codex/worker-ariadne-risk-weighted-721f4cf1 at that exact HEAD. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 1e63ae754c74e2282b0f5938f1dbca160743096c. Unrelated untracked paths remain outside the worker and preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. It preserves the accepted delete-confirm scaffold and deferred PostgreSQL successor while Yuri's 2026-08-16 direction places this bounded Ariadne reform first.",
+    "protected_evidence_boundaries": "Provider-free repository harness implementation only. No Raisa product/API/UI/migration, database, product data, product provider, credentials/IAM, browser/network adapter, executable product command, deployment, release, Pages or protected-ref authority. Protected evidence is closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

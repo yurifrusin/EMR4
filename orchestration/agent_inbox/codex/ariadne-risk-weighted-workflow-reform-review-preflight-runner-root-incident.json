@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0346",
+  "observed_on": "2026-08-16",
+  "timestamp": "2026-08-16T09:45:11+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-risk-weighted-workflow-reform",
+  "attempt_id": "ariadne-risk-weighted-workflow-reform-review-preflight-001",
+  "provider_or_model_calls": 0,
+  "candidate_head": "51866ce084c33fce600b792c66b180927658ed9e",
+  "rejected_reasons": [
+    "primary_checkout_preflight_lacked_candidate_arguments",
+    "candidate_script_root_not_selected"
+  ],
+  "detection": "The first local review-preflight command invoked the primary checkout's preflight script at plan commit 721f4cf1, so argparse rejected candidate-only command-manifest, candidate-path and serial-root options before any receipt or verifier dispatch.",
+  "correction": "The corrected attempt invokes the exact candidate checkout's preflight script with the shared interpreter, exact review worktree, exact candidate HEAD, validated manifest, candidate-relative tests and exact serial repository root.",
+  "candidate_state": "exact_candidate_unchanged_no_receipt_or_dispatch",
+  "external_effects": false,
+  "status": "recorded_before_corrected_preflight"
+}

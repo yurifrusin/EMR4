@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0",
+  "branch": "codex/review-ariadne-risk-weighted-51866ce0",
+  "head": "51866ce084c33fce600b792c66b180927658ed9e",
+  "expected_head": "51866ce084c33fce600b792c66b180927658ed9e",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "b97a742fd18a4ec0d6da3c882b7654d99cb4d02f15b153dff7e4cf43cb3f44e2",
+  "command_count": 7,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/tests/test_ariadne_risk_weighted_workflow.py",
+    "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/tests/test_ariadne_verifier_worktree_preflight.py",
+    "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/tests/test_ariadne_serial_pytest.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

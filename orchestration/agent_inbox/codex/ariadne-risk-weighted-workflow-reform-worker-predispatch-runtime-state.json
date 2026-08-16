@@ -1,0 +1,109 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_bounded_risk_weighted_workflow_mechanical_worker",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. It preserves the accepted delete-confirm scaffold and deferred PostgreSQL successor while Yuri's 2026-08-16 direction places this bounded Ariadne reform first.",
+    "current_authority_allocation": "Sol owns workflow semantics, recovery, acceptance, integration and Git. DeepSeek V4 Flash/high receives only the thirteen frozen mechanical paths; Gemini 3.7 Flash/high remains one later final veto and native subagents remain declined.",
+    "active_plan_and_acceptance": "Exact plan commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 freezes the four-tier policy, baseline/rerun/review/binding/threat/incident/tail/result contracts and verifier-root correction. The exact pre-implementation baseline passes all 196 canonical tests.",
+    "protected_evidence_boundaries": "Provider-free repository harness implementation only. No Raisa product/API/UI/migration, database, product data, product provider, credentials/IAM, browser/network adapter, executable product command, deployment, release, Pages or protected-ref authority. Protected evidence is closed.",
+    "git_refs_and_worktree": "Primary plan HEAD is exact 721f4cf1dd7bce27429ed97fdeb6028ba85ed954. Clean worker C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-worker-721f4cf1 is on codex/worker-ariadne-risk-weighted-721f4cf1 at that exact HEAD. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; origin task remains 1e63ae754c74e2282b0f5938f1dbca160743096c. Unrelated untracked paths remain outside the worker and preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "objective": "Implement the accepted workflow-efficiency recommendations as a repository-only risk-tiered Ariadne policy and deterministic admission surface before Raisa product development resumes, preserving hard authority, privacy, evidence, cleanup and protected-ref controls while reducing redundant receipts, reruns, reviews and closeout synchronization.",
+    "status": "in_progress",
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16; the exact plan and baseline are frozen at task commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 under the standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "The corrected five-source preplanning receipt passes; the Tier 2 reform plan and threat delta are frozen at commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954; the exact pre-implementation canonical baseline passed 196 tests plus Ruff, compilation, Diary syntax and whitespace.",
+      "next_executable_stage": "Dispatch one bounded DeepSeek V4 Flash/high mechanical implementation package in an exact clean worker worktree, then perform Sol deterministic semantic admission before any Gemini veto.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "repository_only_ariadne_workflow_policy_harness_and_tests",
+      "preserve_five_source_rehydration_authority_privacy_immutable_evidence_cleanup_git_and_terminal_latch_controls",
+      "no_raisa_product_source_route_schema_openapi_graphql_or_ui_change",
+      "no_migration_ddl_sql_database_engine_transaction_lock_or_postgresql_rehearsal",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_product_provider_call_adc_credentials_iam_browser_network_or_external_adapter",
+      "no_executable_product_tool_command_watcher_event_or_product_write_authority",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "rationale": "The committed plan removes semantic choice and leaves a closed module, CLI, policy, schema, runner, preflight and focused-test package in an isolated worktree.",
+        "work_packages": ["thirteen-path mechanical implementation and tests under the frozen plan"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "The Tier 2 workflow-authority change requires one fresh exact-candidate veto only after deterministic Sol admission.",
+        "work_packages": ["one final exact-candidate veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "A third analytical lane would duplicate Sol's semantic admission and Gemini's later veto and would recreate review stacking.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": ["DeepSeek mechanical implementation while Sol prepares exact deterministic admission and diff checks"],
+    "serial_constraints": ["DeepSeek returns before Sol admission", "Gemini follows deterministic admission only", "shared pytest is serial", "Sol alone integrates and accepts"],
+    "reassessment_triggers": ["worker_result", "scope_mismatch", "material_recovery", "pre_verifier_acceptance", "tranche_closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_complete_five_source_rehydration_and_exact_plan_baseline",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Exact clean named worker worktree exists at the literal git-resolved plan HEAD."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini 3.7 is reserved for the final veto; no call has occurred."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol verified exact refs, plan, baseline and worker worktree before dispatch."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined because its expected leverage is negative."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

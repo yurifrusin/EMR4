@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 302
+    assert register["register_revision"] == 308
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 342)
+        f"AER-{index:04d}" for index in range(1, 348)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 236
+    assert len(agent_incidents) == 242
     assert len(transport_incidents) == 10
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2576,7 +2576,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 341
+    assert report["incident_count"] == 347
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3613,29 +3613,29 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 302
-    assert report["incident_count"] == 341
+    assert report["register_revision"] == 308
+    assert report["incident_count"] == 347
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 236,
+        "agent_behavior": 242,
         "harness": 39,
         "repository": 56,
         "transport": 10,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 53,
-        "evidence_misreport": 43,
+        "command_scope_violation": 55,
+        "evidence_misreport": 44,
         "harness_failure": 39,
-        "output_contract_violation": 98,
+        "output_contract_violation": 100,
         "read_only_violation": 3,
-        "reasoning_claim_error": 39,
+        "reasoning_claim_error": 40,
         "repository_defect": 56,
         "transport_timeout": 10,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 98,
-        "canonical_unchanged": 211,
-        "untrusted_partial_worktree": 32,
+        "canonical_unchanged": 216,
+        "untrusted_partial_worktree": 33,
     }
     receipt_event_recurrence = next(
         row
@@ -5390,6 +5390,58 @@ def test_aer_0252_keeps_worker_only_paths_out_of_primary_register_evidence() -> 
     assert "isolated worker worktree" in incident["observed_error"]
     assert "primary repository root" in incident["correction"]["prevention_control"]
     assert incident["status"] == "corrected"
+
+
+def test_aer_0342_through_0347_bind_risk_weighted_reform_corrections() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    expected = {
+        "AER-0342": (
+            "output_contract_violation",
+            "canonical_unchanged",
+            "orchestrator.risk_weighted_preplanning_latch_and_lane_vocabulary_invalid",
+        ),
+        "AER-0343": (
+            "evidence_misreport",
+            "canonical_unchanged",
+            "orchestrator.risk_weighted_worker_source_full_sha_manually_invented",
+        ),
+        "AER-0344": (
+            "command_scope_violation",
+            "canonical_unchanged",
+            "orchestrator.risk_weighted_focused_test_process_identity_discarded",
+        ),
+        "AER-0345": (
+            "reasoning_claim_error",
+            "untrusted_partial_worktree",
+            "implementer.risk_weighted_admission_trusted_authority_bearing_candidate_claims",
+        ),
+        "AER-0346": (
+            "output_contract_violation",
+            "canonical_unchanged",
+            "orchestrator.risk_weighted_review_preflight_selected_primary_old_script",
+        ),
+        "AER-0347": (
+            "command_scope_violation",
+            "canonical_unchanged",
+            "orchestrator.risk_weighted_gemini_manifest_selected_primary_old_serial_runner",
+        ),
+    }
+
+    for incident_id, (category, candidate_state, recurrence_signature) in expected.items():
+        incident = incidents[incident_id]
+        assert incident["origin"] == "agent_behavior"
+        assert incident["category"] == category
+        assert incident["candidate_state"] == candidate_state
+        assert incident["workflow_disposition"] == "revision_required"
+        assert incident["recurrence_signature"] == recurrence_signature
+        assert incident["causal_claim_level"] == "observation_only"
+        assert incident["correction"]["status"] == "corrected_fresh_attempt"
+        assert incident["status"] == "corrected"
+
+    assert incidents["AER-0345"]["role"] == "implementer"
+    assert incidents["AER-0345"]["resource_id"] == "deepseek-flash-workers"
+    assert incidents["AER-0347"]["stage"] == "independent_review"
 
 
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:

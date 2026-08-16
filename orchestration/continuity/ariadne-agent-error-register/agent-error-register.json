@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 302,
+  "register_revision": 308,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-16",
@@ -13724,6 +13724,241 @@
           "orchestration/agent_inbox/antigravity/raisa-delete-confirm-physical-scaffold-gemini37-review-receipt.json",
           "orchestration/agent_inbox/codex/raisa-delete-confirm-physical-scaffold-gemini37-relative-test-path-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-302.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0342",
+      "attempt_id": "ariadne-risk-weighted-workflow-reform-preplanning-001",
+      "observed_on": "2026-08-16",
+      "tranche": "ariadne-risk-weighted-workflow-reform",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A fresh five-source receipt must bind the admitted live-latch fingerprint and use the configured parallel-lane disposition vocabulary before planning or dispatch.",
+      "observed_error": "The first preplanning receipt used a provisional latch fingerprint, a noncanonical unfinished-operation reason and reservation-timing phrases where the configured lane disposition enum was required, so receipt admission rejected it before planning.",
+      "detection_method": "The repository-local receipt preflight returned active_operation_latch_invalid and two parallelism_lane_disposition_invalid reasons; no worker or provider was dispatched from the rejected state.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-incident.json",
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-308.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.risk_weighted_preplanning_latch_and_lane_vocabulary_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Align the latch to the exact configured fingerprint and terminal reason, move lane timing into rationale and work-package fields, then require a distinct corrected receipt before planning.",
+        "prevention_control": "Generate receipt vocabulary from the admitted settings and live-latch schemas; never invent terminal or lane disposition literals in a continuation state.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-incident.json",
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preplanning-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0343",
+      "attempt_id": "ariadne-risk-weighted-worker-worktree-create-001",
+      "observed_on": "2026-08-16",
+      "tranche": "ariadne-risk-weighted-workflow-reform",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "git",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every full Git object ID used for worktree creation or evidence binding must be copied from a successful exact Git readback.",
+      "observed_error": "The first worker-worktree command expanded the displayed short commit into a manually invented full object ID. Git rejected the nonexistent reference before creating the worktree.",
+      "detection_method": "git worktree add failed on the invalid object; git rev-parse HEAD then supplied literal plan source 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 for the corrected attempt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-worker-worktree-git-identity-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-308.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.risk_weighted_worker_source_full_sha_manually_invented",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Read the complete plan source literally with git rev-parse, bind that value into the latch and packet, and create the worker worktree only from that exact object.",
+        "prevention_control": "A full Git object ID may enter a command, receipt or plan only through literal Git output or an already validated durable field; manual short-SHA expansion is prohibited.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-worker-worktree-git-identity-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0344",
+      "attempt_id": "ariadne-risk-weighted-workflow-reform-sol-focused-tests-001",
+      "observed_on": "2026-08-16",
+      "tranche": "ariadne-risk-weighted-workflow-reform",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_shell",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "An asynchronous focused test run must retain its process identity until an exact terminal exit status is captured before the result is admitted.",
+      "observed_error": "The first wrapper emitted child output but discarded the running process identifier, leaving the eventual exit status unattributable even though visible pytest output completed.",
+      "detection_method": "Sol recognized that the wrapper could not recover the exact process result and treated the visible output as non-admissible until the identical focused command was rerun with retained identity.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-focused-test-output-capture-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-308.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.risk_weighted_focused_test_process_identity_discarded",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rerun the exact focused command with retained process identity and admit only its terminal zero exit and complete output.",
+        "prevention_control": "Every yielded process must preserve and poll its returned session or cell identity through terminal completion; visible output without an attributable exit is not gate evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-focused-test-output-capture-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0345",
+      "attempt_id": "ariadne-risk-weighted-workflow-reform-deepseek-candidate-admission-001",
+      "observed_on": "2026-08-16",
+      "tranche": "ariadne-risk-weighted-workflow-reform",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_via_claude_code_bare",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "The risk-weighted admission implementation must derive and compare every authority-bearing freeze, reuse, veto, parallelism and renderer boundary instead of trusting candidate-declared values.",
+      "observed_error": "The first worker candidate could admit stale freeze details, accept a self-asserted reuse fingerprint, count a mechanical lane as an independent veto, omit planned-versus-actual parallelism comparison, return pass after a declared-decision mismatch, overwrite protected renderer paths and narrow malformed verifier input.",
+      "detection_method": "Sol's source review and hostile regression design rejected worker source 85a0877face2f16af80a07217918bf86b370febd despite its 118 passing focused tests; no verifier or integration admitted that candidate.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-candidate-semantic-admission-incident.json",
+        "orchestration/agent_inbox/deepseek/ariadne-risk-weighted-workflow-reform-worker-result.json",
+        "docs/ariadne-agent-error-correction-register-revision-308.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.risk_weighted_admission_trusted_authority_bearing_candidate_claims",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Sol recovered the exact worker candidate by deriving all authority-bearing bindings, restricting veto lanes, comparing actual parallelism, failing closed on every reason, protecting renderer targets and adding hostile regressions before freezing 51866ce084c33fce600b792c66b180927658ed9e.",
+        "prevention_control": "Mechanical workers may construct authority tooling, but Sol must independently trace every field that can release pass, reuse evidence, satisfy a veto or select a write target before semantic freeze.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-candidate-semantic-admission-incident.json",
+          "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0346",
+      "attempt_id": "ariadne-risk-weighted-workflow-reform-review-preflight-001",
+      "observed_on": "2026-08-16",
+      "tranche": "ariadne-risk-weighted-workflow-reform",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Candidate-only verifier arguments must be parsed by the exact candidate checkout's preflight implementation before reviewer dispatch.",
+      "observed_error": "The first review-preflight command invoked the primary checkout's older script, whose parser did not yet know the candidate manifest, path and serial-root arguments, so argparse rejected them before producing a receipt.",
+      "detection_method": "The command exited at argument parsing with no reviewer dispatch; path readback showed that the requested verifier capability existed only in the exact candidate checkout.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-review-preflight-runner-root-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-308.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.risk_weighted_review_preflight_selected_primary_old_script",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Invoke the exact candidate checkout's preflight script with the shared interpreter and bind the exact review root, candidate HEAD, validated manifest and candidate-relative paths.",
+        "prevention_control": "For a tranche that changes verifier tooling, review preflight and command manifests must resolve the tool from the exact candidate root unless a separately versioned external tool is explicitly frozen.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-review-preflight-runner-root-incident.json",
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0347",
+      "attempt_id": "ariadne-risk-weighted-workflow-reform-gemini-veto-001",
+      "observed_on": "2026-08-16",
+      "tranche": "ariadne-risk-weighted-workflow-reform",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every verifier manifest command must run the exact candidate-compatible helper rooted in the clean review checkout.",
+      "observed_error": "The first Gemini manifest invoked the primary checkout's old serial runner for C03. It rejected the candidate-only --repo-root option, producing revision_required even though Gemini's source audit found every required invariant satisfied.",
+      "detection_method": "The preserved Gemini 3.7 Flash/high receipt recorded six passing commands, one C03 parser failure, clean source state and no substantive source defect at exact candidate 51866ce084c33fce600b792c66b180927658ed9e.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-gemini-manifest-runner-root-incident.json",
+        "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-308.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.risk_weighted_gemini_manifest_selected_primary_old_serial_runner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed receipt, bind a distinct corrected manifest to the candidate checkout's serial runner, revalidate manifest and root preflight, then use the one authorised corrected final veto on the unchanged candidate.",
+        "prevention_control": "Manifest admission must verify executable-helper provenance against the exact review root and reject primary-checkout fallthrough whenever candidate tooling changed.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-gemini-manifest-runner-root-incident.json",
+          "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
         ]
       },
       "status": "corrected"

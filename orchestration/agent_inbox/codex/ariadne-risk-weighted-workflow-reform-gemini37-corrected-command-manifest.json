@@ -1,0 +1,54 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0",
+        "--",
+        "tests/test_ariadne_risk_weighted_workflow.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-rww-51866ce0-retry"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_risk_weighted_workflow",
+        "validate",
+        "--profile",
+        "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.example.json",
+        "--result",
+        "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.example.json"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/risk_weighted_workflow.py",
+        "scripts/ariadne_risk_weighted_workflow.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_risk_weighted_workflow.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py"
+      ]
+    },
+    {"id": "C06", "argv": ["git", "diff", "--check", "721f4cf1dd7bce27429ed97fdeb6028ba85ed954..51866ce084c33fce600b792c66b180927658ed9e"]},
+    {"id": "C07", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

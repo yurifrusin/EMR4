@@ -1,0 +1,10 @@
+{
+  "authority_boundary": "generated_payload_applied_by_sol_only",
+  "classified_tier": "tier_2_authority_runtime",
+  "decision": "pass",
+  "generated_at": "2026-08-16T09:57:59+10:00",
+  "profile_sha256": "sha256:475c96bca766b198b22987280c87797c55e6a05cdbbde01178a5aa53c12b41df",
+  "schema_version": "ariadne.continuity_update.v1",
+  "timezone": "Australia/Brisbane",
+  "tranche_id": "ariadne-risk-weighted-workflow-reform"
+}

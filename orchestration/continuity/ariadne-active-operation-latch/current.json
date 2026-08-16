@@ -3,16 +3,16 @@
   "operation_id": "ariadne-risk-weighted-workflow-reform",
   "active_tranche": "Ariadne risk-weighted workflow reform",
   "objective": "Implement the accepted workflow-efficiency recommendations as a repository-only risk-tiered Ariadne policy and deterministic admission surface before Raisa product development resumes, preserving hard authority, privacy, evidence, cleanup and protected-ref controls while reducing redundant receipts, reruns, reviews and closeout synchronization.",
-  "status": "in_progress",
-  "source_head": "1e63ae754c74e2282b0f5938f1dbca160743096c",
-  "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16 before continuing Raisa development, under the standing uninterrupted-development authority.",
+  "status": "complete",
+  "source_head": "51866ce084c33fce600b792c66b180927658ed9e",
+  "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16; exact reviewed implementation 51866ce084c33fce600b792c66b180927658ed9e is accepted under the standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "The delete-confirm scaffold is accepted and the paused workflow-efficiency review concluded that hard semantic controls found material authority defects while approximately 30-50 percent of recent elapsed time may be reducible meta-work.",
-    "next_executable_stage": "Generate the fresh pre-sprint-planning receipt, freeze the narrowest repository-only risk-weighted reform plan, then implement and verify its deterministic policy and automation without opening the deferred PostgreSQL parse/catalogue rehearsal.",
+    "completed_stage": "Risk-weighted admission, corrected Gemini 3.7 Flash/high veto, exact fast-forward integration, result rendering, AER revision 308, Continuity 301, Compass 283, baton update and selected post-freeze gates all passed for exact implementation 51866ce084c33fce600b792c66b180927658ed9e.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
-      "implementation": 0,
-      "review": 0,
+      "implementation": 1,
+      "review": 1,
       "verification": 0
     },
     "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "completed_authorized_operation"
   },
   "protected_boundaries": [
     "repository_only_ariadne_workflow_policy_harness_and_tests",

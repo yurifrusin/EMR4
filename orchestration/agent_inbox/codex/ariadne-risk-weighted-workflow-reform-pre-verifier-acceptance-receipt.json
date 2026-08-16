@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "completed_stage": "Sol recovery candidate 51866ce084c33fce600b792c66b180927658ed9e is exact and clean. It passes 121 focused tests, Ruff, JSON/schema validation, Git whitespace and the canonical 196-test fast profile. The manifest and corrected exact-candidate verifier-worktree preflight pass; AER-0346 preserves the rejected primary-script-root attempt.",
+    "next_executable_stage": "Generate the fresh pre-verifier five-source receipt, dispatch exactly one Gemini 3.7 Flash/high final veto against clean review branch codex/review-ariadne-risk-weighted-51866ce0, then accept or enter one bounded Sol recovery according to its exact result.",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "resume_after_compaction": true,
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The single implementation package is complete and preserved as immutable candidate evidence after Sol recovery.",
+        "work_packages": [
+          "implemented and tested the frozen mechanical allowlist"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Tier 2 now requires exactly one fresh final veto against the deterministic exact candidate and no stacked reviewer.",
+        "work_packages": [
+          "review exact candidate 51866ce084c33fce600b792c66b180927658ed9e once at Gemini 3.7 Flash/high"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "An additional reviewer would duplicate the single final veto and reintroduce the latency the reform removes.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier_result",
+      "material_recovery",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Gemini dispatch follows deterministic admission",
+      "review result precedes integration",
+      "shared pytest and Git integration remain serial"
+    ]
+  },
+  "planned_action": "dispatch_external_verifier",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen Tier 2 plan and RWW-001 through RWW-018 threat delta require one final veto only after deterministic admission. Exact recovery candidate 51866ce084c33fce600b792c66b180927658ed9e passes 121 focused tests and the canonical 196-test fast profile.",
+    "current_authority_allocation": "Sol owns deterministic admission, integration and acceptance; DeepSeek's single package is complete, Gemini 3.7 Flash/high owns exactly one final independent veto, and native subagents remain declined.",
+    "git_refs_and_worktree": "The exact clean review worktree is C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0 on codex/review-ariadne-risk-weighted-51866ce0 at 51866ce084c33fce600b792c66b180927658ed9e; its seven-command manifest and exact-root preflight pass. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely; protected refs and the accepted delete-confirm result remain unchanged while the explicitly authorised Ariadne reform controls the active latch.",
+    "protected_evidence_boundaries": "The review is repository-only and provider input is authored synthetic source. No Raisa runtime, database, migration execution, product/patient/clinical data, credentials/IAM, deployment, Pages or protected-ref movement is allowed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

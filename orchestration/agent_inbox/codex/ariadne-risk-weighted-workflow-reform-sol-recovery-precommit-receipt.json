@@ -1,0 +1,80 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "completed_stage": "DeepSeek returned exact candidate 85a0877face2f16af80a07217918bf86b370febd and 118 focused tests passed independently. Sol semantic admission rejected stale-freeze, reuse, independent-veto, parallelism, decision, renderer-authority and verifier-root gaps; AER-0345 was recorded before one bounded Sol recovery, whose corrected focused suite now passes.",
+    "next_executable_stage": "Commit the bounded Sol recovery as a new exact candidate, run deterministic focused and canonical admission on that candidate, then issue one fresh Gemini 3.7 Flash/high final veto only if every deterministic gate passes.",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "resume_after_compaction": true,
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "parallelism_assessment": {
+    "assessed_stage": "sol_recovery_pre_commit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The single mechanical package produced a useful bounded candidate and tests, while Sol retained responsibility for conceptual recovery.",
+        "work_packages": [
+          "implemented the exact allowlist and supplied immutable candidate evidence"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The Tier 2 final veto remains serially ineligible until the corrected exact candidate passes deterministic admission.",
+        "work_packages": [
+          "one fresh final exact-candidate veto after deterministic admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Another review lane would duplicate Sol recovery and the single required Gemini veto, recreating review stacking.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre_verifier_acceptance",
+      "material_recovery",
+      "tranche_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol recovery commit precedes deterministic canonical admission",
+      "Gemini remains ineligible before deterministic admission",
+      "shared pytest and all Git integration remain serial"
+    ]
+  },
+  "planned_action": "commit_exact_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen Tier 2 reform plan and RWW-001 through RWW-018 threat delta require exact freeze/reuse binding, independent review, authority-safe rendering and exact verifier roots. Worker candidate 85a0877face2f16af80a07217918bf86b370febd was rejected and the bounded Sol recovery passes 121 focused tests plus Ruff and whitespace.",
+    "current_authority_allocation": "Sol owns semantic recovery, integration and acceptance; DeepSeek completed its one bounded implementation package, Gemini 3.7 Flash/high remains reserved for one final veto, and native subagents remain declined.",
+    "git_refs_and_worktree": "The primary task branch remains at 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 before recovery integration; the isolated recovery worktree is based on rejected worker candidate 85a0877face2f16af80a07217918bf86b370febd. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely; the protected delete-confirm result and deferred Raisa successor remain unchanged while the user-authorised Ariadne reform is active.",
+    "protected_evidence_boundaries": "Repository-only harness recovery. No Raisa product source, database, migration execution, product or patient data, provider call, credentials, deployment, Pages or protected-ref movement; all untracked files remain preserved and staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

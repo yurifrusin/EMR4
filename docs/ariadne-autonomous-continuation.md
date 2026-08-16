@@ -82,6 +82,34 @@ discoverable with
 The machine-readable policy is
 `orchestration/harness_settings/evidence_led_workflow.yaml`.
 
+## Risk-weighted tranche admission
+
+Every tranche derives its tier from exact change signals; a declared tier may
+raise but never lower the result. Tier 0 covers prose-only changes, Tier 1
+covers provider-free unmounted source, Tier 2 covers authority, security,
+database-runtime or executable-tool seams, and Tier 3 covers occupied
+providers, credentials, product-derived data, deployment, release, Pages or
+protected refs.
+
+The tranche captures a pre-edit baseline before the first semantic edit, then
+freezes exact semantic and toolchain bindings. Post-freeze change families
+select the union of targeted reruns. A canonical pass may be reused only when
+the harness independently derives the same complete fingerprint; a candidate
+cannot self-assert reuse. Stable semantic bindings and volatile receipts,
+closeout prose, latch snapshots and continuity metadata remain distinct.
+
+Independent review is zero-or-one by default. The derived tier and explicit
+risk triggers decide whether the single final veto is required; an
+implementation worker does not satisfy that lane. The admitted result binds
+planned and actual parallelism, rejects protected renderer targets and runs
+candidate-aware verifier tooling from the exact review root.
+
+The machine-readable policy is
+`orchestration/harness_settings/risk_weighted_workflow.yaml`; schemas and
+executable admission live under
+`orchestration/continuity/ariadne-risk-weighted-workflow-reform/` and
+`scripts/ariadne_risk_weighted_workflow.py`.
+
 The machine-readable policy is
 `orchestration/harness_settings/autonomous_continuation.yaml`.
 

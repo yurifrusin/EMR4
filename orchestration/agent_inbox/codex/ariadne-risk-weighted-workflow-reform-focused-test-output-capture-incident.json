@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.agent_error_incident_evidence.v1",
+  "incident_id": "AER-0344",
+  "observed_on": "2026-08-16",
+  "timestamp": "2026-08-16T09:32:28+10:00",
+  "timezone": "Australia/Brisbane",
+  "tranche": "ariadne-risk-weighted-workflow-reform",
+  "attempt_id": "ariadne-risk-weighted-workflow-reform-sol-focused-tests-001",
+  "provider_or_model_calls": 0,
+  "candidate_head": "85a0877face2f16af80a07217918bf86b370febd",
+  "rejected_reasons": [
+    "test_wrapper_discarded_process_identity",
+    "first_exit_status_uncertain"
+  ],
+  "detection": "The first independent focused-test wrapper emitted child stdout but discarded the running process identifier, so its eventual exit status could not be attributed exactly even though the visible test output completed.",
+  "correction": "Before relying on the result, the exact same focused test command was rerun once with a retained process identity; it exited 0 with all 118 focused tests passing and two known warnings.",
+  "candidate_state": "candidate_unchanged_exact_rerun_passed",
+  "external_effects": false,
+  "status": "corrected_before_semantic_admission"
+}

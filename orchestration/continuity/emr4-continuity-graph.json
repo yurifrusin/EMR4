@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 300,
+  "graph_revision": 301,
   "harvests": [],
   "nodes": [
     {
@@ -20455,9 +20455,101 @@
         "Product/patient data, providers, credentials, watchers/events, commands, deployment, Pages and protected refs remain closed.",
         "The next parse/catalogue tranche is paused pending Yuri's requested workflow-efficiency review."
       ]
+    },
+    {
+      "id": "ariadne-risk-weighted-workflow-reform",
+      "title": "Ariadne risk-weighted workflow reform",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-16T00:05:15Z",
+      "updated_at": "2026-08-16T00:05:15Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "51866ce084c33fce600b792c66b180927658ed9e",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The reform applies only to Ariadne's development-orchestration control plane and opens no Raisa product capability.",
+          "Tier derivation remains fail closed: higher-risk signals elevate the tranche and declared tier may not lower it.",
+          "Baseline, semantic freeze, targeted rerun union, zero-or-one final veto and protected closeout rendering are now deterministic contracts.",
+          "No database, migration execution, route, provider, credential, product data, deployment, Pages or protected ref was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-ariadne-risk-weighted-workflow-reform",
+          "source": "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+          "status": "accepted",
+          "summary": "Adopt four derived risk tiers, baseline-first semantic freeze, change-family rerun selection, at most one independent final veto and protected deterministic closeout rendering."
+        }
+      ],
+      "claim_scope": [
+        "Four risk tiers are derived from exact change signals and cannot be lowered by declaration.",
+        "A pre-edit baseline, semantic bindings and toolchain freeze distinguish candidate semantics from volatile closeout evidence.",
+        "Post-freeze change families select the union of targeted reruns; unchanged canonical evidence may be reused only by an independently derived exact fingerprint.",
+        "Tier and trigger policy require zero or one genuinely independent final veto, with planned-versus-actual parallelism bound into admission.",
+        "Renderer targets reject protected authority paths and verifier helpers resolve from the exact candidate root.",
+        "One hundred twenty-one focused tests, the canonical 196-test profile, hostile schema checks and one corrected clean Gemini 3.7 Flash/high veto passed at exact candidate 51866ce084c33fce600b792c66b180927658ed9e."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-risk-weighted-workflow-reform-plan.md"
+        ],
+        "findings": [
+          "docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md",
+          "orchestration/harness_settings/risk_weighted_workflow.yaml",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.json",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.json",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/baseline-fast-profile.json",
+          "docs/ariadne-agent-error-correction-register-revision-308.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/ariadne-risk-weighted-workflow-reform-worker-result.json",
+          "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-preintegration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_risk_weighted_workflow.py",
+          "tests/test_ariadne_serial_pytest.py",
+          "tests/test_ariadne_verifier_worktree_preflight.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/risk_weighted_workflow.py",
+          "scripts/ariadne_risk_weighted_workflow.py",
+          "scripts/ariadne_serial_pytest.py",
+          "scripts/ariadne_verifier_worktree_preflight.py",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.schema.json",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.schema.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Throughput improvement and false-positive reduction must be measured across subsequent real tranches; this acceptance proves the mechanism, not a quantified productivity gain.",
+        "The reform does not waive explicit evidence at authority, database, provider, credential, deployment, release or protected-ref boundaries.",
+        "Raisa's next disposable PostgreSQL parse/catalogue rehearsal remains a separate product-evidence tranche."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-15T14:24:19Z"
+  "updated_at": "2026-08-16T00:05:15Z"
 }

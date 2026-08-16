@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 300 / Compass 282. The unmounted delete-confirm physical schema-and-transaction scaffold passes with database-owned current authority, normalized default-deny grants, inert DDL, exact private receipt/audit mappings and an ordered transaction seam. Work is paused before the disposable PostgreSQL parse/catalogue rehearsal.
+> EMR4 is at Continuity 301 / Compass 283. Ariadne now admits tranches through four derived risk tiers, a pre-edit baseline, semantic freeze, targeted post-freeze reruns, zero-or-one independent final veto and protected deterministic closeout rendering. The workflow review pause is resolved; the next safe Raisa direction is the provider-free disposable PostgreSQL parse/catalogue rehearsal of the unmounted delete-confirm scaffold.
 
 ## North star
 
@@ -370,26 +370,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One exact additive authority, receipt, audit, ordered transaction and separate-readback design passes; implementation remains unmounted and the next product tranche is paused. Lineage parent: `raisa-provider-free-read-only-unmounted-delete-confirm-physical-representability-review`.
 177. **Embody the cancellation authority and atomic transaction design without opening a database or route — Provider-free unmounted delete-confirm physical schema-and-transaction scaffold**
    Exact mappings, inert migration, canonical receipt helpers and the ordered transaction seam pass as an unmounted scaffold. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-design-architecture`.
+178. **Reduce Ariadne ceremony while preserving fail-closed evidence at the boundaries whose failure would materially change authority or truth — Ariadne risk-weighted workflow reform**
+   Four derived tiers, baseline-first semantic freeze, targeted reruns, at most one independent final veto and protected closeout generation pass at exact reviewed source 51866ce084c33fce600b792c66b180927658ed9e. Lineage parent: `raisa-provider-free-unmounted-delete-confirm-physical-schema-transaction-scaffold`.
 
 ## Current position
 
-**The cancellation safety kernel has an unmounted physical source scaffold and is paused before database embodiment — Provider-free unmounted delete-confirm physical schema-and-transaction scaffold**
+**Ariadne now scales evidence effort to the actual tranche risk while retaining hard fail-closed boundaries — Ariadne risk-weighted workflow reform**
 
-**Why this proof came next:** The physical design passed and has now been lowered into exact source without executing a migration, database transaction or route.
+**Why this proof came next:** The workflow-efficiency pause found that repeated full-profile and reviewer ceremony could be replaced by derived risk, exact baseline/freeze bindings and change-family-targeted reruns without weakening authority controls.
 
-Database-owned authority mapping, inert DDL, canonical receipt helpers and the authority-first lock seam pass deterministic and fresh independent review evidence.
+The accepted control plane derives four tiers, refuses tier lowering, reuses only exact canonical evidence, permits at most one independent final veto and blocks protected closeout write targets.
 
 ### What this unlocks
 
-- After Yuri resumes, run a provider-free disposable PostgreSQL delete-confirm scaffold parse/catalogue rehearsal.
-- Verify only empty-instance installation plus exact columns, constraints, functions and triggers.
-- Keep behavior and route execution behind later evidence gates.
+- Resume Raisa with a risk-classified provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8.
+- Use the pre-edit baseline and post-freeze change-family union instead of reflexively rerunning every historical gate.
+- Measure actual tranche duration and correction yield so later evidence can tune the policy without self-modification.
 
 ### What it does not solve
 
-- PostgreSQL installation, catalogue, trigger, RLS, real lock, rollback or timing behavior.
-- Capability provisioning, mounted-route behavior or the public response compatibility transition.
-- Provider/credential activity, patient/product data, watchers/events, product commands, deployment, release, Pages or protected-ref movement.
+- It does not prove a productivity gain until later tranches supply comparative timing and correction evidence.
+- It does not waive evidence for database behavior, authority, provider, credential, deployment, release or protected-ref boundaries.
+- It opens no Raisa runtime, route, migration execution, patient/product data, provider call, deployment, Pages or protected-ref movement.
 
 ## Continuity and authority
 
@@ -916,6 +918,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-293.md`
 - `docs/ariadne-agent-error-correction-register-revision-294.md`
 - `docs/ariadne-agent-error-correction-register-revision-302.md`
+- `docs/ariadne-agent-error-correction-register-revision-308.md`
 - `docs/ariadne-agent-error-correction-register-revision-31.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
@@ -937,6 +940,8 @@ Prerequisites:
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
+- `docs/ariadne-risk-weighted-workflow-reform-closeout.md`
+- `docs/ariadne-risk-weighted-workflow-reform-plan.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
@@ -1376,6 +1381,7 @@ Prerequisites:
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
+- `docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md`
 - `docs/security/bernie-reception-one-bureau-runtime-ui-wiring-threat-model-delta.md`
 - `docs/security/bernie-reception-one-default-off-dual-planner-runtime-threat-model-delta.md`
 - `docs/security/bernie-reception-one-extended-proposal-runtime-threat-model-delta.md`
@@ -1513,6 +1519,7 @@ Prerequisites:
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
@@ -1567,6 +1574,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-independent-audit.md`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-preacceptance-receipt.json`
@@ -2047,6 +2055,8 @@ Prerequisites:
 - `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-promotion.schema.json`
 - `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-proposal.schema.json`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
+- `orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.json`
+- `orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-004-audit-analysis.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/gemini-provider-blocked-request-contract-diagnostic-evidence.json`
@@ -2581,6 +2591,7 @@ Prerequisites:
 - `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/harness_settings/orchestrator_requirements.yaml`
 - `orchestration/harness_settings/python_source_state.json`
+- `orchestration/harness_settings/risk_weighted_workflow.yaml`
 - `orchestration/human_inbox/yuri/2026-08-08--context-fabric-database-durability-behavior-transaction.md`
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c0-architecture-contract.md`
 - `orchestration/human_inbox/yuri/2026-08-11--aes-c1-provider-free-admission.md`
@@ -2647,6 +2658,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-cancellation-command-path-readiness-review.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-editor-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-15--reception-one-same-update-family-multi-change-kernel-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-16--ariadne-risk-weighted-workflow-reform.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-physical-schema-transaction-scaffold.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2659,6 +2671,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/continuity_and_refinement.py`
+- `orchestration_harness/risk_weighted_workflow.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_duration_action.py`
 - `review/test_reception_one_practitioner_reassignment_action.py`
@@ -2671,6 +2684,7 @@ Prerequisites:
 - `scripts/ariadne_continuity_and_refinement.py`
 - `scripts/ariadne_continuity_and_refinement_safeguards_continuity_update.py`
 - `scripts/ariadne_evidence_gate.py`
+- `scripts/ariadne_risk_weighted_workflow.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
@@ -2738,6 +2752,7 @@ Prerequisites:
 - `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_continuity_and_refinement.py`
 - `tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py`
+- `tests/test_ariadne_risk_weighted_workflow.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
@@ -2821,4 +2836,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 282; continuity graph revision 300._
+_Compass map revision 283; continuity graph revision 301._

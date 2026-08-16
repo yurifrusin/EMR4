@@ -1,0 +1,201 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-risk-weighted-review-51866ce0",
+  "branch": "codex/review-ariadne-risk-weighted-51866ce0",
+  "head_before": "51866ce084c33fce600b792c66b180927658ed9e",
+  "head_after": "51866ce084c33fce600b792c66b180927658ed9e",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "3bcfd352c53087656f1fd924e74e11e1d1abf01f0b64742bee0ffd958dac334f",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review: Ariadne Risk-Weighted Workflow Reform\n\nDate: 2026-08-16\nReviewer: Gemini 3.7 Flash/high (fresh independent veto role)\nCandidate HEAD: `51866ce084c33fce600b792c66b180927658ed9e`\nCandidate Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-risk-weighted-review-51866ce0`\nBound Branch: `codex/review-ariadne-risk-weighted-51866ce0`\nEvidence Label: `provider_free_authored_synthetic_repository_only_workflow_reform`\n\n---\n\n## 1. Executive Summary & Terminal Finding\n\nExecution of the bound command manifest resulted in a non-zero exit code on command `C03`:\n- **Command ID**: `C03`\n- **Command Invocation**: `C:/Users/sarashera/emr4/.venv/Scripts/python.exe C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py --repo-root C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0 -- tests/test_ariadne_risk_weighted_workflow.py tests/test_ariadne_verifier_worktree_preflight.py tests/test_ariadne_serial_pytest.py -q -p no:cacheprovider --basetemp C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-rww-51866ce0`\n- **Exit Code**: `1`\n- **Error Output**: `ariadne_serial_pytest.py: error: unrecognized arguments: --repo-root`\n\n### Root Cause Analysis:\nCommand `C03` explicitly invokes the serial pytest launcher located in the primary checkout (`C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py`). The primary checkout does not yet contain the newly implemented `--repo-root` argument, which was authored and added within the candidate branch at `C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/scripts/ariadne_serial_pytest.py`. Consequently, when the primary checkout's unintegrated script is called with `--repo-root`, `argparse` rejects the option. Under `scripts/ariadne_evidence_gate.py` (`admit_command_results`) and the verifier execution contract, a `pass` decision requires every command exit code to be zero. Because `C03` exited with code `1`, the terminal decision is fail-closed `revision_required`.\n\n---\n\n## 2. Invariant & Source Artifact Verification\n\nAll 18 candidate allowlisted artifacts were inspected against the frozen plan (`docs/ariadne-risk-weighted-workflow-reform-plan.md`) and threat model delta (`docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md`).\n\n### Invariant 1: Highest applicable tier wins & contradiction fail-closed\n- `orchestration_harness/risk_weighted_workflow.py` (`_derive_tier`) deterministically selects the highest applicable tier from signals, change families, and review triggers.\n- Callers cannot choose or lower their own tier (`declared_tier != derived_tier` raises `ValueError`).\n- Contradictory claims (`docs_only` with executable signals/semantic families; `unmounted` with database/authority/provider/migration scope) fail closed in `_check_contradictions`.\n- Tier 0 tranches with review triggers deterministically elevate to Tier 1.\n\n### Invariant 2: Pre-edit canonical baseline & semantic freeze binding\n- Tier 1\u20133 require `captured_before_first_edit: true` and a valid canonical baseline fingerprint.\n- `canonical_pass_fingerprint()` binds stable semantic inputs (`baseline`, `change_families`, `change_signals`, `semantic_bindings`, `semantic_freeze`, `threat_ids`) while excluding volatile closeout paths, timestamps, and latch snapshots.\n- Stale pass reuse without exact matching is rejected.\n\n### Invariant 3: Post-freeze rerun matrix & union calculation\n- `compute_rerun()` implements the closed change family rerun table and computes the exact union for mixed post-freeze changes.\n- Semantic changes require focused semantic gates, a canonical final profile, and invalidate earlier verifier results.\n- Unknown or falsely narrowed change families fail closed.\n\n### Invariant 4: Review economy & independent single veto\n- Tier 0 requires 0 final vetoes; Tier 1 requires 0 routine / 1 risk-triggered veto; Tier 2 and Tier 3 require exactly 1 final independent veto.\n- Reviewer stacking is prohibited (`validate_review` permits at most 1 veto).\n- Reviewer lane is constrained to `gemini_single_final_veto` or `native_explicit_review_lane`; DeepSeek mechanical lane cannot serve as review veto.\n\n### Invariant 5: Named RWW threat coverage, incidents, and tail deferral\n- All 18 named threats (`RWW-001` through `RWW-018`) must be covered by passing deterministic gates (`validate_threat_coverage`). Mutation quota is advisory.\n- Incidents require typed pre-correction records (`validate_incident_grouping` enforces distinct causal tuples `(origin, category, role, resource, signature)`).\n- Tail deferral (`validate_tail_deferral`) strictly rejects deferral if any hard defect flag (`safety_relevant`, `authority_relevant`, `integrity_relevant`, `privacy_relevant`, `atomicity_relevant`, `protected_evidence_relevant`, `irreversible_effect_relevant`) is true, and requires owner and next review boundary.\n\n### Invariant 6: Decision contract alignment\n- `admit_result()` verifies that `result[\"decision\"]` matches the evidence evaluation. Any mismatch adds `decision_does_not_match_evidence` and fails closed. No passing decision may carry reasons.\n\n### Invariant 7: Pure deterministic renderer & protected path guards\n- `scripts/ariadne_risk_weighted_workflow.py` (`render_packet`) is pure and executes no subprocesses.\n- Output writer `_write()` explicitly rejects targets matching `AGENTS.md`, `.git`, `orchestration/continuity`, `orchestration/compass`, or the live latch.\n- Renders standard ISO 8601 timestamps in `Australia/Brisbane` timezone.\n\n### Invariant 8: Verifier worktree preflight\n- `scripts/ariadne_verifier_worktree_preflight.py` enforces clean candidate worktree, `codex/review-` branch prefix, and exact 40-hex HEAD.\n- `_resolve_candidate_paths()` enforces that candidate test paths resolve inside the review worktree.\n- Rejects external serial runners whose `--repo-root` does not match the review worktree.\n\n### Invariant 9: Serial pytest launcher candidate root resolution\n- `scripts/ariadne_serial_pytest.py` in the candidate branch includes `--repo-root` parsing and validation via `resolve_repo_root()`, enforcing presence of `tests/conftest.py` and maintaining the shared OS lock.\n\n### Invariant 10: Closed surfaces & non-product boundaries\n- No Raisa product runtime, database/migration runtime, external provider/retrieval, real/patient/clinical data, credentials/IAM, deployment/Pages, or protected refs were opened or modified.\n\n---\n\n## 3. Command Manifest Results Summary\n\n| ID | Command argv | Exit Code | Status |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Passed (`## codex/review-ariadne-risk-weighted-51866ce0`) |\n| C02 | `git rev-parse HEAD` | 0 | Passed (`51866ce084c33fce600b792c66b180927658ed9e`) |\n| C03 | `python.exe C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py --repo-root ...` | 1 | Failed (`unrecognized arguments: --repo-root`) |\n| C04 | `python.exe -m scripts.ariadne_risk_weighted_workflow validate --profile ... --result ...` | 0 | Passed (profile and result validated) |\n| C05 | `ruff.exe check ...` | 0 | Passed (all checks passed) |\n| C06 | `git diff --check 721f4cf1dd...51866ce084...` | 0 | Passed (clean whitespace) |\n| C07 | `git status --short --branch` | 0 | Passed (`## codex/review-ariadne-risk-weighted-51866ce0`) |\n\n---\n\n## 4. Required Recovery Action\n\nSol must update the manifest/dispatch or runner invocation so that the serial pytest launcher utilized for candidate verification either:\n1. Executes the candidate worktree's own updated `scripts/ariadne_serial_pytest.py` (e.g. `C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/scripts/ariadne_serial_pytest.py`), or\n2. Re-runs following the candidate runner integration so that all 7 manifest commands exit with code `0`.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review: Ariadne Risk-Weighted Workflow Reform\n\nDate: 2026-08-16\nReviewer: Gemini 3.7 Flash/high (fresh independent veto role)\nCandidate HEAD: `51866ce084c33fce600b792c66b180927658ed9e`\nCandidate Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-risk-weighted-review-51866ce0`\nBound Branch: `codex/review-ariadne-risk-weighted-51866ce0`\nEvidence Label: `provider_free_authored_synthetic_repository_only_workflow_reform`\n\n---\n\n## 1. Executive Summary & Terminal Finding\n\nExecution of the bound command manifest resulted in a non-zero exit code on command `C03`:\n- **Command ID**: `C03`\n- **Command Invocation**: `C:/Users/sarashera/emr4/.venv/Scripts/python.exe C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py --repo-root C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0 -- tests/test_ariadne_risk_weighted_workflow.py tests/test_ariadne_verifier_worktree_preflight.py tests/test_ariadne_serial_pytest.py -q -p no:cacheprovider --basetemp C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-rww-51866ce0`\n- **Exit Code**: `1`\n- **Error Output**: `ariadne_serial_pytest.py: error: unrecognized arguments: --repo-root`\n\n### Root Cause Analysis:\nCommand `C03` explicitly invokes the serial pytest launcher located in the primary checkout (`C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py`). The primary checkout does not yet contain the newly implemented `--repo-root` argument, which was authored and added within the candidate branch at `C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/scripts/ariadne_serial_pytest.py`. Consequently, when the primary checkout's unintegrated script is called with `--repo-root`, `argparse` rejects the option. Under `scripts/ariadne_evidence_gate.py` (`admit_command_results`) and the verifier execution contract, a `pass` decision requires every command exit code to be zero. Because `C03` exited with code `1`, the terminal decision is fail-closed `revision_required`.\n\n---\n\n## 2. Invariant & Source Artifact Verification\n\nAll 18 candidate allowlisted artifacts were inspected against the frozen plan (`docs/ariadne-risk-weighted-workflow-reform-plan.md`) and threat model delta (`docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md`).\n\n### Invariant 1: Highest applicable tier wins & contradiction fail-closed\n- `orchestration_harness/risk_weighted_workflow.py` (`_derive_tier`) deterministically selects the highest applicable tier from signals, change families, and review triggers.\n- Callers cannot choose or lower their own tier (`declared_tier != derived_tier` raises `ValueError`).\n- Contradictory claims (`docs_only` with executable signals/semantic families; `unmounted` with database/authority/provider/migration scope) fail closed in `_check_contradictions`.\n- Tier 0 tranches with review triggers deterministically elevate to Tier 1.\n\n### Invariant 2: Pre-edit canonical baseline & semantic freeze binding\n- Tier 1\u20133 require `captured_before_first_edit: true` and a valid canonical baseline fingerprint.\n- `canonical_pass_fingerprint()` binds stable semantic inputs (`baseline`, `change_families`, `change_signals`, `semantic_bindings`, `semantic_freeze`, `threat_ids`) while excluding volatile closeout paths, timestamps, and latch snapshots.\n- Stale pass reuse without exact matching is rejected.\n\n### Invariant 3: Post-freeze rerun matrix & union calculation\n- `compute_rerun()` implements the closed change family rerun table and computes the exact union for mixed post-freeze changes.\n- Semantic changes require focused semantic gates, a canonical final profile, and invalidate earlier verifier results.\n- Unknown or falsely narrowed change families fail closed.\n\n### Invariant 4: Review economy & independent single veto\n- Tier 0 requires 0 final vetoes; Tier 1 requires 0 routine / 1 risk-triggered veto; Tier 2 and Tier 3 require exactly 1 final independent veto.\n- Reviewer stacking is prohibited (`validate_review` permits at most 1 veto).\n- Reviewer lane is constrained to `gemini_single_final_veto` or `native_explicit_review_lane`; DeepSeek mechanical lane cannot serve as review veto.\n\n### Invariant 5: Named RWW threat coverage, incidents, and tail deferral\n- All 18 named threats (`RWW-001` through `RWW-018`) must be covered by passing deterministic gates (`validate_threat_coverage`). Mutation quota is advisory.\n- Incidents require typed pre-correction records (`validate_incident_grouping` enforces distinct causal tuples `(origin, category, role, resource, signature)`).\n- Tail deferral (`validate_tail_deferral`) strictly rejects deferral if any hard defect flag (`safety_relevant`, `authority_relevant`, `integrity_relevant`, `privacy_relevant`, `atomicity_relevant`, `protected_evidence_relevant`, `irreversible_effect_relevant`) is true, and requires owner and next review boundary.\n\n### Invariant 6: Decision contract alignment\n- `admit_result()` verifies that `result[\"decision\"]` matches the evidence evaluation. Any mismatch adds `decision_does_not_match_evidence` and fails closed. No passing decision may carry reasons.\n\n### Invariant 7: Pure deterministic renderer & protected path guards\n- `scripts/ariadne_risk_weighted_workflow.py` (`render_packet`) is pure and executes no subprocesses.\n- Output writer `_write()` explicitly rejects targets matching `AGENTS.md`, `.git`, `orchestration/continuity`, `orchestration/compass`, or the live latch.\n- Renders standard ISO 8601 timestamps in `Australia/Brisbane` timezone.\n\n### Invariant 8: Verifier worktree preflight\n- `scripts/ariadne_verifier_worktree_preflight.py` enforces clean candidate worktree, `codex/review-` branch prefix, and exact 40-hex HEAD.\n- `_resolve_candidate_paths()` enforces that candidate test paths resolve inside the review worktree.\n- Rejects external serial runners whose `--repo-root` does not match the review worktree.\n\n### Invariant 9: Serial pytest launcher candidate root resolution\n- `scripts/ariadne_serial_pytest.py` in the candidate branch includes `--repo-root` parsing and validation via `resolve_repo_root()`, enforcing presence of `tests/conftest.py` and maintaining the shared OS lock.\n\n### Invariant 10: Closed surfaces & non-product boundaries\n- No Raisa product runtime, database/migration runtime, external provider/retrieval, real/patient/clinical data, credentials/IAM, deployment/Pages, or protected refs were opened or modified.\n\n---\n\n## 3. Command Manifest Results Summary\n\n| ID | Command argv | Exit Code | Status |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Passed (`## codex/review-ariadne-risk-weighted-51866ce0`) |\n| C02 | `git rev-parse HEAD` | 0 | Passed (`51866ce084c33fce600b792c66b180927658ed9e`) |\n| C03 | `python.exe C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py --repo-root ...` | 1 | Failed (`unrecognized arguments: --repo-root`) |\n| C04 | `python.exe -m scripts.ariadne_risk_weighted_workflow validate --profile ... --result ...` | 0 | Passed (profile and result validated) |\n| C05 | `ruff.exe check ...` | 0 | Passed (all checks passed) |\n| C06 | `git diff --check 721f4cf1dd...51866ce084...` | 0 | Passed (clean whitespace) |\n| C07 | `git status --short --branch` | 0 | Passed (`## codex/review-ariadne-risk-weighted-51866ce0`) |\n\n---\n\n## 4. Required Recovery Action\n\nSol must update the manifest/dispatch or runner invocation so that the serial pytest launcher utilized for candidate verification either:\n1. Executes the candidate worktree's own updated `scripts/ariadne_serial_pytest.py` (e.g. `C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0/scripts/ariadne_serial_pytest.py`), or\n2. Re-runs following the candidate runner integration so that all 7 manifest commands exit with code `0`.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0",
+          "--",
+          "tests/test_ariadne_risk_weighted_workflow.py",
+          "tests/test_ariadne_verifier_worktree_preflight.py",
+          "tests/test_ariadne_serial_pytest.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-rww-51866ce0"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_risk_weighted_workflow",
+          "validate",
+          "--profile",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.example.json",
+          "--result",
+          "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.example.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/risk_weighted_workflow.py",
+          "scripts/ariadne_risk_weighted_workflow.py",
+          "scripts/ariadne_serial_pytest.py",
+          "scripts/ariadne_verifier_worktree_preflight.py",
+          "tests/test_ariadne_risk_weighted_workflow.py",
+          "tests/test_ariadne_serial_pytest.py",
+          "tests/test_ariadne_verifier_worktree_preflight.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "721f4cf1dd7bce27429ed97fdeb6028ba85ed954..51866ce084c33fce600b792c66b180927658ed9e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "936fbaa6ad731697da2fafff87a544e32cb8c1ac9b41133159e8de92f84ecb49",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "C:/Users/sarashera/emr4/scripts/ariadne_serial_pytest.py",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-risk-weighted-review-51866ce0",
+        "--",
+        "tests/test_ariadne_risk_weighted_workflow.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-rww-51866ce0"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_risk_weighted_workflow",
+        "validate",
+        "--profile",
+        "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.example.json",
+        "--result",
+        "orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.example.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/risk_weighted_workflow.py",
+        "scripts/ariadne_risk_weighted_workflow.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_risk_weighted_workflow.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "721f4cf1dd7bce27429ed97fdeb6028ba85ed954..51866ce084c33fce600b792c66b180927658ed9e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

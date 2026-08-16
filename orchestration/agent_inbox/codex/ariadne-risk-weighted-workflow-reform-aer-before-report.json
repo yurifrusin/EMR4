@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "f895eec903e9e151da6c02057116676aad863adb91a8fce9f343a72cf787275e",
+  "canonical_register_sha256": "7d527463a1ec9069d8a44290c2efafe02ae147622273bca7ea92d39d6833cfa0",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 98,
-      "canonical_unchanged": 216,
-      "untrusted_partial_worktree": 33
+      "canonical_unchanged": 211,
+      "untrusted_partial_worktree": 32
     },
     "by_category": {
-      "command_scope_violation": 55,
-      "evidence_misreport": 44,
+      "command_scope_violation": 53,
+      "evidence_misreport": 43,
       "harness_failure": 39,
-      "output_contract_violation": 100,
+      "output_contract_violation": 98,
       "read_only_violation": 3,
-      "reasoning_claim_error": 40,
+      "reasoning_claim_error": 39,
       "repository_defect": 56,
       "transport_timeout": 10
     },
     "by_origin": {
-      "agent_behavior": 242,
+      "agent_behavior": 236,
       "harness": 39,
       "repository": 56,
       "transport": 10
     },
     "by_process_severity": {
-      "low": 142,
-      "material": 102,
-      "moderate": 103
+      "low": 139,
+      "material": 101,
+      "moderate": 101
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -39,14 +39,14 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 181,
+      "codex-primary-orchestrator::orchestrator": 176,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
-      "deepseek-flash-workers::implementer": 12,
+      "deepseek-flash-workers::implementer": 11,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -87,14 +87,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 27,
+      "implementer": 26,
       "integration_reviewer": 2,
-      "orchestrator": 266,
+      "orchestrator": 261,
       "verifier": 52
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 347,
+  "incident_count": 341,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -942,7 +942,7 @@
       ]
     }
   ],
-  "register_revision": 308,
+  "register_revision": 302,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-16"
 }

@@ -1,0 +1,139 @@
+{
+  "schema_version": "ariadne.risk_weighted_tranche_result.v1",
+  "tranche_id": "ariadne-risk-weighted-workflow-reform",
+  "profile_sha256": "sha256:475c96bca766b198b22987280c87797c55e6a05cdbbde01178a5aa53c12b41df",
+  "classified_tier": "tier_2_authority_runtime",
+  "decision": "pass",
+  "baseline": {
+    "fingerprint_sha256": "sha256:4115d324f3d448df9f0705462908c9299f040aba0cf36d6e2b67b5b832e7e9cb",
+    "result": "passed",
+    "known_failure_ids": [],
+    "captured_before_first_edit": true
+  },
+  "semantic_freeze": {
+    "source_head": "51866ce084c33fce600b792c66b180927658ed9e",
+    "source_tree": "1dc69f23c8e93fe33de2289e563b2363fcd03539",
+    "semantic_bindings_sha256": "sha256:42cdb69535f7578e2d3f82e21e00fed14b73de19436bf773167d2a0d5c3d1bae",
+    "toolchain_sha256": "sha256:b79f9ebc7ca5f00e99d3a8877a6a819e0abd1cc546199e8ce8d8f0cae19416b8",
+    "focused_gate_results": {
+      "focused_121_tests": "passed",
+      "ruff": "passed",
+      "json_and_schema": "passed",
+      "git_whitespace": "passed",
+      "canonical_fast_profile_196_tests": "passed"
+    }
+  },
+  "deterministic_gates": [
+    {
+      "id": "GATE-FOCUSED-SEMANTIC",
+      "category": "focused_semantic_gates",
+      "result": "passed",
+      "covers": ["RWW-001", "RWW-002", "RWW-003", "RWW-004", "RWW-005", "RWW-006", "RWW-007", "RWW-008", "RWW-009", "RWW-010", "RWW-011", "RWW-012", "RWW-016", "RWW-018"]
+    },
+    {
+      "id": "GATE-CANONICAL-FINAL",
+      "category": "canonical_final_profile",
+      "result": "passed",
+      "covers": ["RWW-003", "RWW-004", "RWW-005", "RWW-006", "RWW-016"]
+    },
+    {
+      "id": "GATE-MANIFEST-VALIDATION",
+      "category": "manifest_validation",
+      "result": "passed",
+      "covers": ["RWW-013", "RWW-014", "RWW-016"]
+    },
+    {
+      "id": "GATE-VERIFIER-ROOT-PREFLIGHT",
+      "category": "verifier_worktree_path_preflight",
+      "result": "passed",
+      "covers": ["RWW-013", "RWW-014"]
+    },
+    {
+      "id": "GATE-RENDERER-METADATA",
+      "category": "document_metadata_link_whitespace",
+      "result": "passed",
+      "covers": ["RWW-005", "RWW-015"]
+    },
+    {
+      "id": "GATE-CONTINUITY-COMPASS-BATON",
+      "category": "continuity_compass_baton",
+      "result": "passed",
+      "covers": ["RWW-004", "RWW-017"]
+    },
+    {
+      "id": "GATE-RECEIPT-PREFLIGHT",
+      "category": "receipt_preflight",
+      "result": "passed",
+      "covers": ["RWW-010", "RWW-017"]
+    },
+    {
+      "id": "GATE-ERROR-REGISTER",
+      "category": "register_schema_pattern",
+      "result": "passed",
+      "covers": ["RWW-010", "RWW-011"]
+    }
+  ],
+  "required_rerun": [
+    "register_schema_pattern",
+    "continuity_compass_baton",
+    "document_metadata_link_whitespace",
+    "receipt_preflight",
+    "manifest_validation",
+    "verifier_worktree_path_preflight"
+  ],
+  "review": {
+    "required_final_vetoes": 1,
+    "final_vetoes": [
+      {
+        "veto_id": "GEMINI-37-RWW-CORRECTED-51866CE0",
+        "reviewer_lane": "gemini_single_final_veto",
+        "decision": "pass"
+      }
+    ]
+  },
+  "canonical_pass_reuse": {
+    "reused": false,
+    "fingerprint_sha256": "sha256:5e7374fd1a83c95e56a879542453c409a0f5c799335883a3819b00b57e6c73c9",
+    "exact": true
+  },
+  "continuation_receipts": [
+    {"event": "five_source_rehydration_at_plan_admission", "receipt_sha256": "sha256:3cafe4f2fa42f8c4919a590775f7b8097cf0f6123c3f9ada297adec8596e29d4"},
+    {"event": "five_source_rehydration_at_verifier_admission", "receipt_sha256": "sha256:bbcda010fc076f44165738a49d29061b1930634b3c71a9a2d6501ba212dd4601"},
+    {"event": "five_source_rehydration_at_integration", "receipt_sha256": "sha256:c0f138a5168babf730080c52dbcb8496d029cfd31372a8b84e3398310350cd90"}
+  ],
+  "incidents": [
+    {"id": "AER-0342", "origin": "preplanning_receipt", "category": "latch_and_lane_vocabulary", "role": "orchestrator", "resource": "preplanning_state", "signature": "invalid_latch_fingerprint_and_lane_dispositions", "recorded_before_correction": true},
+    {"id": "AER-0343", "origin": "worker_worktree_create", "category": "git_identity", "role": "orchestrator", "resource": "worker_source_head", "signature": "manually_invented_full_sha", "recorded_before_correction": true},
+    {"id": "AER-0344", "origin": "focused_test_wrapper", "category": "process_attribution", "role": "orchestrator", "resource": "test_exit_status", "signature": "discarded_process_identity", "recorded_before_correction": true},
+    {"id": "AER-0345", "origin": "worker_candidate_admission", "category": "semantic_admission", "role": "worker_and_orchestrator", "resource": "risk_weighted_candidate", "signature": "stale_binding_and_authority_write_gaps", "recorded_before_correction": true},
+    {"id": "AER-0346", "origin": "review_preflight", "category": "runner_root", "role": "orchestrator", "resource": "preflight_script", "signature": "primary_script_selected_before_candidate_script", "recorded_before_correction": true},
+    {"id": "AER-0347", "origin": "gemini_command_manifest", "category": "runner_root", "role": "orchestrator", "resource": "manifest_C03", "signature": "primary_serial_runner_lacked_repo_root", "recorded_before_correction": true}
+  ],
+  "deferred_tail": [],
+  "parallelism": {
+    "planned": {
+      "deepseek_lane": "bounded_mechanical_implementation",
+      "gemini_lane": "single_final_veto",
+      "native_lane": "declined"
+    },
+    "actual": {
+      "deepseek_lane": "bounded_mechanical_implementation",
+      "gemini_lane": "single_final_veto",
+      "native_lane": "declined"
+    },
+    "planned_vs_actual": "exact"
+  },
+  "capability": "provider_free_deterministic_risk_weighted_workflow_admission_and_closeout_generation",
+  "technical_result": "Four derived tiers, baseline-first semantic freeze, targeted rerun union, zero-or-one independent veto, protected-path rendering and exact candidate-root verification pass at reviewed candidate 51866ce084c33fce600b792c66b180927658ed9e.",
+  "closed_surfaces": [
+    "Raisa product runtime and source",
+    "database and migration execution",
+    "product patient clinical or protected data",
+    "credentials IAM and occupied product providers",
+    "deployment production release Pages and protected refs"
+  ],
+  "issues": [],
+  "place_in_raisa": "Ariadne development-orchestration control plane above product tranches",
+  "next_tranche": "provider-free disposable PostgreSQL parse/catalogue rehearsal of migration x3y4z5a6b7c8",
+  "attention_status": "green"
+}

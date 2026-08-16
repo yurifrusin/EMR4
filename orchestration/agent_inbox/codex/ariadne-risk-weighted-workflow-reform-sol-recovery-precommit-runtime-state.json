@@ -1,0 +1,119 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_exact_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely; the protected delete-confirm result and deferred Raisa successor remain unchanged while the user-authorised Ariadne reform is active.",
+    "current_authority_allocation": "Sol owns semantic recovery, integration and acceptance; DeepSeek completed its one bounded implementation package, Gemini 3.7 Flash/high remains reserved for one final veto, and native subagents remain declined.",
+    "active_plan_and_acceptance": "The frozen Tier 2 reform plan and RWW-001 through RWW-018 threat delta require exact freeze/reuse binding, independent review, authority-safe rendering and exact verifier roots. Worker candidate 85a0877face2f16af80a07217918bf86b370febd was rejected and the bounded Sol recovery passes 121 focused tests plus Ruff and whitespace.",
+    "protected_evidence_boundaries": "Repository-only harness recovery. No Raisa product source, database, migration execution, product or patient data, provider call, credentials, deployment, Pages or protected-ref movement; all untracked files remain preserved and staging is explicit-path only.",
+    "git_refs_and_worktree": "The primary task branch remains at 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 before recovery integration; the isolated recovery worktree is based on rejected worker candidate 85a0877face2f16af80a07217918bf86b370febd. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "active_tranche": "Ariadne risk-weighted workflow reform",
+    "objective": "Implement the accepted workflow-efficiency recommendations as a repository-only risk-tiered Ariadne policy and deterministic admission surface before Raisa product development resumes, preserving hard authority, privacy, evidence, cleanup and protected-ref controls while reducing redundant receipts, reruns, reviews and closeout synchronization.",
+    "status": "in_progress",
+    "source_head": "721f4cf1dd7bce27429ed97fdeb6028ba85ed954",
+    "authority_source": "Yuri explicitly approved the recommended Ariadne reform on 2026-08-16; the exact plan and baseline are frozen at task commit 721f4cf1dd7bce27429ed97fdeb6028ba85ed954 under the standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "DeepSeek returned exact candidate 85a0877face2f16af80a07217918bf86b370febd and 118 focused tests passed independently. Sol semantic admission rejected stale-freeze, reuse, independent-veto, parallelism, decision, renderer-authority and verifier-root gaps; AER-0345 was recorded before one bounded Sol recovery, whose corrected focused suite now passes.",
+      "next_executable_stage": "Commit the bounded Sol recovery as a new exact candidate, run deterministic focused and canonical admission on that candidate, then issue one fresh Gemini 3.7 Flash/high final veto only if every deterministic gate passes.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:31139588dba95c3bb6fa64262e815b559d289dfee2db2c3a00af8aeb6158849b"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "repository_only_ariadne_workflow_policy_harness_and_tests",
+      "preserve_five_source_rehydration_authority_privacy_immutable_evidence_cleanup_git_and_terminal_latch_controls",
+      "no_raisa_product_source_route_schema_openapi_graphql_or_ui_change",
+      "no_migration_ddl_sql_database_engine_transaction_lock_or_postgresql_rehearsal",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_product_provider_call_adc_credentials_iam_browser_network_or_external_adapter",
+      "no_executable_product_tool_command_watcher_event_or_product_write_authority",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-risk-weighted-workflow-reform",
+    "assessed_stage": "sol_recovery_pre_commit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The single mechanical package produced a useful bounded candidate and tests, while Sol retained responsibility for conceptual recovery.",
+        "work_packages": ["implemented the exact allowlist and supplied immutable candidate evidence"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "The Tier 2 final veto remains serially ineligible until the corrected exact candidate passes deterministic admission.",
+        "work_packages": ["one fresh final exact-candidate veto after deterministic admission"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Another review lane would duplicate Sol recovery and the single required Gemini veto, recreating review stacking.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol recovery commit precedes deterministic canonical admission",
+      "Gemini remains ineligible before deterministic admission",
+      "shared pytest and all Git integration remain serial"
+    ],
+    "reassessment_triggers": ["pre_verifier_acceptance", "material_recovery", "tranche_closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_five_source_rehydration_and_current_latch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["One bounded worker call completed and its immutable candidate receipt is retained."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini remains reserved and no veto call has occurred."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol recorded AER-0345 and completed one bounded recovery with 121 focused tests passing."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native subagents remain deliberately declined for negative leverage."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
