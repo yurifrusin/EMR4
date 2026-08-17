@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 344,
+  "register_revision": 345,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-17",
+    "source_cutoff_on": "2026-08-18",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -15677,6 +15677,165 @@
           "orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json",
           "docs/ariadne-agent-error-correction-register-revision-344.md",
           "review/test_ordinary_diary_cancellation_convergence.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0392",
+      "attempt_id": "ordinary-diary-cancellation-verifier-worktree-preflight-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-verifier-worktree-preflight",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Verifier worktree preflight must receive the exact configured codex/review- branch prefix rather than a task-specific narrower prefix.",
+      "observed_error": "The first verifier preflight supplied codex/review-ordinary-diary-cancellation as the branch-prefix argument, so the harness rejected it because the configured exact prefix must remain codex/review-.",
+      "detection_method": "The preflight failed closed before any model call, emitted the exact branch_prefix reason, and the corrected v2 invocation passed against the same clean worktree and unchanged candidate.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-review-worktree-preflight-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-review-worktree-preflight-v2.json",
+        "docs/ariadne-agent-error-correction-register-revision-345.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_preflight_branch_prefix_not_exact_review_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed preflight and rerun it with the exact configured codex/review- prefix against the same candidate worktree before permitting the verifier call.",
+        "prevention_control": "Copy the exact verifier branch prefix from the execution policy or a passing preflight template; never derive a narrower prefix from the tranche name.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-review-worktree-preflight-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-review-worktree-preflight-v2.json",
+          "docs/ariadne-agent-error-correction-register-revision-345.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0393",
+      "attempt_id": "ordinary-diary-cancellation-combined-browser-review-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "repository",
+      "role": "verifier",
+      "resource_id": "ordinary-diary-cancellation-browser-review-manifest",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_playwright",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The exact combined route-intercepted browser review packet must wait for asynchronous focus restoration and the ordinary Diary reload using stable eventual conditions without weakening their semantic assertions.",
+      "observed_error": "Gemini's exact combined browser command failed an immediate focus assertion after Escape and timed out one cleanup reload at 15 seconds even though its structural review found the cancellation product contract conformant. Sol's fresh exact rerun reproduced only the focus race; the cleanup timeout did not recur.",
+      "detection_method": "The preserved Gemini receipt records both failing nodes and all other manifest commands passing. Sol reran the identical three-file packet with a fresh temporary directory, reproduced the focus assertion only, applied the narrow timing repairs, and then passed all 170 combined browser tests.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-review-receipt.json",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_diary_smoke.py",
+        "docs/ariadne-agent-error-correction-register-revision-345.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.browser_review_combined_packet_immediate_focus_and_reset_timeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the immediate active-element check with an eventual wait for the exact same focus predicate and allow 30 seconds for the one post-unroute Diary cleanup reload, then rerun the entire three-file browser packet in one process.",
+        "prevention_control": "Cross-suite Playwright review packets must encode asynchronous browser postconditions as bounded eventual assertions and use the established 30-second full-page reload allowance while preserving exact truth, request and fallback assertions.",
+        "evidence_paths": [
+          "review/test_reception_one_cancellation_action.py",
+          "review/test_diary_smoke.py",
+          "orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-345.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0394",
+      "attempt_id": "ordinary-diary-cancellation-postcompaction-receipt-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-orchestrator-postcompaction-preflight",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A post-compaction runtime state must include every configured adapter observation and use an allowlisted probe method before its five-source receipt can pass.",
+      "observed_error": "The first post-compaction runtime state omitted the required deepcode_cli and claude_cli_print observations and used an invalid antigravity_receipt_observation method, so the generated receipt returned revision_required.",
+      "detection_method": "The orchestrator preflight reported both missing adapter identifiers and the invalid Antigravity probe method. The failed receipt was preserved; the runtime state added the two declined fallback observations and restored the accepted synthetic_fixture method, after which the fresh receipt passed with all five rehydration sources.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-postcompaction-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-postcompaction-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-postcompaction-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-345.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.postcompaction_receipt_missing_adapters_or_invalid_probe_method",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed receipt, add the two required fallback adapter observations, use the accepted synthetic_fixture method for Antigravity continuity evidence and regenerate the five-source post-compaction receipt.",
+        "prevention_control": "Start every continuation runtime-state adapter block from the latest passing six-adapter template and change only current reachability evidence; run preflight before any dispatch or candidate acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-postcompaction-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-postcompaction-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-345.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0395",
+      "attempt_id": "ordinary-diary-cancellation-register-revision-345-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every register revision must update direct seed totals as well as report aggregates, ordered identifiers and recurring-pattern expectations before the full register suite runs.",
+      "observed_error": "The first full revision-345 register run passed 299 tests but retained one stale direct len(agent_incidents) value of 267 after two new agent-behavior incidents increased the exact count to 269.",
+      "detection_method": "The complete serialized register test file failed only test_seed_separates_agent_behavior_from_transport at its direct agent-origin count; all schema, incident, report and other aggregate controls passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-345.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Update the direct agent-origin seed total, advance the ordered incident and aggregate totals for AER-0395, extend the existing exact-count recurrence, regenerate pattern-report.json and rerun the full serialized register file.",
+        "prevention_control": "Before the next register run, derive and compare every direct origin length, whole report aggregate, ordered ID range and recurring-pattern member list from the regenerated pattern report rather than relying only on literal mapping searches.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-345.md"
         ]
       },
       "status": "corrected"

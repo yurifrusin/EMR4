@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Ordinary Diary canonical cancellation consumer convergence composition",
+    "completed_stage": "Gemini 3.7 Flash/high found the exact candidate's product structure and behavior conformant but returned revision_required because combined browser command C04 exposed two test-harness timing assumptions. Sol's exact rerun reproduced only the immediate focus assertion; the narrow same-predicate eventual-focus wait and one 30-second cleanup reload wait are applied but not yet deterministically admitted.",
+    "next_executable_stage": "rerun_the_exact_combined_browser_packet_register_both_harness_incidents_commit_the_repair_candidate_then_issue_one_fresh_gemini_37_flash_high_veto",
+    "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+    "resume_after_compaction": true,
+    "source_head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "reason_codes": [],
+    "resolved_commit": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "cb6589437bce24c5680c590bc5cf4571435f1a7a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "branch_origin_aligned": false,
+    "head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "origin_branch_commit": "40e20981f3a4a14856f5dc4d127957ca791b06ad",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction_material_recovery",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its bounded tests-only transport non-result is preserved; Sol completed the frozen fallback and there is no late worker source to admit.",
+        "work_packages": [
+          "transport_non_result_preserved_and_frozen_tests_completed_by_sol"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The first exact-candidate veto correctly failed closed on its combined browser command. A fresh Gemini 3.7 Flash/high project will review the repaired exact candidate only after deterministic admission.",
+        "work_packages": [
+          "fresh_repaired_exact_candidate_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "browser suites share one process and run as the exact combined packet",
+      "register correction precedes repaired-candidate acceptance",
+      "fresh verifier follows deterministic admission",
+      "Sol alone accepts or repairs"
+    ]
+  },
+  "planned_action": "admit_the_narrow_browser_harness_timing_repair_register_the_incidents_and_rerun_one_fresh_exact_candidate_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+      "docs/security/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-threat-model-delta.md",
+      "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-review-receipt.json",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "current_authority_allocation": "GPT Sol retains product meaning, recovery, acceptance, integration and Git authority. DeepSeek's completed tests-only transport non-result remains preserved without admitted source. Gemini 3.7 Flash/high returned one exact-candidate revision_required decision and is reserved for one fresh repaired-candidate veto. Native subagents remain declined by current developer policy.",
+    "git_refs_and_worktree": "Task worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact candidate cb6589437bce24c5680c590bc5cf4571435f1a7a with two intended browser-test timing repairs and continuity evidence uncommitted. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Clean verifier worktree r197 preserves the rejected exact candidate.",
+    "live_handover_current_baton": "AGENTS.md Current Baton directs the ordinary Diary provider-free client-only canonical cancellation convergence while protected integration remains closed.",
+    "protected_evidence_boundaries": "Provider-free authored-synthetic client-only repair and route-intercepted browser evidence. Product semantics, backend/OpenAPI/schema/migration/database, provider/ADC, product/patient/clinical/protected data, deployment, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

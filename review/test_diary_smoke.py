@@ -1215,7 +1215,7 @@ def test_bernie_review_route_intercepted_blocked(diary_page):
         # Clean up route
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
         diary_page.goto(base_url + CHECKS["target"])
-        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=30000)
 
 
 def test_bernie_review_route_intercepted_candidate_selection(diary_page):

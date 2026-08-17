@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Ordinary Diary canonical cancellation consumer convergence composition",
+    "completed_stage": "The narrow browser timing repair passes the exact 170-test combined packet, complete 301-test register file, 52 latch checks, Ruff, JavaScript syntax and whitespace. Register revision 345 preserves AER-0392 through AER-0395 and no product source changed after candidate cb658943.",
+    "next_executable_stage": "commit_the_repair_provenance_then_prepare_one_fresh_exact_candidate_gemini_37_flash_high_veto",
+    "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+    "resume_after_compaction": true,
+    "source_head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "reason_codes": [],
+    "resolved_commit": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "cb6589437bce24c5680c590bc5cf4571435f1a7a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "branch_origin_aligned": false,
+    "head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+    "origin_branch_commit": "40e20981f3a4a14856f5dc4d127957ca791b06ad",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_commit_repair",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded tests-only transport non-result and Sol fallback are complete; no worker source remains admissible.",
+        "work_packages": [
+          "transport_non_result_preserved_and_frozen_tests_completed_by_sol"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The rejected exact-candidate review is preserved and a fresh project will review the committed repair candidate after clean-worktree admission.",
+        "work_packages": [
+          "fresh_repaired_exact_candidate_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path commit precedes fresh verifier worktree creation",
+      "fresh verifier follows exact clean candidate admission",
+      "Sol alone accepts or repairs"
+    ]
+  },
+  "planned_action": "commit_the_deterministically_admitted_browser_harness_repair_and_preserved_review_provenance_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+      "docs/security/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-threat-model-delta.md",
+      "orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-review-receipt.json",
+      "review/test_reception_one_cancellation_action.py",
+      "review/test_diary_smoke.py",
+      "docs/ariadne-agent-error-correction-register-revision-345.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-postcompaction-receipt.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the bounded test-harness recovery, acceptance, integration and task-branch Git. DeepSeek's prior transport non-result remains complete. Gemini 3.7 Flash/high's revision_required receipt is preserved and one fresh repaired-candidate veto remains reserved. Native subagents remain declined by current developer policy.",
+    "git_refs_and_worktree": "Task worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact product candidate cb6589437bce24c5680c590bc5cf4571435f1a7a with only the bounded repair/provenance set intended for commit. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Current Baton and the in-progress latch direct completion of the ordinary Diary provider-free client-only canonical cancellation convergence; protected integration remains closed.",
+    "protected_evidence_boundaries": "Commit only the provider-free route-intercepted browser timing repair, preserved rejected-review/preflight/rehydration evidence, register revision 345 and active latch. No product source, backend/OpenAPI/schema/migration/database, provider/ADC, product/patient/clinical/protected data, deployment, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

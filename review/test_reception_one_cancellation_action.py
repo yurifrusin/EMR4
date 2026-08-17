@@ -630,10 +630,11 @@ def test_staff_escape_cancels_without_confirm_and_retains_truth(reception_page) 
         assert_appointment_still_present(page)
         assert page.locator(REASON_SELECT).input_value() == CANCEL_REASON
         assert page.locator(NOTE_INPUT).input_value() == CANCEL_NOTE
-        assert page.evaluate(
+        page.wait_for_function(
             "() => { const el = document.activeElement; return Boolean(el && ("
             "el.dataset.testid === 'meta-grid-action-choice-cancel' || "
-            "el.dataset.testid === 'meta-grid-cancellation-reason-code')); }"
+            "el.dataset.testid === 'meta-grid-cancellation-reason-code')); }",
+            timeout=WAIT_TIMEOUT,
         )
         assert_no_forbidden_fallbacks(state)
     finally:

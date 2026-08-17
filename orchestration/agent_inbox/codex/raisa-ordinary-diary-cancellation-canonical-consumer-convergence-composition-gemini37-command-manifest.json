@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/r197",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_plan.py",
+        "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+        "tests/test_raisa_reception_one_selected_appointment_cancellation_composition_evidence.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_artifacts.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "pytest", "-q", "-p", "no:cacheprovider", "--basetemp", "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-ordinary-cancel-cb658943",
+        "review/test_ordinary_diary_cancellation_convergence.py",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_diary_smoke.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_agent_error_register"
+      ]
+    },
+    {"id": "C06", "argv": ["node", "--check", "docs/diary/diary.js"]},
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check",
+        "review/test_ordinary_diary_cancellation_convergence.py",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+        "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {"id": "C08", "argv": ["git", "diff", "--check", "967ac705bad2013734beaed127cd5e811823d2c7..cb6589437bce24c5680c590bc5cf4571435f1a7a"]},
+    {"id": "C09", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

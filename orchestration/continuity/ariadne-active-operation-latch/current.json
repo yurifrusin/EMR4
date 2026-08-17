@@ -4,16 +4,16 @@
   "active_tranche": "Ordinary Diary canonical cancellation consumer convergence composition",
   "objective": "Converge the ordinary Diary cancellation consumer on the accepted dedicated delete proposal and canonical delete-confirm contract, strict minimal public receipt and fresh authorised reconciliation after every terminal or uncertain outcome, without changing backend or API contracts.",
   "status": "in_progress",
-  "source_head": "967ac705bad2013734beaed127cd5e811823d2c7",
+  "source_head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
   "authority_source": "AGENTS.md Current Baton at Continuity 312 / Compass 294, the accepted ordinary Diary cancellation compatibility-consumer review and Yuri's standing uninterrupted-development authority direct this provider-free client-only convergence.",
   "checkpoint": {
-    "completed_stage": "The frozen client-only implementation, strict minimal-receipt dispatcher and fresh-read reconciliation pass 11 ordinary browser scenarios, 15 Reception One cases, the full 144-case Diary smoke packet, 85 focused/API Spine checks, register revision 344 and static gates. The DeepSeek transport non-result is preserved with no admitted source.",
-    "next_executable_stage": "commit_the_exact_deterministically_admitted_candidate_then_issue_one_fresh_gemini_37_flash_high_veto",
+    "completed_stage": "Gemini 3.7 Flash/high found the exact candidate's product structure and behavior conformant but returned revision_required because combined browser command C04 exposed two test-harness timing assumptions. Sol's exact rerun reproduced only the immediate focus assertion; the narrow same-predicate eventual-focus wait and one 30-second cleanup reload wait are applied but not yet deterministically admitted.",
+    "next_executable_stage": "rerun_the_exact_combined_browser_packet_register_both_harness_incidents_commit_the_repair_candidate_then_issue_one_fresh_gemini_37_flash_high_veto",
     "retry_counters": {
       "planning": 1,
       "implementation": 1,
-      "review": 0,
-      "verification": 1
+      "review": 1,
+      "verification": 2
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },

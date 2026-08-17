@@ -1,0 +1,237 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r197",
+  "branch": "codex/review-ordinary-diary-cancellation-cb658943",
+  "head_before": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+  "head_after": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "616cfdbe256dc6e8b0657e5c8b007326d1f1f3300b4df4f07da414aebf9cf6e5",
+  "result": "### 1. Mandatory Rehydration and Authority Confirmation\n\nRehydration completed across all five authoritative sources:\n1. `live_handover_current_baton`: Current baton ref `handoff/current`, protected single-track integration aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No protected refs moved; no Pages rebuild authorised.\n2. `current_authority_allocation`: Conductor/integrator GPT Sol; Independent reviewer Gemini 3.7 Flash/high via clean dedicated worktree `C:\\Users\\sarashera\\EMR4-worktrees\\r197`.\n3. `active_plan_and_acceptance`: Verified [plan](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md), [threat model delta](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/security/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-threat-model-delta.md), [compatibility review](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md), and [register rev 344](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/ariadne-agent-error-correction-register-revision-344.md).\n4. `protected_evidence_boundaries`: All review evidence is strictly `provider_free_authored_synthetic_route_intercepted_browser` and repository static. No live backend, Docker, external API, patient, clinical, or product data accessed. `docs/branding/` excluded.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\r197`, branch `codex/review-ordinary-diary-cancellation-cb658943`, HEAD `cb6589437bce24c5680c590bc5cf4571435f1a7a`, base `967ac705bad2013734beaed127cd5e811823d2c7`.\n\n---\n\n### 2. Challenge Findings and Verification Evidence\n\n- **Challenge 1 (Worktree & HEAD Hygiene):** Verified exact branch `codex/review-ordinary-diary-cancellation-cb658943`, HEAD `cb6589437bce24c5680c590bc5cf4571435f1a7a`, and clean worktree before (C01, C02) and after (C08, C09) command execution.\n- **Challenge 2 (Delete-Only Ordinary Command Path):** In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10534-L10557), `deleteBooking()` issues only dedicated delete proposal requests to `/appointments/proposals/delete/${encodeURIComponent(appointmentId)}`. The legacy 404 fallback to status proposal and status-confirm has been excised. Any failure or non-OK response sets a terminal failed outcome and proceeds immediately to fresh reconciliation without calling status endpoints, the hyphenated alias, or raw `DELETE`.\n- **Challenge 3 (Shared Proposal Validator):** In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L9638-L9686), `validateDeleteProposalForConfirmation()` binds `appointment_id`, allowlisted `status_reason_code`, optional `cancellation_reason` (<=500 chars), recursive issue validation (`validDeleteConfirmIssue`), exact command matching, `intent === \"delete_appointment\"`, `requires_confirmation === true`, exact autonomy tier (`proposal` vs `blocked`), and canonical endpoint `/appointments/proposals/delete/confirm`.\n- **Challenge 4 (Mandatory Visible Confirmation):** In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10559-L10571), `showStatusProposalDialog(proposal)` is displayed. Staff cancellation (clicking cancel or pressing Escape) resolves to `false`, causing the flow to treat the action as unconfirmed and skip confirmation execution entirely without issuing any confirm HTTP request.\n- **Challenge 5 (Canonical Endpoint & Minimal Public Receipt):** [`applySignedDeleteProposal()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L11057-L11090) validates the proposal, POSTs only to canonical `/appointments/proposals/delete/confirm` with `deleteConfirmIdempotencyKey`, and validates the response through [`validateDeleteConfirmPublicEnvelope()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L9688-L9746). The envelope validator enforces `raisa.delete_confirm_public_envelope.v1`, minimal receipt `appointment.delete_confirmation_receipt.v1`, and explicitly rejects any `appointment` read-model object or private receipt fields.\n- **Challenge 6 (Reconciliation via Fresh Authorized Read):** [`reconcileOrdinaryCancellation()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10458-L10471) executes `await loadDiary(true)` after all outcomes (success, replay, block, denial, transport uncertainty, non-OK, or malformed responses). No optimistic cache modification or appointment deletion is performed.\n- **Challenge 7 (Current Appointment Defeats Success Claim):** When `loadDiary(true)` reconciles and finds the appointment still active/un-cancelled ([`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10610-L10617)), any receipt success claim is defeated, displaying `\"A cancellation receipt was returned, but the current Diary still shows this appointment. Success has not been assumed; review current truth before trying again.\"` and requiring a new proposal.\n- **Challenge 8 (Reconciliation Failure Handling):** If `loadDiary(true)` fails (`refreshed !== true`), [`setOrdinaryCancellationRefreshRequired()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10447-L10456) sets `data-refresh-required=\"true\"`, disables the delete control with `\"Refresh Required\"`, and keeps the modal open without making any success or non-commit claim.\n- **Challenge 9 (Review and Smoke Suite Execution):** Command C04 executed the review test suite and encountered 2 test failures, exiting with code 1:\n  1. `review/test_reception_one_cancellation_action.py::test_staff_escape_cancels_without_confirm_and_retains_truth`: Failed activeElement evaluation assertion on line 633 following Escape press.\n  2. `review/test_diary_smoke.py::test_bernie_review_route_intercepted_blocked`: Playwright timeout (15000ms) waiting for locator `.diary-column`.\n- **Challenge 10 (AER-0391 Provenance):** Verified [`docs/ariadne-agent-error-correction-register-revision-344.md`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/ariadne-agent-error-correction-register-revision-344.md) and [`orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json`](file:///C:/Users/sarashera/EMR4-worktrees/r197/orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json). AER-0391 accurately preserves the isolated DeepSeek exit-1 transport non-result at frozen source `967ac705bad2013734beaed127cd5e811823d2c7` and records Sol's fallback without worker attribution.\n- **Challenge 11 (Source Boundary and Scope):** Candidate changes are strictly restricted to client UI script, cache version tag, tests, review scripts, and documentation ([`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js), [`docs/diary/diary.html`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.html)). No backend, API Spine, OpenAPI, schema, migration, or database files were modified.\n- **Challenge 12 (Command Manifest Execution):** All 9 commands in the bound command manifest were executed in exact order.\n\n---\n\n### 3. Review Conclusion\n\nThe structural and behavioral implementation of ordinary Diary cancellation convergence in [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js) meets the canonical Reception One/kernel contract. However, because manifest command C04 failed with exit code 1 (`review/test_reception_one_cancellation_action.py` and `review/test_diary_smoke.py`), the decision rule strictly mandates returning `revision_required` due to the failed exact command.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "### 1. Mandatory Rehydration and Authority Confirmation\n\nRehydration completed across all five authoritative sources:\n1. `live_handover_current_baton`: Current baton ref `handoff/current`, protected single-track integration aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No protected refs moved; no Pages rebuild authorised.\n2. `current_authority_allocation`: Conductor/integrator GPT Sol; Independent reviewer Gemini 3.7 Flash/high via clean dedicated worktree `C:\\Users\\sarashera\\EMR4-worktrees\\r197`.\n3. `active_plan_and_acceptance`: Verified [plan](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md), [threat model delta](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/security/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-threat-model-delta.md), [compatibility review](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md), and [register rev 344](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/ariadne-agent-error-correction-register-revision-344.md).\n4. `protected_evidence_boundaries`: All review evidence is strictly `provider_free_authored_synthetic_route_intercepted_browser` and repository static. No live backend, Docker, external API, patient, clinical, or product data accessed. `docs/branding/` excluded.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\r197`, branch `codex/review-ordinary-diary-cancellation-cb658943`, HEAD `cb6589437bce24c5680c590bc5cf4571435f1a7a`, base `967ac705bad2013734beaed127cd5e811823d2c7`.\n\n---\n\n### 2. Challenge Findings and Verification Evidence\n\n- **Challenge 1 (Worktree & HEAD Hygiene):** Verified exact branch `codex/review-ordinary-diary-cancellation-cb658943`, HEAD `cb6589437bce24c5680c590bc5cf4571435f1a7a`, and clean worktree before (C01, C02) and after (C08, C09) command execution.\n- **Challenge 2 (Delete-Only Ordinary Command Path):** In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10534-L10557), `deleteBooking()` issues only dedicated delete proposal requests to `/appointments/proposals/delete/${encodeURIComponent(appointmentId)}`. The legacy 404 fallback to status proposal and status-confirm has been excised. Any failure or non-OK response sets a terminal failed outcome and proceeds immediately to fresh reconciliation without calling status endpoints, the hyphenated alias, or raw `DELETE`.\n- **Challenge 3 (Shared Proposal Validator):** In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L9638-L9686), `validateDeleteProposalForConfirmation()` binds `appointment_id`, allowlisted `status_reason_code`, optional `cancellation_reason` (<=500 chars), recursive issue validation (`validDeleteConfirmIssue`), exact command matching, `intent === \"delete_appointment\"`, `requires_confirmation === true`, exact autonomy tier (`proposal` vs `blocked`), and canonical endpoint `/appointments/proposals/delete/confirm`.\n- **Challenge 4 (Mandatory Visible Confirmation):** In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10559-L10571), `showStatusProposalDialog(proposal)` is displayed. Staff cancellation (clicking cancel or pressing Escape) resolves to `false`, causing the flow to treat the action as unconfirmed and skip confirmation execution entirely without issuing any confirm HTTP request.\n- **Challenge 5 (Canonical Endpoint & Minimal Public Receipt):** [`applySignedDeleteProposal()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L11057-L11090) validates the proposal, POSTs only to canonical `/appointments/proposals/delete/confirm` with `deleteConfirmIdempotencyKey`, and validates the response through [`validateDeleteConfirmPublicEnvelope()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L9688-L9746). The envelope validator enforces `raisa.delete_confirm_public_envelope.v1`, minimal receipt `appointment.delete_confirmation_receipt.v1`, and explicitly rejects any `appointment` read-model object or private receipt fields.\n- **Challenge 6 (Reconciliation via Fresh Authorized Read):** [`reconcileOrdinaryCancellation()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10458-L10471) executes `await loadDiary(true)` after all outcomes (success, replay, block, denial, transport uncertainty, non-OK, or malformed responses). No optimistic cache modification or appointment deletion is performed.\n- **Challenge 7 (Current Appointment Defeats Success Claim):** When `loadDiary(true)` reconciles and finds the appointment still active/un-cancelled ([`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10610-L10617)), any receipt success claim is defeated, displaying `\"A cancellation receipt was returned, but the current Diary still shows this appointment. Success has not been assumed; review current truth before trying again.\"` and requiring a new proposal.\n- **Challenge 8 (Reconciliation Failure Handling):** If `loadDiary(true)` fails (`refreshed !== true`), [`setOrdinaryCancellationRefreshRequired()`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js#L10447-L10456) sets `data-refresh-required=\"true\"`, disables the delete control with `\"Refresh Required\"`, and keeps the modal open without making any success or non-commit claim.\n- **Challenge 9 (Review and Smoke Suite Execution):** Command C04 executed the review test suite and encountered 2 test failures, exiting with code 1:\n  1. `review/test_reception_one_cancellation_action.py::test_staff_escape_cancels_without_confirm_and_retains_truth`: Failed activeElement evaluation assertion on line 633 following Escape press.\n  2. `review/test_diary_smoke.py::test_bernie_review_route_intercepted_blocked`: Playwright timeout (15000ms) waiting for locator `.diary-column`.\n- **Challenge 10 (AER-0391 Provenance):** Verified [`docs/ariadne-agent-error-correction-register-revision-344.md`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/ariadne-agent-error-correction-register-revision-344.md) and [`orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json`](file:///C:/Users/sarashera/EMR4-worktrees/r197/orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json). AER-0391 accurately preserves the isolated DeepSeek exit-1 transport non-result at frozen source `967ac705bad2013734beaed127cd5e811823d2c7` and records Sol's fallback without worker attribution.\n- **Challenge 11 (Source Boundary and Scope):** Candidate changes are strictly restricted to client UI script, cache version tag, tests, review scripts, and documentation ([`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js), [`docs/diary/diary.html`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.html)). No backend, API Spine, OpenAPI, schema, migration, or database files were modified.\n- **Challenge 12 (Command Manifest Execution):** All 9 commands in the bound command manifest were executed in exact order.\n\n---\n\n### 3. Review Conclusion\n\nThe structural and behavioral implementation of ordinary Diary cancellation convergence in [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/r197/docs/diary/diary.js) meets the canonical Reception One/kernel contract. However, because manifest command C04 failed with exit code 1 (`review/test_reception_one_cancellation_action.py` and `review/test_diary_smoke.py`), the decision rule strictly mandates returning `revision_required` due to the failed exact command.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/r197",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_plan.py",
+          "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+          "tests/test_raisa_reception_one_selected_appointment_cancellation_composition_evidence.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+          "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-ordinary-cancel-cb658943",
+          "review/test_ordinary_diary_cancellation_convergence.py",
+          "review/test_reception_one_cancellation_action.py",
+          "review/test_diary_smoke.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_agent_error_register"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "node",
+          "--check",
+          "docs/diary/diary.js"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "review/test_ordinary_diary_cancellation_convergence.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "967ac705bad2013734beaed127cd5e811823d2c7..cb6589437bce24c5680c590bc5cf4571435f1a7a"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "9dbaad3b84fe548c010828fa94019b5ce37b14231faf4753571dac6e641130d3",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/r197",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_plan.py",
+        "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+        "tests/test_raisa_reception_one_selected_appointment_cancellation_composition_evidence.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_artifacts.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-ordinary-cancel-cb658943",
+        "review/test_ordinary_diary_cancellation_convergence.py",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_diary_smoke.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_agent_error_register"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "node",
+        "--check",
+        "docs/diary/diary.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "review/test_ordinary_diary_cancellation_convergence.py",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+        "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "967ac705bad2013734beaed127cd5e811823d2c7..cb6589437bce24c5680c590bc5cf4571435f1a7a"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

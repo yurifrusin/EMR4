@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.verifier_worktree_preflight_failure.v1",
+  "recorded_at": "2026-08-17T22:55:54.5900244+10:00",
+  "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+  "candidate_head": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\r197",
+  "status": "revision_required",
+  "reason": "branch_prefix must remain the exact non-protected review prefix: codex/review-",
+  "incorrect_argument": "codex/review-ordinary-diary-cancellation",
+  "corrected_argument": "codex/review-",
+  "candidate_changed": false,
+  "model_called": false,
+  "worktree_changed": false,
+  "claim_boundary": "This is a pre-dispatch orchestrator argument error only; it is not verifier or candidate evidence."
+}
