@@ -1,0 +1,119 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only post-cancellation programme orientation",
+    "completed_stage": "Exact reviewed source 74da22d5372299eb2d2e38bb2266b76c89a97035 passed deterministic gates and one Gemini 3.7 veto; closeout descendant cada7b0a5d08b23e6e9bd360afa97e294f273d08 passes the 64-test handover packet, full register, 200-test canonical fast profile, Diary syntax and whitespace.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+    "resume_after_compaction": false,
+    "source_head": "cada7b0a5d08b23e6e9bd360afa97e294f273d08",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "cada7b0a5d08b23e6e9bd360afa97e294f273d08",
+    "reason_codes": [],
+    "resolved_commit": "cada7b0a5d08b23e6e9bd360afa97e294f273d08",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "cada7b0a5d08b23e6e9bd360afa97e294f273d08"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cada7b0a5d08b23e6e9bd360afa97e294f273d08",
+    "branch_origin_aligned": false,
+    "head": "cada7b0a5d08b23e6e9bd360afa97e294f273d08",
+    "origin_branch_commit": "5981b6cacdd3d488462803748c0d86f1e9bc2457",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 650
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "tranche_closeout",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "No separable implementation package existed in this repository-static semantic orientation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high veto passed the exact clean architecture candidate and all seven manifest commands.",
+        "work_packages": [
+          "completed_provider_free_exact_candidate_post_cancellation_orientation_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibited proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "push result",
+      "protected-ref mismatch",
+      "fresh successor planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone accepts and publishes",
+      "push only the existing task branch",
+      "protected refs remain unchanged",
+      "successor opens only after fresh five-source rehydration"
+    ]
+  },
+  "planned_action": "publish_the_completed_post_cancellation_programme_orientation_descendant_to_the_existing_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns acceptance, continuity, explicit-path commit and task-branch publication. Gemini 3.7 Flash/high completed its exact-candidate independent veto with pass. DeepSeek remained declined because no separable implementation package existed. Native subagents remained declined by developer policy.",
+    "git_refs_and_worktree": "The tracked task worktree is clean at exact closeout commit cada7b0a5d08b23e6e9bd360afa97e294f273d08, whose reviewed architecture parent is exact 74da22d5372299eb2d2e38bb2266b76c89a97035. Origin task remains at prior accepted 5981b6cacdd3d488462803748c0d86f1e9bc2457 before this authorised push. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted post-cancellation orientation at Continuity 314 / Compass 296 and directs the provider-free read-only arrival/check-in command-family convergence review next.",
+    "protected_evidence_boundaries": "Publish only the already committed provider-free read-only orientation and closeout descendant. No product/runtime source, database, route, provider call, patient/product/clinical data, deployment, release, Pages or protected ref is opened. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}
