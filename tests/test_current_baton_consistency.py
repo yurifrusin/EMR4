@@ -18,6 +18,10 @@ HTTP_POSTGRES_NODE_ID = (
 HTTP_POSTGRES_SOURCE_HEAD = "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db"
 EFFECTIVENESS_NODE_ID = "ariadne-recent-work-effectiveness-and-transport-repair"
 EFFECTIVENESS_SOURCE_HEAD = "73bea42b37424ca3f53240d52f8e5c10120a5ce7"
+CANCELLATION_NODE_ID = (
+    "raisa-reception-one-selected-appointment-cancellation-composition"
+)
+CANCELLATION_SOURCE_HEAD = "856ebc3d832d5b64ce65c2e0732eaa63d926c600"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
@@ -62,15 +66,17 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 310
-    assert graph["nodes"][-1]["id"] == EFFECTIVENESS_NODE_ID
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == EFFECTIVENESS_SOURCE_HEAD
+    assert graph["graph_revision"] == 311
+    assert graph["nodes"][-1]["id"] == CANCELLATION_NODE_ID
+    assert graph["nodes"][-1]["coordinates"]["source_head"] == (
+        CANCELLATION_SOURCE_HEAD
+    )
     assert graph["nodes"][-1]["relationships"] == [
-        {"node_id": HTTP_POSTGRES_NODE_ID, "relation": "builds_on"}
+        {"node_id": EFFECTIVENESS_NODE_ID, "relation": "implements"}
     ]
-    assert compass["map_revision"] == 292
-    assert compass["source_graph_revision"] == 310
-    assert compass["current_position"]["node_id"] == EFFECTIVENESS_NODE_ID
+    assert compass["map_revision"] == 293
+    assert compass["source_graph_revision"] == 311
+    assert compass["current_position"]["node_id"] == CANCELLATION_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -86,16 +92,20 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_acceptance = _table_row(
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
-    assert "Continuity 310 / Compass 292" in current
-    assert "ariadne_recent_work_effectiveness_and_transport_repair_pass" in current
-    assert EFFECTIVENESS_SOURCE_HEAD in current
-    assert HTTP_POSTGRES_SOURCE_HEAD in current
-    assert "38.5 minutes" in current.lower()
-    assert "deepseek harness migration is rejected" in current.lower()
-    assert "codex remains conductor" in current.lower()
-    assert "aer-0369 through aer-0378" in _table_row(
+    assert "Continuity 311 / Compass 293" in current
+    assert "raisa_reception_one_selected_appointment_cancellation_composition_pass" in current
+    assert CANCELLATION_SOURCE_HEAD in current
+    assert "84 combined" in current.lower()
+    assert "200-test canonical fast profile" in current.lower()
+    assert "reference rendering" in current.lower()
+    error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
+    assert "revision 337" in error_register
+    assert "384 bounded incidents" in error_register
+    assert "aer-0382" in error_register
+    assert "aer-0383" in error_register
+    assert "aer-0384" in error_register
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
@@ -109,7 +119,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert HTTP_POSTGRES_SOURCE_HEAD in product
     assert ROUTE_REVIEW_SOURCE_HEAD in relation
     assert "raw compatibility delete" in product.lower()
-    assert "visible reception one behavior" in product.lower()
+    assert "visible explicit-confirmation cancellation" in product.lower()
+    assert "adapter-neutral typed projection/action contract" in product.lower()
+    assert CANCELLATION_SOURCE_HEAD in relation
     assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
     assert READINESS_SOURCE_HEAD in relation
@@ -150,9 +162,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "visible selected-appointment cancellation composition" in next_work.lower()
+    assert "read-only ordinary diary cancellation" in next_work.lower()
+    assert "compatibility-consumer convergence review" in next_work.lower()
     assert "raw compatibility delete" in next_work.lower()
-    assert "explicit human confirmation" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected refs" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
@@ -191,10 +203,11 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "visible selected-appointment cancellation composition",
+        "read-only ordinary diary cancellation",
+        "compatibility-consumer convergence review",
         "raw compatibility delete",
         "product/patient/clinical data",
-        "provider product call",
+        "providers",
         "deployment",
         "protected refs",
         "docs/branding/",

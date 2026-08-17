@@ -1,0 +1,233 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-cancellation-gemini-review-856ebc3d",
+  "branch": "codex/review-reception-one-cancellation-856ebc3d",
+  "head_before": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+  "head_after": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "44c3f01d6bcdc2ec2e64a34d39b088ffe6033f751f35a7a192ca255a5fb1a238",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review\n\n**Target Operation:** Reception One selected-appointment cancellation composition  \n**Decision Owner:** GPT Sol  \n**Reviewer Role:** Exactly one final independent Tier-2 veto after deterministic admission  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-cancellation-gemini-review-856ebc3d`  \n**Candidate Branch:** `codex/review-reception-one-cancellation-856ebc3d`  \n**Candidate HEAD:** `856ebc3d832d5b64ce65c2e0732eaa63d926c600`  \n**Frozen Planning Baseline:** `a6fefda036dc46b964f1f1951d5e2efb48534219`  \n\n---\n\n## 1. Five-Source Mandatory Rehydration\n\n1. **`live_handover_current_baton`:** Verified against [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/AGENTS.md) at Continuity 310 / Compass 292. PR 74 integrated, PR 75 merged at protected master `2e34bdad732fdab32fbf778280b3d3c70d66d602`, Pages run `30719055657` passed, and no further GitHub Pages rebuild is authorised.\n2. **`current_authority_allocation`:** GPT Sol owns Conductor, architecture, integration, and final acceptance; DeepSeek V4 Flash/high via Claude Code `--bare` owns bounded implementation/test worker packages; Gemini 3.7 Flash/high via Antigravity owns independent Tier-2 read-only veto review. Native subagents remain declined by developer policy.\n3. **`active_plan_and_acceptance`:** Governed by [`docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md), [`docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md), and evidence schema [`selected-appointment-cancellation-composition-evidence.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.schema.json).\n4. **`protected_evidence_boundaries`:** Provider-free authored-synthetic fixtures and route-intercepted browser tests only. No real patient, clinical, historical diary or product data. No live backend/database mutation, no provider calls, no raw `DELETE`, no status fallback, no new backend routes/schemas/migrations. Master and `handoff/current` remain closed and aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. `docs/branding/` and all untracked files are preserved and excluded.\n5. **`git_refs_and_worktree`:** Worktree verified at `C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-cancellation-gemini-review-856ebc3d` on branch `codex/review-reception-one-cancellation-856ebc3d` at commit `856ebc3d832d5b64ce65c2e0732eaa63d926c600`. Active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` verified in progress.\n\n---\n\n## 2. Evaluation of Required Challenges\n\n### Challenge 1: Worktree, Ref, Baseline, and Exact Diff Integrity\n- Exact branch `codex/review-reception-one-cancellation-856ebc3d` and HEAD `856ebc3d832d5b64ce65c2e0732eaa63d926c600` verified via C01, C02, and C09.\n- The worktree is completely clean with zero untracked or dirty files.\n- The diff `a6fefda036dc46b964f1f1951d5e2efb48534219..856ebc3d832d5b64ce65c2e0732eaa63d926c600` touches only allowlisted paths across 12 files (3 HTML/JS/CSS assets in `docs/diary/`, 1 plan, 4 orchestration/continuity artifacts, 2 review tests, and 2 test updates). No unauthorized files were created or modified.\n\n### Challenge 2: Native Palette, Shared Editor, and Distinct Danger Treatment\n- The selected action palette in [`docs/diary/meta-grid.js`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/diary/meta-grid.js#L4438-L4460) contains exactly five choices: `status`, `time`, `duration`, `practitioner`, and `cancel`.\n- Cancellation is styled with distinct danger tokens (`meta-grid-action-choice-danger`, terracotta/red palette `#c28e7d`, `#7b2c22`, `#fff1eb`, `#9f4939`).\n- At most one editor panel mounts inside `#meta-grid-selected-action-editor` at any given time.\n- Retains the four existing update families without creating a generic or unvalidated write dispatcher.\n\n### Challenge 3: Route-Inert Drafting, Reason Vocabulary, and Note Constraint\n- Opening, closing, switching, or drafting in the cancellation panel issues zero HTTP routes (verified by `test_cancellation_palette_and_draft_are_route_inert`).\n- Reason options in [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/diary/diary.js) are restricted to exactly the 10 dedicated codes: `PATIENT_CANCELLED`, `PATIENT_RESCHEDULED`, `PATIENT_UNWELL`, `PATIENT_TRANSPORT`, `PRACTITIONER_UNAVAILABLE`, `CLINIC_OPERATIONAL`, `CLINIC_RESCHEDULED`, `ADMIN_ERROR`, `DUPLICATE_BOOKING`, and `OTHER`.\n- Optional cancellation note is validated and capped at 500 characters, trimmed, and treated as provisional input.\n\n### Challenge 4: Dedicated Proposal and Canonical Confirm Routes with Visible Human Confirmation\n- `EMR4DiaryMetaGridBridge.cancelAppointment` submits proposal exclusively to `POST /api/v1/appointments/proposals/delete/{appointment_id}`.\n- Every admissible proposal triggers explicit visible staff confirmation through `showStatusProposalDialog`.\n- Confirmed submission uses only canonical `POST /api/v1/appointments/proposals/delete/confirm` with cloned prepared payload and `confirmed=true`.\n\n### Challenge 5: Blocked Proposals, Close-Only Dialog, and Escape Handling\n- Blocked proposals (`autonomy_tier === \"blocked\"`) render a close-only dialog without a confirm action.\n- Pressing Escape or clicking Cancel sends zero confirm requests, retains current Diary truth, and returns focus.\n- Busy state latches (`anySelectedActionBusy()`, `state.cancellationAction.busy`) prevent double submission, palette switching, or selection races during in-flight operations.\n\n### Challenge 6: Strict Fail-Closed Envelope and Minimal Public Receipt\n- Responses are strictly validated via `validateDeleteConfirmPublicEnvelope` against `raisa.delete_confirm_public_envelope.v1` and `appointment.delete_confirmation_receipt.v1`.\n- Requires exact matching `appointment_id` and `status_reason_code`, `status=\"Cancelled\"`, `waiting_area_id=null`, and allowed warning code `waiting_area_cleared`.\n- Rejects unknown top-level/receipt fields, unexpected audit evidence, private receipt bytes, or any returned `appointment` read-model object.\n\n### Challenge 7: Robust Handling of Stale, Mismatched, and Malformed Responses\n- Stale proposals, server/network errors, mismatched IDs/reasons, non-null waiting areas, and unexpected warning codes fail closed without creating fallbacks or optimistic state mutations.\n- The UI triggers fresh reconciliation via `refreshCurrent(...)` on any uncertain or failed outcome.\n\n### Challenge 8: Post-Command Truth Display and Scoped Reconciliation\n- The appointment is removed from view only after a fresh authorized list read confirms its absence.\n- If reconciliation read fails, the console transitions to `reconciliation_required` state, disabling all selected action controls and presenting the refresh action.\n\n### Challenge 9: Accessibility, Responsive Layout, and Viewport Containment\n- Touch targets meet or exceed the 44px minimum requirement across all controls.\n- Keyboard navigation (Tab loops, Escape to close, focus return) functions correctly.\n- Polite atomic live region (`aria-live=\"polite\"`, `aria-atomic=\"true\"`) announces outcome states.\n- Responsive styles tested and verified across desktop (1280x720), tablet (768x1024), and mobile (390x844) without horizontal document/editor overflow.\n\n### Challenge 10: Backend and Governance Invariants\n- GraphQL remains read-only; no backend routes, schemas, tables, migrations, or event watchers were added.\n- No live provider/model calls, external network traffic, or product/patient data touched.\n- No deployment, publication, or protected ref modification occurred.\n\n### Challenge 11: Command Manifest Verification\n- All 9 commands in the bound manifest were executed in strict sequential order.\n- Manifest exit codes: C01=0, C02=0, C03=0 (84/84 passed), C04=0 (43/43 passed), C05=0, C06=0, C07=0, C08=0, C09=0.\n- Worktree and HEAD remain clean and unchanged.\n\n---\n\n## 3. Review Conclusion\n\nThe candidate at `856ebc3d832d5b64ce65c2e0732eaa63d926c600` safely and cleanly implements the fifth `Cancel appointment` action for Reception One over the canonical delete proposal/confirm protocol. All security controls, strict envelope boundaries, human confirmation stops, accessibility constraints, and deterministic test gates pass without defect.\n\nIndependent Tier-2 veto decision: **pass**.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review\n\n**Target Operation:** Reception One selected-appointment cancellation composition  \n**Decision Owner:** GPT Sol  \n**Reviewer Role:** Exactly one final independent Tier-2 veto after deterministic admission  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-cancellation-gemini-review-856ebc3d`  \n**Candidate Branch:** `codex/review-reception-one-cancellation-856ebc3d`  \n**Candidate HEAD:** `856ebc3d832d5b64ce65c2e0732eaa63d926c600`  \n**Frozen Planning Baseline:** `a6fefda036dc46b964f1f1951d5e2efb48534219`  \n\n---\n\n## 1. Five-Source Mandatory Rehydration\n\n1. **`live_handover_current_baton`:** Verified against [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/AGENTS.md) at Continuity 310 / Compass 292. PR 74 integrated, PR 75 merged at protected master `2e34bdad732fdab32fbf778280b3d3c70d66d602`, Pages run `30719055657` passed, and no further GitHub Pages rebuild is authorised.\n2. **`current_authority_allocation`:** GPT Sol owns Conductor, architecture, integration, and final acceptance; DeepSeek V4 Flash/high via Claude Code `--bare` owns bounded implementation/test worker packages; Gemini 3.7 Flash/high via Antigravity owns independent Tier-2 read-only veto review. Native subagents remain declined by developer policy.\n3. **`active_plan_and_acceptance`:** Governed by [`docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md), [`docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md), and evidence schema [`selected-appointment-cancellation-composition-evidence.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.schema.json).\n4. **`protected_evidence_boundaries`:** Provider-free authored-synthetic fixtures and route-intercepted browser tests only. No real patient, clinical, historical diary or product data. No live backend/database mutation, no provider calls, no raw `DELETE`, no status fallback, no new backend routes/schemas/migrations. Master and `handoff/current` remain closed and aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. `docs/branding/` and all untracked files are preserved and excluded.\n5. **`git_refs_and_worktree`:** Worktree verified at `C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-cancellation-gemini-review-856ebc3d` on branch `codex/review-reception-one-cancellation-856ebc3d` at commit `856ebc3d832d5b64ce65c2e0732eaa63d926c600`. Active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` verified in progress.\n\n---\n\n## 2. Evaluation of Required Challenges\n\n### Challenge 1: Worktree, Ref, Baseline, and Exact Diff Integrity\n- Exact branch `codex/review-reception-one-cancellation-856ebc3d` and HEAD `856ebc3d832d5b64ce65c2e0732eaa63d926c600` verified via C01, C02, and C09.\n- The worktree is completely clean with zero untracked or dirty files.\n- The diff `a6fefda036dc46b964f1f1951d5e2efb48534219..856ebc3d832d5b64ce65c2e0732eaa63d926c600` touches only allowlisted paths across 12 files (3 HTML/JS/CSS assets in `docs/diary/`, 1 plan, 4 orchestration/continuity artifacts, 2 review tests, and 2 test updates). No unauthorized files were created or modified.\n\n### Challenge 2: Native Palette, Shared Editor, and Distinct Danger Treatment\n- The selected action palette in [`docs/diary/meta-grid.js`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/diary/meta-grid.js#L4438-L4460) contains exactly five choices: `status`, `time`, `duration`, `practitioner`, and `cancel`.\n- Cancellation is styled with distinct danger tokens (`meta-grid-action-choice-danger`, terracotta/red palette `#c28e7d`, `#7b2c22`, `#fff1eb`, `#9f4939`).\n- At most one editor panel mounts inside `#meta-grid-selected-action-editor` at any given time.\n- Retains the four existing update families without creating a generic or unvalidated write dispatcher.\n\n### Challenge 3: Route-Inert Drafting, Reason Vocabulary, and Note Constraint\n- Opening, closing, switching, or drafting in the cancellation panel issues zero HTTP routes (verified by `test_cancellation_palette_and_draft_are_route_inert`).\n- Reason options in [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d/docs/diary/diary.js) are restricted to exactly the 10 dedicated codes: `PATIENT_CANCELLED`, `PATIENT_RESCHEDULED`, `PATIENT_UNWELL`, `PATIENT_TRANSPORT`, `PRACTITIONER_UNAVAILABLE`, `CLINIC_OPERATIONAL`, `CLINIC_RESCHEDULED`, `ADMIN_ERROR`, `DUPLICATE_BOOKING`, and `OTHER`.\n- Optional cancellation note is validated and capped at 500 characters, trimmed, and treated as provisional input.\n\n### Challenge 4: Dedicated Proposal and Canonical Confirm Routes with Visible Human Confirmation\n- `EMR4DiaryMetaGridBridge.cancelAppointment` submits proposal exclusively to `POST /api/v1/appointments/proposals/delete/{appointment_id}`.\n- Every admissible proposal triggers explicit visible staff confirmation through `showStatusProposalDialog`.\n- Confirmed submission uses only canonical `POST /api/v1/appointments/proposals/delete/confirm` with cloned prepared payload and `confirmed=true`.\n\n### Challenge 5: Blocked Proposals, Close-Only Dialog, and Escape Handling\n- Blocked proposals (`autonomy_tier === \"blocked\"`) render a close-only dialog without a confirm action.\n- Pressing Escape or clicking Cancel sends zero confirm requests, retains current Diary truth, and returns focus.\n- Busy state latches (`anySelectedActionBusy()`, `state.cancellationAction.busy`) prevent double submission, palette switching, or selection races during in-flight operations.\n\n### Challenge 6: Strict Fail-Closed Envelope and Minimal Public Receipt\n- Responses are strictly validated via `validateDeleteConfirmPublicEnvelope` against `raisa.delete_confirm_public_envelope.v1` and `appointment.delete_confirmation_receipt.v1`.\n- Requires exact matching `appointment_id` and `status_reason_code`, `status=\"Cancelled\"`, `waiting_area_id=null`, and allowed warning code `waiting_area_cleared`.\n- Rejects unknown top-level/receipt fields, unexpected audit evidence, private receipt bytes, or any returned `appointment` read-model object.\n\n### Challenge 7: Robust Handling of Stale, Mismatched, and Malformed Responses\n- Stale proposals, server/network errors, mismatched IDs/reasons, non-null waiting areas, and unexpected warning codes fail closed without creating fallbacks or optimistic state mutations.\n- The UI triggers fresh reconciliation via `refreshCurrent(...)` on any uncertain or failed outcome.\n\n### Challenge 8: Post-Command Truth Display and Scoped Reconciliation\n- The appointment is removed from view only after a fresh authorized list read confirms its absence.\n- If reconciliation read fails, the console transitions to `reconciliation_required` state, disabling all selected action controls and presenting the refresh action.\n\n### Challenge 9: Accessibility, Responsive Layout, and Viewport Containment\n- Touch targets meet or exceed the 44px minimum requirement across all controls.\n- Keyboard navigation (Tab loops, Escape to close, focus return) functions correctly.\n- Polite atomic live region (`aria-live=\"polite\"`, `aria-atomic=\"true\"`) announces outcome states.\n- Responsive styles tested and verified across desktop (1280x720), tablet (768x1024), and mobile (390x844) without horizontal document/editor overflow.\n\n### Challenge 10: Backend and Governance Invariants\n- GraphQL remains read-only; no backend routes, schemas, tables, migrations, or event watchers were added.\n- No live provider/model calls, external network traffic, or product/patient data touched.\n- No deployment, publication, or protected ref modification occurred.\n\n### Challenge 11: Command Manifest Verification\n- All 9 commands in the bound manifest were executed in strict sequential order.\n- Manifest exit codes: C01=0, C02=0, C03=0 (84/84 passed), C04=0 (43/43 passed), C05=0, C06=0, C07=0, C08=0, C09=0.\n- Worktree and HEAD remain clean and unchanged.\n\n---\n\n## 3. Review Conclusion\n\nThe candidate at `856ebc3d832d5b64ce65c2e0732eaa63d926c600` safely and cleanly implements the fifth `Cancel appointment` action for Reception One over the canonical delete proposal/confirm protocol. All security controls, strict envelope boundaries, human confirmation stops, accessibility constraints, and deterministic test gates pass without defect.\n\nIndependent Tier-2 veto decision: **pass**.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-cancellation-856ebc3d",
+          "review/test_reception_one_cancellation_action.py",
+          "review/test_reception_one_selected_action_console.py",
+          "review/test_reception_one_status_action.py",
+          "review/test_reception_one_time_reschedule_action.py",
+          "review/test_reception_one_duration_action.py",
+          "review/test_reception_one_practitioner_reassignment_action.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d",
+          "tests/test_reception_one_time_reschedule_composition.py",
+          "tests/test_reception_one_duration_composition.py",
+          "tests/test_reception_one_practitioner_reassignment_composition.py",
+          "tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py",
+          "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "node",
+          "--check",
+          "docs/diary/diary.js"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "node",
+          "--check",
+          "docs/diary/meta-grid.js"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "review/test_reception_one_cancellation_action.py",
+          "review/test_reception_one_selected_action_console.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "a6fefda036dc46b964f1f1951d5e2efb48534219..856ebc3d832d5b64ce65c2e0732eaa63d926c600"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "3b4f2fb8635e60daf4960d5889430d58a9e5a12989b053737294e9d54bc61e73",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-cancellation-856ebc3d",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_reception_one_selected_action_console.py",
+        "review/test_reception_one_status_action.py",
+        "review/test_reception_one_time_reschedule_action.py",
+        "review/test_reception_one_duration_action.py",
+        "review/test_reception_one_practitioner_reassignment_action.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d",
+        "tests/test_reception_one_time_reschedule_composition.py",
+        "tests/test_reception_one_duration_composition.py",
+        "tests/test_reception_one_practitioner_reassignment_composition.py",
+        "tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "node",
+        "--check",
+        "docs/diary/diary.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "node",
+        "--check",
+        "docs/diary/meta-grid.js"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_reception_one_selected_action_console.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a6fefda036dc46b964f1f1951d5e2efb48534219..856ebc3d832d5b64ce65c2e0732eaa63d926c600"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

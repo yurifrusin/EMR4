@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 334
+    assert register["register_revision"] == 337
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 382)
+        f"AER-{index:04d}" for index in range(1, 385)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,8 +53,8 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 262
-    assert len(transport_incidents) == 12
+    assert len(agent_incidents) == 264
+    assert len(transport_incidents) == 13
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -68,6 +68,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0326",
         "AER-0367",
         "AER-0380",
+        "AER-0382",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -2578,7 +2579,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 381
+    assert report["incident_count"] == 384
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3615,28 +3616,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 334
-    assert report["incident_count"] == 381
+    assert report["register_revision"] == 337
+    assert report["incident_count"] == 384
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 262,
+        "agent_behavior": 264,
         "harness": 48,
         "repository": 59,
-        "transport": 12,
+        "transport": 13,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 60,
-        "evidence_misreport": 53,
+        "command_scope_violation": 61,
+        "evidence_misreport": 54,
         "harness_failure": 48,
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
         "repository_defect": 59,
-        "transport_timeout": 12,
+        "transport_timeout": 13,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 231,
+        "canonical_unchanged": 234,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3683,6 +3684,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
                 "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
                 "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.fixture_dependent_pytest_invoked_without_conftest"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0378", "AER-0384"],
+            "origins": ["agent_behavior"],
+            "categories": ["command_scope_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Prerequisite validators and dependent pytest commands must not be joined by an unconditional separator; repository pytest always uses the serial launcher when tests/conftest.py loads.",
+                "The post-closeout effectiveness repair must make each named pytest profile declare conftest_required and have the launcher reject --noconftest when any selected file is fixture-dependent.",
             ],
         },
         {
@@ -6061,6 +6077,45 @@ def test_aer_0381_blocks_worker_dispatch_from_terminal_latch_state() -> None:
 
 
 
+
+
+def test_aer_0382_contains_first_deepseek_transport_non_result() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0382"
+    ]
+
+    assert incident["origin"] == "transport"
+    assert incident["category"] == "transport_timeout"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert "before producing a worker result" in incident["observed_error"]
+    assert "same-packet retry" in incident["detection_method"]
+
+
+def test_aer_0383_contains_rejected_preverifier_state_drafts() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0383"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "positive_with_bounded_recovery" in incident["observed_error"]
+    assert "No model call" in incident["detection_method"]
+    assert "planned" in incident["correction"]["action"]
+
+
+def test_aer_0384_records_serial_pytest_recurrence() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0384"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "PowerShell semicolon" in incident["observed_error"]
+    assert "interrupted" in incident["detection_method"]
+    assert "ariadne_serial_pytest.py" in incident["correction"]["action"]
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

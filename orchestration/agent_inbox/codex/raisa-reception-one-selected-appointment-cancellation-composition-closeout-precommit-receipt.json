@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment cancellation composition",
+    "completed_stage": "Exact candidate 856ebc3d832d5b64ce65c2e0732eaa63d926c600 passes 15 dedicated and 84 combined browser cases, 43 focused checks, the canonical 200-test profile, syntax, Ruff, compilation, whitespace, responsive inspection, typed evidence, Continuity 311 / Compass 293 and one clean Gemini 3.7 Flash/high veto.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+    "resume_after_compaction": false,
+    "source_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "reason_codes": [],
+    "resolved_commit": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "856ebc3d832d5b64ce65c2e0732eaa63d926c600"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "branch_origin_aligned": false,
+    "head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "origin_branch_commit": "36edc1e5b36b83a54f6af28c9519853290e4189b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 665
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded test-only package completed after one preserved transport non-result and one clean-source retry; no product-source or acceptance authority transferred.",
+        "work_packages": [
+          "review/test_reception_one_cancellation_action.py"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one fresh nine-command Gemini 3.7 Flash/high veto passed at unchanged clean exact candidate.",
+        "work_packages": [
+          "one_exact_candidate_veto_at_856ebc3d832d5b64ce65c2e0732eaa63d926c600"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibited proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "precommit or prepush failure",
+      "next-tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol acceptance and continuity closeout",
+      "explicit-path commit and task-branch publication",
+      "fresh five-source rehydration before the next tranche"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_accepted_reception_one_cancellation_closeout_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md",
+      "docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md",
+      "orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-review-receipt.json",
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md"
+    ],
+    "current_authority_allocation": "Sol owns acceptance, closeout and task-branch publication. DeepSeek V4 Flash/high completed the bounded test-only package after one contained transport retry; Gemini 3.7 Flash/high completed exactly one clean independent veto; native subagents remained declined by current developer policy.",
+    "git_refs_and_worktree": "Exact reviewed product candidate remains 856ebc3d832d5b64ce65c2e0732eaa63d926c600 on the task branch. Origin task remains 36edc1e5b36b83a54f6af28c9519853290e4189b pending closeout publication. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The Gemini review worktree remained clean at the exact candidate; all unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md now records the accepted Reception One selected-appointment cancellation composition at Continuity 311 / Compass 293 and directs one provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review next.",
+    "protected_evidence_boundaries": "No protected evidence was opened or enumerated. Raw compatibility DELETE, status-cancel fallback, product/patient/clinical/historical data, provider calls, credential/IAM work, database/source access, deployment, production, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}

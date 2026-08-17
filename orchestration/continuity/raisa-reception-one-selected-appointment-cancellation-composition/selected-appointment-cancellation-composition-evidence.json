@@ -1,0 +1,103 @@
+{
+  "schema_version": "raisa.reception-one.selected-appointment-cancellation-composition.evidence.v1",
+  "generated_at": "2026-08-17T15:49:00.1044374+10:00",
+  "result": "raisa_reception_one_selected_appointment_cancellation_composition_pass",
+  "planning_baseline": "36edc1e5b36b83a54f6af28c9519853290e4189b",
+  "reviewed_candidate": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+  "evidence_modes": [
+    "authored_synthetic_client_fixture",
+    "route_intercepted_browser",
+    "repository_static_and_regression",
+    "independent_read_only_veto"
+  ],
+  "projection_adapter_contract": {
+    "raisa_output": "typed_minimized_projection_and_action_envelope_not_raw_rows",
+    "first_party_client": "reference_rendering",
+    "adapter_freedom": [
+      "layout",
+      "modality",
+      "visual_hierarchy",
+      "bounded_copy"
+    ],
+    "immutable_semantics": [
+      "fact_values_and_provenance",
+      "current_proposed_committed_state",
+      "action_identity_and_consequence",
+      "warnings_and_blocks",
+      "explicit_confirmation",
+      "authority_and_source_recheck",
+      "receipt_and_fresh_reconciliation"
+    ]
+  },
+  "command_contract": {
+    "graphql": "read_only_unchanged",
+    "proposal": "post_appointments_proposals_delete_appointment_id_only",
+    "confirm": "post_appointments_proposals_delete_confirm_canonical_only",
+    "explicit_staff_confirmation": true,
+    "status_cancel_fallbacks": 0,
+    "raw_delete_fallbacks": 0,
+    "new_routes": 0,
+    "new_schemas": 0,
+    "optimistic_mutations": 0
+  },
+  "interaction_acceptance": {
+    "zero_route_draft": "pass",
+    "safe_commit": "pass_one_delete_proposal_one_canonical_confirm_fresh_removal",
+    "staff_cancel": "pass_zero_confirm_current_truth_retained",
+    "blocked": "pass_zero_confirm_fresh_reconciliation",
+    "stale_or_authority_denial": "pass_zero_fallback_fresh_reconciliation",
+    "malformed_public_envelope": "pass_fail_closed_fresh_reconciliation",
+    "interruption": "pass_no_duplicate_busy_reselection_or_palette_switch",
+    "viewports": [
+      "1280x720",
+      "768x1024",
+      "390x844"
+    ],
+    "minimum_target_css_pixels": 44,
+    "horizontal_overflow": false,
+    "console_errors": 0
+  },
+  "strict_public_receipt": {
+    "envelope_schema": "raisa.delete_confirm_public_envelope.v1",
+    "receipt_schema": "appointment.delete_confirmation_receipt.v1",
+    "appointment_identity_exact": true,
+    "status": "Cancelled",
+    "reason_identity_exact": true,
+    "waiting_area_id": null,
+    "warning_code_allowlist": [
+      "waiting_area_cleared"
+    ],
+    "unknown_fields_admitted": false,
+    "appointment_read_model_admitted": false,
+    "private_receipt_bytes_admitted": false
+  },
+  "verification": {
+    "dedicated_browser_cases": 15,
+    "existing_selected_action_cases": 69,
+    "focused_tests": 43,
+    "canonical_fast_tests": 200,
+    "independent_veto": "pass",
+    "javascript_syntax": "pass",
+    "ruff": "pass",
+    "maintained_source_compilation": "pass",
+    "git_whitespace": "pass"
+  },
+  "parallelism_efficacy": {
+    "sol": "Owned destructive semantics, product source, deterministic admission, integration and acceptance.",
+    "deepseek": "Completed one separable test-only artifact after one preserved transport failure and one bounded clean-source retry.",
+    "gemini": "Completed one fresh manifest-bound Gemini 3.7 Flash/high exact-candidate veto with decision pass and an unchanged clean review worktree.",
+    "native_subagents": "declined_by_current_developer_policy"
+  },
+  "authority_counts": {
+    "provider_calls": 0,
+    "patient_or_product_records": 0,
+    "real_database_or_source_reads": 0,
+    "real_database_writes": 0,
+    "new_command_routes": 0,
+    "deployments": 0,
+    "releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_movements": 0
+  },
+  "claim_limit": "Proves provider-free authored-synthetic first-party client composition, route-intercepted browser behavior, repository regression and independent source review only; it does not prove live backend/database, product-data, representative usability, external-adapter compliance, deployment or production operation."
+}

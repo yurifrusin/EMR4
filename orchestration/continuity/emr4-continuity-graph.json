@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 310,
+  "graph_revision": 311,
   "harvests": [],
   "nodes": [
     {
@@ -21409,9 +21409,121 @@
         "DeepSeek worker hardening is defence in depth, not hostile-process containment.",
         "Raw compatibility DELETE, real/product data, provider product calls, deployment and protected integration remain closed."
       ]
+    },
+    {
+      "id": "raisa-reception-one-selected-appointment-cancellation-composition",
+      "title": "Reception One selected-appointment cancellation composition",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-17T05:49:00Z",
+      "updated_at": "2026-08-17T05:49:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-recent-work-effectiveness-and-transport-repair",
+          "relation": "implements"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Provider-free authored-synthetic first-party client composition over the accepted delete proposal/confirm family.",
+          "Reception One is a reference renderer; adapter presentation freedom remains below immutable typed facts, actions, confirmation, authority and receipt semantics.",
+          "No raw compatibility DELETE, status-cancel fallback, product data, provider, database execution, deployment or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reception-one-selected-appointment-cancellation-composition",
+          "source": "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept one explicit-confirmation cancellation action with strict public receipt admission and fresh truth reconciliation."
+        }
+      ],
+      "claim_scope": [
+        "One selected current appointment can use one dedicated delete proposal and canonical delete-confirm interaction after explicit staff confirmation.",
+        "Fifteen dedicated and 84 combined route-intercepted browser cases pass, alongside 43 focused and 200 canonical-fast tests.",
+        "Malformed, stale, blocked, cancelled, interrupted and uncertain outcomes fail closed and reconcile from a fresh scoped read.",
+        "One fresh Gemini 3.7 Flash/high exact-candidate veto passes at unchanged source HEAD.",
+        "Creative or external renderers may vary presentation but cannot vary facts, consequences, warnings, confirmation, authority checks or receipts."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.json",
+            "review/test_reception_one_cancellation_action.py",
+            "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md"
+          ],
+          "note": "Cancellation remains one separately typed selected-appointment action and does not create a generic command dispatcher."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md",
+            "orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.json",
+            "review/test_reception_one_cancellation_action.py",
+            "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md"
+          ],
+          "note": "The display accepts terminal truth only after a fresh scoped Diary read; event cues remain acceleration hints."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md",
+          "docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.schema.json",
+          "orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-337.md"
+        ],
+        "closeouts": [
+          "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-test-worker-result.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-pre-verifier-v3-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-closeout-postcompaction-receipt.json"
+        ],
+        "tests": [
+          "review/test_reception_one_cancellation_action.py",
+          "tests/test_raisa_reception_one_selected_appointment_cancellation_composition_evidence.py",
+          "tests/test_raisa_reception_one_selected_appointment_cancellation_composition_continuity.py"
+        ],
+        "artifacts": [
+          "docs/diary/diary.js",
+          "docs/diary/meta-grid.js",
+          "docs/diary/meta-grid.css",
+          "docs/diary/diary.html",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-deepseek-test-worker-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-command-manifest.json",
+          "scripts/raisa_reception_one_selected_appointment_cancellation_composition_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The ordinary Diary deleteBooking and applySignedDeleteProposal compatibility consumer still retains a separately unaccepted dual-family fallback.",
+        "Route-intercepted browser evidence does not prove live backend or PostgreSQL behavior.",
+        "External-adapter interoperability, product data, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-17T02:40:11Z"
+  "updated_at": "2026-08-17T05:49:00Z"
 }

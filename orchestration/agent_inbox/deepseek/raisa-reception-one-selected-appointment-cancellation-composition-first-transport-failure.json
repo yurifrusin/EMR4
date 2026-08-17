@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.worker_transport_failure.v1",
+  "observed_on": "2026-08-17",
+  "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+  "attempt_id": "deepseek-cancellation-test-worker-001",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "source_head": "a6fefda036dc46b964f1f1951d5e2efb48534219",
+  "exit_code": 1,
+  "status": "rejected_transport_failure",
+  "sanitized_error": "DeepSeek Claude transport failed before producing a worker result.",
+  "worktree_changed": false,
+  "provider_decision_admitted": false,
+  "correction": "One bounded retry used the same packet, model, effort, exact clean source and worktree; it completed and wrote the preserved terminal worker result."
+}

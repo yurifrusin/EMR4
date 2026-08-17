@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d",
+  "branch": "codex/review-reception-one-cancellation-856ebc3d",
+  "head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+  "expected_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "3b4f2fb8635e60daf4960d5889430d58a9e5a12989b053737294e9d54bc61e73",
+  "command_count": 9,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "1c449011e2bf532f36ac9deea4e76c2775f2383495e2304ba088b376cb7d0149",
+  "canonical_register_sha256": "4f14f26acfa039928c8f8325048c6574e27d409d51b0a7651e701a558ac88cb2",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 231,
+      "canonical_unchanged": 234,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
-      "command_scope_violation": 60,
-      "evidence_misreport": 53,
+      "command_scope_violation": 61,
+      "evidence_misreport": 54,
       "harness_failure": 48,
       "output_contract_violation": 106,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
       "repository_defect": 59,
-      "transport_timeout": 12
+      "transport_timeout": 13
     },
     "by_origin": {
-      "agent_behavior": 262,
+      "agent_behavior": 264,
       "harness": 48,
       "repository": 59,
-      "transport": 12
+      "transport": 13
     },
     "by_process_severity": {
       "low": 143,
       "material": 115,
-      "moderate": 123
+      "moderate": 126
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -34,7 +34,7 @@
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
-      "ariadne-orchestrator-preflight::orchestrator": 2,
+      "ariadne-orchestrator-preflight::orchestrator": 3,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 2,
@@ -42,7 +42,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 195,
+      "codex-primary-orchestrator::orchestrator": 196,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -54,6 +54,7 @@
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 6,
+      "deepseek-v4-flash-test-worker::implementer": 1,
       "deepseek-v4-flash-worker-delete-confirm-btr::implementer": 1,
       "delete-confirm-behavior-transaction-harness::implementer": 4,
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
@@ -95,14 +96,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 38,
+      "implementer": 39,
       "integration_reviewer": 3,
-      "orchestrator": 287,
+      "orchestrator": 289,
       "verifier": 53
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 381,
+  "incident_count": 384,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -125,6 +126,30 @@
         "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent."
       ],
       "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0378",
+        "AER-0384"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Prerequisite validators and dependent pytest commands must not be joined by an unconditional separator; repository pytest always uses the serial launcher when tests/conftest.py loads.",
+        "The post-closeout effectiveness repair must make each named pytest profile declare conftest_required and have the launcher reject --noconftest when any selected file is fixture-dependent."
+      ],
+      "recurrence_signature": "orchestrator.fixture_dependent_pytest_invoked_without_conftest",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1032,7 +1057,7 @@
       ]
     }
   ],
-  "register_revision": 334,
+  "register_revision": 337,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

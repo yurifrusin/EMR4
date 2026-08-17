@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 310 / Compass 292. Five evidence-backed Ariadne effectiveness and transport repairs pass without weakening the truth kernel. The narrow provider-free visible Reception One selected-appointment cancellation composition is next.
+> EMR4 is at Continuity 311 / Compass 293. Reception One selected-appointment cancellation passes through the canonical delete-only truth kernel with explicit confirmation and fresh reconciliation. A provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review is next.
 
 ## North star
 
@@ -390,30 +390,34 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Authored-synthetic delete confirmation now has one accepted local HTTP/PostgreSQL truth path with replay, denial, rollback and cleanup evidence. Lineage parent: `raisa-provider-free-delete-confirm-http-route-convergence`.
 187. **Reduce avoidable workflow tail without weakening safety gates — Ariadne recent-work effectiveness and transport repair**
    Five evidence-backed Ariadne repairs pass and the product sequence can resume with clearer durable evidence. Lineage parent: `raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal`.
+188. **Complete the first-party selected-action console with canonical explicit-confirmation cancellation — Reception One selected-appointment cancellation composition**
+   Reception One can cancel one selected appointment through the delete-only truth kernel and can serve as one reference rendering of an adapter-neutral contract. Lineage parent: `ariadne-recent-work-effectiveness-and-transport-repair`.
 
 ## Current position
 
-**Ariadne effectiveness repair accepted; visible cancellation composition is next — Ariadne recent-work effectiveness and transport repair**
+**The native selected-action console now spans routine edits and destructive cancellation over one truth kernel — Reception One selected-appointment cancellation composition**
 
-**Why this proof came next:** The workflow review and independent correction gate pass, so the next dependency-satisfied product step can reuse the accepted delete-confirm truth envelope.
+**Why this proof came next:** The visible cancellation composition passed over the accepted delete-confirm envelope, leaving the ordinary Diary compatibility consumer as the narrowest same-family inconsistency.
 
-Ariadne now removes repeated evidence friction and preserves useful failure diagnostics without relaxing authority or acceptance.
+Reception One is a stronger reference client, while adapter presentation remains decoupled from deterministic facts, authority and effects.
 
 ### What this unlocks
 
-- Freeze the narrow provider-free visible selected-appointment cancellation composition.
-- Reuse the selected-action console and explicit human confirmation pattern.
-- Project strict delete-confirm success and failure receipts without opening raw DELETE.
+- Run one provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review.
+- Map deleteBooking and applySignedDeleteProposal against the now-proven canonical delete-only consumer contract.
+- Freeze the smallest later source convergence without calling or authorizing raw compatibility DELETE.
 
 ### What it does not solve
 
-- Visible Reception One cancellation behavior itself.
-- Concurrent crash/restart or unknown-commit behavior.
-- Product/patient data, provider access, deployment, release, Pages or protected refs.
+- The ordinary Diary dual-family cancellation fallback itself.
+- External-adapter conformance or representative human usability.
+- Product/patient data, providers, database execution, deployment, release, Pages or protected refs.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -690,6 +694,7 @@ Prerequisites:
 
 ## Map limits
 
+- The Reception One cancellation result proves authored-synthetic first-party rendering over a typed adapter-neutral contract; it does not prove live backend/database or external-adapter operation.
 - The Ariadne effectiveness result improves development evidence and transport handling; it changes no Raisa product behavior.
 - Delete-confirm HTTP/PostgreSQL integration proves one authored-synthetic local lifecycle, not raw DELETE, visible UI, product data, concurrency/crash recovery or production.
 - Delete-confirm HTTP convergence proves provider-free composition only, not database execution, raw DELETE convergence or visible client behavior.
@@ -959,6 +964,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-319.md`
 - `docs/ariadne-agent-error-correction-register-revision-329.md`
 - `docs/ariadne-agent-error-correction-register-revision-334.md`
+- `docs/ariadne-agent-error-correction-register-revision-337.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1408,6 +1414,8 @@ Prerequisites:
 - `docs/raisa-reception-one-selected-action-console-consolidation-orientation-plan.md`
 - `docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout.md`
 - `docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-plan.md`
+- `docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md`
+- `docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md`
 - `docs/raisa-reception-one-selected-appointment-duration-composition-closeout.md`
 - `docs/raisa-reception-one-selected-appointment-duration-composition-plan.md`
 - `docs/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-closeout.md`
@@ -1571,6 +1579,7 @@ Prerequisites:
 - `docs/security/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-action-console-consolidation-orientation-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-action-console-progressive-disclosure-composition-threat-model-delta.md`
+- `docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-duration-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-threat-model-delta.md`
 - `docs/security/raisa-reception-one-selected-appointment-status-action-composition-threat-model-delta.md`
@@ -1649,6 +1658,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-same-update-family-multi-change-kernel-rehearsal-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-consolidation-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-action-console-progressive-disclosure-composition-gemini-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
@@ -2029,6 +2039,13 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-action-console-progressive-disclosure-composition-sol-test-recovery.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-closeout-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-deepseek-test-worker-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-pre-verifier-v3-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-duration-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-practitioner-reassignment-composition-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-status-action-composition-preacceptance-receipt.json`
@@ -2183,6 +2200,7 @@ Prerequisites:
 - `orchestration/agent_inbox/deepseek/raisa-delete-confirm-route-mounting-readiness-review-worker-receipt.json`
 - `orchestration/agent_inbox/deepseek/raisa-provider-free-delete-confirm-http-route-convergence-worker-receipt.json`
 - `orchestration/agent_inbox/deepseek/raisa-reception-one-duration-test-worker-receipt.json`
+- `orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-test-worker-result.json`
 - `orchestration/agent_inbox/deepseek/raisa-reception-one-time-reschedule-test-worker-receipt.json`
 - `orchestration/api_spine_adr.md`
 - `orchestration/api_spine_appointment_command_alignment_inventory.md`
@@ -2508,6 +2526,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-reception-one-selected-action-console-consolidation-orientation/selected-action-console-orientation-contract.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-action-console-progressive-disclosure-composition/selected-action-console-composition-evidence.schema.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.json`
+- `orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-duration-composition/selected-appointment-duration-evidence.schema.json`
 - `orchestration/continuity/raisa-reception-one-selected-appointment-practitioner-reassignment-composition/selected-appointment-practitioner-reassignment-evidence.json`
@@ -2842,6 +2862,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-postgresql-integration-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md`
+- `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -2858,6 +2879,7 @@ Prerequisites:
 - `orchestration_harness/orchestrator_preflight.py`
 - `orchestration_harness/risk_weighted_workflow.py`
 - `review/test_diary_smoke.py`
+- `review/test_reception_one_cancellation_action.py`
 - `review/test_reception_one_duration_action.py`
 - `review/test_reception_one_practitioner_reassignment_action.py`
 - `review/test_reception_one_same_update_family_multi_change_editor_composition.py`
@@ -2912,6 +2934,7 @@ Prerequisites:
 - `scripts/raisa_provider_free_unmounted_delete_confirm_response_compatibility_product_adapter_architecture_continuity_update.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal.py`
 - `scripts/raisa_provider_free_unmounted_status_confirm_route_convergence_composition_rehearsal.py`
+- `scripts/raisa_reception_one_selected_appointment_cancellation_composition_continuity_update.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
 - `scripts/reception_one_bureau_model_text_lane_live.py`
 - `scripts/reception_one_preprinted_form_v5.py`
@@ -3037,6 +3060,8 @@ Prerequisites:
 - `tests/test_raisa_reception_one_same_update_family_multi_change_kernel_rehearsal.py`
 - `tests/test_raisa_reception_one_selected_action_console_consolidation_orientation.py`
 - `tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py`
+- `tests/test_raisa_reception_one_selected_appointment_cancellation_composition_continuity.py`
+- `tests/test_raisa_reception_one_selected_appointment_cancellation_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_duration_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_practitioner_reassignment_composition_evidence.py`
 - `tests/test_raisa_reception_one_selected_appointment_status_action_composition_evidence.py`
@@ -3071,4 +3096,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 292; continuity graph revision 310._
+_Compass map revision 293; continuity graph revision 311._

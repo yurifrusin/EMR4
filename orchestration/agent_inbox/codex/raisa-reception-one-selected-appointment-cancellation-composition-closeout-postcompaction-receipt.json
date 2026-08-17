@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Reception One selected-appointment cancellation composition",
+    "completed_stage": "Exact candidate 856ebc3d832d5b64ce65c2e0732eaa63d926c600 passed deterministic browser, source, API Spine, canonical fast-profile, syntax, lint, compilation, whitespace and responsive visual gates, followed by one clean Gemini 3.7 Flash/high exact-candidate veto pass.",
+    "next_executable_stage": "Package typed evidence, the contained agent-error register revisions, closeout, Sol acceptance, paired Yuri summary and continuity updates; rerun proportionate final checks; then explicitly stage, commit and publish only owned task-branch paths.",
+    "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+    "resume_after_compaction": true,
+    "source_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "reason_codes": [],
+    "resolved_commit": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "856ebc3d832d5b64ce65c2e0732eaa63d926c600"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "branch_origin_aligned": false,
+    "head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
+    "origin_branch_commit": "36edc1e5b36b83a54f6af28c9519853290e4189b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded test-only package supplied useful separable browser coverage after one transport retry; no product-source or acceptance authority was transferred.",
+        "work_packages": [
+          "review/test_reception_one_cancellation_action.py"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh manifest-bound Gemini 3.7 Flash/high veto reviewed the exact clean candidate and returned one terminal pass without changing source or worktree state.",
+        "work_packages": [
+          "one_exact_candidate_veto_at_856ebc3d832d5b64ce65c2e0732eaa63d926c600"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "material closeout verification failure",
+      "next-tranche planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol-owned evidence synthesis and acceptance",
+      "continuity mutation and final repository verification",
+      "explicit-path Git closeout and task-branch publication"
+    ]
+  },
+  "planned_action": "package_exact_candidate_and_independent_veto_evidence_then_complete_acceptance_continuity_closeout_explicit_path_commit_and_task_branch_publication",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md",
+      "docs/security/raisa-reception-one-selected-appointment-cancellation-composition-threat-model-delta.md",
+      "orchestration/continuity/raisa-reception-one-selected-appointment-cancellation-composition/selected-appointment-cancellation-composition-evidence.schema.json",
+      "orchestration/agent_inbox/antigravity/raisa-reception-one-selected-appointment-cancellation-composition-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-test-worker-result.json",
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-plan.md",
+      "docs/raisa-provider-free-delete-confirm-http-route-convergence-closeout.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-plan.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md",
+      "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-plan.md",
+      "docs/raisa-reception-one-selected-action-console-progressive-disclosure-composition-closeout.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns destructive semantics, integration, recovery and acceptance. DeepSeek V4 Flash/high completed the bounded test-only package after one contained transport retry. Gemini 3.7 Flash/high completed one exact-candidate read-only veto with decision pass. Native subagents remain declined because current developer policy prohibits proactive delegation.",
+    "git_refs_and_worktree": "Task HEAD and exact reviewed candidate are 856ebc3d832d5b64ce65c2e0732eaa63d926c600; origin task remains 36edc1e5b36b83a54f6af28c9519853290e4189b pending explicit-path closeout publication. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The only tracked worktree changes are the contained Ariadne error-register revision; 655 unrelated untracked paths including docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. Its Current Baton remains at Continuity 310 / Compass 292 and directs the narrow provider-free visible Reception One selected-appointment cancellation composition over the accepted selected-action console and delete-confirm truth envelope.",
+    "protected_evidence_boundaries": "Only committed non-protected source, authored-synthetic client fixtures, route-intercepted browser evidence and repository static/regression checks are admitted. Raw compatibility DELETE, status-cancellation fallback, product/patient/clinical/historical data, providers, credentials, IAM, database execution or migration, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

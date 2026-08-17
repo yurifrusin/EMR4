@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 334,
+  "register_revision": 337,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15283,6 +15283,122 @@
           "tests/test_ariadne_orchestrator_preflight.py",
           "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-exhausted-v2-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-332.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0382",
+      "attempt_id": "deepseek-cancellation-test-worker-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-reception-one-selected-appointment-cancellation-composition",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-test-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "dispatch",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded test-worker dispatch must either return one preserved terminal result or fail with a sanitized non-result while leaving its exact isolated worktree unchanged before any retry.",
+      "observed_error": "The first DeepSeek V4 Flash/high launch exited 1 with a transport failure before producing a worker result; the exact worker worktree remained clean at the frozen planning source.",
+      "detection_method": "The launcher returned a nonzero terminal status, the expected result was absent and Sol verified the isolated branch, HEAD and empty worktree status before authorizing one same-packet retry.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-first-transport-failure.json",
+        "orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-test-worker-result.json",
+        "docs/ariadne-agent-error-correction-register-revision-335.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "transport.deepseek_claude_exit_1_before_worker_result",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected transport result, verify the exact isolated worktree remained clean and run one bounded retry with the unchanged packet, model, effort and source; independently admit only the completed single-file worker result.",
+        "prevention_control": "A DeepSeek transport retry is allowed only after an exact clean-worktree/HEAD check and never converts the earlier transport failure into worker evidence or expands its file authority.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-first-transport-failure.json",
+          "orchestration/agent_inbox/deepseek/raisa-reception-one-selected-appointment-cancellation-composition-test-worker-result.json",
+          "docs/ariadne-agent-error-correction-register-revision-335.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0383",
+      "attempt_id": "reception-one-cancellation-pre-verifier-state-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-reception-one-selected-appointment-cancellation-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-orchestrator-preflight",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_preflight",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Before an external verifier call, the pre-verifier receipt must use exact parallelism vocabulary and must not declare an active or assigned verifier without a configured matching workspace receipt.",
+      "observed_error": "The first draft used unsupported expected_leverage positive_with_bounded_recovery and an unmatched assigned Gemini receipt; the second corrected the enum but retained the unmatched assignment, so both receipts correctly denied dispatch.",
+      "detection_method": "The deterministic preflight returned revision_required with parallelism_lane_leverage_invalid and workspace_receipt_missing on the first receipt, then workspace_receipt_missing alone on the second. No model call followed either result.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-pre-verifier-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-pre-verifier-v2-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-pre-verifier-v3-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-336.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preverifier_invalid_leverage_and_unmatched_assignment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use exact leverage value positive, represent the not-yet-started Gemini lane as planned, leave active and assigned inventories empty, retain the separate clean-worktree preflight and generate a distinct third five-source receipt before dispatch.",
+        "prevention_control": "Pre-verifier planning receipts keep external verifier active/assigned inventories empty until dispatch tooling creates a configured matching resource; only the closed leverage vocabulary is admitted.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-pre-verifier-v3-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-336.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0384",
+      "attempt_id": "reception-one-cancellation-register-validation-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-reception-one-selected-appointment-cancellation-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Repository tests that load tests/conftest.py must start only through the admitted serial pytest launcher, and a failed prerequisite validator must prevent every dependent command from starting.",
+      "observed_error": "Sol chained register validation and direct pytest with a PowerShell semicolon. Validation failed on AER-0382, but direct pytest still started without scripts/ariadne_serial_pytest.py, recurring after AER-0378.",
+      "detection_method": "The terminal showed the validator failure followed by the serial-lock conftest banner and pytest failures in the same command. Sol interrupted the run, excluded it and separated validation from the corrected serial invocation.",
+      "evidence_paths": [
+        "scripts/ariadne_serial_pytest.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-337.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.fixture_dependent_pytest_invoked_without_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop and exclude the direct run, validate the register in an independent command, then invoke the exact register pytest only through scripts/ariadne_serial_pytest.py after the prerequisite passes.",
+        "prevention_control": "Prerequisite validators and dependent pytest commands must not be joined by an unconditional separator; repository pytest always uses the serial launcher when tests/conftest.py loads.",
+        "evidence_paths": [
+          "scripts/ariadne_serial_pytest.py",
+          "docs/ariadne-agent-error-correction-register-revision-337.md"
         ]
       },
       "status": "corrected"

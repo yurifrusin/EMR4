@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "pytest", "-q", "-p", "no:cacheprovider", "--basetemp", "C:/Users/sarashera/AppData/Local/Temp/emr4-gemini-cancellation-856ebc3d",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_reception_one_selected_action_console.py",
+        "review/test_reception_one_status_action.py",
+        "review/test_reception_one_time_reschedule_action.py",
+        "review/test_reception_one_duration_action.py",
+        "review/test_reception_one_practitioner_reassignment_action.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/reception-one-cancellation-gemini-review-856ebc3d",
+        "tests/test_reception_one_time_reschedule_composition.py",
+        "tests/test_reception_one_duration_composition.py",
+        "tests/test_reception_one_practitioner_reassignment_composition.py",
+        "tests/test_raisa_reception_one_selected_action_console_progressive_disclosure_composition_evidence.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py"
+      ]
+    },
+    {"id": "C05", "argv": ["node", "--check", "docs/diary/diary.js"]},
+    {"id": "C06", "argv": ["node", "--check", "docs/diary/meta-grid.js"]},
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check",
+        "review/test_reception_one_cancellation_action.py",
+        "review/test_reception_one_selected_action_console.py"
+      ]
+    },
+    {"id": "C08", "argv": ["git", "diff", "--check", "a6fefda036dc46b964f1f1951d5e2efb48534219..856ebc3d832d5b64ce65c2e0732eaa63d926c600"]},
+    {"id": "C09", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}
