@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 365,
+  "register_revision": 366,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -16707,6 +16707,49 @@
           "docs/ariadne-agent-error-correction-register-revision-365.md",
           "tests/test_ariadne_agent_error_register.py",
           "tests/test_ariadne_active_operation_latch_continuity.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0417",
+      "attempt_id": "check-in-product-adapter-extraction-preplanning-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every continuation receipt must express lane leverage using the exact admitted vocabulary before worker dispatch can be permitted.",
+      "observed_error": "The first successor preplanning runtime state used high for the DeepSeek and Gemini expected-leverage fields. Preflight rejected both labels because the admitted values are positive, required_independence, neutral and negative.",
+      "detection_method": "The fresh five-source orchestrator preflight returned revision_required with exactly parallelism_lane_leverage_invalid:deepseek_flash and parallelism_lane_leverage_invalid:gemini_verifier; worker_dispatch_permitted was false and no plan, worker or provider action followed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-preplanning-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-preplanning-runtime-state.json",
+        "orchestration/harness_settings/orchestrator_requirements.yaml",
+        "docs/ariadne-agent-error-correction-register-revision-366.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace DeepSeek leverage high with positive and Gemini leverage high with required_independence, advance register aggregates, regenerate the report and rerun the exact fresh five-source preplanning receipt before plan freeze or dispatch.",
+        "prevention_control": "Select every parallelism disposition and leverage label directly from orchestration/harness_settings/orchestrator_requirements.yaml when authoring a continuation runtime state; preflight remains mandatory before dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-preplanning-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-preplanning-runtime-state.json",
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "docs/ariadne-agent-error-correction-register-revision-366.md",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"

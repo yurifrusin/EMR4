@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted canonical check-in product-adapter extraction rehearsal",
+    "completed_stage": "Fresh complete five-source rehydration remains valid at exact task HEAD 852f6f26089cf081c205aff952dffcdecb80d63b. The first preplanning receipt rejected two non-schema leverage labels before dispatch; AER-0417 preserves the failure and the assessment now uses exact admitted vocabulary.",
+    "next_executable_stage": "generate_fresh_five_source_preplanning_receipt_then_freeze_the_unmounted_adapter_extraction_plan",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "852f6f26089cf081c205aff952dffcdecb80d63b",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "852f6f26089cf081c205aff952dffcdecb80d63b",
+    "reason_codes": [],
+    "resolved_commit": "852f6f26089cf081c205aff952dffcdecb80d63b",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "852f6f26089cf081c205aff952dffcdecb80d63b"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "852f6f26089cf081c205aff952dffcdecb80d63b",
+    "branch_origin_aligned": true,
+    "head": "852f6f26089cf081c205aff952dffcdecb80d63b",
+    "origin_branch_commit": "852f6f26089cf081c205aff952dffcdecb80d63b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The successor creates a stable separable mechanical package: one unmounted adapter module plus focused authored-synthetic unit tests after Sol freezes exact boundaries and interfaces.",
+        "work_packages": [
+          "implement_unmounted_check_in_product_adapter_and_focused_authored_synthetic_tests_in_disposable_worktree"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Reserve one fresh Gemini 3.7 Flash/high exact-candidate veto after deterministic admission because the adapter crystallizes the canonical check-in authority seam.",
+        "work_packages": [
+          "fresh_exact_candidate_read_only_veto_after_deterministic_admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation even though the implementation package is separable.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek implements only the frozen adapter-and-tests package while Sol retains plan acceptance integration and worker review"
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "pre_dispatch",
+      "worker_candidate_return",
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact interface and acceptance before DeepSeek dispatch",
+      "Sol reviews and deterministically admits the worker candidate before any Gemini call",
+      "Gemini reviews one exact clean candidate only after deterministic admission",
+      "Sol alone owns recovery acceptance continuity Git and protected-boundary verification"
+    ]
+  },
+  "planned_action": "freeze_and_execute_the_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md",
+      "docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md",
+      "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freeze, acceptance, recovery, integration and Git. DeepSeek V4 Flash/high is planned for the bounded separable adapter-and-tests implementation package after exact plan freeze. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto after deterministic admission. Native subagents are declined because current developer policy prohibits proactive native delegation.",
+    "git_refs_and_worktree": "Task HEAD and origin task are aligned at exact post-publication repair source 852f6f26089cf081c205aff952dffcdecb80d63b. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree was clean before opening this successor latch and 649 unrelated untracked paths including docs/branding were preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the predecessor repair publication and directs raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal from Continuity 315 / Compass 297.",
+    "protected_evidence_boundaries": "Provider-free unmounted authored-synthetic adapter extraction only. Existing A5.1 route behavior and default-off gate remain unchanged; no route wiring or call, practice enablement, generic-status Arrived change, grammar/route-contract/client edit, waiting-area move/removal, live database/source/watcher, product/patient/clinical/historical/protected data, provider/ADC/credential/IAM/network/tool, deployment/release/Pages or protected-ref action. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

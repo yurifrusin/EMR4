@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
-  "active_tranche": "Provider-free read-only arrival/check-in command-family convergence review",
-  "objective": "Compare exact general-status, waiting-area and A5.1 check-in contracts, classify static action-contract drift, choose one canonical product-facing arrival meaning or strict justified non-overlap, and freeze the smallest later tranche without editing product or runtime source.",
-  "status": "complete",
-  "source_head": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
-  "authority_source": "AGENTS.md Current Baton at Continuity 314 / Compass 296, the accepted post-cancellation programme orientation and Yuri's standing uninterrupted-development authority direct this provider-free read-only convergence review.",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "active_tranche": "Provider-free unmounted canonical check-in product-adapter extraction rehearsal",
+  "objective": "Extract and test the reusable deterministic check-in product adapter from the default-off A5.1 route-local contract without changing mounted route behavior, practice admission, generic-status Arrived authority, action grammar, either first-party client or waiting-area movement.",
+  "status": "in_progress",
+  "source_head": "852f6f26089cf081c205aff952dffcdecb80d63b",
+  "authority_source": "AGENTS.md Current Baton at Continuity 315 / Compass 297, the accepted arrival/check-in convergence review and Yuri's standing uninterrupted-development authority direct this narrow provider-free unmounted extraction rehearsal.",
   "checkpoint": {
-    "completed_stage": "Exact candidate 3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d, Gemini veto, closeout, Sol acceptance, Yuri summary, Continuity 315 / Compass 297, register revision 365 with 416 incidents, the 404-check closeout packet and the 200-test canonical fast profile all pass. AER-0413 through AER-0416 contain closeout/rehydration harness corrections without product-source change. The tranche objective is complete and published on the task branch.",
-    "next_executable_stage": null,
+    "completed_stage": "The corrected five-source preplanning receipt passes; AER-0417 preserves its rejected first vocabulary attempt. The exact unmounted adapter plan, threat delta, two-file DeepSeek package, 60-mutation floor and closed API Spine boundary are frozen at source HEAD 852f6f26089cf081c205aff952dffcdecb80d63b, and the 400-check planning/continuity packet passes.",
+    "next_executable_stage": "commit_and_publish_the_frozen_plan_then_generate_the_exact_pre_dispatch_receipt_and_launch_the_bounded_deepseek_worktree",
     "retry_counters": {
       "planning": 1,
-      "implementation": 6,
+      "implementation": 0,
       "review": 0,
       "verification": 0
     },
@@ -24,27 +24,27 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_repository_static_read_only_arrival_check_in_convergence_review",
-    "committed_authored_synthetic_and_static_source_evidence_only",
-    "compare_general_status_waiting_area_and_a5_1_contracts_only",
-    "choose_canonical_arrival_meaning_or_strict_justified_non_overlap_before_product_edit",
-    "a5_1_remains_default_off_uncalled_and_unmodified",
-    "no_product_backend_api_openapi_graphql_schema_service_migration_product_test_or_database_edit",
-    "no_action_grammar_route_contract_or_endpoint_coverage_repair_in_this_review",
-    "no_raw_compatibility_route_behavior_or_deprecation_change",
-    "no_live_route_source_database_watcher_or_external_client_access",
+    "provider_free_unmounted_authored_synthetic_adapter_extraction_only",
+    "extract_reusable_deterministic_check_in_contract_without_product_admission",
+    "existing_a5_1_route_behavior_and_default_off_gate_preserved",
+    "no_route_mount_or_route_wiring_change",
+    "no_practice_enablement_or_live_route_call",
+    "no_generic_status_arrived_admission_change",
+    "no_action_grammar_route_contract_or_client_change",
+    "no_waiting_area_move_or_removal_command",
+    "no_live_database_source_watcher_or_external_client_access",
     "no_product_patient_clinical_historical_or_protected_data",
-    "no_provider_adc_credentials_iam_external_network_or_executable_model_tool_before_independent_review_admission",
+    "no_provider_adc_credentials_iam_network_or_executable_model_tool",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.deterministic_failure_evidence.v1",
+  "observed_at": "2026-08-18T08:54:38+10:00",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "stage": "pre_sprint_planning",
+  "detection": "ariadne orchestrator preflight",
+  "error": "parallelism_lane_leverage_invalid:deepseek_flash and parallelism_lane_leverage_invalid:gemini_verifier",
+  "candidate_state": "canonical_unchanged",
+  "worker_dispatch_permitted": false,
+  "worker_or_provider_calls": 0,
+  "product_source_changed": false,
+  "protected_refs_changed": false,
+  "disposition": "revision_required"
+}

@@ -38,14 +38,26 @@ def test_current_latch_validly_projects_its_live_operation_state() -> None:
     assert validate_active_operation(latch) == latch
 
 
-def test_completed_arrival_check_in_latch_binds_final_closeout_evidence() -> None:
+def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None:
     latch = _load(CURRENT_LATCH)
 
-    assert latch["status"] == "complete"
-    completed = latch["checkpoint"]["completed_stage"]
-    assert "register revision 365 with 416 incidents" in completed
-    assert "404-check closeout packet" in completed
-    assert "AER-0413 through AER-0416" in completed
+    if (
+        latch["operation_id"]
+        == "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review"
+    ):
+        assert latch["status"] == "complete"
+        completed = latch["checkpoint"]["completed_stage"]
+        assert "register revision 365 with 416 incidents" in completed
+        assert "404-check closeout packet" in completed
+        assert "AER-0413 through AER-0416" in completed
+    else:
+        assert latch["operation_id"] == (
+            "raisa-provider-free-unmounted-canonical-check-in-product-adapter-"
+            "extraction-rehearsal"
+        )
+        assert latch["status"] == "in_progress"
+        assert latch["source_head"] == "852f6f26089cf081c205aff952dffcdecb80d63b"
+        assert "AER-0417" in latch["checkpoint"]["completed_stage"]
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]
