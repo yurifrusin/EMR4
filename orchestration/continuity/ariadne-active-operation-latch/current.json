@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
-  "active_tranche": "Reception One selected-appointment cancellation composition",
-  "objective": "Add one provider-free visible Reception One cancellation action over the accepted selected-action console and canonical delete-confirm truth envelope, with explicit staff confirmation, current-authority/source recheck, strict public receipt projection and fresh post-command reconciliation.",
-  "status": "complete",
-  "source_head": "856ebc3d832d5b64ce65c2e0732eaa63d926c600",
-  "authority_source": "AGENTS.md Current Baton at Continuity 310 / Compass 292, Yuri's standing uninterrupted-development authority and his instruction to continue beyond the completed effectiveness review authorize the narrow provider-free visible selected-appointment cancellation composition.",
+  "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+  "active_tranche": "Ordinary Diary cancellation compatibility-consumer convergence review",
+  "objective": "Perform one provider-free read-only repository review of deleteBooking() and applySignedDeleteProposal() against the accepted canonical delete-only consumer contract, and freeze the smallest later source convergence without changing or calling any product route or write path.",
+  "status": "in_progress",
+  "source_head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+  "authority_source": "AGENTS.md Current Baton at Continuity 311 / Compass 293, the accepted Reception One cancellation closeout and Yuri's standing uninterrupted-development authority direct this narrow provider-free read-only ordinary Diary compatibility-consumer convergence review.",
   "checkpoint": {
-    "completed_stage": "Exact reviewed candidate 856ebc3d832d5b64ce65c2e0732eaa63d926c600 passes the frozen cancellation interaction, strict receipt, reconciliation, responsive rendering, deterministic regression and one fresh Gemini 3.7 Flash/high independent veto. Continuity 311 / Compass 293, paired closeout and accepted register revision 337 package the result.",
-    "next_executable_stage": null,
+    "completed_stage": "The repository-static plan, threat delta and review are frozen. The current consumer/public-envelope incompatibility, status semantic downgrade, widened endpoint admission and success-only reconciliation gap are proved; 88 current focused checks, the canonical 200-test fast profile, register validation/tests, Ruff, 217-source compilation, JavaScript syntax and whitespace pass. One stale legacy route suite is explicitly contained as AER-0387 after an insufficient test-only repair was reverted.",
+    "next_executable_stage": "Generate a fresh pre-commit receipt, commit the exact review candidate on the task branch, then issue a pre-verifier receipt and run one fresh Gemini 3.7 Flash/high read-only veto if exact clean-worktree admission passes.",
     "retry_counters": {
       "planning": 0,
-      "implementation": 1,
+      "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 2
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,23 +24,21 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_synthetic_visible_client_composition_only",
-    "canonical_delete_proposal_and_confirm_routes_only",
-    "explicit_staff_confirmation_required",
-    "strict_minimal_public_delete_receipt_only",
-    "fresh_authorized_projection_reconciliation_after_terminal_outcome",
-    "no_raw_compatibility_delete_or_status_cancel_fallback",
-    "no_new_backend_route_schema_database_migration_or_command_meaning",
+    "provider_free_repository_static_review_only",
+    "read_only_inventory_of_deleteBooking_and_applySignedDeleteProposal",
+    "canonical_delete_only_consumer_contract_is_the_acceptance_reference",
+    "no_product_route_schema_database_ui_or_runtime_source_edit",
+    "no_raw_compatibility_delete_or_status_cancel_fallback_call",
     "no_product_patient_clinical_historical_diary_or_protected_data",
     "no_provider_adc_credentials_iam_external_network_or_executable_model_tool",
     "no_deployment_production_release_pages_or_protected_ref_movement",

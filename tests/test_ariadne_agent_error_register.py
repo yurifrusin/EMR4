@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 337
+    assert register["register_revision"] == 340
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 385)
+        f"AER-{index:04d}" for index in range(1, 388)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 264
+    assert len(agent_incidents) == 266
     assert len(transport_incidents) == 13
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2579,7 +2579,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 384
+    assert report["incident_count"] == 387
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3616,28 +3616,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 337
-    assert report["incident_count"] == 384
+    assert report["register_revision"] == 340
+    assert report["incident_count"] == 387
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 264,
+        "agent_behavior": 266,
         "harness": 48,
-        "repository": 59,
+        "repository": 60,
         "transport": 13,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 61,
-        "evidence_misreport": 54,
+        "command_scope_violation": 62,
+        "evidence_misreport": 55,
         "harness_failure": 48,
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
-        "repository_defect": 59,
+        "repository_defect": 60,
         "transport_timeout": 13,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 234,
+        "canonical_unchanged": 237,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3735,14 +3735,15 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
             ),
-            "incident_count": 3,
-            "incident_ids": ["AER-0314", "AER-0321", "AER-0330"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0314", "AER-0321", "AER-0330", "AER-0385"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
                 "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+                "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
                 "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
                 "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value.",
             ],
@@ -6116,6 +6117,47 @@ def test_aer_0384_records_serial_pytest_recurrence() -> None:
     assert "PowerShell semicolon" in incident["observed_error"]
     assert "interrupted" in incident["detection_method"]
     assert "ariadne_serial_pytest.py" in incident["correction"]["action"]
+
+
+def test_aer_0385_records_preplanning_leverage_vocabulary_recurrence() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0385"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "positive_independence" in incident["observed_error"]
+    assert "No worker ran" in incident["detection_method"]
+    assert "required_independence" in incident["correction"]["action"]
+
+
+def test_aer_0386_records_register_stage_vocabulary_rejection() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0386"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "evidence_misreport"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "stage planning" in incident["observed_error"]
+    assert "peer linkage mismatch" in incident["detection_method"]
+    assert "dispatch" in incident["correction"]["action"]
+
+
+def test_aer_0387_records_delete_route_fixture_reason_drift() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0387"
+    ]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "thirteen route-test failures" in incident["observed_error"]
+    assert "reason_code_not_dedicated" in incident["observed_error"]
+    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert "reason-only edit" in incident["correction"]["action"]
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

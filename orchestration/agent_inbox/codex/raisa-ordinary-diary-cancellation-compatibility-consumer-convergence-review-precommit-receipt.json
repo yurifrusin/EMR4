@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Ordinary Diary cancellation compatibility-consumer convergence review",
+    "completed_stage": "The repository-static plan, threat delta and review are frozen. The current consumer/public-envelope incompatibility, status semantic downgrade, widened endpoint admission and success-only reconciliation gap are proved; 88 current focused checks, the canonical 200-test fast profile, register validation/tests, Ruff, 217-source compilation, JavaScript syntax and whitespace pass. One stale legacy route suite is explicitly contained as AER-0387 after an insufficient test-only repair was reverted.",
+    "next_executable_stage": "Generate a fresh pre-commit receipt, commit the exact review candidate on the task branch, then issue a pre-verifier receipt and run one fresh Gemini 3.7 Flash/high read-only veto if exact clean-worktree admission passes.",
+    "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+    "resume_after_compaction": true,
+    "source_head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "reason_codes": [],
+    "resolved_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "branch_origin_aligned": true,
+    "head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "origin_branch_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "No separable implementation existed; Sol completed the adjacent two-function semantic review more cheaply than a worker packet and reconciliation cycle.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The review freezes the later meaning of a destructive compatibility consumer, so one fresh exact-candidate veto remains required after the committed candidate is clean and deterministically admitted.",
+        "work_packages": [
+          "one fresh Gemini 3.7 Flash/high exact-candidate read-only veto over the review, cited source and deterministic tests"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate commit",
+      "pre-verifier admission",
+      "verifier return",
+      "material recovery",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "candidate commit precedes clean-worktree verifier admission",
+      "Gemini performs review only and receives no implementation or acceptance authority",
+      "repository pytest remains serial"
+    ]
+  },
+  "planned_action": "commit_the_exact_deterministically_admitted_repository_static_review_candidate_to_the_nonprotected_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md",
+      "docs/raisa-reception-one-cancellation-command-path-readiness-review.md",
+      "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-plan.md",
+      "docs/security/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-threat-model-delta.md",
+      "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+      "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/api_spine_adr.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns the review, bounded harness recovery, acceptance and task-branch Git. DeepSeek V4 Flash/high remains declined for neutral leverage. Gemini 3.7 Flash/high remains reserved for one fresh exact-candidate veto after commit and clean-worktree deterministic admission. Native subagents remain declined by current developer policy. Register revision 340 contains AER-0385 through AER-0387 with none open.",
+    "git_refs_and_worktree": "Primary worktree is codex/ariadne-bernie-davida-parallel-seam based on exact published HEAD 36b116bdb72c82acac63b8a0371d6212e9bc1f9a with only the explicit review, latch and error-register candidate paths intentionally tracked-dirty. Origin task remains 36b116bdb72c82acac63b8a0371d6212e9bc1f9a. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Unrelated untracked files including docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 311 / Compass 293 directs the narrow provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review after accepted Reception One cancellation.",
+    "protected_evidence_boundaries": "Repository-static non-protected evidence only. Product/API/runtime source, the stale contained route suite, raw compatibility DELETE, status fallback calls, patient/product/clinical/historical data, provider/ADC, credentials/IAM, external network, database/source/watcher access, deployment, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

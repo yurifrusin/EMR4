@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Ordinary Diary cancellation compatibility-consumer convergence review",
+    "completed_stage": "Fresh post-closeout five-source rehydration has restored the accepted cancellation composition, current authority, protected boundaries, exact Git refs and the ordinary Diary compatibility review named by the Current Baton.",
+    "next_executable_stage": "Issue the fresh pre-sprint-planning Ariadne receipt, then freeze and execute the repository-static review plan over the two exact ordinary Diary consumer functions and canonical delete-only contract.",
+    "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+    "resume_after_compaction": true,
+    "source_head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "reason_codes": [],
+    "resolved_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "branch_origin_aligned": true,
+    "head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "origin_branch_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 646
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded evidence is concentrated in two adjacent consumer functions, and classifying the fallback's command meaning is inseparable from the architecture decision; worker briefing and reconciliation would cost more than the mechanical inventory saves.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The review selects a future convergence boundary for destructive compatibility behavior, so one fresh exact-candidate Gemini 3.7 Flash/high read-only veto may materially challenge route completeness and semantic claims after deterministic admission.",
+        "work_packages": [
+          "one fresh exact-candidate read-only review of the frozen report and cited source if the deterministic risk gate admits external verification"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan freeze",
+      "report freeze",
+      "material recovery",
+      "pre-verifier admission",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol must reconcile the two adjacent consumers with the accepted canonical delete-only meaning before any review claim",
+      "no product source implementation exists in this read-only tranche",
+      "Gemini is eligible only after deterministic exact-candidate admission"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_read_only_ordinary_diary_cancellation_compatibility_consumer_convergence_review_plan",
+  "reasons": [
+    "parallelism_lane_leverage_invalid:gemini_verifier"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-plan.md",
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-sol-acceptance.md",
+      "docs/raisa-reception-one-cancellation-command-path-readiness-review-plan.md",
+      "docs/raisa-reception-one-cancellation-command-path-readiness-review.md",
+      "docs/raisa-reception-one-cancellation-command-path-readiness-review-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/bernie_release_gates.md",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "current_authority_allocation": "GPT Sol owns architecture, repository evidence reconciliation, acceptance and Git. DeepSeek V4 Flash/high is declined at planning because the two-function inventory is small and its compatibility-versus-canonical meaning is tightly coupled to Sol's acceptance judgment. Gemini 3.7 Flash/high is reserved for one later fresh exact-candidate veto if the frozen risk gate admits it. Native subagents are declined because current developer policy prohibits proactive native delegation.",
+    "git_refs_and_worktree": "Primary worktree C:\\Users\\sarashera\\emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD and origin task 36b116bdb72c82acac63b8a0371d6212e9bc1f9a. Local/origin master and local/origin handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree was clean before opening this latch; 645 unrelated untracked items including docs/branding remain preserved and excluded. Explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 311 / Compass 293 accepts Reception One cancellation at exact reviewed candidate 856ebc3d832d5b64ce65c2e0732eaa63d926c600 and directs a narrow provider-free read-only review of deleteBooking() and applySignedDeleteProposal() against the canonical delete-only consumer contract.",
+    "protected_evidence_boundaries": "Only committed non-protected repository source and newly authored repository-static evidence are admitted. No protected holdout, historical Diary/PHI, product/patient/clinical data, provider or ADC, credentials/IAM, external network, database/source/watcher access, raw compatibility DELETE or status-cancel call, product source change, deployment, release, Pages or protected-ref movement is allowed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

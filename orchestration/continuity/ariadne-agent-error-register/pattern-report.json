@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "4f14f26acfa039928c8f8325048c6574e27d409d51b0a7651e701a558ac88cb2",
+  "canonical_register_sha256": "b4bcaaf26055dfe8844ac4378993a1659e9e35106ca708bb1fd65c0d086e5c82",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 234,
+      "canonical_unchanged": 237,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
-      "command_scope_violation": 61,
-      "evidence_misreport": 54,
+      "command_scope_violation": 62,
+      "evidence_misreport": 55,
       "harness_failure": 48,
       "output_contract_violation": 106,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
-      "repository_defect": 59,
+      "repository_defect": 60,
       "transport_timeout": 13
     },
     "by_origin": {
-      "agent_behavior": 264,
+      "agent_behavior": 266,
       "harness": 48,
-      "repository": 59,
+      "repository": 60,
       "transport": 13
     },
     "by_process_severity": {
-      "low": 143,
+      "low": 146,
       "material": 115,
       "moderate": 126
     },
@@ -42,7 +42,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 196,
+      "codex-primary-orchestrator::orchestrator": 198,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -58,6 +58,7 @@
       "deepseek-v4-flash-worker-delete-confirm-btr::implementer": 1,
       "delete-confirm-behavior-transaction-harness::implementer": 4,
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
+      "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 3,
       "emr4-behavior-evidence-schema::orchestrator": 1,
@@ -98,12 +99,12 @@
     "by_role": {
       "implementer": 39,
       "integration_reviewer": 3,
-      "orchestrator": 289,
+      "orchestrator": 292,
       "verifier": 53
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 384,
+  "incident_count": 387,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -213,17 +214,19 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0314",
         "AER-0321",
-        "AER-0330"
+        "AER-0330",
+        "AER-0385"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+        "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
         "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
         "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value."
       ],
@@ -1057,7 +1060,7 @@
       ]
     }
   ],
-  "register_revision": 337,
+  "register_revision": 340,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

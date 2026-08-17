@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 337,
+  "register_revision": 340,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15402,6 +15402,124 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0385",
+      "attempt_id": "ordinary-diary-cancellation-compatibility-preplanning-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every preplanning parallelism assessment must use only the configured expected_leverage vocabulary before a plan is frozen or any worker is dispatched.",
+      "observed_error": "The first ordinary Diary cancellation compatibility preplanning state invented expected_leverage positive_independence for the reserved Gemini lane. Deterministic preflight returned revision_required before plan freeze or worker dispatch.",
+      "detection_method": "The repository-local orchestrator preflight emitted parallelism_lane_leverage_invalid:gemini_verifier. No worker ran and no product source changed; the failed receipt was preserved for exact evidence.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-338.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed receipt, replace only the invalid Gemini leverage with configured required_independence in the corrected runtime state, validate the register and generate a fresh passing v2 receipt before plan freeze.",
+        "prevention_control": "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-338.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0386",
+      "attempt_id": "ordinary-diary-cancellation-compatibility-register-validation-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_register_validator",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every incident record must use only the JSON-schema stage vocabulary and pass canonical register validation before it is relied on as correction evidence.",
+      "observed_error": "The first AER-0385 register entry used stage planning, which is not in the admitted stage enum. After that field was corrected, the first AER-0386 draft also used an invalid one-way related-incident link. The canonical register validator rejected both drafts before any register test, corrected receipt, plan freeze or worker dispatch.",
+      "detection_method": "scripts.ariadne_agent_error_register first reported that planning is not an admitted stage and then reported an attempt peer linkage mismatch. Both defects were confined to the still-unaccepted register correction.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+        "docs/ariadne-agent-error-correction-register-revision-339.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_stage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the invalid AER-0385 stage with admitted value dispatch, remove the unsupported one-way peer link from AER-0386, increment the register revision and require canonical validation before any corrected preplanning receipt is generated.",
+        "prevention_control": "Select every new incident enum directly from agent-error-register.schema.json, leave related_incident_ids empty unless the register's exact peer-link rule is satisfied, and run the standalone validator before depending on the entry or starting repository pytest.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-339.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0387",
+      "attempt_id": "ordinary-diary-cancellation-compatibility-focused-verification-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "delete-confirm-idempotency-route-contract-test",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The current delete-confirm route-contract suite's ordinary valid fixture must supply one allowlisted dedicated structured cancellation reason while explicit invalid-reason tests remain separately controlled.",
+      "observed_error": "At unchanged accepted product source, the first broader review packet produced thirteen route-test failures because helper _delete_payload defaulted status_reason_code to null and the current default-deny adapter returned reason_code_not_dedicated. A reason-only test edit was insufficient: a second excluded packet exposed additional pre-adapter session/current-authority and historical HTTP-shape assumptions.",
+      "detection_method": "Both serial packets passed the new review, API Spine, OpenAPI and Reception One tests while only the exact legacy route-contract file failed. The reason-only edit was reverted, and current accepted route-convergence/product-adapter suites remain the backend controls.",
+      "evidence_paths": [
+        "tests/test_api_spine_delete_confirm_idempotency_route_contract.py",
+        "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+        "docs/ariadne-agent-error-correction-register-revision-340.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.delete_confirm_route_fixture_omitted_dedicated_reason",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Revert the insufficient reason-only edit, exclude this stale legacy suite from current acceptance, use the accepted route-convergence/product-adapter tests as backend controls and carry a separate future harness-rewrite obligation without weakening current command semantics.",
+        "prevention_control": "Do not patch one assertion layer of a superseded route suite into apparent health; rebind it to the current adapter/session/authority and typed-response contract in a dedicated test-only repair before readmission.",
+        "evidence_paths": [
+          "tests/test_api_spine_delete_confirm_idempotency_route_contract.py",
+          "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+          "docs/ariadne-agent-error-correction-register-revision-340.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }
