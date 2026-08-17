@@ -1,0 +1,118 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted canonical check-in product-adapter extraction rehearsal",
+    "completed_stage": "The frozen plan is committed and published at exact source 2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b after the AER-0417 preplanning correction. The clean disposable DeepSeek worktree and exact two-file packet are prepared; protected refs remain fixed and all unrelated untracked files remain preserved.",
+    "next_executable_stage": "generate_the_exact_pre_worker_dispatch_receipt_then_launch_one_deepseek_v4_flash_high_worker",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
+    "reason_codes": [],
+    "resolved_commit": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
+    "branch_origin_aligned": true,
+    "head": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
+    "origin_branch_commit": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 654
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_dispatch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The frozen adapter and test modules are a stable separable mechanical package with exact paths, input hashes, line limits, commands and terminal receipt.",
+        "work_packages": [
+          "implement_unmounted_check_in_product_adapter_and_focused_authored_synthetic_tests_in_disposable_worktree"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high remains reserved for one fresh exact-candidate veto only after Sol deterministic admission of the worker result.",
+        "work_packages": [
+          "fresh_exact_candidate_read_only_veto_after_deterministic_admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek owns only the exact adapter-and-test package while Sol monitors and retains all acceptance integration and recovery authority"
+    ],
+    "reassessment_triggers": [
+      "worker_candidate_return",
+      "worker_transport_failure",
+      "material_worker_defect",
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "The committed plan and passed pre-dispatch receipt precede worker launch",
+      "Sol inspects exact worker diff and runs deterministic gates before integration",
+      "Gemini receives only one exact clean admitted candidate after Sol integration",
+      "Sol alone owns acceptance continuity Git and protected-boundary verification"
+    ]
+  },
+  "planned_action": "dispatch_one_deepseek_v4_flash_high_worker_for_the_exact_two_file_unmounted_check_in_adapter_package",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The frozen plan and threat delta are committed at exact source 2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b and constrain the worker to one unmounted adapter module plus one authored-synthetic test module over exact hash-bound read-only inputs.",
+    "current_authority_allocation": "GPT Sol retains plan, acceptance, recovery, integration and Git. DeepSeek V4 Flash/high receives exactly one two-file implementation/test package. Gemini 3.7 Flash/high remains reserved for the later exact-candidate veto. Native subagents remain declined by current developer policy.",
+    "git_refs_and_worktree": "The disposable worktree C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-deepseek-2b20e59c is clean on branch codex/check-in-product-adapter-deepseek-2b20e59c at exact source 2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b. The task branch and origin task match that source. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; 649 unrelated main-worktree untracked paths including docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the Current Baton directs the provider-free unmounted canonical check-in product-adapter extraction rehearsal from Continuity 315 / Compass 297.",
+    "protected_evidence_boundaries": "No existing route, config, schema, model, service, manifest, migration, client or test may change. No practice enablement, route call, live database/source/watcher, product/patient/clinical/historical/protected data, provider/ADC/credential/IAM/network/tool, deployment/release/Pages or protected-ref action. Worker stages only its two exact new paths."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -4,14 +4,14 @@
   "active_tranche": "Provider-free unmounted canonical check-in product-adapter extraction rehearsal",
   "objective": "Extract and test the reusable deterministic check-in product adapter from the default-off A5.1 route-local contract without changing mounted route behavior, practice admission, generic-status Arrived authority, action grammar, either first-party client or waiting-area movement.",
   "status": "in_progress",
-  "source_head": "852f6f26089cf081c205aff952dffcdecb80d63b",
+  "source_head": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
   "authority_source": "AGENTS.md Current Baton at Continuity 315 / Compass 297, the accepted arrival/check-in convergence review and Yuri's standing uninterrupted-development authority direct this narrow provider-free unmounted extraction rehearsal.",
   "checkpoint": {
-    "completed_stage": "The corrected five-source preplanning receipt passes; AER-0417 preserves its rejected first vocabulary attempt. The exact unmounted adapter plan, threat delta, two-file DeepSeek package, 60-mutation floor and closed API Spine boundary are frozen at source HEAD 852f6f26089cf081c205aff952dffcdecb80d63b, and the 400-check planning/continuity packet passes.",
-    "next_executable_stage": "commit_and_publish_the_frozen_plan_then_generate_the_exact_pre_dispatch_receipt_and_launch_the_bounded_deepseek_worktree",
+    "completed_stage": "The corrected exact five-source pre-dispatch receipt passes with worker dispatch permitted. One DeepSeek V4 Flash/high worker is active in the clean disposable worktree at plan source 2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b under the frozen two-file packet; no other worker or provider lane is active.",
+    "next_executable_stage": "await_the_deepseek_terminal_receipt_then_inspect_the_exact_commit_and_run_sol_deterministic_admission",
     "retry_counters": {
       "planning": 1,
-      "implementation": 0,
+      "implementation": 1,
       "review": 0,
       "verification": 0
     },

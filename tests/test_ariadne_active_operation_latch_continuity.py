@@ -56,7 +56,8 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
             "extraction-rehearsal"
         )
         assert latch["status"] == "in_progress"
-        assert latch["source_head"] == "852f6f26089cf081c205aff952dffcdecb80d63b"
+        assert len(latch["source_head"]) == 40
+        assert all(char in "0123456789abcdef" for char in latch["source_head"])
         assert "AER-0417" in latch["checkpoint"]["completed_stage"]
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True

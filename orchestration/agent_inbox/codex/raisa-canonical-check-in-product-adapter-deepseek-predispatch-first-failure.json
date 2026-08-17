@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.deterministic_failure_evidence.v1",
+  "observed_at": "2026-08-18T09:05:05+10:00",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "stage": "pre_worker_dispatch",
+  "detection": "ariadne orchestrator preflight",
+  "error": "workspace_receipt_missing:canonical_check_in_product_adapter_worker",
+  "candidate_state": "canonical_unchanged",
+  "worker_dispatch_permitted": false,
+  "worker_or_provider_calls": 0,
+  "product_source_changed": false,
+  "protected_refs_changed": false,
+  "disposition": "revision_required"
+}

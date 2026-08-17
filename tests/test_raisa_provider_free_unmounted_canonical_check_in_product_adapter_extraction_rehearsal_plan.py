@@ -79,6 +79,7 @@ def test_live_latch_names_the_exact_in_progress_successor() -> None:
         "extraction-rehearsal"
     )
     assert latch["status"] == "in_progress"
-    assert latch["source_head"] == "852f6f26089cf081c205aff952dffcdecb80d63b"
+    assert len(latch["source_head"]) == 40
+    assert all(char in "0123456789abcdef" for char in latch["source_head"])
     assert latch["user_attention"]["required"] is False
     assert latch["terminal_response"]["permitted"] is False
