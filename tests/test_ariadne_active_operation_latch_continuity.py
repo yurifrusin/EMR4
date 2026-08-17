@@ -9,6 +9,7 @@ from orchestration_harness.active_operation import validate_active_operation
 ROOT = Path(__file__).resolve().parents[1]
 NODE_ID = "ariadne-postcompaction-active-operation-latch"
 SOURCE_HEAD = "ac62a6f65612acb624f14b53ba86b1a9dbf72dab"
+CURRENT_LATCH = "orchestration/continuity/ariadne-active-operation-latch/current.json"
 
 
 def _load(path: str) -> dict:
@@ -35,6 +36,16 @@ def test_current_latch_validly_projects_its_live_operation_state() -> None:
         "orchestration/continuity/ariadne-active-operation-latch/current.json"
     )
     assert validate_active_operation(latch) == latch
+
+
+def test_completed_arrival_check_in_latch_binds_final_closeout_evidence() -> None:
+    latch = _load(CURRENT_LATCH)
+
+    assert latch["status"] == "complete"
+    completed = latch["checkpoint"]["completed_stage"]
+    assert "register revision 365 with 416 incidents" in completed
+    assert "404-check closeout packet" in completed
+    assert "AER-0413 through AER-0416" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]

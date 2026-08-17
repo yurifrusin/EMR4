@@ -39,7 +39,8 @@ negative evidence.
 - 118 focused API Spine, action-grammar, route-contract, promotion and review
   checks passed;
 - the agent-error register and compact Current Baton packet passed at final
-  closeout revision 363 with 414 bounded incidents and none open;
+  final post-publication rehydration revision 365 with 416 bounded incidents
+  and none open;
 - the canonical fast profile passed 200 tests, Ruff, 217 maintained-source
   compilations, Diary JavaScript syntax and Git whitespace; and
 - one fresh Gemini 3.7 Flash/high exact-candidate veto passed all seven
@@ -50,8 +51,10 @@ AER-0405 through AER-0412 preserve orchestration/test-fixture corrections
 encountered while admitting the candidate. AER-0413 records the closeout's
 stale current-position fixtures, active-label classification and handover byte-
 budget correction. AER-0414 records the rejected first terminal-latch draft
-and its exact validator-contract repair. None changed product source or the
-selected command-family meaning.
+and its exact validator-contract repair. AER-0415 records the stale completed-
+stage count found on successor rehydration. AER-0416 records the schema and
+test-symbol defects caught while validating that repair. None changed product
+source or the selected command-family meaning.
 
 ## Parallelism outcome
 

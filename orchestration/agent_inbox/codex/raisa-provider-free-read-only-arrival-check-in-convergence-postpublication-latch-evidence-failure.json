@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.deterministic_failure_evidence.v1",
+  "observed_at": "2026-08-18T07:34:51+10:00",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "stage": "pre_sprint_planning",
+  "detection": "fresh five-source successor rehydration",
+  "error": "the completed predecessor latch checkpoint still named register revision 362 and the 403-check packet after accepted closeout advanced to revision 363, 414 incidents and a 404-check packet",
+  "candidate_state": "canonical_unchanged",
+  "product_source_changed": false,
+  "provider_calls": 0,
+  "protected_refs_changed": false,
+  "disposition": "revision_required"
+}

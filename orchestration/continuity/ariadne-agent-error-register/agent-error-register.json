@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 363,
+  "register_revision": 365,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -16618,6 +16618,94 @@
           "orchestration/continuity/ariadne-active-operation-latch/current.json",
           "docs/ariadne-agent-error-correction-register-revision-363.md",
           "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0415",
+      "attempt_id": "arrival-check-in-convergence-postpublication-rehydration-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_rehydration",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A completed active-operation latch checkpoint must name the final accepted register revision, incident population and closeout-packet result before the successor rehydration receipt can pass.",
+      "observed_error": "The published completed latch still named register revision 362 and the 403-check packet after accepted closeout evidence had advanced through AER-0414 to revision 363, 414 incidents and a 404-check packet.",
+      "detection_method": "Fresh five-source successor rehydration compared the completed latch with the accepted closeout, live Current Baton and canonical register before generating a pre-sprint-planning receipt; no successor plan, dispatch or product edit followed the mismatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-postpublication-latch-evidence-failure.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md",
+        "docs/ariadne-agent-error-correction-register-revision-364.md",
+        "tests/test_ariadne_active_operation_latch_continuity.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.completed_latch_checkpoint_evidence_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Update the completed-stage text to register revision 364, 415 incidents and the 404-check packet; bind those facts in the latch Continuity test, regenerate the register report and rerun the exact latch/register/baton packet before successor planning.",
+        "prevention_control": "Immediately before terminal latch commit, derive completed-stage revision, population and check-count facts from the final register/closeout objects and assert them in the latch Continuity suite; do not copy them from an earlier precommit checkpoint.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-postpublication-latch-evidence-failure.json",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-364.md",
+          "tests/test_ariadne_active_operation_latch_continuity.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0416",
+      "attempt_id": "arrival-check-in-convergence-postpublication-correction-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A post-publication evidence correction must use the register schema vocabulary and its focused continuity assertion must resolve the canonical latch path before the corrected state can be committed.",
+      "observed_error": "The first AER-0415 correction used the schema-invalid stage pre_sprint_planning and added a latch assertion that referenced undefined CURRENT_LATCH. Register report generation rejected the stage and the preserved focused pytest packet exited with the schema failures and NameError before commit. The next generator pass rejected an informal AER-0415 related-incident link because no exact attempt-peer linkage existed.",
+      "detection_method": "The register generator failed JSON-schema validation before writing a new report, and the complete focused latch/register/baton packet then reached 100 percent with the corresponding register failures plus the undefined-name failure. After those repairs, the generator failed closed on the attempt-peer linkage rule. No commit, successor receipt, dispatch or product edit followed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-postpublication-correction-validation-failure.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-365.md",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.postpublication_evidence_repair_schema_and_fixture_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Map AER-0415 to the accepted closeout stage, define CURRENT_LATCH once at module scope, remove the unsupported informal related-incident link, add exact AER-0416 coverage, advance revision and aggregate fixtures, regenerate the report and rerun the complete focused packet before commit or successor planning.",
+        "prevention_control": "Before adding an incident or focused latch assertion, select stage values from the register schema, resolve every newly referenced module symbol and add related-incident links only with the exact required attempt-peer linkage; run register generation before the wider focused packet so contract defects are isolated immediately.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-postpublication-correction-validation-failure.json",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-365.md",
+          "tests/test_ariadne_agent_error_register.py",
           "tests/test_ariadne_active_operation_latch_continuity.py"
         ]
       },

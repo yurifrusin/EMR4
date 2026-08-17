@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.deterministic_failure_evidence.v1",
+  "observed_at": "2026-08-18T08:41:38+10:00",
+  "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+  "stage": "deterministic_verification",
+  "detection": "focused latch/register/baton continuity packet",
+  "error": "AER-0415 used the schema-invalid stage pre_sprint_planning and the new latch assertion referenced undefined CURRENT_LATCH; after those repairs the register generator also rejected an informal related-incident link without exact attempt-peer linkage; every failure occurred before commit",
+  "candidate_state": "canonical_unchanged",
+  "product_source_changed": false,
+  "provider_calls": 0,
+  "protected_refs_changed": false,
+  "disposition": "revision_required"
+}

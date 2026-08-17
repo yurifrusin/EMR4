@@ -47,7 +47,9 @@ remains recorded, not silently repaired.
 
 The closeout also caught stale Compass/baton fixtures, a handover size-limit
 breach and one invalid first terminal-latch draft. AER-0413/AER-0414 record the
-narrow harness-only repairs; product code and the accepted check-in decision
+narrow harness-only repairs; AER-0415 corrects one stale evidence count found
+on successor rehydration, and AER-0416 corrects the schema/test defects caught
+while validating that repair. Product code and the accepted check-in decision
 did not change.
 
 The next tranche is the provider-free unmounted canonical check-in product-
