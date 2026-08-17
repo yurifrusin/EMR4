@@ -34,6 +34,17 @@ git_object_resolution:
   expected_object_type: commit
   require_ancestor_of_head: true
   timeout_seconds: 5
+git_refs_snapshot:
+  schema_version: ariadne.git_refs_snapshot_policy.v1
+  required_events: *continuation_events
+  expected_protected_commit: 2e34bdad732fdab32fbf778280b3d3c70d66d602
+  protected_refs:
+    - refs/heads/master
+    - refs/remotes/origin/master
+    - refs/heads/handoff/current
+    - refs/remotes/origin/handoff/current
+  preserved_untracked_paths: [docs/branding]
+  timeout_seconds: 5
 required_adapter_observations: all_declared
 worker_slot_management:
   # This is an EMR4 profile choice. The receipt core is resource-neutral.
@@ -76,6 +87,7 @@ orchestrator_rules:
   - require_valid_active_operation_latch_at_each_continuation_event
   - require_explicit_parallelism_assessment_at_each_continuation_event
   - require_machine_resolved_active_operation_source_commit_at_each_continuation_event
+  - require_machine_generated_git_ref_and_worktree_snapshot_at_each_continuation_event
   - never_default_to_solo_serial_work_without_recorded_lane_dispositions_and_serial_constraints
   - reassess_deepseek_gemini_and_native_subagents_at_each_named_tranche_boundary
   - never_treat_prompt_recency_alone_as_operation_replacement

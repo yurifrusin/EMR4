@@ -1,21 +1,21 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
-  "active_tranche": "Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal",
-  "objective": "Repair the proved route-producer canonicalization mismatch and missing transaction-local tenant context at the accepted delete physical seam, then exercise the exact canonical delete-confirm HTTP route and hidden alias against one owned disposable PostgreSQL 16 server using fixed authored-synthetic rows and prove non-mutating proposal, committed/replay/denial/rollback behavior and exact cleanup without changing raw DELETE, adapter/composition/schema/public meaning or opening product data, providers, deployment or protected refs.",
-  "status": "complete",
-  "source_head": "fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db",
-  "authority_source": "The Continuity 308 / Compass 290 HTTP route-convergence acceptance, AGENTS.md Current Baton and Yuri's standing uninterrupted-development authority direct the disposable PostgreSQL integration rehearsal; Yuri's latest instructions add the post-closeout Ariadne effectiveness review plus a primary-source DeepSeek Harness takeaway and migration assessment without replacing this unfinished operation.",
+  "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+  "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
+  "objective": "Review the recent workflow against preserved incidents, assess DeepSeek Harness from exact public primary sources, keep Codex as conductor when subscription and migration constraints hold, and implement only machine Git snapshots, durable structured validation lifecycle receipts with pytest-envelope admission, and bounded DeepSeek worker environment hardening without changing Raisa product behavior or protected refs.",
+  "status": "in_progress",
+  "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+  "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
   "checkpoint": {
-    "completed_stage": "Exact candidate fe5dbcb31b06b027285aa84ee3cafb4fbbffb9db passed all twelve authored-synthetic local HTTP/PostgreSQL scenarios, 135 hostile mutations, exact cleanup, deterministic profiles and one clean eight-command Gemini 3.7 Flash/high veto. Sol acceptance, paired closeout and Continuity 309 / Compass 291 are complete.",
-    "next_executable_stage": null,
+    "completed_stage": "The three frozen repository-only Ariadne repairs are implemented. The final deterministic profile passes 234 harness/handover tests, 287 register tests, Ruff, maintained-source compilation and Git whitespace; AER-0379 preserves the correctly stopped pre-existing live-handover compactness failure and its correction.",
+    "next_executable_stage": "Freeze the exact task-branch candidate, prepare a fresh clean review worktree and obtain one Gemini 3.7 Flash/high veto before Sol acceptance.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
-      "review": 1,
-      "verification": 3
+      "review": 0,
+      "verification": 2
     },
-    "settings_fingerprint": "sha256:a4d95918a9f93cbea29121178fc85e7624b72dacc318beeb3f2c030beef8f734"
+    "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
   "interruption_policy": {
     "chronological_last_prompt_is_controlling_authority": false,
@@ -24,25 +24,24 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete_but_authorized_next_operation_continues"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_owned_disposable_postgresql16_and_authored_synthetic_only",
-    "no_existing_product_database_or_external_database_access",
-    "only_route_producer_canonicalization_may_change_to_delegate_to_the_accepted_adapter_helpers",
-    "only_physical_transaction_context_may_change_to_set_the_authenticated_practice_transaction_locally_after_isolation_begins",
-    "no_adapter_composition_schema_public_contract_or_raw_delete_edit",
-    "no_raw_delete_convergence_or_route_local_write_fallback",
-    "no_capability_provisioning_or_client_selected_authority",
+    "repository_only_ariadne_development_harness_changes",
+    "deepseek_harness_public_primary_sources_only_no_import_install_or_execution",
+    "no_raisa_product_api_database_migration_runtime_or_ui_change",
+    "no_external_package_install_or_dependency_vendoring",
+    "validation_receipts_store_only_output_digests_and_byte_counts",
+    "worker_environment_hardening_is_defence_in_depth_not_os_sandboxing",
     "no_product_patient_clinical_historical_diary_or_protected_data",
-    "no_provider_adc_credentials_iam_browser_or_external_network_except_owned_loopback_database_transport",
+    "no_product_provider_adc_credentials_iam_browser_database_or_external_runtime",
     "no_ui_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

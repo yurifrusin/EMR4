@@ -1,0 +1,173 @@
+{
+  "command_manifest_sha256": "b892ff20ccd264e3f7448f1504df8b084949fac780ab4e64c7836db666ebb09b",
+  "commands": [
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        ".",
+        "--",
+        "tests/test_ariadne_risk_weighted_workflow.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_current_baton_consistency.py",
+        "-q"
+      ],
+      "id": "CANONICAL"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py"
+      ],
+      "id": "RUFF"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py"
+      ],
+      "id": "COMPILE"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "id": "DIFFCHECK"
+    }
+  ],
+  "ended_at": "2026-08-17T00:08:21.551043Z",
+  "failure_command_id": "CANONICAL",
+  "repo_root": "C:\\Users\\sarashera\\emr4",
+  "results": [
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        ".",
+        "--",
+        "tests/test_ariadne_risk_weighted_workflow.py",
+        "tests/test_ariadne_verifier_worktree_preflight.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_current_baton_consistency.py",
+        "-q"
+      ],
+      "elapsed_ms": 91808,
+      "error_code": null,
+      "exit_code": 1,
+      "id": "CANONICAL",
+      "status": "failed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 2071,
+      "stdout_sha256": "ad423fb7b4b3e1d7ec907899ea8240c633083f84ce766e171e8061217a7360d7"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "RUFF",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "COMPILE",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "DIFFCHECK",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-17T00:06:49.739756Z",
+  "status": "failed"
+}

@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 329
+    assert register["register_revision"] == 330
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 379)
+        f"AER-{index:04d}" for index in range(1, 380)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2577,7 +2577,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 378
+    assert report["incident_count"] == 379
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3614,13 +3614,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 329
-    assert report["incident_count"] == 378
+    assert report["register_revision"] == 330
+    assert report["incident_count"] == 379
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 262,
         "harness": 47,
-        "repository": 58,
+        "repository": 59,
         "transport": 11,
     }
     assert report["counts"]["by_category"] == {
@@ -3630,12 +3630,12 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
-        "repository_defect": 58,
+        "repository_defect": 59,
         "transport_timeout": 11,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 109,
-        "canonical_unchanged": 229,
+        "canonical_unchanged": 230,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -5994,6 +5994,23 @@ def test_aer_0378_repairs_fixtureless_closeout_invocations() -> None:
     assert "37/37" in incident["detection_method"]
     assert "130/130" in incident["detection_method"]
     assert "conftest_required" in incident["correction"]["prevention_control"]
+
+
+def test_aer_0379_compacts_the_preexisting_live_handover_overrun() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0379"
+    ]
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["status"] == "corrected"
+    assert "80040-byte canonical" in incident["observed_error"]
+    assert "stopped all later commands" in incident["detection_method"]
+    assert "tests/test_agents_acceptance_index.py" in incident["correction"][
+        "prevention_control"
+    ]
 
 
 

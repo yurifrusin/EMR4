@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCK_PATH = Path(tempfile.gettempdir()) / "emr4-ariadne-shared-pytest-v1.lock"
 LOCK_TIMEOUT_ENV = "EMR4_ARIADNE_SERIAL_PYTEST_TIMEOUT_SECONDS"
 CONFTEST_RELATIVE = Path("tests") / "conftest.py"
+COMPOUND_TOKENS = frozenset({";", "&&", "||", "|"})
 
 
 def resolve_repo_root(repo_root: Path) -> Path:
@@ -118,6 +119,44 @@ def serial_pytest_lock(
             _unlock(handle)
 
 
+def validate_pytest_arguments(
+    pytest_args: Sequence[str], *, repo_root: Path
+) -> list[str]:
+    """Admit one explicit serial pytest envelope and its selected paths."""
+    args = list(pytest_args)
+    if args[:1] == ["--"]:
+        args = args[1:]
+    if not args:
+        raise ValueError("explicit_pytest_arguments_required")
+    if any(token in COMPOUND_TOKENS for token in args):
+        raise ValueError("compound_pytest_tokens_forbidden")
+    if any(
+        token == "--noconftest" or token.startswith("--noconftest=")
+        for token in args
+    ):
+        raise ValueError("serial_pytest_noconftest_forbidden")
+
+    root = resolve_repo_root(repo_root)
+    for token in args:
+        if token.startswith("-"):
+            continue
+        selector = token.split("::", 1)[0]
+        normalized = selector.replace("\\", "/")
+        if not normalized.endswith(".py"):
+            continue
+        selected_path = Path(selector)
+        if selected_path.is_absolute():
+            raise ValueError("selected_test_path_must_be_repository_relative")
+        candidate = (root / selected_path).resolve()
+        try:
+            candidate.relative_to(root)
+        except ValueError as error:
+            raise ValueError("selected_test_path_outside_repository") from error
+        if not candidate.is_file():
+            raise ValueError(f"selected_test_path_missing:{normalized}")
+    return args
+
+
 def build_pytest_command(pytest_args: Sequence[str]) -> list[str]:
     args = list(pytest_args)
     if args[:1] == ["--"]:
@@ -159,7 +198,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parse_args(sys.argv[1:] if argv is None else argv)
     try:
         repo_root = resolve_repo_root(args.repo_root)
-        command = build_pytest_command(args.pytest_args)
+        admitted_args = validate_pytest_arguments(
+            args.pytest_args,
+            repo_root=repo_root,
+        )
+        command = build_pytest_command(admitted_args)
         environment = build_pytest_environment(args.timeout_seconds)
         completed = subprocess.run(
             command,

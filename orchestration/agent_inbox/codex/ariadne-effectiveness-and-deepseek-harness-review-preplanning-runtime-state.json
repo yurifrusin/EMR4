@@ -1,0 +1,93 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "freeze_the_deterministically_admitted_exact_task_branch_candidate_for_one_fresh_independent_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton records Continuity 309 / Compass 291 and directs an Ariadne effectiveness and DeepSeek Harness review before further product work.",
+    "current_authority_allocation": "Sol owns evidence synthesis, implementation integration and acceptance. DeepSeek Flash implementation is declined because this tranche hardens its launcher and shared admission path; Gemini 3.7 Flash/high is reserved for one final exact-candidate veto; native subagents are declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-risk-weighted-workflow-reform-plan.md",
+      "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+      "docs/ariadne-cf-d2-workflow-incident-diagnosis.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md",
+      "docs/ariadne-agent-error-correction-register-revision-329.md",
+      "docs/ariadne-agent-error-correction-register-revision-330.md",
+      "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md",
+      "docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json"
+    ],
+    "protected_evidence_boundaries": "The review may inspect committed workflow source, settings, tests, public DeepSeek Harness primary sources and non-sensitive aggregate incident evidence only. It may not open protected evidence, PHI, product/patient/clinical data, credentials, provider product calls, deployment, release, Pages or protected refs. docs/branding and unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Task HEAD and origin task are exact 38660a4a7136094df67b28d5a6ec07ca40c14416 before the candidate commit. The working tree contains only explicitly scoped tranche edits plus preserved pre-existing untracked files. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+    "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
+    "objective": "Review the recent workflow against preserved incidents, assess DeepSeek Harness from exact public primary sources, keep Codex as conductor when subscription and migration constraints hold, and implement only machine Git snapshots, durable structured validation lifecycle receipts with pytest-envelope admission, and bounded DeepSeek worker environment hardening without changing Raisa product behavior or protected refs.",
+    "status": "in_progress",
+    "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+    "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
+    "checkpoint": {
+      "completed_stage": "The three frozen repository-only Ariadne repairs are implemented. The final deterministic profile passes 234 harness/handover tests, 287 register tests, Ruff, maintained-source compilation and Git whitespace; AER-0379 preserves the correctly stopped pre-existing live-handover compactness failure and its correction.",
+      "next_executable_stage": "Freeze the exact task-branch candidate, prepare a fresh clean review worktree and obtain one Gemini 3.7 Flash/high veto before Sol acceptance.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 2},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "repository_only_ariadne_development_harness_changes",
+      "deepseek_harness_public_primary_sources_only_no_import_install_or_execution",
+      "no_raisa_product_api_database_migration_runtime_or_ui_change",
+      "no_external_package_install_or_dependency_vendoring",
+      "validation_receipts_store_only_output_digests_and_byte_counts",
+      "worker_environment_hardening_is_defence_in_depth_not_os_sandboxing",
+      "no_product_patient_clinical_historical_diary_or_protected_data",
+      "no_product_provider_adc_credentials_iam_browser_database_or_external_runtime",
+      "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+    "assessed_stage": "deterministic_candidate_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The bounded changes modify the worker launcher and shared receipt/test admission path itself; dispatch through the not-yet-hardened lane would cost more than serial implementation and weaken isolation evidence.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "One fresh final veto is required because the selected repairs materially change continuation and validation admission behavior.", "work_packages": ["exact-candidate read-only veto after all deterministic gates pass"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits native delegation; Sol can perform primary-source and incident synthesis serially.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["shared preflight validation and receipt schema changes", "worker launcher hardening must precede later worker use", "one final exact-candidate verifier after deterministic admission"],
+    "reassessment_triggers": ["unexpectedly separable mechanical package", "deterministic repair gate", "pre-verifier admission"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "fresh complete post-compaction AGENTS.md read, active plan/threat/latch read and exact Git/ref/worktree verification", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready for primary-source research and plan freeze."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined by current policy."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini lane is reserved, not dispatched."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek lane is reserved for a later stable mechanical package."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

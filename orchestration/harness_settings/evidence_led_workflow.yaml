@@ -14,6 +14,8 @@ hard_controls:
   - handover_edits_require_acceptance_index_guard
   - active_operation_settings_fingerprint_matches_receipt
   - git_refs_evidence_full_commit_ids_resolve_locally
+  - machine_generated_git_ref_and_worktree_snapshot
+  - durable_one_command_validation_lifecycle_receipt
 adaptive_flow:
   active_boundary_artifacts: one_plan_and_one_machine_contract
   external_review: one_final_risk_triggered_veto_unless_a_hard_boundary_is_ambiguous
@@ -46,6 +48,14 @@ review_command_evidence:
   pass_requires_every_exit_code_zero: true
   manifest_digest_in_receipt: required_when_manifest_bound
   provider_free_database_closed_test_entrypoint: python -m scripts.ariadne_provider_free_pytest
+  admitted_local_runner: python -m scripts.ariadne_validation_runner
+  local_runner_shell: forbidden
+  local_runner_stops_on_first_nonzero: true
+  local_runner_receipt: atomic_before_run_and_after_each_command
+  direct_pytest: forbidden
+  serial_pytest_entrypoint: python -m scripts.ariadne_serial_pytest
+  serial_pytest_noconftest: forbidden
+  selected_test_paths: exact_existing_repository_paths
 receipt_authoring:
   configured_event_discovery_command: python -m scripts.ariadne_orchestrator_preflight --list-continuation-events
   inferred_or_abbreviated_event_names: forbidden
@@ -53,6 +63,11 @@ git_identity:
   full_commit_ids: resolve_with_git_rev_parse
   manual_short_sha_expansion: forbidden
   verifier_worktree: reverify_exact_head_before_dispatch
+  continuation_receipt_snapshot: fixed_read_only_git_argv
+worker_environment:
+  package_or_environment_mutation: forbidden
+  inherited_virtual_environment_and_package_indexes: removed
+  dependency_installers: offline_noninteractive_defence_in_depth
 closed_surfaces:
   - database_or_docker_runtime
   - provider_or_external_retrieval

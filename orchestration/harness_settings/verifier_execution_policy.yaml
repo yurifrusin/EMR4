@@ -95,6 +95,12 @@ lane_profile:
       - acceptance
       - integration
       - protected_refs
+      - package_or_shared_environment_mutation
+    environment_boundary:
+      inherited_virtual_environment_and_package_indexes: removed
+      pip_and_uv_network_install: disabled
+      package_manager_instruction: forbidden
+      missing_dependency_action: stop_and_report
   gemini_flash:
     resource_id: antigravity-gemini-flash-3-7-high-verifier
     model: gemini-3.7-flash-high
@@ -124,8 +130,15 @@ evidence_led_flow:
 test_execution:
   repository_conftest_pytest: serial
   shared_postgresql_schema: serial
+  required_validation_runner: ../../scripts/ariadne_validation_runner.py
+  validation_runner_manifest: ordered_structured_argv
+  validation_runner_lifecycle_receipt: atomic_and_durable
+  validation_runner_failure_behavior: stop_on_first_nonzero
   required_pytest_launcher: ../../scripts/ariadne_serial_pytest.py
   conftest_enforcement: ../../tests/conftest.py
+  direct_pytest: forbidden
+  serial_noconftest: forbidden
+  selected_test_paths: exact_existing_repository_paths
   direct_pytest_bypass: serialized_by_repository_conftest
   parallel_allowed_only_for:
     - import_free_static_checks

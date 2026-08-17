@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 329,
+  "register_revision": 330,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15154,6 +15154,45 @@
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-329.md",
           "scripts/ariadne_serial_pytest.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0379",
+      "attempt_id": "ariadne-effectiveness-review-canonical-maintenance-001",
+      "observed_on": "2026-08-17",
+      "tranche": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-live-handover-compactness-guard",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The live AGENTS.md rehydration surface must remain below 80000 checkout bytes and 500 lines while durable historical incident detail remains available from the canonical register and topic ledger.",
+      "observed_error": "The first durable canonical maintenance run stopped after 233 passes because unchanged source HEAD 38660a4a had an 80040-byte canonical AGENTS.md blob and an 80507-byte Windows CRLF checkout, exceeding the live-handover compactness guard before this tranche changed AGENTS.md.",
+      "detection_method": "The structured validation runner persisted the failed CANONICAL command and stopped all later commands. git cat-file -s HEAD:AGENTS.md proved the defect existed at the exact unchanged source, and the working-tree diff proved the harness implementation had not modified AGENTS.md.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-canonical-validation-receipt.json",
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-330.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.live_handover_exceeded_compactness_byte_guard",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the failed receipt, replace one obsolete revision-42 incident narrative in the live handover with a compact pointer to the current canonical register and topic ledger, and rerun the exact compactness test before candidate acceptance.",
+        "prevention_control": "Current incident counts and active rules remain in the live Current Baton; superseded per-incident chronology stays in the canonical register, revision documents and topic ledger. Every AGENTS closeout continues to run tests/test_agents_acceptance_index.py.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_agents_acceptance_index.py",
+          "docs/ariadne-agent-error-correction-register-revision-330.md"
         ]
       },
       "status": "corrected"

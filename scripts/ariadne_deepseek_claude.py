@@ -16,9 +16,24 @@ EFFORTS = {"high", "max"}
 SYSTEM_PROMPT = (
     "Execute the bounded coding packet in the current isolated worktree. "
     "Do not change scope, access protected master, push, deploy, or expose secrets. "
+    "Do not run a package manager, install a dependency, or mutate any Python, "
+    "Node, user, system, or shared environment. "
     "Run the requested checks and report changed files, tests, and blockers concisely."
 )
 DEFAULT_TOOLS = "Read,Glob,Grep,Edit,Write,Bash"
+SCRUBBED_PACKAGE_ENVIRONMENT = frozenset(
+    {
+        "virtual_env",
+        "pythonhome",
+        "pythonpath",
+        "pip_index_url",
+        "pip_extra_index_url",
+        "pip_trusted_host",
+        "uv_index",
+        "uv_default_index",
+        "uv_extra_index_url",
+    }
+)
 
 
 def build_command(*, packet: str, model: str, effort: str) -> list[str]:
@@ -57,6 +72,9 @@ def deepseek_environment(
     if not api_key:
         raise ValueError("DEEPSEEK_API_KEY is not set")
     env = os.environ.copy()
+    for key in list(env):
+        if key.casefold() in SCRUBBED_PACKAGE_ENVIRONMENT:
+            env.pop(key)
     env.update(
         {
             "ANTHROPIC_BASE_URL": BASE_URL,
@@ -65,6 +83,13 @@ def deepseek_environment(
             "ANTHROPIC_MODEL": model,
             "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-flash",
             "CLAUDE_CODE_EFFORT_LEVEL": effort,
+            "PIP_NO_INDEX": "1",
+            "PIP_NO_INPUT": "1",
+            "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+            "PYTHONNOUSERSITE": "1",
+            "UV_OFFLINE": "1",
+            "NPM_CONFIG_OFFLINE": "true",
+            "YARN_ENABLE_NETWORK": "0",
         }
     )
     if cwd is not None:
@@ -89,6 +114,9 @@ def run_worker(
     bounded_packet = (
         f"AUTHORIZED_WORKTREE_ROOT: {resolved_cwd}\n"
         "All file and shell operations must remain under that root.\n\n"
+        "PACKAGE_AND_ENVIRONMENT_MUTATION: FORBIDDEN. Do not run pip, uv, npm, "
+        "yarn, pnpm, conda, poetry, or any dependency installer. If a required "
+        "dependency is absent, stop and report the blocker without installing it.\n\n"
         f"{packet}"
     )
     command = build_command(packet=bounded_packet, model=model, effort=effort)

@@ -55,6 +55,12 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
         "native_subagents",
     ]
     assert receipt["terminal_handback_permitted"] is False
+    assert receipt["git_refs_snapshot"]["status"] == "passed"
+    assert receipt["git_refs_snapshot"]["protected_refs_aligned"] is True
+    assert receipt["git_refs_snapshot"]["head"] == receipt[
+        "git_object_resolution"
+    ]["observed_head"]
+    assert isinstance(receipt["git_refs_snapshot"]["untracked_path_count"], int)
     assert receipt["git_object_resolution"] == {
         "schema_version": "ariadne.git_object_resolution.v1",
         "status": "passed",

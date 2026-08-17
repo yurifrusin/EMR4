@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "FOCUSED",
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        ".",
+        "--",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "RUFF",
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py"
+      ]
+    },
+    {
+      "id": "COMPILE",
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py"
+      ]
+    },
+    {
+      "id": "DIFFCHECK",
+      "argv": ["git", "diff", "--check"]
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "command_manifest_sha256": "af43013cba4479202c6471c2794a5662ce2ce11a886ed663b40fcbddef91f538",
+  "commands": [
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        ".",
+        "--",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "-q"
+      ],
+      "id": "FOCUSED"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py"
+      ],
+      "id": "RUFF"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py"
+      ],
+      "id": "COMPILE"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "id": "DIFFCHECK"
+    }
+  ],
+  "ended_at": "2026-08-17T00:01:03.142597Z",
+  "failure_command_id": null,
+  "repo_root": "C:\\Users\\sarashera\\emr4",
+  "results": [
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        ".",
+        "--",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "-q"
+      ],
+      "elapsed_ms": 44756,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "FOCUSED",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1004,
+      "stdout_sha256": "5e74fbd9a8c8b12209bc12b922729e054d22a81573f6f6cbb3c4e0669b82fc4b"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py"
+      ],
+      "elapsed_ms": 73,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "RUFF",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 19,
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "argv": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py"
+      ],
+      "elapsed_ms": 56,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "COMPILE",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "elapsed_ms": 40,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "DIFFCHECK",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-17T00:00:18.199686Z",
+  "status": "passed"
+}

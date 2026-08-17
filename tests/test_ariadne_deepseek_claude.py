@@ -27,6 +27,10 @@ def test_command_uses_bare_headless_mode_and_no_session_persistence():
 
 def test_environment_uses_only_process_local_deepseek_configuration(monkeypatch):
     monkeypatch.setenv("UNRELATED", "preserved")
+    monkeypatch.setenv("VIRTUAL_ENV", "C:/primary/.venv")
+    monkeypatch.setenv("PYTHONPATH", "C:/primary")
+    monkeypatch.setenv("PIP_INDEX_URL", "https://packages.example.invalid")
+    monkeypatch.setenv("UV_DEFAULT_INDEX", "https://uv.example.invalid")
     env = deepseek_environment(api_key="test-key", model="deepseek-v4-pro", effort="max")
 
     assert env["ANTHROPIC_BASE_URL"] == BASE_URL
@@ -34,6 +38,16 @@ def test_environment_uses_only_process_local_deepseek_configuration(monkeypatch)
     assert env["ANTHROPIC_AUTH_TOKEN"] == "test-key"
     assert env["ANTHROPIC_MODEL"] == "deepseek-v4-pro"
     assert env["UNRELATED"] == "preserved"
+    assert "VIRTUAL_ENV" not in env
+    assert "PYTHONPATH" not in env
+    assert "PIP_INDEX_URL" not in env
+    assert "UV_DEFAULT_INDEX" not in env
+    assert env["PIP_NO_INDEX"] == "1"
+    assert env["PIP_NO_INPUT"] == "1"
+    assert env["PYTHONNOUSERSITE"] == "1"
+    assert env["UV_OFFLINE"] == "1"
+    assert env["NPM_CONFIG_OFFLINE"] == "true"
+    assert env["YARN_ENABLE_NETWORK"] == "0"
 
 
 def test_environment_pins_shell_directory_signals_to_worker(tmp_path: Path):
@@ -112,6 +126,9 @@ def test_run_worker_writes_compact_receipt_without_session_id_or_raw_stderr(
     assert packet_argument.startswith(
         f"AUTHORIZED_WORKTREE_ROOT: {worktree.resolve()}\n"
     )
+    assert "PACKAGE_AND_ENVIRONMENT_MUTATION: FORBIDDEN" in packet_argument
+    system_prompt = command[command.index("--system-prompt") + 1]
+    assert "Do not run a package manager" in system_prompt
     rendered = output.read_text(encoding="utf-8")
     assert '"total_cost_usd"' not in rendered
     assert "session_id" not in rendered

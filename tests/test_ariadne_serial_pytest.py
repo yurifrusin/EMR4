@@ -18,6 +18,7 @@ from scripts.ariadne_serial_pytest import (
     main as serial_pytest_main,
     resolve_repo_root,
     serial_pytest_lock,
+    validate_pytest_arguments,
 )
 
 
@@ -143,3 +144,29 @@ def test_serial_pytest_main_rejects_repo_root_without_conftest(tmp_path: Path) -
         ["--repo-root", str(empty), "--", "tests/test_example.py::test_case", "-q"]
     )
     assert rc == 2
+
+
+def test_serial_pytest_rejects_noconftest_compound_and_missing_paths(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    tests = repo / "tests"
+    tests.mkdir(parents=True)
+    (tests / "conftest.py").write_text("# synthetic\n", encoding="utf-8")
+    (tests / "test_present.py").write_text("def test_present(): pass\n", encoding="utf-8")
+
+    assert validate_pytest_arguments(
+        ["--", "tests/test_present.py::test_present", "-q"], repo_root=repo
+    ) == ["tests/test_present.py::test_present", "-q"]
+    with pytest.raises(ValueError, match="serial_pytest_noconftest_forbidden"):
+        validate_pytest_arguments(
+            ["--noconftest", "tests/test_present.py"], repo_root=repo
+        )
+    with pytest.raises(ValueError, match="compound_pytest_tokens_forbidden"):
+        validate_pytest_arguments(
+            ["tests/test_present.py", ";", "echo"], repo_root=repo
+        )
+    with pytest.raises(ValueError, match="selected_test_path_missing"):
+        validate_pytest_arguments(["tests/test_absent.py"], repo_root=repo)
+    with pytest.raises(ValueError, match="selected_test_path_outside_repository"):
+        validate_pytest_arguments(["../test_escape.py"], repo_root=repo)

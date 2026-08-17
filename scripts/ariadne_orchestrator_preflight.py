@@ -22,6 +22,11 @@ from orchestration_harness.git_object_resolution import (
     failure_projection,
     resolve_commit_source,
 )
+from orchestration_harness.git_refs_snapshot import (
+    GitRefsSnapshotError,
+    build_git_refs_snapshot,
+    failure_projection as git_refs_failure_projection,
+)
 from orchestration_harness.settings_fingerprint import settings_fingerprint
 
 SETTINGS_DIR = REPO_ROOT / "orchestration" / "harness_settings"
@@ -122,6 +127,38 @@ def build_receipt(
         reasons = receipt.setdefault("reasons", [])
         if reason not in reasons:
             reasons.append(reason)
+        receipt["status"] = "revision_required"
+        receipt["worker_dispatch_permitted"] = False
+    snapshot_policy = requirements.get("git_refs_snapshot")
+    if not isinstance(snapshot_policy, dict):
+        snapshot_reason = "git_refs_snapshot_policy_missing"
+        snapshot = git_refs_failure_projection(snapshot_reason)
+    else:
+        try:
+            snapshot = build_git_refs_snapshot(
+                repo_root=repository_root,
+                expected_protected_commit=snapshot_policy["expected_protected_commit"],
+                protected_refs=snapshot_policy["protected_refs"],
+                preserved_untracked_paths=snapshot_policy["preserved_untracked_paths"],
+                timeout_seconds=snapshot_policy["timeout_seconds"],
+            )
+            snapshot_reason = (
+                None
+                if snapshot["status"] == "passed"
+                else snapshot["reason_codes"][0]
+            )
+        except (GitRefsSnapshotError, KeyError, TypeError) as error:
+            snapshot_reason = (
+                error.reason_code
+                if isinstance(error, GitRefsSnapshotError)
+                else "git_refs_snapshot_policy_invalid"
+            )
+            snapshot = git_refs_failure_projection(snapshot_reason)
+    receipt["git_refs_snapshot"] = snapshot
+    if snapshot_reason is not None:
+        reasons = receipt.setdefault("reasons", [])
+        if snapshot_reason not in reasons:
+            reasons.append(snapshot_reason)
         receipt["status"] = "revision_required"
         receipt["worker_dispatch_permitted"] = False
     policy = requirements.get("git_object_resolution")
