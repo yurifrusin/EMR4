@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "cc13bd613c9675201654c5f0364b3e1b63d6d1d04c38f6bcc0871aa50862b987",
+  "canonical_register_sha256": "6a0aeeee27952b576cc198205e313adaf8568460711aa58c8a18888c2fde9af9",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 262,
+      "canonical_unchanged": 264,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 64,
       "evidence_misreport": 55,
       "harness_failure": 48,
-      "output_contract_violation": 121,
+      "output_contract_violation": 123,
       "read_only_violation": 3,
       "reasoning_claim_error": 42,
       "repository_defect": 65,
       "transport_timeout": 14
     },
     "by_origin": {
-      "agent_behavior": 285,
+      "agent_behavior": 287,
       "harness": 48,
       "repository": 65,
       "transport": 14
     },
     "by_process_severity": {
-      "low": 168,
+      "low": 170,
       "material": 115,
       "moderate": 129
     },
@@ -45,7 +45,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 203,
+      "codex-primary-orchestrator::orchestrator": 204,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -87,7 +87,7 @@
       "emr4-context-fabric-durability-structural-contract::orchestrator": 5,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-context-fabric-roadmap-order-test::orchestrator": 1,
-      "emr4-current-baton-consistency::orchestrator": 2,
+      "emr4-current-baton-consistency::orchestrator": 3,
       "emr4-disposable-postgresql-harness::orchestrator": 23,
       "emr4-disposable-postgresql-parse-evidence-router::orchestrator": 1,
       "emr4-durability-ddl-renderer::orchestrator": 3,
@@ -107,12 +107,12 @@
     "by_role": {
       "implementer": 40,
       "integration_reviewer": 3,
-      "orchestrator": 315,
+      "orchestrator": 317,
       "verifier": 54
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 412,
+  "incident_count": 414,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -506,6 +506,30 @@
       "categories": [
         "output_contract_violation"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0390",
+        "AER-0414"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Construct every terminal latch transition from the exact status branch in orchestration_harness/active_operation.py and run both canonical latch suites before generating the final precommit receipt. When adding an explicit recurrence assertion, update its residual-list exclusion in the same patch.",
+        "Construct terminal latch transitions from the exact status branch in orchestration_harness/active_operation.py and run the two canonical latch suites before any closeout receipt, commit or publication."
+      ],
+      "recurrence_signature": "orchestrator.active_operation_complete_retained_resume_or_next_stage",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
       "incident_count": 3,
       "incident_ids": [
         "AER-0255",
@@ -811,16 +835,18 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0403",
-        "AER-0411"
+        "AER-0411",
+        "AER-0413"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Current Baton prose fixtures require current revision/count and current bounded-chain endpoints; historical incident continuity belongs in the canonical register and revision documents, not as permanent names in the compact live row.",
+        "Treat graph/Compass advance, current-row fixtures, active-label classification and the live-handover byte budget as one closeout change set; measure and run the compactness check before the first full closeout packet and bind assertions to the new node and exact successor in the same patch.",
         "When a maintenance fixture intentionally binds prose, copy or deliberately add the exact normalized semantic phrase in the accepted baton row; use structured artifacts for numeric semantics instead of inventing alternate representations and read the entire assertion block before the next packet."
       ],
       "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
@@ -1219,7 +1245,7 @@
       ]
     }
   ],
-  "register_revision": 361,
+  "register_revision": 363,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

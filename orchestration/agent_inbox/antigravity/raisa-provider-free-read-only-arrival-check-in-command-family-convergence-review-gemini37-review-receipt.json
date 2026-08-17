@@ -1,0 +1,181 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\arrival-check-in-convergence-3bed3eb3",
+  "branch": "codex/review-arrival-check-in-convergence-3bed3eb3",
+  "head_before": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
+  "head_after": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "bf607d9a5c6b316de361461ecc8490c0b693a25959d549ef001fe7359502eb8b",
+  "result": "# Gemini 3.7 Flash/high Independent Veto: Arrival/Check-In Convergence Review\n\n**Date:** 2026-08-18  \n**Timestamp:** 2026-08-18T07:45:00+10:00 (Australia/Brisbane)  \n**Verifier Role:** Gemini 3.7 Flash/high independent verifier (fresh Antigravity session, bound read-only worktree)  \n**Evaluated Candidate:** `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d`  \n**Task Baseline:** `fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0`  \n**Bound Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\arrival-check-in-convergence-3bed3eb3`  \n**Bound Branch:** `codex/review-arrival-check-in-convergence-3bed3eb3`  \n**Evidence Posture:** Provider-free `repository_static_authored_synthetic` only\n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\n1. **`live_handover_current_baton`**: Rehydrated from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/AGENTS.md). Protected integration PR 74/75 rebase-merged at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; default branch runs passed; no further public Pages rebuild is authorised. Local/origin `master` and `handoff/current` aligned. Reception One's backend authority-kernel seam covers proposal/confirmation, status, multi-field rescheduling, and explicit cancellation. Ordinary Diary converges at accepted candidate `bfac65298e1d4aaca85d1c9dcb20329ef298c485`. The post-cancellation orientation at `74da22d5372299eb2d2e38bb2266b76c89a97035` selected the read-only arrival/check-in command-family convergence review. Ariadne Agent Error Register is at Revision 361 (412 bounded incidents, all corrected/contained, none open; AER-0405 through AER-0412 preserved).\n2. **`current_authority_allocation`**: Conductor/integrator: GPT Sol. Implementation/test worker: DeepSeek V4 Flash/high (declined for this coupled review tranche). Independent verifier: Gemini 3.7 Flash/high (fresh read-only veto). Native subagents: declined per developer policy.\n3. **`active_plan_and_acceptance`**: Governed by [`docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md), [`docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md), [`docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md), and parent orientation [`docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md).\n4. **`protected_evidence_boundaries`**: Strict provider-free repository-static authored-synthetic evidence only. No live database, network routes, external APIs, Docker containers, patient data, clinical data, or `docs/branding/` access.\n5. **`git_refs_and_worktree`**: Verified `C:\\Users\\sarashera\\EMR4-worktrees\\arrival-check-in-convergence-3bed3eb3` on branch `codex/review-arrival-check-in-convergence-3bed3eb3`, exact HEAD `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d`, parent `fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0`.\n\n---\n\n## 2. Review Question Assessment\n\n**Core Finding:**\nExact source evidence completely supports the decision that dedicated check-in\u2014not generic state assignment\u2014is the future canonical product-facing arrival command. General status is properly retained for other appointment lifecycle transitions, and its ordinary product-facing `Arrived` target will be removed during a later atomic two-client cutover. The reusable deterministic kernel is clearly decoupled from Rayleen-named default-off admission scaffolding without widening present authority or opening unreviewed surfaces.\n\n---\n\n## 3. Detailed Responses to Required Challenges\n\n1. **Exact Worktree, Branch, HEAD, and Diff Inventory:**\n   - Pre-review and post-review `git status --short --branch` confirmed clean state on `codex/review-arrival-check-in-convergence-3bed3eb3`.\n   - HEAD confirmed as exact `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d`.\n   - Baseline diff against `fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0` contains strictly allowlisted review, threat-model, plan, test, error register, and orchestration receipt files. No product source, API schemas, migrations, or frontend JS files were modified.\n\n2. **Generic Status vs. A5.1 Semantic Divergence:**\n   - Both pathways can update the database column `Appointment.status` to `AppointmentStatus.Arrived`, but they represent fundamentally different domain contracts.\n   - *Generic status* admits broad roles (`Receptionist`, `GP`, `Nurse`, `Admin`, `PracticeOwner`), permits any valid non-terminal transition to `Arrived`, uses general status confirmation evidence, handles waiting areas via general clear/assign heuristics without same-location validation, and emits no dedicated domain check-in event.\n   - *A5.1 check-in* enforces `UserRole.Receptionist` authority, strictly requires source status `Booked` or `Confirmed`, consumes single-use HMAC evidence with durable hash claims preventing replay under different keys, enforces active same-practice same-location waiting-area compatibility, and atomically writes status, audit log, and the dedicated `diary.appointment_checked_in.v1` committed event.\n\n3. **Check-In as a Domain Command vs. Bare State Synonym:**\n   - Setting `status = Arrived` is merely an attribute mutation. Check-in is a distinct General Practice operational domain event certifying physical/telehealth arrival by authorised front-desk staff, recording point-in-time evidence, assigning compatible waiting facilities, and publishing downstream event notifications. Treating check-in as synonymous with general status mutation would make audit/event completeness depend arbitrarily on client selection.\n\n4. **A5.1 Exact Rules and Replay Invariants:**\n   - Confirmed in [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/routers/appointments.py#L3217-L3450):\n     - Role restriction: `require_role(UserRole.Receptionist)`.\n     - State validation: Source must be `Booked` or `Confirmed`; `already_arrived` and invalid source statuses block execution.\n     - Confirmation evidence: Cryptographic HMAC token with strict TTL; SHA-256 evidence hash recorded via `claim_appointment_check_in_command`.\n     - Waiting-area validation: Validates same practice, active status, non-null appointment location parity; preserves existing area if omitted/null; rejects moves/removals.\n     - Atomicity: Status update, audit log with evidence audit codes, `record_appointment_checked_in_event`, and private receipt committed in one locked transaction.\n     - Replay: Exact same-key replay returns stored JSON; reuse of the same signed evidence token under a different idempotency key is rejected with HTTP 409 `confirmation_replay_rejected`.\n\n5. **Reusable Kernel vs. A5.1 Scaffolding:**\n   - The review explicitly separates the core domain logic (transition rules, role policy, row locking, evidence hash consumption, waiting-area validation, audit/event composition, bounded readback) from A5.1 development scaffolding (`rayleen_a5_check_in_enabled`, `rayleen_a5_check_in_synthetic_practice_ids`, Rayleen naming, authored-synthetic claim boundary). Present authority remains completely closed and default-off.\n\n6. **Future Atomic Two-Client Cutover Rule:**\n   - To eliminate split-brain write semantics and avoid transitional dead zones, both first-party clients (ordinary Diary in [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/diary/diary.js) and Reception One in [`docs/diary/meta-grid.js`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/diary/meta-grid.js)) must migrate to the dedicated check-in command simultaneously with closing ordinary product-facing `Arrived` admission in generic status.\n\n7. **Waiting-Area Movement/Removal Boundary:**\n   - Check-in allows optional initial assignment or preservation of an existing valid waiting area. Moving to another area or removing an assigned area remains a distinct domain operation (`waiting_area_move`) that is not silently admitted by check-in.\n\n8. **Static Grammar and Route-Contract Classifications:**\n   - [`app/services/diary/action_grammar.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/services/diary/action_grammar.py): `check_in` as `implemented=False` is *scope-qualified current* (no generally admitted product action exists); prose stating \"no signed endpoint exists\" is *factually superseded* by the mounted A5.1 confirm endpoint.\n   - [`app/services/diary/action_route_contract.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/services/diary/action_route_contract.py): `planned_not_implemented` is *scope-qualified current*; notes regarding \"no confirm action\" are *superseded/incomplete* route inventory.\n   - [`app/services/diary/confirm_actions.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/services/diary/confirm_actions.py): Lacks `DiaryConfirmAction.check_in` because check-in is not yet admitted for general product use.\n   - Static files are appropriately left untouched in this read-only review tranche.\n\n9. **Narrowest Successor Definition:**\n   - Successor tranche `raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal` is bounded to extracting the unmounted reusable check-in product adapter with authored-synthetic unit tests. It opens no routes, changes no flags, enables no practices, modifies no UI, and accesses no product/provider data.\n\n10. **Register Incidents AER-0405 through AER-0412:**\n    - AER-0405 (prose fixture whitespace normalization), AER-0406 (asymmetric peer link validation), AER-0407 (population fixture updates), AER-0408 (residual recurring-pattern assertion separation), AER-0409 (five-field recurrence composite vs signature text), AER-0410 (residual-list filter/exclusion set pairing), AER-0411 (Current Baton compact live row historical name fixture drift), and AER-0412 (test prose assertion mismatch on \"current bounded-chain endpoints\") accurately capture test harness fixture failures and corrections while preserving the underlying review candidate and product codebase.\n\n11. **Manifest Command Execution:**\n    - All commands C01\u2013C07 executed in exact order with exit code 0. HEAD and worktree remain clean and unmodified.\n\n---\n\n## 4. Manifest Command Summary\n\n| ID | Command | Exit Code | Result Summary |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Clean branch `codex/review-arrival-check-in-convergence-3bed3eb3` |\n| C02 | `git rev-parse HEAD` | 0 | Exact HEAD `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d` |\n| C03 | `python -m scripts.ariadne_provider_free_pytest ...` | 0 | 118 passed checks across review, plan, API spine, grammar, route contract, and promotion suites |\n| C04 | `python -m scripts.ariadne_agent_error_register` | 0 | Pattern report validated and regenerated at Revision 361 |\n| C05 | `ruff check ...` | 0 | All linting checks passed |\n| C06 | `git diff --check fb39d...3bed3...` | 0 | No whitespace or formatting violations |\n| C07 | `git status --short --branch` | 0 | Clean worktree preserved |\n\n---\n\n## 5. Conclusion\n\nThe arrival/check-in convergence review is complete, mathematically and architecturally sound, and rigorously verified against the codebase. No P0\u2013P2 findings, source misstatements, or unsafe successor boundaries exist.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto: Arrival/Check-In Convergence Review\n\n**Date:** 2026-08-18  \n**Timestamp:** 2026-08-18T07:45:00+10:00 (Australia/Brisbane)  \n**Verifier Role:** Gemini 3.7 Flash/high independent verifier (fresh Antigravity session, bound read-only worktree)  \n**Evaluated Candidate:** `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d`  \n**Task Baseline:** `fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0`  \n**Bound Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\arrival-check-in-convergence-3bed3eb3`  \n**Bound Branch:** `codex/review-arrival-check-in-convergence-3bed3eb3`  \n**Evidence Posture:** Provider-free `repository_static_authored_synthetic` only\n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\n1. **`live_handover_current_baton`**: Rehydrated from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/AGENTS.md). Protected integration PR 74/75 rebase-merged at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`; default branch runs passed; no further public Pages rebuild is authorised. Local/origin `master` and `handoff/current` aligned. Reception One's backend authority-kernel seam covers proposal/confirmation, status, multi-field rescheduling, and explicit cancellation. Ordinary Diary converges at accepted candidate `bfac65298e1d4aaca85d1c9dcb20329ef298c485`. The post-cancellation orientation at `74da22d5372299eb2d2e38bb2266b76c89a97035` selected the read-only arrival/check-in command-family convergence review. Ariadne Agent Error Register is at Revision 361 (412 bounded incidents, all corrected/contained, none open; AER-0405 through AER-0412 preserved).\n2. **`current_authority_allocation`**: Conductor/integrator: GPT Sol. Implementation/test worker: DeepSeek V4 Flash/high (declined for this coupled review tranche). Independent verifier: Gemini 3.7 Flash/high (fresh read-only veto). Native subagents: declined per developer policy.\n3. **`active_plan_and_acceptance`**: Governed by [`docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md), [`docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md), [`docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md), and parent orientation [`docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md).\n4. **`protected_evidence_boundaries`**: Strict provider-free repository-static authored-synthetic evidence only. No live database, network routes, external APIs, Docker containers, patient data, clinical data, or `docs/branding/` access.\n5. **`git_refs_and_worktree`**: Verified `C:\\Users\\sarashera\\EMR4-worktrees\\arrival-check-in-convergence-3bed3eb3` on branch `codex/review-arrival-check-in-convergence-3bed3eb3`, exact HEAD `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d`, parent `fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0`.\n\n---\n\n## 2. Review Question Assessment\n\n**Core Finding:**\nExact source evidence completely supports the decision that dedicated check-in\u2014not generic state assignment\u2014is the future canonical product-facing arrival command. General status is properly retained for other appointment lifecycle transitions, and its ordinary product-facing `Arrived` target will be removed during a later atomic two-client cutover. The reusable deterministic kernel is clearly decoupled from Rayleen-named default-off admission scaffolding without widening present authority or opening unreviewed surfaces.\n\n---\n\n## 3. Detailed Responses to Required Challenges\n\n1. **Exact Worktree, Branch, HEAD, and Diff Inventory:**\n   - Pre-review and post-review `git status --short --branch` confirmed clean state on `codex/review-arrival-check-in-convergence-3bed3eb3`.\n   - HEAD confirmed as exact `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d`.\n   - Baseline diff against `fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0` contains strictly allowlisted review, threat-model, plan, test, error register, and orchestration receipt files. No product source, API schemas, migrations, or frontend JS files were modified.\n\n2. **Generic Status vs. A5.1 Semantic Divergence:**\n   - Both pathways can update the database column `Appointment.status` to `AppointmentStatus.Arrived`, but they represent fundamentally different domain contracts.\n   - *Generic status* admits broad roles (`Receptionist`, `GP`, `Nurse`, `Admin`, `PracticeOwner`), permits any valid non-terminal transition to `Arrived`, uses general status confirmation evidence, handles waiting areas via general clear/assign heuristics without same-location validation, and emits no dedicated domain check-in event.\n   - *A5.1 check-in* enforces `UserRole.Receptionist` authority, strictly requires source status `Booked` or `Confirmed`, consumes single-use HMAC evidence with durable hash claims preventing replay under different keys, enforces active same-practice same-location waiting-area compatibility, and atomically writes status, audit log, and the dedicated `diary.appointment_checked_in.v1` committed event.\n\n3. **Check-In as a Domain Command vs. Bare State Synonym:**\n   - Setting `status = Arrived` is merely an attribute mutation. Check-in is a distinct General Practice operational domain event certifying physical/telehealth arrival by authorised front-desk staff, recording point-in-time evidence, assigning compatible waiting facilities, and publishing downstream event notifications. Treating check-in as synonymous with general status mutation would make audit/event completeness depend arbitrarily on client selection.\n\n4. **A5.1 Exact Rules and Replay Invariants:**\n   - Confirmed in [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/routers/appointments.py#L3217-L3450):\n     - Role restriction: `require_role(UserRole.Receptionist)`.\n     - State validation: Source must be `Booked` or `Confirmed`; `already_arrived` and invalid source statuses block execution.\n     - Confirmation evidence: Cryptographic HMAC token with strict TTL; SHA-256 evidence hash recorded via `claim_appointment_check_in_command`.\n     - Waiting-area validation: Validates same practice, active status, non-null appointment location parity; preserves existing area if omitted/null; rejects moves/removals.\n     - Atomicity: Status update, audit log with evidence audit codes, `record_appointment_checked_in_event`, and private receipt committed in one locked transaction.\n     - Replay: Exact same-key replay returns stored JSON; reuse of the same signed evidence token under a different idempotency key is rejected with HTTP 409 `confirmation_replay_rejected`.\n\n5. **Reusable Kernel vs. A5.1 Scaffolding:**\n   - The review explicitly separates the core domain logic (transition rules, role policy, row locking, evidence hash consumption, waiting-area validation, audit/event composition, bounded readback) from A5.1 development scaffolding (`rayleen_a5_check_in_enabled`, `rayleen_a5_check_in_synthetic_practice_ids`, Rayleen naming, authored-synthetic claim boundary). Present authority remains completely closed and default-off.\n\n6. **Future Atomic Two-Client Cutover Rule:**\n   - To eliminate split-brain write semantics and avoid transitional dead zones, both first-party clients (ordinary Diary in [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/diary/diary.js) and Reception One in [`docs/diary/meta-grid.js`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/docs/diary/meta-grid.js)) must migrate to the dedicated check-in command simultaneously with closing ordinary product-facing `Arrived` admission in generic status.\n\n7. **Waiting-Area Movement/Removal Boundary:**\n   - Check-in allows optional initial assignment or preservation of an existing valid waiting area. Moving to another area or removing an assigned area remains a distinct domain operation (`waiting_area_move`) that is not silently admitted by check-in.\n\n8. **Static Grammar and Route-Contract Classifications:**\n   - [`app/services/diary/action_grammar.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/services/diary/action_grammar.py): `check_in` as `implemented=False` is *scope-qualified current* (no generally admitted product action exists); prose stating \"no signed endpoint exists\" is *factually superseded* by the mounted A5.1 confirm endpoint.\n   - [`app/services/diary/action_route_contract.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/services/diary/action_route_contract.py): `planned_not_implemented` is *scope-qualified current*; notes regarding \"no confirm action\" are *superseded/incomplete* route inventory.\n   - [`app/services/diary/confirm_actions.py`](file:///C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/app/services/diary/confirm_actions.py): Lacks `DiaryConfirmAction.check_in` because check-in is not yet admitted for general product use.\n   - Static files are appropriately left untouched in this read-only review tranche.\n\n9. **Narrowest Successor Definition:**\n   - Successor tranche `raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal` is bounded to extracting the unmounted reusable check-in product adapter with authored-synthetic unit tests. It opens no routes, changes no flags, enables no practices, modifies no UI, and accesses no product/provider data.\n\n10. **Register Incidents AER-0405 through AER-0412:**\n    - AER-0405 (prose fixture whitespace normalization), AER-0406 (asymmetric peer link validation), AER-0407 (population fixture updates), AER-0408 (residual recurring-pattern assertion separation), AER-0409 (five-field recurrence composite vs signature text), AER-0410 (residual-list filter/exclusion set pairing), AER-0411 (Current Baton compact live row historical name fixture drift), and AER-0412 (test prose assertion mismatch on \"current bounded-chain endpoints\") accurately capture test harness fixture failures and corrections while preserving the underlying review candidate and product codebase.\n\n11. **Manifest Command Execution:**\n    - All commands C01\u2013C07 executed in exact order with exit code 0. HEAD and worktree remain clean and unmodified.\n\n---\n\n## 4. Manifest Command Summary\n\n| ID | Command | Exit Code | Result Summary |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Clean branch `codex/review-arrival-check-in-convergence-3bed3eb3` |\n| C02 | `git rev-parse HEAD` | 0 | Exact HEAD `3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d` |\n| C03 | `python -m scripts.ariadne_provider_free_pytest ...` | 0 | 118 passed checks across review, plan, API spine, grammar, route contract, and promotion suites |\n| C04 | `python -m scripts.ariadne_agent_error_register` | 0 | Pattern report validated and regenerated at Revision 361 |\n| C05 | `ruff check ...` | 0 | All linting checks passed |\n| C06 | `git diff --check fb39d...3bed3...` | 0 | No whitespace or formatting violations |\n| C07 | `git status --short --branch` | 0 | Clean worktree preserved |\n\n---\n\n## 5. Conclusion\n\nThe arrival/check-in convergence review is complete, mathematically and architecturally sound, and rigorously verified against the codebase. No P0\u2013P2 findings, source misstatements, or unsafe successor boundaries exist.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_diary_action_grammar.py",
+          "tests/test_diary_action_route_contract.py",
+          "tests/test_diary_planned_action_promotion.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_agent_error_register"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0..3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "f16ae92cc610b5216bfdae3e5efa44acc74f7ea8e2350e64b777583e71fa5957",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+        "tests/test_api_spine_artifacts.py",
+        "tests/test_diary_action_grammar.py",
+        "tests/test_diary_action_route_contract.py",
+        "tests/test_diary_planned_action_promotion.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_agent_error_register"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0..3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

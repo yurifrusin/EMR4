@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 361
+    assert register["register_revision"] == 363
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 413)
+        f"AER-{index:04d}" for index in range(1, 415)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 285
+    assert len(agent_incidents) == 287
     assert len(transport_incidents) == 14
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2580,7 +2580,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 412
+    assert report["incident_count"] == 414
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3617,11 +3617,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 361
-    assert report["incident_count"] == 412
+    assert report["register_revision"] == 363
+    assert report["incident_count"] == 414
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 285,
+        "agent_behavior": 287,
         "harness": 48,
         "repository": 65,
         "transport": 14,
@@ -3630,7 +3630,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 64,
         "evidence_misreport": 55,
         "harness_failure": 48,
-        "output_contract_violation": 121,
+        "output_contract_violation": 123,
         "read_only_violation": 3,
         "reasoning_claim_error": 42,
         "repository_defect": 65,
@@ -3638,7 +3638,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 262,
+        "canonical_unchanged": 264,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3707,8 +3707,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         if row["recurrence_signature"]
         == "orchestrator.current_baton_prose_assertion_representation_mismatch"
     )
-    assert baton_prose_recurrence["incident_ids"] == ["AER-0403", "AER-0411"]
-    assert baton_prose_recurrence["incident_count"] == 2
+    assert baton_prose_recurrence["incident_ids"] == [
+        "AER-0403",
+        "AER-0411",
+        "AER-0413",
+    ]
+    assert baton_prose_recurrence["incident_count"] == 3
+    complete_latch_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "orchestrator.active_operation_complete_retained_resume_or_next_stage"
+    )
+    assert complete_latch_recurrence["incident_ids"] == ["AER-0390", "AER-0414"]
+    assert complete_latch_recurrence["incident_count"] == 2
     register_prose_recurrence = next(
         row
         for row in report["recurring_patterns"]
@@ -3749,6 +3761,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.manual_short_sha_expansion",
             "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
             "orchestrator.current_baton_prose_assertion_representation_mismatch",
+            "orchestrator.active_operation_complete_retained_resume_or_next_stage",
             "orchestrator.agent_error_register_test_prose_assertion_mismatch",
             "orchestrator.agent_error_register_asymmetric_peer_link",
         }
@@ -6578,6 +6591,42 @@ def test_aer_0412_records_register_test_prose_near_synonym() -> None:
     )
     assert "current correction-chain endpoints" in incident["observed_error"]
     assert "current bounded-chain endpoints" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0413_records_closeout_current_fixture_drift() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0413"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        incidents["AER-0411"]["recurrence_signature"]
+    )
+    assert "81695 bytes" in incident["observed_error"]
+    assert "less-than-80000-byte guard" in incident["observed_error"]
+    assert "eight already-live current product-lineage rows" in incident[
+        "observed_error"
+    ]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0414_records_complete_latch_terminal_contract_recurrence() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0414"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        incidents["AER-0390"]["recurrence_signature"]
+    )
+    assert "complete state is internally inconsistent" in incident[
+        "detection_method"
+    ]
     assert incident["status"] == "corrected"
 
 

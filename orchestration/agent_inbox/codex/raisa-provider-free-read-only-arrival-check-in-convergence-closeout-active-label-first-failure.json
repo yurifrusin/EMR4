@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.deterministic_failure_evidence.v1",
+  "observed_at": "2026-08-18T07:34:51+10:00",
+  "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+  "stage": "closeout",
+  "command": ".venv/Scripts/python.exe scripts/compact_agents_acceptance_index.py --check",
+  "exit_code": 2,
+  "error": "unclassified live Current Baton rows require a deliberate manifest revision",
+  "unclassified_count": 8,
+  "candidate_state": "canonical_unchanged",
+  "product_source_changed": false,
+  "provider_calls": 0,
+  "protected_refs_changed": false,
+  "disposition": "revision_required"
+}

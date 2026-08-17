@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 314 / Compass 296. First-party cancellation is complete; arrival/check-in is the next bounded command-family convergence question, and no product meaning is selected yet.
+> EMR4 is at Continuity 315 / Compass 297. Dedicated check-in is the future canonical ordinary arrival command; the next bounded step is its provider-free unmounted adapter extraction.
 
 ## North star
 
@@ -398,23 +398,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Reception One and the ordinary Diary now preserve identical cancellation meaning across different visual projections. Lineage parent: `raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review`.
 191. **Reconcile arrival/check-in command-family meaning before another first-party control — Provider-free read-only post-cancellation programme orientation**
    A provider-free read-only arrival/check-in convergence review is selected without choosing a product meaning. Lineage parent: `raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition`.
+192. **Select one authoritative ordinary appointment-arrival command meaning — Provider-free read-only arrival/check-in command-family convergence review**
+   Dedicated check-in is the future canonical product-facing arrival command; Arrived is its resulting state. Lineage parent: `raisa-provider-free-read-only-post-cancellation-programme-orientation`.
 
 ## Current position
 
-**Arrival/check-in meaning must converge across status, waiting-area, A5.1 and static contracts — Provider-free read-only post-cancellation programme orientation**
+**Dedicated check-in owns ordinary arrival meaning while general status retains other transitions — Provider-free read-only arrival/check-in command-family convergence review**
 
-**Why this proof came next:** The first-party cancellation family is complete and check-in is the narrowest remaining dependency-satisfied command-family inconsistency.
+**Why this proof came next:** The repository-static convergence review proves that bare Arrived assignment does not preserve the full check-in contract.
 
-A provider-free read-only arrival/check-in command-family convergence review is next.
+Extract the deterministic check-in kernel into one provider-free unmounted product adapter next.
 
 ### What this unlocks
 
-- Compare exact general status, waiting-area and A5.1 contracts.
-- Freeze one canonical product-facing arrival meaning or a strict justified non-overlap before implementation.
+- Separate reusable check-in behavior from A5.1-only admission scaffolding.
+- Prepare a later atomic route, grammar and two-client convergence without opening it now.
 
 ### What it does not solve
 
-- No A5.1 feature flag, route, action grammar, UI control or database behavior changed.
+- No A5.1 feature flag, route, general-status policy, action grammar or client changed.
 - Patient linking, external channels, product data, providers, deployment and release remain closed.
 
 ## Continuity and authority
@@ -696,6 +698,7 @@ Prerequisites:
 
 ## Map limits
 
+- The convergence review selects future command meaning only; A5.1 remains default-off and no route, status admission, grammar, client, database or runtime authority is opened.
 - The post-cancellation orientation selects only a read-only arrival/check-in convergence review; it does not admit A5.1, bind generic status, repair static route contracts or add a control.
 - The ordinary Diary cancellation convergence proves authored-synthetic route-intercepted client behavior, not live backend/database, external-adapter, representative usability, deployment or production behavior.
 - The ordinary Diary cancellation review proves repository facts and one later source boundary; it changes no product behavior and proves no live route, database or external-adapter outcome.
@@ -1297,6 +1300,9 @@ Prerequisites:
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-closeout.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-design.md`
 - `docs/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-plan.md`
+- `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
+- `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
+- `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md`
@@ -1549,6 +1555,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-current-operational-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md`
@@ -1671,6 +1678,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
@@ -1972,6 +1980,12 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout-postcompaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-pre-verifier-acceptance-receipt.json`
@@ -2908,6 +2922,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md`
 - `orchestration/human_inbox/yuri/2026-08-17--ordinary-diary-cancellation-compatibility-consumer-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
+- `orchestration/human_inbox/yuri/2026-08-18--arrival-check-in-command-family-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -3085,6 +3100,8 @@ Prerequisites:
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_plan.py`
 - `tests/test_raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
+- `tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py`
+- `tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_git_object_resolution_continuity.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py`
@@ -3155,4 +3172,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 296; continuity graph revision 314._
+_Compass map revision 297; continuity graph revision 315._

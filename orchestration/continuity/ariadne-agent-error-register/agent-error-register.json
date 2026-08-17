@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 361,
+  "register_revision": 363,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -16525,6 +16525,100 @@
           "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
           "docs/ariadne-agent-error-correction-register-revision-361.md",
           "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0413",
+      "attempt_id": "arrival-check-in-convergence-closeout-current-fixtures-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A Continuity closeout must atomically rebind the live Compass and Current Baton fixtures to the accepted node, preserve the exact successor boundary and keep AGENTS.md below its compactness limit.",
+      "observed_error": "The first closeout packet failed five assertions because the Compass and Current Baton fixtures still pinned the predecessor node and prose after the accepted graph advance, while the newly expanded live handover measured 81695 bytes against the less-than-80000-byte guard. The direct compactness recheck then failed because eight already-live current product-lineage rows were absent from the active-label classification. The next full packet failed one remaining fixture that required the superseded compound phrase explicit-confirmation cancellation after compaction retained the material cancellation token.",
+      "detection_method": "The preserved complete provider-free pytest packet reached 100 percent with 397 passes and exited 1 on exactly one Compass assertion, three Current Baton assertions and one acceptance-index compactness assertion. The preserved direct compact check then exited 2 on the active-label mismatch. The preserved next full packet exited 1 only on the remaining cancellation-prose fixture; no product source, publication or successor execution followed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-current-fixture-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-active-label-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-current-fixture-second-failure.json",
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-362.md",
+        "tests/test_ariadne_compass.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_agents_acceptance_index.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rebind the current Compass and baton fixtures to Continuity 315 / Compass 297 and the exact adapter-extraction successor, compact the live baton below 80000 bytes, align script and manifest active-label classifications for all current lineage rows, replace the remaining superseded compound-prose fixture with its material cancellation token, advance register totals, regenerate the report and rerun the complete closeout packet.",
+        "prevention_control": "Treat graph/Compass advance, current-row fixtures, active-label classification and the live-handover byte budget as one closeout change set; measure and run the compactness check before the first full closeout packet and bind assertions to the new node and exact successor in the same patch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-current-fixture-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-active-label-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-current-fixture-second-failure.json",
+          "AGENTS.md",
+          "docs/ariadne-agent-error-correction-register-revision-362.md",
+          "tests/test_ariadne_compass.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_agents_acceptance_index.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0414",
+      "attempt_id": "arrival-check-in-convergence-closeout-latch-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A complete active-operation latch must set resume_after_compaction false, next_executable_stage null, user attention false and terminal permission true.",
+      "observed_error": "The first terminal latch transition changed status to complete but retained resume_after_compaction true and a non-null publication/successor stage, repeating the previously corrected AER-0390 pattern. The fresh full packet then found that the new explicit AER-0390/AER-0414 recurrence assertion had not been paired with exclusion of that signature from the residual recurrence list.",
+      "detection_method": "The pure active-operation validator raised complete state is internally inconsistent in both canonical latch suites. After the terminal fields were corrected, the preserved full packet exited 1 only on the unpaired residual recurrence list; no closeout commit, push, notification or successor opening used either rejected state.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-latch-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-latch-recurrence-first-failure.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-363.md",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_complete_retained_resume_or_next_stage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Set resume_after_compaction false and next_executable_stage null while retaining accepted completion evidence, no user attention and terminal permission; pair the explicit recurrence assertion with exclusion from the residual list; then rerun both latch suites and the full closeout packet before commit.",
+        "prevention_control": "Construct every terminal latch transition from the exact status branch in orchestration_harness/active_operation.py and run both canonical latch suites before generating the final precommit receipt. When adding an explicit recurrence assertion, update its residual-list exclusion in the same patch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-latch-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-closeout-latch-recurrence-first-failure.json",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-363.md",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py"
         ]
       },
       "status": "corrected"

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 314,
+  "graph_revision": 315,
   "harvests": [],
   "nodes": [
     {
@@ -21817,9 +21817,89 @@
         "A5.1 remains default-off, authored-synthetic-practice-only and uncalled.",
         "Product source, route/static-contract repair, patient linking, external channels, product data, providers, deployment and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "title": "Provider-free read-only arrival/check-in command-family convergence review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-17T21:20:15Z",
+      "updated_at": "2026-08-17T21:20:15Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Repository-static semantic review; no product behavior or runtime changed.",
+          "Dedicated check-in is selected as the future canonical ordinary arrival command.",
+          "A5.1 remains default-off, uncalled and unmodified."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-dedicated-check-in-as-future-canonical-arrival-command",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Treat check-in as the authoritative domain command and Arrived as its resulting state; preserve general status for other transitions and require a later atomic two-client cutover."
+        }
+      ],
+      "claim_scope": [
+        "Dedicated check-in has stronger authority, evidence, waiting-area, event and receipt meaning than bare Arrived assignment.",
+        "The reusable deterministic kernel is separated from the Rayleen-named default-off A5.1 gate.",
+        "Waiting-area movement or removal remains a separate command family.",
+        "Eleven new checks, 118 focused checks, the 200-test canonical fast profile and one fresh Gemini 3.7 Flash/high veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md",
+          "docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--arrival-check-in-command-family-convergence-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-command-manifest.json",
+          "scripts/raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The unmounted canonical check-in product-adapter extraction rehearsal remains next.",
+        "Mounted route, general-status Arrived admission, grammar action and both first-party clients remain unchanged.",
+        "Product data, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-17T18:57:36Z"
+  "updated_at": "2026-08-17T21:20:15Z"
 }

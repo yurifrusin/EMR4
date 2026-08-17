@@ -35,6 +35,11 @@ POST_CANCELLATION_ORIENTATION_NODE_ID = (
 POST_CANCELLATION_ORIENTATION_SOURCE_HEAD = (
     "74da22d5372299eb2d2e38bb2266b76c89a97035"
 )
+ARRIVAL_CHECK_IN_REVIEW_NODE_ID = (
+    "raisa-provider-free-read-only-arrival-check-in-command-family-"
+    "convergence-review"
+)
+ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD = "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
@@ -79,19 +84,17 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 314
-    assert graph["nodes"][-1]["id"] == POST_CANCELLATION_ORIENTATION_NODE_ID
+    assert graph["graph_revision"] == 315
+    assert graph["nodes"][-1]["id"] == ARRIVAL_CHECK_IN_REVIEW_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        POST_CANCELLATION_ORIENTATION_SOURCE_HEAD
+        ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
-        {"node_id": ORDINARY_CONVERGENCE_NODE_ID, "relation": "builds_on"}
+        {"node_id": POST_CANCELLATION_ORIENTATION_NODE_ID, "relation": "builds_on"}
     ]
-    assert compass["map_revision"] == 296
-    assert compass["source_graph_revision"] == 314
-    assert compass["current_position"]["node_id"] == (
-        POST_CANCELLATION_ORIENTATION_NODE_ID
-    )
+    assert compass["map_revision"] == 297
+    assert compass["source_graph_revision"] == 315
+    assert compass["current_position"]["node_id"] == ARRIVAL_CHECK_IN_REVIEW_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -108,20 +111,23 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
-    orientation_relation = _table_row(text, "Current post-cancellation orientation relation")
-    assert "Continuity 314 / Compass 296" in current
-    assert "raisa_provider_free_read_only_post_cancellation_programme_orientation_pass" in current
-    assert POST_CANCELLATION_ORIENTATION_SOURCE_HEAD in current
+    orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
+    assert "Continuity 315 / Compass 297" in current
+    assert (
+        "raisa_provider_free_read_only_arrival_check_in_command_family_"
+        "convergence_review_pass"
+    ) in current
+    assert ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD in current
     assert "eleven new checks" in current.lower()
-    assert "107 api/static checks" in current.lower()
-    assert "arrival/check-in" in current.lower()
+    assert "118 focused" in current.lower()
+    assert "dedicated check-in" in current.lower()
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
-    assert "revision 361" in error_register
-    assert "412 bounded incidents" in error_register
+    assert "revision 363" in error_register
+    assert "414 bounded incidents" in error_register
     assert "aer-0405" in error_register
-    assert "aer-0412" in error_register
+    assert "aer-0414" in error_register
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
@@ -131,12 +137,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert UNMOUNTED_SOURCE_HEAD in implementation_relation
     assert HTTP_SOURCE_HEAD in implementation_relation
     assert HTTP_POSTGRES_SOURCE_HEAD in implementation_relation
-    assert HTTP_SOURCE_HEAD in product
-    assert HTTP_POSTGRES_SOURCE_HEAD in product
+    assert HTTP_SOURCE_HEAD in implementation_relation
+    assert HTTP_POSTGRES_SOURCE_HEAD in implementation_relation
     assert ROUTE_REVIEW_SOURCE_HEAD in relation
-    assert "raw compatibility delete" in product.lower()
-    assert "visible explicit-confirmation cancellation" in product.lower()
-    assert "adapter-neutral typed projection/action contract" in product.lower()
+    assert "cancellation" in product.lower()
+    assert "adapter-neutral reference renderer" in product.lower()
+    assert ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD in product
     assert ORDINARY_CONVERGENCE_SOURCE_HEAD in ordinary_relation
     assert POST_CANCELLATION_ORIENTATION_SOURCE_HEAD in orientation_relation
     assert CANCELLATION_SOURCE_HEAD in relation
@@ -180,9 +186,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "arrival-check-in-command-family-convergence-review" in next_work.lower()
-    assert "general-status, waiting-area and a5.1" in next_work.lower()
-    assert "raw compatibility delete" in next_work.lower()
+    assert "canonical-check-in-product-adapter-extraction-rehearsal" in next_work.lower()
+    assert "general-status `arrived`" in next_work.lower()
+    assert "waiting-area movement" in next_work.lower()
     assert "provider call" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
@@ -221,9 +227,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "arrival-check-in-command-family-convergence-review",
-        "general-status, waiting-area and a5.1",
-        "raw compatibility delete",
+        "canonical-check-in-product-adapter-extraction-rehearsal",
+        "general-status `arrived`",
+        "waiting-area movement",
         "product/patient/clinical data",
         "provider call",
         "deployment",

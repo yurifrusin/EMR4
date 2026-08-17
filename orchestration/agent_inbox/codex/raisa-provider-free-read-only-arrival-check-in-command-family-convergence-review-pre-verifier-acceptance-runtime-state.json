@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "run_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The Current Baton selects this provider-free read-only arrival/check-in convergence review at Continuity 314 / Compass 296 and names register revision 361 with 412 bounded incidents.",
+    "current_authority_allocation": "GPT Sol owns semantic selection, acceptance and Git. DeepSeek V4 Flash/high is declined at neutral leverage for this coupled read-only review. Gemini 3.7 Flash/high is reserved with required independence for exactly one final veto. Native subagents remain declined by developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md",
+      "docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "docs/ariadne-agent-error-correction-register-revision-361.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json"
+    ],
+    "protected_evidence_boundaries": "Exact committed repository-static authored-synthetic candidate only. A5.1 remains default-off, uncalled and unmodified. No product/API/schema/service/migration/client/product-test edit; no endpoint-coverage run; no database, route, product/patient/clinical/historical/protected data, provider product call, ADC, credential/IAM/network, deployment, release, Pages or protected ref. Gemini may read only the packet allowlist and run only the seven admitted commands. docs/branding and unrelated untracked files remain preserved.",
+    "git_refs_and_worktree": "Primary HEAD and exact review worktree are 3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d. Review branch codex/review-arrival-check-in-convergence-3bed3eb3 is clean and preflight-passed. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary worktree has only post-candidate latch and verifier-dispatch artifacts plus preserved unrelated untracked files."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+    "active_tranche": "Provider-free read-only arrival/check-in command-family convergence review",
+    "objective": "Compare exact general-status, waiting-area and A5.1 check-in contracts, classify static action-contract drift, choose one canonical product-facing arrival meaning or strict justified non-overlap, and freeze the smallest later tranche without editing product or runtime source.",
+    "status": "in_progress",
+    "source_head": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
+    "authority_source": "AGENTS.md Current Baton at Continuity 314 / Compass 296, the accepted post-cancellation programme orientation and Yuri's standing uninterrupted-development authority direct this provider-free read-only convergence review.",
+    "checkpoint": {
+      "completed_stage": "The deterministically admitted read-only candidate is committed at exact 3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d. Named review worktree codex/review-arrival-check-in-convergence-3bed3eb3 is clean at that exact HEAD and its seven-command manifest preflight passes with zero provider calls.",
+      "next_executable_stage": "generate_pre_verifier_acceptance_receipt_then_run_one_fresh_gemini_37_flash_high_exact_candidate_veto",
+      "retry_counters": {"planning": 1, "implementation": 6, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_repository_static_read_only_arrival_check_in_convergence_review",
+      "committed_authored_synthetic_and_static_source_evidence_only",
+      "dedicated_check_in_selected_as_future_canonical_product_facing_arrival_command",
+      "a5_1_remains_default_off_uncalled_and_unmodified",
+      "no_product_backend_api_openapi_graphql_schema_service_migration_product_test_or_database_edit",
+      "no_action_grammar_route_contract_or_endpoint_coverage_repair_or_run_in_this_review",
+      "gemini_exact_allowlist_and_seven_command_manifest_only",
+      "no_live_route_source_database_watcher_or_external_client_access",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_product_provider_adc_credentials_iam_external_network_or_executable_model_tool",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "neutral", "rationale": "No separable implementation package exists inside this review; successor extraction must reassess DeepSeek.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "Material command-family meaning is frozen and deterministically admitted; exactly one fresh exact-candidate Gemini 3.7 Flash/high veto is now required.", "work_packages": ["exact_candidate_read_only_architecture_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits proactive native delegation.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["clean exact candidate", "preflight and five-source receipt before Gemini", "one no-fallback veto", "Sol-only acceptance and Git"],
+    "reassessment_triggers": ["Gemini terminal decision", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "exact_candidate_pre_verifier_five_source_receipt", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Exact candidate and protected refs verified."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Named clean worktree and seven-command manifest passed preflight with zero calls."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Lane declined by developer policy."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

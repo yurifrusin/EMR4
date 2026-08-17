@@ -51,7 +51,8 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition"
+        "raisa-provider-free-read-only-arrival-check-in-command-family-"
+        "convergence-review"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]

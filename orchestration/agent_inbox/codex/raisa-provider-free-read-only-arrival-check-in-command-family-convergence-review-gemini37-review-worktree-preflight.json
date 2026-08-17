@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3",
+  "branch": "codex/review-arrival-check-in-convergence-3bed3eb3",
+  "head": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
+  "expected_head": "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "f16ae92cc610b5216bfdae3e5efa44acc74f7ea8e2350e64b777583e71fa5957",
+  "command_count": 7,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+    "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+    "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/tests/test_api_spine_artifacts.py",
+    "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/tests/test_diary_action_grammar.py",
+    "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/tests/test_diary_action_route_contract.py",
+    "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3/tests/test_diary_planned_action_promotion.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/arrival-check-in-convergence-3bed3eb3",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
