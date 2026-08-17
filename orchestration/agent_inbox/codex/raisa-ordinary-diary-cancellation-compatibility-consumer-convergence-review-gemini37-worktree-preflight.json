@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73",
+  "branch": "codex/review-ordinary-diary-cancellation-compat-0f3b0c73",
+  "head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+  "expected_head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "6fb7cd3c1b2ab980718015ab38b84a5489c49845236d17d6c4b79d162e7282ce",
+  "command_count": 8,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73/tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+    "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73/tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+    "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73/tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+    "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73/tests/test_api_spine_artifacts.py",
+    "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73/tests/test_api_spine_appointment_openapi_drift_guard.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

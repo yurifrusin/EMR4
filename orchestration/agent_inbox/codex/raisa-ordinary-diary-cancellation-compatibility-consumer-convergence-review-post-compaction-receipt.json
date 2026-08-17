@@ -1,0 +1,121 @@
+{
+  "active_operation": {
+    "active_tranche": "Ordinary Diary cancellation compatibility-consumer convergence review",
+    "completed_stage": "Exact candidate 0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df commits the repository-static plan, threat delta, report, deterministic test and contained verification recovery. The current consumer/public-envelope incompatibility, status semantic downgrade, widened endpoint admission and success-only reconciliation gap are proved; 88 current focused checks, the canonical 200-test fast profile, register validation/tests, Ruff, 217-source compilation, JavaScript syntax and whitespace pass.",
+    "next_executable_stage": "Issue a fresh pre-verifier receipt bound to exact candidate 0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df and run one clean Gemini 3.7 Flash/high read-only veto if exact worktree admission passes.",
+    "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+    "resume_after_compaction": true,
+    "source_head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+    "reason_codes": [],
+    "resolved_commit": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+    "branch_origin_aligned": false,
+    "head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+    "origin_branch_commit": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 652
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "No separable implementation existed in this static review; dispatch cost exceeded likely leverage.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one fresh Gemini 3.7 Flash/high veto has returned for exact candidate 0f3b0c73; its compact receipt and clean-worktree postcondition are the next serial validation step.",
+        "work_packages": [
+          "one_exact_candidate_read_only_veto_at_0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier receipt conflict",
+      "material recovery",
+      "closeout",
+      "next tranche freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "compact Gemini receipt and worktree postcondition validation",
+      "Sol acceptance and closeout",
+      "repository pytest remains serial"
+    ]
+  },
+  "planned_action": "validate_the_completed_exact_candidate_gemini_veto_then_close_out_the_static_review_and_begin_the_frozen_client_only_convergence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-plan.md",
+      "docs/security/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-threat-model-delta.md",
+      "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+      "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-reception-one-selected-appointment-cancellation-composition-sol-acceptance.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/api_spine_adr.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns review, acceptance, closeout and Git; DeepSeek V4 Flash/high was declined because no separable implementation existed; Gemini 3.7 Flash/high supplied the already-dispatched exact-candidate independent veto; native subagents remain declined by current developer policy.",
+    "git_refs_and_worktree": "Main task branch codex/ariadne-bernie-davida-parallel-seam is at exact candidate 0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df with only the active latch tracked-modified and 651 untracked paths preserved. Origin task is 36b116bdb72c82acac63b8a0371d6212e9bc1f9a. Local/origin master and handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding is present.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. Its Current Baton at Continuity 311 / Compass 293 directs the provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review after accepted Reception One cancellation.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored. Repository-static non-protected evidence only; product/API/runtime edits, raw compatibility DELETE or status fallback calls, product/patient/clinical/historical data, provider/ADC, credentials/IAM, database/source/watcher access, deployment, release, Pages and protected refs remain closed. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

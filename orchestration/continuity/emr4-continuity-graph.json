@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 311,
+  "graph_revision": 312,
   "harvests": [],
   "nodes": [
     {
@@ -21521,9 +21521,115 @@
         "Route-intercepted browser evidence does not prove live backend or PostgreSQL behavior.",
         "External-adapter interoperability, product data, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
+      "title": "Ordinary Diary cancellation compatibility-consumer convergence review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-17T08:41:05Z",
+      "updated_at": "2026-08-17T08:41:05Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+          "relation": "validates"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Repository-static provider-free review only; no product source or command path changed.",
+          "The review freezes one later client-only dedicated-delete and canonical-confirm convergence.",
+          "Product data, providers, database execution, deployment and protected refs remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-ordinary-diary-cancellation-compatibility-review",
+          "source": "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the five source-grounded client gaps and freeze one delete-only fail-closed convergence."
+        }
+      ],
+      "claim_scope": [
+        "The ordinary Diary can report failure after a valid canonical delete commit because it still requires an appointment read model absent from the strict public envelope.",
+        "Its 404-to-status fallback changes command meaning and drops the free-text reason while retaining human confirmation.",
+        "Its cancellation-specific proposal/endpoint admission and terminal-outcome reconciliation are weaker than Reception One.",
+        "The smallest later fix is client-only and requires no backend, API, schema, migration or database change.",
+        "One fresh Gemini 3.7 Flash/high exact-candidate veto passes after eight zero-exit commands and leaves its worktree clean."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "gap",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-plan.md",
+            "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.json",
+            "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md"
+          ],
+          "note": "The ordinary Diary cancellation consumer remains a separately typed action but has not yet converged on the canonical delete-only response contract."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "gap",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.json",
+            "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md"
+          ],
+          "note": "Fresh source-truth reconciliation is currently success-only and must cover every terminal or uncertain cancellation outcome."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-plan.md",
+          "docs/security/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.schema.json",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-343.md"
+        ],
+        "closeouts": [
+          "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-17--ordinary-diary-cancellation-compatibility-consumer-convergence-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-post-compaction-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+          "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_evidence.py",
+          "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-command-manifest.json",
+          "scripts/raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The ordinary Diary client-only canonical cancellation convergence is frozen but not yet implemented.",
+        "The stale pre-adapter route-contract suite remains contained test debt under AER-0387.",
+        "Live backend/database behavior, external adapters, product data, providers, deployment and production remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-17T05:49:00Z"
+  "updated_at": "2026-08-17T08:41:05Z"
 }

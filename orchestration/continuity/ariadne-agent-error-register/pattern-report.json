@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "b4bcaaf26055dfe8844ac4378993a1659e9e35106ca708bb1fd65c0d086e5c82",
+  "canonical_register_sha256": "48af3e6b90519b549f3da6616e033280729a83eda0b2bef37bca459fdae360b2",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 237,
+      "canonical_unchanged": 240,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 62,
       "evidence_misreport": 55,
       "harness_failure": 48,
-      "output_contract_violation": 106,
+      "output_contract_violation": 107,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
-      "repository_defect": 60,
+      "repository_defect": 62,
       "transport_timeout": 13
     },
     "by_origin": {
-      "agent_behavior": 266,
+      "agent_behavior": 267,
       "harness": 48,
-      "repository": 60,
+      "repository": 62,
       "transport": 13
     },
     "by_process_severity": {
-      "low": 146,
+      "low": 149,
       "material": 115,
       "moderate": 126
     },
@@ -33,6 +33,7 @@
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
+      "ariadne-compass-current-position-test::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "codex-native-architecture-challenger::verifier": 1,
@@ -42,7 +43,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 198,
+      "codex-primary-orchestrator::orchestrator": 199,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -60,7 +61,7 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
-      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 3,
+      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 4,
       "emr4-behavior-evidence-schema::orchestrator": 1,
       "emr4-behavior-plan-parent-binding-test::orchestrator": 1,
       "emr4-cf-d2-event-cue-parse-catalogue-harness::orchestrator": 1,
@@ -99,12 +100,12 @@
     "by_role": {
       "implementer": 39,
       "integration_reviewer": 3,
-      "orchestrator": 292,
+      "orchestrator": 295,
       "verifier": 53
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 387,
+  "incident_count": 390,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -932,16 +933,18 @@
       "categories": [
         "repository_defect"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0175",
         "AER-0179",
-        "AER-0211"
+        "AER-0211",
+        "AER-0389"
       ],
       "origins": [
         "repository"
       ],
       "prevention_controls": [
+        "Before a register test, inspect literal searches plus every whole aggregate and recurring-pattern equality block that consumes incident totals, update every field against a fresh pattern report, regenerate pattern-report.json explicitly, then run the complete file as one serialized acceptance packet.",
         "Before regenerating the report after any future register edit, search the whole exact register test for every revision, ID-range, seed, origin, category, candidate-state and total-count literal; then run the entire register file as the only acceptance packet.",
         "Every register edit must run the whole exact register test file after regenerating pattern-report.json; partial node selection cannot serve as final register acceptance."
       ],
@@ -1060,7 +1063,7 @@
       ]
     }
   ],
-  "register_revision": 340,
+  "register_revision": 343,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }

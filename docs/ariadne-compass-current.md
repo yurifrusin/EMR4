@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 311 / Compass 293. Reception One selected-appointment cancellation passes through the canonical delete-only truth kernel with explicit confirmation and fresh reconciliation. A provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review is next.
+> EMR4 is at Continuity 312 / Compass 294. The ordinary Diary cancellation consumer divergence is source-proved: it can reject the accepted minimal receipt, change to status semantics and fail to reconcile uncertain outcomes. The provider-free client-only canonical delete convergence is next.
 
 ## North star
 
@@ -392,32 +392,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Five evidence-backed Ariadne repairs pass and the product sequence can resume with clearer durable evidence. Lineage parent: `raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal`.
 188. **Complete the first-party selected-action console with canonical explicit-confirmation cancellation — Reception One selected-appointment cancellation composition**
    Reception One can cancel one selected appointment through the delete-only truth kernel and can serve as one reference rendering of an adapter-neutral contract. Lineage parent: `ariadne-recent-work-effectiveness-and-transport-repair`.
+189. **Locate the remaining native cancellation-consumer divergence and freeze its narrowest source convergence — Ordinary Diary cancellation compatibility-consumer convergence review**
+   The ordinary Diary client gap is source-proved and one provider-free delete-only client correction is ready to implement. Lineage parent: `raisa-reception-one-selected-appointment-cancellation-composition`.
 
 ## Current position
 
-**The native selected-action console now spans routine edits and destructive cancellation over one truth kernel — Reception One selected-appointment cancellation composition**
+**The cancellation truth kernel is accepted and the remaining ordinary Diary consumer divergence is now exactly bounded — Ordinary Diary cancellation compatibility-consumer convergence review**
 
-**Why this proof came next:** The visible cancellation composition passed over the accepted delete-confirm envelope, leaving the ordinary Diary compatibility consumer as the narrowest same-family inconsistency.
+**Why this proof came next:** Reception One proved the canonical interaction; this read-only review showed the older consumer still expects the wrong response and may change command families on failure.
 
-Reception One is a stronger reference client, while adapter presentation remains decoupled from deterministic facts, authority and effects.
+A client-only canonical delete convergence can now remove false failure, semantic fallback and stale-outcome ambiguity without backend change.
 
 ### What this unlocks
 
-- Run one provider-free read-only ordinary Diary cancellation compatibility-consumer convergence review.
-- Map deleteBooking and applySignedDeleteProposal against the now-proven canonical delete-only consumer contract.
-- Freeze the smallest later source convergence without calling or authorizing raw compatibility DELETE.
+- Implement the provider-free ordinary Diary client-only canonical cancellation convergence.
+- Remove delete-to-status fallback while preserving visible destructive intent and human confirmation.
+- Admit the strict minimal receipt and reconcile fresh Diary truth after every terminal or uncertain outcome.
 
 ### What it does not solve
 
-- The ordinary Diary dual-family cancellation fallback itself.
-- External-adapter conformance or representative human usability.
-- Product/patient data, providers, database execution, deployment, release, Pages or protected refs.
+- The client source gap itself until the next composition is accepted.
+- The contained stale pre-adapter route-contract test debt.
+- Live backend/database, external-adapter, product-data, provider, deployment or production operation.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -694,6 +694,7 @@ Prerequisites:
 
 ## Map limits
 
+- The ordinary Diary cancellation review proves repository facts and one later source boundary; it changes no product behavior and proves no live route, database or external-adapter outcome.
 - The Reception One cancellation result proves authored-synthetic first-party rendering over a typed adapter-neutral contract; it does not prove live backend/database or external-adapter operation.
 - The Ariadne effectiveness result improves development evidence and transport handling; it changes no Raisa product behavior.
 - Delete-confirm HTTP/PostgreSQL integration proves one authored-synthetic local lifecycle, not raw DELETE, visible UI, product data, concurrency/crash recovery or production.
@@ -965,6 +966,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-329.md`
 - `docs/ariadne-agent-error-correction-register-revision-334.md`
 - `docs/ariadne-agent-error-correction-register-revision-337.md`
+- `docs/ariadne-agent-error-correction-register-revision-343.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1180,6 +1182,9 @@ Prerequisites:
 - `docs/raisa-microsoft-federation-admission-runtime-plan.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-closeout.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-plan.md`
+- `docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md`
+- `docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-plan.md`
+- `docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation-closeout.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation-plan.md`
 - `docs/raisa-post-cf-d2-compass-baton-orientation.md`
@@ -1500,6 +1505,7 @@ Prerequisites:
 - `docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md`
 - `docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
+- `docs/security/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-threat-model-delta.md`
 - `docs/security/raisa-post-combined-editor-compass-baton-orientation-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
@@ -1647,6 +1653,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-receipt.json`
@@ -1890,6 +1897,12 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-post-compaction-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-pre-verifier-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preacceptance-receipt.json`
@@ -2336,6 +2349,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.json`
+- `orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.schema.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
@@ -2862,6 +2877,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-postgresql-integration-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md`
+- `orchestration/human_inbox/yuri/2026-08-17--ordinary-diary-cancellation-compatibility-consumer-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -2902,6 +2918,7 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
+- `scripts/raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_continuity_update.py`
 - `scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py`
 - `scripts/raisa_provider_free_delete_confirm_http_route_convergence.py`
 - `scripts/raisa_provider_free_delete_confirm_http_route_convergence_continuity_update.py`
@@ -3005,6 +3022,9 @@ Prerequisites:
 - `tests/test_raisa_channel_neutral_patient_interaction_foundation_plan.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
+- `tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py`
+- `tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_continuity.py`
+- `tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_evidence.py`
 - `tests/test_raisa_post_cf_d2_compass_baton_orientation.py`
 - `tests/test_raisa_post_combined_editor_compass_baton_orientation.py`
 - `tests/test_raisa_post_combined_editor_compass_baton_orientation_plan.py`
@@ -3096,4 +3116,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 293; continuity graph revision 311._
+_Compass map revision 294; continuity graph revision 312._

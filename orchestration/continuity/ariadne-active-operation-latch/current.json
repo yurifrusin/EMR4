@@ -3,12 +3,12 @@
   "operation_id": "raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review",
   "active_tranche": "Ordinary Diary cancellation compatibility-consumer convergence review",
   "objective": "Perform one provider-free read-only repository review of deleteBooking() and applySignedDeleteProposal() against the accepted canonical delete-only consumer contract, and freeze the smallest later source convergence without changing or calling any product route or write path.",
-  "status": "in_progress",
-  "source_head": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a",
+  "status": "complete",
+  "source_head": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df",
   "authority_source": "AGENTS.md Current Baton at Continuity 311 / Compass 293, the accepted Reception One cancellation closeout and Yuri's standing uninterrupted-development authority direct this narrow provider-free read-only ordinary Diary compatibility-consumer convergence review.",
   "checkpoint": {
-    "completed_stage": "The repository-static plan, threat delta and review are frozen. The current consumer/public-envelope incompatibility, status semantic downgrade, widened endpoint admission and success-only reconciliation gap are proved; 88 current focused checks, the canonical 200-test fast profile, register validation/tests, Ruff, 217-source compilation, JavaScript syntax and whitespace pass. One stale legacy route suite is explicitly contained as AER-0387 after an insufficient test-only repair was reverted.",
-    "next_executable_stage": "Generate a fresh pre-commit receipt, commit the exact review candidate on the task branch, then issue a pre-verifier receipt and run one fresh Gemini 3.7 Flash/high read-only veto if exact clean-worktree admission passes.",
+    "completed_stage": "Accepted at exact reviewed candidate 0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df and Continuity 312 / Compass 294. The five ordinary Diary cancellation consumer gaps and one client-only convergence are source-proved; 88 focused checks, 200 canonical-fast tests, 296 register tests, static gates and one clean eight-command Gemini 3.7 Flash/high veto pass. AER-0387 is contained and AER-0388 through AER-0390 preserve corrected closeout-only harness drift.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "named_review_tranche_complete_but_continuing_engine_requires_next_tranche_rehydration"
   },
   "protected_boundaries": [
     "provider_free_repository_static_review_only",

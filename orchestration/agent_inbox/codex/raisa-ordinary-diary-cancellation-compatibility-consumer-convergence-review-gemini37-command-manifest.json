@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/ordinary-diary-cancellation-compat-review-0f3b0c73",
+        "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py",
+        "tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py",
+        "tests/test_api_spine_delete_confirm_idempotency_preflight.py",
+        "tests/test_api_spine_artifacts.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_agent_error_register"
+      ]
+    },
+    {"id": "C05", "argv": ["node", "--check", "docs/diary/diary.js"]},
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check",
+        "tests/test_raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review.py"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--check", "36b116bdb72c82acac63b8a0371d6212e9bc1f9a..0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df"]},
+    {"id": "C08", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

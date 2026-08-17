@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.schema.json",
+  "title": "Ordinary Diary cancellation compatibility-consumer convergence review evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "result",
+    "planning_baseline",
+    "reviewed_candidate",
+    "evidence_modes",
+    "findings",
+    "frozen_later_convergence",
+    "verification",
+    "legacy_test_containment",
+    "parallelism_efficacy",
+    "authority_counts",
+    "claim_limit"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.ordinary-diary.cancellation-compatibility-consumer-convergence-review.evidence.v1"
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "result": {
+      "const": "raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_pass"
+    },
+    "planning_baseline": {
+      "const": "36b116bdb72c82acac63b8a0371d6212e9bc1f9a"
+    },
+    "reviewed_candidate": {
+      "const": "0f3b0c73fef0a2a52186a8f86bae8cf351d1a8df"
+    },
+    "evidence_modes": {
+      "const": [
+        "repository_static_authored_synthetic",
+        "deterministic_regression",
+        "independent_read_only_veto"
+      ]
+    },
+    "findings": {
+      "const": {
+        "public_envelope_compatibility": "high_client_correctness_gap",
+        "delete_404_to_status": "medium_semantic_downgrade",
+        "cancellation_specific_endpoint_binding": "medium_admission_widening",
+        "success_only_refresh": "medium_truth_reconciliation_gap",
+        "smoke_status_optimistic_removal": "low_fixture_drift",
+        "backend_database_integrity_defect_proved": false,
+        "product_source_changed": false
+      }
+    },
+    "frozen_later_convergence": {
+      "const": {
+        "files": [
+          "docs/diary/diary.js",
+          "docs/diary/diary.html_if_cache_reference_changes",
+          "focused_source_and_browser_tests"
+        ],
+        "dedicated_delete_proposal_only": true,
+        "canonical_delete_confirm_only": true,
+        "status_or_raw_delete_fallbacks": 0,
+        "strict_minimal_public_envelope": true,
+        "appointment_read_model_required": false,
+        "fresh_read_after_every_terminal_or_uncertain_outcome": true,
+        "reconciliation_failure_state": "refresh_required_and_cancellation_disabled",
+        "backend_api_schema_migration_or_database_changes": 0
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "focused_tests",
+        "canonical_fast_tests",
+        "register_tests",
+        "maintained_source_compilation",
+        "javascript_syntax",
+        "ruff",
+        "git_whitespace",
+        "independent_veto",
+        "independent_veto_commands",
+        "review_worktree_clean"
+      ],
+      "properties": {
+        "focused_tests": {"const": 88},
+        "canonical_fast_tests": {"const": 200},
+        "register_tests": {"const": 296},
+        "maintained_source_compilation": {"const": 217},
+        "javascript_syntax": {"const": "pass"},
+        "ruff": {"const": "pass"},
+        "git_whitespace": {"const": "pass"},
+        "independent_veto": {"const": "pass"},
+        "independent_veto_commands": {"const": 8},
+        "review_worktree_clean": {"const": true}
+      }
+    },
+    "legacy_test_containment": {
+      "const": {
+        "suite": "tests/test_api_spine_delete_confirm_idempotency_route_contract.py",
+        "status": "contained_as_stale_pre_adapter_test_debt",
+        "attempted_reason_only_change_reverted": true,
+        "failed_packets_used_for_acceptance": false,
+        "incident": "AER-0387"
+      }
+    },
+    "parallelism_efficacy": {
+      "const": {
+        "sol": "owned_tightly_coupled_semantic_review_acceptance_closeout_and_git",
+        "deepseek": "declined_neutral_leverage_no_separable_implementation",
+        "gemini": "completed_one_fresh_exact_candidate_independent_veto",
+        "native_subagents": "declined_by_current_developer_policy"
+      }
+    },
+    "authority_counts": {
+      "const": {
+        "provider_calls": 0,
+        "product_route_calls": 0,
+        "patient_or_product_records": 0,
+        "database_or_source_accesses": 0,
+        "product_source_edits": 0,
+        "deployments": 0,
+        "releases": 0,
+        "pages_rebuilds": 0,
+        "protected_ref_movements": 0
+      }
+    },
+    "claim_limit": {
+      "const": "Proves repository facts and freezes the narrowest provider-free client-only convergence; it does not change or prove live product, route, database, representative usability, external-adapter, deployment or production behavior."
+    }
+  }
+}
