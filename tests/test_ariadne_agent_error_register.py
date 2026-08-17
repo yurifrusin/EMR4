@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 347
+    assert register["register_revision"] == 353
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 399)
+        f"AER-{index:04d}" for index in range(1, 405)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 271
+    assert len(agent_incidents) == 277
     assert len(transport_incidents) == 14
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2580,7 +2580,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 398
+    assert report["incident_count"] == 404
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3617,11 +3617,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 347
-    assert report["incident_count"] == 398
+    assert report["register_revision"] == 353
+    assert report["incident_count"] == 404
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 271,
+        "agent_behavior": 277,
         "harness": 48,
         "repository": 65,
         "transport": 14,
@@ -3630,15 +3630,15 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 64,
         "evidence_misreport": 55,
         "harness_failure": 48,
-        "output_contract_violation": 109,
+        "output_contract_violation": 114,
         "read_only_violation": 3,
-        "reasoning_claim_error": 40,
+        "reasoning_claim_error": 41,
         "repository_defect": 65,
         "transport_timeout": 14,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 248,
+        "canonical_unchanged": 254,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3686,6 +3686,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     )
     assert deepseek_exit_recurrence["incident_ids"] == ["AER-0382", "AER-0391"]
     assert deepseek_exit_recurrence["incident_count"] == 2
+    manual_sha_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"] == "orchestrator.manual_short_sha_expansion"
+    )
+    assert manual_sha_recurrence["incident_ids"] == ["AER-0286", "AER-0399"]
+    assert manual_sha_recurrence["incident_count"] == 2
+    closeout_fixture_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale"
+    )
+    assert closeout_fixture_recurrence["incident_ids"] == ["AER-0319", "AER-0402"]
+    assert closeout_fixture_recurrence["incident_count"] == 2
     assert [
         row
         for row in report["recurring_patterns"]
@@ -3695,6 +3710,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.git_refs_evidence_included_noncommit_tree_object",
             "repository.agent_error_register_exact_count_update_incomplete",
             "transport.deepseek_claude_exit_1_before_worker_result",
+            "orchestrator.manual_short_sha_expansion",
+            "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
         }
     ] == [
         {
@@ -6302,6 +6319,99 @@ def test_aer_0398_records_recurrent_parallelism_leverage_vocabulary_mismatch() -
     )
     assert "conditional_independence" in incident["observed_error"]
     assert "configured neutral" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0399_records_recurrent_manual_short_sha_expansion() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0399"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "dispatch"
+    assert incident["category"] == "reasoning_claim_error"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        incidents["AER-0286"]["recurrence_signature"]
+    )
+    assert incident["related_incident_ids"] == []
+    assert "invalid reference" in incident["detection_method"]
+    assert "git rev-parse HEAD" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0400_records_asymmetric_peer_link_validation_failure() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0400"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["related_incident_ids"] == []
+    assert "attempt peer linkage mismatch" in incident["observed_error"]
+    assert "recurrence grouping" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0401_records_overliteral_register_prose_assertion() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0401"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert "307 tests" in incident["observed_error"]
+    assert "semantic phrase" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0402_records_recurrent_closeout_latch_and_baton_fixture_drift() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0402"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        incidents["AER-0319"]["recurrence_signature"]
+    )
+    assert "Continuity 313 / Compass 295" in incident["observed_error"]
+    assert "Continuity 314 / Compass 296" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0403_records_baton_count_phrase_fixture_mismatch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0403"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "11 new checks" in incident["observed_error"]
+    assert "Eleven new checks" in incident["correction"]["action"]
+    assert "arrival/check-in" in incident["observed_error"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0404_records_live_handover_compactness_overrun() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0404"
+    ]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "501 lines" in incident["observed_error"]
+    assert "two purely presentational blank lines" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

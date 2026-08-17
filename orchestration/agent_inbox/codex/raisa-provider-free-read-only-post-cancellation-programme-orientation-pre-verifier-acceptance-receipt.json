@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only post-cancellation programme orientation",
+    "completed_stage": "The exact candidate passes 11 orientation checks, 107 API/static checks, the revision-347 register suite and the 200-test canonical fast profile. Six unchanged endpoint-coverage failures are preserved as baseline negative evidence. Clean-worktree and seven-command verifier-manifest preflight pass.",
+    "next_executable_stage": "Dispatch one Gemini 3.7 Flash/high independent veto, admit exactly one terminal decision and verify unchanged HEAD/tree/worktree postconditions.",
+    "operation_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+    "resume_after_compaction": true,
+    "source_head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+    "reason_codes": [],
+    "resolved_commit": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "74da22d5372299eb2d2e38bb2266b76c89a97035"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+    "branch_origin_aligned": false,
+    "head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+    "origin_branch_commit": "5981b6cacdd3d488462803748c0d86f1e9bc2457",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The exact candidate is a tightly coupled semantic orientation with no separable mechanical implementation package; another worker would duplicate packet-monitoring cost.",
+        "work_packages": []
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The orientation freezes material arrival/check-in architecture meaning, so one fresh exact-candidate Gemini 3.7 Flash/high veto is the remaining independent gate.",
+        "work_packages": [
+          "one_provider_free_exact_candidate_post_cancellation_orientation_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native subagent delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier result",
+      "scope breach or revision required",
+      "worktree postcondition failure",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "execute only the admitted manifest in the clean review worktree",
+      "admit one terminal Gemini decision",
+      "verify unchanged HEAD tree and worktree",
+      "Sol alone interprets and accepts"
+    ]
+  },
+  "planned_action": "admit_exact_post_cancellation_orientation_candidate_for_one_gemini_37_flash_high_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md",
+      "docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md",
+      "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+      "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-worktree-preflight.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the coupled matrix, successor selection, acceptance and Git. DeepSeek V4 Flash/high remains declined because no separable implementation package exists. Gemini 3.7 Flash/high owns one exact-candidate read-only veto because the orientation freezes material command-family architecture meaning. Native subagents remain declined by current developer policy.",
+    "git_refs_and_worktree": "The exact review candidate is 74da22d5372299eb2d2e38bb2266b76c89a97035. Review worktree C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5 is clean on codex/review-post-cancellation-orientation-74da22d5 at the same HEAD. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main-worktree correction evidence and preserved unrelated untracked files are outside the review candidate.",
+    "live_handover_current_baton": "The live baton and in-progress latch require completion of the provider-free read-only post-cancellation programme orientation after accepted ordinary Diary cancellation convergence at Continuity 313 / Compass 295.",
+    "protected_evidence_boundaries": "Review is limited to the exact non-protected allowlist, exact parent-to-candidate diff and seven-command provider-free manifest. The endpoint-coverage file is read-only negative evidence and must not run. No repository enumeration, product or runtime edit, database, route, Docker, provider fallback, product/patient/clinical data, credentials/IAM, deployment, release, Pages or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

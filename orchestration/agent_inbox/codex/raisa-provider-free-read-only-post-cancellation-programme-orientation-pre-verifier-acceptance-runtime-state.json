@@ -1,0 +1,181 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "admit_exact_post_cancellation_orientation_candidate_for_one_gemini_37_flash_high_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton and in-progress latch require completion of the provider-free read-only post-cancellation programme orientation after accepted ordinary Diary cancellation convergence at Continuity 313 / Compass 295.",
+    "current_authority_allocation": "GPT Sol owns the coupled matrix, successor selection, acceptance and Git. DeepSeek V4 Flash/high remains declined because no separable implementation package exists. Gemini 3.7 Flash/high owns one exact-candidate read-only veto because the orientation freezes material command-family architecture meaning. Native subagents remain declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md",
+      "docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md",
+      "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+      "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-worktree-preflight.json"
+    ],
+    "protected_evidence_boundaries": "Review is limited to the exact non-protected allowlist, exact parent-to-candidate diff and seven-command provider-free manifest. The endpoint-coverage file is read-only negative evidence and must not run. No repository enumeration, product or runtime edit, database, route, Docker, provider fallback, product/patient/clinical data, credentials/IAM, deployment, release, Pages or protected ref is opened.",
+    "git_refs_and_worktree": "The exact review candidate is 74da22d5372299eb2d2e38bb2266b76c89a97035. Review worktree C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5 is clean on codex/review-post-cancellation-orientation-74da22d5 at the same HEAD. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main-worktree correction evidence and preserved unrelated untracked files are outside the review candidate."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+    "active_tranche": "Provider-free read-only post-cancellation programme orientation",
+    "objective": "Compare the completed first-party cancellation chain with remaining Reception One and API Spine appointment command families, identify dependency-satisfied gaps, and freeze the narrowest next architecture-strengthening tranche without editing product or command runtime source.",
+    "status": "in_progress",
+    "source_head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+    "authority_source": "AGENTS.md Current Baton at Continuity 313 / Compass 295, the accepted ordinary Diary cancellation convergence closeout and Yuri's standing uninterrupted-development authority direct this provider-free read-only orientation.",
+    "checkpoint": {
+      "completed_stage": "The exact candidate passes 11 orientation checks, 107 API/static checks, the revision-347 register suite and the 200-test canonical fast profile. Six unchanged endpoint-coverage failures are preserved as baseline negative evidence. Clean-worktree and seven-command verifier-manifest preflight pass.",
+      "next_executable_stage": "Dispatch one Gemini 3.7 Flash/high independent veto, admit exactly one terminal decision and verify unchanged HEAD/tree/worktree postconditions.",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 3
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_repository_static_read_only_orientation",
+      "exact_non_protected_allowlist_and_parent_candidate_diff_only",
+      "endpoint_coverage_packet_is_read_only_negative_evidence_and_must_not_run",
+      "no_product_backend_api_openapi_graphql_schema_service_migration_or_database_edit",
+      "no_live_route_source_database_watcher_or_external_client_access",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_provider_fallback_adc_credentials_iam_browser_or_external_network_beyond_selected_verifier",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The exact candidate is a tightly coupled semantic orientation with no separable mechanical implementation package; another worker would duplicate packet-monitoring cost.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "The orientation freezes material arrival/check-in architecture meaning, so one fresh exact-candidate Gemini 3.7 Flash/high veto is the remaining independent gate.",
+        "work_packages": [
+          "one_provider_free_exact_candidate_post_cancellation_orientation_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive native subagent delegation.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "execute only the admitted manifest in the clean review worktree",
+      "admit one terminal Gemini decision",
+      "verify unchanged HEAD tree and worktree",
+      "Sol alone interprets and accepts"
+    ],
+    "reassessment_triggers": [
+      "verifier result",
+      "scope breach or revision required",
+      "worktree postcondition failure",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source rehydration plus exact clean candidate and verifier-manifest preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol admitted the exact candidate after deterministic provider-free checks."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native lane declined by current developer policy."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.7 Flash/high selected for one exact-candidate veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No separable implementation package; lane declined."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

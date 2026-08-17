@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 313,
+  "graph_revision": 314,
   "harvests": [],
   "nodes": [
     {
@@ -21739,9 +21739,87 @@
         "The stale pre-adapter route-contract suite remains contained test debt under AER-0387.",
         "Live backend/database behavior, external adapters, product data, providers, deployment and production remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "title": "Provider-free read-only post-cancellation programme orientation",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-17T18:57:36Z",
+      "updated_at": "2026-08-17T18:57:36Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Repository-static read-only orientation; no product behavior or runtime changed.",
+          "Arrival/check-in is an authority and lifecycle inconsistency, not a proved corrupt write path.",
+          "No product-facing arrival meaning is selected before the successor convergence review."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-arrival-check-in-command-family-convergence-review",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Select one provider-free read-only review of generic Arrived status, waiting-area composition, A5.1 check-in and static action-contract meaning before any product edit."
+        }
+      ],
+      "claim_scope": [
+        "Create, update, general status and delete/cancel are complete for the current first-party reference-client scope.",
+        "Generic Arrived status, specialized default-off A5.1 check-in and static action-contract meaning require convergence.",
+        "Six unchanged endpoint-coverage failures are baseline negative evidence, not candidate regressions.",
+        "Eleven new checks, 107 API/static checks, the 200-test canonical fast profile and one fresh Gemini 3.7 Flash/high veto pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md",
+          "docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md",
+          "scripts/raisa_provider_free_read_only_post_cancellation_programme_orientation_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The selected arrival/check-in convergence review remains to choose canonical A5.1, explicit generic status binding or strict specialized non-overlap.",
+        "A5.1 remains default-off, authored-synthetic-practice-only and uncalled.",
+        "Product source, route/static-contract repair, patient linking, external channels, product data, providers, deployment and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-17T15:54:51Z"
+  "updated_at": "2026-08-17T18:57:36Z"
 }

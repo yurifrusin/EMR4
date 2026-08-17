@@ -1,0 +1,179 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\post-cancellation-orientation-74da22d5",
+  "branch": "codex/review-post-cancellation-orientation-74da22d5",
+  "head_before": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+  "head_after": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "5b4a520b2c3085ac32fb8f1ef06fc6dcb19955355b6a1dfd5bbc4fdb8662ce2b",
+  "result": "### Gemini 3.7 Flash/high Independent Veto Review: Post-Cancellation Programme Orientation\n\n**Review Date:** 2026-08-18  \n**Timestamp:** 2026-08-18T04:55:00+10:00 (Australia/Brisbane)  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\post-cancellation-orientation-74da22d5`  \n**Candidate Branch:** `codex/review-post-cancellation-orientation-74da22d5`  \n**Candidate HEAD:** `74da22d5372299eb2d2e38bb2266b76c89a97035`  \n**Parent Accepted Closeout:** `5981b6cacdd3d488462803748c0d86f1e9bc2457`  \n**Evidence:** Provider-free `repository_static_authored_synthetic` only.\n\n---\n\n### Mandatory Five-Source Rehydration Audit\n1. `live_handover_current_baton`: Restored from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/AGENTS.md). Local/origin `master` and `handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Ordinary Diary canonical cancellation consumer convergence accepted at `bfac65298e1d4aaca85d1c9dcb20329ef298c485`.\n2. `current_authority_allocation`: GPT Sol is Conductor/integrator/acceptance owner; DeepSeek V4 Flash/high via Claude Code `--bare` is implementation/test worker (declined for this orientation tranche); Gemini 3.7 Flash/high via Antigravity is independent veto reviewer.\n3. `active_plan_and_acceptance`: Verified [`docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md), [`docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md), [`docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md), and register revision 347 [`docs/ariadne-agent-error-correction-register-revision-347.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/ariadne-agent-error-correction-register-revision-347.md).\n4. `protected_evidence_boundaries`: Holdouts v1\u2013v10 sealed, provider lane paused, historical diary ignored, product authority backend-owned, no live routes/databases/providers/protected refs/Pages touched, `docs/branding/` and unrelated untracked files preserved.\n5. `git_refs_and_worktree`: Exact worktree `C:\\Users\\sarashera\\EMR4-worktrees\\post-cancellation-orientation-74da22d5`, branch `codex/review-post-cancellation-orientation-74da22d5`, HEAD `74da22d5372299eb2d2e38bb2266b76c89a97035`, clean before and after verification.\n\n---\n\n### Challenge Responses & Verification Findings\n\n1. **Exact Git & Worktree Verification:**\n   - Preflight and postflight `git status --short --branch` (C01, C07) confirm branch `codex/review-post-cancellation-orientation-74da22d5` and clean worktree.\n   - `git rev-parse HEAD` (C02) confirms exact hash `74da22d5372299eb2d2e38bb2266b76c89a97035`.\n   - File diff against parent `5981b6cacdd3d488462803748c0d86f1e9bc2457` touches only orientation docs, threat model delta, test files, latch, register revision 347, and inbox receipts. No product source or protected refs modified.\n\n2. **First-Party UI Representation of Arrival:**\n   - In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/diary/diary.js), the ordinary Diary Expected flow list uses generic status transition to `Arrived` (`renderFlowList(\"flow-list-expected\", filteredExpected, \"Check In\", \"Arrived\")` and `setAppointmentStatus(a, targetStatus, null, waitingAreaId)`).\n   - In [`docs/diary/meta-grid.js`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/diary/meta-grid.js), Reception One's console supports only `[\"status\", \"time\", \"duration\", \"practitioner\", \"cancel\"]`, with `Arrived` available through general status selection.\n   - Neither first-party client consumes or exposes the A5.1 check-in route.\n\n3. **Dedicated A5.1 Route Posture:**\n   - In [`app/config.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/config.py), `rayleen_a5_check_in_enabled: bool = False` and `rayleen_a5_check_in_synthetic_practice_ids: str = \"\"` ensure the feature is default-off and practice-allowlisted.\n   - In [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/routers/appointments.py), `/proposals/check-in/{appointment_id:uuid}` and `/proposals/check-in/confirm` exist, gated by `_a5_check_in_gate_open(current_user)`, supporting atomic waiting-area assignment, audit recording, patient-free `checked_in` event emission, and idempotency receipts.\n\n4. **Static Action Grammar, Route Contract & Promotion Discrepancies:**\n   - [`app/services/diary/action_grammar.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/services/diary/action_grammar.py) marks `DiaryActionVerb.check_in` as `implemented=False`, `confirm_actions=()`, with notes that no signed confirm action exists.\n   - [`app/services/diary/action_route_contract.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/services/diary/action_route_contract.py) classifies `check_in` as `RouteAuthority.planned_not_implemented`, mapping proposals to the generic status proposal route.\n   - [`app/services/diary/planned_action_promotion.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/services/diary/planned_action_promotion.py) requires resolving whether a dedicated signed check-in confirm action or an explicitly reviewed status-confirm binding should be promoted.\n   - These repository facts prove a genuine lifecycle posture inconsistency across runtime, UI, and static contract layers that requires reconciliation before wider admission.\n\n5. **Exhaustiveness of Retained Outcomes:**\n   - The report defines three distinct architectural outcomes:\n     1. Future canonical A5.1 check-in (decoupling the reusable deterministic kernel from the Rayleen-specific default-off gate);\n     2. Retaining generic status-confirm as the explicitly documented canonical check-in binding with A5.1 remaining a gated proof;\n     3. Specialized atomic status-plus-waiting-area command with a strict non-overlap rule.\n   - The report correctly preserves all three options without prematurely choosing among them.\n\n6. **Out-of-Scope & Horizon Boundaries:**\n   - Link-patient is identity-sensitive and lacks a signed command family; it is not dependency-satisfied.\n   - External patient channels, delegation, Context Fabric durability, and UI polish are properly distinguished and retained as separate horizons.\n\n7. **Successor Scope Boundedness:**\n   - The selected successor tranche (`raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review`) is strictly read-only and explicitly prohibited from modifying `app/**`, `docs/diary/**`, API Spine schemas, migrations, or product tests.\n\n8. **Classification of Six Baseline Endpoint Coverage Failures:**\n   - In [`tests/test_diary_action_route_endpoint_coverage.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_diary_action_route_endpoint_coverage.py), the 6 baseline failures are caused by `{appointment_id}` in static route contracts vs `{appointment_id:uuid}` in FastAPI mounts.\n   - The orientation report correctly classifies this as pre-existing baseline negative evidence rather than candidate regression, and properly avoids editing static contracts or tests within this orientation tranche.\n\n9. **Evidence Purity & Isolation:**\n   - No backend, API, OpenAPI, schema, service, migration, database, provider, or UI source was altered.\n   - All changes are confined to orientation, threat model delta, test coverage, latch, error register revision 347, and inbox receipts.\n\n10. **Command Manifest Execution:**\n    - C01 through C07 executed sequentially with exit code 0.\n    - 118 pytest unit and orientation checks passed (C03).\n    - Error register generation passed (C04).\n    - Ruff linting on new and modified Python files passed (C05).\n    - Git diff whitespace/syntax check passed (C06).\n    - Post-execution working directory is clean on the exact candidate commit (C07).\n\n---\n\n### Conclusion\nThe candidate report faithfully and accurately documents the bounded arrival/check-in lifecycle inconsistency, preserves baseline negative evidence, adheres to all protected boundaries, and selects the narrowest safe next read-only convergence review. The veto passes without reservation.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Gemini 3.7 Flash/high Independent Veto Review: Post-Cancellation Programme Orientation\n\n**Review Date:** 2026-08-18  \n**Timestamp:** 2026-08-18T04:55:00+10:00 (Australia/Brisbane)  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\post-cancellation-orientation-74da22d5`  \n**Candidate Branch:** `codex/review-post-cancellation-orientation-74da22d5`  \n**Candidate HEAD:** `74da22d5372299eb2d2e38bb2266b76c89a97035`  \n**Parent Accepted Closeout:** `5981b6cacdd3d488462803748c0d86f1e9bc2457`  \n**Evidence:** Provider-free `repository_static_authored_synthetic` only.\n\n---\n\n### Mandatory Five-Source Rehydration Audit\n1. `live_handover_current_baton`: Restored from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/AGENTS.md). Local/origin `master` and `handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Ordinary Diary canonical cancellation consumer convergence accepted at `bfac65298e1d4aaca85d1c9dcb20329ef298c485`.\n2. `current_authority_allocation`: GPT Sol is Conductor/integrator/acceptance owner; DeepSeek V4 Flash/high via Claude Code `--bare` is implementation/test worker (declined for this orientation tranche); Gemini 3.7 Flash/high via Antigravity is independent veto reviewer.\n3. `active_plan_and_acceptance`: Verified [`docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md), [`docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md), [`docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md), and register revision 347 [`docs/ariadne-agent-error-correction-register-revision-347.md`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/ariadne-agent-error-correction-register-revision-347.md).\n4. `protected_evidence_boundaries`: Holdouts v1\u2013v10 sealed, provider lane paused, historical diary ignored, product authority backend-owned, no live routes/databases/providers/protected refs/Pages touched, `docs/branding/` and unrelated untracked files preserved.\n5. `git_refs_and_worktree`: Exact worktree `C:\\Users\\sarashera\\EMR4-worktrees\\post-cancellation-orientation-74da22d5`, branch `codex/review-post-cancellation-orientation-74da22d5`, HEAD `74da22d5372299eb2d2e38bb2266b76c89a97035`, clean before and after verification.\n\n---\n\n### Challenge Responses & Verification Findings\n\n1. **Exact Git & Worktree Verification:**\n   - Preflight and postflight `git status --short --branch` (C01, C07) confirm branch `codex/review-post-cancellation-orientation-74da22d5` and clean worktree.\n   - `git rev-parse HEAD` (C02) confirms exact hash `74da22d5372299eb2d2e38bb2266b76c89a97035`.\n   - File diff against parent `5981b6cacdd3d488462803748c0d86f1e9bc2457` touches only orientation docs, threat model delta, test files, latch, register revision 347, and inbox receipts. No product source or protected refs modified.\n\n2. **First-Party UI Representation of Arrival:**\n   - In [`docs/diary/diary.js`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/diary/diary.js), the ordinary Diary Expected flow list uses generic status transition to `Arrived` (`renderFlowList(\"flow-list-expected\", filteredExpected, \"Check In\", \"Arrived\")` and `setAppointmentStatus(a, targetStatus, null, waitingAreaId)`).\n   - In [`docs/diary/meta-grid.js`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/docs/diary/meta-grid.js), Reception One's console supports only `[\"status\", \"time\", \"duration\", \"practitioner\", \"cancel\"]`, with `Arrived` available through general status selection.\n   - Neither first-party client consumes or exposes the A5.1 check-in route.\n\n3. **Dedicated A5.1 Route Posture:**\n   - In [`app/config.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/config.py), `rayleen_a5_check_in_enabled: bool = False` and `rayleen_a5_check_in_synthetic_practice_ids: str = \"\"` ensure the feature is default-off and practice-allowlisted.\n   - In [`app/routers/appointments.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/routers/appointments.py), `/proposals/check-in/{appointment_id:uuid}` and `/proposals/check-in/confirm` exist, gated by `_a5_check_in_gate_open(current_user)`, supporting atomic waiting-area assignment, audit recording, patient-free `checked_in` event emission, and idempotency receipts.\n\n4. **Static Action Grammar, Route Contract & Promotion Discrepancies:**\n   - [`app/services/diary/action_grammar.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/services/diary/action_grammar.py) marks `DiaryActionVerb.check_in` as `implemented=False`, `confirm_actions=()`, with notes that no signed confirm action exists.\n   - [`app/services/diary/action_route_contract.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/services/diary/action_route_contract.py) classifies `check_in` as `RouteAuthority.planned_not_implemented`, mapping proposals to the generic status proposal route.\n   - [`app/services/diary/planned_action_promotion.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/app/services/diary/planned_action_promotion.py) requires resolving whether a dedicated signed check-in confirm action or an explicitly reviewed status-confirm binding should be promoted.\n   - These repository facts prove a genuine lifecycle posture inconsistency across runtime, UI, and static contract layers that requires reconciliation before wider admission.\n\n5. **Exhaustiveness of Retained Outcomes:**\n   - The report defines three distinct architectural outcomes:\n     1. Future canonical A5.1 check-in (decoupling the reusable deterministic kernel from the Rayleen-specific default-off gate);\n     2. Retaining generic status-confirm as the explicitly documented canonical check-in binding with A5.1 remaining a gated proof;\n     3. Specialized atomic status-plus-waiting-area command with a strict non-overlap rule.\n   - The report correctly preserves all three options without prematurely choosing among them.\n\n6. **Out-of-Scope & Horizon Boundaries:**\n   - Link-patient is identity-sensitive and lacks a signed command family; it is not dependency-satisfied.\n   - External patient channels, delegation, Context Fabric durability, and UI polish are properly distinguished and retained as separate horizons.\n\n7. **Successor Scope Boundedness:**\n   - The selected successor tranche (`raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review`) is strictly read-only and explicitly prohibited from modifying `app/**`, `docs/diary/**`, API Spine schemas, migrations, or product tests.\n\n8. **Classification of Six Baseline Endpoint Coverage Failures:**\n   - In [`tests/test_diary_action_route_endpoint_coverage.py`](file:///C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_diary_action_route_endpoint_coverage.py), the 6 baseline failures are caused by `{appointment_id}` in static route contracts vs `{appointment_id:uuid}` in FastAPI mounts.\n   - The orientation report correctly classifies this as pre-existing baseline negative evidence rather than candidate regression, and properly avoids editing static contracts or tests within this orientation tranche.\n\n9. **Evidence Purity & Isolation:**\n   - No backend, API, OpenAPI, schema, service, migration, database, provider, or UI source was altered.\n   - All changes are confined to orientation, threat model delta, test coverage, latch, error register revision 347, and inbox receipts.\n\n10. **Command Manifest Execution:**\n    - C01 through C07 executed sequentially with exit code 0.\n    - 118 pytest unit and orientation checks passed (C03).\n    - Error register generation passed (C04).\n    - Ruff linting on new and modified Python files passed (C05).\n    - Git diff whitespace/syntax check passed (C06).\n    - Post-execution working directory is clean on the exact candidate commit (C07).\n\n---\n\n### Conclusion\nThe candidate report faithfully and accurately documents the bounded arrival/check-in lifecycle inconsistency, preserves baseline negative evidence, adheres to all protected boundaries, and selects the narrowest safe next read-only convergence review. The veto passes without reservation.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5",
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_diary_action_grammar.py",
+          "tests/test_diary_action_route_contract.py",
+          "tests/test_diary_planned_action_promotion.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_agent_error_register"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "5981b6cacdd3d488462803748c0d86f1e9bc2457..74da22d5372299eb2d2e38bb2266b76c89a97035"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "32b8d170bfee96624d2e56e24411779be75e2762c7c6248a2d64402ce2c5bba9",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5",
+        "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+        "tests/test_api_spine_artifacts.py",
+        "tests/test_diary_action_grammar.py",
+        "tests/test_diary_action_route_contract.py",
+        "tests/test_diary_planned_action_promotion.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_agent_error_register"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "5981b6cacdd3d488462803748c0d86f1e9bc2457..74da22d5372299eb2d2e38bb2266b76c89a97035"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

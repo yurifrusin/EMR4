@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-review-worktree-001",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "review_worktree_creation",
+  "candidate_prefix": "74da22d5",
+  "rejected_object_id": "74da22d5dd4553c04693bc3d8e17b41e74ed4226",
+  "resolved_object_id": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+  "git_error": "fatal: invalid reference",
+  "side_effects": {
+    "target_path_created": false,
+    "review_branch_created": false,
+    "provider_call": false,
+    "database_call": false,
+    "product_change": false,
+    "network_call": false
+  },
+  "correction": "Use only the literal full object returned by git rev-parse HEAD and reverify it through the clean-worktree preflight before dispatch."
+}

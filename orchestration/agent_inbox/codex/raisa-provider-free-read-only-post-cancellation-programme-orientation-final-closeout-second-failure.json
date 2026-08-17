@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-final-closeout-packet-002",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "closeout",
+  "process_exit_code": 1,
+  "failed_tests": 1,
+  "failed_test": "tests/test_current_baton_consistency.py::test_live_baton_rows_accept_behavior_and_resume_narrow_product_work",
+  "expected_phrase": "11 new checks",
+  "actual_phrase": "Eleven new checks",
+  "publication_followed": false,
+  "correction": "Assert the exact durable baton wording."
+}

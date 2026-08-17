@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-final-closeout-packet-001",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "closeout",
+  "process_exit_code": 1,
+  "passed_tests": 65,
+  "failed_tests": 5,
+  "failure_classes": {
+    "complete_latch_internally_inconsistent": 2,
+    "current_baton_fixture_stale": 3
+  },
+  "publication_followed": false,
+  "external_dispatch_followed": false,
+  "correction": "Set complete-latch resume false and next stage null; advance current-baton fixtures to Continuity 314 / Compass 296 and the arrival/check-in convergence successor."
+}

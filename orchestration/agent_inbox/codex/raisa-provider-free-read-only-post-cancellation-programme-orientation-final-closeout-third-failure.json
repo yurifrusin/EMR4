@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-final-closeout-packet-003",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "closeout",
+  "process_exit_code": 1,
+  "failed_tests": 1,
+  "failed_test": "tests/test_current_baton_consistency.py::test_live_baton_rows_accept_behavior_and_resume_narrow_product_work",
+  "expected_phrase": "arrival/check-in",
+  "actual_semantics": "generic Arrived, waiting-area composition and default-off A5.1 check-in",
+  "publication_followed": false,
+  "correction": "Name the already-described seam explicitly as arrival/check-in in the accepted Current result row."
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-canonical-fast-001",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "closeout",
+  "process_exit_code": 1,
+  "passed_tests": 199,
+  "failed_tests": 1,
+  "failed_test": "tests/test_agents_handover_archive.py::test_compact_live_handover_retains_required_authority_and_boundaries",
+  "observed_lines": 501,
+  "required_lines_less_than": 500,
+  "ruff_passed": true,
+  "maintained_source_compilation_passed": 217,
+  "publication_followed": false,
+  "correction": "Remove two presentational blank lines without removing authority content and rerun the handover and canonical profiles."
+}

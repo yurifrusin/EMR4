@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-register-validation-001",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "deterministic_verification",
+  "command": "python scripts/ariadne_agent_error_register.py --output orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+  "process_exit_code": 1,
+  "error": "attempt peer linkage mismatch for AER-0399: expected=none",
+  "derived_report_written": false,
+  "external_dispatch_followed": false,
+  "correction": "Use an empty related_incident_ids array and retain the historical recurrence only through the exact recurrence_signature."
+}

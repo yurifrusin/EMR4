@@ -418,13 +418,23 @@ schema-and-transaction scaffold now passes at integrated source
 grants, the family-qualified delete receipt, attributable audit additions,
 canonical response/session helpers and the ordered fail-closed transaction seam
 are represented without executing the migration, opening a database or
-mounting a route. The next narrow descendant is a provider-free disposable
-PostgreSQL parse/catalogue rehearsal, but Yuri requested a pause before it
-opens for a workflow-efficiency review. The current mounted and compatibility
-routes remain unadmitted. Patient-channel delegation, check-in, Stage 3B,
-another event family and operational durability remain retained at their exact
-gates. No watcher runtime, product data, external patient client, provider,
-deployment, production or release is opened.
+mounting a route. Its provider-free disposable PostgreSQL descendants and the
+first-party cancellation compositions subsequently pass: Reception One and the
+ordinary Diary now consume the same dedicated delete proposal, visible
+confirmation, canonical delete-confirm, strict minimal public receipt and
+fresh-authorised-truth reconciliation contract. The post-cancellation
+programme orientation passes at exact reviewed source
+`74da22d5372299eb2d2e38bb2266b76c89a97035`. It finds create, update,
+general status and delete/cancel complete for the current first-party scope and
+selects a provider-free read-only arrival/check-in command-family convergence
+review next. That review must reconcile generic `Arrived`, waiting-area
+composition, default-off authored-synthetic A5.1 check-in and the static action
+contract before choosing canonical A5.1, an explicit generic-status binding or
+strict specialized non-overlap. The unchanged `{appointment_id}` versus
+`{appointment_id:uuid}` endpoint-coverage drift is retained as negative
+evidence. No A5.1 admission, source repair, control, watcher runtime, product
+data, external patient client, provider, deployment, production or release is
+opened. The durability track remains retained at its recorded later gate.
 
 The durable product seam is one Raisa authority kernel with replaceable
 interaction adapters. Reception One is the first-party reference client; later

@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "8bd9fb29a27dcc2108afeecd395db125ab4e41e8f0ce5424c193d22b939ca610",
+  "canonical_register_sha256": "e41be670033ff33c8a8770dc77430727888eb56e9fc1f7999f1f53f0cefe8c62",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 248,
+      "canonical_unchanged": 254,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 64,
       "evidence_misreport": 55,
       "harness_failure": 48,
-      "output_contract_violation": 109,
+      "output_contract_violation": 114,
       "read_only_violation": 3,
-      "reasoning_claim_error": 40,
+      "reasoning_claim_error": 41,
       "repository_defect": 65,
       "transport_timeout": 14
     },
     "by_origin": {
-      "agent_behavior": 271,
+      "agent_behavior": 277,
       "harness": 48,
       "repository": 65,
       "transport": 14
     },
     "by_process_severity": {
-      "low": 154,
+      "low": 160,
       "material": 115,
       "moderate": 129
     },
@@ -45,7 +45,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 201,
+      "codex-primary-orchestrator::orchestrator": 203,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -63,7 +63,7 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
-      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 5,
+      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 7,
       "emr4-behavior-evidence-schema::orchestrator": 1,
       "emr4-behavior-plan-parent-binding-test::orchestrator": 1,
       "emr4-cf-d2-event-cue-parse-catalogue-harness::orchestrator": 1,
@@ -86,10 +86,12 @@
       "emr4-context-fabric-durability-structural-contract::orchestrator": 5,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-context-fabric-roadmap-order-test::orchestrator": 1,
+      "emr4-current-baton-consistency::orchestrator": 1,
       "emr4-disposable-postgresql-harness::orchestrator": 23,
       "emr4-disposable-postgresql-parse-evidence-router::orchestrator": 1,
       "emr4-durability-ddl-renderer::orchestrator": 3,
       "emr4-live-handover-compactness-guard::orchestrator": 1,
+      "emr4-live-handover-compactness::orchestrator": 1,
       "emr4-maintenance-test-suite::orchestrator": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
@@ -104,12 +106,12 @@
     "by_role": {
       "implementer": 40,
       "integration_reviewer": 3,
-      "orchestrator": 301,
+      "orchestrator": 307,
       "verifier": 54
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 398,
+  "incident_count": 404,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -529,6 +531,30 @@
       "categories": [
         "output_contract_violation"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0319",
+        "AER-0402"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before a closeout updater runs, construct the complete latch from the exact validator branch and update the terminal Continuity/Compass/current-baton fixtures in the same patch; run both latch suites and tests/test_current_baton_consistency.py before any closeout receipt, commit, notification or push.",
+        "Before a closeout updater runs, validate the complete latch as a whole object, search all global continuity/Compass/current-baton fixtures for the predecessor, and require acceptance-index refresh to replace an existing moved label in place rather than duplicating or rejecting it."
+      ],
+      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
       "incident_count": 4,
       "incident_ids": [
         "AER-0012",
@@ -818,6 +844,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0286",
+        "AER-0399"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Treat full Git identities as command outputs, never completion tasks. Capture git rev-parse HEAD in a standalone read before every worktree command, copy its literal forty-character output and let deterministic preflight compare the created worktree before external review.",
+        "Treat full Git identities as command outputs, never memory or completion tasks. Worktree creation and verifier packets copy the literal git rev-parse result and a separate preflight compares the resulting worktree HEAD before any external call."
+      ],
+      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "reasoning_claim_error"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0274",
         "AER-0280"
       ],
@@ -1096,7 +1146,7 @@
       ]
     }
   ],
-  "register_revision": 347,
+  "register_revision": 353,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

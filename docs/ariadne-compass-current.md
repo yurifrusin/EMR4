@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 313 / Compass 295. Reception One and the ordinary Diary now consume one canonical cancellation command and fresh-truth contract. A provider-free read-only post-cancellation programme orientation is next.
+> EMR4 is at Continuity 314 / Compass 296. First-party cancellation is complete; arrival/check-in is the next bounded command-family convergence question, and no product meaning is selected yet.
 
 ## North star
 
@@ -396,32 +396,30 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The ordinary Diary client gap is source-proved and one provider-free delete-only client correction is ready to implement. Lineage parent: `raisa-reception-one-selected-appointment-cancellation-composition`.
 190. **Converge both first-party cancellation clients on one deterministic command and fresh-truth contract — Ordinary Diary cancellation canonical consumer convergence composition**
    Reception One and the ordinary Diary now preserve identical cancellation meaning across different visual projections. Lineage parent: `raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review`.
+191. **Reconcile arrival/check-in command-family meaning before another first-party control — Provider-free read-only post-cancellation programme orientation**
+   A provider-free read-only arrival/check-in convergence review is selected without choosing a product meaning. Lineage parent: `raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition`.
 
 ## Current position
 
-**Two first-party Diary projections now share one cancellation truth kernel — Ordinary Diary cancellation canonical consumer convergence composition**
+**Arrival/check-in meaning must converge across status, waiting-area, A5.1 and static contracts — Provider-free read-only post-cancellation programme orientation**
 
-**Why this proof came next:** The earlier review located a false-failure and semantic-fallback gap in the ordinary Diary after Reception One had already proven the canonical interaction.
+**Why this proof came next:** The first-party cancellation family is complete and check-in is the narrowest remaining dependency-satisfied command-family inconsistency.
 
-Cancellation presentation may vary across adapters while proposal, confirmation, receipt and fresh source truth retain one deterministic meaning.
+A provider-free read-only arrival/check-in command-family convergence review is next.
 
 ### What this unlocks
 
-- Run a provider-free read-only post-cancellation programme orientation.
-- Compare the complete cancellation chain with remaining Reception One and API Spine command families.
-- Freeze the narrowest next architecture-strengthening tranche before another product edit.
+- Compare exact general status, waiting-area and A5.1 contracts.
+- Freeze one canonical product-facing arrival meaning or a strict justified non-overlap before implementation.
 
 ### What it does not solve
 
-- Selection of the next command family until the read-only orientation completes.
-- The contained stale pre-adapter route-contract test debt.
-- Live backend/database, external-adapter, product-data, provider, deployment or production operation.
+- No A5.1 feature flag, route, action grammar, UI control or database behavior changed.
+- Patient linking, external channels, product data, providers, deployment and release remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -698,6 +696,7 @@ Prerequisites:
 
 ## Map limits
 
+- The post-cancellation orientation selects only a read-only arrival/check-in convergence review; it does not admit A5.1, bind generic status, repair static route contracts or add a control.
 - The ordinary Diary cancellation convergence proves authored-synthetic route-intercepted client behavior, not live backend/database, external-adapter, representative usability, deployment or production behavior.
 - The ordinary Diary cancellation review proves repository facts and one later source boundary; it changes no product behavior and proves no live route, database or external-adapter outcome.
 - The Reception One cancellation result proves authored-synthetic first-party rendering over a typed adapter-neutral contract; it does not prove live backend/database or external-adapter operation.
@@ -1303,6 +1302,9 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md`
+- `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md`
+- `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md`
+- `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md`
@@ -1549,6 +1551,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-readiness-rereview-threat-model-delta.md`
@@ -1668,6 +1671,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-post-combined-editor-compass-baton-orientation-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-cancellation-command-path-readiness-review-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-duration-composition-gemini-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-multi-change-request-atomicity-orientation-gemini-review-receipt.json`
@@ -1968,6 +1972,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-current-operational-weave-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-intent-shaped-temporal-retrieval-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-physical-representability-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-preacceptance-receipt.json`
@@ -2901,6 +2909,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--ordinary-diary-cancellation-compatibility-consumer-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
+- `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3081,6 +3090,8 @@ Prerequisites:
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py`
+- `tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py`
+- `tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `tests/test_raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py`
@@ -3144,4 +3155,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 295; continuity graph revision 313._
+_Compass map revision 296; continuity graph revision 314._

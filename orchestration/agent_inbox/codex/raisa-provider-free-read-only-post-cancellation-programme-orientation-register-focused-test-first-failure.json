@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.sanitized_failure_evidence.v1",
+  "attempt_id": "post-cancellation-orientation-register-focused-test-001",
+  "observed_on": "2026-08-18",
+  "status": "revision_required",
+  "stage": "deterministic_verification",
+  "process_exit_code": 1,
+  "passed_tests": 307,
+  "failed_tests": 1,
+  "failed_test": "tests/test_ariadne_agent_error_register.py::test_aer_0400_records_asymmetric_peer_link_validation_failure",
+  "assertion": "literal recurrence_signature was not present in correction.action",
+  "actual_semantic_phrase": "recurrence grouping",
+  "external_dispatch_followed": false,
+  "correction": "Assert the stable semantic phrase rather than an arbitrary field-name token in natural-language prose."
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 347,
+  "register_revision": 353,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -15955,6 +15955,246 @@
           "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-first-failure.json",
           "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-347.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0399",
+      "attempt_id": "post-cancellation-orientation-review-worktree-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_git",
+      "stage": "dispatch",
+      "category": "reasoning_claim_error",
+      "process_severity": "low",
+      "expected_invariant": "Every exact candidate commit used for review-worktree creation must be copied literally from git rev-parse HEAD; a display prefix may label a path but must never be manually expanded into a full object ID.",
+      "observed_error": "Sol manually expanded candidate prefix 74da22d5 into a nonexistent forty-character object in the first review-worktree command. Git returned invalid reference before creating the target path or branch. No verifier, provider, database, product or network operation occurred and the candidate remained unchanged.",
+      "detection_method": "The git worktree add process returned invalid reference. A separately captured git rev-parse HEAD then returned exact candidate 74da22d5372299eb2d2e38bb2266b76c89a97035; branch and path checks proved the rejected command created neither target.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-review-worktree-first-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-348.md",
+        "scripts/ariadne_verifier_worktree_preflight.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Capture literal git rev-parse HEAD output, use exactly 74da22d5372299eb2d2e38bb2266b76c89a97035 for worktree creation and require ariadne_verifier_worktree_preflight to reverify that same full HEAD before dispatch.",
+        "prevention_control": "Treat full Git identities as command outputs, never completion tasks. Capture git rev-parse HEAD in a standalone read before every worktree command, copy its literal forty-character output and let deterministic preflight compare the created worktree before external review.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-review-worktree-first-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-348.md",
+          "scripts/ariadne_verifier_worktree_preflight.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0400",
+      "attempt_id": "post-cancellation-orientation-register-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_agent_error_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A recurrence reuses its exact recurrence_signature but leaves related_incident_ids empty unless the register's symmetric attempt-peer relation can already be represented in both records.",
+      "observed_error": "The first AER-0399 draft listed historical AER-0286 as a one-way related incident even though the records are separate attempts and the older record cannot name the future incident. Canonical pattern generation stopped with attempt peer linkage mismatch and did not write a new report.",
+      "detection_method": "The standalone ariadne_agent_error_register process exited nonzero with exact attempt peer linkage mismatch for AER-0399 before any test, verifier dispatch or external call. The corrected record retains the shared recurrence signature and uses an empty related_incident_ids array.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-register-first-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-349.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_asymmetric_peer_link",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the unsupported one-way peer from AER-0399, retain orchestrator.manual_short_sha_expansion as its recurrence grouping, add this distinct failed-validation record and rerun pattern generation as a separately captured process before review dispatch.",
+        "prevention_control": "Leave related_incident_ids empty for historical recurrences unless both records can carry the exact symmetric attempt-peer link; recurrence grouping belongs exclusively in recurrence_signature and must pass standalone register validation before tests or dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-register-first-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-349.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0401",
+      "attempt_id": "post-cancellation-orientation-register-focused-test-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A focused incident test must assert the semantic correction actually encoded in the register rather than require an arbitrary field-name token to appear in natural-language correction prose.",
+      "observed_error": "The first full revision-349 register test run passed 307 tests and failed only the new AER-0400 assertion because it required literal recurrence_signature in correction.action while the accepted action used the equivalent phrase recurrence grouping.",
+      "detection_method": "The separately captured pytest process exited 1 with one exact assertion mismatch after canonical register validation and pattern generation had passed; no reviewer dispatch or external call followed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-register-focused-test-first-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-350.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_test_prose_assertion_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the arbitrary field-name substring assertion with the exact semantic phrase recurrence grouping, add this incident, regenerate the derived report and rerun the complete register suite before review dispatch.",
+        "prevention_control": "Focused register tests assert stable structured fields and material semantic phrases; they do not require schema field names to be duplicated inside free-text prose unless that literal wording is itself an invariant.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-register-focused-test-first-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-350.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0402",
+      "attempt_id": "post-cancellation-orientation-final-closeout-packet-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A complete active-operation latch must set resume_after_compaction false and next_executable_stage null, while global current-baton fixtures must advance with the accepted Continuity/Compass node and exact next-work boundary.",
+      "observed_error": "The first orientation closeout packet found the completed latch still resumable with a non-null successor stage and found three current-baton fixtures fixed to Continuity 313 / Compass 295 and the superseded post-cancellation orientation next step. Fourteen orientation checks and the remaining latch/baton checks passed; no commit, push, notification or next operation followed.",
+      "detection_method": "The separately captured closeout pytest process reported two complete-state internally inconsistent failures and three exact stale current-baton assertions before publication.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-final-closeout-first-failure.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-351.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Set complete-latch resume false and next stage null, advance the exact baton fixtures to Continuity 314 / Compass 296 and the arrival/check-in convergence review, preserve historical lineage assertions, regenerate the register report and rerun the same closeout packet before publication.",
+        "prevention_control": "Before a closeout updater runs, construct the complete latch from the exact validator branch and update the terminal Continuity/Compass/current-baton fixtures in the same patch; run both latch suites and tests/test_current_baton_consistency.py before any closeout receipt, commit, notification or push.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-final-closeout-first-failure.json",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-351.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0403",
+      "attempt_id": "post-cancellation-orientation-final-closeout-packet-002",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A current-baton prose fixture must assert the exact durable wording present in AGENTS.md rather than silently substitute a numeric representation for a spelled-out count.",
+      "observed_error": "The second orientation closeout packet passed every structural closeout and latch assertion but one new baton fixture expected 11 new checks while the accepted Current result row says Eleven new checks. After that correction, the same still-unaccepted fixture exposed a second wording assumption: it required the compound arrival/check-in phrase while the row described generic Arrived plus A5.1 check-in without that compound label.",
+      "detection_method": "Two separately captured pytest processes each exited 1 with only test_live_baton_rows_accept_behavior_and_resume_narrow_product_work failing, first on numeric-versus-spelled count and then on the compound seam label; no publication or successor opening followed either stop.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-final-closeout-second-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-final-closeout-third-failure.json",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-352.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Change the count fixture to the exact durable phrase Eleven new checks and make the accepted Current result explicitly name the arrival/check-in seam already described by its constituent facts, then regenerate the register report and rerun the unchanged closeout packet before publication.",
+        "prevention_control": "When a maintenance fixture intentionally binds prose, copy or deliberately add the exact normalized semantic phrase in the accepted baton row; use structured artifacts for numeric semantics instead of inventing alternate representations and read the entire assertion block before the next packet.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-final-closeout-second-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-final-closeout-third-failure.json",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-352.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0404",
+      "attempt_id": "post-cancellation-orientation-canonical-fast-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-live-handover-compactness",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The authoritative live AGENTS.md handover must remain below 500 physical lines after every Current Baton update without dropping required authority or boundary content.",
+      "observed_error": "The first post-orientation canonical fast profile passed 199 tests and failed only the compact live-handover check because the added orientation baton row brought AGENTS.md to 501 lines.",
+      "detection_method": "The separately captured canonical fast process exited 1 only at tests/test_agents_handover_archive.py::test_compact_live_handover_retains_required_authority_and_boundaries with exact 501 < 500 failure after Ruff and 217-source compilation passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-canonical-fast-first-failure.json",
+        "AGENTS.md",
+        "tests/test_agents_handover_archive.py",
+        "docs/ariadne-agent-error-correction-register-revision-353.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.live_handover_compactness_limit_exceeded",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove two purely presentational blank lines while retaining every authority and boundary statement, add the handover-archive test to the final packet, regenerate the register report and rerun canonical fast before publication.",
+        "prevention_control": "Every AGENTS.md Current Baton addition must measure physical line count and run tests/test_agents_handover_archive.py in the same closeout packet before canonical fast, commit, notification or push.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-canonical-fast-first-failure.json",
+          "AGENTS.md",
+          "tests/test_agents_handover_archive.py",
+          "docs/ariadne-agent-error-correction-register-revision-353.md"
         ]
       },
       "status": "corrected"

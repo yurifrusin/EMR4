@@ -29,6 +29,12 @@ ORDINARY_CONVERGENCE_NODE_ID = (
     "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition"
 )
 ORDINARY_CONVERGENCE_SOURCE_HEAD = "bfac65298e1d4aaca85d1c9dcb20329ef298c485"
+POST_CANCELLATION_ORIENTATION_NODE_ID = (
+    "raisa-provider-free-read-only-post-cancellation-programme-orientation"
+)
+POST_CANCELLATION_ORIENTATION_SOURCE_HEAD = (
+    "74da22d5372299eb2d2e38bb2266b76c89a97035"
+)
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
@@ -73,17 +79,19 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 313
-    assert graph["nodes"][-1]["id"] == ORDINARY_CONVERGENCE_NODE_ID
+    assert graph["graph_revision"] == 314
+    assert graph["nodes"][-1]["id"] == POST_CANCELLATION_ORIENTATION_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        ORDINARY_CONVERGENCE_SOURCE_HEAD
+        POST_CANCELLATION_ORIENTATION_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
-        {"node_id": ORDINARY_REVIEW_NODE_ID, "relation": "implements"}
+        {"node_id": ORDINARY_CONVERGENCE_NODE_ID, "relation": "builds_on"}
     ]
-    assert compass["map_revision"] == 295
-    assert compass["source_graph_revision"] == 313
-    assert compass["current_position"]["node_id"] == ORDINARY_CONVERGENCE_NODE_ID
+    assert compass["map_revision"] == 296
+    assert compass["source_graph_revision"] == 314
+    assert compass["current_position"]["node_id"] == (
+        POST_CANCELLATION_ORIENTATION_NODE_ID
+    )
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -100,19 +108,20 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
         text, "Ariadne risk-weighted workflow reform acceptance"
     )
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
-    assert "Continuity 313 / Compass 295" in current
-    assert "raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_pass" in current
-    assert ORDINARY_CONVERGENCE_SOURCE_HEAD in current
-    assert "170-test browser packet" in current.lower()
-    assert "85 focused/api spine checks" in current.lower()
-    assert "ordinary diary and reception one" in current.lower()
+    orientation_relation = _table_row(text, "Current post-cancellation orientation relation")
+    assert "Continuity 314 / Compass 296" in current
+    assert "raisa_provider_free_read_only_post_cancellation_programme_orientation_pass" in current
+    assert POST_CANCELLATION_ORIENTATION_SOURCE_HEAD in current
+    assert "eleven new checks" in current.lower()
+    assert "107 api/static checks" in current.lower()
+    assert "arrival/check-in" in current.lower()
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
-    assert "revision 346" in error_register
-    assert "397 bounded incidents" in error_register
-    assert "aer-0396" in error_register
-    assert "aer-0397" in error_register
+    assert "revision 353" in error_register
+    assert "404 bounded incidents" in error_register
+    assert "aer-0399" in error_register
+    assert "aer-0401" in error_register
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
@@ -129,6 +138,7 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "visible explicit-confirmation cancellation" in product.lower()
     assert "adapter-neutral typed projection/action contract" in product.lower()
     assert ORDINARY_CONVERGENCE_SOURCE_HEAD in ordinary_relation
+    assert POST_CANCELLATION_ORIENTATION_SOURCE_HEAD in orientation_relation
     assert CANCELLATION_SOURCE_HEAD in relation
     assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
@@ -170,8 +180,8 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "provider-free read-only post-cancellation programme orientation" in next_work.lower()
-    assert "remaining reception one and api spine command families" in next_work.lower()
+    assert "arrival-check-in-command-family-convergence-review" in next_work.lower()
+    assert "general-status, waiting-area and a5.1" in next_work.lower()
     assert "raw compatibility delete" in next_work.lower()
     assert "provider call" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
@@ -211,8 +221,8 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "provider-free read-only post-cancellation programme orientation",
-        "remaining reception one and api spine command families",
+        "arrival-check-in-command-family-convergence-review",
+        "general-status, waiting-area and a5.1",
         "raw compatibility delete",
         "product/patient/clinical data",
         "provider call",

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5",
+  "branch": "codex/review-post-cancellation-orientation-74da22d5",
+  "head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+  "expected_head": "74da22d5372299eb2d2e38bb2266b76c89a97035",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "32b8d170bfee96624d2e56e24411779be75e2762c7c6248a2d64402ce2c5bba9",
+  "command_count": 7,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py",
+    "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py",
+    "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_api_spine_artifacts.py",
+    "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_diary_action_grammar.py",
+    "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_diary_action_route_contract.py",
+    "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5/tests/test_diary_planned_action_promotion.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/post-cancellation-orientation-74da22d5",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
