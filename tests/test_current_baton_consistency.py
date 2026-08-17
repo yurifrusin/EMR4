@@ -155,7 +155,7 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "ariadne effectiveness review" in next_work.lower()
     assert "deepseek harness migration is rejected" in next_work.lower()
     assert "codex remains conductor" in next_work.lower()
-    assert "independent acceptance is blocked" in next_work.lower()
+    assert "independent acceptance remains pending" in next_work.lower()
     assert "blocked-latch non-dispatch" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
@@ -197,7 +197,7 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     for phrase in (
         "ariadne effectiveness review",
         "deepseek harness migration is rejected",
-        "independent acceptance is blocked",
+        "independent acceptance remains pending",
         "product/patient/clinical data",
         "provider product call",
         "deployment",

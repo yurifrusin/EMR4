@@ -5,9 +5,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
+import tempfile
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -20,6 +23,8 @@ from scripts.ariadne_evidence_gate import (
 
 
 DEFAULT_MODEL = "gemini-3.7-flash-high"
+PRINT_TIMEOUT_SECONDS = 45 * 60
+PRINT_TIMEOUT_ARGUMENT = "45m"
 MODEL_EFFORTS = {
     "gemini-3.5-flash-low": "low",
     "gemini-3.5-flash-medium": "medium",
@@ -190,7 +195,7 @@ def build_command(
         "plan",
         "--dangerously-skip-permissions",
         "--print-timeout",
-        "30m",
+        PRINT_TIMEOUT_ARGUMENT,
     ]
     if structured_decision:
         command.extend(
@@ -300,6 +305,33 @@ def admit_orchestrator_receipt(path: Path) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def _atomic_receipt_write(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rendered = (json.dumps(payload, indent=2) + "\n").encode("utf-8")
+    descriptor, temporary = tempfile.mkstemp(
+        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
+    )
+    temporary_path = Path(temporary)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(rendered)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary_path, path)
+    finally:
+        if temporary_path.exists():
+            temporary_path.unlink()
+
+
+def _output_evidence(value: str) -> dict[str, Any]:
+    encoded = value.encode("utf-8")
+    return {
+        "bytes": len(encoded),
+        "sha256": hashlib.sha256(encoded).hexdigest(),
+        "empty": not encoded,
+    }
+
+
 def run_worker(
     *,
     packet_path: Path,
@@ -327,6 +359,7 @@ def run_worker(
     reasoning_effort = MODEL_EFFORTS.get(canonical_model)
     if reasoning_effort is None:
         raise ValueError(f"unsupported Antigravity model: {model}")
+    started = time.monotonic()
     completed = subprocess.run(
         build_command(
             packet=packet,
@@ -341,10 +374,48 @@ def run_worker(
         text=True,
         encoding="utf-8",
     )
+    elapsed_ms = round((time.monotonic() - started) * 1000)
     if completed.returncode != 0:
+        after = inspect_worktree(before.root, require_clean=False)
+        failure_receipt: dict[str, Any] = {
+            "schema_version": "ariadne.transport-failure-receipt.v1",
+            "status": "transport_failed_without_terminal_decision",
+            "transport": "antigravity_new_project_bound_readonly_worktree",
+            "model": canonical_model,
+            "requested_model": model,
+            "reasoning_effort": reasoning_effort,
+            "worktree": str(before.root),
+            "branch": before.branch,
+            "head_before": before.head,
+            "head_after": after.head,
+            "dirty_after": after.dirty,
+            "worktree_identity_unchanged": (
+                after.root == before.root
+                and after.branch == before.branch
+                and after.head == before.head
+                and not after.dirty
+            ),
+            "os_sandbox": os_sandbox,
+            "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
+            "exit_code": completed.returncode,
+            "elapsed_ms": elapsed_ms,
+            "print_timeout_seconds": PRINT_TIMEOUT_SECONDS,
+            "print_timeout_boundary_reached": (
+                elapsed_ms >= (PRINT_TIMEOUT_SECONDS * 1000 - 5000)
+            ),
+            "stdout": _output_evidence(completed.stdout or ""),
+            "stderr": _output_evidence(completed.stderr or ""),
+            "terminal_decision_returned": False,
+            "candidate_review_admitted": False,
+        }
+        if command_manifest is not None:
+            failure_receipt["command_manifest_sha256"] = command_manifest_sha256(
+                command_manifest
+            )
+        _atomic_receipt_write(output_path, failure_receipt)
         raise RuntimeError(
-            f"Antigravity transport failed ({completed.returncode}): "
-            f"{completed.stderr.strip()}"
+            f"Antigravity transport failed ({completed.returncode}); "
+            f"digest-only diagnostics written to {output_path}"
         )
     after = inspect_worktree(before.root, require_clean=False)
     if after.root != before.root or after.branch != before.branch:
@@ -395,8 +466,7 @@ def run_worker(
     if command_manifest is not None:
         receipt["command_manifest_sha256"] = command_manifest_sha256(command_manifest)
         receipt["command_results"] = decision_envelope["command_results"]
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    _atomic_receipt_write(output_path, receipt)
     return receipt
 
 

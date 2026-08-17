@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 332,
+  "register_revision": 333,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15226,13 +15226,19 @@
       "recurrence_signature": "transport.antigravity_exit_1_empty_stderr_without_terminal_decision",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "Preserve both sanitized transport failures, consume the configured single same-head retry, keep the exact candidate unaccepted and pause before selecting any further verifier transport or waiver.",
-        "prevention_control": "Antigravity review admission requires one written structured terminal receipt and an unchanged clean postflight. Exit code 1 with empty stderr is durable transport evidence only; after one same-head retry it requires an explicit new programme direction and can never trigger silent model fallback or candidate acceptance.",
+        "status": "control_implemented_pending_acceptance",
+        "action": "Preserve both sanitized transport failures; replay the exact manifest provider-free; replace the disproven 30-minute print deadline with one bounded 45-minute attempt; and atomically persist digest-only elapsed, exit and postflight evidence for every nonzero transport exit.",
+        "prevention_control": "Antigravity review admission still requires one written structured terminal receipt and an unchanged clean postflight. A nonzero exit now writes elapsed time, deadline-boundary observation, exact worktree state and stdout/stderr digests plus byte counts without raw output; it never becomes a reviewer decision, silent model fallback or candidate acceptance.",
         "evidence_paths": [
           "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-failure-receipt.json",
           "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-retry-transport-failure-receipt.json",
-          "docs/ariadne-agent-error-correction-register-revision-331.md"
+          "docs/ariadne-agent-error-correction-register-revision-331.md",
+          "docs/ariadne-antigravity-transport-timeout-diagnosis.md",
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_antigravity.py",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-333.md"
         ]
       },
       "status": "contained"

@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "--",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "--",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_current_baton_consistency.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_antigravity.py",
+        "orchestration_harness/orchestrator_preflight.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_antigravity.py"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--check"]},
+    {"id": "C08", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

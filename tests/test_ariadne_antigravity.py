@@ -48,6 +48,7 @@ def test_command_always_binds_a_fresh_project_and_exact_worktree():
     assert command[command.index("--model") + 1] == "gemini-3.7-flash-high"
     assert command[command.index("--effort") + 1] == "high"
     assert command[command.index("--mode") + 1] == "plan"
+    assert command[command.index("--print-timeout") + 1] == "45m"
     assert command[command.index("--output-format") + 1] == "json"
     schema = json.loads(command[command.index("--json-schema") + 1])
     assert schema["additionalProperties"] is False
@@ -147,6 +148,64 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
     assert receipt["transport"] == ("antigravity_new_project_bound_readonly_worktree")
     assert output.is_file()
     assert len(receipt["orchestrator_receipt_sha256"]) == 64
+
+
+def test_nonzero_transport_writes_digest_only_failure_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "transport-failure.json"
+    orchestrator_receipt = _passed_orchestrator_receipt(tmp_path)
+    state = WorktreeState(
+        root=tmp_path,
+        branch="codex/verifier-candidate",
+        head="abc123",
+        dirty=False,
+    )
+    states = iter([state, state])
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: next(states),
+    )
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            returncode=1,
+            stdout="bounded diagnostic on stdout",
+            stderr="",
+        ),
+    )
+    times = iter([10.0, 2710.0])
+    monkeypatch.setattr(
+        ariadne_antigravity.time, "monotonic", lambda: next(times)
+    )
+
+    with pytest.raises(RuntimeError, match="digest-only diagnostics written"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            orchestrator_receipt_path=orchestrator_receipt,
+            model="gemini-3.7-flash-high",
+            os_sandbox=False,
+        )
+
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert failure["schema_version"] == "ariadne.transport-failure-receipt.v1"
+    assert failure["status"] == "transport_failed_without_terminal_decision"
+    assert failure["exit_code"] == 1
+    assert failure["elapsed_ms"] == 2_700_000
+    assert failure["print_timeout_seconds"] == 2_700
+    assert failure["print_timeout_boundary_reached"] is True
+    assert failure["stdout"]["bytes"] == len("bounded diagnostic on stdout")
+    assert failure["stderr"]["empty"] is True
+    assert failure["worktree_identity_unchanged"] is True
+    assert failure["terminal_decision_returned"] is False
+    assert failure["candidate_review_admitted"] is False
+    assert "bounded diagnostic on stdout" not in output.read_text(encoding="utf-8")
 
 
 def test_run_worker_rejects_revision_required_orchestrator_receipt_before_dispatch(

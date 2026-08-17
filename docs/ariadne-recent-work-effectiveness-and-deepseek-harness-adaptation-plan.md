@@ -6,7 +6,7 @@ Timestamp: 2026-08-17T09:47:18.3542784+10:00 (Australia/Brisbane)
 
 Source HEAD: `38660a4a7136094df67b28d5a6ec07ca40c14416`
 
-Status: `deterministic_candidate_extended_by_blocked-state-guard_pending_independent_veto`
+Status: `transport_timeout_repair_candidate_pending_fresh_independent_veto`
 
 Reasoning level: workflow architecture and execution admission / Extra High
 
@@ -74,6 +74,12 @@ outcomes, fail-loud misuse and bounded ownership/cleanup.
    emit worker-dispatch permission merely because the receipt otherwise
    validates. Dispatch additionally requires exact `in_progress` state and no
    user-attention condition.
+5. The Antigravity verifier uses a bounded 45-minute print deadline for this
+   full high-effort repository veto rather than the disproven 30-minute
+   deadline. A nonzero transport exit atomically writes a fail-closed receipt
+   containing elapsed time, exit code, exact worktree postcondition and only
+   stdout/stderr byte counts and SHA-256 digests. It never persists raw output
+   or converts transport failure into a reviewer decision.
 
 The first repair addresses AER-0370/AER-0376. The second addresses AER-0372,
 AER-0378 and the post-closeout terminal-result loss. The third addresses the
@@ -87,6 +93,14 @@ the exhausted verifier-transport receipt exposed AER-0381. It prevents a
 terminal latch state from authorising another worker while the independent
 veto remains unsatisfied.
 
+The fifth repair follows the provider-free diagnosis in
+`docs/ariadne-antigravity-transport-timeout-diagnosis.md`. The exact eight-
+command review manifest passed locally in 150.578 seconds, while the bounded
+retry failed approximately 31.5 minutes after its predispatch receipt and the
+launcher supplied `--print-timeout 30m`. The causal claim remains bounded to a
+deadline-correlated transport exit: prior stdout/stderr bytes and exact elapsed
+time were not retained, so no provider- or model-causal claim is made.
+
 ## Exact implementation allowlist
 
 - `orchestration_harness/git_refs_snapshot.py`;
@@ -99,6 +113,9 @@ veto remains unsatisfied.
 - `tests/test_ariadne_serial_pytest.py`;
 - `scripts/ariadne_deepseek_claude.py`;
 - `tests/test_ariadne_deepseek_claude.py`;
+- `scripts/ariadne_antigravity.py`;
+- `tests/test_ariadne_antigravity.py`;
+- `docs/ariadne-antigravity-transport-timeout-diagnosis.md`;
 - `orchestration/harness_settings/orchestrator_requirements.yaml`;
 - `orchestration/harness_settings/evidence_led_workflow.yaml`;
 - `orchestration/harness_settings/verifier_execution_policy.yaml`;

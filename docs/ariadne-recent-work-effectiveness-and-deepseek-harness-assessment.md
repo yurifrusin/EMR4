@@ -4,7 +4,7 @@ Date: 2026-08-17
 
 Timestamp: 2026-08-17T10:01:53.2381516+10:00 (Australia/Brisbane)
 
-Status: `deterministic_candidate_extended_by_blocked-state-guard_pending_independent_veto`
+Status: `transport_timeout_repair_candidate_pending_fresh_independent_veto`
 
 Source HEAD: `38660a4a7136094df67b28d5a6ec07ca40c14416`
 
@@ -182,6 +182,24 @@ Primary sources:
    exactly `in_progress` with no user-attention condition. This closes AER-0381,
    where a valid blocked-state receipt had incorrectly retained a true dispatch
    flag.
+5. Antigravity full-veto print time is now bounded at 45 minutes, and every
+   nonzero transport exit produces atomic digest-only elapsed/exit/worktree
+   evidence rather than collapsing an empty-stderr failure to an opaque line.
+
+## Transport diagnosis after the two failed veto launches
+
+The exact historical eight-command verifier manifest was replayed locally
+without a provider and passed in 150.578 seconds. The retry predispatch receipt
+was written at 11:01:56 Australia/Brisbane and the preserved retry failure at
+11:33:30; the launcher used Antigravity's documented `--print-timeout 30m`.
+Together these facts support a deadline-correlated transport-timeout diagnosis
+and rule out a 30-minute inherent command-suite runtime. They do not prove why
+the model-driven session used the remaining time, because the old wrapper
+retained neither elapsed time nor stdout evidence on nonzero exit.
+
+The repair therefore does not blame Gemini or accept the candidate. It grants
+one bounded 45-minute attempt and makes any further nonzero outcome
+diagnostically durable without persisting raw output.
 
 No DeepSeek Harness package, source or dependency was installed, copied or
 executed. No Raisa product behavior or protected ref changed.

@@ -47,6 +47,12 @@ the local development harness and receives no Raisa runtime authority.
   authority. Dispatch permission additionally requires the active operation to
   be exactly `in_progress` with no user-attention condition; terminal latch
   states remain non-dispatchable even when every other receipt check passes.
+- `DHAR-T10` — a long independent veto reaches a fixed print deadline, while a
+  nonzero CLI exit with empty stderr destroys the evidence needed to distinguish
+  timeout from another transport fault. The admitted full-review deadline is
+  bounded at 45 minutes; every nonzero exit writes an atomic fail-closed receipt
+  with elapsed time, exit code, worktree postcondition and digest/byte-count-only
+  stdout/stderr evidence. It returns no decision and stores no raw model output.
 
 ## Residual risk
 

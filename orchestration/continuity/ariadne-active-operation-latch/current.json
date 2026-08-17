@@ -3,17 +3,17 @@
   "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
   "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
   "objective": "Review recent workflow evidence, assess DeepSeek Harness primary sources, keep Codex as conductor, implement machine Git snapshots, durable validation receipts, pytest-envelope admission and DeepSeek worker environment hardening, and ensure terminal active-operation states cannot dispatch workers, without changing Raisa product behavior or protected refs.",
-  "status": "blocked",
+  "status": "in_progress",
   "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
-  "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
+  "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, Yuri's agreement to implement worthwhile adaptations, and Yuri's 2026-08-17 explicit approval of the recommended Antigravity transport diagnosis followed by one fresh exact-checkpoint Gemini 3.7 Flash/high review authorize this repository-only workflow tranche.",
   "checkpoint": {
-    "completed_stage": "Four repository-only repairs pass deterministic admission at checkpoint 2219efc8a7f9df61ec084127683848887bde872c. AER-0380 contains two same-head Gemini transports with no receipt or decision; AER-0381 now forbids worker dispatch from blocked latch receipts. The extended candidate remains independently unaccepted.",
-    "next_executable_stage": "Obtain Yuri's direction on a new review route: recommended later fresh Antigravity reattempt after transport diagnosis, or an explicitly authorised same-head independent fallback; do not waive the veto silently.",
+    "completed_stage": "Provider-free diagnosis replays the exact historical manifest in 150.578 seconds and binds both prior failures to the former 30-minute deadline without a provider- or model-causal claim. The 45-minute deadline plus atomic digest-only failure receipt passes focused and deterministic gates; AER-0380 remains contained pending independent acceptance.",
+    "next_executable_stage": "Commit the exact deterministic transport-repair checkpoint with explicit paths, create a fresh clean non-protected review worktree and exact packet/manifest, generate a fresh pre-verifier receipt, then run exactly one Gemini 3.7 Flash/high review with no fallback or veto waiver.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 2,
-      "verification": 2
+      "verification": 4
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "The configured Gemini 3.7 Antigravity attempt and its only bounded retry both ended without a receipt or decision. Selecting a further attempt, different transport or veto waiver is an exhausted-recovery programme choice."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "bounded_verifier_transport_recovery_exhausted"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "repository_only_ariadne_development_harness_changes",

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "continuation_event": "pre_commit",
-  "planned_action": "commit_the_contained_transport_failures_blocked_latch_and_non_dispatch_guard_without_claiming_independent_acceptance",
+  "planned_action": "commit_the_exact_deterministically_admitted_antigravity_transport_timeout_and_digest_only_failure_evidence_repair_before_one_fresh_review",
   "source_evidence": {
     "live_handover_current_baton": "AGENTS.md Current Baton records Continuity 309 / Compass 291 and directs an Ariadne effectiveness and DeepSeek Harness review before further product work.",
-    "current_authority_allocation": "Sol owns evidence synthesis, implementation integration and acceptance. DeepSeek Flash implementation is declined because this tranche hardens its launcher and shared admission path; Gemini 3.7 Flash/high is reserved for one final exact-candidate veto; native subagents are declined by current developer policy.",
+    "current_authority_allocation": "Sol owns transport diagnosis, any narrow reproducible harness repair, implementation integration and acceptance. DeepSeek Flash is declined because diagnosis touches the Gemini/Antigravity launcher and shared verifier admission itself; Gemini 3.7 Flash/high is reserved for exactly one fresh exact-checkpoint veto after deterministic admission; native subagents are declined by current developer policy.",
     "active_plan_and_acceptance": [
       "docs/ariadne-risk-weighted-workflow-reform-plan.md",
       "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
@@ -14,23 +14,27 @@
       "docs/ariadne-agent-error-correction-register-revision-330.md",
       "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md",
       "docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md",
+      "docs/ariadne-antigravity-transport-timeout-diagnosis.md",
+      "docs/ariadne-agent-error-correction-register-revision-333.md",
+      "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-receipt.json",
       "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json"
     ],
     "protected_evidence_boundaries": "The review may inspect committed workflow source, settings, tests, public DeepSeek Harness primary sources and non-sensitive aggregate incident evidence only. It may not open protected evidence, PHI, product/patient/clinical data, credentials, provider product calls, deployment, release, Pages or protected refs. docs/branding and unrelated untracked files remain preserved.",
-    "git_refs_and_worktree": "Task checkpoint HEAD is exact 2219efc8a7f9df61ec084127683848887bde872c from source parent 38660a4a7136094df67b28d5a6ec07ca40c14416. Prior review branch codex/review-ariadne-effectiveness-f6e5e96d remains clean at exact f6e5e96d as transport evidence but is superseded for any future veto by the blocked-state guard. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+    "git_refs_and_worktree": "Task branch and origin are exact a943e420e395ad5aec36c8d32ec0bbd3c76f8f19 with no tracked changes before this resumption update, 640 preserved untracked files and docs/branding present. Prior review branch codex/review-ariadne-effectiveness-f6e5e96d remains clean at exact f6e5e96d as immutable transport evidence but is superseded for any future veto. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
   },
   "active_operation": {
     "schema_version": "ariadne.active_operation_latch.v1",
     "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
     "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
     "objective": "Review recent workflow evidence, assess DeepSeek Harness primary sources, keep Codex as conductor, implement machine Git snapshots, durable validation receipts, pytest-envelope admission and DeepSeek worker environment hardening, and ensure terminal active-operation states cannot dispatch workers, without changing Raisa product behavior or protected refs.",
-    "status": "blocked",
+    "status": "in_progress",
     "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
-    "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
+    "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, Yuri's agreement to implement worthwhile adaptations, and Yuri's 2026-08-17 explicit approval of the recommended Antigravity transport diagnosis followed by one fresh exact-checkpoint Gemini 3.7 Flash/high review authorize this repository-only workflow tranche.",
     "checkpoint": {
-      "completed_stage": "Four repository-only repairs pass deterministic admission at checkpoint 2219efc8a7f9df61ec084127683848887bde872c. AER-0380 contains two same-head Gemini transports with no receipt or decision; AER-0381 now forbids worker dispatch from blocked latch receipts. The extended candidate remains independently unaccepted.",
-      "next_executable_stage": "Obtain Yuri's direction on a new review route: recommended later fresh Antigravity reattempt after transport diagnosis, or an explicitly authorised same-head independent fallback; do not waive the veto silently.",
-      "retry_counters": {"planning": 0, "implementation": 0, "review": 2, "verification": 2},
+      "completed_stage": "Provider-free diagnosis replays the exact historical manifest in 150.578 seconds and binds both prior failures to the former 30-minute deadline without a provider- or model-causal claim. The 45-minute deadline plus atomic digest-only failure receipt passes focused and deterministic gates; AER-0380 remains contained pending independent acceptance.",
+      "next_executable_stage": "Commit the exact deterministic transport-repair checkpoint with explicit paths, create a fresh clean non-protected review worktree and exact packet/manifest, generate a fresh pre-verifier receipt, then run exactly one Gemini 3.7 Flash/high review with no fallback or veto waiver.",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 2, "verification": 4},
       "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
     },
     "interruption_policy": {
@@ -41,8 +45,8 @@
       "replacement_requires_explicit_pause_or_redirect": true
     },
     "resume_after_compaction": true,
-    "user_attention": {"required": true, "reason": "The configured Gemini 3.7 Antigravity attempt and its only bounded retry both ended without a receipt or decision. Selecting a further attempt, different transport or veto waiver is an exhausted-recovery programme choice."},
-    "terminal_response": {"permitted": true, "reason": "bounded_verifier_transport_recovery_exhausted"},
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
     "protected_boundaries": [
       "repository_only_ariadne_development_harness_changes",
       "deepseek_harness_public_primary_sources_only_no_import_install_or_execution",
@@ -61,10 +65,10 @@
   "parallelism_assessment": {
     "schema_version": "ariadne.parallelism_assessment.v1",
     "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
-    "assessed_stage": "blocked_transport_exhaustion_evidence_precommit",
+    "assessed_stage": "transport_repair_precommit_and_preverifier",
     "lanes": [
       {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The bounded changes modify the worker launcher and shared receipt/test admission path itself; dispatch through the not-yet-hardened lane would cost more than serial implementation and weaken isolation evidence.", "work_packages": []},
-      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "One fresh final veto is required because the selected repairs materially change continuation and validation admission behavior.", "work_packages": ["exact-candidate read-only veto after all deterministic gates pass"]},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "Exactly one newly authorised fresh Gemini 3.7 Flash/high veto is required after transport diagnosis and deterministic admission because the selected repairs materially change continuation and validation admission behavior.", "work_packages": ["one fresh exact-checkpoint read-only veto after all deterministic gates pass"]},
       {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits native delegation; Sol can perform primary-source and incident synthesis serially.", "work_packages": []}
     ],
     "parallel_work_packages": [],
@@ -73,13 +77,13 @@
   },
   "context_health": {
     "agent_contexts": [
-      {"agent_id": "orchestrator", "measurement_source": "fresh complete post-compaction AGENTS.md read, active plan/threat/latch read and exact Git/ref/worktree verification", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+      {"agent_id": "orchestrator", "measurement_source": "fresh complete 2026-08-17 post-decision post-compaction AGENTS.md read, active assessment/plan/threat/latch/runtime read and exact Git/ref/worktree verification", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
     ]
   },
   "adapter_observations": [
     {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready for primary-source research and plan freeze."]},
     {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined by current policy."]},
-    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "unreachable", "evidence": ["The first fresh-project transport and its only same-head retry each exited 1 with empty stderr and no receipt or decision. The exact candidate remains clean and unchanged; no additional retry or silent fallback is admitted."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Antigravity CLI 1.1.13 help/version probes pass without a model call. The former 30-minute deadline is replaced by a bounded 45-minute deadline and digest-only failure receipt; exactly one fresh Gemini 3.7 Flash/high review remains admitted after an exact clean checkpoint."]},
     {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["DeepSeek lane is reserved for a later stable mechanical package."]},
     {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
     {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
