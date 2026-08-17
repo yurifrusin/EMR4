@@ -6,7 +6,7 @@ Timestamp: 2026-08-17T09:47:18.3542784+10:00 (Australia/Brisbane)
 
 Source HEAD: `38660a4a7136094df67b28d5a6ec07ca40c14416`
 
-Status: `deterministic_candidate_admitted_pending_independent_veto`
+Status: `deterministic_candidate_extended_by_blocked-state-guard_pending_independent_veto`
 
 Reasoning level: workflow architecture and execution admission / Extra High
 
@@ -70,6 +70,10 @@ outcomes, fail-loud misuse and bounded ownership/cleanup.
    remove inherited virtual-environment and package-index targeting, force pip
    offline/no-input behavior, and explicitly forbid package-manager or shared
    environment mutation. This is defence in depth, not an OS sandbox claim.
+4. A blocked, paused, complete or replaced active-operation latch must never
+   emit worker-dispatch permission merely because the receipt otherwise
+   validates. Dispatch additionally requires exact `in_progress` state and no
+   user-attention condition.
 
 The first repair addresses AER-0370/AER-0376. The second addresses AER-0372,
 AER-0378 and the post-closeout terminal-result loss. The third addresses the
@@ -77,6 +81,11 @@ observed AER-0371 path. A shared Docker-profile type is deferred: the current
 delete-confirm harness now validates its complete inherited argv before
 occupied execution, and introducing a cross-family abstraction in this review
 would create more coupling than it removes.
+
+The fourth repair was admitted under continuous harness self-correction after
+the exhausted verifier-transport receipt exposed AER-0381. It prevents a
+terminal latch state from authorising another worker while the independent
+veto remains unsatisfied.
 
 ## Exact implementation allowlist
 

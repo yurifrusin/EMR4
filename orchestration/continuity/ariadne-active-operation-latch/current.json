@@ -2,17 +2,17 @@
   "schema_version": "ariadne.active_operation_latch.v1",
   "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
   "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
-  "objective": "Review the recent workflow against preserved incidents, assess DeepSeek Harness from exact public primary sources, keep Codex as conductor when subscription and migration constraints hold, and implement only machine Git snapshots, durable structured validation lifecycle receipts with pytest-envelope admission, and bounded DeepSeek worker environment hardening without changing Raisa product behavior or protected refs.",
-  "status": "in_progress",
+  "objective": "Review recent workflow evidence, assess DeepSeek Harness primary sources, keep Codex as conductor, implement machine Git snapshots, durable validation receipts, pytest-envelope admission and DeepSeek worker environment hardening, and ensure terminal active-operation states cannot dispatch workers, without changing Raisa product behavior or protected refs.",
+  "status": "blocked",
   "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
   "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
   "checkpoint": {
-    "completed_stage": "The three frozen repository-only Ariadne repairs are implemented. The final deterministic profile passes 234 harness/handover tests, 287 register tests, Ruff, maintained-source compilation and Git whitespace; AER-0379 preserves the correctly stopped pre-existing live-handover compactness failure and its correction.",
-    "next_executable_stage": "Freeze the exact task-branch candidate, prepare a fresh clean review worktree and obtain one Gemini 3.7 Flash/high veto before Sol acceptance.",
+    "completed_stage": "The three repository-only repairs pass deterministic admission at exact candidate f6e5e96d. Two same-head Gemini 3.7 Flash/high Antigravity transports, including the single permitted retry, each exited 1 with empty stderr and no receipt or decision. AER-0380 contains both; the clean candidate remains independently unaccepted.",
+    "next_executable_stage": "Obtain Yuri's direction on a new review route: recommended later fresh Antigravity reattempt after transport diagnosis, or an explicitly authorised same-head independent fallback; do not waive the veto silently.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
-      "review": 0,
+      "review": 2,
       "verification": 2
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "The configured Gemini 3.7 Antigravity attempt and its only bounded retry both ended without a receipt or decision. Selecting a further attempt, different transport or veto waiver is an exhausted-recovery programme choice."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "bounded_verifier_transport_recovery_exhausted"
   },
   "protected_boundaries": [
     "repository_only_ariadne_development_harness_changes",

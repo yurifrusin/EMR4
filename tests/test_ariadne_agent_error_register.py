@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 330
+    assert register["register_revision"] == 332
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 380)
+        f"AER-{index:04d}" for index in range(1, 382)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -54,7 +54,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 262
-    assert len(transport_incidents) == 11
+    assert len(transport_incidents) == 12
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -67,6 +67,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0198",
         "AER-0326",
         "AER-0367",
+        "AER-0380",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -2577,7 +2578,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 379
+    assert report["incident_count"] == 381
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3614,28 +3615,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 330
-    assert report["incident_count"] == 379
+    assert report["register_revision"] == 332
+    assert report["incident_count"] == 381
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 262,
-        "harness": 47,
+        "harness": 48,
         "repository": 59,
-        "transport": 11,
+        "transport": 12,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 60,
         "evidence_misreport": 53,
-        "harness_failure": 47,
+        "harness_failure": 48,
         "output_contract_violation": 106,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
         "repository_defect": 59,
-        "transport_timeout": 11,
+        "transport_timeout": 12,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "accepted_candidate_changed": 109,
-        "canonical_unchanged": 230,
+        "accepted_candidate_changed": 110,
+        "canonical_unchanged": 231,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -6011,6 +6012,43 @@ def test_aer_0379_compacts_the_preexisting_live_handover_overrun() -> None:
     assert "tests/test_agents_acceptance_index.py" in incident["correction"][
         "prevention_control"
     ]
+
+
+def test_aer_0380_contains_antigravity_empty_stderr_transport_exhaustion() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0380"
+    ]
+
+    assert incident["origin"] == "transport"
+    assert incident["role"] == "verifier"
+    assert incident["resource_id"] == "antigravity-gemini-flash-3-7-high-verifier"
+    assert incident["model"] == "gemini-3.7-flash-high"
+    assert incident["category"] == "transport_timeout"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
+    assert incident["causal_claim_level"] == "observation_only"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["status"] == "contained"
+    assert "exit code 1" in incident["observed_error"]
+    assert "empty stderr" in incident["observed_error"]
+    assert "no reviewer decision" in incident["detection_method"]
+
+
+def test_aer_0381_blocks_worker_dispatch_from_terminal_latch_state() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0381"
+    ]
+
+    assert incident["origin"] == "harness"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "harness_failure"
+    assert incident["process_severity"] == "material"
+    assert incident["candidate_state"] == "accepted_candidate_changed"
+    assert incident["workflow_disposition"] == "revision_required"
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+    assert "worker_dispatch_permitted=true" in incident["observed_error"]
+    assert "in_progress" in incident["correction"]["action"]
 
 
 

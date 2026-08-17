@@ -406,6 +406,10 @@ def build_orchestrator_receipt(
         "terminal_handback_permitted": active_operation.get(
             "terminal_handback_permitted"
         ),
-        "worker_dispatch_permitted": not reasons,
+        "worker_dispatch_permitted": (
+            not reasons
+            and active_operation.get("status") == "in_progress"
+            and active_operation.get("user_attention_required") is False
+        ),
         "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
     }

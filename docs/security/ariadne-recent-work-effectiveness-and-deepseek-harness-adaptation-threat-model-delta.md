@@ -43,6 +43,10 @@ the local development harness and receives no Raisa runtime authority.
   compatibility dependency. No DeepSeek Harness code or dependency is copied,
   installed or executed; only independently implemented architectural patterns
   are used.
+- `DHAR-T09` — a valid receipt for a blocked operation is mistaken for worker
+  authority. Dispatch permission additionally requires the active operation to
+  be exactly `in_progress` with no user-attention condition; terminal latch
+  states remain non-dispatchable even when every other receipt check passes.
 
 ## Residual risk
 

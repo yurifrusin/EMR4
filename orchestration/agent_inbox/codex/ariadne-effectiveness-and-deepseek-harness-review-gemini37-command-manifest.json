@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-f6e5e96d",
+        "--",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-f6e5e96d",
+        "--",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-f6e5e96d",
+        "--",
+        "tests/test_ariadne_agent_error_register.py",
+        "-q"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--check", "38660a4a7136094df67b28d5a6ec07ca40c14416..f6e5e96dc86a1bb3319692a6ac656fbb756b49df"]},
+    {"id": "C08", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

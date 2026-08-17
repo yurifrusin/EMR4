@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 330,
+  "register_revision": 332,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15193,6 +15193,88 @@
           "AGENTS.md",
           "tests/test_agents_acceptance_index.py",
           "docs/ariadne-agent-error-correction-register-revision-330.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0380",
+      "attempt_id": "ariadne-effectiveness-review-gemini37-transport-001",
+      "observed_on": "2026-08-17",
+      "tranche": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "One fresh exact-candidate Antigravity veto, or its single bounded same-head and same-model transport retry, must return exactly one structured terminal decision while leaving the review worktree clean and unchanged.",
+      "observed_error": "The first Antigravity transport and its only permitted fresh-project retry each ended with launcher exit code 1 and empty stderr. Neither wrote a review receipt or returned a terminal decision; exact candidate f6e5e96d remained clean and unchanged after both attempts.",
+      "detection_method": "Sol observed both launcher failures, verified both expected review receipt paths were absent, and re-read the exact review branch, HEAD and empty worktree status after each attempt. Provider/model reach is unknown, so no reviewer decision or model-causal claim is inferred.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-failure-receipt.json",
+        "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-retry-transport-failure-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-331.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.antigravity_exit_1_empty_stderr_without_terminal_decision",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Preserve both sanitized transport failures, consume the configured single same-head retry, keep the exact candidate unaccepted and pause before selecting any further verifier transport or waiver.",
+        "prevention_control": "Antigravity review admission requires one written structured terminal receipt and an unchanged clean postflight. Exit code 1 with empty stderr is durable transport evidence only; after one same-head retry it requires an explicit new programme direction and can never trigger silent model fallback or candidate acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-failure-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-retry-transport-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-331.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0381",
+      "attempt_id": "ariadne-effectiveness-review-blocked-receipt-001",
+      "observed_on": "2026-08-17",
+      "tranche": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "ariadne-orchestrator-preflight",
+      "model": "none",
+      "reasoning_level": "none",
+      "transport": "local_python_preflight",
+      "stage": "dispatch",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "A valid orchestrator receipt may permit worker dispatch only while its active-operation latch is in_progress and no user-attention condition is active; blocked, paused, complete or replaced operations must remain non-dispatchable.",
+      "observed_error": "The first transport-exhausted receipt correctly projected active_operation.status=blocked, user_attention_required=true and terminal_handback_permitted=true, but still emitted worker_dispatch_permitted=true because the field depended only on an empty validation-reason list.",
+      "detection_method": "Sol mechanically read the generated blocked-state receipt before any further dispatch. No worker was launched from it. A focused blocked-latch fixture reproduced the unsafe true value against the exact preflight function.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-exhausted-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-exhausted-v2-receipt.json",
+        "orchestration_harness/orchestrator_preflight.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "docs/ariadne-agent-error-correction-register-revision-332.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.blocked_active_operation_receipt_permitted_worker_dispatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Require an error-free receipt, active_operation.status=in_progress and user_attention_required=false before worker_dispatch_permitted can be true; retain terminal handback as an independent field.",
+        "prevention_control": "Every terminal or blocked latch-state regression must assert worker_dispatch_permitted=false even when the receipt otherwise validates. Launcher admission may never derive dispatch solely from receipt status.",
+        "evidence_paths": [
+          "orchestration_harness/orchestrator_preflight.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-exhausted-v2-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-332.md"
         ]
       },
       "status": "corrected"

@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.transport-failure-receipt.v1",
+  "observed_on": "2026-08-17",
+  "preserved_at": "2026-08-17T11:33:30.0272329+10:00",
+  "status": "bounded_retry_transport_failed_without_terminal_decision",
+  "candidate_head": "f6e5e96dc86a1bb3319692a6ac656fbb756b49df",
+  "source_parent": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-f6e5e96d",
+  "branch": "codex/review-ariadne-effectiveness-f6e5e96d",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model_requested": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "review_packet": "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-review-packet.md",
+  "command_manifest_sha256": "3e8a3c4b16f5920c310ef509dc943a9108726cbf06b2a97836a7f1dc8126c2fe",
+  "failure": {
+    "launcher_exit_code": 1,
+    "launcher_stderr_empty": true,
+    "launcher_message": "Antigravity transport failed: Antigravity transport failed (1):",
+    "model_reached": "unknown",
+    "terminal_decision_returned": false,
+    "review_receipt_written": false,
+    "candidate_review_admitted": false,
+    "worktree_changed": false,
+    "worktree_head_after_failure": "f6e5e96dc86a1bb3319692a6ac656fbb756b49df",
+    "worktree_clean_after_failure": true
+  },
+  "disposition": {
+    "failure_counts_as_review_decision": false,
+    "configured_same_lane_retry_consumed": true,
+    "additional_same_lane_retry_permitted": false,
+    "silent_model_fallback_permitted": false,
+    "independent_veto_satisfied": false,
+    "product_or_protected_authority_added": false,
+    "user_attention_required": true
+  }
+}

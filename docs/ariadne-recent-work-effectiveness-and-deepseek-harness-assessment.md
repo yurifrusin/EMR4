@@ -4,7 +4,7 @@ Date: 2026-08-17
 
 Timestamp: 2026-08-17T10:01:53.2381516+10:00 (Australia/Brisbane)
 
-Status: `deterministic_candidate_admitted_pending_independent_veto`
+Status: `deterministic_candidate_extended_by_blocked-state-guard_pending_independent_veto`
 
 Source HEAD: `38660a4a7136094df67b28d5a6ec07ca40c14416`
 
@@ -178,6 +178,20 @@ Primary sources:
    package-index targeting, sets pip/uv/npm/yarn offline or noninteractive
    controls, and carries an explicit no-install/no-environment-mutation
    instruction. This is defence in depth, not hostile-process containment.
+4. Receipt dispatch admission now additionally requires the active latch to be
+   exactly `in_progress` with no user-attention condition. This closes AER-0381,
+   where a valid blocked-state receipt had incorrectly retained a true dispatch
+   flag.
 
 No DeepSeek Harness package, source or dependency was installed, copied or
 executed. No Raisa product behavior or protected ref changed.
+
+## Current acceptance state
+
+The original exact candidate passed its deterministic profile. The first
+Gemini 3.7 Flash/high Antigravity transport and its only configured same-head
+retry then each exited with code 1, empty stderr, no receipt and no terminal
+decision while leaving the review worktree clean. AER-0380 records these as
+transport failures, not reviewer rejection. The subsequent blocked receipt
+exposed and corrected AER-0381. The complete candidate remains unaccepted until
+a newly authorised independent-review route returns one valid veto result.

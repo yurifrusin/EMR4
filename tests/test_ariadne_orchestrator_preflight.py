@@ -73,6 +73,29 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
     }
 
 
+def test_blocked_active_operation_never_permits_worker_dispatch(tmp_path: Path) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    active = runtime_state["active_operation"]
+    active["status"] = "blocked"
+    active["user_attention"] = {
+        "required": True,
+        "reason": "The bounded verifier transport recovery is exhausted.",
+    }
+    active["terminal_response"] = {
+        "permitted": True,
+        "reason": "bounded_verifier_transport_recovery_exhausted",
+    }
+    path = tmp_path / "blocked-operation.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "passed"
+    assert receipt["active_operation"]["status"] == "blocked"
+    assert receipt["terminal_handback_permitted"] is True
+    assert receipt["worker_dispatch_permitted"] is False
+
+
 def test_every_continuation_fails_closed_without_parallelism_assessment(
     tmp_path: Path,
 ) -> None:
