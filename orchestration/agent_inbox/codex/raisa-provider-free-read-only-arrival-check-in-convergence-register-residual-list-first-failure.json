@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.local-test-failure.v1",
+  "attempt_id": "arrival-check-in-convergence-register-focused-004",
+  "observed_at": "2026-08-18T07:08:00+10:00",
+  "candidate_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+  "command": "python scripts/ariadne_serial_pytest.py --timeout-seconds 600 -- -q tests/test_ariadne_agent_error_register.py tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+  "exit_code": 1,
+  "summary": {
+    "failed": 1,
+    "failure_class": "residual_pattern_exclusion_and_expected_row_mismatch",
+    "semantic_candidate_defect_observed": false
+  },
+  "observed_error": "the population-fixture signature was excluded from the actual residual list while its unchanged exact row remained in the expected residual list",
+  "disposition": "revision_required_before_acceptance",
+  "authority_change": false
+}

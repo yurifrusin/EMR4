@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only arrival/check-in command-family convergence review",
+    "completed_stage": "Fresh post-publication AGENTS.md reading, active orientation acceptance/plan reading, protected-boundary restoration, exact task/origin/protected-ref verification and parallelism-efficacy assessment are complete at exact task HEAD fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0.",
+    "next_executable_stage": "generate_fresh_five_source_preplanning_receipt_then_freeze_the_read_only_arrival_check_in_contract_matrix",
+    "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+    "resume_after_compaction": true,
+    "source_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "reason_codes": [],
+    "resolved_commit": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "branch_origin_aligned": true,
+    "head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "origin_branch_commit": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 650
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The current task is one tightly coupled comparison of overlapping authority and semantics with no stable separable implementation or mechanical artifact before the decision is frozen.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Reserve one fresh Gemini 3.7 Flash/high veto if the completed review freezes material A5.1 versus generic-status product meaning; deterministic read-only evidence comes first.",
+        "work_packages": [
+          "conditional_exact_candidate_read_only_veto_after_deterministic_admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "material_semantic_selection",
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol compares payload confirmation authority transaction event audit receipt client and grammar evidence as one coupled set",
+      "No worker is dispatched before a genuinely separable package exists",
+      "Any Gemini veto follows exact candidate freeze and deterministic admission",
+      "Sol alone selects the semantic relationship and owns continuity acceptance and Git"
+    ]
+  },
+  "planned_action": "freeze_and_execute_the_provider_free_read_only_arrival_check_in_command_family_convergence_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-sol-acceptance.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "current_authority_allocation": "GPT Sol owns the tightly coupled contract comparison, semantic selection, acceptance and Git. DeepSeek V4 Flash/high is declined at neutral leverage because no stable separable implementation package exists in a read-only architecture review. Gemini 3.7 Flash/high is reserved for one final veto if the review freezes material command-family meaning. Native subagents are declined because current developer policy prohibits proactive delegation.",
+    "git_refs_and_worktree": "The task branch and origin task are aligned at exact closeout HEAD fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Before opening the new latch the tracked worktree was clean and 649 unrelated untracked paths, including docs/branding and historical receipt/state pairs, were preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after publication and directs raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review at Continuity 314 / Compass 296.",
+    "protected_evidence_boundaries": "Provider-free repository-static read-only review over committed authored-synthetic evidence only. A5.1 remains default-off, uncalled and unmodified. Product, backend, API/OpenAPI/GraphQL, schema, service, migration, product-test and database source; action grammar and route-contract repair; live routes/sources/watchers; product/patient/clinical/historical/protected data; providers, ADC, credentials/IAM, deployment, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

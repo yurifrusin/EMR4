@@ -118,10 +118,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
-    assert "revision 353" in error_register
-    assert "404 bounded incidents" in error_register
-    assert "aer-0399" in error_register
-    assert "aer-0401" in error_register
+    assert "revision 361" in error_register
+    assert "412 bounded incidents" in error_register
+    assert "aer-0405" in error_register
+    assert "aer-0412" in error_register
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation

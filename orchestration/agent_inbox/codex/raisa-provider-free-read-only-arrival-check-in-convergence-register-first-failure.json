@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.local-tool-failure.v1",
+  "attempt_id": "arrival-check-in-convergence-register-validation-001",
+  "observed_at": "2026-08-18T06:31:00+10:00",
+  "candidate_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+  "command": "python scripts/ariadne_agent_error_register.py --output orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+  "exit_code": 1,
+  "error": "ariadne agent-error register failed: attempt peer linkage mismatch for AER-0405: expected=none",
+  "effect": "no derived report was accepted or written",
+  "disposition": "revision_required_before_acceptance",
+  "authority_change": false
+}

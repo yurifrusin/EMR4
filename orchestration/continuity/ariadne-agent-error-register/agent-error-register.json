@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 353,
+  "register_revision": 361,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -16195,6 +16195,336 @@
           "AGENTS.md",
           "tests/test_agents_handover_archive.py",
           "docs/ariadne-agent-error-correction-register-revision-353.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0405",
+      "attempt_id": "arrival-check-in-convergence-focused-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-arrival-check-in-convergence-prose-fixtures",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "New documentation assertions must compare normalized semantic prose or exact structured values without depending on incidental Markdown line wrapping or inconsistent backtick placement.",
+      "observed_error": "The first focused convergence-review run passed seven checks and failed five new prose fixtures because four assertions compared phrases across authored Markdown line wraps without normalizing whitespace and one assertion omitted the opening backtick around the documented untyped route parameter.",
+      "detection_method": "The preserved serial pytest process exited 1 with exactly five failures in the two newly authored review test files; each failure displayed the expected phrase and the unchanged semantic document, and no product source was involved.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-focused-first-failure.json",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+        "docs/ariadne-agent-error-correction-register-revision-354.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prose_fixture_representation_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Normalize whitespace for multi-line prose assertions, retain exact Markdown delimiters only where they carry semantic meaning, preserve the first failed run and rerun the unchanged review candidate in a fresh serial pytest process.",
+        "prevention_control": "For documentation fixtures, normalize whitespace before matching semantic sentences and reserve literal raw-text assertions for machine-significant tokens, paths or headings; inspect line-wrapped source before freezing a new assertion.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-focused-first-failure.json",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-354.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0406",
+      "attempt_id": "arrival-check-in-convergence-register-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_agent_error_register_validation",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A recurrence or semantically adjacent incident leaves related_incident_ids empty unless the register can represent the exact symmetric attempt-peer relationship in both records.",
+      "observed_error": "The first AER-0405 draft named AER-0403 as a one-way related incident because both involved prose fixtures, but they are separate attempts and the historical record does not name the new incident. Canonical pattern generation stopped with attempt peer linkage mismatch and wrote no accepted report.",
+      "detection_method": "The standalone agent-error register process exited 1 with exact attempt peer linkage mismatch for AER-0405 before register acceptance, wider tests, verifier dispatch, commit or publication.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-first-failure.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-355.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_asymmetric_peer_link",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the unsupported one-way peer from AER-0405, retain its independent recurrence signature, add this distinct validation failure and regenerate the derived report in a fresh standalone process.",
+        "prevention_control": "Leave related_incident_ids empty unless both existing records already carry the exact symmetric link; use recurrence_signature for recurrence grouping and run standalone register validation immediately after every new incident draft.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-first-failure.json",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-355.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0407",
+      "attempt_id": "arrival-check-in-convergence-register-focused-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident addition must update all exact revision, sequential-ID, population and derived category/origin/candidate-state fixtures before the complete register suite is rerun.",
+      "observed_error": "After AER-0405 and AER-0406 were added, the first complete register-focused run failed four otherwise passing tests because exact fixtures still expected revision 353, 404 incidents, 277 agent-behavior incidents, 114 output-contract violations and 254 canonical-unchanged candidates.",
+      "detection_method": "The preserved complete serial pytest process reached 100 percent and exited 1 with exactly four stale-metadata failures; the newly authored eleven convergence-review checks and every non-population register assertion passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-focused-first-failure.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-356.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance every exact register and derived-report population fixture to revision 356 and 407 incidents, including 280 agent-behavior, 117 output-contract and 257 canonical-unchanged counts, regenerate the report and rerun the complete register-focused packet.",
+        "prevention_control": "Before the first full test after adding incidents, derive revision, ID range, origin, category and candidate-state totals from the proposed final register population and update the complete exact-count assertion block as one patch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-focused-first-failure.json",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-356.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0408",
+      "attempt_id": "arrival-check-in-convergence-register-focused-002",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "When new incidents make a recurrence signature cross the report threshold or change a recurring group, the exact recurring-pattern fixtures must be updated in the same register patch as the population totals.",
+      "observed_error": "The second complete register-focused run passed every check except the exact residual recurring-pattern list because AER-0406 made orchestrator.agent_error_register_asymmetric_peer_link newly recurrent and that structured group had not been separated into an explicit assertion.",
+      "detection_method": "The preserved complete serial pytest process reached 100 percent and exited 1 with one exact recurring-pattern list difference after the register validator, all population fixtures and all convergence-review tests passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-recurring-pattern-first-failure.json",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-357.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_derived_expectations_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance all population totals, inspect the report's exact five-field recurrence composite, add one explicit incident-ID assertion for the actually new asymmetric-peer group, exclude that owned group from the exact residual list, regenerate the report and rerun the complete packet.",
+        "prevention_control": "After incident insertion and report regeneration, diff recurring_patterns by the exact origin/category/role/resource/signature composite and incident IDs before full pytest; every actually new or changed composite receives one explicit semantic assertion or an intentional residual-list update.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-recurring-pattern-first-failure.json",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-357.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0409",
+      "attempt_id": "arrival-check-in-convergence-register-focused-003",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "low",
+      "expected_invariant": "Recurring-pattern fixtures must be derived from the register builder's exact origin/category/role/resource/signature composite rather than from recurrence_signature text alone.",
+      "observed_error": "The third complete register-focused run failed one assertion because the correction assumed AER-0407 joined the historical population-fixture recurrence group by signature alone. The builder correctly kept it separate because its resource_id differs; AER-0408 is likewise not recurrent with AER-0248 under the five-field composite.",
+      "detection_method": "The preserved complete serial pytest process reached 100 percent and exited 1 at the explicit population-fixture incident-ID assertion. Direct readback of the derived report and builder lines 206-224 proved the five-field composite rule.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-composite-first-failure.json",
+        "scripts/ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-358.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_recurrence_composite_misread",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the historical population composite to its exact three incident IDs, remove the nonexistent derived-expectation composite assertion, keep only the observed asymmetric-peer composite assertion, advance totals, regenerate the report and rerun the complete packet.",
+        "prevention_control": "Read the report builder's grouping tuple or the complete derived row before predicting recurrence membership; matching recurrence_signature text alone is insufficient when origin, category, role or resource differs.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-composite-first-failure.json",
+          "scripts/ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-358.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0410",
+      "attempt_id": "arrival-check-in-convergence-register-focused-004",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A recurring-pattern signature must either remain in both sides of the exact residual-list comparison or be removed from both after receiving a separate owned assertion.",
+      "observed_error": "The fourth complete register-focused run failed one residual-list equality because the population-fixture signature was excluded from the actual list while its unchanged exact expected row remained in place, shifting the comparison at the following detached-verifier row.",
+      "detection_method": "The preserved complete serial pytest process reached 100 percent and exited 1 with one list-equality failure. Direct inspection showed the actual and expected detached-verifier rows were identical and the preceding population row had been filtered only from the actual side.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-residual-list-first-failure.json",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-359.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_residual_list_exclusion_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove only the population-fixture signature from the actual-side exclusion set so its existing exact row remains aligned, advance totals, regenerate the report and rerun the complete packet.",
+        "prevention_control": "When splitting an owned recurrence assertion from an exact residual list, edit the filter set and expected residual rows as one paired change; otherwise leave both intact even if an additional explicit assertion is useful.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-residual-list-first-failure.json",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-359.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0411",
+      "attempt_id": "arrival-check-in-convergence-current-baton-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The compact Current Baton register fixture must require the accepted current correction chain rather than permanently pin superseded historical incident names after the row advances.",
+      "observed_error": "The first compact handover/baton/register packet failed one assertion because the accepted register row named AER-0405 through AER-0410 while the fixture still required historical AER-0399 and AER-0401 to remain in the one-line live handover.",
+      "detection_method": "The preserved complete serial pytest process reached 100 percent and exited 1 only at test_live_baton_rows_accept_behavior_and_resume_narrow_product_work; compactness and the full register suite passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-current-baton-first-failure.json",
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-360.md",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the live row to revision 360 and 411 incidents, name AER-0405 through AER-0411, replace the fixture's historical-name assertions with the current chain endpoints, regenerate the report and rerun the full compact packet.",
+        "prevention_control": "Current Baton prose fixtures require current revision/count and current bounded-chain endpoints; historical incident continuity belongs in the canonical register and revision documents, not as permanent names in the compact live row.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-current-baton-first-failure.json",
+          "AGENTS.md",
+          "docs/ariadne-agent-error-correction-register-revision-360.md",
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0412",
+      "attempt_id": "arrival-check-in-convergence-register-focused-005",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A focused incident test must assert the exact stable phrase encoded in the accepted register and must not invent a near-synonym for natural-language correction prose.",
+      "observed_error": "The fifth complete register-focused packet failed one newly authored AER-0411 assertion because it expected current correction-chain endpoints while the accepted prevention control says current bounded-chain endpoints.",
+      "detection_method": "The preserved complete serial pytest process reached 100 percent and exited 1 only at test_aer_0411_records_compact_baton_historical_name_fixture_drift; every register validator, baton, handover and convergence-review assertion otherwise passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-prose-first-failure.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-361.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_test_prose_assertion_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the invented near-synonym with the exact stable phrase current bounded-chain endpoints, add an explicit recurrence-group assertion, advance totals, regenerate the report and rerun the complete packet.",
+        "prevention_control": "Copy exact stable prose from the incident when a literal phrase is intentionally tested; otherwise assert structured fields or a shorter material token rather than inventing equivalent wording.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-convergence-register-prose-first-failure.json",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-361.md",
+          "tests/test_ariadne_agent_error_register.py"
         ]
       },
       "status": "corrected"

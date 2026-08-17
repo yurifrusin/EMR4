@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.local-test-failure.v1",
+  "attempt_id": "arrival-check-in-convergence-current-baton-001",
+  "observed_at": "2026-08-18T07:20:00+10:00",
+  "candidate_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+  "command": "python scripts/ariadne_serial_pytest.py --timeout-seconds 300 -- -q tests/test_current_baton_consistency.py tests/test_agents_handover_archive.py tests/test_ariadne_agent_error_register.py",
+  "exit_code": 1,
+  "summary": {
+    "failed": 1,
+    "failure_class": "current_baton_historical_incident_name_fixture_stale",
+    "semantic_candidate_defect_observed": false
+  },
+  "observed_error": "the compact current register row advanced to the AER-0405 through AER-0410 chain while the baton fixture still required historical AER-0399 and AER-0401 names",
+  "disposition": "revision_required_before_acceptance",
+  "authority_change": false
+}

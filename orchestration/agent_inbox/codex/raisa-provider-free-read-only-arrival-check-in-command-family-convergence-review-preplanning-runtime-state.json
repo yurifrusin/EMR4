@@ -1,0 +1,182 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_provider_free_read_only_arrival_check_in_command_family_convergence_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after publication and directs raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review at Continuity 314 / Compass 296.",
+    "current_authority_allocation": "GPT Sol owns the tightly coupled contract comparison, semantic selection, acceptance and Git. DeepSeek V4 Flash/high is declined at neutral leverage because no stable separable implementation package exists in a read-only architecture review. Gemini 3.7 Flash/high is reserved for one final veto if the review freezes material command-family meaning. Native subagents are declined because current developer policy prohibits proactive delegation.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md",
+      "docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-sol-acceptance.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "protected_evidence_boundaries": "Provider-free repository-static read-only review over committed authored-synthetic evidence only. A5.1 remains default-off, uncalled and unmodified. Product, backend, API/OpenAPI/GraphQL, schema, service, migration, product-test and database source; action grammar and route-contract repair; live routes/sources/watchers; product/patient/clinical/historical/protected data; providers, ADC, credentials/IAM, deployment, release, Pages and protected refs remain closed. docs/branding and unrelated untracked files remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "The task branch and origin task are aligned at exact closeout HEAD fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Before opening the new latch the tracked worktree was clean and 649 unrelated untracked paths, including docs/branding and historical receipt/state pairs, were preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+    "active_tranche": "Provider-free read-only arrival/check-in command-family convergence review",
+    "objective": "Compare exact general-status, waiting-area and A5.1 check-in contracts, classify static action-contract drift, choose one canonical product-facing arrival meaning or strict justified non-overlap, and freeze the smallest later tranche without editing product or runtime source.",
+    "status": "in_progress",
+    "source_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+    "authority_source": "AGENTS.md Current Baton at Continuity 314 / Compass 296, the accepted post-cancellation programme orientation and Yuri's standing uninterrupted-development authority direct this provider-free read-only convergence review.",
+    "checkpoint": {
+      "completed_stage": "Fresh post-publication AGENTS.md reading, active orientation acceptance/plan reading, protected-boundary restoration, exact task/origin/protected-ref verification and parallelism-efficacy assessment are complete at exact task HEAD fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0.",
+      "next_executable_stage": "generate_fresh_five_source_preplanning_receipt_then_freeze_the_read_only_arrival_check_in_contract_matrix",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_repository_static_read_only_arrival_check_in_convergence_review",
+      "committed_authored_synthetic_and_static_source_evidence_only",
+      "compare_general_status_waiting_area_and_a5_1_contracts_only",
+      "choose_canonical_arrival_meaning_or_strict_justified_non_overlap_before_product_edit",
+      "a5_1_remains_default_off_uncalled_and_unmodified",
+      "no_product_backend_api_openapi_graphql_schema_service_migration_product_test_or_database_edit",
+      "no_action_grammar_route_contract_or_endpoint_coverage_repair_in_this_review",
+      "no_raw_compatibility_route_behavior_or_deprecation_change",
+      "no_live_route_source_database_watcher_or_external_client_access",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_provider_adc_credentials_iam_external_network_or_executable_model_tool_before_independent_review_admission",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The current task is one tightly coupled comparison of overlapping authority and semantics with no stable separable implementation or mechanical artifact before the decision is frozen.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "rationale": "Reserve one fresh Gemini 3.7 Flash/high veto if the completed review freezes material A5.1 versus generic-status product meaning; deterministic read-only evidence comes first.",
+        "work_packages": [
+          "conditional_exact_candidate_read_only_veto_after_deterministic_admission"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol compares payload confirmation authority transaction event audit receipt client and grammar evidence as one coupled set",
+      "No worker is dispatched before a genuinely separable package exists",
+      "Any Gemini veto follows exact candidate freeze and deterministic admission",
+      "Sol alone selects the semantic relationship and owns continuity acceptance and Git"
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "material_semantic_selection",
+      "pre_verifier_acceptance",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete post-publication five-source rehydration plus EMR4 API Steward boundary restoration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed fresh five-source rehydration and protected-ref verification."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Neutral-leverage architecture review; no dispatch selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Verifier conditionally reserved; no call before deterministic admission and materiality assessment."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native lane declined by current developer policy."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

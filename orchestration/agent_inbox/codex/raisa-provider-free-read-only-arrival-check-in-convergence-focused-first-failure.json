@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.local-test-failure.v1",
+  "attempt_id": "arrival-check-in-convergence-focused-001",
+  "observed_at": "2026-08-18T06:24:00+10:00",
+  "candidate_head": "fb39d235c5dc4de2440a5b0e4685ee5da5b4f4d0",
+  "command": "python scripts/ariadne_serial_pytest.py --timeout-seconds 300 -- -q tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+  "exit_code": 1,
+  "summary": {
+    "passed": 7,
+    "failed": 5,
+    "failure_class": "new_prose_fixture_representation_mismatch",
+    "semantic_candidate_defect_observed": false
+  },
+  "failures": [
+    "plan assertion split backticked typed-route phrase differently from authored Markdown",
+    "closed-surface assertion did not normalize the explicit-path line wrap",
+    "decision assertion omitted the intervening line wrap",
+    "non-overlap assertion omitted the intervening line wrap",
+    "typed-route diagnosis assertion omitted the intervening line wrap"
+  ],
+  "disposition": "revision_required_before_acceptance",
+  "authority_change": false
+}

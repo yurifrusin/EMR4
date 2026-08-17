@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "e41be670033ff33c8a8770dc77430727888eb56e9fc1f7999f1f53f0cefe8c62",
+  "canonical_register_sha256": "cc13bd613c9675201654c5f0364b3e1b63d6d1d04c38f6bcc0871aa50862b987",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 254,
+      "canonical_unchanged": 262,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 64,
       "evidence_misreport": 55,
       "harness_failure": 48,
-      "output_contract_violation": 114,
+      "output_contract_violation": 121,
       "read_only_violation": 3,
-      "reasoning_claim_error": 41,
+      "reasoning_claim_error": 42,
       "repository_defect": 65,
       "transport_timeout": 14
     },
     "by_origin": {
-      "agent_behavior": 277,
+      "agent_behavior": 285,
       "harness": 48,
       "repository": 65,
       "transport": 14
     },
     "by_process_severity": {
-      "low": 160,
+      "low": 168,
       "material": 115,
       "moderate": 129
     },
@@ -63,7 +63,8 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
-      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 7,
+      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 13,
+      "emr4-arrival-check-in-convergence-prose-fixtures::orchestrator": 1,
       "emr4-behavior-evidence-schema::orchestrator": 1,
       "emr4-behavior-plan-parent-binding-test::orchestrator": 1,
       "emr4-cf-d2-event-cue-parse-catalogue-harness::orchestrator": 1,
@@ -86,7 +87,7 @@
       "emr4-context-fabric-durability-structural-contract::orchestrator": 5,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-context-fabric-roadmap-order-test::orchestrator": 1,
-      "emr4-current-baton-consistency::orchestrator": 1,
+      "emr4-current-baton-consistency::orchestrator": 2,
       "emr4-disposable-postgresql-harness::orchestrator": 23,
       "emr4-disposable-postgresql-parse-evidence-router::orchestrator": 1,
       "emr4-durability-ddl-renderer::orchestrator": 3,
@@ -106,12 +107,12 @@
     "by_role": {
       "implementer": 40,
       "integration_reviewer": 3,
-      "orchestrator": 307,
+      "orchestrator": 315,
       "verifier": 54
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 404,
+  "incident_count": 412,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -762,6 +763,78 @@
       "categories": [
         "output_contract_violation"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0400",
+        "AER-0406"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Leave related_incident_ids empty for historical recurrences unless both records can carry the exact symmetric attempt-peer link; recurrence grouping belongs exclusively in recurrence_signature and must pass standalone register validation before tests or dispatch.",
+        "Leave related_incident_ids empty unless both existing records already carry the exact symmetric link; use recurrence_signature for recurrence grouping and run standalone register validation immediately after every new incident draft."
+      ],
+      "recurrence_signature": "orchestrator.agent_error_register_asymmetric_peer_link",
+      "resource_ids": [
+        "emr4-ariadne-agent-error-register-acceptance"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0401",
+        "AER-0412"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Copy exact stable prose from the incident when a literal phrase is intentionally tested; otherwise assert structured fields or a shorter material token rather than inventing equivalent wording.",
+        "Focused register tests assert stable structured fields and material semantic phrases; they do not require schema field names to be duplicated inside free-text prose unless that literal wording is itself an invariant."
+      ],
+      "recurrence_signature": "orchestrator.agent_error_register_test_prose_assertion_mismatch",
+      "resource_ids": [
+        "emr4-ariadne-agent-error-register-acceptance"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0403",
+        "AER-0411"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Current Baton prose fixtures require current revision/count and current bounded-chain endpoints; historical incident continuity belongs in the canonical register and revision documents, not as permanent names in the compact live row.",
+        "When a maintenance fixture intentionally binds prose, copy or deliberately add the exact normalized semantic phrase in the accepted baton row; use structured artifacts for numeric semantics instead of inventing alternate representations and read the entire assertion block before the next packet."
+      ],
+      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
+      "resource_ids": [
+        "emr4-current-baton-consistency"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
       "incident_count": 6,
       "incident_ids": [
         "AER-0004",
@@ -1146,7 +1219,7 @@
       ]
     }
   ],
-  "register_revision": 353,
+  "register_revision": 361,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }
