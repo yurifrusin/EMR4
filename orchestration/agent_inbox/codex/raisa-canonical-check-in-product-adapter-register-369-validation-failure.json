@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.deterministic_verification_failure.v1",
+  "recorded_at": "2026-08-18T09:47:05+10:00",
+  "timezone": "Australia/Brisbane",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "attempt_id": "check-in-product-adapter-register-369-validation-001",
+  "status": "revision_required",
+  "observed_failures": [
+    "The transport-separation fixture still expected 291 agent-behavior incidents after AER-0420 and AER-0421 raised the exact count to 293.",
+    "The updated active-latch completed_stage contained 528 characters, exceeding the admitted 500-character bound."
+  ],
+  "candidate_source_changed_after_failure": false,
+  "correction": "Update the exact aggregate to include both incidents, shorten the latch checkpoint without dropping its verification meaning, advance the register and rerun the complete focused packet."
+}

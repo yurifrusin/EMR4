@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.deterministic_verification_failure.v1",
+  "recorded_at": "2026-08-18T09:47:05+10:00",
+  "timezone": "Australia/Brisbane",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "attempt_id": "check-in-product-adapter-register-370-validation-001",
+  "status": "revision_required",
+  "observed_failures": [
+    "The successor-latch test expected the phrase canonical fast profile passes 200, while the valid shortened checkpoint represented the same result as 200-test canonical fast profile.",
+    "The first correction compressed AER-0422 and AER-0423 as AER-0422/0423, while the same fixture required the exact AER-0423 prefix."
+  ],
+  "candidate_source_changed_after_failure": false,
+  "correction": "Bind the test to the actual compact phrase, spell both incident prefixes explicitly within the bounded checkpoint and rerun the complete focused packet."
+}

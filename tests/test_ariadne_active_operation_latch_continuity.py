@@ -59,8 +59,8 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert len(latch["source_head"]) == 40
         assert all(char in "0123456789abcdef" for char in latch["source_head"])
         completed = latch["checkpoint"]["completed_stage"]
-        assert "AER-0419" in completed
-        assert "no same-lane retry" in completed
+        assert "AER-0423" in completed
+        assert "200-test canonical fast profile" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]

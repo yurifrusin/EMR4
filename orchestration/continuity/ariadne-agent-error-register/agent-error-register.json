@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 368,
+  "register_revision": 371,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -16835,6 +16835,164 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0420",
+      "attempt_id": "check-in-product-adapter-sol-admission-selection-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A provider-free no-conftest admission packet must include only self-contained static tests and must not reuse a separately bounded known-negative suite as candidate acceptance evidence.",
+      "observed_error": "The first broader Sol packet included two route suites that require repository database fixtures and the already documented route-literal endpoint-coverage false-positive suite. The no-conftest runner therefore reported 18 missing-fixture errors and eight unrelated static failures although the adapter-focused checks had passed.",
+      "detection_method": "The failure output named the absent client/db fixtures and the same route-literal and moved-delete-route assertions already classified by the frozen convergence review. Sol confirmed none referenced either new adapter-owned file.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-admission-first-selection-failure.json",
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-admission-corrected-validation.json",
+        "docs/ariadne-agent-error-correction-register-revision-369.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_test_allowlist_included_fixture_or_known_negative_suites",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the over-broad packet with the literal self-contained API subset, preserve the rejected selection and run the repository-owned canonical fast profile separately before candidate commit.",
+        "prevention_control": "Before a no-conftest dispatch, inspect every selected file for repository fixtures and known-negative classification; fixture-backed coverage belongs only to an explicitly authorised database profile and documented negative suites cannot become positive admission gates.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-admission-first-selection-failure.json",
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-admission-corrected-validation.json",
+          "docs/ariadne-agent-error-correction-register-revision-369.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0421",
+      "attempt_id": "check-in-product-adapter-canonical-fast-capture-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_verifier",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A yielded canonical verification run is admissible only when its unified-session identifier is retained and polled to an exact terminal exit with complete output.",
+      "observed_error": "The first canonical-fast wrapper printed only the partial stdout field from the yielded exec result and discarded its session identifier. Although the process later disappeared, its terminal exit and remaining output were unavailable and were not admitted.",
+      "detection_method": "The initial call returned after the 30-second yield without terminal output; process readback later showed completion, while no retained session handle existed for an exact exit-code read.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-canonical-fast-first-capture-failure.json",
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-admission-corrected-validation.json",
+        "docs/ariadne-agent-error-correction-register-revision-369.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_exec_session_identifier_discarded",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rerun the exact unchanged canonical command once, retain session 38174 and poll it to exit code 0 with all 200 tests and the remaining repository checks passing.",
+        "prevention_control": "Whenever exec_command can yield, serialize or otherwise retain the complete result object including session_id; never project only stdout until terminal exit is confirmed.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-canonical-fast-first-capture-failure.json",
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-admission-corrected-validation.json",
+          "docs/ariadne-agent-error-correction-register-revision-369.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0422",
+      "attempt_id": "check-in-product-adapter-register-369-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident-register correction must advance every exact aggregate fixture and keep the active-operation checkpoint within its admitted 500-character bound before candidate commit.",
+      "observed_error": "The first revision-369 focused packet failed two checks: the transport-separation fixture retained 291 agent-behavior incidents rather than 293, and the updated latch completed_stage contained 528 characters against the validator's 500-character maximum.",
+      "detection_method": "The complete provider-free register/latch/baton/adapter packet failed only the exact aggregate assertion and validate_active_operation bounded-text check before candidate staging or commit.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-register-369-validation-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-370.md",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_aggregate_and_latch_bound_correction_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the exact agent-behavior and total aggregates, shorten the latch checkpoint below 500 characters without dropping gate counts, add exact AER-0422 coverage, regenerate the pattern report and rerun the complete focused packet.",
+        "prevention_control": "After adding multiple incidents, derive every aggregate from the regenerated report and measure every bounded continuity field before running the full focused packet.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-register-369-validation-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-370.md",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0423",
+      "attempt_id": "check-in-product-adapter-register-370-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A shortened valid latch checkpoint and its focused test must use the same compact semantic phrase before candidate staging.",
+      "observed_error": "The revision-370 focused packet passed every check except one successor-latch assertion: it expected canonical fast profile passes 200 while the valid shortened checkpoint said 200-test canonical fast profile. The first correction then compressed AER-0422 and AER-0423 as AER-0422/0423, which still omitted the exact AER-0423 prefix required by that fixture.",
+      "detection_method": "Two successive complete focused packets each returned one exact prose assertion failure and no register, latch-schema, product or adapter failure.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-register-370-validation-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-371.md",
+        "tests/test_ariadne_active_operation_latch_continuity.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.bounded_latch_prose_and_fixture_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bind the focused assertion to 200-test canonical fast profile, spell both AER-0422 and AER-0423 prefixes explicitly, retain the checkpoint below 500 characters and rerun the complete focused packet.",
+        "prevention_control": "When compacting a bounded continuity field, update semantic fixtures from the final validated string rather than an intermediate draft.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-register-370-validation-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-371.md",
+          "tests/test_ariadne_active_operation_latch_continuity.py"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

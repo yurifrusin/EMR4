@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.deterministic_verification_failure.v1",
+  "recorded_at": "2026-08-18T09:47:05+10:00",
+  "timezone": "Australia/Brisbane",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "attempt_id": "check-in-product-adapter-canonical-fast-capture-001",
+  "status": "rejected_incomplete_terminal_evidence",
+  "runner": "scripts/verify_repository.py --profile fast",
+  "observed_result": "The process reached completion, but the orchestration wrapper printed only stdout and discarded the yielded unified-session identifier, so the exit status and terminal output were unavailable for admission.",
+  "candidate_source_changed_after_failure": false,
+  "provider_or_database_opened": false,
+  "correction": "Rerun the unchanged command once while preserving the returned session identifier and poll that exact session to terminal exit."
+}

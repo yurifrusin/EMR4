@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.deterministic_verification_receipt.v1",
+  "recorded_at": "2026-08-18T09:47:05+10:00",
+  "timezone": "Australia/Brisbane",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "status": "passed",
+  "checks": {
+    "adapter_focused_tests": 85,
+    "adapter_plan_and_convergence_tests": 101,
+    "provider_free_static_api_subset": 152,
+    "canonical_fast_profile_tests": 200,
+    "complete_provider_free_admission_packet": 590,
+    "ruff": "passed",
+    "maintained_source_compilation": "passed",
+    "maintained_source_files": 218,
+    "verification_files": 35,
+    "diary_javascript_syntax": "passed",
+    "git_whitespace": "passed"
+  },
+  "candidate_files": [
+    "app/services/appointment_check_in_product_adapter.py",
+    "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+  ],
+  "provider_or_database_opened": false,
+  "claim_boundary": "This is provider-free repository and authored-synthetic in-process evidence only; it does not admit a route, real database transaction or product use."
+}

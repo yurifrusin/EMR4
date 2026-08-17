@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.deterministic_verification_failure.v1",
+  "recorded_at": "2026-08-18T09:47:05+10:00",
+  "timezone": "Australia/Brisbane",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+  "attempt_id": "check-in-product-adapter-sol-admission-selection-001",
+  "status": "rejected_test_selection",
+  "runner": "scripts.ariadne_provider_free_pytest",
+  "observed_result": {
+    "fixture_errors": 18,
+    "static_failures": 8,
+    "candidate_failures": 0
+  },
+  "classification": "The packet incorrectly mixed fixture-dependent route tests and the already documented route-literal false-positive suite into a no-conftest provider-free runner. The failures do not inspect or implicate the new adapter.",
+  "database_or_product_runtime_opened": false,
+  "candidate_source_changed_after_failure": false,
+  "correction": "Use only the genuinely provider-free static API subset, then run the repository-owned canonical fast profile as its own captured gate."
+}
