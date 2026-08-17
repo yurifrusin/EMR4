@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
-  "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
-  "objective": "Review recent workflow evidence, assess DeepSeek Harness primary sources, keep Codex as conductor, implement machine Git snapshots, durable validation receipts, pytest-envelope admission and DeepSeek worker environment hardening, and ensure terminal active-operation states cannot dispatch workers, without changing Raisa product behavior or protected refs.",
-  "status": "complete",
-  "source_head": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
-  "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, Yuri's agreement to implement worthwhile adaptations, and Yuri's 2026-08-17 explicit approval of the recommended Antigravity transport diagnosis followed by one fresh exact-checkpoint Gemini 3.7 Flash/high review authorize this repository-only workflow tranche.",
+  "operation_id": "raisa-reception-one-selected-appointment-cancellation-composition",
+  "active_tranche": "Reception One selected-appointment cancellation composition",
+  "objective": "Add one provider-free visible Reception One cancellation action over the accepted selected-action console and canonical delete-confirm truth envelope, with explicit staff confirmation, current-authority/source recheck, strict public receipt projection and fresh post-command reconciliation.",
+  "status": "in_progress",
+  "source_head": "36edc1e5b36b83a54f6af28c9519853290e4189b",
+  "authority_source": "AGENTS.md Current Baton at Continuity 310 / Compass 292, Yuri's standing uninterrupted-development authority and his instruction to continue beyond the completed effectiveness review authorize the narrow provider-free visible selected-appointment cancellation composition.",
   "checkpoint": {
-    "completed_stage": "Accepted at exact reviewed source 73bea42b37424ca3f53240d52f8e5c10120a5ce7 after deterministic validation and one clean Gemini 3.7 Flash/high veto pass; Continuity 310 / Compass 292 records the result and directs the next visible Reception One cancellation composition.",
-    "next_executable_stage": null,
+    "completed_stage": "The fresh post-compaction receipt passed and Sol froze the provider-free cancellation plan, threat delta, adapter-neutral projection rule and typed evidence schema before product edits or worker dispatch.",
+    "next_executable_stage": "Validate and commit the planning checkpoint, fast-forward the clean isolated worker branch, issue a predispatch receipt, dispatch the bounded DeepSeek test-only package and implement the Sol-owned product source in parallel.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
-      "review": 3,
-      "verification": 4
+      "review": 0,
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,25 +24,26 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "repository_only_ariadne_development_harness_changes",
-    "deepseek_harness_public_primary_sources_only_no_import_install_or_execution",
-    "no_raisa_product_api_database_migration_runtime_or_ui_change",
-    "no_external_package_install_or_dependency_vendoring",
-    "validation_receipts_store_only_output_digests_and_byte_counts",
-    "worker_environment_hardening_is_defence_in_depth_not_os_sandboxing",
+    "provider_free_authored_synthetic_visible_client_composition_only",
+    "canonical_delete_proposal_and_confirm_routes_only",
+    "explicit_staff_confirmation_required",
+    "strict_minimal_public_delete_receipt_only",
+    "fresh_authorized_projection_reconciliation_after_terminal_outcome",
+    "no_raw_compatibility_delete_or_status_cancel_fallback",
+    "no_new_backend_route_schema_database_migration_or_command_meaning",
     "no_product_patient_clinical_historical_diary_or_protected_data",
-    "no_product_provider_adc_credentials_iam_browser_database_or_external_runtime",
-    "no_ui_deployment_production_release_pages_or_protected_ref_movement",
+    "no_provider_adc_credentials_iam_external_network_or_executable_model_tool",
+    "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
     "explicit_path_staging_only"

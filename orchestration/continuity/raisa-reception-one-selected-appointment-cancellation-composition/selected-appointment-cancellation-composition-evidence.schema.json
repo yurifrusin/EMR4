@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/selected-appointment-cancellation-composition-evidence.schema.json",
+  "title": "Reception One selected-appointment cancellation composition evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "result",
+    "planning_baseline",
+    "reviewed_candidate",
+    "evidence_modes",
+    "projection_adapter_contract",
+    "command_contract",
+    "interaction_acceptance",
+    "strict_public_receipt",
+    "verification",
+    "parallelism_efficacy",
+    "authority_counts",
+    "claim_limit"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.reception-one.selected-appointment-cancellation-composition.evidence.v1"
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "result": {
+      "const": "raisa_reception_one_selected_appointment_cancellation_composition_pass"
+    },
+    "planning_baseline": {
+      "const": "36edc1e5b36b83a54f6af28c9519853290e4189b"
+    },
+    "reviewed_candidate": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "evidence_modes": {
+      "const": [
+        "authored_synthetic_client_fixture",
+        "route_intercepted_browser",
+        "repository_static_and_regression",
+        "independent_read_only_veto"
+      ]
+    },
+    "projection_adapter_contract": {
+      "const": {
+        "raisa_output": "typed_minimized_projection_and_action_envelope_not_raw_rows",
+        "first_party_client": "reference_rendering",
+        "adapter_freedom": ["layout", "modality", "visual_hierarchy", "bounded_copy"],
+        "immutable_semantics": [
+          "fact_values_and_provenance",
+          "current_proposed_committed_state",
+          "action_identity_and_consequence",
+          "warnings_and_blocks",
+          "explicit_confirmation",
+          "authority_and_source_recheck",
+          "receipt_and_fresh_reconciliation"
+        ]
+      }
+    },
+    "command_contract": {
+      "const": {
+        "graphql": "read_only_unchanged",
+        "proposal": "post_appointments_proposals_delete_appointment_id_only",
+        "confirm": "post_appointments_proposals_delete_confirm_canonical_only",
+        "explicit_staff_confirmation": true,
+        "status_cancel_fallbacks": 0,
+        "raw_delete_fallbacks": 0,
+        "new_routes": 0,
+        "new_schemas": 0,
+        "optimistic_mutations": 0
+      }
+    },
+    "interaction_acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zero_route_draft",
+        "safe_commit",
+        "staff_cancel",
+        "blocked",
+        "stale_or_authority_denial",
+        "malformed_public_envelope",
+        "interruption",
+        "viewports",
+        "minimum_target_css_pixels",
+        "horizontal_overflow",
+        "console_errors"
+      ],
+      "properties": {
+        "zero_route_draft": {"const": "pass"},
+        "safe_commit": {"const": "pass_one_delete_proposal_one_canonical_confirm_fresh_removal"},
+        "staff_cancel": {"const": "pass_zero_confirm_current_truth_retained"},
+        "blocked": {"const": "pass_zero_confirm_fresh_reconciliation"},
+        "stale_or_authority_denial": {"const": "pass_zero_fallback_fresh_reconciliation"},
+        "malformed_public_envelope": {"const": "pass_fail_closed_fresh_reconciliation"},
+        "interruption": {"const": "pass_no_duplicate_busy_reselection_or_palette_switch"},
+        "viewports": {"const": ["1280x720", "768x1024", "390x844"]},
+        "minimum_target_css_pixels": {"minimum": 44},
+        "horizontal_overflow": {"const": false},
+        "console_errors": {"const": 0}
+      }
+    },
+    "strict_public_receipt": {
+      "const": {
+        "envelope_schema": "raisa.delete_confirm_public_envelope.v1",
+        "receipt_schema": "appointment.delete_confirmation_receipt.v1",
+        "appointment_identity_exact": true,
+        "status": "Cancelled",
+        "reason_identity_exact": true,
+        "waiting_area_id": null,
+        "warning_code_allowlist": ["waiting_area_cleared"],
+        "unknown_fields_admitted": false,
+        "appointment_read_model_admitted": false,
+        "private_receipt_bytes_admitted": false
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dedicated_browser_cases",
+        "existing_selected_action_cases",
+        "focused_tests",
+        "canonical_fast_tests",
+        "independent_veto",
+        "javascript_syntax",
+        "ruff",
+        "maintained_source_compilation",
+        "git_whitespace"
+      ],
+      "properties": {
+        "dedicated_browser_cases": {"type": "integer", "minimum": 8},
+        "existing_selected_action_cases": {"type": "integer", "minimum": 1},
+        "focused_tests": {"type": "integer", "minimum": 1},
+        "canonical_fast_tests": {"type": "integer", "minimum": 1},
+        "independent_veto": {"const": "pass"},
+        "javascript_syntax": {"const": "pass"},
+        "ruff": {"const": "pass"},
+        "maintained_source_compilation": {"const": "pass"},
+        "git_whitespace": {"const": "pass"}
+      }
+    },
+    "parallelism_efficacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sol", "deepseek", "gemini", "native_subagents"],
+      "properties": {
+        "sol": {"type": "string", "minLength": 1},
+        "deepseek": {"type": "string", "minLength": 1},
+        "gemini": {"type": "string", "minLength": 1},
+        "native_subagents": {"const": "declined_by_current_developer_policy"}
+      }
+    },
+    "authority_counts": {
+      "const": {
+        "provider_calls": 0,
+        "patient_or_product_records": 0,
+        "real_database_or_source_reads": 0,
+        "real_database_writes": 0,
+        "new_command_routes": 0,
+        "deployments": 0,
+        "releases": 0,
+        "pages_rebuilds": 0,
+        "protected_ref_movements": 0
+      }
+    },
+    "claim_limit": {
+      "const": "Proves provider-free authored-synthetic first-party client composition, route-intercepted browser behavior, repository regression and independent source review only; it does not prove live backend/database, product-data, representative usability, external-adapter compliance, deployment or production operation."
+    }
+  }
+}
