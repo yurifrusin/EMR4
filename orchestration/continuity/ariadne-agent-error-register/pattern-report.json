@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "16c7a862dfd2387ddf887eeb6a17b09e04eaace001e2e2f8cac9e96850bf4f44",
+  "canonical_register_sha256": "c3d325c6ab1f5471ef49bd4a38bc6ccfb5acafa2a79979d69710c676f55525f1",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 245,
+      "canonical_unchanged": 247,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
-      "command_scope_violation": 62,
+      "command_scope_violation": 63,
       "evidence_misreport": 55,
       "harness_failure": 48,
       "output_contract_violation": 109,
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
-      "repository_defect": 64,
+      "repository_defect": 65,
       "transport_timeout": 14
     },
     "by_origin": {
-      "agent_behavior": 269,
+      "agent_behavior": 270,
       "harness": 48,
-      "repository": 64,
+      "repository": 65,
       "transport": 14
     },
     "by_process_severity": {
-      "low": 152,
+      "low": 153,
       "material": 115,
-      "moderate": 128
+      "moderate": 129
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -45,7 +45,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 199,
+      "codex-primary-orchestrator::orchestrator": 200,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -98,17 +98,18 @@
       "model-required-bureau-c5-live-controller::orchestrator": 1,
       "native-codex-observation-to-signal-worker::implementer": 1,
       "ordinary-diary-cancellation-browser-review-manifest::verifier": 1,
+      "ordinary-diary-cancellation-continuity-updater::orchestrator": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
       "implementer": 40,
       "integration_reviewer": 3,
-      "orchestrator": 298,
+      "orchestrator": 300,
       "verifier": 54
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 395,
+  "incident_count": 397,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -116,11 +117,12 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0334",
         "AER-0337",
-        "AER-0372"
+        "AER-0372",
+        "AER-0397"
       ],
       "origins": [
         "agent_behavior"
@@ -128,7 +130,8 @@
       "prevention_controls": [
         "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
         "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
-        "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent."
+        "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+        "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call."
       ],
       "recurrence_signature": "orchestrator.chained_validation_exit_masking",
       "resource_ids": [
@@ -1092,7 +1095,7 @@
       ]
     }
   ],
-  "register_revision": 345,
+  "register_revision": 346,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

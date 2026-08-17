@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/r198",
+  "branch": "codex/review-ordinary-diary-cancellation-repair-bfac6529",
+  "head": "bfac65298e1d4aaca85d1c9dcb20329ef298c485",
+  "expected_head": "bfac65298e1d4aaca85d1c9dcb20329ef298c485",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "67318019c1b04fa8825d31b537cd6126518c6d932333ccb7b495f33f9ccf2842",
+  "command_count": 9,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/r198",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.schema.json",
+  "title": "Ordinary Diary cancellation canonical consumer convergence composition evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "result",
+    "planning_baseline",
+    "product_implementation_source",
+    "accepted_candidate",
+    "evidence_modes",
+    "contract",
+    "verification",
+    "recovery_provenance",
+    "parallelism_efficacy",
+    "authority_counts",
+    "claim_limit"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.ordinary-diary.cancellation-canonical-consumer-convergence-composition.evidence.v1"
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "result": {
+      "const": "raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_pass"
+    },
+    "planning_baseline": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "product_implementation_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_candidate": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "evidence_modes": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dedicated_delete_proposal_only",
+        "canonical_delete_confirm_only",
+        "strict_minimal_public_envelope",
+        "appointment_read_model_required",
+        "status_or_raw_delete_fallbacks",
+        "fresh_read_after_every_terminal_or_uncertain_outcome",
+        "reconciliation_failure_state",
+        "optimistic_source_truth_mutations",
+        "backend_api_schema_migration_or_database_changes"
+      ],
+      "properties": {
+        "dedicated_delete_proposal_only": {"const": true},
+        "canonical_delete_confirm_only": {"const": true},
+        "strict_minimal_public_envelope": {"const": true},
+        "appointment_read_model_required": {"const": false},
+        "status_or_raw_delete_fallbacks": {"const": 0},
+        "fresh_read_after_every_terminal_or_uncertain_outcome": {"const": true},
+        "reconciliation_failure_state": {"const": "refresh_required_and_cancellation_disabled"},
+        "optimistic_source_truth_mutations": {"const": 0},
+        "backend_api_schema_migration_or_database_changes": {"const": 0}
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "combined_browser_tests",
+        "focused_api_spine_tests",
+        "register_tests",
+        "latch_tests",
+        "javascript_syntax",
+        "ruff",
+        "git_whitespace",
+        "independent_veto",
+        "independent_veto_commands",
+        "review_worktree_clean"
+      ],
+      "properties": {
+        "combined_browser_tests": {"const": 170},
+        "focused_api_spine_tests": {"const": 85},
+        "register_tests": {"const": 303},
+        "latch_tests": {"const": 52},
+        "javascript_syntax": {"const": "pass"},
+        "ruff": {"const": "pass"},
+        "git_whitespace": {"const": "pass"},
+        "independent_veto": {"const": "pass"},
+        "independent_veto_commands": {"const": 9},
+        "review_worktree_clean": {"const": true}
+      }
+    },
+    "recovery_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "first_review_decision",
+        "product_semantics_found_conformant",
+        "repair_changed_product_source",
+        "incidents",
+        "register_revision",
+        "open_incidents"
+      ],
+      "properties": {
+        "first_review_decision": {"const": "revision_required"},
+        "product_semantics_found_conformant": {"const": true},
+        "repair_changed_product_source": {"const": false},
+        "incidents": {
+          "const": ["AER-0391", "AER-0392", "AER-0393", "AER-0394", "AER-0395", "AER-0396", "AER-0397"]
+        },
+        "register_revision": {"const": 346},
+        "open_incidents": {"const": 0}
+      }
+    },
+    "parallelism_efficacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sol", "deepseek", "gemini", "native_subagents"],
+      "properties": {
+        "sol": {"type": "string", "minLength": 1},
+        "deepseek": {"type": "string", "minLength": 1},
+        "gemini": {"type": "string", "minLength": 1},
+        "native_subagents": {"type": "string", "minLength": 1}
+      }
+    },
+    "authority_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "product_provider_calls",
+        "product_route_calls",
+        "patient_or_product_records",
+        "database_or_source_accesses",
+        "backend_api_schema_migration_or_database_edits",
+        "deployments",
+        "releases",
+        "pages_rebuilds",
+        "protected_ref_movements"
+      ],
+      "properties": {
+        "product_provider_calls": {"const": 0},
+        "product_route_calls": {"const": 0},
+        "patient_or_product_records": {"const": 0},
+        "database_or_source_accesses": {"const": 0},
+        "backend_api_schema_migration_or_database_edits": {"const": 0},
+        "deployments": {"const": 0},
+        "releases": {"const": 0},
+        "pages_rebuilds": {"const": 0},
+        "protected_ref_movements": {"const": 0}
+      }
+    },
+    "claim_limit": {"type": "string", "minLength": 1}
+  }
+}

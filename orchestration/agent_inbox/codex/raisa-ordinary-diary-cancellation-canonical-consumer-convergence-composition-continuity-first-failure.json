@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.sanitized_local_failure.v1",
+  "observed_at": "2026-08-18T02:16:09.1305913+10:00",
+  "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+  "stage": "closeout_continuity_update",
+  "source_head": "bfac65298e1d4aaca85d1c9dcb20329ef298c485",
+  "first_process_exit_code": 1,
+  "first_process_error": "current_position_continuity:contract_evidence_type_unlinked:raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition:combined-patient-practitioner-time-duration-intent:tests",
+  "shell_sequence_final_exit_code": 0,
+  "masked_by_later_readback": true,
+  "product_candidate_changed": false,
+  "protected_ref_moved": false,
+  "provider_or_model_calls": 0,
+  "correction": "Add the exact source test to the affected contract evidence and rerun the updater as one standalone captured process before any separate readback."
+}

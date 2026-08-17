@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 345
+    assert register["register_revision"] == 346
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 396)
+        f"AER-{index:04d}" for index in range(1, 398)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 269
+    assert len(agent_incidents) == 270
     assert len(transport_incidents) == 14
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2580,7 +2580,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 395
+    assert report["incident_count"] == 397
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3617,28 +3617,28 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 345
-    assert report["incident_count"] == 395
+    assert report["register_revision"] == 346
+    assert report["incident_count"] == 397
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 269,
+        "agent_behavior": 270,
         "harness": 48,
-        "repository": 64,
+        "repository": 65,
         "transport": 14,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 62,
+        "command_scope_violation": 63,
         "evidence_misreport": 55,
         "harness_failure": 48,
         "output_contract_violation": 109,
         "read_only_violation": 3,
         "reasoning_claim_error": 40,
-        "repository_defect": 64,
+        "repository_defect": 65,
         "transport_timeout": 14,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 245,
+        "canonical_unchanged": 247,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3699,8 +3699,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     ] == [
         {
             "recurrence_signature": "orchestrator.chained_validation_exit_masking",
-            "incident_count": 3,
-            "incident_ids": ["AER-0334", "AER-0337", "AER-0372"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0334", "AER-0337", "AER-0372", "AER-0397"],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
@@ -3709,6 +3709,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
                 "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
                 "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+                "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
             ],
         },
         {
@@ -6250,6 +6251,35 @@ def test_aer_0395_records_direct_register_origin_count_recurrence() -> None:
         "repository.agent_error_register_exact_count_update_incomplete"
     )
     assert "len(agent_incidents)" in incident["observed_error"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0396_records_continuity_contract_test_evidence_repair() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0396"]
+
+    assert incident["origin"] == "repository"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "contract_evidence_type_unlinked" in incident["detection_method"]
+    assert "required_evidence_types" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0397_records_recurrent_updater_exit_masking() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0397"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "closeout"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.chained_validation_exit_masking"
+    )
+    assert "shell_sequence_final_exit_code 0" in incident["detection_method"]
+    assert "standalone captured process" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

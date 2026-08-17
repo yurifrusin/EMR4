@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 345,
+  "register_revision": 346,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -15836,6 +15836,84 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "docs/ariadne-agent-error-correction-register-revision-345.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0396",
+      "attempt_id": "ordinary-diary-cancellation-continuity-update-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ordinary-diary-cancellation-continuity-updater",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_repository_python",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every satisfied Continuity contract must link all evidence types required by that contract, including at least one exact test path.",
+      "observed_error": "The first Continuity 313 updater draft marked the combined intent contract satisfied but linked only plan, evidence and closeout artifacts, so Compass validation rejected the node for an unlinked required tests evidence type.",
+      "detection_method": "The updater's canonical Compass validation returned current_position_continuity:contract_evidence_type_unlinked for the exact node, contract and tests type before closeout commit or publication.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-continuity-first-failure.json",
+        "scripts/raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_continuity_update.py",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+        "docs/ariadne-agent-error-correction-register-revision-346.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.continuity_contract_evidence_missing_required_test_type",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact source-composition test to the affected satisfied contract evidence and rerun the idempotent updater as one standalone captured process until canonical Compass validation passes.",
+        "prevention_control": "Before running a Continuity updater, compare every satisfied contract-evidence array against that contract's required_evidence_types and include an exact existing path for every required type.",
+        "evidence_paths": [
+          "scripts/raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_continuity_update.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "docs/ariadne-agent-error-correction-register-revision-346.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0397",
+      "attempt_id": "ordinary-diary-cancellation-continuity-command-capture-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_shell",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A mutating validation command and its later readback must run as separately captured processes so a later success cannot mask the validation's nonzero exit.",
+      "observed_error": "The first Continuity updater invocation exited 1, but the same shell command continued through semicolon-separated JSON readback and therefore surfaced a final shell exit of 0 despite the failed canonical validation.",
+      "detection_method": "The command output contained the explicit Compass validation failure before successful graph/Compass readback, and the sanitized failure record preserves first_process_exit_code 1, shell_sequence_final_exit_code 0 and masked_by_later_readback true.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-continuity-first-failure.json",
+        "scripts/raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_continuity_update.py",
+        "docs/ariadne-agent-error-correction-register-revision-346.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the masked failure, rerun the corrected Continuity updater as one standalone captured process, confirm its own exit code is zero and perform graph/Compass readback only in a separate later process.",
+        "prevention_control": "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-continuity-first-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-346.md"
         ]
       },
       "status": "corrected"

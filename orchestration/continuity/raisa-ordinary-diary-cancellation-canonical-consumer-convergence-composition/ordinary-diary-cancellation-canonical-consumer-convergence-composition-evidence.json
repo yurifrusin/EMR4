@@ -1,0 +1,63 @@
+{
+  "schema_version": "raisa.ordinary-diary.cancellation-canonical-consumer-convergence-composition.evidence.v1",
+  "generated_at": "2026-08-18T01:54:51.4291281+10:00",
+  "result": "raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_pass",
+  "planning_baseline": "40e20981f3a4a14856f5dc4d127957ca791b06ad",
+  "product_implementation_source": "cb6589437bce24c5680c590bc5cf4571435f1a7a",
+  "accepted_candidate": "bfac65298e1d4aaca85d1c9dcb20329ef298c485",
+  "evidence_modes": [
+    "provider_free_authored_synthetic",
+    "route_intercepted_browser",
+    "repository_static_regression",
+    "independent_read_only_veto"
+  ],
+  "contract": {
+    "dedicated_delete_proposal_only": true,
+    "canonical_delete_confirm_only": true,
+    "strict_minimal_public_envelope": true,
+    "appointment_read_model_required": false,
+    "status_or_raw_delete_fallbacks": 0,
+    "fresh_read_after_every_terminal_or_uncertain_outcome": true,
+    "reconciliation_failure_state": "refresh_required_and_cancellation_disabled",
+    "optimistic_source_truth_mutations": 0,
+    "backend_api_schema_migration_or_database_changes": 0
+  },
+  "verification": {
+    "combined_browser_tests": 170,
+    "focused_api_spine_tests": 85,
+    "register_tests": 303,
+    "latch_tests": 52,
+    "javascript_syntax": "pass",
+    "ruff": "pass",
+    "git_whitespace": "pass",
+    "independent_veto": "pass",
+    "independent_veto_commands": 9,
+    "review_worktree_clean": true
+  },
+  "recovery_provenance": {
+    "first_review_decision": "revision_required",
+    "product_semantics_found_conformant": true,
+    "repair_changed_product_source": false,
+    "incidents": ["AER-0391", "AER-0392", "AER-0393", "AER-0394", "AER-0395", "AER-0396", "AER-0397"],
+    "register_revision": 346,
+    "open_incidents": 0
+  },
+  "parallelism_efficacy": {
+    "sol": "owned_product_implementation_recovery_integration_acceptance_and_git",
+    "deepseek": "tests_only_transport_non_result_preserved_then_bounded_sol_fallback",
+    "gemini": "first_veto_failed_closed_then_fresh_repaired_candidate_veto_passed",
+    "native_subagents": "declined_by_current_developer_policy"
+  },
+  "authority_counts": {
+    "product_provider_calls": 0,
+    "product_route_calls": 0,
+    "patient_or_product_records": 0,
+    "database_or_source_accesses": 0,
+    "backend_api_schema_migration_or_database_edits": 0,
+    "deployments": 0,
+    "releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_movements": 0
+  },
+  "claim_limit": "Proves provider-free authored-synthetic first-party client convergence and route-intercepted browser behavior only; it does not prove live backend/database, representative usability, external-adapter, product-data, deployment or production behavior."
+}
