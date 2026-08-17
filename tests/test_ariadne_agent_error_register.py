@@ -38,7 +38,7 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 333
+    assert register["register_revision"] == 334
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 382)
@@ -3615,7 +3615,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 333
+    assert report["register_revision"] == 334
     assert report["incident_count"] == 381
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
@@ -6027,10 +6027,8 @@ def test_aer_0380_contains_antigravity_empty_stderr_transport_exhaustion() -> No
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["workflow_disposition"] == "attempt_rejected_and_escalated"
     assert incident["causal_claim_level"] == "observation_only"
-    assert incident["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
-    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert incident["status"] == "corrected"
     assert "exit code 1" in incident["observed_error"]
     assert "empty stderr" in incident["observed_error"]
     assert "no reviewer decision" in incident["detection_method"]
@@ -6039,6 +6037,10 @@ def test_aer_0380_contains_antigravity_empty_stderr_transport_exhaustion() -> No
     assert "docs/ariadne-antigravity-transport-timeout-diagnosis.md" in incident[
         "correction"
     ]["evidence_paths"]
+    assert (
+        "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json"
+        in incident["correction"]["evidence_paths"]
+    )
 
 
 def test_aer_0381_blocks_worker_dispatch_from_terminal_latch_state() -> None:

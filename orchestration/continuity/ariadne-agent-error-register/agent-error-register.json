@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 333,
+  "register_revision": 334,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15226,8 +15226,8 @@
       "recurrence_signature": "transport.antigravity_exit_1_empty_stderr_without_terminal_decision",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Preserve both sanitized transport failures; replay the exact manifest provider-free; replace the disproven 30-minute print deadline with one bounded 45-minute attempt; and atomically persist digest-only elapsed, exit and postflight evidence for every nonzero transport exit.",
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve both sanitized transport failures; replay the exact manifest provider-free; replace the disproven 30-minute print deadline with one bounded 45-minute attempt; atomically persist digest-only elapsed, exit and postflight evidence for every nonzero transport exit; and admit the correction only after the newly authorised fresh exact-checkpoint Gemini 3.7 Flash/high veto passed.",
         "prevention_control": "Antigravity review admission still requires one written structured terminal receipt and an unchanged clean postflight. A nonzero exit now writes elapsed time, deadline-boundary observation, exact worktree state and stdout/stderr digests plus byte counts without raw output; it never becomes a reviewer decision, silent model fallback or candidate acceptance.",
         "evidence_paths": [
           "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-transport-failure-receipt.json",
@@ -15238,10 +15238,12 @@
           "tests/test_ariadne_antigravity.py",
           "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-receipt.json",
-          "docs/ariadne-agent-error-correction-register-revision-333.md"
+          "docs/ariadne-agent-error-correction-register-revision-333.md",
+          "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-334.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0381",

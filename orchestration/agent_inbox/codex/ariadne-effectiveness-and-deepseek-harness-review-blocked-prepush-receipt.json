@@ -1,0 +1,121 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
+    "completed_stage": "Four repository-only repairs pass deterministic admission at checkpoint 2219efc8a7f9df61ec084127683848887bde872c. AER-0380 contains two same-head Gemini transports with no receipt or decision; AER-0381 now forbids worker dispatch from blocked latch receipts. The extended candidate remains independently unaccepted.",
+    "next_executable_stage": "Obtain Yuri's direction on a new review route: recommended later fresh Antigravity reattempt after transport diagnosis, or an explicitly authorised same-head independent fallback; do not waive the veto silently.",
+    "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+    "resume_after_compaction": true,
+    "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "a943e420e395ad5aec36c8d32ec0bbd3c76f8f19",
+    "reason_codes": [],
+    "resolved_commit": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "38660a4a7136094df67b28d5a6ec07ca40c14416"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "a943e420e395ad5aec36c8d32ec0bbd3c76f8f19",
+    "branch_origin_aligned": false,
+    "head": "a943e420e395ad5aec36c8d32ec0bbd3c76f8f19",
+    "origin_branch_commit": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 643
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "blocked_transport_exhaustion_task_branch_prepush",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded changes modify the worker launcher and shared receipt/test admission path itself; dispatch through the not-yet-hardened lane would cost more than serial implementation and weaken isolation evidence.",
+        "work_packages": []
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh final veto is required because the selected repairs materially change continuation and validation admission behavior.",
+        "work_packages": [
+          "exact-candidate read-only veto after all deterministic gates pass"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native delegation; Sol can perform primary-source and incident synthesis serially.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "unexpectedly separable mechanical package",
+      "deterministic repair gate",
+      "pre-verifier admission"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "shared preflight validation and receipt schema changes",
+      "worker launcher hardening must precede later worker use",
+      "one final exact-candidate verifier after deterministic admission"
+    ]
+  },
+  "planned_action": "publish_the_contained_blocked_checkpoint_to_the_task_branch_only_without_claiming_independent_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-risk-weighted-workflow-reform-plan.md",
+      "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+      "docs/ariadne-cf-d2-workflow-incident-diagnosis.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md",
+      "docs/ariadne-agent-error-correction-register-revision-329.md",
+      "docs/ariadne-agent-error-correction-register-revision-330.md",
+      "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md",
+      "docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json"
+    ],
+    "current_authority_allocation": "Sol owns evidence synthesis, implementation integration and acceptance. DeepSeek Flash implementation is declined because this tranche hardens its launcher and shared admission path; Gemini 3.7 Flash/high is reserved for one final exact-candidate veto; native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task checkpoint HEAD is exact 2219efc8a7f9df61ec084127683848887bde872c from source parent 38660a4a7136094df67b28d5a6ec07ca40c14416. Prior review branch codex/review-ariadne-effectiveness-f6e5e96d remains clean at exact f6e5e96d as transport evidence but is superseded for any future veto by the blocked-state guard. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Current Baton records Continuity 309 / Compass 291 and directs an Ariadne effectiveness and DeepSeek Harness review before further product work.",
+    "protected_evidence_boundaries": "The review may inspect committed workflow source, settings, tests, public DeepSeek Harness primary sources and non-sensitive aggregate incident evidence only. It may not open protected evidence, PHI, product/patient/clinical data, credentials, provider product calls, deployment, release, Pages or protected refs. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}

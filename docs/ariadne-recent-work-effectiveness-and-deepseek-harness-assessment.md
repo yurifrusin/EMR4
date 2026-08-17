@@ -4,7 +4,7 @@ Date: 2026-08-17
 
 Timestamp: 2026-08-17T10:01:53.2381516+10:00 (Australia/Brisbane)
 
-Status: `transport_timeout_repair_candidate_pending_fresh_independent_veto`
+Status: `accepted`
 
 Source HEAD: `38660a4a7136094df67b28d5a6ec07ca40c14416`
 
@@ -206,10 +206,10 @@ executed. No Raisa product behavior or protected ref changed.
 
 ## Current acceptance state
 
-The original exact candidate passed its deterministic profile. The first
-Gemini 3.7 Flash/high Antigravity transport and its only configured same-head
-retry then each exited with code 1, empty stderr, no receipt and no terminal
-decision while leaving the review worktree clean. AER-0380 records these as
-transport failures, not reviewer rejection. The subsequent blocked receipt
-exposed and corrected AER-0381. The complete candidate remains unaccepted until
-a newly authorised independent-review route returns one valid veto result.
+The exact complete checkpoint at
+`73bea42b37424ca3f53240d52f8e5c10120a5ce7` passes the deterministic
+validation profile and one fresh eight-command Gemini 3.7 Flash/high veto with
+an unchanged clean review worktree. AER-0380 retains the two prior transports
+as non-decisions and now closes the bounded deadline/digest-evidence correction;
+AER-0381 retains terminal-latch non-dispatch. The five repository-only controls
+are accepted without changing Raisa product behavior or protected refs.

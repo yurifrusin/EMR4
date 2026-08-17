@@ -1,0 +1,255 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-effectiveness-gemini-73bea42b",
+  "branch": "codex/review-ariadne-effectiveness-73bea42b",
+  "head_before": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+  "head_after": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "235ec040248f0e623d4bc16f3b5c394afb12190dafcdef19107d6c2a9456fe6d",
+  "result": "# Gemini 3.7 Flash/high independent veto review: Ariadne effectiveness and transport repair\n\n## 1. Candidate and Worktree Verification\n- Bound worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-effectiveness-gemini-73bea42b`\n- Bound branch: `codex/review-ariadne-effectiveness-73bea42b`\n- Evaluated HEAD: `73bea42b37424ca3f53240d52f8e5c10120a5ce7`\n- Source parent: `38660a4a7136094df67b28d5a6ec07ca40c14416`\n- Candidate diff verified clean of whitespace or formatting defects (`git diff --check` passed cleanly).\n\n## 2. Review Findings Against Required Criteria\n\n1. **Original Four Controls Fail Closed Without Expanding Authority:**\n   - **Control 1 (Git/Ref Snapshot):** `orchestration_harness/git_refs_snapshot.py` and `scripts/ariadne_orchestrator_preflight.py` machine-populate Git HEAD, current branch, origin commit, cleanliness, untracked counts, preserved `docs/branding/`, and verify all four protected refs against `expected_protected_commit` (`2e34bdad732fdab32fbf778280b3d3c70d66d602`). Any mismatch returns `revision_required` and prevents worker dispatch.\n   - **Control 2 (Durable Validation Runner & Pytest Admission):** `scripts/ariadne_validation_runner.py` executes shell-free argv manifests sequentially, stops at first failure, rejects direct pytest, `--noconftest`, compound shell operators, and missing/out-of-tree test paths, and writes atomic lifecycle receipts.\n   - **Control 3 (DeepSeek Worker Hardening):** `scripts/ariadne_deepseek_claude.py` scrubs virtualenv and package-index environment variables, enforces offline/noninteractive flags (`PIP_NO_INDEX=1`, `UV_OFFLINE=1`, `NPM_CONFIG_OFFLINE=true`, `YARN_ENABLE_NETWORK=0`), and embeds explicit prohibitions against package/environment mutation.\n   - **Control 4 (Terminal-Latch Non-Dispatch):** `orchestration_harness/orchestrator_preflight.py` ensures `worker_dispatch_permitted` is granted only when `active_operation.status == \"in_progress\"` and `user_attention_required is False`. Blocked or attention-required latches fail closed.\n   - None of these controls grant or expand product, clinical, patient, worker, integration, deployment, or protected-ref authority.\n\n2. **Bounded 45-Minute Print Limit and Atomic Nonzero Diagnostic Evidence:**\n   - In `scripts/ariadne_antigravity.py`, the print timeout is updated to `PRINT_TIMEOUT_SECONDS = 45 * 60` (`--print-timeout 45m`).\n   - On nonzero exit, `run_worker` executes `inspect_worktree` and atomically writes a fail-closed failure receipt recording `elapsed_ms`, `exit_code`, `print_timeout_seconds`, `print_timeout_boundary_reached`, worktree cleanliness/identity postconditions (`head_before`, `head_after`, `dirty_after`, `worktree_identity_unchanged`), and output digests (`bytes`, `sha256`, `empty`) via `_output_evidence`.\n\n3. **Fail-Closed Transport Failure Behavior:**\n   - No raw model output (stdout/stderr) is stored on transport failure; only byte counts and SHA-256 hashes are persisted.\n   - Transport failure raises a `RuntimeError`, sets `terminal_decision_returned: False` and `candidate_review_admitted: False`, and never returns a reviewer decision.\n   - Prior transport failure receipts in `orchestration/agent_inbox/antigravity/` remain immutable.\n\n4. **Provider-Free Diagnosis Boundary & Precision:**\n   - `docs/ariadne-antigravity-transport-timeout-diagnosis.md` and related documents accurately separate direct empirical evidence (the 8-command manifest running in 150.578s locally; the retry predispatch-to-failure interval of ~31.5m correlating with the 30m deadline) from inference.\n   - It makes no provider- or model-causal assertions regarding internal model reasoning or session duration consumption.\n\n5. **Accurate Error Register and Register Revision 333 Alignment:**\n   - AER-0380, revision 333 (`docs/ariadne-agent-error-correction-register-revision-333.md`), live baton (`AGENTS.md`), assessment (`docs/ariadne-recent-work-effectiveness-and-deepseek-harness-assessment.md`), plan (`docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md`), and threat delta (`docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md`) consistently represent the correction state as `control_implemented_pending_acceptance`.\n\n6. **Bound Command Manifest & Surface Closure:**\n   - All 8 bound commands (C01 through C08) completed in order with exit code 0.\n   - The candidate worktree remains clean and unmodified.\n   - No database, browser, deployment, credential, or protected ref surfaces were opened.\n\nAll acceptance criteria are satisfied.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high independent veto review: Ariadne effectiveness and transport repair\n\n## 1. Candidate and Worktree Verification\n- Bound worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-effectiveness-gemini-73bea42b`\n- Bound branch: `codex/review-ariadne-effectiveness-73bea42b`\n- Evaluated HEAD: `73bea42b37424ca3f53240d52f8e5c10120a5ce7`\n- Source parent: `38660a4a7136094df67b28d5a6ec07ca40c14416`\n- Candidate diff verified clean of whitespace or formatting defects (`git diff --check` passed cleanly).\n\n## 2. Review Findings Against Required Criteria\n\n1. **Original Four Controls Fail Closed Without Expanding Authority:**\n   - **Control 1 (Git/Ref Snapshot):** `orchestration_harness/git_refs_snapshot.py` and `scripts/ariadne_orchestrator_preflight.py` machine-populate Git HEAD, current branch, origin commit, cleanliness, untracked counts, preserved `docs/branding/`, and verify all four protected refs against `expected_protected_commit` (`2e34bdad732fdab32fbf778280b3d3c70d66d602`). Any mismatch returns `revision_required` and prevents worker dispatch.\n   - **Control 2 (Durable Validation Runner & Pytest Admission):** `scripts/ariadne_validation_runner.py` executes shell-free argv manifests sequentially, stops at first failure, rejects direct pytest, `--noconftest`, compound shell operators, and missing/out-of-tree test paths, and writes atomic lifecycle receipts.\n   - **Control 3 (DeepSeek Worker Hardening):** `scripts/ariadne_deepseek_claude.py` scrubs virtualenv and package-index environment variables, enforces offline/noninteractive flags (`PIP_NO_INDEX=1`, `UV_OFFLINE=1`, `NPM_CONFIG_OFFLINE=true`, `YARN_ENABLE_NETWORK=0`), and embeds explicit prohibitions against package/environment mutation.\n   - **Control 4 (Terminal-Latch Non-Dispatch):** `orchestration_harness/orchestrator_preflight.py` ensures `worker_dispatch_permitted` is granted only when `active_operation.status == \"in_progress\"` and `user_attention_required is False`. Blocked or attention-required latches fail closed.\n   - None of these controls grant or expand product, clinical, patient, worker, integration, deployment, or protected-ref authority.\n\n2. **Bounded 45-Minute Print Limit and Atomic Nonzero Diagnostic Evidence:**\n   - In `scripts/ariadne_antigravity.py`, the print timeout is updated to `PRINT_TIMEOUT_SECONDS = 45 * 60` (`--print-timeout 45m`).\n   - On nonzero exit, `run_worker` executes `inspect_worktree` and atomically writes a fail-closed failure receipt recording `elapsed_ms`, `exit_code`, `print_timeout_seconds`, `print_timeout_boundary_reached`, worktree cleanliness/identity postconditions (`head_before`, `head_after`, `dirty_after`, `worktree_identity_unchanged`), and output digests (`bytes`, `sha256`, `empty`) via `_output_evidence`.\n\n3. **Fail-Closed Transport Failure Behavior:**\n   - No raw model output (stdout/stderr) is stored on transport failure; only byte counts and SHA-256 hashes are persisted.\n   - Transport failure raises a `RuntimeError`, sets `terminal_decision_returned: False` and `candidate_review_admitted: False`, and never returns a reviewer decision.\n   - Prior transport failure receipts in `orchestration/agent_inbox/antigravity/` remain immutable.\n\n4. **Provider-Free Diagnosis Boundary & Precision:**\n   - `docs/ariadne-antigravity-transport-timeout-diagnosis.md` and related documents accurately separate direct empirical evidence (the 8-command manifest running in 150.578s locally; the retry predispatch-to-failure interval of ~31.5m correlating with the 30m deadline) from inference.\n   - It makes no provider- or model-causal assertions regarding internal model reasoning or session duration consumption.\n\n5. **Accurate Error Register and Register Revision 333 Alignment:**\n   - AER-0380, revision 333 (`docs/ariadne-agent-error-correction-register-revision-333.md`), live baton (`AGENTS.md`), assessment (`docs/ariadne-recent-work-effectiveness-and-deepseek-harness-assessment.md`), plan (`docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md`), and threat delta (`docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md`) consistently represent the correction state as `control_implemented_pending_acceptance`.\n\n6. **Bound Command Manifest & Surface Closure:**\n   - All 8 bound commands (C01 through C08) completed in order with exit code 0.\n   - The candidate worktree remains clean and unmodified.\n   - No database, browser, deployment, credential, or protected ref surfaces were opened.\n\nAll acceptance criteria are satisfied.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-73bea42b",
+          "--",
+          "tests/test_ariadne_git_refs_snapshot.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_serial_pytest.py",
+          "tests/test_ariadne_deepseek_claude.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_evidence_gate.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-73bea42b",
+          "--",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-73bea42b",
+          "--",
+          "tests/test_ariadne_agent_error_register.py",
+          "-q"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/git_refs_snapshot.py",
+          "orchestration_harness/orchestrator_preflight.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "scripts/ariadne_validation_runner.py",
+          "scripts/ariadne_serial_pytest.py",
+          "scripts/ariadne_deepseek_claude.py",
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_git_refs_snapshot.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_serial_pytest.py",
+          "tests/test_ariadne_deepseek_claude.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "38660a4a7136094df67b28d5a6ec07ca40c14416..73bea42b37424ca3f53240d52f8e5c10120a5ce7"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "52edfbe86f34657e274a2efa4e381efb44aefe23c702138642c0d2a19f9b9509",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-73bea42b",
+        "--",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_evidence_gate.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-73bea42b",
+        "--",
+        "tests/test_agents_acceptance_index.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/ariadne-effectiveness-gemini-73bea42b",
+        "--",
+        "tests/test_ariadne_agent_error_register.py",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/git_refs_snapshot.py",
+        "orchestration_harness/orchestrator_preflight.py",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/ariadne_validation_runner.py",
+        "scripts/ariadne_serial_pytest.py",
+        "scripts/ariadne_deepseek_claude.py",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_git_refs_snapshot.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_serial_pytest.py",
+        "tests/test_ariadne_deepseek_claude.py",
+        "tests/test_ariadne_antigravity.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "38660a4a7136094df67b28d5a6ec07ca40c14416..73bea42b37424ca3f53240d52f8e5c10120a5ce7"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

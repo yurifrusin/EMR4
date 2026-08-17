@@ -3,16 +3,16 @@
   "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
   "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
   "objective": "Review recent workflow evidence, assess DeepSeek Harness primary sources, keep Codex as conductor, implement machine Git snapshots, durable validation receipts, pytest-envelope admission and DeepSeek worker environment hardening, and ensure terminal active-operation states cannot dispatch workers, without changing Raisa product behavior or protected refs.",
-  "status": "in_progress",
-  "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
+  "status": "complete",
+  "source_head": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
   "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, Yuri's agreement to implement worthwhile adaptations, and Yuri's 2026-08-17 explicit approval of the recommended Antigravity transport diagnosis followed by one fresh exact-checkpoint Gemini 3.7 Flash/high review authorize this repository-only workflow tranche.",
   "checkpoint": {
-    "completed_stage": "Provider-free diagnosis replays the exact historical manifest in 150.578 seconds and binds both prior failures to the former 30-minute deadline without a provider- or model-causal claim. The 45-minute deadline plus atomic digest-only failure receipt passes focused and deterministic gates; AER-0380 remains contained pending independent acceptance.",
-    "next_executable_stage": "Commit the exact deterministic transport-repair checkpoint with explicit paths, create a fresh clean non-protected review worktree and exact packet/manifest, generate a fresh pre-verifier receipt, then run exactly one Gemini 3.7 Flash/high review with no fallback or veto waiver.",
+    "completed_stage": "Accepted at exact reviewed source 73bea42b37424ca3f53240d52f8e5c10120a5ce7 after deterministic validation and one clean Gemini 3.7 Flash/high veto pass; Continuity 310 / Compass 292 records the result and directs the next visible Reception One cancellation composition.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
-      "review": 2,
+      "review": 3,
       "verification": 4
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "accepted_operation_complete"
   },
   "protected_boundaries": [
     "repository_only_ariadne_development_harness_changes",

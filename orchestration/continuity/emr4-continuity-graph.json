@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 309,
+  "graph_revision": 310,
   "harvests": [],
   "nodes": [
     {
@@ -21318,9 +21318,100 @@
         "No product data, reusable runtime, provider, deployment, Pages or protected-ref authority is opened.",
         "The authorised Ariadne effectiveness and DeepSeek Harness review precedes further product work."
       ]
+    },
+    {
+      "id": "ariadne-recent-work-effectiveness-and-transport-repair",
+      "title": "Ariadne recent-work effectiveness and transport repair",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-17T02:40:11Z",
+      "updated_at": "2026-08-17T02:40:11Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Repository-only Ariadne development-harness review and repair.",
+          "Codex remains conductor; DeepSeek Harness migration is rejected.",
+          "No Raisa product, data, database, provider, deployment or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-ariadne-effectiveness-and-transport-repair",
+          "source": "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept five evidence-backed workflow repairs and resume the narrow provider-free Reception One cancellation composition."
+        }
+      ],
+      "claim_scope": [
+        "The sampled median candidate-to-closeout tail is 38.5 minutes; 40.3 percent of sampled time was tail, not necessarily waste.",
+        "Machine Git snapshots, durable validation, pytest admission, worker hardening and terminal-latch non-dispatch pass.",
+        "The exact historical command manifest passes provider-free in 150.578 seconds.",
+        "Antigravity now has a bounded 45-minute deadline and digest-only nonzero failure evidence.",
+        "One fresh eight-command Gemini 3.7 Flash/high veto passes at unchanged exact source HEAD."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md",
+          "docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-assessment.md",
+          "docs/ariadne-antigravity-transport-timeout-diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-334.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-17--ariadne-effectiveness-and-deepseek-harness-adaptation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-v2-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_recent_work_effectiveness_and_transport_repair_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/git_refs_snapshot.py",
+          "orchestration_harness/orchestrator_preflight.py",
+          "scripts/ariadne_validation_runner.py",
+          "scripts/ariadne_serial_pytest.py",
+          "scripts/ariadne_deepseek_claude.py",
+          "scripts/ariadne_antigravity.py",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json",
+          "scripts/ariadne_recent_work_effectiveness_and_transport_repair_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The sub-25-minute ordinary closeout-tail target needs several later samples.",
+        "DeepSeek worker hardening is defence in depth, not hostile-process containment.",
+        "Raw compatibility DELETE, real/product data, provider product calls, deployment and protected integration remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-16T23:22:02Z"
+  "updated_at": "2026-08-17T02:40:11Z"
 }

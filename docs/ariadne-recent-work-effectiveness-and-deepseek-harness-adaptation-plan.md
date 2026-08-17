@@ -6,7 +6,7 @@ Timestamp: 2026-08-17T09:47:18.3542784+10:00 (Australia/Brisbane)
 
 Source HEAD: `38660a4a7136094df67b28d5a6ec07ca40c14416`
 
-Status: `transport_timeout_repair_candidate_pending_fresh_independent_veto`
+Status: `accepted`
 
 Reasoning level: workflow architecture and execution admission / Extra High
 

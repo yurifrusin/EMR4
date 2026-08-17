@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 309 / Compass 291. Delete-confirm now has an accepted authored-synthetic local HTTP/PostgreSQL truth path with replay, denial, rollback and cleanup evidence. A short Ariadne effectiveness and DeepSeek Harness review is next before more product work.
+> EMR4 is at Continuity 310 / Compass 292. Five evidence-backed Ariadne effectiveness and transport repairs pass without weakening the truth kernel. The narrow provider-free visible Reception One selected-appointment cancellation composition is next.
 
 ## North star
 
@@ -388,32 +388,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Canonical and historical delete-confirm paths now share one strict adapter-owned transport; database execution remains the next bounded proof. Lineage parent: `raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review`.
 186. **Close the canonical delete-confirm route-to-database integration proof — Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal**
    Authored-synthetic delete confirmation now has one accepted local HTTP/PostgreSQL truth path with replay, denial, rollback and cleanup evidence. Lineage parent: `raisa-provider-free-delete-confirm-http-route-convergence`.
+187. **Reduce avoidable workflow tail without weakening safety gates — Ariadne recent-work effectiveness and transport repair**
+   Five evidence-backed Ariadne repairs pass and the product sequence can resume with clearer durable evidence. Lineage parent: `raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal`.
 
 ## Current position
 
-**Delete-confirm HTTP/PostgreSQL integration accepted; Ariadne effectiveness review is next — Provider-free disposable PostgreSQL delete-confirm HTTP integration rehearsal**
+**Ariadne effectiveness repair accepted; visible cancellation composition is next — Ariadne recent-work effectiveness and transport repair**
 
-**Why this proof came next:** The product seam has passed its final independent gate, and recent incident evidence now supports a short workflow repair review before more product work.
+**Why this proof came next:** The workflow review and independent correction gate pass, so the next dependency-satisfied product step can reuse the accepted delete-confirm truth envelope.
 
-One authored-synthetic canonical/hidden-alias path rechecks current authority and source truth, commits cancellation/audit/private receipt atomically and projects only strict public bytes.
+Ariadne now removes repeated evidence friction and preserves useful failure diagnostics without relaxing authority or acceptance.
 
 ### What this unlocks
 
-- Review recent Ariadne incidents and tranche timing against the risk-weighted reform.
-- Inspect DeepSeek Harness primary sources and decide adaptation versus migration using authentication, cost, control and switching evidence.
-- Implement only the highest-leverage workflow repairs before resuming product work.
+- Freeze the narrow provider-free visible selected-appointment cancellation composition.
+- Reuse the selected-action console and explicit human confirmation pattern.
+- Project strict delete-confirm success and failure receipts without opening raw DELETE.
 
 ### What it does not solve
 
-- Raw compatibility DELETE convergence or visible Reception One cancellation UI.
-- Concurrent, crash/restart or unknown-commit behavior.
+- Visible Reception One cancellation behavior itself.
+- Concurrent crash/restart or unknown-commit behavior.
 - Product/patient data, provider access, deployment, release, Pages or protected refs.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -499,8 +499,8 @@ A backend-owned temporal Context Fabric can let Bernie, Rayleen, Davida, Clinici
 
 Prerequisites:
 
-- Preserve the accepted delete-confirm route, adapter, transaction, RLS, audit and private/public receipt boundaries.
-- Review recent Ariadne effectiveness and implement only evidence-backed high-leverage workflow repairs.
+- Preserve the accepted delete-confirm HTTP/PostgreSQL truth envelope.
+- Use machine-derived Git state and durable sequential validation for later tranches.
 - Keep raw DELETE, product data, providers, deployment and protected integration separately closed.
 
 ### Ariadne Sydney Vertex Gemini 3.5 Flash documentary gate — blocked
@@ -690,6 +690,7 @@ Prerequisites:
 
 ## Map limits
 
+- The Ariadne effectiveness result improves development evidence and transport handling; it changes no Raisa product behavior.
 - Delete-confirm HTTP/PostgreSQL integration proves one authored-synthetic local lifecycle, not raw DELETE, visible UI, product data, concurrency/crash recovery or production.
 - Delete-confirm HTTP convergence proves provider-free composition only, not database execution, raw DELETE convergence or visible client behavior.
 - The delete-confirm readiness result is read-only evidence; no route, schema behavior, database, capability or product runtime is opened.
@@ -957,9 +958,11 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-316.md`
 - `docs/ariadne-agent-error-correction-register-revision-319.md`
 - `docs/ariadne-agent-error-correction-register-revision-329.md`
+- `docs/ariadne-agent-error-correction-register-revision-334.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
+- `docs/ariadne-antigravity-transport-timeout-diagnosis.md`
 - `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md`
@@ -977,6 +980,9 @@ Prerequisites:
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
+- `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-closeout.md`
+- `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md`
+- `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-assessment.md`
 - `docs/ariadne-risk-weighted-workflow-reform-closeout.md`
 - `docs/ariadne-risk-weighted-workflow-reform-plan.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
@@ -1439,6 +1445,7 @@ Prerequisites:
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
+- `docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md`
 - `docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md`
 - `docs/security/bernie-reception-one-bureau-runtime-ui-wiring-threat-model-delta.md`
 - `docs/security/bernie-reception-one-default-off-dual-planner-runtime-threat-model-delta.md`
@@ -1584,6 +1591,7 @@ Prerequisites:
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
@@ -1645,6 +1653,13 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-predispatch-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-packet.md`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-v2-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json`
@@ -2823,6 +2838,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-response-compatibility-product-adapter-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-route-convergence-and-ariadne-git-object-resolution.md`
 - `orchestration/human_inbox/yuri/2026-08-16--delete-confirm-scaffold-parse-catalogue-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-17--ariadne-effectiveness-and-deepseek-harness-adaptation.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-postgresql-integration-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-http-route-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-17--delete-confirm-route-mounting-readiness-review.md`
@@ -2838,6 +2854,8 @@ Prerequisites:
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/continuity_and_refinement.py`
 - `orchestration_harness/git_object_resolution.py`
+- `orchestration_harness/git_refs_snapshot.py`
+- `orchestration_harness/orchestrator_preflight.py`
 - `orchestration_harness/risk_weighted_workflow.py`
 - `review/test_diary_smoke.py`
 - `review/test_reception_one_duration_action.py`
@@ -2848,11 +2866,16 @@ Prerequisites:
 - `review/test_reception_one_time_reschedule_action.py`
 - `review/test_two_projection_truth_parity.py`
 - `scripts/ariadne_active_operation_latch.py`
+- `scripts/ariadne_antigravity.py`
 - `scripts/ariadne_continuity_and_refinement.py`
 - `scripts/ariadne_continuity_and_refinement_safeguards_continuity_update.py`
+- `scripts/ariadne_deepseek_claude.py`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_provider_free_pytest.py`
+- `scripts/ariadne_recent_work_effectiveness_and_transport_repair_continuity_update.py`
 - `scripts/ariadne_risk_weighted_workflow.py`
+- `scripts/ariadne_serial_pytest.py`
+- `scripts/ariadne_validation_runner.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
@@ -2932,15 +2955,24 @@ Prerequisites:
 - `tests/test_appointment_delete_composition.py`
 - `tests/test_appointment_delete_product_adapter.py`
 - `tests/test_ariadne_active_operation_latch.py`
+- `tests/test_ariadne_agent_error_register.py`
+- `tests/test_ariadne_antigravity.py`
 - `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_continuity_and_refinement.py`
 - `tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py`
+- `tests/test_ariadne_deepseek_claude.py`
 - `tests/test_ariadne_git_object_resolution.py`
+- `tests/test_ariadne_git_refs_snapshot.py`
+- `tests/test_ariadne_orchestrator_preflight.py`
 - `tests/test_ariadne_provider_free_pytest.py`
+- `tests/test_ariadne_recent_work_effectiveness_and_transport_repair_continuity.py`
 - `tests/test_ariadne_risk_weighted_workflow.py`
+- `tests/test_ariadne_serial_pytest.py`
+- `tests/test_ariadne_validation_runner.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
+- `tests/test_current_baton_consistency.py`
 - `tests/test_diary_security_hardening.py`
 - `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
 - `tests/test_model_required_bureau_c3_d3.py`
@@ -3039,4 +3071,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 291; continuity graph revision 309._
+_Compass map revision 292; continuity graph revision 310._

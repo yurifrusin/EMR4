@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne recent-work effectiveness and DeepSeek Harness adaptation review",
+    "completed_stage": "Accepted at exact reviewed source 73bea42b37424ca3f53240d52f8e5c10120a5ce7 after deterministic validation and one clean Gemini 3.7 Flash/high veto pass; Continuity 310 / Compass 292 records the result and directs the next visible Reception One cancellation composition.",
+    "next_executable_stage": null,
+    "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+    "resume_after_compaction": false,
+    "source_head": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+    "reason_codes": [],
+    "resolved_commit": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "73bea42b37424ca3f53240d52f8e5c10120a5ce7"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+    "branch_origin_aligned": false,
+    "head": "73bea42b37424ca3f53240d52f8e5c10120a5ce7",
+    "origin_branch_commit": "a943e420e395ad5aec36c8d32ec0bbd3c76f8f19",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "accepted_closeout",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded changes modify the worker launcher and shared receipt/test admission path itself; dispatch through the not-yet-hardened lane would cost more than serial implementation and weaken isolation evidence.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exactly one newly authorised fresh Gemini 3.7 Flash/high veto passed against exact clean candidate 73bea42b37424ca3f53240d52f8e5c10120a5ce7 after transport diagnosis and deterministic admission.",
+        "work_packages": [
+          "completed one fresh exact-checkpoint read-only veto after all deterministic gates passed"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native delegation; Sol can perform primary-source and incident synthesis serially.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "unexpectedly separable mechanical package",
+      "deterministic repair gate",
+      "pre-verifier admission"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "shared preflight validation and receipt schema changes",
+      "worker launcher hardening must precede later worker use",
+      "one final exact-candidate verifier after deterministic admission"
+    ]
+  },
+  "planned_action": "commit_and_publish_the_accepted_exact_reviewed_harness_closeout_then_open_the_next_provider_free_visible_reception_one_cancellation_composition_under_standing_authority",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-risk-weighted-workflow-reform-plan.md",
+      "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+      "docs/ariadne-cf-d2-workflow-incident-diagnosis.md",
+      "docs/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal-closeout.md",
+      "docs/ariadne-agent-error-correction-register-revision-329.md",
+      "docs/ariadne-agent-error-correction-register-revision-330.md",
+      "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md",
+      "docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md",
+      "docs/ariadne-antigravity-transport-timeout-diagnosis.md",
+      "docs/ariadne-agent-error-correction-register-revision-333.md",
+      "docs/ariadne-agent-error-correction-register-revision-334.md",
+      "docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-closeout.md",
+      "orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-receipt.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json"
+    ],
+    "current_authority_allocation": "Sol owns closeout, explicit-path integration and continuation. DeepSeek Flash was correctly declined because the worker launcher and shared verifier admission were themselves under repair; Gemini 3.7 Flash/high completed exactly one clean exact-checkpoint veto; native subagents were declined by current developer policy.",
+    "git_refs_and_worktree": "Task branch is exact reviewed candidate 73bea42b37424ca3f53240d52f8e5c10120a5ce7 before the closeout-only commit and origin remains at the earlier published a943e420e395ad5aec36c8d32ec0bbd3c76f8f19 until accepted closeout publication. Fresh review branch codex/review-ariadne-effectiveness-73bea42b is clean at exact 73bea42b37424ca3f53240d52f8e5c10120a5ce7. The earlier f6e5e96d review worktree remains immutable transport evidence. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md Current Baton records the accepted Ariadne effectiveness and transport repair at Continuity 310 / Compass 292 and directs the narrow provider-free visible Reception One selected-appointment cancellation composition next.",
+    "protected_evidence_boundaries": "The review may inspect committed workflow source, settings, tests, public DeepSeek Harness primary sources and non-sensitive aggregate incident evidence only. It may not open protected evidence, PHI, product/patient/clinical data, credentials, provider product calls, deployment, release, Pages or protected refs. docs/branding and unrelated untracked files remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}
