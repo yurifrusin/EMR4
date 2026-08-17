@@ -544,7 +544,7 @@ def test_cancellation_palette_and_draft_are_route_inert(reception_page) -> None:
         option_values = page.locator(f"{REASON_SELECT} option").evaluate_all(
             "els => els.map(el => el.value)"
         )
-        assert tuple(option_values) == CANCELLATION_REASON_CODES
+        assert tuple(option_values) == ("", *CANCELLATION_REASON_CODES)
         assert page.locator(CANCEL_SUBMIT).is_disabled()
         page.select_option(REASON_SELECT, CANCEL_REASON)
         assert not page.locator(CANCEL_SUBMIT).is_disabled()
@@ -602,7 +602,7 @@ def test_safe_cancellation_requires_dialog_and_fresh_removal(reception_page) -> 
         # Fresh projection removed the appointment; only the cancellation outcome shows.
         assert page.locator(f"#meta-grid-content [data-appointment-id='{APPOINTMENT_ID}']").count() == 0
         assert page.locator(CANCEL_OUTCOME).count() == 1
-        assert "no longer in this current projection" in page.locator(CANCEL_OUTCOME).text_content().lower()
+        assert "cancelled and removed" in page.locator(CANCEL_OUTCOME).text_content().lower()
         for other in ("status", "reschedule", "duration", "practitioner"):
             assert page.locator(f".meta-grid-{other}-outcome").count() == 0
         assert page.locator(CANCEL_PANEL).count() == 0
@@ -628,8 +628,8 @@ def test_staff_escape_cancels_without_confirm_and_retains_truth(reception_page) 
         assert state["list_read_count"] > initial_list
         assert state["removed"] is False
         assert_appointment_still_present(page)
-        assert page.locator(REASON_SELECT).input_value() == ""
-        assert page.locator(NOTE_INPUT).input_value() == ""
+        assert page.locator(REASON_SELECT).input_value() == CANCEL_REASON
+        assert page.locator(NOTE_INPUT).input_value() == CANCEL_NOTE
         assert page.evaluate(
             "() => { const el = document.activeElement; return Boolean(el && ("
             "el.dataset.testid === 'meta-grid-action-choice-cancel' || "
@@ -662,8 +662,8 @@ def test_blocked_proposal_is_close_only_and_never_confirms(reception_page) -> No
         assert state["list_read_count"] > initial_list
         assert state["removed"] is False
         assert_appointment_still_present(page)
-        assert page.locator(REASON_SELECT).input_value() == ""
-        assert page.locator(NOTE_INPUT).input_value() == ""
+        assert page.locator(REASON_SELECT).input_value() == CANCEL_REASON
+        assert page.locator(NOTE_INPUT).input_value() == CANCEL_NOTE
         assert page.locator(CANCEL_OUTCOME).count() == 0
         assert_no_forbidden_fallbacks(state)
     finally:
@@ -692,8 +692,8 @@ def test_stale_or_revoked_confirm_fails_closed_without_fallback(reception_page) 
         assert state["removed"] is False
         assert_appointment_still_present(page)
         assert page.locator(CANCEL_OUTCOME).count() == 0
-        assert page.locator(REASON_SELECT).input_value() == ""
-        assert page.locator(NOTE_INPUT).input_value() == ""
+        assert page.locator(REASON_SELECT).input_value() == CANCEL_REASON
+        assert page.locator(NOTE_INPUT).input_value() == CANCEL_NOTE
         assert_no_forbidden_fallbacks(state)
     finally:
         page.unroute("**/api/v1/**", handler)
@@ -722,7 +722,8 @@ def test_malformed_or_widened_public_receipt_fails_closed(reception_page, malfor
         assert LEAK_TOKEN not in page.locator("#bernie-meta-grid").text_content()
         feedback = page.locator(CANCEL_FEEDBACK).text_content().lower()
         assert "committed" not in feedback
-        assert page.locator(REASON_SELECT).input_value() == ""
+        assert page.locator(REASON_SELECT).input_value() == CANCEL_REASON
+        assert page.locator(NOTE_INPUT).input_value() == CANCEL_NOTE
         assert_no_forbidden_fallbacks(state)
     finally:
         page.unroute("**/api/v1/**", handler)
@@ -757,9 +758,9 @@ def test_busy_confirmation_locks_palette_reselection_and_interruption(reception_
         assert state["proposal_count"] == 1
         assert state["confirm_count"] == 0
 
+        initial_list = state["list_read_count"]
         page.keyboard.press("Escape")
         page.wait_for_selector(DIALOG, state="detached", timeout=WAIT_TIMEOUT)
-        initial_list = state["list_read_count"]
         page.wait_for_function(
             "() => { const c = document.querySelector(\"[data-testid='meta-grid-action-choice-cancel']\"); "
             "return Boolean(c) && !c.disabled; }",
@@ -767,8 +768,8 @@ def test_busy_confirmation_locks_palette_reselection_and_interruption(reception_
         assert state["list_read_count"] > initial_list
         assert state["confirm_count"] == 0
         assert state["removed"] is False
-        assert page.locator(REASON_SELECT).input_value() == ""
-        assert page.locator(NOTE_INPUT).input_value() == ""
+        assert page.locator(REASON_SELECT).input_value() == CANCEL_REASON
+        assert page.locator(NOTE_INPUT).input_value() == CANCEL_NOTE
         assert_no_forbidden_fallbacks(state)
     finally:
         page.unroute("**/api/v1/**", handler)

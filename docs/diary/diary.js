@@ -165,6 +165,17 @@ const STATUS_SPECIFIC_REASON_CODE_OPTIONS = {
   ]
 };
 
+const DELETE_CONFIRM_REASON_CODE_OPTIONS = Object.freeze(
+  STATUS_SPECIFIC_REASON_CODE_OPTIONS.Cancelled.map(code => Object.freeze({
+    value: code,
+    label: STATUS_REASON_CODE_LABELS[code]
+  }))
+);
+
+function appointmentCancellationReasonOptions() {
+  return DELETE_CONFIRM_REASON_CODE_OPTIONS.map(option => ({ ...option }));
+}
+
 function statusReasonCodeLabel(code) {
   return STATUS_REASON_CODE_LABELS[code] || String(code || "");
 }
@@ -3203,6 +3214,7 @@ const ALLOWED_CONFIRM_ENDPOINT_PATHS = new Set([
   "/appointments/proposals/create/confirm-bernie",
   "/appointments/proposals/update/confirm",
   "/appointments/proposals/status-confirm",
+  "/appointments/proposals/delete/confirm",
   "/appointments/proposals/delete-confirm"
 ]);
 
@@ -7664,6 +7676,147 @@ function setMetaGridLaunchAvailability(available) {
   if (button) button.classList.toggle("hidden", !available);
 }
 
+async function metaGridCancelAppointment(input, returnFocus = null, onStateChange = null) {
+  const appointmentId = String(input?.appointment_id || "").trim();
+  const statusReasonCode = String(input?.status_reason_code || "").trim();
+  const cancellationReasonText = String(input?.cancellation_reason || "").trim();
+  const cancellationReason = cancellationReasonText || null;
+  const allowedReasons = DELETE_CONFIRM_REASON_CODE_OPTIONS.map(option => option.value);
+  const notify = (phase, busy) => {
+    if (typeof onStateChange === "function") onStateChange(Object.freeze({ phase, busy }));
+  };
+
+  if (!appointmentId || appointmentId.length > 200) {
+    throw new Error("The selected appointment is not available for cancellation review.");
+  }
+  if (!allowedReasons.includes(statusReasonCode)) {
+    throw new Error("Choose an administrative reason before cancellation review.");
+  }
+  if (cancellationReasonText.length > 500) {
+    throw new Error("Keep the optional cancellation note to 500 characters or fewer.");
+  }
+  const appointments = isSmokeMode() ? getMockAppointments() : activeAppointments;
+  const appointment = appointments.find(item => String(item?.id || "") === appointmentId);
+  if (!appointment || appointment.status === "Cancelled") {
+    throw new Error("The selected appointment is no longer available in the current Diary.");
+  }
+
+  try {
+    notify("checking", true);
+    const proposalResponse = await apiFetch(
+      `/appointments/proposals/delete/${encodeURIComponent(appointmentId)}`,
+      {
+        method: "POST",
+        headers: idempotencyHeadersFor(generateClientIdempotencyKey()),
+        body: JSON.stringify({
+          intent: "delete_appointment",
+          cancellation_reason: cancellationReason,
+          status_reason_code: statusReasonCode
+        })
+      }
+    );
+    if (!proposalResponse.ok) {
+      throw new Error(await apiErrorMessage(proposalResponse, "Cancellation proposal check"));
+    }
+    const proposal = await proposalResponse.json();
+    const proposalWarningsValid = Array.isArray(proposal?.warnings)
+      && proposal.warnings.every(validDeleteConfirmIssue);
+    const proposalBlocksValid = Array.isArray(proposal?.blocks)
+      && proposal.blocks.every(validDeleteConfirmIssue);
+    const commandMatches = Boolean(
+      proposal?.command
+      && String(proposal.command.appointment_id || "") === appointmentId
+      && proposal.command.status_reason_code === statusReasonCode
+      && (proposal.command.cancellation_reason || null) === cancellationReason
+    );
+    const blockedProposal = Boolean(
+      proposal?.safe === false
+      && proposal?.requires_confirmation === true
+      && proposal?.autonomy_tier === "blocked"
+      && proposalBlocksValid
+      && proposal.blocks.length > 0
+    );
+    const admissibleProposal = Boolean(
+      proposal?.intent === "delete_appointment"
+      && proposal?.safe === true
+      && proposal?.requires_confirmation === true
+      && proposal?.autonomy_tier === "proposal"
+      && proposalWarningsValid
+      && proposalBlocksValid
+      && proposal.blocks.length === 0
+      && commandMatches
+      && normalizeApiPath(proposal.confirm_endpoint) === "/appointments/proposals/delete/confirm"
+      && proposal.confirm_payload
+      && typeof proposal.confirm_payload === "object"
+      && !Array.isArray(proposal.confirm_payload)
+    );
+    if (
+      proposal?.intent !== "delete_appointment"
+      || !proposalWarningsValid
+      || !proposalBlocksValid
+      || !commandMatches
+      || (!blockedProposal && !admissibleProposal)
+    ) {
+      throw new Error("The appointment cancellation proposal did not match the required secure contract.");
+    }
+
+    notify("awaiting_confirmation", true);
+    const confirmed = await showStatusProposalDialog(proposal, {
+      returnFocus,
+      title: "Confirm Appointment Cancellation",
+      defaultSummary: "Review the cancellation of this whole appointment.",
+      displayTransition: {
+        from: `${formatAuditStatus(appointment.status) || "Current appointment"} · ${appointment.start_time_local || "Current time"}`,
+        to: `Cancelled · ${statusReasonCodeLabel(statusReasonCode)}`
+      },
+      currentTruthRecheck: true
+    });
+    if (blockedProposal) {
+      notify("blocked", false);
+      return Object.freeze({ committed: false, outcome: "blocked", receipt: null });
+    }
+    if (!confirmed) {
+      notify("cancelled", false);
+      return Object.freeze({ committed: false, outcome: "cancelled", receipt: null });
+    }
+
+    const confirmPayload = JSON.parse(JSON.stringify(proposal.confirm_payload));
+    confirmPayload.confirmed = true;
+    confirmPayload.confirmed_warnings = Array.from(new Set([
+      ...(confirmPayload.confirmed_warnings || []),
+      ...proposal.warnings.map(issue => issue.code)
+    ]));
+    if (normalizeApiPath(proposal.confirm_endpoint) !== "/appointments/proposals/delete/confirm") {
+      throw new Error("The appointment cancellation confirmation endpoint is not canonical.");
+    }
+    notify("saving", true);
+    const confirmResponse = await apiFetch("/appointments/proposals/delete/confirm", {
+      method: "POST",
+      headers: idempotencyHeadersFor(deleteConfirmIdempotencyKey(proposal, confirmPayload)),
+      body: JSON.stringify(confirmPayload)
+    });
+    if (!confirmResponse.ok) {
+      throw new Error(await apiErrorMessage(confirmResponse, "Cancellation confirmation"));
+    }
+    const publicEnvelope = validateDeleteConfirmPublicEnvelope(
+      await confirmResponse.json(),
+      {
+        appointment_id: appointmentId,
+        status_reason_code: statusReasonCode,
+        cancellation_reason: cancellationReason
+      }
+    );
+    if (!publicEnvelope) {
+      throw new Error("The cancellation response was not the required minimal public receipt.");
+    }
+    notify(publicEnvelope.outcome, false);
+    return publicEnvelope;
+  } catch (error) {
+    notify("failed", false);
+    throw error;
+  }
+}
+
 window.EMR4DiaryMetaGridBridge = Object.freeze({
   getSnapshot() {
     return {
@@ -7683,11 +7836,13 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   searchPatients: metaGridSearchPatients,
   readAvailability: metaGridReadAvailability,
   statusOptions: appointmentStatusOptions,
+  cancellationReasonOptions: appointmentCancellationReasonOptions,
   setAppointmentStatus: metaGridSetAppointmentStatus,
   rescheduleAppointmentTime: metaGridRescheduleAppointmentTime,
   resizeAppointmentDuration: metaGridResizeAppointmentDuration,
   reassignAppointmentPractitioner: metaGridReassignAppointmentPractitioner,
   updateAppointmentDetails: metaGridUpdateAppointmentDetails,
+  cancelAppointment: metaGridCancelAppointment,
   composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
@@ -9446,6 +9601,115 @@ function deleteConfirmIdempotencyKey(proposal, confirmPayload) {
     confirmPayload?.delete_proposal_freshness_id || proposal?.delete_proposal_freshness_id,
     proposal
   );
+}
+
+const DELETE_CONFIRM_PUBLIC_ENVELOPE_KEYS = Object.freeze([
+  "audit_evidence",
+  "autonomy_tier",
+  "blocks",
+  "intent",
+  "receipt",
+  "requires_confirmation",
+  "safe",
+  "schema_version",
+  "summary",
+  "warnings"
+]);
+const DELETE_CONFIRM_PUBLIC_RECEIPT_KEYS = Object.freeze([
+  "appointment_id",
+  "cancellation_reason",
+  "schema_version",
+  "status",
+  "status_reason_code",
+  "waiting_area_id",
+  "warning_codes"
+]);
+const DELETE_CONFIRM_ISSUE_REQUIRED_KEYS = Object.freeze(["code", "message", "severity"]);
+const DELETE_CONFIRM_ISSUE_ALLOWED_KEYS = Object.freeze(["code", "field", "message", "severity"]);
+const DELETE_CONFIRM_AUDIT_LABELS = Object.freeze([
+  "delete_product_adapter_v1",
+  "delete_signed_confirmation_evidence_verified",
+  "delete_current_authority_rechecked"
+]);
+
+function objectHasExactKeys(value, allowedKeys, requiredKeys = allowedKeys) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const keys = Object.keys(value).sort();
+  const allowed = [...allowedKeys].sort();
+  if (keys.some(key => !allowed.includes(key))) return false;
+  return [...requiredKeys].every(key => keys.includes(key));
+}
+
+function validDeleteConfirmIssue(issue) {
+  return Boolean(
+    objectHasExactKeys(issue, DELETE_CONFIRM_ISSUE_ALLOWED_KEYS, DELETE_CONFIRM_ISSUE_REQUIRED_KEYS)
+    && typeof issue.code === "string"
+    && issue.code.length > 0
+    && typeof issue.message === "string"
+    && issue.message.length > 0
+    && ["warning", "blocked"].includes(issue.severity)
+    && (issue.field === undefined || typeof issue.field === "string")
+  );
+}
+
+function validateDeleteConfirmPublicEnvelope(value, expected) {
+  if (!objectHasExactKeys(value, DELETE_CONFIRM_PUBLIC_ENVELOPE_KEYS)) return null;
+  if (
+    value.schema_version !== "raisa.delete_confirm_public_envelope.v1"
+    || value.intent !== "confirm_delete_appointment"
+    || typeof value.safe !== "boolean"
+    || typeof value.requires_confirmation !== "boolean"
+    || !["confirmed_write", "blocked"].includes(value.autonomy_tier)
+    || typeof value.summary !== "string"
+    || !Array.isArray(value.warnings)
+    || !value.warnings.every(validDeleteConfirmIssue)
+    || !Array.isArray(value.blocks)
+    || !value.blocks.every(validDeleteConfirmIssue)
+    || !Array.isArray(value.audit_evidence)
+  ) return null;
+
+  if (value.safe === false || value.autonomy_tier === "blocked") {
+    if (
+      value.safe !== false
+      || value.requires_confirmation !== true
+      || value.autonomy_tier !== "blocked"
+      || value.receipt !== null
+      || value.blocks.length === 0
+      || value.audit_evidence.length !== 0
+    ) return null;
+    return Object.freeze({ committed: false, outcome: "blocked", receipt: null });
+  }
+
+  if (
+    value.safe !== true
+    || value.requires_confirmation !== false
+    || value.autonomy_tier !== "confirmed_write"
+    || value.blocks.length !== 0
+    || JSON.stringify(value.audit_evidence) !== JSON.stringify(DELETE_CONFIRM_AUDIT_LABELS)
+    || !objectHasExactKeys(value.receipt, DELETE_CONFIRM_PUBLIC_RECEIPT_KEYS)
+  ) return null;
+
+  const receipt = value.receipt;
+  const expectedReason = expected.cancellation_reason || null;
+  if (
+    String(receipt.appointment_id || "") !== expected.appointment_id
+    || receipt.schema_version !== "appointment.delete_confirmation_receipt.v1"
+    || receipt.status !== "Cancelled"
+    || receipt.status_reason_code !== expected.status_reason_code
+    || receipt.cancellation_reason !== expectedReason
+    || receipt.waiting_area_id !== null
+    || !Array.isArray(receipt.warning_codes)
+    || !(
+      receipt.warning_codes.length === 0
+      || (receipt.warning_codes.length === 1 && receipt.warning_codes[0] === "waiting_area_cleared")
+    )
+  ) return null;
+
+  return Object.freeze({
+    committed: true,
+    outcome: "committed",
+    receipt: Object.freeze({ ...receipt, warning_codes: Object.freeze([...receipt.warning_codes]) })
+  });
 }
 
 function idempotencyHeadersFor(key) {

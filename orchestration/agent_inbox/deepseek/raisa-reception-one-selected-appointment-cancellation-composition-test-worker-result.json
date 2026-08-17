@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "## Terminal Receipt\n\n**Status:** \u2705 Complete \u2014 one worker artifact created, checked, staged, and committed. No acceptance claimed.\n\n**Exact changed file:** `review/test_reception_one_cancellation_action.py` (new, 1 file changed)\n\n**Final line count:** 819 source lines (under the 900 limit)\n\n**Syntax check:** `python -m py_compile review/test_reception_one_cancellation_action.py` \u2192 **pass**\n\n**Git checks:** `git diff --check` \u2192 pass \u00b7 `git diff --cached --check` \u2192 pass \u00b7 tracked worktree clean at commit\n\n**Expected-red behavioral status:** \u2705 Red by design. Product implementation (`meta-grid-action-choice-cancel`, `meta-grid-cancellation-action`, reason/note/submit/feedback, `EMR4DiaryMetaGridBridge.cancelAppointment`, and the delete proposal/confirm wiring) is intentionally absent at this source. The 8 test functions specify the frozen contract and will remain red until Sol integrates the parallel source.\n\n**Commit hash:** `095637aa866a5420a018c7980cb400ab0bc38c26` (branch `codex/reception-one-cancellation-test-worker-36edc1e5`)\n\n**Boundary attestation:**\n- Read only the exact allowlist (AGENTS.md, plan, threat delta, harness, two sibling tests, diary/meta-grid/js/css/html, appointments schema, appointment-commands.yaml) plus the new test.\n- Created/edited only `review/test_reception_one_cancellation_action.py`; staged only that exact path; made exactly one commit.\n- Ran only the listed checks; **no pytest** in the worker worktree (Sol owns execution).\n- No package install, environment mutation, product/source/test edit, push, deploy, or protected-ref access.\n- Evidence labels `route_intercepted_browser` and `authored_synthetic_client_fixture` present; no live backend/database claim.\n\n**Artifact shape:** Exactly eight test functions:\n1. `test_cancellation_palette_and_draft_are_route_inert`\n2. `test_safe_cancellation_requires_dialog_and_fresh_removal`\n3. `test_staff_escape_cancels_without_confirm_and_retains_truth`\n4. `test_blocked_proposal_is_close_only_and_never_confirms`\n5. `test_stale_or_revoked_confirm_fails_closed_without_fallback`\n6. `test_malformed_or_widened_public_receipt_fails_closed` (6 parametrized cases)\n7. `test_busy_confirmation_locks_palette_reselection_and_interruption`\n8. `test_cancellation_accessibility_and_responsive_contract` (3 viewports)\n\nRoute fixture counts all non-read requests and fails closed on raw `DELETE`, status/update proposals, and the non-canonical `delete-confirm` alias.\n\n**Genuine blockers:** None.",
+  "usage": {
+    "input_tokens": 229121,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 8995968,
+    "output_tokens": 160780,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 9.679459,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

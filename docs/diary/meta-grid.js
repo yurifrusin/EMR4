@@ -118,6 +118,14 @@
       busy: false,
       reconciliationRequired: false
     },
+    cancellationAction: {
+      appointmentId: null,
+      statusReasonCode: null,
+      cancellationReason: "",
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    },
     proposalResult: null,
     patientContexts: new Map(),
     private: false,
@@ -561,6 +569,14 @@
       state.practitionerAction = {
         appointmentId: null,
         requestedPractitionerId: null,
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
+      state.cancellationAction = {
+        appointmentId: null,
+        statusReasonCode: null,
+        cancellationReason: "",
         phase: "idle",
         busy: false,
         reconciliationRequired: false
@@ -2200,6 +2216,14 @@
       busy: false,
       reconciliationRequired: false
     };
+    state.cancellationAction = {
+      appointmentId: null,
+      statusReasonCode: null,
+      cancellationReason: "",
+      phase: "idle",
+      busy: false,
+      reconciliationRequired: false
+    };
     state.proposalResult = null;
     if (state.current && ["selection_only", "proposal_not_committed"].includes(state.current.state)) {
       state.current = null;
@@ -2294,12 +2318,14 @@
       || state.rescheduleAction.busy
       || state.durationAction.busy
       || state.practitionerAction.busy
+      || state.cancellationAction.busy
     ) {
       state.interrupted = true;
       if (state.statusAction.busy) state.statusAction.reconciliationRequired = true;
       if (state.rescheduleAction.busy) state.rescheduleAction.reconciliationRequired = true;
       if (state.durationAction.busy) state.durationAction.reconciliationRequired = true;
       if (state.practitionerAction.busy) state.practitionerAction.reconciliationRequired = true;
+      if (state.cancellationAction.busy) state.cancellationAction.reconciliationRequired = true;
       return;
     }
     if (state.current.state === "reconciliation_required") return;
@@ -2422,6 +2448,14 @@
             state.practitionerAction = {
               appointmentId: String(item.id),
               requestedPractitionerId: null,
+              phase: "idle",
+              busy: false,
+              reconciliationRequired: false
+            };
+            state.cancellationAction = {
+              appointmentId: String(item.id),
+              statusReasonCode: null,
+              cancellationReason: "",
               phase: "idle",
               busy: false,
               reconciliationRequired: false
@@ -2740,6 +2774,17 @@
     committed: "Practitioner committed and checked against a fresh Diary read."
   });
 
+  const CANCELLATION_ACTION_MESSAGES = Object.freeze({
+    idle: "The reason and optional note are provisional. The existing Diary cancellation review owns any change.",
+    checking: "Checking the dedicated cancellation proposal against current Diary truth.",
+    awaiting_confirmation: "Explicit confirmation is required in the Diary review dialog.",
+    saving: "Checking current authority and booking truth again before cancellation.",
+    cancelled: "Cancellation review closed. No cancellation was confirmed.",
+    blocked: "Cancellation blocked. Fresh Diary truth has been restored.",
+    failed: "Cancellation outcome was not accepted. Fresh Diary truth has been restored.",
+    committed: "Appointment cancelled and removed after a fresh Diary read."
+  });
+
   function selectedStatusActionItem(projection = state.current) {
     const selectedId = String(state.selectedAppointment?.id || "");
     if (!selectedId || !["patient_timeline", "focused_schedule_lane"].includes(projection?.family)) {
@@ -2759,6 +2804,7 @@
       || state.rescheduleAction.busy
       || state.durationAction.busy
       || state.practitionerAction.busy
+      || state.cancellationAction.busy
     );
   }
 
@@ -2768,6 +2814,7 @@
       || state.rescheduleAction.reconciliationRequired
       || state.durationAction.reconciliationRequired
       || state.practitionerAction.reconciliationRequired
+      || state.cancellationAction.reconciliationRequired
     );
   }
 
@@ -2822,6 +2869,15 @@
         busy: false,
         reconciliationRequired: false
       };
+    } else if (action === "cancel") {
+      state.cancellationAction = {
+        appointmentId,
+        statusReasonCode: null,
+        cancellationReason: "",
+        phase: "idle",
+        busy: false,
+        reconciliationRequired: false
+      };
     }
   }
 
@@ -2844,6 +2900,7 @@
     if (anySelectedActionBusy()) return false;
     resetSelectedActionDraft("status");
     resetSelectedUpdateDraft();
+    resetSelectedActionDraft("cancel");
     if (collapse) state.activeSelectedAction = null;
     return true;
   }
@@ -2853,6 +2910,7 @@
     if (action === "time") return "meta-grid-reschedule-time";
     if (action === "duration") return "meta-grid-duration-select";
     if (action === "practitioner") return "meta-grid-practitioner-select";
+    if (action === "cancel") return "meta-grid-cancellation-reason-code";
     return null;
   }
 
@@ -2866,7 +2924,7 @@
   }
 
   function activateSelectedAction(action) {
-    if (!["status", "time", "duration", "practitioner"].includes(action)) return;
+    if (!["status", "time", "duration", "practitioner", "cancel"].includes(action)) return;
     if (selectedActionPaletteUnavailable()) return;
     const previous = state.activeSelectedAction;
     const retainedUpdateDraft = Boolean(
@@ -2910,6 +2968,7 @@
       || state.rescheduleAction.busy
       || state.durationAction.busy
       || state.practitionerAction.busy
+      || state.cancellationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
     );
@@ -2999,6 +3058,59 @@
   function practitionerActionMessage() {
     return PRACTITIONER_ACTION_MESSAGES[state.practitionerAction.phase]
       || PRACTITIONER_ACTION_MESSAGES.failed;
+  }
+
+  function cancellationActionMessage() {
+    return CANCELLATION_ACTION_MESSAGES[state.cancellationAction.phase]
+      || CANCELLATION_ACTION_MESSAGES.failed;
+  }
+
+  function cancellationReasonOptions() {
+    const options = typeof bridge.cancellationReasonOptions === "function"
+      ? bridge.cancellationReasonOptions()
+      : [];
+    return Array.isArray(options)
+      ? options.filter(option => (
+          option
+          && typeof option.value === "string"
+          && option.value
+          && typeof option.label === "string"
+          && option.label
+        ))
+      : [];
+  }
+
+  function updateCancellationActionControls() {
+    const reasonSelect = document.getElementById("meta-grid-cancellation-reason-code");
+    const reasonInput = document.getElementById("meta-grid-cancellation-reason");
+    const submit = document.getElementById("meta-grid-cancellation-submit");
+    const feedback = document.getElementById("meta-grid-cancellation-feedback");
+    const selected = selectedStatusActionItem();
+    const allowedReasons = cancellationReasonOptions().map(option => option.value);
+    const selectedReason = String(reasonSelect?.value || state.cancellationAction.statusReasonCode || "");
+    const note = String(reasonInput?.value ?? state.cancellationAction.cancellationReason ?? "");
+    const unavailable = Boolean(
+      anySelectedActionBusy()
+      || state.interrupted
+      || state.current?.freshness?.stale
+      || state.current?.state === "reconciliation_required"
+    );
+    if (reasonSelect) {
+      reasonSelect.disabled = unavailable;
+      reasonSelect.toggleAttribute("aria-busy", state.cancellationAction.busy);
+    }
+    if (reasonInput) {
+      reasonInput.disabled = unavailable;
+      reasonInput.toggleAttribute("aria-busy", state.cancellationAction.busy);
+    }
+    if (submit) {
+      submit.disabled = unavailable
+        || !selected
+        || !allowedReasons.includes(selectedReason)
+        || note.trim().length > 500;
+    }
+    if (feedback) feedback.textContent = cancellationActionMessage();
+    updateSelectedActionPaletteControls();
   }
 
   function activePractitionerTargets(selected) {
@@ -3201,6 +3313,7 @@
     updateRescheduleActionControls();
     updateDurationActionControls();
     updatePractitionerActionControls();
+    updateCancellationActionControls();
   }
 
   function applyFreshAppointmentToCurrentProjection(appointment) {
@@ -3248,6 +3361,7 @@
       || state.rescheduleAction.busy
       || state.durationAction.busy
       || state.practitionerAction.busy
+      || state.cancellationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
       || requestedStatus === selected.status
@@ -3265,6 +3379,7 @@
     updateRescheduleActionControls();
     updateDurationActionControls();
     updatePractitionerActionControls();
+    updateCancellationActionControls();
 
     try {
       const result = await bridge.setAppointmentStatus(
@@ -3277,6 +3392,7 @@
           updateRescheduleActionControls();
           updateDurationActionControls();
           updatePractitionerActionControls();
+          updateCancellationActionControls();
         }
       );
       const interrupted = state.statusAction.reconciliationRequired || state.interrupted;
@@ -3335,6 +3451,7 @@
       || state.statusAction.busy
       || state.durationAction.busy
       || state.practitionerAction.busy
+      || state.cancellationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
       || requestedStart === selected.starts_at
@@ -3352,6 +3469,7 @@
     updateStatusActionControls();
     updateDurationActionControls();
     updatePractitionerActionControls();
+    updateCancellationActionControls();
 
     try {
       const result = await bridge.rescheduleAppointmentTime(
@@ -3364,6 +3482,7 @@
           updateStatusActionControls();
           updateDurationActionControls();
           updatePractitionerActionControls();
+          updateCancellationActionControls();
         }
       );
       const interrupted = state.rescheduleAction.reconciliationRequired || state.interrupted;
@@ -3425,6 +3544,7 @@
       || state.statusAction.busy
       || state.rescheduleAction.busy
       || state.practitionerAction.busy
+      || state.cancellationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
       || !Number.isInteger(requestedDuration)
@@ -3443,6 +3563,7 @@
     updateStatusActionControls();
     updateRescheduleActionControls();
     updatePractitionerActionControls();
+    updateCancellationActionControls();
 
     try {
       const result = await bridge.resizeAppointmentDuration(
@@ -3455,6 +3576,7 @@
           updateStatusActionControls();
           updateRescheduleActionControls();
           updatePractitionerActionControls();
+          updateCancellationActionControls();
         }
       );
       const interrupted = state.durationAction.reconciliationRequired || state.interrupted;
@@ -3521,6 +3643,7 @@
       || state.statusAction.busy
       || state.rescheduleAction.busy
       || state.durationAction.busy
+      || state.cancellationAction.busy
       || state.interrupted
       || state.current?.freshness?.stale
       || !targetExists
@@ -3539,6 +3662,7 @@
     updateStatusActionControls();
     updateRescheduleActionControls();
     updateDurationActionControls();
+    updateCancellationActionControls();
 
     try {
       const result = await bridge.reassignAppointmentPractitioner(
@@ -3551,6 +3675,7 @@
           updateStatusActionControls();
           updateRescheduleActionControls();
           updateDurationActionControls();
+          updateCancellationActionControls();
         }
       );
       const interrupted = state.practitionerAction.reconciliationRequired || state.interrupted;
@@ -3708,6 +3833,125 @@
     setTimeout(() => {
       const focusId = selectedActionControlId(state.activeSelectedAction);
       const control = focusId ? document.getElementById(focusId) : null;
+      if (control) control.focus({ preventScroll: true });
+      else focusCanvasWithoutWindowScroll();
+    }, 0);
+  }
+
+  async function executeSelectedCancellationAction(reasonSelect, reasonInput, submit) {
+    const selected = selectedStatusActionItem();
+    const appointmentId = String(selected?.id || "");
+    const statusReasonCode = String(reasonSelect?.value || "");
+    const cancellationReason = String(reasonInput?.value || "").trim();
+    const allowedReasons = cancellationReasonOptions().map(option => option.value);
+    if (
+      !selected
+      || anySelectedActionBusy()
+      || state.interrupted
+      || state.current?.freshness?.stale
+      || !allowedReasons.includes(statusReasonCode)
+      || cancellationReason.length > 500
+      || typeof bridge.cancelAppointment !== "function"
+    ) return;
+
+    state.cancellationAction = {
+      appointmentId,
+      statusReasonCode,
+      cancellationReason,
+      phase: "checking",
+      busy: true,
+      reconciliationRequired: false
+    };
+    updateAllSelectedActionControls();
+
+    try {
+      const result = await bridge.cancelAppointment(
+        {
+          appointment_id: appointmentId,
+          status_reason_code: statusReasonCode,
+          cancellation_reason: cancellationReason
+        },
+        submit,
+        update => {
+          state.cancellationAction.phase = update.phase;
+          state.cancellationAction.busy = update.busy !== false;
+          updateAllSelectedActionControls();
+        }
+      );
+      let reconciled = false;
+      try {
+        await refreshCurrent({
+          pushCurrent: false,
+          clearTrail: true,
+          preserveSelectedAppointmentId: appointmentId,
+          focusCanvas: false,
+          reason: result.committed
+            ? "Fresh scoped read after committed appointment cancellation"
+            : "Fresh scoped read after terminal appointment cancellation review"
+        });
+        reconciled = true;
+      } catch (_) {
+        reconciled = false;
+      }
+      state.cancellationAction = {
+        appointmentId,
+        statusReasonCode,
+        cancellationReason,
+        phase: result.committed ? "committed" : result.outcome,
+        busy: false,
+        reconciliationRequired: !reconciled
+      };
+      state.interrupted = false;
+      if (!reconciled) {
+        requireFreshActionReconciliation(
+          "The cancellation outcome could not be reconciled from a fresh scoped Diary read"
+        );
+      }
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = state.selectedAppointment
+          ? cancellationActionMessage()
+          : (result.committed
+              ? CANCELLATION_ACTION_MESSAGES.committed
+              : "Cancellation was not committed by this action. The appointment is no longer in this current projection.");
+      }
+    } catch (_) {
+      let reconciled = false;
+      try {
+        await refreshCurrent({
+          pushCurrent: false,
+          clearTrail: true,
+          preserveSelectedAppointmentId: appointmentId,
+          focusCanvas: false,
+          reason: "Fresh scoped read after an uncertain appointment cancellation outcome"
+        });
+        reconciled = true;
+      } catch (_readError) {
+        reconciled = false;
+      }
+      state.cancellationAction = {
+        appointmentId,
+        statusReasonCode,
+        cancellationReason,
+        phase: "failed",
+        busy: false,
+        reconciliationRequired: !reconciled
+      };
+      state.interrupted = false;
+      if (!reconciled) {
+        requireFreshActionReconciliation(
+          "The cancellation outcome could not be reconciled from a fresh scoped Diary read"
+        );
+      }
+      render();
+      if (elements.announcer) {
+        elements.announcer.textContent = reconciled
+          ? CANCELLATION_ACTION_MESSAGES.failed
+          : "Cancellation outcome uncertain. Refresh current Diary truth before another action.";
+      }
+    }
+    setTimeout(() => {
+      const control = document.getElementById("meta-grid-cancellation-reason-code");
       if (control) control.focus({ preventScroll: true });
       else focusCanvasWithoutWindowScroll();
     }, 0);
@@ -4027,6 +4271,111 @@
     updatePractitionerActionControls();
   }
 
+  function renderCancellationAction(projection, target = elements.actions) {
+    const selected = selectedStatusActionItem(projection);
+    if (!selected) {
+      if (state.cancellationAction.appointmentId) {
+        const text = state.cancellationAction.phase === "committed"
+          ? CANCELLATION_ACTION_MESSAGES.committed
+          : "Fresh Diary truth no longer includes this appointment. This action has not made a broader effect claim.";
+        const outcome = createElement("p", "meta-grid-cancellation-outcome", text);
+        outcome.dataset.testid = "meta-grid-cancellation-outcome";
+        outcome.setAttribute("role", "status");
+        outcome.setAttribute("aria-live", "polite");
+        outcome.setAttribute("aria-atomic", "true");
+        target.appendChild(outcome);
+      }
+      return;
+    }
+
+    const appointmentId = String(selected.id);
+    const draftMatches = state.cancellationAction.appointmentId === appointmentId;
+    const panel = createElement("div", "meta-grid-cancellation-action");
+    panel.dataset.testid = "meta-grid-cancellation-action";
+    panel.setAttribute("aria-labelledby", "meta-grid-selected-action-editor-heading");
+
+    const copy = createElement("div", "meta-grid-cancellation-action-copy");
+    copy.append(
+      createElement("strong", "", "Cancel this whole appointment"),
+      createElement(
+        "span",
+        "",
+        "Choose an administrative reason. Nothing changes until the dedicated proposal is reviewed and explicitly confirmed."
+      )
+    );
+
+    const fields = createElement("div", "meta-grid-cancellation-fields");
+    const reasonLabel = createElement("label", "meta-grid-cancellation-label", "Administrative reason");
+    reasonLabel.htmlFor = "meta-grid-cancellation-reason-code";
+    const reasonSelect = document.createElement("select");
+    reasonSelect.id = "meta-grid-cancellation-reason-code";
+    reasonSelect.className = "meta-grid-cancellation-reason-code";
+    reasonSelect.dataset.testid = "meta-grid-cancellation-reason-code";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Choose a reason";
+    reasonSelect.appendChild(placeholder);
+    cancellationReasonOptions().forEach(option => {
+      const item = document.createElement("option");
+      item.value = option.value;
+      item.textContent = option.label;
+      reasonSelect.appendChild(item);
+    });
+    reasonSelect.value = draftMatches ? (state.cancellationAction.statusReasonCode || "") : "";
+    reasonSelect.addEventListener("change", () => {
+      state.cancellationAction.appointmentId = appointmentId;
+      state.cancellationAction.statusReasonCode = reasonSelect.value || null;
+      state.cancellationAction.phase = "idle";
+      updateCancellationActionControls();
+    });
+
+    const noteLabel = createElement("label", "meta-grid-cancellation-label", "Optional note");
+    noteLabel.htmlFor = "meta-grid-cancellation-reason";
+    const noteInput = document.createElement("input");
+    noteInput.id = "meta-grid-cancellation-reason";
+    noteInput.className = "meta-grid-cancellation-reason";
+    noteInput.dataset.testid = "meta-grid-cancellation-reason";
+    noteInput.type = "text";
+    noteInput.maxLength = 500;
+    noteInput.autocomplete = "off";
+    noteInput.value = draftMatches ? (state.cancellationAction.cancellationReason || "") : "";
+    noteInput.addEventListener("input", () => {
+      state.cancellationAction.appointmentId = appointmentId;
+      state.cancellationAction.cancellationReason = noteInput.value;
+      state.cancellationAction.phase = "idle";
+      updateCancellationActionControls();
+    });
+    fields.append(reasonLabel, reasonSelect, noteLabel, noteInput);
+
+    const submit = createElement(
+      "button",
+      "meta-grid-cancellation-submit",
+      "Review cancellation"
+    );
+    submit.id = "meta-grid-cancellation-submit";
+    submit.dataset.testid = "meta-grid-cancellation-submit";
+    submit.type = "button";
+    submit.addEventListener("click", () => (
+      executeSelectedCancellationAction(reasonSelect, noteInput, submit)
+    ));
+
+    const feedback = createElement(
+      "p",
+      "meta-grid-cancellation-feedback",
+      cancellationActionMessage()
+    );
+    feedback.id = "meta-grid-cancellation-feedback";
+    feedback.dataset.testid = "meta-grid-cancellation-feedback";
+    feedback.setAttribute("role", "status");
+    feedback.setAttribute("aria-live", "polite");
+    feedback.setAttribute("aria-atomic", "true");
+    reasonSelect.setAttribute("aria-describedby", feedback.id);
+    noteInput.setAttribute("aria-describedby", feedback.id);
+    panel.append(copy, fields, submit, feedback);
+    target.appendChild(panel);
+    updateCancellationActionControls();
+  }
+
   function selectedActionHasRemovalOutcome(action) {
     if (action === "status") {
       return state.statusAction.phase === "committed" && Boolean(state.statusAction.appointmentId);
@@ -4040,6 +4389,12 @@
     if (action === "practitioner") {
       return state.practitionerAction.phase === "committed" && Boolean(state.practitionerAction.appointmentId);
     }
+    if (action === "cancel") {
+      return Boolean(
+        state.cancellationAction.appointmentId
+        && ["committed", "cancelled", "blocked", "failed"].includes(state.cancellationAction.phase)
+      );
+    }
     return false;
   }
 
@@ -4048,6 +4403,7 @@
     if (action === "time") return "Time";
     if (action === "duration") return "Duration";
     if (action === "practitioner") return "Practitioner";
+    if (action === "cancel") return "Cancellation";
     return "Appointment action";
   }
 
@@ -4083,9 +4439,14 @@
         ["status", "Change status"],
         ["time", "Change time"],
         ["duration", "Change duration"],
-        ["practitioner", "Change practitioner"]
+        ["practitioner", "Change practitioner"],
+        ["cancel", "Cancel appointment"]
       ].forEach(([action, label]) => {
-        const button = createElement("button", "meta-grid-action-choice", label);
+        const button = createElement(
+          "button",
+          action === "cancel" ? "meta-grid-action-choice meta-grid-action-choice-danger" : "meta-grid-action-choice",
+          label
+        );
         button.type = "button";
         button.id = `meta-grid-action-choice-${action}`;
         button.dataset.testid = `meta-grid-action-choice-${action}`;
@@ -4122,6 +4483,7 @@
     else if (activeAction === "time") renderRescheduleAction(projection, editor);
     else if (activeAction === "duration") renderDurationAction(projection, editor);
     else if (activeAction === "practitioner") renderPractitionerAction(projection, editor);
+    else if (activeAction === "cancel") renderCancellationAction(projection, editor);
     updateSelectedActionPaletteControls();
   }
 

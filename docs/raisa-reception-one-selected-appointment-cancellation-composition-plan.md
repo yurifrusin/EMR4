@@ -130,7 +130,7 @@ Sol may edit only:
   `9c09ea90e7846d9fdee1a912fc9b7d72e1fdd7f7990549d7dd8768b22c73ce5e`;
 - `docs/diary/meta-grid.css` at baseline SHA-256
   `54f1e5aa1dbfa913376e06fe3af682315e0bef61d13b91fef7f8b3da28c436f0`;
-- the two matching cache references in `docs/diary/diary.html` at baseline
+- the three matching cache references in `docs/diary/diary.html` at baseline
   SHA-256
   `42314b5febe364a09eaff46b4ac1d791caea2bf386adbb24976b03a3120edb06`;
 - tranche-local deterministic tests, typed evidence, review, continuity,

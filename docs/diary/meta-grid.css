@@ -2942,7 +2942,8 @@ body.meta-grid-open #diary-status {
 .meta-grid-status-action,
 .meta-grid-reschedule-action,
 .meta-grid-duration-action,
-.meta-grid-practitioner-action {
+.meta-grid-practitioner-action,
+.meta-grid-cancellation-action {
   align-items: end;
   background: #f3f7f4;
   border: 1px solid #c4d6d0;
@@ -2957,7 +2958,8 @@ body.meta-grid-open #diary-status {
 .meta-grid-status-action-copy,
 .meta-grid-reschedule-action-copy,
 .meta-grid-duration-action-copy,
-.meta-grid-practitioner-action-copy {
+.meta-grid-practitioner-action-copy,
+.meta-grid-cancellation-action-copy {
   align-self: center;
   display: grid;
   gap: 2px;
@@ -2967,7 +2969,8 @@ body.meta-grid-open #diary-status {
 .meta-grid-status-action-copy strong,
 .meta-grid-reschedule-action-copy strong,
 .meta-grid-duration-action-copy strong,
-.meta-grid-practitioner-action-copy strong {
+.meta-grid-practitioner-action-copy strong,
+.meta-grid-cancellation-action-copy strong {
   color: var(--bureau-navy-deep);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 13px;
@@ -2985,7 +2988,10 @@ body.meta-grid-open #diary-status {
 .meta-grid-practitioner-action-copy span,
 .meta-grid-update-draft-summary,
 .meta-grid-practitioner-feedback,
-.meta-grid-practitioner-outcome {
+.meta-grid-practitioner-outcome,
+.meta-grid-cancellation-action-copy span,
+.meta-grid-cancellation-feedback,
+.meta-grid-cancellation-outcome {
   color: #526770;
   font-size: 10px;
   line-height: 1.4;
@@ -3001,7 +3007,8 @@ body.meta-grid-open #diary-status {
 .meta-grid-status-label,
 .meta-grid-reschedule-label,
 .meta-grid-duration-label,
-.meta-grid-practitioner-label {
+.meta-grid-practitioner-label,
+.meta-grid-cancellation-label {
   color: #3f575f;
   font-size: 9px;
   font-weight: 700;
@@ -3016,14 +3023,19 @@ body.meta-grid-open #diary-status {
 .meta-grid-duration-select,
 .meta-grid-duration-submit,
 .meta-grid-practitioner-select,
-.meta-grid-practitioner-submit {
+.meta-grid-practitioner-submit,
+.meta-grid-cancellation-reason-code,
+.meta-grid-cancellation-reason,
+.meta-grid-cancellation-submit {
   min-height: 36px;
 }
 
 .meta-grid-status-select,
 .meta-grid-reschedule-time,
 .meta-grid-duration-select,
-.meta-grid-practitioner-select {
+.meta-grid-practitioner-select,
+.meta-grid-cancellation-reason-code,
+.meta-grid-cancellation-reason {
   background: #fff;
   border: 1px solid #aebfbd;
   border-radius: 5px;
@@ -3044,17 +3056,48 @@ body.meta-grid-open #diary-status {
   white-space: nowrap;
 }
 
+.meta-grid-cancellation-action {
+  background: #fff8f5;
+  border-color: #d7b6a8;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(220px, 1.2fr) auto;
+}
+
+.meta-grid-cancellation-fields {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(180px, 1.2fr);
+  min-width: 0;
+}
+
+.meta-grid-cancellation-reason-code,
+.meta-grid-cancellation-reason {
+  min-width: 0;
+  min-height: 44px;
+  width: 100%;
+}
+
+.meta-grid-cancellation-submit {
+  align-self: end;
+  background: #8a3529;
+  border-color: #6f281f;
+  color: #fff;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
 .meta-grid-status-feedback,
 .meta-grid-reschedule-feedback,
 .meta-grid-duration-feedback,
-.meta-grid-practitioner-feedback {
+.meta-grid-practitioner-feedback,
+.meta-grid-cancellation-feedback {
   grid-column: 2 / -1;
 }
 
 .meta-grid-status-outcome,
 .meta-grid-reschedule-outcome,
 .meta-grid-duration-outcome,
-.meta-grid-practitioner-outcome {
+.meta-grid-practitioner-outcome,
+.meta-grid-cancellation-outcome {
   background: #f3f7f4;
   border: 1px solid #c4d6d0;
   border-radius: 8px;
@@ -3095,7 +3138,7 @@ body.meta-grid-open #diary-status {
 .meta-grid-selected-action-palette {
   display: grid;
   gap: 7px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   min-width: 0;
 }
 
@@ -3113,6 +3156,17 @@ body.meta-grid-open #diary-status {
   background: #e6f1ed;
   border-color: var(--bureau-eucalyptus);
   box-shadow: inset 0 0 0 1px var(--bureau-eucalyptus);
+}
+
+.meta-grid-action-choice-danger {
+  border-color: #c28e7d;
+  color: #7b2c22;
+}
+
+.meta-grid-action-choice-danger[aria-expanded="true"] {
+  background: #fff1eb;
+  border-color: #9f4939;
+  box-shadow: inset 0 0 0 1px #9f4939;
 }
 
 .meta-grid-action-choice:focus-visible {
@@ -3137,7 +3191,8 @@ body.meta-grid-open #diary-status {
 .meta-grid-selected-action-editor > .meta-grid-status-action,
 .meta-grid-selected-action-editor > .meta-grid-reschedule-action,
 .meta-grid-selected-action-editor > .meta-grid-duration-action,
-.meta-grid-selected-action-editor > .meta-grid-practitioner-action {
+.meta-grid-selected-action-editor > .meta-grid-practitioner-action,
+.meta-grid-selected-action-editor > .meta-grid-cancellation-action {
   min-width: 0;
   width: 100%;
 }
@@ -3149,7 +3204,10 @@ body.meta-grid-open #diary-status {
 .meta-grid-duration-select:focus-visible,
 .meta-grid-duration-submit:focus-visible,
 .meta-grid-practitioner-select:focus-visible,
-.meta-grid-practitioner-submit:focus-visible {
+.meta-grid-practitioner-submit:focus-visible,
+.meta-grid-cancellation-reason-code:focus-visible,
+.meta-grid-cancellation-reason:focus-visible,
+.meta-grid-cancellation-submit:focus-visible {
   outline: 2px solid var(--bureau-terracotta);
   outline-offset: 2px;
 }
@@ -3162,7 +3220,8 @@ body.meta-grid-open #diary-status {
   .meta-grid-status-action,
   .meta-grid-reschedule-action,
   .meta-grid-duration-action,
-  .meta-grid-practitioner-action {
+  .meta-grid-practitioner-action,
+  .meta-grid-cancellation-action {
     align-items: stretch;
     grid-template-columns: minmax(0, 1fr);
   }
@@ -3178,7 +3237,11 @@ body.meta-grid-open #diary-status {
   .meta-grid-duration-feedback,
   .meta-grid-practitioner-action-copy,
   .meta-grid-practitioner-submit,
-  .meta-grid-practitioner-feedback {
+  .meta-grid-practitioner-feedback,
+  .meta-grid-cancellation-action-copy,
+  .meta-grid-cancellation-fields,
+  .meta-grid-cancellation-submit,
+  .meta-grid-cancellation-feedback {
     grid-column: 1;
     grid-row: auto;
   }
@@ -3186,9 +3249,14 @@ body.meta-grid-open #diary-status {
   .meta-grid-status-submit,
   .meta-grid-reschedule-submit,
   .meta-grid-duration-submit,
-  .meta-grid-practitioner-submit {
+  .meta-grid-practitioner-submit,
+  .meta-grid-cancellation-submit {
     justify-content: center;
     width: 100%;
+  }
+
+  .meta-grid-cancellation-fields {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

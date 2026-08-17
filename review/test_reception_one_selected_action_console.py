@@ -469,7 +469,7 @@ def test_palette_starts_collapsed_native_and_route_inert(reception_page) -> None
     try:
         open_selected_appointment(page, base_url, state)
         choices = page.locator(f"{PALETTE} button[data-testid^='meta-grid-action-choice-']")
-        assert choices.count() == 4
+        assert choices.count() == 5
         for field in FIELDS:
             choice = page.locator(CHOICE[field])
             assert choice.evaluate("el => el.tagName") == "BUTTON"
@@ -500,7 +500,7 @@ def test_palette_starts_collapsed_native_and_route_inert(reception_page) -> None
         page.unroute("**/api/v1/**", handler)
 
 def test_open_collapse_switch_keeps_zero_or_one_editor_and_zero_routes(reception_page) -> None:
-    """Open, collapse and switch through all four actions: one editor max."""
+    """Open, collapse and switch through the four update actions: one editor max."""
     page, base_url = reception_page
     state, handler = install_routes(page, mode="safe")
     try:
