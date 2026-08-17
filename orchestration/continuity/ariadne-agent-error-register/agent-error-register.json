@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 346,
+  "register_revision": 347,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -15914,6 +15914,47 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-continuity-first-failure.json",
           "docs/ariadne-agent-error-correction-register-revision-346.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0398",
+      "attempt_id": "post-cancellation-orientation-preplanning-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-post-cancellation-programme-orientation",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every preplanning parallelism assessment must use only the configured expected_leverage vocabulary; timing or qualifications belong in rationale text rather than a new enum value.",
+      "observed_error": "The first post-cancellation orientation preplanning state invented expected_leverage conditional_independence for the reserved Gemini lane. Deterministic preflight returned revision_required before plan freeze, worker dispatch, external model use or product source change.",
+      "detection_method": "The repository-local orchestrator preflight emitted parallelism_lane_leverage_invalid:gemini_verifier. The exact sanitized failure record preserves the invalid value and configured vocabulary; the corrected state changed only that enum to neutral and the fresh receipt passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-first-failure.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-347.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the exact sanitized failure, replace only the invalid Gemini leverage with configured neutral, retain the conditional-review qualification in rationale text and generate a fresh passing receipt before plan freeze.",
+        "prevention_control": "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-first-failure.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-347.md"
         ]
       },
       "status": "corrected"

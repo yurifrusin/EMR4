@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 346
+    assert register["register_revision"] == 347
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 398)
+        f"AER-{index:04d}" for index in range(1, 399)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 270
+    assert len(agent_incidents) == 271
     assert len(transport_incidents) == 14
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2580,7 +2580,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 397
+    assert report["incident_count"] == 398
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3617,17 +3617,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 346
-    assert report["incident_count"] == 397
+    assert report["register_revision"] == 347
+    assert report["incident_count"] == 398
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 270,
+        "agent_behavior": 271,
         "harness": 48,
         "repository": 65,
         "transport": 14,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 63,
+        "command_scope_violation": 64,
         "evidence_misreport": 55,
         "harness_failure": 48,
         "output_contract_violation": 109,
@@ -3638,7 +3638,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 247,
+        "canonical_unchanged": 248,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3761,8 +3761,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
             ),
-            "incident_count": 4,
-            "incident_ids": ["AER-0314", "AER-0321", "AER-0330", "AER-0385"],
+            "incident_count": 5,
+            "incident_ids": [
+                "AER-0314",
+                "AER-0321",
+                "AER-0330",
+                "AER-0385",
+                "AER-0398",
+            ],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
             "roles": ["orchestrator"],
@@ -6280,6 +6286,22 @@ def test_aer_0397_records_recurrent_updater_exit_masking() -> None:
     )
     assert "shell_sequence_final_exit_code 0" in incident["detection_method"]
     assert "standalone captured process" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0398_records_recurrent_parallelism_leverage_vocabulary_mismatch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0398"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["stage"] == "dispatch"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
+    )
+    assert "conditional_independence" in incident["observed_error"]
+    assert "configured neutral" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
 
 

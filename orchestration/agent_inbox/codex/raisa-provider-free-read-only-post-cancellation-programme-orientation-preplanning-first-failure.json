@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_preflight_failure.v1",
+  "attempt_id": "post-cancellation-orientation-preplanning-001",
+  "observed_on": "2026-08-18",
+  "source_head": "5981b6cacdd3d488462803748c0d86f1e9bc2457",
+  "continuation_event": "pre_sprint_planning",
+  "status": "revision_required",
+  "reason_codes": [
+    "parallelism_lane_leverage_invalid:gemini_verifier"
+  ],
+  "invalid_field": "parallelism_assessment.lanes[gemini_verifier].expected_leverage",
+  "observed_value": "conditional_independence",
+  "configured_vocabulary": [
+    "positive",
+    "required_independence",
+    "neutral",
+    "negative"
+  ],
+  "corrected_value": "neutral",
+  "external_worker_dispatched": false,
+  "product_source_changed_before_detection": false,
+  "protected_refs_changed": false,
+  "correction_evidence": "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-preplanning-receipt.json"
+}
