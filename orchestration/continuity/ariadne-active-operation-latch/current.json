@@ -7,7 +7,7 @@
   "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
   "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
   "checkpoint": {
-    "completed_stage": "The three repository-only repairs pass deterministic admission at exact candidate f6e5e96d. Two same-head Gemini 3.7 Flash/high Antigravity transports, including the single permitted retry, each exited 1 with empty stderr and no receipt or decision. AER-0380 contains both; the clean candidate remains independently unaccepted.",
+    "completed_stage": "Four repository-only repairs pass deterministic admission at checkpoint 2219efc8a7f9df61ec084127683848887bde872c. AER-0380 contains two same-head Gemini transports with no receipt or decision; AER-0381 now forbids worker dispatch from blocked latch receipts. The extended candidate remains independently unaccepted.",
     "next_executable_stage": "Obtain Yuri's direction on a new review route: recommended later fresh Antigravity reattempt after transport diagnosis, or an explicitly authorised same-head independent fallback; do not waive the veto silently.",
     "retry_counters": {
       "planning": 0,

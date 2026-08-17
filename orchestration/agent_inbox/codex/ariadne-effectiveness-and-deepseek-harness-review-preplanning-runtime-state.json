@@ -17,7 +17,7 @@
       "orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-http-integration-rehearsal/provider-free-http-postgresql-failure-evidence.json"
     ],
     "protected_evidence_boundaries": "The review may inspect committed workflow source, settings, tests, public DeepSeek Harness primary sources and non-sensitive aggregate incident evidence only. It may not open protected evidence, PHI, product/patient/clinical data, credentials, provider product calls, deployment, release, Pages or protected refs. docs/branding and unrelated untracked files remain preserved.",
-    "git_refs_and_worktree": "Task candidate HEAD is exact f6e5e96dc86a1bb3319692a6ac656fbb756b49df from source parent 38660a4a7136094df67b28d5a6ec07ca40c14416. Fresh review branch codex/review-ariadne-effectiveness-f6e5e96d is clean at the exact candidate. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+    "git_refs_and_worktree": "Task checkpoint HEAD is exact 2219efc8a7f9df61ec084127683848887bde872c from source parent 38660a4a7136094df67b28d5a6ec07ca40c14416. Prior review branch codex/review-ariadne-effectiveness-f6e5e96d remains clean at exact f6e5e96d as transport evidence but is superseded for any future veto by the blocked-state guard. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
   },
   "active_operation": {
     "schema_version": "ariadne.active_operation_latch.v1",
@@ -28,7 +28,7 @@
     "source_head": "38660a4a7136094df67b28d5a6ec07ca40c14416",
     "authority_source": "AGENTS.md Current Baton, the accepted delete-confirm HTTP/PostgreSQL closeout, Yuri's explicit request for the effectiveness review and DeepSeek Harness assessment, and Yuri's agreement to implement worthwhile adaptations authorize this repository-only workflow tranche.",
     "checkpoint": {
-      "completed_stage": "The three repository-only repairs pass deterministic admission at exact candidate f6e5e96d. Two same-head Gemini 3.7 Flash/high Antigravity transports, including the single permitted retry, each exited 1 with empty stderr and no receipt or decision. AER-0380 contains both; the clean candidate remains independently unaccepted.",
+      "completed_stage": "Four repository-only repairs pass deterministic admission at checkpoint 2219efc8a7f9df61ec084127683848887bde872c. AER-0380 contains two same-head Gemini transports with no receipt or decision; AER-0381 now forbids worker dispatch from blocked latch receipts. The extended candidate remains independently unaccepted.",
       "next_executable_stage": "Obtain Yuri's direction on a new review route: recommended later fresh Antigravity reattempt after transport diagnosis, or an explicitly authorised same-head independent fallback; do not waive the veto silently.",
       "retry_counters": {"planning": 0, "implementation": 0, "review": 2, "verification": 2},
       "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"

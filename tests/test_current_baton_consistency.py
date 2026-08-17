@@ -153,10 +153,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert "ariadne effectiveness review" in next_work.lower()
-    assert "deepseek harness primary sources" in next_work.lower()
-    assert "authentication/subscription model" in next_work.lower()
-    assert "highest-leverage workflow repairs" in next_work.lower()
-    assert "chatgpt subscription" in next_work.lower()
+    assert "deepseek harness migration is rejected" in next_work.lower()
+    assert "codex remains conductor" in next_work.lower()
+    assert "independent acceptance is blocked" in next_work.lower()
+    assert "blocked-latch non-dispatch" in next_work.lower()
     assert "provider" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
@@ -196,7 +196,8 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
         "ariadne effectiveness review",
-        "deepseek harness primary sources",
+        "deepseek harness migration is rejected",
+        "independent acceptance is blocked",
         "product/patient/clinical data",
         "provider product call",
         "deployment",
