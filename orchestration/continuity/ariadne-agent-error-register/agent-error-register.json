@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 343,
+  "register_revision": 344,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-17",
@@ -15637,6 +15637,46 @@
           "tests/test_ariadne_active_operation_latch.py",
           "tests/test_ariadne_active_operation_latch_continuity.py",
           "docs/ariadne-agent-error-correction-register-revision-343.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0391",
+      "attempt_id": "deepseek-ordinary-diary-cancellation-tests-001",
+      "observed_on": "2026-08-17",
+      "tranche": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-test-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "dispatch",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded tests-only worker dispatch must either return one preserved terminal result or fail with a sanitized non-result while leaving its exact isolated worktree unchanged before any source can be admitted.",
+      "observed_error": "The DeepSeek V4 Flash/high tests-only launch exited 1 with a transport failure before producing a worker result or its single authorised file; the exact worker worktree remained clean at the frozen planning source.",
+      "detection_method": "The launcher returned a nonzero terminal status, the expected result and owned file were absent, and Sol verified the isolated branch, exact HEAD and empty worktree status before taking the unchanged frozen test package as a bounded fallback.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json",
+        "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-deepseek-test-worker-packet.md",
+        "docs/ariadne-agent-error-correction-register-revision-344.md",
+        "review/test_ordinary_diary_cancellation_convergence.py"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "transport.deepseek_claude_exit_1_before_worker_result",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the sanitized transport non-result, verify the exact isolated worktree and HEAD remained clean, prohibit late source adoption and let Sol implement the unchanged frozen browser-test package without a same-lane retry.",
+        "prevention_control": "After a recurrent DeepSeek exit-1 non-result, exact result-path, owned-path, HEAD and worktree readback are mandatory; a bounded Sol fallback may use only the already frozen package and no later worker source is admitted without distinct authority.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/deepseek/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-first-transport-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-344.md",
+          "review/test_ordinary_diary_cancellation_convergence.py"
         ]
       },
       "status": "corrected"

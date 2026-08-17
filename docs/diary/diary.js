@@ -4908,7 +4908,7 @@ async function loadAuthenticatedDiary(silent = false, options = {}) {
   if (!token) {
     setStatus("Waiting for auth token…");
     showAuthBanner();
-    return;
+    return false;
   }
 
   return loadDiaryData(silent, options, false);
@@ -4923,10 +4923,19 @@ async function loadSmokeDiary(silent = false, options = {}) {
 }
 
 async function loadDiary(silent = false, options = {}) {
-  if (isSmokeMode()) {
-    return loadSmokeDiary(silent, options);
+  try {
+    if (isSmokeMode()) {
+      return await loadSmokeDiary(silent, options);
+    }
+    return await loadAuthenticatedDiary(silent, options);
+  } catch (e) {
+    if (!silent) {
+      showLoading(false);
+      showError("Failed to load diary: " + (e.message || String(e)));
+    }
+    setStatus("Refresh failed — " + (e.message || String(e)));
+    return false;
   }
-  return loadAuthenticatedDiary(silent, options);
 }
 
 async function loadDiaryData(silent = false, options = {}, smokeMode = false) {
@@ -5218,15 +5227,17 @@ async function loadDiaryData(silent = false, options = {}, smokeMode = false) {
         evidence_mode: smokeMode ? "authored_synthetic_client_fixture" : "live_local_read_model"
       }
     }));
+    return true;
   } catch (e) {
     if (isAuthBannerVisible()) {
-      return;
+      return false;
     }
     if (!silent) {
       showLoading(false);
       showError("Failed to load diary: " + (e.message || String(e)));
     }
     setStatus("Refresh failed — " + (e.message || String(e)));
+    return false;
   }
 }
 
@@ -7719,46 +7730,15 @@ async function metaGridCancelAppointment(input, returnFocus = null, onStateChang
       throw new Error(await apiErrorMessage(proposalResponse, "Cancellation proposal check"));
     }
     const proposal = await proposalResponse.json();
-    const proposalWarningsValid = Array.isArray(proposal?.warnings)
-      && proposal.warnings.every(validDeleteConfirmIssue);
-    const proposalBlocksValid = Array.isArray(proposal?.blocks)
-      && proposal.blocks.every(validDeleteConfirmIssue);
-    const commandMatches = Boolean(
-      proposal?.command
-      && String(proposal.command.appointment_id || "") === appointmentId
-      && proposal.command.status_reason_code === statusReasonCode
-      && (proposal.command.cancellation_reason || null) === cancellationReason
-    );
-    const blockedProposal = Boolean(
-      proposal?.safe === false
-      && proposal?.requires_confirmation === true
-      && proposal?.autonomy_tier === "blocked"
-      && proposalBlocksValid
-      && proposal.blocks.length > 0
-    );
-    const admissibleProposal = Boolean(
-      proposal?.intent === "delete_appointment"
-      && proposal?.safe === true
-      && proposal?.requires_confirmation === true
-      && proposal?.autonomy_tier === "proposal"
-      && proposalWarningsValid
-      && proposalBlocksValid
-      && proposal.blocks.length === 0
-      && commandMatches
-      && normalizeApiPath(proposal.confirm_endpoint) === "/appointments/proposals/delete/confirm"
-      && proposal.confirm_payload
-      && typeof proposal.confirm_payload === "object"
-      && !Array.isArray(proposal.confirm_payload)
-    );
-    if (
-      proposal?.intent !== "delete_appointment"
-      || !proposalWarningsValid
-      || !proposalBlocksValid
-      || !commandMatches
-      || (!blockedProposal && !admissibleProposal)
-    ) {
+    const proposalAdmission = validateDeleteProposalForConfirmation(proposal, {
+      appointment_id: appointmentId,
+      status_reason_code: statusReasonCode,
+      cancellation_reason: cancellationReason
+    });
+    if (!proposalAdmission) {
       throw new Error("The appointment cancellation proposal did not match the required secure contract.");
     }
+    const blockedProposal = proposalAdmission.blocked;
 
     notify("awaiting_confirmation", true);
     const confirmed = await showStatusProposalDialog(proposal, {
@@ -9278,7 +9258,10 @@ function openBookingModalForEdit(appt) {
   const cancelBtn = document.getElementById("btn-booking-delete");
   cancelBtn.classList.remove("hidden");
   cancelBtn.dataset.confirming = "";
+  cancelBtn.dataset.refreshRequired = "";
   cancelBtn.textContent = "Cancel Appointment";
+  cancelBtn.disabled = false;
+  cancelBtn.removeAttribute("aria-disabled");
 
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
@@ -9650,6 +9633,56 @@ function validDeleteConfirmIssue(issue) {
     && ["warning", "blocked"].includes(issue.severity)
     && (issue.field === undefined || typeof issue.field === "string")
   );
+}
+
+function validateDeleteProposalForConfirmation(proposal, expected) {
+  const appointmentId = String(expected?.appointment_id || "").trim();
+  const statusReasonCode = String(expected?.status_reason_code || "").trim();
+  const cancellationReasonText = String(expected?.cancellation_reason || "").trim();
+  const cancellationReason = cancellationReasonText || null;
+  const allowedReasons = DELETE_CONFIRM_REASON_CODE_OPTIONS.map(option => option.value);
+  if (
+    !appointmentId
+    || !allowedReasons.includes(statusReasonCode)
+    || cancellationReasonText.length > 500
+  ) return null;
+
+  const warningsValid = Array.isArray(proposal?.warnings)
+    && proposal.warnings.every(validDeleteConfirmIssue);
+  const blocksValid = Array.isArray(proposal?.blocks)
+    && proposal.blocks.every(validDeleteConfirmIssue);
+  const commandMatches = Boolean(
+    proposal?.command
+    && String(proposal.command.appointment_id || "") === appointmentId
+    && proposal.command.status_reason_code === statusReasonCode
+    && (proposal.command.cancellation_reason || null) === cancellationReason
+  );
+  const blocked = Boolean(
+    proposal?.intent === "delete_appointment"
+    && proposal?.safe === false
+    && proposal?.requires_confirmation === true
+    && proposal?.autonomy_tier === "blocked"
+    && warningsValid
+    && blocksValid
+    && proposal.blocks.length > 0
+    && commandMatches
+  );
+  const admissible = Boolean(
+    proposal?.intent === "delete_appointment"
+    && proposal?.safe === true
+    && proposal?.requires_confirmation === true
+    && proposal?.autonomy_tier === "proposal"
+    && warningsValid
+    && blocksValid
+    && proposal.blocks.length === 0
+    && commandMatches
+    && normalizeApiPath(proposal.confirm_endpoint) === "/appointments/proposals/delete/confirm"
+    && proposal.confirm_payload
+    && typeof proposal.confirm_payload === "object"
+    && !Array.isArray(proposal.confirm_payload)
+  );
+  if (!blocked && !admissible) return null;
+  return Object.freeze({ blocked, admissible });
 }
 
 function validateDeleteConfirmPublicEnvelope(value, expected) {
@@ -10399,11 +10432,50 @@ async function saveBooking() {
   }
 }
 
+function resetOrdinaryCancellationControls(deleteBtn, cancelReasonInput) {
+  deleteBtn.dataset.confirming = "";
+  deleteBtn.dataset.refreshRequired = "";
+  deleteBtn.textContent = "Cancel Appointment";
+  deleteBtn.disabled = false;
+  deleteBtn.removeAttribute("aria-disabled");
+  const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+  if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+  resetBookingReasonCode();
+  if (cancelReasonInput) cancelReasonInput.value = "";
+}
+
+function setOrdinaryCancellationRefreshRequired(deleteBtn, errorEl) {
+  deleteBtn.dataset.confirming = "";
+  deleteBtn.dataset.refreshRequired = "true";
+  deleteBtn.textContent = "Refresh Required";
+  deleteBtn.disabled = true;
+  deleteBtn.setAttribute("aria-disabled", "true");
+  errorEl.textContent = "The current Diary could not be refreshed. Cancellation is disabled until a full refresh succeeds; no outcome has been assumed.";
+  errorEl.classList.remove("hidden");
+  setStatus("Refresh required — cancellation outcome not assumed.");
+}
+
+async function reconcileOrdinaryCancellation(appointmentId) {
+  const refreshed = await loadDiary(true);
+  if (refreshed !== true) {
+    return Object.freeze({ reconciled: false, appointment: null, cancelled: null });
+  }
+  const appointment = activeAppointments.find(
+    item => String(item?.id || "") === String(appointmentId || "")
+  ) || null;
+  return Object.freeze({
+    reconciled: true,
+    appointment,
+    cancelled: appointment === null || appointment.status === "Cancelled"
+  });
+}
+
 async function deleteBooking() {
   if (!editingAppointmentId) return;
 
   const deleteBtn = document.getElementById("btn-booking-delete");
   const errorEl = document.getElementById("booking-error");
+  if (deleteBtn.dataset.refreshRequired === "true") return;
   if (deleteBtn.dataset.confirming !== "true") {
     deleteBtn.dataset.confirming = "true";
     deleteBtn.textContent = "Confirm Cancel";
@@ -10420,123 +10492,128 @@ async function deleteBooking() {
     return;
   }
 
+  const appointmentId = String(editingAppointmentId || "");
+  const cancelReasonInput = document.getElementById("booking-cancel-reason");
+  const cancellationReasonText = cancelReasonInput ? cancelReasonInput.value.trim() : "";
+  const cancellationReason = cancellationReasonText || null;
+  const statusReasonCode = bookingStatusReasonCodeValue();
+  const allowedReasons = DELETE_CONFIRM_REASON_CODE_OPTIONS.map(option => option.value);
+  if (!allowedReasons.includes(statusReasonCode)) {
+    errorEl.textContent = "Please select an administrative reason code for this cancellation.";
+    errorEl.classList.remove("hidden");
+    setBookingReasonCodeVisible(true);
+    deleteBtn.disabled = false;
+    return;
+  }
+  if (cancellationReasonText.length > 500) {
+    errorEl.textContent = "Keep the optional cancellation note to 500 characters or fewer.";
+    errorEl.classList.remove("hidden");
+    deleteBtn.disabled = false;
+    return;
+  }
+
+  const appt = (isSmokeMode() ? getMockAppointments() : todayAppointments)
+    .find(item => String(item?.id || "") === appointmentId);
+  if (!appt) {
+    errorEl.textContent = "The selected appointment is no longer available in the current Diary.";
+    errorEl.classList.remove("hidden");
+    deleteBtn.disabled = false;
+    return;
+  }
+  if (isSmokeMode()) {
+    errorEl.textContent = "Cancellation is not simulated in built-in smoke mode. Use the canonical route-intercepted cancellation review.";
+    errorEl.classList.remove("hidden");
+    resetOrdinaryCancellationControls(deleteBtn, cancelReasonInput);
+    return;
+  }
+
   errorEl.classList.add("hidden");
   deleteBtn.disabled = true;
-
+  let terminalOutcome = null;
   try {
-    const smokeMode = isSmokeMode();
-    const appt = smokeMode
-      ? mockAppointmentsCache.find(x => x.id === editingAppointmentId)
-      : todayAppointments.find(x => x.id === editingAppointmentId);
-
-    if (!appt) {
-      throw new Error("Target appointment not found.");
+    const proposalResponse = await apiFetch(
+      `/appointments/proposals/delete/${encodeURIComponent(appointmentId)}`,
+      {
+        method: "POST",
+        headers: idempotencyHeadersFor(generateClientIdempotencyKey()),
+        body: JSON.stringify({
+          intent: "delete_appointment",
+          cancellation_reason: cancellationReason,
+          status_reason_code: statusReasonCode
+        })
+      }
+    );
+    if (!proposalResponse.ok) {
+      throw new Error(await apiErrorMessage(proposalResponse, "Cancellation proposal check"));
+    }
+    const proposal = await proposalResponse.json();
+    const proposalAdmission = validateDeleteProposalForConfirmation(proposal, {
+      appointment_id: appointmentId,
+      status_reason_code: statusReasonCode,
+      cancellation_reason: cancellationReason
+    });
+    if (!proposalAdmission) {
+      throw new Error("The appointment cancellation proposal did not match the required secure contract.");
     }
 
-    const cancelReasonInput = document.getElementById("booking-cancel-reason");
-    const cancellation_reason = cancelReasonInput ? cancelReasonInput.value.trim() : "";
-    const statusReasonCode = bookingStatusReasonCodeValue();
-    if (!statusReasonCode) {
-      errorEl.textContent = "Please select an administrative reason code for this cancellation.";
-      errorEl.classList.remove("hidden");
-      setBookingReasonCodeVisible(true);
-      deleteBtn.disabled = false;
-      return;
-    }
-
-    let proposal;
-    if (smokeMode) {
-      proposal = simulateStatusProposal(appt, {
-        status: "Cancelled",
-        waiting_area_id: null,
-        status_reason_code: statusReasonCode
+    const confirmed = await showStatusProposalDialog(proposal);
+    if (proposalAdmission.blocked) {
+      const issue = proposal.blocks[0];
+      terminalOutcome = {
+        kind: "blocked",
+        message: issue?.message || proposal.summary || "The cancellation proposal was blocked."
+      };
+    } else if (!confirmed) {
+      terminalOutcome = {
+        kind: "cancelled",
+        message: "Cancellation was not confirmed."
+      };
+    } else {
+      const publicOutcome = await applySignedDeleteProposal(proposal, {
+        appointment_id: appointmentId,
+        status_reason_code: statusReasonCode,
+        cancellation_reason: cancellationReason
       });
-    } else {
-      const proposalHeaders = idempotencyHeadersFor(generateClientIdempotencyKey());
-      try {
-        const propRes = await apiFetch(`/appointments/proposals/delete/${editingAppointmentId}`, {
-          method: "POST",
-          headers: proposalHeaders,
-          body: JSON.stringify({
-            intent: "delete_appointment",
-            cancellation_reason,
-            status_reason_code: statusReasonCode
-          })
-        });
-        if (propRes.status === 404) {
-          throw new Error("404");
-        }
-        if (!propRes.ok) {
-          throw new Error(await apiErrorMessage(propRes, "Delete proposal check"));
-        }
-        proposal = await propRes.json();
-      } catch (err) {
-        if (err.message === "404" || (err.message && err.message.includes("404"))) {
-          // Fallback to status proposal (omitting cancellation_reason)
-          const propRes = await apiFetch(`/appointments/proposals/status/${editingAppointmentId}`, {
-            method: "POST",
-            headers: proposalHeaders,
-            body: JSON.stringify({
-              status: "Cancelled",
-              waiting_area_id: null,
-              status_reason_code: statusReasonCode
-            })
-          });
-          if (!propRes.ok) {
-            throw new Error(await apiErrorMessage(propRes, "Status proposal check"));
-          }
-          proposal = await propRes.json();
-        } else {
-          throw err;
-        }
-      }
+      terminalOutcome = {
+        kind: publicOutcome.outcome,
+        message: publicOutcome.committed
+          ? "The cancellation receipt was accepted."
+          : "The cancellation confirmation was blocked."
+      };
     }
-
-    if (
-      !proposal.safe
-      || (proposal.warnings && proposal.warnings.length > 0)
-      || proposal.autonomy_tier === "proposal"
-    ) {
-      const confirmed = await showStatusProposalDialog(proposal);
-      if (!confirmed) {
-        deleteBtn.dataset.confirming = "";
-        deleteBtn.textContent = "Cancel Appointment";
-        errorEl.classList.add("hidden");
-        const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
-        if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
-        resetBookingReasonCode();
-        if (cancelReasonInput) cancelReasonInput.value = "";
-        deleteBtn.disabled = false;
-        return;
-      }
-    }
-
-    if (smokeMode) {
-      mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
-      setStatus("Booking cancelled (Mock).");
-    } else {
-      await applySignedDeleteProposal(proposal, cancellation_reason, statusReasonCode);
-      setStatus("Booking cancelled successfully.");
-    }
-    const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
-    if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
-    resetBookingReasonCode();
-    if (cancelReasonInput) cancelReasonInput.value = "";
-    closeBookingModal();
-    await loadDiary(true);
   } catch (err) {
     console.error(err);
-    errorEl.textContent = err.message || "An error occurred while cancelling the booking.";
-    errorEl.classList.remove("hidden");
-    deleteBtn.dataset.confirming = "";
-    deleteBtn.textContent = "Cancel Appointment";
-    const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
-    if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
-    resetBookingReasonCode();
-    if (cancelReasonInput) cancelReasonInput.value = "";
-  } finally {
-    deleteBtn.disabled = false;
+    terminalOutcome = {
+      kind: "failed",
+      message: err.message || "The appointment cancellation could not be completed."
+    };
   }
+
+  const reconciliation = await reconcileOrdinaryCancellation(appointmentId);
+  if (!reconciliation.reconciled) {
+    setOrdinaryCancellationRefreshRequired(deleteBtn, errorEl);
+    return;
+  }
+
+  resetOrdinaryCancellationControls(deleteBtn, cancelReasonInput);
+  if (reconciliation.cancelled) {
+    setStatus("Booking is cancelled in the current Diary.");
+    closeBookingModal();
+    return;
+  }
+
+  if (terminalOutcome?.kind === "cancelled") {
+    errorEl.classList.add("hidden");
+    setStatus("Cancellation was not confirmed. Current Diary refreshed.");
+    return;
+  }
+  if (terminalOutcome?.kind === "committed") {
+    errorEl.textContent = "A cancellation receipt was returned, but the current Diary still shows this appointment. Success has not been assumed; review current truth before trying again.";
+  } else {
+    errorEl.textContent = `${terminalOutcome?.message || "The cancellation did not complete."} Current Diary refreshed; the appointment remains.`;
+  }
+  errorEl.classList.remove("hidden");
+  setStatus("Current Diary refreshed — appointment remains.");
 }
 
 // ─── PATIENT FLOW WORKBENCH & WAITING ROOM LOGIC ───────────
@@ -10977,12 +11054,19 @@ async function applyBookingStatusAfterConfirmedBase(appt, newStatus, statusReaso
   }
 }
 
-async function applySignedDeleteProposal(proposal, cancellationReason, statusReasonCode = null) {
+async function applySignedDeleteProposal(proposal, expected) {
+  const proposalAdmission = validateDeleteProposalForConfirmation(proposal, expected);
+  if (!proposalAdmission?.admissible) {
+    throw new Error("The appointment cancellation could not be prepared securely. Refresh the Diary and try again.");
+  }
   const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
   const confirmEndpoint = proposal?.confirm_endpoint;
   const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
 
-  if (!confirmEndpoint || !confirmPayload) {
+  if (
+    normalizeApiPath(confirmEndpoint) !== "/appointments/proposals/delete/confirm"
+    || !confirmPayload
+  ) {
     throw new Error("The appointment cancellation could not be prepared securely. Refresh the Diary and try again.");
   }
   confirmPayload.confirmed = true;
@@ -10990,29 +11074,19 @@ async function applySignedDeleteProposal(proposal, cancellationReason, statusRea
     ...(confirmPayload.confirmed_warnings || []),
     ...confirmedWarnings
   ]));
-  const normalizedConfirmPath = allowlistedConfirmApiPath(confirmEndpoint);
-  const confirmHeaders = idempotencyHeadersFor(
-    normalizedConfirmPath.endsWith("/appointments/proposals/status-confirm")
-      ? statusConfirmIdempotencyKey(proposal, confirmPayload)
-      : deleteConfirmIdempotencyKey(proposal, confirmPayload)
-  );
-  const confirmRes = await apiFetch(normalizedConfirmPath, {
+  const confirmRes = await apiFetch("/appointments/proposals/delete/confirm", {
     method: "POST",
-    headers: confirmHeaders,
+    headers: idempotencyHeadersFor(deleteConfirmIdempotencyKey(proposal, confirmPayload)),
     body: JSON.stringify(confirmPayload)
   });
   if (!confirmRes.ok) {
     throw new Error(await apiErrorMessage(confirmRes, "Delete confirm"));
   }
-  const confirmResult = await confirmRes.json();
-  if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
-    const issue = (confirmResult?.blocks || [])[0];
-    throw new Error(issue?.message || confirmResult?.summary || "The appointment cancellation could not be confirmed.");
+  const publicEnvelope = validateDeleteConfirmPublicEnvelope(await confirmRes.json(), expected);
+  if (!publicEnvelope) {
+    throw new Error("The cancellation response was not the required minimal public receipt.");
   }
-  if (!confirmResult.appointment) {
-    throw new Error("Delete confirm response did not include an appointment.");
-  }
-  return confirmResult.appointment;
+  return publicEnvelope;
 }
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null, actionOptions = null) {

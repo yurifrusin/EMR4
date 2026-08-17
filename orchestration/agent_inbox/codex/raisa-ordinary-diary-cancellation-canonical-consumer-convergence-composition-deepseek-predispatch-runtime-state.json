@@ -1,0 +1,139 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_bounded_deepseek_v4_flash_high_tests_only_package_at_exact_plan_commit_while_sol_implements_the_frozen_client_source",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md directs the frozen provider-free ordinary Diary client-only canonical cancellation convergence at Continuity 312 / Compass 294; no user-attention condition is active.",
+    "current_authority_allocation": "GPT Sol owns destructive-command semantics, diary.js/cache implementation, integration, acceptance and Git. DeepSeek V4 Flash/high receives exactly one new focused test file in an isolated worktree. Gemini 3.7 Flash/high remains reserved for exact-candidate veto. Native subagents remain declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+      "docs/security/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-deepseek-test-worker-packet.md",
+      "docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-sol-acceptance.md",
+      "docs/raisa-reception-one-selected-appointment-cancellation-composition-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "protected_evidence_boundaries": "The worker may read only its literal allowlist and create only review/test_ordinary_diary_cancellation_convergence.py, run its explicit static checks, stage that file and commit only its branch. It has no product source, existing test, acceptance, integration, provider, data, database, deployment or protected-ref authority. Sol remains confined to diary.js and the exact diary.html cache reference. docs/branding and unrelated untracked paths remain preserved.",
+    "git_refs_and_worktree": "Primary task HEAD is exact plan commit 967ac705bad2013734beaed127cd5e811823d2c7 and origin task remains 40e20981f3a4a14856f5dc4d127957ca791b06ad. The clean worker path C:\\Users\\sarashera\\EMR4-worktrees\\ordinary-diary-cancel-tests-967ac705 on branch codex/worker-ordinary-diary-cancel-tests-967ac705 is exact at 967ac705bad2013734beaed127cd5e811823d2c7. Local/origin master and handoff/current remain protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+    "active_tranche": "Ordinary Diary canonical cancellation consumer convergence composition",
+    "objective": "Converge the ordinary Diary cancellation consumer on the accepted dedicated delete proposal and canonical delete-confirm contract, strict minimal public receipt and fresh authorised reconciliation after every terminal or uncertain outcome, without changing backend or API contracts.",
+    "status": "in_progress",
+    "source_head": "967ac705bad2013734beaed127cd5e811823d2c7",
+    "authority_source": "AGENTS.md Current Baton at Continuity 312 / Compass 294, the accepted ordinary Diary cancellation compatibility-consumer review and Yuri's standing uninterrupted-development authority direct this provider-free client-only convergence.",
+    "checkpoint": {
+      "completed_stage": "The frozen plan baseline is committed at 967ac705bad2013734beaed127cd5e811823d2c7 after 39 plan/API Spine checks; a clean tests-only DeepSeek worktree and branch are bound to that exact commit.",
+      "next_executable_stage": "dispatch_the_bounded_deepseek_test_package_and_implement_the_client_only_canonical_cancellation_source_in_parallel",
+      "retry_counters": {
+        "planning": 1,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_synthetic_client_only_composition",
+      "docs_diary_diary_js_and_exact_diary_html_cache_reference_if_needed_only",
+      "focused_source_and_route_intercepted_browser_tests_only",
+      "dedicated_delete_proposal_and_canonical_delete_confirm_endpoint_only",
+      "strict_minimal_public_receipt_without_appointment_read_model",
+      "fresh_authorised_diary_reconciliation_after_every_terminal_or_uncertain_outcome",
+      "reconciliation_failure_disables_cancellation_as_refresh_required",
+      "no_status_cancel_fallback_raw_compatibility_delete_or_optimistic_mutation",
+      "no_backend_openapi_schema_migration_database_or_graphql_change",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_provider_adc_credentials_iam_external_network_or_executable_model_tool",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "rationale": "The destructive contract is committed and the new self-contained browser test is isolated from Sol-owned product files, so parallel authorship saves a meaningful cycle.",
+        "work_packages": ["one new review/test_ordinary_diary_cancellation_convergence.py artifact against the ten frozen scenario families"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "The destructive command and unknown-commit reconciliation retain one fresh exact-candidate veto after deterministic admission.",
+        "work_packages": ["one fresh Gemini 3.7 Flash/high exact-candidate read-only veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": ["Sol diary.js/cache implementation overlaps the exact-HEAD DeepSeek tests-only artifact"],
+    "serial_constraints": [
+      "worker may not edit product or existing tests",
+      "Sol alone reviews and integrates the worker commit",
+      "repository pytest and browser execution remain serial",
+      "Gemini starts only after exact deterministic candidate admission"
+    ],
+    "reassessment_triggers": ["worker return", "material recovery", "pre_verifier_acceptance", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh exact-plan-commit five-source pre-worker dispatch verification",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is ready to implement the exact frozen client source."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Launcher help and clean exact-HEAD worktree verified; dispatch remains bounded by the packet."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Verifier reserved; no call before deterministic admission."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined by current developer policy."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude transport is used only as the bounded DeepSeek bare-mode carrier, not as an independent model lane."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

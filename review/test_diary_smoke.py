@@ -9431,6 +9431,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
                     "appointment_id": "appt-delete-1",
                     "clears_waiting_area": True,
                     "cancellation_reason": body.get("cancellation_reason"),
+                    "status_reason_code": body.get("status_reason_code"),
                 },
                 "warnings": [{
                     "code": "waiting_area_cleared",
@@ -9450,7 +9451,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
                 content_type="application/json",
                 body=json.dumps({
                     **proposal,
-                    "confirm_endpoint": "/api/v1/appointments/proposals/delete-confirm",
+                    "confirm_endpoint": "/api/v1/appointments/proposals/delete/confirm",
                     "confirm_payload": {
                         "confirmed": False,
                         "delete_proposal": proposal,
@@ -9465,29 +9466,34 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
                 }),
             )
             return
-        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete-confirm"):
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete/confirm"):
             captured_confirms.append(request.post_data_json)
             captured_confirm_keys.append(request.headers.get("idempotency-key"))
             route.fulfill(
                 status=200,
                 content_type="application/json",
                 body=json.dumps({
+                    "schema_version": "raisa.delete_confirm_public_envelope.v1",
                     "intent": "confirm_delete_appointment",
                     "safe": True,
                     "requires_confirmation": False,
                     "autonomy_tier": "confirmed_write",
                     "summary": "Cancelled.",
-                    "appointment": {
-                        "id": "appt-delete-1",
+                    "receipt": {
+                        "schema_version": "appointment.delete_confirmation_receipt.v1",
+                        "appointment_id": "appt-delete-1",
                         "status": "Cancelled",
+                        "status_reason_code": "PATIENT_TRANSPORT",
                         "waiting_area_id": None,
                         "cancellation_reason": "Patient had transport issues",
+                        "warning_codes": ["waiting_area_cleared"],
                     },
                     "warnings": [],
                     "blocks": [],
                     "audit_evidence": [
-                        "diary_confirm_delete_proposal",
+                        "delete_product_adapter_v1",
                         "delete_signed_confirmation_evidence_verified",
+                        "delete_current_authority_rechecked",
                     ],
                 }),
             )
@@ -9561,8 +9567,8 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
     assert captured_raw_deletes == []
 
 
-def test_cancel_flow_delete_404_uses_signed_status_fallback_without_raw_delete(diary_page):
-    """An unavailable delete proposal may fall back only to signed status confirm."""
+def test_cancel_flow_delete_404_fails_closed_without_status_or_raw_fallback(diary_page):
+    """An unavailable dedicated delete proposal cannot widen to another command family."""
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
@@ -9696,8 +9702,6 @@ def test_cancel_flow_delete_404_uses_signed_status_fallback_without_raw_delete(d
         diary_page.fill("#booking-cancel-reason", "Patient had transport issues")
         diary_page.select_option("[data-testid='booking-status-reason-code']", "PATIENT_TRANSPORT")
         diary_page.click("#btn-booking-delete")
-        diary_page.wait_for_selector(".identity-confirm-overlay", state="visible", timeout=5000)
-        diary_page.click(".identity-confirm-overlay button:has-text('Confirm & Save')")
         diary_page.wait_for_timeout(500)
     finally:
         diary_page.unroute("**/api/v1/**", handle_api)
@@ -9705,10 +9709,8 @@ def test_cancel_flow_delete_404_uses_signed_status_fallback_without_raw_delete(d
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
     assert delete_proposal_keys[0]
-    assert delete_proposal_keys == status_proposal_keys
-    assert captured_status_confirms
-    assert captured_status_confirms[0]["idempotency_key"] == "status-confirm-delete-status-fresh-1"
-    assert captured_status_confirms[0]["body"]["status_proposal"]["command"]["status"] == "Cancelled"
+    assert status_proposal_keys == []
+    assert captured_status_confirms == []
     assert captured_raw_deletes == []
 
 
@@ -9743,7 +9745,7 @@ def test_cancel_flow_failed_signed_confirm_does_not_raw_delete(diary_page):
                 content_type="application/json",
                 body=json.dumps({
                     **proposal,
-                    "confirm_endpoint": "/api/v1/appointments/proposals/delete-confirm",
+                    "confirm_endpoint": "/api/v1/appointments/proposals/delete/confirm",
                     "confirm_payload": {
                         "confirmed": False,
                         "delete_proposal": proposal,
@@ -9760,20 +9762,25 @@ def test_cancel_flow_failed_signed_confirm_does_not_raw_delete(diary_page):
                 }),
             )
             return
-        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete-confirm"):
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete/confirm"):
             captured_confirms.append(request.post_data_json)
             route.fulfill(
                 status=200,
                 content_type="application/json",
                 body=json.dumps({
+                    "schema_version": "raisa.delete_confirm_public_envelope.v1",
                     "intent": "confirm_delete_appointment",
                     "safe": False,
                     "requires_confirmation": True,
                     "autonomy_tier": "blocked",
                     "summary": "Delete proposal is stale.",
-                    "appointment": None,
+                    "receipt": None,
                     "warnings": [],
-                    "blocks": [{"code": "stale_delete_proposal_freshness_id", "message": "Delete proposal is stale."}],
+                    "blocks": [{
+                        "code": "stale_delete_proposal_freshness_id",
+                        "severity": "blocked",
+                        "message": "Delete proposal is stale.",
+                    }],
                     "audit_evidence": [],
                 }),
             )

@@ -17,7 +17,7 @@ def _between(text: str, start: str, end: str) -> str:
     return text[start_index : text.index(end, start_index)]
 
 
-def test_current_ordinary_delete_consumer_has_exact_dual_family_facts() -> None:
+def test_current_ordinary_delete_consumer_has_converged_on_canonical_family() -> None:
     source = DIARY.read_text(encoding="utf-8")
     delete_booking = _between(
         source,
@@ -25,16 +25,18 @@ def test_current_ordinary_delete_consumer_has_exact_dual_family_facts() -> None:
         "// ─── PATIENT FLOW WORKBENCH",
     )
 
-    assert "/appointments/proposals/delete/${editingAppointmentId}" in delete_booking
-    assert "/appointments/proposals/status/${editingAppointmentId}" in delete_booking
-    assert "Fallback to status proposal (omitting cancellation_reason)" in delete_booking
-    assert 'err.message.includes("404")' in delete_booking
+    assert "/appointments/proposals/delete/${encodeURIComponent(appointmentId)}" in delete_booking
+    assert "/appointments/proposals/status/${editingAppointmentId}" not in delete_booking
+    assert "Fallback to status proposal" not in delete_booking
+    assert 'err.message.includes("404")' not in delete_booking
+    assert "validateDeleteProposalForConfirmation" in delete_booking
     assert "await applySignedDeleteProposal(" in delete_booking
-    assert "await loadDiary(true)" in delete_booking
+    assert "reconcileOrdinaryCancellation(appointmentId)" in delete_booking
+    assert "setOrdinaryCancellationRefreshRequired" in delete_booking
     assert "method: \"DELETE\"" not in delete_booking
 
 
-def test_current_dispatcher_is_incompatible_with_minimal_public_envelope() -> None:
+def test_current_dispatcher_accepts_only_canonical_minimal_public_envelope() -> None:
     source = DIARY.read_text(encoding="utf-8")
     dispatcher = _between(
         source,
@@ -42,14 +44,15 @@ def test_current_dispatcher_is_incompatible_with_minimal_public_envelope() -> No
         "async function setAppointmentStatus(",
     )
 
-    assert "allowlistedConfirmApiPath(confirmEndpoint)" in dispatcher
-    assert 'endsWith("/appointments/proposals/status-confirm")' in dispatcher
+    assert "validateDeleteProposalForConfirmation(proposal, expected)" in dispatcher
+    assert 'normalizeApiPath(confirmEndpoint) !== "/appointments/proposals/delete/confirm"' in dispatcher
+    assert 'apiFetch("/appointments/proposals/delete/confirm"' in dispatcher
+    assert "allowlistedConfirmApiPath(confirmEndpoint)" not in dispatcher
+    assert "statusConfirmIdempotencyKey" not in dispatcher
     assert "deleteConfirmIdempotencyKey(proposal, confirmPayload)" in dispatcher
-    assert "if (!confirmResult.appointment)" in dispatcher
-    assert "return confirmResult.appointment" in dispatcher
-    assert "validateDeleteConfirmPublicEnvelope" not in dispatcher
-    assert dispatcher.count("cancellationReason") == 1
-    assert dispatcher.count("statusReasonCode") == 1
+    assert "confirmResult.appointment" not in dispatcher
+    assert "validateDeleteConfirmPublicEnvelope" in dispatcher
+    assert "return publicEnvelope" in dispatcher
 
 
 def test_canonical_bridge_and_backend_public_contract_are_exact_controls() -> None:
@@ -62,7 +65,8 @@ def test_canonical_bridge_and_backend_public_contract_are_exact_controls() -> No
     router = ROUTER.read_text(encoding="utf-8")
     schemas = SCHEMAS.read_text(encoding="utf-8")
 
-    assert bridge.count("/appointments/proposals/delete/confirm") >= 3
+    assert bridge.count("/appointments/proposals/delete/confirm") >= 2
+    assert "validateDeleteProposalForConfirmation" in bridge
     assert "/appointments/proposals/status/" not in bridge
     assert "validateDeleteConfirmPublicEnvelope" in bridge
     assert '"/proposals/delete/confirm"' in router

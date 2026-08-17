@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "48af3e6b90519b549f3da6616e033280729a83eda0b2bef37bca459fdae360b2",
+  "canonical_register_sha256": "69d68d08f51d8e082a3c863c8d536ee7d8a645e6fee5587277b96fd57c4d4538",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 240,
+      "canonical_unchanged": 241,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
@@ -14,18 +14,18 @@
       "read_only_violation": 3,
       "reasoning_claim_error": 40,
       "repository_defect": 62,
-      "transport_timeout": 13
+      "transport_timeout": 14
     },
     "by_origin": {
       "agent_behavior": 267,
       "harness": 48,
       "repository": 62,
-      "transport": 13
+      "transport": 14
     },
     "by_process_severity": {
       "low": 149,
       "material": 115,
-      "moderate": 126
+      "moderate": 127
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -55,7 +55,7 @@
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
       "deepseek-v4-flash-implementation-worker::implementer": 6,
-      "deepseek-v4-flash-test-worker::implementer": 1,
+      "deepseek-v4-flash-test-worker::implementer": 2,
       "deepseek-v4-flash-worker-delete-confirm-btr::implementer": 1,
       "delete-confirm-behavior-transaction-harness::implementer": 4,
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
@@ -98,14 +98,14 @@
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
-      "implementer": 39,
+      "implementer": 40,
       "integration_reviewer": 3,
       "orchestrator": 295,
       "verifier": 53
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 390,
+  "incident_count": 391,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1036,6 +1036,30 @@
       "categories": [
         "transport_timeout"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0382",
+        "AER-0391"
+      ],
+      "origins": [
+        "transport"
+      ],
+      "prevention_controls": [
+        "A DeepSeek transport retry is allowed only after an exact clean-worktree/HEAD check and never converts the earlier transport failure into worker evidence or expands its file authority.",
+        "After a recurrent DeepSeek exit-1 non-result, exact result-path, owned-path, HEAD and worktree readback are mandatory; a bounded Sol fallback may use only the already frozen package and no later worker source is admitted without distinct authority."
+      ],
+      "recurrence_signature": "transport.deepseek_claude_exit_1_before_worker_result",
+      "resource_ids": [
+        "deepseek-v4-flash-test-worker"
+      ],
+      "roles": [
+        "implementer"
+      ]
+    },
+    {
+      "categories": [
+        "transport_timeout"
+      ],
       "incident_count": 5,
       "incident_ids": [
         "AER-0022",
@@ -1063,7 +1087,7 @@
       ]
     }
   ],
-  "register_revision": 343,
+  "register_revision": 344,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-17"
 }
