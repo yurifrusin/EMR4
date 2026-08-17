@@ -7,8 +7,8 @@
   "source_head": "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b",
   "authority_source": "AGENTS.md Current Baton at Continuity 315 / Compass 297, the accepted arrival/check-in convergence review and Yuri's standing uninterrupted-development authority direct this narrow provider-free unmounted extraction rehearsal.",
   "checkpoint": {
-    "completed_stage": "The corrected exact five-source pre-dispatch receipt passes with worker dispatch permitted. One DeepSeek V4 Flash/high worker is active in the clean disposable worktree at plan source 2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b under the frozen two-file packet; no other worker or provider lane is active.",
-    "next_executable_stage": "await_the_deepseek_terminal_receipt_then_inspect_the_exact_commit_and_run_sol_deterministic_admission",
+    "completed_stage": "The corrected exact five-source pre-dispatch receipt passed and the occupied DeepSeek V4 Flash/high worker ran once. It exited 1 without a terminal receipt, diagnostic stderr, owned file or commit; exact source 2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b and the isolated worktree remain clean. AER-0419 preserves the non-transferable transport result, and no same-lane retry is admitted.",
+    "next_executable_stage": "sol_implements_the_unchanged_frozen_two_file_package_then_runs_deterministic_admission",
     "retry_counters": {
       "planning": 1,
       "implementation": 1,

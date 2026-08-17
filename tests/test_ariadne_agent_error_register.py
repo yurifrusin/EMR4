@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 367
+    assert register["register_revision"] == 368
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 419)
+        f"AER-{index:04d}" for index in range(1, 420)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -54,7 +54,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 291
-    assert len(transport_incidents) == 14
+    assert len(transport_incidents) == 15
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
         "AER-0022",
@@ -70,6 +70,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
         "AER-0380",
         "AER-0382",
         "AER-0391",
+        "AER-0419",
     ]
     assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
     assert {row["causal_claim_level"] for row in transport_incidents} == {
@@ -2580,7 +2581,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 418
+    assert report["incident_count"] == 419
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3617,14 +3618,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 367
-    assert report["incident_count"] == 418
+    assert report["register_revision"] == 368
+    assert report["incident_count"] == 419
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 291,
         "harness": 48,
         "repository": 65,
-        "transport": 14,
+        "transport": 15,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 64,
@@ -3634,11 +3635,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "read_only_violation": 3,
         "reasoning_claim_error": 42,
         "repository_defect": 65,
-        "transport_timeout": 14,
+        "transport_timeout": 15,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 268,
+        "canonical_unchanged": 269,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -3684,6 +3685,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         if row["recurrence_signature"]
         == "transport.deepseek_claude_exit_1_before_worker_result"
     )
+    # AER-0419 uses the same transport signature but remains a distinct
+    # implementation-worker resource dimension, so the report does not merge it.
     assert deepseek_exit_recurrence["incident_ids"] == ["AER-0382", "AER-0391"]
     assert deepseek_exit_recurrence["incident_count"] == 2
     manual_sha_recurrence = next(
@@ -6683,6 +6686,20 @@ def test_aer_0418_records_missing_assigned_worker_workspace_receipt() -> None:
     assert incident["candidate_state"] == "canonical_unchanged"
     assert "workspace_receipt_missing" in incident["observed_error"]
     assert incident["status"] == "corrected"
+
+
+def test_aer_0419_preserves_non_transferable_deepseek_transport_result() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0419"
+    ]
+
+    assert incident["origin"] == "transport"
+    assert incident["stage"] == "dispatch"
+    assert incident["category"] == "transport_timeout"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert "no terminal worker receipt" in incident["observed_error"]
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert incident["status"] == "contained"
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:
