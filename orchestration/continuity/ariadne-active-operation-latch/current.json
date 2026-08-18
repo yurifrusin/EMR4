@@ -7,8 +7,8 @@
   "source_head": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
   "authority_source": "AGENTS.md Current Baton at Continuity 320 / Compass 302 names this exact successor under Yuri's standing uninterrupted-development authority; the accepted first attempt requires provider-free exact-tool-view proof before any fresh occupied dispatch.",
   "checkpoint": {
-    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed. Fresh five-source rehydration and register revision 417 passed; AER-0488 through AER-0490 correct the guessed missing packet operand, its origin/category mismatch and the first wrong-target register patch. The exact worker branch and no-checkout sparse worktree exist, but no sparse packet checkout, container or occupied provider call has started.",
-    "next_executable_stage": "Validate and commit register revision 420 plus this checkpoint, generate a fresh replacement pre-dispatch receipt, then populate only the plan-named sparse packet before one occupied launch.",
+    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed. Register revision 420 and AER-0488 through AER-0490 are committed at 66bc12015d6184e00228d8abd8f77e1689f2e517 after complete validation; AER-0491 corrects the first unverified expansion of that identifier. The exact worker branch and no-checkout sparse worktree exist, but no sparse packet checkout, container or occupied provider call has started.",
+    "next_executable_stage": "Generate a fresh replacement five-source pre-dispatch receipt from the clean checkpoint descendant, then populate only the plan-named sparse packet before one occupied launch.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

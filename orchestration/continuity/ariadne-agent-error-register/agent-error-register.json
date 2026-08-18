@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 420,
+  "register_revision": 421,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19504,6 +19504,45 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-420.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0491",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-checkpoint-source-010",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every full commit identifier written into a latch checkpoint must be copied from a completed exact git rev-parse readback.",
+      "observed_error": "The post-revision-420 latch patch expanded short source 66bc1201 into an unverified incorrect forty-character identifier before the exact committed HEAD was read.",
+      "detection_method": "A separate git rev-parse HEAD returned 66bc12015d6184e00228d8abd8f77e1689f2e517 and disagreed with the uncommitted latch text before receipt generation or dispatch.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-421.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unverified_short_commit_expansion_in_latch_checkpoint",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the checkpoint source with the exact git rev-parse result, add AER-0491 and rerun latch plus complete register validation before any receipt or dispatch.",
+        "prevention_control": "Never manually expand a short Git ID; obtain and copy the exact full object ID from a completed git rev-parse invocation before editing evidence.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-421.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },

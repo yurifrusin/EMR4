@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 420
+    assert register["register_revision"] == 421
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 491)
+        f"AER-{index:04d}" for index in range(1, 492)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 352
+    assert len(agent_incidents) == 353
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 490
+    assert report["incident_count"] == 491
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,11 +3619,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 420
-    assert report["incident_count"] == 490
+    assert report["register_revision"] == 421
+    assert report["incident_count"] == 491
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 352,
+        "agent_behavior": 353,
         "harness": 51,
         "operator": 2,
         "repository": 69,
@@ -3631,7 +3631,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 77,
-        "evidence_misreport": 62,
+        "evidence_misreport": 63,
         "harness_failure": 51,
         "operator_error": 2,
         "output_contract_violation": 164,
@@ -3642,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 334,
+        "canonical_unchanged": 335,
         "untrusted_partial_worktree": 42,
     }
     receipt_event_recurrence = next(
@@ -7396,13 +7396,13 @@ def test_aer_0463_preserves_stale_compass_sentinel_correction() -> None:
     assert incident["status"] == "corrected"
 
 
-def test_aer_0473_through_0490_preserve_exact_tool_view_recovery_corrections() -> (
+def test_aer_0473_through_0491_preserve_exact_tool_view_recovery_corrections() -> (
     None
 ):
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
-    assert list(incidents)[472:490] == [
-        f"AER-{index:04d}" for index in range(473, 491)
+    assert list(incidents)[472:491] == [
+        f"AER-{index:04d}" for index in range(473, 492)
     ]
     assert incidents["AER-0473"]["recurrence_signature"] == (
         "orchestrator.windows_rg_wildcard_path_operand_invalid"
@@ -7430,7 +7430,8 @@ def test_aer_0473_through_0490_preserve_exact_tool_view_recovery_corrections() -
     assert incidents["AER-0488"]["origin"] == "operator"
     assert incidents["AER-0489"]["category"] == "output_contract_violation"
     assert incidents["AER-0490"]["transport"] == "local_apply_patch"
+    assert incidents["AER-0491"]["category"] == "evidence_misreport"
     assert all(
         incidents[f"AER-{index:04d}"]["status"] == "corrected"
-        for index in range(473, 491)
+        for index in range(473, 492)
     )
