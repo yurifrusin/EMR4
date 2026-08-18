@@ -26,7 +26,7 @@ strict resolver and copied it into every prospective projection and WorkOrder.
 | Measure | Legacy representative surface | Clockwork candidate |
 |---|---:|---:|
 | Maintained executable/schema/test files | 6 | 5 |
-| Physical maintained lines | 1,002 | 1,001 |
+| Physical maintained lines | 1,002 | 975 |
 | Manually supplied binding/leaf fields | 72 top-level updater constants | 54 manifest leaves |
 | Projection publication calls | 12 | 1 |
 | Controlled procedural retries | 7 | 0 |
@@ -40,14 +40,17 @@ candidate's complete prepare-and-shadow-publication had a 985.012 ms median.
 The clockwork pays roughly three times the clean-run cost for full Git, graph,
 Compass, latch, journal, digest and generation validation.
 
+The 20-run timing observation is retained here but is not rerun by clean-checkout
+admission because the legacy updater depends on historical local-only evidence.
+
 When the seven observed procedural correction cycles are included, the derived
 median cycle is 2,571.216 ms for the legacy reference and 985.012 ms for the
 candidate, a 61.7% reduction. This estimate is explanatory only: scheduler and
 filesystem timing are explicitly non-authoritative. The acceptance rests on
 zero escapes, zero partial publication, 100% retry reduction in the controlled
-defect suite, preserved coverage and the one-surface reduction. The physical
-line reduction is only one line and is not treated as meaningful efficiency
-evidence on its own.
+defect suite, preserved coverage and the one-surface / 27-line reduction. The
+line reduction is modest and is not treated as sufficient efficiency evidence
+on its own.
 
 ## DeepSeek gear result
 

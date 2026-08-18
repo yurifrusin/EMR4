@@ -5,15 +5,12 @@ from __future__ import annotations
 import ast
 import copy
 import hashlib
-import importlib
 import json
 import os
 import re
 import shutil
-import statistics
 import subprocess
 import tempfile
-import time
 from pathlib import Path
 from typing import Any
 
@@ -496,27 +493,6 @@ def measure_efficacy(
     for path in candidate_paths:
         tracked = subprocess.run(["git", "ls-files", "--error-unmatch", path], cwd=repo_root, capture_output=True, check=False).returncode == 0
         candidate_lines += deltas[path] if tracked else len((repo_root / path).read_text(encoding="utf-8").splitlines())
-    legacy_times, candidate_times = [], []
-    legacy = importlib.import_module("scripts.raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update")
-    original_paths = legacy.GRAPH, legacy.COMPASS, legacy.REPORT
-    with tempfile.TemporaryDirectory(prefix="ariadne-alternating-benchmark-") as temporary:
-        temporary_root = Path(temporary)
-        legacy.GRAPH, legacy.COMPASS, legacy.REPORT = temporary_root / "legacy-graph.json", temporary_root / "legacy-compass.json", temporary_root / "legacy-report.md"
-        try:
-            for index in range(iterations):
-                legacy.GRAPH.write_text(json.dumps(graph), encoding="utf-8")
-                legacy.COMPASS.write_text(json.dumps(compass), encoding="utf-8")
-                started = time.perf_counter_ns()
-                legacy.main()
-                legacy_times.append((time.perf_counter_ns() - started) / 1_000_000)
-                target = temporary_root / f"candidate-{index}"
-                started = time.perf_counter_ns()
-                candidate_bundle = prepare_transaction(manifest, repo_root=repo_root, graph=graph, compass=compass, active_latch=latch)
-                publish_shadow(candidate_bundle, repo_root=repo_root, target=target)
-                candidate_times.append((time.perf_counter_ns() - started) / 1_000_000)
-                shutil.rmtree(target)
-        finally:
-            legacy.GRAPH, legacy.COMPASS, legacy.REPORT = original_paths
     legacy_writes = sum((repo_root / item[key]).read_text(encoding="utf-8").count("_write(") + (repo_root / item[key]).read_text(encoding="utf-8").count("REPORT.write_text") for item in fixtures["fixtures"] for key in ("legacy_updater",))
     legacy_constants = sum(sum(isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id.isupper() for target in node.targets) for node in ast.parse((repo_root / item["legacy_updater"]).read_text(encoding="utf-8")).body) for item in fixtures["fixtures"])
     def leaf_count(value: object) -> int:
@@ -524,10 +500,6 @@ def measure_efficacy(
     candidate_fields = leaf_count(manifest)
     escaped = sorted({"source_head", "source_cutoff", "incident_population", "asymmetric_peer", "boundary_paraphrase", "stale_latch", "prevalidation_or_partial_publication"} - set(prevented))
     passed = historical["status"] == "passed" and not escaped and candidate_lines < historical["legacy_lines"] and len(candidate_paths) < historical["legacy_files"]
-    timing = lambda values: {"median_ms": round(statistics.median(values), 3), "minimum_ms": round(min(values), 3), "maximum_ms": round(max(values), 3)}
-    legacy_timing, candidate_timing = timing(legacy_times), timing(candidate_times)
-    legacy_cycle = legacy_timing["median_ms"] * 8
-    candidate_cycle = candidate_timing["median_ms"] * (1 + len(escaped))
     return {
         "schema_version": "ariadne.transactional_closeout_efficacy.v1",
         "status": "passed" if passed else "efficacy_not_proven",
@@ -537,7 +509,7 @@ def measure_efficacy(
         "commands": {"legacy_projection_write_calls": legacy_writes, "candidate_publication_calls": 1},
         "manual_fields": {"legacy_top_level_binding_constants": legacy_constants, "candidate_manifest_leaf_values": candidate_fields, "reduction_percent": round((legacy_constants - candidate_fields) * 100 / legacy_constants, 1)},
         "surface": {"legacy_files": historical["legacy_files"], "legacy_lines": historical["legacy_lines"], "candidate_files": len(candidate_paths), "candidate_lines": candidate_lines, "raw_repository_growth_reported": True},
-        "timing": {"iterations": iterations, "legacy_latest_shadow_apply": legacy_timing, "candidate_prepare_and_shadow_publish": candidate_timing, "single_clean_run_candidate_slower": candidate_timing["median_ms"] > legacy_timing["median_ms"], "observed_seven_retry_cycle_estimate": {"legacy_ms": round(legacy_cycle, 3), "candidate_ms": round(candidate_cycle, 3), "reduction_percent": round((legacy_cycle - candidate_cycle) * 100 / legacy_cycle, 1)}, "acceptance_relevant": False},
+        "timing": {"reproduced": False, "acceptance_relevant": False},
         "canonical_writes_before_validation": 0,
         "hand_copied_git_object_ids": 0,
     }

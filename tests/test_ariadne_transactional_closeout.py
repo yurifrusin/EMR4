@@ -225,7 +225,9 @@ def test_controlled_efficacy_gate_passes_without_hidden_engine_cost(
     assert result["retries"]["reduction_percent"] >= 50
     assert result["surface"]["candidate_files"] == 5
     assert result["surface"]["candidate_lines"] < 1002
-    assert result["timing"]["iterations"] == 20
+    assert result["timing"] == {"reproduced": False, "acceptance_relevant": False}
     stored = _load(f"{BASE}/provider-free-efficacy-evidence.json")
+    assert stored["timing"]["iterations"] == 20
+    assert stored["timing"]["acceptance_relevant"] is False
     for key in ("status", "commands", "manual_fields", "defects", "retries", "surface", "canonical_writes_before_validation", "hand_copied_git_object_ids"):
         assert stored[key] == result[key]
