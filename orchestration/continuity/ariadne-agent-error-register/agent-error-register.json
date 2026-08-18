@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 494,
+  "register_revision": 495,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -22706,6 +22706,46 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "docs/ariadne-agent-error-correction-register-revision-494.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0574",
+      "attempt_id": "transactional-closeout-gemini37-veto-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A final veto may claim newly introduced evidence defects remain rejected only when the filter distinguishes the appended current node from inherited historical ancestors.",
+      "observed_error": "The first Gemini 3.7 veto returned pass and stated that every newly introduced error remained fail-closed, although the filter excluded current_position_continuity evidence-not-found errors for both inherited nodes and the newly appended node.",
+      "detection_method": "Sol compared the review claim with the exact filter predicate after receipt readback and constructed a new-node missing-evidence mutation that the predicate would have discarded.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-review-receipt.json",
+        "orchestration_harness/transactional_closeout.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "docs/ariadne-agent-error-correction-register-revision-495.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.shadow_evidence_deferral_misclassified_as_inherited_only",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Reject the pass, exempt only inherited-node evidence absence, add a newly appended-node missing-evidence mutation and require a fresh exact-candidate independent veto.",
+        "prevention_control": "Every differential exception must carry an explicit old-versus-new identity test, and reviewer acceptance must reproduce at least one mutation on each side of that boundary.",
+        "evidence_paths": [
+          "orchestration_harness/transactional_closeout.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "docs/ariadne-agent-error-correction-register-revision-495.md"
         ]
       },
       "status": "corrected"

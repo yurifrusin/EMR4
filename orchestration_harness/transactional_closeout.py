@@ -233,7 +233,8 @@ def _projection_report(compass: dict[str, Any], graph: dict[str, Any], repo_root
     errors = ariadne_compass.validate_compass(
         compass, graph, repo_root=repo_root, require_evidence_files=False
     )
-    errors = [item for item in errors if not item.startswith("current_position_continuity:evidence_not_found:")]
+    current_node = f":node:{compass['current_position']['node_id']}:"
+    errors = [item for item in errors if not (item.startswith("current_position_continuity:evidence_not_found:") and current_node not in item)]
     if errors:
         raise ValueError("prospective_projection_invalid:" + ",".join(errors))
     return (
@@ -432,8 +433,8 @@ def publish_shadow(bundle: object, *, repo_root: Path, target: Path, fail_after_
 
 
 def verify_historical_fixtures(value: object, *, repo_root: Path, graph: dict[str, Any], compass: dict[str, Any]) -> dict[str, Any]:
-    fixtures = _exact(value, {"schema_version", "fixtures"}, "fixtures")
-    if fixtures["schema_version"] != "ariadne.transactional_closeout_shadow_fixtures.v1" or not isinstance(fixtures["fixtures"], list):
+    fixtures = _exact(value, {"schema_version", "baseline_source", "fixtures"}, "fixtures")
+    if fixtures["schema_version"] != "ariadne.transactional_closeout_shadow_fixtures.v1" or HEX40.fullmatch(fixtures["baseline_source"]) is None or not isinstance(fixtures["fixtures"], list):
         raise ValueError("fixture_schema_invalid")
     results = []
     for item in fixtures["fixtures"]:
@@ -487,7 +488,7 @@ def measure_efficacy(
             fault_prevented = fault_prevented and not target.exists()
     if fault_prevented:
         prevented.append("prevalidation_or_partial_publication")
-    diff = subprocess.run(["git", "diff", "--numstat", latch["source_head"], "--", *candidate_paths], cwd=repo_root, check=True, capture_output=True, text=True, encoding="utf-8")
+    diff = subprocess.run(["git", "diff", "--numstat", fixtures["baseline_source"], "--", *candidate_paths], cwd=repo_root, check=True, capture_output=True, text=True, encoding="utf-8")
     deltas = {path: int(added) + int(deleted) for added, deleted, path in (line.split("\t") for line in diff.stdout.splitlines() if line)}
     candidate_lines = 0
     for path in candidate_paths:

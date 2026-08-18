@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/transactional_closeout.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/transactional_closeout.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": ["node", "--check", "scripts/ariadne_deepseek_native_harness_broker.mjs"]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "f21072405a4d5877ec03e2cd1aefc7fa74d379e9..d53f0c02b912df4238811dd6a509e7f1878185f0"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "f21072405a4d5877ec03e2cd1aefc7fa74d379e9..d53f0c02b912df4238811dd6a509e7f1878185f0"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

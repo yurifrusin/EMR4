@@ -101,6 +101,7 @@ def test_historical_shadow_set_is_exact_legacy_baseline() -> None:
         graph=_load("orchestration/continuity/emr4-continuity-graph.json"),
         compass=_load("orchestration/continuity/emr4-compass.json"),
     )
+    assert _load(f"{BASE}/historical-shadow-fixtures.json")["baseline_source"] == SOURCE
     assert result == {"status": "passed", "fixtures": [
         {"node_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal", "status": "passed", "legacy_lines": 351},
         {"node_id": "ariadne-post-native-harness-successor-resolution-repair", "status": "passed", "legacy_lines": 325},
@@ -150,6 +151,10 @@ def test_observed_bookkeeping_defects_fail_before_publication(
     stale["operation_id"] = "different-operation"
     with pytest.raises(ValueError, match="active_operation_mismatch"):
         tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=stale)
+    missing_evidence = copy.deepcopy(manifest)
+    missing_evidence["node"]["evidence"]["receipts"].append("docs/nonexistent-new-clockwork-evidence.md")
+    with pytest.raises(ValueError, match="prospective_projection_invalid"):
+        tc.prepare_transaction(missing_evidence, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
     bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
     live = [ROOT / "orchestration/continuity/emr4-continuity-graph.json", ROOT / "orchestration/continuity/emr4-compass.json", ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"]
     before = [path.read_bytes() for path in live]

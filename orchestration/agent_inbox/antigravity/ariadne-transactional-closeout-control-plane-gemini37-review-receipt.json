@@ -1,0 +1,223 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\transactional-closeout-gemini-7c287e57",
+  "branch": "codex/review-transactional-closeout-7c287e57",
+  "head_before": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+  "head_after": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "892edbc1af5ffc999dc08f55e2e72bf46be928fef4ece94767dd2066d380e7be",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review\n\nDate: 2026-08-19\nTimestamp: 2026-08-19T01:49:00.0000000+10:00 (Australia/Brisbane)\nReviewer Role: Exactly one final independent Tier-2 veto after deterministic admission\nBound Worktree: `C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57`\nBound Branch: `codex/review-transactional-closeout-7c287e57`\nHEAD: `d53f0c02b912df4238811dd6a509e7f1878185f0`\nRecovery Base: `f21072405a4d5877ec03e2cd1aefc7fa74d379e9`\n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\n1. `live_handover_current_baton`: [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/AGENTS.md) was read completely. Current baton confirms protected integration PR 74/PR 75 aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`, accepted 6/3/3 not-ready check-in admission-readiness review at `27101faa86b5aa3850e90bc4ded8600e5f8d7dc9`, Continuity 323 / Compass 305, register revision 494 (573 bounded incidents, all closed/contained, zero open), and uninterrupted Sol authority for the measured `ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal`.\n2. `current_authority_allocation`: GPT Sol is conductor/integrator holding the transactional closeout consolidation lease. DeepSeek native Harness is paused behind a separate stock-headless-to-custom-runner HMR boot proof; Claude Code is not a fallback. Gemini 3.7 Flash/high is reserved strictly for this one independent read-only veto. Native subagents are declined.\n3. `active_plan_and_acceptance`: [`docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md), [`docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md), [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/continuity/ariadne-active-operation-latch/current.json), [`orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json), and [`orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json).\n4. `protected_evidence_boundaries`: Provider-free repository-local shadow fixtures only. No product, patient, clinical, protected or historical record content. Zero canonical writes before validation. Four protected refs remain closed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. User-owned `docs/branding/` and all unrelated untracked files preserved.\n5. `git_refs_and_worktree`: Bound worktree root `C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57` on branch `codex/review-transactional-closeout-7c287e57`. HEAD verified as `d53f0c02b912df4238811dd6a509e7f1878185f0`. Clean worktree verified before and after review.\n\n---\n\n## 2. Assessment of Required Challenges\n\n1. **Exact Git & Worktree Verification:**\n   Pre- and post-review verification (`git status --short --branch`, `git rev-parse HEAD`, `git diff --name-only`) confirmed the exact branch `codex/review-transactional-closeout-7c287e57`, full 40-character HEAD `d53f0c02b912df4238811dd6a509e7f1878185f0`, clean worktree, and exactly 23 diff files matching the allowlist.\n2. **Strict Single-HEAD Resolution & Protected Ref Invariant:**\n   [`validate_manifest`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L108-L174) rejects any caller-supplied `source_head` and requires `source_anchor: current_head`. [`prepare_transaction`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L245-L332) uses [`build_git_refs_snapshot`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/git_refs_snapshot.py) to confirm all 4 protected refs (`master`, `origin/master`, `handoff/current`, `origin/handoff/current`) match `2e34bdad732fdab32fbf778280b3d3c70d66d602`, resolves HEAD once through [`resolve_commit_source`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/git_object_resolution.py), and copies the 40-character commit to node coordinates, latch, journal events, work order, and bundle.\n3. **Prevalidation, Strict Keys & Invariant Verification:**\n   All manifest and projection dictionaries pass strict exact-key validation via `_exact`. Incident relationships are checked for bidirectional symmetry. Active latch operation ID and `in_progress` status are verified against the manifest. Graph/Compass predecessor parents are verified. All prospective projections (Continuity, Compass, Latch, Incident Aggregate) and their SHA-256 digests are validated in-memory before staging.\n4. **Narrow & Explicit Shadow Report Evidence Deferral:**\n   [`_projection_report`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L232-L243) runs [`validate_compass`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/scripts/ariadne_compass.py) with `require_evidence_files=False` and strictly filters only errors starting with `current_position_continuity:evidence_not_found:`. Any structural or newly introduced error raises an exception and aborts publication.\n5. **Fail-Closed Staging & Transactional Atomic Publication:**\n   [`publish_shadow`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L400-L432) verifies that canonical authority paths, `.git`, and non-shadow paths are forbidden targets. It writes to a temporary sibling staging directory, re-reads file existence, and performs a single atomic `os.replace` directory rename. Injected failures after each of the 8 staging writes leave zero target directory and zero mutation to live authority files.\n6. **Journal Event Sequence & Digest Chaining:**\n   [`validate_event_chain`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L195-L220) enforces contiguous sequence numbers starting at 1, unvarying `(journal_id, transaction_id, operation_id)` tuple identity, exact `previous_event_sha256` matching, and canonical SHA-256 event digest verification over sorted-key JSON without the `event_sha256` field.\n7. **DeepSeek WorkOrder Binding & Independent Digest Admission:**\n   WorkOrder incorporates journal ID, operation ID, transaction ID, full source commit, authority/boundary digests, exact tools `['edit', 'glob', 'read']`, and `provider_free_shadow` posture. [`loadWorkOrder`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/scripts/ariadne_deepseek_native_harness_broker.mjs#L48-L58) validates the environment variable `EMR4_BROKER_WORK_ORDER_SHA256` against the canonical digest of the loaded WorkOrder before listening or processing requests.\n8. **Opt-In Causal Broker Event Clock & Compatibility:**\n   When no WorkOrder is supplied, the broker operates in standard mode with full backwards compatibility for baseline tests. When a WorkOrder is present, every broker event decorates and advances the causal clock sequence and prior-digest chain. Reordered, malformed, or drifted events fail validation in [`validate_broker_events`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L383-L398).\n9. **Historical Parity & Weight Accounting:**\n   The historical shadow baseline spans 3 accepted closeouts totaling 6 legacy files and 1,002 lines, with 72 top-level binding constants, 12 separate write calls, and 7 controlled procedural retries. The clockwork candidate consolidation uses 5 maintained files (975 lines, including engine and broker integration), 54 manifest leaf fields (25% reduction), 1 publication call, 0 controlled retries (100% reduction), and 0 escaped defects.\n10. **Efficacy Report Timing Transparency:**\n    [`provider-free-efficacy-report.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-report.md) and [`provider-free-efficacy-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json) explicitly state that clean candidate execution (985.012 ms median) is slower than clean legacy apply (321.402 ms median) due to comprehensive cryptographic and schema validation. Timing is explicitly marked as non-authoritative (`acceptance_relevant: false`) and is not re-executed during checkout admission.\n11. **Command Manifest Execution:**\n    All 9 commands (C01 through C09) executed with exit code 0: 13/13 pytest tests passed, Ruff check passed, py_compile passed, Node syntax check passed, git diff check passed, git diff name list verified, and working tree remained completely clean.\n12. **Closed Boundaries Maintained:**\n    No product code, routing, configuration, database schema, ordinary-practice feature flags, generic status `Arrived`, grammar/client structures, waiting area logic, provider calls, HMR retries, credentials, or protected refs were altered.\n\n---\n\n## 3. Finding Summary\n\nNo P0-P2 findings, clock/binding defects, prevalidation writes, checkout-state dependencies, efficacy misstatements, or dirty postconditions exist in the candidate. All 12 required challenges are satisfied.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review\n\nDate: 2026-08-19\nTimestamp: 2026-08-19T01:49:00.0000000+10:00 (Australia/Brisbane)\nReviewer Role: Exactly one final independent Tier-2 veto after deterministic admission\nBound Worktree: `C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57`\nBound Branch: `codex/review-transactional-closeout-7c287e57`\nHEAD: `d53f0c02b912df4238811dd6a509e7f1878185f0`\nRecovery Base: `f21072405a4d5877ec03e2cd1aefc7fa74d379e9`\n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\n1. `live_handover_current_baton`: [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/AGENTS.md) was read completely. Current baton confirms protected integration PR 74/PR 75 aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`, accepted 6/3/3 not-ready check-in admission-readiness review at `27101faa86b5aa3850e90bc4ded8600e5f8d7dc9`, Continuity 323 / Compass 305, register revision 494 (573 bounded incidents, all closed/contained, zero open), and uninterrupted Sol authority for the measured `ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal`.\n2. `current_authority_allocation`: GPT Sol is conductor/integrator holding the transactional closeout consolidation lease. DeepSeek native Harness is paused behind a separate stock-headless-to-custom-runner HMR boot proof; Claude Code is not a fallback. Gemini 3.7 Flash/high is reserved strictly for this one independent read-only veto. Native subagents are declined.\n3. `active_plan_and_acceptance`: [`docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md), [`docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md), [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/continuity/ariadne-active-operation-latch/current.json), [`orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json), and [`orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json).\n4. `protected_evidence_boundaries`: Provider-free repository-local shadow fixtures only. No product, patient, clinical, protected or historical record content. Zero canonical writes before validation. Four protected refs remain closed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. User-owned `docs/branding/` and all unrelated untracked files preserved.\n5. `git_refs_and_worktree`: Bound worktree root `C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57` on branch `codex/review-transactional-closeout-7c287e57`. HEAD verified as `d53f0c02b912df4238811dd6a509e7f1878185f0`. Clean worktree verified before and after review.\n\n---\n\n## 2. Assessment of Required Challenges\n\n1. **Exact Git & Worktree Verification:**\n   Pre- and post-review verification (`git status --short --branch`, `git rev-parse HEAD`, `git diff --name-only`) confirmed the exact branch `codex/review-transactional-closeout-7c287e57`, full 40-character HEAD `d53f0c02b912df4238811dd6a509e7f1878185f0`, clean worktree, and exactly 23 diff files matching the allowlist.\n2. **Strict Single-HEAD Resolution & Protected Ref Invariant:**\n   [`validate_manifest`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L108-L174) rejects any caller-supplied `source_head` and requires `source_anchor: current_head`. [`prepare_transaction`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L245-L332) uses [`build_git_refs_snapshot`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/git_refs_snapshot.py) to confirm all 4 protected refs (`master`, `origin/master`, `handoff/current`, `origin/handoff/current`) match `2e34bdad732fdab32fbf778280b3d3c70d66d602`, resolves HEAD once through [`resolve_commit_source`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/git_object_resolution.py), and copies the 40-character commit to node coordinates, latch, journal events, work order, and bundle.\n3. **Prevalidation, Strict Keys & Invariant Verification:**\n   All manifest and projection dictionaries pass strict exact-key validation via `_exact`. Incident relationships are checked for bidirectional symmetry. Active latch operation ID and `in_progress` status are verified against the manifest. Graph/Compass predecessor parents are verified. All prospective projections (Continuity, Compass, Latch, Incident Aggregate) and their SHA-256 digests are validated in-memory before staging.\n4. **Narrow & Explicit Shadow Report Evidence Deferral:**\n   [`_projection_report`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L232-L243) runs [`validate_compass`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/scripts/ariadne_compass.py) with `require_evidence_files=False` and strictly filters only errors starting with `current_position_continuity:evidence_not_found:`. Any structural or newly introduced error raises an exception and aborts publication.\n5. **Fail-Closed Staging & Transactional Atomic Publication:**\n   [`publish_shadow`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L400-L432) verifies that canonical authority paths, `.git`, and non-shadow paths are forbidden targets. It writes to a temporary sibling staging directory, re-reads file existence, and performs a single atomic `os.replace` directory rename. Injected failures after each of the 8 staging writes leave zero target directory and zero mutation to live authority files.\n6. **Journal Event Sequence & Digest Chaining:**\n   [`validate_event_chain`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L195-L220) enforces contiguous sequence numbers starting at 1, unvarying `(journal_id, transaction_id, operation_id)` tuple identity, exact `previous_event_sha256` matching, and canonical SHA-256 event digest verification over sorted-key JSON without the `event_sha256` field.\n7. **DeepSeek WorkOrder Binding & Independent Digest Admission:**\n   WorkOrder incorporates journal ID, operation ID, transaction ID, full source commit, authority/boundary digests, exact tools `['edit', 'glob', 'read']`, and `provider_free_shadow` posture. [`loadWorkOrder`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/scripts/ariadne_deepseek_native_harness_broker.mjs#L48-L58) validates the environment variable `EMR4_BROKER_WORK_ORDER_SHA256` against the canonical digest of the loaded WorkOrder before listening or processing requests.\n8. **Opt-In Causal Broker Event Clock & Compatibility:**\n   When no WorkOrder is supplied, the broker operates in standard mode with full backwards compatibility for baseline tests. When a WorkOrder is present, every broker event decorates and advances the causal clock sequence and prior-digest chain. Reordered, malformed, or drifted events fail validation in [`validate_broker_events`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration_harness/transactional_closeout.py#L383-L398).\n9. **Historical Parity & Weight Accounting:**\n   The historical shadow baseline spans 3 accepted closeouts totaling 6 legacy files and 1,002 lines, with 72 top-level binding constants, 12 separate write calls, and 7 controlled procedural retries. The clockwork candidate consolidation uses 5 maintained files (975 lines, including engine and broker integration), 54 manifest leaf fields (25% reduction), 1 publication call, 0 controlled retries (100% reduction), and 0 escaped defects.\n10. **Efficacy Report Timing Transparency:**\n    [`provider-free-efficacy-report.md`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-report.md) and [`provider-free-efficacy-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57/orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json) explicitly state that clean candidate execution (985.012 ms median) is slower than clean legacy apply (321.402 ms median) due to comprehensive cryptographic and schema validation. Timing is explicitly marked as non-authoritative (`acceptance_relevant: false`) and is not re-executed during checkout admission.\n11. **Command Manifest Execution:**\n    All 9 commands (C01 through C09) executed with exit code 0: 13/13 pytest tests passed, Ruff check passed, py_compile passed, Node syntax check passed, git diff check passed, git diff name list verified, and working tree remained completely clean.\n12. **Closed Boundaries Maintained:**\n    No product code, routing, configuration, database schema, ordinary-practice feature flags, generic status `Arrived`, grammar/client structures, waiting area logic, provider calls, HMR retries, credentials, or protected refs were altered.\n\n---\n\n## 3. Finding Summary\n\nNo P0-P2 findings, clock/binding defects, prevalidation writes, checkout-state dependencies, efficacy misstatements, or dirty postconditions exist in the candidate. All 12 required challenges are satisfied.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/transactional_closeout.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/transactional_closeout.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "node",
+          "--check",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "f21072405a4d5877ec03e2cd1aefc7fa74d379e9..d53f0c02b912df4238811dd6a509e7f1878185f0"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "f21072405a4d5877ec03e2cd1aefc7fa74d379e9..d53f0c02b912df4238811dd6a509e7f1878185f0"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "ba1a4ba03a3c6e4c1338837c781dc553c7975d26d17b2cdb25fa6afb733d7bf6",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/transactional_closeout.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/transactional_closeout.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "node",
+        "--check",
+        "scripts/ariadne_deepseek_native_harness_broker.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "f21072405a4d5877ec03e2cd1aefc7fa74d379e9..d53f0c02b912df4238811dd6a509e7f1878185f0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "f21072405a4d5877ec03e2cd1aefc7fa74d379e9..d53f0c02b912df4238811dd6a509e7f1878185f0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

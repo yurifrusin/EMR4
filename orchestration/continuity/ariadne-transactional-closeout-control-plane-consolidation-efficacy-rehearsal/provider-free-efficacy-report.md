@@ -26,7 +26,7 @@ strict resolver and copied it into every prospective projection and WorkOrder.
 | Measure | Legacy representative surface | Clockwork candidate |
 |---|---:|---:|
 | Maintained executable/schema/test files | 6 | 5 |
-| Physical maintained lines | 1,002 | 975 |
+| Physical maintained lines | 1,002 | 981 |
 | Manually supplied binding/leaf fields | 72 top-level updater constants | 54 manifest leaves |
 | Projection publication calls | 12 | 1 |
 | Controlled procedural retries | 7 | 0 |
@@ -48,7 +48,7 @@ median cycle is 2,571.216 ms for the legacy reference and 985.012 ms for the
 candidate, a 61.7% reduction. This estimate is explanatory only: scheduler and
 filesystem timing are explicitly non-authoritative. The acceptance rests on
 zero escapes, zero partial publication, 100% retry reduction in the controlled
-defect suite, preserved coverage and the one-surface / 27-line reduction. The
+defect suite, preserved coverage and the one-surface / 21-line reduction. The
 line reduction is modest and is not treated as sufficient efficiency evidence
 on its own.
 

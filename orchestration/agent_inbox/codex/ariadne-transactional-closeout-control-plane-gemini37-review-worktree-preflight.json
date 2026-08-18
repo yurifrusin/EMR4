@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57",
+  "branch": "codex/review-transactional-closeout-7c287e57",
+  "head": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+  "expected_head": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "ba1a4ba03a3c6e4c1338837c781dc553c7975d26d17b2cdb25fa6afb733d7bf6",
+  "command_count": 9,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/transactional-closeout-gemini-7c287e57",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

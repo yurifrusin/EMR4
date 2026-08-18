@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne transactional closeout control-plane consolidation efficacy rehearsal",
+    "completed_stage": "The checkout-stable candidate is frozen at exact d53f0c02b912df4238811dd6a509e7f1878185f0. The named review worktree is clean at that exact commit, 13 focused tests pass there, and its nine-command provider-free manifest preflight passes with zero model calls.",
+    "next_executable_stage": "generate_the_pre_verifier_five_source_receipt_then_dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto",
+    "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+    "reason_codes": [],
+    "resolved_commit": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "d53f0c02b912df4238811dd6a509e7f1878185f0"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+    "branch_origin_aligned": false,
+    "head": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+    "origin_branch_commit": "f21072405a4d5877ec03e2cd1aefc7fa74d379e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied native-Harness work remains inadmissible until the separate provider-free HMR boot proof passes. This tranche has completed only local broker protocol conformance; Claude Code is not a silent fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact checkout-stable control-plane candidate and deterministic evidence are frozen; exactly one fresh Gemini 3.7 Flash/high read-only veto is now required.",
+        "work_packages": [
+          "exact_candidate_read_only_control_plane_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "closeout",
+      "before any future occupied DeepSeek worker"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "clean exact candidate and deterministic admission",
+      "preflight and five-source receipt before Gemini",
+      "one no-fallback veto",
+      "Sol-only acceptance, closeout and Git"
+    ]
+  },
+  "planned_action": "run_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md",
+      "docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json",
+      "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-report.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md",
+      "docs/ariadne-agent-error-correction-register-revision-494.md",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns architecture, implementation integration, acceptance and Git. DeepSeek occupied native-Harness work remains declined pending its separate HMR boot proof, with no Claude Code fallback. Gemini 3.7 Flash/high is reserved with required independence for exactly one final read-only veto. Native subagents remain declined by developer policy.",
+    "git_refs_and_worktree": "Primary task branch and exact named review worktree are at candidate d53f0c02b912df4238811dd6a509e7f1878185f0. Review branch codex/review-transactional-closeout-7c287e57 is clean and its nine-command manifest preflight passed. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The primary worktree contains only post-candidate latch and verifier-dispatch artifacts plus preserved unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The Current Baton selects this measured transactional control-plane consolidation after the accepted ordinary-practice check-in readiness review, preserves protected master and handoff/current at 2e34bdad732fdab32fbf778280b3d3c70d66d602, and records register revision 494 with 573 bounded incidents.",
+    "protected_evidence_boundaries": "Exact committed provider-free shadow candidate only. Read-only Gemini may inspect only the packet allowlist and run only the nine manifest commands. No canonical control replacement, product/configuration/route/database behavior, ordinary-practice enablement, generic-status Arrived, grammar/client/waiting-area movement, product/patient/clinical/historical/protected data, occupied DeepSeek/Harness HMR retry, credentials/IAM/network, deployment, release, Pages or protected ref. Preserve docs/branding and every unrelated untracked file; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
