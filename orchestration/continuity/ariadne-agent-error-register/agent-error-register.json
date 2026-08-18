@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 374,
+  "register_revision": 375,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17113,6 +17113,46 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0427",
+      "attempt_id": "deepseek-default-off-check-in-route-adapter-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-v4-flash-check-in-route-adapter-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "claude_code_bare_deepseek",
+      "stage": "dispatch",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded implementation-and-test worker dispatch must return one preserved terminal result or fail as a sanitized non-result while leaving its exact isolated worktree unchanged before any source can be admitted.",
+      "observed_error": "The occupied DeepSeek V4 Flash/high launch exited 1 after producing no terminal worker result, diagnostic stderr, owned file or commit. The exact worker branch remained clean at frozen plan source 4daa2d772ffcf64e55f69917d2fb21802e959673.",
+      "detection_method": "The launcher returned a nonzero terminal status, the expected result artifact was absent, and Sol re-read the isolated branch, exact HEAD and empty worktree status before retaining the unchanged frozen package.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/raisa-default-off-check-in-route-adapter-first-transport-failure.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deepseek-worker-packet.md",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-recovery-lease.md",
+        "docs/ariadne-agent-error-correction-register-revision-375.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "transport.deepseek_claude_exit_1_before_worker_result",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Preserve the sanitized transport non-result, verify the exact isolated branch and HEAD remained clean, prohibit late worker-source adoption and let Sol implement the unchanged frozen package under an explicit recovery lease without a same-lane retry.",
+        "prevention_control": "After a recurrent DeepSeek exit-1 non-result, exact result-path, owned-path, HEAD and worktree readback are mandatory; a bounded Sol fallback may use only the already frozen package and Gemini independence remains required before acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/deepseek/raisa-default-off-check-in-route-adapter-first-transport-failure.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-recovery-lease.md",
+          "docs/ariadne-agent-error-correction-register-revision-375.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }
