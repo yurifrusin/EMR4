@@ -1,0 +1,107 @@
+{
+  "schema_version": "emr4.deepseek_native_harness_agentic_preflight.v1",
+  "recorded_at": "2026-08-18T15:06:36.8994425+10:00",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "registry_shasum": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+    "registry_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "npx": "11.16.0"
+  },
+  "profile": {
+    "profile": "headless",
+    "tools_mode": "native",
+    "permission_preset": "rehearsal-write",
+    "sandbox": "workspace-write",
+    "approval": "never",
+    "reasoning_effort": "high",
+    "model": "deepseek-v4-flash",
+    "max_output_tokens_per_request": 2048,
+    "max_parallel_tool_calls": 1,
+    "automatic_retries": 0,
+    "fallbacks": 0,
+    "profile_patch_sha256": "1c430fae949d34474855b699d7b48f9a0b4ae1db8382c0d0b8adb1661b22f897",
+    "enabled_model_tools": [
+      "pwsh",
+      "filesystem",
+      "filesystem_search",
+      "string_replace_editor"
+    ],
+    "disabled_surfaces": [
+      "bash",
+      "jobs",
+      "skills",
+      "goals",
+      "todo",
+      "ralph",
+      "subagents",
+      "workflows",
+      "web",
+      "code_runtime",
+      "compaction_model",
+      "session_title_model",
+      "telemetry",
+      "pi_ai_routes"
+    ]
+  },
+  "request_guard": {
+    "kind": "ephemeral_loopback_forward_counter",
+    "listen_host": "127.0.0.1",
+    "only_upstream": "https://api.deepseek.com/chat/completions",
+    "maximum_provider_requests": 6,
+    "maximum_request_body_bytes": 200000,
+    "maximum_wall_seconds": 600,
+    "source_sha256": "ff34cf2513340f03ea1bc1e1510ac5769d3bdf8a505eeb36241faf33cc8c4f33",
+    "persists_headers_or_bodies": false,
+    "rationale": "rc.7 dsh-agent-loop explicitly documents that it has no built-in turn budget; the loopback guard refuses request seven before provider I/O and refuses any request body above the byte ceiling."
+  },
+  "cost_envelope": {
+    "official_pricing_source": "https://api-docs.deepseek.com/quick_start/pricing",
+    "flash_cache_miss_input_usd_per_million_tokens": 0.14,
+    "flash_output_usd_per_million_tokens": 0.28,
+    "maximum_assumed_input_tokens": 1200000,
+    "maximum_output_tokens": 12288,
+    "derived_worst_case_usd": 0.17144064,
+    "frozen_cap_usd": 0.25
+  },
+  "credential_absent_admission": {
+    "initial_profile_boot": {
+      "result": "contained_before_provider_io",
+      "exit_code": 1,
+      "sanitized_error": "permission: composed sandbox and approval defaults match no preset; configure defaultPreset explicitly",
+      "correction": "added explicit rehearsal-write preset pairing workspace-write sandbox with never approval"
+    },
+    "corrected_profile_boot": {
+      "result": "expected_missing_credential_guard",
+      "exit_code": 1,
+      "duration_seconds": 1.2989528,
+      "error_code": "MISSING_CREDENTIAL",
+      "credential_reference": "DSH_REHEARSAL_INTENTIONALLY_ABSENT_KEY",
+      "provider_requests": 0,
+      "session_id": "e3487e05-8c42-43a1-934a-0952a86f029f",
+      "session_trace_bytes": 7018,
+      "session_trace_sha256": "145a57e95a4aa325c8ac1c637e3d9cd86b6d4a4929d59ba9a20532e51413907f"
+    }
+  },
+  "synthetic_baseline": {
+    "git_head": "26a79a46115681763fbff571fea27eddeb243a81",
+    "tracked_worktree_clean": true,
+    "test_command": "python -m unittest -v",
+    "tests_run": 4,
+    "tests_passed": 3,
+    "tests_failed": 1,
+    "failing_test": "test_contained_interval_preserves_later_overlap",
+    "allowlisted_edit_paths": ["intervals.py", "test_intervals.py"],
+    "baseline_file_sha256": {
+      "AGENTS.md": "288044cc61ed0c9d8e8b33fdba8e64b6656f2c6cd0d035f359f8635f4e4d325e",
+      ".gitignore": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "intervals.py": "7b1ec9621472e6d98549bddb1d28a5f51a0d40b11b0683e5973b192ef4294cc7",
+      "test_intervals.py": "f21926abd42af68f3f3fd3613c09786e0653f880936af5bf7bd8af3501898445"
+    }
+  },
+  "provider_requests_before_dispatch": 0,
+  "occupied_session_attempts_before_dispatch": 0,
+  "admission": "ready_for_one_occupied_session"
+}
