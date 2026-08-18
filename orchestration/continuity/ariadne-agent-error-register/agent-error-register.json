@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 417,
+  "register_revision": 420,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19387,6 +19387,123 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-417.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0488",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-worker-packet-discovery-003",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_rg",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every exact-path discovery operand must be confirmed from accepted evidence or checked for existence before a multi-file content search.",
+      "observed_error": "A bounded rg search included a guessed deepseek-native-harness-emr4-profile-validator-worker-packet.md operand that does not exist, so rg returned an exact missing-file error while still reporting matches from valid operands.",
+      "detection_method": "The rg process returned exit 2 and named the single nonexistent packet path before any worker container or provider call.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md",
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_worker_packet_path_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop dispatch, register the missing-path incident, retain the existing sparse worktree without launching a container and continue only from plan-named paths plus native exact inventory filtering.",
+        "prevention_control": "Do not infer worker-packet filenames; use only acceptance-named literals or first verify a guessed path with an exact existence check before including it in a search invocation.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-418.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0489",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-validator-008",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every register incident origin must match the category's canonical origin family before a revision can be accepted.",
+      "observed_error": "Revision 418 classified AER-0488 as origin agent_behavior with category operator_error, and the canonical validator rejected the required operator origin mapping.",
+      "detection_method": "The canonical register validator returned origin/category mismatch for AER-0488 before pattern generation or dispatch.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-418.md",
+        "docs/ariadne-agent-error-correction-register-revision-419.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_operator_error_origin_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Reclassify AER-0488 origin as operator, add AER-0489 and rerun canonical validation before accepting the register revision.",
+        "prevention_control": "Check each newly selected category against the register's origin-category mapping before applying aggregate baseline changes.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-419.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0490",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-patch-009",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A repeated-value register patch must include the exact incident_id context so it cannot mutate an earlier unrelated record.",
+      "observed_error": "The first origin correction patch matched the first origin agent_behavior occurrence and changed AER-0001 instead of AER-0488; immediate exact search exposed the unintended target before validation or dispatch.",
+      "detection_method": "An exact rg readback showed origin operator at AER-0001 while AER-0488 remained agent_behavior, proving the patch target was wrong.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-419.md",
+        "docs/ariadne-agent-error-correction-register-revision-420.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore AER-0001, change only AER-0488 under exact incident_id context, add AER-0490 and rerun canonical plus complete-suite validation.",
+        "prevention_control": "Every patch to a repeated register field must include the target incident_id in the same hunk and receive exact target plus sentinel readback before validation.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-420.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },
