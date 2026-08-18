@@ -1,0 +1,121 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness authored-synthetic traceability micro-rehearsal",
+    "completed_stage": "Complete fresh five-source rehydration confirms the predecessor latch complete, task/origin HEAD exact, all protected refs exact, Node/npm/npx available and DEEPSEEK_API_KEY present without disclosure. The one-call isolated plan is frozen before package bootstrap.",
+    "next_executable_stage": "pass_preplanning_receipt_then_explicitly_commit_the_frozen_plan_before_any_pinned_package_resolution",
+    "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "reason_codes": [],
+    "resolved_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "branch_origin_aligned": true,
+    "head": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "origin_branch_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 651
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The user explicitly requested one native-Harness rehearsal; the single occupied authored-synthetic Flash/high request is the entire measured work package.",
+        "work_packages": [
+          "one_pinned_native_harness_trace_ok_request_and_automatic_trace_artifacts"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "This tiny transport-observability measurement changes no product/runtime source; a second external model would add cost without independent product risk reduction.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and a parallel worker would add overhead to a single serial process.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+    "parallel_work_packages": [
+      "No parallel execution; the one native Harness request is itself the measured DeepSeek lane."
+    ],
+    "reassessment_triggers": [
+      "post_package_help",
+      "pre_occupied_request",
+      "post_process_exit",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit plan before package bootstrap",
+      "offline help/version before at most one occupied request",
+      "capture then cleanup before acceptance",
+      "Sol alone admits evidence and closes Git"
+    ]
+  },
+  "planned_action": "freeze_and_commit_the_one_call_native_deepseek_harness_traceability_micro_rehearsal_before_package_bootstrap",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-plan.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "https://github.com/deepseek-ai/deepseek-harness",
+      "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7"
+    ],
+    "current_authority_allocation": "GPT Sol owns planning, deterministic admission, acceptance, closeout and Git. DeepSeek V4 Flash/high owns exactly one native-Harness authored-synthetic request. Gemini is declined for this non-product transport measurement; native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task and origin task are exact 0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb on codex/ariadne-bernie-davida-parallel-seam with no tracked changes before plan authoring and the pre-existing untracked set preserved. Local/origin master and local/origin handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 317 / Compass 299 directs Yuri's authorised tiny isolated native DeepSeek Harness traceability rehearsal after accepted default-off check-in route convergence.",
+    "protected_evidence_boundaries": "One official pinned rc.7 native-Harness Flash/high request in an empty disposable workspace with a dedicated npm cache, exact benign prompt, USD 0.05 cap, no retry/fallback/tools/subagents and sanitized metadata only. No EMR4 source, untracked file, product/patient/clinical/protected data, global install/configuration, production/deployment/release/Pages/protected refs. docs/branding remains excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

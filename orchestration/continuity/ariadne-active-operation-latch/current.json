@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
-  "active_tranche": "Provider-free default-off canonical check-in route-adapter convergence rehearsal",
-  "objective": "Make the unchanged default-off A5.1 route delegate to the accepted canonical check-in product adapter while preserving the feature flag, authored-synthetic practice allowlist, exact request and response contract, default denial and every closed ordinary-product boundary.",
-  "status": "complete",
-  "source_head": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
-  "authority_source": "AGENTS.md Current Baton at Continuity 316 / Compass 298, the accepted check-in product-adapter extraction result and Yuri's standing uninterrupted-development authority direct this narrow default-off route-adapter convergence rehearsal.",
+  "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+  "active_tranche": "DeepSeek native Harness authored-synthetic traceability micro-rehearsal",
+  "objective": "Run one tiny authored-synthetic DeepSeek V4 Flash/high task through the pinned official native Harness and capture fail-closed terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
+  "status": "in_progress",
+  "source_head": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+  "authority_source": "Yuri explicitly authorised a very short rehearsal with the newly released native DeepSeek Harness; AGENTS.md Current Baton at Continuity 317 / Compass 299 directs this isolated traceability successor under standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Accepted reviewed candidate c82c3a741053a9c8da260aa62e1a968af22bb54e passes 103 focused, 35 database-backed and 85 API-Spine/plan checks. The fresh Gemini 3.7 Flash/high veto passed all eight commands with unchanged clean HEAD. AER-0426 through AER-0435 are corrected/contained; Continuity 317 / Compass 299 and the paired closeout are prepared.",
-    "next_executable_stage": null,
+    "completed_stage": "Complete fresh five-source rehydration confirms the predecessor latch complete, task/origin HEAD exact 0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb, all protected refs exact, Node/npm/npx available and DEEPSEEK_API_KEY present without disclosure. The one-call isolated plan is frozen before package bootstrap.",
+    "next_executable_stage": "generate_and_pass_the_fresh_preplanning_receipt_then_commit_the_plan_before_pinned_npx_help_and_headless_discovery",
     "retry_counters": {
       "planning": 0,
-      "implementation": 2,
-      "review": 1,
-      "verification": 5
+      "implementation": 0,
+      "review": 0,
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,26 +24,25 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_default_off_authored_synthetic_route_adapter_convergence_only",
-    "delegate_existing_a5_1_route_to_accepted_check_in_adapter_without_product_admission",
-    "existing_a5_1_feature_flag_authored_synthetic_allowlist_request_response_and_default_denial_preserved",
-    "no_practice_enablement_or_live_route_call",
-    "no_generic_status_arrived_admission_change",
-    "no_action_grammar_route_contract_or_client_change",
-    "no_waiting_area_move_or_removal_command",
-    "no_product_database_source_watcher_or_external_client_access",
+    "one_pinned_official_deepseek_harness_rc7_authored_synthetic_traceability_call_only",
+    "isolated_empty_disposable_workspace_and_dedicated_npm_cache_outside_emr4",
+    "exact_prompt_return_trace_ok_and_do_not_use_tools",
+    "maximum_one_deepseek_flash_high_request_no_retry_no_fallback_and_usd_0_05_cap",
+    "no_emr4_repository_source_or_untracked_file_exposure_to_harness",
     "no_product_patient_clinical_historical_or_protected_data",
-    "no_provider_adc_credentials_iam_network_or_executable_model_tool",
+    "no_tool_subagent_mcp_acp_plugin_attachment_browser_or_filesystem_action",
+    "no_raw_reasoning_request_response_credential_header_or_environment_persistence",
+    "no_global_install_path_profile_configuration_or_default_transport_change",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

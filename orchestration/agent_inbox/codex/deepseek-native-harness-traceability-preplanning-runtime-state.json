@@ -1,0 +1,93 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_commit_the_one_call_native_deepseek_harness_traceability_micro_rehearsal_before_package_bootstrap",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 317 / Compass 299 directs Yuri's authorised tiny isolated native DeepSeek Harness traceability rehearsal after accepted default-off check-in route convergence.",
+    "current_authority_allocation": "GPT Sol owns planning, deterministic admission, acceptance, closeout and Git. DeepSeek V4 Flash/high owns exactly one native-Harness authored-synthetic request. Gemini is declined for this non-product transport measurement; native subagents are declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-plan.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "https://github.com/deepseek-ai/deepseek-harness",
+      "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7"
+    ],
+    "protected_evidence_boundaries": "One official pinned rc.7 native-Harness Flash/high request in an empty disposable workspace with a dedicated npm cache, exact benign prompt, USD 0.05 cap, no retry/fallback/tools/subagents and sanitized metadata only. No EMR4 source, untracked file, product/patient/clinical/protected data, global install/configuration, production/deployment/release/Pages/protected refs. docs/branding remains excluded; explicit-path staging only.",
+    "git_refs_and_worktree": "Task and origin task are exact 0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb on codex/ariadne-bernie-davida-parallel-seam with no tracked changes before plan authoring and the pre-existing untracked set preserved. Local/origin master and local/origin handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+    "active_tranche": "DeepSeek native Harness authored-synthetic traceability micro-rehearsal",
+    "objective": "Run one tiny authored-synthetic DeepSeek V4 Flash/high task through the pinned official native Harness and capture fail-closed terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
+    "status": "in_progress",
+    "source_head": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "authority_source": "Yuri explicitly authorised a very short rehearsal with the newly released native DeepSeek Harness; AGENTS.md Current Baton at Continuity 317 / Compass 299 directs this isolated traceability successor under standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "Complete fresh five-source rehydration confirms the predecessor latch complete, task/origin HEAD exact, all protected refs exact, Node/npm/npx available and DEEPSEEK_API_KEY present without disclosure. The one-call isolated plan is frozen before package bootstrap.",
+      "next_executable_stage": "pass_preplanning_receipt_then_explicitly_commit_the_frozen_plan_before_any_pinned_package_resolution",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "one_pinned_official_deepseek_harness_rc7_authored_synthetic_traceability_call_only",
+      "isolated_empty_disposable_workspace_and_dedicated_npm_cache_outside_emr4",
+      "exact_prompt_return_trace_ok_and_do_not_use_tools",
+      "maximum_one_deepseek_flash_high_request_no_retry_no_fallback_and_usd_0_05_cap",
+      "no_emr4_repository_source_or_untracked_file_exposure_to_harness",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_tool_subagent_mcp_acp_plugin_attachment_browser_or_filesystem_action",
+      "no_raw_reasoning_request_response_credential_header_or_environment_persistence",
+      "no_global_install_path_profile_configuration_or_default_transport_change",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The user explicitly requested one native-Harness rehearsal; the single occupied authored-synthetic Flash/high request is the entire measured work package.", "work_packages": ["one_pinned_native_harness_trace_ok_request_and_automatic_trace_artifacts"]},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "neutral", "rationale": "This tiny transport-observability measurement changes no product/runtime source; a second external model would add cost without independent product risk reduction.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits proactive native delegation, and a parallel worker would add overhead to a single serial process.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["No parallel execution; the one native Harness request is itself the measured DeepSeek lane."],
+    "serial_constraints": ["commit plan before package bootstrap", "offline help/version before at most one occupied request", "capture then cleanup before acceptance", "Sol alone admits evidence and closes Git"],
+    "reassessment_triggers": ["post_package_help", "pre_occupied_request", "post_process_exit", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "complete fresh five-source rehydration, exact terminal predecessor latch, official release evidence and local tool/key-presence preflight",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed fresh rehydration and froze the one-call plan."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code transport is not selected; the native Harness request will be measured separately after plan commit."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini lane declined for this tiny transport measurement."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native subagent lane declined; no subagent was spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
