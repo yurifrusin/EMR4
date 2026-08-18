@@ -53,4 +53,3 @@ authored-synthetic configuration.
 No generic-status `Arrived`, grammar, client, waiting-area move/removal,
 product/patient/clinical/protected evidence, provider, live external network,
 deployment, release, Pages or protected-ref action is in scope.
-

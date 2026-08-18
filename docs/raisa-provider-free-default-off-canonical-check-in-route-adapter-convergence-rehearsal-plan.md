@@ -204,4 +204,3 @@ production runtime, deployment, release, Pages or protected-ref movement is
 authorised. Local/origin `master` and `handoff/current` remain exact
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Preserve `docs/branding/` and all
 unrelated untracked files; stage explicit paths only.
-
