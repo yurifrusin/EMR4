@@ -7,8 +7,8 @@
   "source_head": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
   "authority_source": "AGENTS.md Current Baton at Continuity 320 / Compass 302 names this exact successor under Yuri's standing uninterrupted-development authority; the accepted first attempt requires provider-free exact-tool-view proof before any fresh occupied dispatch.",
   "checkpoint": {
-    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed. Fresh corrected pre-dispatch receipt generation passed, the exact sparse packet is populated and AER-0492 corrects the first unquoted Docker format absence query. No worker/broker container, Docker network or volume, or occupied provider call has started.",
-    "next_executable_stage": "Validate and commit register revision 422 plus this checkpoint, generate another fresh receipt, then continue exact quoted Docker absence checks and one occupied launch.",
+    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed. Register revision 422 and AER-0492 are committed at 8be2502e9cfd06b0b0226e6284440c9d0e1ad0fc after complete validation; the exact sparse packet is populated. No worker/broker container, Docker network or volume, or occupied provider call has started.",
+    "next_executable_stage": "Generate a fresh five-source pre-dispatch receipt from the clean checkpoint descendant, then continue exact quoted Docker absence checks and one occupied launch.",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
