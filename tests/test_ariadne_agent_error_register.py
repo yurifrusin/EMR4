@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 543
+    assert register["register_revision"] == 552
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 630)
+        f"AER-{index:04d}" for index in range(1, 641)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 629
+    assert report["incident_count"] == 640
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,31 +3619,31 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 543
-    assert report["incident_count"] == 629
+    assert report["register_revision"] == 552
+    assert report["incident_count"] == 640
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 433,
         "harness": 54,
-        "operator": 31,
-        "repository": 95,
+        "operator": 36,
+        "repository": 101,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 86,
         "evidence_misreport": 67,
         "harness_failure": 54,
-        "operator_error": 31,
+        "operator_error": 36,
         "output_contract_violation": 230,
         "read_only_violation": 4,
         "reasoning_claim_error": 46,
-        "repository_defect": 95,
+        "repository_defect": 101,
         "transport_timeout": 16,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
         "canonical_unchanged": 391,
-        "untrusted_partial_worktree": 124,
+        "untrusted_partial_worktree": 135,
     }
     receipt_event_recurrence = next(
         row
@@ -8911,3 +8911,105 @@ def test_aer_0616_through_0629_preserve_clockwork_construction_reruns() -> None:
             boundary_projection,
         )
     )
+
+
+def test_aer_0630_through_0634_preserve_governance_repair_construction_cost() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    assert list(incidents)[629:634] == [
+        "AER-0630",
+        "AER-0631",
+        "AER-0632",
+        "AER-0633",
+        "AER-0634",
+    ]
+
+    module_entry = incidents["AER-0630"]
+    patch_shape = incidents["AER-0631"]
+    immutable_input = incidents["AER-0632"]
+    stage_vocabulary = incidents["AER-0633"]
+    process_shape = incidents["AER-0634"]
+    assert module_entry["origin"] == "operator"
+    assert "module entry point" in module_entry["expected_invariant"]
+    assert "same exact path" in patch_shape["expected_invariant"]
+    assert immutable_input["origin"] == "repository"
+    assert immutable_input["category"] == "repository_defect"
+    assert "deep-copy" in immutable_input["correction"]["action"]
+    assert "closed vocabulary" in stage_vocabulary["expected_invariant"]
+    assert "one executable" in process_shape["expected_invariant"]
+    assert all(row["status"] == "corrected" for row in (
+        module_entry,
+        patch_shape,
+        immutable_input,
+        stage_vocabulary,
+        process_shape,
+    ))
+
+
+def test_aer_0635_and_0636_preserve_generated_cleanup_and_literal_corrections() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0635"]
+    literal = incidents["AER-0636"]
+    assert list(incidents)[634:636] == ["AER-0635", "AER-0636"]
+    assert incident["origin"] == "operator"
+    assert incident["category"] == "operator_error"
+    assert "rejected by the desktop policy" in incident["observed_error"]
+    assert "three operation-owned generated files" in incident["correction"]["action"]
+    assert incident["status"] == "corrected"
+    assert literal["origin"] == "repository"
+    assert literal["category"] == "repository_defect"
+    assert literal["recurrence_signature"] == (
+        "repository.current_register_test_used_near_synonym_literal"
+    )
+    assert literal["status"] == "corrected"
+
+
+def test_aer_0637_preserves_the_structural_assertion_correction() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    structural = incidents["AER-0637"]
+    assert list(incidents)[636:637] == ["AER-0637"]
+    assert structural["origin"] == "repository"
+    assert structural["category"] == "repository_defect"
+    assert structural["recurrence_signature"] == (
+        "repository.current_register_test_claimed_structural_but_asserted_prose"
+    )
+    assert structural["correction"]["status"] == "corrected_fresh_attempt"
+    assert structural["status"] == "corrected"
+
+
+def test_aer_0638_preserves_current_projection_fixture_correction() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    projection = incidents["AER-0638"]
+    assert list(incidents)[637:638] == ["AER-0638"]
+    assert projection["origin"] == "repository"
+    assert projection["category"] == "repository_defect"
+    assert projection["recurrence_signature"] == (
+        "repository.current_register_population_and_origin_projection_stale"
+    )
+    assert projection["correction"]["status"] == "corrected_fresh_attempt"
+    assert projection["status"] == "corrected"
+
+
+def test_aer_0639_preserves_generated_count_readback_correction() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    readback = incidents["AER-0639"]
+    assert list(incidents)[638:639] == ["AER-0639"]
+    assert readback["origin"] == "repository"
+    assert readback["category"] == "repository_defect"
+    assert readback["recurrence_signature"] == (
+        "repository.current_register_aggregate_reconstructed_instead_of_read_back"
+    )
+    assert readback["correction"]["status"] == "corrected_fresh_attempt"
+    assert readback["status"] == "corrected"
+
+
+def test_aer_0640_preserves_cached_diff_whitespace_admission() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    whitespace = incidents["AER-0640"]
+    assert list(incidents)[639:640] == ["AER-0640"]
+    assert whitespace["origin"] == "repository"
+    assert whitespace["category"] == "repository_defect"
+    assert whitespace["recurrence_signature"] == (
+        "repository.new_markdown_hard_breaks_rejected_by_cached_diff_check"
+    )
+    assert whitespace["correction"]["status"] == "corrected_fresh_attempt"
+    assert whitespace["status"] == "corrected"

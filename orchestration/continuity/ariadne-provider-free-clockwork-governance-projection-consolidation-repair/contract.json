@@ -1,0 +1,67 @@
+{
+  "schema_version": "ariadne.governance_projection_contract.v1",
+  "operation_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+  "required_ancestor": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
+  "protected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "predecessor_acknowledged_tip_sha256": "916165250796d6e07d2720e06774d575db3441b746cee82b3c3f13706cf75074",
+  "predecessor_sunk_reruns": 13,
+  "baseline_surrounding_reruns": 9,
+  "maximum_steady_state_surrounding_reruns": 1,
+  "incremental_line_budget": 850,
+  "minimum_surface_reduction_percent": 50.0,
+  "failure_classes": {
+    "operator_command": {"category": "operator_error", "origin": "operator"},
+    "projection_contract": {"category": "output_contract_violation", "origin": "agent_behavior"},
+    "repository_projection": {"category": "repository_defect", "origin": "repository"}
+  },
+  "gate_result_mappings": {
+    "accepted": {"continuity_node": "accepted", "continuity_decision": "accepted", "compass": "active", "latch": "complete", "attention": false},
+    "rejected": {"continuity_node": "rejected", "continuity_decision": "rejected", "compass": "blocked", "latch": "blocked", "attention": true}
+  },
+  "inherited_boundaries": [
+    "zero_new_mutable_current_fixtures",
+    "no_live_adoption_or_current_control_retirement",
+    "no_provider_product_runtime_or_protected_ref_effect",
+    "explicit_path_staging_only"
+  ],
+  "commands": [
+    {"command_id": "register_project", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_agent_error_register", "--register", "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json", "--schema", "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json", "--output", "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"]},
+    {"command_id": "governance_packet", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "pytest", "-q", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"]}
+  ],
+  "baseline_maintained_surfaces": [
+    "register_incident_derived_fields",
+    "register_pattern_report",
+    "register_revision_document_counts",
+    "register_command_shape",
+    "register_mutable_literal_tests",
+    "continuity_status_updater",
+    "compass_serial_projection",
+    "current_baton_counts_and_sentinels",
+    "current_baton_next_boundary",
+    "active_latch_terminal_projection"
+  ],
+  "candidate_maintained_surfaces": [
+    "semantic_observation_journal",
+    "governance_policy_contract",
+    "governance_projection_reducer",
+    "structural_invariant_tests"
+  ],
+  "legacy_bindings": [
+    {"binding_id": "register_origin", "owner": "incident_projection"},
+    {"binding_id": "register_category", "owner": "incident_projection"},
+    {"binding_id": "register_attempt_id", "owner": "incident_projection"},
+    {"binding_id": "register_peer_links", "owner": "incident_projection"},
+    {"binding_id": "register_revision", "owner": "revision_projection"},
+    {"binding_id": "register_counts", "owner": "pattern_projection"},
+    {"binding_id": "register_recurrence", "owner": "pattern_projection"},
+    {"binding_id": "command_executable", "owner": "command_projection"},
+    {"binding_id": "command_arguments_and_output", "owner": "command_projection"},
+    {"binding_id": "continuity_status", "owner": "continuity_projection"},
+    {"binding_id": "compass_status", "owner": "compass_projection"},
+    {"binding_id": "baton_register_reading", "owner": "baton_projection"},
+    {"binding_id": "baton_result_reading", "owner": "baton_projection"},
+    {"binding_id": "baton_next_boundary", "owner": "baton_projection"},
+    {"binding_id": "latch_terminal_state", "owner": "latch_projection"}
+  ],
+  "line_budget_files": ["orchestration_harness/governance_clockwork.py", "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py", "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json", "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json", "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"]
+}

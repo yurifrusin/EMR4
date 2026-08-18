@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
-  "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear rehearsal",
-  "objective": "Implement and evaluate only the provider-free request, lease, terminal-result and acknowledgement engine in one private shadow generation against frozen representative workflow fixtures, measuring whether shared clockwork materially reduces procedural reruns without losing coverage or opening live authority.",
-  "status": "blocked",
-  "source_head": "a4044010e9f9319e149660ad889141a32cc8d000",
-  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803, its published closeout at 159301c3ef84c3f274971df9ef0776312b99f7af and Yuri's standing uninterrupted-development authority authorize only this provider-free private-shadow efficacy rehearsal.",
+  "operation_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+  "active_tranche": "Ariadne provider-free clockwork governance projection consolidation repair",
+  "objective": "Implement and evaluate one provider-free private-shadow governance reducer that derives the incident register, recurrence report, revision/count readings, typed command manifest, Continuity/Compass deltas, Current Baton fields and latch transition from one acknowledged clock tick, while replaying the preserved failure probes and measuring construction cost, steady-state reruns, maintained surface and break-even before any live adoption or control retirement.",
+  "status": "in_progress",
+  "source_head": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
+  "authority_source": "AGENTS.md Current Baton Next implementation, the rejected rehearsal at a4044010e9f9319e149660ad889141a32cc8d000, Yuri's explicit 2026-08-19 choice of the bounded repair and standing uninterrupted-development authority authorize only this provider-free private-shadow governance projection consolidation repair.",
   "checkpoint": {
-    "completed_stage": "The provider-free rehearsal is factually closed at exact deterministic candidate a4044010e9f9319e149660ad889141a32cc8d000 with 14/14 gauges covered, zero provider calls and thirteen failure-induced reruns; the candidate is rejected because 7.143 percent reduction fails the frozen 50 percent gate.",
-    "next_executable_stage": "await_yuri_choice_between_one_bounded_governance_projection_repair_and_freezing_clockwork_as_research_evidence",
+    "completed_stage": "The predecessor rehearsal is factually closed revision-required with thirteen reruns, the user selected one bounded repair, AGENTS.md and active predecessor acceptance were reread, protected refs and task refs were verified, and the predecessor blocked latch passed structural validation.",
+    "next_executable_stage": "generate_and_validate_the_fresh_five_source_preplanning_receipt_then_freeze_the_narrow_repair_plan",
     "retry_counters": {
-      "planning": 0,
-      "implementation": 3,
+      "planning": 2,
+      "implementation": 1,
       "review": 0,
-      "verification": 10
+      "verification": 8
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,26 +24,27 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "The measured rehearsal failed its efficacy gate. Expanding the clock into the legacy register and command manifest is a material scope choice; alternatively the engine should be frozen and product work resumed."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_evaluated_and_closed_revision_required_with_genuine_user_attention_fork"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_private_shadow_request_lease_result_and_acknowledgement_engine_only",
-    "accepted_architecture_and_current_control_plane_sources_remain_read_only",
-    "frozen_representative_workflow_fixtures_only_with_no_mutable_current_fixture",
-    "fourteen_failure_induced_reruns_is_the_frozen_conventional_comparator_and_pass_requires_seven_or_fewer",
-    "zero_caller_binding_fields_zero_partial_publication_zero_uncaught_escape_and_no_coverage_loss",
-    "shared_engine_growth_and_clean_run_overhead_reported_without_timing_based_acceptance",
-    "single_writer_lease_exact_terminal_result_and_acknowledgement_remain_mandatory",
-    "presets_profiles_and_tools_remain_digest_bound_configuration_not_authority",
+    "provider_free_private_shadow_governance_projection_repair_only",
+    "accepted_clockwork_and_live_governance_controls_remain_authoritative_until_separate_adoption",
+    "all_thirteen_predecessor_failures_retained_as_immutable_probes_and_nine_surrounding_reruns_classified_separately",
+    "zero_caller_authored_oids_counts_statuses_peer_links_output_paths_or_projection_revisions",
+    "zero_new_mutable_current_fixtures_zero_partial_publications_zero_uncaught_escapes_and_no_coverage_loss",
+    "candidate_steady_state_surrounding_reruns_at_most_one_per_representative_closeout",
+    "repair_construction_cost_steady_state_cost_and_break_even_reported_without_amortisation",
+    "incremental_shared_engine_runner_contract_fixture_and_test_growth_has_an_explicit_budget",
+    "shadow_maintained_governance_surface_must_shrink_and_no_long_term_dual_control_plane_may_be_accepted",
     "no_live_clockwork_adoption_or_current_control_retirement",
-    "no_occupied_deepseek_hmr_or_other_provider_call",
+    "no_occupied_deepseek_hmr_claude_code_fallback_or_other_provider_call",
     "no_product_practice_git_or_ordinary_practice_authority",
     "no_product_configuration_openapi_graphql_route_database_or_client_change",
     "no_product_patient_clinical_historical_or_protected_data",

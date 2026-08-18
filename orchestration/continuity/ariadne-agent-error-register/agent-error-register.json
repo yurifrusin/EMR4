@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 543,
+  "register_revision": 552,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -24892,6 +24892,421 @@
           "AGENTS.md",
           "tests/test_current_baton_consistency.py",
           "docs/ariadne-agent-error-correction-register-revision-543.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0630",
+      "attempt_id": "clockwork-governance-latch-helper-invocation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-python-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_process",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Repository scripts that import orchestration_harness must be invoked through their supported module entry point so the repository root is on the import path.",
+      "observed_error": "The first read-only latch-helper orientation invoked the script file directly and failed before argument parsing with ModuleNotFoundError for orchestration_harness.",
+      "detection_method": "The local Python process returned the exact import traceback; the supported module invocation then printed help and the latch validation passed.",
+      "evidence_paths": [
+        "scripts/ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-544.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.repository_script_invoked_without_module_import_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count one planning retry and invoke the helper through python -m scripts.ariadne_active_operation_latch.",
+        "prevention_control": "The generated command catalogue owns repository Python entry points and emits module invocations rather than remembered file-style commands.",
+        "evidence_paths": [
+          "scripts/ariadne_active_operation_latch.py",
+          "docs/ariadne-agent-error-correction-register-revision-544.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0631",
+      "attempt_id": "clockwork-governance-successor-latch-patch-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A patch must not express delete and add operations for the same exact path in one patch transaction.",
+      "observed_error": "The first successor-latch patch combined delete and add operations for current.json and was rejected before changing any file.",
+      "detection_method": "The patch validator returned the exact multiple-operations-on-one-target diagnostic; separate explicit delete and add transactions then produced a valid latch.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-544.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.apply_patch_delete_and_add_same_target_in_one_transaction",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a second planning retry, preserve the rejection and use separate exact-path patch operations followed by latch validation.",
+        "prevention_control": "Generated projection publication uses one staged generation and atomic rename; manual apply_patch replacement must use one operation per exact path.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-544.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0632",
+      "attempt_id": "clockwork-governance-observation-reuse-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "governance-projection-incident-observation-reducer",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Projection derivation must not mutate a caller's validated semantic observation, so the same observation can be reused in a later representative reading.",
+      "observed_error": "The first focused run popped failure_class from the caller-owned observation; a later split-resource reading reused that object and failed exact-key validation.",
+      "detection_method": "The complete focused suite reported one observation_keys rejection after four tests passed; stack readback located the in-place pop.",
+      "evidence_paths": [
+        "orchestration_harness/governance_clockwork.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "docs/ariadne-agent-error-correction-register-revision-544.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.governance_reducer_mutated_caller_observation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count one implementation retry, deep-copy the exact validated observation before derivation and rerun the complete focused suite.",
+        "prevention_control": "The reducer treats semantic observations as immutable inputs; reuse and split-resource tests exercise both paths.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "docs/ariadne-agent-error-correction-register-revision-544.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0633",
+      "attempt_id": "clockwork-governance-register-stage-vocabulary-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every new register incident must select its stage from the register schema's closed vocabulary before the canonical pattern-report command runs.",
+      "observed_error": "The first revision-544 register draft used pre_sprint_planning for AER-0630 and AER-0631 even though that value belongs to continuation events rather than the register stage enum.",
+      "detection_method": "The register validator failed closed on the exact schema enum mismatch before writing pattern-report.json.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+        "docs/ariadne-agent-error-correction-register-revision-544.md",
+        "docs/ariadne-agent-error-correction-register-revision-545.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.register_stage_used_continuation_event_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve revision 544 as rejected, count one verification retry, map both planning incidents to deterministic_verification, add AER-0633 and rerun the exact typed register command.",
+        "prevention_control": "The prospective governance reducer must map one semantic stage through the register's closed stage vocabulary; until live adoption, inspect that enum before authoring incidents.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-544.md",
+          "docs/ariadne-agent-error-correction-register-revision-545.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0634",
+      "attempt_id": "clockwork-governance-register-baseline-search-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_rg",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Repository orientation commands must run one executable per shell process and must not chain multiple searches with shell separators.",
+      "observed_error": "One read-only register-test orientation command chained three ripgrep invocations with PowerShell semicolons instead of using one typed invocation.",
+      "detection_method": "Immediate command readback showed the three executable invocations in one shell process; no repository state changed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-546.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.multiple_repository_search_executables_chained_by_shell_separator",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a second verification retry and replace the chained searches with one ripgrep process using multiple fixed-string -e operands.",
+        "prevention_control": "The typed command projection emits one executable plus an argument array; manual repository commands follow the same one-process shape until adoption.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-546.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0635",
+      "attempt_id": "clockwork-governance-superseded-shadow-cleanup-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_policy_guard",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Cleanup of operation-owned generated files must use an approved exact-target mechanism and must never risk pre-existing untracked files.",
+      "observed_error": "A guarded PowerShell recursive removal of the superseded private-shadow generation was rejected by the desktop policy before any deletion.",
+      "detection_method": "The execution policy returned a blocked-by-policy result; exact apply-patch deletion then removed only the three newly generated superseded files.",
+      "evidence_paths": [
+        "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "docs/ariadne-agent-error-correction-register-revision-547.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.recursive_generated_cleanup_blocked_before_exact_file_deletion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a third verification retry and delete only the three operation-owned generated files through explicit apply-patch file operations.",
+        "prevention_control": "The reducer publishes one final digest-named generation; superseded operation-owned files use explicit-file cleanup and all pre-existing untracked paths remain excluded.",
+        "evidence_paths": [
+          "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "docs/ariadne-agent-error-correction-register-revision-547.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0636",
+      "attempt_id": "clockwork-governance-register-cleanup-assertion-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-literal-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A newly appended current-register test must use an exact phrase present in the incident or assert a structural field instead of a near-synonym.",
+      "observed_error": "The complete register suite reached its final test and failed because the assertion searched for blocked while the incident text said rejected by the desktop policy.",
+      "detection_method": "The full serial suite reported one final exact AssertionError after every preceding register test passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-548.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_register_test_used_near_synonym_literal",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a fourth verification retry, replace the near-synonym with the exact preserved phrase, add AER-0636 and rerun the complete register suite.",
+        "prevention_control": "Future adopted clockwork tests validate structural incident fields and generated digests rather than repeating mutable current prose.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-548.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0637",
+      "attempt_id": "clockwork-governance-register-structural-assertion-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-structural-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A correction that replaces a brittle prose assertion with a structural assertion must test a stable structured field rather than another prose token.",
+      "observed_error": "The complete register suite reached its final test and failed because the purported structural correction still searched observed_error for the prose label near-synonym, which was not present in the preserved incident sentence.",
+      "detection_method": "The full serial suite reported one final exact AssertionError after all preceding register tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-549.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_register_test_claimed_structural_but_asserted_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a fifth verification retry, replace the prose search with an exact recurrence_signature assertion, append AER-0637 and rerun the complete register suite.",
+        "prevention_control": "A structural register assertion names a typed key and exact closed-vocabulary value; it does not search narrative fields for explanatory wording.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-549.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0638",
+      "attempt_id": "clockwork-governance-register-current-fixtures-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-projection-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "After an accepted register append, all still-live exact population and aggregate fixtures must advance together before the complete suite is rerun.",
+      "observed_error": "The complete suite found two stale hand-maintained projections after AER-0637: the explicit incident-ID range still ended at AER-0636 and the repository-origin aggregate remained one lower than the generated report.",
+      "detection_method": "The full serial suite reported one population-list mismatch and one by-origin aggregate mismatch; all other tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-550.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_register_population_and_origin_projection_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a sixth verification retry, advance every affected exact population and aggregate fixture, append AER-0638, regenerate the pattern report and rerun the complete suite.",
+        "prevention_control": "The proposed clockwork projection owns population and aggregate readings from one validated register source; until adoption, the generated report is compared to every remaining exact fixture before the full suite runs.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-550.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0639",
+      "attempt_id": "clockwork-governance-register-generated-count-readback-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-projection-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Exact aggregate fixtures must be copied from the validated generated report and must not be reconstructed by manual arithmetic.",
+      "observed_error": "The focused projection check found that untrusted_partial_worktree was set to 132 although the regenerated pattern report correctly read 133 before AER-0639 was appended.",
+      "detection_method": "A focused pytest compared the hand-maintained aggregate with build_pattern_report and reported the exact 132-versus-133 mismatch before a full-suite rerun.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-551.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_register_aggregate_reconstructed_instead_of_read_back",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a seventh verification retry, append AER-0639, regenerate the report and copy every resulting aggregate directly from that machine reading before rerunning focused or complete tests.",
+        "prevention_control": "No aggregate is manually incremented; the validated generated report is the only numerical source until the clockwork projection replaces the duplicate fixture.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-551.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0640",
+      "attempt_id": "clockwork-governance-candidate-whitespace-admission-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "git-cached-diff-whitespace-gate",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_diff_cached_check",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every exact staged candidate must pass git diff --cached --check before a commit is created.",
+      "observed_error": "The first exact staging attempt was rejected because eight register-revision notes plus the plan and threat delta contained Markdown two-space hard breaks reported as trailing whitespace.",
+      "detection_method": "git diff --cached --check returned a nonzero result with every exact file and line; no commit was created.",
+      "evidence_paths": [
+        "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md",
+        "docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-552.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.new_markdown_hard_breaks_rejected_by_cached_diff_check",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count an eighth verification retry, remove the trailing spaces with exact-file edits, append AER-0640 and rerun cached-diff and deterministic admission.",
+        "prevention_control": "New Markdown uses ordinary line breaks; exact candidate staging always runs git diff --cached --check before commit.",
+        "evidence_paths": [
+          "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md",
+          "docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-552.md"
         ]
       },
       "status": "corrected"

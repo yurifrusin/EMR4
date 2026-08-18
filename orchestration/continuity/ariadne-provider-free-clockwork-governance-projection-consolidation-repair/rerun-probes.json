@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.governance_rerun_probes.v1",
+  "probes": [
+    {"probe_id": "rerun-01", "incident_ids": ["AER-0616"], "classification": "clock_core", "failure_signature": "generic_json_readback_rejected_declared_array", "control_owner": "clock_tip_binding"},
+    {"probe_id": "rerun-02", "incident_ids": ["AER-0617"], "classification": "clock_core", "failure_signature": "efficacy_percentage_and_digest_scope_diverged", "control_owner": "efficacy_binding"},
+    {"probe_id": "rerun-03", "incident_ids": ["AER-0618"], "classification": "surrounding_governance", "failure_signature": "register_category_origin_not_derived", "control_owner": "incident_projection"},
+    {"probe_id": "rerun-04", "incident_ids": ["AER-0619"], "classification": "surrounding_governance", "failure_signature": "compound_regex_not_validated", "control_owner": "command_projection"},
+    {"probe_id": "rerun-05", "incident_ids": ["AER-0620", "AER-0621"], "classification": "surrounding_governance", "failure_signature": "register_output_and_test_projection_drift", "control_owner": "command_projection"},
+    {"probe_id": "rerun-06", "incident_ids": ["AER-0622"], "classification": "surrounding_governance", "failure_signature": "attempt_identity_spanned_resources", "control_owner": "incident_projection"},
+    {"probe_id": "rerun-07", "incident_ids": ["AER-0623"], "classification": "surrounding_governance", "failure_signature": "peer_links_survived_attempt_split", "control_owner": "incident_projection"},
+    {"probe_id": "rerun-08", "incident_ids": ["AER-0624"], "classification": "clock_core", "failure_signature": "retry_projection_not_bound_to_tick", "control_owner": "clock_tip_binding"},
+    {"probe_id": "rerun-09", "incident_ids": ["AER-0625"], "classification": "clock_core", "failure_signature": "live_rejection_retained_acceptance_fixture", "control_owner": "efficacy_binding"},
+    {"probe_id": "rerun-10", "incident_ids": ["AER-0626"], "classification": "surrounding_governance", "failure_signature": "continuity_vocabulary_search_regex_failed", "control_owner": "command_projection"},
+    {"probe_id": "rerun-11", "incident_ids": ["AER-0627"], "classification": "surrounding_governance", "failure_signature": "continuity_used_latch_vocabulary", "control_owner": "continuity_projection"},
+    {"probe_id": "rerun-12", "incident_ids": ["AER-0628"], "classification": "surrounding_governance", "failure_signature": "four_legacy_projections_stale", "control_owner": "atomic_projection_binding"},
+    {"probe_id": "rerun-13", "incident_ids": ["AER-0629"], "classification": "surrounding_governance", "failure_signature": "next_boundary_omitted_mutable_fixture_guard", "control_owner": "baton_projection"}
+  ]
+}
