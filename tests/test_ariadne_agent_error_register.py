@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 402
+    assert register["register_revision"] == 408
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 464)
+        f"AER-{index:04d}" for index in range(1, 473)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 329
+    assert len(agent_incidents) == 335
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 463
+    assert report["incident_count"] == 472
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,30 +3619,30 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 402
-    assert report["incident_count"] == 463
+    assert report["register_revision"] == 408
+    assert report["incident_count"] == 472
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 329,
+        "agent_behavior": 335,
         "harness": 51,
         "operator": 1,
-        "repository": 66,
+        "repository": 69,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 72,
+        "command_scope_violation": 73,
         "evidence_misreport": 62,
         "harness_failure": 51,
         "operator_error": 1,
-        "output_contract_violation": 146,
+        "output_contract_violation": 151,
         "read_only_violation": 3,
         "reasoning_claim_error": 46,
-        "repository_defect": 66,
+        "repository_defect": 69,
         "transport_timeout": 16,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 307,
+        "canonical_unchanged": 316,
         "untrusted_partial_worktree": 42,
     }
     receipt_event_recurrence = next(
@@ -3791,6 +3791,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "AER-0463",
     ]
     assert compass_sentinel_recurrence["incident_count"] == 2
+    register_literal_baseline_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "repository.agent_error_register_literal_baseline_stale_after_valid_advance"
+    )
+    assert register_literal_baseline_recurrence["incident_ids"] == [
+        "AER-0470",
+        "AER-0471",
+    ]
+    assert register_literal_baseline_recurrence["incident_count"] == 2
     assert [
         row
         for row in report["recurring_patterns"]
@@ -3809,6 +3820,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.plan_precommit_parallelism_disposition_invalid",
             "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
             "repository.compass_current_position_literal_stale_after_valid_advance",
+            "repository.agent_error_register_literal_baseline_stale_after_valid_advance",
         }
     ] == [
         {

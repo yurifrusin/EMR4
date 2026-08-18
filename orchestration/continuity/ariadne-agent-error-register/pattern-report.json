@@ -1,39 +1,40 @@
 {
-  "canonical_register_sha256": "b0a9b0a898598bee8c412cb02045a1c40c4bad8a0fa95bdfcf2d24c5bc0fbfc1",
+  "canonical_register_sha256": "4fccc32e2bfbdaca1a48a977e97f33aebf2908704f8c9b3cb513dec2ca60418a",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 307,
+      "canonical_unchanged": 316,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
-      "command_scope_violation": 72,
+      "command_scope_violation": 73,
       "evidence_misreport": 62,
       "harness_failure": 51,
       "operator_error": 1,
-      "output_contract_violation": 146,
+      "output_contract_violation": 151,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
-      "repository_defect": 66,
+      "repository_defect": 69,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 329,
+      "agent_behavior": 335,
       "harness": 51,
       "operator": 1,
-      "repository": 66,
+      "repository": 69,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 206,
+      "low": 214,
       "material": 116,
-      "moderate": 141
+      "moderate": 142
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
+      "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 1,
       "ariadne-compass-current-position-test::orchestrator": 2,
@@ -48,7 +49,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 247,
+      "codex-primary-orchestrator::orchestrator": 253,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -114,12 +115,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 363,
+      "orchestrator": 372,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 463,
+  "incident_count": 472,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1184,6 +1185,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0470",
+        "AER-0471"
+      ],
+      "origins": [
+        "repository"
+      ],
+      "prevention_controls": [
+        "Every accepted register revision must baseline-check and advance the canonical register revision, total-count and origin-count test literals before the complete suite is launched.",
+        "Treat the contiguous ID range, revision, total, origin, category and candidate-state maps as one atomic baseline update for every accepted register revision."
+      ],
+      "recurrence_signature": "repository.agent_error_register_literal_baseline_stale_after_valid_advance",
+      "resource_ids": [
+        "ariadne-agent-error-register-tests"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "repository_defect"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0388",
         "AER-0463"
       ],
@@ -1362,7 +1387,7 @@
       ]
     }
   ],
-  "register_revision": 402,
+  "register_revision": 408,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_corrections_evidence.v1",
+  "operation_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+  "generated_at": "2026-08-18T18:16:33.2744440+10:00",
+  "incidents": [
+    {
+      "incident_id": "AER-0464",
+      "result": "preplanning_receipt_rejected_operation_mismatch",
+      "observed_reason": "parallelism_assessment_operation_mismatch",
+      "side_effects": "none",
+      "correction": "The immutable rejected receipt was preserved; the runtime assessment was rebound to the still-current complete latch operation and a distinct corrected receipt passed."
+    },
+    {
+      "incident_id": "AER-0465",
+      "result": "successor_latch_rejected_invalid_terminal_reason",
+      "observed_reason": "in_progress terminal reason is invalid",
+      "side_effects": "none",
+      "correction": "The latch was corrected to the canonical unfinished_authorized_operation reason and standalone validation passed before any continuation receipt, staging or dispatch."
+    },
+    {
+      "incident_id": "AER-0466",
+      "result": "single_process_shell_gate_breached_by_pipeline",
+      "observed_reason": "An rg file-list command was piped to Select-String despite the active one-executable/no-pipeline correction.",
+      "side_effects": "read_only_output_only",
+      "correction": "The result was not used as authority. Subsequent discovery commands are constrained to one executable with native include/glob arguments and no PowerShell pipeline."
+    },
+    {
+      "incident_id": "AER-0467",
+      "result": "active_latch_validator_invoked_without_module_import_context",
+      "observed_reason": "Direct script-path invocation could not import orchestration_harness.",
+      "side_effects": "none",
+      "correction": "The validator was rerun through python -m scripts.ariadne_active_operation_latch and passed. Module-form invocation is retained for repository scripts that import root packages."
+    },
+    {
+      "incident_id": "AER-0468",
+      "result": "agent_error_register_revision_403_rejected_by_schema",
+      "observed_reason": "Four incident stages and one category were outside the canonical enum.",
+      "side_effects": "none",
+      "correction": "Revision 405 retains the admitted deterministic_verification stages, corrects the later semantic defects, preserves revisions 403 and 404 as rejected correction history, and passes full register validation."
+    },
+    {
+      "incident_id": "AER-0469",
+      "result": "agent_error_register_revision_404_rejected_by_semantic_validator",
+      "observed_reason": "related_incident_ids was incorrectly used for cross-attempt lineage and one operator_error category conflicted with agent_behavior origin.",
+      "side_effects": "none",
+      "correction": "Revision 405 leaves related_incident_ids empty for distinct attempts, classifies the module invocation as an agent output-contract violation, and passes schema plus semantic validation."
+    },
+    {
+      "incident_id": "AER-0470",
+      "result": "agent_error_register_test_baselines_stale_after_valid_revision_advance",
+      "observed_reason": "Four literal revision, incident-count and agent-origin-count assertions still described revision 402.",
+      "side_effects": "none",
+      "correction": "Only the stale canonical literals were advanced to revision 406, 470 incidents and 335 agent-origin incidents; all structural and semantic assertions remain intact."
+    },
+    {
+      "incident_id": "AER-0471",
+      "result": "register_suite_second_baseline_correction_incomplete",
+      "observed_reason": "The first literal correction omitted the contiguous incident-id range plus origin, category and candidate-state aggregate maps.",
+      "side_effects": "none",
+      "correction": "Revision 407 advances the complete coupled baseline set and the full register suite passes."
+    },
+    {
+      "incident_id": "AER-0472",
+      "result": "register_suite_recurring_pattern_baseline_stale",
+      "observed_reason": "The new two-incident literal-baseline recurrence was not explicitly admitted by the recurring-pattern sentinel.",
+      "side_effects": "none",
+      "correction": "Revision 408 asserts the exact AER-0470/AER-0471 recurrence and includes its signature in the enumerated recurring-pattern set."
+    }
+  ],
+  "provider_calls": 0,
+  "worker_dispatches": 0,
+  "git_staging_or_commits": 0,
+  "protected_ref_changes": 0,
+  "candidate_changes": 0
+}

@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
-  "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
-  "objective": "Freeze a versioned three-profile native-Harness authority contract and use its bounded-worker profile for one real low-risk provider-free EMR4 harness-development package with attributable session evidence and Sol-only candidate admission.",
-  "status": "complete",
-  "source_head": "af1a79f93024a7186849e550b4d529c8c601c93f",
-  "authority_source": "AGENTS.md Current Baton now records the accepted Continuity 320 / Compass 302 result; the operation derived from its prior 319 / 301 successor authority and Yuri's direction to gather monitored useful EMR4 evidence with prepaid credit as monetary budget.",
+  "operation_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+  "active_tranche": "DeepSeek native Harness exact-tool-view recovery and second monitored development admission",
+  "objective": "Prove an exact package-native read/glob/edit model-facing tool view provider-free, then conditionally run one fresh second monitored native-Harness worker session over the unchanged two-path EMR4 profile-validator package.",
+  "status": "in_progress",
+  "source_head": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
+  "authority_source": "AGENTS.md Current Baton at Continuity 320 / Compass 302 names this exact successor under Yuri's standing uninterrupted-development authority; the accepted first attempt requires provider-free exact-tool-view proof before any fresh occupied dispatch.",
   "checkpoint": {
-    "completed_stage": "Continuity 320 / Compass 302 accepts the exact broker-rejected result at evidence source af1a79f93024a7186849e550b4d529c8c601c93f. Seventy-two focused checks and the full register suite pass. All cleanup is complete; no retry, candidate or provider call occurred. Closeout and Yuri summary are prepared for task-branch publication.",
-    "next_executable_stage": null,
+    "completed_stage": "Fresh post-compaction five-source preplanning receipt passes and the narrow fail-closed plan plus threat delta are frozen. No provider or worker dispatch has occurred in this successor.",
+    "next_executable_stage": "Identify and pin rc.7 package-native scoped-tool source, bind it into the normalized contract, and prove an exact read/glob/edit composed request on an isolated provider-free capture endpoint.",
     "retry_counters": {
-      "planning": 2,
-      "implementation": 2,
+      "planning": 0,
+      "implementation": 0,
       "review": 0,
-      "verification": 27
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,27 +24,27 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "one_pinned_official_deepseek_harness_rc7_fresh_session_for_one_exact_sparse_emr4_harness_development_package",
-    "repository_owned_three_profile_normalized_authority_contract_and_exact_package_source_mapping",
-    "provider_free_missing_credential_preflight_before_one_occupied_session",
-    "prepaid_account_credit_is_monetary_ceiling_with_zero_retry_zero_fallback_one_session_and_fifteen_minute_wall_clock",
-    "only_exact_sparse_packet_inputs_and_two_owned_output_paths_enter_the_worker_container_mount",
+    "exact_rc7_package_native_tool_scope_must_prove_model_view_edit_glob_read_before_occupied_dispatch",
+    "outer_broker_allowlist_remains_exact_edit_glob_read_and_is_not_broadened",
+    "provider_free_capture_has_no_credential_no_egress_and_retains_sanitized_structural_metadata_only",
+    "one_fresh_second_session_only_after_committed_provider_free_proof_zero_retry_zero_fallback_fifteen_minute_wall_clock_prepaid_balance_ceiling",
+    "same_exact_sparse_packet_and_two_owned_output_paths_only",
     "no_product_patient_clinical_historical_or_protected_data",
-    "only_read_glob_and_editor_tools_inside_the_enclosed_worker_container_no_model_facing_shell_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
+    "only_read_glob_edit_no_shell_web_browser_mcp_acp_skill_job_workflow_or_subagent",
     "worker_has_internal_broker_network_only_no_direct_egress_and_no_provider_credential",
     "isolated_broker_sidecar_has_provider_credential_no_shared_worker_mount_and_exact_deepseek_route_allowlist",
     "no_raw_reasoning_request_response_tool_payload_credential_header_or_environment_persistence",
-    "no_global_install_path_shell_profile_user_profile_credential_iam_or_unrestricted_default_transport_change",
+    "no_global_install_profile_credential_iam_or_unrestricted_default_transport_change",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
