@@ -79,6 +79,16 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert "register revision 445" in completed
         assert "AER-0497" in completed
         assert "Continuity 321 / Compass 303" in completed
+    elif latch["operation_id"] == (
+        "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-"
+        "admission-readiness-review"
+    ):
+        assert latch["status"] == "in_progress"
+        assert latch["source_head"] == "8fe889764e778c21bd051f30549f77c8db425e7c"
+        completed = latch["checkpoint"]["completed_stage"]
+        assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in completed
+        assert "paused native-Harness lane" in completed
+        assert "No product code changed" in completed
     else:
         assert latch["operation_id"] == (
             "ariadne-post-native-harness-successor-resolution-repair"

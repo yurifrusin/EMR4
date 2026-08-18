@@ -1,0 +1,208 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_the_provider_free_read_only_ordinary_practice_canonical_check_in_admission_readiness_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the predecessor closeout. Its Current Baton accepts default-off route convergence at c82c3a741053a9c8da260aa62e1a968af22bb54e, accepts the successor repair at 2a31437f6da0defa2dc9247491f04d5b23c97608, pauses occupied native-Harness work, and names this exact provider-free read-only no-enable readiness review as Next implementation.",
+    "current_authority_allocation": "GPT Sol owns the serial read-only readiness inventory, plan, deterministic evidence, acceptance and Git. DeepSeek native-Harness occupied work is paused pending a separate provider-free stock-headless-to-custom-runner HMR boot proof; Claude Code is not a silent fallback. Gemini has no product candidate or conceptual fork to review. Native subagents are unavailable under current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+      "docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md",
+      "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Read-only ordinary-practice admission-readiness inventory only. Preserve accepted route source c82c3a741053a9c8da260aa62e1a968af22bb54e, default-off flag false, empty ordinary-practice posture, exact authored-synthetic allowlist behavior and API contracts. No practice enablement, product code/configuration/live-route/database change, generic-status Arrived, grammar/client/waiting-area movement, product/patient/clinical/historical/protected data, provider/Harness retry/credential/network, production/deployment/release/Pages/protected-ref action. Preserve docs/branding and all unrelated untracked files; stage explicit paths only.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam was tracked-clean at 8fe889764e778c21bd051f30549f77c8db425e7c before this operation opened; origin task is 853f76d9a086c4bb263b54c761cbf8edbb65d6e9. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files, including docs/branding, are present and preserved. The only tracked change opening this operation is the named latch, and this named runtime state is the only new operation artifact before receipt generation."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+    "active_tranche": "Provider-free read-only ordinary-practice canonical check-in admission-readiness review",
+    "objective": "Inventory and classify the exact prerequisites for a future ordinary-practice admission of the already accepted default-off canonical check-in route, without enabling any practice or changing product code, configuration, routes, clients, data or runtime.",
+    "status": "in_progress",
+    "source_head": "8fe889764e778c21bd051f30549f77c8db425e7c",
+    "authority_source": "AGENTS.md Current Baton Next implementation and Yuri's standing uninterrupted-development authority require the dependency-satisfied read-only readiness review to begin without a ceremonial pause.",
+    "checkpoint": {
+      "completed_stage": "The predecessor repair is accepted at 2a31437f6da0defa2dc9247491f04d5b23c97608 and closed at 8fe889764e778c21bd051f30549f77c8db425e7c. Fresh complete five-source rehydration restored the accepted default-off route at c82c3a741053a9c8da260aa62e1a968af22bb54e, the no-enable successor boundary, the paused native-Harness lane and exact protected refs. No product code changed.",
+      "next_executable_stage": "generate_and_validate_the_fresh_five_source_preplanning_receipt_then_freeze_the_read_only_admission_readiness_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "read_only_ordinary_practice_admission_readiness_inventory_only",
+      "accepted_check_in_route_convergence_c82c3a741053a9c8da260aa62e1a968af22bb54e_remains_exact",
+      "accepted_native_harness_terminal_00d4f8d6065ab09b5faf5501c979edd2fa59943c_remains_exact",
+      "no_ordinary_practice_enablement_or_feature_flag_change",
+      "no_product_code_configuration_live_route_or_database_change",
+      "no_generic_status_arrived_grammar_client_or_waiting_area_change",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_provider_call_retry_resume_credential_iam_or_network_change",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "This tranche is a bounded read-only authority and prerequisite classification with no implementation package. Occupied native-Harness work is paused pending a separate provider-free HMR boot proof, and Claude Code is not an authorized silent fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "There is no product candidate, authority alternative or conceptual fork: exact source bindings and deterministic prerequisite classifications can support the read-only verdict. Reassess if the inventory exposes conflicting evidence or before any later admission candidate.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the one live latch plus one machine contract require a serial evidence transition.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [
+      "No worker lane owns a separable implementation artifact in this read-only inventory."
+    ],
+    "serial_constraints": [
+      "validate the five-source continuation receipt",
+      "freeze the exact read-only source boundary and prerequisite taxonomy",
+      "generate deterministic provider-free evidence without importing app modules or calling routes",
+      "classify every admission prerequisite and fail closed on any missing lower-layer invariant",
+      "verify latch, baton, API Spine, protected refs and preserved untracked files before closeout"
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "if_conflicting_authority_or_contract_evidence_appears",
+      "pre_commit",
+      "closeout",
+      "before_any_future_ordinary_practice_admission_candidate"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete AGENTS.md reread, accepted successor-repair and route-convergence plan/threat/closeout/acceptance readback, API Spine ADR/programme/OpenAPI readback, validated completed predecessor latch, exact refs and tracked-clean worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh five-source and API Spine readback and owns the serial read-only readiness review."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Occupied work remains paused after the consumed rc.7 stock headless HMR startup terminal; no provider call, retry or fallback is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport is not selected and no silent fallback is permitted."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No candidate or conceptual fork exists for Gemini review; reassess on conflict or before a later admission candidate."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent spawned; current developer policy forbids proactive delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Real-TTY fallback is not selected for a serial read-only authority review."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude transport is not selected and cannot silently replace the paused native Harness."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/ordinary-practice-check-in-admission-readiness-review-contract.v1.json",
+  "title": "Ordinary-practice canonical check-in admission-readiness review contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "input_hash_mode",
+    "inputs",
+    "classifications",
+    "verdict_rules",
+    "dimensions",
+    "acceptance",
+    "forbidden_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.ordinary_practice_check_in_admission_readiness_review_contract.v1"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "input_hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "inputs": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "classifications": {
+      "const": ["satisfied", "blocking_gap", "operational_evidence_gap"]
+    },
+    "verdict_rules": {
+      "const": {
+        "any_non_satisfied": "not_ready_for_ordinary_practice_admission",
+        "all_satisfied": "ready_for_bounded_ordinary_practice_admission_candidate"
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "id", "expected_classification", "question"],
+        "properties": {
+          "order": {"type": "integer", "minimum": 1, "maximum": 12},
+          "id": {"type": "string", "minLength": 1},
+          "expected_classification": {"enum": ["satisfied", "blocking_gap", "operational_evidence_gap"]},
+          "question": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected_counts", "expected_verdict", "expected_next_tranche", "minimum_hostile_mutations", "require_exact_dimension_order", "require_exact_source_citations", "require_no_app_import", "require_no_runtime_surface"],
+      "properties": {
+        "expected_counts": {
+          "const": {"satisfied": 6, "blocking_gap": 3, "operational_evidence_gap": 3}
+        },
+        "expected_verdict": {"const": "not_ready_for_ordinary_practice_admission"},
+        "expected_next_tranche": {"const": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture"},
+        "minimum_hostile_mutations": {"type": "integer", "minimum": 120},
+        "require_exact_dimension_order": {"const": true},
+        "require_exact_source_citations": {"const": true},
+        "require_no_app_import": {"const": true},
+        "require_no_runtime_surface": {"const": true}
+      }
+    },
+    "forbidden_surfaces": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

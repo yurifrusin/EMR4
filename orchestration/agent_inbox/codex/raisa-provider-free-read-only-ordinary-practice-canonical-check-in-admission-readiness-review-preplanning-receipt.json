@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only ordinary-practice canonical check-in admission-readiness review",
+    "completed_stage": "The predecessor repair is accepted at 2a31437f6da0defa2dc9247491f04d5b23c97608 and closed at 8fe889764e778c21bd051f30549f77c8db425e7c. Fresh complete five-source rehydration restored the accepted default-off route at c82c3a741053a9c8da260aa62e1a968af22bb54e, the no-enable successor boundary, the paused native-Harness lane and exact protected refs. No product code changed.",
+    "next_executable_stage": "generate_and_validate_the_fresh_five_source_preplanning_receipt_then_freeze_the_read_only_admission_readiness_plan",
+    "operation_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+    "resume_after_compaction": true,
+    "source_head": "8fe889764e778c21bd051f30549f77c8db425e7c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "8fe889764e778c21bd051f30549f77c8db425e7c",
+    "reason_codes": [],
+    "resolved_commit": "8fe889764e778c21bd051f30549f77c8db425e7c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "8fe889764e778c21bd051f30549f77c8db425e7c"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "8fe889764e778c21bd051f30549f77c8db425e7c",
+    "branch_origin_aligned": false,
+    "head": "8fe889764e778c21bd051f30549f77c8db425e7c",
+    "origin_branch_commit": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 651
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "This tranche is a bounded read-only authority and prerequisite classification with no implementation package. Occupied native-Harness work is paused pending a separate provider-free HMR boot proof, and Claude Code is not an authorized silent fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "There is no product candidate, authority alternative or conceptual fork: exact source bindings and deterministic prerequisite classifications can support the read-only verdict. Reassess if the inventory exposes conflicting evidence or before any later admission candidate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the one live latch plus one machine contract require a serial evidence transition.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+    "parallel_work_packages": [
+      "No worker lane owns a separable implementation artifact in this read-only inventory."
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "if_conflicting_authority_or_contract_evidence_appears",
+      "pre_commit",
+      "closeout",
+      "before_any_future_ordinary_practice_admission_candidate"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validate the five-source continuation receipt",
+      "freeze the exact read-only source boundary and prerequisite taxonomy",
+      "generate deterministic provider-free evidence without importing app modules or calling routes",
+      "classify every admission prerequisite and fail closed on any missing lower-layer invariant",
+      "verify latch, baton, API Spine, protected refs and preserved untracked files before closeout"
+    ]
+  },
+  "planned_action": "freeze_and_execute_the_provider_free_read_only_ordinary_practice_canonical_check_in_admission_readiness_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+      "docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md",
+      "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial read-only readiness inventory, plan, deterministic evidence, acceptance and Git. DeepSeek native-Harness occupied work is paused pending a separate provider-free stock-headless-to-custom-runner HMR boot proof; Claude Code is not a silent fallback. Gemini has no product candidate or conceptual fork to review. Native subagents are unavailable under current developer policy.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam was tracked-clean at 8fe889764e778c21bd051f30549f77c8db425e7c before this operation opened; origin task is 853f76d9a086c4bb263b54c761cbf8edbb65d6e9. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files, including docs/branding, are present and preserved. The only tracked change opening this operation is the named latch, and this named runtime state is the only new operation artifact before receipt generation.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the predecessor closeout. Its Current Baton accepts default-off route convergence at c82c3a741053a9c8da260aa62e1a968af22bb54e, accepts the successor repair at 2a31437f6da0defa2dc9247491f04d5b23c97608, pauses occupied native-Harness work, and names this exact provider-free read-only no-enable readiness review as Next implementation.",
+    "protected_evidence_boundaries": "Read-only ordinary-practice admission-readiness inventory only. Preserve accepted route source c82c3a741053a9c8da260aa62e1a968af22bb54e, default-off flag false, empty ordinary-practice posture, exact authored-synthetic allowlist behavior and API contracts. No practice enablement, product code/configuration/live-route/database change, generic-status Arrived, grammar/client/waiting-area movement, product/patient/clinical/historical/protected data, provider/Harness retry/credential/network, production/deployment/release/Pages/protected-ref action. Preserve docs/branding and all unrelated untracked files; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -20,27 +20,27 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_default_off_check_in_route_convergence_is_current() -> None:
+def test_default_off_check_in_route_convergence_is_retained() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 317
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 299
-    assert compass["source_graph_revision"] == 317
-    assert compass["current_position"]["node_id"] == NODE_ID
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 317
+    assert compass["map_revision"] >= 299
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
     assert node["authority"]["authorized_openings"] == []
 
 
-def test_compass_keeps_product_admission_closed_and_names_harness_successor() -> None:
-    compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    assert "native DeepSeek Harness" in current["outcome"]
-    assert "without changing A5.1 admission" in current["outcome"]
-    assert "No ordinary practice" in " ".join(current["does_not_solve"])
-    assert "Continuity 317 / Compass 299" in compass["orientation_statement"]
+def test_historical_node_keeps_product_admission_closed() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    notes = " ".join(node["authority"]["notes"])
+    gates = " ".join(node["unresolved_gates"])
+    assert "default-off" in notes
+    assert "authored-synthetic practice allowlisted" in notes
+    assert "Ordinary-practice admission remains closed" in gates
+    assert "Generic-status Arrived" in gates
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

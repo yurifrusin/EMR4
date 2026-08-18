@@ -1,0 +1,73 @@
+{
+  "schema_version": "raisa.ordinary_practice_check_in_admission_readiness_review_contract.v1",
+  "source_head": "8fe889764e778c21bd051f30549f77c8db425e7c",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "inputs": [
+    {"path": "app/config.py", "sha256": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e"},
+    {"path": "app/database.py", "sha256": "2da2b2d584391755a1d9de4e274d59f05dcc24b6b5a3737a35efae49c7f6b117"},
+    {"path": "app/dependencies.py", "sha256": "70574af69c73664a9f8ebda15b749bc5b5b25fe291a55be1f080096146bf47bc"},
+    {"path": "app/services/auth_service.py", "sha256": "c7380e744bc42be006b34546769b76eb3b8f010b8602513a64f3865c76c1f33c"},
+    {"path": "app/routers/appointments.py", "sha256": "8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08"},
+    {"path": "app/schemas/appointments.py", "sha256": "ce7a9819e4947fb288c79009a08b7d9f2502b8d096ff5e2eb005796a250aee90"},
+    {"path": "app/services/appointment_check_in_product_adapter.py", "sha256": "ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570"},
+    {"path": "app/services/appointment_idempotency.py", "sha256": "c52b24be780a89459bff0522611f8b7fc9d074ca84fde22f02fc8cf28dfc3410"},
+    {"path": "app/services/diary_committed_events.py", "sha256": "7a2caaa1fc862821cc9f8a666e945ddb5e5e837825978bcdcb5f7445cd7a219f"},
+    {"path": "app/models/appointments.py", "sha256": "4ae06eeb87c6d5212e354c39c01a8da397cfa2c21bd1031c24e1467d86c77794"},
+    {"path": "app/models/tenancy.py", "sha256": "e411c816565bdddfbb25beca62439c5bba7a44a90e348cd7e9f4296a65fb65e2"},
+    {"path": "app/models/diary.py", "sha256": "257960e5ac5222b0fef319f1c34cabbd55c785230a8697cc7f685484040b8e87"},
+    {"path": "alembic/versions/m2n3o4p5q6r7_add_bernie_durable_authority.py", "sha256": "0836c40fe51e9aa3d908967f4875174dfd04edcff6a7aa88f1476c7b0398113b"},
+    {"path": "alembic/versions/n3o4p5q6r7s8_add_reception_one_committed_events.py", "sha256": "a7e29785a7e2e8433fa9543b8ede9f35f75260a054d6302da6f8e0630e0c9a53"},
+    {"path": "alembic/versions/v1w2x3y4z5a6_add_a5_check_in_runtime.py", "sha256": "0cc6918aa6ae26de29b2cc9090e4efadb4e7b48433a5e00e12a36ae7502ff6f1"},
+    {"path": "docs/api-spine/openapi/appointment-commands.yaml", "sha256": "0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622"},
+    {"path": "orchestration/api_spine_adr.md", "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"},
+    {"path": "orchestration/api_spine_programme.md", "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"},
+    {"path": "orchestration/api_spine_appointment_command_alignment_inventory.md", "sha256": "c13a7edd91799a240f94f47729136022cc23789df22d7fd8bea0b82b57a52935"},
+    {"path": "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md", "sha256": "e641ea24d1787ad5b971d7db6e1817d33fdb132be67bf79345ed736f1ca1b56d"},
+    {"path": "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md", "sha256": "e894a308c94299e4242090b5862758959442ab98cc11e051be5237846ed9b961"},
+    {"path": "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md", "sha256": "6ccdc05d5958b51eea87585e3c0d656cccc67de7137456daf6c88b9dc641fc3a"},
+    {"path": "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md", "sha256": "72bf62e321ef1cd19887776bd98b51684efa4fca305690a3f13209daa66f188c"},
+    {"path": "tests/test_model_required_bureau_a5_1_check_in_runtime.py", "sha256": "758bbcf786a0ee806b25fa5fae33480d3158605ea0594e2178b41b854cc3e5b5"},
+    {"path": "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py", "sha256": "666f0dbda7f41fb183059f6d9c5d0864001e33faf7ef5984175cb2c8b355241b"},
+    {"path": "tests/test_api_spine_appointment_openapi_drift_guard.py", "sha256": "019a6eadcd4a57b414e8c0f8df000adebc57ea4ff397838132310aabee07b640"},
+    {"path": "tests/test_api_spine_artifacts.py", "sha256": "01981b06e762b0fc044b962aba4d16c03ff3d407a19dbb13a81b0410bdbd2946"},
+    {"path": ".env.example", "sha256": "c31eb51ece0eb8c49054ce76cee57f64c21fe50c07da716c112cdc01627a0ebe"}
+  ],
+  "classifications": ["satisfied", "blocking_gap", "operational_evidence_gap"],
+  "verdict_rules": {
+    "any_non_satisfied": "not_ready_for_ordinary_practice_admission",
+    "all_satisfied": "ready_for_bounded_ordinary_practice_admission_candidate"
+  },
+  "dimensions": [
+    {"order": 1, "id": "current_default_off_and_empty_ordinary_posture", "expected_classification": "satisfied", "question": "Does current source prove default denial, an empty authored-synthetic default and no ordinary-practice admission setting?"},
+    {"order": 2, "id": "ordinary_practice_admission_control", "expected_classification": "blocking_gap", "question": "Is a separate fail-closed ordinary-practice admission control present without reusing the authored-synthetic allowlist?"},
+    {"order": 3, "id": "api_spine_contract_and_route_identity", "expected_classification": "satisfied", "question": "Is the dedicated REST/OpenAPI route and typed request/response contract exact and accepted?"},
+    {"order": 4, "id": "authentication_and_dual_receptionist_authorization", "expected_classification": "satisfied", "question": "Does the route authenticate and authorize Receptionist authority both before and inside the transaction?"},
+    {"order": 5, "id": "tenant_isolation_and_runtime_database_role", "expected_classification": "operational_evidence_gap", "question": "Are exact-practice filters and forced RLS present, and is the ordinary runtime database role independently proved non-owner and NOBYPASSRLS?"},
+    {"order": 6, "id": "idempotency_evidence_and_replay", "expected_classification": "satisfied", "question": "Are key identity, exact replay, conflict, in-progress, evidence reuse and one-use evidence semantics fail closed?"},
+    {"order": 7, "id": "atomic_effect_rollback_and_unknown_commit_recovery", "expected_classification": "operational_evidence_gap", "question": "Does the command roll back before commit and avoid false success on uncertainty, with an ordinary-practice recovery runbook and alert proof?"},
+    {"order": 8, "id": "append_only_audit_and_committed_event", "expected_classification": "satisfied", "question": "Does one command-bound append-only audit and one patient-free committed event accompany success?"},
+    {"order": 9, "id": "ordinary_rollout_kill_switch_and_rollback_runbook", "expected_classification": "blocking_gap", "question": "Is there a separate selected-practice rollout state machine, kill switch and practiced rollback runbook?"},
+    {"order": 10, "id": "non_phi_observability_and_alerting", "expected_classification": "blocking_gap", "question": "Are non-PHI attempt, denial, replay, latency, error and unknown-commit metrics and alerts defined?"},
+    {"order": 11, "id": "environment_manifest_and_operational_secret_posture", "expected_classification": "operational_evidence_gap", "question": "Are A5 admission settings, runtime role and operational secrets documented and evidenced for an ordinary environment?"},
+    {"order": 12, "id": "client_cutover_and_waiting_area_separation", "expected_classification": "satisfied", "question": "Do client cutover and waiting-area movement remain separate gates while assignment/preservation stays bounded?"}
+  ],
+  "acceptance": {
+    "expected_counts": {"satisfied": 6, "blocking_gap": 3, "operational_evidence_gap": 3},
+    "expected_verdict": "not_ready_for_ordinary_practice_admission",
+    "expected_next_tranche": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+    "minimum_hostile_mutations": 120,
+    "require_exact_dimension_order": true,
+    "require_exact_source_citations": true,
+    "require_no_app_import": true,
+    "require_no_runtime_surface": true
+  },
+  "forbidden_surfaces": [
+    "ordinary_practice_enablement_or_feature_flag_change",
+    "product_code_configuration_route_database_or_api_spine_edit",
+    "generic_status_arrived_grammar_client_or_waiting_area_movement",
+    "product_patient_clinical_historical_or_protected_data",
+    "provider_harness_retry_credential_iam_or_network",
+    "production_deployment_release_pages_or_protected_refs",
+    "docs_branding_and_unrelated_untracked_files"
+  ]
+}
