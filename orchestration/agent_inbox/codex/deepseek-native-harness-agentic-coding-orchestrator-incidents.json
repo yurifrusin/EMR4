@@ -1,0 +1,34 @@
+{
+  "schema_version": "emr4.orchestrator_incident_set.v1",
+  "tranche": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+  "incident_ids": ["AER-0446", "AER-0447", "AER-0448", "AER-0449", "AER-0450"],
+  "incidents": [
+    {
+      "incident_id": "AER-0446",
+      "summary": "Two read-only PowerShell command drafts embedded a literal newline marker and failed before producing their intended bounded Git/receipt readback.",
+      "correction": "Use independent command invocations or actual multiline PowerShell source and admit only the corrected outputs."
+    },
+    {
+      "incident_id": "AER-0447",
+      "summary": "The first long npx bootstrap wrapper did not emit its returned session handle, obscuring ordinary wait control while package resolution continued.",
+      "correction": "Identify the exact child command read-only, observe npm-log progress, let it complete, and use a cached offline invocation whose full result object is preserved."
+    },
+    {
+      "incident_id": "AER-0448",
+      "summary": "The first credential-absent runtime boot rejected an unnamed workspace-write plus never-approval combination after static composition.",
+      "correction": "Define and select explicit session-pinned permission preset rehearsal-write, then rerun only the key-absent boot to the expected MISSING_CREDENTIAL guard."
+    },
+    {
+      "incident_id": "AER-0449",
+      "summary": "The first pre-dispatch receipt parsed the separately rooted synthetic repository's full commit id as an EMR4 Git object and returned revision_required.",
+      "correction": "Keep the full foreign object in its dedicated evidence and use a clearly labelled short foreign id in five-source prose."
+    },
+    {
+      "incident_id": "AER-0450",
+      "summary": "The ephemeral proxy logged response terminals for ordinals 1 and 3-6 but not ordinal 2 because it did not persist a request-start record and the upstream SSE response did not reach its observed end callback.",
+      "correction": "Bind this run's six successful requests through the six durable assistant usage anchors; future transport counters must log a body-admitted request-start record before forwarding."
+    }
+  ],
+  "provider_requests_added_by_corrections": 0,
+  "product_or_protected_surface_changed": false
+}

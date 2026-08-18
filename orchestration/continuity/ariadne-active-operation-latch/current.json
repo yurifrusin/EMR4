@@ -4,16 +4,16 @@
   "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
   "objective": "Run one bounded multi-turn authored-synthetic DeepSeek V4 Flash/high coding task through the pinned official native Harness and capture attributable inspect/edit/test, model-turn, terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
   "status": "in_progress",
-  "source_head": "59d9f4cc80958cc27280eda75b710bb63f6d61db",
+  "source_head": "6c15058f479a12302543f52e9a5412345e1d7303",
   "authority_source": "Yuri explicitly redirected the pre-publication sequence to require a less atomic and more comprehensive native DeepSeek Harness test; AGENTS.md standing uninterrupted-development authority permits this isolated successor without opening product or protected surfaces.",
   "checkpoint": {
-    "completed_stage": "Plan source 59d9f4cc80958cc27280eda75b710bb63f6d61db is committed. Pinned rc.7 identity, exact isolated profile, synthetic failing baseline and local six-request/body guard are admitted. The first key-absent boot exposed and contained an unnamed custom permission combination; the explicit rehearsal-write repair then reached MISSING_CREDENTIAL in 1.299 seconds with a durable session and zero HTTP requests.",
-    "next_executable_stage": "pass_and_commit_the_pre_worker_dispatch_receipt_then_start_the_ephemeral_loopback_guard_and_run_exactly_one_occupied_headless_session",
+    "completed_stage": "One occupied pinned rc.7 session produced six attributable model-usage anchors and eight ordered tool calls, recovered one FS_STALE_VERSION edit safely, corrected the interval merge defect and left 4/4 tests passing. It did not add the required regression test or emit a successful terminal summary before the local request-7 guard denied continuation. Sanitized evidence is reduced, register revision 392 passes, and the exact disposable root is recoverably removed and absent.",
+    "next_executable_stage": "commit_the_accepted_sanitized_evidence_source_then_write_and_verify_closeout_continuity_human_summary_and_sol_acceptance",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 5
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },

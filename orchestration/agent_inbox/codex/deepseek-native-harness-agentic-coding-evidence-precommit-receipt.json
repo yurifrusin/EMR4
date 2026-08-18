@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
+    "completed_stage": "One occupied pinned rc.7 session produced six attributable model-usage anchors and eight ordered tool calls, recovered one FS_STALE_VERSION edit safely, corrected the interval merge defect and left 4/4 tests passing. It did not add the required regression test or emit a successful terminal summary before the local request-7 guard denied continuation. Sanitized evidence is reduced, register revision 392 passes, and the exact disposable root is recoverably removed and absent.",
+    "next_executable_stage": "commit_the_accepted_sanitized_evidence_source_then_write_and_verify_closeout_continuity_human_summary_and_sol_acceptance",
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "6c15058f479a12302543f52e9a5412345e1d7303",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "6c15058f479a12302543f52e9a5412345e1d7303",
+    "reason_codes": [],
+    "resolved_commit": "6c15058f479a12302543f52e9a5412345e1d7303",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "6c15058f479a12302543f52e9a5412345e1d7303"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "6c15058f479a12302543f52e9a5412345e1d7303",
+    "branch_origin_aligned": false,
+    "head": "6c15058f479a12302543f52e9a5412345e1d7303",
+    "origin_branch_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "evidence_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one pinned native-Harness session demonstrated materially strong automatic traceability and a correct bounded code repair, but did not complete every task requirement or return a success terminal before the local request ceiling.",
+        "work_packages": [
+          "completed_single_occupied_native_harness_session_and_sanitized_trace_reduction"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The rehearsal changed no EMR4 product/runtime source; independent Git path/hash readback and unittest execution provide the necessary deterministic acceptance evidence.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and no independent closeout work package requires a subagent.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "parallel_work_packages": [
+      "All model lanes are terminal; Sol performs serial evidence admission, closeout and Git."
+    ],
+    "reassessment_triggers": [
+      "closeout_precommit",
+      "pre_push",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path evidence commit",
+      "closeout and continuity after exact evidence source exists",
+      "task-branch-only push",
+      "non-PHI notification before successor execution"
+    ]
+  },
+  "planned_action": "commit_the_sanitized_native_harness_agentic_coding_evidence_register_revision_and_cleanup_readback_with_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-plan.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json",
+      "docs/ariadne-agent-error-correction-register-revision-392.md",
+      "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+      "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns evidence reduction, deterministic verification, register maintenance, cleanup, acceptance, closeout and Git. The pinned native DeepSeek V4 Flash/high lane completed its single occupied session and owns no further action. Gemini and native subagents are declined.",
+    "git_refs_and_worktree": "Task HEAD is exact 6c15058f479a12302543f52e9a5412345e1d7303 on codex/ariadne-bernie-davida-parallel-seam before this evidence commit; origin task remains behind. Local/origin master and local/origin handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The separately rooted synthetic repository and all raw Harness material were removed recoverably after sanitized reduction; the exact disposable target is absent. Existing untracked files are preserved.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 318 / Compass 300 preserves the accepted no-call micro result, unchanged default DeepSeek allocation and every protected boundary; Yuri authorised this broader synthetic successor and has now directed that real low-risk EMR4 use follow profile codification rather than more ceremonial synthetic qualification.",
+    "protected_evidence_boundaries": "Only sanitized package/profile/process, model-usage, tool-sequence, diff/test, terminal and cleanup metadata are admitted. Raw reasoning, prompts, responses, credentials and the disposable Harness home remain outside EMR4 and were moved recoverably to the Windows Recycle Bin. No EMR4 source was exposed to the Harness; no product/patient/clinical data, ordinary-practice admission, live runtime, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

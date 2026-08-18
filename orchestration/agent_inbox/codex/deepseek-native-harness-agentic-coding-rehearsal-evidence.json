@@ -1,0 +1,129 @@
+{
+  "schema_version": "emr4.deepseek_native_harness_agentic_coding_rehearsal_evidence.v1",
+  "recorded_at": "2026-08-18T15:16:45.0628965+10:00",
+  "result": "bounded_occupied_traceability_demonstrated_worker_completion_not_demonstrated",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "profile_patch_sha256": "1c430fae949d34474855b699d7b48f9a0b4ae1db8382c0d0b8adb1661b22f897"
+  },
+  "process": {
+    "started_at": "2026-08-18T15:10:52.8122219+10:00",
+    "ended_at": "2026-08-18T15:11:17.7167974+10:00",
+    "duration_ms": 24903,
+    "timed_out": false,
+    "exit_code": 1,
+    "stdout_bytes": 74,
+    "stdout_sha256": "91d502a5d6433a5889c5fd08894e71e0744a2bce9a4bd09c7082ead9a98b3735",
+    "sanitized_stdout": "Content is unchanged (likely touched by the test run). Retrying the edit:",
+    "stderr_bytes": 47,
+    "stderr_sha256": "2ee3f43c071a95ec7073dc1f663f1695cba47bc327cb7398a408f896b7f6ce48",
+    "sanitized_stderr": "dsh: RATE_LIMIT: local request ceiling reached"
+  },
+  "session": {
+    "session_id": "session-a1bdadd2-3f49-4e50-b7e5-aef6aa65dc01",
+    "compressed_bytes": 50519,
+    "compressed_sha256": "4ef322e702255cce24212c02d8bf02e670434e206d9b2439d1b829d468263e5b",
+    "zstd_frame_count": 103,
+    "logical_row_count": 185,
+    "maximum_explicit_seq": 2752,
+    "model_steps_with_usage": 6,
+    "tool_calls": 8,
+    "tool_results": 8,
+    "step_starts": 7,
+    "terminal_turn": {
+      "kind": "error",
+      "code": "RATE_LIMIT",
+      "status": 429,
+      "message": "local request ceiling reached"
+    }
+  },
+  "effective_authority": {
+    "provider": "deepseek-official",
+    "model": "deepseek-v4-flash",
+    "reasoning_effort": "high",
+    "max_output_tokens_per_request": 2048,
+    "permission_preset": "rehearsal-write",
+    "sandbox": "workspace-write",
+    "approval": "never",
+    "max_parallel_tool_calls": 1,
+    "automatic_retries": 0,
+    "fallbacks": 0,
+    "auxiliary_model_calls": 0,
+    "telemetry": "disabled"
+  },
+  "model_usage": {
+    "steps": [
+      {"step": 1, "input_tokens": 3903, "cache_read_tokens": 0, "output_tokens": 118, "reasoning_tokens": 14},
+      {"step": 2, "input_tokens": 288, "cache_read_tokens": 3968, "output_tokens": 137, "reasoning_tokens": 0},
+      {"step": 3, "input_tokens": 623, "cache_read_tokens": 4352, "output_tokens": 767, "reasoning_tokens": 696},
+      {"step": 4, "input_tokens": 569, "cache_read_tokens": 5632, "output_tokens": 1529, "reasoning_tokens": 1201},
+      {"step": 5, "input_tokens": 115, "cache_read_tokens": 7680, "output_tokens": 96, "reasoning_tokens": 21},
+      {"step": 6, "input_tokens": 347, "cache_read_tokens": 7808, "output_tokens": 289, "reasoning_tokens": 26}
+    ],
+    "uncached_input_tokens": 5845,
+    "cache_read_tokens": 29440,
+    "output_tokens": 2936,
+    "reasoning_tokens": 1958,
+    "estimated_cost_usd_from_official_2026_08_18_flash_rates": 0.001722812
+  },
+  "ordered_tool_sequence": [
+    {"step": 1, "name": "read", "target": "<workspace>/AGENTS.md", "result": "success"},
+    {"step": 1, "name": "glob", "target": "<workspace>", "result": "success"},
+    {"step": 2, "name": "read", "target": "<workspace>/intervals.py", "result": "success"},
+    {"step": 2, "name": "read", "target": "<workspace>/test_intervals.py", "result": "success"},
+    {"step": 3, "name": "pwsh", "command": "python -m unittest -v", "result": "success"},
+    {"step": 4, "name": "edit", "target": "<workspace>/intervals.py", "result": "FS_STALE_VERSION"},
+    {"step": 5, "name": "read", "target": "<workspace>/intervals.py", "result": "success"},
+    {"step": 6, "name": "edit", "target": "<workspace>/intervals.py", "result": "success"}
+  ],
+  "request_guard": {
+    "listen_host": "127.0.0.1",
+    "only_upstream": "https://api.deepseek.com/chat/completions",
+    "provider_steps_completed": 6,
+    "local_request_ordinal_rejected": 7,
+    "provider_response_terminal_ordinals_recorded": [1, 3, 4, 5, 6],
+    "provider_response_terminal_ordinal_missing": 2,
+    "proxy_evidence_bytes": 863,
+    "proxy_evidence_sha256": "ebd84bad447047f818abae03c7d934d677ae508c00640e73517bdf8abfb71627",
+    "proxy_stdout_bytes": 0,
+    "proxy_stderr_bytes": 0,
+    "proxy_process_absent_after_stop": true
+  },
+  "synthetic_candidate": {
+    "baseline_git_head": "26a79a46115681763fbff571fea27eddeb243a81",
+    "changed_paths": ["intervals.py"],
+    "unexpected_changed_paths": [],
+    "implementation_change": "replace the shrinking assignment with max(existing_end, new_end) and align the explanatory comment",
+    "insertions": 2,
+    "deletions": 2,
+    "final_intervals_py_sha256": "2928ce54e67e5939e13b882381f6277e96be2c8c0317c23e11db3c7117cd2f5f",
+    "test_intervals_py_sha256": "f21926abd42af68f3f3fd3613c09786e0653f880936af5bf7bd8af3501898445",
+    "test_file_unchanged": true,
+    "regression_tests_added": 0,
+    "independent_test_command": "python -m unittest -v",
+    "independent_tests_run": 4,
+    "independent_tests_passed": 4,
+    "independent_tests_failed": 0
+  },
+  "acceptance": {
+    "occupied_traceability": "passed",
+    "model_and_tool_accounting": "passed",
+    "inspect_read_edit_test_sequence": "passed_with_one_recovered_stale_version_error",
+    "implementation_defect_fixed": "passed",
+    "independent_suite": "passed",
+    "exactly_one_regression_test_added": "failed",
+    "terminal_success_and_final_summary": "failed",
+    "overall_occupied_task": "failed_incomplete"
+  },
+  "cleanup": {
+    "status": "complete_recoverable",
+    "target": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-harness-agentic-001",
+    "method": "windows_recycle_bin",
+    "removed_at": "2026-08-18T15:28:26.9048090+10:00",
+    "target_absent_after_cleanup": true,
+    "raw_session_and_reasoning_removed_from_active_filesystem": true,
+    "recovery_boundary": "The disposable root can be recovered from the Windows Recycle Bin until the operator empties it."
+  },
+  "claim_boundary": "The pinned native Harness demonstrated materially strong traceability for an occupied multi-step coding loop. This one attempt did not demonstrate complete worker task reliability and does not change the default EMR4 DeepSeek transport."
+}
