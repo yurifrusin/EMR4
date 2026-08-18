@@ -3,12 +3,12 @@
   "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
   "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
   "objective": "Run one bounded multi-turn authored-synthetic DeepSeek V4 Flash/high coding task through the pinned official native Harness and capture attributable inspect/edit/test, model-turn, terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
-  "status": "in_progress",
-  "source_head": "6c15058f479a12302543f52e9a5412345e1d7303",
+  "status": "complete",
+  "source_head": "25067e7d633eae597929d6969a35b22b735b253e",
   "authority_source": "Yuri explicitly redirected the pre-publication sequence to require a less atomic and more comprehensive native DeepSeek Harness test; AGENTS.md standing uninterrupted-development authority permits this isolated successor without opening product or protected surfaces.",
   "checkpoint": {
-    "completed_stage": "One occupied pinned rc.7 session produced six attributable model-usage anchors and eight ordered tool calls, recovered one FS_STALE_VERSION edit safely, corrected the interval merge defect and left 4/4 tests passing. It did not add the required regression test or emit a successful terminal summary before the local request-7 guard denied continuation. Sanitized evidence is reduced, register revision 392 passes, and the exact disposable root is recoverably removed and absent.",
-    "next_executable_stage": "commit_the_accepted_sanitized_evidence_source_then_write_and_verify_closeout_continuity_human_summary_and_sol_acceptance",
+    "completed_stage": "Accepted evidence source 25067e7d633eae597929d6969a35b22b735b253e binds one occupied pinned rc.7 session with six attributable model-usage anchors, eight ordered tool calls, safe stale-version recovery, a correct one-file repair and 4/4 passing tests. The required regression test and terminal success summary were absent before the local request-7 guard. Register revision 392, paired closeout, Continuity 319 / Compass 301 and recoverable raw-session cleanup pass.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "operation_complete"
   },
   "protected_boundaries": [
     "one_pinned_official_deepseek_harness_rc7_authored_synthetic_agentic_coding_session_only",

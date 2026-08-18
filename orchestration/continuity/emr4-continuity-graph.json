@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 318,
+  "graph_revision": 319,
   "harvests": [],
   "nodes": [
     {
@@ -22215,9 +22215,112 @@
         "Ordinary check-in admission and atomic client cutover remain closed.",
         "Product data, providers, deployment, production and protected integration remain closed."
       ]
+    },
+    {
+      "id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+      "title": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-18T05:32:45.5157558Z",
+      "updated_at": "2026-08-18T05:32:45.5157558Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "25067e7d633eae597929d6969a35b22b735b253e",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The result accepts occupied native-Harness traceability, not complete worker reliability.",
+          "A monitored low-risk EMR4 trial may follow only through a separately frozen profile-and-work package.",
+          "Product data, live runtime, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-occupied-native-harness-traceability-not-worker-completion",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept materially strong attributable session/tool/usage evidence and the correct partial repair while declining a complete task or default-transport claim."
+        }
+      ],
+      "claim_scope": [
+        "Pinned rc.7 produced six attributable successful model steps and eight ordered tool calls/results.",
+        "The worker recovered a stale-version edit, correctly repaired one synthetic source file and left 4/4 tests passing.",
+        "The worker omitted the required regression test and successful terminal summary before local request ordinal seven was denied.",
+        "No retry, fallback, auxiliary route, telemetry, web or subagent activity occurred.",
+        "The result supports monitored low-risk EMR4 trial use after profile codification, not unrestricted default promotion."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py"
+          ],
+          "note": "The accepted product intent remains inherited; the Harness saw only a generic synthetic fixture."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "review/test_ordinary_diary_cancellation_convergence.py",
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+          ],
+          "note": "The accepted reconciliation contract remains unchanged; no EMR4 source or projection entered the rehearsal."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-plan.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json",
+          "docs/ariadne-agent-error-correction-register-revision-392.md",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-agentic-coding-traceability-rehearsal.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_agentic_coding_traceability_rehearsal_continuity.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "review/test_ordinary_diary_cancellation_convergence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_agentic_coding_traceability_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Complete native-Harness worker reliability on real EMR4 work remains unproved.",
+        "The versioned EMR4 profile family and first monitored work package remain to be frozen.",
+        "Unrestricted default-worker promotion remains closed.",
+        "Ordinary-practice admission, product data, providers, deployment, production and protected integration remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T04:37:03Z"
+  "updated_at": "2026-08-18T05:32:45.5157558Z"
 }
