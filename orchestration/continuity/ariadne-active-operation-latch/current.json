@@ -4,11 +4,11 @@
   "active_tranche": "DeepSeek native Harness authored-synthetic traceability micro-rehearsal",
   "objective": "Run one tiny authored-synthetic DeepSeek V4 Flash/high task through the pinned official native Harness and capture fail-closed terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
   "status": "in_progress",
-  "source_head": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+  "source_head": "d8afa41f1efc121e1195567644f8c6437233e863",
   "authority_source": "Yuri explicitly authorised a very short rehearsal with the newly released native DeepSeek Harness; AGENTS.md Current Baton at Continuity 317 / Compass 299 directs this isolated traceability successor under standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Complete fresh five-source rehydration confirms the predecessor latch complete, task/origin HEAD exact 0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb, all protected refs exact, Node/npm/npx available and DEEPSEEK_API_KEY present without disclosure. The one-call isolated plan is frozen before package bootstrap.",
-    "next_executable_stage": "generate_and_pass_the_fresh_preplanning_receipt_then_commit_the_plan_before_pinned_npx_help_and_headless_discovery",
+    "completed_stage": "The frozen plan is committed at d8afa41f1efc121e1195567644f8c6437233e863. Pinned package 0.1.0-rc.7, registry integrity, headless contract, explicit Flash/high selection, 64-token cap, zero retries, disabled telemetry, isolated home/cache and zero enabled model-facing tool registrations are deterministically admitted without a provider call.",
+    "next_executable_stage": "generate_and_pass_pre_worker_dispatch_receipt_then_commit_preflight_evidence_before_exactly_one_bounded_occupied_request",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

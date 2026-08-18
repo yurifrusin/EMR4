@@ -1,0 +1,76 @@
+{
+  "schema_version": "emr4.deepseek_native_harness.package_preflight.v1",
+  "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+  "observed_at": "2026-08-18T14:20:24.3806023+10:00",
+  "official_upstream": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness",
+    "release": "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7",
+    "package": "@deepseek-ai/dsh",
+    "pinned_version": "0.1.0-rc.7",
+    "registry_version": "0.1.0-rc.7",
+    "registry_tarball": "https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-0.1.0-rc.7.tgz",
+    "registry_shasum": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+    "registry_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+    "observed_cli_version": "0.1.0-rc.7"
+  },
+  "local_runtime": {
+    "node_version": "v24.18.0",
+    "npm_version": "11.16.0",
+    "npx_version": "11.16.0",
+    "deepseek_api_key_present": true,
+    "credential_value_observed_or_persisted": false,
+    "global_install_performed": false,
+    "disposable_workspace": "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-native-harness-rc7-micro-001",
+    "dsh_home": "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-native-harness-rc7-micro-001\\.dsh-home",
+    "dedicated_npm_cache": "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-native-harness-rc7-micro-001\\.npm-cache",
+    "emr4_source_copied_or_supplied": false
+  },
+  "headless_contract": {
+    "profile": "headless",
+    "behavior": "one task, final assistant message on stdout, then exit",
+    "exact_prompt": "Return exactly TRACE_OK and nothing else. Do not use tools.",
+    "maximum_occupied_requests": 1,
+    "retry_maximum": 0,
+    "maximum_output_tokens": 64,
+    "wall_time_limit_seconds": 300,
+    "cost_cap_usd": 0.05
+  },
+  "composed_configuration": {
+    "provider": "deepseek-official",
+    "model": "deepseek-v4-flash",
+    "reasoning_effort": "high",
+    "telemetry_mode": "DISABLED",
+    "permission_mode": "read-only",
+    "tool_presentation_mode": "native",
+    "model_facing_tool_registrations_enabled": 0,
+    "auxiliary_session_title_model_call_enabled": false,
+    "disabled_rows": [
+      "session-title-llm",
+      "tool-bash",
+      "tool-pwsh",
+      "tool-jobs",
+      "tool-fs",
+      "tool-fs-search",
+      "tool-skill",
+      "tool-subagent-control",
+      "tool-subagent-list-agents",
+      "tool-subagent",
+      "tool-subagent-fork",
+      "tool-subagent-report",
+      "tool-workflow",
+      "tool-result-pruner",
+      "tool-todo",
+      "tool-goal",
+      "tool-ralph",
+      "tool-str-replace-editor",
+      "tool-web",
+      "code-runtime"
+    ]
+  },
+  "admission": {
+    "status": "passed",
+    "occupied_request_permitted": true,
+    "retry_or_fallback_permitted": false,
+    "claim_boundary": "Preflight proves only exact local package/configuration admission for the one-call rehearsal; it proves no provider result or general reliability."
+  }
+}
