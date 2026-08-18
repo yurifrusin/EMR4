@@ -1,0 +1,121 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness authored-synthetic traceability micro-rehearsal",
+    "completed_stage": "Accepted evidence source binds exit 1, exact pre-provider configuration invariant, zero provider/retry/fallback/tool/subagent requests, no session trace and recoverable cleanup. Register revision 391 and Continuity 318 / Compass 300 pass.",
+    "next_executable_stage": null,
+    "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "ed044625b6f1e59d323c21ced6ec6e2372a11d3f",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "ed044625b6f1e59d323c21ced6ec6e2372a11d3f",
+    "reason_codes": [],
+    "resolved_commit": "ed044625b6f1e59d323c21ced6ec6e2372a11d3f",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "ed044625b6f1e59d323c21ced6ec6e2372a11d3f"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "ed044625b6f1e59d323c21ced6ec6e2372a11d3f",
+    "branch_origin_aligned": false,
+    "head": "ed044625b6f1e59d323c21ced6ec6e2372a11d3f",
+    "origin_branch_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The pinned native process produced exact fail-fast local traceability but stopped before provider I/O; no inference result exists.",
+        "work_packages": [
+          "completed_bounded_native_harness_terminal_and_trace_absence_measurement"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No product/runtime source or provider result existed for an independent model veto.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibited proactive delegation and the one-process rehearsal had no parallel work package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+    "parallel_work_packages": [
+      "All lanes are terminal; Sol performs serial closeout and Git."
+    ],
+    "reassessment_triggers": [
+      "pre_push",
+      "successor_rehydration"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path closeout commit",
+      "task-branch-only push",
+      "non-PHI notification before successor planning"
+    ]
+  },
+  "planned_action": "commit_the_accepted_native_harness_bounded_no_call_closeout_with_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-plan.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json",
+      "docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-traceability-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-traceability-micro-rehearsal.md",
+      "docs/ariadne-agent-error-correction-register-revision-391.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns evidence admission, cleanup, closeout, continuity and task-branch Git. The native DeepSeek lane is terminal as a bounded pre-provider process result. Gemini and native subagents were declined.",
+    "git_refs_and_worktree": "Accepted evidence source is exact ed044625b6f1e59d323c21ced6ec6e2372a11d3f on codex/ariadne-bernie-davida-parallel-seam. Origin task remains behind before closeout publication. Local/origin master and local/origin handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Current Baton now records accepted Continuity 318 / Compass 300 and the read-only check-in ordinary-admission/atomic-client-cutover orientation successor.",
+    "protected_evidence_boundaries": "Only sanitized official rc.7 package, terminal, trace-absence and cleanup metadata are admitted. No raw reasoning/request/response/key, EMR4 source exposure, product/patient/clinical data, default transport change, ordinary practice, client, generic-status Arrived, waiting-area action, deployment, release, Pages or protected-ref movement. docs/branding and unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}

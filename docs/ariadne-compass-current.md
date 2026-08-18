@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 317 / Compass 299. Default-off A5.1 delegates to the canonical check-in adapter; the immediate authorised successor is a tiny isolated native DeepSeek Harness traceability rehearsal.
+> EMR4 is at Continuity 318 / Compass 300. The pinned native DeepSeek Harness produced a clear pre-provider configuration failure but no inference result; product work resumes through a read-only ordinary-admission and atomic-client-cutover orientation.
 
 ## North star
 
@@ -404,23 +404,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One unmounted deterministic check-in adapter is accepted without route or practice admission. Lineage parent: `raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review`.
 194. **Converge default-off A5.1 onto the accepted check-in adapter — Provider-free default-off canonical check-in route-adapter convergence rehearsal**
    The closed route has one canonical check-in write path without ordinary-practice admission. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal`.
+195. **Measure native Harness terminal and trace evidence without changing product authority — DeepSeek native Harness authored-synthetic traceability micro-rehearsal**
+   Pinned rc.7 failed fast before provider I/O with an exact local invariant; no inference result exists. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.
 
 ## Current position
 
-**Default-off A5.1 now delegates to one canonical check-in authority seam — Provider-free default-off canonical check-in route-adapter convergence rehearsal**
+**Native Harness traceability measured only through a bounded no-call failure — DeepSeek native Harness authored-synthetic traceability micro-rehearsal**
 
-**Why this proof came next:** The accepted unmounted adapter could replace duplicated route-local composition without opening product admission.
+**Why this proof came next:** Yuri requested a tiny official-Harness rehearsal after repeated untraceable Claude Code failures.
 
-Run Yuri's tiny isolated native DeepSeek Harness traceability rehearsal, then resume product planning without changing A5.1 admission.
+Resume with a provider-free read-only orientation for later ordinary check-in admission and atomic two-client cutover.
 
 ### What this unlocks
 
-- Measure whether the native DeepSeek harness improves terminal and trace evidence over Claude Code transport.
-- Plan later check-in product admission and atomic client convergence as separate fail-closed gates.
+- Require credential-absent exact-profile boot validation before any future occupied Harness comparison.
+- Map the next product admission and atomic client-cutover gates without opening either.
 
 ### What it does not solve
 
-- No ordinary practice, generic-status Arrived, action grammar or client is enabled.
+- No DeepSeek inference reliability, coding quality or transport superiority was measured.
+- No ordinary practice, client, generic-status Arrived or waiting-area action is enabled.
 - Product/patient data, providers, deployment, production and protected integration remain closed.
 
 ## Continuity and authority
@@ -704,6 +707,7 @@ Prerequisites:
 
 ## Map limits
 
+- The native Harness no-call result supports local launcher traceability only; it opens no model-performance, transport-selection, product or runtime authority.
 - Default-off check-in route convergence opens no ordinary practice, client, product data, provider, deployment, production or protected integration authority.
 - The adapter extraction is in-process authored-synthetic evidence only; it opens no route, practice, database, provider, client, deployment or production authority.
 - The convergence review selects future command meaning only; A5.1 remains default-off and no route, status admission, grammar, client, database or runtime authority is opened.
@@ -985,6 +989,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-343.md`
 - `docs/ariadne-agent-error-correction-register-revision-346.md`
 - `docs/ariadne-agent-error-correction-register-revision-384.md`
+- `docs/ariadne-agent-error-correction-register-revision-391.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1122,6 +1127,8 @@ Prerequisites:
 - `docs/bernie-reception-one-yuri-internal-walkthrough-findings.md`
 - `docs/bernie-reception-one-yuri-internal-walkthrough-plan.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
+- `docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-closeout.md`
+- `docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-plan.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1755,6 +1762,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-pre-dispatch-receipt.json`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
@@ -2954,6 +2966,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-18--arrival-check-in-command-family-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-18--canonical-check-in-product-adapter-extraction-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-traceability-micro-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
@@ -2995,6 +3008,7 @@ Prerequisites:
 - `scripts/ariadne_validation_runner.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
+- `scripts/deepseek_native_harness_traceability_micro_rehearsal_continuity_update.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
 - `scripts/raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_continuity_update.py`
@@ -3093,6 +3107,7 @@ Prerequisites:
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
 - `tests/test_current_baton_consistency.py`
+- `tests/test_deepseek_native_harness_traceability_micro_rehearsal_continuity.py`
 - `tests/test_diary_security_hardening.py`
 - `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
 - `tests/test_model_required_bureau_c3_d3.py`
@@ -3207,4 +3222,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 299; continuity graph revision 317._
+_Compass map revision 300; continuity graph revision 318._
