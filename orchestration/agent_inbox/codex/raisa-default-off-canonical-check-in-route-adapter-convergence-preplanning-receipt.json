@@ -1,0 +1,126 @@
+{
+  "active_operation": {},
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": null,
+    "reason_codes": [
+      "git_object_resolution_active_operation_unavailable"
+    ],
+    "resolved_commit": null,
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": null,
+    "status": "revision_required",
+    "supplied_object_id": null
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "ad523968713e58f0b42c3a428556c968f61d6d3c",
+    "branch_origin_aligned": true,
+    "head": "ad523968713e58f0b42c3a428556c968f61d6d3c",
+    "origin_branch_commit": "ad523968713e58f0b42c3a428556c968f61d6d3c",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 650
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "After Sol freezes exact dependency seams, replacing the duplicated route-local composition and adding focused authored-synthetic convergence tests can form one bounded mechanical route-and-tests package.",
+        "work_packages": [
+          "replace_only_the_default_off_a5_1_route_local_composition_with_the_accepted_adapter_and_add_focused_convergence_tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Reserve one fresh Gemini 3.7 Flash/high exact-candidate veto after deterministic admission because this tranche changes a state-changing REST command route even while admission remains default-off.",
+        "work_packages": [
+          "fresh_exact_candidate_read_only_veto_after_deterministic_admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation; no user request or skill instruction authorizes spawning a native subagent.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "parallel_work_packages": [
+      "DeepSeek may own only the post-freeze route-and-tests package while Sol retains architecture acceptance integration and worker review"
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "pre_dispatch",
+      "worker_candidate_return",
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol inspects and freezes the exact route dependency and response boundary before any DeepSeek dispatch",
+      "Sol reviews and deterministically admits any worker candidate before any Gemini call",
+      "Gemini reviews one exact clean candidate only after deterministic admission",
+      "Sol alone owns recovery acceptance continuity Git and protected-boundary verification"
+    ]
+  },
+  "planned_action": "freeze_and_execute_the_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal",
+  "reasons": [
+    "active_operation_latch_invalid",
+    "parallelism_assessment_operation_mismatch",
+    "git_object_resolution_active_operation_unavailable"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md",
+      "app/services/appointment_check_in_product_adapter.py",
+      "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-18--canonical-check-in-product-adapter-extraction-rehearsal.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freeze, acceptance, recovery, integration and Git. DeepSeek V4 Flash/high is tentatively planned only for a bounded separable route-and-tests package after exact plan freeze. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto after deterministic admission. Native subagents are declined because current developer policy prohibits proactive native delegation.",
+    "git_refs_and_worktree": "After a fresh origin fetch, task HEAD, local task branch and origin task branch align at exact required ad523968713e58f0b42c3a428556c968f61d6d3c with accepted adapter source 8de886c5148b3259428c8c517674f10ea92d937e as an ancestor. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree was clean before opening this successor latch and 645 unrelated untracked paths including docs/branding were preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely in the fresh task. Its Current Baton records the accepted canonical check-in adapter at Continuity 316 / Compass 298 and directs raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal while protected integration remains closed.",
+    "protected_evidence_boundaries": "Provider-free default-off authored-synthetic route-adapter convergence only. The exact A5.1 feature flag, authored-synthetic practice allowlist, request/response contract and default denial remain unchanged. No ordinary-practice enablement, generic-status Arrived change, action grammar, first-party client, waiting-area move/removal, product database or data, patient/clinical/historical/protected data, provider/ADC/credential/IAM/network/tool, production runtime, deployment, release, Pages or protected-ref action. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": null,
+  "worker_dispatch_permitted": false
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_frozen_default_off_canonical_check_in_route_adapter_convergence_plan_with_explicit_paths",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 316 / Compass 298 directs the default-off canonical check-in route-adapter successor with protected integration closed.",
+    "current_authority_allocation": "GPT Sol owns the frozen plan, acceptance, recovery, integration and Git. DeepSeek V4 Flash/high is positively selected for the bounded route/adapter/tests package after this plan commit. Gemini 3.7 Flash/high is reserved for a fresh exact-candidate veto. Native subagents remain declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-acceptance.md",
+      "app/services/appointment_check_in_product_adapter.py",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml"
+    ],
+    "protected_evidence_boundaries": "Only provider-free default-off authored-synthetic route-adapter convergence is admitted. Exact A5.1 flag, allowlist, typed HTTP contract and default denial remain. No ordinary-practice admission, generic-status Arrived, grammar/client/waiting-area movement, product/patient/clinical/protected data, provider, production runtime, deployment, release, Pages or protected-ref movement. docs/branding and unrelated untracked files are preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "Fetched task and origin task remain exact ad523968713e58f0b42c3a428556c968f61d6d3c before the plan commit. All four protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are limited to the frozen plan/threat, latch and fresh receipt/state artifacts; 645 predecessor untracked paths including docs/branding remain excluded."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "active_tranche": "Provider-free default-off canonical check-in route-adapter convergence rehearsal",
+    "objective": "Make the unchanged default-off A5.1 route delegate to the accepted canonical check-in product adapter while preserving the feature flag, authored-synthetic practice allowlist, exact request and response contract, default denial and every closed ordinary-product boundary.",
+    "status": "in_progress",
+    "source_head": "ad523968713e58f0b42c3a428556c968f61d6d3c",
+    "authority_source": "AGENTS.md Current Baton at Continuity 316 / Compass 298, the accepted check-in product-adapter extraction result and Yuri's standing uninterrupted-development authority direct this narrow default-off route-adapter convergence rehearsal.",
+    "checkpoint": {
+      "completed_stage": "The fail-closed plan and threat delta are frozen at source HEAD ad523968713e58f0b42c3a428556c968f61d6d3c. They preserve A5.1 default denial, exact HTTP/idempotency semantics and one accepted-adapter write path, including the narrow claim-before-envelope compatibility amendment required by route inspection.",
+      "next_executable_stage": "check_gate_and_commit_the_frozen_plan_then_generate_the_exact_deepseek_predispatch_packet_and_receipt",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_default_off_authored_synthetic_route_adapter_convergence_only",
+      "delegate_existing_a5_1_route_to_accepted_check_in_adapter_without_product_admission",
+      "existing_a5_1_feature_flag_authored_synthetic_allowlist_request_response_and_default_denial_preserved",
+      "no_practice_enablement_or_live_route_call",
+      "no_generic_status_arrived_admission_change",
+      "no_action_grammar_route_contract_or_client_change",
+      "no_waiting_area_move_or_removal_command",
+      "no_product_database_source_watcher_or_external_client_access",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_provider_adc_credentials_iam_network_or_executable_model_tool",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "assessed_stage": "post_plan_freeze",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "The frozen route/adapter/tests package is bounded, mechanical and separable; exact transport mapping and one ordering amendment are now specified without acceptance judgment.",
+        "work_packages": ["implement_the_exact_frozen_route_adapter_and_tests_package"]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "A fresh Gemini 3.7 Flash/high veto remains required after deterministic admission of this command-route change.",
+        "work_packages": ["fresh_exact_candidate_read_only_veto_after_deterministic_admission"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive native delegation and no user or skill instruction authorizes a native subagent.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": ["DeepSeek implements only the exact frozen source/test package while Sol retains review acceptance and Git"],
+    "serial_constraints": [
+      "commit the frozen plan before worker dispatch",
+      "Sol reviews and deterministically admits the worker candidate before Gemini",
+      "Gemini reviews one exact clean candidate only after admission",
+      "Sol alone owns recovery acceptance continuity and Git"
+    ],
+    "reassessment_triggers": ["pre_dispatch", "worker_candidate_return", "pre_verifier_acceptance", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "fresh five-source receipt plus exact route/adapter/API Spine inspection and frozen plan",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol froze the exact plan and is check-gating its explicit-path commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Selected but not dispatched before the plan commit and pre-dispatch receipt."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Reserved after deterministic admission."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Native lane declined; no native subagent was spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
