@@ -424,25 +424,67 @@ def run_worker(
         raise RuntimeError(
             "Antigravity verifier modified its read-only candidate worktree"
         )
-    if structured_decision:
-        decision_envelope = parse_structured_decision(
-            completed.stdout,
-            command_manifest,
-        )
-        decision = decision_envelope["decision"]
-        result = decision_envelope["review"]
-        decision_contract = "schema_constrained_json_v1"
-    else:
-        decisions = DECISION_PATTERN.findall(completed.stdout)
-        if len(decisions) != 1:
-            raise RuntimeError(
-                "Antigravity verifier must return exactly one terminal decision; "
-                f"observed {len(decisions)}"
+    try:
+        if structured_decision:
+            decision_envelope = parse_structured_decision(
+                completed.stdout,
+                command_manifest,
             )
-        decision = decisions[0]
-        result = completed.stdout.strip()
-        decision_envelope = None
-        decision_contract = "legacy_terminal_line_v1"
+            decision = decision_envelope["decision"]
+            result = decision_envelope["review"]
+            decision_contract = "schema_constrained_json_v1"
+        else:
+            decisions = DECISION_PATTERN.findall(completed.stdout)
+            if len(decisions) != 1:
+                raise RuntimeError(
+                    "Antigravity verifier must return exactly one terminal decision; "
+                    f"observed {len(decisions)}"
+                )
+            decision = decisions[0]
+            result = completed.stdout.strip()
+            decision_envelope = None
+            decision_contract = "legacy_terminal_line_v1"
+    except RuntimeError as error:
+        failure_receipt = {
+            "schema_version": "ariadne.egress-failure-receipt.v1",
+            "status": "egress_failed_without_admitted_terminal_decision",
+            "transport": "antigravity_new_project_bound_readonly_worktree",
+            "model": canonical_model,
+            "requested_model": model,
+            "reasoning_effort": reasoning_effort,
+            "worktree": str(before.root),
+            "branch": before.branch,
+            "head_before": before.head,
+            "head_after": after.head,
+            "dirty_after": after.dirty,
+            "worktree_identity_unchanged": True,
+            "os_sandbox": os_sandbox,
+            "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
+            "exit_code": completed.returncode,
+            "elapsed_ms": elapsed_ms,
+            "stdout": _output_evidence(completed.stdout or ""),
+            "stderr": _output_evidence(completed.stderr or ""),
+            "decision_contract": (
+                "schema_constrained_json_v1"
+                if structured_decision
+                else "legacy_terminal_line_v1"
+            ),
+            "reason_code": (
+                "structured_decision_envelope_not_admitted"
+                if structured_decision
+                else "legacy_terminal_decision_not_admitted"
+            ),
+            "terminal_decision_admitted": False,
+            "candidate_review_admitted": False,
+        }
+        if command_manifest is not None:
+            failure_receipt["command_manifest_sha256"] = command_manifest_sha256(
+                command_manifest
+            )
+        _atomic_receipt_write(output_path, failure_receipt)
+        raise RuntimeError(
+            f"{error}; digest-only diagnostics written to {output_path}"
+        ) from error
     receipt = {
         "schema_version": "ariadne.worker_receipt.v1",
         "status": "completed",
@@ -511,7 +553,7 @@ def main() -> int:
             ),
         )
     except (OSError, ValueError, RuntimeError) as error:
-        print(f"Antigravity transport failed: {error}", file=sys.stderr)
+        print(f"Antigravity verifier failed: {error}", file=sys.stderr)
         return 2
     print(
         json.dumps(

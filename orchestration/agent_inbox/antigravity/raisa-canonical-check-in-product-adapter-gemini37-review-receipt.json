@@ -1,0 +1,199 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-product-adapter-gemini-8de886c5",
+  "branch": "codex/review-check-in-product-adapter-8de886c5",
+  "head_before": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "head_after": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "d202541390c5148da338502f303a0ab7e59e62d6b5e0ddf5581a9bddefc38d5a",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review \u2014 Canonical Check-In Product Adapter\n\n## 1. Five-Source Rehydration Receipt\n\n- `live_handover_current_baton`: Operating under AGENTS.md Current Baton. Protected integration closed and single-track through `master`. Baton ref `handoff/current`. Local/origin `master` and `handoff/current` aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Conductor/integrator: GPT Sol. Implementation worker: DeepSeek V4 Flash/high. Independent veto: Gemini 3.7 Flash/high.\n- `current_authority_allocation`: Sol owns planning, threat model, review, recovery, integration, continuity, and Git. DeepSeek owned the unmounted product adapter implementation and focused tests. Gemini 3.7 Flash/high provides this independent Tier-2 read-only veto. Native subagents remain declined.\n- `active_plan_and_acceptance`: `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md`, `docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md`, and `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`.\n- `protected_evidence_boundaries`: Provider-free authored-synthetic in-process objects and injected fakes only. Zero live provider, external network, real database, patient, clinical, or protected data. `docs/branding/` and all unrelated untracked files strictly preserved.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-product-adapter-gemini-8de886c5` on branch `codex/review-check-in-product-adapter-8de886c5` at HEAD `8de886c5148b3259428c8c517674f10ea92d937e`, evaluating the candidate against frozen baseline `2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b`.\n\n## 2. Preflight and Command Manifest Execution\n\nThe eight bound manifest commands were executed in exact order with the following outcomes:\n\n- **C01 (`git status --short --branch`)**: Exit code `0`. Worktree is clean on `codex/review-check-in-product-adapter-8de886c5`.\n- **C02 (`git rev-parse HEAD`)**: Exit code `0`. Output matched exact target HEAD `8de886c5148b3259428c8c517674f10ea92d937e`.\n- **C03 (`python -m scripts.ariadne_provider_free_pytest ...`)**: Exit code `1`.\n  - Focused adapter tests (`tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py`): Passed all 85 checks (including all 68 hostile mutations).\n  - Plan test (`tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py`): Passed.\n  - Convergence review tests (`tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py` & plan): Passed.\n  - Runtime regression test (`tests/test_model_required_bureau_a5_1_check_in_runtime.py`): Failed at test setup due to missing test fixture `practice` under the standalone provider-free test harness invocation.\n- **C04 (`ruff check ...`)**: Exit code `0`. All style, lint, and formatting checks passed.\n- **C05 (`python -m py_compile ...`)**: Exit code `0`. Syntax compilation passed cleanly.\n- **C06 (`git diff --check ...`)**: Exit code `0`. Clean diff with zero whitespace errors.\n- **C07 (`git diff --name-only ...`)**: Exit code `0`. Modified/added files strictly correspond to the candidate extraction and continuity artifacts.\n- **C08 (`git status --short --branch`)**: Exit code `0`. Worktree remained clean post-execution.\n\n## 3. Substantive Challenge Findings\n\n1. **Unmounted Extraction & Zero Side-Effects**: `app/services/appointment_check_in_product_adapter.py` is strictly unmounted. It imports no FastAPI routers, settings, `SessionLocal`, database connectors, or server runtime components. It reads no feature flags and leaves all existing routing, schemas, models, and services unmodified.\n2. **Authority & Closed Envelope**: The adapter enforces exact Receptionist authority at initial check and inside the transaction session before mutation. The envelope requires `confirmed=true`, a safe proposal, exact warning matching, and opaque evidence.\n3. **Idempotency & Replay**: Stable claim-before-effect sequence, exact-match stored replay returns without locking or mutations, and mismatched/conflicting claims fail closed.\n4. **Waiting Area Policy**: Allows only assignment into empty slots or preservation of existing areas; moves/removals and location/practice mismatches fail closed.\n5. **Ordered Atomic Composition & Patient-Free Release**: Composition is strictly ordered (`claim` -> `lock` -> `reauthorize` -> `verify` -> `waiting_area` -> `effect` -> `audit` -> `event` -> `complete` -> `commit` -> `readback`). All released structures, audits, and events are verified patient-free.\n6. **Manifest Command Failure Finding**: Under the deterministic decision rule, any non-zero exit code in the bound command manifest precludes a `pass`. Command `C03` returned exit code `1` because `tests/test_model_required_bureau_a5_1_check_in_runtime.py` requires database/conftest fixtures that are not resolved when passed as an argument to `scripts.ariadne_provider_free_pytest`.\n\n## 4. Disposition\n\nBecause command `C03` failed with exit code `1`, the exact verification criteria require `revision_required` to repair the test execution configuration / fixture harness binding for the A5.1 regression suite under the manifest runner.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review \u2014 Canonical Check-In Product Adapter\n\n## 1. Five-Source Rehydration Receipt\n\n- `live_handover_current_baton`: Operating under AGENTS.md Current Baton. Protected integration closed and single-track through `master`. Baton ref `handoff/current`. Local/origin `master` and `handoff/current` aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Conductor/integrator: GPT Sol. Implementation worker: DeepSeek V4 Flash/high. Independent veto: Gemini 3.7 Flash/high.\n- `current_authority_allocation`: Sol owns planning, threat model, review, recovery, integration, continuity, and Git. DeepSeek owned the unmounted product adapter implementation and focused tests. Gemini 3.7 Flash/high provides this independent Tier-2 read-only veto. Native subagents remain declined.\n- `active_plan_and_acceptance`: `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md`, `docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md`, and `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`.\n- `protected_evidence_boundaries`: Provider-free authored-synthetic in-process objects and injected fakes only. Zero live provider, external network, real database, patient, clinical, or protected data. `docs/branding/` and all unrelated untracked files strictly preserved.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-product-adapter-gemini-8de886c5` on branch `codex/review-check-in-product-adapter-8de886c5` at HEAD `8de886c5148b3259428c8c517674f10ea92d937e`, evaluating the candidate against frozen baseline `2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b`.\n\n## 2. Preflight and Command Manifest Execution\n\nThe eight bound manifest commands were executed in exact order with the following outcomes:\n\n- **C01 (`git status --short --branch`)**: Exit code `0`. Worktree is clean on `codex/review-check-in-product-adapter-8de886c5`.\n- **C02 (`git rev-parse HEAD`)**: Exit code `0`. Output matched exact target HEAD `8de886c5148b3259428c8c517674f10ea92d937e`.\n- **C03 (`python -m scripts.ariadne_provider_free_pytest ...`)**: Exit code `1`.\n  - Focused adapter tests (`tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py`): Passed all 85 checks (including all 68 hostile mutations).\n  - Plan test (`tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py`): Passed.\n  - Convergence review tests (`tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py` & plan): Passed.\n  - Runtime regression test (`tests/test_model_required_bureau_a5_1_check_in_runtime.py`): Failed at test setup due to missing test fixture `practice` under the standalone provider-free test harness invocation.\n- **C04 (`ruff check ...`)**: Exit code `0`. All style, lint, and formatting checks passed.\n- **C05 (`python -m py_compile ...`)**: Exit code `0`. Syntax compilation passed cleanly.\n- **C06 (`git diff --check ...`)**: Exit code `0`. Clean diff with zero whitespace errors.\n- **C07 (`git diff --name-only ...`)**: Exit code `0`. Modified/added files strictly correspond to the candidate extraction and continuity artifacts.\n- **C08 (`git status --short --branch`)**: Exit code `0`. Worktree remained clean post-execution.\n\n## 3. Substantive Challenge Findings\n\n1. **Unmounted Extraction & Zero Side-Effects**: `app/services/appointment_check_in_product_adapter.py` is strictly unmounted. It imports no FastAPI routers, settings, `SessionLocal`, database connectors, or server runtime components. It reads no feature flags and leaves all existing routing, schemas, models, and services unmodified.\n2. **Authority & Closed Envelope**: The adapter enforces exact Receptionist authority at initial check and inside the transaction session before mutation. The envelope requires `confirmed=true`, a safe proposal, exact warning matching, and opaque evidence.\n3. **Idempotency & Replay**: Stable claim-before-effect sequence, exact-match stored replay returns without locking or mutations, and mismatched/conflicting claims fail closed.\n4. **Waiting Area Policy**: Allows only assignment into empty slots or preservation of existing areas; moves/removals and location/practice mismatches fail closed.\n5. **Ordered Atomic Composition & Patient-Free Release**: Composition is strictly ordered (`claim` -> `lock` -> `reauthorize` -> `verify` -> `waiting_area` -> `effect` -> `audit` -> `event` -> `complete` -> `commit` -> `readback`). All released structures, audits, and events are verified patient-free.\n6. **Manifest Command Failure Finding**: Under the deterministic decision rule, any non-zero exit code in the bound command manifest precludes a `pass`. Command `C03` returned exit code `1` because `tests/test_model_required_bureau_a5_1_check_in_runtime.py` requires database/conftest fixtures that are not resolved when passed as an argument to `scripts.ariadne_provider_free_pytest`.\n\n## 4. Disposition\n\nBecause command `C03` failed with exit code `1`, the exact verification criteria require `revision_required` to repair the test execution configuration / fixture harness binding for the A5.1 regression suite under the manifest runner.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+          "tests/test_model_required_bureau_a5_1_check_in_runtime.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "app/services/appointment_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "app/services/appointment_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "e920e1dc45b1c0d11380530e364c306155c62a5545b2ca5a1932870755a167b5",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py",
+        "tests/test_model_required_bureau_a5_1_check_in_runtime.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

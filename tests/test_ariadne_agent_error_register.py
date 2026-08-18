@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 371
+    assert register["register_revision"] == 373
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 424)
+        f"AER-{index:04d}" for index in range(1, 426)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 295
+    assert len(agent_incidents) == 296
     assert len(transport_incidents) == 15
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2581,7 +2581,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 423
+    assert report["incident_count"] == 425
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3618,20 +3618,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 371
-    assert report["incident_count"] == 423
+    assert report["register_revision"] == 373
+    assert report["incident_count"] == 425
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 295,
-        "harness": 48,
+        "agent_behavior": 296,
+        "harness": 49,
         "repository": 65,
         "transport": 15,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 64,
         "evidence_misreport": 57,
-        "harness_failure": 48,
-        "output_contract_violation": 129,
+        "harness_failure": 49,
+        "output_contract_violation": 130,
         "read_only_violation": 3,
         "reasoning_claim_error": 42,
         "repository_defect": 65,
@@ -3639,7 +3639,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 110,
-        "canonical_unchanged": 273,
+        "canonical_unchanged": 275,
         "untrusted_partial_worktree": 40,
     }
     receipt_event_recurrence = next(
@@ -4039,6 +4039,21 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Never create an Antigravity verifier worktree with --detach. Create it directly on a named codex/review branch and require scripts.ariadne_verifier_worktree_preflight to pass before constructing the pre-verifier runtime state.",
                 "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
                 "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate.",
+            ],
+        },
+        {
+            "recurrence_signature": (
+                "orchestrator.provider_free_test_allowlist_included_fixture_or_known_negative_suites"
+            ),
+            "incident_count": 2,
+            "incident_ids": ["AER-0420", "AER-0425"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Before a no-conftest dispatch, inspect every selected file for repository fixtures and known-negative classification; fixture-backed coverage belongs only to an explicitly authorised database profile and documented negative suites cannot become positive admission gates.",
+                "Verifier manifest construction must classify every pytest path as self-contained or conftest-required before selection and obtain the digest only through load_command_manifest plus command_manifest_sha256; raw JSON file hashing is not an admitted substitute.",
             ],
         },
         {
@@ -6739,6 +6754,37 @@ def test_aer_0423_records_compact_latch_prose_fixture_repair() -> None:
     assert "200-test canonical fast profile" in incident["observed_error"]
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["status"] == "corrected"
+
+
+def test_aer_0424_records_antigravity_egress_failure_receipt_repair() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0424"
+    ]
+
+    assert incident["origin"] == "harness"
+    assert incident["category"] == "harness_failure"
+    assert "observed 0" in incident["observed_error"]
+    assert "wrote no failure receipt" in incident["observed_error"]
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0425_records_fixture_free_verifier_manifest_correction() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0425"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert "practice fixture" in incident["observed_error"]
+    assert "raw JSON file SHA-256" in incident["observed_error"]
+    assert "101/101" in incident["detection_method"]
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["status"] == "corrected"
+    assert (
+        incidents["AER-0420"]["recurrence_signature"]
+        == incident["recurrence_signature"]
+    )
 
 
 def test_missing_or_out_of_scope_evidence_fails_closed() -> None:

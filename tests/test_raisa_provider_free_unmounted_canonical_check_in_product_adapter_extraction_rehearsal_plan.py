@@ -71,15 +71,19 @@ def test_parallelism_and_closed_surfaces_are_explicit() -> None:
     assert "No product data" in threat
 
 
-def test_live_latch_names_the_exact_in_progress_successor() -> None:
+def test_live_latch_names_the_exact_completed_operation() -> None:
     latch = json.loads(_text(LATCH))
 
     assert latch["operation_id"] == (
         "raisa-provider-free-unmounted-canonical-check-in-product-adapter-"
         "extraction-rehearsal"
     )
-    assert latch["status"] == "in_progress"
-    assert len(latch["source_head"]) == 40
-    assert all(char in "0123456789abcdef" for char in latch["source_head"])
+    assert latch["status"] == "complete"
+    assert latch["source_head"] == "8de886c5148b3259428c8c517674f10ea92d937e"
+    assert latch["checkpoint"]["next_executable_stage"] is None
+    assert latch["resume_after_compaction"] is False
     assert latch["user_attention"]["required"] is False
-    assert latch["terminal_response"]["permitted"] is False
+    assert latch["terminal_response"] == {
+        "permitted": True,
+        "reason": "operation_complete",
+    }

@@ -1,0 +1,68 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

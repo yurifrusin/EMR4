@@ -1,0 +1,197 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-product-adapter-gemini-8de886c5",
+  "branch": "codex/review-check-in-product-adapter-8de886c5",
+  "head_before": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "head_after": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "033b92fcf5620ad2340ae4fea83536a936d05157f2aa944333f139be4d0e103d",
+  "result": "# Independent Veto Review: Canonical Check-in Product Adapter\n\n## 1. Rehydration and Authority Boundary Verification\n\n- `live_handover_current_baton`: Rehydrated from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/AGENTS.md) at current baton ref `handoff/current`. Protected master and handoff remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n- `current_authority_allocation`: Sol is conductor/integrator; DeepSeek Flash owns the two-file implementation/test package; Gemini 3.7 Flash/high performs this independent veto review. No proactive native subagents.\n- `active_plan_and_acceptance`: [docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md), [docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md), [docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md), and [orchestration/continuity/ariadne-active-operation-latch/current.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/orchestration/continuity/ariadne-active-operation-latch/current.json).\n- `protected_evidence_boundaries`: Authored-synthetic in-process objects and injected fakes only. No live database, network, provider, patient/clinical data, or ref movement.\n- `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-product-adapter-gemini-8de886c5`, branch `codex/review-check-in-product-adapter-8de886c5`, HEAD `8de886c5148b3259428c8c517674f10ea92d937e`, planning source `2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b`.\n\n## 2. Challenge Findings\n\n1. **Worktree & Diff Cleanliness**: Exact branch `codex/review-check-in-product-adapter-8de886c5` and HEAD `8de886c5148b3259428c8c517674f10ea92d937e` confirmed via C01, C02, and C08. `git diff --check` and `--name-only` (C06, C07) verify zero whitespace defects and strict restriction to allowlisted implementation, plan, register, continuity, and test files.\n2. **Genuinely Unmounted Architecture**: [app/services/appointment_check_in_product_adapter.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/app/services/appointment_check_in_product_adapter.py) imports zero routers, settings, database sessions, or network tools. It reads no configuration or feature flags, starts no server, and exposes no generic command executor. All existing routes and schemas remain unchanged.\n3. **Closed Confirmation Envelope & Command Meaning**: Validates that incoming envelopes strictly match `AppointmentCheckInProposalConfirmationIn` carrying `AppointmentCheckInProposalOut` and `AppointmentCheckInCommand`, requires `confirmed=true`, non-empty opaque evidence, exact warning acknowledgement, and restricts state transitions to exact `Booked|Confirmed -> Arrived`.\n4. **Authenticated Authority at Ingress & In-Session Recheck**: Verifies active same-practice `Receptionist` role at ingress and rechecks the loaded actor inside the session before applying effects. Authority revocation or role mismatch immediately stops execution and rolls back.\n5. **Stable Idempotency & Evidence Consumption**: Idempotency claim precedes any lock or effect. Replay responses strictly return stored payloads without executing callbacks or locks. Conflict, in-progress, and evidence reuse attempts stop fail-closed.\n6. **Locked Truth & Parity**: Exact practice-scoped row locking, 32-character SHA-256 freshness computation, and aware UTC timestamp verification against opaque evidence are strictly enforced.\n7. **Waiting-Area Policy**: Permits only compatible assignment into empty slots or preservation of existing slots. Area move, removal, cross-practice, inactive, locationless, or location-mismatched areas fail closed with rollback.\n8. **Ordered Atomic Composition**: Enforces strict step ordering: claim -> lock -> reauthorize -> freshness/evidence check -> waiting-area check -> staged effect -> audit log -> committed event -> idempotency completion -> commit -> fresh readback. Pre-commit failures trigger rollback; commit/readback failures fail closed as `outcome_unknown`.\n9. **Patient-Free Release & Redaction**: Strict `_patient_free` verification excludes all patient names, IDs, clinical notes, raw evidence tokens, and raw idempotency keys from returned structures, audits, events, and receipts.\n10. **Hostile Mutation & Verification Matrix**: All 68 hostile contract mutations and the 101/101 test suite (C03) pass cleanly. Ruff linting (C04) and Python bytecode compilation (C05) pass with zero errors.\n11. **Closed System Boundaries**: Confirms GraphQL remains read-only, no route mount/wiring is altered, generic-status `Arrived` remains untouched, and no live database, provider, patient data, deployment, or protected refs are touched.\n\nNo P0-P2 findings or defect paths exist. All 11 challenges are satisfied.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Veto Review: Canonical Check-in Product Adapter\n\n## 1. Rehydration and Authority Boundary Verification\n\n- `live_handover_current_baton`: Rehydrated from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/AGENTS.md) at current baton ref `handoff/current`. Protected master and handoff remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n- `current_authority_allocation`: Sol is conductor/integrator; DeepSeek Flash owns the two-file implementation/test package; Gemini 3.7 Flash/high performs this independent veto review. No proactive native subagents.\n- `active_plan_and_acceptance`: [docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md), [docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md), [docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md), and [orchestration/continuity/ariadne-active-operation-latch/current.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/orchestration/continuity/ariadne-active-operation-latch/current.json).\n- `protected_evidence_boundaries`: Authored-synthetic in-process objects and injected fakes only. No live database, network, provider, patient/clinical data, or ref movement.\n- `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-product-adapter-gemini-8de886c5`, branch `codex/review-check-in-product-adapter-8de886c5`, HEAD `8de886c5148b3259428c8c517674f10ea92d937e`, planning source `2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b`.\n\n## 2. Challenge Findings\n\n1. **Worktree & Diff Cleanliness**: Exact branch `codex/review-check-in-product-adapter-8de886c5` and HEAD `8de886c5148b3259428c8c517674f10ea92d937e` confirmed via C01, C02, and C08. `git diff --check` and `--name-only` (C06, C07) verify zero whitespace defects and strict restriction to allowlisted implementation, plan, register, continuity, and test files.\n2. **Genuinely Unmounted Architecture**: [app/services/appointment_check_in_product_adapter.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5/app/services/appointment_check_in_product_adapter.py) imports zero routers, settings, database sessions, or network tools. It reads no configuration or feature flags, starts no server, and exposes no generic command executor. All existing routes and schemas remain unchanged.\n3. **Closed Confirmation Envelope & Command Meaning**: Validates that incoming envelopes strictly match `AppointmentCheckInProposalConfirmationIn` carrying `AppointmentCheckInProposalOut` and `AppointmentCheckInCommand`, requires `confirmed=true`, non-empty opaque evidence, exact warning acknowledgement, and restricts state transitions to exact `Booked|Confirmed -> Arrived`.\n4. **Authenticated Authority at Ingress & In-Session Recheck**: Verifies active same-practice `Receptionist` role at ingress and rechecks the loaded actor inside the session before applying effects. Authority revocation or role mismatch immediately stops execution and rolls back.\n5. **Stable Idempotency & Evidence Consumption**: Idempotency claim precedes any lock or effect. Replay responses strictly return stored payloads without executing callbacks or locks. Conflict, in-progress, and evidence reuse attempts stop fail-closed.\n6. **Locked Truth & Parity**: Exact practice-scoped row locking, 32-character SHA-256 freshness computation, and aware UTC timestamp verification against opaque evidence are strictly enforced.\n7. **Waiting-Area Policy**: Permits only compatible assignment into empty slots or preservation of existing slots. Area move, removal, cross-practice, inactive, locationless, or location-mismatched areas fail closed with rollback.\n8. **Ordered Atomic Composition**: Enforces strict step ordering: claim -> lock -> reauthorize -> freshness/evidence check -> waiting-area check -> staged effect -> audit log -> committed event -> idempotency completion -> commit -> fresh readback. Pre-commit failures trigger rollback; commit/readback failures fail closed as `outcome_unknown`.\n9. **Patient-Free Release & Redaction**: Strict `_patient_free` verification excludes all patient names, IDs, clinical notes, raw evidence tokens, and raw idempotency keys from returned structures, audits, events, and receipts.\n10. **Hostile Mutation & Verification Matrix**: All 68 hostile contract mutations and the 101/101 test suite (C03) pass cleanly. Ruff linting (C04) and Python bytecode compilation (C05) pass with zero errors.\n11. **Closed System Boundaries**: Confirms GraphQL remains read-only, no route mount/wiring is altered, generic-status `Arrived` remains untouched, and no live database, provider, patient data, deployment, or protected refs are touched.\n\nNo P0-P2 findings or defect paths exist. All 11 challenges are satisfied.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "app/services/appointment_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "app/services/appointment_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "09b93f00ffd2c72f326ac0992de5927ca1397aae6ea972ee2cf1f7f00680c907",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_arrival_check_in_command_family_convergence_review_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "2b20e59c4a6c6584709f794e7ed4b5e6b1dc5b0b..8de886c5148b3259428c8c517674f10ea92d937e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

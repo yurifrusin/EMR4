@@ -343,7 +343,14 @@ def test_run_worker_rejects_missing_or_duplicate_terminal_decision(
             structured_decision=False,
         )
 
-    assert not output.exists()
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert failure["schema_version"] == "ariadne.egress-failure-receipt.v1"
+    assert failure["decision_contract"] == "legacy_terminal_line_v1"
+    assert failure["reason_code"] == "legacy_terminal_decision_not_admitted"
+    assert failure["terminal_decision_admitted"] is False
+    assert failure["candidate_review_admitted"] is False
+    assert failure["stdout"]["bytes"] == len(stdout.encode("utf-8"))
+    assert stdout not in output.read_text(encoding="utf-8")
 
 
 @pytest.mark.parametrize(
@@ -412,7 +419,21 @@ def test_run_worker_rejects_missing_or_conflicting_structured_decision(
             os_sandbox=False,
         )
 
-    assert not output.exists()
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert failure["schema_version"] == "ariadne.egress-failure-receipt.v1"
+    assert failure["status"] == (
+        "egress_failed_without_admitted_terminal_decision"
+    )
+    assert failure["exit_code"] == 0
+    assert failure["worktree_identity_unchanged"] is True
+    assert failure["decision_contract"] == "schema_constrained_json_v1"
+    assert failure["reason_code"] == (
+        "structured_decision_envelope_not_admitted"
+    )
+    assert failure["terminal_decision_admitted"] is False
+    assert failure["candidate_review_admitted"] is False
+    assert failure["stdout"]["bytes"] == len(stdout.encode("utf-8"))
+    assert stdout not in output.read_text(encoding="utf-8")
 
 
 def test_structured_decision_rejects_embedded_legacy_terminal_marker() -> None:

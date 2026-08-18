@@ -55,12 +55,12 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
             "raisa-provider-free-unmounted-canonical-check-in-product-adapter-"
             "extraction-rehearsal"
         )
-        assert latch["status"] == "in_progress"
-        assert len(latch["source_head"]) == 40
-        assert all(char in "0123456789abcdef" for char in latch["source_head"])
+        assert latch["status"] == "complete"
+        assert latch["source_head"] == "8de886c5148b3259428c8c517674f10ea92d937e"
         completed = latch["checkpoint"]["completed_stage"]
-        assert "AER-0423" in completed
-        assert "200-test canonical fast profile" in completed
+        assert "AER-0424/0425" in completed
+        assert "590-check admission packet" in completed
+        assert "Continuity 316 / Compass 298" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]
@@ -68,6 +68,14 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert latch["terminal_response"] == {
             "permitted": False,
             "reason": "unfinished_authorized_operation",
+        }
+    else:
+        assert latch["resume_after_compaction"] is False
+        assert latch["checkpoint"]["next_executable_stage"] is None
+        assert latch["user_attention"]["required"] is False
+        assert latch["terminal_response"] == {
+            "permitted": True,
+            "reason": "operation_complete",
         }
 
 

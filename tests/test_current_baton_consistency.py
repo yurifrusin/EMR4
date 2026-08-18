@@ -40,6 +40,11 @@ ARRIVAL_CHECK_IN_REVIEW_NODE_ID = (
     "convergence-review"
 )
 ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD = "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d"
+CHECK_IN_ADAPTER_NODE_ID = (
+    "raisa-provider-free-unmounted-canonical-check-in-product-adapter-"
+    "extraction-rehearsal"
+)
+CHECK_IN_ADAPTER_SOURCE_HEAD = "8de886c5148b3259428c8c517674f10ea92d937e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
@@ -84,17 +89,17 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 315
-    assert graph["nodes"][-1]["id"] == ARRIVAL_CHECK_IN_REVIEW_NODE_ID
+    assert graph["graph_revision"] == 316
+    assert graph["nodes"][-1]["id"] == CHECK_IN_ADAPTER_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD
+        CHECK_IN_ADAPTER_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
-        {"node_id": POST_CANCELLATION_ORIENTATION_NODE_ID, "relation": "builds_on"}
+        {"node_id": ARRIVAL_CHECK_IN_REVIEW_NODE_ID, "relation": "builds_on"}
     ]
-    assert compass["map_revision"] == 297
-    assert compass["source_graph_revision"] == 315
-    assert compass["current_position"]["node_id"] == ARRIVAL_CHECK_IN_REVIEW_NODE_ID
+    assert compass["map_revision"] == 298
+    assert compass["source_graph_revision"] == 316
+    assert compass["current_position"]["node_id"] == CHECK_IN_ADAPTER_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -112,22 +117,22 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     )
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
-    assert "Continuity 315 / Compass 297" in current
+    assert "Continuity 316 / Compass 298" in current
     assert (
-        "raisa_provider_free_read_only_arrival_check_in_command_family_"
-        "convergence_review_pass"
+        "raisa_provider_free_unmounted_canonical_check_in_product_adapter_"
+        "extraction_rehearsal_pass"
     ) in current
-    assert ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD in current
-    assert "eleven new checks" in current.lower()
-    assert "118 focused" in current.lower()
-    assert "dedicated check-in" in current.lower()
+    assert CHECK_IN_ADAPTER_SOURCE_HEAD in current
+    assert "85 focused checks" in current.lower()
+    assert "68 hostile mutations" in current.lower()
+    assert "590-check admission packet" in current.lower()
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
-    assert "revision 371" in error_register
-    assert "423 bounded incidents" in error_register
-    assert "aer-0405" in error_register
-    assert "aer-0423" in error_register
+    assert "revision 373" in error_register
+    assert "425 bounded incidents" in error_register
+    assert "aer-0424" in error_register
+    assert "aer-0425" in error_register
     assert "gemini 3.7 flash/high" in current.lower()
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
@@ -141,10 +146,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert HTTP_POSTGRES_SOURCE_HEAD in implementation_relation
     assert ROUTE_REVIEW_SOURCE_HEAD in relation
     assert "cancellation" in product.lower()
-    assert "adapter-neutral reference renderer" in product.lower()
-    assert ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD in product
+    assert "accepted reusable unmounted adapter" in product.lower()
+    assert CHECK_IN_ADAPTER_SOURCE_HEAD in product
     assert ORDINARY_CONVERGENCE_SOURCE_HEAD in ordinary_relation
     assert POST_CANCELLATION_ORIENTATION_SOURCE_HEAD in orientation_relation
+    assert CHECK_IN_ADAPTER_SOURCE_HEAD in orientation_relation
+    assert CHECK_IN_ADAPTER_SOURCE_HEAD in relation
     assert CANCELLATION_SOURCE_HEAD in relation
     assert REPRESENTABILITY_SOURCE_HEAD in relation
     assert KERNEL_SOURCE_HEAD in relation
@@ -186,10 +193,11 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "canonical-check-in-product-adapter-extraction-rehearsal" in next_work.lower()
+    assert "canonical-check-in-route-adapter-convergence-rehearsal" in next_work.lower()
+    assert "fresh codex task" in next_work.lower()
     assert "general-status `arrived`" in next_work.lower()
     assert "waiting-area movement" in next_work.lower()
-    assert "provider call" in next_work.lower()
+    assert "live provider" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
@@ -227,11 +235,12 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "canonical-check-in-product-adapter-extraction-rehearsal",
+        "canonical-check-in-route-adapter-convergence-rehearsal",
+        "fresh codex task",
         "general-status `arrived`",
         "waiting-area movement",
-        "product/patient/clinical data",
-        "provider call",
+        "product/patient data",
+        "live provider",
         "deployment",
         "protected-ref movement",
         "docs/branding/",

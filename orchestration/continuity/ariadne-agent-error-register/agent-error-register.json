@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 371,
+  "register_revision": 373,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -16990,6 +16990,88 @@
           "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-register-370-validation-failure.json",
           "docs/ariadne-agent-error-correction-register-revision-371.md",
           "tests/test_ariadne_active_operation_latch_continuity.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0424",
+      "attempt_id": "check-in-product-adapter-gemini-veto-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "harness",
+      "role": "verifier",
+      "resource_id": "ariadne-antigravity-egress-admission",
+      "model": "gemini-3.7-flash",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Every completed Antigravity transport whose output fails exact terminal-decision admission must write a sanitized digest-only egress-failure receipt before the run returns nonzero.",
+      "observed_error": "The first Gemini 3.7 Flash/high veto transport returned exit zero but no schema-valid decision envelope. The harness rejected the result with observed 0 yet wrote no failure receipt because digest-only persistence covered nonzero transport exits but not post-transport egress admission failures.",
+      "detection_method": "The wrapper reached parse_structured_decision, returned the exact zero-envelope error, left the review worktree clean at 8de886c5148b3259428c8c517674f10ea92d937e and created no configured output path; the code path inspection confirmed the missing post-transport exception receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-first-egress-failure.json",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_antigravity.py",
+        "docs/ariadne-agent-error-correction-register-revision-372.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.antigravity_completed_transport_invalid_egress_without_digest_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Wrap both structured and legacy terminal-decision admission in a digest-only failure-receipt boundary, record exact transport/model/worktree identity plus stdout and stderr digests without raw output, distinguish verifier failure from transport failure at the CLI and add missing/conflicting egress regressions.",
+        "prevention_control": "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; no parse or decision-count exception may bypass evidence persistence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-first-egress-failure.json",
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_antigravity.py",
+          "docs/ariadne-agent-error-correction-register-revision-372.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0425",
+      "attempt_id": "check-in-product-adapter-gemini-veto-002",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity_command_manifest",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A provider-free verifier command manifest may contain only self-contained no-conftest tests, and its preflight must bind the repository's canonical parsed-manifest digest rather than a raw file-byte digest.",
+      "observed_error": "The first admitted Gemini decision was revision_required only because C03 combined four self-contained provider-free suites with tests/test_model_required_bureau_a5_1_check_in_runtime.py, whose practice fixture is intentionally unavailable under the no-conftest runner. The manually authored preflight also named the raw JSON file SHA-256 instead of command_manifest_sha256 over the parsed manifest.",
+      "detection_method": "Gemini reported that the adapter's substantive authority, idempotency, waiting-area, atomicity and patient-free challenges passed, while exact C03 alone exited 1 at missing fixture setup. Removing the fixture-dependent member made the unchanged four-suite command pass 101/101; canonical manifest hashing then produced 09b93f00ffd2c72f326ac0992de5927ca1397aae6ea972ee2cf1f7f00680c907.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-command-manifest.json",
+        "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-373.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_test_allowlist_included_fixture_or_known_negative_suites",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the fixture-dependent A5.1 runtime suite from the no-conftest manifest, retain the four exact self-contained adapter/plan/convergence suites, reproduce their 101/101 pass locally at unchanged candidate HEAD and replace the preflight digest with command_manifest_sha256 over the parsed corrected manifest.",
+        "prevention_control": "Verifier manifest construction must classify every pytest path as self-contained or conftest-required before selection and obtain the digest only through load_command_manifest plus command_manifest_sha256; raw JSON file hashing is not an admitted substitute.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-373.md"
         ]
       },
       "status": "corrected"

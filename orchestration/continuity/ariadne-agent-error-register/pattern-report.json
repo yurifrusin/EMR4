@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "1b7af886dd453dbf815a36506f6bb1ee843f3521273fc66742f2bc5db4e9a00d",
+  "canonical_register_sha256": "537cdba44a52e73ef37323407cd7d194f60b776fc1cd3429839a927a59453877",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 273,
+      "canonical_unchanged": 275,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 64,
       "evidence_misreport": 57,
-      "harness_failure": 48,
-      "output_contract_violation": 129,
+      "harness_failure": 49,
+      "output_contract_violation": 130,
       "read_only_violation": 3,
       "reasoning_claim_error": 42,
       "repository_defect": 65,
       "transport_timeout": 15
     },
     "by_origin": {
-      "agent_behavior": 295,
-      "harness": 48,
+      "agent_behavior": 296,
+      "harness": 49,
       "repository": 65,
       "transport": 15
     },
     "by_process_severity": {
       "low": 178,
       "material": 115,
-      "moderate": 130
+      "moderate": 132
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -33,6 +33,7 @@
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
+      "ariadne-antigravity-egress-admission::verifier": 1,
       "ariadne-compass-current-position-test::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
@@ -45,7 +46,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 212,
+      "codex-primary-orchestrator::orchestrator": 213,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -108,12 +109,12 @@
     "by_role": {
       "implementer": 41,
       "integration_reviewer": 3,
-      "orchestrator": 325,
-      "verifier": 54
+      "orchestrator": 326,
+      "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 423,
+  "incident_count": 425,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -629,6 +630,30 @@
         "Expose the configured event vocabulary through the receipt CLI and require authors to select from that output; tests bind the discoverable list to orchestrator_requirements.yaml so event spelling is not a memory or prose task."
       ],
       "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0420",
+        "AER-0425"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before a no-conftest dispatch, inspect every selected file for repository fixtures and known-negative classification; fixture-backed coverage belongs only to an explicitly authorised database profile and documented negative suites cannot become positive admission gates.",
+        "Verifier manifest construction must classify every pytest path as self-contained or conftest-required before selection and obtain the digest only through load_command_manifest plus command_manifest_sha256; raw JSON file hashing is not an admitted substitute."
+      ],
+      "recurrence_signature": "orchestrator.provider_free_test_allowlist_included_fixture_or_known_negative_suites",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1246,7 +1271,7 @@
       ]
     }
   ],
-  "register_revision": 371,
+  "register_revision": 373,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted canonical check-in product-adapter extraction rehearsal",
+    "completed_stage": "The exact candidate remains clean at 8de886c5148b3259428c8c517674f10ea92d937e. Attempt 002 found every substantive adapter challenge sound and failed only Sol's fixture-dependent C03 member. AER-0425 removes it, binds the canonical manifest digest and the corrected four-suite command passes 101/101.",
+    "next_executable_stage": "Run one final same-model Gemini 3.7 Flash/high corrected-manifest veto, then accept or repair without changing protected boundaries.",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "8de886c5148b3259428c8c517674f10ea92d937e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "8de886c5148b3259428c8c517674f10ea92d937e",
+    "reason_codes": [],
+    "resolved_commit": "8de886c5148b3259428c8c517674f10ea92d937e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "8de886c5148b3259428c8c517674f10ea92d937e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "8de886c5148b3259428c8c517674f10ea92d937e",
+    "branch_origin_aligned": false,
+    "head": "8de886c5148b3259428c8c517674f10ea92d937e",
+    "origin_branch_commit": "eddabb6a6797fa0a3d8ad29795e1d1b7c5040729",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The frozen package was separable, but this occupied lane returned a bounded transport non-result with no artifact; Sol recovery completed the same exact package and no worker source was accepted.",
+        "work_packages": [
+          "implement_unmounted_check_in_product_adapter_and_focused_authored_synthetic_tests_in_disposable_worktree"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact candidate remains clean. Attempt 002 found no product defect and failed solely on a fixture-dependent manifest member; after AER-0425 correction and local 101/101 reproduction, one final same-model corrected-manifest veto is required.",
+        "work_packages": [
+          "one_exact_candidate_veto_at_8de886c5148b3259428c8c517674f10ea92d937e"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation. The current collaboration runtime also reports zero live child agents; stale Codex-panel cards are not admitted as active workers.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini return",
+      "material recovery",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "exact-candidate Gemini veto",
+      "Sol acceptance and closeout"
+    ]
+  },
+  "planned_action": "run_one_final_read_only_gemini_37_flash_high_veto_at_clean_candidate_8de886c5148b3259428c8c517674f10ea92d937e_after_aer_0425_manifest_correction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md",
+      "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "app/services/appointment_check_in_product_adapter.py",
+      "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-worktree-preflight.json",
+      "orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-first-egress-failure.json",
+      "scripts/ariadne_antigravity.py",
+      "tests/test_ariadne_antigravity.py",
+      "docs/ariadne-agent-error-correction-register-revision-372.md",
+      "orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-373.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns semantics, recovery, harness/manifest correction, integration and acceptance. DeepSeek ended as a transport non-result and Sol admitted the exact package. Gemini attempt 001 returned no decision; AER-0424 repaired egress evidence. Attempt 002 found no product defect and returned revision_required only for Sol's fixture-dependent manifest member; AER-0425 corrects that manifest. One final same-model exact-candidate veto owns the still-unsatisfied independence gate. Native subagents remain declined.",
+    "git_refs_and_worktree": "Exact candidate 8de886c5148b3259428c8c517674f10ea92d937e remains clean on codex/review-check-in-product-adapter-8de886c5 after both prior veto attempts. Main task HEAD remains that candidate; origin task remains eddabb6a6797fa0a3d8ad29795e1d1b7c5040729. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main has only bounded unstaged verifier/AER-0424/AER-0425 corrections plus 659 untracked paths, including preserved docs/branding.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the Current Baton directs the provider-free unmounted canonical check-in product-adapter extraction rehearsal from Continuity 315 / Compass 297.",
+    "protected_evidence_boundaries": "Only committed non-protected source, authored-synthetic in-process objects, injected fakes and repository static/regression checks are admitted. The default-off A5.1 route and every existing input remain unchanged. Route mounting/calling, ordinary-practice admission, generic-status Arrived, action grammar, clients, waiting-area move/removal, live database/source/watcher, product/patient/clinical/historical/protected data, providers, credentials, IAM, deployment, release, Pages and protected refs remain closed. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

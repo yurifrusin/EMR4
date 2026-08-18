@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 315 / Compass 297. Dedicated check-in is the future canonical ordinary arrival command; the next bounded step is its provider-free unmounted adapter extraction.
+> EMR4 is at Continuity 316 / Compass 298. The canonical check-in adapter is accepted unmounted; the next product step is default-off route-adapter convergence after fresh-task rehydration.
 
 ## North star
 
@@ -400,28 +400,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A provider-free read-only arrival/check-in convergence review is selected without choosing a product meaning. Lineage parent: `raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition`.
 192. **Select one authoritative ordinary appointment-arrival command meaning — Provider-free read-only arrival/check-in command-family convergence review**
    Dedicated check-in is the future canonical product-facing arrival command; Arrived is its resulting state. Lineage parent: `raisa-provider-free-read-only-post-cancellation-programme-orientation`.
+193. **Extract reusable check-in authority from default-off A5.1 route-local composition — Provider-free unmounted canonical check-in product-adapter extraction rehearsal**
+   One unmounted deterministic check-in adapter is accepted without route or practice admission. Lineage parent: `raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review`.
 
 ## Current position
 
-**Dedicated check-in owns ordinary arrival meaning while general status retains other transitions — Provider-free read-only arrival/check-in command-family convergence review**
+**Reusable deterministic check-in adapter exists while admission stays route-owned and default-off — Provider-free unmounted canonical check-in product-adapter extraction rehearsal**
 
-**Why this proof came next:** The repository-static convergence review proves that bare Arrived assignment does not preserve the full check-in contract.
+**Why this proof came next:** The predecessor selected check-in as canonical ordinary-arrival meaning and this tranche extracts that exact meaning without opening runtime authority.
 
-Extract the deterministic check-in kernel into one provider-free unmounted product adapter next.
+In a fresh task, converge the unchanged default-off A5.1 route onto the accepted adapter without enabling it.
 
 ### What this unlocks
 
-- Separate reusable check-in behavior from A5.1-only admission scaffolding.
-- Prepare a later atomic route, grammar and two-client convergence without opening it now.
+- Remove duplicated route-local check-in composition behind the existing closed gate.
+- Prepare later atomic general-status, grammar and two-client convergence as distinct gates.
 
 ### What it does not solve
 
-- No A5.1 feature flag, route, general-status policy, action grammar or client changed.
-- Patient linking, external channels, product data, providers, deployment and release remain closed.
+- No practice, route call, general-status Arrived, action grammar or client changed.
+- Real PostgreSQL, product/patient data, providers, deployment and production remain closed.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -698,6 +702,7 @@ Prerequisites:
 
 ## Map limits
 
+- The adapter extraction is in-process authored-synthetic evidence only; it opens no route, practice, database, provider, client, deployment or production authority.
 - The convergence review selects future command meaning only; A5.1 remains default-off and no route, status admission, grammar, client, database or runtime authority is opened.
 - The post-cancellation orientation selects only a read-only arrival/check-in convergence review; it does not admit A5.1, bind generic status, repair static route contracts or add a control.
 - The ordinary Diary cancellation convergence proves authored-synthetic route-intercepted client behavior, not live backend/database, external-adapter, representative usability, deployment or production behavior.
@@ -909,6 +914,7 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption.py`
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
+- `app/services/appointment_check_in_product_adapter.py`
 - `app/services/appointment_delete_composition.py`
 - `app/services/appointment_delete_physical.py`
 - `app/services/appointment_delete_product_adapter.py`
@@ -1340,6 +1346,8 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md`
@@ -1570,6 +1578,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-durability-state-machine-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-observation-to-temporal-signal-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-threat-model-delta.md`
+- `docs/security/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-threat-model-delta.md`
 - `docs/security/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture-threat-model-delta.md`
@@ -1643,6 +1652,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-aes-c3-provider-free-hostile-containment-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-aes-c4-provider-proof-rebind-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-aes-c5-gemini-36-high-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-final-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
@@ -1786,6 +1796,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-pre-verifier-corrected-manifest-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-candidate-prepush-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-cf-d2-event-cue-behavior-transaction-closeout-precommit-receipt.json`
@@ -2923,6 +2938,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--ordinary-diary-cancellation-compatibility-consumer-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-18--arrival-check-in-command-family-convergence-review.md`
+- `orchestration/human_inbox/yuri/2026-08-18--canonical-check-in-product-adapter-extraction-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -3118,6 +3134,8 @@ Prerequisites:
 - `tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal.py`
 - `tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_evidence.py`
 - `tests/test_raisa_provider_free_two_projection_truth_parity_conformance_rehearsal_plan.py`
+- `tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py`
+- `tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_admission_rehearsal.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_inert_ddl_lowering.py`
 - `tests/test_raisa_provider_free_unmounted_cf_d2_event_cue_representation_architecture.py`
@@ -3172,4 +3190,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 297; continuity graph revision 315._
+_Compass map revision 298; continuity graph revision 316._

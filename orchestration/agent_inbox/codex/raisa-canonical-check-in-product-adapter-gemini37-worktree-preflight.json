@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+  "branch": "codex/review-check-in-product-adapter-8de886c5",
+  "head": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "expected_head": "8de886c5148b3259428c8c517674f10ea92d937e",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "09b93f00ffd2c72f326ac0992de5927ca1397aae6ea972ee2cf1f7f00680c907",
+  "command_count": 8,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/check-in-product-adapter-gemini-8de886c5",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
