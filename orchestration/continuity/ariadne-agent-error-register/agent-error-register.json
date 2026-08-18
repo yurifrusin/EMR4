@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 426,
+  "register_revision": 428,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19738,6 +19738,84 @@
         "evidence_paths": [
           "tests/test_ariadne_active_operation_latch_continuity.py",
           "docs/ariadne-agent-error-correction-register-revision-426.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0497",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-occupied-worker-002",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "harness",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-container-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "native_harness_brokered_internal_network",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "The one admitted occupied rc.7 worker must boot the stock headless profile through the package-declared CLI, reach the custom package-native exact-tool-view runner and make at most the brokered provider requests permitted by the fifteen-minute session boundary.",
+      "observed_error": "The worker terminaled with exit 1 in under one second while the stock headless profile applied cordis-plugin-hmr; that service requires Node --expose-internals, which the package-declared CLI launcher did not supply. The custom runner, Harness session and provider boundary were never reached.",
+      "detection_method": "Worker state readback recorded one terminal container and the exact HMR startup requirement; the broker log retained only its ready event, the worker worktree remained clean and the disposable home root contained only preset/profile material with no session root.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-427.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.rc7_headless_hmr_requires_node_expose_internals",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the occupied authority without retry or resume, stop the broker, retain only sanitized negative evidence, clean every disposable resource and close this tranche as attributable pre-provider Harness boot failure.",
+        "prevention_control": "Any successor must prove the exact declared CLI startup flags and complete a provider-free stock-headless-to-custom-runner boot before receiving fresh occupied authority; it may not relaunch this consumed attempt.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-427.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0498",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-latch-suite-016",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "When the current latch checkpoint advances with a newly registered occupied result, its exact continuity-test revision assertion must advance in the same patch.",
+      "observed_error": "The AER-0497 update advanced the latch checkpoint from register revision 426 to 427 but retained the current-operation continuity assertion at revision 426, producing one exact stale-literal failure.",
+      "detection_method": "The complete register/latch packet passed every other check and failed only the current-operation completed-stage substring assertion, printing the exact 427 checkpoint against expected 426.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-428.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_latch_revision_assertion_stale_after_incident_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the latch checkpoint and its exact continuity assertion together to register revision 428, preserve AER-0498 and rerun the complete register/latch packet.",
+        "prevention_control": "Every incident patch that changes current-latch completed_stage must search and atomically advance exact current-operation checkpoint literals in the dedicated continuity test.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-428.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },

@@ -1,0 +1,73 @@
+{
+  "schema_version": "deepseek.native_harness_second_monitored_development_occupied_negative_evidence.v1",
+  "operation_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+  "attempt_id": "deepseek-native-harness-exact-tool-view-occupied-worker-002",
+  "observed_on": "2026-08-18",
+  "main_source_head": "9e86b017c8319c081d8bb3d6d7dfc24e0223ab44",
+  "worker_source_head": "0b02c575d629e68e117a7c70ed9338a7ae957d42",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "declared_cli": "lib/bin.js",
+    "root_export_present": false,
+    "pinned_node_image": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d"
+  },
+  "enclosure": {
+    "worker_network": "internal_broker_network_only",
+    "worker_provider_credential_present": false,
+    "broker_worker_mount_present": false,
+    "broker_allowlisted_tools": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "automatic_retry": false,
+    "fallback": false,
+    "resume_after_terminal": false
+  },
+  "terminal": {
+    "worker_exit_code": 1,
+    "started_at_utc": "2026-08-18T10:26:51.753301918Z",
+    "finished_at_utc": "2026-08-18T10:26:52.449169924Z",
+    "classification": "pre_session_harness_boot_failure",
+    "sanitized_error": "stock_headless_hmr_requires_node_expose_internals",
+    "custom_runner_reached": false,
+    "exact_tool_view_runtime_check_reached": false,
+    "harness_session_created": false
+  },
+  "broker": {
+    "ready_event_count": 1,
+    "request_event_count": 0,
+    "provider_call_count": 0,
+    "response_event_count": 0
+  },
+  "candidate": {
+    "changed_path_count": 0,
+    "owned_output_paths_created": false,
+    "worker_worktree_clean_after_terminal": true
+  },
+  "session_storage": {
+    "sanitized_home_entry_classes": [
+      "agent_presets",
+      "profiles"
+    ],
+    "session_root_present": false,
+    "raw_session_retained_in_repository": false
+  },
+  "authority_disposition": {
+    "occupied_attempt_consumed": true,
+    "retry_permitted": false,
+    "resume_permitted": false,
+    "candidate_admitted": false,
+    "native_harness_promoted": false
+  },
+  "excluded": [
+    "raw_prompt",
+    "raw_reasoning",
+    "raw_response",
+    "raw_tool_payload",
+    "credential",
+    "environment_dump",
+    "raw_session"
+  ]
+}

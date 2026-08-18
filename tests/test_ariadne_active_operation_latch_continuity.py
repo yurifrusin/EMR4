@@ -73,7 +73,7 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert latch["source_head"] == "853f76d9a086c4bb263b54c761cbf8edbb65d6e9"
         completed = latch["checkpoint"]["completed_stage"]
         assert "provider-free exact-tool-view proof is committed" in completed
-        assert "register revision 426" in completed
+        assert "register revision 428" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]
