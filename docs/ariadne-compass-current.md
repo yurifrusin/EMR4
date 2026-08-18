@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 319 / Compass 301. The pinned native DeepSeek Harness now has materially strong occupied traceability evidence and a correct partial coding result, while complete task reliability remains unproved; the next step is profile codification followed by one monitored low-risk provider-free EMR4 development package.
+> EMR4 is at Continuity 320 / Compass 302. The first monitored native-Harness EMR4 worker attempt failed closed before provider I/O because its composed request exposed seven tools against a three-tool broker allowlist; the next step is exact package-native tool-view recovery followed by at most one fresh second monitored attempt.
 
 ## North star
 
@@ -408,25 +408,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Pinned rc.7 failed fast before provider I/O with an exact local invariant; no inference result exists. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.
 196. **Measure attributable native-Harness multi-step coding control before monitored EMR4 use — DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal**
    Occupied traceability and a correct partial repair passed; complete worker-task reliability did not. Lineage parent: `deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal`.
+197. **Prove fail-closed native-Harness control on the first monitored EMR4 worker admission — DeepSeek native Harness EMR4 worker profile and first monitored development admission**
+   The broker attributed and rejected an over-broad seven-tool request before provider I/O; no candidate was admitted. Lineage parent: `deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal`.
 
 ## Current position
 
-**Native Harness ready for versioned-profile codification and one monitored low-risk EMR4 trial — DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal**
+**Recover an exact native-Harness model tool view before one second monitored EMR4 worker attempt — DeepSeek native Harness EMR4 worker profile and first monitored development admission**
 
-**Why this proof came next:** The broader synthetic run exposed every model/tool step and terminal cause, enough to replace further broad rehearsal with representative work.
+**Why this proof came next:** The broker proved containment and the session trace identified four surplus model-facing schemas, so the narrow defect is package-native tool scoping rather than provider or model behavior.
 
-Freeze the minimal profile family, then admit one exact-path provider-free EMR4 development package under Sol review.
+Prove provider-free that the composed request exposes exactly read, glob and edit, then permit one fresh second monitored attempt over the same two-path package.
 
 ### What this unlocks
 
-- Codify emr4-readonly-review, emr4-bounded-worker and emr4-provider-free profiles with pinned package/profile identities.
-- Use the bounded profile for one real low-risk EMR4 package and compare planned work, trace and candidate admission.
+- Identify and pin the rc.7 scoped-tool restriction that hides surplus model schemas.
+- Add a provider-free composed-request admission gate comparing exact tool inventory with profile and broker allowlist.
+- Run one fresh monitored worker only after that deterministic proof passes.
 
 ### What it does not solve
 
-- Complete worker reliability and lower failure frequency remain unproved.
+- No useful real-EMR4 worker candidate has yet been produced by the native Harness.
 - The native Harness is not an unrestricted default worker transport.
-- No ordinary practice, product/patient data, live runtime, deployment, Pages or protected integration is enabled.
+- No product/patient data, application behavior, runtime, deployment, Pages or protected integration is enabled.
 
 ## Continuity and authority
 
@@ -709,6 +712,7 @@ Prerequisites:
 
 ## Map limits
 
+- The first monitored native-Harness EMR4 attempt is attributable pre-provider negative evidence only; no candidate, retry, default-transport promotion or broader product/runtime authority is accepted.
 - The occupied native-Harness result supports a monitored exact-path EMR4 trial after profile codification; it is not unrestricted default-worker, product-data, live-runtime or protected-integration authority.
 - The native Harness no-call result supports local launcher traceability only; it opens no model-performance, transport-selection, product or runtime authority.
 - Default-off check-in route convergence opens no ordinary practice, client, product data, provider, deployment, production or protected integration authority.
@@ -994,6 +998,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-384.md`
 - `docs/ariadne-agent-error-correction-register-revision-391.md`
 - `docs/ariadne-agent-error-correction-register-revision-392.md`
+- `docs/ariadne-agent-error-correction-register-revision-402.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1135,6 +1140,9 @@ Prerequisites:
 - `docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-plan.md`
 - `docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-plan.md`
+- `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-closeout.md`
+- `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md`
+- `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1517,6 +1525,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-receptionist-first-v62-threat-model-delta.md`
 - `docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md`
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -1773,6 +1782,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2366,6 +2379,8 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/desktop-selection-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/final-residue-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
+- `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json`
+- `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
@@ -2978,6 +2993,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--arrival-check-in-command-family-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-18--canonical-check-in-product-adapter-extraction-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-agentic-coding-traceability-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-emr4-first-monitored-worker-admission.md`
 - `orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-traceability-micro-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
@@ -3012,6 +3028,7 @@ Prerequisites:
 - `scripts/ariadne_continuity_and_refinement.py`
 - `scripts/ariadne_continuity_and_refinement_safeguards_continuity_update.py`
 - `scripts/ariadne_deepseek_claude.py`
+- `scripts/ariadne_deepseek_native_harness_broker.mjs`
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_provider_free_pytest.py`
 - `scripts/ariadne_recent_work_effectiveness_and_transport_repair_continuity_update.py`
@@ -3021,6 +3038,7 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/deepseek_native_harness_agentic_coding_traceability_rehearsal_continuity_update.py`
+- `scripts/deepseek_native_harness_emr4_worker_profile_first_admission_continuity_update.py`
 - `scripts/deepseek_native_harness_traceability_micro_rehearsal_continuity_update.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
 - `scripts/raisa_channel_neutral_patient_interaction_foundation_acceptance.py`
@@ -3108,6 +3126,7 @@ Prerequisites:
 - `tests/test_ariadne_continuity_and_refinement.py`
 - `tests/test_ariadne_continuity_and_refinement_safeguards_continuity.py`
 - `tests/test_ariadne_deepseek_claude.py`
+- `tests/test_ariadne_deepseek_native_harness_broker.py`
 - `tests/test_ariadne_git_object_resolution.py`
 - `tests/test_ariadne_git_refs_snapshot.py`
 - `tests/test_ariadne_orchestrator_preflight.py`
@@ -3121,6 +3140,7 @@ Prerequisites:
 - `tests/test_clinician_one_word_desktop_selection_check.py`
 - `tests/test_current_baton_consistency.py`
 - `tests/test_deepseek_native_harness_agentic_coding_traceability_rehearsal_continuity.py`
+- `tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py`
 - `tests/test_deepseek_native_harness_traceability_micro_rehearsal_continuity.py`
 - `tests/test_diary_security_hardening.py`
 - `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
@@ -3236,4 +3256,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 301; continuity graph revision 319._
+_Compass map revision 302; continuity graph revision 320._

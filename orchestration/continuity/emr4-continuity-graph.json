@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 319,
+  "graph_revision": 320,
   "harvests": [],
   "nodes": [
     {
@@ -22318,9 +22318,121 @@
         "Unrestricted default-worker promotion remains closed.",
         "Ordinary-practice admission, product data, providers, deployment, production and protected integration remain closed."
       ]
+    },
+    {
+      "id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "title": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-18T07:41:39.5012901Z",
+      "updated_at": "2026-08-18T07:41:39.5012901Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "af1a79f93024a7186849e550b4d529c8c601c93f",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The result accepts attributable pre-provider negative worker evidence, not a worker candidate.",
+          "A second monitored attempt requires a separately frozen exact-tool-view recovery and provider-free request-header proof.",
+          "Product data, application behavior, live runtime, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-broker-rejected-worker-terminal-without-candidate",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact seven-tool broker rejection as useful fail-closed traceability evidence while rejecting the mapping claim and admitting no candidate or retry."
+        }
+      ],
+      "claim_scope": [
+        "The isolated broker rejected the seven-tool declaration before provider I/O.",
+        "The exact session had four frames, 17 rows, one request, zero provider calls, zero successful model steps, zero tool calls and no candidate change.",
+        "The broker allowlist stayed at edit, glob and read; surplus schemas were not silently admitted.",
+        "All disposable runtime and raw-session resources were cleaned and the single attempt was not retried.",
+        "The result proves fail-closed control and attribution, not successful real-EMR4 worker completion or unrestricted default transport."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py"
+          ],
+          "note": "The accepted product intent remains inherited; no product source or data entered this Harness tranche."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "review/test_ordinary_diary_cancellation_convergence.py",
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+          ],
+          "note": "The accepted reconciliation contract remains unchanged; the worker candidate never started."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md",
+          "docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md",
+          "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-402.md",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-emr4-first-monitored-worker-admission.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-predispatch-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-terminal-evidence-precommit-corrected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "review/test_ordinary_diary_cancellation_convergence.py",
+          "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+          "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs",
+          "scripts/deepseek_native_harness_emr4_worker_profile_first_admission_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "An exact package-native scoped model tool view has not been demonstrated.",
+        "A useful real-EMR4 native-Harness worker candidate remains unproved.",
+        "The native Harness is not an unrestricted default worker transport.",
+        "Product data, application runtime, deployment, release and protected integration remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T05:32:45.5157558Z"
+  "updated_at": "2026-08-18T07:41:39.5012901Z"
 }

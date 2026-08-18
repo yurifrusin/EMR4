@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.deterministic_test_failure.v1",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "observed_at": "2026-08-18T17:57:02.8700438+10:00",
+  "result": "canonical_compass_current_position_literal_stale",
+  "source_head": "af1a79f93024a7186849e550b4d529c8c601c93f",
+  "expected_by_test": "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review",
+  "actual_accepted_current_position": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "other_focused_tests_passed": 71,
+  "provider_calls": 0,
+  "candidate_changes": 0,
+  "protected_ref_changes": 0
+}

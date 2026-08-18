@@ -3,17 +3,17 @@
   "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
   "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
   "objective": "Freeze a versioned three-profile native-Harness authority contract and use its bounded-worker profile for one real low-risk provider-free EMR4 harness-development package with attributable session evidence and Sol-only candidate admission.",
-  "status": "in_progress",
-  "source_head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
-  "authority_source": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names this successor; Yuri directed that further evidence come from monitored useful EMR4 work and confirmed prepaid account credit is the monetary budget mechanism.",
+  "status": "complete",
+  "source_head": "af1a79f93024a7186849e550b4d529c8c601c93f",
+  "authority_source": "AGENTS.md Current Baton now records the accepted Continuity 320 / Compass 302 result; the operation derived from its prior 319 / 301 successor authority and Yuri's direction to gather monitored useful EMR4 evidence with prepaid credit as monetary budget.",
   "checkpoint": {
-    "completed_stage": "One occupied attempt is reduced: four frames, 17 rows, one seven-tool request, zero provider calls, zero successful model steps, zero tool calls and zero candidate changes. AER-0459 and revision 398 contain the incorrect three-tool mapping; the full register passes. All containers, volumes, networks, raw storage, worktree and worker branch are absent; the disposable profile root is recycled. No retry occurred.",
-    "next_executable_stage": "commit_the_attributable_negative_evidence_then_write_and_publish_the_paired_closeout_and_successor_boundary",
+    "completed_stage": "Continuity 320 / Compass 302 accepts the exact broker-rejected result at evidence source af1a79f93024a7186849e550b4d529c8c601c93f. Seventy-two focused checks and the full register suite pass. All cleanup is complete; no retry, candidate or provider call occurred. Closeout and Yuri summary are prepared for task-branch publication.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 2,
       "implementation": 2,
       "review": 0,
-      "verification": 23
+      "verification": 27
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "operation_complete"
   },
   "protected_boundaries": [
     "one_pinned_official_deepseek_harness_rc7_fresh_session_for_one_exact_sparse_emr4_harness_development_package",

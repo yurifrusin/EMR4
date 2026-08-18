@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.continuity_update_failure.v1",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "observed_at": "2026-08-18T17:50:47.8378516+10:00",
+  "result": "continuity_update_rejected_before_compass_report",
+  "exit_code": 1,
+  "reason_codes": [
+    "contract_evidence_paths_missing_from_node_evidence",
+    "profile_contract_test_path_misspelled"
+  ],
+  "partial_state": {
+    "graph_revision": 320,
+    "compass_revision": 302,
+    "compass_report_updated": false,
+    "reentrant_recovery_supported": true
+  },
+  "provider_calls": 0,
+  "candidate_changes": 0,
+  "protected_ref_changes": 0
+}

@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "8fc81f018af297ea7e156b57bd3d750f5bc117f1723146b8b04a4665cfd4b180",
+  "canonical_register_sha256": "b0a9b0a898598bee8c412cb02045a1c40c4bad8a0fa95bdfcf2d24c5bc0fbfc1",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 304,
+      "canonical_unchanged": 307,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
@@ -11,23 +11,23 @@
       "evidence_misreport": 62,
       "harness_failure": 51,
       "operator_error": 1,
-      "output_contract_violation": 144,
+      "output_contract_violation": 146,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
-      "repository_defect": 65,
+      "repository_defect": 66,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 327,
+      "agent_behavior": 329,
       "harness": 51,
       "operator": 1,
-      "repository": 65,
+      "repository": 66,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 205,
+      "low": 206,
       "material": 116,
-      "moderate": 139
+      "moderate": 141
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -36,7 +36,7 @@
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 1,
-      "ariadne-compass-current-position-test::orchestrator": 1,
+      "ariadne-compass-current-position-test::orchestrator": 2,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
@@ -48,7 +48,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 245,
+      "codex-primary-orchestrator::orchestrator": 247,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -114,12 +114,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 360,
+      "orchestrator": 363,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 460,
+  "incident_count": 463,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -584,6 +584,30 @@
         "Before a closeout updater runs, validate the complete latch as a whole object, search all global continuity/Compass/current-baton fixtures for the predecessor, and require acceptance-index refresh to replace an existing moved label in place rather than duplicating or rejecting it."
       ],
       "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0461",
+        "AER-0462"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before every Continuity updater run, mechanically compare the union of contract_evidence paths with the node evidence inventory and resolve every named artifact path; only then permit graph or Compass writes.",
+        "Validate inherited contract evidence by typed collection, not path union alone: every contract plan, finding, closeout, acceptance, receipt, test and artifact path must appear in the matching node evidence key before any Continuity write."
+      ],
+      "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1158,6 +1182,30 @@
       "categories": [
         "repository_defect"
       ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0388",
+        "AER-0463"
+      ],
+      "origins": [
+        "repository"
+      ],
+      "prevention_controls": [
+        "Every Continuity closeout that advances current_position must include the canonical Compass test in its risk-weighted metadata packet and update its explicit current-node sentinel in the same closeout change.",
+        "Every Continuity closeout that advances current_position must update and execute the canonical Compass current-node sentinel in the same closeout packet; baseline-check that literal before the updater write."
+      ],
+      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
+      "resource_ids": [
+        "ariadne-compass-current-position-test"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "repository_defect"
+      ],
       "incident_count": 5,
       "incident_ids": [
         "AER-0175",
@@ -1314,7 +1362,7 @@
       ]
     }
   ],
-  "register_revision": 399,
+  "register_revision": 402,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }
