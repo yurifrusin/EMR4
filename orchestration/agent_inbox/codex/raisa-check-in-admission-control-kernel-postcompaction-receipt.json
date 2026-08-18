@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted default-off ordinary-practice canonical check-in admission-control kernel rehearsal",
+    "completed_stage": "The exact unmounted kernel candidate is committed at full source 4204ec6348abb0f92b1a30314699d4a469fa860a after the integrated packet passed. It has seven exact source bindings, 63 scenarios, 341 hostile mutations, zero active ordinary records, zero ordinary admission releases and no product or broker source change.",
+    "next_executable_stage": "create_a_fresh_exact_candidate_review_worktree_generate_the_pre_verifier_receipt_and_dispatch_one_gemini_37_flash_high_read_only_veto",
+    "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "reason_codes": [],
+    "resolved_commit": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4204ec6348abb0f92b1a30314699d4a469fa860a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "branch_origin_aligned": false,
+    "head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "origin_branch_commit": "249609a7f0c7131cff376aef315e1ff7742b44d7",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The kernel candidate is already exact and deterministic, while occupied native-Harness EMR4 work remains blocked until the separate provider-free HMR boot proof passes. Claude Code is not an authorized fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "After the contained preflight incidents and full register validation, one fresh exact-candidate read-only veto supplies the required independent check of the authority kernel.",
+        "work_packages": [
+          "Review exact candidate 4204ec6348abb0f92b1a30314699d4a469fa860a for zero active ordinary records, default denial, lane separation, kill-switch dominance, disable-only transitions, full-Git command validation and absence of product mounting."
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and no independent implementation package remains before the reserved veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after_error_register_validation",
+      "pre_verifier_acceptance",
+      "Gemini_terminal_decision",
+      "closeout",
+      "before_any_future_product_mount_or_occupied_deepseek_worker"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validate AER-0592 and AER-0593 plus recurrence projections",
+      "generate the fresh five-source post-compaction and pre-verifier receipts",
+      "dispatch exactly one no-fallback Gemini veto from the clean review worktree",
+      "Sol-only acceptance closeout and task-branch publication"
+    ]
+  },
+  "planned_action": "validate_the_contained_pre_verifier_incidents_then_dispatch_one_fresh_exact_candidate_gemini_37_flash_high_read_only_kernel_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/kernel-rehearsal-report.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial provider-free kernel implementation, contained workflow correction, acceptance and task-branch Git. Occupied DeepSeek native-Harness work remains declined pending its separate provider-free stock-headless-to-custom-runner HMR boot proof; Claude Code is not a fallback. Gemini 3.7 Flash/high is reserved for one exact-candidate independent read-only veto after deterministic and register gates pass. Native subagents remain declined under current developer policy.",
+    "git_refs_and_worktree": "Primary task branch codex/ariadne-bernie-davida-parallel-seam is at exact kernel candidate 4204ec6348abb0f92b1a30314699d4a469fa860a and is one candidate commit ahead of origin task source 249609a7f0c7131cff376aef315e1ff7742b44d7. The exact review worktree C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-kernel-gemini-4204ec63 is on codex/review-check-in-admission-kernel-4204ec63 at exact candidate 4204ec6348abb0f92b1a30314699d4a469fa860a. Local/origin master and local/origin handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked changes are post-candidate latch and contained pre-verifier incident/register artifacts; docs/branding and all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after conversation compaction in five exact bounded character slices. Its Current Baton accepts the admission-control architecture at 752b521c59f5b44bf46de0cf776a33ac74b8134d, names this exact unmounted zero-active-record kernel rehearsal as active, records register revision 513, preserves the native-Harness HMR prerequisite and keeps all protected refs fixed at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "protected_evidence_boundaries": "Provider-free unmounted pure-kernel and deterministic review only, with zero active ordinary admission records. Preserve the global default-off feature boundary, exact authored-synthetic allowlist semantics, distinct ordinary lane, exact default denial, kill-switch dominance and disable-only rollback. No ordinary-practice enablement, feature flag/allowlist/product/configuration/OpenAPI/GraphQL/live-route/database/runtime-role mutation, generic-status Arrived, action grammar, first-party client, waiting-area movement, product/patient/clinical data, occupied DeepSeek call, production/deployment/release/Pages, live clockwork adoption/control retirement or protected-ref movement. Preserve docs/branding and every unrelated untracked file; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

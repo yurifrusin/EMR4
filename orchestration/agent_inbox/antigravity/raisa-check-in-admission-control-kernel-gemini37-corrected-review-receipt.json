@@ -1,0 +1,223 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-kernel-gemini-4204ec63",
+  "branch": "codex/review-check-in-admission-kernel-4204ec63",
+  "head_before": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "head_after": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "52a7e106645efab68ab6dd3835d81835635b5d538a6c2ad111965e3802a3ffbb",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review \u2014 Unmounted Default-Off Canonical Check-In Admission-Control Kernel\n\n**Date:** 2026-08-19  \n**Reviewer Model:** Gemini 3.7 Flash (High Reasoning)  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-kernel-gemini-4204ec63`  \n**Candidate Branch:** `codex/review-check-in-admission-kernel-4204ec63`  \n**Exact Candidate HEAD:** `4204ec6348abb0f92b1a30314699d4a469fa860a`  \n**Tranche Base:** `249609a7f0c7131cff376aef315e1ff7742b44d7`  \n**Decision Owner:** GPT Sol  \n\n---\n\n## 1. Five-Source Rehydration Receipt\n\n1. **`live_handover_current_baton`**: Verified [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/AGENTS.md) completely. The Current Baton incorporates the accepted check-in admission-control architecture at `752b521c59f5b44bf46de0cf776a33ac74b8134d` (Continuity 325 / Compass 307) and authorises only this pure unmounted provider-free zero-active-record kernel rehearsal.\n2. **`current_authority_allocation`**: GPT Sol owns conductor/integrator implementation, rehearsal evidence, and task-branch Git authority. Gemini 3.7 Flash/high is engaged exclusively for this independent read-only Tier-2 veto. DeepSeek native Harness remains paused behind its separate provider-free HMR boot proof without transport fallback. Native subagents remain uninvoked.\n3. **`active_plan_and_acceptance`**: Evaluated frozen plan [`docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md), threat delta [`docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md), continuity latch [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/ariadne-active-operation-latch/current.json), normative contract [`orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json), schema [`contract.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.schema.json), rehearsal evidence [`provider-free-kernel-rehearsal-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json), rehearsal report [`kernel-rehearsal-report.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/kernel-rehearsal-report.md), preplanning receipt and preplanning runtime state.\n4. **`protected_evidence_boundaries`**: Rehearsal profile strictly maintains zero canonical active ordinary records (`canonical_active_ordinary_record_count: 0`, `ordinary_activation_authority_granted: false`), default-off feature flags, authored-synthetic isolation, disable-only rollback, complete command envelope denial, no application mounting, no persistence, and no clockwork gear mesh adoption.\n5. **`git_refs_and_worktree`**: Verified exact candidate worktree root `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-kernel-gemini-4204ec63`, branch `codex/review-check-in-admission-kernel-4204ec63`, full 40-character HEAD `4204ec6348abb0f92b1a30314699d4a469fa860a`, clean tracked worktree, and protected refs `master` / `handoff/current` aligned at protected commit `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Required Challenge Verifications\n\n### Challenge 1: Git Candidate & Protected Boundary Confirmation\n- Worktree, branch, HEAD (`4204ec6348abb0f92b1a30314699d4a469fa860a`), base (`249609a7f0c7131cff376aef315e1ff7742b44d7`), clean status, and diff were confirmed via commands C01, C02, C06, C07, C08, and C09.\n- Diffs are strictly within the allowlist; no product, app, database, or branding paths were touched.\n\n### Challenge 2: Source Bindings & Normative Schema\n- Evaluated all 7 exact canonical SHA-256 source bindings in `contract.json`. All match identically.\n- `contract.schema.json` enforces `additionalProperties: false` across all root and `$defs` object structures, ensuring a closed contract against schema drift and hostile mutation.\n\n### Challenge 3: Pure Unmounted Standard-Library Module\n- Inspected [`orchestration_harness/check_in_admission_control.py`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration_harness/check_in_admission_control.py).\n- Imports are restricted strictly to: `__future__`, `dataclasses`, `enum`, and `re`.\n- The module contains zero references to `app`, `sqlalchemy`, `fastapi`, `httpx`, `os.environ`, filesystem I/O, network, or provider transports.\n\n### Challenge 4: Evaluator Precedence & Fail-Closed Hierarchy\n- Precedence in `evaluate_admission()` follows the exact required fail-closed order:\n  1. Snapshot presence, schema validity, 40-char resolved Git authority, signature, freshness, and environment scoping.\n  2. Feature flag check (`feature_enabled is True`).\n  3. Global kill-switch check (`kill_switch is KillSwitchState.CLEAR`).\n  4. Independent synthetic and ordinary lane evaluation.\n  5. Lane ambiguity denial (if both synthetic and ordinary match).\n  6. Synthetic admission release (`ADMITTED_SYNTHETIC`).\n  7. Ordinary lane evaluation: binding verification, record active state verification, operational evidence verification, and profile authorization check.\n\n### Challenge 5: Synthetic Lane Preservation & Ordinary Admission Impossibility\n- Evaluator scenarios confirm that authored-synthetic inputs release `ADMITTED_SYNTHETIC` only when isolated.\n- Ambiguous overlap with ordinary records fails closed with `LANE_AMBIGUOUS`.\n- Any ordinary record input\u2014even an active record with valid evidence\u2014is unconditionally denied with `ORDINARY_ACTIVATION_CLOSED` because `profile.ordinary_activation_authority_granted` is frozen `False`.\n- Zero ordinary releases (`ordinary_admission_release_count: 0`) exist across all scenarios.\n\n### Challenge 6: Record State Transition Matrix (25 Cases)\n- All 25 state-operation permutations (`AdmissionState` $\\times$ `ControlOperation`) were exercised:\n  - Exactly 5 disable-biased transitions succeed: `absent -> prepared`, `prepared -> withdrawn`, `active -> suspended`, `active -> withdrawn`, `suspended -> withdrawn`.\n  - `prepared -> active` is represented but denied with `ACTIVATION_AUTHORITY_CLOSED`.\n  - No transition produces `AdmissionState.ACTIVE`.\n  - `suspended -> active` (resume) and all operations from `AdmissionState.WITHDRAWN` are denied (terminal withdrawal).\n\n### Challenge 7: Global Kill-Switch Monotonicity\n- Verified `engage_kill_switch()`:\n  - `clear -> engaged` succeeds with `ACCEPTED_NON_ADMITTING`.\n  - `engaged -> engaged` returns `accepted=False` with `KILL_SWITCH_ALREADY_ENGAGED`.\n  - No clear or reset operation exists.\n\n### Challenge 8: Command-Envelope Validation & Unknown-Commit Invariance\n- `validate_command_envelope()` enforces all 14 architectural control checks without command dispatch capability.\n- Mandatory rejection of abbreviated 7-character Git objects (`752b521`) verified (`AUTHORITY_GIT_OBJECT_INVALID`).\n- `unknown_commit_result()` returns invariant fail-closed posture: `success_released=False`, `readback_required=True`, `retry_allowed=False`, keyed by server command ID and idempotency identity.\n\n### Challenge 9: Rehearsal Reduction & Hostile Mutation Evidence\n- Rehearsal reduction reports:\n  - 63 total named scenarios (17 evaluator, 25 record transitions, 2 kill-switch transitions, 18 command envelopes, 1 unknown commit).\n  - 341 hostile contract mutations with 0 escapes.\n  - 0 canonical active ordinary records.\n  - 0 ordinary admission releases.\n  - 0 product or configuration mutations.\n\n### Challenge 10: Clockwork & DeepSeek Boundary Integrity\n- `clockwork_boundary` is explicitly set to `accepted_shadow_only` with `live_gear_mesh_implemented: false` and `workflow_receipt_is_product_authority: false`.\n- Workflow ticks and WorkOrders cannot confer product admission authority.\n\n### Challenge 11: Bound Manifest Execution\n- Executed all 9 structured commands (C01\u2013C09) sequentially in the bound worktree.\n- Pytest (23 tests), Ruff, py_compile, and git verification commands all completed with exit code 0. Tracked worktree remains completely clean.\n\n---\n\n## 3. Review Conclusion\n\nThe candidate at commit `4204ec6348abb0f92b1a30314699d4a469fa860a` is a pure unmounted standard-library kernel that strictly upholds zero active ordinary records, exact authored-synthetic admission preservation, absolute ordinary practice admission denial, dominant kill-switch mechanics, and fail-closed command-envelope validation without product mounting or live clockwork adoption. All required challenges and verifier gates pass.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review \u2014 Unmounted Default-Off Canonical Check-In Admission-Control Kernel\n\n**Date:** 2026-08-19  \n**Reviewer Model:** Gemini 3.7 Flash (High Reasoning)  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-kernel-gemini-4204ec63`  \n**Candidate Branch:** `codex/review-check-in-admission-kernel-4204ec63`  \n**Exact Candidate HEAD:** `4204ec6348abb0f92b1a30314699d4a469fa860a`  \n**Tranche Base:** `249609a7f0c7131cff376aef315e1ff7742b44d7`  \n**Decision Owner:** GPT Sol  \n\n---\n\n## 1. Five-Source Rehydration Receipt\n\n1. **`live_handover_current_baton`**: Verified [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/AGENTS.md) completely. The Current Baton incorporates the accepted check-in admission-control architecture at `752b521c59f5b44bf46de0cf776a33ac74b8134d` (Continuity 325 / Compass 307) and authorises only this pure unmounted provider-free zero-active-record kernel rehearsal.\n2. **`current_authority_allocation`**: GPT Sol owns conductor/integrator implementation, rehearsal evidence, and task-branch Git authority. Gemini 3.7 Flash/high is engaged exclusively for this independent read-only Tier-2 veto. DeepSeek native Harness remains paused behind its separate provider-free HMR boot proof without transport fallback. Native subagents remain uninvoked.\n3. **`active_plan_and_acceptance`**: Evaluated frozen plan [`docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md), threat delta [`docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md), continuity latch [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/ariadne-active-operation-latch/current.json), normative contract [`orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json), schema [`contract.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.schema.json), rehearsal evidence [`provider-free-kernel-rehearsal-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json), rehearsal report [`kernel-rehearsal-report.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/kernel-rehearsal-report.md), preplanning receipt and preplanning runtime state.\n4. **`protected_evidence_boundaries`**: Rehearsal profile strictly maintains zero canonical active ordinary records (`canonical_active_ordinary_record_count: 0`, `ordinary_activation_authority_granted: false`), default-off feature flags, authored-synthetic isolation, disable-only rollback, complete command envelope denial, no application mounting, no persistence, and no clockwork gear mesh adoption.\n5. **`git_refs_and_worktree`**: Verified exact candidate worktree root `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-kernel-gemini-4204ec63`, branch `codex/review-check-in-admission-kernel-4204ec63`, full 40-character HEAD `4204ec6348abb0f92b1a30314699d4a469fa860a`, clean tracked worktree, and protected refs `master` / `handoff/current` aligned at protected commit `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Required Challenge Verifications\n\n### Challenge 1: Git Candidate & Protected Boundary Confirmation\n- Worktree, branch, HEAD (`4204ec6348abb0f92b1a30314699d4a469fa860a`), base (`249609a7f0c7131cff376aef315e1ff7742b44d7`), clean status, and diff were confirmed via commands C01, C02, C06, C07, C08, and C09.\n- Diffs are strictly within the allowlist; no product, app, database, or branding paths were touched.\n\n### Challenge 2: Source Bindings & Normative Schema\n- Evaluated all 7 exact canonical SHA-256 source bindings in `contract.json`. All match identically.\n- `contract.schema.json` enforces `additionalProperties: false` across all root and `$defs` object structures, ensuring a closed contract against schema drift and hostile mutation.\n\n### Challenge 3: Pure Unmounted Standard-Library Module\n- Inspected [`orchestration_harness/check_in_admission_control.py`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63/orchestration_harness/check_in_admission_control.py).\n- Imports are restricted strictly to: `__future__`, `dataclasses`, `enum`, and `re`.\n- The module contains zero references to `app`, `sqlalchemy`, `fastapi`, `httpx`, `os.environ`, filesystem I/O, network, or provider transports.\n\n### Challenge 4: Evaluator Precedence & Fail-Closed Hierarchy\n- Precedence in `evaluate_admission()` follows the exact required fail-closed order:\n  1. Snapshot presence, schema validity, 40-char resolved Git authority, signature, freshness, and environment scoping.\n  2. Feature flag check (`feature_enabled is True`).\n  3. Global kill-switch check (`kill_switch is KillSwitchState.CLEAR`).\n  4. Independent synthetic and ordinary lane evaluation.\n  5. Lane ambiguity denial (if both synthetic and ordinary match).\n  6. Synthetic admission release (`ADMITTED_SYNTHETIC`).\n  7. Ordinary lane evaluation: binding verification, record active state verification, operational evidence verification, and profile authorization check.\n\n### Challenge 5: Synthetic Lane Preservation & Ordinary Admission Impossibility\n- Evaluator scenarios confirm that authored-synthetic inputs release `ADMITTED_SYNTHETIC` only when isolated.\n- Ambiguous overlap with ordinary records fails closed with `LANE_AMBIGUOUS`.\n- Any ordinary record input\u2014even an active record with valid evidence\u2014is unconditionally denied with `ORDINARY_ACTIVATION_CLOSED` because `profile.ordinary_activation_authority_granted` is frozen `False`.\n- Zero ordinary releases (`ordinary_admission_release_count: 0`) exist across all scenarios.\n\n### Challenge 6: Record State Transition Matrix (25 Cases)\n- All 25 state-operation permutations (`AdmissionState` $\\times$ `ControlOperation`) were exercised:\n  - Exactly 5 disable-biased transitions succeed: `absent -> prepared`, `prepared -> withdrawn`, `active -> suspended`, `active -> withdrawn`, `suspended -> withdrawn`.\n  - `prepared -> active` is represented but denied with `ACTIVATION_AUTHORITY_CLOSED`.\n  - No transition produces `AdmissionState.ACTIVE`.\n  - `suspended -> active` (resume) and all operations from `AdmissionState.WITHDRAWN` are denied (terminal withdrawal).\n\n### Challenge 7: Global Kill-Switch Monotonicity\n- Verified `engage_kill_switch()`:\n  - `clear -> engaged` succeeds with `ACCEPTED_NON_ADMITTING`.\n  - `engaged -> engaged` returns `accepted=False` with `KILL_SWITCH_ALREADY_ENGAGED`.\n  - No clear or reset operation exists.\n\n### Challenge 8: Command-Envelope Validation & Unknown-Commit Invariance\n- `validate_command_envelope()` enforces all 14 architectural control checks without command dispatch capability.\n- Mandatory rejection of abbreviated 7-character Git objects (`752b521`) verified (`AUTHORITY_GIT_OBJECT_INVALID`).\n- `unknown_commit_result()` returns invariant fail-closed posture: `success_released=False`, `readback_required=True`, `retry_allowed=False`, keyed by server command ID and idempotency identity.\n\n### Challenge 9: Rehearsal Reduction & Hostile Mutation Evidence\n- Rehearsal reduction reports:\n  - 63 total named scenarios (17 evaluator, 25 record transitions, 2 kill-switch transitions, 18 command envelopes, 1 unknown commit).\n  - 341 hostile contract mutations with 0 escapes.\n  - 0 canonical active ordinary records.\n  - 0 ordinary admission releases.\n  - 0 product or configuration mutations.\n\n### Challenge 10: Clockwork & DeepSeek Boundary Integrity\n- `clockwork_boundary` is explicitly set to `accepted_shadow_only` with `live_gear_mesh_implemented: false` and `workflow_receipt_is_product_authority: false`.\n- Workflow ticks and WorkOrders cannot confer product admission authority.\n\n### Challenge 11: Bound Manifest Execution\n- Executed all 9 structured commands (C01\u2013C09) sequentially in the bound worktree.\n- Pytest (23 tests), Ruff, py_compile, and git verification commands all completed with exit code 0. Tracked worktree remains completely clean.\n\n---\n\n## 3. Review Conclusion\n\nThe candidate at commit `4204ec6348abb0f92b1a30314699d4a469fa860a` is a pure unmounted standard-library kernel that strictly upholds zero active ordinary records, exact authored-synthetic admission preservation, absolute ordinary practice admission denial, dominant kill-switch mechanics, and fail-closed command-envelope validation without product mounting or live clockwork adoption. All required challenges and verifier gates pass.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/check_in_admission_control.py",
+          "scripts/raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_admission_control.py",
+          "scripts/raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "249609a7f0c7131cff376aef315e1ff7742b44d7..4204ec6348abb0f92b1a30314699d4a469fa860a"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "249609a7f0c7131cff376aef315e1ff7742b44d7..4204ec6348abb0f92b1a30314699d4a469fa860a"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "d139f25670f94c3d749a1db15747246c8a8c17478dc4293fdcff034af3625b38",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/check_in_admission_control.py",
+        "scripts/raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/check_in_admission_control.py",
+        "scripts/raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "249609a7f0c7131cff376aef315e1ff7742b44d7..4204ec6348abb0f92b1a30314699d4a469fa860a"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "249609a7f0c7131cff376aef315e1ff7742b44d7..4204ec6348abb0f92b1a30314699d4a469fa860a"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

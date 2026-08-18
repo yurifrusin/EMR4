@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 512,
+  "register_revision": 521,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -23397,6 +23397,443 @@
         "evidence_paths": [
           "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
           "docs/ariadne-agent-error-correction-register-revision-512.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0592",
+      "attempt_id": "check-in-admission-kernel-gemini-preflight-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-verifier-worktree-preflight",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Verifier worktree preflight must receive the exact configured codex/review- branch prefix rather than a task-specific narrower prefix.",
+      "observed_error": "The first kernel verifier preflight supplied codex/review-check-in-admission-kernel- as the branch-prefix argument, so the harness rejected it because the configured exact prefix must remain codex/review-.",
+      "detection_method": "The preflight failed closed before any provider call and emitted the exact branch_prefix reason; the candidate and clean review worktree remained unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight-failures.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-513.md"
+      ],
+      "related_incident_ids": [
+        "AER-0593"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_preflight_branch_prefix_not_exact_review_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed preflight and rerun against the unchanged candidate with exact branch prefix codex/review- before permitting provider dispatch.",
+        "prevention_control": "Generate verifier preflight arguments from the typed execution-policy enum; until adoption, copy branch_prefix exactly as codex/review- and never derive it from the branch name.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight-failures.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-513.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0593",
+      "attempt_id": "check-in-admission-kernel-gemini-preflight-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-verifier-worktree-preflight",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "When verifier preflight declares an external serial repository root, that root must be the exact clean review worktree used by the manifest's --repo-root binding.",
+      "observed_error": "The second kernel verifier preflight supplied the primary checkout as --serial-repo-root even though the manifest correctly bound the external serialized pytest runner to the review worktree, so preflight rejected the cross-checkout root before provider dispatch.",
+      "detection_method": "The preflight failed closed with the exact external serial runner reason, made zero provider calls and left candidate HEAD and the review worktree unchanged; the corrected exact review-root invocation then passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight-failures.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-513.md"
+      ],
+      "related_incident_ids": [
+        "AER-0592"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_preflight_serial_repo_root_not_review_worktree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bind --serial-repo-root to the exact review worktree named by --cwd and the manifest's --repo-root, then rerun preflight before provider dispatch.",
+        "prevention_control": "Generate cwd, serial_repo_root and manifest --repo-root from one typed review-worktree receipt so all three resolve to the same exact path; never substitute the primary checkout.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight-failures.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-513.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0594",
+      "attempt_id": "check-in-admission-kernel-gemini-veto-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity_command_manifest",
+      "stage": "independent_review",
+      "category": "read_only_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A read-only verifier command manifest may verify committed evidence but must never execute a generator that writes tracked evidence inside the exact candidate worktree.",
+      "observed_error": "The nine-command kernel veto manifest included the deterministic evidence generator as C06. The reviewer executed it in the clean Windows review worktree, rewriting line endings in the committed kernel report and evidence JSON and making the worktree dirty without changing HEAD or semantic content.",
+      "detection_method": "The launcher rejected the review at its mandatory clean-worktree postcondition. Exact Git status named only the two generated evidence paths, while Git diff reported no semantic content change after line-ending normalization and HEAD remained 4204ec6348abb0f92b1a30314699d4a469fa860a.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-command-manifest.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-514.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.generative_acceptance_in_read_only_review_worktree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed review evidence, restore only the two known generated paths from exact candidate HEAD, replace C06 with a read-only Git diff postcondition, and rerun the exact worktree/manifest preflight before any bounded fresh veto.",
+        "prevention_control": "The future typed clockwork command vocabulary must classify manifest operations by filesystem effect and reject evidence generators from read-only verifier ticks; until adoption, verifier manifests inspect committed evidence and run only non-regenerative tests and static checks.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-514.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0595",
+      "attempt_id": "check-in-admission-kernel-gemini-veto-egress-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "harness",
+      "role": "verifier",
+      "resource_id": "ariadne-antigravity-egress-admission",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Every completed Antigravity transport that fails terminal-decision admission or a read-only worktree postcondition must write one sanitized digest-only egress-failure receipt before the launcher returns nonzero.",
+      "observed_error": "The completed kernel veto child process exited zero, but the worktree postcondition was dirty. The launcher raised before structured-decision parsing and before writing its configured output, so no harness-owned digest-only failure receipt captured stdout or stderr evidence.",
+      "detection_method": "The launcher returned the exact modified-worktree exception, the configured output path was absent, the manual bounded receipt preserved the Git postcondition, and code inspection showed both worktree identity exceptions bypassed the existing post-transport egress-failure writer.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json",
+        "scripts/ariadne_antigravity.py",
+        "tests/test_ariadne_antigravity.py",
+        "docs/ariadne-agent-error-correction-register-revision-514.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.antigravity_completed_transport_invalid_egress_without_digest_receipt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Write a sanitized egress-failure receipt for every post-transport worktree root, branch, HEAD or dirty-state failure before raising, including only exact identity fields plus stdout and stderr digests rather than raw model output.",
+        "prevention_control": "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; worktree postcondition failures are part of the same exhaustive boundary.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json",
+          "scripts/ariadne_antigravity.py",
+          "tests/test_ariadne_antigravity.py",
+          "docs/ariadne-agent-error-correction-register-revision-514.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0596",
+      "attempt_id": "check-in-admission-kernel-register-revision-514-validation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Rows sharing one attempt identity and related peer linkage must preserve one exact role and full transport identity; cross-role process lineage must use distinct attempts and prose rather than false peer linkage.",
+      "observed_error": "Rejected register revision 514 linked AER-0594 as orchestrator and AER-0595 as verifier peers under check-in-admission-kernel-gemini-veto-001, so semantic validation rejected the split role identity before pattern generation.",
+      "detection_method": "The canonical register generator exited nonzero with split attempt identity mismatch: check-in-admission-kernel-gemini-veto-001:role before any revised register, review retry, commit or acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-register-revision-514-validation-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-514.md",
+        "docs/ariadne-agent-error-correction-register-revision-515.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_split_attempt_role_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve revision 514 as rejected, remove the false cross-role peer links, give the harness egress incident a distinct attempt identity, add AER-0596 and validate revision 515 before any fresh verifier dispatch.",
+        "prevention_control": "The typed clockwork register projection must derive attempt identity and peer eligibility together; until adoption, compare role, resource, model and transport before linking peers and use prose lineage whenever any identity field differs.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-register-revision-514-validation-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-514.md",
+          "docs/ariadne-agent-error-correction-register-revision-515.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0597",
+      "attempt_id": "check-in-admission-kernel-pre-verifier-receipt-002",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A pre-verifier runtime state must use the configured parallelism disposition vocabulary; a verifier awaiting its bounded dispatch remains reserved until an admitted external receipt completes.",
+      "observed_error": "The corrected-manifest attempt-002 runtime state labelled the Gemini verifier disposition selected. The configured vocabulary does not admit selected, so the five-source preflight returned revision_required before provider dispatch.",
+      "detection_method": "The repository-local receipt reported exactly parallelism_lane_disposition_invalid:gemini_verifier, worker_dispatch_permitted false and no provider or model call from the rejected receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-002-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-002-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-516.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_verifier_parallelism_disposition_and_workspace_receipt_shape_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected attempt-002 state and receipt, create a distinct attempt-003 state using the admitted reserved disposition, and require a passing five-source receipt before any bounded verifier retry.",
+        "prevention_control": "The typed clockwork continuation event must project verifier disposition from the configured enum and stage; until adoption, copy the reserved value from the last passing pre-verifier analogue and never infer selected.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-002-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-002-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-516.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0598",
+      "attempt_id": "check-in-admission-kernel-register-revision-516-validation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every correction evidence path must exist before the canonical register validator runs; a planned future runtime state cannot serve as current correction evidence.",
+      "observed_error": "Rejected revision 516 listed the not-yet-authored attempt-003 pre-verifier runtime state in AER-0597 correction evidence, so validation stopped on that missing path before pattern generation.",
+      "detection_method": "The canonical generator returned evidence path is missing or not a file with the exact attempt-003 runtime-state path before provider dispatch, candidate change, commit or acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-516.md",
+        "docs/ariadne-agent-error-correction-register-revision-517.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_correction_evidence_not_materialized",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve rejected revision 516, replace the future path with the existing revision-516 rejection document, add AER-0598 and validate revision 517 before authoring the corrected attempt-003 continuation state.",
+        "prevention_control": "The clockwork register projector must accept only already-materialized evidence object identities; until adoption, verify every new evidence path exists before invoking the canonical generator.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-516.md",
+          "docs/ariadne-agent-error-correction-register-revision-517.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0599",
+      "attempt_id": "check-in-admission-kernel-closeout-packet-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A tranche plan test must bind the immutable opening receipt to its exact source while validating the mutable live latch structurally across later candidate and successor transitions.",
+      "observed_error": "The first integrated closeout packet reached 100 percent with one failure because the kernel plan test still required the live latch source_head to equal the opening architecture closeout 249609a7f0c7131cff376aef315e1ff7742b44d7, although the validated in-progress latch correctly named reviewed candidate 4204ec6348abb0f92b1a30314699d4a469fa860a.",
+      "detection_method": "The 13-module integrated packet passed every other kernel, architecture, launcher, register, latch, baton, Compass and API Spine check and failed only the exact stale source-head assertion.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-518.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Keep the opening preplanning receipt bound to full source 249609a7f0c7131cff376aef315e1ff7742b44d7, replace the mutable live-latch literal with full-object and state-conditional structural assertions, add AER-0599 and rerun the complete closeout packet.",
+        "prevention_control": "The clockwork must distinguish immutable event receipts from mutable current projections; historical tests bind the former exactly and validate the latter by schema, operation identity when applicable and terminal invariants rather than predecessor literals.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-518.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0600",
+      "attempt_id": "check-in-admission-kernel-terminal-transition-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The generic latch-continuity test must validate any schema-valid completed current operation structurally and reserve exact operation facts for immutable event receipts.",
+      "observed_error": "After the kernel latch validly transitioned to complete, the focused closeout packet failed because the generic latch-continuity test's fallback branch required the live latch to be the historical post-native-Harness successor-resolution operation.",
+      "detection_method": "The five-module post-transition packet passed 64 checks and failed only the historical operation_id assertion in the generic mutable-latch continuity test; inspection also aligned the terminal reason with the canonical operation_complete projection.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-519.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve explicit assertions for recognised immutable historical transitions, replace the fallback historical operation literal with schema-valid completed-state structure, use the canonical operation_complete terminal reason, record AER-0600 and rerun the focused transition plus integrated packets.",
+        "prevention_control": "The shadow clockwork projector must generate the mutable current-latch check from the terminal event schema; tests may bind exact operation facts only through immutable event receipts, never through the fallback branch for live state.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-519.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0601",
+      "attempt_id": "check-in-admission-kernel-register-revision-519-validation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "related_incident_ids may link only valid peer incidents within the same attempt; recurrence is represented solely by recurrence_signature and its derived pattern report.",
+      "observed_error": "Rejected revision 519 linked AER-0600 to AER-0599 through related_incident_ids even though they have different attempt identities, so canonical validation failed before pattern generation.",
+      "detection_method": "The canonical register generator returned attempt peer linkage mismatch for AER-0600: expected=none before any commit, push, provider call or candidate change.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-519.md",
+        "docs/ariadne-agent-error-correction-register-revision-520.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_cross_attempt_peer_linkage_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve rejected revision 519, remove the invalid cross-attempt peer link from AER-0600, add AER-0601 and rerun canonical validation before generating any continuation receipt.",
+        "prevention_control": "The shadow clockwork register projector must derive peer links from one exact attempt identity and derive recurrence membership independently from the recurrence signature; until adoption, never use related_incident_ids to express recurrence.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-519.md",
+          "docs/ariadne-agent-error-correction-register-revision-520.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0602",
+      "attempt_id": "check-in-admission-kernel-complete-closeout-packet-002",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A newly added register regression assertion must match the canonical prevention-control wording it claims to verify.",
+      "observed_error": "The complete-state integrated packet failed only because the new AER-0600 test asserted the absent phrase typed terminal events while the canonical prevention control says terminal event schema.",
+      "detection_method": "The integrated packet reached 100 percent with one exact assertion failure showing both the requested substring and the stored canonical control text.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-521.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed packet, change only the regression assertion to the canonical terminal event schema wording, add AER-0602 and rerun register generation plus the integrated packet.",
+        "prevention_control": "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase from the validated register value before running the packet.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-521.md"
         ]
       },
       "status": "corrected"

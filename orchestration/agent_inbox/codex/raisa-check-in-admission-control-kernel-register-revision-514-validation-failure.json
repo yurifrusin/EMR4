@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.agent-error-register-validation-failure.v1",
+  "status": "revision_required",
+  "rejected_revision": 514,
+  "candidate_head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "validator_error": "split attempt identity mismatch: check-in-admission-kernel-gemini-veto-001:role",
+  "provider_or_model_calls": 0,
+  "candidate_changed": false,
+  "protected_refs_changed": false,
+  "correction": "remove_cross_role_peer_links_assign_distinct_attempt_identity_and_validate_revision_515"
+}

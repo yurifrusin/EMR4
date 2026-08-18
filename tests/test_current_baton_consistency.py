@@ -65,6 +65,11 @@ ADMISSION_ARCHITECTURE_NODE_ID = (
     "admission-control-architecture"
 )
 ADMISSION_ARCHITECTURE_SOURCE_HEAD = "752b521c59f5b44bf46de0cf776a33ac74b8134d"
+ADMISSION_KERNEL_NODE_ID = (
+    "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-"
+    "check-in-admission-control-kernel-rehearsal"
+)
+ADMISSION_KERNEL_SOURCE_HEAD = "4204ec6348abb0f92b1a30314699d4a469fa860a"
 ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
@@ -110,20 +115,20 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 325
-    assert graph["nodes"][-1]["id"] == ADMISSION_ARCHITECTURE_NODE_ID
+    assert graph["graph_revision"] == 326
+    assert graph["nodes"][-1]["id"] == ADMISSION_KERNEL_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        ADMISSION_ARCHITECTURE_SOURCE_HEAD
+        ADMISSION_KERNEL_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": CLOCK_NODE_ID,
+            "node_id": ADMISSION_ARCHITECTURE_NODE_ID,
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 307
-    assert compass["source_graph_revision"] == 325
-    assert compass["current_position"]["node_id"] == ADMISSION_ARCHITECTURE_NODE_ID
+    assert compass["map_revision"] == 308
+    assert compass["source_graph_revision"] == 326
+    assert compass["current_position"]["node_id"] == ADMISSION_KERNEL_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -138,10 +143,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
-    assert "Continuity 325 / Compass 307" in current
-    assert "provider-free shadow candidate" in current
-    assert ADMISSION_ARCHITECTURE_SOURCE_HEAD in current
-    assert "ordinary admission remains absent and denied" in current.lower()
+    assert "Continuity 326 / Compass 308" in current
+    assert "shadow-only" in current
+    assert ADMISSION_KERNEL_SOURCE_HEAD in current
+    assert "ordinary admission remains absent and impossible" in current.lower()
     assert "no live control is replaced" in current.lower()
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
@@ -185,6 +190,7 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "codex/ariadne-bernie-davida-parallel-seam" in relation
     assert PROTECTED_SHA in relation
     assert COMPOSITION_SOURCE_HEAD in relation
+    assert ADMISSION_KERNEL_SOURCE_HEAD in relation
     assert ADAPTER_SOURCE_HEAD in relation
     assert INTEGRATION_SOURCE_HEAD in relation
     assert "28cd0ce6639fd831960c57d5289b08f3d36ca3fb" in relation
@@ -208,20 +214,15 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert (
-        "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-"
-        "check-in-admission-control-kernel-rehearsal"
-    ) in next_work.lower()
-    assert "typed evaluator and transition kernel" in next_work.lower()
-    assert "zero active records" in next_work.lower()
-    assert "kill-switch dominance" in next_work.lower()
+    assert "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture" in next_work.lower()
+    assert "typed causal tick/result protocol" in next_work.lower()
+    assert "side-effect class" in next_work.lower()
+    assert "exact parent-tick broker binding" in next_work.lower()
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
-    assert "no ordinary-practice enablement" in next_work.lower()
-    assert "no mounted product command" in next_work.lower()
-    assert "no product code/configuration or live-route change" in next_work.lower()
-    assert "generic-status `arrived`" in next_work.lower()
-    assert "waiting-area movement" in next_work.lower()
-    assert "live provider" in next_work.lower()
+    assert "no live clockwork adoption" in next_work.lower()
+    assert "occupied deepseek/provider call" in next_work.lower()
+    assert "product authority" in next_work.lower()
+    assert "patient/clinical/product data" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
@@ -259,18 +260,16 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
-        "no ordinary-practice enablement",
-        "no product code/configuration or live-route change",
-        "generic-status `arrived`",
-        "waiting-area movement",
-        "product/patient/clinical data",
-        "live provider",
+        "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+        "no live clockwork adoption",
+        "current-control retirement",
+        "occupied deepseek/provider call",
+        "product authority",
+        "patient/clinical/product data",
         "deployment",
         "protected-ref movement",
         "docs/branding/",
         "stage explicit paths only",
-        "no live clockwork adoption",
     ):
         assert phrase in next_work
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work

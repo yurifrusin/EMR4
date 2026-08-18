@@ -20,15 +20,13 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_architecture_is_current_without_enablement() -> None:
+def test_architecture_remains_preserved_without_enablement() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 325
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 307
-    assert compass["source_graph_revision"] == 325
-    assert compass["current_position"]["node_id"] == NODE_ID
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 325
+    assert compass["map_revision"] >= 307
+    assert compass["source_graph_revision"] >= 325
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
     assert node["authority"]["authorized_openings"] == []
@@ -40,15 +38,10 @@ def test_architecture_is_current_without_enablement() -> None:
 
 def test_compass_names_zero_active_record_kernel_successor() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    assert "unmounted default-off" in current["strategic_role"]
-    assert SOURCE_HEAD in current["why_now"]
-    assert "zero active records" in current["outcome"]
-    closed = " ".join(current["does_not_solve"])
-    assert "No ordinary practice is enabled" in closed
-    assert "No product route" in closed
-    assert "No live clockwork adoption" in closed
-    assert "Continuity 325 / Compass 307" in compass["orientation_statement"]
+    journey = next(row for row in compass["journey"] if row["node_id"] == NODE_ID)
+    assert "Freeze check-in admission control" in journey["strategic_role"]
+    assert "ordinary admission remains absent and denied" in journey["outcome"]
+    assert "Continuity 326 / Compass 308" in compass["orientation_statement"]
 
 
 def test_closeout_records_have_brisbane_timestamps() -> None:

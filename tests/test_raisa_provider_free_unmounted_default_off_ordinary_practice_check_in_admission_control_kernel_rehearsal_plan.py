@@ -48,15 +48,15 @@ def test_threat_delta_keeps_product_and_clockwork_authority_closed() -> None:
 def test_latch_and_receipt_bind_all_five_sources() -> None:
     latch = validate_active_operation(json.loads(LATCH.read_text(encoding="utf-8")))
     receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
-    assert latch["operation_id"] == (
+    operation_id = (
         "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-"
         "check-in-admission-control-kernel-rehearsal"
     )
-    assert latch["status"] == "in_progress"
-    assert latch["source_head"] == "249609a7f0c7131cff376aef315e1ff7742b44d7"
-    assert latch["terminal_response"]["permitted"] is False
-    assert "zero_active_ordinary_admission_records" in latch["protected_boundaries"]
     assert receipt["status"] == "passed"
+    assert receipt["active_operation"]["operation_id"] == operation_id
+    assert receipt["active_operation"]["source_head"] == (
+        "249609a7f0c7131cff376aef315e1ff7742b44d7"
+    )
     assert receipt["rehydration_sources"] == [
         "live_handover_current_baton",
         "current_authority_allocation",
@@ -69,6 +69,14 @@ def test_latch_and_receipt_bind_all_five_sources() -> None:
         "gemini_verifier",
         "native_subagents",
     ]
+    assert len(latch["source_head"]) == 40
+    assert latch["source_head"] == latch["source_head"].lower()
+    if latch["operation_id"] == operation_id:
+        assert latch["status"] in {"in_progress", "complete"}
+        assert "zero_active_ordinary_admission_records" in latch["protected_boundaries"]
+        assert latch["terminal_response"]["permitted"] is (
+            latch["status"] == "complete"
+        )
 
 
 def test_owned_runtime_module_is_outside_product_source() -> None:

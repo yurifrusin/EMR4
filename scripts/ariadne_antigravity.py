@@ -418,12 +418,57 @@ def run_worker(
             f"digest-only diagnostics written to {output_path}"
         )
     after = inspect_worktree(before.root, require_clean=False)
-    if after.root != before.root or after.branch != before.branch:
-        raise RuntimeError("Antigravity changed or escaped its bound worktree/branch")
-    if after.head != before.head or after.dirty:
-        raise RuntimeError(
-            "Antigravity verifier modified its read-only candidate worktree"
+    worktree_identity_unchanged = (
+        after.root == before.root
+        and after.branch == before.branch
+        and after.head == before.head
+        and not after.dirty
+    )
+    if not worktree_identity_unchanged:
+        escaped_binding = after.root != before.root or after.branch != before.branch
+        error = (
+            "Antigravity changed or escaped its bound worktree/branch"
+            if escaped_binding
+            else "Antigravity verifier modified its read-only candidate worktree"
         )
+        failure_receipt = {
+            "schema_version": "ariadne.egress-failure-receipt.v1",
+            "status": "egress_failed_without_admitted_terminal_decision",
+            "transport": "antigravity_new_project_bound_readonly_worktree",
+            "model": canonical_model,
+            "requested_model": model,
+            "reasoning_effort": reasoning_effort,
+            "worktree": str(before.root),
+            "branch": before.branch,
+            "head_before": before.head,
+            "head_after": after.head,
+            "dirty_after": after.dirty,
+            "worktree_identity_unchanged": False,
+            "os_sandbox": os_sandbox,
+            "orchestrator_receipt_sha256": orchestrator_receipt_sha256,
+            "exit_code": completed.returncode,
+            "elapsed_ms": elapsed_ms,
+            "stdout": _output_evidence(completed.stdout or ""),
+            "stderr": _output_evidence(completed.stderr or ""),
+            "decision_contract": (
+                "schema_constrained_json_v1"
+                if structured_decision
+                else "legacy_terminal_line_v1"
+            ),
+            "reason_code": (
+                "bound_worktree_or_branch_changed"
+                if escaped_binding
+                else "read_only_worktree_postcondition_failed"
+            ),
+            "terminal_decision_admitted": False,
+            "candidate_review_admitted": False,
+        }
+        if command_manifest is not None:
+            failure_receipt["command_manifest_sha256"] = command_manifest_sha256(
+                command_manifest
+            )
+        _atomic_receipt_write(output_path, failure_receipt)
+        raise RuntimeError(f"{error}; digest-only diagnostics written to {output_path}")
     try:
         if structured_decision:
             decision_envelope = parse_structured_decision(

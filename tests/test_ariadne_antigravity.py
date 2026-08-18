@@ -289,7 +289,20 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
             os_sandbox=False,
         )
 
-    assert not output.exists()
+    failure = json.loads(output.read_text(encoding="utf-8"))
+    assert failure["schema_version"] == "ariadne.egress-failure-receipt.v1"
+    assert failure["status"] == (
+        "egress_failed_without_admitted_terminal_decision"
+    )
+    assert failure["exit_code"] == 0
+    assert failure["head_before"] == failure["head_after"] == "abc123"
+    assert failure["dirty_after"] is True
+    assert failure["worktree_identity_unchanged"] is False
+    assert failure["reason_code"] == "read_only_worktree_postcondition_failed"
+    assert failure["terminal_decision_admitted"] is False
+    assert failure["candidate_review_admitted"] is False
+    assert failure["stdout"]["bytes"] > 0
+    assert "Candidate remained unchanged" not in output.read_text(encoding="utf-8")
 
 
 @pytest.mark.parametrize(

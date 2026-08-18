@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.verifier-worktree-postcondition-failure.v1",
+  "status": "review_rejected_without_admitted_terminal_decision",
+  "timestamp": "2026-08-19T04:18:56.4226085+10:00",
+  "attempt_id": "check-in-admission-kernel-gemini-veto-001",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/check-in-admission-kernel-gemini-4204ec63",
+  "branch": "codex/review-check-in-admission-kernel-4204ec63",
+  "head_before": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "head_after": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "candidate_source_changed": false,
+  "tracked_clean_after": false,
+  "modified_paths": [
+    "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/kernel-rehearsal-report.md",
+    "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json"
+  ],
+  "content_diff": "empty_after_git_normalization",
+  "observed_mutation_class": "working_tree_line_ending_rewrite",
+  "occupied_review_session_count": 1,
+  "provider_call_count": "not_observed_by_launcher",
+  "child_process_exit_code": 0,
+  "wrapper_exit_code": 1,
+  "terminal_decision_parsed": false,
+  "terminal_decision_admitted": false,
+  "candidate_review_admitted": false,
+  "raw_model_output_persisted": false,
+  "raw_model_output_reason": "The worktree postcondition exception occurs before structured-decision parsing and the launcher did not write its configured digest-only failure receipt.",
+  "detection": {
+    "launcher_error": "Antigravity verifier modified its read-only candidate worktree",
+    "git_status": "exactly_two_tracked_generated_evidence_paths_modified",
+    "git_diff": "no_semantic_diff_after_line_ending_normalization"
+  },
+  "containment": {
+    "review_rejected": true,
+    "retry_started": false,
+    "candidate_head_retained": true,
+    "protected_refs_changed": false,
+    "next_action": "remove_the_write_producing_runner_from_the_read_only_manifest_persist_digest_only_postcondition_failures_restore_the_two_exact_generated_paths_and_repeat_preflight_before_any_fresh_review"
+  }
+}

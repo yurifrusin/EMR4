@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted default-off ordinary-practice canonical check-in admission-control kernel rehearsal",
+    "completed_stage": "The first Gemini veto was rejected because a manifest evidence generator rewrote line endings in two tracked review-worktree files; HEAD and semantic content stayed exact. The two paths are restored, the manifest is read-only, the launcher now persists dirty-postcondition failure receipts, and AER-0594 through AER-0596 pass in register revision 515.",
+    "next_executable_stage": "generate_and_validate_a_fresh_pre_verifier_receipt_for_the_corrected_manifest_then_run_one_bounded_same_candidate_gemini_37_flash_high_veto",
+    "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "reason_codes": [],
+    "resolved_commit": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4204ec6348abb0f92b1a30314699d4a469fa860a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "branch_origin_aligned": false,
+    "head": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "origin_branch_commit": "249609a7f0c7131cff376aef315e1ff7742b44d7",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 666
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance_attempt_002",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied native-Harness EMR4 work still requires its separate HMR boot proof; the exact kernel candidate needs no implementation worker and Claude is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "selected",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One bounded same-candidate fresh-project veto is permitted after the first attempt was rejected solely by the orchestrator-owned generative command and the worktree, launcher, register and preflight corrections all pass.",
+        "work_packages": [
+          "exact_candidate_read_only_kernel_veto_attempt_002"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and no separate implementation package remains.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini attempt 002 terminal decision",
+      "closeout",
+      "before future product mount or occupied DeepSeek work"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validated register revision 515",
+      "clean exact candidate and corrected non-generative manifest preflight",
+      "one no-fallback bounded same-candidate Gemini veto",
+      "Sol-only acceptance and Git"
+    ]
+  },
+  "planned_action": "run_one_bounded_same_candidate_gemini_37_flash_high_veto_with_the_corrected_read_only_manifest",
+  "reasons": [
+    "parallelism_lane_disposition_invalid:gemini_verifier"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md",
+      "orchestration_harness/check_in_admission_control.py",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json",
+      "docs/ariadne-agent-error-correction-register-revision-515.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns correction, kernel acceptance and task-branch Git. DeepSeek occupied native-Harness work remains declined behind its separate provider-free HMR boot proof with no Claude fallback. Gemini 3.7 Flash/high may receive one bounded same-candidate fresh-project veto because the first review was rejected only by a corrected manifest/worktree postcondition. Native subagents remain declined under developer policy.",
+    "git_refs_and_worktree": "Primary task branch remains at exact candidate 4204ec6348abb0f92b1a30314699d4a469fa860a and origin task remains 249609a7f0c7131cff376aef315e1ff7742b44d7. The exact review worktree on codex/review-check-in-admission-kernel-4204ec63 is restored clean at candidate 4204ec6348abb0f92b1a30314699d4a469fa860a. Corrected manifest preflight passes with digest d139f25670f94c3d749a1db15747246c8a8c17478dc4293fdcff034af3625b38. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now records register revision 515. Its Current Baton keeps this zero-active-record unmounted kernel rehearsal active, preserves the native-Harness HMR prerequisite and fixes every protected ref at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "protected_evidence_boundaries": "Exact committed provider-free unmounted candidate 4204ec6348abb0f92b1a30314699d4a469fa860a only. The corrected manifest contains nine non-generative commands and its preflight passes. Zero active ordinary records, default denial and unchanged synthetic semantics remain exact. No ordinary enablement, product/config/API/database/client/waiting-area change, product/patient/clinical/protected data, DeepSeek/HMR call, production/deployment/release/Pages, live clockwork adoption or protected-ref movement. Preserve docs/branding and all unrelated untracked files; explicit-path staging only."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

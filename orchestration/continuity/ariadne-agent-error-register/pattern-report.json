@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "6c93886ffcb29419e6285535b8cd2538c1e980561cb697d53543009c1679fb16",
+  "canonical_register_sha256": "e9fd6a5e60e4f553aaa875af15a71ffabfc6d7cb8222c939c750fce3fbb0b674",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 370,
+      "canonical_unchanged": 381,
       "untrusted_partial_worktree": 107
     },
     "by_category": {
       "command_scope_violation": 86,
       "evidence_misreport": 66,
-      "harness_failure": 53,
+      "harness_failure": 54,
       "operator_error": 21,
-      "output_contract_violation": 214,
-      "read_only_violation": 3,
+      "output_contract_violation": 223,
+      "read_only_violation": 4,
       "reasoning_claim_error": 46,
       "repository_defect": 86,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 415,
-      "harness": 53,
+      "agent_behavior": 425,
+      "harness": 54,
       "operator": 21,
       "repository": 86,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 322,
+      "low": 331,
       "material": 117,
-      "moderate": 152
+      "moderate": 154
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -39,13 +39,13 @@
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-agent-error-register::orchestrator": 5,
       "ariadne-antigravity-command-schema::orchestrator": 1,
-      "ariadne-antigravity-egress-admission::verifier": 1,
+      "ariadne-antigravity-egress-admission::verifier": 2,
       "ariadne-compass-current-position-test::orchestrator": 5,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
-      "ariadne-verifier-worktree-preflight::orchestrator": 1,
+      "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 2,
@@ -53,7 +53,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 321,
+      "codex-primary-orchestrator::orchestrator": 329,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -132,12 +132,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 489,
-      "verifier": 56
+      "orchestrator": 499,
+      "verifier": 57
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 591,
+  "incident_count": 602,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -627,6 +627,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0392",
+        "AER-0592"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Copy the exact verifier branch prefix from the execution policy or a passing preflight template; never derive a narrower prefix from the tranche name.",
+        "Generate verifier preflight arguments from the typed execution-policy enum; until adoption, copy branch_prefix exactly as codex/review- and never derive it from the branch name."
+      ],
+      "recurrence_signature": "orchestrator.verifier_preflight_branch_prefix_not_exact_review_prefix",
+      "resource_ids": [
+        "ariadne-verifier-worktree-preflight"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0460",
         "AER-0512"
       ],
@@ -715,17 +739,21 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0319",
-        "AER-0402"
+        "AER-0402",
+        "AER-0599",
+        "AER-0600"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Before a closeout updater runs, construct the complete latch from the exact validator branch and update the terminal Continuity/Compass/current-baton fixtures in the same patch; run both latch suites and tests/test_current_baton_consistency.py before any closeout receipt, commit, notification or push.",
-        "Before a closeout updater runs, validate the complete latch as a whole object, search all global continuity/Compass/current-baton fixtures for the predecessor, and require acceptance-index refresh to replace an existing moved label in place rather than duplicating or rejecting it."
+        "Before a closeout updater runs, validate the complete latch as a whole object, search all global continuity/Compass/current-baton fixtures for the predecessor, and require acceptance-index refresh to replace an existing moved label in place rather than duplicating or rejecting it.",
+        "The clockwork must distinguish immutable event receipts from mutable current projections; historical tests bind the former exactly and validate the latter by schema, operation identity when applicable and terminal invariants rather than predecessor literals.",
+        "The shadow clockwork projector must generate the mutable current-latch check from the terminal event schema; tests may bind exact operation facts only through immutable event receipts, never through the fallback branch for live state."
       ],
       "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
       "resource_ids": [
@@ -919,6 +947,30 @@
         "Select lane dispositions only from orchestration/harness_settings/orchestrator_requirements.yaml and place descriptive terminal detail in rationale and work_packages rather than inventing an enum value."
       ],
       "recurrence_signature": "orchestrator.plan_precommit_parallelism_disposition_invalid",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0320",
+        "AER-0597"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Construct pre-verifier parallelism and workspace-receipt objects from the last passing exact analogue, validate incident peer links as part of register admission, then validate the runtime state before invoking any external verifier; do not infer enum values or reuse generic receipt metadata shapes.",
+        "The typed clockwork continuation event must project verifier disposition from the configured enum and stage; until adoption, copy the reserved value from the last passing pre-verifier analogue and never infer selected."
+      ],
+      "recurrence_signature": "orchestrator.pre_verifier_parallelism_disposition_and_workspace_receipt_shape_invalid",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1208,6 +1260,30 @@
     },
     {
       "categories": [
+        "read_only_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0040",
+        "AER-0594"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Review-worktree reconciliation runs only non-regenerative tests and static checks. Acceptance generators run before candidate freeze in the primary worktree; review verifies committed evidence through hashes and focused tests rather than regeneration.",
+        "The future typed clockwork command vocabulary must classify manifest operations by filesystem effect and reject evidence generators from read-only verifier ticks; until adoption, verifier manifests inspect committed evidence and run only non-regenerative tests and static checks."
+      ],
+      "recurrence_signature": "orchestrator.generative_acceptance_in_read_only_review_worktree",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
         "reasoning_claim_error"
       ],
       "incident_count": 2,
@@ -1380,6 +1456,30 @@
       ],
       "roles": [
         "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "harness_failure"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0424",
+        "AER-0595"
+      ],
+      "origins": [
+        "harness"
+      ],
+      "prevention_controls": [
+        "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; no parse or decision-count exception may bypass evidence persistence.",
+        "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; worktree postcondition failures are part of the same exhaustive boundary."
+      ],
+      "recurrence_signature": "harness.antigravity_completed_transport_invalid_egress_without_digest_receipt",
+      "resource_ids": [
+        "ariadne-antigravity-egress-admission"
+      ],
+      "roles": [
+        "verifier"
       ]
     },
     {
@@ -1722,7 +1822,7 @@
       ]
     }
   ],
-  "register_revision": 512,
+  "register_revision": 521,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }
