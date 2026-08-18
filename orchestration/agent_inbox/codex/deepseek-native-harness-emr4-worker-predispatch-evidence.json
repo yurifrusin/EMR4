@@ -1,0 +1,70 @@
+{
+  "schema_version": "emr4.deepseek-native-harness-worker-predispatch-evidence.v1",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "observed_on": "2026-08-18",
+  "source_head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+  "status": "provider_free_corrected_boot_passed_occupied_dispatch_still_closed",
+  "worker_worktree": {
+    "host_path": "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-native-harness-emr4-worker-001",
+    "container_path": "/workspace",
+    "branch": "codex/deepseek-native-harness-emr4-worker-001",
+    "head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "owned_paths": [
+      "scripts/ariadne_deepseek_native_harness_profiles.py",
+      "tests/test_ariadne_deepseek_native_harness_profiles.py"
+    ],
+    "external_disposable_packet": "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-native-harness-emr4-profile-001\\WORKER_PACKET.md",
+    "packet_sha256": "959f6cd1998a6e14f1b69448e4b9220529b86d42ea6fa7bfd414c5413971e51e",
+    "provider_free_postflight_clean": true
+  },
+  "image": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+  "package": "@deepseek-ai/dsh@0.1.0-rc.7",
+  "overlay_sha256": "a1d7bc31d031b64af5bd8114d9609cbdb9237346679c55c5b1f58357cd72f08a",
+  "networks": {
+    "worker_internal": {
+      "name": "emr4-dsh-worker-001-internal",
+      "id": "e00ed46e0be202ee2729cb85e92f072f2a28a4915d5d941ad918454af2fce8c5",
+      "internal": true
+    },
+    "broker_egress": {
+      "name": "emr4-dsh-broker-001-egress",
+      "id": "43fddaec9f6bf0a5c2448d9eda187e4e46fa8d5f90d199ebfb34234b7da56fce",
+      "attached_to_worker": false
+    }
+  },
+  "first_provider_free_boot": {
+    "container": "emr4-dsh-native-worker-provider-free-001",
+    "container_id": "16955b5983bdc4dc1c04ed0a7194f40f0f89eeee54d6d849227f3cb7e3d6076a",
+    "tools_mode": "local",
+    "exit_code": 1,
+    "terminal_class": "pre_provider_plugin_configuration_failure",
+    "terminal_code": "DSH_TOOLS_MODE_ENUM_INVALID",
+    "provider_request_count": 0,
+    "broker_request_count": 0,
+    "model_step_count": 0,
+    "incident_id": "AER-0456"
+  },
+  "corrected_provider_free_boot": {
+    "container": "emr4-dsh-native-worker-provider-free-002",
+    "container_id": "52769e05b672e089206f58f94e08c96c4b2bdef56c1812b94195f2e5ab2b6d33",
+    "tools_mode": "native",
+    "exit_code": 1,
+    "terminal_class": "expected_pre_provider_stop",
+    "terminal_code": "MISSING_CREDENTIAL",
+    "provider_request_count": 0,
+    "broker_request_count": 0,
+    "model_step_count": 0,
+    "provider_credential_present": false,
+    "broker_capability_present": false
+  },
+  "mounts": [
+    {"destination": "/workspace", "kind": "exact_sparse_worker_bind", "read_only": false},
+    {"destination": "/workspace/WORKER_PACKET.md", "kind": "disposable_packet_bind_for_occupied_run", "read_only": true},
+    {"destination": "/opt/ariadne/emr4-bounded-worker.patch.yml", "kind": "disposable_overlay_bind", "read_only": true},
+    {"destination": "/opt/dsh", "kind": "disposable_package_volume", "read_only": true},
+    {"destination": "/dsh-home", "kind": "fresh_disposable_home_volume", "read_only": false}
+  ],
+  "retained_secret_or_raw_content": false,
+  "occupied_dispatch_authorized": false,
+  "next_gate": "validate_revision_397_generate_distinct_corrected_predispatch_receipt_then_start_isolated_broker_and_one_occupied_worker_session"
+}

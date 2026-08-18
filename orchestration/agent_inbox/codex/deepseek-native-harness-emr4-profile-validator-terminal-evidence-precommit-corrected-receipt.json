@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
+    "completed_stage": "One occupied attempt is reduced: four frames, 17 rows, one seven-tool request, zero provider calls, zero successful model steps, zero tool calls and zero candidate changes. AER-0459 and revision 398 contain the incorrect three-tool mapping; the full register passes. All containers, volumes, networks, raw storage, worktree and worker branch are absent; the disposable profile root is recycled. No retry occurred.",
+    "next_executable_stage": "commit_the_attributable_negative_evidence_then_write_and_publish_the_paired_closeout_and_successor_boundary",
+    "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+    "resume_after_compaction": true,
+    "source_head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "reason_codes": [],
+    "resolved_commit": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "7229bcd447bedcd3608a22b4ad026eaf50b3c542"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "branch_origin_aligned": false,
+    "head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "origin_branch_commit": "f3288aea19cc9b0451386093933acf2db0fd70e8",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 662
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "terminal_evidence_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The single native-Harness package was dispatched and ended as attributable broker-rejected negative evidence; it owns no candidate and receives no retry.",
+        "work_packages": [
+          "consumed_sparse_profile_validator_attempt_terminal_evidence"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "There is no candidate to veto and all terminal, cleanup, Git and register evidence is deterministic.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and this exact evidence commit is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+    "parallel_work_packages": [
+      "No parallel work remains before the exact evidence commit."
+    ],
+    "reassessment_triggers": [
+      "closeout",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one_process_per_gate",
+      "no_retry",
+      "complete_register_suite",
+      "explicit_path_staging",
+      "protected_ref_readback"
+    ]
+  },
+  "planned_action": "commit_exact_attributable_negative_worker_terminal_evidence_and_register_correction",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md",
+      "docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md",
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json",
+      "docs/ariadne-agent-error-correction-register-revision-399.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns evidence admission, correction, cleanup, commit and acceptance. The DeepSeek native-Harness lane completed one consumed negative attempt with no retry. Gemini is declined because no candidate exists and terminal facts are deterministic. Native subagents are declined under current developer policy.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at exact HEAD 7229bcd447bedcd3608a22b4ad026eaf50b3c542. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The intended evidence commit contains only exact current-tranche latch, register, receipt and sanitized evidence paths.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names this monitored native-Harness EMR4 worker tranche and forbids unrestricted transport promotion.",
+    "protected_evidence_boundaries": "One occupied attempt was consumed without retry. The isolated broker rejected the seven-tool declaration before provider I/O. No product, patient, clinical, historical or protected data; no application source, runtime, deployment, release, Pages or protected ref. Raw session and all disposable runtime resources are absent. docs/branding and unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

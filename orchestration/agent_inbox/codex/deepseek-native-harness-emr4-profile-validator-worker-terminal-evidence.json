@@ -1,0 +1,134 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_worker_terminal_evidence.v1",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "generated_at": "2026-08-18T17:29:56.0631711+10:00",
+  "source_head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+  "result": "occupied_worker_dispatch_traceable_broker_tool_contract_rejected_zero_provider_zero_candidate",
+  "acceptance_class": "attributable_pre_provider_negative_worker_evidence",
+  "retry_permitted": false,
+  "worker": {
+    "container_name": "emr4-dsh-native-worker-occupied-001",
+    "container_id": "2f8fb85be673f3f73a6ba4de4f33b227dd4bf91a00359fedf6319fb8fc0c1247",
+    "image": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+    "started_at": "2026-08-18T07:18:30.963246499Z",
+    "finished_at": "2026-08-18T07:18:31.724419882Z",
+    "elapsed_ms": 761,
+    "exit_code": 1,
+    "oom_killed": false,
+    "terminal_code": "INVALID_REQUEST",
+    "terminal_http_status": 400,
+    "network_names": [
+      "emr4-dsh-worker-001-internal"
+    ],
+    "network_ids": [
+      "e00ed46e0be202ee2729cb85e92f072f2a28a4915d5d941ad918454af2fce8c5"
+    ],
+    "direct_egress_network_present": false,
+    "provider_credential_present": false
+  },
+  "broker": {
+    "container_name": "emr4-dsh-native-broker-001",
+    "container_id": "ac1422ee415d267b2f6d8c2672d955b35a2f865888b1c58eeb79bfd56d914d9e",
+    "internal_network_id": "e00ed46e0be202ee2729cb85e92f072f2a28a4915d5d941ad918454af2fce8c5",
+    "egress_network_id": "43fddaec9f6bf0a5c2448d9eda187e4e46fa8d5f90d199ebfb34234b7da56fce",
+    "worker_mount_present": false,
+    "allowed_path": "/chat/completions",
+    "allowed_model": "deepseek-v4-flash",
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "request_rejections": 1,
+    "rejection_reason_code": "tool-not-allowlisted",
+    "provider_call_started_events": 0,
+    "provider_calls": 0
+  },
+  "session": {
+    "session_id": "ccaba131-ff9a-4ca1-9bcb-8c793c54052e",
+    "raw_artifact_bytes": 26075,
+    "zstandard_frame_count": 4,
+    "decompressed_bytes": 78558,
+    "logical_row_count": 17,
+    "request_header_count": 1,
+    "request_reason": "initial",
+    "provider": "deepseek-official",
+    "model": "deepseek-v4-flash",
+    "reasoning_effort": "high",
+    "max_output_tokens": 4096,
+    "harness_step_start_count": 1,
+    "successful_model_step_count": 0,
+    "usage_record_count": 0,
+    "tool_call_count": 0,
+    "tool_result_count": 0,
+    "assistant_finish_kind": "error",
+    "turn_end_kind": "error",
+    "declared_tool_count": 7,
+    "declared_tool_names": [
+      "edit",
+      "glob",
+      "grep",
+      "read",
+      "read_image",
+      "str_replace_editor",
+      "write"
+    ],
+    "unexpected_declared_tool_names": [
+      "grep",
+      "read_image",
+      "str_replace_editor",
+      "write"
+    ],
+    "raw_content_copied_into_repository": false,
+    "raw_artifact_retained_only_in_disposable_volume_pending_cleanup": false
+  },
+  "package_source_readback": {
+    "dsh_tool_fs_declared_tools": [
+      "read",
+      "read_image",
+      "write",
+      "edit"
+    ],
+    "dsh_tool_fs_search_declared_tools": [
+      "glob",
+      "grep"
+    ],
+    "dsh_tool_str_replace_editor_declared_tools": [
+      "str_replace_editor"
+    ],
+    "prior_mapping_claim_valid": false,
+    "required_recovery": "prove_and_enforce_a_package_native_scoped_model_tool_view_before_any_future_occupied_dispatch"
+  },
+  "candidate_readback": {
+    "worker_branch": "codex/deepseek-native-harness-emr4-worker-001",
+    "worker_head": "7229bcd447bedcd3608a22b4ad026eaf50b3c542",
+    "tracked_diff_present": false,
+    "staged_diff_present": false,
+    "owned_script_present": false,
+    "owned_test_present": false,
+    "intentional_empty_bind_mount_placeholder": "WORKER_PACKET.md",
+    "intentional_empty_placeholder_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate_admitted": false
+  },
+  "protected_boundaries": {
+    "product_patient_clinical_historical_or_protected_data_used": false,
+    "application_or_product_source_changed": false,
+    "ordinary_practice_runtime_or_deployment_changed": false,
+    "protected_ref_changed": false,
+    "main_worktree_untracked_files_entered_worker": false,
+    "raw_prompt_reasoning_response_or_tool_payload_committed": false
+  },
+  "cleanup": {
+    "status": "complete",
+    "occupied_retry_or_resume": false,
+    "containers_absent": true,
+    "volumes_absent": true,
+    "networks_absent": true,
+    "worker_worktree_absent": true,
+    "worker_branch_absent": true,
+    "profile_root_absent": true,
+    "raw_session_active_filesystem_absent": true,
+    "profile_root_sent_to_windows_recycle_bin": true,
+    "docker_volume_removal_recoverable": false
+  }
+}

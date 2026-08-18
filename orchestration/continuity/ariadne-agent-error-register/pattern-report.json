@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "af24f73e925c2c71d86148b26d52f029538dd586fe205c3e7394740f66dc5f44",
+  "canonical_register_sha256": "8fc81f018af297ea7e156b57bd3d750f5bc117f1723146b8b04a4665cfd4b180",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 299,
+      "canonical_unchanged": 304,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
-      "command_scope_violation": 71,
+      "command_scope_violation": 72,
       "evidence_misreport": 62,
       "harness_failure": 51,
       "operator_error": 1,
-      "output_contract_violation": 141,
+      "output_contract_violation": 144,
       "read_only_violation": 3,
-      "reasoning_claim_error": 45,
+      "reasoning_claim_error": 46,
       "repository_defect": 65,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 322,
+      "agent_behavior": 327,
       "harness": 51,
       "operator": 1,
       "repository": 65,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 203,
+      "low": 205,
       "material": 116,
-      "moderate": 136
+      "moderate": 139
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -48,7 +48,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 241,
+      "codex-primary-orchestrator::orchestrator": 245,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -57,6 +57,7 @@
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
       "deepseek-flash-workers::implementer": 14,
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
+      "deepseek-native-harness-rc7-container-worker::orchestrator": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -113,12 +114,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 355,
+      "orchestrator": 360,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 455,
+  "incident_count": 460,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -126,7 +127,7 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 7,
+      "incident_count": 8,
       "incident_ids": [
         "AER-0334",
         "AER-0337",
@@ -134,7 +135,8 @@
         "AER-0397",
         "AER-0429",
         "AER-0432",
-        "AER-0455"
+        "AER-0455",
+        "AER-0458"
       ],
       "origins": [
         "agent_behavior"
@@ -143,6 +145,7 @@
         "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
         "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
         "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+        "For the remainder of this tranche, every shell process contains exactly one executable command with no pipe, semicolon or newline-composed successor; output limiting must use that executable's native options only.",
         "No validation, staging, commit or readback operation may share a shell invocation with another gate; record every exit before starting the next process.",
         "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
         "One command and one result per process for all remaining gates; newline separation inside one shell invocation is prohibited just like semicolon or pipeline composition.",
@@ -1311,7 +1314,7 @@
       ]
     }
   ],
-  "register_revision": 396,
+  "register_revision": 399,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

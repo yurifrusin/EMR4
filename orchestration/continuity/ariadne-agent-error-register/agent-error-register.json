@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 396,
+  "register_revision": 399,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -18172,6 +18172,193 @@
         "prevention_control": "One command and one result per process for all remaining gates; newline separation inside one shell invocation is prohibited just like semicolon or pipeline composition.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-396.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0456",
+      "attempt_id": "deepseek-native-harness-sparse-worker-provider-free-predispatch-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "deepseek-native-harness-rc7-container-worker",
+      "model": "none",
+      "reasoning_level": "high",
+      "transport": "provider_free_docker_linux",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The actual sparse-worker provider-free boot must use an exact rc.7-admitted DSH_TOOLS_MODE value and reach MISSING_CREDENTIAL before any occupied request.",
+      "observed_error": "The first sparse-worker container supplied DSH_TOOLS_MODE=local. Pinned rc.7 admits only native, code or both, so plugin-tree validation stopped locally before credential resolution, broker traffic, provider traffic or a model step.",
+      "detection_method": "The preserved container exited during dsh-tools configuration with an exact validation error naming the admitted vocabulary. The earlier passing provider-free container recorded DSH_TOOLS_MODE=native; one fresh corrected provider-free boot used that exact value and reached MISSING_CREDENTIAL with the worktree unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-397.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.deepseek_native_tools_mode_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed container, rebind DSH_TOOLS_MODE to exact previously passing value native, and consume the plan's single provider-free corrected boot before occupied dispatch.",
+        "prevention_control": "Copy every launcher environment enum from exact pinned-package validation or a separately captured passing container; do not infer an apparently descriptive value from prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-397.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0457",
+      "attempt_id": "deepseek-native-harness-profile-validator-worker-predispatch-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ariadne_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A pre-worker-dispatch runtime state must use only configured parallelism dispositions and must not mark a worker assigned before the required clean handoff-current workspace receipt phase is satisfied.",
+      "observed_error": "The first receipt used unrecognised DeepSeek disposition selected and populated assigned_agent_ids before a handoff-current workspace receipt existed. Preflight returned revision_required with both exact reason codes and did not authorise dispatch.",
+      "detection_method": "The failed receipt reported parallelism_lane_disposition_invalid:deepseek_flash and workspace_receipt_missing:deepseek-native-harness-emr4-profile-validator-worker-001 before broker start, provider I/O, model execution or candidate change.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-predispatch-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-predispatch-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-397.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.predispatch_parallelism_disposition_and_assignment_phase_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected receipt, use exact configured disposition planned, keep assigned-agent and active-slot lists empty until actual dispatch, and generate a distinct corrected five-source receipt.",
+        "prevention_control": "Copy lane dispositions from the configured vocabulary and represent a not-yet-started external worker as planned with no assigned agent; never use a prose synonym or predeclare an active assignment.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-predispatch-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-397.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0458",
+      "attempt_id": "deepseek-native-harness-post-aer0455-output-limiting-readbacks-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-0455, every remaining readback and validation process must contain one command whose exit cannot be masked by a downstream pipeline command.",
+      "observed_error": "The orchestrator subsequently used output-limiting PowerShell pipelines in readback calls, including rg output piped to Select-Object, despite AER-0455's explicit no-pipeline control.",
+      "detection_method": "Immediate self-review of the exact readback invocation identified the pipeline. The calls were read-only and no worktree, Docker, provider, candidate or ref state changed.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-397.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Stop all shell pipeline composition and run each remaining readback with a single native command or accept its full bounded output.",
+        "prevention_control": "For the remainder of this tranche, every shell process contains exactly one executable command with no pipe, semicolon or newline-composed successor; output limiting must use that executable's native options only.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-397.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0459",
+      "attempt_id": "deepseek-native-harness-emr4-profile-validator-worker-occupied-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "native_deepseek_harness_isolated_broker",
+      "stage": "dispatch",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Exact pinned-package source mapping and provider-free composition must enumerate every model-facing tool schema before an occupied request, and the composed request must declare only read, glob and edit.",
+      "observed_error": "The pre-dispatch mapping claimed that the enclosed worker exposed only read, glob and edit. The first occupied request actually declared seven tools: edit, glob, grep, read, read_image, str_replace_editor and write. The isolated broker rejected the request with tool-not-allowlisted before provider I/O.",
+      "detection_method": "Broker logs recorded one tool-not-allowlisted rejection and zero provider-call-started events. Sanitized four-frame session reduction independently counted one request header with the exact seven tool names, zero usage records, zero tool calls and an INVALID_REQUEST HTTP 400 terminal. The sparse candidate remained unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-398.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.native_harness_model_facing_tool_inventory_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the terminal negative evidence, consume the tranche's single occupied attempt without retry, and require a separately frozen recovery tranche to prove a package-native scoped model tool view before any future occupied dispatch.",
+        "prevention_control": "Before every native-Harness occupied dispatch, reduce a provider-free composed request header and compare its exact ordered model-facing tool inventory with the frozen profile and broker allowlist; reject any hidden, aliased or surplus schema before credentialed provider routing.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-398.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0460",
+      "attempt_id": "deepseek-native-harness-terminal-evidence-precommit-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ariadne_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every active-operation checkpoint field must satisfy the configured bounded-text limit before it is embedded in a continuation runtime state or submitted to Ariadne preflight.",
+      "observed_error": "The first terminal-evidence precommit runtime copied a completed_stage checkpoint longer than the configured bound. Preflight returned revision_required with active_operation_latch_invalid and did not authorise commit.",
+      "detection_method": "A standalone active-latch validation reported completed_stage must be bounded non-empty text. No Git staging, commit, provider call, runtime launch, candidate change or protected-ref movement occurred.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-terminal-evidence-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-terminal-evidence-precommit-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-399.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected receipt, shorten the checkpoint without changing its facts, validate the latch standalone, and generate a distinct corrected precommit receipt.",
+        "prevention_control": "Validate the active latch as its own gate after every checkpoint edit and before copying it into any continuation runtime state; never rely on preflight to be the first bounded-text check.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-terminal-evidence-precommit-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-399.md"
         ]
       },
       "status": "corrected"
