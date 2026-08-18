@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_rejected_generation.v1",
+  "attempt": 2,
+  "source_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+  "published_manifest_generation_sha256": "83aca625b7fe58dde37444c49bddf073e024ae4a3253558a05744e76c6d05e71",
+  "status": "superseded_after_later_workflow_failure",
+  "reason": "The generation was internally valid at two reruns, but the subsequent register validator rejected an origin/category mismatch and advanced the workflow verification rerun counter to one.",
+  "contained": true,
+  "live_or_protected_publication": false,
+  "provider_calls": 0,
+  "preserved_generation": "rejected-private-shadow-generation-attempt-002"
+}

@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "437f31efbad808aeb37f794ee7e442c3728ad340df356388401f6207778ca87c",
+  "canonical_register_sha256": "474c3b3699b2b3b43d8e28ee18e74581801bc0f8aee7c1328979ff0512d86f2b",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
       "canonical_unchanged": 391,
-      "untrusted_partial_worktree": 110
+      "untrusted_partial_worktree": 120
     },
     "by_category": {
       "command_scope_violation": 86,
-      "evidence_misreport": 66,
+      "evidence_misreport": 67,
       "harness_failure": 54,
-      "operator_error": 25,
-      "output_contract_violation": 228,
+      "operator_error": 30,
+      "output_contract_violation": 229,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 90,
+      "repository_defect": 93,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 430,
+      "agent_behavior": 432,
       "harness": 54,
-      "operator": 25,
-      "repository": 90,
+      "operator": 30,
+      "repository": 93,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 344,
-      "material": 117,
-      "moderate": 154
+      "low": 352,
+      "material": 118,
+      "moderate": 155
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -37,6 +37,7 @@
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
       "ariadne-active-operation-latch::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
+      "ariadne-agent-error-register-update::orchestrator": 1,
       "ariadne-agent-error-register::orchestrator": 5,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
@@ -113,12 +114,12 @@
       "gemini-36-flash-high-verifier::verifier": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "live-agents-handover::orchestrator": 1,
-      "local-apply-patch-operator::orchestrator": 3,
+      "local-apply-patch-operator::orchestrator": 6,
       "local-docker-desktop::orchestrator": 1,
       "local-powershell-operator::orchestrator": 14,
       "local-powershell-python-operator::orchestrator": 1,
-      "local-python-operator::orchestrator": 2,
-      "local-rg-operator::orchestrator": 1,
+      "local-python-operator::orchestrator": 3,
+      "local-rg-operator::orchestrator": 2,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
@@ -129,18 +130,22 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
+      "shadow-clockwork-causal-tick-engine::orchestrator": 1,
+      "shadow-clockwork-efficacy-reducer::orchestrator": 1,
+      "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
+      "shadow-clockwork-private-publication-engine::implementer": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1
     },
     "by_role": {
-      "implementer": 43,
+      "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 512,
+      "orchestrator": 521,
       "verifier": 57
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 615,
+  "incident_count": 625,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1885,7 +1890,7 @@
       ]
     }
   ],
-  "register_revision": 531,
+  "register_revision": 539,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

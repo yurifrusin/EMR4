@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_rejected_generation.v1",
+  "attempt": 3,
+  "source_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+  "published_manifest_generation_sha256": "4cacd55589fe3c381aaecaf0d78c68a0c916fb10eeca91c0447f148634192f5a",
+  "status": "rejected_after_causal_readback",
+  "reason": "The generation bound retry counters only in a projection. Its manifest changed as verification reruns accrued, but its acknowledged event tip did not, so the causal clock failed to move with the workflow state.",
+  "contained": true,
+  "live_or_protected_publication": false,
+  "provider_calls": 0,
+  "preserved_generation": "rejected-private-shadow-generation-attempt-003"
+}

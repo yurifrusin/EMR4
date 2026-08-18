@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-shadow-clockwork-rehearsal-contract-v1.json",
+  "title": "Ariadne provider-free shadow clockwork rehearsal contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_architecture_source",
+    "task_branch",
+    "protected_ref_oid",
+    "stage_catalogue",
+    "source_bindings",
+    "reading_sources",
+    "caller_supplied_binding_fields",
+    "engine_owned_fields",
+    "policy",
+    "publication",
+    "efficacy",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.shadow_clockwork_rehearsal_contract.v1"},
+    "operation_id": {"const": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/git_oid"},
+    "accepted_architecture_source": {"$ref": "#/$defs/git_oid"},
+    "task_branch": {"type": "string", "pattern": "^codex/[a-z0-9._/-]+$"},
+    "protected_ref_oid": {"$ref": "#/$defs/git_oid"},
+    "stage_catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["in_progress", "complete", "blocked", "paused", "replaced"],
+      "properties": {
+        "in_progress": {"const": "shadow_rehearsal"},
+        "complete": {"const": "shadow_rehearsal_closeout"},
+        "blocked": {"const": "shadow_rehearsal_blocked"},
+        "paused": {"const": "shadow_rehearsal_paused"},
+        "replaced": {"const": "shadow_rehearsal_replaced"}
+      }
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "canonical_lf_sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "canonical_lf_sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "reading_sources": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "caller_supplied_binding_fields": {"const": []},
+    "engine_owned_fields": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["admitted_effect_class", "denied_effect_classes", "profile_family", "permission_preset", "minimized_tools", "native_harness_package", "native_harness_version", "automatic_retries", "silent_fallbacks", "provider_calls", "single_writer", "one_terminal_result", "acknowledgement_required", "raw_prompt_reasoning_secret_or_product_payload_allowed", "worker_self_acceptance_allowed", "live_adoption"],
+      "properties": {
+        "admitted_effect_class": {"const": "shadow_generation_write"},
+        "denied_effect_classes": {"type": "array", "minItems": 5, "uniqueItems": true},
+        "profile_family": {"const": "emr4-provider-free"},
+        "permission_preset": {"const": "provider-free-shadow-read-generate"},
+        "minimized_tools": {"const": ["read", "generate_private_shadow"]},
+        "native_harness_package": {"const": "deepseek-native-harness"},
+        "native_harness_version": {"const": "unoccupied-shadow-binding-v1"},
+        "automatic_retries": {"const": 0},
+        "silent_fallbacks": {"const": 0},
+        "provider_calls": {"const": 0},
+        "single_writer": {"const": true},
+        "one_terminal_result": {"const": true},
+        "acknowledgement_required": {"const": true},
+        "raw_prompt_reasoning_secret_or_product_payload_allowed": {"const": false},
+        "worker_self_acceptance_allowed": {"const": false},
+        "live_adoption": {"const": false}
+      }
+    },
+    "publication": {"type": "object"},
+    "efficacy": {"type": "object"},
+    "closed_surfaces": {"type": "array", "minItems": 9, "uniqueItems": true}
+  },
+  "$defs": {
+    "git_oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

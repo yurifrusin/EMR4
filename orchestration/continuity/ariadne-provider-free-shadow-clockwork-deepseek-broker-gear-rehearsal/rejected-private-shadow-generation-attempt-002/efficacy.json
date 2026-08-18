@@ -1,0 +1,111 @@
+{
+  "comparator_failure_induced_reruns": 14,
+  "candidate_failure_induced_reruns": 2,
+  "failure_induced_rerun_reduction_percent": 85.714,
+  "failure_gauges_covered": 14,
+  "failure_gauges_required": 14,
+  "caller_supplied_derived_fields": 0,
+  "new_mutable_current_fixtures": 0,
+  "partial_publications": 0,
+  "uncaught_escapes": 0,
+  "coverage_loss": false,
+  "shared_line_growth": {
+    "orchestration_harness/shadow_clockwork.py": 693,
+    "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py": 136,
+    "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/contract.json": 157,
+    "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/contract.schema.json": 102,
+    "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/frozen-failure-gauges.json": 104,
+    "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py": 192,
+    "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_plan.py": 92,
+    "total": 1476
+  },
+  "clean_run_overhead_ms_median": 106.202,
+  "timing_acceptance_relevant": false,
+  "accepted": true,
+  "failure_gauge_results": [
+    {
+      "id": "gauge-01-mutable-current-latch-literal",
+      "rule": "mutable_current_literal",
+      "phase": "reading",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-02-handover-compactness-drift",
+      "rule": "projection_limit",
+      "phase": "projection",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-03-copied-assertion-literal",
+      "rule": "caller_binding_field",
+      "phase": "request",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-04-population-fixture-drift",
+      "rule": "aggregate_mismatch",
+      "phase": "projection",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-05-recurrence-fixture-drift",
+      "rule": "recurrence_mismatch",
+      "phase": "projection",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-06-guessed-yuri-path",
+      "rule": "unmaterialized_path",
+      "phase": "reading",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-07-stale-navigation-binding",
+      "rule": "stale_source_oid",
+      "phase": "request",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-08-resource-recurrence-mismatch",
+      "rule": "resource_digest_mismatch",
+      "phase": "work_order",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-09-standalone-population-drift",
+      "rule": "standalone_population_mismatch",
+      "phase": "projection",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-10-windows-wildcard-operand",
+      "rule": "untyped_command_operand",
+      "phase": "work_order",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-11-missing-adapter-inventory",
+      "rule": "reading_inventory_incomplete",
+      "phase": "reading",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-12-guessed-register-siblings",
+      "rule": "unmaterialized_register_path",
+      "phase": "reading",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-13-guessed-latch-sibling",
+      "rule": "unmaterialized_latch_path",
+      "phase": "reading",
+      "result": "rejected_before_publication"
+    },
+    {
+      "id": "gauge-14-lifecycle-source-fixture",
+      "rule": "lifecycle_source_mismatch",
+      "phase": "projection",
+      "result": "rejected_before_publication"
+    }
+  ]
+}

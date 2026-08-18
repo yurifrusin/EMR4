@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear rehearsal",
+    "completed_stage": "The accepted architecture is published at task HEAD 159301c3ef84c3f274971df9ef0776312b99f7af, fresh five-source successor rehydration is complete, protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and the honest conventional baseline is fourteen failure-induced reruns.",
+    "next_executable_stage": "freeze_the_narrow_provider_free_shadow_rehearsal_plan_threat_delta_fixtures_and_efficacy_contract_before_implementation",
+    "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "159301c3ef84c3f274971df9ef0776312b99f7af",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "159301c3ef84c3f274971df9ef0776312b99f7af",
+    "reason_codes": [],
+    "resolved_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "159301c3ef84c3f274971df9ef0776312b99f7af"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+    "branch_origin_aligned": true,
+    "head": "159301c3ef84c3f274971df9ef0776312b99f7af",
+    "origin_branch_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The rehearsal must remain provider-free and occupied native-Harness work still requires the separate HMR boot proof; using Claude Code would defeat the transport question and is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Reserve one fresh Gemini 3.7 Flash/high read-only veto only after deterministic admission of an exact provider-free rehearsal candidate and a clean bound review worktree.",
+        "work_packages": [
+          "exact_candidate_provider_free_shadow_clockwork_gear_rehearsal_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and the engine, fixtures and efficacy reducer form one tightly coupled deterministic package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after plan freeze",
+      "after deterministic candidate admission",
+      "before verifier acceptance",
+      "at closeout",
+      "before any live adoption or occupied Harness use"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze exact fixtures and comparator before code",
+      "one private shadow generation",
+      "deterministic hostile and efficacy admission",
+      "optional one exact Gemini veto",
+      "Sol-only acceptance and Git"
+    ]
+  },
+  "planned_action": "freeze_and_execute_only_the_provider_free_private_shadow_clockwork_gear_rehearsal_against_frozen_representative_workflow_fixtures",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md",
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md",
+      "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md",
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md",
+      "docs/ariadne-compass-current.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan, implementation, deterministic admission, acceptance and task-branch Git. DeepSeek is declined because the rehearsal is provider-free and occupied native-Harness work remains behind the separate HMR boot proof; Claude Code is not a fallback. Gemini is reserved only for one exact-candidate veto after deterministic admission. Native subagents remain declined under current developer policy.",
+    "git_refs_and_worktree": "Local/origin task refs align at published 159301c3ef84c3f274971df9ef0776312b99f7af. The tracked worktree was clean before the intentional successor latch and this preplanning state. Local/origin master and local/origin handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after publication. It records the architecture accepted at f6cbd33fd3322754e06ac6dafa1503f5200e0803, published task state 159301c3ef84c3f274971df9ef0776312b99f7af, Continuity 327 / Compass 309, register revision 531 and names this provider-free private-shadow efficacy rehearsal as Next implementation.",
+    "protected_evidence_boundaries": "Only a provider-free request/lease/result/acknowledgement engine, frozen representative fixtures, one private shadow generation and deterministic efficacy readings are authorized. No live adoption, current-control retirement, occupied DeepSeek/HMR or provider call, product/practice/Git authority, product/configuration/API/database/client change, product/patient/clinical/historical/protected data, production, deployment, release, Pages or protected-ref movement. Preserve docs/branding and all unrelated untracked files; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

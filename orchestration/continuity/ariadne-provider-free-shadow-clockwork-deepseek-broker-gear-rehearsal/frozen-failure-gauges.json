@@ -1,0 +1,104 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_failure_gauges.v1",
+  "comparator_failure_induced_reruns": 14,
+  "gauges": [
+    {
+      "id": "gauge-01-mutable-current-latch-literal",
+      "incident": "AER-0603",
+      "rejection_rule": "mutable_current_literal",
+      "expected_phase": "reading",
+      "covered_control": "Tests consume structural latch invariants rather than copied live values."
+    },
+    {
+      "id": "gauge-02-handover-compactness-drift",
+      "incident": "AER-0604",
+      "rejection_rule": "projection_limit",
+      "expected_phase": "projection",
+      "covered_control": "Generated handover projections obey the authoritative compactness limit."
+    },
+    {
+      "id": "gauge-03-copied-assertion-literal",
+      "incident": "AER-0605",
+      "rejection_rule": "caller_binding_field",
+      "expected_phase": "request",
+      "covered_control": "Derived fields are asserted from one reading rather than copied into tests."
+    },
+    {
+      "id": "gauge-04-population-fixture-drift",
+      "incident": "AER-0606",
+      "rejection_rule": "aggregate_mismatch",
+      "expected_phase": "projection",
+      "covered_control": "Incident populations are derived from one immutable gauge ledger."
+    },
+    {
+      "id": "gauge-05-recurrence-fixture-drift",
+      "incident": "AER-0606",
+      "rejection_rule": "recurrence_mismatch",
+      "expected_phase": "projection",
+      "covered_control": "Recurrence classifications and residuals derive in the same pass."
+    },
+    {
+      "id": "gauge-06-guessed-yuri-path",
+      "incident": "AER-0607",
+      "rejection_rule": "unmaterialized_path",
+      "expected_phase": "reading",
+      "covered_control": "Evidence paths are enumerated from the materialized registry, never guessed."
+    },
+    {
+      "id": "gauge-07-stale-navigation-binding",
+      "incident": "AER-0608",
+      "rejection_rule": "stale_source_oid",
+      "expected_phase": "request",
+      "covered_control": "Navigation and dispatch bind the full Git OID derived at the tick."
+    },
+    {
+      "id": "gauge-08-resource-recurrence-mismatch",
+      "incident": "AER-0609",
+      "rejection_rule": "resource_digest_mismatch",
+      "expected_phase": "work_order",
+      "covered_control": "The WorkOrder binds the exact profile, preset, package and resource view."
+    },
+    {
+      "id": "gauge-09-standalone-population-drift",
+      "incident": "AER-0610",
+      "rejection_rule": "standalone_population_mismatch",
+      "expected_phase": "projection",
+      "covered_control": "Standalone and aggregate population readings share one reducer."
+    },
+    {
+      "id": "gauge-10-windows-wildcard-operand",
+      "incident": "AER-0611",
+      "rejection_rule": "untyped_command_operand",
+      "expected_phase": "work_order",
+      "covered_control": "Commands are selected from typed vocabulary and do not carry wildcard path operands."
+    },
+    {
+      "id": "gauge-11-missing-adapter-inventory",
+      "incident": "AER-0612",
+      "rejection_rule": "reading_inventory_incomplete",
+      "expected_phase": "reading",
+      "covered_control": "The receipt derives the complete required adapter observation inventory."
+    },
+    {
+      "id": "gauge-12-guessed-register-siblings",
+      "incident": "AER-0613",
+      "rejection_rule": "unmaterialized_register_path",
+      "expected_phase": "reading",
+      "covered_control": "Register sources come from directory enumeration and exact identities."
+    },
+    {
+      "id": "gauge-13-guessed-latch-sibling",
+      "incident": "AER-0614",
+      "rejection_rule": "unmaterialized_latch_path",
+      "expected_phase": "reading",
+      "covered_control": "Latch sources come from exact enumeration and validation."
+    },
+    {
+      "id": "gauge-14-lifecycle-source-fixture",
+      "incident": "AER-0615",
+      "rejection_rule": "lifecycle_source_mismatch",
+      "expected_phase": "projection",
+      "covered_control": "Lifecycle assertions derive expected source from status rather than a planning literal."
+    }
+  ]
+}

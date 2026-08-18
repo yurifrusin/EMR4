@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
-  "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture",
-  "objective": "Freeze one typed causal tick/result architecture in which current state is derived from validated sources, Ariadne and the DeepSeek broker share a single-writer sequence lease, and neither advances without an acknowledged terminal digest, while retaining all current controls.",
-  "status": "complete",
-  "source_head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
-  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted transactional shadow at 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0, the accepted kernel at 4204ec6348abb0f92b1a30314699d4a469fa860a and Yuri's standing uninterrupted-development authority authorize only this provider-free shadow gear architecture.",
+  "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+  "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear rehearsal",
+  "objective": "Implement and evaluate only the provider-free request, lease, terminal-result and acknowledgement engine in one private shadow generation against frozen representative workflow fixtures, measuring whether shared clockwork materially reduces procedural reruns without losing coverage or opening live authority.",
+  "status": "in_progress",
+  "source_head": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803, its published closeout at 159301c3ef84c3f274971df9ef0776312b99f7af and Yuri's standing uninterrupted-development authority authorize only this provider-free private-shadow efficacy rehearsal.",
   "checkpoint": {
-    "completed_stage": "Exact reviewed source f6cbd33fd3322754e06ac6dafa1503f5200e0803 is accepted after 48 scenarios, 256 hostile contract mutations, 10 hostile gear traces, one clean Gemini 10-of-10 veto, the complete register revision 531 packet, Continuity 327 / Compass 309 and successful continuing notification; fourteen failure-induced verification reruns remain explicit baseline evidence.",
-    "next_executable_stage": null,
+    "completed_stage": "The accepted architecture is published at task HEAD 159301c3ef84c3f274971df9ef0776312b99f7af, fresh five-source successor rehydration is complete, protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and the honest conventional baseline is fourteen failure-induced reruns.",
+    "next_executable_stage": "repair_rejected_live_efficacy_test_assumptions_then_emit_the_nine_rerun_final_reading",
     "retry_counters": {
       "planning": 0,
-      "implementation": 0,
+      "implementation": 3,
       "review": 0,
-      "verification": 14
+      "verification": 6
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,26 +24,29 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_shadow_architecture_contract_and_deterministic_validation_only",
-    "accepted_transactional_clock_and_broker_sources_remain_read_only",
-    "all_git_stage_disposition_effect_attempt_evidence_sequence_and_digest_fields_engine_derived",
-    "single_writer_lease_and_acknowledged_terminal_digest_required",
-    "presets_profiles_and_tools_are_digest_bound_configuration_not_authority",
+    "provider_free_private_shadow_request_lease_result_and_acknowledgement_engine_only",
+    "accepted_architecture_and_current_control_plane_sources_remain_read_only",
+    "frozen_representative_workflow_fixtures_only_with_no_mutable_current_fixture",
+    "fourteen_failure_induced_reruns_is_the_frozen_conventional_comparator_and_pass_requires_seven_or_fewer",
+    "zero_caller_binding_fields_zero_partial_publication_zero_uncaught_escape_and_no_coverage_loss",
+    "shared_engine_growth_and_clean_run_overhead_reported_without_timing_based_acceptance",
+    "single_writer_lease_exact_terminal_result_and_acknowledgement_remain_mandatory",
+    "presets_profiles_and_tools_remain_digest_bound_configuration_not_authority",
     "no_live_clockwork_adoption_or_current_control_retirement",
-    "no_occupied_deepseek_provider_call_or_hmr_retry",
-    "no_product_authority_or_ordinary_practice_enablement",
+    "no_occupied_deepseek_hmr_or_other_provider_call",
+    "no_product_practice_git_or_ordinary_practice_authority",
     "no_product_configuration_openapi_graphql_route_database_or_client_change",
-    "no_product_patient_clinical_or_historical_data",
+    "no_product_patient_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",

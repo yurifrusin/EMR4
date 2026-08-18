@@ -1,0 +1,157 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_rehearsal_contract.v1",
+  "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+  "planning_source": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "accepted_architecture_source": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+  "task_branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "protected_ref_oid": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "stage_catalogue": {
+    "in_progress": "shadow_rehearsal",
+    "complete": "shadow_rehearsal_closeout",
+    "blocked": "shadow_rehearsal_blocked",
+    "paused": "shadow_rehearsal_paused",
+    "replaced": "shadow_rehearsal_replaced"
+  },
+  "source_bindings": [
+    {
+      "path": "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md",
+      "canonical_lf_sha256": "232657f13b9051f13f798c25f3526ff36ac73dd181aaa3b191e9a6844e8891b9"
+    },
+    {
+      "path": "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md",
+      "canonical_lf_sha256": "c47a4cbf68af816e8e62b179ccbe1ba6c59298fb800c2a22ed28a83910c2c089"
+    },
+    {
+      "path": "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md",
+      "canonical_lf_sha256": "fe60e6e0518aa59c367e67f789e10050f3940d2341cbaaf96910cca0d570cc40"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json",
+      "canonical_lf_sha256": "fb74568456b3e99e5f727e6f824840fbed5419dcb32d7e3875fbdfd0166b807a"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.schema.json",
+      "canonical_lf_sha256": "ca372035c814d1f6f69a51e6bc72f8933ef3fba863ec50547a3344dfbb926ab7"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/provider-free-architecture-evidence.json",
+      "canonical_lf_sha256": "ee8df85ce1de2862839f750e3213b2908097025c3fad82b7807d34cfff07ac02"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/architecture-report.md",
+      "canonical_lf_sha256": "eab214d842232be2cb4237a2e98757c2e2cce7f9ffadca236e928b2d9986d212"
+    },
+    {
+      "path": "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+      "canonical_lf_sha256": "01114e98a8f4b00efb1f64f20195bfe1e12f3e0fe0d5062d2b474733835ed0e5"
+    },
+    {
+      "path": "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md",
+      "canonical_lf_sha256": "8714df84a11e2ccdac58aca3420740c2a3a56a28180ee2dfc44eb5ec94d9f0ec"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md",
+      "canonical_lf_sha256": "172915de8447b4afa30efde7be9c529d63f26354e765771b2d1175e04878d040"
+    },
+    {
+      "path": "docs/ariadne-agent-error-correction-register-revision-531.md",
+      "canonical_lf_sha256": "e7b70c6a099e76a8f4260ef845da16a5a769bb16c0577d28e76dcc5f5b660ef4"
+    }
+  ],
+  "reading_sources": [
+    "live_operation_latch",
+    "stage_catalogue",
+    "git_and_protected_refs",
+    "source_bindings",
+    "failure_gauge_ledger",
+    "genesis_or_previous_acknowledged_tip"
+  ],
+  "caller_supplied_binding_fields": [],
+  "engine_owned_fields": [
+    "source_commit",
+    "branch_and_protected_ref_digest",
+    "operation_id",
+    "stage_id",
+    "disposition",
+    "effect_class",
+    "attempt_id",
+    "attempt_ordinal",
+    "materialized_evidence_identities",
+    "sequence",
+    "previous_tick_sha256",
+    "tick_sha256",
+    "settings_authority_and_forbidden_surface_digests",
+    "projection_revisions_counts_cutoffs_and_peer_links",
+    "work_order_and_worker_result_bindings"
+  ],
+  "policy": {
+    "admitted_effect_class": "shadow_generation_write",
+    "denied_effect_classes": [
+      "candidate_workspace_write",
+      "provider_request",
+      "task_branch_git_write",
+      "protected_ref_write",
+      "product_runtime_effect"
+    ],
+    "profile_family": "emr4-provider-free",
+    "permission_preset": "provider-free-shadow-read-generate",
+    "minimized_tools": [
+      "read",
+      "generate_private_shadow"
+    ],
+    "native_harness_package": "deepseek-native-harness",
+    "native_harness_version": "unoccupied-shadow-binding-v1",
+    "automatic_retries": 0,
+    "silent_fallbacks": 0,
+    "provider_calls": 0,
+    "single_writer": true,
+    "one_terminal_result": true,
+    "acknowledgement_required": true,
+    "raw_prompt_reasoning_secret_or_product_payload_allowed": false,
+    "worker_self_acceptance_allowed": false,
+    "live_adoption": false
+  },
+  "publication": {
+    "mode": "private_shadow_generation_atomic_rename",
+    "target_leaf": "private-shadow-generation",
+    "forbidden_target_parts": [
+      "current",
+      "master",
+      "handoff",
+      "docs/branding"
+    ],
+    "authoritative_files": [
+      "journal.json",
+      "work-order.json",
+      "terminal-result.json",
+      "acknowledgement.json",
+      "projections.json",
+      "efficacy.json",
+      "manifest.json"
+    ]
+  },
+  "efficacy": {
+    "comparator_failure_induced_reruns": 14,
+    "maximum_candidate_failure_induced_reruns": 7,
+    "required_failure_gauge_coverage": 14,
+    "caller_supplied_derived_fields": 0,
+    "new_mutable_current_fixtures": 0,
+    "partial_publications": 0,
+    "uncaught_escapes": 0,
+    "coverage_loss": false,
+    "timing_acceptance_relevant": false,
+    "report_shared_engine_growth": true,
+    "report_clean_run_overhead": true
+  },
+  "closed_surfaces": [
+    "live_clockwork_adoption",
+    "current_control_retirement",
+    "occupied_deepseek_or_other_provider_call",
+    "native_harness_hmr_retry",
+    "ordinary_practice_enablement",
+    "product_configuration_api_route_database_or_client_change",
+    "product_patient_clinical_or_historical_data",
+    "production_runtime_deployment_release_or_pages",
+    "protected_evidence_or_protected_ref_movement"
+  ]
+}

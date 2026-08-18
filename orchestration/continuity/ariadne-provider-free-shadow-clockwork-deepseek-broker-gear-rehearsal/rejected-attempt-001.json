@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_rejected_generation.v1",
+  "attempt": 1,
+  "source_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "acknowledged_tip_sha256": "0e87c85e65fd4ec3bd97264040db5fe1a15a109cfcb323ca0de15ea2b7dd4b0e",
+  "published_manifest_generation_sha256": "0340f6197b25ae3e1ebb849e65cde5d66af4ca682781274a6e021b99f68696b5",
+  "status": "rejected_after_private_shadow_readback",
+  "reason": "The candidate counted one workflow rerun but hard-coded a 100 percent reduction, and its authoritative generation digest omitted all efficacy fields instead of excluding timing alone.",
+  "contained": true,
+  "live_or_protected_publication": false,
+  "provider_calls": 0,
+  "preserved_generation": "rejected-private-shadow-generation-attempt-001"
+}

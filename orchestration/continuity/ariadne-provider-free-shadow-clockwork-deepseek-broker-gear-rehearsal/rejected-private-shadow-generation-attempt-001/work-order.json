@@ -1,0 +1,32 @@
+{
+  "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+  "stage_id": "shadow_rehearsal",
+  "effect_class": "shadow_generation_write",
+  "source_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "branch_and_protected_ref_digest": "03c1cf55beda11de88c0e09cf63f2662825da96aece064b4c679b7a030c3bebe",
+  "attempt_id": "f9bd71cd1f58e49102fd805ba55c9e5795caaf344b30dafd8aad16f8f2465150",
+  "attempt_ordinal": 2,
+  "source_binding_digest": "d13fd22a88e5e56993ee82c53215c2a1becdabce8591cf920137a177cfcf1ce9",
+  "failure_gauge_digest": "561a9379d7a09d34a585d3390f3f9e86a777190037e2f34424b41fc06a83077e",
+  "policy_digest": "ff11eb05fea2948be5b50a18ea728b3a9f177123a255724e4aa0894487404040",
+  "forbidden_surface_digest": "0b4341a8d7715cab080693d0f5cfe09a84a0d4f154260117f6f12ccb3fc199a4",
+  "parent_event_sha256": "06beb086be6a49a4d9ee2aa9bcf7bb5dd662ecf15bfc67c8fa6856232bb68e54",
+  "leased_sequence": 2,
+  "lease_from": "ariadne",
+  "lease_to": "deepseek_broker",
+  "branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "worktree": "C:\\Users\\sarashera\\emr4",
+  "profile_family": "emr4-provider-free",
+  "permission_preset": "provider-free-shadow-read-generate",
+  "package": "deepseek-native-harness",
+  "package_version": "unoccupied-shadow-binding-v1",
+  "tool_view": [
+    "read",
+    "generate_private_shadow"
+  ],
+  "automatic_retries": 0,
+  "silent_fallbacks": 0,
+  "occupied_enabled": false,
+  "work_order_sha256": "3575956f5fc4c8256ed62826ef3a9c85ad4af71167b3aec96b0736d9d98483c1",
+  "lease_event_sha256": "374b3209b94e5ece3dbe15cef6da4b0421cc0c2fdb16139931c2c2272915ff67"
+}

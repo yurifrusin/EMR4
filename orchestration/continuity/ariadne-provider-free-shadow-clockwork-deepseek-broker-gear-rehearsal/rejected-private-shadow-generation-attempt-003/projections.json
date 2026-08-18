@@ -1,0 +1,26 @@
+{
+  "continuity": {
+    "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+    "revision": 1
+  },
+  "compass": {
+    "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+    "revision": 1
+  },
+  "report": {
+    "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+    "revision": 1
+  },
+  "latch": {
+    "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+    "revision": 1
+  },
+  "incident": {
+    "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+    "revision": 1
+  },
+  "broker": {
+    "acknowledged_tip_sha256": "b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8",
+    "revision": 1
+  }
+}

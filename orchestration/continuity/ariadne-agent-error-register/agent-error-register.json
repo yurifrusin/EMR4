@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 531,
+  "register_revision": 539,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -24337,6 +24337,402 @@
           "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py",
           "orchestration/continuity/ariadne-active-operation-latch/current.json",
           "docs/ariadne-agent-error-correction-register-revision-531.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0616",
+      "attempt_id": "shadow-clockwork-journal-readback-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "repository",
+      "role": "implementer",
+      "resource_id": "shadow-clockwork-private-publication-engine",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "implementation",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Private-shadow staging readback must validate each declared JSON value by its contract shape, including the journal's required array shape, before an atomic rename.",
+      "observed_error": "The first publication test failed because the generic readback helper required a JSON object for every file even though journal.json is intentionally an array.",
+      "detection_method": "The focused engine suite rejected the staged journal during the successful-publication test; the target was absent and the exception path removed the staging directory.",
+      "evidence_paths": [
+        "orchestration_harness/shadow_clockwork.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-532.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.generic_json_readback_rejected_declared_array",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain one implementation rerun, separate shape-neutral JSON readback from object-only contract loading, and rerun the complete focused engine suite.",
+        "prevention_control": "The private publisher validates file digests over arbitrary JSON values after each typed generator has validated its own value shape; object-only loaders remain confined to object contracts.",
+        "evidence_paths": [
+          "orchestration_harness/shadow_clockwork.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-532.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0617",
+      "attempt_id": "shadow-clockwork-efficacy-projection-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "shadow-clockwork-efficacy-reducer",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_runner_readback",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "The efficacy reducer must calculate rerun reduction from its derived comparator and candidate counts, and the authoritative generation digest must bind every acceptance field while excluding only non-authoritative timing.",
+      "observed_error": "The first complete private generation counted one candidate rerun but reported a hard-coded 100 percent reduction; its generation digest also omitted the whole efficacy object instead of excluding only clean-run timing.",
+      "detection_method": "Immediate orchestrator readback compared the emitted count and percentage and inspected the manifest digest input before candidate admission.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-001.json",
+        "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-private-shadow-generation-attempt-001/manifest.json",
+        "orchestration_harness/shadow_clockwork.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-532.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.derived_efficacy_percentage_and_digest_scope_diverged",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the entire rejected generation, count a second implementation rerun, calculate the percentage from derived counts, bind non-timing efficacy fields into the manifest, and add an exact timing-exclusion versus efficacy-inclusion test.",
+        "prevention_control": "One efficacy reducer owns comparator, candidate, percentage and acceptance; manifest tests must prove that timing changes preserve the authoritative digest while an acceptance-field change alters it.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-001.json",
+          "orchestration_harness/shadow_clockwork.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-532.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0618",
+      "attempt_id": "shadow-clockwork-register-revision-532-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-update",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A new incident must select its origin from the register's category-to-origin map before the register validator is run.",
+      "observed_error": "The rejected revision-532 draft classified AER-0617 as repository-origin with category evidence_misreport, whose controlled origin is agent_behavior.",
+      "detection_method": "The deterministic register validator failed closed on the exact origin/category mismatch before rewriting the pattern report.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-532.md",
+        "docs/ariadne-agent-error-correction-register-revision-533.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.register_category_origin_not_derived_from_controlled_map",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve revision 532 as the rejected draft, derive AER-0617's origin from the validator's controlled category map, add AER-0618 in revision 533, and rerun the same validator.",
+        "prevention_control": "The future register projection must own category and origin as one typed relation; before live adoption, inspect the controlled mapping before authoring each new incident.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-532.md",
+          "docs/ariadne-agent-error-correction-register-revision-533.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0619",
+      "attempt_id": "shadow-clockwork-register-baseline-search-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-rg-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_rg",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A read-only register-baseline search must use separately valid fixed-string expressions rather than one unvalidated compound regular expression.",
+      "observed_error": "A compound ripgrep expression intended to locate count baselines contained an unclosed group and exited with a regex parse error, requiring replacement fixed-string searches.",
+      "detection_method": "Ripgrep returned the exact unclosed-group diagnostic; no repository file changed and the replacement fixed-string commands completed separately.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-534.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.ripgrep_compound_regex_not_syntax_validated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed read-only command, advance the verification rerun counter, and replace it with separate fixed-string searches whose results are captured independently.",
+        "prevention_control": "Prefer one fixed-string search per known register baseline; any required compound regular expression must be syntax-validated before repository execution.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-534.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0620",
+      "attempt_id": "shadow-clockwork-register-complete-suite-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-python-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "After any accepted register edit, the deterministic generator must be invoked with the exact committed pattern-report output path before the complete register suite runs.",
+      "observed_error": "The validator was invoked without --output, so it validated and printed revision 534 but left the committed revision-531 pattern report unchanged; the complete suite rejected the mismatch.",
+      "detection_method": "The complete register suite compared the committed report with a fresh build and reported the exact revision, count and canonical-digest differences.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-535.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.register_validator_output_path_omitted_before_complete_suite",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the two-failure suite, invoke the generator with the exact pattern-report output path, update revision/count projections, and rerun the entire register file.",
+        "prevention_control": "The typed clockwork command manifest must make the register output path mandatory; until adoption, every register update command includes explicit --output before pytest.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-535.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0621",
+      "attempt_id": "shadow-clockwork-register-test-boundary-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A new register test must be appended after the complete preceding test function, with exact function-boundary context and immediate readback.",
+      "observed_error": "The AER-0616-through-0619 test was inserted after only the first AER-0615 assertion, leaving the rest of AER-0615's assertions inside the new function where the variable incident was undefined.",
+      "detection_method": "The complete register suite reported a NameError at the first stranded AER-0615 assertion; exact tail readback showed the incorrect function boundary.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-535.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.test_append_split_preceding_function_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore every AER-0615 assertion to its owning function, keep the new test after that complete boundary, and rerun the entire register suite.",
+        "prevention_control": "Every appended test patch includes the complete preceding function tail and the next function sentinel; immediate readback must prove both scopes before execution.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-535.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0622",
+      "attempt_id": "shadow-clockwork-register-revision-535-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Incidents may share an attempt identity only when their complete actor and resource identity envelope is the same; cross-resource failures use distinct attempt IDs and explicit peer links.",
+      "observed_error": "The rejected revision-535 draft gave AER-0620 and AER-0621 one attempt ID even though one described the local Python operator and the other the local apply-patch operator.",
+      "detection_method": "The deterministic register generator rejected the exact split-attempt resource_id mismatch before rewriting the committed pattern report.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-535.md",
+        "docs/ariadne-agent-error-correction-register-revision-536.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.register_attempt_identity_spanned_distinct_resource_envelopes",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve revision 535 as rejected, assign AER-0621 its own attempt identity, retain the explicit AER-0620/AER-0621 peer links, add AER-0622 and rerun the generator.",
+        "prevention_control": "Before reusing an attempt ID, compare the full actor/resource identity tuple; distinct tuples receive distinct IDs even when one verification invocation exposed both failures.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-535.md",
+          "docs/ariadne-agent-error-correction-register-revision-536.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0623",
+      "attempt_id": "shadow-clockwork-register-revision-536-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "related_incident_ids must exactly enumerate same-attempt peers and must be empty for incidents with distinct attempt identities.",
+      "observed_error": "The rejected revision-536 draft separated AER-0620 and AER-0621 into distinct attempt identities but retained cross-attempt related-incident links, which the register does not permit.",
+      "detection_method": "The deterministic generator rejected the exact attempt-peer linkage mismatch for AER-0620 before rewriting the committed pattern report.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-536.md",
+        "docs/ariadne-agent-error-correction-register-revision-537.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.register_related_ids_retained_after_attempt_identity_split",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve revision 536 as rejected, clear the cross-attempt links, add AER-0623 and rerun the exact generator command.",
+        "prevention_control": "Derive related_incident_ids from the final attempt grouping rather than using it for general causal association; distinct attempt IDs necessarily project empty peer lists unless another exact peer exists.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-536.md",
+          "docs/ariadne-agent-error-correction-register-revision-537.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0624",
+      "attempt_id": "shadow-clockwork-causal-retry-binding-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "shadow-clockwork-causal-tick-engine",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_runner_readback",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every workflow retry counter that changes the authoritative efficacy reading must also change the clockwork attempt identity and acknowledged event tip.",
+      "observed_error": "The seven-rerun generation included verification counters only in its readings projection; its manifest changed from the two-rerun generation but its acknowledged event tip remained b869d1ecc274d6f6a2c8e93d39f26e2b069fddf39a650d29e8f0ac3d8757f9f8.",
+      "detection_method": "Immediate causal readback compared preserved attempt 002 with attempt 003 and found identical acknowledged tips despite different retry counters and efficacy manifests.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-003.json",
+        "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-private-shadow-generation-attempt-003/manifest.json",
+        "orchestration_harness/shadow_clockwork.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-538.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.clockwork_retry_projection_not_bound_into_causal_tick",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the seven-rerun generation, bind the digest of all retry counters into every event common payload, derive attempt ordinal from their sum, add an exact hostile counter-change test, and record the resulting eight-rerun efficacy rejection.",
+        "prevention_control": "Every field used by authoritative efficacy or lifecycle projections must be causally bound before the request tick is hashed; projection-only authority inputs are forbidden.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-003.json",
+          "orchestration_harness/shadow_clockwork.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-538.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0625",
+      "attempt_id": "shadow-clockwork-post-rejection-focused-suite-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "shadow-clockwork-live-efficacy-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "After the live efficacy reading becomes revision_required, tests of publication mechanics must use a derived accepted synthetic generation and live-reading tests must assert the threshold relation rather than acceptance.",
+      "observed_error": "The focused suite retained four acceptance assumptions: one asserted the live eight-rerun reading was within threshold and three attempted accepted publication with that rejected efficacy object.",
+      "detection_method": "The complete focused engine suite reported one exact 8 <= 7 assertion failure and three efficacy_not_accepted publication rejections.",
+      "evidence_paths": [
+        "orchestration_harness/shadow_clockwork.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-539.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.publication_tests_retained_live_acceptance_after_efficacy_rejection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain the four-failure suite as one verification rerun, derive a zero-retry synthetic generation for publication mechanics, assert the live threshold relation generically, and make the publisher recompute efficacy before admission.",
+        "prevention_control": "Publication mechanics and live efficacy status use separate derived fixtures; no test may force accepted=true, and the publisher rejects any caller-altered efficacy projection.",
+        "evidence_paths": [
+          "orchestration_harness/shadow_clockwork.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-539.md"
         ]
       },
       "status": "corrected"

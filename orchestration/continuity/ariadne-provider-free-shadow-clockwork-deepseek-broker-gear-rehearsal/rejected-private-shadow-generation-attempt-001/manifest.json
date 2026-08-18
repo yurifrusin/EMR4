@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_private_manifest.v1",
+  "acknowledged_tip_sha256": "0e87c85e65fd4ec3bd97264040db5fe1a15a109cfcb323ca0de15ea2b7dd4b0e",
+  "authoritative_file_digests": {
+    "journal.json": "02a2c8b4c77a6f833accc21a98a0825d761720002e7cb81a174351522ed68040",
+    "work-order.json": "e592d4dc1253b8cb7acf3cf9b7d3c377803f1d67e4f9e805ff40ef1f0b80d5e9",
+    "terminal-result.json": "340ed29a952f0b4b37b8a43f91e027db683f099776636b6598c8808786d552d0",
+    "acknowledgement.json": "8facb3d1586cd4e29c687225042b6de5235a86f4f9cd91fa4de0ab10824f1df5",
+    "projections.json": "1fc9cff1d187a7c5dfc38f4e8cd45a7d16b3ce6353d7bd3217638bd42a742849",
+    "efficacy.json": "160ac571a9c839d30e0284754e953cfaf6e305909962b35c60c73e19aa23cbc1"
+  },
+  "generation_sha256": "0340f6197b25ae3e1ebb849e65cde5d66af4ca682781274a6e021b99f68696b5",
+  "timing_excluded_from_authoritative_digest": true
+}
