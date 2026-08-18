@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "967c5f8d9baf37baf8f75acf58f365441ebf921736441fb5dfe75b7e92e0a4f9",
+  "canonical_register_sha256": "2115c561fd7307c96038c2edde97f47d678f49474edd9f5935f5b1899c6854f1",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 342,
+      "canonical_unchanged": 344,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
-      "command_scope_violation": 78,
+      "command_scope_violation": 79,
       "evidence_misreport": 63,
       "harness_failure": 53,
       "operator_error": 3,
-      "output_contract_violation": 166,
+      "output_contract_violation": 167,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
       "repository_defect": 70,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 356,
+      "agent_behavior": 358,
       "harness": 53,
       "operator": 3,
       "repository": 70,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 236,
+      "low": 238,
       "material": 117,
       "moderate": 145
     },
@@ -50,7 +50,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 275,
+      "codex-primary-orchestrator::orchestrator": 277,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -118,12 +118,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 397,
+      "orchestrator": 399,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 498,
+  "incident_count": 500,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -272,11 +272,12 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0484",
         "AER-0485",
-        "AER-0494"
+        "AER-0494",
+        "AER-0499"
       ],
       "origins": [
         "agent_behavior"
@@ -284,6 +285,7 @@
       "prevention_controls": [
         "Before every shell call, reject command text containing a pipeline operator and express discovery filters through the selected executable's own arguments.",
         "Inspect every command string for a pipeline operator before execution; use direct array indexing or a single purpose-built executable for read-only projection.",
+        "Reject a closeout command containing a pipeline operator before execution; bound searches with the selected executable's own file and context arguments only.",
         "Reject any proposed shell command containing a pipeline operator before execution; use rg context arguments or one direct executable instead of composed read-only projections."
       ],
       "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
@@ -638,6 +640,30 @@
         "Validate inherited contract evidence by typed collection, not path union alone: every contract plan, finding, closeout, acceptance, receipt, test and artifact path must appear in the matching node evidence key before any Continuity write."
       ],
       "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0498",
+        "AER-0500"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Current-latch continuity tests assert durable operation semantics and named terminal evidence; exact mutable register revision numbers remain validated by the register suite rather than duplicated in the latch fixture.",
+        "Every incident patch that changes current-latch completed_stage must search and atomically advance exact current-operation checkpoint literals in the dedicated continuity test."
+      ],
+      "recurrence_signature": "orchestrator.current_latch_revision_assertion_stale_after_incident_advance",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1440,7 +1466,7 @@
       ]
     }
   ],
-  "register_revision": 428,
+  "register_revision": 430,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

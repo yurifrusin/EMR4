@@ -7,7 +7,7 @@
   "source_head": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
   "authority_source": "AGENTS.md Current Baton at Continuity 320 / Compass 302 names this exact successor under Yuri's standing uninterrupted-development authority; the accepted first attempt requires provider-free exact-tool-view proof before any fresh occupied dispatch.",
   "checkpoint": {
-    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed. The one admitted occupied worker terminaled before its Harness session or provider boundary because rc.7 headless HMR requires Node --expose-internals; zero provider calls, zero candidate changes and no retry or resume. AER-0497 contains the consumed attempt and AER-0498 corrects its continuity assertion in register revision 428.",
+    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed. The one admitted occupied worker terminaled before its Harness session or provider boundary because rc.7 headless HMR requires Node --expose-internals; zero provider calls, zero candidate changes and no retry or resume. Runtime teardown is complete. AER-0497 contains the consumed attempt; AER-0498 through AER-0500 correct the closeout continuity and command recurrences in register revision 430.",
     "next_executable_stage": "Retain sanitized negative evidence, verify exact zero-change and zero-provider boundaries, clean every disposable resource and close the tranche without relaunching the consumed occupied attempt.",
     "retry_counters": {
       "planning": 0,

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 428,
+  "register_revision": 430,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19817,6 +19817,84 @@
           "tests/test_ariadne_active_operation_latch_continuity.py",
           "docs/ariadne-agent-error-correction-register-revision-428.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0499",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-pushover-discovery-017",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every closeout discovery command must use one executable and no PowerShell pipeline, including bounded searches for the repository notification mechanism.",
+      "observed_error": "The closeout notification search piped rg output into Select-Object, repeating the prohibited read-only projection pattern after runtime teardown.",
+      "detection_method": "The orchestrator inspected the issued command text, identified the pipeline operator and stopped closeout publication before notification, latch completion or staging.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-429.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop closeout, preserve the repeated command-scope incident, advance the exact recurrence baseline and use the already identified notification script directly without further composed discovery.",
+        "prevention_control": "Reject a closeout command containing a pipeline operator before execution; bound searches with the selected executable's own file and context arguments only.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-429.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0500",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-latch-suite-018",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The corrected current-operation latch test must assert stable semantic evidence rather than a revision literal that becomes stale whenever the same checkpoint records another incident.",
+      "observed_error": "The AER-0499 update advanced the checkpoint to register revision 429 while the just-corrected latch test retained exact revision 428, repeating AER-0498's self-invalidating literal pattern.",
+      "detection_method": "The complete register/latch packet passed every other check and failed only the current-operation exact revision substring, demonstrating that the assertion shape rather than the latch was defective.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-430.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_latch_revision_assertion_stale_after_incident_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the self-invalidating exact revision assertion with stable semantic assertions for a recorded register revision and the contained AER-0497 terminal, admit the generated AER-0498/AER-0500 recurrence and rerun the complete packet.",
+        "prevention_control": "Current-latch continuity tests assert durable operation semantics and named terminal evidence; exact mutable register revision numbers remain validated by the register suite rather than duplicated in the latch fixture.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-430.md"
         ]
       },
       "status": "corrected"
