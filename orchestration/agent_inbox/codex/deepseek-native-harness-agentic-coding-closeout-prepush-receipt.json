@@ -1,0 +1,121 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
+    "completed_stage": "Accepted evidence source 25067e7d633eae597929d6969a35b22b735b253e binds one occupied pinned rc.7 session with six attributable model-usage anchors, eight ordered tool calls, safe stale-version recovery, a correct one-file repair and 4/4 passing tests. The required regression test and terminal success summary were absent before the local request-7 guard. Register revision 392, paired closeout, Continuity 319 / Compass 301 and recoverable raw-session cleanup pass.",
+    "next_executable_stage": null,
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "25067e7d633eae597929d6969a35b22b735b253e",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "0fb02ccf06464fc0a429d611e4c018cdc84dd035",
+    "reason_codes": [],
+    "resolved_commit": "25067e7d633eae597929d6969a35b22b735b253e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "25067e7d633eae597929d6969a35b22b735b253e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0fb02ccf06464fc0a429d611e4c018cdc84dd035",
+    "branch_origin_aligned": false,
+    "head": "0fb02ccf06464fc0a429d611e4c018cdc84dd035",
+    "origin_branch_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 651
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_push",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness result and trace are committed; DeepSeek owns no publication action.",
+        "work_packages": [
+          "completed_occupied_session_and_sanitized_trace_evidence"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No product/runtime source changed and no verifier work remains before task-branch publication.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation; protected single-track Git publication is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "parallel_work_packages": [
+      "No parallel work remains; Sol performs the explicit task-branch push and readback."
+    ],
+    "reassessment_triggers": [
+      "successor_rehydration"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit this pre-push receipt",
+      "push only the task branch",
+      "verify task origin and all four protected refs",
+      "send non-PHI Pushover notification"
+    ]
+  },
+  "planned_action": "push_only_the_closed_native_harness_rehearsal_task_branch_then_verify_protected_refs_and_send_the_non_phi_closeout_notification",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-plan.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json",
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-agentic-coding-traceability-rehearsal.md",
+      "docs/ariadne-agent-error-correction-register-revision-392.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json"
+    ],
+    "current_authority_allocation": "GPT Sol alone owns explicit task-branch publication, protected-ref readback, non-PHI notification and successor rehydration. DeepSeek is terminal, and Gemini/native-subagent lanes remain declined.",
+    "git_refs_and_worktree": "Closeout HEAD is exact 0fb02ccf06464fc0a429d611e4c018cdc84dd035 on codex/ariadne-bernie-davida-parallel-seam; origin task is 0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb before publication. After fresh fetch, local/origin master and local/origin handoff/current are each exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean before these pre-push receipt files; unrelated untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md Current Baton records accepted Continuity 319 / Compass 301, evidence source 25067e7d633eae597929d6969a35b22b735b253e and the profile-codification plus monitored low-risk EMR4 trial successor.",
+    "protected_evidence_boundaries": "Publish only refs/heads/codex/ariadne-bernie-davida-parallel-seam. No master, handoff/current, Pages, deployment, release, product/runtime or other protected movement. Only sanitized evidence is committed. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}
