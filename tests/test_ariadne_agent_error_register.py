@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 393
+    assert register["register_revision"] == 394
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 452)
+        f"AER-{index:04d}" for index in range(1, 454)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 319
+    assert len(agent_incidents) == 321
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 451
+    assert report["incident_count"] == 453
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,11 +3619,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 393
-    assert report["incident_count"] == 451
+    assert report["register_revision"] == 394
+    assert report["incident_count"] == 453
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 319,
+        "agent_behavior": 321,
         "harness": 50,
         "operator": 1,
         "repository": 65,
@@ -3636,13 +3636,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "operator_error": 1,
         "output_contract_violation": 141,
         "read_only_violation": 3,
-        "reasoning_claim_error": 43,
+        "reasoning_claim_error": 45,
         "repository_defect": 65,
         "transport_timeout": 16,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 295,
+        "canonical_unchanged": 297,
         "untrusted_partial_worktree": 42,
     }
     receipt_event_recurrence = next(
@@ -3702,8 +3702,9 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "AER-0286",
         "AER-0399",
         "AER-0426",
+        "AER-0452",
     ]
-    assert manual_sha_recurrence["incident_count"] == 3
+    assert manual_sha_recurrence["incident_count"] == 4
     closeout_fixture_recurrence = next(
         row
         for row in report["recurring_patterns"]
@@ -7178,3 +7179,23 @@ def test_aer_0451_preserves_preplanning_event_vocabulary_correction() -> None:
     assert "pre_plan" in incident["observed_error"]
     assert "pre_sprint_planning" in incident["correction"]["action"]
     assert incident["status"] == "corrected"
+
+
+def test_aer_0452_and_0453_preserve_native_harness_enclosure_recovery() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    assert list(incidents)[451:453] == ["AER-0452", "AER-0453"]
+    sha = incidents["AER-0452"]
+    assert sha["origin"] == "agent_behavior"
+    assert sha["category"] == "reasoning_claim_error"
+    assert sha["recurrence_signature"] == "orchestrator.manual_short_sha_expansion"
+    assert "git rev-parse HEAD" in sha["observed_error"]
+    assert sha["status"] == "corrected"
+
+    enclosure = incidents["AER-0453"]
+    assert enclosure["origin"] == "agent_behavior"
+    assert enclosure["category"] == "reasoning_claim_error"
+    assert enclosure["process_severity"] == "material"
+    assert "reads always pass through" in enclosure["observed_error"]
+    assert "broker sidecar" in enclosure["correction"]["action"]
+    assert enclosure["status"] == "corrected"

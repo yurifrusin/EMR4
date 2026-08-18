@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "049d05ee1fec27a1b99f7cc40286d6628c345bc89e4dda71c5d68031ceb21556",
+  "canonical_register_sha256": "6204cea64e188aaccc61ac1db57abd633df7d4bd9fbe393ec3782c1fb450e87f",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 295,
+      "canonical_unchanged": 297,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
@@ -13,12 +13,12 @@
       "operator_error": 1,
       "output_contract_violation": 141,
       "read_only_violation": 3,
-      "reasoning_claim_error": 43,
+      "reasoning_claim_error": 45,
       "repository_defect": 65,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 319,
+      "agent_behavior": 321,
       "harness": 50,
       "operator": 1,
       "repository": 65,
@@ -26,8 +26,8 @@
     },
     "by_process_severity": {
       "low": 202,
-      "material": 115,
-      "moderate": 134
+      "material": 116,
+      "moderate": 135
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -48,7 +48,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 238,
+      "codex-primary-orchestrator::orchestrator": 240,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -112,12 +112,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 351,
+      "orchestrator": 353,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 451,
+  "incident_count": 453,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1000,16 +1000,18 @@
       "categories": [
         "reasoning_claim_error"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0286",
         "AER-0399",
-        "AER-0426"
+        "AER-0426",
+        "AER-0452"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "Copy all 40-character Git identities only from separately captured machine output and immediately verify repository resolution; never extend a displayed prefix manually.",
         "Treat full Git identities as command outputs only. Every future worktree command must consume a separately captured literal git rev-parse value or an already machine-validated durable field; no manual completion of display prefixes is admitted.",
         "Treat full Git identities as command outputs, never completion tasks. Capture git rev-parse HEAD in a standalone read before every worktree command, copy its literal forty-character output and let deterministic preflight compare the created worktree before external review.",
         "Treat full Git identities as command outputs, never memory or completion tasks. Worktree creation and verifier packets copy the literal git rev-parse result and a separate preflight compares the resulting worktree HEAD before any external call."
@@ -1306,7 +1308,7 @@
       ]
     }
   ],
-  "register_revision": 393,
+  "register_revision": 394,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

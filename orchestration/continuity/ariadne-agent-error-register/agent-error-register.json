@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 393,
+  "register_revision": 394,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -18024,6 +18024,82 @@
           "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-monitored-development-preplanning-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-monitored-development-preplanning-corrected-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-393.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0452",
+      "attempt_id": "deepseek-native-harness-profile-plan-source-readback-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every exact source identity in the active-operation latch must be copied from a standalone machine git rev-parse result and resolve in the active repository.",
+      "observed_error": "The latch manually expanded the visible plan-commit prefix as bb6d9c659853eff866cfc6327ad3f84e958361cd, while standalone git rev-parse HEAD returned bb6d9c65910c2464dd1cfb5bfe087984f3d8a583.",
+      "detection_method": "A fresh standalone git rev-parse HEAD followed by an exact-string repository search found the incorrect identity only in the live latch. No dispatch, provider request, candidate adoption or protected-ref movement used it.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-394.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace both latch occurrences with the literal standalone git rev-parse HEAD output before any continuation receipt or worker dispatch.",
+        "prevention_control": "Copy all 40-character Git identities only from separately captured machine output and immediately verify repository resolution; never extend a displayed prefix manually.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-394.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0453",
+      "attempt_id": "deepseek-native-harness-profile-package-security-mapping-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness_package_source_inspection",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "material",
+      "expected_invariant": "An occupied native-Harness profile may claim host-path and credential isolation only when package-source semantics and the execution enclosure technically enforce those read boundaries.",
+      "observed_error": "The frozen plan treated a sparse host worktree, workspace-write filesystem mode and process-environment credential as a read and credential boundary. Pinned rc.7 documentation states that filesystem reads always pass through and that same-UID credential secrecy is discretion, not a boundary.",
+      "detection_method": "Sol inspected the exact installed rc.7 dsh-fs-sandbox and dsh-credentials-local package sources after provider-free composition. The credential-absent boot reached MISSING_CREDENTIAL, and no occupied provider request or worker dispatch had occurred.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-394.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.native_harness_sparse_worktree_misclassified_as_read_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze a two-container enclosure: mount only the exact sparse worktree into a no-egress Harness worker with no model-facing shell or provider credential, and keep the real key in a separate authenticated broker sidecar with no shared mount.",
+        "prevention_control": "Map package-source read, write, process, network and credential semantics before occupied dispatch; a workspace-write label never implies a read or secret boundary without an independent OS/container enclosure.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-394.md"
         ]
       },
       "status": "corrected"

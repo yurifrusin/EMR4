@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
+    "completed_stage": "Plan and threat boundary are committed at exact machine-read source bb6d9c65910c2464dd1cfb5bfe087984f3d8a583. The credential-absent native boot reached MISSING_CREDENTIAL with no provider call. Pinned package source proved that its filesystem sandbox permits all reads and same-UID credential isolation is discretion, not a boundary; no occupied request occurred. Docker enclosure recovery is frozen before dispatch.",
+    "next_executable_stage": "validate_and_commit_the_recovered_profile_schema_enclosure_boundary_exact_package_mapping_and_provider_free_boot_evidence_before_any_occupied_dispatch",
+    "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+    "resume_after_compaction": true,
+    "source_head": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+    "reason_codes": [],
+    "resolved_commit": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+    "branch_origin_aligned": false,
+    "head": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+    "origin_branch_commit": "f3288aea19cc9b0451386093933acf2db0fd70e8",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 657
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "profile_contract_recovery_precommit",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "After Sol commits and provider-free validates the container/broker enclosure, one native-Harness Flash/high session owns the unchanged exact two-path sparse implementation package.",
+        "work_packages": [
+          "future_sparse_profile_validator_and_focused_test_candidate"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "This recovery gate is deterministic local package/configuration/container evidence and has no material product candidate requiring an external veto before commit.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and no independent recovery package is authorised.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+    "parallel_work_packages": [
+      "No parallel recovery work; package mapping, enclosure implementation, provider-free boot, occupied dispatch and admission remain serial."
+    ],
+    "reassessment_triggers": [
+      "post_recovery_commit",
+      "pre_worker_dispatch",
+      "post_worker_exit",
+      "pre_acceptance"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path recovery commit",
+      "Sol-owned broker and enclosure",
+      "provider-free container preflight",
+      "one sparse occupied worker session",
+      "Sol candidate tests admission and cleanup"
+    ]
+  },
+  "planned_action": "commit_the_recovered_native_harness_profile_contract_package_mapping_container_broker_boundary_and_complete_register_corrections_with_explicit_paths",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md",
+      "docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md",
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
+      "docs/ariadne-agent-error-correction-register-revision-394.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns the profile contract, pinned package-source mapping, execution enclosure, broker, provider-free checks, worker admission, recovery, acceptance and Git. DeepSeek native Harness remains planned for only the exact two-path sparse implementation package after enclosure admission. Gemini and native subagents are declined for this serial recovery gate.",
+    "git_refs_and_worktree": "Standalone git rev-parse fixes current task HEAD at bb6d9c65910c2464dd1cfb5bfe087984f3d8a583; origin task remains f3288aea19cc9b0451386093933acf2db0fd70e8. Local/origin master and local/origin handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intended tracked changes are only AGENTS, recovery/incident documents, live latch, profile YAML/schema, package mapping, register/report/test and focused profile test plus this runtime state; every unrelated untracked file is excluded.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 319 / Compass 301 authorises the versioned native-Harness profile and first monitored low-risk EMR4 trial while retaining every product, data, runtime, deployment and protected-ref closure.",
+    "protected_evidence_boundaries": "No occupied dispatch has occurred. Only provider-free Harness profile, package mapping, disposable enclosure and sanitized trace evidence may change. The recovered worker gets one exact sparse bind mount, an internal broker-only network, no provider credential and no model-facing shell. No product, patient, clinical, historical or protected data; no application behavior, ordinary practice, live runtime, deployment, release, Pages, protected refs, global install/profile or credential/IAM mutation. Raw reasoning, requests, responses, tool bodies, credentials and environment dumps remain outside EMR4. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

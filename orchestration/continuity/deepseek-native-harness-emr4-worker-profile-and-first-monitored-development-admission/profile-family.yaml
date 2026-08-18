@@ -1,0 +1,120 @@
+schema_version: emr4.deepseek-native-harness-profile-family.v1
+package:
+  name: "@deepseek-ai/dsh"
+  version: 0.1.0-rc.7
+  registry_shasum: 8a69013c06179d7af437de92fb4a9a2e1fd7d410
+  registry_integrity: sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==
+model_route:
+  provider: deepseek-official
+  model: deepseek-v4-flash
+  reasoning_effort: high
+  endpoint_authority: isolated_broker_sidecar_allowlisted_deepseek_official
+loop_control:
+  automatic_retries: 0
+  fallbacks: []
+  max_parallel_tool_calls: 1
+  wall_clock_seconds: 900
+  monetary_boundary: operator_prepaid_account
+session_policy:
+  fresh_session_by_default: true
+  profile_pinned_for_session: true
+  resume_same_operation_only: true
+  terminal_session_not_resumable: true
+  binding_fields:
+    - operation_id
+    - source_head
+    - worktree
+    - owned_paths
+    - forbidden_surfaces
+    - focused_tests
+execution_enclosure:
+  image: node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d
+  host_filesystem_visibility: exact_sparse_worktree_bind_only
+  worker_network: internal_broker_only_no_direct_egress
+  provider_credential_holder: isolated_broker_sidecar
+  worker_provider_credential: forbidden
+  worker_broker_capability: required_at_process_start
+  broker_provider_call_budget: none_beyond_single_session_wall_clock_and_prepaid_balance
+  model_facing_shell: disabled_for_first_monitored_development
+  focused_test_executor: sol_outside_worker_container
+evidence_policy:
+  raw_session_location: disposable_harness_home_only
+  raw_session_commit: forbidden
+  retained_evidence: sanitized_structural_metadata_only
+  required_fields:
+    - package_identity
+    - profile_digest
+    - session_id
+    - process_terminal
+    - model_usage_totals
+    - ordered_tool_metadata
+    - changed_paths
+    - focused_test_result
+    - cleanup_readback
+    - broker_request_metadata
+    - enclosure_readback
+  forbidden_retention:
+    - raw_reasoning
+    - provider_request_body
+    - provider_response_body
+    - raw_tool_payload
+    - credential
+    - environment_dump
+disabled_surfaces:
+  - bash
+  - jobs
+  - skills
+  - goals
+  - todo
+  - ralph
+  - subagents
+  - workflows
+  - web
+  - browser
+  - mcp
+  - acp
+  - code_runtime
+  - compaction_model
+  - session_title_model
+  - telemetry
+  - pi_ai_routes
+  - pwsh
+profiles:
+  emr4-provider-free-preflight:
+    occupied: false
+    purpose: validate_package_profile_and_tool_composition_before_provider_io
+    permission:
+      sandbox: read-only
+      approval: never
+    tools: []
+    credential_policy: intentionally_absent
+    expected_pre_provider_terminal: MISSING_CREDENTIAL
+    max_output_tokens: 64
+    allowed_resume: never
+  emr4-readonly-review:
+    occupied: true
+    purpose: bounded_repository_local_readonly_review
+    permission:
+      sandbox: read-only
+      approval: never
+    tools:
+      - read
+      - glob
+    credential_policy: broker_capability_only
+    expected_pre_provider_terminal: null
+    max_output_tokens: 4096
+    allowed_resume: same_operation_only
+  emr4-bounded-worker:
+    occupied: true
+    purpose: exact_packet_repository_local_implementation_and_focused_tests
+    permission:
+      sandbox: workspace-write
+      approval: never
+    tools:
+      - read
+      - glob
+      - edit
+    credential_policy: broker_capability_only
+    expected_pre_provider_terminal: null
+    max_output_tokens: 4096
+    allowed_resume: same_operation_only

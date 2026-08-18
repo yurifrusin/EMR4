@@ -1,0 +1,115 @@
+{
+  "schema_version": "emr4.deepseek-native-harness-package-mapping-evidence.v1",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "observed_at": "2026-08-18T16:09:20.8230251+10:00",
+  "source_head": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+  "status": "passed_with_fail_closed_enclosure_recovery_required_before_occupied_dispatch",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "registry_shasum": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+    "registry_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+    "installed_package_json_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "installed_package_json_bytes": 4298,
+    "bin": "lib/bin.js",
+    "repository": "git+https://github.com/deepseek-ai/deepseek-harness.git#apps/cli"
+  },
+  "package_source_files": [
+    {
+      "path": "@deepseek-ai/dsh-base/cordis.patch.yml",
+      "bytes": 18162,
+      "sha256": "9870a518274194c0e1ebd870cee2737fbc2ffc04ae36887871ffe6fcf74beac1"
+    },
+    {
+      "path": "@deepseek-ai/dsh-headless/cordis.patch.yml",
+      "bytes": 1300,
+      "sha256": "534dc49c84b0fb9c2d3278dc8990f577d57b7a88442941444b58c96ac1a09ba0"
+    },
+    {
+      "path": "@deepseek-ai/dsh-fs-sandbox/README.md",
+      "bytes": 4767,
+      "sha256": "7268da3fe939fba241b82e9492db38ee864c23f020707162ae3d62cb3893ba15"
+    },
+    {
+      "path": "@deepseek-ai/dsh-credentials-local/README.md",
+      "bytes": 6790,
+      "sha256": "d55b5a80301f2487c41d419d98ae1cad5aeb05c0f0ad5d3a6352bcb55f2837c3"
+    },
+    {
+      "path": "@deepseek-ai/dsh-llm-deepseek/README.md",
+      "bytes": 14358,
+      "sha256": "9d5b87205fa6c7700e14f5ec1c2b7894234113c76af2cc4811f06753d954073f"
+    }
+  ],
+  "recovered_package_native_overlay": {
+    "disposable_relative_path": "emr4-bounded-worker.patch.yml",
+    "bytes": 2619,
+    "sha256": "a1d7bc31d031b64af5bd8114d9609cbdb9237346679c55c5b1f58357cd72f08a",
+    "dump_config_exit_code": 0,
+    "dump_config_utf8_sha256": "d61dee47b49b80c1d23105bb9d28f9487c75c3dc92b7a42885f5fa9de17a7fbe",
+    "dump_config_line_count": 408,
+    "effective_facts": {
+      "provider": "deepseek-official",
+      "model": "deepseek-v4-flash",
+      "base_url": "http://broker:8080",
+      "credential_reference": "DSH_EMR4_BROKER_TOKEN",
+      "max_retries": 0,
+      "max_parallel_tool_calls": 1,
+      "workspace_root": "/workspace",
+      "approval": "never",
+      "permission_preset": "emr4-bounded-worker",
+      "disabled_plugins": [
+        "tool-pwsh",
+        "tool-bash",
+        "web",
+        "web-search-deepseek",
+        "tool-web",
+        "session-title-llm",
+        "compaction-basic",
+        "subagent",
+        "session-telemetry-otel",
+        "llm-pi-ai"
+      ]
+    }
+  },
+  "provider_free_boot": {
+    "profile_generation": "pre_enclosure_package_composition",
+    "credential_injected": false,
+    "provider_request_count": 0,
+    "terminal_code": "MISSING_CREDENTIAL",
+    "session_id": "05f69536-2cd8-4b10-a8fc-df893f5f0047",
+    "session_artifact_bytes": 12896,
+    "session_artifact_sha256": "5b561d28a64ce3a310847316a9b3dd339f5aed9de4b97c38b82d5f23eb442cbe",
+    "zstandard_frames": 4,
+    "logical_rows": 17,
+    "terminal_turn_kind": "error",
+    "local_fallback_title_event": true,
+    "title_model_request_count": 0
+  },
+  "security_mapping": {
+    "filesystem_mutation_fence": "read_only_denies_mutation_workspace_write_fences_mutation_roots",
+    "filesystem_read_boundary": "none_reads_always_pass_through_in_every_mode",
+    "local_credential_boundary": "same_uid_discretion_not_model_isolation",
+    "worker_provider_credential_admission": "forbidden",
+    "required_recovery": "container_worker_exact_sparse_mount_internal_broker_network_no_shell_plus_isolated_credential_broker_sidecar"
+  },
+  "docker_enclosure_preflight": {
+    "engine": "Docker Desktop 4.78.0",
+    "server_version": "29.5.3",
+    "server_os": "linux",
+    "server_arch": "amd64",
+    "image": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+    "image_present": true
+  },
+  "retention": {
+    "raw_prompt": false,
+    "raw_reasoning": false,
+    "raw_response": false,
+    "raw_tool_payload": false,
+    "credential": false,
+    "environment_dump": false,
+    "raw_session_committed": false
+  },
+  "occupied_dispatch_authorized": false,
+  "next_gate": "commit_and_verify_enclosure_broker_profile_and_provider_free_container_boot"
+}

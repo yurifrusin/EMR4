@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/orchestration/deepseek-native-harness-profile-family.schema.json",
+  "title": "EMR4 DeepSeek native Harness profile family",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package",
+    "model_route",
+    "loop_control",
+    "session_policy",
+    "execution_enclosure",
+    "evidence_policy",
+    "disabled_surfaces",
+    "profiles"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.deepseek-native-harness-profile-family.v1"
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "registry_shasum", "registry_integrity"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "registry_shasum": {
+          "const": "8a69013c06179d7af437de92fb4a9a2e1fd7d410"
+        },
+        "registry_integrity": {
+          "const": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw=="
+        }
+      }
+    },
+    "model_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "reasoning_effort", "endpoint_authority"],
+      "properties": {
+        "provider": {"const": "deepseek-official"},
+        "model": {"const": "deepseek-v4-flash"},
+        "reasoning_effort": {"const": "high"},
+        "endpoint_authority": {
+          "const": "isolated_broker_sidecar_allowlisted_deepseek_official"
+        }
+      }
+    },
+    "loop_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "automatic_retries",
+        "fallbacks",
+        "max_parallel_tool_calls",
+        "wall_clock_seconds",
+        "monetary_boundary"
+      ],
+      "properties": {
+        "automatic_retries": {"const": 0},
+        "fallbacks": {"type": "array", "maxItems": 0},
+        "max_parallel_tool_calls": {"const": 1},
+        "wall_clock_seconds": {"type": "integer", "minimum": 60, "maximum": 900},
+        "monetary_boundary": {"const": "operator_prepaid_account"}
+      }
+    },
+    "session_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fresh_session_by_default",
+        "profile_pinned_for_session",
+        "resume_same_operation_only",
+        "terminal_session_not_resumable",
+        "binding_fields"
+      ],
+      "properties": {
+        "fresh_session_by_default": {"const": true},
+        "profile_pinned_for_session": {"const": true},
+        "resume_same_operation_only": {"const": true},
+        "terminal_session_not_resumable": {"const": true},
+        "binding_fields": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "operation_id",
+              "source_head",
+              "worktree",
+              "owned_paths",
+              "forbidden_surfaces",
+              "focused_tests"
+            ]
+          }
+        }
+      }
+    },
+    "execution_enclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "image",
+        "host_filesystem_visibility",
+        "worker_network",
+        "provider_credential_holder",
+        "worker_provider_credential",
+        "worker_broker_capability",
+        "broker_provider_call_budget",
+        "model_facing_shell",
+        "focused_test_executor"
+      ],
+      "properties": {
+        "image": {
+          "const": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d"
+        },
+        "host_filesystem_visibility": {
+          "const": "exact_sparse_worktree_bind_only"
+        },
+        "worker_network": {
+          "const": "internal_broker_only_no_direct_egress"
+        },
+        "provider_credential_holder": {
+          "const": "isolated_broker_sidecar"
+        },
+        "worker_provider_credential": {"const": "forbidden"},
+        "worker_broker_capability": {
+          "const": "required_at_process_start"
+        },
+        "broker_provider_call_budget": {
+          "const": "none_beyond_single_session_wall_clock_and_prepaid_balance"
+        },
+        "model_facing_shell": {
+          "const": "disabled_for_first_monitored_development"
+        },
+        "focused_test_executor": {
+          "const": "sol_outside_worker_container"
+        }
+      }
+    },
+    "evidence_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_session_location",
+        "raw_session_commit",
+        "retained_evidence",
+        "required_fields",
+        "forbidden_retention"
+      ],
+      "properties": {
+        "raw_session_location": {"const": "disposable_harness_home_only"},
+        "raw_session_commit": {"const": "forbidden"},
+        "retained_evidence": {"const": "sanitized_structural_metadata_only"},
+        "required_fields": {
+          "type": "array",
+          "minItems": 11,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "package_identity",
+              "profile_digest",
+              "session_id",
+              "process_terminal",
+              "model_usage_totals",
+              "ordered_tool_metadata",
+              "changed_paths",
+              "focused_test_result",
+              "cleanup_readback",
+              "broker_request_metadata",
+              "enclosure_readback"
+            ]
+          }
+        },
+        "forbidden_retention": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "raw_reasoning",
+              "provider_request_body",
+              "provider_response_body",
+              "raw_tool_payload",
+              "credential",
+              "environment_dump"
+            ]
+          }
+        }
+      }
+    },
+    "disabled_surfaces": {
+      "type": "array",
+      "minItems": 18,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "bash",
+          "jobs",
+          "skills",
+          "goals",
+          "todo",
+          "ralph",
+          "subagents",
+          "workflows",
+          "web",
+          "browser",
+          "mcp",
+          "acp",
+          "code_runtime",
+          "compaction_model",
+          "session_title_model",
+          "telemetry",
+          "pi_ai_routes",
+          "pwsh"
+        ]
+      }
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "emr4-provider-free-preflight",
+        "emr4-readonly-review",
+        "emr4-bounded-worker"
+      ],
+      "properties": {
+        "emr4-provider-free-preflight": {"$ref": "#/$defs/profile"},
+        "emr4-readonly-review": {"$ref": "#/$defs/profile"},
+        "emr4-bounded-worker": {"$ref": "#/$defs/profile"}
+      }
+    }
+  },
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "occupied",
+        "purpose",
+        "permission",
+        "tools",
+        "credential_policy",
+        "expected_pre_provider_terminal",
+        "max_output_tokens",
+        "allowed_resume"
+      ],
+      "properties": {
+        "occupied": {"type": "boolean"},
+        "purpose": {"type": "string", "minLength": 1, "maxLength": 160},
+        "permission": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sandbox", "approval"],
+          "properties": {
+            "sandbox": {"enum": ["read-only", "workspace-write"]},
+            "approval": {"const": "never"}
+          }
+        },
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["read", "glob", "edit", "pwsh"]}
+        },
+        "credential_policy": {
+          "enum": ["intentionally_absent", "broker_capability_only"]
+        },
+        "expected_pre_provider_terminal": {
+          "type": ["string", "null"]
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 32,
+          "maximum": 4096
+        },
+        "allowed_resume": {"enum": ["never", "same_operation_only"]}
+      }
+    }
+  }
+}

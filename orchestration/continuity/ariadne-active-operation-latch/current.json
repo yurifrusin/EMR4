@@ -4,16 +4,16 @@
   "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
   "objective": "Freeze a versioned three-profile native-Harness authority contract and use its bounded-worker profile for one real low-risk provider-free EMR4 harness-development package with attributable session evidence and Sol-only candidate admission.",
   "status": "in_progress",
-  "source_head": "f3288aea19cc9b0451386093933acf2db0fd70e8",
+  "source_head": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
   "authority_source": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names this successor; Yuri directed that further evidence come from monitored useful EMR4 work and confirmed prepaid account credit is the monetary budget mechanism.",
   "checkpoint": {
-    "completed_stage": "Fresh successor five-source rehydration and explicit DeepSeek/Gemini/native-subagent assessment pass after one corrected continuation-event vocabulary error. The narrow profile-family, sparse-worktree, occupied-session, evidence and claim boundary is frozen in the uncommitted plan and threat delta.",
-    "next_executable_stage": "validate_and_commit_the_plan_threat_delta_preplanning_receipts_and_active_latch_then_build_the_sol_owned_profile_contract",
+    "completed_stage": "Plan and threat boundary are committed at exact machine-read source bb6d9c65910c2464dd1cfb5bfe087984f3d8a583. The credential-absent native boot reached MISSING_CREDENTIAL with no provider call. Pinned package source proved that its filesystem sandbox permits all reads and same-UID credential isolation is discretion, not a boundary; no occupied request occurred. Docker enclosure recovery is frozen before dispatch.",
+    "next_executable_stage": "validate_and_commit_the_recovered_profile_schema_enclosure_boundary_exact_package_mapping_and_provider_free_boot_evidence_before_any_occupied_dispatch",
     "retry_counters": {
-      "planning": 1,
+      "planning": 2,
       "implementation": 0,
       "review": 0,
-      "verification": 5
+      "verification": 10
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -38,9 +38,11 @@
     "repository_owned_three_profile_normalized_authority_contract_and_exact_package_source_mapping",
     "provider_free_missing_credential_preflight_before_one_occupied_session",
     "prepaid_account_credit_is_monetary_ceiling_with_zero_retry_zero_fallback_one_session_and_fifteen_minute_wall_clock",
-    "only_exact_sparse_packet_inputs_and_two_owned_output_paths_enter_the_worker_workspace",
+    "only_exact_sparse_packet_inputs_and_two_owned_output_paths_enter_the_worker_container_mount",
     "no_product_patient_clinical_historical_or_protected_data",
-    "only_workspace_scoped_read_glob_editor_and_powershell_tools_no_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
+    "only_read_glob_and_editor_tools_inside_the_enclosed_worker_container_no_model_facing_shell_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
+    "worker_has_internal_broker_network_only_no_direct_egress_and_no_provider_credential",
+    "isolated_broker_sidecar_has_provider_credential_no_shared_worker_mount_and_exact_deepseek_route_allowlist",
     "no_raw_reasoning_request_response_tool_payload_credential_header_or_environment_persistence",
     "no_global_install_path_shell_profile_user_profile_credential_iam_or_unrestricted_default_transport_change",
     "no_deployment_production_release_pages_or_protected_ref_movement",
