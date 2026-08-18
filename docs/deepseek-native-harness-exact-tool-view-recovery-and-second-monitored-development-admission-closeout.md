@@ -75,11 +75,14 @@ The usual non-PHI Pushover closeout notification succeeded with request
 
 ## Next tranche
 
-Resume
-`raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.
-The unchanged default-off A5.1 route may delegate to the accepted check-in
-adapter while retaining the feature flag, authored-synthetic practice
-allowlist, exact request/response contract and default denial. The native
-Harness is not eligible for occupied work in that tranche; a future DeepSeek
-worker first requires a separately frozen provider-free stock-headless-to-
-custom-runner HMR startup proof.
+The default-off canonical check-in route-adapter convergence already passed at
+reviewed source `c82c3a741053a9c8da260aa62e1a968af22bb54e` and must not be
+repeated. Next is
+`raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review`.
+It may inventory the current default-off feature flag and empty ordinary-
+practice posture plus the API Spine command, authorization, tenant,
+idempotency, audit, rollback, rollout and observability prerequisites. It may
+not enable a practice, edit product code or configuration, exercise a live
+route or use product data. The native Harness is not eligible for occupied work
+in that tranche; a future DeepSeek worker first requires a separately frozen
+provider-free stock-headless-to-custom-runner HMR startup proof.

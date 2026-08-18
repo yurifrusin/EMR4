@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 448,
+  "register_revision": 454,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -20509,16 +20509,17 @@
       "recurrence_signature": "orchestrator.live_successor_repeats_already_accepted_tranche",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
+        "status": "corrected_fresh_attempt",
         "action": "Freeze a Sol-only successor-resolution repair, preserve the accepted route and Harness evidence, replace every stale pointer with a read-only ordinary-practice admission-readiness review and add a deterministic accepted-versus-next intersection guard.",
         "prevention_control": "Every closeout derives Next implementation by subtracting all exact live accepted tranche identifiers; the baton test fails if accepted and next names intersect.",
         "evidence_paths": [
           "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
           "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
-          "docs/ariadne-agent-error-correction-register-revision-446.md"
+          "docs/ariadne-agent-error-correction-register-revision-446.md",
+          "docs/ariadne-agent-error-correction-register-revision-449.md"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0517",
@@ -20595,6 +20596,240 @@
           "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
           "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-448.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0519",
+      "attempt_id": "ariadne-post-native-harness-successor-resumption-inspection-004",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-0484, AER-0485 and AER-0494, every shell invocation must contain exactly one executable and no pipeline, semicolon or newline-composed successor, including read-only resumption inspection.",
+      "observed_error": "The resumed inspection first combined four Get-Content reads with semicolons and Select-Object pipelines, then used one further Get-Content-to-Select-Object pipeline after acknowledging the control. Both invocations were read-only and exited zero, but repeated the prohibited command shape.",
+      "detection_method": "The orchestrator inspected the literal command strings, excluded both outputs from acceptance authority and verified that no tracked repository change existed before the successor correction patch.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-449.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude the composed readbacks from authority, register the bounded recurrence and use one native executable per invocation for every remaining inspection, generation, validation, staging and commit gate.",
+        "prevention_control": "Reject command text containing a pipeline, semicolon or newline-composed successor before execution; use native rg context or one self-contained executable for bounded reads.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-449.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0520",
+      "attempt_id": "ariadne-post-native-harness-successor-register-suite-005",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After adding an incident, the complete focused register test must atomically advance the ordered global ID range and every standalone origin-length fixture before its first full run.",
+      "observed_error": "The first revision-449 register run failed its first two tests because the ordered ID range still stopped before AER-0519 and the standalone agent-origin length remained 373, although the aggregate report expectations had been advanced.",
+      "detection_method": "The complete focused register suite reported exactly two leading fixture failures while the remaining tests continued; direct exact-line inspection identified range(1, 519) and len(agent_incidents) == 373 as the stale literals.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-450.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the full ID range, standalone agent-origin length, revision, total and all affected aggregate and recurrence fixtures together; regenerate pattern-report.json and rerun the complete suite.",
+        "prevention_control": "Before the first full run after any incident addition, search for the previous total, revision, final ID, standalone origin lengths, aggregate dictionaries and affected recurrence signature; update every match as one mechanical patch.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-450.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0521",
+      "attempt_id": "ariadne-post-native-harness-successor-register-suite-006",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "When a new incident joins an existing recurrence, its exact generated incident list, count and prevention-control set must be advanced atomically with the register fixtures before the next full run.",
+      "observed_error": "The revision-450 register suite passed all population, schema and aggregate checks but failed the exact recurring-pattern equality because AER-0520's prevention control was present in the generated report and absent from the test's literal population-fixture baseline.",
+      "detection_method": "The complete focused suite finished with one failure whose diff identified recurrence index 13 and the added AER-0520 prevention control as the sole mismatch.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-451.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add the exact AER-0520 prevention control to the literal population-fixture recurrence baseline, advance this recurrence's own IDs/count and rerun the complete register suite.",
+        "prevention_control": "After pattern generation, compare every recurrence touched by the new incident field-for-field with its test literal, including prevention_controls, before starting the complete suite.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-451.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0522",
+      "attempt_id": "ariadne-post-native-harness-successor-register-suite-007",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A field-for-field recurrence baseline correction must update the exact incident_count, incident_ids and generated prevention_controls ordering in the same patch.",
+      "observed_error": "The revision-451 suite repeated the sole recurrence equality failure because the literal population-fixture block gained AER-0520's prevention text but retained incident_count 3, omitted AER-0520 from incident_ids and placed the new control after rather than before the lexically later existing control.",
+      "detection_method": "The repeated complete-suite failure identified the same recurrence index; direct generated-report readback showed count 4, IDs through AER-0520 and the exact sorted four-control order.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-452.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the complete population-fixture expected block with the generated report's exact count, IDs and lexically sorted prevention controls, then advance this recurrence's IDs/count and rerun the suite.",
+        "prevention_control": "Copy every changed generated recurrence block as a whole field-for-field structure; never patch one nested field from a truncated assertion diff.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-452.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0523",
+      "attempt_id": "ariadne-post-native-harness-successor-baton-suite-008",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A live register-row revision may condense history only while retaining the exact AER-0497 occupied-terminal and AER-0509 closeout-correction anchor literals required by the stable baton contract.",
+      "observed_error": "The revision-452 AGENTS register row summarized AER-0496 through AER-0515 as a range and therefore removed the exact AER-0497 and AER-0509 substrings even though their semantic coverage remained.",
+      "detection_method": "The focused current-baton suite failed one assertion at the first missing stable anchor and all successor, product-boundary and continuity assertions otherwise passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-453.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_register_stable_anchor_dropped",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore explicit AER-0497 and AER-0509 anchor literals in the condensed live register row and rerun the focused baton suite.",
+        "prevention_control": "Preserve every literal asserted by the stable baton contract when condensing mutable register history; exact anchor IDs are not replaceable by an inclusive range phrase.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-453.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0524",
+      "attempt_id": "ariadne-post-native-harness-successor-latch-suite-009",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The bounded successor-repair latch checkpoint must retain the exact already-passed transition anchor required by its dedicated continuity fixture after later incident updates.",
+      "observed_error": "The checkpoint rewrite named stale successor pointers and the accepted-versus-next guard but omitted the exact phrase already passed, so the latch continuity suite failed one semantic phrase assertion while 52 other latch checks passed.",
+      "detection_method": "The focused latch packet reported one failure at the explicit completed-stage phrase assertion; schema, status, boundaries, terminal prohibition and remaining continuity checks passed.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-454.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.latch_continuity_phrase_stale_after_bounded_checkpoint_rewrite",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the exact accepted route already passed anchor within the bounded checkpoint and rerun both latch suites.",
+        "prevention_control": "Before accepting a bounded latch rewrite, run its dedicated continuity fixture and preserve every exact semantic transition anchor it asserts.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-454.md"
         ]
       },
       "status": "corrected"

@@ -51,10 +51,15 @@ untracked files remain untouched.
 
 ## Programme position and next work
 
-This closes at Continuity 321 / Compass 303. Next is the already authorised
-`raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.
-The native Harness is paused from occupied EMR4 work until a separate provider-
-free HMR startup proof. No decision or action is required from Yuri.
+This closes at Continuity 321 / Compass 303. The default-off route convergence
+already passed at reviewed source
+`c82c3a741053a9c8da260aa62e1a968af22bb54e` and must not be repeated. Next is
+`raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review`:
+a provider-free inventory of the exact safety and rollout prerequisites, with
+no practice enablement, product code/configuration change, live route or
+product data. The native Harness is paused from occupied EMR4 work until a
+separate provider-free HMR startup proof. No decision or action is required
+from Yuri.
 
 The usual non-PHI Pushover closeout notification succeeded with request
 `2585170d-71b3-40ee-a8bd-777da80a6d58`.

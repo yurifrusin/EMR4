@@ -61,11 +61,14 @@ def test_provider_free_exact_view_and_occupied_negative_result_are_preserved() -
     assert occupied["authority_disposition"]["retry_permitted"] is False
 
 
-def test_compass_resumes_default_off_check_in_route_convergence() -> None:
+def test_compass_advances_to_read_only_admission_readiness() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
     current = compass["current_position"]
-    assert "default-off canonical check-in route-adapter" in current["strategic_role"]
-    assert "authored-synthetic allowlist" in current["outcome"]
+    assert "admission readiness" in current["strategic_role"]
+    assert "without enabling it" in current["strategic_role"]
+    assert "default-off and empty-allowlist posture" in current["outcome"]
+    assert "product source" in current["outcome"]
+    assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in current["why_now"]
     assert "not a default transport" in " ".join(current["does_not_solve"])
     assert "Continuity 321 / Compass 303" in compass["orientation_statement"]
 

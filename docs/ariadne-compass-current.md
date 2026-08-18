@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 321 / Compass 303. The native Harness now has an exact provider-free edit/glob/read proof and an attributable pre-provider HMR startup terminal with no candidate; the programme resumes the already authorised default-off canonical check-in route-adapter convergence.
+> EMR4 is at Continuity 321 / Compass 303. The native Harness now has an exact provider-free edit/glob/read proof and an attributable pre-provider HMR startup terminal with no candidate. Default-off route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; next is the provider-free read-only ordinary-practice canonical check-in admission-readiness review.
 
 ## North star
 
@@ -415,21 +415,22 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 ## Current position
 
-**Resume the default-off canonical check-in route-adapter convergence under Sol authority — DeepSeek native Harness exact-tool-view recovery and second monitored development admission**
+**Review ordinary-practice canonical check-in admission readiness without enabling it — DeepSeek native Harness exact-tool-view recovery and second monitored development admission**
 
-**Why this proof came next:** The additive Harness trial is closed with exact traceability evidence, while the accepted check-in adapter and unchanged default-off A5.1 route remain ready for their narrow planned convergence.
+**Why this proof came next:** The additive Harness trial is closed with exact traceability evidence, and the default-off check-in route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; repeating that accepted tranche would be invalid.
 
-Delegate only the unchanged default-off A5.1 route to the accepted check-in adapter while preserving its flag, authored-synthetic allowlist, exact contract and default denial.
+Inventory the current default-off and empty-allowlist posture plus API Spine command, authorization, tenant, idempotency, audit, rollback, rollout and observability prerequisites without changing product source, configuration, route behavior or data.
 
 ### What this unlocks
 
-- Freeze the narrow route-delegation diff and negative default-off matrix.
-- Implement and test provider-free canonical check-in delegation without ordinary-practice admission.
-- Reassess Gemini only after a candidate and keep occupied native-Harness work declined pending separate HMR recovery.
+- Freeze a bounded evidence-backed readiness inventory for a later explicit ordinary-practice admission gate.
+- Identify every unmet prerequisite and preserve default denial until a separately authorised implementation tranche.
+- Reassess DeepSeek, Gemini and native-subagent lanes only when a future candidate has an independently owned work package.
 
 ### What it does not solve
 
 - The native Harness has not produced a useful real-EMR4 candidate and is not a default transport.
+- No practice is enabled and no product code, configuration, route behavior or product data is changed.
 - No generic-status Arrived transition, grammar/client change or waiting-area movement is admitted.
 - No product/patient data, live provider, production runtime, deployment, Pages or protected integration is enabled.
 

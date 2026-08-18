@@ -7,8 +7,8 @@
   "source_head": "5fab227e7a0bf1d308d1373858f490419fee660e",
   "authority_source": "AGENTS.md standing uninterrupted-development and continuous harness self-correction rules require evidence conflicts to be contained, registered, guarded and repaired before the next planned tranche continues.",
   "checkpoint": {
-    "completed_stage": "The Harness tranche closed at 5fab227e7a0bf1d308d1373858f490419fee660e. Fresh complete rehydration then proved the named route tranche already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e, while the Harness closeout and live Next implementation incorrectly direct it again. No product code changed.",
-    "next_executable_stage": "generate_a_fresh_five_source_preplanning_receipt_then_freeze_the_successor_resolution_repair_plan",
+    "completed_stage": "The repair plan is frozen at efaf6385a39249cbe4ccbda6299d70d00af74c81. The accepted route already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; stale pointers now name the read-only readiness review. AER-0516 and AER-0519 through AER-0524 are corrected. No product code changed.",
+    "next_executable_stage": "regenerate_historical_compass_and_register_reports_then_validate_and_commit_the_core_correction_candidate",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

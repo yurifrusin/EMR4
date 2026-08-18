@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "f22e0f410bc8e500eff0e066998f1ba60e57257c4b0e63f0b59148c775bc98c2",
+  "canonical_register_sha256": "57f42abd07a47074028fef4b8456c07ba2fa011d50262547a529aff9a2f07e2c",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 349,
-      "untrusted_partial_worktree": 55
+      "canonical_unchanged": 350,
+      "untrusted_partial_worktree": 60
     },
     "by_category": {
-      "command_scope_violation": 80,
+      "command_scope_violation": 81,
       "evidence_misreport": 65,
       "harness_failure": 53,
       "operator_error": 3,
-      "output_contract_violation": 179,
+      "output_contract_violation": 184,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
       "repository_defect": 73,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 373,
+      "agent_behavior": 379,
       "harness": 53,
       "operator": 3,
       "repository": 73,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 251,
+      "low": 257,
       "material": 117,
       "moderate": 150
     },
@@ -50,7 +50,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 292,
+      "codex-primary-orchestrator::orchestrator": 298,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -119,12 +119,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 417,
+      "orchestrator": 423,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 518,
+  "incident_count": 524,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -297,12 +297,13 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0484",
         "AER-0485",
         "AER-0494",
-        "AER-0499"
+        "AER-0499",
+        "AER-0519"
       ],
       "origins": [
         "agent_behavior"
@@ -311,7 +312,8 @@
         "Before every shell call, reject command text containing a pipeline operator and express discovery filters through the selected executable's own arguments.",
         "Inspect every command string for a pipeline operator before execution; use direct array indexing or a single purpose-built executable for read-only projection.",
         "Reject a closeout command containing a pipeline operator before execution; bound searches with the selected executable's own file and context arguments only.",
-        "Reject any proposed shell command containing a pipeline operator before execution; use rg context arguments or one direct executable instead of composed read-only projections."
+        "Reject any proposed shell command containing a pipeline operator before execution; use rg context arguments or one direct executable instead of composed read-only projections.",
+        "Reject command text containing a pipeline, semicolon or newline-composed successor before execution; use native rg context or one self-contained executable for bounded reads."
       ],
       "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
       "resource_ids": [
@@ -626,11 +628,12 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 4,
       "incident_ids": [
         "AER-0255",
         "AER-0318",
-        "AER-0340"
+        "AER-0340",
+        "AER-0520"
       ],
       "origins": [
         "agent_behavior"
@@ -638,6 +641,7 @@
       "prevention_controls": [
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
+        "Before the first full run after any incident addition, search for the previous total, revision, final ID, standalone origin lengths, aggregate dictionaries and affected recurrence signature; update every match as one mechanical patch.",
         "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report."
       ],
       "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
@@ -756,14 +760,42 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0513",
+        "AER-0524"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "A bounded checkpoint rewrite updates its dedicated semantic phrase assertions in the same patch and runs the focused latch packet immediately.",
+        "Before accepting a bounded latch rewrite, run its dedicated continuity fixture and preserve every exact semantic transition anchor it asserts."
+      ],
+      "recurrence_signature": "orchestrator.latch_continuity_phrase_stale_after_bounded_checkpoint_rewrite",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 4,
+      "incident_ids": [
         "AER-0487",
-        "AER-0495"
+        "AER-0495",
+        "AER-0521",
+        "AER-0522"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "After every new incident, inspect every generated recurrence containing that ID and update the exact list, count and residual-pattern allowlist in the same correction patch.",
+        "After pattern generation, compare every recurrence touched by the new incident field-for-field with its test literal, including prevention_controls, before starting the complete suite.",
+        "Copy every changed generated recurrence block as a whole field-for-field structure; never patch one nested field from a truncated assertion diff.",
         "Whenever a new incident repeats a full recurrence composite, inspect the generated report and advance the exact recurring-pattern baseline in the same revision before launching the complete suite."
       ],
       "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
@@ -1519,7 +1551,7 @@
       ]
     }
   ],
-  "register_revision": 448,
+  "register_revision": 454,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

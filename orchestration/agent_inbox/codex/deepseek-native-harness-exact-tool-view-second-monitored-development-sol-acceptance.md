@@ -27,8 +27,12 @@ open. All disposable runtime, raw-session and worker-worktree resources are
 absent; the exact temporary root is recycled. Protected refs remain exact at
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
-This supports Continuity 321 / Compass 303 and resumption of the already
-authorised default-off canonical check-in route-adapter rehearsal under Sol's
-implementation/recovery lease. It does not establish successful real-EMR4
-native-Harness work, permit another occupied retry or promote the Harness as a
-default transport.
+This supports Continuity 321 / Compass 303. The default-off canonical check-in
+route-adapter rehearsal already passed at reviewed source
+`c82c3a741053a9c8da260aa62e1a968af22bb54e` and must not be repeated. The true
+successor is the Sol-owned provider-free read-only ordinary-practice canonical
+check-in admission-readiness review. It may inventory prerequisites only and
+admits no practice enablement, product code/configuration change, live route or
+product data. This acceptance does not establish successful real-EMR4 native-
+Harness work, permit another occupied retry or promote the Harness as a default
+transport.

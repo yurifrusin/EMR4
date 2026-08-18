@@ -195,8 +195,13 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "canonical-check-in-route-adapter-convergence-rehearsal" in next_work.lower()
-    assert "fresh codex task" in next_work.lower()
+    assert (
+        "provider-free-read-only-ordinary-practice-canonical-check-in-"
+        "admission-readiness-review"
+    ) in next_work.lower()
+    assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
+    assert "no ordinary-practice enablement" in next_work.lower()
+    assert "no product code/configuration or live-route change" in next_work.lower()
     assert "general-status `arrived`" in next_work.lower()
     assert "waiting-area movement" in next_work.lower()
     assert "live provider" in next_work.lower()
@@ -237,8 +242,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "canonical-check-in-route-adapter-convergence-rehearsal",
-        "fresh codex task",
+        "ordinary-practice-canonical-check-in-admission-readiness-review",
+        "no ordinary-practice enablement",
+        "no product code/configuration or live-route change",
         "general-status `arrived`",
         "waiting-area movement",
         "product/patient data",
@@ -249,3 +255,4 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "stage explicit paths only",
     ):
         assert phrase in next_work
+    assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work
