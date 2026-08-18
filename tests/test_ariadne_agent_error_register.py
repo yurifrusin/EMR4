@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 521
+    assert register["register_revision"] == 525
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 603)
+        f"AER-{index:04d}" for index in range(1, 607)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 425
+    assert len(agent_incidents) == 427
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 602
+    assert report["incident_count"] == 606
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,14 +3619,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 521
-    assert report["incident_count"] == 602
+    assert report["register_revision"] == 525
+    assert report["incident_count"] == 606
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 425,
+        "agent_behavior": 427,
         "harness": 54,
         "operator": 21,
-        "repository": 86,
+        "repository": 88,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
@@ -3634,15 +3634,15 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "evidence_misreport": 66,
         "harness_failure": 54,
         "operator_error": 21,
-        "output_contract_violation": 223,
+        "output_contract_violation": 225,
         "read_only_violation": 4,
         "reasoning_claim_error": 46,
-        "repository_defect": 86,
+        "repository_defect": 88,
         "transport_timeout": 16,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 381,
+        "canonical_unchanged": 385,
         "untrusted_partial_worktree": 107,
     }
     receipt_event_recurrence = next(
@@ -3776,8 +3776,9 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "AER-0580",
         "AER-0582",
         "AER-0585",
+        "AER-0606",
     ]
-    assert population_fixture_recurrence["incident_count"] == 11
+    assert population_fixture_recurrence["incident_count"] == 12
     plan_disposition_recurrence = next(
         row
         for row in report["recurring_patterns"]
@@ -3968,6 +3969,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "AER-0597",
     ]
     assert pre_verifier_disposition_recurrence["incident_count"] == 2
+    regression_literal_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "orchestrator.agent_error_register_regression_assertion_literal_not_canonical"
+    )
+    assert regression_literal_recurrence["incident_ids"] == [
+        "AER-0602",
+        "AER-0605",
+    ]
+    assert regression_literal_recurrence["incident_count"] == 2
     assert [
         row
         for row in report["recurring_patterns"]
@@ -4002,6 +4014,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.generative_acceptance_in_read_only_review_worktree",
             "harness.antigravity_completed_transport_invalid_egress_without_digest_receipt",
             "orchestrator.pre_verifier_parallelism_disposition_and_workspace_receipt_shape_invalid",
+            "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
         }
     ] == [
         {
@@ -4264,7 +4277,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "recurrence_signature": (
                 "orchestrator.agent_error_register_population_fixture_update_incomplete"
             ),
-            "incident_count": 11,
+            "incident_count": 12,
             "incident_ids": [
                 "AER-0255",
                 "AER-0318",
@@ -4277,6 +4290,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0580",
                 "AER-0582",
                 "AER-0585",
+                "AER-0606",
             ],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
@@ -4294,6 +4308,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "The clockwork reducer must emit recurrence rows in deterministic canonical order and tests must consume that projection without independently ordering its narrative fields.",
                 "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures.",
                 "The clockwork reducer must own contiguous IDs, populations, aggregate dictionaries, recurrence rows and the committed report as projections of one journal reading.",
+                "The clockwork reducer must own contiguous IDs, standalone and aggregate populations, recurrence classifications, exact recurrence rows and the committed report as projections of one journal reading.",
             ],
         },
         {
@@ -8561,4 +8576,72 @@ def test_aer_0602_binds_regression_assertion_to_canonical_control_text() -> None
         "orchestrator.agent_error_register_regression_assertion_literal_not_canonical"
     )
     assert "exact stored controls" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0603_derives_historical_shadow_latch_from_immutable_manifest() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0603"]
+
+    assert list(incidents)[602:603] == ["AER-0603"]
+    assert incident["related_incident_ids"] == []
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "repository.immutable_shadow_fixture_bound_to_mutable_live_latch"
+    )
+    assert "immutable manifest" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0604_measures_live_handover_compactness_before_publication() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0604"]
+
+    assert list(incidents)[603:604] == ["AER-0604"]
+    assert incident["related_incident_ids"] == []
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "repository.live_handover_exceeds_compactness_guard"
+    )
+    assert "measure split-line count before publication" in (
+        incident["correction"]["prevention_control"]
+    )
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0605_binds_regression_assertion_to_exact_stored_control() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0605"]
+
+    assert list(incidents)[604:605] == ["AER-0605"]
+    assert incident["related_incident_ids"] == []
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.agent_error_register_regression_assertion_literal_not_canonical"
+    )
+    assert "exact stored controls" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0606_projects_all_register_populations_from_one_reading() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0606"]
+
+    assert list(incidents)[605:606] == ["AER-0606"]
+    assert incident["related_incident_ids"] == []
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.agent_error_register_population_fixture_update_incomplete"
+    )
+    assert "standalone and aggregate populations" in (
+        incident["correction"]["prevention_control"]
+    )
     assert incident["status"] == "corrected"

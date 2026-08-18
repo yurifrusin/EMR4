@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "e9fd6a5e60e4f553aaa875af15a71ffabfc6d7cb8222c939c750fce3fbb0b674",
+  "canonical_register_sha256": "b40e7226cca864884238bb536dda6245373ced7139b1dfd4b6c69ac9eef8c38b",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 381,
+      "canonical_unchanged": 385,
       "untrusted_partial_worktree": 107
     },
     "by_category": {
@@ -11,21 +11,21 @@
       "evidence_misreport": 66,
       "harness_failure": 54,
       "operator_error": 21,
-      "output_contract_violation": 223,
+      "output_contract_violation": 225,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 86,
+      "repository_defect": 88,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 425,
+      "agent_behavior": 427,
       "harness": 54,
       "operator": 21,
-      "repository": 86,
+      "repository": 88,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 331,
+      "low": 335,
       "material": 117,
       "moderate": 154
     },
@@ -53,7 +53,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 329,
+      "codex-primary-orchestrator::orchestrator": 331,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -111,6 +111,7 @@
       "emr4-maintenance-test-suite::orchestrator": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
+      "live-agents-handover::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 3,
       "local-docker-desktop::orchestrator": 1,
       "local-powershell-operator::orchestrator": 10,
@@ -127,17 +128,18 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
-      "shared-postgresql-pytest-gate::orchestrator": 1
+      "shared-postgresql-pytest-gate::orchestrator": 1,
+      "transactional-closeout-shadow-fixture::orchestrator": 1
     },
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 499,
+      "orchestrator": 503,
       "verifier": 57
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 602,
+  "incident_count": 606,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -697,7 +699,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 11,
+      "incident_count": 12,
       "incident_ids": [
         "AER-0255",
         "AER-0318",
@@ -709,7 +711,8 @@
         "AER-0579",
         "AER-0580",
         "AER-0582",
-        "AER-0585"
+        "AER-0585",
+        "AER-0606"
       ],
       "origins": [
         "agent_behavior"
@@ -725,9 +728,34 @@
         "The clockwork reducer must emit recurrence classification and exhaustive residual checks from the same generated pattern set, so a new recurrence cannot require two manually synchronized fixtures.",
         "The clockwork reducer must emit recurrence rows in deterministic canonical order and tests must consume that projection without independently ordering its narrative fields.",
         "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures.",
-        "The clockwork reducer must own contiguous IDs, populations, aggregate dictionaries, recurrence rows and the committed report as projections of one journal reading."
+        "The clockwork reducer must own contiguous IDs, populations, aggregate dictionaries, recurrence rows and the committed report as projections of one journal reading.",
+        "The clockwork reducer must own contiguous IDs, standalone and aggregate populations, recurrence classifications, exact recurrence rows and the committed report as projections of one journal reading."
       ],
       "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0602",
+        "AER-0605"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase directly from the validated register value before execution.",
+        "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase from the validated register value before running the packet."
+      ],
+      "recurrence_signature": "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1822,7 +1850,7 @@
       ]
     }
   ],
-  "register_revision": 521,
+  "register_revision": 525,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

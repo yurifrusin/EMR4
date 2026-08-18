@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_broker_gear_architecture_evidence.v1",
+  "status": "passed",
+  "evidence_label": "provider_free_repository_local_shadow_architecture",
+  "source_bindings": {
+    "expected": 10,
+    "matched": 10
+  },
+  "acceptance_scenarios": {
+    "expected_minimum": 36,
+    "passed": 48,
+    "failed": []
+  },
+  "terminal_traces": {
+    "succeeded": "passed",
+    "failed": "passed",
+    "unknown_commit": "passed"
+  },
+  "trace_mutations": {
+    "attempted": 10,
+    "rejected": 10,
+    "escaped": []
+  },
+  "hostile_contract_mutations": {
+    "attempted": 256,
+    "rejected": 256,
+    "escaped": []
+  },
+  "caller_supplied_binding_fields": 0,
+  "engine_owned_fields": 15,
+  "shadow_admitted_effect_classes": [
+    "read_only",
+    "shadow_generation_write"
+  ],
+  "occupied_harness_enabled": false,
+  "current_controls_retired": false,
+  "kernel_closeout_baseline": {
+    "manual_binding_fields": null,
+    "provider_retries": 1,
+    "rejected_register_or_pre_verifier_drafts": 4,
+    "failure_induced_closeout_or_transition_reruns": 4,
+    "stale_mutable_latch_fixtures": 2,
+    "uncaught_escapes": 0
+  },
+  "future_rehearsal_thresholds": {
+    "caller_supplied_derived_fields": 0,
+    "minimum_failure_induced_rerun_reduction_percent": 50,
+    "new_mutable_current_fixtures": 0,
+    "coverage_loss": false,
+    "partial_publications": 0,
+    "uncaught_escapes": 0,
+    "shared_engine_growth_reported": true,
+    "clean_run_overhead_reported": true,
+    "timing_acceptance_relevant": false
+  },
+  "uncaught_escapes": 0
+}

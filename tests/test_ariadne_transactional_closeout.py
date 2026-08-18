@@ -78,10 +78,30 @@ def _manifest(graph: dict) -> dict:
     }
 
 
+def _fixture_latch(live_latch: dict, operation_id: str) -> dict:
+    latch = copy.deepcopy(live_latch)
+    latch["checkpoint"]["next_executable_stage"] = "run_immutable_shadow_fixture"
+    latch.update(
+        operation_id=operation_id, status="in_progress", resume_after_compaction=True,
+        user_attention={"required": False, "reason": None},
+        terminal_response={"permitted": False, "reason": "unfinished_authorized_operation"},
+    )
+    return latch
+
+
 @pytest.fixture
 def state() -> tuple[dict, dict, dict, dict]:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
-    return graph, _load("orchestration/continuity/emr4-compass.json"), _load("orchestration/continuity/ariadne-active-operation-latch/current.json"), _manifest(graph)
+    manifest = _manifest(graph)
+    live_latch = _load(
+        "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    )
+    return (
+        graph,
+        _load("orchestration/continuity/emr4-compass.json"),
+        _fixture_latch(live_latch, manifest["operation_id"]),
+        manifest,
+    )
 
 
 def test_plan_freezes_clockwork_efficacy_and_closed_surfaces() -> None:

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 521,
+  "register_revision": 525,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -23834,6 +23834,162 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
           "docs/ariadne-agent-error-correction-register-revision-521.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0603",
+      "attempt_id": "clockwork-gear-architecture-compatibility-packet-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "transactional-closeout-shadow-fixture",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "An immutable historical transactional-shadow manifest must use a fixture latch derived for that manifest and must not depend on whichever operation currently occupies the live mutable latch.",
+      "observed_error": "After the valid successor latch advanced to the clockwork gear architecture, four accepted transactional closeout tests failed at active_operation_mismatch because their state fixture paired the fixed historical transactional manifest with the unrelated live current latch.",
+      "detection_method": "The six-module compatibility packet reported four failures in tests/test_ariadne_transactional_closeout.py; the broker, latch, Git-object and orchestrator-preflight checks passed, and every failure had the same exact active_operation_mismatch origin.",
+      "evidence_paths": [
+        "tests/test_ariadne_transactional_closeout.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-522.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.immutable_shadow_fixture_bound_to_mutable_live_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the compatibility failure, derive a provider-free fixture latch from the live latch's validated structure while binding its operation to the immutable manifest, add AER-0603 and rerun the same compatibility packet.",
+        "prevention_control": "Historical shadow tests must construct their latch from the immutable manifest or event receipt and may use the live latch only as a schema-valid structural template; the shared clockwork projector must generate this fixture relationship.",
+        "evidence_paths": [
+          "tests/test_ariadne_transactional_closeout.py",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-522.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0604",
+      "attempt_id": "clockwork-gear-architecture-baton-guard-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "live-agents-handover",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The authoritative live AGENTS.md handover must remain below the repository guard's 500-line compactness ceiling without losing any current authority or protected boundary.",
+      "observed_error": "The accepted parent AGENTS.md and the worktree both contained 505 split lines, so the broader handover guard failed at 505 < 500 even though the current tranche had changed only one existing register-acceptance row.",
+      "detection_method": "The applicable baton, Compass and API Spine packet passed every other check and reported one exact test_agents_handover_archive.py compactness failure; direct comparison confirmed the accepted parent and worktree had the same 505-line shape.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_agents_handover_archive.py",
+        "docs/ariadne-agent-error-correction-register-revision-523.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.live_handover_exceeds_compactness_guard",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed packet, compact only line wrapping in AGENTS.md without removing authority content, add AER-0604 and rerun the exact broader guard packet.",
+        "prevention_control": "The baton projector must measure split-line count before publication and compact presentation deterministically while preserving parsed authority content; until adoption, run the archive guard whenever AGENTS.md changes.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_agents_handover_archive.py",
+          "docs/ariadne-agent-error-correction-register-revision-523.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0605",
+      "attempt_id": "clockwork-gear-architecture-register-verification-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A newly added register regression assertion must use wording present in the canonical prevention control it claims to verify.",
+      "observed_error": "The AER-0604 regression test asserted the phrase measure the rendered split-line count while the canonical prevention control says measure split-line count before publication.",
+      "detection_method": "The full register suite reached its final test and failed one exact substring assertion while canonical register validation and all preceding tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-524.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed register packet, replace the assertion with exact canonical prevention-control wording, add AER-0605 and rerun register generation plus the full suite.",
+        "prevention_control": "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase directly from the validated register value before execution.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-524.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0606",
+      "attempt_id": "clockwork-gear-architecture-register-verification-002",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Adding an incident must advance every standalone population and affected recurring-pattern fixture from the same generated register reading before the full suite runs.",
+      "observed_error": "Revision 524 advanced aggregate dictionaries but left the standalone agent_incidents length at 425 and did not classify the newly recurring AER-0602/AER-0605 signature in the exhaustive recurring-pattern fixture.",
+      "detection_method": "The full register suite produced exactly two failures: assert 426 == 425 and one residual recurring-pattern comparison containing orchestrator.agent_error_register_regression_assertion_literal_not_canonical.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-525.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the two-failure packet, update the standalone population, both exact recurrence projections and all totals in one patch, add AER-0606 and rerun generation plus the complete register suite.",
+        "prevention_control": "The clockwork reducer must own contiguous IDs, standalone and aggregate populations, recurrence classifications, exact recurrence rows and the committed report as projections of one journal reading.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-525.md"
         ]
       },
       "status": "corrected"

@@ -55,7 +55,7 @@
   "status": "passed",
   "surface": {
     "candidate_files": 5,
-    "candidate_lines": 981,
+    "candidate_lines": 1001,
     "legacy_files": 6,
     "legacy_lines": 1002,
     "raw_repository_growth_reported": true

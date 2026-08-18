@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-shadow-clockwork-broker-gear-architecture-v1.json",
+  "title": "Ariadne shadow clockwork and DeepSeek broker gear architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "architecture_id",
+    "evidence_label",
+    "source_bindings",
+    "reading_sources",
+    "caller_supplied_binding_fields",
+    "engine_owned_fields",
+    "dispositions",
+    "effect_classes",
+    "attempt_lifecycle",
+    "lease_protocol",
+    "work_order",
+    "worker_result",
+    "projection_protocol",
+    "efficacy",
+    "acceptance_scenarios",
+    "closed_surfaces",
+    "successor"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.shadow_clockwork_broker_gear_architecture.v1"},
+    "architecture_id": {"const": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture"},
+    "evidence_label": {"const": "provider_free_repository_local_shadow_architecture"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "canonical_lf_sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "canonical_lf_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "reading_sources": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "caller_supplied_binding_fields": {"const": []},
+    "engine_owned_fields": {"type": "array", "minItems": 14, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "dispositions": {"const": ["admitted", "rejected", "started", "succeeded", "failed", "unknown_commit", "acknowledged", "superseded"]},
+    "effect_classes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["represented", "shadow_admitted"],
+      "properties": {
+        "represented": {"const": ["read_only", "shadow_generation_write", "candidate_workspace_write", "provider_request", "task_branch_git_write", "protected_ref_write", "product_runtime_effect"]},
+        "shadow_admitted": {"const": ["read_only", "shadow_generation_write"]}
+      }
+    },
+    "attempt_lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_from", "terminal_from_started", "rejection_is_terminal_without_start", "exactly_one_terminal_receipt", "acknowledgement_requires_terminal_digest", "unknown_commit_releases_success", "unknown_commit_requires_readback", "unknown_commit_automatic_retry", "recovery_derives_new_attempt_ordinal"],
+      "properties": {
+        "started_from": {"const": "admitted"},
+        "terminal_from_started": {"const": ["succeeded", "failed", "unknown_commit"]},
+        "rejection_is_terminal_without_start": {"const": true},
+        "exactly_one_terminal_receipt": {"const": true},
+        "acknowledgement_requires_terminal_digest": {"const": true},
+        "unknown_commit_releases_success": {"const": false},
+        "unknown_commit_requires_readback": {"const": true},
+        "unknown_commit_automatic_retry": {"const": false},
+        "recovery_derives_new_attempt_ordinal": {"const": true}
+      }
+    },
+    "lease_protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["writers", "initial_owner", "work_order_transfers_to", "broker_terminal_result_required", "ariadne_acknowledgement_returns_lease", "concurrent_writers_allowed", "broker_events_after_terminal_allowed", "ariadne_advance_before_acknowledgement_allowed"],
+      "properties": {
+        "writers": {"const": ["ariadne", "deepseek_broker"]},
+        "initial_owner": {"const": "ariadne"},
+        "work_order_transfers_to": {"const": "deepseek_broker"},
+        "broker_terminal_result_required": {"const": true},
+        "ariadne_acknowledgement_returns_lease": {"const": true},
+        "concurrent_writers_allowed": {"const": false},
+        "broker_events_after_terminal_allowed": {"const": false},
+        "ariadne_advance_before_acknowledgement_allowed": {"const": false}
+      }
+    },
+    "work_order": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parent_is_exact_admitted_ariadne_tick", "whole_digest_supplied_independently", "required_bindings", "profile_families", "bounded_worker_tools", "automatic_retries", "silent_fallbacks", "occupied_enabled", "financial_budget_mechanism_required", "financial_boundary"],
+      "properties": {
+        "parent_is_exact_admitted_ariadne_tick": {"const": true},
+        "whole_digest_supplied_independently": {"const": true},
+        "required_bindings": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "profile_families": {"const": ["emr4-readonly-review", "emr4-bounded-worker", "emr4-provider-free"]},
+        "bounded_worker_tools": {"const": ["edit", "glob", "read"]},
+        "automatic_retries": {"const": 0},
+        "silent_fallbacks": {"const": 0},
+        "occupied_enabled": {"const": false},
+        "financial_budget_mechanism_required": {"const": false},
+        "financial_boundary": {"const": "yuri_prepaid_provider_balance"}
+      }
+    },
+    "worker_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_bindings", "raw_prompt_reasoning_secret_or_product_payload_allowed", "worker_self_acceptance_allowed", "ariadne_acknowledgement_required"],
+      "properties": {
+        "required_bindings": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "raw_prompt_reasoning_secret_or_product_payload_allowed": {"const": false},
+        "worker_self_acceptance_allowed": {"const": false},
+        "ariadne_acknowledgement_required": {"const": true}
+      }
+    },
+    "projection_protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["views", "same_acknowledged_tip_required", "validate_complete_generation_before_write", "publication_mode", "live_canonical_adoption", "current_controls_retired", "immutable_receipts_bind_exact_history", "mutable_current_state_uses_structural_invariants"],
+      "properties": {
+        "views": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "same_acknowledged_tip_required": {"const": true},
+        "validate_complete_generation_before_write": {"const": true},
+        "publication_mode": {"const": "private_shadow_generation_atomic_rename"},
+        "live_canonical_adoption": {"const": false},
+        "current_controls_retired": {"const": false},
+        "immutable_receipts_bind_exact_history": {"const": true},
+        "mutable_current_state_uses_structural_invariants": {"const": true}
+      }
+    },
+    "efficacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary_readings", "kernel_closeout_baseline", "future_rehearsal_thresholds"],
+      "properties": {
+        "primary_readings": {"const": ["manual_binding_fields", "failure_induced_reruns", "maintained_projection_fixtures", "uncaught_escapes"]},
+        "kernel_closeout_baseline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["manual_binding_fields", "provider_retries", "rejected_register_or_pre_verifier_drafts", "failure_induced_closeout_or_transition_reruns", "stale_mutable_latch_fixtures", "uncaught_escapes"],
+          "properties": {
+            "manual_binding_fields": {"type": "null"},
+            "provider_retries": {"const": 1},
+            "rejected_register_or_pre_verifier_drafts": {"const": 4},
+            "failure_induced_closeout_or_transition_reruns": {"const": 4},
+            "stale_mutable_latch_fixtures": {"const": 2},
+            "uncaught_escapes": {"const": 0}
+          }
+        },
+        "future_rehearsal_thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["caller_supplied_derived_fields", "minimum_failure_induced_rerun_reduction_percent", "new_mutable_current_fixtures", "coverage_loss", "partial_publications", "uncaught_escapes", "shared_engine_growth_reported", "clean_run_overhead_reported", "timing_acceptance_relevant"],
+          "properties": {
+            "caller_supplied_derived_fields": {"const": 0},
+            "minimum_failure_induced_rerun_reduction_percent": {"const": 50},
+            "new_mutable_current_fixtures": {"const": 0},
+            "coverage_loss": {"const": false},
+            "partial_publications": {"const": 0},
+            "uncaught_escapes": {"const": 0},
+            "shared_engine_growth_reported": {"const": true},
+            "clean_run_overhead_reported": {"const": true},
+            "timing_acceptance_relevant": {"const": false}
+          }
+        }
+      }
+    },
+    "acceptance_scenarios": {"type": "array", "minItems": 36, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "closed_surfaces": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "successor": {"const": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal"}
+  }
+}

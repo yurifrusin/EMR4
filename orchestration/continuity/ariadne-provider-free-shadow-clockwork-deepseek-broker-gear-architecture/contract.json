@@ -1,0 +1,278 @@
+{
+  "schema_version": "ariadne.shadow_clockwork_broker_gear_architecture.v1",
+  "architecture_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+  "evidence_label": "provider_free_repository_local_shadow_architecture",
+  "source_bindings": [
+    {
+      "path": "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md",
+      "canonical_lf_sha256": "49b14b761fddfe5d97476b9417f37a0f8f397fbfb82f9414c508c47ab341cb47"
+    },
+    {
+      "path": "orchestration_harness/transactional_closeout.py",
+      "canonical_lf_sha256": "ee504ff4157ef27b1eb111d152fd1bb0d7b08b622f95a2c6e98c799ffc149603"
+    },
+    {
+      "path": "scripts/ariadne_deepseek_native_harness_broker.mjs",
+      "canonical_lf_sha256": "8de1ea44deddea35b5b4fc72efe150fa6b55f37634ce9ad273fb9f228015f7f7"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/control-plane.schema.json",
+      "canonical_lf_sha256": "2ca92848acb52a7a5b3be593e2aac61d2b346753aa2ac86745384dccf4baa674"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json",
+      "canonical_lf_sha256": "4bd53ea9a5ef99f7664cf40d26abece79e1ff6f7ded215b0233cb8156381ddf2"
+    },
+    {
+      "path": "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md",
+      "canonical_lf_sha256": "e577f20e1b164be1abce990f915bd792eb4e158051f48c5c1d629825cd93a78f"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md",
+      "canonical_lf_sha256": "e325827421577bce896bf55eaef7e9d37fe2ac69221f54f2679432a91addf379"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md",
+      "canonical_lf_sha256": "4a2a4a4c0a926a8362f62d77353ae88b3dc2778cf4701a56282915c88cb37391"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "canonical_lf_sha256": "74d3e60840883fe197cb10c5c695c793b8d2f440a5a14b94d3b52488e2dd37c4"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md",
+      "canonical_lf_sha256": "6f6a4ffb35fce55b75b3953c84de2aa0df925566f4e3b7b0ff1dc1dacc310d04"
+    }
+  ],
+  "reading_sources": [
+    "validated_live_operation_latch",
+    "immutable_configured_stage_catalogue",
+    "fixed_git_and_protected_ref_snapshot",
+    "materialized_evidence_registry",
+    "validated_incident_register_and_pattern_report",
+    "last_acknowledged_tick_or_genesis"
+  ],
+  "caller_supplied_binding_fields": [],
+  "engine_owned_fields": [
+    "source_commit",
+    "branch_and_protected_ref_digest",
+    "operation_id",
+    "stage_id",
+    "disposition",
+    "effect_class",
+    "attempt_id",
+    "attempt_ordinal",
+    "materialized_evidence_identities",
+    "sequence",
+    "previous_tick_sha256",
+    "tick_sha256",
+    "settings_authority_and_forbidden_surface_digests",
+    "projection_revisions_counts_cutoffs_and_peer_links",
+    "work_order_and_worker_result_bindings"
+  ],
+  "dispositions": [
+    "admitted",
+    "rejected",
+    "started",
+    "succeeded",
+    "failed",
+    "unknown_commit",
+    "acknowledged",
+    "superseded"
+  ],
+  "effect_classes": {
+    "represented": [
+      "read_only",
+      "shadow_generation_write",
+      "candidate_workspace_write",
+      "provider_request",
+      "task_branch_git_write",
+      "protected_ref_write",
+      "product_runtime_effect"
+    ],
+    "shadow_admitted": [
+      "read_only",
+      "shadow_generation_write"
+    ]
+  },
+  "attempt_lifecycle": {
+    "started_from": "admitted",
+    "terminal_from_started": [
+      "succeeded",
+      "failed",
+      "unknown_commit"
+    ],
+    "rejection_is_terminal_without_start": true,
+    "exactly_one_terminal_receipt": true,
+    "acknowledgement_requires_terminal_digest": true,
+    "unknown_commit_releases_success": false,
+    "unknown_commit_requires_readback": true,
+    "unknown_commit_automatic_retry": false,
+    "recovery_derives_new_attempt_ordinal": true
+  },
+  "lease_protocol": {
+    "writers": [
+      "ariadne",
+      "deepseek_broker"
+    ],
+    "initial_owner": "ariadne",
+    "work_order_transfers_to": "deepseek_broker",
+    "broker_terminal_result_required": true,
+    "ariadne_acknowledgement_returns_lease": true,
+    "concurrent_writers_allowed": false,
+    "broker_events_after_terminal_allowed": false,
+    "ariadne_advance_before_acknowledgement_allowed": false
+  },
+  "work_order": {
+    "parent_is_exact_admitted_ariadne_tick": true,
+    "whole_digest_supplied_independently": true,
+    "required_bindings": [
+      "clock_sequence_parent_and_attempt",
+      "full_source_branch_and_worktree",
+      "authority_and_forbidden_surfaces",
+      "owned_forbidden_paths_and_command_test_allowlists",
+      "native_harness_package_version_and_digest",
+      "profile_family_permission_preset_and_digests",
+      "minimized_tool_view",
+      "provider_retry_fallback_and_auxiliary_route_posture",
+      "cleanup_readback_and_process_lifetime_lease"
+    ],
+    "profile_families": [
+      "emr4-readonly-review",
+      "emr4-bounded-worker",
+      "emr4-provider-free"
+    ],
+    "bounded_worker_tools": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "automatic_retries": 0,
+    "silent_fallbacks": 0,
+    "occupied_enabled": false,
+    "financial_budget_mechanism_required": false,
+    "financial_boundary": "yuri_prepaid_provider_balance"
+  },
+  "worker_result": {
+    "required_bindings": [
+      "work_order_and_terminal_event_digest",
+      "session_identity_hash",
+      "provider_call_count",
+      "ordered_tool_and_result_digest",
+      "candidate_tree_and_diff_digest_when_applicable",
+      "test_result_digest",
+      "cleanup_state",
+      "closed_terminal_class"
+    ],
+    "raw_prompt_reasoning_secret_or_product_payload_allowed": false,
+    "worker_self_acceptance_allowed": false,
+    "ariadne_acknowledgement_required": true
+  },
+  "projection_protocol": {
+    "views": [
+      "continuity",
+      "compass",
+      "report",
+      "active_operation_latch",
+      "incident_aggregate",
+      "orchestrator_and_worker_receipts",
+      "broker_bindings"
+    ],
+    "same_acknowledged_tip_required": true,
+    "validate_complete_generation_before_write": true,
+    "publication_mode": "private_shadow_generation_atomic_rename",
+    "live_canonical_adoption": false,
+    "current_controls_retired": false,
+    "immutable_receipts_bind_exact_history": true,
+    "mutable_current_state_uses_structural_invariants": true
+  },
+  "efficacy": {
+    "primary_readings": [
+      "manual_binding_fields",
+      "failure_induced_reruns",
+      "maintained_projection_fixtures",
+      "uncaught_escapes"
+    ],
+    "kernel_closeout_baseline": {
+      "manual_binding_fields": null,
+      "provider_retries": 1,
+      "rejected_register_or_pre_verifier_drafts": 4,
+      "failure_induced_closeout_or_transition_reruns": 4,
+      "stale_mutable_latch_fixtures": 2,
+      "uncaught_escapes": 0
+    },
+    "future_rehearsal_thresholds": {
+      "caller_supplied_derived_fields": 0,
+      "minimum_failure_induced_rerun_reduction_percent": 50,
+      "new_mutable_current_fixtures": 0,
+      "coverage_loss": false,
+      "partial_publications": 0,
+      "uncaught_escapes": 0,
+      "shared_engine_growth_reported": true,
+      "clean_run_overhead_reported": true,
+      "timing_acceptance_relevant": false
+    }
+  },
+  "acceptance_scenarios": [
+    "canonical_contract",
+    "all_source_bindings_match",
+    "caller_binding_field_inventory_empty",
+    "engine_owned_field_inventory_exact",
+    "full_git_is_derived",
+    "stage_is_derived",
+    "disposition_is_derived",
+    "effect_class_is_derived",
+    "attempt_identity_is_derived",
+    "evidence_identity_is_materialized",
+    "sequence_and_digests_are_derived",
+    "read_only_rejects_generator",
+    "shadow_write_is_private_only",
+    "candidate_write_denied",
+    "provider_request_denied",
+    "task_branch_git_denied",
+    "protected_ref_denied",
+    "product_runtime_denied",
+    "attempt_start_requires_admission",
+    "rejection_terminal_without_start",
+    "one_terminal_receipt",
+    "unknown_commit_no_success",
+    "unknown_commit_readback_required",
+    "unknown_commit_no_automatic_retry",
+    "recovery_new_attempt_ordinal",
+    "work_order_transfers_lease",
+    "stale_parent_rejected",
+    "sequence_gap_rejected",
+    "replay_rejected",
+    "concurrent_writer_rejected",
+    "broker_after_terminal_rejected",
+    "ariadne_before_acknowledgement_rejected",
+    "work_order_package_profile_preset_bound",
+    "work_order_tool_view_bound",
+    "work_order_digest_independent",
+    "result_envelope_content_minimized",
+    "worker_self_acceptance_denied",
+    "acknowledgement_binds_terminal_digest",
+    "all_projections_share_acknowledged_tip",
+    "partial_publication_rejected",
+    "mutable_state_fixture_literal_rejected",
+    "peer_link_and_recurrence_separate",
+    "caller_supplied_metric_rejected",
+    "shared_engine_cost_reported",
+    "timing_not_authoritative",
+    "financial_budget_not_duplicated",
+    "occupied_harness_remains_disabled",
+    "current_controls_remain_active"
+  ],
+  "closed_surfaces": [
+    "live_clockwork_adoption",
+    "current_control_retirement",
+    "occupied_deepseek_or_other_provider_call",
+    "native_harness_hmr_retry",
+    "ordinary_practice_enablement",
+    "product_configuration_api_route_database_or_client_change",
+    "product_patient_clinical_or_historical_data",
+    "production_runtime_deployment_release_or_pages",
+    "protected_evidence_or_protected_ref_movement"
+  ],
+  "successor": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal"
+}
