@@ -22076,7 +22076,7 @@
         "findings": [
           "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json",
-          "docs/ariadne-agent-error-correction-register-revision-382.md",
+          "docs/ariadne-agent-error-correction-register-revision-384.md",
           "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json"
         ],
         "closeouts": [

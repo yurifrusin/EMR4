@@ -984,7 +984,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-337.md`
 - `docs/ariadne-agent-error-correction-register-revision-343.md`
 - `docs/ariadne-agent-error-correction-register-revision-346.md`
-- `docs/ariadne-agent-error-correction-register-revision-382.md`
+- `docs/ariadne-agent-error-correction-register-revision-384.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`

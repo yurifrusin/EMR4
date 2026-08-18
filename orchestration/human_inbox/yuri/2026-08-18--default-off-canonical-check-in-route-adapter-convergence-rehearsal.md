@@ -46,7 +46,7 @@ its legacy precedence while server-side binding remains mandatory.
 
 Acceptance includes 103/103 focused tests, 35/35 database-backed A5.1 checks,
 85/85 API-Spine/plan checks, compilation, Ruff, whitespace and the complete
-435-entry incident-register suite. A fresh Gemini 3.7 Flash/high veto passed
+438-entry incident-register suite. A fresh Gemini 3.7 Flash/high veto passed
 all eight commands and left the clean exact candidate unchanged.
 
 DeepSeek through Claude Code again returned exit 1 with no worker result or

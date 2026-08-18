@@ -46,7 +46,7 @@ protected ref was accessed or moved.
   Alembic-head expectation excluded and preserved as baseline evidence;
 - 85/85 API-Spine and predecessor-plan checks pass with the predecessor's
   intentionally completed-latch assertion excluded;
-- Python compilation, Ruff, exact diff whitespace and the complete 435-entry
+- Python compilation, Ruff, exact diff whitespace and the complete 438-entry
   Ariadne incident-register suite pass as independently captured processes;
 - the fresh Gemini 3.7 Flash/high veto returns `pass`; all eight exact manifest
   commands succeed, including 103 tests, and its exact clean HEAD is unchanged.
@@ -69,7 +69,7 @@ delegation for this tranche.
 
 ## Workflow corrections
 
-AER-0426 through AER-0435 preserve short-SHA completion, DeepSeek transport,
+AER-0426 through AER-0438 preserve short-SHA completion, DeepSeek transport,
 parallel-disposition, chained-command, package-CLI, timestamp and resumed
 readback corrections. All are corrected or contained, none is open, and the
 product candidate was rerun through independent gates after the command-scope

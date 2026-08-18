@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.agent-error-evidence.v1",
+  "timestamp": "2026-08-18T13:59:27.4403150+10:00",
+  "last_corrected_at": "2026-08-18T14:01:20.8398496+10:00",
+  "status": "corrected",
+  "incidents": [
+    {
+      "incident_id": "AER-0436",
+      "attempt_id": "check-in-route-adapter-terminal-latch-postpush-readback-001",
+      "observed_error": "The pushed terminal latch checkpoint said AER-0426 through AER-0434 even though register revision 382 and the Current Baton accepted AER-0435.",
+      "correction": "The terminal checkpoint now names AER-0426 through AER-0435 before the successor latch is opened."
+    },
+    {
+      "incident_id": "AER-0437",
+      "attempt_id": "deepseek-harness-rehydration-agents-chunk-001",
+      "observed_error": "The final chunked AGENTS.md read used the byte length as a character substring bound and exceeded the text by two characters, returning an exception.",
+      "correction": "A standalone character-length readback returned 80261 and the exact final 10261-character chunk was then read successfully."
+    },
+    {
+      "incident_id": "AER-0438",
+      "attempt_id": "deepseek-harness-rehydration-register-stage-001",
+      "observed_error": "The first AER-0437 register draft used unsupported stage value rehydration and failed schema validation.",
+      "correction": "AER-0437 now uses configured stage dispatch for the preplanning continuation boundary; a fresh full register build passed."
+    }
+  ],
+  "task_head_before_correction": "21568ee7e9ef95d272d16a289880c2f0ba2231f9",
+  "protected_ref": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+}

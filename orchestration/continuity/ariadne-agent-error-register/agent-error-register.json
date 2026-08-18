@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 382,
+  "register_revision": 384,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17457,6 +17457,118 @@
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-precommit-runtime-state.json",
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-precommit-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-382.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0436",
+      "attempt_id": "check-in-route-adapter-terminal-latch-postpush-readback-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_evidence_authoring",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A terminal latch checkpoint must name the complete accepted incident range current at its closeout.",
+      "observed_error": "The pushed terminal latch checkpoint said AER-0426 through AER-0434 even though register revision 382 and the Current Baton accepted AER-0435.",
+      "detection_method": "The successor's mandatory exact latch readback was compared with the Current Baton register row before a new operation latch was opened.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-postpush-rehydration-incidents.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-383.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.terminal_latch_incident_range_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Update the terminal checkpoint to name AER-0426 through AER-0435 before opening the successor latch.",
+        "prevention_control": "Compare the terminal latch's incident range with the Current Baton and canonical register latest id immediately before every closeout push and successor rehydration.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-383.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0437",
+      "attempt_id": "deepseek-harness-rehydration-agents-chunk-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Chunked mandatory-file reads must use the actual character length for substring bounds and must cover the file completely without an exception.",
+      "observed_error": "The final chunked AGENTS.md read used the byte length as a character substring bound and exceeded the text by two characters, returning an exception.",
+      "detection_method": "PowerShell returned a Substring bounds exception; a standalone character-length readback returned 80261 before the exact remaining chunk was read successfully.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-postpush-rehydration-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-383.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.mandatory_file_chunk_byte_character_bound_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Read the text character length independently, then read the exact final 10261-character chunk and require complete coverage before planning.",
+        "prevention_control": "Chunk text by its independently read character length, never filesystem byte length; calculate each final bound from that value.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-postpush-rehydration-incidents.json",
+          "docs/ariadne-agent-error-correction-register-revision-383.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0438",
+      "attempt_id": "deepseek-harness-rehydration-register-stage-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every agent-error register stage value must come from the schema enum before a full register build is attempted.",
+      "observed_error": "The first AER-0437 register draft used unsupported stage value rehydration and failed schema validation.",
+      "detection_method": "The independently captured full register build returned a jsonschema enum failure before the draft was accepted.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-postpush-rehydration-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-384.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_rehydration_register_stage_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use configured stage dispatch for AER-0437's preplanning continuation boundary and require a fresh complete register build.",
+        "prevention_control": "Copy incident stage only from the register schema enum before authoring; explanatory lifecycle detail belongs in detection text.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-384.md"
         ]
       },
       "status": "corrected"

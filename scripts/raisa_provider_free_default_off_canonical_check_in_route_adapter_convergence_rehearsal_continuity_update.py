@@ -85,7 +85,7 @@ RECOVERY = (
     "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-"
     "sol-recovery-result.md"
 )
-REGISTER_REVISION = "docs/ariadne-agent-error-correction-register-revision-382.md"
+REGISTER_REVISION = "docs/ariadne-agent-error-correction-register-revision-384.md"
 UPDATER = (
     "scripts/raisa_provider_free_default_off_canonical_check_in_route_adapter_"
     "convergence_rehearsal_continuity_update.py"
