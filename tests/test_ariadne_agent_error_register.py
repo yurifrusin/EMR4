@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 384
+    assert register["register_revision"] == 391
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 439)
+        f"AER-{index:04d}" for index in range(1, 446)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 308
+    assert len(agent_incidents) == 313
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 438
+    assert report["incident_count"] == 445
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,20 +3619,22 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 384
-    assert report["incident_count"] == 438
+    assert report["register_revision"] == 391
+    assert report["incident_count"] == 445
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 308,
-        "harness": 49,
+        "agent_behavior": 313,
+        "harness": 50,
+        "operator": 1,
         "repository": 65,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 68,
-        "evidence_misreport": 58,
-        "harness_failure": 49,
-        "output_contract_violation": 136,
+        "command_scope_violation": 69,
+        "evidence_misreport": 60,
+        "harness_failure": 50,
+        "operator_error": 1,
+        "output_contract_violation": 138,
         "read_only_violation": 3,
         "reasoning_claim_error": 43,
         "repository_defect": 65,
@@ -3640,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 283,
+        "canonical_unchanged": 290,
         "untrusted_partial_worktree": 41,
     }
     receipt_event_recurrence = next(
@@ -7130,3 +7132,19 @@ def test_aer_0438_corrects_successor_register_stage_value() -> None:
     assert incident["related_incident_ids"] == []
     assert "jsonschema enum failure" in incident["detection_method"]
     assert incident["correction"]["status"] == "corrected_fresh_attempt"
+
+
+def test_aer_0439_through_0445_preserve_native_harness_no_call_corrections() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    assert list(incidents)[-7:] == [f"AER-{index:04d}" for index in range(439, 446)]
+    assert incidents["AER-0439"]["origin"] == "operator"
+    assert incidents["AER-0440"]["category"] == "output_contract_violation"
+    assert incidents["AER-0441"]["category"] == "command_scope_violation"
+    assert "non-Git" in incidents["AER-0442"]["expected_invariant"]
+    assert incidents["AER-0443"]["status"] == "contained"
+    assert "bounded_no_provider_call_configuration_failure" in (
+        incidents["AER-0443"]["correction"]["action"]
+    )
+    assert "git rev-parse" in incidents["AER-0444"]["detection_method"]
+    assert incidents["AER-0445"]["origin"] == "harness"

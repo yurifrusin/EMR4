@@ -4,11 +4,11 @@
   "active_tranche": "DeepSeek native Harness authored-synthetic traceability micro-rehearsal",
   "objective": "Run one tiny authored-synthetic DeepSeek V4 Flash/high task through the pinned official native Harness and capture fail-closed terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
   "status": "in_progress",
-  "source_head": "d8afa41f1efc121e1195567644f8c6437233e863",
+  "source_head": "7f878a8e9795b4b82f16a50cf6315ecc293f5da1",
   "authority_source": "Yuri explicitly authorised a very short rehearsal with the newly released native DeepSeek Harness; AGENTS.md Current Baton at Continuity 317 / Compass 299 directs this isolated traceability successor under standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "The frozen plan is committed at d8afa41f1efc121e1195567644f8c6437233e863. Pinned package 0.1.0-rc.7, registry integrity, headless contract, explicit Flash/high selection, 64-token cap, zero retries, disabled telemetry, isolated home/cache and zero enabled model-facing tool registrations are deterministically admitted without a provider call.",
-    "next_executable_stage": "generate_and_pass_pre_worker_dispatch_receipt_then_commit_preflight_evidence_before_exactly_one_bounded_occupied_request",
+    "completed_stage": "The sole provider-capable process exited 1 during plugin-tree load in 2002 ms with exact local error retryPolicy.retryableCodes must not be empty. A key-absent diagnostic reproduced the same pre-I/O error. Zero provider, retry, fallback, auxiliary-model, tool or subagent requests started; no sessions directory or durable session trace was created.",
+    "next_executable_stage": "preserve_sanitized_no_call_evidence_remove_the_exact_disposable_workspace_then_close_and_publish_the_bounded_traceability_result",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

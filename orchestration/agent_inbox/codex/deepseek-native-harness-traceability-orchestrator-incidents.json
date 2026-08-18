@@ -1,0 +1,17 @@
+{
+  "schema_version": "emr4.ariadne_incident_batch.v1",
+  "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+  "incident_ids": ["AER-0439", "AER-0440", "AER-0441", "AER-0442", "AER-0443", "AER-0444", "AER-0445"],
+  "summary": [
+    "A Node require.resolve probe ran outside npx's installed-package resolution context and returned MODULE_NOT_FOUND; exact npm registry fields and the pinned CLI were used instead.",
+    "One broad npm metadata query exceeded the output budget; subsequent registry evidence was read one exact field per command.",
+    "Several Windows rg probes incorrectly used a wildcard as a literal path operand, and one replacement search was overly broad; later reads used an exact directory plus rg globs or exact files.",
+    "The first two pre-dispatch receipts misclassified the disposable non-Git process as an assigned agent worktree; the runtime state was corrected to keep the DeepSeek process in its lane without a Git workspace assignment.",
+    "Static config-dump admission missed the adapter runtime invariant that retryableCodes cannot be empty; the sole provider-capable process failed before provider I/O and the result was corrected to a bounded no-call outcome.",
+    "One latch edit guessed a full commit id from short commit output; exact git rev-parse readback immediately replaced it.",
+    "The first exact recursive cleanup command was rejected by command policy; after preserving the already verified exact target, cleanup used the recoverable Windows Recycle Bin path and absence was read back."
+  ],
+  "candidate_state": "canonical_unchanged",
+  "provider_requests_started": 0,
+  "all_statuses": "corrected_or_contained"
+}

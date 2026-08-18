@@ -68,9 +68,10 @@
     ]
   },
   "admission": {
-    "status": "passed",
-    "occupied_request_permitted": true,
+    "status": "superseded_by_runtime_boot_failure",
+    "occupied_request_permitted": false,
     "retry_or_fallback_permitted": false,
-    "claim_boundary": "Preflight proves only exact local package/configuration admission for the one-call rehearsal; it proves no provider result or general reliability."
+    "runtime_correction": "The composed config dump accepted retryPolicy.retryableCodes: [], but adapter boot rejected it before provider I/O. See deepseek-native-harness-traceability-micro-rehearsal-evidence.json.",
+    "claim_boundary": "Package identity and static composition were established, but provider-capable boot admission was not. No provider result or general reliability was measured."
   }
 }

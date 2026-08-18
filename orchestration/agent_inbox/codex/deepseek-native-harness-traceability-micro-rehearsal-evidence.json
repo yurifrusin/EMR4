@@ -1,0 +1,72 @@
+{
+  "schema_version": "emr4.deepseek_native_harness.traceability_micro_rehearsal.v1",
+  "operation_id": "deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal",
+  "result": "bounded_no_provider_call_configuration_failure",
+  "observed_package": "@deepseek-ai/dsh@0.1.0-rc.7",
+  "provider": "deepseek-official",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "high",
+  "exact_prompt": "Return exactly TRACE_OK and nothing else. Do not use tools.",
+  "provider_capable_process": {
+    "started_at": "2026-08-18T14:23:57.1352788+10:00",
+    "ended_at": "2026-08-18T14:23:59.1368844+10:00",
+    "duration_ms": 2002,
+    "timed_out": false,
+    "exit_code": 1,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 5302,
+    "stderr_sha256": "2199a134ec659967e0d0ec44e0123a39e63dbd5ac06c7beb57229807f69a22c9",
+    "sanitized_final": null,
+    "raw_stderr_persisted": false
+  },
+  "failure": {
+    "stage": "plugin_tree_load_before_llm_adapter_registration",
+    "category": "configuration_admission_failure",
+    "sanitized_error": "llm-deepseek: retryPolicy.retryableCodes must not be empty",
+    "cause": "The rehearsal override combined maxRetries: 0 with an empty retryableCodes list. The schema dump accepted the shape, but the adapter's runtime resolver rejects an empty code list before provider I/O.",
+    "deterministic_no_credential_diagnostic_reproduced_same_error": true
+  },
+  "request_and_trace_accounting": {
+    "provider_requests_started": 0,
+    "provider_retries_started": 0,
+    "fallbacks_started": 0,
+    "auxiliary_model_requests_started": 0,
+    "tool_calls_started": 0,
+    "subagents_started": 0,
+    "sessions_directory_present": false,
+    "session_id": null,
+    "durable_session_or_trace_files": [],
+    "provider_cost_usd": 0.0
+  },
+  "dsh_home_files_before_cleanup": [
+    {"relative_path": "profiles\\headless\\cordis.patch.yml", "bytes": 1160, "sha256": "0df9407e4b4555c5f72714436a42605a3e0232b812386b389b7aee6f167b21ab"},
+    {"relative_path": "profiles\\headless\\cordis.yml", "bytes": 223, "sha256": "c300dcf2ebc5f02062d6591268d29d3db6fe45e0cb138f5467276fe2ba06076e"},
+    {"relative_path": "profiles\\headless\\package.json", "bytes": 213, "sha256": "563c0b6082748a6e93daad51514f01335c51fc9c44f5f88253383f18ac2557b5"},
+    {"relative_path": "profiles\\headless\\pnpm-workspace.yaml", "bytes": 61, "sha256": "ae7c5b68e2f157528e62885804e69e88583897b775e03c86fcbe52feaf498aba"},
+    {"relative_path": "settings.yaml", "bytes": 230, "sha256": "9c0ae6f929c886744bb4224ca2d1b6153ed1ef2b154f26068c0375726d16a58a"}
+  ],
+  "protected_boundary_readback": {
+    "emr4_source_supplied_to_harness": false,
+    "product_patient_clinical_or_protected_data_used": false,
+    "telemetry_mode": "DISABLED",
+    "model_facing_tool_registrations_enabled": 0,
+    "raw_reasoning_request_response_or_credential_committed": false,
+    "default_worker_transport_changed": false,
+    "protected_ref_movement": false
+  },
+  "assessment": {
+    "traceability_signal": "The native harness failed fast with an exact local configuration invariant and nonzero process exit instead of producing an unclassified transport non-result.",
+    "reliability_or_model_performance_measured": false,
+    "replacement_decision_supported": false,
+    "claim_boundary": "This no-call result supports only local launcher/configuration traceability for rc.7. It provides no evidence about DeepSeek inference reliability, reasoning, coding performance, provider latency, or superiority to Claude Code."
+  },
+  "cleanup": {
+    "required": true,
+    "completed": true,
+    "completed_at": "2026-08-18T14:27:15.6592213+10:00",
+    "method": "exact verified directory sent to Windows Recycle Bin",
+    "recoverable_from_recycle_bin": true,
+    "workspace_present_after_cleanup": false
+  }
+}
