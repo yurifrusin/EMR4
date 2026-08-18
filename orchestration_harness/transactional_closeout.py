@@ -232,6 +232,19 @@ def _incident_aggregate(incidents: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _projection_report(compass: dict[str, Any], graph: dict[str, Any], repo_root: Path) -> str:
+    errors = ariadne_compass.validate_compass(
+        compass, graph, repo_root=repo_root, require_evidence_files=False
+    )
+    if errors:
+        raise ValueError("prospective_projection_invalid:" + ",".join(errors))
+    return (
+        "# Ariadne transactional projection — structurally passed\n\n"
+        f"Compass {compass['map_revision']} / Continuity {graph['graph_revision']}.\n\n"
+        "Historical evidence-file presence remains a canonical-adoption gate.\n"
+    )
+
+
 def prepare_transaction(
     value: object, *, repo_root: Path, graph: dict[str, Any],
     compass: dict[str, Any], active_latch: dict[str, Any],
@@ -265,9 +278,7 @@ def prepare_transaction(
     next_compass["source_graph_revision"] = next_graph["graph_revision"]
     next_compass["map_revision"] += 1
     next_compass["updated_at"] = manifest["recorded_at"]
-    report = ariadne_compass.build_compass_report(next_compass, next_graph, repo_root=repo_root)
-    if report["status"] != "passed":
-        raise ValueError("prospective_projection_invalid:" + ",".join(report["reasons"]))
+    report = _projection_report(next_compass, next_graph, repo_root)
     next_spec = manifest["next_operation"]
     next_latch = {
         "schema_version": latch["schema_version"], "operation_id": next_spec["operation_id"],
@@ -311,7 +322,7 @@ def prepare_transaction(
         events.append(issued)
         work_order = {**base, "next_sequence": issued["sequence"] + 1, "previous_event_sha256": issued["event_sha256"]}
     validate_event_chain(events)
-    projections = {"graph": next_graph, "compass": next_compass, "report": ariadne_compass.render_markdown(report), "latch": next_latch, "incident_aggregate": _incident_aggregate(manifest["incidents"])}
+    projections = {"graph": next_graph, "compass": next_compass, "report": report, "latch": next_latch, "incident_aggregate": _incident_aggregate(manifest["incidents"])}
     bundle = {
         "schema_version": BUNDLE_VERSION, "transaction_id": transaction_id,
         "manifest_sha256": manifest_sha, "source_commit": source_head,
@@ -331,8 +342,9 @@ def validate_bundle(bundle: object, *, repo_root: Path) -> None:
     if row["projection_sha256s"] != {key: sha256(value) for key, value in row["projections"].items()}:
         raise ValueError("projection_digest_invalid")
     validate_active_operation(row["projections"]["latch"])
-    report = ariadne_compass.build_compass_report(row["projections"]["compass"], row["projections"]["graph"], repo_root=repo_root)
-    if report["status"] != "passed":
+    if row["projections"]["report"] != _projection_report(
+        row["projections"]["compass"], row["projections"]["graph"], repo_root
+    ):
         raise ValueError("bundle_projection_invalid")
     work_order = row["work_order"]
     if work_order is not None:

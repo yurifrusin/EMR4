@@ -26,7 +26,7 @@ strict resolver and copied it into every prospective projection and WorkOrder.
 | Measure | Legacy representative surface | Clockwork candidate |
 |---|---:|---:|
 | Maintained executable/schema/test files | 6 | 5 |
-| Physical maintained lines | 1,002 | 989 |
+| Physical maintained lines | 1,002 | 1,001 |
 | Manually supplied binding/leaf fields | 72 top-level updater constants | 54 manifest leaves |
 | Projection publication calls | 12 | 1 |
 | Controlled procedural retries | 7 | 0 |
@@ -45,8 +45,9 @@ median cycle is 2,571.216 ms for the legacy reference and 985.012 ms for the
 candidate, a 61.7% reduction. This estimate is explanatory only: scheduler and
 filesystem timing are explicitly non-authoritative. The acceptance rests on
 zero escapes, zero partial publication, 100% retry reduction in the controlled
-defect suite, preserved coverage and the 49-line / one-surface maintained
-reduction.
+defect suite, preserved coverage and the one-surface reduction. The physical
+line reduction is only one line and is not treated as meaningful efficiency
+evidence on its own.
 
 ## DeepSeek gear result
 
@@ -61,7 +62,10 @@ occurred.
 
 ## Claim boundary
 
-This is shadow evidence, not live-control replacement. It proves a smaller and
+This is shadow evidence, not live-control replacement. The shadow report uses
+deterministic structural Compass validation; historical evidence-file presence
+remains an explicit canonical-adoption gate because the accepted map names
+preserved local evidence absent from a clean checkout. It proves a smaller and
 more reliable candidate reading mechanism plus shared broker causal time. It
 does not prove crash-atomic migration of the independently addressed live
 files, occupied native-Harness startup, model performance, product throughput

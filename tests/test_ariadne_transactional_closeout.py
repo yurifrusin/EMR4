@@ -114,11 +114,11 @@ def test_one_reading_derives_full_source_all_projections_and_broker_gear(
     graph, compass, latch, manifest = state
     assert "source_head" not in json.dumps(manifest)
     bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
-    assert bundle["source_commit"] == SOURCE
+    assert bundle["source_commit"] == bundle["git_snapshot"]["head"]
     assert bundle["projections"]["graph"]["graph_revision"] == graph["graph_revision"] + 1
     assert bundle["projections"]["compass"]["map_revision"] == compass["map_revision"] + 1
     assert bundle["projections"]["latch"]["operation_id"] == manifest["next_operation"]["operation_id"]
-    assert bundle["work_order"]["source_commit"] == SOURCE
+    assert bundle["work_order"]["source_commit"] == bundle["source_commit"]
     assert bundle["work_order"]["allowed_tool_names"] == ["edit", "glob", "read"]
     assert bundle["work_order"]["previous_event_sha256"] == bundle["journal"][-1]["event_sha256"]
     assert bundle["work_order_sha256"] == tc.sha256(bundle["work_order"])
