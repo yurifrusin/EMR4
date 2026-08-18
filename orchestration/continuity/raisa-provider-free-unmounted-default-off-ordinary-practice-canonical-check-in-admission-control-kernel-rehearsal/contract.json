@@ -1,0 +1,189 @@
+{
+  "schema_version": "emr4.check-in-admission-kernel-rehearsal-contract.v1",
+  "source_head": "249609a7f0c7131cff376aef315e1ff7742b44d7",
+  "accepted_architecture_source": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+  "result": "raisa_provider_free_unmounted_default_off_ordinary_practice_canonical_check_in_admission_control_kernel_rehearsal_pass",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md",
+      "sha256": "744c175e18b335bd02cb954e501d6d3cba99744b052fc1e34f4b445050cc49f1"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md",
+      "sha256": "ce520b9d8c90d46aba7cb5bad1c59585d508d9d1849051443c5a45e1a68371ab"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md",
+      "sha256": "a52f8d108f5703b6bf19ca689fcf7911110b063f922cdac41f547b4fdbb43131"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+      "sha256": "505120968572362a7df8d67ab1d95947ed1cd467df0fbc520aca73a704755ba9"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.schema.json",
+      "sha256": "1557801527dc8db675e1dc21bb0593b8ab94a253843703e53e1a67a77a2ea122"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+      "sha256": "5fdef13d61414002c7f5c2719062f9bbf81acabdab86cbb222d847f5d47cb712"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-sol-acceptance.md",
+      "sha256": "da13d4c8c8ce12f37dbdab26a442edb2adb95c45b84fceebc0a3145a496e1bd7"
+    }
+  ],
+  "kernel_profile": {
+    "module": "orchestration_harness.check_in_admission_control",
+    "unmounted": true,
+    "standard_library_only": true,
+    "imports_app": false,
+    "ordinary_activation_authority_granted": false,
+    "canonical_active_ordinary_record_count": 0,
+    "ordinary_admission_release_possible": false,
+    "executes_product_command": false,
+    "persists_state": false,
+    "reads_environment": false,
+    "uses_network_or_provider": false
+  },
+  "types": {
+    "admission_states": [
+      "absent",
+      "prepared",
+      "active",
+      "suspended",
+      "withdrawn"
+    ],
+    "kill_switch_states": [
+      "clear",
+      "engaged"
+    ],
+    "lanes": [
+      "none",
+      "authored_synthetic",
+      "ordinary_practice",
+      "ambiguous"
+    ],
+    "decision_fields": [
+      "schema_version",
+      "decision",
+      "lane",
+      "reason_code",
+      "snapshot_generation",
+      "snapshot_digest"
+    ],
+    "full_git_object_pattern": "^[0-9a-f]{40}$",
+    "request_digest_pattern": "^[0-9a-f]{64}$"
+  },
+  "evaluator": {
+    "ordered_steps": [
+      "validate_snapshot_presence_shape_signature_git_freshness_environment_and_uniqueness",
+      "deny_unless_feature_enabled_exact_true",
+      "deny_if_kill_switch_engaged",
+      "compute_synthetic_and_ordinary_matches_independently",
+      "deny_lane_overlap_or_absence",
+      "preserve_synthetic_only_admission",
+      "deny_every_ordinary_lane_while_activation_authority_closed",
+      "return_six_field_typed_decision_without_command_capability"
+    ],
+    "synthetic_and_ordinary_non_substitutable": true,
+    "lane_overlap_denies": true,
+    "kill_switch_dominates_both_lanes": true,
+    "last_known_good_fallback": false,
+    "ordinary_admitted_reason_present": false
+  },
+  "transitions": {
+    "future_architecture_graph": [
+      "absent->prepared",
+      "prepared->active",
+      "prepared->withdrawn",
+      "active->suspended",
+      "active->withdrawn",
+      "suspended->withdrawn"
+    ],
+    "executable_record_edges": [
+      "absent->prepared",
+      "prepared->withdrawn",
+      "active->suspended",
+      "active->withdrawn",
+      "suspended->withdrawn"
+    ],
+    "represented_but_denied_edges": [
+      "prepared->active"
+    ],
+    "accepted_transition_may_produce_active": false,
+    "resume_operation_present": false,
+    "withdrawal_disable_only": true,
+    "withdrawn_terminal": true,
+    "kill_switch_executable_edges": [
+      "clear->engaged"
+    ],
+    "kill_switch_clear_operation_present": false
+  },
+  "command_envelope": {
+    "operation_ids": [
+      "prepareAppointmentCheckInAdmission",
+      "activateAppointmentCheckInAdmission",
+      "suspendAppointmentCheckInAdmission",
+      "withdrawAppointmentCheckInAdmission",
+      "engageAppointmentCheckInGlobalKillSwitch"
+    ],
+    "required_controls": [
+      "authenticated_current_human",
+      "dedicated_operator_role",
+      "server_owned_practice_scope",
+      "server_owned_environment_scope",
+      "correlation_id",
+      "idempotency_key",
+      "complete_request_digest",
+      "idempotency_bound_to_complete_request_digest",
+      "expected_record_version",
+      "expected_snapshot_generation",
+      "closed_reason_code",
+      "authority_git_object_full_40_and_resolved",
+      "freshness",
+      "append_only_audit",
+      "bounded_patient_free_receipt"
+    ],
+    "dispatch_capability": false,
+    "seven_character_git_object_rejected": true,
+    "unknown_commit": {
+      "success_released": false,
+      "readback_required": true,
+      "retry_allowed": false,
+      "readback_identity": "server_command_id_and_idempotency_identity"
+    }
+  },
+  "scenario_profile": {
+    "evaluator_named_scenarios": 17,
+    "record_transition_matrix_scenarios": 25,
+    "kill_switch_transition_scenarios": 2,
+    "command_named_scenarios": 18,
+    "unknown_commit_scenarios": 1,
+    "minimum_total_scenarios": 24,
+    "minimum_hostile_contract_mutations": 192
+  },
+  "clockwork_boundary": {
+    "inputs_are_digest_and_full_git_bound": true,
+    "ariadne_deepseek_shared_clock_status": "accepted_shadow_only",
+    "live_gear_mesh_implemented": false,
+    "broker_called": false,
+    "workflow_receipt_is_product_authority": false,
+    "later_adoption_requires_measured_efficacy": true
+  },
+  "closed_boundaries": {
+    "ordinary_practice_enabled": false,
+    "feature_flag_or_synthetic_allowlist_changed": false,
+    "app_product_or_configuration_changed": false,
+    "openapi_or_graphql_changed": false,
+    "database_or_runtime_role_changed": false,
+    "route_or_product_command_called": false,
+    "generic_status_arrived_changed": false,
+    "action_grammar_client_or_waiting_area_changed": false,
+    "product_patient_or_clinical_data_used": false,
+    "provider_or_network_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false,
+    "live_clockwork_adopted": false
+  }
+}

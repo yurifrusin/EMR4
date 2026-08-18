@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
-  "active_tranche": "Provider-free default-off ordinary-practice canonical check-in admission-control architecture",
-  "objective": "Freeze the narrowest API-spine-compatible architecture for an explicit ordinary-practice admission gate distinct from the authored-synthetic allowlist, rollout kill-switch and rollback operations, and non-PHI A5.1 observability and alerting while default denial remains exact.",
-  "status": "complete",
-  "source_head": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
-  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted 6/3/3 readiness review and Yuri's standing uninterrupted-development authority authorize provider-free default-off architecture only; they do not authorize enablement or product mutation.",
+  "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+  "active_tranche": "Provider-free unmounted default-off ordinary-practice canonical check-in admission-control kernel rehearsal",
+  "objective": "Derive and rehearse one pure typed evaluator and control-transition kernel from the accepted architecture with zero active ordinary records, exact default denial, global kill-switch dominance and disable-only rollback without mounting a product command.",
+  "status": "in_progress",
+  "source_head": "249609a7f0c7131cff376aef315e1ff7742b44d7",
+  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted architecture at 752b521c59f5b44bf46de0cf776a33ac74b8134d and Yuri's standing uninterrupted-development authority authorize only the provider-free unmounted zero-active-record kernel rehearsal.",
   "checkpoint": {
-    "completed_stage": "The exact architecture candidate at full source 752b521c59f5b44bf46de0cf776a33ac74b8134d passes deterministic and integrated verification plus one fresh Gemini 3.7 Flash/high veto. Continuity 325 / Compass 307, revision 512, Sol acceptance, Yuri summary and the delivered non-PHI closeout notification are complete.",
-    "next_executable_stage": null,
+    "completed_stage": "The fresh five-source preplanning receipt passes at full source 249609a7f0c7131cff376aef315e1ff7742b44d7. The frozen unmounted kernel plan, pure standard-library implementation and deterministic evidence now pass 63 named scenarios and 341 hostile contract mutations with zero active ordinary records, zero ordinary admission releases and zero escapes.",
+    "next_executable_stage": "run_the_integrated_acceptance_packet_then_commit_the_exact_clean_candidate_and_obtain_one_fresh_gemini_37_flash_high_read_only_veto",
     "retry_counters": {
-      "planning": 1,
+      "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 3
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,22 +24,24 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "authorized_operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_architecture_and_deterministic_artifact_review_only",
+    "provider_free_unmounted_kernel_and_deterministic_rehearsal_only",
+    "zero_active_ordinary_admission_records",
     "default_off_and_default_denial_remain_exact",
     "authored_synthetic_practice_allowlist_remains_exact_and_distinct_from_future_ordinary_admission",
     "no_ordinary_practice_enablement",
     "no_feature_flag_or_allowlist_change",
-    "no_product_code_configuration_or_live_route_change",
+    "no_product_code_configuration_openapi_graphql_or_live_route_change",
+    "no_database_schema_or_runtime_role_change",
     "no_generic_status_arrived_change",
     "no_action_grammar_or_first_party_client_change",
     "no_waiting_area_movement",

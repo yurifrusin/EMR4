@@ -1,0 +1,148 @@
+{
+  "canonical_active_ordinary_record_count": 0,
+  "commands": {
+    "accepted_count": 1,
+    "count": 18,
+    "seven_character_git_object_rejected": true,
+    "unknown_commit": {
+      "readback_identity": "server_command_id_and_idempotency_identity",
+      "readback_required": true,
+      "retry_allowed": false,
+      "success_released": false
+    }
+  },
+  "evaluator": {
+    "count": 17,
+    "results": [
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_missing",
+        "scenario_id": "snapshot_missing"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_invalid",
+        "scenario_id": "schema_invalid"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_invalid",
+        "scenario_id": "git_abbreviated"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_invalid",
+        "scenario_id": "git_unresolved"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_stale",
+        "scenario_id": "snapshot_stale"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_ambiguous",
+        "scenario_id": "snapshot_ambiguous"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "feature_disabled",
+        "scenario_id": "feature_disabled"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "kill_switch_engaged",
+        "scenario_id": "kill_switch_synthetic"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "kill_switch_engaged",
+        "scenario_id": "kill_switch_ordinary"
+      },
+      {
+        "decision": "denied",
+        "lane": "ambiguous",
+        "reason_code": "lane_ambiguous",
+        "scenario_id": "lane_ambiguous"
+      },
+      {
+        "decision": "admitted",
+        "lane": "authored_synthetic",
+        "reason_code": "admitted_synthetic",
+        "scenario_id": "synthetic_admitted"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "no_matching_lane",
+        "scenario_id": "ordinary_absent"
+      },
+      {
+        "decision": "denied",
+        "lane": "ordinary_practice",
+        "reason_code": "ordinary_state_not_active",
+        "scenario_id": "ordinary_prepared"
+      },
+      {
+        "decision": "denied",
+        "lane": "ordinary_practice",
+        "reason_code": "ordinary_evidence_missing",
+        "scenario_id": "ordinary_active_evidence_missing"
+      },
+      {
+        "decision": "denied",
+        "lane": "ordinary_practice",
+        "reason_code": "ordinary_activation_closed",
+        "scenario_id": "ordinary_active_authority_closed"
+      },
+      {
+        "decision": "denied",
+        "lane": "none",
+        "reason_code": "snapshot_invalid",
+        "scenario_id": "wrong_environment"
+      },
+      {
+        "decision": "denied",
+        "lane": "ordinary_practice",
+        "reason_code": "ordinary_binding_mismatch",
+        "scenario_id": "ordinary_binding_mismatch"
+      }
+    ]
+  },
+  "hostile_contract_mutations": {
+    "count": 341,
+    "escapes": 0
+  },
+  "live_clockwork_adopted": false,
+  "ordinary_admission_release_count": 0,
+  "product_or_configuration_changed": false,
+  "provider_or_network_used": false,
+  "reasons": [],
+  "result": "raisa_provider_free_unmounted_default_off_ordinary_practice_canonical_check_in_admission_control_kernel_rehearsal_pass",
+  "schema_version": "emr4.check-in-admission-kernel-rehearsal-evidence.v1",
+  "source_binding_count": 7,
+  "source_head": "249609a7f0c7131cff376aef315e1ff7742b44d7",
+  "status": "passed",
+  "total_scenario_count": 63,
+  "transitions": {
+    "accepted_record_edges": [
+      "absent->prepared",
+      "prepared->withdrawn",
+      "active->suspended",
+      "active->withdrawn",
+      "suspended->withdrawn"
+    ],
+    "active_output_count": 0,
+    "kill_switch_count": 2,
+    "record_matrix_count": 25
+  }
+}

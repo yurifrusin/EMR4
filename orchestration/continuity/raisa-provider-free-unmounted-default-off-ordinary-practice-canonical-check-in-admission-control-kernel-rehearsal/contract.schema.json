@@ -1,0 +1,450 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-admission-kernel-rehearsal-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "accepted_architecture_source",
+    "result",
+    "source_bindings",
+    "kernel_profile",
+    "types",
+    "evaluator",
+    "transitions",
+    "command_envelope",
+    "scenario_profile",
+    "clockwork_boundary",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-admission-kernel-rehearsal-contract.v1"
+    },
+    "source_head": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "accepted_architecture_source": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "result": {
+      "const": "raisa_provider_free_unmounted_default_off_ordinary_practice_canonical_check_in_admission_control_kernel_rehearsal_pass"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "kernel_profile": {
+      "$ref": "#/$defs/kernelProfile"
+    },
+    "types": {
+      "$ref": "#/$defs/types"
+    },
+    "evaluator": {
+      "$ref": "#/$defs/evaluator"
+    },
+    "transitions": {
+      "$ref": "#/$defs/transitions"
+    },
+    "command_envelope": {
+      "$ref": "#/$defs/commandEnvelope"
+    },
+    "scenario_profile": {
+      "$ref": "#/$defs/scenarioProfile"
+    },
+    "clockwork_boundary": {
+      "$ref": "#/$defs/clockworkBoundary"
+    },
+    "closed_boundaries": {
+      "$ref": "#/$defs/closedBoundaries"
+    }
+  },
+  "$defs": {
+    "gitObject": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonEmptyTextList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "kernelProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "module",
+        "unmounted",
+        "standard_library_only",
+        "imports_app",
+        "ordinary_activation_authority_granted",
+        "canonical_active_ordinary_record_count",
+        "ordinary_admission_release_possible",
+        "executes_product_command",
+        "persists_state",
+        "reads_environment",
+        "uses_network_or_provider"
+      ],
+      "properties": {
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unmounted": {
+          "type": "boolean"
+        },
+        "standard_library_only": {
+          "type": "boolean"
+        },
+        "imports_app": {
+          "type": "boolean"
+        },
+        "ordinary_activation_authority_granted": {
+          "type": "boolean"
+        },
+        "canonical_active_ordinary_record_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ordinary_admission_release_possible": {
+          "type": "boolean"
+        },
+        "executes_product_command": {
+          "type": "boolean"
+        },
+        "persists_state": {
+          "type": "boolean"
+        },
+        "reads_environment": {
+          "type": "boolean"
+        },
+        "uses_network_or_provider": {
+          "type": "boolean"
+        }
+      }
+    },
+    "types": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admission_states",
+        "kill_switch_states",
+        "lanes",
+        "decision_fields",
+        "full_git_object_pattern",
+        "request_digest_pattern"
+      ],
+      "properties": {
+        "admission_states": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "kill_switch_states": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "lanes": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "decision_fields": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "full_git_object_pattern": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_digest_pattern": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordered_steps",
+        "synthetic_and_ordinary_non_substitutable",
+        "lane_overlap_denies",
+        "kill_switch_dominates_both_lanes",
+        "last_known_good_fallback",
+        "ordinary_admitted_reason_present"
+      ],
+      "properties": {
+        "ordered_steps": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "synthetic_and_ordinary_non_substitutable": {
+          "type": "boolean"
+        },
+        "lane_overlap_denies": {
+          "type": "boolean"
+        },
+        "kill_switch_dominates_both_lanes": {
+          "type": "boolean"
+        },
+        "last_known_good_fallback": {
+          "type": "boolean"
+        },
+        "ordinary_admitted_reason_present": {
+          "type": "boolean"
+        }
+      }
+    },
+    "transitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "future_architecture_graph",
+        "executable_record_edges",
+        "represented_but_denied_edges",
+        "accepted_transition_may_produce_active",
+        "resume_operation_present",
+        "withdrawal_disable_only",
+        "withdrawn_terminal",
+        "kill_switch_executable_edges",
+        "kill_switch_clear_operation_present"
+      ],
+      "properties": {
+        "future_architecture_graph": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "executable_record_edges": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "represented_but_denied_edges": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "accepted_transition_may_produce_active": {
+          "type": "boolean"
+        },
+        "resume_operation_present": {
+          "type": "boolean"
+        },
+        "withdrawal_disable_only": {
+          "type": "boolean"
+        },
+        "withdrawn_terminal": {
+          "type": "boolean"
+        },
+        "kill_switch_executable_edges": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "kill_switch_clear_operation_present": {
+          "type": "boolean"
+        }
+      }
+    },
+    "commandEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_ids",
+        "required_controls",
+        "dispatch_capability",
+        "seven_character_git_object_rejected",
+        "unknown_commit"
+      ],
+      "properties": {
+        "operation_ids": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "required_controls": {
+          "$ref": "#/$defs/nonEmptyTextList"
+        },
+        "dispatch_capability": {
+          "type": "boolean"
+        },
+        "seven_character_git_object_rejected": {
+          "type": "boolean"
+        },
+        "unknown_commit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "success_released",
+            "readback_required",
+            "retry_allowed",
+            "readback_identity"
+          ],
+          "properties": {
+            "success_released": {
+              "type": "boolean"
+            },
+            "readback_required": {
+              "type": "boolean"
+            },
+            "retry_allowed": {
+              "type": "boolean"
+            },
+            "readback_identity": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "scenarioProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluator_named_scenarios",
+        "record_transition_matrix_scenarios",
+        "kill_switch_transition_scenarios",
+        "command_named_scenarios",
+        "unknown_commit_scenarios",
+        "minimum_total_scenarios",
+        "minimum_hostile_contract_mutations"
+      ],
+      "properties": {
+        "evaluator_named_scenarios": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "record_transition_matrix_scenarios": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "kill_switch_transition_scenarios": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "command_named_scenarios": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unknown_commit_scenarios": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_total_scenarios": {
+          "type": "integer",
+          "minimum": 24
+        },
+        "minimum_hostile_contract_mutations": {
+          "type": "integer",
+          "minimum": 192
+        }
+      }
+    },
+    "clockworkBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputs_are_digest_and_full_git_bound",
+        "ariadne_deepseek_shared_clock_status",
+        "live_gear_mesh_implemented",
+        "broker_called",
+        "workflow_receipt_is_product_authority",
+        "later_adoption_requires_measured_efficacy"
+      ],
+      "properties": {
+        "inputs_are_digest_and_full_git_bound": {
+          "type": "boolean"
+        },
+        "ariadne_deepseek_shared_clock_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "live_gear_mesh_implemented": {
+          "type": "boolean"
+        },
+        "broker_called": {
+          "type": "boolean"
+        },
+        "workflow_receipt_is_product_authority": {
+          "type": "boolean"
+        },
+        "later_adoption_requires_measured_efficacy": {
+          "type": "boolean"
+        }
+      }
+    },
+    "closedBoundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordinary_practice_enabled",
+        "feature_flag_or_synthetic_allowlist_changed",
+        "app_product_or_configuration_changed",
+        "openapi_or_graphql_changed",
+        "database_or_runtime_role_changed",
+        "route_or_product_command_called",
+        "generic_status_arrived_changed",
+        "action_grammar_client_or_waiting_area_changed",
+        "product_patient_or_clinical_data_used",
+        "provider_or_network_used",
+        "production_deployment_release_or_pages",
+        "protected_ref_moved",
+        "live_clockwork_adopted"
+      ],
+      "properties": {
+        "ordinary_practice_enabled": {
+          "type": "boolean"
+        },
+        "feature_flag_or_synthetic_allowlist_changed": {
+          "type": "boolean"
+        },
+        "app_product_or_configuration_changed": {
+          "type": "boolean"
+        },
+        "openapi_or_graphql_changed": {
+          "type": "boolean"
+        },
+        "database_or_runtime_role_changed": {
+          "type": "boolean"
+        },
+        "route_or_product_command_called": {
+          "type": "boolean"
+        },
+        "generic_status_arrived_changed": {
+          "type": "boolean"
+        },
+        "action_grammar_client_or_waiting_area_changed": {
+          "type": "boolean"
+        },
+        "product_patient_or_clinical_data_used": {
+          "type": "boolean"
+        },
+        "provider_or_network_used": {
+          "type": "boolean"
+        },
+        "production_deployment_release_or_pages": {
+          "type": "boolean"
+        },
+        "protected_ref_moved": {
+          "type": "boolean"
+        },
+        "live_clockwork_adopted": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
