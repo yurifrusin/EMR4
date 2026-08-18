@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne transactional closeout control-plane consolidation efficacy rehearsal",
+    "completed_stage": "The corrected candidate is frozen at exact 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0. Its clean review worktree passes 13 focused tests, including the new-node missing-evidence mutation, and the corrected nine-command manifest preflight passes with zero model calls.",
+    "next_executable_stage": "generate_the_corrected_pre_verifier_five_source_receipt_then_dispatch_one_fresh_replacement_gemini_3_7_flash_high_veto",
+    "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
+    "reason_codes": [],
+    "resolved_commit": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
+    "branch_origin_aligned": false,
+    "head": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
+    "origin_branch_commit": "f21072405a4d5877ec03e2cd1aefc7fa74d379e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied native-Harness work remains inadmissible pending its separate HMR proof; local broker conformance does not launch DeepSeek and Claude is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The first pass was rejected; the corrected old-node/new-node boundary requires one fresh exact-candidate replacement veto.",
+        "work_packages": [
+          "corrected_exact_candidate_read_only_control_plane_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "replacement Gemini terminal decision",
+      "closeout",
+      "before any future occupied DeepSeek worker"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "clean corrected candidate",
+      "fresh preflight and five-source receipt",
+      "one replacement no-fallback veto",
+      "Sol-only acceptance and Git"
+    ]
+  },
+  "planned_action": "run_one_fresh_replacement_gemini_37_flash_high_exact_candidate_read_only_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md",
+      "docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json",
+      "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-report.md",
+      "docs/ariadne-agent-error-correction-register-revision-495.md",
+      "orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-gemini37-corrected-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns correction, acceptance and Git. DeepSeek occupied native-Harness work remains declined behind the separate HMR boot proof with no Claude fallback. Gemini 3.7 Flash/high is reserved for one fresh replacement read-only veto of the corrected exact candidate. Native subagents remain declined by developer policy.",
+    "git_refs_and_worktree": "Primary task branch and clean named review worktree are at corrected candidate 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0. Review branch codex/review-transactional-closeout-7c287e57 is clean; the corrected nine-command manifest preflight passed. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary contains only post-candidate dispatch artifacts plus preserved unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The Current Baton keeps the measured transactional control-plane tranche active, preserves protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and records revision 495 with 574 closed or contained incidents, including the rejected first Gemini pass in AER-0574.",
+    "protected_evidence_boundaries": "Exact committed provider-free shadow correction only. Gemini may read only the corrected packet allowlist and run only its nine commands. No canonical adoption, product/configuration/route/database behavior, ordinary-practice enablement, Arrived grammar/client/waiting-area movement, product/patient/clinical/historical/protected data, occupied DeepSeek/HMR retry, credentials/IAM/network, deployment, release, Pages or protected ref. Preserve docs/branding and all unrelated untracked files; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

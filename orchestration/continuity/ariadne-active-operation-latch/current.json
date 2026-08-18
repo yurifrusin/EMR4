@@ -4,11 +4,11 @@
   "active_tranche": "Ariadne transactional closeout control-plane consolidation efficacy rehearsal",
   "objective": "Design and rehearse one typed append-only closeout journal, transactional prewrite validator and deterministic projection reducer shared by Ariadne and the DeepSeek broker boundary, then reject adoption unless measured historical-shadow evidence proves lower procedural weight without coverage loss.",
   "status": "in_progress",
-  "source_head": "d53f0c02b912df4238811dd6a509e7f1878185f0",
+  "source_head": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
   "authority_source": "AGENTS.md Current Baton Next implementation, Yuri's explicit clockwork direction and standing uninterrupted-development authority require this measured workflow consolidation before the deferred product admission-control architecture.",
   "checkpoint": {
-    "completed_stage": "The first Gemini pass was rejected because it misclassified new-node evidence absence as inherited-only. The candidate now exempts only historical ancestor-node evidence gaps, rejects a new-node missing-evidence mutation, freezes its efficacy baseline independently of the advancing latch and passes focused plus complete register admission.",
-    "next_executable_stage": "freeze_the_corrected_exact_candidate_then_run_one_fresh_replacement_gemini_3_7_flash_high_read_only_veto",
+    "completed_stage": "The replacement Gemini 3.7 Flash/high veto passed against exact clean source 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0. It independently reproduced the new-node missing-evidence rejection, verified historical-ancestor-only deferral, ran all nine commands successfully and left the review worktree clean at the same full Git object ID.",
+    "next_executable_stage": "write_the_shadow_only_closeout_acceptance_yuri_summary_and_conventional_continuity_324_compass_306_transition_without_claiming_live_clockwork_adoption",
     "retry_counters": {
       "planning": 0,
       "implementation": 1,
