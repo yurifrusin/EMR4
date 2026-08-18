@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "aba468ee0ab14efccade6ec71c3fa2f7dfe4cd642ada818249e3094ba344f4b2",
+  "canonical_register_sha256": "6fcf30b6d3d3cad5562cf8cede4e3cc691248645bc1a2c1ddc53012592f41393",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 336,
+      "canonical_unchanged": 340,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
-      "command_scope_violation": 77,
+      "command_scope_violation": 78,
       "evidence_misreport": 63,
-      "harness_failure": 51,
+      "harness_failure": 52,
       "operator_error": 3,
-      "output_contract_violation": 164,
+      "output_contract_violation": 165,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
-      "repository_defect": 69,
+      "repository_defect": 70,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 353,
-      "harness": 51,
+      "agent_behavior": 355,
+      "harness": 52,
       "operator": 3,
-      "repository": 69,
+      "repository": 70,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 231,
+      "low": 235,
       "material": 116,
       "moderate": 145
     },
@@ -34,6 +34,7 @@
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
+      "ariadne-active-operation-latch-continuity-test::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 1,
@@ -49,7 +50,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 272,
+      "codex-primary-orchestrator::orchestrator": 274,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -58,7 +59,7 @@
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
       "deepseek-flash-workers::implementer": 14,
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
-      "deepseek-native-harness-rc7-container-worker::orchestrator": 1,
+      "deepseek-native-harness-rc7-container-worker::orchestrator": 2,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -116,12 +117,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 392,
+      "orchestrator": 396,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 492,
+  "incident_count": 496,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -270,17 +271,19 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0484",
-        "AER-0485"
+        "AER-0485",
+        "AER-0494"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Before every shell call, reject command text containing a pipeline operator and express discovery filters through the selected executable's own arguments.",
-        "Inspect every command string for a pipeline operator before execution; use direct array indexing or a single purpose-built executable for read-only projection."
+        "Inspect every command string for a pipeline operator before execution; use direct array indexing or a single purpose-built executable for read-only projection.",
+        "Reject any proposed shell command containing a pipeline operator before execution; use rg context arguments or one direct executable instead of composed read-only projections."
       ],
       "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
       "resource_ids": [
@@ -662,6 +665,30 @@
         "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
       ],
       "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0487",
+        "AER-0495"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "After every new incident, inspect every generated recurrence containing that ID and update the exact list, count and residual-pattern allowlist in the same correction patch.",
+        "Whenever a new incident repeats a full recurrence composite, inspect the generated report and advance the exact recurring-pattern baseline in the same revision before launching the complete suite."
+      ],
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1412,7 +1439,7 @@
       ]
     }
   ],
-  "register_revision": 422,
+  "register_revision": 426,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

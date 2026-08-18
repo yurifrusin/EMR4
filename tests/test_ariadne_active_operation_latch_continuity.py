@@ -50,7 +50,10 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert "register revision 365 with 416 incidents" in completed
         assert "404-check closeout packet" in completed
         assert "AER-0413 through AER-0416" in completed
-    else:
+    elif latch["operation_id"] == (
+        "raisa-provider-free-unmounted-canonical-check-in-product-adapter-"
+        "extraction-rehearsal"
+    ):
         assert latch["operation_id"] == (
             "raisa-provider-free-unmounted-canonical-check-in-product-adapter-"
             "extraction-rehearsal"
@@ -61,6 +64,16 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert "AER-0424/0425" in completed
         assert "590-check admission packet" in completed
         assert "Continuity 316 / Compass 298" in completed
+    else:
+        assert latch["operation_id"] == (
+            "deepseek-native-harness-exact-tool-view-recovery-and-second-"
+            "monitored-development-admission"
+        )
+        assert latch["status"] == "in_progress"
+        assert latch["source_head"] == "853f76d9a086c4bb263b54c761cbf8edbb65d6e9"
+        completed = latch["checkpoint"]["completed_stage"]
+        assert "provider-free exact-tool-view proof is committed" in completed
+        assert "register revision 426" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]

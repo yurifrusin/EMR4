@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 422,
+  "register_revision": 426,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19582,6 +19582,162 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-422.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0493",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-occupied-package-probe-012",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "deepseek-native-harness-rc7-container-worker",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "pinned_linux_docker_provider_free",
+      "stage": "dispatch",
+      "category": "harness_failure",
+      "process_severity": "low",
+      "expected_invariant": "The exact rc.7 package probe must use a package-declared CLI or exported internal module path and must complete before any Harness session or provider boundary is opened.",
+      "observed_error": "After the pinned Linux package and native modules loaded successfully, a root-package import probe resolved a nonexistent @deepseek-ai/dsh/index.js because rc.7 declares a lib/bin.js CLI and no root export or main entry.",
+      "detection_method": "Node returned ERR_MODULE_NOT_FOUND locally; package.json readback then proved bin dsh=lib/bin.js with exports and main both absent. No Harness session, broker container or provider call had started.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-423.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.rc7_root_package_import_without_declared_export",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop setup, preserve the failed provider-free probe, read the exact package metadata and continue only through the declared lib/bin.js CLI and verified internal module paths.",
+        "prevention_control": "Read package.json bin, exports and main before constructing any package entrypoint probe; do not infer a root index module from the package name.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-423.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0494",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-inspection-013",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-0484 and AER-0485, every shell invocation must contain one executable and no PowerShell pipeline, including bounded source inspection during incident registration.",
+      "observed_error": "A later register-test source inspection piped Get-Content into Select-Object, repeating the prohibited read-only projection pattern before any Harness session or provider call.",
+      "detection_method": "The orchestrator inspected the issued command string, identified the pipeline operator immediately after output and stopped occupied setup before dispatch.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-424.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop setup again, register the repeated violation and use one executable with native context arguments for all subsequent source inspection before rerunning complete register validation.",
+        "prevention_control": "Reject any proposed shell command containing a pipeline operator before execution; use rg context arguments or one direct executable instead of composed read-only projections.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-424.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0495",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-suite-014",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Adding a later incident to an existing recurring composite must atomically advance that composite's exact incident list and count in the complete-suite baseline.",
+      "observed_error": "Revision 424 added AER-0494 to the PowerShell-pipeline recurrence but retained the prior exact AER-0484/AER-0485 two-incident assertion, so the complete register suite rejected the stale literal baseline.",
+      "detection_method": "The complete register suite failed its exact PowerShell-pipeline recurring-pattern assertion and reported AER-0494 as the sole unexpected additional incident.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-425.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the exact PowerShell-pipeline recurrence to AER-0484/AER-0485/AER-0494, admit the now-recurring baseline-failure composite and rerun canonical plus complete-suite validation.",
+        "prevention_control": "After every new incident, inspect every generated recurrence containing that ID and update the exact list, count and residual-pattern allowlist in the same correction patch.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-425.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0496",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-latch-suite-015",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch-continuity-test",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The active-operation latch continuity test must admit a valid current in-progress successor while preserving exact historical assertions for the arrival review and accepted check-in adapter latch states.",
+      "observed_error": "The continuity test treated every operation other than the historical arrival review as the completed check-in adapter rehearsal, so it rejected the valid in-progress DeepSeek native-Harness successor operation.",
+      "detection_method": "The latch suite failed one exact operation-id assertion while the active latch's schema validation and dedicated current-operation invariants passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-426.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.active_operation_latch_successor_fixture_stale_after_valid_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Make the two historical operation assertions explicit branches, admit the current successor as a third exact branch and retain the shared in-progress versus complete latch invariants.",
+        "prevention_control": "A transition-bound latch continuity test must enumerate each retained historical operation explicitly and bind its final branch to the exact current successor rather than use a historical catch-all else branch.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-426.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },
