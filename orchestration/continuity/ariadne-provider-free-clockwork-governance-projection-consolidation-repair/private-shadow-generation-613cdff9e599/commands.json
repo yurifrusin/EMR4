@@ -1,0 +1,30 @@
+{
+  "commands": [
+    {
+      "arguments": [
+        "-m",
+        "scripts.ariadne_agent_error_register",
+        "--register",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "--schema",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+        "--output",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+      ],
+      "command_id": "register_project",
+      "executable": ".venv/Scripts/python.exe"
+    },
+    {
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "command_id": "governance_packet",
+      "executable": ".venv/Scripts/python.exe"
+    }
+  ]
+}
