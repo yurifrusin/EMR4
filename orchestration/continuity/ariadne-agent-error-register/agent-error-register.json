@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 392,
+  "register_revision": 393,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17988,6 +17988,45 @@
         "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json", "docs/ariadne-agent-error-correction-register-revision-392.md"]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0451",
+      "attempt_id": "deepseek-native-harness-profile-first-monitored-development-preplanning-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne runtime state must copy the exact current continuation-event vocabulary before receipt generation; the preplanning event is pre_sprint_planning.",
+      "observed_error": "The first successor preplanning runtime state reused the prose abbreviation pre_plan. Orchestrator preflight returned revision_required with continuation_event_missing_or_unapproved and admitted none of the five-source evidence.",
+      "detection_method": "The failed receipt returned revision_required before plan commit, worker dispatch, provider I/O or external mutation. The orchestrator listed the configured vocabulary, corrected the runtime state to pre_sprint_planning and generated a distinct passed five-source receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-monitored-development-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-monitored-development-preplanning-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-393.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected receipt, list the configured continuation events, correct the runtime state to pre_sprint_planning and admit only the distinct passed five-source receipt before freezing the plan.",
+        "prevention_control": "Before creating any runtime state, run the orchestrator preflight continuation-event listing and copy one exact configured value; never infer a shortened machine event from prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-monitored-development-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-monitored-development-preplanning-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-393.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

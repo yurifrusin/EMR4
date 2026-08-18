@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
-  "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
-  "objective": "Run one bounded multi-turn authored-synthetic DeepSeek V4 Flash/high coding task through the pinned official native Harness and capture attributable inspect/edit/test, model-turn, terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
-  "status": "complete",
-  "source_head": "25067e7d633eae597929d6969a35b22b735b253e",
-  "authority_source": "Yuri explicitly redirected the pre-publication sequence to require a less atomic and more comprehensive native DeepSeek Harness test; AGENTS.md standing uninterrupted-development authority permits this isolated successor without opening product or protected surfaces.",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
+  "objective": "Freeze a versioned three-profile native-Harness authority contract and use its bounded-worker profile for one real low-risk provider-free EMR4 harness-development package with attributable session evidence and Sol-only candidate admission.",
+  "status": "in_progress",
+  "source_head": "f3288aea19cc9b0451386093933acf2db0fd70e8",
+  "authority_source": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names this successor; Yuri directed that further evidence come from monitored useful EMR4 work and confirmed prepaid account credit is the monetary budget mechanism.",
   "checkpoint": {
-    "completed_stage": "Accepted evidence source 25067e7d633eae597929d6969a35b22b735b253e binds one occupied pinned rc.7 session with six attributable model-usage anchors, eight ordered tool calls, safe stale-version recovery, a correct one-file repair and 4/4 passing tests. The required regression test and terminal success summary were absent before the local request-7 guard. Register revision 392, paired closeout, Continuity 319 / Compass 301 and recoverable raw-session cleanup pass.",
-    "next_executable_stage": null,
+    "completed_stage": "Fresh successor five-source rehydration and explicit DeepSeek/Gemini/native-subagent assessment pass after one corrected continuation-event vocabulary error. The narrow profile-family, sparse-worktree, occupied-session, evidence and claim boundary is frozen in the uncommitted plan and threat delta.",
+    "next_executable_stage": "validate_and_commit_the_plan_threat_delta_preplanning_receipts_and_active_latch_then_build_the_sol_owned_profile_contract",
     "retry_counters": {
-      "planning": 0,
+      "planning": 1,
       "implementation": 0,
       "review": 0,
       "verification": 5
@@ -24,25 +24,25 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "one_pinned_official_deepseek_harness_rc7_authored_synthetic_agentic_coding_session_only",
-    "isolated_disposable_synthetic_git_workspace_dedicated_npm_cache_and_harness_homes_outside_emr4",
-    "generic_interval_processing_fixture_and_exact_inspect_edit_test_task_only",
-    "maximum_six_deepseek_flash_high_model_turns_zero_retry_zero_fallback_ten_minutes_and_usd_0_25_cap",
-    "no_emr4_repository_source_or_untracked_file_exposure_to_harness",
+    "one_pinned_official_deepseek_harness_rc7_fresh_session_for_one_exact_sparse_emr4_harness_development_package",
+    "repository_owned_three_profile_normalized_authority_contract_and_exact_package_source_mapping",
+    "provider_free_missing_credential_preflight_before_one_occupied_session",
+    "prepaid_account_credit_is_monetary_ceiling_with_zero_retry_zero_fallback_one_session_and_fifteen_minute_wall_clock",
+    "only_exact_sparse_packet_inputs_and_two_owned_output_paths_enter_the_worker_workspace",
     "no_product_patient_clinical_historical_or_protected_data",
-    "only_workspace_scoped_read_search_editor_and_powershell_test_tools_no_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
+    "only_workspace_scoped_read_glob_editor_and_powershell_tools_no_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
     "no_raw_reasoning_request_response_tool_payload_credential_header_or_environment_persistence",
-    "no_global_install_path_profile_configuration_or_default_transport_change",
+    "no_global_install_path_shell_profile_user_profile_credential_iam_or_unrestricted_default_transport_change",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

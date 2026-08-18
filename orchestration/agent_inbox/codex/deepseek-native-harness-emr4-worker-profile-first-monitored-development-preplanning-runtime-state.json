@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "derive_and_freeze_the_narrowest_versioned_native_harness_profile_family_and_first_monitored_low_risk_provider_free_emr4_development_boundary",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission as the next implementation and keeps every product/data/runtime/protected boundary closed.",
+    "current_authority_allocation": "GPT Sol remains Conductor and sole planner, acceptance owner, recovery owner and Git integrator. Yuri's current direction selects pinned native Harness as the next monitored trial transport only; the standing Claude Code lineage is not silently rewritten. DeepSeek may own one later exact-path low-risk provider-free worker package. Gemini and native subagents require independent leverage and currently have none.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json",
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-plan.md",
+      "docs/ariadne-agent-error-correction-register-revision-392.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json"
+    ],
+    "protected_evidence_boundaries": "The successor may codify repository-local provider-free profile specifications/generation/validation and later expose only an exact owned low-risk provider-free work package to one fresh native-Harness session. It opens no patient/product/clinical/historical/protected data, live runtime, ordinary-practice action, route/client/status/waiting-area change, deployment, release, Pages or protected refs. No global install or user-profile mutation. Raw model reasoning/request/response/credential material remains outside EMR4. docs/branding and unrelated untracked files remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "Fresh post-push task HEAD and origin task are aligned at f3288aea19cc9b0451386093933acf2db0fd70e8 on codex/ariadne-bernie-davida-parallel-seam with no tracked changes. Local/origin master and local/origin handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Required lineage including ad523968713e58f0b42c3a428556c968f61d6d3c and accepted native-Harness evidence source 25067e7d633eae597929d6969a35b22b735b253e remains ancestral; untracked files remain excluded."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
+    "objective": "Run one bounded multi-turn authored-synthetic DeepSeek V4 Flash/high coding task through the pinned official native Harness and capture attributable inspect/edit/test, model-turn, terminal and durable trace evidence without exposing EMR4 or changing the default worker transport.",
+    "status": "complete",
+    "source_head": "25067e7d633eae597929d6969a35b22b735b253e",
+    "authority_source": "Yuri explicitly redirected the pre-publication sequence to require a less atomic and more comprehensive native DeepSeek Harness test; AGENTS.md standing uninterrupted-development authority permits this isolated successor without opening product or protected surfaces.",
+    "checkpoint": {
+      "completed_stage": "Accepted evidence source 25067e7d633eae597929d6969a35b22b735b253e binds one occupied pinned rc.7 session with six attributable model-usage anchors, eight ordered tool calls, safe stale-version recovery, a correct one-file repair and 4/4 passing tests. The required regression test and terminal success summary were absent before the local request-7 guard. Register revision 392, paired closeout, Continuity 319 / Compass 301 and recoverable raw-session cleanup pass.",
+      "next_executable_stage": null,
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 5},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": false,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": true, "reason": "operation_complete"},
+    "protected_boundaries": [
+      "one_pinned_official_deepseek_harness_rc7_authored_synthetic_agentic_coding_session_only",
+      "isolated_disposable_synthetic_git_workspace_dedicated_npm_cache_and_harness_homes_outside_emr4",
+      "generic_interval_processing_fixture_and_exact_inspect_edit_test_task_only",
+      "maximum_six_deepseek_flash_high_model_turns_zero_retry_zero_fallback_ten_minutes_and_usd_0_25_cap",
+      "no_emr4_repository_source_or_untracked_file_exposure_to_harness",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "only_workspace_scoped_read_search_editor_and_powershell_test_tools_no_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
+      "no_raw_reasoning_request_response_tool_payload_credential_header_or_environment_persistence",
+      "no_global_install_path_profile_configuration_or_default_transport_change",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "assessed_stage": "successor_preplanning",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "After Sol freezes and deterministically validates the versioned profile family, one fresh native-Harness Flash/high session can own a real exact-path low-risk provider-free EMR4 work package and produce the trace evidence being evaluated.", "work_packages": ["one_future_exact_path_provider_free_emr4_worker_candidate_after_profile_admission"]},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "neutral", "rationale": "The immediate work is provider-free profile architecture and deterministic schema/hash validation; no material product candidate or independent veto surface exists before the worker package is selected.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits proactive delegation and no independent planning package is authorised.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["No parallel work before plan freeze; Sol serially defines the authority schema, profile family and first exact work package."],
+    "serial_constraints": ["fresh five-source preplan receipt", "plan and threat boundary freeze", "provider-free profile generation and deterministic admission", "commit exact profile source before any occupied EMR4 dispatch", "one fresh worker session", "Sol candidate review and closeout"],
+    "reassessment_triggers": ["post_plan_commit", "pre_worker_dispatch", "post_worker_exit", "pre_acceptance"]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "complete updated AGENTS.md read, predecessor acceptance, complete latch, exact post-push refs/worktree and fresh five-source successor assessment",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed fresh successor rehydration and owns serial plan freeze."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Pinned rc.7 is accepted for the next monitored trial only after versioned-profile admission."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical/default lineage remains available but is not silently selected for the next monitored trial."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini lane declined before a material candidate exists."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent was spawned under current policy."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
