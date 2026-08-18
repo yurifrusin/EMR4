@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 413,
+  "register_revision": 414,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19231,6 +19231,45 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-413.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0484",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-predispatch-rehydration-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every shell invocation must contain exactly one executable and must not use a PowerShell pipeline, even for read-only file slicing or metadata projection.",
+      "observed_error": "During provider-free proof verification and pre-dispatch rehydration, the orchestrator issued a bounded series of read-only PowerShell pipeline expressions using Select-Object or Measure-Object, contrary to the exact one-executable no-pipeline command rule.",
+      "detection_method": "The orchestrator compared the issued command strings with the restored AER command-scope rule before occupied dispatch and identified the pipeline operators directly.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop pipeline use, perform subsequent file slicing with direct indexed PowerShell expressions, register the bounded command-scope incident and rerun complete register validation before dispatch.",
+        "prevention_control": "Inspect every command string for a pipeline operator before execution; use direct array indexing or a single purpose-built executable for read-only projection.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-414.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },
