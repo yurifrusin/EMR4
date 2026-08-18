@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 373,
+  "register_revision": 374,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17072,6 +17072,44 @@
           "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-command-manifest.json",
           "orchestration/agent_inbox/codex/raisa-canonical-check-in-product-adapter-gemini37-worktree-preflight.json",
           "docs/ariadne-agent-error-correction-register-revision-373.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0426",
+      "attempt_id": "check-in-route-adapter-worker-worktree-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "dispatch",
+      "category": "reasoning_claim_error",
+      "process_severity": "low",
+      "expected_invariant": "Every full Git object ID used for worktree creation must be copied literally from a successful git rev-parse readback; a display prefix must never be manually expanded.",
+      "observed_error": "Sol manually expanded plan prefix 4daa2d77 into nonexistent object 4daa2d77a575c098b7d09e2ff01fd6bd74dfc7e9 in the first worker-worktree command. Git returned invalid reference before creating a path, branch or worktree. No worker, provider, database, product or network action occurred.",
+      "detection_method": "The git worktree add process returned invalid reference. Immediate path and branch checks proved absence; a standalone git rev-parse HEAD returned exact plan source 4daa2d772ffcf64e55f69917d2fb21802e959673, from which the corrected clean worktree was created.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-worker-worktree-first-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-374.md",
+        "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Capture literal git rev-parse HEAD output, use exact 4daa2d772ffcf64e55f69917d2fb21802e959673 for worktree creation and verify the new branch, path, clean status and HEAD before dispatch.",
+        "prevention_control": "Treat full Git identities as command outputs only. Every future worktree command must consume a separately captured literal git rev-parse value or an already machine-validated durable field; no manual completion of display prefixes is admitted.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-worker-worktree-first-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-374.md"
         ]
       },
       "status": "corrected"

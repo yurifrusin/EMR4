@@ -1,9 +1,9 @@
 {
-  "canonical_register_sha256": "537cdba44a52e73ef37323407cd7d194f60b776fc1cd3429839a927a59453877",
+  "canonical_register_sha256": "7ead32fedbc1fa5c2f1437b41e394c26b58f91a8e3226e9a6afbccd60286a492",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 275,
+      "canonical_unchanged": 276,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
@@ -12,18 +12,18 @@
       "harness_failure": 49,
       "output_contract_violation": 130,
       "read_only_violation": 3,
-      "reasoning_claim_error": 42,
+      "reasoning_claim_error": 43,
       "repository_defect": 65,
       "transport_timeout": 15
     },
     "by_origin": {
-      "agent_behavior": 296,
+      "agent_behavior": 297,
       "harness": 49,
       "repository": 65,
       "transport": 15
     },
     "by_process_severity": {
-      "low": 178,
+      "low": 179,
       "material": 115,
       "moderate": 132
     },
@@ -46,7 +46,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 213,
+      "codex-primary-orchestrator::orchestrator": 214,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -109,12 +109,12 @@
     "by_role": {
       "implementer": 41,
       "integration_reviewer": 3,
-      "orchestrator": 326,
+      "orchestrator": 327,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 425,
+  "incident_count": 426,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -967,15 +967,17 @@
       "categories": [
         "reasoning_claim_error"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0286",
-        "AER-0399"
+        "AER-0399",
+        "AER-0426"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "Treat full Git identities as command outputs only. Every future worktree command must consume a separately captured literal git rev-parse value or an already machine-validated durable field; no manual completion of display prefixes is admitted.",
         "Treat full Git identities as command outputs, never completion tasks. Capture git rev-parse HEAD in a standalone read before every worktree command, copy its literal forty-character output and let deterministic preflight compare the created worktree before external review.",
         "Treat full Git identities as command outputs, never memory or completion tasks. Worktree creation and verifier packets copy the literal git rev-parse result and a separate preflight compares the resulting worktree HEAD before any external call."
       ],
@@ -1271,7 +1273,7 @@
       ]
     }
   ],
-  "register_revision": 373,
+  "register_revision": 374,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

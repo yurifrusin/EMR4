@@ -4,14 +4,14 @@
   "active_tranche": "Provider-free default-off canonical check-in route-adapter convergence rehearsal",
   "objective": "Make the unchanged default-off A5.1 route delegate to the accepted canonical check-in product adapter while preserving the feature flag, authored-synthetic practice allowlist, exact request and response contract, default denial and every closed ordinary-product boundary.",
   "status": "in_progress",
-  "source_head": "ad523968713e58f0b42c3a428556c968f61d6d3c",
+  "source_head": "4daa2d772ffcf64e55f69917d2fb21802e959673",
   "authority_source": "AGENTS.md Current Baton at Continuity 316 / Compass 298, the accepted check-in product-adapter extraction result and Yuri's standing uninterrupted-development authority direct this narrow default-off route-adapter convergence rehearsal.",
   "checkpoint": {
-    "completed_stage": "The fail-closed plan and threat delta are frozen at source HEAD ad523968713e58f0b42c3a428556c968f61d6d3c. They preserve A5.1 default denial, exact HTTP/idempotency semantics and one accepted-adapter write path, including the narrow claim-before-envelope compatibility amendment required by route inspection.",
-    "next_executable_stage": "check_gate_and_commit_the_frozen_plan_then_generate_the_exact_deepseek_predispatch_packet_and_receipt",
+    "completed_stage": "The frozen plan is committed at exact source 4daa2d772ffcf64e55f69917d2fb21802e959673. AER-0426 preserves the rejected manual-SHA worktree command; the corrected DeepSeek branch and worktree are clean at the literal source, with the exact bounded packet prepared.",
+    "next_executable_stage": "generate_the_exact_pre_worker_dispatch_receipt_then_launch_one_deepseek_v4_flash_high_worker",
     "retry_counters": {
       "planning": 0,
-      "implementation": 0,
+      "implementation": 1,
       "review": 0,
       "verification": 0
     },

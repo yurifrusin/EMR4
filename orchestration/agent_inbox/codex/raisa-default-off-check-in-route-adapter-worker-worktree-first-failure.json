@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.worktree-command-failure.v1",
+  "attempt_id": "check-in-route-adapter-worker-worktree-001",
+  "observed_at": "2026-08-18T12:09:00+10:00",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+  "status": "revision_required",
+  "command_family": "git_worktree_add",
+  "attempted_object_id": "4daa2d77a575c098b7d09e2ff01fd6bd74dfc7e9",
+  "observed_error": "fatal: invalid reference",
+  "target_path_created": false,
+  "target_branch_created": false,
+  "candidate_changed": false,
+  "external_worker_started": false,
+  "corrected_object_id": "4daa2d772ffcf64e55f69917d2fb21802e959673",
+  "corrected_worktree": "C:/Users/sarashera/EMR4-worktrees/check-in-route-adapter-deepseek-4daa2d77",
+  "corrected_branch": "codex/check-in-route-adapter-deepseek-4daa2d77",
+  "corrected_worktree_clean": true,
+  "protected_refs_moved": false,
+  "incident_id": "AER-0426"
+}
