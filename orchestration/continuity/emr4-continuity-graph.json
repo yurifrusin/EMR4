@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 316,
+  "graph_revision": 317,
   "harvests": [],
   "nodes": [
     {
@@ -22003,9 +22003,119 @@
         "Practice enablement, general-status Arrived closure, action grammar and both client cutovers remain closed.",
         "PostgreSQL/RLS/concurrency, product data, providers, deployment and production remain unproved."
       ]
+    },
+    {
+      "id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "title": "Provider-free default-off canonical check-in route-adapter convergence rehearsal",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-18T03:39:45Z",
+      "updated_at": "2026-08-18T03:39:45Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Existing A5.1 remains default-off and exact authored-synthetic practice allowlisted.",
+          "The route delegates once to the accepted check-in adapter with no fallback write path.",
+          "Generic-status Arrived, action grammar, clients and waiting-area movement remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-default-off-canonical-check-in-route-adapter-convergence",
+          "source": "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept one default-off A5.1 delegation to the canonical check-in adapter without ordinary product admission."
+        }
+      ],
+      "claim_scope": [
+        "Gate-before-lookup denial and the exact A5.1 authored-synthetic allowlist remain unchanged.",
+        "One route binder composes locked current authority, check-in effect, audit, event, completion, commit/rollback and readback.",
+        "Same-key classification retains route compatibility while newly claimed invalid envelopes roll back.",
+        "103 focused, 35 database-backed and 85 API-Spine/plan checks plus the final Gemini 3.7 veto pass."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+          ],
+          "note": "The accepted first-party intent contract remains inherited; this default-off backend route convergence changes no client intent."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "review/test_ordinary_diary_cancellation_convergence.py",
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+          ],
+          "note": "The accepted fresh-read reconciliation contract remains inherited; no client projection changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md"
+        ],
+        "findings": [
+          "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json",
+          "docs/ariadne-agent-error-correction-register-revision-382.md",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-default-off-check-in-route-adapter-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "review/test_ordinary_diary_cancellation_convergence.py"
+        ],
+        "artifacts": [
+          "app/routers/appointments.py",
+          "app/services/appointment_check_in_product_adapter.py",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-recovery-result.md",
+          "scripts/raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Ordinary-practice admission remains closed.",
+        "Generic-status Arrived, action grammar and atomic two-client cutover remain closed.",
+        "Real product data, providers, deployment, production and protected integration remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T00:22:21Z"
+  "updated_at": "2026-08-18T03:39:45Z"
 }

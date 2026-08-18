@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 316 / Compass 298. The canonical check-in adapter is accepted unmounted; the next product step is default-off route-adapter convergence after fresh-task rehydration.
+> EMR4 is at Continuity 317 / Compass 299. Default-off A5.1 delegates to the canonical check-in adapter; the immediate authorised successor is a tiny isolated native DeepSeek Harness traceability rehearsal.
 
 ## North star
 
@@ -402,24 +402,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Dedicated check-in is the future canonical product-facing arrival command; Arrived is its resulting state. Lineage parent: `raisa-provider-free-read-only-post-cancellation-programme-orientation`.
 193. **Extract reusable check-in authority from default-off A5.1 route-local composition — Provider-free unmounted canonical check-in product-adapter extraction rehearsal**
    One unmounted deterministic check-in adapter is accepted without route or practice admission. Lineage parent: `raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review`.
+194. **Converge default-off A5.1 onto the accepted check-in adapter — Provider-free default-off canonical check-in route-adapter convergence rehearsal**
+   The closed route has one canonical check-in write path without ordinary-practice admission. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal`.
 
 ## Current position
 
-**Reusable deterministic check-in adapter exists while admission stays route-owned and default-off — Provider-free unmounted canonical check-in product-adapter extraction rehearsal**
+**Default-off A5.1 now delegates to one canonical check-in authority seam — Provider-free default-off canonical check-in route-adapter convergence rehearsal**
 
-**Why this proof came next:** The predecessor selected check-in as canonical ordinary-arrival meaning and this tranche extracts that exact meaning without opening runtime authority.
+**Why this proof came next:** The accepted unmounted adapter could replace duplicated route-local composition without opening product admission.
 
-In a fresh task, converge the unchanged default-off A5.1 route onto the accepted adapter without enabling it.
+Run Yuri's tiny isolated native DeepSeek Harness traceability rehearsal, then resume product planning without changing A5.1 admission.
 
 ### What this unlocks
 
-- Remove duplicated route-local check-in composition behind the existing closed gate.
-- Prepare later atomic general-status, grammar and two-client convergence as distinct gates.
+- Measure whether the native DeepSeek harness improves terminal and trace evidence over Claude Code transport.
+- Plan later check-in product admission and atomic client convergence as separate fail-closed gates.
 
 ### What it does not solve
 
-- No practice, route call, general-status Arrived, action grammar or client changed.
-- Real PostgreSQL, product/patient data, providers, deployment and production remain closed.
+- No ordinary practice, generic-status Arrived, action grammar or client is enabled.
+- Product/patient data, providers, deployment, production and protected integration remain closed.
 
 ## Continuity and authority
 
@@ -702,6 +704,7 @@ Prerequisites:
 
 ## Map limits
 
+- Default-off check-in route convergence opens no ordinary practice, client, product data, provider, deployment, production or protected integration authority.
 - The adapter extraction is in-process authored-synthetic evidence only; it opens no route, practice, database, provider, client, deployment or production authority.
 - The convergence review selects future command meaning only; A5.1 remains default-off and no route, status admission, grammar, client, database or runtime authority is opened.
 - The post-cancellation orientation selects only a read-only arrival/check-in convergence review; it does not admit A5.1, bind generic status, repair static route contracts or add a control.
@@ -981,6 +984,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-337.md`
 - `docs/ariadne-agent-error-correction-register-revision-343.md`
 - `docs/ariadne-agent-error-correction-register-revision-346.md`
+- `docs/ariadne-agent-error-correction-register-revision-382.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1226,6 +1230,8 @@ Prerequisites:
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md`
+- `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
+- `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
@@ -1537,6 +1543,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-cf-d2-observability-first-event-cue-threat-model-delta.md`
 - `docs/security/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-threat-model-delta.md`
 - `docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md`
+- `docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-delete-confirm-http-route-convergence-threat-model-delta.md`
@@ -1670,6 +1677,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-intent-shaped-temporal-retrieval-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-model-required-intent-shaping-source-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-patient-free-temporal-weave-review-1-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-default-off-check-in-route-adapter-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-behavior-transaction-gemini37-final-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-composition-product-adapter-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-kernel-sol-recovery-gemini-review-receipt.json`
@@ -1877,6 +1885,13 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-independent-veto.md`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-context-fabric-source-specific-durability-architecture-sol-recovery-lease.md`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-recovery-result.md`
 - `orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-default-off-runtime-instrumentation-architecture-sol-acceptance.md`
@@ -2939,6 +2954,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-17--reception-one-selected-appointment-cancellation-composition.md`
 - `orchestration/human_inbox/yuri/2026-08-18--arrival-check-in-command-family-convergence-review.md`
 - `orchestration/human_inbox/yuri/2026-08-18--canonical-check-in-product-adapter-extraction-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -3099,6 +3115,7 @@ Prerequisites:
 - `tests/test_raisa_post_status_action_compass_baton_orientation.py`
 - `tests/test_raisa_post_status_action_compass_baton_orientation_plan.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
+- `tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py`
 - `tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py`
 - `tests/test_raisa_provider_free_delete_confirm_http_route_convergence_continuity.py`
 - `tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py`
@@ -3190,4 +3207,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 298; continuity graph revision 316._
+_Compass map revision 299; continuity graph revision 317._

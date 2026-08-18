@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 380,
+  "register_revision": 382,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17342,6 +17342,121 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-resumption-chained-readback-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-380.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0433",
+      "attempt_id": "check-in-route-adapter-continuity-update-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A continuity node must link every inherited contract-evidence path through one of its typed evidence buckets before accepted Compass state can be written.",
+      "observed_error": "The first idempotent updater run wrote draft Continuity 317 / Compass 299 state and then failed Compass validation because inherited contract-evidence paths were not repeated in the new node's typed evidence buckets.",
+      "detection_method": "The updater's built-in ariadne_compass validation returned explicit contract_evidence_path_not_node_evidence reasons and a nonzero exit before the closeout was admitted.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-process-incidents.json",
+        "scripts/raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity_update.py",
+        "docs/ariadne-agent-error-correction-register-revision-381.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.check_in_route_closeout_contract_evidence_link_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Link every inherited contract path through the corresponding plan, finding, closeout and test bucket, then rerun the updater idempotently until its Compass report passes.",
+        "prevention_control": "Before each continuity update, compare every contract_evidence path with the union of the node's typed evidence buckets and require an empty difference before execution.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity_update.py",
+          "docs/ariadne-agent-error-correction-register-revision-381.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0434",
+      "attempt_id": "check-in-route-adapter-optional-compass-test-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every requested test path must come from a repository-confirmed exact filename rather than an inferred maintenance-test name.",
+      "observed_error": "Sol guessed nonexistent tests/test_ariadne_compass_current.py for an optional maintenance check. Pytest exited before collection.",
+      "detection_method": "The independently captured pytest process returned file-or-directory-not-found and collected no tests.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-process-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-381.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.optional_compass_maintenance_test_path_guessed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude the nonexistent command from acceptance and use the updater's passing built-in Compass validator plus the exact new continuity test as the admitted evidence.",
+        "prevention_control": "Optional maintenance checks may run only when their exact filename is already present in an accepted plan, updater or Git-tracked evidence list; guessed filenames are prohibited.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-381.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0435",
+      "attempt_id": "check-in-route-adapter-closeout-precommit-receipt-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ariadne_preflight",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every adapter observation method in an Ariadne runtime state must come from the configured method vocabulary.",
+      "observed_error": "The first closeout precommit runtime state used invented adapter observation method antigravity_worker_receipt. Ariadne returned revision_required before commit.",
+      "detection_method": "The independently captured preflight receipt returned adapter_probe_method_invalid:antigravity_cli_print and did not permit the closeout commit.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-process-incidents.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-precommit-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-382.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_adapter_probe_method_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the invented method with configured synthetic_fixture, retain the durable Gemini receipt in the evidence field and require a fresh passed precommit receipt.",
+        "prevention_control": "Copy adapter observation methods only from a previously passing exact runtime state or the configured enum; receipt provenance belongs in evidence text, not the method value.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-closeout-precommit-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-382.md"
         ]
       },
       "status": "corrected"

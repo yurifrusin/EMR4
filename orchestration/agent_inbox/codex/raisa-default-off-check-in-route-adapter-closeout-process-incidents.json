@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.agent-error-evidence.v1",
+  "timestamp": "2026-08-18T13:45:34.2675963+10:00",
+  "last_corrected_at": "2026-08-18T13:51:49.8390883+10:00",
+  "status": "corrected",
+  "incidents": [
+    {
+      "incident_id": "AER-0433",
+      "attempt_id": "check-in-route-adapter-continuity-update-001",
+      "observed_error": "The first idempotent continuity-updater run wrote draft Continuity 317 / Compass 299 state and then failed Compass validation because inherited contract-evidence paths were not repeated in the new node's typed evidence buckets.",
+      "correction": "The updater was repaired to link every inherited contract path through the corresponding plan, finding, closeout and test bucket, then rerun idempotently to a passing Compass report."
+    },
+    {
+      "incident_id": "AER-0434",
+      "attempt_id": "check-in-route-adapter-optional-compass-test-001",
+      "observed_error": "Sol guessed nonexistent tests/test_ariadne_compass_current.py for an optional maintenance check. Pytest exited before collection.",
+      "correction": "The nonexistent command is excluded from acceptance. The continuity updater's built-in Compass validator and the exact newly authored continuity test are the admitted checks; no further guessed filename is used."
+    },
+    {
+      "incident_id": "AER-0435",
+      "attempt_id": "check-in-route-adapter-closeout-precommit-receipt-001",
+      "observed_error": "The first closeout precommit runtime state used invented adapter observation method antigravity_worker_receipt. Ariadne returned revision_required before commit.",
+      "correction": "The runtime state now uses the configured synthetic_fixture method while naming the durable Gemini receipt in evidence. A fresh receipt passed."
+    }
+  ],
+  "candidate_head": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+  "protected_ref": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+}

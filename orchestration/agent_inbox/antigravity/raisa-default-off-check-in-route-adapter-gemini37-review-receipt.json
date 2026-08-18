@@ -1,0 +1,201 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-route-adapter-gemini-74a6552e",
+  "branch": "codex/review-check-in-route-adapter-74a6552e",
+  "head_before": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+  "head_after": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "869156aa3136750b6276694fd7f7db65ddb95ece9641aba4cf385d3c76f0a47c",
+  "result": "### Ariadne Rehydration & Authority Naming\n\nMandatory five-source rehydration verified:\n1. `live_handover_current_baton`: PR 74 & PR 75 merged at master `2e34bdad732fdab32fbf778280b3d3c70d66d602`; single-track protected integration.\n2. `current_authority_allocation`: GPT Sol is conductor/integrator and author of this recovery candidate; Gemini 3.7 Flash/high is the independent reviewer / veto.\n3. `active_plan_and_acceptance`: `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md` and `docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md`.\n4. `protected_evidence_boundaries`: Provider-free authored-synthetic objects, injected fakes, and local test database only; no product data, patient data, live providers or external network access.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-route-adapter-gemini-74a6552e` on branch `codex/review-check-in-route-adapter-74a6552e`, HEAD `c82c3a741053a9c8da260aa62e1a968af22bb54e`, recovery base `c2bc6fae8bd99131c34613daf255fe82ce3a1690`, local/origin master at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\nActive operation latch (`orchestration/continuity/ariadne-active-operation-latch/current.json`) verified in progress for operation `raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.\n\n---\n\n### Challenge Verification & Detailed Findings\n\n1. **Exact Git & Worktree Preconditions (C01, C02, C06, C07, C08):**\n   - Branch is `codex/review-check-in-route-adapter-74a6552e`.\n   - Exact HEAD is `c82c3a741053a9c8da260aa62e1a968af22bb54e`.\n   - Worktree is clean before and after review.\n   - Exact diff `c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e` contains no trailing whitespace issues and is strictly bounded to the allowlisted route, adapter, test, error register, receipt, and continuity files.\n\n2. **Fail-Closed Gate & Idempotency Key Normalization:**\n   - In `app/routers/appointments.py`, `confirm_check_in_proposal_route` executes `_a5_check_in_gate_open(current_user)` as its very first action.\n   - `_a5_check_in_gate_open` enforces both `settings.rayleen_a5_check_in_enabled` and exact practice inclusion in `settings.rayleen_a5_check_in_synthetic_practice_ids`.\n   - `_normalize_idempotency_key(idempotency_key)` executes before dependency construction (`_a5_check_in_dependencies(db)`) or adapter invocation (`compose_product_check_in`).\n   - If the gate is closed or the practice is not allowlisted, execution immediately raises HTTP 403 before any database query or callback creation.\n\n3. **Single Adapter Delegation & Zero Route Fallback:**\n   - `confirm_check_in_proposal_route` invokes `compose_product_check_in` exactly once.\n   - The route handler contains no direct claim, appointment lock, manual reauthorization, evidence verification, status update, waiting area change, audit creation, event emission, command completion, or `db.commit()` fallback.\n\n4. **Dependency Callbacks & In-Transaction Primitives:**\n   - `claim`: Invokes `claim_appointment_check_in_command` with the server secret and 10-minute stale window.\n   - `load_locked_appointment`: Locks appointment via `.filter(Appointment.id == appointment_id, Appointment.practice_id == practice_id).with_for_update().one_or_none()`.\n   - `load_current_actor`: Reloads authenticated user within transaction via `.filter(User.id == actor_user_id, User.practice_id == practice_id).with_for_update().one_or_none()`.\n   - `load_waiting_area`: Scoped to `practice_id == practice_id`.\n   - `verify_evidence`: Calls `verify_check_in_evidence_token` with backend HMAC secret.\n   - `stage_effect`: Verifies plan matches locked appointment state and sets status to `AppointmentStatus.Arrived` and target waiting area.\n   - `write_audit`: Verifies plan matches `AppointmentAuditAction.status_change`, `status_after == Arrived`, and exact audit evidence list, then creates `AppointmentAuditLog`.\n   - `write_event`: Emits patient-free `diary.appointment_checked_in.v1` event bound to command and audit record.\n   - `complete`: Calls `complete_appointment_command`.\n   - `readback`: Calls `populate_existing()` and queries exact practice appointment.\n\n5. **Authority & Domain Integrity:**\n   - Adapter and binder strictly prevent widening generic status, moving existing waiting areas, removing waiting areas, or substituting client practice/role assertions.\n   - Only transitions from `Booked` or `Confirmed` to `Arrived` are permitted; already arrived appointments stop as `already_arrived`.\n\n6. **Idempotency Classification Ordering & Rollback:**\n   - `compose_product_check_in` checks structural validity and derives the evidence hash before calling `dependencies.claim`.\n   - Same-key replay, conflict, in-progress, and transient failure are classified immediately upon claim resolution prior to semantic envelope validation.\n   - A newly started claim whose subsequent envelope validation fails triggers `_rollback(dependencies)` and returns `_stop(\"confirmation_envelope_invalid\")`, leaving no dirty row.\n\n7. **Evidence Precedence & Server-Side Verification:**\n   - Explicitly submitted `body.signed_confirmation_evidence` takes precedence over `proposal.signed_confirmation_evidence`.\n   - Evidence is hashed via SHA-256 for the claim record and strictly verified against server practice, current actor, target appointment, expected status before, target area, and fresh proposal id.\n\n8. **Response Compatibility & Error Mapping:**\n   - Confirmed write and replay return HTTP 200 with the typed `AppointmentConfirmCheckInProposalOut` envelope.\n   - Missing appointment returns standard non-enumerating HTTP 404.\n   - Idempotency stops map to exact 409 and 503 codes (`idempotency_key_conflict`, `idempotency_key_in_progress`, `idempotency_key_stale_in_progress`, `idempotency_key_failed_transient`, `confirmation_replay_rejected`).\n   - Validation stops map to typed HTTP 200 blocked envelopes.\n   - Internal/commit/readback uncertainties raise `RuntimeError`, preserving the fail-closed 500 posture without releasing false success.\n\n9. **Patient & Secret Minimization:**\n   - Recursive `_patient_free` validation strictly guarantees that responses, receipts, audits, and events contain zero patient identifiers, names, notes, clinical text, raw HMAC tokens, or raw idempotency keys.\n\n10. **Command Manifest Execution (C01 - C08):**\n    - C01: `git status --short --branch` -> Exit Code 0 (clean)\n    - C02: `git rev-parse HEAD` -> Exit Code 0 (`c82c3a741053a9c8da260aa62e1a968af22bb54e`)\n    - C03: `scripts.ariadne_provider_free_pytest` -> Exit Code 0 (103 passed)\n    - C04: `ruff check` -> Exit Code 0 (all checks passed)\n    - C05: `py_compile` -> Exit Code 0\n    - C06: `git diff --check` -> Exit Code 0\n    - C07: `git diff --name-only` -> Exit Code 0\n    - C08: `git status --short --branch` -> Exit Code 0 (clean)\n\n11. **Boundaries & Product Invariants:**\n    - GraphQL mutations remain read-only.\n    - Public OpenAPI specifications and schemas remain unchanged.\n    - No changes to default-off feature flags, general status routes, action grammars, first-party clients, external providers, deployment artifacts, or protected git refs.\n\nNo P0-P2 findings, authority leaks, duplicate writes, or dirty postconditions remain. Candidate satisfies all deterministic criteria.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Ariadne Rehydration & Authority Naming\n\nMandatory five-source rehydration verified:\n1. `live_handover_current_baton`: PR 74 & PR 75 merged at master `2e34bdad732fdab32fbf778280b3d3c70d66d602`; single-track protected integration.\n2. `current_authority_allocation`: GPT Sol is conductor/integrator and author of this recovery candidate; Gemini 3.7 Flash/high is the independent reviewer / veto.\n3. `active_plan_and_acceptance`: `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md` and `docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md`.\n4. `protected_evidence_boundaries`: Provider-free authored-synthetic objects, injected fakes, and local test database only; no product data, patient data, live providers or external network access.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-route-adapter-gemini-74a6552e` on branch `codex/review-check-in-route-adapter-74a6552e`, HEAD `c82c3a741053a9c8da260aa62e1a968af22bb54e`, recovery base `c2bc6fae8bd99131c34613daf255fe82ce3a1690`, local/origin master at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\nActive operation latch (`orchestration/continuity/ariadne-active-operation-latch/current.json`) verified in progress for operation `raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.\n\n---\n\n### Challenge Verification & Detailed Findings\n\n1. **Exact Git & Worktree Preconditions (C01, C02, C06, C07, C08):**\n   - Branch is `codex/review-check-in-route-adapter-74a6552e`.\n   - Exact HEAD is `c82c3a741053a9c8da260aa62e1a968af22bb54e`.\n   - Worktree is clean before and after review.\n   - Exact diff `c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e` contains no trailing whitespace issues and is strictly bounded to the allowlisted route, adapter, test, error register, receipt, and continuity files.\n\n2. **Fail-Closed Gate & Idempotency Key Normalization:**\n   - In `app/routers/appointments.py`, `confirm_check_in_proposal_route` executes `_a5_check_in_gate_open(current_user)` as its very first action.\n   - `_a5_check_in_gate_open` enforces both `settings.rayleen_a5_check_in_enabled` and exact practice inclusion in `settings.rayleen_a5_check_in_synthetic_practice_ids`.\n   - `_normalize_idempotency_key(idempotency_key)` executes before dependency construction (`_a5_check_in_dependencies(db)`) or adapter invocation (`compose_product_check_in`).\n   - If the gate is closed or the practice is not allowlisted, execution immediately raises HTTP 403 before any database query or callback creation.\n\n3. **Single Adapter Delegation & Zero Route Fallback:**\n   - `confirm_check_in_proposal_route` invokes `compose_product_check_in` exactly once.\n   - The route handler contains no direct claim, appointment lock, manual reauthorization, evidence verification, status update, waiting area change, audit creation, event emission, command completion, or `db.commit()` fallback.\n\n4. **Dependency Callbacks & In-Transaction Primitives:**\n   - `claim`: Invokes `claim_appointment_check_in_command` with the server secret and 10-minute stale window.\n   - `load_locked_appointment`: Locks appointment via `.filter(Appointment.id == appointment_id, Appointment.practice_id == practice_id).with_for_update().one_or_none()`.\n   - `load_current_actor`: Reloads authenticated user within transaction via `.filter(User.id == actor_user_id, User.practice_id == practice_id).with_for_update().one_or_none()`.\n   - `load_waiting_area`: Scoped to `practice_id == practice_id`.\n   - `verify_evidence`: Calls `verify_check_in_evidence_token` with backend HMAC secret.\n   - `stage_effect`: Verifies plan matches locked appointment state and sets status to `AppointmentStatus.Arrived` and target waiting area.\n   - `write_audit`: Verifies plan matches `AppointmentAuditAction.status_change`, `status_after == Arrived`, and exact audit evidence list, then creates `AppointmentAuditLog`.\n   - `write_event`: Emits patient-free `diary.appointment_checked_in.v1` event bound to command and audit record.\n   - `complete`: Calls `complete_appointment_command`.\n   - `readback`: Calls `populate_existing()` and queries exact practice appointment.\n\n5. **Authority & Domain Integrity:**\n   - Adapter and binder strictly prevent widening generic status, moving existing waiting areas, removing waiting areas, or substituting client practice/role assertions.\n   - Only transitions from `Booked` or `Confirmed` to `Arrived` are permitted; already arrived appointments stop as `already_arrived`.\n\n6. **Idempotency Classification Ordering & Rollback:**\n   - `compose_product_check_in` checks structural validity and derives the evidence hash before calling `dependencies.claim`.\n   - Same-key replay, conflict, in-progress, and transient failure are classified immediately upon claim resolution prior to semantic envelope validation.\n   - A newly started claim whose subsequent envelope validation fails triggers `_rollback(dependencies)` and returns `_stop(\"confirmation_envelope_invalid\")`, leaving no dirty row.\n\n7. **Evidence Precedence & Server-Side Verification:**\n   - Explicitly submitted `body.signed_confirmation_evidence` takes precedence over `proposal.signed_confirmation_evidence`.\n   - Evidence is hashed via SHA-256 for the claim record and strictly verified against server practice, current actor, target appointment, expected status before, target area, and fresh proposal id.\n\n8. **Response Compatibility & Error Mapping:**\n   - Confirmed write and replay return HTTP 200 with the typed `AppointmentConfirmCheckInProposalOut` envelope.\n   - Missing appointment returns standard non-enumerating HTTP 404.\n   - Idempotency stops map to exact 409 and 503 codes (`idempotency_key_conflict`, `idempotency_key_in_progress`, `idempotency_key_stale_in_progress`, `idempotency_key_failed_transient`, `confirmation_replay_rejected`).\n   - Validation stops map to typed HTTP 200 blocked envelopes.\n   - Internal/commit/readback uncertainties raise `RuntimeError`, preserving the fail-closed 500 posture without releasing false success.\n\n9. **Patient & Secret Minimization:**\n   - Recursive `_patient_free` validation strictly guarantees that responses, receipts, audits, and events contain zero patient identifiers, names, notes, clinical text, raw HMAC tokens, or raw idempotency keys.\n\n10. **Command Manifest Execution (C01 - C08):**\n    - C01: `git status --short --branch` -> Exit Code 0 (clean)\n    - C02: `git rev-parse HEAD` -> Exit Code 0 (`c82c3a741053a9c8da260aa62e1a968af22bb54e`)\n    - C03: `scripts.ariadne_provider_free_pytest` -> Exit Code 0 (103 passed)\n    - C04: `ruff check` -> Exit Code 0 (all checks passed)\n    - C05: `py_compile` -> Exit Code 0\n    - C06: `git diff --check` -> Exit Code 0\n    - C07: `git diff --name-only` -> Exit Code 0\n    - C08: `git status --short --branch` -> Exit Code 0 (clean)\n\n11. **Boundaries & Product Invariants:**\n    - GraphQL mutations remain read-only.\n    - Public OpenAPI specifications and schemas remain unchanged.\n    - No changes to default-off feature flags, general status routes, action grammars, first-party clients, external providers, deployment artifacts, or protected git refs.\n\nNo P0-P2 findings, authority leaks, duplicate writes, or dirty postconditions remain. Candidate satisfies all deterministic criteria.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-route-adapter-gemini-74a6552e",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "app/routers/appointments.py",
+          "app/services/appointment_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "app/routers/appointments.py",
+          "app/services/appointment_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "828aef0905622aedcf9866507a2186f2ec69ccd3a81b4167dda4f479a77f1b96",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-route-adapter-gemini-74a6552e",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/routers/appointments.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "app/routers/appointments.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

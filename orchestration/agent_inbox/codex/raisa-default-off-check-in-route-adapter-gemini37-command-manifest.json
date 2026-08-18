@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-route-adapter-gemini-74a6552e",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "app/routers/appointments.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "app/routers/appointments.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "c2bc6fae8bd99131c34613daf255fe82ce3a1690..c82c3a741053a9c8da260aa62e1a968af22bb54e"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}
