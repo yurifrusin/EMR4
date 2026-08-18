@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.predispatch_supersession_evidence.v1",
+  "operation_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+  "superseded_receipts": [
+    {
+      "path": "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-predispatch-receipt.json",
+      "source_head": "74c22108d9fc9f22c3d385b7bf0ec14c6948b3de"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-corrected-predispatch-receipt.json",
+      "source_head": "0b02c575d629e68e117a7c70ed9338a7ae957d42"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-final-corrected-predispatch-receipt.json",
+      "source_head": "c0d8f5a048fe2f601710e719a5dec30302b9ca62"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-docker-corrected-predispatch-receipt.json",
+      "source_head": "c37b77e1ef80e3deeaececd616b4d5ad933e4b6b"
+    }
+  ],
+  "supersession_reason": "post_receipt_package_entrypoint_command_scope_and_deterministic_fixture_incidents_required_register_426_descendant",
+  "incident_ids": [
+    "AER-0485",
+    "AER-0486",
+    "AER-0487",
+    "AER-0488",
+    "AER-0489",
+    "AER-0490",
+    "AER-0491",
+    "AER-0492",
+    "AER-0493",
+    "AER-0494",
+    "AER-0495",
+    "AER-0496"
+  ],
+  "worker_worktree_created_before_supersession": true,
+  "worker_container_created_before_supersession": false,
+  "provider_call_made_before_supersession": false,
+  "dispatch_authority_carried_forward_from_superseded_receipt": false,
+  "replacement_required": true,
+  "replacement_source_head": "9e86b017c8319c081d8bb3d6d7dfc24e0223ab44"
+}

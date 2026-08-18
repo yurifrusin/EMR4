@@ -54,6 +54,19 @@
     "session_root_present": false,
     "raw_session_retained_in_repository": false
   },
+  "cleanup": {
+    "status": "complete",
+    "worker_container_absent": true,
+    "broker_container_absent": true,
+    "package_volume_absent": true,
+    "home_volume_absent": true,
+    "capability_token_volume_absent": true,
+    "internal_network_absent": true,
+    "worker_worktree_absent": true,
+    "worker_branch_absent": true,
+    "disposable_root_disposition": "windows_recycle_bin",
+    "disposable_root_recoverable_until_recycle_bin_emptied": true
+  },
   "authority_disposition": {
     "occupied_attempt_consumed": true,
     "retry_permitted": false,

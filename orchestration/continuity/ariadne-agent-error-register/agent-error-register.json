@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 430,
+  "register_revision": 445,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19895,6 +19895,586 @@
           "tests/test_ariadne_active_operation_latch_continuity.py",
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-430.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0501",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-continuity-update-019",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_continuity_updater",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A new current Continuity node must explicitly preserve every inherited contract-evidence block required by Compass current-position validation.",
+      "observed_error": "The first Continuity 321 updater emitted the new Harness node with an empty contract_evidence list, omitting the inherited combined-intent and reschedule-reconciliation blocks carried by its parent.",
+      "detection_method": "The updater's post-write Compass validation failed closed on exactly two contract_evidence_missing reasons before staging or acceptance.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "docs/ariadne-agent-error-correction-register-revision-431.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_node_inherited_contract_evidence_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore both inherited contract-evidence blocks verbatim in the node builder, preserve AER-0501 and rerun the idempotent updater plus Compass validation before acceptance.",
+        "prevention_control": "Every successor node builder copies the parent's required inherited contract_evidence set before the first updater execution; Compass validation remains a mandatory fail-closed post-write gate.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
+          "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-431.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0502",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-continuity-update-020",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_continuity_updater",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every inherited contract evidence path must also be present in the Continuity node's corresponding typed plan, finding, closeout or test inventory.",
+      "observed_error": "The reentrant Continuity 321 correction restored both contract_evidence blocks but omitted their six paths from the node's typed evidence collections, so Compass rejected every path as contract_evidence_path_not_node_evidence.",
+      "detection_method": "The updater's post-write Compass validation failed closed on exactly six typed inventory reasons before report rendering, staging or acceptance.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "docs/ariadne-agent-error-correction-register-revision-432.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the inherited plan to plans, shared evidence to findings, accepted closeout to closeouts and both inherited tests to tests, preserve AER-0502 and rerun the reentrant updater.",
+        "prevention_control": "Validate inherited contract evidence by typed collection before every updater run: every contract plan, finding, closeout, acceptance, receipt, test and artifact must appear in the matching node evidence key.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
+          "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-432.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0503",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-key-test-021",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A new continuity test must assert the exact committed evidence key rather than infer a nearby structural name.",
+      "observed_error": "The first closeout test referenced isolated_container_proof, but the committed provider-free evidence names the accepted block accepted_isolated_capture.",
+      "detection_method": "The broad closeout packet raised one exact KeyError before any acceptance, notification or staging.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-433.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_continuity_test_inferred_wrong_evidence_key",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bind the test to accepted_isolated_capture, preserve the exact declared-tool and zero-provider assertions and rerun the broad closeout packet.",
+        "prevention_control": "Read the committed evidence object's exact key before authoring a fixture assertion; do not infer a field name from plan terminology.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-433.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0504",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-history-test-021",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "deepseek-native-harness-first-admission-continuity-test",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A historical Continuity test must preserve its accepted node and journey without requiring that historical node to remain the graph and Compass current position after a valid successor.",
+      "observed_error": "The first-admission continuity test still required graph 320 / Compass 302 and its node as current, so the valid 321 / 303 successor produced two stale-current failures.",
+      "detection_method": "The broad closeout packet reported exact 321-versus-320 and changed-current-role assertions while the historical node remained present and unchanged in the graph and journey.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py",
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "docs/ariadne-agent-error-correction-register-revision-434.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.historical_continuity_test_required_current_position_after_successor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert the first-admission node by ID and its retained journey evidence while allowing the exact accepted successor to own current position.",
+        "prevention_control": "Historical continuity tests bind node identity, coordinates, lineage and journey retention; only the current tranche test asserts the terminal graph/Compass position.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-434.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0505",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-compass-test-021",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-compass-current-position-test",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The canonical Compass report sentinel must advance atomically to the accepted Continuity 321 current node.",
+      "observed_error": "The canonical Compass test retained the first-admission node literal after the validated 321 / 303 successor became current.",
+      "detection_method": "The broad packet passed Compass schema and semantic validation and failed only the exact superseded current-position node ID.",
+      "evidence_paths": [
+        "tests/test_ariadne_compass.py",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-435.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Advance only the canonical current-position sentinel to the exact Continuity 321 Harness node and retain all remaining navigation assertions.",
+        "prevention_control": "Every current-position advance updates and runs the canonical Compass sentinel in the same closeout packet.",
+        "evidence_paths": [
+          "tests/test_ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-435.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0506",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-baton-test-021",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The live-baton consistency fixture must track the compact Current Baton, its exact terminal Continuity/Compass node and its current narrow next-work boundary rather than historical acceptance rows moved to the index.",
+      "observed_error": "The fixture remained pinned to Continuity 316 / Compass 298, required a risk-weighted acceptance row already compacted from the live baton and required historical next-work prose after the valid 321 / 303 advance.",
+      "detection_method": "The broad packet reported three bounded failures: stale graph revision, absent compacted-row expectation and stale next-work phrase set. Protected lineage assertions remained available separately.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-436.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_baton_consistency_fixture_stale_after_compaction_and_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the fixture to Continuity 321 / Compass 303 and exact evidence source, stop requiring a historical compacted acceptance row, and assert the current default-off route-adapter boundary with the preserved closed surfaces.",
+        "prevention_control": "Current-baton tests distinguish live compact rows from historical acceptance-index rows and advance terminal node plus next-work semantics in the same closeout patch.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "AGENTS.md",
+          "docs/ariadne-agent-error-correction-register-revision-436.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0507",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-validator-022",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Incident rows sharing one attempt_id must carry the validator-required complete symmetric same-attempt peer linkage.",
+      "observed_error": "Revision 436 gave AER-0503 through AER-0506 one broad-packet attempt ID but left every related_incident_ids array empty, so the register validator rejected the missing peer set.",
+      "detection_method": "Canonical validation stopped before pattern generation and printed expected AER-0504/AER-0505/AER-0506 peers for AER-0503.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-437.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_same_attempt_peer_links_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add the complete symmetric three-peer arrays to AER-0503 through AER-0506, preserve AER-0507 and rerun canonical validation before pattern generation.",
+        "prevention_control": "Before validating a multi-incident attempt, mechanically derive and assign every row's exact all-other-peers related_incident_ids set.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-437.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0508",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-patch-023",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A repeated related_incident_ids patch must include exact incident_id context in every hunk and verify both the intended target and an early historical sentinel before validation.",
+      "observed_error": "The first AER-0503 peer-link patch matched AER-0003's earlier empty related_incident_ids array and inserted AER-0504/AER-0505/AER-0506 there while leaving AER-0503 empty.",
+      "detection_method": "Canonical validation reported AER-0003 expected no peers; exact readback then proved AER-0003 was altered and AER-0503 remained empty before any acceptance or staging.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-438.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore AER-0003 to an empty peer array, patch AER-0503 only under exact incident context, preserve AER-0508 and add an exact AER-0490/AER-0508 recurrence assertion.",
+        "prevention_control": "Every repeated-field patch hunk includes target incident_id context and receives immediate exact intended-target plus early-sentinel readback before canonical validation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-438.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0509",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-validator-024",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Incidents with distinct resource identities must use distinct attempt identities and empty peer arrays even when one pytest process exposed them together.",
+      "observed_error": "The first AER-0507 correction linked AER-0503 through AER-0506 as peers under one attempt ID, but their four different resource_id values made that attempt identity semantically split.",
+      "detection_method": "Canonical validation stopped on split attempt identity mismatch for resource_id before pattern generation, staging or acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-439.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_split_attempt_identity_across_distinct_resources",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Give AER-0503 through AER-0506 distinct resource-specific sub-attempt IDs, clear their peer arrays, preserve the shared broad-packet origin in prose and rerun canonical validation.",
+        "prevention_control": "Before assigning one attempt_id to multiple incidents, compare role, resource, model, reasoning and transport identity; any difference requires a distinct sub-attempt and no peer linkage.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-439.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0510",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-history-wording-025",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A corrected historical continuity test must assert the exact accepted successor wording rather than a semantically similar absent phrase.",
+      "observed_error": "The first historical-test correction expected not an unrestricted default, while the accepted Compass boundary says not a default transport.",
+      "detection_method": "The second broad packet failed one exact substring assertion while the retained journey and current successor evidence passed.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-440.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.historical_continuity_test_successor_phrase_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Assert the exact accepted not a default transport phrase and rerun the broad closeout packet.",
+        "prevention_control": "Copy exact accepted boundary prose into literal continuity assertions; use semantic containment only where the test is intentionally vocabulary-neutral.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-440.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0511",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-baton-register-literal-026",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The current-baton register fixture must assert stable live-row semantics rather than a revision/count pair invalidated by later closeout incidents.",
+      "observed_error": "The AER-0506 correction fixed revision 436 and 506 incidents in the baton test; subsequent validated corrections advanced the live row to revision 439 and 509, making the fixture stale before its first accepted run.",
+      "detection_method": "The second broad packet failed only the exact register-revision assertion in that fixture; named terminal and boundary checks remained valid.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-441.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_register_revision_assertion_self_invalidating",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace exact revision/count literals with stable assertions that the row names a revision, a bounded-incident count and the current terminal and latest correction IDs.",
+        "prevention_control": "The register suite owns exact mutable revision/count values; baton consistency tests assert the live row's semantic shape and current incident anchors.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-441.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0512",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-closeout-latch-validation-027",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_active_operation_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every active-operation checkpoint must stay within the 500-character bounded-text contract after closeout incident updates.",
+      "observed_error": "The checkpoint accumulated terminal, teardown and AER-0498-through-AER-0509 prose beyond 500 characters, causing one schema failure and nine cascading pure-validator failures in the broad packet.",
+      "detection_method": "JSON Schema reported completed_stage too long and the pure validator repeated bounded non-empty text; all other latch structure remained intact.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-442.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Shorten completed_stage while preserving exact tool proof, occupied HMR terminal, zero-provider/zero-change boundary, no-retry disposition, teardown and register linkage, then validate the latch standalone.",
+        "prevention_control": "Run the active-latch validator immediately after every checkpoint edit and before the broad packet; detailed incident inventory stays in the register rather than the bounded checkpoint.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_ariadne_active_operation_latch.py",
+          "docs/ariadne-agent-error-correction-register-revision-442.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0513",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-latch-suite-028",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After a bounded checkpoint rewrite, the dedicated continuity test must assert the new stable exact-tool phrase rather than superseded checkpoint prose.",
+      "observed_error": "The standalone latch schema and pure validator passed after AER-0512, but the continuity test still expected provider-free exact-tool-view proof is committed instead of the new Exact provider-free edit/glob/read proof passed wording.",
+      "detection_method": "The focused latch packet passed 50 checks and failed one exact substring assertion while AER-0497 and register-link assertions passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-443.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.latch_continuity_phrase_stale_after_bounded_checkpoint_rewrite",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Assert the new stable Exact provider-free edit/glob/read proof passed phrase and rerun the focused latch packet before the broad closeout packet.",
+        "prevention_control": "A bounded checkpoint rewrite updates its dedicated semantic phrase assertions in the same patch and runs the focused latch packet immediately.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-443.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0514",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-broad-closeout-suite-029",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The live Active product track row must retain the exact accepted reusable unmounted adapter phrase while naming the accepted default-off route descendant.",
+      "observed_error": "The broad closeout packet found that the updated Active product track row said accepted reusable adapter but had dropped the required unmounted qualifier.",
+      "detection_method": "The 443-item broad packet completed with one failing exact semantic assertion in test_live_baton_rows_accept_behavior_and_resume_narrow_product_work; all other checks passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-444.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.live_product_track_dropped_unmounted_adapter_qualifier",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore accepted reusable unmounted adapter in the live product-track row and rerun the same broad closeout packet before commit.",
+        "prevention_control": "Treat the product-track contract test as the exact wording guard whenever the live baton row is advanced for a descendant route rehearsal.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-444.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0515",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-broad-closeout-suite-030",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After every canonical register change, pattern-report.json must be explicitly regenerated to the repository output path before the broad closeout packet runs.",
+      "observed_error": "The register utility was invoked without --output, so it validated and printed revision 444 while the repository pattern-report.json remained at revision 443.",
+      "detection_method": "The repeated broad packet completed with one failure: committed pattern report did not equal the fresh in-memory build; every other check passed.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-445.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_report_generator_invoked_without_output_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the correction register, invoke the utility with the exact --output path for pattern-report.json, then rerun the same broad closeout packet.",
+        "prevention_control": "Every canonical register update uses the explicit --output pattern-report.json invocation; printed validation output never counts as report regeneration.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-445.md"
         ]
       },
       "status": "corrected"

@@ -69,12 +69,13 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
             "deepseek-native-harness-exact-tool-view-recovery-and-second-"
             "monitored-development-admission"
         )
-        assert latch["status"] == "in_progress"
-        assert latch["source_head"] == "853f76d9a086c4bb263b54c761cbf8edbb65d6e9"
+        assert latch["status"] == "complete"
+        assert latch["source_head"] == "00d4f8d6065ab09b5faf5501c979edd2fa59943c"
         completed = latch["checkpoint"]["completed_stage"]
-        assert "provider-free exact-tool-view proof is committed" in completed
-        assert "register revision " in completed
+        assert "provider-free edit/glob/read proof passed" in completed
+        assert "register revision 445" in completed
         assert "AER-0497" in completed
+        assert "Continuity 321 / Compass 303" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]

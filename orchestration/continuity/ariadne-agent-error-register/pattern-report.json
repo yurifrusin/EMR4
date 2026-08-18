@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "2115c561fd7307c96038c2edde97f47d678f49474edd9f5935f5b1899c6854f1",
+  "canonical_register_sha256": "020799fa85b9946012c84c73ab9dd27a5dc1a8f96eddd94465406bf57367bae0",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 344,
-      "untrusted_partial_worktree": 42
+      "canonical_unchanged": 348,
+      "untrusted_partial_worktree": 53
     },
     "by_category": {
-      "command_scope_violation": 79,
+      "command_scope_violation": 80,
       "evidence_misreport": 63,
       "harness_failure": 53,
       "operator_error": 3,
-      "output_contract_violation": 167,
+      "output_contract_violation": 178,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
-      "repository_defect": 70,
+      "repository_defect": 73,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 358,
+      "agent_behavior": 370,
       "harness": 53,
       "operator": 3,
-      "repository": 70,
+      "repository": 73,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 238,
+      "low": 249,
       "material": 117,
-      "moderate": 145
+      "moderate": 149
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -38,7 +38,7 @@
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 1,
-      "ariadne-compass-current-position-test::orchestrator": 2,
+      "ariadne-compass-current-position-test::orchestrator": 3,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
@@ -50,7 +50,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 277,
+      "codex-primary-orchestrator::orchestrator": 289,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -58,6 +58,7 @@
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
       "deepseek-flash-workers::implementer": 14,
+      "deepseek-native-harness-first-admission-continuity-test::orchestrator": 1,
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
       "deepseek-native-harness-rc7-container-worker::implementer": 1,
       "deepseek-native-harness-rc7-container-worker::orchestrator": 2,
@@ -97,7 +98,7 @@
       "emr4-context-fabric-durability-structural-contract::orchestrator": 5,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-context-fabric-roadmap-order-test::orchestrator": 1,
-      "emr4-current-baton-consistency::orchestrator": 3,
+      "emr4-current-baton-consistency::orchestrator": 4,
       "emr4-disposable-postgresql-harness::orchestrator": 23,
       "emr4-disposable-postgresql-parse-evidence-router::orchestrator": 1,
       "emr4-durability-ddl-renderer::orchestrator": 3,
@@ -118,15 +119,39 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 399,
+      "orchestrator": 414,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 500,
+  "incident_count": 515,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0490",
+        "AER-0508"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Every patch to a repeated register field must include the target incident_id in the same hunk and receive exact target plus sentinel readback before validation.",
+        "Every repeated-field patch hunk includes target incident_id context and receives immediate exact intended-target plus early-sentinel readback before canonical validation."
+      ],
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
     {
       "categories": [
         "command_scope_violation"
@@ -555,6 +580,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0460",
+        "AER-0512"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Run the active-latch validator immediately after every checkpoint edit and before the broad packet; detailed incident inventory stays in the register rather than the bounded checkpoint.",
+        "Validate the active latch as its own gate after every checkpoint edit and before copying it into any continuation runtime state; never rely on preflight to be the first bounded-text check."
+      ],
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0390",
         "AER-0414"
       ],
@@ -627,16 +676,18 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0461",
-        "AER-0462"
+        "AER-0462",
+        "AER-0502"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Before every Continuity updater run, mechanically compare the union of contract_evidence paths with the node evidence inventory and resolve every named artifact path; only then permit graph or Compass writes.",
+        "Validate inherited contract evidence by typed collection before every updater run: every contract plan, finding, closeout, acceptance, receipt, test and artifact must appear in the matching node evidence key.",
         "Validate inherited contract evidence by typed collection, not path union alone: every contract plan, finding, closeout, acceptance, receipt, test and artifact path must appear in the matching node evidence key before any Continuity write."
       ],
       "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
@@ -1286,17 +1337,19 @@
       "categories": [
         "repository_defect"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0388",
-        "AER-0463"
+        "AER-0463",
+        "AER-0505"
       ],
       "origins": [
         "repository"
       ],
       "prevention_controls": [
         "Every Continuity closeout that advances current_position must include the canonical Compass test in its risk-weighted metadata packet and update its explicit current-node sentinel in the same closeout change.",
-        "Every Continuity closeout that advances current_position must update and execute the canonical Compass current-node sentinel in the same closeout packet; baseline-check that literal before the updater write."
+        "Every Continuity closeout that advances current_position must update and execute the canonical Compass current-node sentinel in the same closeout packet; baseline-check that literal before the updater write.",
+        "Every current-position advance updates and runs the canonical Compass sentinel in the same closeout packet."
       ],
       "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
       "resource_ids": [
@@ -1466,7 +1519,7 @@
       ]
     }
   ],
-  "register_revision": 430,
+  "register_revision": 445,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

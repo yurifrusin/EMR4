@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 320,
+  "graph_revision": 321,
   "harvests": [],
   "nodes": [
     {
@@ -22430,9 +22430,119 @@
         "The native Harness is not an unrestricted default worker transport.",
         "Product data, application runtime, deployment, release and protected integration remain closed."
       ]
+    },
+    {
+      "id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "title": "DeepSeek native Harness exact-tool-view recovery and second monitored development admission",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-18T10:37:23.2818490Z",
+      "updated_at": "2026-08-18T10:37:23.2818490Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "00d4f8d6065ab09b5faf5501c979edd2fa59943c",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The provider-free exact three-tool view is accepted.",
+          "The occupied HMR startup terminal is accepted as negative evidence; no candidate, retry or resume is admitted.",
+          "Future occupied native-Harness work requires a separate provider-free stock-headless-to-custom-runner startup proof.",
+          "Product data, application runtime, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-tool-view-and-contained-hmr-startup-terminal",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exact provider-free edit/glob/read composition and the attributable pre-provider HMR startup failure while admitting no worker candidate or retry."
+        }
+      ],
+      "claim_scope": [
+        "The pinned rc.7 package-native preset mount and tools.restrict mechanism removed every unselected model schema.",
+        "A provider-free request declared exactly edit, glob and read with zero external/provider calls.",
+        "The occupied worker failed before its custom runner or provider boundary because stock headless HMR requires Node --expose-internals.",
+        "The broker observed zero requests/provider calls/responses and the candidate changed zero paths.",
+        "All disposable resources are absent and the attempt was not retried or resumed."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py"
+          ],
+          "note": "The accepted product intent remains inherited; no product source or data entered this Harness tranche."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "review/test_ordinary_diary_cancellation_convergence.py",
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+          ],
+          "note": "The accepted reconciliation contract remains unchanged; no product source or projection entered the Harness tranche."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+          "docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-445.md",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-exact-tool-view-second-monitored-development.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-register-426-corrected-predispatch-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "review/test_ordinary_diary_cancellation_convergence.py",
+          "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+          "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs",
+          "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A provider-free stock-headless-to-custom-runner HMR startup proof is required before any future occupied native-Harness worker.",
+        "A useful real-EMR4 native-Harness candidate remains unproved.",
+        "The native Harness is not an unrestricted default worker transport.",
+        "Product data, application runtime, deployment, release and protected integration remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T07:41:39.5012901Z"
+  "updated_at": "2026-08-18T10:37:23.2818490Z"
 }

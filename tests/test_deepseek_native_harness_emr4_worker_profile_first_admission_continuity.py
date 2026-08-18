@@ -20,18 +20,16 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_first_monitored_harness_worker_result_is_current() -> None:
+def test_first_monitored_harness_worker_result_is_retained() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 320
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 302
-    assert compass["source_graph_revision"] == 320
-    assert compass["current_position"]["node_id"] == NODE_ID
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 320
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    journey = next(row for row in compass["journey"] if row["node_id"] == NODE_ID)
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
     assert node["authority"]["authorized_openings"] == []
+    assert "seven-tool" in journey["outcome"]
 
 
 def test_broker_rejection_and_zero_candidate_are_preserved() -> None:
@@ -53,13 +51,14 @@ def test_broker_rejection_and_zero_candidate_are_preserved() -> None:
     assert evidence["cleanup"]["status"] == "complete"
 
 
-def test_compass_requires_exact_tool_view_before_second_attempt() -> None:
+def test_compass_preserves_first_attempt_and_records_its_successor() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
     current = compass["current_position"]
-    assert "exact native-Harness model tool view" in current["strategic_role"]
-    assert "exactly read, glob and edit" in current["outcome"]
-    assert "not an unrestricted default" in " ".join(current["does_not_solve"])
-    assert "Continuity 320 / Compass 302" in compass["orientation_statement"]
+    journey = next(row for row in compass["journey"] if row["node_id"] == NODE_ID)
+    assert "seven-tool" in journey["outcome"]
+    assert "default-off canonical check-in route-adapter" in current["strategic_role"]
+    assert "not a default transport" in " ".join(current["does_not_solve"])
+    assert "Continuity 321 / Compass 303" in compass["orientation_statement"]
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 302,
-  "updated_at": "2026-08-18T07:41:39.5012901Z",
-  "source_graph_revision": 320,
-  "orientation_statement": "EMR4 is at Continuity 320 / Compass 302. The first monitored native-Harness EMR4 worker attempt failed closed before provider I/O because its composed request exposed seven tools against a three-tool broker allowlist; the next step is exact package-native tool-view recovery followed by at most one fresh second monitored attempt.",
+  "map_revision": 303,
+  "updated_at": "2026-08-18T10:37:23.2818490Z",
+  "source_graph_revision": 321,
+  "orientation_statement": "EMR4 is at Continuity 321 / Compass 303. The native Harness now has an exact provider-free edit/glob/read proof and an attributable pre-provider HMR startup terminal with no candidate; the programme resumes the already authorised default-off canonical check-in route-adapter convergence.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3908,40 +3908,62 @@
         "scripts/deepseek_native_harness_emr4_worker_profile_first_admission_continuity_update.py",
         "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "lineage_parent": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "strategic_role": "Prove the exact native-Harness tool view and attribute the second monitored EMR4 admission",
+      "outcome": "Provider-free exact edit/glob/read composition passed; the occupied worker then failed deterministically before provider I/O at the stock headless HMR startup prerequisite.",
+      "evidence": [
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+        "docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+        "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
+        "scripts/ariadne_deepseek_native_harness_broker.mjs",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "docs/ariadne-agent-error-correction-register-revision-445.md",
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-exact-tool-view-second-monitored-development.md",
+        "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
+        "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
-    "strategic_role": "Recover an exact native-Harness model tool view before one second monitored EMR4 worker attempt",
-    "why_now": "The broker proved containment and the session trace identified four surplus model-facing schemas, so the narrow defect is package-native tool scoping rather than provider or model behavior.",
-    "outcome": "Prove provider-free that the composed request exposes exactly read, glob and edit, then permit one fresh second monitored attempt over the same two-path package.",
+    "node_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+    "strategic_role": "Resume the default-off canonical check-in route-adapter convergence under Sol authority",
+    "why_now": "The additive Harness trial is closed with exact traceability evidence, while the accepted check-in adapter and unchanged default-off A5.1 route remain ready for their narrow planned convergence.",
+    "outcome": "Delegate only the unchanged default-off A5.1 route to the accepted check-in adapter while preserving its flag, authored-synthetic allowlist, exact contract and default denial.",
     "unlocks": [
-      "Identify and pin the rc.7 scoped-tool restriction that hides surplus model schemas.",
-      "Add a provider-free composed-request admission gate comparing exact tool inventory with profile and broker allowlist.",
-      "Run one fresh monitored worker only after that deterministic proof passes."
+      "Freeze the narrow route-delegation diff and negative default-off matrix.",
+      "Implement and test provider-free canonical check-in delegation without ordinary-practice admission.",
+      "Reassess Gemini only after a candidate and keep occupied native-Harness work declined pending separate HMR recovery."
     ],
     "does_not_solve": [
-      "No useful real-EMR4 worker candidate has yet been produced by the native Harness.",
-      "The native Harness is not an unrestricted default worker transport.",
-      "No product/patient data, application behavior, runtime, deployment, Pages or protected integration is enabled."
+      "The native Harness has not produced a useful real-EMR4 candidate and is not a default transport.",
+      "No generic-status Arrived transition, grammar/client change or waiting-area movement is admitted.",
+      "No product/patient data, live provider, production runtime, deployment, Pages or protected integration is enabled."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md",
-      "docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md",
-      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+      "docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json",
       "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
       "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json",
       "scripts/ariadne_deepseek_native_harness_broker.mjs",
+      "tests/test_deepseek_native_harness_emr4_profile_contract.py",
       "tests/test_ariadne_deepseek_native_harness_broker.py",
-      "docs/ariadne-agent-error-correction-register-revision-402.md",
-      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-closeout.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-emr4-first-monitored-worker-admission.md",
-      "scripts/deepseek_native_harness_emr4_worker_profile_first_admission_continuity_update.py",
-      "tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py"
+      "docs/ariadne-agent-error-correction-register-revision-445.md",
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-exact-tool-view-second-monitored-development.md",
+      "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
+      "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py"
     ]
   },
   "decision_horizon": [
@@ -5981,6 +6003,7 @@
     }
   ],
   "map_limits": [
+    "The second native-Harness admission proves exact provider-free tool scoping and traceable HMR startup failure only; it admits no candidate, retry, default-transport promotion or broader product/runtime authority.",
     "The first monitored native-Harness EMR4 attempt is attributable pre-provider negative evidence only; no candidate, retry, default-transport promotion or broader product/runtime authority is accepted.",
     "The occupied native-Harness result supports a monitored exact-path EMR4 trial after profile codification; it is not unrestricted default-worker, product-data, live-runtime or protected-integration authority.",
     "The native Harness no-call result supports local launcher traceability only; it opens no model-performance, transport-selection, product or runtime authority.",

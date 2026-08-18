@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness exact-tool-view recovery and second monitored development admission",
+    "completed_stage": "Phase 2 provider-free exact-tool-view proof is committed at f321778dd3972decad0dd7b8b116786176b83f64. Register revision 417 and AER-0484 through AER-0487 are committed at 0130ad685bc2a18ef058acec5fb45d2036bf459c after fresh five-source rehydration and complete-suite validation. No worker worktree, container or occupied provider call has started.",
+    "next_executable_stage": "Generate a replacement five-source pre-dispatch receipt from the clean checkpoint descendant, then launch the one conditionally admitted native-Harness session over only the frozen two-path package.",
+    "operation_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+    "resume_after_compaction": true,
+    "source_head": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "0b02c575d629e68e117a7c70ed9338a7ae957d42",
+    "reason_codes": [],
+    "resolved_commit": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0b02c575d629e68e117a7c70ed9338a7ae957d42",
+    "branch_origin_aligned": false,
+    "head": "0b02c575d629e68e117a7c70ed9338a7ae957d42",
+    "origin_branch_commit": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "second_monitored_worker_corrected_predispatch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The committed exact-tool-view proof now makes one native-Harness Flash/high implementation session useful and attributable over the frozen two-path package.",
+        "work_packages": [
+          "implement_and_test_the_provider_free_emr4_profile_validator_in_two_owned_paths"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No candidate exists yet; deterministic Sol readback follows worker terminal, with Gemini reassessed only for material veto leverage or conceptual recovery.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and this exact occupied enclosure has one serial worker, broker and cleanup boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+    "parallel_work_packages": [
+      "No concurrent lane shares the disposable worker or broker state."
+    ],
+    "reassessment_triggers": [
+      "post_worker_exit",
+      "after_deterministic_candidate_admission",
+      "before_any_conceptual_recovery",
+      "pre_acceptance"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "create exact branch and sparse worktree",
+      "launch one occupied session",
+      "wait for terminal",
+      "Sol readback and deterministic tests",
+      "cleanup and acceptance"
+    ]
+  },
+  "planned_action": "launch_one_fresh_exact_tool_view_native_harness_session_over_the_frozen_two_path_profile_validator_package",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+      "docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md",
+      "docs/ariadne-agent-error-correction-register-revision-417.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol retains planning, recovery, acceptance and Git authority. DeepSeek V4 Flash/high through pinned native Harness owns only the frozen two-path validator package for one fresh session. Gemini and native subagents remain declined; no silent Claude Code fallback is permitted.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean at 0b02c575d629e68e117a7c70ed9338a7ae957d42 and is five commits ahead of origin branch 853f76d9a086c4bb263b54c761cbf8edbb65d6e9. Local/origin master and local/origin handoff/current are each exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and every unrelated untracked file remain preserved and excluded.",
+    "live_handover_current_baton": "AGENTS.md Current Baton preserves the consumed seven-tool rejection, names native Harness as the next monitored low-risk trial only after exact provider-free proof and retains every protected ref at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "protected_evidence_boundaries": "One fresh rc.7 occupied session only; exact read/glob/edit inner view and outer allowlist; exact sparse packet and two owned output paths; no shell, direct egress, worker credential, retry, fallback or resume. No product/patient/clinical/historical/protected data, application behavior, ordinary-practice runtime, deployment, release, Pages or protected refs. Raw model/session/tool/credential content is excluded and docs/branding remains outside the worker mount."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
