@@ -83,8 +83,8 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert latch["operation_id"] == (
             "ariadne-post-native-harness-successor-resolution-repair"
         )
-        assert latch["status"] == "in_progress"
-        assert latch["source_head"] == "5fab227e7a0bf1d308d1373858f490419fee660e"
+        assert latch["status"] == "complete"
+        assert latch["source_head"] == "2a31437f6da0defa2dc9247491f04d5b23c97608"
         completed = latch["checkpoint"]["completed_stage"]
         assert "already passed" in completed
         assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in completed

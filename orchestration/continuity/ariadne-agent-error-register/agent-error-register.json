@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 454,
+  "register_revision": 459,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -20830,6 +20830,201 @@
           "orchestration/continuity/ariadne-active-operation-latch/current.json",
           "tests/test_ariadne_active_operation_latch_continuity.py",
           "docs/ariadne-agent-error-correction-register-revision-454.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0525",
+      "attempt_id": "ariadne-post-native-harness-successor-continuity-010",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_compass_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every inherited contract_evidence path on a new Continuity node must also appear in that node's typed evidence collections before Compass validation.",
+      "observed_error": "The first Continuity 322 updater wrote both inherited contract rows but omitted their six referenced plan, finding, closeout and test paths from the node evidence collections, so validation failed closed with six contract_evidence_path_not_node_evidence reasons.",
+      "detection_method": "The local Compass validator returned exactly six typed missing-path reasons after graph and Compass candidate writes; the updater's re-entrant branch remained available and the report was not accepted.",
+      "evidence_paths": [
+        "scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py",
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-455.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add every contract path to the matching typed node evidence collections and journey inventory, then rerun the updater through its explicit Continuity 322 / Compass 304 re-entrant branch.",
+        "prevention_control": "Construct contract_evidence and node evidence from one shared typed path inventory so no contract path can exist outside the node evidence collections.",
+        "evidence_paths": [
+          "scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-455.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0526",
+      "attempt_id": "ariadne-post-native-harness-successor-continuity-suite-011",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Continuity 322 closeout fixtures must bind the exact new parent without shadowing an existing constant and must distinguish preserved Harness-node evidence from the valid current Compass position.",
+      "observed_error": "The first Continuity 322 packet had two fixture failures: a new HARNESS_NODE_ID constant was shadowed by an older unrelated constant, and the historical Harness test still expected product-source/default-transport/Continuity-321 current-position prose after the accepted repair node became current.",
+      "detection_method": "The 11-check packet reported exactly two failures while the new successor-repair node tests passed; the relationship diff exposed constant shadowing and the second assertion showed the historical/current Compass vocabulary mismatch.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py",
+        "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-456.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_continuity_fixture_current_position_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rename the exact-tool Harness parent constant uniquely and rebind the historical Harness test to preserved node evidence plus the valid Continuity 322 read-only current position.",
+        "prevention_control": "Search a complete test module for duplicate constant names before adding one, and update historical-node fixtures separately from current-position fixtures whenever Compass advances.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-456.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0527",
+      "attempt_id": "ariadne-post-native-harness-successor-broad-closeout-012",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-compass-current-position-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "After a valid Continuity/Compass advance, the global Compass report sentinel must name the new terminal accepted node before the broad closeout packet can pass.",
+      "observed_error": "The Continuity 322 / Compass 304 graph and dedicated repair tests passed, but tests/test_ariadne_compass.py still asserted the predecessor exact-tool Harness node as report.current_position.node_id.",
+      "detection_method": "The broad serial closeout packet completed with exactly one failing assertion whose diff showed the validated repair node versus the stale Harness literal; every other gate passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_compass.py",
+        "orchestration/continuity/emr4-compass.json",
+        "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-457.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the global Compass sentinel with the exact accepted successor-repair node and rerun the same broad serial packet.",
+        "prevention_control": "Every valid Compass advance updates the dedicated node test, live baton test and global report current-position sentinel in the same patch before broad closeout.",
+        "evidence_paths": [
+          "tests/test_ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-457.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0528",
+      "attempt_id": "ariadne-post-native-harness-successor-latch-completion-013",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After the repair latch validly transitions to complete, its operation-specific continuity branch must accept complete and bind the exact reviewed source while the generic terminal assertions enforce terminal semantics.",
+      "observed_error": "The completed latch passed schema and pure validation, but the repair-specific continuity branch still asserted status in_progress, causing one failure before the generic complete-state assertions.",
+      "detection_method": "The focused 53-check latch packet reported one exact status mismatch; schema, source data and every other latch assertion passed up to that branch.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-458.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_repair_latch_status_fixture_stale_after_completion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bind the repair-specific branch to complete and exact reviewed source 2a31437f6da0defa2dc9247491f04d5b23c97608, then rerun both latch suites.",
+        "prevention_control": "A tranche-specific latch branch must model its terminal transition in the same patch that changes current.json from in_progress to complete.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-458.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0529",
+      "attempt_id": "ariadne-post-native-harness-successor-latch-completion-014",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A latch source-head fixture replacement must remove the predecessor assertion so the branch binds exactly one reviewed source.",
+      "observed_error": "The AER-0528 patch added the correct core source assertion but left the immediately following predecessor 5fab227e assertion, making the fixture demand two mutually exclusive source heads.",
+      "detection_method": "The repeated latch packet failed one assertion at the obsolete predecessor source line after the new status and source assertions passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-459.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_repair_latch_source_fixture_duplicate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the obsolete predecessor source assertion and retain only the exact reviewed repair source before rerunning both latch suites.",
+        "prevention_control": "When replacing a literal fixture value, search the complete local branch for every assertion of the same field and leave exactly one current value.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-459.md"
         ]
       },
       "status": "corrected"

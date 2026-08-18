@@ -45,11 +45,13 @@ CHECK_IN_ADAPTER_NODE_ID = (
     "extraction-rehearsal"
 )
 CHECK_IN_ADAPTER_SOURCE_HEAD = "8de886c5148b3259428c8c517674f10ea92d937e"
-CURRENT_HARNESS_NODE_ID = (
+EXACT_TOOL_HARNESS_NODE_ID = (
     "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-"
     "development-admission"
 )
-CURRENT_HARNESS_SOURCE_HEAD = "00d4f8d6065ab09b5faf5501c979edd2fa59943c"
+CURRENT_REPAIR_NODE_ID = "ariadne-post-native-harness-successor-resolution-repair"
+CURRENT_REPAIR_SOURCE_HEAD = "2a31437f6da0defa2dc9247491f04d5b23c97608"
+ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
 ROUTE_REVIEW_SOURCE_HEAD = "1cc75672abba6e011e0de03f26a3ad2ba9bae396"
@@ -94,23 +96,20 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 321
-    assert graph["nodes"][-1]["id"] == CURRENT_HARNESS_NODE_ID
+    assert graph["graph_revision"] == 322
+    assert graph["nodes"][-1]["id"] == CURRENT_REPAIR_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        CURRENT_HARNESS_SOURCE_HEAD
+        CURRENT_REPAIR_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": (
-                "deepseek-native-harness-emr4-worker-profile-and-first-"
-                "monitored-development-admission"
-            ),
+            "node_id": EXACT_TOOL_HARNESS_NODE_ID,
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 303
-    assert compass["source_graph_revision"] == 321
-    assert compass["current_position"]["node_id"] == CURRENT_HARNESS_NODE_ID
+    assert compass["map_revision"] == 304
+    assert compass["source_graph_revision"] == 322
+    assert compass["current_position"]["node_id"] == CURRENT_REPAIR_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -125,11 +124,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
-    assert "Continuity 321 / Compass 303" in current
-    assert "provider_free_exact_tool_view_passed" in current
-    assert CURRENT_HARNESS_SOURCE_HEAD in current
-    assert "exact model-facing three-tool contract" in current.lower()
-    assert "hmr" in current.lower()
+    assert "Continuity 322 / Compass 304" in current
+    assert "ariadne_post_native_harness_successor_resolution_repair_pass" in current
+    assert CURRENT_REPAIR_SOURCE_HEAD in current
+    assert ROUTE_CONVERGENCE_SOURCE_HEAD in current
+    assert "read-only ordinary-practice" in current.lower()
+    assert "default denial remains" in current.lower()
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()

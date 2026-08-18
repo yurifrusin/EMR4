@@ -20,15 +20,16 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_exact_tool_view_second_admission_is_current() -> None:
+def test_exact_tool_view_second_admission_is_preserved_under_successor_repair() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 321
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 303
-    assert compass["source_graph_revision"] == 321
-    assert compass["current_position"]["node_id"] == NODE_ID
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] == 322
+    assert compass["map_revision"] == 304
+    assert compass["source_graph_revision"] == 322
+    assert compass["current_position"]["node_id"] == (
+        "ariadne-post-native-harness-successor-resolution-repair"
+    )
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
     assert node["authority"]["authorized_openings"] == []
@@ -67,10 +68,10 @@ def test_compass_advances_to_read_only_admission_readiness() -> None:
     assert "admission readiness" in current["strategic_role"]
     assert "without enabling it" in current["strategic_role"]
     assert "default-off and empty-allowlist posture" in current["outcome"]
-    assert "product source" in current["outcome"]
+    assert "no product or data change" in current["outcome"]
     assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in current["why_now"]
-    assert "not a default transport" in " ".join(current["does_not_solve"])
-    assert "Continuity 321 / Compass 303" in compass["orientation_statement"]
+    assert "No provider" in " ".join(current["does_not_solve"])
+    assert "Continuity 322 / Compass 304" in compass["orientation_statement"]
 
 
 def test_closeout_documents_have_brisbane_timestamps() -> None:

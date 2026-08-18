@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 321,
+  "graph_revision": 322,
   "harvests": [],
   "nodes": [
     {
@@ -22540,9 +22540,118 @@
         "The native Harness is not an unrestricted default worker transport.",
         "Product data, application runtime, deployment, release and protected integration remain closed."
       ]
+    },
+    {
+      "id": "ariadne-post-native-harness-successor-resolution-repair",
+      "title": "Post-native-Harness successor resolution repair",
+      "kind": "maintenance",
+      "status": "accepted",
+      "created_at": "2026-08-18T12:06:43.5937197Z",
+      "updated_at": "2026-08-18T12:06:43.5937197Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2a31437f6da0defa2dc9247491f04d5b23c97608",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The already accepted default-off check-in route convergence remains exact and is not repeated.",
+          "The successor is a provider-free read-only readiness review with no practice enablement or product edit authority.",
+          "DeepSeek native-Harness occupied work remains paused and Claude Code is not a silent fallback.",
+          "Product data, providers, deployment and protected integration remain closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-corrected-post-harness-successor",
+          "source": "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the continuity-only successor correction and continue with the no-enable read-only admission-readiness review."
+        }
+      ],
+      "claim_scope": [
+        "The default-off check-in route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e.",
+        "Every stale post-Harness successor pointer now names the read-only ordinary-practice admission-readiness review.",
+        "A deterministic guard rejects an exact accepted plan name in the live Next row.",
+        "No product source, configuration, behavior, data, provider or protected ref changed."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py"
+          ],
+          "note": "The accepted product intent remains inherited; this repair changed continuity metadata only."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+            "review/test_ordinary_diary_cancellation_convergence.py",
+            "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+          ],
+          "note": "The accepted reconciliation contract remains unchanged; no product source or projection entered this repair."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+          "docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-459.md",
+          "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md",
+          "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+          "review/test_ordinary_diary_cancellation_convergence.py",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No ordinary practice is admitted to canonical check-in.",
+        "No product code, configuration, live route or product data is authorized by the readiness review.",
+        "Future native-Harness occupied work requires a separate provider-free HMR startup proof.",
+        "Provider, runtime, deployment, release, Pages and protected integration remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T10:37:23.2818490Z"
+  "updated_at": "2026-08-18T12:06:43.5937197Z"
 }

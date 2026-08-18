@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 321 / Compass 303. The native Harness now has an exact provider-free edit/glob/read proof and an attributable pre-provider HMR startup terminal with no candidate. Default-off route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; next is the provider-free read-only ordinary-practice canonical check-in admission-readiness review.
+> EMR4 is at Continuity 322 / Compass 304. The stale post-Harness successor is corrected without repeating accepted route work or changing the product. Next is the provider-free read-only ordinary-practice canonical check-in admission-readiness review; default denial remains.
 
 ## North star
 
@@ -412,33 +412,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The broker attributed and rejected an over-broad seven-tool request before provider I/O; no candidate was admitted. Lineage parent: `deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal`.
 198. **Prove the exact native-Harness tool view and attribute the second monitored EMR4 admission — DeepSeek native Harness exact-tool-view recovery and second monitored development admission**
    Provider-free exact edit/glob/read composition passed; the occupied worker then failed deterministically before provider I/O at the stock headless HMR startup prerequisite. Lineage parent: `deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission`.
+199. **Correct the stale post-Harness successor without reopening accepted product work — Post-native-Harness successor resolution repair**
+   Every live pointer now advances to a no-enable read-only ordinary-practice check-in admission-readiness review. Lineage parent: `deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission`.
 
 ## Current position
 
-**Review ordinary-practice canonical check-in admission readiness without enabling it — DeepSeek native Harness exact-tool-view recovery and second monitored development admission**
+**Review ordinary-practice canonical check-in admission readiness without enabling it — Post-native-Harness successor resolution repair**
 
-**Why this proof came next:** The additive Harness trial is closed with exact traceability evidence, and the default-off check-in route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; repeating that accepted tranche would be invalid.
+**Why this proof came next:** Route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e and the stale post-Harness pointer is corrected at 2a31437f6da0defa2dc9247491f04d5b23c97608.
 
-Inventory the current default-off and empty-allowlist posture plus API Spine command, authorization, tenant, idempotency, audit, rollback, rollout and observability prerequisites without changing product source, configuration, route behavior or data.
+Inventory the unchanged default-off and empty-allowlist posture plus API Spine, authorization, tenant, idempotency, audit, rollback, rollout and observability prerequisites with no product or data change.
 
 ### What this unlocks
 
-- Freeze a bounded evidence-backed readiness inventory for a later explicit ordinary-practice admission gate.
-- Identify every unmet prerequisite and preserve default denial until a separately authorised implementation tranche.
-- Reassess DeepSeek, Gemini and native-subagent lanes only when a future candidate has an independently owned work package.
+- Produce an evidence-backed readiness inventory for a later explicit admission decision.
+- Name every unmet prerequisite while preserving default denial.
+- Reassess worker and verifier lanes only if a later candidate creates an independently owned work package.
 
 ### What it does not solve
 
-- The native Harness has not produced a useful real-EMR4 candidate and is not a default transport.
-- No practice is enabled and no product code, configuration, route behavior or product data is changed.
-- No generic-status Arrived transition, grammar/client change or waiting-area movement is admitted.
-- No product/patient data, live provider, production runtime, deployment, Pages or protected integration is enabled.
+- No practice is enabled and no product code, configuration, live route or product data is changed.
+- No generic-status Arrived, grammar/client or waiting-area movement is admitted.
+- No provider, runtime, deployment, release, Pages or protected integration is enabled.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -1004,6 +1003,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-392.md`
 - `docs/ariadne-agent-error-correction-register-revision-402.md`
 - `docs/ariadne-agent-error-correction-register-revision-445.md`
+- `docs/ariadne-agent-error-correction-register-revision-459.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1021,6 +1021,8 @@ Prerequisites:
 - `docs/ariadne-gemini-repaired-request-attempt4-closeout.md`
 - `docs/ariadne-gemini-repaired-request-attempt4-plan.md`
 - `docs/ariadne-mandatory-parallelism-efficacy-control.md`
+- `docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md`
+- `docs/ariadne-post-native-harness-successor-resolution-repair-plan.md`
 - `docs/ariadne-postcompaction-active-operation-latch-closeout.md`
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
@@ -1514,6 +1516,7 @@ Prerequisites:
 - `docs/raisa-word-online-authenticated-companion-verification-closeout.md`
 - `docs/raisa-word-online-authenticated-companion-verification-plan.md`
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
+- `docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
 - `docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md`
@@ -1749,6 +1752,10 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-v2-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
+- `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-postflight.json`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md`
@@ -3010,6 +3017,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
+- `orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3042,6 +3050,7 @@ Prerequisites:
 - `scripts/ariadne_deepseek_claude.py`
 - `scripts/ariadne_deepseek_native_harness_broker.mjs`
 - `scripts/ariadne_evidence_gate.py`
+- `scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py`
 - `scripts/ariadne_provider_free_pytest.py`
 - `scripts/ariadne_recent_work_effectiveness_and_transport_repair_continuity_update.py`
 - `scripts/ariadne_risk_weighted_workflow.py`
@@ -3143,6 +3152,8 @@ Prerequisites:
 - `tests/test_ariadne_git_object_resolution.py`
 - `tests/test_ariadne_git_refs_snapshot.py`
 - `tests/test_ariadne_orchestrator_preflight.py`
+- `tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py`
+- `tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py`
 - `tests/test_ariadne_provider_free_pytest.py`
 - `tests/test_ariadne_recent_work_effectiveness_and_transport_repair_continuity.py`
 - `tests/test_ariadne_risk_weighted_workflow.py`
@@ -3271,4 +3282,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 303; continuity graph revision 321._
+_Compass map revision 304; continuity graph revision 322._

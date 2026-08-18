@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 303,
-  "updated_at": "2026-08-18T10:37:23.2818490Z",
-  "source_graph_revision": 321,
-  "orientation_statement": "EMR4 is at Continuity 321 / Compass 303. The native Harness now has an exact provider-free edit/glob/read proof and an attributable pre-provider HMR startup terminal with no candidate. Default-off route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; next is the provider-free read-only ordinary-practice canonical check-in admission-readiness review.",
+  "map_revision": 304,
+  "updated_at": "2026-08-18T12:06:43.5937197Z",
+  "source_graph_revision": 322,
+  "orientation_statement": "EMR4 is at Continuity 322 / Compass 304. The stale post-Harness successor is corrected without repeating accepted route work or changing the product. Next is the provider-free read-only ordinary-practice canonical check-in admission-readiness review; default denial remains.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -3931,40 +3931,70 @@
         "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
         "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py"
       ]
+    },
+    {
+      "node_id": "ariadne-post-native-harness-successor-resolution-repair",
+      "lineage_parent": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "strategic_role": "Correct the stale post-Harness successor without reopening accepted product work",
+      "outcome": "Every live pointer now advances to a no-enable read-only ordinary-practice check-in admission-readiness review.",
+      "evidence": [
+        "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+        "docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-459.md",
+        "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md",
+        "scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py",
+        "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py",
+        "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+        "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+        "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+        "review/test_ordinary_diary_cancellation_convergence.py",
+        "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+    "node_id": "ariadne-post-native-harness-successor-resolution-repair",
     "strategic_role": "Review ordinary-practice canonical check-in admission readiness without enabling it",
-    "why_now": "The additive Harness trial is closed with exact traceability evidence, and the default-off check-in route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e; repeating that accepted tranche would be invalid.",
-    "outcome": "Inventory the current default-off and empty-allowlist posture plus API Spine command, authorization, tenant, idempotency, audit, rollback, rollout and observability prerequisites without changing product source, configuration, route behavior or data.",
+    "why_now": "Route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e and the stale post-Harness pointer is corrected at 2a31437f6da0defa2dc9247491f04d5b23c97608.",
+    "outcome": "Inventory the unchanged default-off and empty-allowlist posture plus API Spine, authorization, tenant, idempotency, audit, rollback, rollout and observability prerequisites with no product or data change.",
     "unlocks": [
-      "Freeze a bounded evidence-backed readiness inventory for a later explicit ordinary-practice admission gate.",
-      "Identify every unmet prerequisite and preserve default denial until a separately authorised implementation tranche.",
-      "Reassess DeepSeek, Gemini and native-subagent lanes only when a future candidate has an independently owned work package."
+      "Produce an evidence-backed readiness inventory for a later explicit admission decision.",
+      "Name every unmet prerequisite while preserving default denial.",
+      "Reassess worker and verifier lanes only if a later candidate creates an independently owned work package."
     ],
     "does_not_solve": [
-      "The native Harness has not produced a useful real-EMR4 candidate and is not a default transport.",
-      "No practice is enabled and no product code, configuration, route behavior or product data is changed.",
-      "No generic-status Arrived transition, grammar/client change or waiting-area movement is admitted.",
-      "No product/patient data, live provider, production runtime, deployment, Pages or protected integration is enabled."
+      "No practice is enabled and no product code, configuration, live route or product data is changed.",
+      "No generic-status Arrived, grammar/client or waiting-area movement is admitted.",
+      "No provider, runtime, deployment, release, Pages or protected integration is enabled."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
-      "docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json",
-      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
-      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
-      "scripts/ariadne_deepseek_native_harness_broker.mjs",
-      "tests/test_deepseek_native_harness_emr4_profile_contract.py",
-      "tests/test_ariadne_deepseek_native_harness_broker.py",
-      "docs/ariadne-agent-error-correction-register-revision-445.md",
-      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-exact-tool-view-second-monitored-development.md",
-      "scripts/deepseek_native_harness_exact_tool_view_second_admission_continuity_update.py",
-      "tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py"
+      "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+      "docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-459.md",
+      "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md",
+      "scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py",
+      "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py",
+      "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
+      "tests/test_current_baton_consistency.py",
+      "tests/test_ariadne_agent_error_register.py",
+      "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md",
+      "orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json",
+      "tests/test_raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition.py",
+      "review/test_ordinary_diary_cancellation_convergence.py",
+      "docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md"
     ]
   },
   "decision_horizon": [
