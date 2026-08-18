@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 375,
+  "register_revision": 376,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17153,6 +17153,46 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0428",
+      "attempt_id": "check-in-route-adapter-candidate-precommit-disposition-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Ariadne parallelism lane must use one exact configured disposition value before a continuation receipt may pass.",
+      "observed_error": "Sol labelled the completed DeepSeek transport lane contained_transport_non_result, which is descriptive but outside the configured disposition vocabulary. The candidate-precommit preflight returned revision_required before commit, dispatch or provider action.",
+      "detection_method": "The local Ariadne preflight emitted parallelism_lane_disposition_invalid:deepseek_flash; the corrected state used completed with an explicit preserved-non-result work package and the distinct regenerated receipt passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-disposition-failure.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-376.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_precommit_parallelism_disposition_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace contained_transport_non_result with admitted disposition completed, retain the exact preservation-and-closure work package and require a distinct passing candidate-precommit receipt before commit.",
+        "prevention_control": "Select lane dispositions only from orchestration/harness_settings/orchestrator_requirements.yaml and place descriptive terminal detail in rationale and work_packages rather than inventing an enum value.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-disposition-failure.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-376.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

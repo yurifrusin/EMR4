@@ -389,6 +389,38 @@ def test_same_key_replay_returns_exact_stored_result_before_lock_or_effect() -> 
     assert replay.commits == replay.rollbacks == 0
 
 
+def test_idempotency_conflict_precedes_changed_invalid_envelope() -> None:
+    deps = FakeDependencies(claim_kind="conflict")
+    body = _body(deps.appointment)
+    body.confirmed = False
+
+    result = _run(deps, body)
+
+    assert result.kind == "stopped"
+    assert result.reason == "idempotency_key_conflict"
+    assert deps.calls == ["claim", "rollback"]
+    assert deps.commits == 0
+    assert not deps.effect_plans
+
+
+def test_body_evidence_precedence_reaches_the_verifier_and_claim_hash() -> None:
+    deps = FakeDependencies(
+        verify_result=(False, "signed_evidence_tampered", None),
+    )
+    body = _body(deps.appointment)
+    body.signed_confirmation_evidence = "different-evidence"
+
+    result = _run(deps, body)
+
+    assert result.kind == "stopped"
+    assert result.reason == "signed_evidence_tampered"
+    assert deps.claim_kwargs["confirmation_evidence_hash"] == hashlib.sha256(
+        b"different-evidence"
+    ).hexdigest()
+    assert deps.verify_kwargs["evidence"] == "different-evidence"
+    assert deps.commits == 0
+
+
 def test_replay_with_extra_patient_or_secret_material_fails_closed() -> None:
     first = FakeDependencies()
     accepted = _run(first)
@@ -561,6 +593,7 @@ def _apply_hostile_mutation(
         body.signed_confirmation_evidence = "   "
     elif name == "evidence_mismatch":
         body.signed_confirmation_evidence = "different-evidence"
+        deps.verify_result = (False, "signed_evidence_tampered", None)
     elif name == "warning_missing_ack":
         proposal.warnings = [issue]
     elif name == "duplicate_body_warning":

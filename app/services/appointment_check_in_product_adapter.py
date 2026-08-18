@@ -282,8 +282,9 @@ def _valid_receptionist(actor: Any, practice_id: UUID, actor_id: UUID | None = N
 def _submitted_evidence(body: AppointmentCheckInProposalConfirmationIn) -> str:
     proposal_evidence = body.check_in_proposal.signed_confirmation_evidence
     body_evidence = body.signed_confirmation_evidence
-    if body_evidence and proposal_evidence and body_evidence != proposal_evidence:
-        raise ValueError("proposal and confirmation evidence differ")
+    # Preserve the mounted A5.1 contract: an explicitly submitted body token
+    # takes precedence and is still verified against the complete server-side
+    # binding. The proposal copy is only the fallback when the body omits it.
     evidence = body_evidence or proposal_evidence
     if not isinstance(evidence, str) or not evidence.strip():
         raise ValueError("signed evidence is required")
@@ -455,15 +456,27 @@ def compose_product_check_in(
         return _stop("aware_utc_time_required")
     if not _valid_receptionist(authenticated_actor, server_practice_id):
         return _stop("current_receptionist_authority_required", outcome="authority_revoked")
+
+    # The mounted A5.1 route has always classified same-key replay/conflict
+    # before validating confirmation semantics. Preserve that observable
+    # ordering while still rejecting foreign object shapes before any claim.
     try:
-        proposal, command, evidence, submitted_freshness = _validate_envelope(
-            body,
-            target_appointment_id=target_appointment_id,
+        if type(body) is not AppointmentCheckInProposalConfirmationIn:
+            raise ValueError("only the dedicated check-in confirmation is supported")
+        if type(body.check_in_proposal) is not AppointmentCheckInProposalOut:
+            raise ValueError("only the dedicated check-in proposal is supported")
+        if type(body.check_in_proposal.command) is not AppointmentCheckInCommand:
+            raise ValueError("only the dedicated check-in command is supported")
+        evidence_candidate = (
+            body.signed_confirmation_evidence
+            or body.check_in_proposal.signed_confirmation_evidence
         )
     except (AttributeError, TypeError, ValueError):
         return _stop("confirmation_envelope_invalid", outcome="confirmation_required")
 
-    evidence_hash = hashlib.sha256(evidence.encode("utf-8")).hexdigest()
+    evidence_hash = None
+    if isinstance(evidence_candidate, str) and evidence_candidate:
+        evidence_hash = hashlib.sha256(evidence_candidate.encode("utf-8")).hexdigest()
     try:
         decision = dependencies.claim(
             practice_id=server_practice_id,
@@ -503,6 +516,15 @@ def compose_product_check_in(
     if kind != "started":
         _rollback(dependencies)
         return _idempotency_stop(str(kind))
+
+    try:
+        proposal, command, evidence, submitted_freshness = _validate_envelope(
+            body,
+            target_appointment_id=target_appointment_id,
+        )
+    except (AttributeError, TypeError, ValueError):
+        _rollback(dependencies)
+        return _stop("confirmation_envelope_invalid", outcome="confirmation_required")
 
     try:
         command_record_id = decision.record.id

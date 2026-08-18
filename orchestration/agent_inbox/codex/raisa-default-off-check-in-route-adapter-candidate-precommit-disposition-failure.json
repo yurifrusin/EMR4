@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt_failure.v1",
+  "recorded_at": "2026-08-18T13:17:00+10:00",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+  "continuation_event": "pre_commit",
+  "source_head": "c2bc6fae8bd99131c34613daf255fe82ce3a1690",
+  "status": "revision_required",
+  "reason_codes": [
+    "parallelism_lane_disposition_invalid:deepseek_flash"
+  ],
+  "invalid_value": "contained_transport_non_result",
+  "admitted_replacement": "completed",
+  "candidate_source_changed": false,
+  "worker_or_provider_dispatched": false,
+  "corrected_receipt": "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-corrected-receipt.json",
+  "claim_boundary": "This is a local receipt-vocabulary failure only. It does not alter the candidate, worker result, provider state, product data or protected refs."
+}

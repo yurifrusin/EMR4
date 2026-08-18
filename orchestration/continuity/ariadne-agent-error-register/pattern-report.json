@@ -1,29 +1,29 @@
 {
-  "canonical_register_sha256": "5817594b8e4d1663301e03576cec4525c361bddf4f721568b7b9bce030b8df75",
+  "canonical_register_sha256": "2de6c84c4b8f92640fcddf017b9207605af6c388a96858a4787f0d0d56b88aab",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 110,
-      "canonical_unchanged": 277,
+      "canonical_unchanged": 278,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
       "command_scope_violation": 64,
       "evidence_misreport": 57,
       "harness_failure": 49,
-      "output_contract_violation": 130,
+      "output_contract_violation": 131,
       "read_only_violation": 3,
       "reasoning_claim_error": 43,
       "repository_defect": 65,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 297,
+      "agent_behavior": 298,
       "harness": 49,
       "repository": 65,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 179,
+      "low": 180,
       "material": 115,
       "moderate": 133
     },
@@ -46,7 +46,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 214,
+      "codex-primary-orchestrator::orchestrator": 215,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -110,12 +110,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 327,
+      "orchestrator": 328,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 427,
+  "incident_count": 428,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -631,6 +631,30 @@
         "Expose the configured event vocabulary through the receipt CLI and require authors to select from that output; tests bind the discoverable list to orchestrator_requirements.yaml so event spelling is not a memory or prose task."
       ],
       "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0322",
+        "AER-0428"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Reuse the last passing stage-equivalent parallelism object and validate its disposition vocabulary locally before any plan, dispatch or verifier boundary.",
+        "Select lane dispositions only from orchestration/harness_settings/orchestrator_requirements.yaml and place descriptive terminal detail in rationale and work_packages rather than inventing an enum value."
+      ],
+      "recurrence_signature": "orchestrator.plan_precommit_parallelism_disposition_invalid",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1274,7 +1298,7 @@
       ]
     }
   ],
-  "register_revision": 375,
+  "register_revision": 376,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

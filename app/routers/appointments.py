@@ -44,7 +44,6 @@ from app.schemas.appointments import (
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentCheckInProposalIn, AppointmentCheckInCommand, AppointmentCheckInProposalOut,
     AppointmentCheckInProposalConfirmationIn, AppointmentConfirmCheckInProposalOut,
-    AppointmentCheckInReceipt,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
     AppointmentDeleteProposalConfirmationIn, AppointmentConfirmDeleteProposalOut,
     AppointmentAuditLogOut,
@@ -94,6 +93,11 @@ from app.services.diary.confirm_actions import (
 from app.services.appointment_status_product_adapter import (
     compose_product_status_confirm,
     mint_status_proposal_version_binding,
+)
+from app.services.appointment_check_in_product_adapter import (
+    CheckInAdapterResult,
+    CheckInDependencies,
+    compose_product_check_in,
 )
 from app.services.appointment_delete_product_adapter import (
     appointment_delete_state,
@@ -3331,6 +3335,309 @@ def propose_check_in_appointment(
     return proposal
 
 
+_A5_CHECK_IN_VERIFIED_AREA_FAILURES = {
+    "waiting_area_move_not_supported",
+    "waiting_area_location_required",
+    "waiting_area_not_active",
+    "waiting_area_location_mismatch",
+    "waiting_area_invalid",
+    "preserved_waiting_area_location_required",
+    "preserved_waiting_area_not_active",
+    "preserved_waiting_area_location_mismatch",
+}
+
+_A5_CHECK_IN_INTERNAL_ADAPTER_STOPS = {
+    "idempotency_claim_failed",
+    "idempotency_decision_invalid",
+    "stored_replay_invalid",
+    "locked_appointment_scope_mismatch",
+    "locked_appointment_invalid",
+    "precommit_composition_failed",
+    "commit_outcome_unknown",
+    "committed_readback_unavailable",
+}
+
+_A5_CHECK_IN_BLOCK_MESSAGES = {
+    "current_receptionist_authority_required": (
+        "The authenticated actor is not currently authorised as a receptionist."
+    ),
+    "current_authority_revoked": (
+        "The receptionist authority changed before check-in could be confirmed."
+    ),
+    "explicit_confirmation_required": (
+        "confirmed=true is required before confirming appointment check-in."
+    ),
+    "check_in_proposal_not_safe": "The check-in proposal is not safe to confirm.",
+    "signed_evidence_required": "Signed check-in confirmation evidence is required.",
+    "already_arrived": "This appointment is already checked in.",
+    "invalid_source_status": "Check-in requires current status Booked or Confirmed.",
+    "stale_check_in_proposal_freshness_id": (
+        "Confirmation blocked: check-in proposal freshness id does not match "
+        "current appointment state."
+    ),
+    "waiting_area_move_not_supported": (
+        "A5.1 check-in cannot move an already assigned waiting area."
+    ),
+    "waiting_area_location_required": (
+        "An appointment without a resolved location cannot be assigned a waiting area."
+    ),
+    "waiting_area_not_active": "The selected waiting area is not active or not found.",
+    "waiting_area_location_mismatch": (
+        "The selected waiting area must belong to the same non-null location as "
+        "the appointment."
+    ),
+    "preserved_waiting_area_location_required": (
+        "The appointment has no resolved location; its existing waiting area "
+        "cannot be preserved."
+    ),
+    "preserved_waiting_area_not_active": (
+        "The appointment's existing waiting area is no longer active or not found."
+    ),
+    "preserved_waiting_area_location_mismatch": (
+        "The appointment's existing waiting area no longer matches its location."
+    ),
+}
+
+
+def _a5_check_in_envelope_block_code(
+    body: AppointmentCheckInProposalConfirmationIn,
+) -> str:
+    proposal = body.check_in_proposal
+    evidence = body.signed_confirmation_evidence or proposal.signed_confirmation_evidence
+    if body.confirmed is not True:
+        return "explicit_confirmation_required"
+    if (
+        proposal.safe is not True
+        or proposal.autonomy_tier == "blocked"
+        or proposal.requires_confirmation is not True
+    ):
+        return "check_in_proposal_not_safe"
+    if not isinstance(evidence, str) or not evidence:
+        return "signed_evidence_required"
+    return "confirmation_envelope_invalid"
+
+
+def _a5_check_in_adapter_response(
+    result: CheckInAdapterResult,
+    *,
+    body: AppointmentCheckInProposalConfirmationIn,
+):
+    if result.kind in {"confirmed_write", "replay"}:
+        if result.response_status_code != status.HTTP_200_OK or result.response_body is None:
+            raise RuntimeError("check-in adapter released an invalid success")
+        parsed = AppointmentConfirmCheckInProposalOut.model_validate(result.response_body)
+        if result.kind == "replay":
+            return JSONResponse(
+                status_code=status.HTTP_200_OK,
+                content=parsed.model_dump(mode="json"),
+            )
+        return parsed
+
+    reason = result.reason or "adapter_stop_without_reason"
+    if reason == "idempotency_key_required":
+        raise _idempotency_key_required_error()
+    idempotency_errors = {
+        "idempotency_key_conflict": (
+            status.HTTP_409_CONFLICT,
+            "idempotency_key_conflict",
+            "Idempotency-Key was already used with a different confirmation payload.",
+        ),
+        "command_in_progress": (
+            status.HTTP_409_CONFLICT,
+            "idempotency_key_in_progress",
+            "A confirmation with this Idempotency-Key is already in progress.",
+        ),
+        "stale_command_in_progress": (
+            status.HTTP_409_CONFLICT,
+            "idempotency_key_stale_in_progress",
+            "A prior confirmation with this Idempotency-Key is stale and needs staff review.",
+        ),
+        "prior_command_failed": (
+            status.HTTP_503_SERVICE_UNAVAILABLE,
+            "idempotency_key_failed_transient",
+            "A prior confirmation with this Idempotency-Key failed transiently and needs staff review.",
+        ),
+        "confirmation_replay_rejected": (
+            status.HTTP_409_CONFLICT,
+            "confirmation_replay_rejected",
+            "This check-in confirmation evidence has already been consumed by another command.",
+        ),
+    }
+    if reason in idempotency_errors:
+        status_code, code, message = idempotency_errors[reason]
+        raise _idempotency_key_error(status_code, code, message)
+    if reason == "appointment_not_found":
+        raise HTTPException(status_code=404, detail="Appointment not found")
+    if reason in _A5_CHECK_IN_INTERNAL_ADAPTER_STOPS:
+        raise RuntimeError(f"check-in adapter stopped internally: {reason}")
+
+    code = (
+        _a5_check_in_envelope_block_code(body)
+        if reason == "confirmation_envelope_invalid"
+        else reason
+    )
+    message = _A5_CHECK_IN_BLOCK_MESSAGES.get(
+        code,
+        (
+            "Check-in confirmation evidence failed verification."
+            if code.startswith("signed_evidence_")
+            else "The check-in confirmation was rejected."
+        ),
+    )
+    audit_evidence = list(_A5_CHECK_IN_BASE_EVIDENCE)
+    if code in _A5_CHECK_IN_VERIFIED_AREA_FAILURES:
+        audit_evidence.append("check_in_signed_confirmation_evidence_verified")
+    return _block_check_in_confirmation(
+        [_check_in_block(code, message)],
+        warnings=body.check_in_proposal.warnings,
+        audit_evidence=audit_evidence,
+    )
+
+
+def _a5_check_in_dependencies(db: Session) -> CheckInDependencies:
+    state: dict[str, Any] = {}
+
+    def claim(**kwargs: Any):
+        return claim_appointment_check_in_command(
+            db,
+            secret=_staff_create_confirm_idempotency_secret(),
+            stale_after=_A5_CHECK_IN_IDEMPOTENCY_STALE_AFTER,
+            **kwargs,
+        )
+
+    def load_locked_appointment(*, practice_id: uuid.UUID, appointment_id: uuid.UUID):
+        appointment = (
+            db.query(Appointment)
+            .filter(
+                Appointment.id == appointment_id,
+                Appointment.practice_id == practice_id,
+            )
+            .with_for_update()
+            .one_or_none()
+        )
+        state["appointment"] = appointment
+        return appointment
+
+    def load_current_actor(*, practice_id: uuid.UUID, actor_user_id: uuid.UUID):
+        actor = (
+            db.query(User)
+            .filter(User.id == actor_user_id, User.practice_id == practice_id)
+            .with_for_update()
+            .one_or_none()
+        )
+        state["actor"] = actor
+        return actor
+
+    def load_waiting_area(*, practice_id: uuid.UUID, waiting_area_id: uuid.UUID):
+        return (
+            db.query(WaitingArea)
+            .filter(
+                WaitingArea.id == waiting_area_id,
+                WaitingArea.practice_id == practice_id,
+            )
+            .one_or_none()
+        )
+
+    def verify_evidence(evidence: str, **kwargs: Any):
+        return verify_check_in_evidence_token(
+            evidence,
+            secret=_staff_create_confirm_idempotency_secret(),
+            **kwargs,
+        )
+
+    def stage_effect(*, appointment: Appointment, plan: Any) -> None:
+        if (
+            appointment is not state.get("appointment")
+            or appointment.id != plan.appointment_id
+            or plan.status_after != AppointmentStatus.Arrived.value
+        ):
+            raise ValueError("check-in effect plan does not match the locked appointment")
+        appointment.status = AppointmentStatus.Arrived
+        appointment.waiting_area_id = plan.waiting_area_id_after
+
+    def write_audit(*, plan: Any):
+        if (
+            plan.action != AppointmentAuditAction.status_change.value
+            or plan.status_after != AppointmentStatus.Arrived.value
+            or tuple(plan.audit_evidence)
+            != tuple([*_A5_CHECK_IN_BASE_EVIDENCE, "check_in_signed_confirmation_evidence_verified"])
+        ):
+            raise ValueError("check-in audit plan is outside the A5.1 contract")
+        audit = _write_audit(
+            db,
+            practice_id=plan.practice_id,
+            appointment_id=plan.appointment_id,
+            confirmed_by_user_id=plan.actor_user_id,
+            action=AppointmentAuditAction.status_change,
+            status_before=AppointmentStatus(plan.status_before),
+            status_after=AppointmentStatus.Arrived,
+            confirmed_warnings=list(plan.confirmed_warnings),
+            audit_evidence=list(plan.audit_evidence),
+            command_id=plan.command_id,
+        )
+        state["audit"] = audit
+        state["audit_plan"] = plan
+        return audit
+
+    def write_event(*, plan: Any):
+        appointment = state.get("appointment")
+        actor = state.get("actor")
+        audit = state.get("audit")
+        audit_plan = state.get("audit_plan")
+        if (
+            appointment is None
+            or actor is None
+            or audit is None
+            or audit_plan is None
+            or plan.appointment_id != appointment.id
+            or plan.practice_id != appointment.practice_id
+            or plan.actor_user_id != actor.id
+            or plan.command_id != audit.command_id
+            or plan.audit_log_id != audit.id
+        ):
+            raise ValueError("check-in event plan does not match the transaction state")
+        return record_appointment_checked_in_event(
+            db,
+            appointment=appointment,
+            audit=audit,
+            actor=actor,
+            command_id=plan.command_id,
+            status_before=audit_plan.status_before,
+            waiting_area_id_before=audit_plan.waiting_area_id_before,
+            waiting_area_id_after=audit_plan.waiting_area_id_after,
+            occurred_at=plan.occurred_at,
+        )
+
+    def complete(**kwargs: Any):
+        return complete_appointment_command(db, **kwargs)
+
+    def readback(*, practice_id: uuid.UUID, appointment_id: uuid.UUID):
+        return (
+            db.query(Appointment)
+            .populate_existing()
+            .filter(
+                Appointment.id == appointment_id,
+                Appointment.practice_id == practice_id,
+            )
+            .one_or_none()
+        )
+
+    return CheckInDependencies(
+        claim=claim,
+        load_locked_appointment=load_locked_appointment,
+        load_current_actor=load_current_actor,
+        load_waiting_area=load_waiting_area,
+        verify_evidence=verify_evidence,
+        stage_effect=stage_effect,
+        write_audit=write_audit,
+        write_event=write_event,
+        complete=complete,
+        commit=db.commit,
+        rollback=db.rollback,
+        readback=readback,
+    )
+
+
 @router.post(
     "/proposals/check-in/confirm",
     response_model=AppointmentConfirmCheckInProposalOut,
@@ -3342,214 +3649,19 @@ def confirm_check_in_proposal_route(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.Receptionist)),
 ):
-    """Confirm one A5.1 check-in proposal within one atomic transaction.
-
-    Resolves same-key replay before evidence consumption, locks the exact
-    practice-scoped appointment, revalidates current state/evidence/area, updates
-    status to Arrived with the optional assigned area, appends one command-bound
-    audit and one patient-free committed event, and completes one bounded
-    idempotency receipt.
-    """
+    """Delegate the unchanged default-off A5.1 confirmation to its adapter."""
     _a5_check_in_gate_open(current_user)
     normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
-
-    proposal = body.check_in_proposal
-    command = proposal.command
-    evidence_token = (
-        body.signed_confirmation_evidence or proposal.signed_confirmation_evidence
-    )
-    evidence_hash = None
-    if isinstance(evidence_token, str) and evidence_token:
-        evidence_hash = hashlib.sha256(evidence_token.encode("utf-8")).hexdigest()
-
-    decision = claim_appointment_check_in_command(
-        db,
-        practice_id=current_user.practice_id,
-        actor_user_id=str(current_user.id),
-        actor_role=current_user.role.value if current_user.role else "unknown",
-        operation_id=_A5_CHECK_IN_OPERATION_ID,
-        route_family=_A5_CHECK_IN_ROUTE_FAMILY,
+    result = compose_product_check_in(
+        body,
+        target_appointment_id=body.check_in_proposal.command.appointment_id,
+        server_practice_id=current_user.practice_id,
+        authenticated_actor=current_user,
         raw_idempotency_key=normalized_idempotency_key,
-        request_body=body.model_dump(mode="json"),
-        secret=_staff_create_confirm_idempotency_secret(),
-        confirmation_evidence_hash=evidence_hash,
-        stale_after=_A5_CHECK_IN_IDEMPOTENCY_STALE_AFTER,
+        now=datetime.now(timezone.utc),
+        dependencies=_a5_check_in_dependencies(db),
     )
-    if decision.kind == "replay":
-        return JSONResponse(
-            status_code=decision.response_status_code or status.HTTP_200_OK,
-            content=decision.response_body_json or {},
-        )
-    if decision.kind == "evidence_replay_rejected":
-        db.rollback()
-        raise _idempotency_key_error(
-            status.HTTP_409_CONFLICT,
-            "confirmation_replay_rejected",
-            "This check-in confirmation evidence has already been consumed by another command.",
-        )
-    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
-    if mapped_decision is not None:
-        return mapped_decision
-
-    audit_evidence = list(_A5_CHECK_IN_BASE_EVIDENCE)
-    blocks: list[AppointmentProposalIssue] = []
-
-    if body.confirmed is not True:
-        blocks.append(_check_in_block(
-            "explicit_confirmation_required",
-            "confirmed=true is required before confirming appointment check-in.",
-        ))
-    if (
-        not proposal.safe
-        or proposal.autonomy_tier == "blocked"
-        or not proposal.requires_confirmation
-    ):
-        blocks.append(_check_in_block(
-            "check_in_proposal_not_safe",
-            "The check-in proposal is not safe to confirm.",
-        ))
-    if not isinstance(evidence_token, str) or not evidence_token:
-        blocks.append(_check_in_block(
-            "signed_evidence_required",
-            "Signed check-in confirmation evidence is required.",
-        ))
-
-    appt = (
-        db.query(Appointment)
-        .filter(
-            Appointment.id == command.appointment_id,
-            Appointment.practice_id == current_user.practice_id,
-        )
-        .with_for_update()
-        .one_or_none()
-    )
-    if appt is None:
-        db.rollback()
-        raise HTTPException(status_code=404, detail="Appointment not found")
-
-    if appt.status not in (AppointmentStatus.Booked, AppointmentStatus.Confirmed):
-        blocks.append(_check_in_block(
-            "invalid_source_status",
-            "Check-in requires current status Booked or Confirmed.",
-        ))
-    if appt.status == AppointmentStatus.Arrived:
-        blocks.append(_check_in_block(
-            "already_arrived",
-            "This appointment is already checked in.",
-        ))
-
-    current_state = _appointment_check_in_state_payload(appt)
-    expected_freshness_id = _compute_check_in_proposal_freshness_id(
-        command=command,
-        current_state=current_state,
-    )
-    submitted_freshness_id = (
-        body.check_in_proposal_freshness_id
-        or proposal.check_in_proposal_freshness_id
-    )
-    if submitted_freshness_id != expected_freshness_id:
-        blocks.append(_check_in_block(
-            "stale_check_in_proposal_freshness_id",
-            "Confirmation blocked: check-in proposal freshness id does not match current appointment state.",
-        ))
-
-    target_area_id = _a5_check_in_target_area_id(appt, command)
-    if isinstance(evidence_token, str) and evidence_token:
-        verified, verify_code, _ = verify_check_in_evidence_token(
-            evidence_token,
-            secret=_staff_create_confirm_idempotency_secret(),
-            now=datetime.now(timezone.utc),
-            expected_practice_id=str(current_user.practice_id),
-            expected_actor_user_id=str(current_user.id),
-            expected_appointment_id=str(command.appointment_id),
-            expected_status_before=appt.status.value,
-            expected_waiting_area_id_before=_uuid_or_none(appt.waiting_area_id),
-            expected_waiting_area_id_target=_uuid_or_none(target_area_id),
-            expected_check_in_proposal_freshness_id=expected_freshness_id,
-        )
-        if not verified:
-            blocks.append(_check_in_block(
-                verify_code,
-                "Check-in confirmation evidence failed verification.",
-            ))
-        else:
-            audit_evidence.append("check_in_signed_confirmation_evidence_verified")
-
-    _validate_check_in_waiting_area(
-        appt=appt,
-        command=command,
-        practice_id=current_user.practice_id,
-        db=db,
-        blocks=blocks,
-    )
-
-    if blocks:
-        db.rollback()
-        return _block_check_in_confirmation(
-            blocks,
-            warnings=proposal.warnings,
-            audit_evidence=audit_evidence,
-        )
-
-    status_before_value = appt.status.value
-    waiting_area_before = appt.waiting_area_id
-    appt.status = AppointmentStatus.Arrived
-    if command.waiting_area_id_supplied and command.waiting_area_id is not None:
-        appt.waiting_area_id = command.waiting_area_id
-
-    audit = _write_audit(
-        db,
-        practice_id=current_user.practice_id,
-        appointment_id=command.appointment_id,
-        confirmed_by_user_id=current_user.id,
-        action=AppointmentAuditAction.status_change,
-        status_before=AppointmentStatus(status_before_value),
-        status_after=AppointmentStatus.Arrived,
-        confirmed_warnings=body.confirmed_warnings,
-        audit_evidence=audit_evidence,
-        command_id=decision.record.id,
-    )
-    event = record_appointment_checked_in_event(
-        db,
-        appointment=appt,
-        audit=audit,
-        actor=current_user,
-        command_id=decision.record.id,
-        status_before=status_before_value,
-        waiting_area_id_before=waiting_area_before,
-        waiting_area_id_after=appt.waiting_area_id,
-    )
-    receipt = AppointmentCheckInReceipt(
-        appointment_id=command.appointment_id,
-        status=AppointmentStatus.Arrived,
-        waiting_area_id=appt.waiting_area_id,
-        audit_log_id=audit.id,
-        event_id=event.id,
-        command_id=decision.record.id,
-        commit_time=datetime.now(timezone.utc),
-    )
-    response_body = AppointmentConfirmCheckInProposalOut(
-        safe=True,
-        requires_confirmation=False,
-        autonomy_tier="confirmed_write",
-        summary="Confirmed check-in and moved the appointment to Arrived.",
-        receipt=receipt,
-        warnings=proposal.warnings,
-        blocks=[],
-        audit_evidence=audit_evidence,
-    )
-    complete_appointment_command(
-        db,
-        decision.record,
-        response_status_code=status.HTTP_200_OK,
-        response_body=response_body.model_dump(mode="json"),
-        result_kind="confirmed_write",
-        target_appointment_id=command.appointment_id,
-        audit_log_id=audit.id,
-        confirmation_evidence_consumed_at=datetime.now(timezone.utc),
-    )
-    db.commit()
-    return response_body
+    return _a5_check_in_adapter_response(result, body=body)
 
 
 @router.get("/waiting-room", response_model=list[AppointmentOut])
