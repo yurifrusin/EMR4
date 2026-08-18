@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness authored-synthetic agentic-coding traceability rehearsal",
+    "completed_stage": "A fresh complete five-source rehydration read the live baton, accepted micro closeout/acceptance and terminal latch; verified the task branch at a64bf71d0eefe902a8647cb0e8cc0e2496976296, required historical sources as ancestors and all four protected refs exact; and froze the isolated multi-turn agentic-coding plan before package bootstrap.",
+    "next_executable_stage": "pass_the_fresh_preplanning_receipt_then_commit_the_plan_latch_and_receipt_before_package_bootstrap",
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "a64bf71d0eefe902a8647cb0e8cc0e2496976296",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "a64bf71d0eefe902a8647cb0e8cc0e2496976296",
+    "reason_codes": [],
+    "resolved_commit": "a64bf71d0eefe902a8647cb0e8cc0e2496976296",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a64bf71d0eefe902a8647cb0e8cc0e2496976296"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "a64bf71d0eefe902a8647cb0e8cc0e2496976296",
+    "branch_origin_aligned": false,
+    "head": "a64bf71d0eefe902a8647cb0e8cc0e2496976296",
+    "origin_branch_commit": "0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The user explicitly requested a broader native-Harness rehearsal; one serial synthetic inspect/edit/test session is the measured work package.",
+        "work_packages": [
+          "one_pinned_native_harness_agentic_coding_session_and_automatic_session_tool_evidence"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "This transport-observability measurement changes no product/runtime source; deterministic Git and test readback validate the synthetic candidate without another paid model.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and the synthetic fixture has no independent parallel work package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal",
+    "parallel_work_packages": [
+      "No parallel execution; the one native Harness session is itself the measured DeepSeek lane."
+    ],
+    "reassessment_triggers": [
+      "post_package_discovery",
+      "post_credential_absent_boot",
+      "pre_occupied_request",
+      "post_session_exit",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit plan before package bootstrap",
+      "offline package and configuration discovery",
+      "credential-absent exact-profile boot before one occupied session",
+      "deterministic diff and test readback before evidence reduction",
+      "cleanup before acceptance",
+      "Sol alone admits evidence and closes Git"
+    ]
+  },
+  "planned_action": "freeze_and_commit_the_bounded_native_deepseek_harness_agentic_coding_traceability_rehearsal_before_package_bootstrap",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-plan.md",
+      "docs/deepseek-native-harness-authored-synthetic-traceability-micro-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-traceability-sol-acceptance.md",
+      "https://github.com/deepseek-ai/deepseek-harness",
+      "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7"
+    ],
+    "current_authority_allocation": "GPT Sol owns planning, deterministic admission, evidence reduction, acceptance, closeout and Git. DeepSeek V4 Flash/high through the pinned native Harness owns exactly one bounded synthetic agentic coding session. Gemini is declined for this transport measurement; native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task HEAD is a64bf71d0eefe902a8647cb0e8cc0e2496976296 on codex/ariadne-bernie-davida-parallel-seam, four commits ahead of origin task 0e5aaab7c35cd8a8ee83ae662c0978cf1ddcb4eb, with no tracked changes before this plan. Required ad523968713e58f0b42c3a428556c968f61d6d3c, accepted adapter 8de886c5148b3259428c8c517674f10ea92d937e and route source 01d355f42df5981341196f3aa0caec2cccce7a2d are ancestors. Local/origin master and local/origin handoff/current are exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; the pre-existing untracked set is preserved.",
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 318 / Compass 300 preserves the accepted native-Harness no-call result, unchanged default worker allocation, protected refs and standing uninterrupted-development authority. Yuri explicitly redirected the pre-publication sequence to require a less atomic and more comprehensive Harness test.",
+    "protected_evidence_boundaries": "One pinned rc.7 native-Harness Flash/high session in a separately committed authored-synthetic interval-processing repository with only workspace read/search/editor/PowerShell-test tools, two-to-six model turns, zero retries/fallbacks, 10-minute wall bound and USD 0.25 cap. No EMR4 source/untracked file, product/patient/clinical/protected data, global install/configuration, web/subagent or production/deployment/release/Pages/protected refs. docs/branding remains excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
