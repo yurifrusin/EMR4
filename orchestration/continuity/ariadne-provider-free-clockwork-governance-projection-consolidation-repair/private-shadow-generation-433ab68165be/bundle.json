@@ -1,13 +1,13 @@
 {
-  "bundle_sha256": "613cdff9e59936e42a2fadd821511f59a0cd8b88d67efaf7840d78aa744f7367",
+  "bundle_sha256": "433ab68165be9f03688e2e46bba6bb02e951a40d40135bad0c28e16ae29a50b0",
   "clock": {
-    "acknowledged_tip_sha256": "16e71c277d77376c4c36d2cf223c996e08b6905c2cf94cd1e06bc40d68c85a64",
+    "acknowledged_tip_sha256": "2115be7489c1093b356aa38927bdb494ac44cc70a69bcd7899007d9dbe2fdb0b",
     "efficacy_sha256": "d3a3b75d73966b03cd1b065e5170c5c482af83c54fd9d3c969dc48138ffe1deb",
-    "latch_sha256": "f8ab38adaff821a877426fffa69451eda5f72ec62a9e6022e80439d4bf59dcf8",
+    "latch_sha256": "d88d43680787a446268df5b24d109c787880f8d8c674aff685a9f9d8b6486fb8",
     "previous_acknowledged_tip_sha256": "916165250796d6e07d2720e06774d575db3441b746cee82b3c3f13706cf75074",
-    "projections_sha256": "2efe235c7215f0f901241b1742a33bb781f45f51303c338848f99917582e19dd",
+    "projections_sha256": "c3fb9929624598e3ab28b4e506d05328ed5c318465b962c291eda9c8cdd98439",
     "protected_refs_sha256": "e0a2dcbd4f1b996c80d3fee24b9a8bca485f5750ff9808cb7b7334bdd11acdac",
-    "source_commit": "5e14e19f7649ae7e19a434cdabe4b09ca7618b26"
+    "source_commit": "ec72ca20e90a1a6f3558efee919cab4b0bb5e438"
   },
   "current_controls_retired": false,
   "efficacy": {
@@ -25672,7 +25672,7 @@
       }
     },
     "latch_projection": {
-      "source_commit": "5e14e19f7649ae7e19a434cdabe4b09ca7618b26",
+      "source_commit": "ec72ca20e90a1a6f3558efee919cab4b0bb5e438",
       "status": "blocked",
       "user_attention_required": true
     },
