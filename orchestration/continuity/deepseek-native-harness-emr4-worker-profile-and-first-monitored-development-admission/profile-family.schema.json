@@ -7,6 +7,7 @@
   "required": [
     "schema_version",
     "package",
+    "tool_view_enforcement",
     "model_route",
     "loop_control",
     "session_policy",
@@ -17,7 +18,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "emr4.deepseek-native-harness-profile-family.v1"
+      "const": "emr4.deepseek-native-harness-profile-family.v2"
     },
     "package": {
       "type": "object",
@@ -31,6 +32,111 @@
         },
         "registry_integrity": {
           "const": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw=="
+        }
+      }
+    },
+    "tool_view_enforcement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selector",
+        "preset_mount",
+        "semantics",
+        "outer_broker",
+        "source_mapping"
+      ],
+      "properties": {
+        "selector": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "package",
+            "version",
+            "public_api",
+            "allow_argument",
+            "applied_scope"
+          ],
+          "properties": {
+            "package": {"const": "@deepseek-ai/dsh-tools"},
+            "version": {"const": "0.1.0-rc.7"},
+            "public_api": {"const": "ctx.tools.restrict"},
+            "allow_argument": {"const": "selected_profile.tools"},
+            "applied_scope": {"const": "agent_setup_context"}
+          }
+        },
+        "preset_mount": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "package",
+            "version",
+            "public_api",
+            "preset_id",
+            "mount_phase"
+          ],
+          "properties": {
+            "package": {"const": "@deepseek-ai/dsh-agent-presets"},
+            "version": {"const": "0.1.0-rc.7"},
+            "public_api": {"const": "ctx.agentPresets.mount"},
+            "preset_id": {"const": "selected_profile_name"},
+            "mount_phase": {
+              "const": "agents.create_setup_before_first_request"
+            }
+          }
+        },
+        "semantics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model_request_effect",
+            "unnamed_late_global_tools",
+            "multiple_restrictions",
+            "unknown_local_or_reserved_names",
+            "security_boundary"
+          ],
+          "properties": {
+            "model_request_effect": {
+              "const": "remove_unselected_tool_schemas"
+            },
+            "unnamed_late_global_tools": {"const": "excluded"},
+            "multiple_restrictions": {"const": "intersection"},
+            "unknown_local_or_reserved_names": {"const": "reject"},
+            "security_boundary": {"const": false}
+          }
+        },
+        "outer_broker": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required",
+            "tool_allowlist_source",
+            "exact_match_required"
+          ],
+          "properties": {
+            "required": {"const": true},
+            "tool_allowlist_source": {"const": "selected_profile.tools"},
+            "exact_match_required": {"const": true}
+          }
+        },
+        "source_mapping": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/sourceMappingDshToolsReadme"
+            },
+            {
+              "$ref": "#/$defs/sourceMappingDshToolsRuntime"
+            },
+            {
+              "$ref": "#/$defs/sourceMappingAgentPresetsReadme"
+            },
+            {
+              "$ref": "#/$defs/sourceMappingAgentPresetsRuntime"
+            }
+          ],
+          "items": false
         }
       }
     },
@@ -233,6 +339,54 @@
     }
   },
   "$defs": {
+    "sourceMappingDshToolsReadme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "path", "sha256"],
+      "properties": {
+        "package": {"const": "@deepseek-ai/dsh-tools"},
+        "path": {"const": "README.md"},
+        "sha256": {
+          "const": "695e1f49dc4929133a5bca9da0d1f96601027a2643159efff5b82fb2709aa90d"
+        }
+      }
+    },
+    "sourceMappingDshToolsRuntime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "path", "sha256"],
+      "properties": {
+        "package": {"const": "@deepseek-ai/dsh-tools"},
+        "path": {"const": "lib/index.js"},
+        "sha256": {
+          "const": "47de95d14493dbd22d1a3ade14890fc99d7232db4e363f2190c9063b030dd029"
+        }
+      }
+    },
+    "sourceMappingAgentPresetsReadme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "path", "sha256"],
+      "properties": {
+        "package": {"const": "@deepseek-ai/dsh-agent-presets"},
+        "path": {"const": "README.md"},
+        "sha256": {
+          "const": "c9fdecbd3d6047f171f0e0a6208b31fe38891685e9fdee86a46d5d7effcd7733"
+        }
+      }
+    },
+    "sourceMappingAgentPresetsRuntime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "path", "sha256"],
+      "properties": {
+        "package": {"const": "@deepseek-ai/dsh-agent-presets"},
+        "path": {"const": "lib/index.js"},
+        "sha256": {
+          "const": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039"
+        }
+      }
+    },
     "profile": {
       "type": "object",
       "additionalProperties": false,

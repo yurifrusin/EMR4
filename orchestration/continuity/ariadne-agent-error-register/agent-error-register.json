@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 408,
+  "register_revision": 413,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -18824,6 +18824,413 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-408.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0473",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-source-search-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_rg_process",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Windows rg searches must express filename filters with rg -g arguments rather than shell-style wildcard path operands that Windows rejects.",
+      "observed_error": "The first profile-family source search passed wildcard path operands such as docs/deepseek-native-harness* directly to rg and exited with Windows filename syntax errors.",
+      "detection_method": "The read-only command exited nonzero before returning search evidence; a fresh rg invocation using explicit -g filters succeeded.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_rg_wildcard_path_operand_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Discard the failed search and rerun rg with repository directories as paths and exact -g filename filters.",
+        "prevention_control": "On Windows, provide rg glob patterns only through -g and keep path operands literal directories or files.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-409.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0474",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-contract-tests-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Documentation assertions must normalize Markdown whitespace before matching a phrase that may cross a line wrap.",
+      "observed_error": "The new exact-tool-view contract test searched raw Markdown for a phrase split across two source lines and produced one false-negative assertion failure.",
+      "detection_method": "The focused profile-contract suite reported one failure while source readback showed the exact semantic phrase across a newline.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.markdown_assertion_omitted_whitespace_normalization",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Normalize the plan with split-and-join before matching and rerun the complete focused profile-contract suite to seven passes.",
+        "prevention_control": "Use normalized whitespace for prose-semantic assertions and reserve raw substring checks for intentionally line-stable source tokens.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "docs/ariadne-agent-error-correction-register-revision-409.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0475",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-docker-inspect-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_docker_cli",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Docker inspect templates must use functions available in Docker's documented Go-template surface.",
+      "observed_error": "A sanitized inspect command attempted to use an unavailable dict template function and exited before producing enclosure metadata.",
+      "detection_method": "Docker reported template parsing error function dict not defined; separate exact scalar and mounts templates then succeeded.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.docker_inspect_template_function_unavailable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use supported scalar interpolation and json field templates in separate read-only inspect invocations.",
+        "prevention_control": "Limit Docker inspect templates to documented built-ins or parse full inspect JSON in one bounded host process before retaining sanitized fields.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0476",
+      "attempt_id": "exact-tool-view-container-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "pinned_linux_docker_provider_free",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A pinned Linux Harness worker must receive dependencies installed for linux-x64, never a Windows-installed node_modules tree.",
+      "observed_error": "The first isolated worker mounted the Windows discovery node_modules tree; Linux refused sharp and Koffi native modules before composing any request.",
+      "detection_method": "The worker exited during plugin loading with exact linux-x64 sharp and Koffi errors; capture request count and provider calls both remained zero.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.cross_platform_node_modules_mounted_into_linux_worker",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Install exact rc.7 inside the pinned Linux image into a disposable package volume and prove sharp and Koffi load before remounting that volume read-only.",
+        "prevention_control": "Bind package preparation to the execution platform and require native optional-module readback before any isolated Harness boot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0477",
+      "attempt_id": "exact-tool-view-container-002",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "pinned_linux_docker_provider_free",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The local capture hostname configured in the Harness adapter must be an exact alias on the isolated Docker network before worker launch.",
+      "observed_error": "The second isolated capture container was not assigned alias capture, so the worker terminated with TRANSPORT before any request reached the endpoint.",
+      "detection_method": "The worker terminal was TRANSPORT, the capture remained ready with no request artifact, and both external/provider call counts remained zero.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.docker_capture_alias_missing_before_worker_launch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Destroy attempt 002, create a fresh internal network, attach the capture container with exact alias capture and rerun a fresh worker session.",
+        "prevention_control": "Read back capture readiness and its exact network alias before every provider-free worker launch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0478",
+      "attempt_id": "exact-tool-view-container-002-capture-read-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After a pre-request transport terminal, capture artifact reads must first test exact path existence because no request artifact is the expected state.",
+      "observed_error": "The orchestrator directly read the absent capture.json after attempt 002 and produced an avoidable path-not-found diagnostic.",
+      "detection_method": "Get-Content reported the exact disposable capture path absent; the absence itself agreed with zero requests and was not used as a passing proof.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.expected_absent_capture_read_without_existence_gate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Treat the absent artifact as corroborating zero-request evidence and require Test-Path before future conditional capture reads.",
+        "prevention_control": "Gate reads of request-created artifacts on exact path existence whenever the preceding terminal may occur before request emission.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0479",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-disposable-root-cleanup-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Disposable Windows roots should use the recoverable recycle path when available and avoid a destructive form rejected by the local safety policy.",
+      "observed_error": "After exact path resolution, the orchestrator attempted recursive Remove-Item and the execution policy rejected it before process creation.",
+      "detection_method": "The tool returned an immediate policy rejection; the root remained present and no data was removed by that attempt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-409.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_recursive_remove_used_before_recycle_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Send the already resolved exact disposable root to the Windows Recycle Bin with Microsoft.VisualBasic FileIO and verify Test-Path false.",
+        "prevention_control": "Prefer the recoverable Windows recycle API for disposable directory cleanup and reserve recursive Remove-Item for explicitly approved nonrecoverable cases.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0480",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-revision-409-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every new incident must use only a canonical register stage before a revision is described as accepted.",
+      "observed_error": "Revision 409 assigned cleanup to AER-0479, but cleanup is not an admitted register stage; schema validation rejected the representation before pattern generation.",
+      "detection_method": "The canonical register validator exited nonzero and named the exact invalid stage on AER-0479.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-409.md",
+        "docs/ariadne-agent-error-correction-register-revision-410.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_stage_enum_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve rejected revision 409, reclassify AER-0479 at canonical closeout stage, add AER-0480 and validate revision 410 before acceptance.",
+        "prevention_control": "Read the schema stage enum before adding an incident and run the canonical validator before updating AGENTS.md or a revision document to accepted status.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-410.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0481",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-revision-410-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Rows sharing one attempt identity and related peer linkage must preserve one exact transport identity.",
+      "observed_error": "Revision 410 linked AER-0477 and AER-0478 under attempt exact-tool-view-container-002 while one row used Docker transport and the other local PowerShell; semantic validation rejected the split identity.",
+      "detection_method": "The canonical register validator exited nonzero with split attempt identity mismatch before pattern generation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-410.md",
+        "docs/ariadne-agent-error-correction-register-revision-411.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_split_attempt_transport_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve rejected revision 410, give the conditional capture read its own attempt identity, clear invalid cross-transport peer links, add AER-0481 and validate revision 411.",
+        "prevention_control": "Before linking register peers, compare the full attempt identity including transport; use separate attempts and prose lineage when any identity field differs.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-411.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0482",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-suite-004",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A newly added incident assertion must preserve the exact case of the canonical observed-error text or normalize both operands explicitly.",
+      "observed_error": "The revision-411 focused test asserted lowercase revision 409 against canonical text beginning Revision 409 and produced one case-sensitive false negative after every other register test passed.",
+      "detection_method": "The complete register suite reached 100 percent and failed only the exact AER-0480 substring assertion.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-411.md",
+        "docs/ariadne-agent-error-correction-register-revision-412.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.case_sensitive_register_literal_assertion_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Match the canonical capitalized Revision 409 text, add AER-0482, advance the complete baselines and rerun schema, pattern and full focused-suite validation.",
+        "prevention_control": "Copy exact case from canonical register text for literal assertions or normalize both sides when case is not part of the contract.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-412.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0483",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-suite-005",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A newly added incident assertion must match a contiguous canonical phrase rather than omit an intervening contract word.",
+      "observed_error": "The revision-412 focused test asserted split identity against canonical text split attempt identity and produced one false negative after every other register test passed.",
+      "detection_method": "The complete register suite reached 100 percent and failed only the exact AER-0481 substring assertion.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-412.md",
+        "docs/ariadne-agent-error-correction-register-revision-413.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_literal_omitted_intervening_word",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Match the canonical split attempt identity phrase, add AER-0483, advance all coupled baselines and rerun schema, pattern and full focused-suite validation.",
+        "prevention_control": "Copy contiguous canonical phrases into register assertions and inspect every newly added literal before launching the full suite.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-413.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },
