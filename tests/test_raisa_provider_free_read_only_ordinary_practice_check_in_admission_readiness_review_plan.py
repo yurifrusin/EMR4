@@ -64,9 +64,9 @@ def test_current_latch_and_five_source_receipt_are_exact() -> None:
         "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-"
         "admission-control-architecture"
     )
-    assert latch["status"] == "in_progress"
-    assert latch["source_head"] == "062f5fb12eb82eab6ec570abea56ad1bd9a7b304"
-    assert latch["terminal_response"]["permitted"] is False
+    assert latch["status"] == "complete"
+    assert latch["source_head"] == "752b521c59f5b44bf46de0cf776a33ac74b8134d"
+    assert latch["terminal_response"]["permitted"] is True
     assert (
         "no_ordinary_practice_enablement" in latch["protected_boundaries"]
     )

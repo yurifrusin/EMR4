@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 510,
+  "register_revision": 512,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -23321,6 +23321,82 @@
         "evidence_paths": [
           "orchestration/continuity/ariadne-active-operation-latch/current.json",
           "docs/ariadne-agent-error-correction-register-revision-510.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0590",
+      "attempt_id": "check-in-admission-control-gemini-preflight-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_verifier_worktree_preflight",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Python file under scripts in a verifier command manifest must be invoked as a package module with python -m before provider dispatch.",
+      "observed_error": "The first nine-command Gemini review manifest invoked the architecture validator by filesystem path. The verifier-worktree preflight rejected command[5] before any provider call because repository scripts must use python -m.",
+      "detection_method": "scripts.ariadne_verifier_worktree_preflight returned revision_required with reason command[5] repository scripts must use python -m; provider_or_model_calls remained zero.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-command-manifest.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-review-worktree-preflight.json",
+        "docs/ariadne-agent-error-correction-register-revision-511.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the direct-path command with python -m scripts.raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture, rerun the same worktree preflight, and dispatch Gemini only after it passes.",
+        "prevention_control": "Generate verifier command manifests from the typed clockwork command vocabulary; until live adoption, require preflight to reject every Python file under scripts that is not launched with python -m before any provider call.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-511.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0591",
+      "attempt_id": "check-in-admission-architecture-precommit-ref-verification-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Each git rev-parse --verify invocation must name exactly one revision and every required ref must be captured as its own scalar reading.",
+      "observed_error": "The first protected-ref verification invocation supplied HEAD, master, origin/master, handoff/current and origin/handoff/current together after --verify. Git rejected the read-only command with fatal: Needed a single revision and changed no state.",
+      "detection_method": "The Git process exited 1 before producing any ref reading; five corrected single-revision invocations then returned the exact required full object ids.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+        "docs/ariadne-agent-error-correction-register-revision-512.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_rev_parse_verify_multiple_revision_operands",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Read HEAD, master, origin/master, handoff/current and origin/handoff/current through five separate git rev-parse --verify invocations and preserve each full 40-character result.",
+        "prevention_control": "The causal clock must expose a typed VerifyRef operation that emits exactly one git revision operand and one full-object reading per tick; until adoption, never batch operands behind git rev-parse --verify.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-512.md"
         ]
       },
       "status": "corrected"

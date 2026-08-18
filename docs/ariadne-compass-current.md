@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 324 / Compass 306. The typed transactional closeout clock and DeepSeek broker coupling pass provider-free shadow efficacy, while live control replacement remains closed. The next tranche is default-off ordinary-practice canonical check-in admission-control architecture.
+> EMR4 is at Continuity 325 / Compass 307. Default-off ordinary-practice canonical check-in admission-control architecture is accepted at exact source 752b521c59f5b44bf46de0cf776a33ac74b8134d; no practice is enabled. The next tranche is an unmounted zero-active-record kernel rehearsal.
 
 ## North star
 
@@ -418,25 +418,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Not ready: six dimensions pass, three blocking controls and three operational evidence obligations remain. Lineage parent: `ariadne-post-native-harness-successor-resolution-repair`.
 201. **Prove a smaller typed closeout clock and DeepSeek broker coupling in shadow — Ariadne transactional closeout control-plane consolidation efficacy rehearsal**
    Shadow efficacy passes; live control replacement remains closed. Lineage parent: `raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review`.
+202. **Freeze check-in admission control without enabling a practice — Provider-free default-off ordinary-practice canonical check-in admission-control architecture**
+   Architecture accepted; ordinary admission remains absent and denied. Lineage parent: `ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal`.
 
 ## Current position
 
-**Design default-off ordinary-practice canonical check-in admission control — Ariadne transactional closeout control-plane consolidation efficacy rehearsal**
+**Rehearse the unmounted default-off check-in admission kernel — Provider-free default-off ordinary-practice canonical check-in admission-control architecture**
 
-**Why this proof came next:** The 6/3/3 readiness review identified three blocking controls, and the prerequisite clockwork efficacy rehearsal now passes in shadow without opening live adoption.
+**Why this proof came next:** The four-state, six-transition disable-biased architecture at 752b521c59f5b44bf46de0cf776a33ac74b8134d is accepted with all operational-evidence gates still closed.
 
-Freeze the narrowest provider-free architecture for explicit admission, kill-switch and rollback operations, and non-PHI observability while default denial remains exact.
+Prove the typed evaluator and transition kernel provider-free with zero active records, exact default denial and no mounted command.
 
 ### What this unlocks
 
-- Freeze one admission-control architecture with explicit default denial.
-- Separate authored-synthetic practice allowlisting from future ordinary-practice admission.
-- Specify rollout, kill-switch, rollback and non-PHI observability without enablement.
+- Freeze one unmounted kernel contract derived from the accepted architecture.
+- Exercise allowed and forbidden transitions with zero active records.
+- Prove kill-switch dominance and disable-only rollback without enablement.
 
 ### What it does not solve
 
 - No ordinary practice is enabled and no feature flag or allowlist changes.
-- No product route, status grammar, client or waiting-area movement changes.
+- No product route, generic-status Arrived, grammar, client or waiting area changes.
 - No live clockwork adoption, product data, provider, runtime, deployment or protected integration opens.
 
 ## Continuity and authority
@@ -1010,6 +1012,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-459.md`
 - `docs/ariadne-agent-error-correction-register-revision-487.md`
 - `docs/ariadne-agent-error-correction-register-revision-509.md`
+- `docs/ariadne-agent-error-correction-register-revision-512.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1275,6 +1278,9 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md`
 - `docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md`
+- `docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md`
+- `docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md`
+- `docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-closeout.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture-plan.md`
 - `docs/raisa-provider-free-default-off-runtime-instrumentation-architecture.md`
@@ -1589,6 +1595,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-live-source-observation-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-default-off-runtime-instrumentation-architecture-threat-model-delta.md`
 - `docs/security/raisa-provider-free-delete-confirm-http-route-convergence-threat-model-delta.md`
 - `docs/security/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-behavior-transaction-rehearsal-threat-model-delta.md`
@@ -1706,6 +1713,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-aes-c4-provider-proof-rebind-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-aes-c5-gemini-36-high-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-canonical-check-in-product-adapter-gemini37-final-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
@@ -1897,6 +1905,11 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-channel-neutral-patient-interaction-foundation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-pre-verifier-acceptance-runtime-state.json`
+- `orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2050,6 +2063,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-default-off-live-source-observation-boundary-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-deepseek-mechanical-correction-failure-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-delete-confirm-http-route-convergence-gemini37-review-packet.md`
@@ -2509,6 +2524,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
+- `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md`
+- `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json`
+- `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/provider-free-architecture-evidence.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-runtime-instrumentation-architecture/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-delete-confirm-http-route-convergence/provider-free-route-convergence-evidence.json`
@@ -3047,6 +3066,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-19--ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-19--default-off-ordinary-practice-check-in-admission-control-architecture.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3098,6 +3118,8 @@ Prerequisites:
 - `scripts/raisa_ordinary_diary_cancellation_canonical_consumer_convergence_composition_continuity_update.py`
 - `scripts/raisa_ordinary_diary_cancellation_compatibility_consumer_convergence_review_continuity_update.py`
 - `scripts/raisa_provider_free_cf_d2_observability_first_event_cue_acceptance.py`
+- `scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py`
+- `scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture_continuity_update.py`
 - `scripts/raisa_provider_free_delete_confirm_http_route_convergence.py`
 - `scripts/raisa_provider_free_delete_confirm_http_route_convergence_continuity_update.py`
 - `scripts/raisa_provider_free_disposable_postgresql_cf_d2_event_cue_behavior_transaction_rehearsal.py`
@@ -3226,6 +3248,8 @@ Prerequisites:
 - `tests/test_raisa_post_status_action_compass_baton_orientation_plan.py`
 - `tests/test_raisa_provider_free_cf_d2_observability_first_event_cue.py`
 - `tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py`
+- `tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py`
+- `tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture_continuity.py`
 - `tests/test_raisa_provider_free_delete_confirm_http_route_convergence.py`
 - `tests/test_raisa_provider_free_delete_confirm_http_route_convergence_continuity.py`
 - `tests/test_raisa_provider_free_delete_confirm_http_route_convergence_plan.py`
@@ -3320,4 +3344,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 306; continuity graph revision 324._
+_Compass map revision 307; continuity graph revision 325._

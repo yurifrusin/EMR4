@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 324,
+  "graph_revision": 325,
   "harvests": [],
   "nodes": [
     {
@@ -22817,9 +22817,98 @@
         "DeepSeek occupied EMR4 work remains blocked by the separate native-Harness HMR boot proof.",
         "No ordinary-practice check-in admission, product runtime, deployment or protected integration is authorized."
       ]
+    },
+    {
+      "id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+      "title": "Provider-free default-off ordinary-practice canonical check-in admission-control architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-18T17:24:22.2795586Z",
+      "updated_at": "2026-08-18T17:24:22.2795586Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Ordinary-practice admission remains absent, default-off and denied.",
+          "Synthetic and ordinary lanes are non-substitutable; lane overlap denies.",
+          "The architecture authorizes no mounted product command or enablement."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-default-off-check-in-admission-control-architecture",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept four-state disable-biased admission control, dominant kill switch and non-PHI observability without enablement."
+        }
+      ],
+      "claim_scope": [
+        "All 11 frozen source bindings match.",
+        "The record has four states and exactly six allowed transitions with no resume.",
+        "Five future commands remain unmounted and unauthorized now.",
+        "All 390 hostile mutations fail closed with zero escapes.",
+        "Five metric families and six non-actuating critical alerts are frozen."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md",
+          "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md",
+          "docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+          "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/provider-free-architecture-evidence.json",
+          "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-512.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-19--default-off-ordinary-practice-check-in-admission-control-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-pre-verifier-acceptance-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No ordinary-practice admission record is implemented or active.",
+        "Tenant-role, unknown-commit and environment posture evidence remains absent.",
+        "Control commands and read-only posture projection remain unmounted.",
+        "The Ariadne and DeepSeek shared causal clock remains shadow-only.",
+        "No product data, provider, runtime, deployment or protected integration is authorized."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T16:22:38.3870606Z"
+  "updated_at": "2026-08-18T17:24:22.2795586Z"
 }

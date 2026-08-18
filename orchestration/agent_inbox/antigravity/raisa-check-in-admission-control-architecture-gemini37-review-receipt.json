@@ -1,0 +1,213 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-architecture-gemini-752b521c",
+  "branch": "codex/review-check-in-admission-architecture-752b521c",
+  "head_before": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+  "head_after": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "c069ccee2dbc2644cd4bab4aafd1b534c21b1c17347ca433bcd2c367b2e26425",
+  "result": "# Gemini 3.7 Flash/high Independent Read-Only Veto: Default-off Ordinary-Practice Check-In Admission-Control Architecture\n\n## 1. Five-Source Rehydration & Authority Boundaries\n\nRehydration verified across all five required authority sources:\n- `live_handover_current_baton`: [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/AGENTS.md) read completely; baton at `handoff/current`.\n- `current_authority_allocation`: Sol holds provider-free default-off admission-control architecture lease; Gemini 3.7 Flash/high holds fresh Tier-2 independent read-only veto; DeepSeek Harness remains paused; Claude Code `--bare` remains historical lineage only.\n- `active_plan_and_acceptance`: [`docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md), [`docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md), [`docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md), accepted readiness review at `27101faa86b5aa3850e90bc4ded8600e5f8d7dc9`, and accepted route convergence at `c82c3a741053a9c8da260aa62e1a968af22bb54e`.\n- `protected_evidence_boundaries`: Provider-free architecture only; default-off and default denial exact; no ordinary-practice enablement; no feature flag or allowlist mutation; no product code, configuration, or live route change; no generic-status `Arrived` change; no action grammar or client change; no waiting area movement; no patient/clinical data; no occupied DeepSeek or external provider call; no deployment/release/Pages; no live clockwork adoption; protected refs remain locked.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-architecture-gemini-752b521c` on branch `codex/review-check-in-admission-architecture-752b521c` at HEAD `752b521c59f5b44bf46de0cf776a33ac74b8134d` over base `062f5fb12eb82eab6ec570abea56ad1bd9a7b304`. Protected refs `master` and `handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\nContinuity evidence [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/ariadne-active-operation-latch/current.json) is valid and consistent with the active tranche.\n\n## 2. Source Bindings & One Normative Reading\n\nAll 11 source bindings match their canonical UTF-8 / LF SHA-256 digests in [`contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json):\n1. `app/config.py`: `f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e`\n2. `app/routers/appointments.py`: `8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08`\n3. `app/services/appointment_check_in_product_adapter.py`: `ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570`\n4. `docs/api-spine/openapi/appointment-commands.yaml`: `0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622`\n5. `orchestration/api_spine_adr.md`: `d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e`\n6. `orchestration/api_spine_programme.md`: `5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946`\n7. `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md`: `3bffad89188d3f700e769d4d39301b8f440d763b21d0e4b7c64fe67354ed78ba`\n8. `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md`: `81a4a92e4f1f7e539282a646d59474420309f2f93785fe2c007e413ef26c297f`\n9. `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md`: `335c82727662a408305e18954bc2927d724e8e312182af5b1ca0d4b32d32d3e8`\n10. `orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md`: `584756f6723e0e699c4dd9ffc7d504b3d7b5cea8dd1f735c63e3e13aef31af53`\n11. `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md`: `e577f20e1b164be1abce990f915bd792eb4e158051f48c5c1d629825cd93a78f`\n\n[`provider-free-architecture-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/provider-free-architecture-evidence.json) and [`architecture-report.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md) are derived strictly from this one normative contract reading.\n\n## 3. Required Challenge Verification\n\n1. **Lane Separation & Default Denial:**\n   - Synthetic and ordinary admission lanes are completely non-substitutable. Synthetic allowlist membership, synthetic receipts, client headers, caller claims, GraphQL inputs, async events, model inferences, and DeepSeek WorkOrders cannot confer ordinary admission.\n   - If both lanes match, the evaluator fails closed (`deny_lane_ambiguity`). If neither matches, it fails closed (`deny_no_admission`). Cross-lane fallback is explicitly `false`.\n\n2. **State Machine & Transition Graph:**\n   - Four-state model: `prepared` (non-admitting), `active` (admitting only with complete prerequisites), `suspended` (non-admitting emergency stop), `withdrawn` (terminal non-admitting disablement).\n   - Exactly 6 allowed transitions: `absent->prepared`, `prepared->active`, `prepared->withdrawn`, `active->suspended`, `active->withdrawn`, `suspended->withdrawn`.\n   - Prohibited transitions enforced: `absent->active`, `active->prepared`, `suspended->active`, `withdrawn->active`, `withdrawn->prepared`, `rollback->active`, `kill_switch_engaged->clear`.\n   - No resume edge exists. Rollback (`withdrawAppointmentCheckInAdmission`) is disable-only and cannot activate. In-place reactivation is impossible; any future enablement requires a fresh record, version, generation, and operational evidence.\n\n3. **Dominant Monotonic Kill Switch:**\n   - Global switch defaults to `clear` with one-way in-generation transition `clear->engaged`.\n   - Engaged switch unconditionally dominates both synthetic and ordinary lanes (`deny_both_lanes`).\n   - Clearing cannot happen automatically, in-place, via telemetry feedback, or within the same generation.\n\n4. **API Spine & Control-Plane Commands:**\n   - Future state-changing operations are unmounted REST/OpenAPI operations (`prepareAppointmentCheckInAdmission`, `activateAppointmentCheckInAdmission`, `suspendAppointmentCheckInAdmission`, `withdrawAppointmentCheckInAdmission`, `engageAppointmentCheckInGlobalKillSwitch`). All have `authorized_now: false`.\n   - All 14 command requirements are verified (human authority, dedicated operator role, server practice/environment scope, correlation, request-digest-bound idempotency key, expected versions, closed reason, 40-char lowercase Git object, resolution, freshness, append-only audit, bounded patient-free receipt).\n   - Git authority object is strictly typed to pattern `^[0-9a-f]{40}$`. A 7-character abbreviation fails.\n   - Unknown-commit behavior requires releasing no success and performing bounded readback by server-owned command/idempotency identity.\n   - GraphQL is strictly read-only posture projection. Async events remain observation-only.\n\n5. **Operational-Evidence Gaps Retained:**\n   - All 3 accepted operational evidence gaps remain mandatory before an `active` record can validate:\n     - `tenant_runtime_role` (non-owner role, `NOBYPASSRLS`, cross-tenant denial, exact environment)\n     - `rollback_and_unknown_commit` (pre-commit rollback, commit uncertainty no-success, bounded readback, disable-only rollback)\n     - `environment_and_secret_posture` (environment manifest, secret/key reference, rotation, break-glass)\n   - Authored-synthetic substitution is explicitly forbidden.\n\n6. **Non-PHI Observability & Alerting:**\n   - Exactly 5 low-cardinality metric families: `emr4_check_in_admission_decisions_total`, `emr4_check_in_admission_snapshot_age_seconds`, `emr4_check_in_admission_kill_switch`, `emr4_check_in_unknown_commit_total`, `emr4_check_in_control_commands_total`.\n   - Label domains are closed enums (`environment`, `lane`, `outcome`, `reason_code`, `operation`).\n   - 15 sensitive identifier/payload fields are forbidden.\n   - Exactly 6 critical alerts (`check_in_kill_switch_engaged`, `check_in_admission_snapshot_invalid_or_stale`, `check_in_unknown_commit`, `check_in_active_record_rejected`, `check_in_control_audit_failure`, `check_in_rollback_failure`). All have `automatic_control_action: false` and `contains_identifier: false`.\n\n7. **Hostile Mutations & Closed Boundaries:**\n   - 390 systematic hostile scalar and extra-field mutations tested against `validate_contract()`. Zero escapes (100% fail-closed rejection).\n   - All 16 closed boundary flags confirm no product code, configuration, database, route, or deployment changes occurred.\n\n## 4. Command Manifest Execution\n\nAll 9 commands in the bounded manifest executed in order with exit code 0:\n- `C01`: `git status --short --branch` -> clean on `codex/review-check-in-admission-architecture-752b521c`\n- `C02`: `git rev-parse HEAD` -> `752b521c59f5b44bf46de0cf776a33ac74b8134d`\n- `C03`: `pytest tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py` -> 20 passed in 3.65s\n- `C04`: `ruff check` -> all checks passed\n- `C05`: `python -m py_compile` -> verified compilation without errors\n- `C06`: `python -m scripts.raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture` -> output passed, 0 hostile escapes\n- `C07`: `git diff --check 062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d` -> clean diff\n- `C08`: `git diff --name-only 062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d` -> exact allowlisted files\n- `C09`: `git status --short --branch` -> clean postcondition\n\nNo P0-P2 findings, authority widening, or escaped mutations detected.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Read-Only Veto: Default-off Ordinary-Practice Check-In Admission-Control Architecture\n\n## 1. Five-Source Rehydration & Authority Boundaries\n\nRehydration verified across all five required authority sources:\n- `live_handover_current_baton`: [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/AGENTS.md) read completely; baton at `handoff/current`.\n- `current_authority_allocation`: Sol holds provider-free default-off admission-control architecture lease; Gemini 3.7 Flash/high holds fresh Tier-2 independent read-only veto; DeepSeek Harness remains paused; Claude Code `--bare` remains historical lineage only.\n- `active_plan_and_acceptance`: [`docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md), [`docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md), [`docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md), accepted readiness review at `27101faa86b5aa3850e90bc4ded8600e5f8d7dc9`, and accepted route convergence at `c82c3a741053a9c8da260aa62e1a968af22bb54e`.\n- `protected_evidence_boundaries`: Provider-free architecture only; default-off and default denial exact; no ordinary-practice enablement; no feature flag or allowlist mutation; no product code, configuration, or live route change; no generic-status `Arrived` change; no action grammar or client change; no waiting area movement; no patient/clinical data; no occupied DeepSeek or external provider call; no deployment/release/Pages; no live clockwork adoption; protected refs remain locked.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-admission-architecture-gemini-752b521c` on branch `codex/review-check-in-admission-architecture-752b521c` at HEAD `752b521c59f5b44bf46de0cf776a33ac74b8134d` over base `062f5fb12eb82eab6ec570abea56ad1bd9a7b304`. Protected refs `master` and `handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\nContinuity evidence [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/ariadne-active-operation-latch/current.json) is valid and consistent with the active tranche.\n\n## 2. Source Bindings & One Normative Reading\n\nAll 11 source bindings match their canonical UTF-8 / LF SHA-256 digests in [`contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json):\n1. `app/config.py`: `f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e`\n2. `app/routers/appointments.py`: `8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08`\n3. `app/services/appointment_check_in_product_adapter.py`: `ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570`\n4. `docs/api-spine/openapi/appointment-commands.yaml`: `0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622`\n5. `orchestration/api_spine_adr.md`: `d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e`\n6. `orchestration/api_spine_programme.md`: `5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946`\n7. `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md`: `3bffad89188d3f700e769d4d39301b8f440d763b21d0e4b7c64fe67354ed78ba`\n8. `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md`: `81a4a92e4f1f7e539282a646d59474420309f2f93785fe2c007e413ef26c297f`\n9. `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md`: `335c82727662a408305e18954bc2927d724e8e312182af5b1ca0d4b32d32d3e8`\n10. `orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md`: `584756f6723e0e699c4dd9ffc7d504b3d7b5cea8dd1f735c63e3e13aef31af53`\n11. `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md`: `e577f20e1b164be1abce990f915bd792eb4e158051f48c5c1d629825cd93a78f`\n\n[`provider-free-architecture-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/provider-free-architecture-evidence.json) and [`architecture-report.md`](file:///C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c/orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md) are derived strictly from this one normative contract reading.\n\n## 3. Required Challenge Verification\n\n1. **Lane Separation & Default Denial:**\n   - Synthetic and ordinary admission lanes are completely non-substitutable. Synthetic allowlist membership, synthetic receipts, client headers, caller claims, GraphQL inputs, async events, model inferences, and DeepSeek WorkOrders cannot confer ordinary admission.\n   - If both lanes match, the evaluator fails closed (`deny_lane_ambiguity`). If neither matches, it fails closed (`deny_no_admission`). Cross-lane fallback is explicitly `false`.\n\n2. **State Machine & Transition Graph:**\n   - Four-state model: `prepared` (non-admitting), `active` (admitting only with complete prerequisites), `suspended` (non-admitting emergency stop), `withdrawn` (terminal non-admitting disablement).\n   - Exactly 6 allowed transitions: `absent->prepared`, `prepared->active`, `prepared->withdrawn`, `active->suspended`, `active->withdrawn`, `suspended->withdrawn`.\n   - Prohibited transitions enforced: `absent->active`, `active->prepared`, `suspended->active`, `withdrawn->active`, `withdrawn->prepared`, `rollback->active`, `kill_switch_engaged->clear`.\n   - No resume edge exists. Rollback (`withdrawAppointmentCheckInAdmission`) is disable-only and cannot activate. In-place reactivation is impossible; any future enablement requires a fresh record, version, generation, and operational evidence.\n\n3. **Dominant Monotonic Kill Switch:**\n   - Global switch defaults to `clear` with one-way in-generation transition `clear->engaged`.\n   - Engaged switch unconditionally dominates both synthetic and ordinary lanes (`deny_both_lanes`).\n   - Clearing cannot happen automatically, in-place, via telemetry feedback, or within the same generation.\n\n4. **API Spine & Control-Plane Commands:**\n   - Future state-changing operations are unmounted REST/OpenAPI operations (`prepareAppointmentCheckInAdmission`, `activateAppointmentCheckInAdmission`, `suspendAppointmentCheckInAdmission`, `withdrawAppointmentCheckInAdmission`, `engageAppointmentCheckInGlobalKillSwitch`). All have `authorized_now: false`.\n   - All 14 command requirements are verified (human authority, dedicated operator role, server practice/environment scope, correlation, request-digest-bound idempotency key, expected versions, closed reason, 40-char lowercase Git object, resolution, freshness, append-only audit, bounded patient-free receipt).\n   - Git authority object is strictly typed to pattern `^[0-9a-f]{40}$`. A 7-character abbreviation fails.\n   - Unknown-commit behavior requires releasing no success and performing bounded readback by server-owned command/idempotency identity.\n   - GraphQL is strictly read-only posture projection. Async events remain observation-only.\n\n5. **Operational-Evidence Gaps Retained:**\n   - All 3 accepted operational evidence gaps remain mandatory before an `active` record can validate:\n     - `tenant_runtime_role` (non-owner role, `NOBYPASSRLS`, cross-tenant denial, exact environment)\n     - `rollback_and_unknown_commit` (pre-commit rollback, commit uncertainty no-success, bounded readback, disable-only rollback)\n     - `environment_and_secret_posture` (environment manifest, secret/key reference, rotation, break-glass)\n   - Authored-synthetic substitution is explicitly forbidden.\n\n6. **Non-PHI Observability & Alerting:**\n   - Exactly 5 low-cardinality metric families: `emr4_check_in_admission_decisions_total`, `emr4_check_in_admission_snapshot_age_seconds`, `emr4_check_in_admission_kill_switch`, `emr4_check_in_unknown_commit_total`, `emr4_check_in_control_commands_total`.\n   - Label domains are closed enums (`environment`, `lane`, `outcome`, `reason_code`, `operation`).\n   - 15 sensitive identifier/payload fields are forbidden.\n   - Exactly 6 critical alerts (`check_in_kill_switch_engaged`, `check_in_admission_snapshot_invalid_or_stale`, `check_in_unknown_commit`, `check_in_active_record_rejected`, `check_in_control_audit_failure`, `check_in_rollback_failure`). All have `automatic_control_action: false` and `contains_identifier: false`.\n\n7. **Hostile Mutations & Closed Boundaries:**\n   - 390 systematic hostile scalar and extra-field mutations tested against `validate_contract()`. Zero escapes (100% fail-closed rejection).\n   - All 16 closed boundary flags confirm no product code, configuration, database, route, or deployment changes occurred.\n\n## 4. Command Manifest Execution\n\nAll 9 commands in the bounded manifest executed in order with exit code 0:\n- `C01`: `git status --short --branch` -> clean on `codex/review-check-in-admission-architecture-752b521c`\n- `C02`: `git rev-parse HEAD` -> `752b521c59f5b44bf46de0cf776a33ac74b8134d`\n- `C03`: `pytest tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py` -> 20 passed in 3.65s\n- `C04`: `ruff check` -> all checks passed\n- `C05`: `python -m py_compile` -> verified compilation without errors\n- `C06`: `python -m scripts.raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture` -> output passed, 0 hostile escapes\n- `C07`: `git diff --check 062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d` -> clean diff\n- `C08`: `git diff --name-only 062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d` -> exact allowlisted files\n- `C09`: `git status --short --branch` -> clean postcondition\n\nNo P0-P2 findings, authority widening, or escaped mutations detected.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c",
+          "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "2b5d5b77bddb8fa6419342ae7267b32a025d4ffb40dbbe9a5d46d2ae79445289",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-admission-architecture-gemini-752b521c",
+        "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+        "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+        "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "062f5fb12eb82eab6ec570abea56ad1bd9a7b304..752b521c59f5b44bf46de0cf776a33ac74b8134d"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

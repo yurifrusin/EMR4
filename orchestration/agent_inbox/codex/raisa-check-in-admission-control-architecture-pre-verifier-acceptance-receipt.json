@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free default-off ordinary-practice canonical check-in admission-control architecture",
+    "completed_stage": "The exact architecture candidate is committed at full source 752b521c59f5b44bf46de0cf776a33ac74b8134d. Its integrated acceptance packet and clean review worktree pass. The verifier preflight rejected one direct-path repository-script command before any model call; the corrected module-form nine-command manifest now passes with zero provider calls.",
+    "next_executable_stage": "generate_and_validate_the_pre_verifier_five_source_receipt_then_dispatch_one_fresh_gemini_37_flash_high_read_only_veto",
+    "operation_id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+    "resume_after_compaction": true,
+    "source_head": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "reason_codes": [],
+    "resolved_commit": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "752b521c59f5b44bf46de0cf776a33ac74b8134d"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "branch_origin_aligned": false,
+    "head": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "origin_branch_commit": "f21072405a4d5877ec03e2cd1aefc7fa74d379e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied native-Harness work remains inadmissible pending its separate HMR proof; architecture contract review does not launch DeepSeek and Claude is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact default-denial, kill-switch, rollback, API Spine and non-PHI observability boundary requires one fresh independent read-only veto after deterministic admission.",
+        "work_packages": [
+          "exact_candidate_read_only_admission_control_architecture_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "closeout",
+      "before any future product implementation or occupied DeepSeek worker"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "clean exact candidate",
+      "passing corrected preflight and five-source receipt",
+      "one no-fallback Gemini veto",
+      "Sol-only acceptance and Git"
+    ]
+  },
+  "planned_action": "run_one_fresh_gemini_37_flash_high_exact_candidate_read_only_admission_architecture_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md",
+      "docs/security/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/provider-free-architecture-evidence.json",
+      "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns architecture acceptance and Git. DeepSeek occupied native-Harness work remains declined behind the separate HMR boot proof with no Claude fallback. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate read-only veto. Native subagents remain declined by developer policy.",
+    "git_refs_and_worktree": "Primary task branch and the clean named review worktree are at exact candidate 752b521c59f5b44bf46de0cf776a33ac74b8134d. Review branch codex/review-check-in-admission-architecture-752b521c is clean and the corrected nine-command manifest preflight passed. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary contains only post-candidate dispatch and contained-incident artifacts plus preserved unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The Current Baton names the default-off ordinary-practice canonical check-in admission-control architecture as active, preserves the accepted readiness and route sources, keeps live clockwork adoption closed, records register revision 510 and fixes all protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "protected_evidence_boundaries": "Exact committed provider-free architecture candidate only. Gemini may read only the packet allowlist and run only its corrected nine commands. Default denial and the authored-synthetic allowlist remain exact. No ordinary enablement, feature/config/product/OpenAPI/GraphQL/route/database change, generic-status Arrived, grammar/client/waiting-area movement, product/patient/clinical/historical/protected data, occupied DeepSeek/HMR retry, credential/IAM/network change, production/deployment/release/Pages, live clockwork adoption/control retirement or protected-ref movement. Preserve docs/branding and all unrelated untracked files; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

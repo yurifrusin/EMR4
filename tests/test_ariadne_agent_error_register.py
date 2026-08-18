@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 510
+    assert register["register_revision"] == 512
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 590)
+        f"AER-{index:04d}" for index in range(1, 592)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 413
+    assert len(agent_incidents) == 415
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 589
+    assert report["incident_count"] == 591
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,18 +3619,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 510
-    assert report["incident_count"] == 589
+    assert report["register_revision"] == 512
+    assert report["incident_count"] == 591
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 413,
+        "agent_behavior": 415,
         "harness": 53,
         "operator": 21,
         "repository": 86,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 84,
+        "command_scope_violation": 86,
         "evidence_misreport": 66,
         "harness_failure": 53,
         "operator_error": 21,
@@ -3642,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 368,
+        "canonical_unchanged": 370,
         "untrusted_partial_worktree": 107,
     }
     receipt_event_recurrence = next(
@@ -4072,7 +4072,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         },
         {
             "recurrence_signature": "orchestrator.python_package_script_path_invocation",
-            "incident_count": 6,
+            "incident_count": 7,
             "incident_ids": [
                 "AER-0058",
                 "AER-0066",
@@ -4080,6 +4080,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0204",
                 "AER-0302",
                 "AER-0311",
+                "AER-0590",
             ],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
@@ -4088,6 +4089,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "prevention_controls": [
                 "For every remaining repository Python harness in this tranche, use python -m scripts.<module> exclusively; never infer direct-path safety from an AGENTS.md launcher label.",
                 "For the remainder of this tranche, invoke every repository Python harness only as python -m scripts.<module>; use filesystem paths only for non-Python executables or files passed as data arguments.",
+                "Generate verifier command manifests from the typed clockwork command vocabulary; until live adoption, require preflight to reject every Python file under scripts that is not launched with python -m before any provider call.",
                 "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
                 "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
                 "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path.",
@@ -8315,4 +8317,36 @@ def test_aer_0589_uses_one_patch_operation_per_target_path() -> None:
         "operator.apply_patch_duplicate_update_file_operation"
     )
     assert "same path more than once" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0590_uses_preflighted_module_launcher_in_verifier_manifest() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0590"]
+
+    assert list(incidents)[589:590] == ["AER-0590"]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.python_package_script_path_invocation"
+    )
+    assert "before provider dispatch" in incident["expected_invariant"]
+    assert "provider call" in incident["observed_error"]
+    assert "typed clockwork" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0591_verifies_one_git_ref_per_clock_tick() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0591"]
+
+    assert list(incidents)[590:591] == ["AER-0591"]
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "command_scope_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.git_rev_parse_verify_multiple_revision_operands"
+    )
+    assert "exactly one revision" in incident["expected_invariant"]
+    assert "Needed a single revision" in incident["observed_error"]
+    assert "typed VerifyRef" in incident["correction"]["prevention_control"]
     assert incident["status"] == "corrected"
