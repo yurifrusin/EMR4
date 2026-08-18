@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free default-off canonical check-in route-adapter convergence rehearsal",
+    "completed_stage": "Accepted reviewed candidate c82c3a741053a9c8da260aa62e1a968af22bb54e and closeout descendant 7c604c81d86eaaf4d93c9f33c9a62da78f07ec89 pass all required checks and exact-path commit admission.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "resume_after_compaction": false,
+    "source_head": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+    "status": "complete",
+    "terminal_handback_permitted": true,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "7c604c81d86eaaf4d93c9f33c9a62da78f07ec89",
+    "reason_codes": [],
+    "resolved_commit": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c82c3a741053a9c8da260aa62e1a968af22bb54e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "7c604c81d86eaaf4d93c9f33c9a62da78f07ec89",
+    "branch_origin_aligned": false,
+    "head": "7c604c81d86eaaf4d93c9f33c9a62da78f07ec89",
+    "origin_branch_commit": "ad523968713e58f0b42c3a428556c968f61d6d3c",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 650
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_prepush",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The bounded non-result is contained and the frozen package completed under Sol recovery.",
+        "work_packages": [
+          "contained_worker_attempt_and_completed_sol_recovery"
+        ]
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact clean candidate passed one Gemini 3.7 Flash/high veto and eight commands.",
+        "work_packages": [
+          "completed_exact_candidate_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibited proactive native delegation for this tranche.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "parallel_work_packages": [
+      "All tranche lanes are terminal; task-branch push is serial under Sol."
+    ],
+    "reassessment_triggers": [
+      "post_push",
+      "successor_new_session"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "push task branch only",
+      "verify all protected refs unchanged",
+      "notify with non-PHI continuation before successor"
+    ]
+  },
+  "planned_action": "push_only_the_task_branch_closeout_descendant_without_moving_protected_refs",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+      "orchestration/agent_inbox/antigravity/raisa-default-off-check-in-route-adapter-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json"
+    ],
+    "current_authority_allocation": "GPT Sol alone owns task-branch publication. DeepSeek's Claude Code non-result is contained, Sol recovery is accepted, Gemini completed the independent pass and native subagents were declined for this tranche.",
+    "git_refs_and_worktree": "Task branch closeout HEAD is exact 7c604c81d86eaaf4d93c9f33c9a62da78f07ec89 and contains accepted reviewed source c82c3a741053a9c8da260aa62e1a968af22bb54e. Origin task is its prior ancestor ad523968713e58f0b42c3a428556c968f61d6d3c. Local/origin master and local/origin handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md Current Baton records accepted Continuity 317 / Compass 299 and the immediate isolated native DeepSeek Harness traceability successor.",
+    "protected_evidence_boundaries": "Push only codex/ariadne-bernie-davida-parallel-seam. Local/origin master and handoff/current must remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. No deployment, release, Pages or protected integration; docs/branding and unrelated untracked files remain excluded."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}
