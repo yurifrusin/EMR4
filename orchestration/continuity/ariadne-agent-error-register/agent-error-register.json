@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 487,
+  "register_revision": 494,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -22439,6 +22439,273 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "docs/ariadne-agent-error-correction-register-revision-487.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0567",
+      "attempt_id": "transactional-closeout-broad-regression-path-resolution-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A broad explicit-path pytest packet must be assembled only from exact test paths resolved from the repository inventory.",
+      "observed_error": "The first broad packet named nonexistent tests/test_ariadne_continuity.py and pytest stopped at collection before running the intended verified files.",
+      "detection_method": "Pytest returned file or directory not found; the exact rg --files inventory showed tests/test_ariadne_continuity_engine.py as the applicable engine suite.",
+      "evidence_paths": [
+        "tests/test_ariadne_continuity_engine.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "docs/ariadne-agent-error-correction-register-revision-489.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.pytest_assumed_test_path_operand_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the exact applicable filenames through rg --files, replace the nonexistent operand with the verified Continuity engine suite and rerun the packet.",
+        "prevention_control": "Build every explicit-path verification packet from a machine-resolved repository inventory or a typed command manifest before execution.",
+        "evidence_paths": [
+          "tests/test_ariadne_continuity_engine.py",
+          "docs/ariadne-agent-error-correction-register-revision-489.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0568",
+      "attempt_id": "transactional-closeout-broad-regression-live-latch-002",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch-continuity-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The historical arrival-transition test must preserve exact completed predecessors while accepting any separately validated current in-progress operation without misclassifying it as one historical terminal successor.",
+      "observed_error": "The verified broad packet failed because the live transactional closeout operation fell into a stale else branch that required the post-native-Harness successor repair to be complete at its historical source.",
+      "detection_method": "The exact assertion compared the live transactional operation ID with ariadne-post-native-harness-successor-resolution-repair; every other broad test passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-489.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.live_latch_unrelated_in_progress_operation_misclassified_as_historical_complete_successor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain exact assertions for each named completed historical operation and add one structural branch for any current in-progress latch, then rerun the focused latch suite.",
+        "prevention_control": "Lifecycle-specific immutable history remains exact while the live projection is validated generically from the active-operation schema instead of a growing terminal-operation else chain.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-489.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0569",
+      "attempt_id": "transactional-closeout-current-baton-test-discovery-003",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Repository path discovery must use one executable per shell invocation and must not resume a shell pipeline.",
+      "observed_error": "The current-baton test discovery command piped one rg invocation into a second rg invocation, contrary to the active one-executable shell discipline.",
+      "detection_method": "Immediate orchestrator review of the emitted command exposed the pipeline before any repository mutation occurred.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-491.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.shell_pipeline_used_during_path_discovery",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop the pipeline, retain the already resolved exact test path, and execute every successor lookup and test as one executable per invocation.",
+        "prevention_control": "A typed command-manifest executor should admit one resolved executable and argument vector per tick rather than relying on prose shell discipline.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-491.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0570",
+      "attempt_id": "transactional-closeout-register-tool-discovery-004",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_rg",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit repository path operand must be resolved from the current inventory before execution.",
+      "observed_error": "The first register-tool lookup supplied nonexistent scripts/ariadne_agent_error_correction_register.py beside the real register validator path.",
+      "detection_method": "rg returned an exact file-not-found diagnostic; a subsequent single-executable rg --files scripts inventory confirmed the companion path does not exist.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-491.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the scripts inventory first, use only scripts/ariadne_agent_error_register.py, and retain the failed lookup as evidence.",
+        "prevention_control": "The causal clock should resolve path operands into the typed command manifest before dispatch and reject absent paths before process launch.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-491.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0571",
+      "attempt_id": "transactional-closeout-register-suite-005",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A register revision must update every derived population fixture and make newly authored exact narrative assertions match the registered text before the complete suite runs.",
+      "observed_error": "The complete revision-491 suite found the canonical_unchanged population still at 362 instead of 364 and found a newly authored prevention-control substring that inserted an extra word not present in the registered sentence.",
+      "detection_method": "The complete register pytest reported exactly two failures: the stale candidate-state aggregate and the mismatched AER-0569 prevention-control phrase; all other tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-492.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance canonical_unchanged to the generated value 364, bind the AER-0569 test to the exact registered phrase, regenerate the report and rerun the complete suite.",
+        "prevention_control": "The clockwork reducer computes population views and emits exact typed fields from one journal so neither aggregate values nor narrative bindings are independently retyped.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-492.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0572",
+      "attempt_id": "transactional-closeout-register-suite-006",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every direct and aggregate recurrence fixture for a changed signature must advance atomically before the next complete register suite run.",
+      "observed_error": "The revision-492 suite retained one second direct assertion listing the population-fixture recurrence only through AER-0566, although the aggregate expected report had already advanced through AER-0571.",
+      "detection_method": "The complete register pytest reported one failure at population_fixture_recurrence incident_ids and every other test passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-493.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve every occurrence of the changed recurrence fixture, advance both expected lists through AER-0572, regenerate the report and rerun the complete suite.",
+        "prevention_control": "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-493.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0573",
+      "attempt_id": "transactional-closeout-register-repeated-count-patch-007",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A patch to a repeated incident_count literal must include its recurrence signature as unique target context and must not alter a neighboring recurrence.",
+      "observed_error": "The revision-493 correction patch changed the parallelism recurrence count from five to seven while leaving the intended population-fixture recurrence count at five because the repeated literal lacked unique signature context.",
+      "detection_method": "The targeted recurring-pattern test failed and exact expected-block readback showed the wrong recurrence count had changed while both incident lists were otherwise explicit.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-494.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Patch each count with its complete recurrence-signature context, read back both exact blocks, regenerate the report and rerun the targeted comparison before the complete suite.",
+        "prevention_control": "Typed reducer output eliminates repeated manual count patches; until adoption, every repeated-field patch must include the owning recurrence signature and receive exact target plus sentinel readback.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-494.md"
         ]
       },
       "status": "corrected"

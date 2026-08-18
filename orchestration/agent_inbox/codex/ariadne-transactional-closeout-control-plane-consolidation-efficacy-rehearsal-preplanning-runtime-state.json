@@ -1,0 +1,216 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "freeze_the_narrow_transactional_closeout_clockwork_and_shared_deepseek_broker_event_protocol_efficacy_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely again after conversation compaction. Its Current Baton accepts the 6/3/3 not-ready review at 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 and Continuity 323 / Compass 305, records register revision 487, and names this exact measured transactional control-plane consolidation before the deferred product admission-control architecture.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance semantics, implementation integration and the serial transactional state transition. DeepSeek occupied native-Harness work remains declined pending a separate provider-free HMR boot proof; local provider-free broker protocol conformance does not launch the model. Gemini 3.7 Flash/high is reserved for one later independent read-only veto after the deterministic candidate passes. Native subagents are declined because current developer policy prohibits proactive delegation and no separable preplanning package exists.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "docs/ariadne-risk-weighted-workflow-reform-plan.md",
+      "docs/ariadne-risk-weighted-workflow-reform-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Workflow control-plane consolidation and efficacy rehearsal only. One typed append-only journal, deterministic reducer, transactional prewrite boundary and provider-free DeepSeek broker WorkOrder/event conformance. Shadow historical non-protected closeout evidence before any replacement. No protected holdout access, product/configuration/route/database or ordinary-practice change, general-status Arrived, grammar/client/waiting-area movement, product/patient/clinical data, occupied provider/HMR retry/credential/network, production/deployment/release/Pages/protected-ref action. Preserve docs/branding and every unrelated untracked file; stage explicit paths only.",
+    "git_refs_and_worktree": "Task branch and origin task are aligned at predecessor closeout f21072405a4d5877ec03e2cd1aefc7fa74d379e9. Local/origin master and local/origin handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The only tracked opening change is the new in-progress latch; the runtime state is the only new tranche artifact before receipt generation. Existing untracked files including docs/branding and the predecessor pre-push evidence remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+    "active_tranche": "Ariadne transactional closeout control-plane consolidation efficacy rehearsal",
+    "objective": "Design and rehearse one typed append-only closeout journal, transactional prewrite validator and deterministic projection reducer shared by Ariadne and the DeepSeek broker boundary, then reject adoption unless measured historical-shadow evidence proves lower procedural weight without coverage loss.",
+    "status": "in_progress",
+    "source_head": "f21072405a4d5877ec03e2cd1aefc7fa74d379e9",
+    "authority_source": "AGENTS.md Current Baton Next implementation, Yuri's explicit clockwork direction and standing uninterrupted-development authority require this measured workflow consolidation before the deferred product admission-control architecture.",
+    "checkpoint": {
+      "completed_stage": "The predecessor read-only readiness review is accepted and published at f21072405a4d5877ec03e2cd1aefc7fa74d379e9. Fresh five-source rehydration restored Continuity 323 / Compass 305, register revision 487, unchanged protected refs and the measured clockwork successor with no product authority.",
+      "next_executable_stage": "generate_and_validate_the_fresh_five_source_preplanning_receipt_then_freeze_the_narrow_transactional_clockwork_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "workflow_control_plane_consolidation_and_efficacy_rehearsal_only",
+      "one_typed_append_only_closeout_journal_and_deterministic_reducer",
+      "one_transactional_prewrite_validation_boundary_before_canonical_projection_writes",
+      "provider_free_deepseek_broker_work_order_and_ordered_event_conformance_only",
+      "zero_hand_copied_git_object_ids_and_zero_prevalidation_canonical_writes",
+      "at_least_fifty_percent_fewer_procedural_retries_or_reruns",
+      "no_coverage_loss_and_net_reduction_in_maintained_workflow_surface",
+      "shadow_only_before_any_control_replacement_or_retirement",
+      "accepted_readiness_review_27101faa86b5aa3850e90bc4ded8600e5f8d7dc9_remains_exact",
+      "accepted_check_in_route_convergence_c82c3a741053a9c8da260aa62e1a968af22bb54e_remains_exact",
+      "accepted_native_harness_terminal_00d4f8d6065ab09b5faf5501c979edd2fa59943c_remains_exact",
+      "no_ordinary_practice_enablement_or_feature_flag_change",
+      "no_product_code_configuration_live_route_or_database_change",
+      "no_generic_status_arrived_grammar_client_or_waiting_area_change",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_or_gemini_call_before_an_exact_later_review_envelope",
+      "no_harness_hmr_retry_resume_credential_iam_or_network_change",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native Harness cannot run occupied EMR4 work until its separate provider-free stock-headless-to-custom-runner HMR boot proof passes. This tranche may test only a local provider-free broker protocol; Claude Code is not a silent fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "A material control-plane candidate benefits from one genuinely independent read-only veto after its deterministic shadow and efficacy gates pass; Gemini receives no implementation, acceptance, integration or protected authority.",
+        "work_packages": [
+          "Independently review the exact clean candidate, typed journal/reducer invariants, DeepSeek broker protocol boundary and efficacy evidence after deterministic admission."
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Architecture and baseline selection are serial Sol decisions, no independent preplanning package exists, and current developer policy prohibits proactive delegation.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [
+      "Gemini may later own one independent read-only veto after the complete deterministic candidate and efficacy report exist."
+    ],
+    "serial_constraints": [
+      "validate the fresh five-source preplanning receipt",
+      "inventory exact existing closeout, latch, Continuity, Compass, register and DeepSeek broker surfaces",
+      "freeze one typed journal and transactional reducer contract plus representative non-protected historical shadow fixtures",
+      "derive the baseline and measurement protocol before implementation",
+      "implement and run deterministic mutation, atomicity, parity and efficacy gates",
+      "admit any Gemini review only after the exact deterministic candidate passes"
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "after_baseline_and_fixture_selection",
+      "after_deterministic_candidate",
+      "pre_verifier_acceptance",
+      "closeout",
+      "before_any_future_occupied_deepseek_worker"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete post-compaction AGENTS.md reread, predecessor plan/closeout/Sol acceptance readback, active successor latch, exact published task/protected refs and explicit three-lane efficacy assessment",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the fresh five-source readback and owns the serial architecture and implementation integration."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Occupied work remains paused; only local provider-free WorkOrder and event-protocol conformance may be implemented in this tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport is not selected and no silent fallback is permitted."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.7 Flash/high is reserved for one later exact read-only veto after deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent spawned; no separable package exists and current developer policy forbids proactive delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Real-TTY fallback is not selected for this provider-free control-plane tranche."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude transport is not selected and cannot replace the paused native Harness."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

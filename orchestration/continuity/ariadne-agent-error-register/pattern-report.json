@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "f663e2429a7ff652150bbcc4d23f74729a9ba49b4ba91c253411f5a0ba48e126",
+  "canonical_register_sha256": "fdb95172001b1814dbb65ffd5da9a7298e059ee11dd1550e2955e87a9e0d3600",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 361,
-      "untrusted_partial_worktree": 91
+      "canonical_unchanged": 364,
+      "untrusted_partial_worktree": 95
     },
     "by_category": {
-      "command_scope_violation": 81,
+      "command_scope_violation": 82,
       "evidence_misreport": 65,
       "harness_failure": 53,
-      "operator_error": 14,
-      "output_contract_violation": 204,
+      "operator_error": 17,
+      "output_contract_violation": 206,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
-      "repository_defect": 84,
+      "repository_defect": 85,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 399,
+      "agent_behavior": 402,
       "harness": 53,
-      "operator": 14,
-      "repository": 84,
+      "operator": 17,
+      "repository": 85,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 298,
+      "low": 305,
       "material": 117,
       "moderate": 151
     },
@@ -34,7 +34,7 @@
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
-      "ariadne-active-operation-latch-continuity-test::orchestrator": 2,
+      "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
       "ariadne-active-operation-latch::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-agent-error-register::orchestrator": 3,
@@ -52,7 +52,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 309,
+      "codex-primary-orchestrator::orchestrator": 312,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -112,7 +112,7 @@
       "git-worktree-windows-path-layout::orchestrator": 3,
       "local-apply-patch-operator::orchestrator": 2,
       "local-docker-desktop::orchestrator": 1,
-      "local-powershell-operator::orchestrator": 6,
+      "local-powershell-operator::orchestrator": 9,
       "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 1,
       "local-rg-operator::orchestrator": 1,
@@ -131,12 +131,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 465,
+      "orchestrator": 472,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 566,
+  "incident_count": 573,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -144,17 +144,19 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0490",
-        "AER-0508"
+        "AER-0508",
+        "AER-0573"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Every patch to a repeated register field must include the target incident_id in the same hunk and receive exact target plus sentinel readback before validation.",
-        "Every repeated-field patch hunk includes target incident_id context and receives immediate exact intended-target plus early-sentinel readback before canonical validation."
+        "Every repeated-field patch hunk includes target incident_id context and receives immediate exact intended-target plus early-sentinel readback before canonical validation.",
+        "Typed reducer output eliminates repeated manual count patches; until adoption, every repeated-field patch must include the owning recurrence signature and receive exact target plus sentinel readback."
       ],
       "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
       "resource_ids": [
@@ -640,13 +642,15 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 5,
+      "incident_count": 7,
       "incident_ids": [
         "AER-0255",
         "AER-0318",
         "AER-0340",
         "AER-0520",
-        "AER-0566"
+        "AER-0566",
+        "AER-0571",
+        "AER-0572"
       ],
       "origins": [
         "agent_behavior"
@@ -656,7 +660,9 @@
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
         "Before the first full run after any incident addition, search for the previous total, revision, final ID, standalone origin lengths, aggregate dictionaries and affected recurrence signature; update every match as one mechanical patch.",
         "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report.",
-        "The clockwork reducer computes direct and aggregate population views from one journal and emits tests from the same typed result, removing independent population literals."
+        "The clockwork reducer computes direct and aggregate population views from one journal and emits tests from the same typed result, removing independent population literals.",
+        "The clockwork reducer computes population views and emits exact typed fields from one journal so neither aggregate values nor narrative bindings are independently retyped.",
+        "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures."
       ],
       "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
       "resource_ids": [
@@ -1601,7 +1607,7 @@
       ]
     }
   ],
-  "register_revision": 487,
+  "register_revision": 494,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

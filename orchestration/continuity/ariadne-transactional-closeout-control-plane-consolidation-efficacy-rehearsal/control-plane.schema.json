@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-transactional-closeout-control-plane.json",
+  "title": "Ariadne transactional closeout control plane",
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "identifier": {"type": "string", "pattern": "^[a-z][a-z0-9._-]{0,127}$"},
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "operation_id", "title", "source_anchor", "recorded_at", "node", "journey", "current_position", "next_operation", "incidents", "broker"],
+      "properties": {
+        "schema_version": {"const": "ariadne.transactional_closeout_manifest.v1"},
+        "operation_id": {"$ref": "#/$defs/identifier"},
+        "title": {"type": "string", "minLength": 1},
+        "source_anchor": {"const": "current_head"},
+        "recorded_at": {"type": "string", "minLength": 1},
+        "node": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "title", "kind", "relationships", "authority", "decisions", "claim_scope", "contract_evidence", "evidence", "unresolved_gates"],
+          "properties": {"id": {"$ref": "#/$defs/identifier"}, "title": {"type": "string"}, "kind": {"type": "string"}, "relationships": {"type": "array", "minItems": 1}, "authority": {"type": "object"}, "decisions": {"type": "array"}, "claim_scope": {"type": "array"}, "contract_evidence": {"type": "array"}, "evidence": {"type": "object"}, "unresolved_gates": {"type": "array"}}
+        },
+        "journey": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["strategic_role", "outcome", "evidence"],
+          "properties": {"strategic_role": {"type": "string"}, "outcome": {"type": "string"}, "evidence": {"type": "array", "minItems": 1}}
+        },
+        "current_position": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["strategic_role", "why_now", "outcome", "unlocks", "does_not_solve", "evidence", "orientation_statement"],
+          "properties": {"strategic_role": {"type": "string"}, "why_now": {"type": "string"}, "outcome": {"type": "string"}, "unlocks": {"type": "array", "minItems": 1}, "does_not_solve": {"type": "array", "minItems": 1}, "evidence": {"type": "array", "minItems": 1}, "orientation_statement": {"type": "string"}}
+        },
+        "next_operation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["operation_id", "active_tranche", "objective", "authority_source", "next_stage"],
+          "properties": {"operation_id": {"$ref": "#/$defs/identifier"}, "active_tranche": {"type": "string"}, "objective": {"type": "string"}, "authority_source": {"type": "string"}, "next_stage": {"type": "string"}}
+        },
+        "incidents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["incident_id", "source_id", "peers"],
+            "properties": {"incident_id": {"$ref": "#/$defs/identifier"}, "source_id": {"$ref": "#/$defs/identifier"}, "peers": {"type": "array", "items": {"$ref": "#/$defs/identifier"}, "uniqueItems": true}}
+          }
+        },
+        "broker": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "posture"],
+          "properties": {"enabled": {"type": "boolean"}, "posture": {"const": "provider_free_shadow"}}
+        }
+      }
+    },
+    "work_order": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "work_order_id", "transaction_id", "operation_id", "lease_id", "journal_id", "source_commit", "authority_sha256", "forbidden_surfaces_sha256", "branch", "worktree", "allowed_tool_names", "posture", "next_sequence", "previous_event_sha256"],
+      "properties": {
+        "schema_version": {"const": "ariadne.deepseek_work_order.v1"},
+        "work_order_id": {"type": "string", "minLength": 1},
+        "transaction_id": {"type": "string", "minLength": 1},
+        "operation_id": {"$ref": "#/$defs/identifier"},
+        "lease_id": {"type": "string", "minLength": 1},
+        "journal_id": {"type": "string", "minLength": 1},
+        "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "authority_sha256": {"$ref": "#/$defs/digest"},
+        "forbidden_surfaces_sha256": {"$ref": "#/$defs/digest"},
+        "branch": {"type": "string", "minLength": 1},
+        "worktree": {"type": "string", "minLength": 1},
+        "allowed_tool_names": {"const": ["edit", "glob", "read"]},
+        "posture": {"const": "provider_free_shadow"},
+        "next_sequence": {"type": "integer", "minimum": 1},
+        "previous_event_sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

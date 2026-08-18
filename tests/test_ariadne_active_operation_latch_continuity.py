@@ -89,6 +89,10 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert "6/3/3 matrix" in completed
         assert "Continuity 323 / Compass 305" in completed
         assert "No product code changed" in completed
+    elif latch["status"] == "in_progress":
+        assert len(latch["source_head"]) == 40
+        assert set(latch["source_head"]) <= set("0123456789abcdef")
+        assert latch["checkpoint"]["completed_stage"]
     else:
         assert latch["operation_id"] == (
             "ariadne-post-native-harness-successor-resolution-repair"

@@ -1,0 +1,83 @@
+{
+  "canonical_writes_before_validation": 0,
+  "commands": {
+    "candidate_publication_calls": 1,
+    "legacy_projection_write_calls": 12
+  },
+  "defects": {
+    "coverage_loss": false,
+    "escaped": [],
+    "named": 7,
+    "prevented": [
+      "asymmetric_peer",
+      "boundary_paraphrase",
+      "incident_population",
+      "prevalidation_or_partial_publication",
+      "source_cutoff",
+      "source_head",
+      "stale_latch"
+    ]
+  },
+  "hand_copied_git_object_ids": 0,
+  "historical_shadow": {
+    "fixtures": [
+      {
+        "legacy_lines": 351,
+        "node_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+        "status": "passed"
+      },
+      {
+        "legacy_lines": 325,
+        "node_id": "ariadne-post-native-harness-successor-resolution-repair",
+        "status": "passed"
+      },
+      {
+        "legacy_lines": 326,
+        "node_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+        "status": "passed"
+      }
+    ],
+    "legacy_files": 6,
+    "legacy_lines": 1002,
+    "status": "passed"
+  },
+  "manual_fields": {
+    "candidate_manifest_leaf_values": 54,
+    "legacy_top_level_binding_constants": 72,
+    "reduction_percent": 25.0
+  },
+  "retries": {
+    "candidate": 0,
+    "legacy_reference": 7,
+    "reduction_percent": 100.0
+  },
+  "schema_version": "ariadne.transactional_closeout_efficacy.v1",
+  "status": "passed",
+  "surface": {
+    "candidate_files": 5,
+    "candidate_lines": 989,
+    "legacy_files": 6,
+    "legacy_lines": 1002,
+    "raw_repository_growth_reported": true
+  },
+  "timing": {
+    "acceptance_relevant": false,
+    "candidate_prepare_and_shadow_publish": {
+      "maximum_ms": 999.678,
+      "median_ms": 985.012,
+      "minimum_ms": 956.505
+    },
+    "iterations": 20,
+    "legacy_latest_shadow_apply": {
+      "maximum_ms": 333.41,
+      "median_ms": 321.402,
+      "minimum_ms": 314.651
+    },
+    "observed_seven_retry_cycle_estimate": {
+      "candidate_ms": 985.012,
+      "legacy_ms": 2571.216,
+      "reduction_percent": 61.7
+    },
+    "single_clean_run_candidate_slower": true
+  }
+}

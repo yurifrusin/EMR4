@@ -1,6 +1,7 @@
 import http from "node:http";
 import https from "node:https";
 import { createHash, timingSafeEqual } from "node:crypto";
+import { readFileSync } from "node:fs";
 
 const TEST_MODE = process.env.EMR4_BROKER_TEST_MODE === "1";
 const LISTEN_HOST = TEST_MODE
@@ -19,19 +20,62 @@ const MAX_REQUEST_BYTES = 1_048_576;
 const MAX_RESPONSE_BYTES = 2_097_152;
 const MAX_OUTPUT_TOKENS = 4_096;
 const UPSTREAM_TIMEOUT_MS = 300_000;
+const WORK_ORDER_SCHEMA = "ariadne.deepseek_work_order.v1";
+const DIGEST_PATTERN = /^sha256:[0-9a-f]{64}$/;
+const COMMIT_PATTERN = /^[0-9a-f]{40}$/;
 
 const brokerToken = process.env.DSH_EMR4_BROKER_TOKEN ?? "";
 const providerKey = process.env.DEEPSEEK_API_KEY ?? "";
 let providerCallCount = 0;
 let activeProviderCall = false;
 let boundSessionHash = null;
+let workOrder = null;
+let clockSequence = null;
+let clockPrevious = null;
 
 function sha256(value) {
   return `sha256:${createHash("sha256").update(value).digest("hex")}`;
 }
 
+function canonical(value) {
+  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
+  if (value !== null && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function loadWorkOrder(path, expectedDigest) {
+  if (path === undefined) return null;
+  const value = JSON.parse(readFileSync(path, { encoding: "utf8" }));
+  if (!DIGEST_PATTERN.test(expectedDigest ?? "") || sha256(canonical(value)) !== expectedDigest) throw new Error("work-order-digest-invalid");
+  const keys = ["allowed_tool_names", "authority_sha256", "branch", "forbidden_surfaces_sha256", "journal_id", "lease_id", "next_sequence", "operation_id", "posture", "previous_event_sha256", "schema_version", "source_commit", "transaction_id", "work_order_id", "worktree"];
+  if (value === null || Array.isArray(value) || typeof value !== "object" || JSON.stringify(Object.keys(value).sort()) !== JSON.stringify(keys)) throw new Error("work-order-keys-invalid");
+  if (value.schema_version !== WORK_ORDER_SCHEMA || !COMMIT_PATTERN.test(value.source_commit) || !DIGEST_PATTERN.test(value.authority_sha256) || !DIGEST_PATTERN.test(value.forbidden_surfaces_sha256) || !DIGEST_PATTERN.test(value.previous_event_sha256)) throw new Error("work-order-binding-invalid");
+  if (JSON.stringify(value.allowed_tool_names) !== JSON.stringify([...ALLOWED_TOOL_NAMES].sort()) || value.posture !== "provider_free_shadow" || !Number.isInteger(value.next_sequence) || value.next_sequence < 1) throw new Error("work-order-authority-invalid");
+  for (const key of ["work_order_id", "transaction_id", "operation_id", "lease_id", "journal_id", "branch", "worktree"]) if (typeof value[key] !== "string" || value[key].length < 1 || value[key].length > 512) throw new Error("work-order-identity-invalid");
+  return value;
+}
+
 function logEvent(event) {
-  process.stdout.write(`${JSON.stringify(event)}\n`);
+  if (workOrder === null) {
+    process.stdout.write(`${JSON.stringify(event)}\n`);
+    return;
+  }
+  const decorated = {
+    ...event,
+    work_order_id: workOrder.work_order_id,
+    transaction_id: workOrder.transaction_id,
+    operation_id: workOrder.operation_id,
+    source_commit: workOrder.source_commit,
+    authority_sha256: workOrder.authority_sha256,
+    clock_sequence: clockSequence,
+    previous_event_sha256: clockPrevious,
+  };
+  decorated.event_sha256 = sha256(canonical(decorated));
+  clockSequence += 1;
+  clockPrevious = decorated.event_sha256;
+  process.stdout.write(`${JSON.stringify(decorated)}\n`);
 }
 
 function equalSecret(left, right) {
@@ -275,6 +319,20 @@ function forwardToProvider(body, response, metadata) {
   upstreamRequest.end(body);
 }
 
+try {
+  workOrder = loadWorkOrder(
+    process.env.EMR4_BROKER_WORK_ORDER_PATH,
+    process.env.EMR4_BROKER_WORK_ORDER_SHA256,
+  );
+  if (workOrder !== null) {
+    clockSequence = workOrder.next_sequence;
+    clockPrevious = workOrder.previous_event_sha256;
+  }
+} catch {
+  logEvent({ event: "broker-start-rejected", reason_code: "work-order-invalid" });
+  process.exit(2);
+}
+
 if (
   !brokerToken ||
   !providerKey ||
@@ -282,6 +340,7 @@ if (
   !Number.isInteger(LISTEN_PORT) ||
   LISTEN_PORT < 0 ||
   LISTEN_PORT > 65535 ||
+  (workOrder !== null && !TEST_MODE) ||
   (!TEST_MODE &&
     (UPSTREAM.protocol !== "https:" ||
       UPSTREAM.hostname !== "api.deepseek.com" ||

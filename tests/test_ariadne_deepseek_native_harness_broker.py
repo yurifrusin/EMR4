@@ -13,12 +13,34 @@ from urllib.request import Request, urlopen
 
 import pytest
 
+from orchestration_harness.transactional_closeout import (
+    sha256 as canonical_sha256,
+    validate_broker_events,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 BROKER = ROOT / "scripts" / "ariadne_deepseek_native_harness_broker.mjs"
 BROKER_TOKEN = "synthetic-broker-capability-token-0123456789"
 PROVIDER_KEY = "synthetic-provider-key-not-a-real-secret-987654321"
 SESSION_ID = "synthetic-session-0001"
+WORK_ORDER = {
+    "schema_version": "ariadne.deepseek_work_order.v1",
+    "work_order_id": "wo-synthetic-clockwork",
+    "transaction_id": "txn-synthetic-clockwork",
+    "operation_id": "synthetic-clockwork-rehearsal",
+    "lease_id": "lease-synthetic-clockwork",
+    "journal_id": "journal-synthetic-clockwork",
+    "source_commit": "1" * 40,
+    "authority_sha256": "sha256:" + "2" * 64,
+    "forbidden_surfaces_sha256": "sha256:" + "3" * 64,
+    "branch": "codex/synthetic-clockwork",
+    "worktree": "C:/synthetic/emr4",
+    "allowed_tool_names": ["edit", "glob", "read"],
+    "posture": "provider_free_shadow",
+    "next_sequence": 7,
+    "previous_event_sha256": "sha256:" + "4" * 64,
+}
 
 
 class _UpstreamHandler(BaseHTTPRequestHandler):
@@ -54,7 +76,9 @@ class _UpstreamHandler(BaseHTTPRequestHandler):
 
 
 @pytest.fixture
-def broker_process() -> tuple[subprocess.Popen[str], int, queue.Queue[dict]]:
+def broker_process(
+    request: pytest.FixtureRequest, tmp_path: Path
+) -> tuple[subprocess.Popen[str], int, queue.Queue[dict]]:
     while not _UpstreamHandler.records.empty():
         _UpstreamHandler.records.get_nowait()
     _UpstreamHandler.release_response.set()
@@ -73,6 +97,12 @@ def broker_process() -> tuple[subprocess.Popen[str], int, queue.Queue[dict]]:
         "DSH_EMR4_BROKER_TOKEN": BROKER_TOKEN,
         "DEEPSEEK_API_KEY": PROVIDER_KEY,
     }
+    selected_work_order = getattr(request, "param", None)
+    if selected_work_order is not None:
+        work_order_path = tmp_path / "work-order.json"
+        work_order_path.write_text(json.dumps(selected_work_order), encoding="utf-8")
+        env["EMR4_BROKER_WORK_ORDER_PATH"] = str(work_order_path)
+        env["EMR4_BROKER_WORK_ORDER_SHA256"] = canonical_sha256(selected_work_order)
     process = subprocess.Popen(
         ["node", str(BROKER)],
         cwd=ROOT,
@@ -90,6 +120,7 @@ def broker_process() -> tuple[subprocess.Popen[str], int, queue.Queue[dict]]:
     )
 
     events: queue.Queue[dict] = queue.Queue()
+    events.put(ready)
 
     def collect() -> None:
         assert process.stdout is not None
@@ -263,3 +294,54 @@ def test_broker_rejects_overlapping_provider_call(
     first_thread.join(timeout=10)
     assert not first_thread.is_alive()
     assert first_result.get(timeout=1)[0] == 200
+
+
+@pytest.mark.parametrize("broker_process", [WORK_ORDER], indirect=True)
+def test_broker_continues_the_work_order_clock_without_secret_leakage(
+    broker_process: tuple[subprocess.Popen[str], int, queue.Queue[dict]],
+) -> None:
+    _process, port, events = broker_process
+    status, _response = _request(port)
+    assert status == 200
+    observed = [
+        _wait_for_event(events, event_type)
+        for event_type in (
+            "broker-ready",
+            "provider-call-started",
+            "provider-response-started",
+            "provider-call-completed",
+        )
+    ]
+    validate_broker_events(WORK_ORDER, observed)
+    assert [event["clock_sequence"] for event in observed] == [7, 8, 9, 10]
+    assert all(event["work_order_id"] == WORK_ORDER["work_order_id"] for event in observed)
+    retained = json.dumps(observed)
+    assert BROKER_TOKEN not in retained
+    assert PROVIDER_KEY not in retained
+
+
+def test_broker_rejects_malformed_or_digest_drifted_work_order_before_io(
+    tmp_path: Path,
+) -> None:
+    malformed = {**WORK_ORDER, "source_commit": "1234567"}
+    for index, (payload, digest) in enumerate(
+        ((malformed, canonical_sha256(malformed)), (WORK_ORDER, "sha256:" + "0" * 64))
+    ):
+        path = tmp_path / f"rejected-work-order-{index}.json"
+        path.write_text(json.dumps(payload), encoding="utf-8")
+        env = {
+            **os.environ,
+            "EMR4_BROKER_TEST_MODE": "1",
+            "EMR4_BROKER_LISTEN_PORT": "0",
+            "EMR4_BROKER_TEST_UPSTREAM_URL": "http://127.0.0.1:1/chat/completions",
+            "DSH_EMR4_BROKER_TOKEN": BROKER_TOKEN,
+            "DEEPSEEK_API_KEY": PROVIDER_KEY,
+            "EMR4_BROKER_WORK_ORDER_PATH": str(path),
+            "EMR4_BROKER_WORK_ORDER_SHA256": digest,
+        }
+        result = subprocess.run(
+            ["node", str(BROKER)], cwd=ROOT, env=env, text=True,
+            encoding="utf-8", capture_output=True, timeout=10, check=False,
+        )
+        assert result.returncode == 2
+        assert json.loads(result.stdout)["reason_code"] == "work-order-invalid"

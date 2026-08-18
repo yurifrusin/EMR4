@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
-  "active_tranche": "Provider-free read-only ordinary-practice canonical check-in admission-readiness review",
-  "objective": "Inventory and classify the exact prerequisites for a future ordinary-practice admission of the already accepted default-off canonical check-in route, without enabling any practice or changing product code, configuration, routes, clients, data or runtime.",
-  "status": "complete",
-  "source_head": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9",
-  "authority_source": "AGENTS.md Current Baton Next implementation and Yuri's standing uninterrupted-development authority require the dependency-satisfied read-only readiness review to begin without a ceremonial pause.",
+  "operation_id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+  "active_tranche": "Ariadne transactional closeout control-plane consolidation efficacy rehearsal",
+  "objective": "Design and rehearse one typed append-only closeout journal, transactional prewrite validator and deterministic projection reducer shared by Ariadne and the DeepSeek broker boundary, then reject adoption unless measured historical-shadow evidence proves lower procedural weight without coverage loss.",
+  "status": "in_progress",
+  "source_head": "f21072405a4d5877ec03e2cd1aefc7fa74d379e9",
+  "authority_source": "AGENTS.md Current Baton Next implementation, Yuri's explicit clockwork direction and standing uninterrupted-development authority require this measured workflow consolidation before the deferred product admission-control architecture.",
   "checkpoint": {
-    "completed_stage": "Reviewed source 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 passes the 28-source contract and 6/3/3 matrix; not_ready_for_ordinary_practice_admission is accepted at Continuity 323 / Compass 305. Focused/broad checks, register revision 487, compilation, Ruff, whitespace and no-write regeneration pass. Full Git-object resolution and prewrite graph/Compass validation pass. No product code changed.",
-    "next_executable_stage": null,
+    "completed_stage": "The typed shadow transaction, prewrite validator, deterministic projections, hash-chained journal and opt-in DeepSeek WorkOrder clock pass focused and broad deterministic admission; controlled evidence prevents all seven frozen defects with zero prevalidation canonical writes, while the still-live manual register produced additional preserved reruns that strengthen the adoption case.",
+    "next_executable_stage": "freeze_the_exact_clean_semantic_candidate_then_dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 6
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,24 +24,33 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": false,
+  "resume_after_compaction": true,
   "user_attention": {
     "required": false,
     "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "operation_complete"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "read_only_ordinary_practice_admission_readiness_inventory_only",
+    "workflow_control_plane_consolidation_and_efficacy_rehearsal_only",
+    "one_typed_append_only_closeout_journal_and_deterministic_reducer",
+    "one_transactional_prewrite_validation_boundary_before_canonical_projection_writes",
+    "provider_free_deepseek_broker_work_order_and_ordered_event_conformance_only",
+    "zero_hand_copied_git_object_ids_and_zero_prevalidation_canonical_writes",
+    "at_least_fifty_percent_fewer_procedural_retries_or_reruns",
+    "no_coverage_loss_and_net_reduction_in_maintained_workflow_surface",
+    "shadow_only_before_any_control_replacement_or_retirement",
+    "accepted_readiness_review_27101faa86b5aa3850e90bc4ded8600e5f8d7dc9_remains_exact",
     "accepted_check_in_route_convergence_c82c3a741053a9c8da260aa62e1a968af22bb54e_remains_exact",
     "accepted_native_harness_terminal_00d4f8d6065ab09b5faf5501c979edd2fa59943c_remains_exact",
     "no_ordinary_practice_enablement_or_feature_flag_change",
     "no_product_code_configuration_live_route_or_database_change",
     "no_generic_status_arrived_grammar_client_or_waiting_area_change",
     "no_product_patient_clinical_historical_or_protected_data",
-    "no_provider_call_retry_resume_credential_iam_or_network_change",
+    "no_occupied_deepseek_or_gemini_call_before_an_exact_later_review_envelope",
+    "no_harness_hmr_retry_resume_credential_iam_or_network_change",
     "no_deployment_production_release_pages_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

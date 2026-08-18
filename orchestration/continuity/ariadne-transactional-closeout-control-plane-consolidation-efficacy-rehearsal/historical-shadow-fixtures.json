@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.transactional_closeout_shadow_fixtures.v1",
+  "fixtures": [
+    {
+      "node_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "node_sha256": "sha256:c5535b8e6386851866116d7c992fa7a931a0118b8af22e6f30e5dd77bf01ff93",
+      "journey_sha256": "sha256:f1452f534221a10a681b17a2682223f58888c4a2552fbfad1a2c708e599498ca",
+      "legacy_updater": "scripts/raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity_update.py",
+      "legacy_test": "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity.py",
+      "legacy_lines": 351
+    },
+    {
+      "node_id": "ariadne-post-native-harness-successor-resolution-repair",
+      "node_sha256": "sha256:e1c7f16aee6cecb90d4fd2cc7f2dbc76bd5b41c57d6f025f6387ca3c04520ea1",
+      "journey_sha256": "sha256:cd1bb70cd5c7b882b320d81f13579a50f19931c929373e348a805bbb52be0e2e",
+      "legacy_updater": "scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py",
+      "legacy_test": "tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py",
+      "legacy_lines": 325
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "node_sha256": "sha256:5aa1480d20ef0e141713df53f5d6f8791257cd2f0cdf109760a273d375d54ab4",
+      "journey_sha256": "sha256:9ad56b95d4f23db8e2b9d4d61655f01c0937560fb850d252cd5dece48977f6aa",
+      "legacy_updater": "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py",
+      "legacy_test": "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity.py",
+      "legacy_lines": 326
+    }
+  ]
+}
