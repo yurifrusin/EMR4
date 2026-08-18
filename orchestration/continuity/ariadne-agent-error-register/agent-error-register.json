@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 421,
+  "register_revision": 422,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19543,6 +19543,45 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-421.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0492",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-docker-absence-check-011",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-docker-desktop",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_docker_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Docker Go-template format arguments passed through PowerShell must be explicitly quoted as one literal argument.",
+      "observed_error": "The first exact network-absence query passed an unquoted Go-template format operand, and Docker parsed part of it as an invalid shorthand flag before listing any resource.",
+      "detection_method": "Docker returned exit 125 with unknown shorthand flag and printed network ls usage before any Docker resource creation.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-422.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_docker_go_template_format_unquoted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop enclosure setup, register the rejected absence query and quote every Docker format template as one literal PowerShell argument before retrying the read-only check.",
+        "prevention_control": "All Docker --format values use explicit outer quotes in PowerShell; read back the exact command exit before creating the corresponding resource.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-422.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },
