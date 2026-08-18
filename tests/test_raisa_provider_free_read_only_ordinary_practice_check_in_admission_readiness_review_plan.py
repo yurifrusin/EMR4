@@ -64,9 +64,12 @@ def test_current_latch_and_five_source_receipt_are_exact() -> None:
         "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-"
         "admission-readiness-review"
     )
-    assert latch["status"] == "in_progress"
-    assert latch["terminal_response"]["permitted"] is False
+    assert latch["status"] == "complete"
+    assert latch["source_head"] == "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9"
+    assert latch["terminal_response"]["permitted"] is True
     assert receipt["status"] == "passed"
+    assert receipt["active_operation"]["status"] == "in_progress"
+    assert receipt["active_operation"]["terminal_handback_permitted"] is False
     assert receipt["rehydration_sources"] == [
         "live_handover_current_baton",
         "current_authority_allocation",

@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "4fb162601d11b3d03f32e18c5048d702215c8b71533ad6c2ec01e258754a1be3",
+  "canonical_register_sha256": "f663e2429a7ff652150bbcc4d23f74729a9ba49b4ba91c253411f5a0ba48e126",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 356,
-      "untrusted_partial_worktree": 78
+      "canonical_unchanged": 361,
+      "untrusted_partial_worktree": 91
     },
     "by_category": {
       "command_scope_violation": 81,
       "evidence_misreport": 65,
       "harness_failure": 53,
-      "operator_error": 9,
-      "output_contract_violation": 196,
+      "operator_error": 14,
+      "output_contract_violation": 204,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
-      "repository_defect": 79,
+      "repository_defect": 84,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 391,
+      "agent_behavior": 399,
       "harness": 53,
-      "operator": 9,
-      "repository": 79,
+      "operator": 14,
+      "repository": 84,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 281,
+      "low": 298,
       "material": 117,
-      "moderate": 150
+      "moderate": 151
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -35,7 +35,9 @@
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 2,
+      "ariadne-active-operation-latch::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
+      "ariadne-agent-error-register::orchestrator": 3,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 1,
       "ariadne-compass-current-position-test::orchestrator": 4,
@@ -50,7 +52,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 306,
+      "codex-primary-orchestrator::orchestrator": 309,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -99,7 +101,7 @@
       "emr4-context-fabric-durability-structural-contract::orchestrator": 5,
       "emr4-context-fabric-durability-typed-body-renderer::orchestrator": 1,
       "emr4-context-fabric-roadmap-order-test::orchestrator": 1,
-      "emr4-current-baton-consistency::orchestrator": 4,
+      "emr4-current-baton-consistency::orchestrator": 7,
       "emr4-disposable-postgresql-harness::orchestrator": 23,
       "emr4-disposable-postgresql-parse-evidence-router::orchestrator": 1,
       "emr4-durability-ddl-renderer::orchestrator": 3,
@@ -108,15 +110,20 @@
       "emr4-maintenance-test-suite::orchestrator": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
+      "local-apply-patch-operator::orchestrator": 2,
       "local-docker-desktop::orchestrator": 1,
-      "local-powershell-operator::orchestrator": 5,
+      "local-powershell-operator::orchestrator": 6,
+      "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 1,
+      "local-rg-operator::orchestrator": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
       "native-codex-observation-to-signal-worker::implementer": 1,
       "ordinary-diary-cancellation-browser-review-manifest::verifier": 1,
       "ordinary-diary-cancellation-continuity-updater::orchestrator": 1,
+      "ordinary-practice-check-in-admission-readiness-plan-test::orchestrator": 1,
+      "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
       "shared-postgresql-pytest-gate::orchestrator": 1
@@ -124,12 +131,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 447,
+      "orchestrator": 465,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 548,
+  "incident_count": 566,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -633,12 +640,13 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0255",
         "AER-0318",
         "AER-0340",
-        "AER-0520"
+        "AER-0520",
+        "AER-0566"
       ],
       "origins": [
         "agent_behavior"
@@ -647,7 +655,8 @@
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
         "Before the first full run after any incident addition, search for the previous total, revision, final ID, standalone origin lengths, aggregate dictionaries and affected recurrence signature; update every match as one mechanical patch.",
-        "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report."
+        "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report.",
+        "The clockwork reducer computes direct and aggregate population views from one journal and emits tests from the same typed result, removing independent population literals."
       ],
       "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
       "resource_ids": [
@@ -789,12 +798,13 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0487",
         "AER-0495",
         "AER-0521",
-        "AER-0522"
+        "AER-0522",
+        "AER-0561"
       ],
       "origins": [
         "agent_behavior"
@@ -803,6 +813,7 @@
         "After every new incident, inspect every generated recurrence containing that ID and update the exact list, count and residual-pattern allowlist in the same correction patch.",
         "After pattern generation, compare every recurrence touched by the new incident field-for-field with its test literal, including prevention_controls, before starting the complete suite.",
         "Copy every changed generated recurrence block as a whole field-for-field structure; never patch one nested field from a truncated assertion diff.",
+        "The clockwork reducer must generate recurrence projections directly from journal state and eliminate duplicated hand-maintained recurrence snapshots.",
         "Whenever a new incident repeats a full recurrence composite, inspect the generated report and advance the exact recurring-pattern baseline in the same revision before launching the complete suite."
       ],
       "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
@@ -1441,6 +1452,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0558",
+        "AER-0560"
+      ],
+      "origins": [
+        "repository"
+      ],
+      "prevention_controls": [
+        "The clockwork manifest owns canonical boundary tokens and renders the live row and its tests from one typed list without paraphrase.",
+        "The transactional manifest must own protected-boundary vocabulary once and derive every human and test projection from that typed value."
+      ],
+      "recurrence_signature": "repository.current_baton_protected_boundary_literal_paraphrased",
+      "resource_ids": [
+        "emr4-current-baton-consistency"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "repository_defect"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0131",
         "AER-0140"
       ],
@@ -1566,7 +1601,7 @@
       ]
     }
   ],
-  "register_revision": 469,
+  "register_revision": 487,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-18"
+  "source_cutoff_on": "2026-08-19"
 }

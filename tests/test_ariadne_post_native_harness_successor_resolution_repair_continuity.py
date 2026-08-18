@@ -17,15 +17,13 @@ def _load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
-def test_successor_repair_is_current_and_contract_evidence_is_inherited() -> None:
+def test_successor_repair_is_retained_and_contract_evidence_is_inherited() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 322
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 304
-    assert compass["source_graph_revision"] == 322
-    assert compass["current_position"]["node_id"] == NODE_ID
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 322
+    assert compass["map_revision"] >= 304
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
     assert node["kind"] == "maintenance"
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
@@ -36,24 +34,14 @@ def test_successor_repair_is_current_and_contract_evidence_is_inherited() -> Non
     ]
 
 
-def test_current_position_is_read_only_and_default_denied() -> None:
-    compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    assert "without enabling it" in current["strategic_role"]
-    assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in current["why_now"]
-    assert "empty-allowlist posture" in current["outcome"]
-    closed = " ".join(current["does_not_solve"])
-    for phrase in (
-        "No practice is enabled",
-        "no product code",
-        "live route",
-        "product data",
-        "No provider",
-        "protected integration",
-    ):
-        assert phrase in closed
-    assert "Continuity 322 / Compass 304" in compass["orientation_statement"]
-    assert "default denial remains" in compass["orientation_statement"]
+def test_historical_repair_node_preserves_read_only_default_denial() -> None:
+    graph = _load("orchestration/continuity/emr4-continuity-graph.json")
+    node = next(row for row in graph["nodes"] if row["id"] == NODE_ID)
+    notes = " ".join(node["authority"]["notes"])
+    gates = " ".join(node["unresolved_gates"])
+    assert "read-only readiness review" in notes
+    assert "No ordinary practice" in gates
+    assert "No product code" in gates
 
 
 def test_closeout_records_have_brisbane_timestamps() -> None:

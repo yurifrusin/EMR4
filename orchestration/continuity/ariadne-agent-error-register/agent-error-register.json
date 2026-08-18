@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 469,
+  "register_revision": 487,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-18",
+    "source_cutoff_on": "2026-08-19",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -21750,6 +21750,695 @@
         "evidence_paths": [
           "orchestration/continuity/emr4-continuity-graph.json",
           "docs/ariadne-agent-error-correction-register-revision-469.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0549",
+      "attempt_id": "ordinary-practice-check-in-readiness-closeout-orientation-020",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_read",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The resumed shell control permits one executable per invocation and forbids pipeline composition even for read-only file-list narrowing.",
+      "observed_error": "A closeout-orientation command composed rg --files with a Select-Object pipeline to retain the last matching paths, despite the active one-executable/no-pipeline control.",
+      "detection_method": "Immediate command review identified the pipe token; the returned list was used only to choose an already existing bounded analog and no write occurred.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity_update.py",
+        "docs/ariadne-agent-error-correction-register-revision-470.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.read_only_shell_pipeline_composed_under_one_executable_control",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop pipeline composition and use direct explicit-path reads for every selected closeout analog.",
+        "prevention_control": "Each subsequent shell invocation contains exactly one executable and no pipe, semicolon or newline-composed successor.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-470.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0550",
+      "attempt_id": "ordinary-practice-check-in-readiness-notification-orientation-021",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-rg-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_rg",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A bounded closeout search must name only verified existing paths and must not assume an untracked predecessor runtime-state filename.",
+      "observed_error": "A notification-orientation rg included a nonexistent predecessor closeout-prepush runtime-state path alongside verified directories, causing exit 2 after still returning the notification script matches.",
+      "detection_method": "rg printed the exact missing explicit operand; the verified scripts/notify_sprint_closeout.py result was then read directly.",
+      "evidence_paths": [
+        "scripts/notify_sprint_closeout.py",
+        "docs/ariadne-agent-error-correction-register-revision-471.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.rg_explicit_path_operand_not_verified_existing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use only the verified notification script path and direct explicit-path reads for the remainder of closeout.",
+        "prevention_control": "Discover uncertain receipt filenames before including them in any bounded search operand list.",
+        "evidence_paths": [
+          "scripts/notify_sprint_closeout.py",
+          "docs/ariadne-agent-error-correction-register-revision-471.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0551",
+      "attempt_id": "ordinary-practice-check-in-readiness-continuity-closeout-022",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ordinary-practice-check-in-readiness-continuity-updater",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Continuity source_head coordinates must bind the full resolved 40-character Git commit object.",
+      "observed_error": "The first Continuity 323 updater run used the seven-character 27101fa abbreviation, wrote only the local draft graph/Compass state, and then failed semantic validation with source_head_invalid before acceptance.",
+      "detection_method": "The Compass validator returned source_graph:source_head_invalid for the new node; git rev-parse resolved the full 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 object.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py",
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-472.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_source_head_used_abbreviated_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the exact full commit with git rev-parse, replace every closeout source binding and rerun the idempotent updater against the local 323/305 draft.",
+        "prevention_control": "Every Continuity source_head is populated only from full git rev-parse output and validated as 40 lowercase hexadecimal characters before the updater runs.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py",
+          "docs/ariadne-agent-error-correction-register-revision-472.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0552",
+      "attempt_id": "ordinary-practice-check-in-readiness-continuity-atomicity-review-023",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ordinary-practice-check-in-readiness-continuity-updater",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_source_review",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A Continuity updater must validate the complete prospective graph/Compass pair before writing either canonical file.",
+      "observed_error": "The rejected abbreviated-source run failed closed only at the acceptance boundary: the updater had already written an invalid local graph/Compass draft before semantic validation, so it was not write-atomic or prevalidation-safe.",
+      "detection_method": "Yuri highlighted the closeout wording; direct control-flow review confirmed both canonical writes preceded build_compass_report validation.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py",
+        "docs/ariadne-agent-error-correction-register-revision-473.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.continuity_updater_wrote_canonical_draft_before_semantic_validation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Build both prospective objects in memory, run the complete Compass semantic report first, and write graph, Compass and rendered report only after validation passes.",
+        "prevention_control": "Every new Continuity updater places all canonical writes after successful in-memory graph/Compass semantic validation.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-473.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0553",
+      "attempt_id": "ordinary-practice-check-in-readiness-baton-edit-024",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "An apply_patch edit to a one-line Markdown table row must provide a complete exact line or a stable surrounding hunk.",
+      "observed_error": "An attempted Required Git relation insertion supplied only a substring as an expected patch line, so apply_patch correctly rejected the hunk without changing AGENTS.md.",
+      "detection_method": "apply_patch returned verification failed and named the unmatched substring; the reviewed source remains bound in the dedicated arrival/check-in relation and Current result rows.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-474.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.apply_patch_partial_line_expected_as_complete_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain the exact reviewed source in the dedicated live relation/result rows and use only complete-line apply_patch hunks for any later one-line table edit.",
+        "prevention_control": "Do not assume apply_patch performs substring replacement inside a line; provide the entire exact line or edit a smaller structured source.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "docs/ariadne-agent-error-correction-register-revision-474.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0554",
+      "attempt_id": "ordinary-practice-check-in-readiness-closeout-packet-025",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The live closed-surface fixture must advance from the accepted readiness review to its architecture-only successor in the same baton patch.",
+      "observed_error": "The first closeout packet failed one assertion because test_current_rows_preserve_closed_surface_boundary still required the now-accepted admission-readiness review name in Next implementation.",
+      "detection_method": "The packet passed all other checks and returned the exact stale phrase versus the new default-off admission-control architecture row.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-475.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_baton_closed_surface_fixture_stale_after_successor_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the stale accepted-review phrase with the exact default-off admission-control architecture successor and retain every closed-surface assertion.",
+        "prevention_control": "Current-baton fixture updates cover both the detailed live-row test and the independent closed-surface phrase loop in the same successor patch.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-475.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0555",
+      "attempt_id": "ordinary-practice-check-in-readiness-source-head-policy-orientation-026",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-python-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A one-off Python command embedded in PowerShell must avoid conflicting nested quote syntax.",
+      "observed_error": "A read-only Python census command embedded a single quote inside a PowerShell double-quoted argument and failed at PowerShell parsing before Python ran.",
+      "detection_method": "PowerShell returned ParserError at the regular-expression literal; a direct rg census then proved every continuity updater literal is already 40 lowercase hexadecimal characters.",
+      "evidence_paths": [
+        "tests/test_continuity_source_head_full_commit_policy.py",
+        "docs/ariadne-agent-error-correction-register-revision-476.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_embedded_python_quote_collision",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use a direct bounded rg census and add an AST-based repository policy test instead of repeating the fragile one-off quoting.",
+        "prevention_control": "Prefer repository-native tests or direct rg for simple source-policy censuses; do not embed mixed-quote regular expressions in PowerShell Python one-liners.",
+        "evidence_paths": [
+          "tests/test_continuity_source_head_full_commit_policy.py",
+          "docs/ariadne-agent-error-correction-register-revision-476.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0556",
+      "attempt_id": "ordinary-practice-check-in-readiness-closeout-latch-027",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The active-operation completed_stage projection must remain within the schema's 500-character bound.",
+      "observed_error": "The first closeout packet produced ten dependent failures from one root: the completed_stage summary was longer than 500 characters, so the schema and pure latch validator rejected the current projection.",
+      "detection_method": "The first failure reported the exact maxLength violation; the remaining nine failures all entered the same pure validator and returned the same bounded-text rejection.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "orchestration/continuity/ariadne-active-operation-latch/active-operation.schema.json",
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-477.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_completed_stage_exceeded_schema_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Compress the completed projection below 500 characters while retaining source, verdict, Continuity/Compass, verification, Git-object guard and no-product-change anchors.",
+        "prevention_control": "Validate every latch projection with the pure validator before treating its write as a closeout transition.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_ariadne_active_operation_latch.py",
+          "docs/ariadne-agent-error-correction-register-revision-477.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0557",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-closeout-028",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident evidence path must name an exact existing canonical file discovered from repository source.",
+      "observed_error": "The revision-477 register validation rejected AER-0556 because its schema evidence path used active-operation-latch.schema.json rather than the existing active-operation.schema.json basename.",
+      "detection_method": "The register validator returned the exact missing path; the latch test's SCHEMA declaration supplied the canonical existing basename.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/active-operation.schema.json",
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-478.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_evidence_schema_basename_assumed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the assumed basename with the exact test-bound active-operation.schema.json path and rerun full register validation.",
+        "prevention_control": "Incident evidence paths are copied from existing source declarations or discovered filenames, never reconstructed from descriptive labels.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/active-operation.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-478.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0558",
+      "attempt_id": "ordinary-practice-check-in-readiness-user-redirect-packet-029",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A user-authorized successor rewrite must preserve the exact waiting-area movement boundary phrase consumed by both live-baton fixtures.",
+      "observed_error": "The first redirected closeout packet failed two dependent assertions because Next implementation said waiting-area change rather than the established waiting-area movement phrase.",
+      "detection_method": "Both failures reported the same missing literal in the same live row; all other successor, efficacy and protected-boundary assertions passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-479.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_baton_protected_boundary_literal_paraphrased",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the exact waiting-area movement phrase once in the live Next implementation row and rerun both consuming fixtures.",
+        "prevention_control": "The transactional manifest must own protected-boundary vocabulary once and derive every human and test projection from that typed value.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-479.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0559",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-update-030",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "One apply_patch payload must not contain two separate Update File operations for the same path.",
+      "observed_error": "The first AER-0558 correction patch targeted AGENTS.md in two separate Update File blocks, so apply_patch rejected the entire payload as invalid before changing any file.",
+      "detection_method": "apply_patch returned 'multiple operations target AGENTS.md'; the correction was split into one AGENTS operation and one remaining-artifacts operation.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-480.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.apply_patch_duplicate_update_file_operation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Split the correction so each apply_patch payload contains at most one operation for AGENTS.md.",
+        "prevention_control": "Before dispatch, check that every file path appears in at most one operation within an apply_patch payload.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-480.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0560",
+      "attempt_id": "ordinary-practice-check-in-readiness-user-redirect-packet-031",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The live Next row must preserve the exact product/patient data and live provider boundary phrases rather than semantically similar paraphrases.",
+      "observed_error": "The second redirected closeout packet found two remaining dependent boundary mismatches: product/patient/clinical data did not contain the exact product/patient data phrase, and no provider omitted live.",
+      "detection_method": "Both live-baton fixtures returned the exact missing canonical phrases; all other tests in the packet passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-481.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_baton_protected_boundary_literal_paraphrased",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore no product/patient data or clinical data and no live provider exactly in the single live Next row.",
+        "prevention_control": "The clockwork manifest owns canonical boundary tokens and renders the live row and its tests from one typed list without paraphrase.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-481.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0561",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-recurrence-032",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "When a second incident makes a recurrence signature newly reportable, the exact recurring-pattern fixture must advance in the same register revision.",
+      "observed_error": "The focused register packet failed because AER-0560 made current_baton_protected_boundary_literal_paraphrased recur, while the hand-maintained recurring-pattern snapshot still omitted that valid generated row.",
+      "detection_method": "The aggregate counts and all product/baton controls passed; the single diff showed the new two-incident recurrence row at the first unmatched snapshot index.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-482.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add an exact assertion for AER-0558/AER-0560, exclude the now-explicit signature from the residual snapshot, and include AER-0561 in the baseline-advance recurrence.",
+        "prevention_control": "The clockwork reducer must generate recurrence projections directly from journal state and eliminate duplicated hand-maintained recurrence snapshots.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-482.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0562",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-recurrence-033",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident intended to extend an existing recurrence group must copy the group's complete composite identity, including resource_id.",
+      "observed_error": "The revision-482 focused register test showed AER-0561 absent from the expected baseline-advance group because its resource_id differed from the historical codex-primary-orchestrator resource.",
+      "detection_method": "The generated report retained the four historical incidents in one group; direct row inspection exposed the resource identity mismatch on AER-0561.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-483.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.recurrence_group_resource_identity_not_copied",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rebind AER-0561 to codex-primary-orchestrator, regenerate the report and retain AER-0562 as the rejected composite-identity attempt.",
+        "prevention_control": "The clockwork reducer derives recurrence composite keys from typed journal fields and never asks an agent to copy signature/resource pairs.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-483.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0563",
+      "attempt_id": "ordinary-practice-check-in-readiness-postcompaction-broad-regression-034",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ordinary-practice-check-in-admission-readiness-plan-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A current-tranche plan fixture must distinguish immutable preplanning evidence from the live active-operation latch after a valid closeout transition.",
+      "observed_error": "The post-compaction broad packet stopped because the plan test still required the mutable current latch to remain in_progress and terminal handback forbidden after the tranche had validly transitioned to complete at the full reviewed commit.",
+      "detection_method": "The exact pytest failure compared live status complete with the stale in_progress assertion; the immutable preplanning receipt still correctly preserved the original in-progress state.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-484.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.current_latch_fixture_required_in_progress_after_valid_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Assert complete/full reviewed source/terminal handback on the live latch while separately asserting in_progress/no handback on the immutable preplanning receipt.",
+        "prevention_control": "The transactional reducer must generate lifecycle-specific immutable event fixtures and the current projection from one journal, so tests never bind a past checkpoint to mutable current state.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-484.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0564",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-peer-link-035",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "related_incident_ids must be empty or have an exact symmetric peer link; conceptual similarity alone is not a valid peer edge.",
+      "observed_error": "Revision 484 report generation failed closed because AER-0563 named AER-0547 as a related incident while the immutable earlier incident did not name AER-0563 back.",
+      "detection_method": "The register validator returned attempt peer linkage mismatch for AER-0563 with expected none before writing a regenerated pattern report.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "scripts/ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-484.md",
+        "docs/ariadne-agent-error-correction-register-revision-485.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_related_incident_peer_link_not_symmetric",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the one-way conceptual link from AER-0563, retain the analogous prior incident only in narrative evidence, and rerun canonical register generation.",
+        "prevention_control": "The transactional journal should accept conceptual tags separately and derive only explicitly symmetric peer edges, eliminating manual back-link maintenance.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-485.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0565",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-date-rollover-036",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The register source cutoff must be at least the maximum observed_on date whenever a new incident crosses a local calendar boundary.",
+      "observed_error": "Revision 485 report generation failed closed because the 19 August AER-0564 row was newer than the hand-maintained 18 August source_cutoff_on field.",
+      "detection_method": "The register validator returned incident observed after source cutoff for AER-0564 before writing a regenerated pattern report.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "scripts/ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-485.md",
+        "docs/ariadne-agent-error-correction-register-revision-486.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_source_cutoff_not_advanced_after_date_rollover",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance source_cutoff_on to 2026-08-19, retain the failed revision and rerun the full register metadata packet before regeneration.",
+        "prevention_control": "The clockwork reducer derives source_cutoff_on as the maximum typed observed_on value instead of accepting a hand-copied metadata date.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-486.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0566",
+      "attempt_id": "ordinary-practice-check-in-readiness-register-suite-037",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A register revision must advance every direct origin-length fixture together with the ordered ID range, report totals and aggregate dictionaries before the first complete suite run.",
+      "observed_error": "The complete revision-486 suite passed all later checks but failed its early standalone len(agent_incidents) assertion at 398 versus the stale literal 396, although the report aggregate dictionary was already correct.",
+      "detection_method": "The complete focused pytest reported one exact failure at test_seed_separates_agent_behavior_from_transport and all remaining register tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-486.md",
+        "docs/ariadne-agent-error-correction-register-revision-487.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance the direct agent-origin length, global range, revision, totals, aggregate dictionaries and recurrence group together before regenerating the report and rerunning the complete suite.",
+        "prevention_control": "The clockwork reducer computes direct and aggregate population views from one journal and emits tests from the same typed result, removing independent population literals.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-487.md"
         ]
       },
       "status": "corrected"

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 322,
+  "graph_revision": 323,
   "harvests": [],
   "nodes": [
     {
@@ -22649,9 +22649,93 @@
         "Future native-Harness occupied work requires a separate provider-free HMR startup proof.",
         "Provider, runtime, deployment, release, Pages and protected integration remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "title": "Provider-free read-only ordinary-practice canonical check-in admission-readiness review",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-18T13:19:10.6024156Z",
+      "updated_at": "2026-08-18T13:19:10.6024156Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-post-native-harness-successor-resolution-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The ordinary-practice admission verdict is fail-closed: not ready.",
+          "Existing A5.1 remains default-off and exact authored-synthetic practice allowlisted.",
+          "Yuri deferred the product successor behind one transactional closeout-control-plane consolidation and efficacy rehearsal."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-not-ready-ordinary-practice-check-in-admission-review",
+          "source": "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the 6/3/3 readiness matrix and continue only to default-off admission-control architecture."
+        }
+      ],
+      "claim_scope": [
+        "All 28 frozen source hashes and canonical-LF bindings match.",
+        "The exact matrix is six satisfied, three blocking gaps and three operational-evidence gaps.",
+        "More than 120 hostile contract mutations fail closed.",
+        "No product/configuration source, practice posture, route, database, provider or protected ref changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/provider-free-read-only-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-487.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-18--ordinary-practice-canonical-check-in-admission-readiness-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+          "scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Explicit ordinary-practice admission control is not designed or implemented.",
+        "Ordinary rollout, kill-switch and rollback operations are not designed or exercised.",
+        "Non-PHI A5.1 observability and alerting are not designed or implemented.",
+        "Tenant-role, unknown-commit recovery and environment posture still require operational evidence.",
+        "No enablement, product data, provider, runtime, deployment or protected integration is authorized.",
+        "Default-off ordinary-practice admission-control architecture remains deferred, not discarded."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T12:06:43.5937197Z"
+  "updated_at": "2026-08-18T13:19:10.6024156Z"
 }

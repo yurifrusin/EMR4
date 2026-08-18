@@ -83,11 +83,11 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-"
         "admission-readiness-review"
     ):
-        assert latch["status"] == "in_progress"
-        assert latch["source_head"] == "8fe889764e778c21bd051f30549f77c8db425e7c"
+        assert latch["status"] == "complete"
+        assert latch["source_head"] == "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9"
         completed = latch["checkpoint"]["completed_stage"]
-        assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in completed
-        assert "paused native-Harness lane" in completed
+        assert "6/3/3 matrix" in completed
+        assert "Continuity 323 / Compass 305" in completed
         assert "No product code changed" in completed
     else:
         assert latch["operation_id"] == (

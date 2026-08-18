@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 322 / Compass 304. The stale post-Harness successor is corrected without repeating accepted route work or changing the product. Next is the provider-free read-only ordinary-practice canonical check-in admission-readiness review; default denial remains.
+> EMR4 is at Continuity 323 / Compass 305. Ordinary-practice canonical check-in admission is not ready: six dimensions pass, three blocking controls and three operational-evidence obligations remain. Yuri has deferred its product successor behind a transactional closeout-control-plane consolidation and efficacy rehearsal.
 
 ## North star
 
@@ -414,26 +414,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Provider-free exact edit/glob/read composition passed; the occupied worker then failed deterministically before provider I/O at the stock headless HMR startup prerequisite. Lineage parent: `deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission`.
 199. **Correct the stale post-Harness successor without reopening accepted product work — Post-native-Harness successor resolution repair**
    Every live pointer now advances to a no-enable read-only ordinary-practice check-in admission-readiness review. Lineage parent: `deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission`.
+200. **Decide ordinary-practice canonical check-in readiness without enabling it — Provider-free read-only ordinary-practice canonical check-in admission-readiness review**
+   Not ready: six dimensions pass, three blocking controls and three operational evidence obligations remain. Lineage parent: `ariadne-post-native-harness-successor-resolution-repair`.
 
 ## Current position
 
-**Review ordinary-practice canonical check-in admission readiness without enabling it — Post-native-Harness successor resolution repair**
+**Consolidate the closeout control plane and measure whether it reduces procedural weight — Provider-free read-only ordinary-practice canonical check-in admission-readiness review**
 
-**Why this proof came next:** Route convergence already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e and the stale post-Harness pointer is corrected at 2a31437f6da0defa2dc9247491f04d5b23c97608.
+**Why this proof came next:** The read-only 6/3/3 matrix at 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 is accepted, and Yuri explicitly prioritized a measured transactional replacement for hand-authored closeout ceremony.
 
-Inventory the unchanged default-off and empty-allowlist posture plus API Spine, authorization, tenant, idempotency, audit, rollback, rollout and observability prerequisites with no product or data change.
+Shadow one typed closeout manifest against representative history and accept it only if retries, manual fields, wall time and maintained workflow surface fall without coverage loss.
 
 ### What this unlocks
 
-- Produce an evidence-backed readiness inventory for a later explicit admission decision.
-- Name every unmet prerequisite while preserving default denial.
-- Reassess worker and verifier lanes only if a later candidate creates an independently owned work package.
+- Freeze one provider-free transactional closeout-control-plane consolidation and efficacy plan.
+- Measure prevention, escapes, commands, reruns, wall time, files, lines and fixture count against the current baseline.
+- Retire redundant controls only after shadow parity and explicit efficacy thresholds pass.
 
 ### What it does not solve
 
-- No practice is enabled and no product code, configuration, live route or product data is changed.
-- No generic-status Arrived, grammar/client or waiting-area movement is admitted.
-- No provider, runtime, deployment, release, Pages or protected integration is enabled.
+- No ordinary practice is enabled and no feature flag or allowlist changes.
+- No product/configuration source, route, database, client or waiting-area movement changes.
+- No product data, provider, runtime, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1004,6 +1006,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-402.md`
 - `docs/ariadne-agent-error-correction-register-revision-445.md`
 - `docs/ariadne-agent-error-correction-register-revision-459.md`
+- `docs/ariadne-agent-error-correction-register-revision-487.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1350,6 +1353,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-plan.md`
+- `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md`
+- `docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`
@@ -1606,6 +1611,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review-threat-model-delta.md`
+- `docs/security/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-post-cancellation-programme-orientation-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-physical-representability-review-threat-model-delta.md`
 - `docs/security/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-threat-model-delta.md`
@@ -2019,6 +2025,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-fallback-diary-client-proposal-confirm-parity-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-post-cf-d2-compass-baton-orientation-preplanning-receipt.json`
@@ -2070,6 +2077,8 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-pre-verifier-acceptance-receipt.json`
@@ -2565,6 +2574,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-report.md`
+- `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.json`
+- `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md`
+- `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/provider-free-read-only-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/provider-free-read-only-review-evidence.json`
@@ -3016,6 +3029,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--deepseek-native-harness-traceability-micro-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--default-off-canonical-check-in-route-adapter-convergence-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-diary-cancellation-canonical-consumer-convergence.md`
+- `orchestration/human_inbox/yuri/2026-08-18--ordinary-practice-canonical-check-in-admission-readiness-review.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -3083,6 +3097,8 @@ Prerequisites:
 - `scripts/raisa_provider_free_read_only_delete_confirm_route_convergence_review.py`
 - `scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py`
 - `scripts/raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity_update.py`
+- `scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py`
+- `scripts/raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity_update.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
 - `scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview.py`
 - `scripts/raisa_provider_free_read_only_unmounted_delete_confirm_physical_representability_review.py`
@@ -3215,6 +3231,9 @@ Prerequisites:
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_continuity.py`
 - `tests/test_raisa_provider_free_read_only_delete_confirm_route_mounting_readiness_review_plan.py`
+- `tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py`
+- `tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_continuity.py`
+- `tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py`
 - `tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation.py`
 - `tests/test_raisa_provider_free_read_only_post_cancellation_programme_orientation_plan.py`
 - `tests/test_raisa_provider_free_read_only_status_confirm_route_mounting_admission_review.py`
@@ -3282,4 +3301,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 304; continuity graph revision 322._
+_Compass map revision 305; continuity graph revision 323._
