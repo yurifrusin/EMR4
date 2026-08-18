@@ -7,13 +7,13 @@
   "source_head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
   "authority_source": "AGENTS.md Current Baton Next implementation, the accepted transactional shadow at 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0, the accepted kernel at 4204ec6348abb0f92b1a30314699d4a469fa860a and Yuri's standing uninterrupted-development authority authorize only this provider-free shadow gear architecture.",
   "checkpoint": {
-    "completed_stage": "Exact reviewed source f6cbd33fd3322754e06ac6dafa1503f5200e0803 is accepted after 48 scenarios, 256 hostile contract mutations, 10 hostile gear traces, one clean Gemini 10-of-10 veto, the complete register revision 529 packet, Continuity 327 / Compass 309 and successful continuing notification; nine failure-induced verification reruns remain explicit baseline evidence.",
+    "completed_stage": "Exact reviewed source f6cbd33fd3322754e06ac6dafa1503f5200e0803 is accepted after 48 scenarios, 256 hostile contract mutations, 10 hostile gear traces, one clean Gemini 10-of-10 veto, the complete register revision 531 packet, Continuity 327 / Compass 309 and successful continuing notification; fourteen failure-induced verification reruns remain explicit baseline evidence.",
     "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 9
+      "verification": 14
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },

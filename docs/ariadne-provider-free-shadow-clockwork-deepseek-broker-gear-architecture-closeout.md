@@ -47,18 +47,19 @@ required manually authored receipts and projections.
 
 The observed current-process reading is:
 
-- failure-induced verification reruns: nine;
+- failure-induced verification reruns: fourteen;
 - occupied provider attempts: zero;
 - independent verifier calls: one, with zero retry;
 - new mutable-current fixtures: zero;
 - partial publications: zero; and
 - uncaught escapes: zero.
 
-AER-0603 through AER-0610 preserve the historical mutable-latch fixture,
+AER-0603 through AER-0615 preserve the historical mutable-latch fixture,
 handover compactness, copied assertion, incomplete register-projection and
-uninventoried path failures plus the stale navigation fixtures found during the
-tranche. They are evidence for the next rehearsal, not hidden overhead and not
-proof that the architecture itself is effective.
+uninventoried path failures, the rejected incomplete adapter-inventory receipt
+and the stale navigation and lifecycle-source fixtures found during and
+immediately after the tranche. They are evidence for the next rehearsal, not
+hidden overhead and not proof that the architecture itself is effective.
 
 ## Independent veto
 

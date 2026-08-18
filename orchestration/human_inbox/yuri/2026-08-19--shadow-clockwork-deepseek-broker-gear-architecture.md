@@ -42,10 +42,13 @@ or replace anything live.
 ## Efficacy and issues
 
 We have deliberately not declared victory on efficiency yet. The old manual
-workflow still caused nine failure-induced verification reruns while this design
-was being closed out. The failures included a historical fixture reading the
-live latch, duplicated register literals and one guessed path. All were caught
-before publication; no escape or partial publication occurred.
+workflow still caused fourteen failure-induced verification reruns through the
+final post-compaction publication checkpoint. The failures included a
+historical fixture reading the live latch, duplicated register literals,
+uninventoried path operands and one receipt with an incomplete adapter
+inventory and one latch test that retained its planning source after valid
+completion. All were caught before publication; no escape or partial
+publication occurred.
 
 That is useful baseline evidence. The next rehearsal must show at least a 50%
 reduction in failure-induced reruns, zero caller binding fields, no new mutable-

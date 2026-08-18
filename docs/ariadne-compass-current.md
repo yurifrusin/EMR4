@@ -429,7 +429,7 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 **Rehearse the provider-free shadow clockwork and DeepSeek broker gear — Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture**
 
-**Why this proof came next:** The accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803 defines one causal lease and freezes an honest nine-rerun conventional baseline.
+**Why this proof came next:** The accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803 defines one causal lease and freezes an honest fourteen-rerun conventional baseline.
 
 Implement only a private shadow request, lease, terminal-result and acknowledgement engine and compare four efficacy readings against frozen fixtures.
 
@@ -1019,7 +1019,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-509.md`
 - `docs/ariadne-agent-error-correction-register-revision-512.md`
 - `docs/ariadne-agent-error-correction-register-revision-521.md`
-- `docs/ariadne-agent-error-correction-register-revision-529.md`
+- `docs/ariadne-agent-error-correction-register-revision-531.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`

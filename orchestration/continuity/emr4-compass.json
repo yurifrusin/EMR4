@@ -4098,7 +4098,7 @@
         "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-runtime-state.json",
         "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-receipt.json",
         "orchestration/agent_inbox/antigravity/ariadne-clockwork-broker-gear-gemini37-review-receipt.json",
-        "docs/ariadne-agent-error-correction-register-revision-529.md",
+        "docs/ariadne-agent-error-correction-register-revision-531.md",
         "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md",
         "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md",
@@ -4110,7 +4110,7 @@
   "current_position": {
     "node_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
     "strategic_role": "Rehearse the provider-free shadow clockwork and DeepSeek broker gear",
-    "why_now": "The accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803 defines one causal lease and freezes an honest nine-rerun conventional baseline.",
+    "why_now": "The accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803 defines one causal lease and freezes an honest fourteen-rerun conventional baseline.",
     "outcome": "Implement only a private shadow request, lease, terminal-result and acknowledgement engine and compare four efficacy readings against frozen fixtures.",
     "unlocks": [
       "Derive zero caller binding fields from one validated reading.",
@@ -4144,7 +4144,7 @@
       "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-runtime-state.json",
       "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-receipt.json",
       "orchestration/agent_inbox/antigravity/ariadne-clockwork-broker-gear-gemini37-review-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-529.md",
+      "docs/ariadne-agent-error-correction-register-revision-531.md",
       "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md",
       "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md",
       "orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md",

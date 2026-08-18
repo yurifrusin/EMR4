@@ -70,7 +70,7 @@ REVIEW = (
     "orchestration/agent_inbox/antigravity/ariadne-clockwork-broker-gear-"
     "gemini37-review-receipt.json"
 )
-REGISTER = "docs/ariadne-agent-error-correction-register-revision-529.md"
+REGISTER = "docs/ariadne-agent-error-correction-register-revision-531.md"
 CLOSEOUT = (
     "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-"
     "architecture-closeout.md"
@@ -167,7 +167,7 @@ def _node(*, source_head: str) -> dict[str, Any]:
             "All 256 hostile contract mutations and ten hostile gear traces fail closed with zero escapes.",
             "Caller-supplied binding fields are zero; fifteen field groups are engine-owned.",
             "The Gemini 3.7 Flash/high veto passes ten commands at unchanged clean reviewed HEAD.",
-            "No efficacy reduction is claimed from architecture alone; nine conventional verification reruns are retained as baseline evidence.",
+            "No efficacy reduction is claimed from architecture alone; fourteen conventional verification reruns are retained as baseline evidence.",
         ],
         "contract_evidence": [],
         "evidence": {
@@ -238,7 +238,7 @@ def main() -> int:
         "strategic_role": "Rehearse the provider-free shadow clockwork and DeepSeek broker gear",
         "why_now": (
             "The accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803 "
-            "defines one causal lease and freezes an honest nine-rerun conventional baseline."
+            "defines one causal lease and freezes an honest fourteen-rerun conventional baseline."
         ),
         "outcome": (
             "Implement only a private shadow request, lease, terminal-result and acknowledgement "

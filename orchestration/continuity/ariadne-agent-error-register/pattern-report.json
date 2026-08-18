@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "de338b46752ec5f5309eab09524ff352853614329f3a24e18a4c377e714e0807",
+  "canonical_register_sha256": "437f31efbad808aeb37f794ee7e442c3728ad340df356388401f6207778ca87c",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 388,
-      "untrusted_partial_worktree": 108
+      "canonical_unchanged": 391,
+      "untrusted_partial_worktree": 110
     },
     "by_category": {
       "command_scope_violation": 86,
       "evidence_misreport": 66,
       "harness_failure": 54,
-      "operator_error": 22,
-      "output_contract_violation": 227,
+      "operator_error": 25,
+      "output_contract_violation": 228,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 89,
+      "repository_defect": 90,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 429,
+      "agent_behavior": 430,
       "harness": 54,
-      "operator": 22,
-      "repository": 89,
+      "operator": 25,
+      "repository": 90,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 339,
+      "low": 344,
       "material": 117,
       "moderate": 154
     },
@@ -46,6 +46,7 @@
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
+      "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 2,
@@ -53,7 +54,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 333,
+      "codex-primary-orchestrator::orchestrator": 334,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -114,7 +115,7 @@
       "live-agents-handover::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 3,
       "local-docker-desktop::orchestrator": 1,
-      "local-powershell-operator::orchestrator": 11,
+      "local-powershell-operator::orchestrator": 14,
       "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 2,
       "local-rg-operator::orchestrator": 1,
@@ -134,12 +135,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 507,
+      "orchestrator": 512,
       "verifier": 57
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 610,
+  "incident_count": 615,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1013,6 +1014,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0517",
+        "AER-0612"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports.",
+        "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports; the clockwork projector must emit this inventory from settings rather than memory."
+      ],
+      "recurrence_signature": "orchestrator.preplanning_adapter_observation_inventory_incomplete",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0420",
         "AER-0425"
       ],
@@ -1539,18 +1564,24 @@
       "categories": [
         "operator_error"
       ],
-      "incident_count": 3,
+      "incident_count": 6,
       "incident_ids": [
         "AER-0570",
         "AER-0586",
-        "AER-0607"
+        "AER-0607",
+        "AER-0611",
+        "AER-0613",
+        "AER-0614"
       ],
       "origins": [
         "operator"
       ],
       "prevention_controls": [
+        "The causal clock must resolve every command path into a typed manifest before dispatch and prohibit guessed sibling operands; discover matching test inventory before issuing exact-path inspection commands.",
+        "The causal clock must resolve every command path into a typed manifest before dispatch and prohibit guessed sibling operands; inventory discovery and exact-file inspection are separate readings.",
         "The causal clock must resolve every command path into a typed manifest before dispatch and reject absent operands before process launch.",
         "The causal clock must resolve every command path into a typed manifest before dispatch, reject absent operands before process launch and issue one executable per process.",
+        "The causal clock must resolve every command path into a typed manifest before dispatch, reject wildcard path operands on Windows and express file selection as a validated directory root plus native glob filter.",
         "The causal clock should resolve path operands into the typed command manifest before dispatch and reject absent paths before process launch."
       ],
       "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
@@ -1854,7 +1885,7 @@
       ]
     }
   ],
-  "register_revision": 529,
+  "register_revision": 531,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

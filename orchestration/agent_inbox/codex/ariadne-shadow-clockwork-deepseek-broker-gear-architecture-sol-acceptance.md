@@ -25,7 +25,8 @@ finding and unchanged clean HEAD. I accept the reviewer as an independent veto,
 not as the decision owner.
 
 I make no efficacy-reduction claim from architecture alone. The conventional
-workflow incurred nine failure-induced verification reruns during this tranche,
+workflow incurred fourteen failure-induced verification reruns through its final
+post-compaction publication checkpoint,
 one independent verifier call with no retry, zero new mutable-current fixtures,
 zero partial publications and zero uncaught escapes. Those readings become the
 comparison baseline for the next provider-free shadow rehearsal.

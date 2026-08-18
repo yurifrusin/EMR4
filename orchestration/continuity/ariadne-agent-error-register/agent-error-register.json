@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 529,
+  "register_revision": 531,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -24147,6 +24147,196 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "docs/ariadne-agent-error-correction-register-revision-529.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0611",
+      "attempt_id": "clockwork-gear-architecture-prepush-runtime-state-search-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ripgrep",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit repository path operand must be resolved from the current inventory before execution, including Windows searches that need a directory root plus a glob filter rather than a wildcard path operand.",
+      "observed_error": "A read-only search supplied orchestration/agent_inbox/codex/*runtime-state.json as a Windows path operand; ripgrep returned an exact I/O error before the search was rerun against the inventoried directory with -g *runtime-state.json.",
+      "detection_method": "The first ripgrep process returned the invalid path operand diagnostic; the corrected directory-root plus glob-filter invocation succeeded and no repository file changed.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-530.md",
+        "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-postcompaction-runtime-state.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the read-only failure in revision 530, search only the exact inventoried directory with a native glob filter, and include the rerun in the conventional workflow-cost reading.",
+        "prevention_control": "The causal clock must resolve every command path into a typed manifest before dispatch, reject wildcard path operands on Windows and express file selection as a validated directory root plus native glob filter.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-530.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0612",
+      "attempt_id": "clockwork-gear-architecture-postcompaction-receipt-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ariadne_orchestrator_preflight",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every continuation runtime state must include the complete configured adapter-observation inventory even when fallback lanes are declined or historical only.",
+      "observed_error": "The first post-compaction runtime state omitted deepcode_cli and claude_cli_print observations, so preflight returned revision_required with exactly those two missing-adapter reasons and prohibited dispatch.",
+      "detection_method": "Immediate readback of the distinct rejected receipt showed status revision_required, both exact adapter_observation_missing reasons, complete five-source evidence and worker_dispatch_permitted false.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-postcompaction-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-postcompaction-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-530.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_adapter_observation_inventory_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected state and receipt, add explicit not-selected observations for Deep Code and Claude CLI to a distinct corrected runtime state, and require a fresh receipt with no reasons before continuing.",
+        "prevention_control": "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports; the clockwork projector must emit this inventory from settings rather than memory.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-postcompaction-corrected-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-postcompaction-corrected-receipt.json",
+          "tests/test_ariadne_orchestrator_preflight.py"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0613",
+      "attempt_id": "clockwork-gear-architecture-register-test-inventory-search-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ripgrep",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit repository path operand must be resolved from the current inventory before execution; a known valid test path must not be bundled with guessed sibling filenames.",
+      "observed_error": "A read-only register-literal search named the valid tests/test_ariadne_agent_error_register.py together with three guessed sibling test paths that do not exist, producing three exact operating-system path errors before the valid file was read directly.",
+      "detection_method": "Ripgrep printed three cannot-find-file diagnostics; the exact valid test was then inspected with separate inventory-resolved reads and no repository file changed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-530.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed read-only search, inspect only the exact registered test path in separate bounded reads, and include the rerun in the conventional workflow-cost reading.",
+        "prevention_control": "The causal clock must resolve every command path into a typed manifest before dispatch and prohibit guessed sibling operands; inventory discovery and exact-file inspection are separate readings.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-530.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0614",
+      "attempt_id": "clockwork-gear-architecture-latch-test-inventory-search-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ripgrep",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit repository path operand must be resolved from the current inventory before execution; a valid latch test must not be bundled with a guessed continuity-test sibling.",
+      "observed_error": "A read-only stale-literal search named the valid tests/test_ariadne_active_operation_latch.py together with guessed tests/test_ariadne_active_operation_continuity.py, which does not exist, so ripgrep returned one exact path error.",
+      "detection_method": "Ripgrep printed the cannot-find-file diagnostic for the guessed sibling; the valid test remained readable and no repository file changed.",
+      "evidence_paths": [
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-530.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed read-only search, derive any additional latch-test names from inventory before exact inspection, and include the rerun in the conventional workflow-cost reading.",
+        "prevention_control": "The causal clock must resolve every command path into a typed manifest before dispatch and prohibit guessed sibling operands; discover matching test inventory before issuing exact-path inspection commands.",
+        "evidence_paths": [
+          "tests/test_ariadne_active_operation_latch.py",
+          "docs/ariadne-agent-error-correction-register-revision-530.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0615",
+      "attempt_id": "clockwork-gear-architecture-complete-closeout-packet-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "clockwork-gear-architecture-plan-latch-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A live-latch plan test must distinguish the operation's accepted planning source while in progress from its full exact reviewed source after valid completion.",
+      "observed_error": "The complete closeout packet failed one plan test because it still required source_head a29e99c2fbfca59a24c348ded49dd29352b72aa3 when the same valid operation was complete at reviewed source f6cbd33fd3322754e06ac6dafa1503f5200e0803.",
+      "detection_method": "The fifteen-file serial packet reported one exact assertion failure in test_live_latch_validly_projects_the_new_operation_or_a_later_state; all other tests passed and the latch itself validated.",
+      "evidence_paths": [
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-531.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.completed_operation_latch_test_retained_planning_source",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the one-failure packet, require the planning source only while the operation is in progress and the full exact reviewed source after completion, then add AER-0615 and rerun the same packet.",
+        "prevention_control": "Lifecycle-sensitive latch tests must project source identity from status: planning source for in-progress work, exact reviewed source for complete work, and no unconstrained alternate source.",
+        "evidence_paths": [
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-531.md"
         ]
       },
       "status": "corrected"

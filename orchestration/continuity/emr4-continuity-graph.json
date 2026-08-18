@@ -23038,7 +23038,7 @@
         "All 256 hostile contract mutations and ten hostile gear traces fail closed with zero escapes.",
         "Caller-supplied binding fields are zero; fifteen field groups are engine-owned.",
         "The Gemini 3.7 Flash/high veto passes ten commands at unchanged clean reviewed HEAD.",
-        "No efficacy reduction is claimed from architecture alone; nine conventional verification reruns are retained as baseline evidence."
+        "No efficacy reduction is claimed from architecture alone; fourteen conventional verification reruns are retained as baseline evidence."
       ],
       "contract_evidence": [],
       "evidence": {
@@ -23052,7 +23052,7 @@
           "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.schema.json",
           "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/provider-free-architecture-evidence.json",
           "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/architecture-report.md",
-          "docs/ariadne-agent-error-correction-register-revision-529.md"
+          "docs/ariadne-agent-error-correction-register-revision-531.md"
         ],
         "closeouts": [
           "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md",

@@ -13,6 +13,7 @@ THREAT = ROOT / "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-b
 RECEIPT = ROOT / "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-receipt.json"
 LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
 SOURCE_HEAD = "a29e99c2fbfca59a24c348ded49dd29352b72aa3"
+REVIEWED_SOURCE_HEAD = "f6cbd33fd3322754e06ac6dafa1503f5200e0803"
 OPERATION_ID = "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture"
 
 
@@ -65,7 +66,10 @@ def test_live_latch_validly_projects_the_new_operation_or_a_later_state() -> Non
 
     if latch["operation_id"] == OPERATION_ID:
         assert latch["status"] in {"in_progress", "complete"}
-        assert latch["source_head"] == SOURCE_HEAD
+        expected_source = (
+            SOURCE_HEAD if latch["status"] == "in_progress" else REVIEWED_SOURCE_HEAD
+        )
+        assert latch["source_head"] == expected_source
         assert "single_writer_lease_and_acknowledged_terminal_digest_required" in (
             latch["protected_boundaries"]
         )
