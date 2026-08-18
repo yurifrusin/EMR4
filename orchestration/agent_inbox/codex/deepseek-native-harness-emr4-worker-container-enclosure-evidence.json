@@ -1,0 +1,85 @@
+{
+  "schema_version": "emr4.deepseek-native-harness-container-enclosure-evidence.v1",
+  "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+  "observed_on": "2026-08-18",
+  "source_head": "4832afaac450a7c84d21f96ccf0cb07ff5f36b10",
+  "status": "provider_free_enclosure_and_broker_components_passed_occupied_dispatch_still_closed",
+  "image": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "container_version_exit_code": 0,
+    "container_version_stdout": "0.1.0-rc.7",
+    "global_install": false,
+    "disposable_volume": "emr4-dsh-native-profile-001-package"
+  },
+  "provider_free_preflight": {
+    "container": "emr4-dsh-native-preflight-001",
+    "container_id": "40fd424d4a86cc9ccc6168bd9938d5c3176dc1dade01271dbe901bf9349fc219",
+    "network_mode": "none",
+    "exit_code": 1,
+    "terminal_code": "MISSING_CREDENTIAL",
+    "provider_request_count": 0,
+    "broker_request_count": 0,
+    "provider_credential_present": false,
+    "broker_capability_present": false,
+    "environment_names": [
+      "DSH_HOME",
+      "DSH_TELEMETRY_DISABLED",
+      "DSH_TOOLS_MODE",
+      "NODE_VERSION",
+      "PATH",
+      "YARN_VERSION"
+    ],
+    "mounts": [
+      {"destination": "/opt/ariadne/preflight.patch.yml", "kind": "disposable_bind", "read_only": true},
+      {"destination": "/workspace", "kind": "disposable_bind", "read_only": true},
+      {"destination": "/opt/dsh", "kind": "disposable_volume", "read_only": true},
+      {"destination": "/dsh-home", "kind": "disposable_volume", "read_only": false}
+    ]
+  },
+  "read_only_rootfs_probe": {
+    "attempt_containers": [
+      "emr4-dsh-native-preflight-002",
+      "emr4-dsh-native-preflight-003",
+      "emr4-dsh-native-preflight-004"
+    ],
+    "network_mode": "none",
+    "provider_request_count": 0,
+    "broker_request_count": 0,
+    "model_step_count": 0,
+    "terminal_class": "pre_provider_plugin_load_failure",
+    "terminal_code": "HMR_EXPOSE_INTERNALS_REQUIRED",
+    "observation": "rc7_headless_profile_applied_disabled_hmr_entry_when_container_rootfs_was_read_only",
+    "disposition": "not_required_for_host_or_credential_isolation_and_not_admitted_for_occupied_run",
+    "recovered_boundary": "disposable_writable_container_rootfs_with_exact_host_mounts_no_provider_credential_internal_broker_only_network_and_no_model_facing_shell"
+  },
+  "broker": {
+    "source_path": "scripts/ariadne_deepseek_native_harness_broker.mjs",
+    "source_bytes": 12864,
+    "source_sha256": "a9c92ece8ddac431ee8783cd421167d1783178d5ee71da2a0af7b90eda6da17c",
+    "test_path": "tests/test_ariadne_deepseek_native_harness_broker.py",
+    "test_bytes": 9417,
+    "test_sha256": "0c07ae30ae9df65be9a3610d9e64a1d5141a8e056ddd6ba9232469a0bb32e3a1",
+    "node_check_exit_code": 0,
+    "focused_test_result": "4_passed",
+    "controls": {
+      "provider_credential_holder": "broker_only",
+      "worker_credential": "session_capability_only",
+      "method_and_path": "POST_/chat/completions",
+      "model": "deepseek-v4-flash",
+      "tool_declarations": ["edit", "glob", "read"],
+      "maximum_output_tokens": 4096,
+      "maximum_parallel_provider_calls": 1,
+      "concurrency_admission": "rechecked_after_asynchronous_body_read_immediately_before_provider_admission",
+      "session_binding": "first_authenticated_session_hash",
+      "provider_forwarded_harness_session_header": false,
+      "provider_call_budget": "none_beyond_process_wall_clock_and_prepaid_balance",
+      "raw_body_retention": false,
+      "credential_retention": false
+    }
+  },
+  "retained_secret_or_raw_content": false,
+  "occupied_dispatch_authorized": false,
+  "next_gate": "commit_broker_and_enclosure_evidence_then_create_exact_sparse_worker_worktree_and_internal_broker_network"
+}

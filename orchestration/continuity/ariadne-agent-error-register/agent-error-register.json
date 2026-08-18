@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 394,
+  "register_revision": 396,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -18100,6 +18100,78 @@
           "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
           "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
           "docs/ariadne-agent-error-correction-register-revision-394.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0454",
+      "attempt_id": "deepseek-native-harness-container-readonly-rootfs-preflight-002",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "deepseek-native-harness-rc7-container-readonly-rootfs",
+      "model": "none",
+      "reasoning_level": "deterministic",
+      "transport": "provider_free_docker_linux",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "Adding a read-only disposable container root filesystem to the already isolated provider-free preflight should preserve the headless profile's disabled HMR entry and reach MISSING_CREDENTIAL.",
+      "observed_error": "Three read-only-rootfs probes exited during plugin load because rc.7 applied the disabled cordis-plugin-hmr entry and required --expose-internals. Network mode was none; no credential, broker request, provider request or model step existed.",
+      "detection_method": "The exact containers exited 1 with the same local HMR loader stack before credential resolution. The earlier minimum enclosure with a disposable writable container rootfs had already reached exact MISSING_CREDENTIAL under network none.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-container-enclosure-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-395.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.deepseek_native_rc7_readonly_rootfs_applies_disabled_hmr",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Do not add the unrequired read-only-rootfs option to this rc.7 trial. Retain the minimum technical isolation: disposable worker rootfs, exact host mounts, no real provider credential, internal broker-only network and no model-facing shell.",
+        "prevention_control": "Provider-free boot-test every container hardening option against the pinned Harness package before admission; an optional hardening failure cannot be bypassed with a broader runtime flag when the minimum isolation boundary does not require it.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-container-enclosure-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-395.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0455",
+      "attempt_id": "deepseek-native-harness-register-location-and-json-validation-001",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every validation and readback gate must run as one separately captured process so a later command cannot mask an earlier exit.",
+      "observed_error": "The orchestrator placed the AER-0454 location readback and JSON parse validation in one newline-separated PowerShell invocation, contrary to the standing one-process-per-gate control.",
+      "detection_method": "Immediate self-review of the exact tool invocation found two commands in one shell process. Both outputs were read-only, the JSON validation passed and no candidate, provider, Docker or ref state changed.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-396.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the incident and run every remaining readback, validation, generation, staging and commit gate through a distinct process invocation with its own exit result.",
+        "prevention_control": "One command and one result per process for all remaining gates; newline separation inside one shell invocation is prohibited just like semicolon or pipeline composition.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-396.md"
         ]
       },
       "status": "corrected"

@@ -4,16 +4,16 @@
   "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
   "objective": "Freeze a versioned three-profile native-Harness authority contract and use its bounded-worker profile for one real low-risk provider-free EMR4 harness-development package with attributable session evidence and Sol-only candidate admission.",
   "status": "in_progress",
-  "source_head": "bb6d9c65910c2464dd1cfb5bfe087984f3d8a583",
+  "source_head": "4832afaac450a7c84d21f96ccf0cb07ff5f36b10",
   "authority_source": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names this successor; Yuri directed that further evidence come from monitored useful EMR4 work and confirmed prepaid account credit is the monetary budget mechanism.",
   "checkpoint": {
-    "completed_stage": "Plan and threat boundary are committed at exact machine-read source bb6d9c65910c2464dd1cfb5bfe087984f3d8a583. The credential-absent native boot reached MISSING_CREDENTIAL with no provider call. Pinned package source proved that its filesystem sandbox permits all reads and same-UID credential isolation is discretion, not a boundary; no occupied request occurred. Docker enclosure recovery is frozen before dispatch.",
-    "next_executable_stage": "validate_and_commit_the_recovered_profile_schema_enclosure_boundary_exact_package_mapping_and_provider_free_boot_evidence_before_any_occupied_dispatch",
+    "completed_stage": "Profile/schema and package mapping are committed at 4832afaac450a7c84d21f96ccf0cb07ff5f36b10. The pinned container reaches provider-free MISSING_CREDENTIAL with network none; the session-bound broker passes syntax and four focused tests; the optional read-only-rootfs/HMR incompatibility is contained without weakening isolation; and register revision 396 passes its complete suite. No occupied request or worker dispatch has occurred.",
+    "next_executable_stage": "commit_the_broker_container_enclosure_and_register_evidence_with_explicit_paths_then_create_the_exact_sparse_worker_worktree_and_internal_broker_network",
     "retry_counters": {
       "planning": 2,
-      "implementation": 0,
+      "implementation": 1,
       "review": 0,
-      "verification": 10
+      "verification": 16
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },

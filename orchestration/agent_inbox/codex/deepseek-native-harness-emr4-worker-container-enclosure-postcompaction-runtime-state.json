@@ -1,0 +1,210 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resolve_the_single_register_test_failure_then_commit_the_sol_owned_native_harness_broker_and_container_enclosure_before_one_exact_occupied_worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission as the active successor and preserves the accepted native-Harness traceability result without promoting an unrestricted default transport.",
+    "current_authority_allocation": "GPT Sol owns orchestration, broker/enclosure implementation, deterministic gates, worker admission, recovery, acceptance and Git. DeepSeek V4 Flash/high through pinned native Harness owns only the future exact two-path sparse implementation package. Gemini remains an independent veto option but is declined for the deterministic enclosure gate; native subagents are declined under current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md",
+      "docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md",
+      "docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-enclosure-recovery.md",
+      "docs/deepseek-native-harness-authored-synthetic-agentic-coding-traceability-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+      "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-package-mapping-evidence.json",
+      "docs/ariadne-agent-error-correction-register-revision-396.md"
+    ],
+    "protected_evidence_boundaries": "No occupied request or worker dispatch has occurred. The worker receives only one exact sparse bind mount, an internal broker-only network, a non-provider broker capability token and read/glob/edit tools; it receives no provider credential, shell or direct egress. No product, patient, clinical, historical or protected data; no application behavior, ordinary-practice enablement, live product runtime, deployment, release, Pages, protected refs, global install/profile or credential/IAM mutation. Raw reasoning, prompts, responses, tool bodies, credentials and environment dumps remain outside EMR4. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "Task worktree C:\\Users\\sarashera\\emr4 is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 4832afaac450a7c84d21f96ccf0cb07ff5f36b10. Local/origin master and local/origin handoff/current are each exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intended tracked work is limited to the active latch, register/report/test and AGENTS updates plus the Sol-owned broker/enclosure evidence and this receipt pair; all unrelated untracked files are excluded."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+    "active_tranche": "DeepSeek native Harness EMR4 worker profile and first monitored development admission",
+    "objective": "Freeze a versioned three-profile native-Harness authority contract and use its bounded-worker profile for one real low-risk provider-free EMR4 harness-development package with attributable session evidence and Sol-only candidate admission.",
+    "status": "in_progress",
+    "source_head": "4832afaac450a7c84d21f96ccf0cb07ff5f36b10",
+    "authority_source": "AGENTS.md Current Baton at Continuity 319 / Compass 301 names this successor; Yuri directed that further evidence come from monitored useful EMR4 work and confirmed prepaid account credit is the monetary budget mechanism.",
+    "checkpoint": {
+      "completed_stage": "Recovered profile/schema, exact package mapping, provider-free MISSING_CREDENTIAL evidence, two-container enclosure boundary and register revision 394 are committed at machine-read source 4832afaac450a7c84d21f96ccf0cb07ff5f36b10. Six profile-contract tests and the complete register suite pass. No occupied request or worker dispatch has occurred.",
+      "next_executable_stage": "implement_and_verify_the_sol_owned_session_bound_streaming_credential_broker_then_build_the_provider_free_container_enclosure",
+      "retry_counters": {
+        "planning": 2,
+        "implementation": 1,
+        "review": 0,
+        "verification": 13
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "one_pinned_official_deepseek_harness_rc7_fresh_session_for_one_exact_sparse_emr4_harness_development_package",
+      "repository_owned_three_profile_normalized_authority_contract_and_exact_package_source_mapping",
+      "provider_free_missing_credential_preflight_before_one_occupied_session",
+      "prepaid_account_credit_is_monetary_ceiling_with_zero_retry_zero_fallback_one_session_and_fifteen_minute_wall_clock",
+      "only_exact_sparse_packet_inputs_and_two_owned_output_paths_enter_the_worker_container_mount",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "only_read_glob_and_editor_tools_inside_the_enclosed_worker_container_no_model_facing_shell_web_browser_mcp_acp_plugin_skill_job_workflow_or_subagent",
+      "worker_has_internal_broker_network_only_no_direct_egress_and_no_provider_credential",
+      "isolated_broker_sidecar_has_provider_credential_no_shared_worker_mount_and_exact_deepseek_route_allowlist",
+      "no_raw_reasoning_request_response_tool_payload_credential_header_or_environment_persistence",
+      "no_global_install_path_shell_profile_user_profile_credential_iam_or_unrestricted_default_transport_change",
+      "no_deployment_production_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission",
+    "assessed_stage": "container_enclosure_postcompaction",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "After Sol commits and provider-free validates the broker/container enclosure, one native-Harness Flash/high session owns only the exact two-path sparse profile-validator implementation package.",
+        "work_packages": [
+          "future_sparse_profile_validator_and_focused_test_candidate"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The current register correction and broker/enclosure gate are deterministic local infrastructure evidence with no product behavior or conceptual recovery requiring an external veto.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive delegation and no independent package has been authorised.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [
+      "No parallel work at this checkpoint; register correction, enclosure commit, provider-free gate and occupied dispatch are serial."
+    ],
+    "serial_constraints": [
+      "one_process_per_validation_gate",
+      "complete_register_suite",
+      "explicit_path_enclosure_commit",
+      "provider_free_container_preflight",
+      "one_sparse_occupied_worker_session",
+      "Sol_candidate_readback_tests_admission_and_cleanup"
+    ],
+    "reassessment_triggers": [
+      "post_enclosure_commit",
+      "pre_worker_dispatch",
+      "post_worker_exit",
+      "pre_acceptance"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete AGENTS.md reread after compaction, active plan/threat/recovery and predecessor acceptance reread, standalone active-latch validation, standalone branch/HEAD/ref/status verification and restored three-lane parallelism assessment",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol restored the complete five-source authority and active latch after compaction."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Pinned rc.7 package and provider-free MISSING_CREDENTIAL evidence remain available; occupied dispatch remains closed until enclosure admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected for this monitored trial and no silent fallback is permitted."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini lane is declined for the deterministic enclosure checkpoint."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

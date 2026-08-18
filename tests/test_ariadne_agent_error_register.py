@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 394
+    assert register["register_revision"] == 396
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 454)
+        f"AER-{index:04d}" for index in range(1, 456)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 321
+    assert len(agent_incidents) == 322
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 453
+    assert report["incident_count"] == 455
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,20 +3619,20 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 394
-    assert report["incident_count"] == 453
+    assert report["register_revision"] == 396
+    assert report["incident_count"] == 455
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 321,
-        "harness": 50,
+        "agent_behavior": 322,
+        "harness": 51,
         "operator": 1,
         "repository": 65,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 70,
+        "command_scope_violation": 71,
         "evidence_misreport": 62,
-        "harness_failure": 50,
+        "harness_failure": 51,
         "operator_error": 1,
         "output_contract_violation": 141,
         "read_only_violation": 3,
@@ -3642,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 297,
+        "canonical_unchanged": 299,
         "untrusted_partial_worktree": 42,
     }
     receipt_event_recurrence = next(
@@ -3789,7 +3789,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     ] == [
         {
             "recurrence_signature": "orchestrator.chained_validation_exit_masking",
-            "incident_count": 6,
+            "incident_count": 7,
             "incident_ids": [
                 "AER-0334",
                 "AER-0337",
@@ -3797,6 +3797,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "AER-0397",
                 "AER-0429",
                 "AER-0432",
+                "AER-0455",
             ],
             "origins": ["agent_behavior"],
             "categories": ["command_scope_violation"],
@@ -3808,6 +3809,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
                 "No validation, staging, commit or readback operation may share a shell invocation with another gate; record every exit before starting the next process.",
                 "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
+                "One command and one result per process for all remaining gates; newline separation inside one shell invocation is prohibited just like semicolon or pipeline composition.",
                 "One process per validation, staging, commit or readback gate; semicolon-composed gate invocations are prohibited even when every operation is read-only.",
             ],
         },
@@ -7199,3 +7201,24 @@ def test_aer_0452_and_0453_preserve_native_harness_enclosure_recovery() -> None:
     assert "reads always pass through" in enclosure["observed_error"]
     assert "broker sidecar" in enclosure["correction"]["action"]
     assert enclosure["status"] == "corrected"
+
+
+def test_aer_0454_and_0455_preserve_container_and_gate_containment() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+
+    assert list(incidents)[453:455] == ["AER-0454", "AER-0455"]
+    rootfs = incidents["AER-0454"]
+    assert rootfs["origin"] == "harness"
+    assert rootfs["category"] == "harness_failure"
+    assert rootfs["status"] == "contained"
+    assert "MISSING_CREDENTIAL" in rootfs["detection_method"]
+    assert "no model-facing shell" in rootfs["correction"]["action"]
+
+    gate = incidents["AER-0455"]
+    assert gate["origin"] == "agent_behavior"
+    assert gate["category"] == "command_scope_violation"
+    assert gate["recurrence_signature"] == (
+        "orchestrator.chained_validation_exit_masking"
+    )
+    assert "newline-separated" in gate["observed_error"]
+    assert gate["status"] == "corrected"

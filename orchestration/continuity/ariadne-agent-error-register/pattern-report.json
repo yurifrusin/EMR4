@@ -1,15 +1,15 @@
 {
-  "canonical_register_sha256": "6204cea64e188aaccc61ac1db57abd633df7d4bd9fbe393ec3782c1fb450e87f",
+  "canonical_register_sha256": "af24f73e925c2c71d86148b26d52f029538dd586fe205c3e7394740f66dc5f44",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 297,
+      "canonical_unchanged": 299,
       "untrusted_partial_worktree": 42
     },
     "by_category": {
-      "command_scope_violation": 70,
+      "command_scope_violation": 71,
       "evidence_misreport": 62,
-      "harness_failure": 50,
+      "harness_failure": 51,
       "operator_error": 1,
       "output_contract_violation": 141,
       "read_only_violation": 3,
@@ -18,16 +18,16 @@
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 321,
-      "harness": 50,
+      "agent_behavior": 322,
+      "harness": 51,
       "operator": 1,
       "repository": 65,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 202,
+      "low": 203,
       "material": 116,
-      "moderate": 135
+      "moderate": 136
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -48,7 +48,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 240,
+      "codex-primary-orchestrator::orchestrator": 241,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -56,6 +56,7 @@
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
       "deepseek-flash-workers::implementer": 14,
+      "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
@@ -112,12 +113,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 353,
+      "orchestrator": 355,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 453,
+  "incident_count": 455,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -125,14 +126,15 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 6,
+      "incident_count": 7,
       "incident_ids": [
         "AER-0334",
         "AER-0337",
         "AER-0372",
         "AER-0397",
         "AER-0429",
-        "AER-0432"
+        "AER-0432",
+        "AER-0455"
       ],
       "origins": [
         "agent_behavior"
@@ -143,6 +145,7 @@
         "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
         "No validation, staging, commit or readback operation may share a shell invocation with another gate; record every exit before starting the next process.",
         "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
+        "One command and one result per process for all remaining gates; newline separation inside one shell invocation is prohibited just like semicolon or pipeline composition.",
         "One process per validation, staging, commit or readback gate; semicolon-composed gate invocations are prohibited even when every operation is read-only."
       ],
       "recurrence_signature": "orchestrator.chained_validation_exit_masking",
@@ -1308,7 +1311,7 @@
       ]
     }
   ],
-  "register_revision": 394,
+  "register_revision": 396,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }
