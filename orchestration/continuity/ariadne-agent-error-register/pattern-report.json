@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "090564462af94ba1cb6a67ef4b0fef6a8c84044bf4c70f83192394fd536e0f35",
+  "canonical_register_sha256": "3ea427b5460e5acb1eae2f6621ce548879499b5941fdb6596028ebbfe80264b7",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 364,
-      "untrusted_partial_worktree": 96
+      "canonical_unchanged": 366,
+      "untrusted_partial_worktree": 105
     },
     "by_category": {
-      "command_scope_violation": 82,
+      "command_scope_violation": 84,
       "evidence_misreport": 66,
       "harness_failure": 53,
-      "operator_error": 17,
-      "output_contract_violation": 206,
+      "operator_error": 19,
+      "output_contract_violation": 213,
       "read_only_violation": 3,
       "reasoning_claim_error": 46,
       "repository_defect": 85,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 403,
+      "agent_behavior": 412,
       "harness": 53,
-      "operator": 17,
+      "operator": 19,
       "repository": 85,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 305,
+      "low": 316,
       "material": 117,
       "moderate": 152
     },
@@ -37,13 +37,14 @@
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
       "ariadne-active-operation-latch::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
-      "ariadne-agent-error-register::orchestrator": 3,
+      "ariadne-agent-error-register::orchestrator": 5,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 1,
       "ariadne-compass-current-position-test::orchestrator": 4,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
+      "ariadne-provider-free-pytest-launcher::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 1,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
@@ -52,7 +53,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 312,
+      "codex-primary-orchestrator::orchestrator": 319,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -114,7 +115,7 @@
       "local-docker-desktop::orchestrator": 1,
       "local-powershell-operator::orchestrator": 9,
       "local-powershell-python-operator::orchestrator": 1,
-      "local-python-operator::orchestrator": 1,
+      "local-python-operator::orchestrator": 2,
       "local-rg-operator::orchestrator": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
@@ -131,12 +132,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 472,
+      "orchestrator": 483,
       "verifier": 56
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 574,
+  "incident_count": 585,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -144,18 +145,22 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 3,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0490",
         "AER-0508",
-        "AER-0573"
+        "AER-0573",
+        "AER-0581",
+        "AER-0584"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "Every patch to a repeated register field must include the target incident_id in the same hunk and receive exact target plus sentinel readback before validation.",
+        "Every repeated attempt-ID edit must be addressed by incident identity, with exact target and neighboring sentinel readback before validation; the clockwork allocator removes this edit class.",
         "Every repeated-field patch hunk includes target incident_id context and receives immediate exact intended-target plus early-sentinel readback before canonical validation.",
+        "The typed reducer must address fields by stable recurrence identity; until adoption, repeated-value patches include the owning signature and an unchanged neighboring sentinel.",
         "Typed reducer output eliminates repeated manual count patches; until adoption, every repeated-field patch must include the owning recurrence signature and receive exact target plus sentinel readback."
       ],
       "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
@@ -596,6 +601,30 @@
       ],
       "incident_count": 2,
       "incident_ids": [
+        "AER-0564",
+        "AER-0577"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "The transactional journal must derive recurrence groups and accept explicit peer relationships only as validated symmetric data, eliminating manual back-link maintenance.",
+        "The transactional journal should accept conceptual tags separately and derive only explicitly symmetric peer edges, eliminating manual back-link maintenance."
+      ],
+      "recurrence_signature": "orchestrator.register_related_incident_peer_link_not_symmetric",
+      "resource_ids": [
+        "ariadne-agent-error-register"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
         "AER-0460",
         "AER-0512"
       ],
@@ -642,7 +671,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 7,
+      "incident_count": 11,
       "incident_ids": [
         "AER-0255",
         "AER-0318",
@@ -650,7 +679,11 @@
         "AER-0520",
         "AER-0566",
         "AER-0571",
-        "AER-0572"
+        "AER-0572",
+        "AER-0579",
+        "AER-0580",
+        "AER-0582",
+        "AER-0585"
       ],
       "origins": [
         "agent_behavior"
@@ -662,7 +695,11 @@
         "Before the first full run after any register edit, mechanically search the entire focused test for revision, ID range, standalone origin lengths, totals, aggregate dictionaries and recurrence equality, then compare every literal with a freshly built report.",
         "The clockwork reducer computes direct and aggregate population views from one journal and emits tests from the same typed result, removing independent population literals.",
         "The clockwork reducer computes population views and emits exact typed fields from one journal so neither aggregate values nor narrative bindings are independently retyped.",
-        "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures."
+        "The clockwork reducer must derive new recurrence classifications and residual exclusions from one generated set; tests must not discover them sequentially through failing comparisons.",
+        "The clockwork reducer must emit recurrence classification and exhaustive residual checks from the same generated pattern set, so a new recurrence cannot require two manually synchronized fixtures.",
+        "The clockwork reducer must emit recurrence rows in deterministic canonical order and tests must consume that projection without independently ordering its narrative fields.",
+        "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures.",
+        "The clockwork reducer must own contiguous IDs, populations, aggregate dictionaries, recurrence rows and the committed report as projections of one journal reading."
       ],
       "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
       "resource_ids": [
@@ -1343,6 +1380,30 @@
     },
     {
       "categories": [
+        "operator_error"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0548",
+        "AER-0575"
+      ],
+      "origins": [
+        "operator"
+      ],
+      "prevention_controls": [
+        "Every repository Path.read_text call in a one-off Python command specifies encoding='utf-8' explicitly.",
+        "The transactional control plane centralizes UTF-8 JSON loading; until canonical adoption, every remaining one-off Path.read_text call must state encoding='utf-8' explicitly."
+      ],
+      "recurrence_signature": "operator.python_path_read_text_utf8_encoding_omitted",
+      "resource_ids": [
+        "local-python-operator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
         "repository_defect"
       ],
       "incident_count": 2,
@@ -1607,7 +1668,7 @@
       ]
     }
   ],
-  "register_revision": 495,
+  "register_revision": 506,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

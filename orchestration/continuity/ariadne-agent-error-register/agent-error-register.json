@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 495,
+  "register_revision": 506,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -22746,6 +22746,427 @@
           "orchestration_harness/transactional_closeout.py",
           "tests/test_ariadne_transactional_closeout.py",
           "docs/ariadne-agent-error-correction-register-revision-495.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0575",
+      "attempt_id": "transactional-closeout-continuity-inspection-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-python-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Repository JSON containing Unicode must be read explicitly as UTF-8 in one-off Python inspection commands.",
+      "observed_error": "A read-only one-off Python inspection again omitted encoding='utf-8' on Continuity and Compass Path.read_text calls, so Windows cp1252 decoding failed before JSON parsing.",
+      "detection_method": "Python returned UnicodeDecodeError at the first Continuity read; no file was written and canonical state remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/emr4-continuity-graph.json",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-496.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.python_path_read_text_utf8_encoding_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop using an ad hoc reader for closeout state and use the UTF-8-fixed typed Continuity path for subsequent inspection and publication.",
+        "prevention_control": "The transactional control plane centralizes UTF-8 JSON loading; until canonical adoption, every remaining one-off Path.read_text call must state encoding='utf-8' explicitly.",
+        "evidence_paths": [
+          "orchestration_harness/transactional_closeout.py",
+          "docs/ariadne-agent-error-correction-register-revision-496.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0576",
+      "attempt_id": "transactional-closeout-register-update-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage must be selected from the canonical register schema before the register validator runs.",
+      "observed_error": "The initial AER-0575 record used the descriptive but invalid stage closeout_preparation instead of the schema enum closeout.",
+      "detection_method": "The deterministic register validator rejected the candidate before regenerating the pattern report and named the complete accepted stage enum.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-497.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_enum_value_not_schema_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the invalid stage with the schema-enumerated closeout value and rerun the canonical validator before staging.",
+        "prevention_control": "Incident-entry construction must source constrained vocabulary from the register schema; the planned typed control plane must expose enum choices instead of accepting duplicated free text.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-497.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0577",
+      "attempt_id": "transactional-closeout-register-update-002",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "related_incident_ids must be empty or have an exact symmetric peer link; recurrence grouping is derived from recurrence_signature instead.",
+      "observed_error": "The first AER-0575 correction named AER-0548 as a one-way related incident even though the immutable earlier incident could not name the later event reciprocally.",
+      "detection_method": "The canonical register validator failed closed with attempt peer linkage mismatch for AER-0575 before regenerating the pattern report.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "scripts/ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-498.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_related_incident_peer_link_not_symmetric",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the one-way link from AER-0575 and let the shared recurrence signature derive the historical grouping.",
+        "prevention_control": "The transactional journal must derive recurrence groups and accept explicit peer relationships only as validated symmetric data, eliminating manual back-link maintenance.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-498.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0578",
+      "attempt_id": "transactional-closeout-register-test-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "ariadne-provider-free-pytest-launcher",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The provider-free pytest launcher accepts explicit test paths only; ordinary pytest verbosity flags are not part of its command grammar.",
+      "observed_error": "The first register-test command appended habitual pytest flag -q to scripts.ariadne_provider_free_pytest, whose parser rejected the unsupported argument before collecting tests.",
+      "detection_method": "The launcher returned argparse exit status 2 and printed its exact test_paths-only usage; no test or repository mutation ran.",
+      "evidence_paths": [
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-499.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.provider_free_pytest_unsupported_pytest_flag",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rerun the launcher with its single explicit test-path operand and no ordinary pytest flag.",
+        "prevention_control": "Verification commands must be emitted from a typed launcher profile rather than composed from remembered pytest conventions; unsupported options fail before execution.",
+        "evidence_paths": [
+          "scripts/ariadne_provider_free_pytest.py",
+          "docs/ariadne-agent-error-correction-register-revision-499.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0579",
+      "attempt_id": "transactional-closeout-register-suite-002",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A register revision must update its contiguous ID range, population fixtures, aggregate dictionaries and committed generated report before the complete suite runs.",
+      "observed_error": "The first revision-499 suite found four stale projections: the final ID range, standalone agent population, origin/category/candidate-state aggregates and committed pattern report.",
+      "detection_method": "The complete provider-free register suite reported exactly four failures, each naming a derived value that had not advanced with AER-0575 through AER-0578; all other tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-500.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Advance every population and recurrence fixture from the freshly generated report, write that report through the canonical generator and rerun the complete suite.",
+        "prevention_control": "The clockwork reducer must own contiguous IDs, populations, aggregate dictionaries, recurrence rows and the committed report as projections of one journal reading.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-500.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0580",
+      "attempt_id": "transactional-closeout-register-suite-003",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A complete register fixture must include every newly recurring pattern or explicitly classify and assert it before comparison.",
+      "observed_error": "The revision-500 suite left one failure because the whole recurring-pattern fixture omitted the newly recurring symmetric-peer-link validation pattern created by AER-0577.",
+      "detection_method": "The complete suite reported one list difference at the new orchestrator.register_related_incident_peer_link_not_symmetric row; every other register assertion passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-501.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add one explicit generated peer-link recurrence assertion, exclude that classified row from the remaining exhaustive fixture and advance the population recurrence projection.",
+        "prevention_control": "The clockwork reducer must emit recurrence classification and exhaustive residual checks from the same generated pattern set, so a new recurrence cannot require two manually synchronized fixtures.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-501.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0581",
+      "attempt_id": "transactional-closeout-register-suite-004",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A repeated incident_count patch must include its owning recurrence signature as unique context and preserve a neighboring sentinel.",
+      "observed_error": "The revision-501 patch changed the chained-validation fixture from eight to nine while leaving the intended population-fixture recurrence at eight because both values were repeated literals.",
+      "detection_method": "The complete register suite reported one first-row recurring-pattern difference; exact readback showed the wrong count changed and the intended count remained stale.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-502.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore chained-validation count eight and set population-fixture count nine using each complete recurrence signature as patch context.",
+        "prevention_control": "The typed reducer must address fields by stable recurrence identity; until adoption, repeated-value patches include the owning signature and an unchanged neighboring sentinel.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-502.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0582",
+      "attempt_id": "transactional-closeout-register-suite-008",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A copied recurrence row must preserve the canonical generator's deterministic prevention-control order.",
+      "observed_error": "The revision-502 suite had correct recurrence IDs and counts but the copied population-row prevention controls placed the newest sentence after expose and own instead of its generated lexical position before them.",
+      "detection_method": "Exact generated-row versus fixture readback isolated the sole failure to the order of the final three prevention-control strings.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-503.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the copied prevention-control tail with the generator's exact deterministic order and rerun the complete suite.",
+        "prevention_control": "The clockwork reducer must emit recurrence rows in deterministic canonical order and tests must consume that projection without independently ordering its narrative fields.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-503.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0583",
+      "attempt_id": "transactional-closeout-register-suite-007",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident attempt_id is unique unless an explicit symmetric peer relationship represents the same attempt.",
+      "observed_error": "AER-0582 initially reused transactional-closeout-register-suite-005, the existing attempt ID of AER-0571, so the validator interpreted them as an unpaired shared attempt.",
+      "detection_method": "The canonical validator failed closed with attempt peer linkage mismatch for AER-0571 expected AER-0582 before writing the generated report.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "scripts/ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-504.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_attempt_id_not_unique",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Assign AER-0582 the next unique suite attempt ID and assign this correction a distinct successor ID before regenerating the report.",
+        "prevention_control": "The clockwork journal must allocate attempt identities monotonically and reject caller-supplied identifiers that collide with retained events.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-504.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0584",
+      "attempt_id": "transactional-closeout-register-suite-009",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A patch to a repeated attempt_id must include the owning incident_id as unique target context and verify both target and sentinel before validation.",
+      "observed_error": "The first revision-504 patch changed AER-0571's historical suite-005 attempt to suite-006 instead of changing AER-0582's duplicated suite-005, creating a new collision with AER-0572 in the unvalidated draft.",
+      "detection_method": "Immediate exact incident-context readback showed AER-0571 and AER-0572 both at suite-006 while AER-0582 remained suite-005; the register validator was not run on that draft.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-505.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore AER-0571 to suite-005, preserve AER-0572 at suite-006 and assign AER-0582 unused suite-008 using incident-scoped patch contexts.",
+        "prevention_control": "Every repeated attempt-ID edit must be addressed by incident identity, with exact target and neighboring sentinel readback before validation; the clockwork allocator removes this edit class.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-505.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0585",
+      "attempt_id": "transactional-closeout-register-suite-010",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every generated recurrence family must be classified once and excluded from the residual comparison from the same report reading.",
+      "observed_error": "The revision-505 suite exposed the recurring UTF-8 omission row as the next unclassified item in the copied residual recurrence fixture.",
+      "detection_method": "The complete suite reported one list difference at operator.python_path_read_text_utf8_encoding_omitted; counts, incident identities and all earlier recurrence assertions passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-506.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add one explicit generated UTF-8 recurrence assertion, exclude it from the residual comparison and advance the population recurrence projection.",
+        "prevention_control": "The clockwork reducer must derive new recurrence classifications and residual exclusions from one generated set; tests must not discover them sequentially through failing comparisons.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-506.md"
         ]
       },
       "status": "corrected"
