@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": ["git", "diff", "--exit-code", "HEAD", "--"]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+      ]
+    },
+    {
+      "id": "C10",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

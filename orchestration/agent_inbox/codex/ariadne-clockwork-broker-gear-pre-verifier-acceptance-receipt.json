@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture",
+    "completed_stage": "The closed architecture contract, schema and validator pass 48 named scenarios, 256 hostile contract mutations and 10 gear-trace mutations with zero escapes; transactional clock, broker, latch, Git, register, baton, Compass and API guards pass with six preserved failure-induced verification reruns and zero live adoption or provider calls.",
+    "next_executable_stage": "commit_the_exact_deterministically_admitted_candidate_then_prepare_one_fresh_gemini_37_flash_high_read_only_veto",
+    "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+    "resume_after_compaction": true,
+    "source_head": "a29e99c2fbfca59a24c348ded49dd29352b72aa3",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+    "reason_codes": [],
+    "resolved_commit": "a29e99c2fbfca59a24c348ded49dd29352b72aa3",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a29e99c2fbfca59a24c348ded49dd29352b72aa3"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+    "branch_origin_aligned": false,
+    "head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+    "origin_branch_commit": "a29e99c2fbfca59a24c348ded49dd29352b72aa3",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied native-Harness EMR4 work still requires the separate provider-free HMR boot proof; this candidate needs no implementation worker and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high read-only veto is now justified by deterministic admission of the exact architecture candidate and its clean review worktree.",
+        "work_packages": [
+          "exact_candidate_shadow_clockwork_and_deepseek_broker_gear_architecture_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and no separate implementation package remains.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "closeout",
+      "before the provider-free shadow gear rehearsal",
+      "before any live adoption or occupied DeepSeek work"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validated register revision 525",
+      "clean exact candidate and non-generative manifest preflight",
+      "one no-fallback bounded Gemini veto",
+      "Sol-only acceptance and task-branch Git"
+    ]
+  },
+  "planned_action": "run_one_bounded_exact_candidate_gemini_37_flash_high_read_only_clockwork_architecture_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md",
+      "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md",
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md",
+      "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json",
+      "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/provider-free-architecture-evidence.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-worktree-preflight.json",
+      "docs/ariadne-agent-error-correction-register-revision-525.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the architecture, deterministic admission, acceptance and task-branch Git. DeepSeek is declined because occupied native-Harness work remains behind the separate provider-free stock-headless-to-custom-runner HMR boot proof and Claude Code is not a fallback. Gemini 3.7 Flash/high is reserved for exactly one fresh read-only veto of candidate f6cbd33fd3322754e06ac6dafa1503f5200e0803. Native subagents remain declined under developer policy.",
+    "git_refs_and_worktree": "Primary task branch is exact candidate f6cbd33fd3322754e06ac6dafa1503f5200e0803 while origin task remains a29e99c2fbfca59a24c348ded49dd29352b72aa3. The review worktree C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f is clean on codex/review-clockwork-broker-gear-f6cbd33f at the exact candidate. Manifest preflight passes with digest 838b4bdc41693bccf379942d7bae41ac77ffec46dc5a6c373a7d2a162baebdb1. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now records the accepted check-in kernel at full source 4204ec6348abb0f92b1a30314699d4a469fa860a, task publication a29e99c2fbfca59a24c348ded49dd29352b72aa3, the active shadow clockwork architecture and agent-error register revision 525. No protected authority moved.",
+    "protected_evidence_boundaries": "Exact committed provider-free architecture candidate f6cbd33fd3322754e06ac6dafa1503f5200e0803 only. The ten-command manifest is non-generative and preflight passes. No live clock adoption or control retirement, occupied DeepSeek/HMR call, product/provider/Git authority widening, product/config/API/route/database/client change, ordinary-practice enablement, product/patient/clinical/protected data, production/deployment/release/Pages or protected-ref movement. Preserve docs/branding and all unrelated untracked files; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

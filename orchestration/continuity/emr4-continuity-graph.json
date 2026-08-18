@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 326,
+  "graph_revision": 327,
   "harvests": [],
   "nodes": [
     {
@@ -22996,9 +22996,102 @@
         "The shared causal clock and DeepSeek broker gear remain shadow-only.",
         "No product data, provider, runtime, deployment or protected integration is authorized."
       ]
+    },
+    {
+      "id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "title": "Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-18T20:08:13.6850292Z",
+      "updated_at": "2026-08-18T20:08:13.6850292Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Ariadne remains the sole source of causal bureaucratic time.",
+          "A digest-bound WorkOrder transfers one sequence lease to the DeepSeek broker and exact terminal acknowledgement returns it.",
+          "The result is architecture-only; no live control is replaced and no occupied Harness starts."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-shadow-clockwork-deepseek-broker-gear-architecture",
+          "source": "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the provider-free single-writer causal architecture without live adoption."
+        }
+      ],
+      "claim_scope": [
+        "All ten canonical-LF predecessor bindings match.",
+        "All 48 named architecture scenarios pass.",
+        "All 256 hostile contract mutations and ten hostile gear traces fail closed with zero escapes.",
+        "Caller-supplied binding fields are zero; fifteen field groups are engine-owned.",
+        "The Gemini 3.7 Flash/high veto passes ten commands at unchanged clean reviewed HEAD.",
+        "No efficacy reduction is claimed from architecture alone; nine conventional verification reruns are retained as baseline evidence."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md",
+          "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md",
+          "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.schema.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/provider-free-architecture-evidence.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/architecture-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-529.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-clockwork-broker-gear-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live clock adoption and retirement of any current control remain separately closed.",
+        "The provider-free shadow gear rehearsal must prove measured efficacy before an adoption plan is considered.",
+        "Occupied DeepSeek work remains behind the separate native-Harness HMR boot proof.",
+        "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T18:37:32.9752761Z"
+  "updated_at": "2026-08-18T20:08:13.6850292Z"
 }

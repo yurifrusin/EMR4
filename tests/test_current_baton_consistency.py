@@ -70,6 +70,10 @@ ADMISSION_KERNEL_NODE_ID = (
     "check-in-admission-control-kernel-rehearsal"
 )
 ADMISSION_KERNEL_SOURCE_HEAD = "4204ec6348abb0f92b1a30314699d4a469fa860a"
+CLOCKWORK_ARCHITECTURE_NODE_ID = (
+    "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture"
+)
+CLOCKWORK_ARCHITECTURE_SOURCE_HEAD = "f6cbd33fd3322754e06ac6dafa1503f5200e0803"
 ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
@@ -115,20 +119,20 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 326
-    assert graph["nodes"][-1]["id"] == ADMISSION_KERNEL_NODE_ID
+    assert graph["graph_revision"] == 327
+    assert graph["nodes"][-1]["id"] == CLOCKWORK_ARCHITECTURE_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        ADMISSION_KERNEL_SOURCE_HEAD
+        CLOCKWORK_ARCHITECTURE_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": ADMISSION_ARCHITECTURE_NODE_ID,
+            "node_id": ADMISSION_KERNEL_NODE_ID,
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 308
-    assert compass["source_graph_revision"] == 326
-    assert compass["current_position"]["node_id"] == ADMISSION_KERNEL_NODE_ID
+    assert compass["map_revision"] == 309
+    assert compass["source_graph_revision"] == 327
+    assert compass["current_position"]["node_id"] == CLOCKWORK_ARCHITECTURE_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -143,11 +147,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
-    assert "Continuity 326 / Compass 308" in current
-    assert "shadow-only" in current
-    assert ADMISSION_KERNEL_SOURCE_HEAD in current
-    assert "ordinary admission remains absent and impossible" in current.lower()
-    assert "no live control is replaced" in current.lower()
+    clockwork_relation = _table_row(text, "Current shadow clockwork relation")
+    assert "Continuity 327 / Compass 309" in current
+    assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in current
+    assert "one causal lease" in current.lower()
+    assert "without replacing a live control" in current.lower()
+    assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
@@ -214,15 +219,15 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture" in next_work.lower()
-    assert "typed causal tick/result protocol" in next_work.lower()
-    assert "side-effect class" in next_work.lower()
-    assert "exact parent-tick broker binding" in next_work.lower()
+    assert "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal" in next_work.lower()
+    assert "private shadow generation" in next_work.lower()
+    assert "at least 50% fewer reruns" in next_work.lower()
+    assert "zero new mutable-current fixtures" in next_work.lower()
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
-    assert "no live clockwork adoption" in next_work.lower()
-    assert "occupied deepseek/provider call" in next_work.lower()
-    assert "product authority" in next_work.lower()
-    assert "patient/clinical/product data" in next_work.lower()
+    assert "no live adoption" in next_work.lower()
+    assert "occupied deepseek/hmr or other provider call" in next_work.lower()
+    assert "product/practice/git authority" in next_work.lower()
+    assert "product data" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
@@ -260,12 +265,12 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
-        "no live clockwork adoption",
+        "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+        "no live adoption",
         "current-control retirement",
-        "occupied deepseek/provider call",
-        "product authority",
-        "patient/clinical/product data",
+        "occupied deepseek/hmr or other provider call",
+        "product/practice/git authority",
+        "product data",
         "deployment",
         "protected-ref movement",
         "docs/branding/",

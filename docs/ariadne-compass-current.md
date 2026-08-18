@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 326 / Compass 308. The provider-free unmounted default-off check-in admission kernel is accepted at exact source 4204ec6348abb0f92b1a30314699d4a469fa860a with zero active ordinary records and zero ordinary releases. The next tranche freezes a shadow Ariadne/DeepSeek broker clockwork gear architecture.
+> EMR4 is at Continuity 327 / Compass 309. The provider-free shadow Ariadne/DeepSeek broker gear architecture is accepted at exact source f6cbd33fd3322754e06ac6dafa1503f5200e0803 with one causal lease, zero caller binding fields and no live adoption. The next tranche is a provider-free private-shadow efficacy rehearsal.
 
 ## North star
 
@@ -422,27 +422,29 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Architecture accepted; ordinary admission remains absent and denied. Lineage parent: `ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal`.
 203. **Prove the default-off check-in admission evaluator without mounting it — Provider-free unmounted default-off ordinary-practice canonical check-in admission-control kernel rehearsal**
    Pure kernel accepted; ordinary admission remains impossible. Lineage parent: `raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture`.
+204. **Freeze one causal clock and single-writer broker gear before implementation — Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture**
+   Architecture accepted; live controls and occupied Harness remain closed. Lineage parent: `raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal`.
 
 ## Current position
 
-**Freeze the shadow Ariadne and DeepSeek broker clockwork gear — Provider-free unmounted default-off ordinary-practice canonical check-in admission-control kernel rehearsal**
+**Rehearse the provider-free shadow clockwork and DeepSeek broker gear — Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture**
 
-**Why this proof came next:** The kernel at 4204ec6348abb0f92b1a30314699d4a469fa860a and its contained review failures expose exact typed clock requirements.
+**Why this proof came next:** The accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803 defines one causal lease and freezes an honest nine-rerun conventional baseline.
 
-Specify one digest-linked causal tick/result protocol and measurable shadow efficacy boundary without live adoption or provider use.
+Implement only a private shadow request, lease, terminal-result and acknowledgement engine and compare four efficacy readings against frozen fixtures.
 
 ### What this unlocks
 
-- Derive full Git, stage, disposition, side-effect and attempt identity from one event.
-- Bind DeepSeek WorkOrders and results to one exact Ariadne parent tick.
-- Require atomic projections and exhaustive admitted-or-rejected receipts.
-- Measure manual fields, reruns, maintained fixtures and escapes before adoption.
+- Derive zero caller binding fields from one validated reading.
+- Measure failure-induced reruns against the frozen conventional baseline.
+- Prove no new mutable-current fixture, partial publication or uncaught escape.
+- Report shared-engine growth and clean-run overhead before any adoption proposal.
 
 ### What it does not solve
 
-- No current control is retired and no live clock is adopted.
-- No occupied DeepSeek or other provider call is authorized.
-- No product, patient, clinical, runtime, deployment or protected integration opens.
+- No live control is replaced and no canonical projection adopts the clock.
+- No native Harness starts and no DeepSeek or other provider call occurs.
+- No product, practice, data, Git, runtime, deployment or protected integration opens.
 
 ## Continuity and authority
 
@@ -1017,6 +1019,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-509.md`
 - `docs/ariadne-agent-error-correction-register-revision-512.md`
 - `docs/ariadne-agent-error-correction-register-revision-521.md`
+- `docs/ariadne-agent-error-correction-register-revision-529.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1040,6 +1043,9 @@ Prerequisites:
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
+- `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md`
+- `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md`
+- `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-closeout.md`
 - `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md`
 - `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-assessment.md`
@@ -1541,6 +1547,7 @@ Prerequisites:
 - `docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
+- `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md`
 - `docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md`
 - `docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md`
 - `docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md`
@@ -1700,6 +1707,7 @@ Prerequisites:
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/antigravity/ariadne-cf-d2-workflow-fluidity-final-review-v2-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-clockwork-broker-gear-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
@@ -1773,6 +1781,11 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-pre-verifier-acceptance-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json`
@@ -1790,6 +1803,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json`
@@ -2402,6 +2418,10 @@ Prerequisites:
 - `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-promotion.schema.json`
 - `orchestration/continuity/ariadne-continuity-and-refinement-safeguards/refinement-proposal.schema.json`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
+- `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/architecture-report.md`
+- `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json`
+- `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.schema.json`
+- `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/provider-free-architecture-evidence.json`
 - `orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.json`
 - `orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
@@ -3086,6 +3106,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-19--ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--default-off-ordinary-practice-check-in-admission-control-architecture.md`
+- `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -3123,6 +3144,8 @@ Prerequisites:
 - `scripts/ariadne_evidence_gate.py`
 - `scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py`
 - `scripts/ariadne_provider_free_pytest.py`
+- `scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py`
+- `scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_continuity_update.py`
 - `scripts/ariadne_recent_work_effectiveness_and_transport_repair_continuity_update.py`
 - `scripts/ariadne_risk_weighted_workflow.py`
 - `scripts/ariadne_serial_pytest.py`
@@ -3233,6 +3256,9 @@ Prerequisites:
 - `tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py`
 - `tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py`
 - `tests/test_ariadne_provider_free_pytest.py`
+- `tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py`
+- `tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_continuity.py`
+- `tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py`
 - `tests/test_ariadne_recent_work_effectiveness_and_transport_repair_continuity.py`
 - `tests/test_ariadne_risk_weighted_workflow.py`
 - `tests/test_ariadne_serial_pytest.py`
@@ -3370,4 +3396,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 308; continuity graph revision 326._
+_Compass map revision 309; continuity graph revision 327._

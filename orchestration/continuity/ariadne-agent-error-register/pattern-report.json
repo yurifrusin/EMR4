@@ -1,31 +1,31 @@
 {
-  "canonical_register_sha256": "b40e7226cca864884238bb536dda6245373ced7139b1dfd4b6c69ac9eef8c38b",
+  "canonical_register_sha256": "de338b46752ec5f5309eab09524ff352853614329f3a24e18a4c377e714e0807",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 385,
-      "untrusted_partial_worktree": 107
+      "canonical_unchanged": 388,
+      "untrusted_partial_worktree": 108
     },
     "by_category": {
       "command_scope_violation": 86,
       "evidence_misreport": 66,
       "harness_failure": 54,
-      "operator_error": 21,
-      "output_contract_violation": 225,
+      "operator_error": 22,
+      "output_contract_violation": 227,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 88,
+      "repository_defect": 89,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 427,
+      "agent_behavior": 429,
       "harness": 54,
-      "operator": 21,
-      "repository": 88,
+      "operator": 22,
+      "repository": 89,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 335,
+      "low": 339,
       "material": 117,
       "moderate": 154
     },
@@ -40,7 +40,7 @@
       "ariadne-agent-error-register::orchestrator": 5,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
-      "ariadne-compass-current-position-test::orchestrator": 5,
+      "ariadne-compass-current-position-test::orchestrator": 6,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
@@ -53,7 +53,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 331,
+      "codex-primary-orchestrator::orchestrator": 333,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -114,7 +114,7 @@
       "live-agents-handover::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 3,
       "local-docker-desktop::orchestrator": 1,
-      "local-powershell-operator::orchestrator": 10,
+      "local-powershell-operator::orchestrator": 11,
       "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 2,
       "local-rg-operator::orchestrator": 1,
@@ -134,12 +134,12 @@
     "by_role": {
       "implementer": 43,
       "integration_reviewer": 3,
-      "orchestrator": 503,
+      "orchestrator": 507,
       "verifier": 57
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 606,
+  "incident_count": 610,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -699,7 +699,7 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 12,
+      "incident_count": 13,
       "incident_ids": [
         "AER-0255",
         "AER-0318",
@@ -712,7 +712,8 @@
         "AER-0580",
         "AER-0582",
         "AER-0585",
-        "AER-0606"
+        "AER-0606",
+        "AER-0610"
       ],
       "origins": [
         "agent_behavior"
@@ -1538,16 +1539,18 @@
       "categories": [
         "operator_error"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0570",
-        "AER-0586"
+        "AER-0586",
+        "AER-0607"
       ],
       "origins": [
         "operator"
       ],
       "prevention_controls": [
         "The causal clock must resolve every command path into a typed manifest before dispatch and reject absent operands before process launch.",
+        "The causal clock must resolve every command path into a typed manifest before dispatch, reject absent operands before process launch and issue one executable per process.",
         "The causal clock should resolve path operands into the typed command manifest before dispatch and reject absent paths before process launch."
       ],
       "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
@@ -1634,13 +1637,14 @@
       "categories": [
         "repository_defect"
       ],
-      "incident_count": 5,
+      "incident_count": 6,
       "incident_ids": [
         "AER-0388",
         "AER-0463",
         "AER-0505",
         "AER-0527",
-        "AER-0587"
+        "AER-0587",
+        "AER-0608"
       ],
       "origins": [
         "repository"
@@ -1850,7 +1854,7 @@
       ]
     }
   ],
-  "register_revision": 525,
+  "register_revision": 529,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

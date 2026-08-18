@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f",
+  "branch": "codex/review-clockwork-broker-gear-f6cbd33f",
+  "head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+  "expected_head": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "838b4bdc41693bccf379942d7bae41ac77ffec46dc5a6c373a7d2a162baebdb1",
+  "command_count": 10,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

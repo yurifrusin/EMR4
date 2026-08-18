@@ -1,0 +1,237 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-broker-gear-gemini-f6cbd33f",
+  "branch": "codex/review-clockwork-broker-gear-f6cbd33f",
+  "head_before": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+  "head_after": "f6cbd33fd3322754e06ac6dafa1503f5200e0803",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "7be45df74dffb86f203d8dd36e94cbe1010b2ea203f489710ec309cac276d5f9",
+  "result": "# Gemini 3.7 Flash/high Independent Read-Only Veto: Ariadne / DeepSeek Shadow Clockwork Gear Architecture\n\n**Date:** 2026-08-19  \n**Timestamp:** 2026-08-19T05:20:02.5485051+10:00 (Australia/Brisbane)  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-broker-gear-gemini-f6cbd33f`  \n**Bound Branch:** `codex/review-clockwork-broker-gear-f6cbd33f`  \n**Candidate HEAD:** `f6cbd33fd3322754e06ac6dafa1503f5200e0803`  \n**Tranche Base:** `a29e99c2fbfca59a24c348ded49dd29352b72aa3`  \n**Model & Effort:** Gemini 3.7 Flash / High effort (read-only Tier-2 veto)  \n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\nRehydration completed across all five authoritative sources:\n\n1. `live_handover_current_baton`: Verified `AGENTS.md` completely. Baton is `handoff/current`. Protected integration results (PR 74/75) rebase-merged cleanly at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Task branch preserves required lineages including transactional shadow (`762cd8fd1a6493f4d4b82e24f97d851531b6f7f0`), check-in admission kernel (`4204ec6348abb0f92b1a30314699d4a469fa860a`), Continuity 326 / Compass 308, and register revision 525 (`docs/ariadne-agent-error-correction-register-revision-525.md`).\n2. `current_authority_allocation`: GPT Sol is conductor and implementation worker holding the shadow gear architecture lease; Gemini 3.7 Flash/high holds one independent Tier-2 read-only veto after deterministic admission; occupied DeepSeek native Harness remains paused behind stock-headless-to-custom-runner HMR boot proof (no Claude Code fallback); native subagents declined under current developer policy.\n3. `active_plan_and_acceptance`: `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md`, `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md`, `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md`, `orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-receipt.json`, and active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` (`operation_id`: `ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture`, status `in_progress`).\n4. `protected_evidence_boundaries`: Provider-free shadow architecture contract and deterministic validation only; accepted transactional closeout and broker sources remain read-only; engine owns all derived binding fields; single-writer sequence lease and acknowledged terminal digest required; presets confer configuration only, not authority; no live clock adoption or control retirement; no occupied DeepSeek/provider call; no product/database/client changes; `docs/branding/` and untracked files preserved; explicit path staging only.\n5. `git_refs_and_worktree`: Candidate worktree is `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-broker-gear-gemini-f6cbd33f` on branch `codex/review-clockwork-broker-gear-f6cbd33f` at HEAD `f6cbd33fd3322754e06ac6dafa1503f5200e0803`. Protected refs `master`, `handoff/current`, `origin/master`, and `origin/handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Evaluation of Required Challenges\n\n### Challenge 1: Worktree, Exact HEAD, Protected Refs, and Allowlisted Diff\n- Verified `git status --short --branch` (C01 and C10) reports branch `codex/review-clockwork-broker-gear-f6cbd33f` with clean tracked worktree.\n- Verified `git rev-parse HEAD` (C02) matches exact 40-character commit `f6cbd33fd3322754e06ac6dafa1503f5200e0803`.\n- Verified `git diff --exit-code HEAD --` (C07) is clean before and after review.\n- Verified `git diff --check` (C08) and `git diff --name-only` (C09) across `a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803` touch strictly allowlisted paths. Untracked `docs/branding/` and user files remain preserved. Protected refs remain unchanged at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 2: Ten Predecessor Source Digests & Closed Schema\n- All ten predecessor source bindings in `contract.json` were checked against physical files using canonical-LF SHA-256 (`verify_source_bindings`):\n  1. `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md` -> `49b14b761fddfe5d97476b9417f37a0f8f397fbfb82f9414c508c47ab341cb47`\n  2. `orchestration_harness/transactional_closeout.py` -> `ee504ff4157ef27b1eb111d152fd1bb0d7b08b622f95a2c6e98c799ffc149603`\n  3. `scripts/ariadne_deepseek_native_harness_broker.mjs` -> `8de1ea44deddea35b5b4fc72efe150fa6b55f37634ce9ad273fb9f228015f7f7`\n  4. `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/control-plane.schema.json` -> `2ca92848acb52a7a5b3be593e2aac61d2b346753aa2ac86745384dccf4baa674`\n  5. `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json` -> `4bd53ea9a5ef99f7664cf40d26abece79e1ff6f7ded215b0233cb8156381ddf2`\n  6. `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md` -> `e577f20e1b164be1abce990f915bd792eb4e158051f48c5c1d629825cd93a78f`\n  7. `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md` -> `e325827421577bce896bf55eaef7e9d37fe2ac69221f54f2679432a91addf379`\n  8. `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md` -> `4a2a4a4c0a926a8362f62d77353ae88b3dc2778cf4701a56282915c88cb37391`\n  9. `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md` -> `74d3e60840883fe197cb10c5c695c793b8d2f440a5a14b94d3b52488e2dd37c4`\n  10. `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md` -> `6f6a4ffb35fce55b75b3953c84de2aa0df925566f4e3b7b0ff1dc1dacc310d04`\n- `contract.schema.json` explicitly sets `\"additionalProperties\": false` across root and nested objects, enforcing strict schema closure.\n\n### Challenge 3: Zero-Field Invocation & Engine Ownership\n- `caller_supplied_binding_fields` is strictly empty (`[]`).\n- The 15 engine-owned field groups are enumerated and enforced: `source_commit`, `branch_and_protected_ref_digest`, `operation_id`, `stage_id`, `disposition`, `effect_class`, `attempt_id`, `attempt_ordinal`, `materialized_evidence_identities`, `sequence`, `previous_tick_sha256`, `tick_sha256`, `settings_authority_and_forbidden_surface_digests`, `projection_revisions_counts_cutoffs_and_peer_links`, and `work_order_and_worker_result_bindings`.\n- Supplying caller-authored fields or abbreviations fails closed.\n\n### Challenge 4: Attempt Lifecycle & Unknown Commit Semantics\n- Lifecycle transitions: `admitted -> started -> succeeded | failed | unknown_commit`.\n- Policy/schema rejections terminate as `rejected` without starting.\n- `unknown_commit` is strictly non-releasing (`unknown_commit_releases_success: false`), forbids automatic retries (`unknown_commit_automatic_retry: false`), mandates bounded readback (`unknown_commit_requires_readback: true`), and recovery derives a new attempt ordinal without overwriting history.\n\n### Challenge 5: Single-Writer Clutch & Hostile Trace Resistance\n- The single-writer lease model enforces sequential token ownership (`ariadne` -> `deepseek_broker` -> `ariadne`).\n- 10 hostile trace mutations (`stale_parent`, `sequence_gap`, `concurrent_writer`, `result_before_start`, `ack_before_terminal`, `wrong_terminal_digest`, `attempt_drift`, `duplicate_terminal`, `broker_after_terminal`, `replay`) plus post-acknowledgement injections were tested and 100% rejected with zero escapes.\n\n### Challenge 6: WorkOrder, Profile Families, and Result Binding\n- WorkOrders bind exact parent tick, source commit, authority/forbidden digests, allowlists, package version/digest, profile/preset digests, minimized tool view, retry/fallback posture, and lifetime lease.\n- Profile families (`emr4-readonly-review`, `emr4-bounded-worker`, `emr4-provider-free`) are configuration definitions only and cannot widen authority.\n- Bounded worker tools default to `edit`, `glob`, `read` only.\n- Worker result envelopes bind exact result digests, counts, and cleanup state; they prohibit raw prompts, reasoning traces, secrets, product payloads, and worker self-acceptance.\n- Yuri's prepaid balance remains the monetary ceiling; no duplicate Harness-native financial mechanism is introduced.\n\n### Challenge 7: Posture & Admitted Effect Classes\n- Represented effect classes cover 7 categories (`read_only`, `shadow_generation_write`, `candidate_workspace_write`, `provider_request`, `task_branch_git_write`, `protected_ref_write`, `product_runtime_effect`).\n- Under current shadow posture, only `read_only` and `shadow_generation_write` are admitted; all others deny immediately.\n- `occupied_enabled` is `false`. No provider requests or live Harness runs occur.\n\n### Challenge 8: Atomic Projection Protocol & Efficacy Contract\n- Projections (`continuity`, `compass`, `report`, `active_operation_latch`, `incident_aggregate`, `orchestrator_and_worker_receipts`, `broker_bindings`) must validate against the identical acknowledged journal tip in memory before write.\n- Publication uses private shadow generations with atomic directory rename; partial publication fails closed.\n- Efficacy contract enforces: `caller_supplied_derived_fields: 0`, `minimum_failure_induced_rerun_reduction_percent: 50`, `new_mutable_current_fixtures: 0`, `coverage_loss: false`, `partial_publications: 0`, `uncaught_escapes: 0`, `shared_engine_growth_reported: true`, `clean_run_overhead_reported: true`, and `timing_acceptance_relevant: false`.\n\n### Challenge 9: Reproduction of Scenarios and Hostile Mutations\n- 48 architecture scenarios: 48 passed, 0 failed.\n- 256 independent hostile contract mutations: 256 rejected, 0 escaped.\n- 10 hostile gear trace mutations: 10 rejected, 0 escaped.\n- Caller-supplied binding fields: 0; occupied Harness enabled: false; current controls retired: false; uncaught escapes: 0.\n\n### Challenge 10: Causal Bureaucratic Time & Authority Separation\n- The architecture provides a shared causal tick reducer and single-writer lease between Ariadne and the DeepSeek broker without treating tick/journal provenance as product, Git, provider, or financial authority.\n\n### Challenge 11: Exact Command Manifest Execution\n- Executed all 10 bound commands (C01\u2013C10) in exact order with zero substitutions or omissions.\n- Every command completed with exit code 0.\n- C06 ran in verification/read-only mode.\n- C07 and C10 verified that the worktree remains completely clean and unmodified.\n\n---\n\n## 3. Finding Summary\n\nNo P0, P1, or P2 findings were identified. All required challenges pass without authority widening, false claims, or dirty postconditions. The candidate satisfies all acceptance criteria.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Read-Only Veto: Ariadne / DeepSeek Shadow Clockwork Gear Architecture\n\n**Date:** 2026-08-19  \n**Timestamp:** 2026-08-19T05:20:02.5485051+10:00 (Australia/Brisbane)  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-broker-gear-gemini-f6cbd33f`  \n**Bound Branch:** `codex/review-clockwork-broker-gear-f6cbd33f`  \n**Candidate HEAD:** `f6cbd33fd3322754e06ac6dafa1503f5200e0803`  \n**Tranche Base:** `a29e99c2fbfca59a24c348ded49dd29352b72aa3`  \n**Model & Effort:** Gemini 3.7 Flash / High effort (read-only Tier-2 veto)  \n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\nRehydration completed across all five authoritative sources:\n\n1. `live_handover_current_baton`: Verified `AGENTS.md` completely. Baton is `handoff/current`. Protected integration results (PR 74/75) rebase-merged cleanly at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Task branch preserves required lineages including transactional shadow (`762cd8fd1a6493f4d4b82e24f97d851531b6f7f0`), check-in admission kernel (`4204ec6348abb0f92b1a30314699d4a469fa860a`), Continuity 326 / Compass 308, and register revision 525 (`docs/ariadne-agent-error-correction-register-revision-525.md`).\n2. `current_authority_allocation`: GPT Sol is conductor and implementation worker holding the shadow gear architecture lease; Gemini 3.7 Flash/high holds one independent Tier-2 read-only veto after deterministic admission; occupied DeepSeek native Harness remains paused behind stock-headless-to-custom-runner HMR boot proof (no Claude Code fallback); native subagents declined under current developer policy.\n3. `active_plan_and_acceptance`: `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md`, `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md`, `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md`, `orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-architecture-preplanning-receipt.json`, and active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` (`operation_id`: `ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture`, status `in_progress`).\n4. `protected_evidence_boundaries`: Provider-free shadow architecture contract and deterministic validation only; accepted transactional closeout and broker sources remain read-only; engine owns all derived binding fields; single-writer sequence lease and acknowledged terminal digest required; presets confer configuration only, not authority; no live clock adoption or control retirement; no occupied DeepSeek/provider call; no product/database/client changes; `docs/branding/` and untracked files preserved; explicit path staging only.\n5. `git_refs_and_worktree`: Candidate worktree is `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-broker-gear-gemini-f6cbd33f` on branch `codex/review-clockwork-broker-gear-f6cbd33f` at HEAD `f6cbd33fd3322754e06ac6dafa1503f5200e0803`. Protected refs `master`, `handoff/current`, `origin/master`, and `origin/handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Evaluation of Required Challenges\n\n### Challenge 1: Worktree, Exact HEAD, Protected Refs, and Allowlisted Diff\n- Verified `git status --short --branch` (C01 and C10) reports branch `codex/review-clockwork-broker-gear-f6cbd33f` with clean tracked worktree.\n- Verified `git rev-parse HEAD` (C02) matches exact 40-character commit `f6cbd33fd3322754e06ac6dafa1503f5200e0803`.\n- Verified `git diff --exit-code HEAD --` (C07) is clean before and after review.\n- Verified `git diff --check` (C08) and `git diff --name-only` (C09) across `a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803` touch strictly allowlisted paths. Untracked `docs/branding/` and user files remain preserved. Protected refs remain unchanged at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 2: Ten Predecessor Source Digests & Closed Schema\n- All ten predecessor source bindings in `contract.json` were checked against physical files using canonical-LF SHA-256 (`verify_source_bindings`):\n  1. `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md` -> `49b14b761fddfe5d97476b9417f37a0f8f397fbfb82f9414c508c47ab341cb47`\n  2. `orchestration_harness/transactional_closeout.py` -> `ee504ff4157ef27b1eb111d152fd1bb0d7b08b622f95a2c6e98c799ffc149603`\n  3. `scripts/ariadne_deepseek_native_harness_broker.mjs` -> `8de1ea44deddea35b5b4fc72efe150fa6b55f37634ce9ad273fb9f228015f7f7`\n  4. `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/control-plane.schema.json` -> `2ca92848acb52a7a5b3be593e2aac61d2b346753aa2ac86745384dccf4baa674`\n  5. `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json` -> `4bd53ea9a5ef99f7664cf40d26abece79e1ff6f7ded215b0233cb8156381ddf2`\n  6. `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md` -> `e577f20e1b164be1abce990f915bd792eb4e158051f48c5c1d629825cd93a78f`\n  7. `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md` -> `e325827421577bce896bf55eaef7e9d37fe2ac69221f54f2679432a91addf379`\n  8. `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md` -> `4a2a4a4c0a926a8362f62d77353ae88b3dc2778cf4701a56282915c88cb37391`\n  9. `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md` -> `74d3e60840883fe197cb10c5c695c793b8d2f440a5a14b94d3b52488e2dd37c4`\n  10. `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md` -> `6f6a4ffb35fce55b75b3953c84de2aa0df925566f4e3b7b0ff1dc1dacc310d04`\n- `contract.schema.json` explicitly sets `\"additionalProperties\": false` across root and nested objects, enforcing strict schema closure.\n\n### Challenge 3: Zero-Field Invocation & Engine Ownership\n- `caller_supplied_binding_fields` is strictly empty (`[]`).\n- The 15 engine-owned field groups are enumerated and enforced: `source_commit`, `branch_and_protected_ref_digest`, `operation_id`, `stage_id`, `disposition`, `effect_class`, `attempt_id`, `attempt_ordinal`, `materialized_evidence_identities`, `sequence`, `previous_tick_sha256`, `tick_sha256`, `settings_authority_and_forbidden_surface_digests`, `projection_revisions_counts_cutoffs_and_peer_links`, and `work_order_and_worker_result_bindings`.\n- Supplying caller-authored fields or abbreviations fails closed.\n\n### Challenge 4: Attempt Lifecycle & Unknown Commit Semantics\n- Lifecycle transitions: `admitted -> started -> succeeded | failed | unknown_commit`.\n- Policy/schema rejections terminate as `rejected` without starting.\n- `unknown_commit` is strictly non-releasing (`unknown_commit_releases_success: false`), forbids automatic retries (`unknown_commit_automatic_retry: false`), mandates bounded readback (`unknown_commit_requires_readback: true`), and recovery derives a new attempt ordinal without overwriting history.\n\n### Challenge 5: Single-Writer Clutch & Hostile Trace Resistance\n- The single-writer lease model enforces sequential token ownership (`ariadne` -> `deepseek_broker` -> `ariadne`).\n- 10 hostile trace mutations (`stale_parent`, `sequence_gap`, `concurrent_writer`, `result_before_start`, `ack_before_terminal`, `wrong_terminal_digest`, `attempt_drift`, `duplicate_terminal`, `broker_after_terminal`, `replay`) plus post-acknowledgement injections were tested and 100% rejected with zero escapes.\n\n### Challenge 6: WorkOrder, Profile Families, and Result Binding\n- WorkOrders bind exact parent tick, source commit, authority/forbidden digests, allowlists, package version/digest, profile/preset digests, minimized tool view, retry/fallback posture, and lifetime lease.\n- Profile families (`emr4-readonly-review`, `emr4-bounded-worker`, `emr4-provider-free`) are configuration definitions only and cannot widen authority.\n- Bounded worker tools default to `edit`, `glob`, `read` only.\n- Worker result envelopes bind exact result digests, counts, and cleanup state; they prohibit raw prompts, reasoning traces, secrets, product payloads, and worker self-acceptance.\n- Yuri's prepaid balance remains the monetary ceiling; no duplicate Harness-native financial mechanism is introduced.\n\n### Challenge 7: Posture & Admitted Effect Classes\n- Represented effect classes cover 7 categories (`read_only`, `shadow_generation_write`, `candidate_workspace_write`, `provider_request`, `task_branch_git_write`, `protected_ref_write`, `product_runtime_effect`).\n- Under current shadow posture, only `read_only` and `shadow_generation_write` are admitted; all others deny immediately.\n- `occupied_enabled` is `false`. No provider requests or live Harness runs occur.\n\n### Challenge 8: Atomic Projection Protocol & Efficacy Contract\n- Projections (`continuity`, `compass`, `report`, `active_operation_latch`, `incident_aggregate`, `orchestrator_and_worker_receipts`, `broker_bindings`) must validate against the identical acknowledged journal tip in memory before write.\n- Publication uses private shadow generations with atomic directory rename; partial publication fails closed.\n- Efficacy contract enforces: `caller_supplied_derived_fields: 0`, `minimum_failure_induced_rerun_reduction_percent: 50`, `new_mutable_current_fixtures: 0`, `coverage_loss: false`, `partial_publications: 0`, `uncaught_escapes: 0`, `shared_engine_growth_reported: true`, `clean_run_overhead_reported: true`, and `timing_acceptance_relevant: false`.\n\n### Challenge 9: Reproduction of Scenarios and Hostile Mutations\n- 48 architecture scenarios: 48 passed, 0 failed.\n- 256 independent hostile contract mutations: 256 rejected, 0 escaped.\n- 10 hostile gear trace mutations: 10 rejected, 0 escaped.\n- Caller-supplied binding fields: 0; occupied Harness enabled: false; current controls retired: false; uncaught escapes: 0.\n\n### Challenge 10: Causal Bureaucratic Time & Authority Separation\n- The architecture provides a shared causal tick reducer and single-writer lease between Ariadne and the DeepSeek broker without treating tick/journal provenance as product, Git, provider, or financial authority.\n\n### Challenge 11: Exact Command Manifest Execution\n- Executed all 10 bound commands (C01\u2013C10) in exact order with zero substitutions or omissions.\n- Every command completed with exit code 0.\n- C06 ran in verification/read-only mode.\n- C07 and C10 verified that the worktree remains completely clean and unmodified.\n\n---\n\n## 3. Finding Summary\n\nNo P0, P1, or P2 findings were identified. All required challenges pass without authority widening, false claims, or dirty postconditions. The candidate satisfies all acceptance criteria.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "838b4bdc41693bccf379942d7bae41ac77ffec46dc5a6c373a7d2a162baebdb1",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py",
+        "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "a29e99c2fbfca59a24c348ded49dd29352b72aa3..f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

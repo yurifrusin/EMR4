@@ -1,0 +1,126 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "run_one_bounded_exact_candidate_gemini_37_flash_high_read_only_clockwork_architecture_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and now records the accepted check-in kernel at full source 4204ec6348abb0f92b1a30314699d4a469fa860a, task publication a29e99c2fbfca59a24c348ded49dd29352b72aa3, the active shadow clockwork architecture and agent-error register revision 525. No protected authority moved.",
+    "current_authority_allocation": "GPT Sol owns the architecture, deterministic admission, acceptance and task-branch Git. DeepSeek is declined because occupied native-Harness work remains behind the separate provider-free stock-headless-to-custom-runner HMR boot proof and Claude Code is not a fallback. Gemini 3.7 Flash/high is reserved for exactly one fresh read-only veto of candidate f6cbd33fd3322754e06ac6dafa1503f5200e0803. Native subagents remain declined under developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md",
+      "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md",
+      "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md",
+      "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json",
+      "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/provider-free-architecture-evidence.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-worktree-preflight.json",
+      "docs/ariadne-agent-error-correction-register-revision-525.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Exact committed provider-free architecture candidate f6cbd33fd3322754e06ac6dafa1503f5200e0803 only. The ten-command manifest is non-generative and preflight passes. No live clock adoption or control retirement, occupied DeepSeek/HMR call, product/provider/Git authority widening, product/config/API/route/database/client change, ordinary-practice enablement, product/patient/clinical/protected data, production/deployment/release/Pages or protected-ref movement. Preserve docs/branding and all unrelated untracked files; explicit-path staging only.",
+    "git_refs_and_worktree": "Primary task branch is exact candidate f6cbd33fd3322754e06ac6dafa1503f5200e0803 while origin task remains a29e99c2fbfca59a24c348ded49dd29352b72aa3. The review worktree C:/Users/sarashera/EMR4-worktrees/clockwork-broker-gear-gemini-f6cbd33f is clean on codex/review-clockwork-broker-gear-f6cbd33f at the exact candidate. Manifest preflight passes with digest 838b4bdc41693bccf379942d7bae41ac77ffec46dc5a6c373a7d2a162baebdb1. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+    "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear architecture",
+    "objective": "Freeze one typed causal tick/result architecture in which current state is derived from validated sources, Ariadne and the DeepSeek broker share a single-writer sequence lease, and neither advances without an acknowledged terminal digest, while retaining all current controls.",
+    "status": "in_progress",
+    "source_head": "a29e99c2fbfca59a24c348ded49dd29352b72aa3",
+    "authority_source": "AGENTS.md Current Baton Next implementation, the accepted transactional shadow at 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0, the accepted kernel at 4204ec6348abb0f92b1a30314699d4a469fa860a and Yuri's standing uninterrupted-development authority authorize only this provider-free shadow gear architecture.",
+    "checkpoint": {
+      "completed_stage": "The closed architecture contract, schema and validator pass 48 named scenarios, 256 hostile contract mutations and 10 gear-trace mutations with zero escapes; transactional clock, broker, latch, Git, register, baton, Compass and API guards pass with six preserved failure-induced verification reruns and zero live adoption or provider calls.",
+      "next_executable_stage": "commit_the_exact_deterministically_admitted_candidate_then_prepare_one_fresh_gemini_37_flash_high_read_only_veto",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 6},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_shadow_architecture_contract_and_deterministic_validation_only",
+      "accepted_transactional_clock_and_broker_sources_remain_read_only",
+      "all_git_stage_disposition_effect_attempt_evidence_sequence_and_digest_fields_engine_derived",
+      "single_writer_lease_and_acknowledged_terminal_digest_required",
+      "presets_profiles_and_tools_are_digest_bound_configuration_not_authority",
+      "no_live_clockwork_adoption_or_current_control_retirement",
+      "no_occupied_deepseek_provider_call_or_hmr_retry",
+      "no_product_authority_or_ordinary_practice_enablement",
+      "no_product_configuration_openapi_graphql_route_database_or_client_change",
+      "no_product_patient_clinical_or_historical_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Occupied native-Harness EMR4 work still requires the separate provider-free HMR boot proof; this candidate needs no implementation worker and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high read-only veto is now justified by deterministic admission of the exact architecture candidate and its clean review worktree.",
+        "work_packages": ["exact_candidate_shadow_clockwork_and_deepseek_broker_gear_architecture_veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive delegation and no separate implementation package remains.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "validated register revision 525",
+      "clean exact candidate and non-generative manifest preflight",
+      "one no-fallback bounded Gemini veto",
+      "Sol-only acceptance and task-branch Git"
+    ],
+    "reassessment_triggers": ["Gemini terminal decision", "closeout", "before the provider-free shadow gear rehearsal", "before any live adoption or occupied DeepSeek work"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh exact-candidate pre-verifier five-source receipt after deterministic admission and register revision 525",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Exact candidate, deterministic packet and clean review worktree preflight pass."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No occupied call selected pending HMR proof."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One exact-candidate Gemini 3.7 Flash/high review is selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Lane declined under developer policy."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

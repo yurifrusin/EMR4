@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 525,
+  "register_revision": 529,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -23990,6 +23990,163 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "docs/ariadne-agent-error-correction-register-revision-525.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0607",
+      "attempt_id": "clockwork-gear-architecture-closeout-template-read-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_get_content",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit repository path operand must be resolved from the current inventory before execution, and unrelated reads must not be chained behind a guessed operand.",
+      "observed_error": "A closeout template read guessed orchestration/human_inbox/yuri/2026-08-19--check-in-admission-control-kernel-rehearsal.md, which does not exist, after successfully reading the exact updater and test paths in the same chained PowerShell command.",
+      "detection_method": "Get-Content returned an exact cannot-find-path diagnostic for the guessed Yuri summary path; all operations were read-only and no candidate or repository file changed.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_continuity_update.py",
+        "orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md",
+        "docs/ariadne-agent-error-correction-register-revision-526.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the read-only diagnostic, use the exact mailbox path already declared by the tracked updater and execute subsequent path reads separately, then add AER-0607 before closeout.",
+        "prevention_control": "The causal clock must resolve every command path into a typed manifest before dispatch, reject absent operands before process launch and issue one executable per process.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_continuity_update.py",
+          "orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md",
+          "docs/ariadne-agent-error-correction-register-revision-526.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0608",
+      "attempt_id": "clockwork-gear-architecture-closeout-navigation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-compass-current-position-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every valid Continuity/Compass advance must update its dedicated test, live baton assertions and global current-position sentinel in the same prospective closeout projection.",
+      "observed_error": "After valid Continuity 327 / Compass 309 publication, two live-baton assertions, one previous-next-tranche boundary fixture and the global Compass node sentinel still named Continuity 326 / Compass 308, the kernel position and the architecture tranche.",
+      "detection_method": "The bounded closeout packet reported exactly four stale expected-value failures while focused architecture, dedicated Continuity, handover compactness and latch checks passed.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_compass.py",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-527.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the four-failure packet, bind global and live-baton fixtures to the architecture node, Continuity 327 / Compass 309 and the shadow rehearsal successor, add AER-0608 and rerun the same closeout packet.",
+        "prevention_control": "Every valid Compass advance must derive the dedicated node, live baton and global current-position fixtures from the prospective projection before canonical publication.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-527.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0609",
+      "attempt_id": "clockwork-gear-architecture-register-verification-003",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident intentionally classified as a recurrence must preserve the full origin, category, role, resource and recurrence-signature composite of the existing pattern.",
+      "observed_error": "AER-0608 copied the existing Compass-staleness recurrence signature but changed resource_id from ariadne-compass-current-position-test to continuity-compass-current-position-fixtures, so the generated pattern correctly kept it out of the expected recurrence row.",
+      "detection_method": "The full register suite produced one exact recurrence-list failure: the generated AER-0388/AER-0463/AER-0505/AER-0527/AER-0587 row did not contain AER-0608.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-528.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_recurrence_composite_resource_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed suite, restore AER-0608's exact existing recurrence resource identity, add AER-0609 and regenerate the report before rerunning the full suite.",
+        "prevention_control": "The clockwork register projector must derive every recurrence composite field from the selected canonical pattern identity rather than accepting an independently authored resource label.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-528.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0610",
+      "attempt_id": "clockwork-gear-architecture-register-verification-004",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_agent_error_register_validator",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Adding an agent-origin incident must advance the standalone agent population together with revision, total, aggregate dictionaries and recurrence projections before the complete suite runs.",
+      "observed_error": "Revision 528 advanced the aggregate by-origin dictionary to 428 but left the standalone len(agent_incidents) assertion at 427.",
+      "detection_method": "The complete register suite reported exactly one failure at its second test: assert 428 == 427; all remaining tests passed.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-529.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the one-failure packet, advance the standalone and aggregate populations plus affected recurrence rows in one patch, add AER-0610 and rerun generation and the full suite.",
+        "prevention_control": "The clockwork reducer must own contiguous IDs, standalone and aggregate populations, recurrence classifications, exact recurrence rows and the committed report as projections of one journal reading.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-529.md"
         ]
       },
       "status": "corrected"
