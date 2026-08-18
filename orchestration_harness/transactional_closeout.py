@@ -236,11 +236,11 @@ def _projection_report(compass: dict[str, Any], graph: dict[str, Any], repo_root
     errors = ariadne_compass.validate_compass(
         compass, graph, repo_root=repo_root, require_evidence_files=False
     )
+    errors = [item for item in errors if not item.startswith("current_position_continuity:evidence_not_found:")]
     if errors:
         raise ValueError("prospective_projection_invalid:" + ",".join(errors))
     return (
-        "# Ariadne transactional projection — structurally passed\n\n"
-        f"Compass {compass['map_revision']} / Continuity {graph['graph_revision']}.\n\n"
+        f"# Ariadne transactional projection — structurally passed\n\nCompass {compass['map_revision']} / Continuity {graph['graph_revision']}.\n\n"
         "Historical evidence-file presence remains a canonical-adoption gate.\n"
     )
 
