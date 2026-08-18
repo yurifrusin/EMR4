@@ -61,12 +61,15 @@ def test_current_latch_and_five_source_receipt_are_exact() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
     receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
     assert latch["operation_id"] == (
-        "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-"
-        "admission-readiness-review"
+        "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-"
+        "admission-control-architecture"
     )
-    assert latch["status"] == "complete"
-    assert latch["source_head"] == "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9"
-    assert latch["terminal_response"]["permitted"] is True
+    assert latch["status"] == "in_progress"
+    assert latch["source_head"] == "062f5fb12eb82eab6ec570abea56ad1bd9a7b304"
+    assert latch["terminal_response"]["permitted"] is False
+    assert (
+        "no_ordinary_practice_enablement" in latch["protected_boundaries"]
+    )
     assert receipt["status"] == "passed"
     assert receipt["active_operation"]["status"] == "in_progress"
     assert receipt["active_operation"]["terminal_handback_permitted"] is False

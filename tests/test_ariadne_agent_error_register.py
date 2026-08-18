@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 509
+    assert register["register_revision"] == 510
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 589)
+        f"AER-{index:04d}" for index in range(1, 590)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 588
+    assert report["incident_count"] == 589
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,13 +3619,13 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 509
-    assert report["incident_count"] == 588
+    assert report["register_revision"] == 510
+    assert report["incident_count"] == 589
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 413,
         "harness": 53,
-        "operator": 20,
+        "operator": 21,
         "repository": 86,
         "transport": 16,
     }
@@ -3633,7 +3633,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "command_scope_violation": 84,
         "evidence_misreport": 66,
         "harness_failure": 53,
-        "operator_error": 20,
+        "operator_error": 21,
         "output_contract_violation": 214,
         "read_only_violation": 3,
         "reasoning_claim_error": 46,
@@ -3642,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 367,
+        "canonical_unchanged": 368,
         "untrusted_partial_worktree": 107,
     }
     receipt_event_recurrence = next(
@@ -3917,6 +3917,14 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     )
     assert path_operand_recurrence["incident_ids"] == ["AER-0570", "AER-0586"]
     assert path_operand_recurrence["incident_count"] == 2
+    duplicate_patch_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "operator.apply_patch_duplicate_update_file_operation"
+    )
+    assert duplicate_patch_recurrence["incident_ids"] == ["AER-0559", "AER-0589"]
+    assert duplicate_patch_recurrence["incident_count"] == 2
     assert [
         row
         for row in report["recurring_patterns"]
@@ -3946,6 +3954,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.register_related_incident_peer_link_not_symmetric",
             "operator.python_path_read_text_utf8_encoding_omitted",
             "operator.explicit_repository_path_operand_not_inventory_resolved",
+            "operator.apply_patch_duplicate_update_file_operation",
         }
     ] == [
         {
@@ -8292,4 +8301,18 @@ def test_aer_0588_renders_unambiguous_baton_boundaries() -> None:
         "orchestrator.current_baton_prose_assertion_representation_mismatch"
     )
     assert "grammatical carry-over" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0589_uses_one_patch_operation_per_target_path() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0589"]
+
+    assert list(incidents)[588:589] == ["AER-0589"]
+    assert incident["origin"] == "operator"
+    assert incident["category"] == "operator_error"
+    assert incident["recurrence_signature"] == (
+        "operator.apply_patch_duplicate_update_file_operation"
+    )
+    assert "same path more than once" in incident["correction"]["prevention_control"]
     assert incident["status"] == "corrected"

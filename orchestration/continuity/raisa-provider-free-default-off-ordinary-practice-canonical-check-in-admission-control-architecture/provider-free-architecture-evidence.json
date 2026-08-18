@@ -1,0 +1,19 @@
+{
+  "alert_count": 6,
+  "allowed_transition_count": 6,
+  "application_or_configuration_changed": false,
+  "control_operation_count": 5,
+  "hostile_mutation_count": 390,
+  "hostile_mutation_escape_count": 0,
+  "live_clockwork_adopted": false,
+  "metric_family_count": 5,
+  "operational_evidence_gate_count": 3,
+  "ordinary_practice_enabled": false,
+  "provider_or_network_used": false,
+  "reasons": [],
+  "schema_version": "emr4.check-in-admission-control-architecture-report.v1",
+  "source_binding_count": 11,
+  "source_head": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+  "state_count": 4,
+  "status": "passed"
+}

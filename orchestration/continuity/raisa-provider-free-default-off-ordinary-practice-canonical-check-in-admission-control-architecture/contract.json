@@ -1,0 +1,578 @@
+{
+  "schema_version": "emr4.check-in-admission-control-architecture.v1",
+  "source_head": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+  "accepted_readiness_source": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9",
+  "accepted_route_source": "c82c3a741053a9c8da260aa62e1a968af22bb54e",
+  "result": "raisa_provider_free_default_off_ordinary_practice_canonical_check_in_admission_control_architecture_pass",
+  "architecture_status": "provider_free_default_off_no_enablement",
+  "source_bindings": [
+    {
+      "path": "app/config.py",
+      "sha256": "f0cafc21a88babd0d60d6ce30067a30d23b4030ad5dd4d26bb841096c62c1f2e"
+    },
+    {
+      "path": "app/routers/appointments.py",
+      "sha256": "8443bc1d045672f05567a5cb6443a882dfda4946791412c231ce475995f71d08"
+    },
+    {
+      "path": "app/services/appointment_check_in_product_adapter.py",
+      "sha256": "ef6abdfef1b99737c527790be007ab07296bbc0422197858a5ae561012230570"
+    },
+    {
+      "path": "docs/api-spine/openapi/appointment-commands.yaml",
+      "sha256": "0dfbce13f3d8933d0cd2355fb41e70612c1550e75c452b95c1528576ac1c8622"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "orchestration/api_spine_programme.md",
+      "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"
+    },
+    {
+      "path": "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md",
+      "sha256": "3bffad89188d3f700e769d4d39301b8f440d763b21d0e4b7c64fe67354ed78ba"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md",
+      "sha256": "81a4a92e4f1f7e539282a646d59474420309f2f93785fe2c007e413ef26c297f"
+    },
+    {
+      "path": "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "sha256": "335c82727662a408305e18954bc2927d724e8e312182af5b1ca0d4b32d32d3e8"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "sha256": "584756f6723e0e699c4dd9ffc7d504b3d7b5cea8dd1f735c63e3e13aef31af53"
+    },
+    {
+      "path": "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md",
+      "sha256": "e577f20e1b164be1abce990f915bd792eb4e158051f48c5c1d629825cd93a78f"
+    }
+  ],
+  "current_posture": {
+    "feature_setting": "rayleen_a5_check_in_enabled",
+    "feature_default": false,
+    "synthetic_allowlist_setting": "rayleen_a5_check_in_synthetic_practice_ids",
+    "synthetic_allowlist_default": [],
+    "ordinary_admission_setting_present": false,
+    "ordinary_admission_records_present": false,
+    "current_gate_order": [
+      "feature_enabled_exact_true",
+      "authenticated_practice_in_exact_authored_synthetic_allowlist"
+    ],
+    "proposal_operation_id": "proposeAppointmentCheckIn",
+    "confirmation_operation_id": "confirmAppointmentCheckInProposal",
+    "product_source_changed": false,
+    "configuration_changed": false,
+    "openapi_changed": false,
+    "practice_enabled": false
+  },
+  "admission_lanes": {
+    "synthetic": {
+      "lane_id": "authored_synthetic",
+      "authority_input": "unchanged_existing_feature_and_exact_synthetic_allowlist_result",
+      "ordinary_authority": false,
+      "may_infer_ordinary_record": false
+    },
+    "ordinary": {
+      "lane_id": "ordinary_practice",
+      "authority_input": "separate_server_owned_versioned_admission_record",
+      "binding_fields": [
+        "practice_id",
+        "environment",
+        "operation_family",
+        "record_id",
+        "record_version",
+        "snapshot_generation",
+        "freshness_expires_at",
+        "authority_git_object",
+        "operational_evidence_digests"
+      ],
+      "default_when_absent": "denied",
+      "caller_claim_allowed": false,
+      "synthetic_receipt_substitution_allowed": false
+    },
+    "both_lanes_match": "deny_lane_ambiguity",
+    "neither_lane_matches": "deny_no_admission",
+    "cross_lane_fallback": false
+  },
+  "ordinary_state_machine": {
+    "absence_semantics": "disabled",
+    "states": [
+      {
+        "state": "prepared",
+        "admits": false,
+        "terminal": false
+      },
+      {
+        "state": "active",
+        "admits": true,
+        "terminal": false
+      },
+      {
+        "state": "suspended",
+        "admits": false,
+        "terminal": false
+      },
+      {
+        "state": "withdrawn",
+        "admits": false,
+        "terminal": true
+      }
+    ],
+    "allowed_transitions": [
+      "absent->prepared",
+      "prepared->active",
+      "prepared->withdrawn",
+      "active->suspended",
+      "active->withdrawn",
+      "suspended->withdrawn"
+    ],
+    "forbidden_transitions": [
+      "absent->active",
+      "active->prepared",
+      "suspended->active",
+      "withdrawn->active",
+      "withdrawn->prepared",
+      "rollback->active",
+      "kill_switch_engaged->clear"
+    ],
+    "resume_transition_present": false,
+    "reactivation_requires_new_record": true,
+    "activation_authority_granted": false
+  },
+  "decision_evaluator": {
+    "snapshot_model": "immutable_versioned_server_owned",
+    "ordered_steps": [
+      "validate_snapshot_shape_signature_resolution_freshness_and_uniqueness",
+      "deny_unless_existing_feature_flag_exact_true",
+      "deny_if_global_kill_switch_engaged",
+      "compute_synthetic_and_ordinary_lane_matches_independently",
+      "deny_if_both_lanes_match",
+      "preserve_unchanged_synthetic_result_when_only_synthetic_matches",
+      "require_one_exact_active_ordinary_record_when_only_ordinary_matches",
+      "require_all_current_operational_evidence_for_ordinary",
+      "return_typed_decision_without_command_capability"
+    ],
+    "kill_switch_dominates_synthetic": true,
+    "kill_switch_dominates_ordinary": true,
+    "unknown_or_extra_state": "deny",
+    "stale_snapshot_behavior": "deny_without_last_known_good_fallback",
+    "multiple_current_records_behavior": "deny",
+    "output_fields": [
+      "schema_version",
+      "decision",
+      "lane",
+      "reason_code",
+      "snapshot_generation",
+      "snapshot_digest"
+    ],
+    "executes_check_in": false,
+    "creates_confirmation_evidence": false,
+    "changes_authentication_or_role": false
+  },
+  "api_spine": {
+    "state_change_transport": "rest_openapi_only",
+    "graphql_posture": "read_only_posture_projection_only",
+    "async_event_posture": "observation_only_never_authority",
+    "current_manifest_changed": false,
+    "current_check_in_operations": [
+      "proposeAppointmentCheckIn",
+      "confirmAppointmentCheckInProposal"
+    ],
+    "candidate_control_operations_unmounted": [
+      "prepareAppointmentCheckInAdmission",
+      "activateAppointmentCheckInAdmission",
+      "suspendAppointmentCheckInAdmission",
+      "withdrawAppointmentCheckInAdmission",
+      "engageAppointmentCheckInGlobalKillSwitch"
+    ],
+    "model_or_agent_write_authority": false,
+    "committed_event_write_authority": false
+  },
+  "control_plane": {
+    "candidate_base_path": "/api/v1/operations/check-in-admissions",
+    "operations": [
+      {
+        "operation_id": "prepareAppointmentCheckInAdmission",
+        "method": "POST",
+        "path_suffix": "/prepare",
+        "from_states": [
+          "absent"
+        ],
+        "to_state": "prepared",
+        "admits_after": false,
+        "authorized_now": false
+      },
+      {
+        "operation_id": "activateAppointmentCheckInAdmission",
+        "method": "POST",
+        "path_suffix": "/activate",
+        "from_states": [
+          "prepared"
+        ],
+        "to_state": "active",
+        "admits_after": true,
+        "authorized_now": false
+      },
+      {
+        "operation_id": "suspendAppointmentCheckInAdmission",
+        "method": "POST",
+        "path_suffix": "/suspend",
+        "from_states": [
+          "active"
+        ],
+        "to_state": "suspended",
+        "admits_after": false,
+        "authorized_now": false
+      },
+      {
+        "operation_id": "withdrawAppointmentCheckInAdmission",
+        "method": "POST",
+        "path_suffix": "/withdraw",
+        "from_states": [
+          "prepared",
+          "active",
+          "suspended"
+        ],
+        "to_state": "withdrawn",
+        "admits_after": false,
+        "authorized_now": false
+      },
+      {
+        "operation_id": "engageAppointmentCheckInGlobalKillSwitch",
+        "method": "POST",
+        "path_suffix": "/kill-switch/engage",
+        "from_states": [
+          "clear"
+        ],
+        "to_state": "engaged",
+        "admits_after": false,
+        "authorized_now": false
+      }
+    ],
+    "command_requirements": [
+      "authenticated_current_human",
+      "separate_check_in_admission_operator_role",
+      "server_owned_practice_scope",
+      "server_owned_environment_scope",
+      "correlation_id",
+      "idempotency_key_bound_to_complete_request_digest",
+      "expected_record_version",
+      "expected_snapshot_generation",
+      "closed_reason_code",
+      "authority_git_object_full_40",
+      "authority_git_object_resolved",
+      "freshness",
+      "append_only_audit",
+      "bounded_patient_free_receipt"
+    ],
+    "authority_git_object_pattern": "^[0-9a-f]{40}$",
+    "abbreviated_git_object_allowed": false,
+    "unknown_commit_behavior": "release_no_success_then_read_back_by_command_and_idempotency_identity",
+    "concurrency_model": "optimistic_expected_version_plus_single_current_record_constraint",
+    "human_authority_required": true,
+    "receptionist_role_is_activation_authority": false,
+    "model_authority_allowed": false
+  },
+  "global_kill_switch": {
+    "default_state": "clear",
+    "engage_transition": "clear->engaged",
+    "clear_in_place_allowed": false,
+    "engaged_effect": "deny_both_lanes",
+    "monotonic_within_generation": true,
+    "new_generation_required_to_clear": true,
+    "automatic_clear_allowed": false
+  },
+  "rollback": {
+    "operation_id": "withdrawAppointmentCheckInAdmission",
+    "disable_only": true,
+    "terminal_state": "withdrawn",
+    "restore_active_version_allowed": false,
+    "retry_after_unknown_commit_allowed": false,
+    "readback_required_after_unknown_commit": true,
+    "audit_required": true
+  },
+  "operational_evidence": {
+    "required_for_active": true,
+    "gates": [
+      {
+        "gate_id": "tenant_runtime_role",
+        "classification": "operational_evidence_gap",
+        "required_claims": [
+          "non_owner_runtime_role",
+          "nobypassrls",
+          "cross_tenant_denial",
+          "exact_environment"
+        ]
+      },
+      {
+        "gate_id": "rollback_and_unknown_commit",
+        "classification": "operational_evidence_gap",
+        "required_claims": [
+          "precommit_rollback",
+          "commit_uncertainty_no_success",
+          "bounded_readback",
+          "disable_only_rollback"
+        ]
+      },
+      {
+        "gate_id": "environment_and_secret_posture",
+        "classification": "operational_evidence_gap",
+        "required_claims": [
+          "environment_manifest",
+          "secret_key_reference",
+          "rotation_posture",
+          "break_glass_posture"
+        ]
+      }
+    ],
+    "artifact_requirements": [
+      "immutable_sha256_digest",
+      "full_40_character_resolved_git_object",
+      "exact_environment_binding",
+      "exact_snapshot_generation_binding",
+      "freshness_not_expired",
+      "independent_verification"
+    ],
+    "authored_synthetic_substitution_allowed": false,
+    "missing_invalid_stale_or_wrong_generation": "deny"
+  },
+  "observability": {
+    "metric_families": [
+      {
+        "name": "emr4_check_in_admission_decisions_total",
+        "kind": "counter",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          },
+          {
+            "label": "lane",
+            "values": [
+              "none",
+              "authored_synthetic",
+              "ordinary_practice",
+              "ambiguous"
+            ]
+          },
+          {
+            "label": "outcome",
+            "values": [
+              "admitted",
+              "denied"
+            ]
+          },
+          {
+            "label": "reason_code",
+            "values": [
+              "feature_disabled",
+              "kill_switch_engaged",
+              "snapshot_missing",
+              "snapshot_invalid",
+              "snapshot_stale",
+              "snapshot_ambiguous",
+              "no_matching_lane",
+              "lane_ambiguous",
+              "ordinary_record_missing",
+              "ordinary_state_not_active",
+              "ordinary_binding_mismatch",
+              "ordinary_evidence_missing",
+              "ordinary_evidence_invalid",
+              "admitted_synthetic",
+              "admitted_ordinary"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "emr4_check_in_admission_snapshot_age_seconds",
+        "kind": "gauge",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "emr4_check_in_admission_kill_switch",
+        "kind": "gauge",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "emr4_check_in_unknown_commit_total",
+        "kind": "counter",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "emr4_check_in_control_commands_total",
+        "kind": "counter",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          },
+          {
+            "label": "operation",
+            "values": [
+              "prepare",
+              "activate",
+              "suspend",
+              "withdraw",
+              "engage_kill_switch"
+            ]
+          },
+          {
+            "label": "outcome",
+            "values": [
+              "accepted",
+              "replayed",
+              "denied",
+              "conflict",
+              "uncertain",
+              "failed"
+            ]
+          }
+        ]
+      }
+    ],
+    "forbidden_labels_and_values": [
+      "practice_id",
+      "appointment_id",
+      "patient_id",
+      "practitioner_id",
+      "user_id",
+      "actor_id",
+      "correlation_id",
+      "idempotency_key",
+      "command_id",
+      "record_id",
+      "evidence_digest",
+      "token",
+      "free_text",
+      "request_body",
+      "response_body"
+    ],
+    "alerts": [
+      {
+        "alert_id": "check_in_kill_switch_engaged",
+        "trigger": "kill_switch_metric_equals_one",
+        "severity": "critical",
+        "automatic_control_action": false,
+        "contains_identifier": false
+      },
+      {
+        "alert_id": "check_in_admission_snapshot_invalid_or_stale",
+        "trigger": "invalid_snapshot_or_age_over_bound",
+        "severity": "critical",
+        "automatic_control_action": false,
+        "contains_identifier": false
+      },
+      {
+        "alert_id": "check_in_unknown_commit",
+        "trigger": "unknown_commit_counter_increase",
+        "severity": "critical",
+        "automatic_control_action": false,
+        "contains_identifier": false
+      },
+      {
+        "alert_id": "check_in_active_record_rejected",
+        "trigger": "active_record_binding_or_evidence_rejected",
+        "severity": "critical",
+        "automatic_control_action": false,
+        "contains_identifier": false
+      },
+      {
+        "alert_id": "check_in_control_audit_failure",
+        "trigger": "control_command_cannot_append_audit",
+        "severity": "critical",
+        "automatic_control_action": false,
+        "contains_identifier": false
+      },
+      {
+        "alert_id": "check_in_rollback_failure",
+        "trigger": "withdraw_command_failed_or_uncertain",
+        "severity": "critical",
+        "automatic_control_action": false,
+        "contains_identifier": false
+      }
+    ],
+    "raw_request_or_response_allowed": false,
+    "audit_record_used_as_metric": false,
+    "telemetry_feedback_to_admission": false,
+    "automatic_retry_or_control_action": false
+  },
+  "clockwork_boundary": {
+    "normative_reading": "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+    "projection_model": "derive_evidence_from_one_typed_reading",
+    "full_git_oid_pattern": "^[0-9a-f]{40}$",
+    "manual_git_abbreviation_accepted": false,
+    "ariadne_deepseek_shared_clock_status": "accepted_shadow_only",
+    "deepseek_broker_binding": "protocol_conformance_only_no_product_or_activation_authority",
+    "live_clockwork_adoption_authorized": false,
+    "existing_control_retirement_authorized": false
+  },
+  "closed_boundaries": {
+    "ordinary_practice_enabled": false,
+    "feature_flag_changed": false,
+    "synthetic_allowlist_changed": false,
+    "product_code_changed": false,
+    "configuration_changed": false,
+    "database_changed_or_opened": false,
+    "openapi_or_graphql_changed": false,
+    "route_called": false,
+    "generic_status_arrived_changed": false,
+    "action_grammar_or_first_party_client_changed": false,
+    "waiting_area_moved": false,
+    "product_patient_or_clinical_data_used": false,
+    "provider_or_network_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false,
+    "live_clockwork_adopted": false
+  },
+  "successor": {
+    "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+    "authorized_scope": "pure_provider_free_unmounted_evaluator_and_control_command_protocol_with_zero_active_records",
+    "ordinary_enablement_authorized": false,
+    "operational_evidence_gaps_closed": false
+  }
+}

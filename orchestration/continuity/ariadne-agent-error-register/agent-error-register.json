@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 509,
+  "register_revision": 510,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -23284,6 +23284,43 @@
           "AGENTS.md",
           "tests/test_current_baton_consistency.py",
           "docs/ariadne-agent-error-correction-register-revision-509.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0589",
+      "attempt_id": "check-in-admission-control-latch-transition-001",
+      "observed_on": "2026-08-19",
+      "tranche": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-apply-patch-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "One apply_patch payload must contain at most one operation for each target path.",
+      "observed_error": "The first latch transition payload contained Delete File and Add File operations for the same current.json path, so apply_patch rejected the entire payload before changing the latch.",
+      "detection_method": "apply_patch returned multiple operations target current.json; exact latch readback remained unchanged until the corrected in-place Update File operation passed.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-510.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.apply_patch_duplicate_update_file_operation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use one incident-scoped Update File operation for the latch and validate the resulting object before planning.",
+        "prevention_control": "The clockwork publisher owns one target operation per projection; until adoption, reject any patch manifest containing the same path more than once.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-510.md"
         ]
       },
       "status": "corrected"

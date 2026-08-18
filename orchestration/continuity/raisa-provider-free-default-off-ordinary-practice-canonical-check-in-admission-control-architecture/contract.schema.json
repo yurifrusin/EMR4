@@ -1,0 +1,440 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example.invalid/schemas/check-in-admission-control-architecture-v1.json",
+  "title": "EMR4 default-off ordinary-practice canonical check-in admission-control architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "accepted_readiness_source",
+    "accepted_route_source",
+    "result",
+    "architecture_status",
+    "source_bindings",
+    "current_posture",
+    "admission_lanes",
+    "ordinary_state_machine",
+    "decision_evaluator",
+    "api_spine",
+    "control_plane",
+    "global_kill_switch",
+    "rollback",
+    "operational_evidence",
+    "observability",
+    "clockwork_boundary",
+    "closed_boundaries",
+    "successor"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-admission-control-architecture.v1"
+    },
+    "source_head": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "accepted_readiness_source": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "accepted_route_source": {
+      "$ref": "#/$defs/gitObject"
+    },
+    "result": {
+      "const": "raisa_provider_free_default_off_ordinary_practice_canonical_check_in_admission_control_architecture_pass"
+    },
+    "architecture_status": {
+      "const": "provider_free_default_off_no_enablement"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceBinding"
+      }
+    },
+    "current_posture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "feature_setting",
+        "feature_default",
+        "synthetic_allowlist_setting",
+        "synthetic_allowlist_default",
+        "ordinary_admission_setting_present",
+        "ordinary_admission_records_present",
+        "current_gate_order",
+        "proposal_operation_id",
+        "confirmation_operation_id",
+        "product_source_changed",
+        "configuration_changed",
+        "openapi_changed",
+        "practice_enabled"
+      ],
+      "properties": {
+        "feature_setting": {"type": "string", "minLength": 1},
+        "feature_default": {"type": "boolean"},
+        "synthetic_allowlist_setting": {"type": "string", "minLength": 1},
+        "synthetic_allowlist_default": {"type": "array", "maxItems": 0},
+        "ordinary_admission_setting_present": {"type": "boolean"},
+        "ordinary_admission_records_present": {"type": "boolean"},
+        "current_gate_order": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "proposal_operation_id": {"type": "string", "minLength": 1},
+        "confirmation_operation_id": {"type": "string", "minLength": 1},
+        "product_source_changed": {"type": "boolean"},
+        "configuration_changed": {"type": "boolean"},
+        "openapi_changed": {"type": "boolean"},
+        "practice_enabled": {"type": "boolean"}
+      }
+    },
+    "admission_lanes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["synthetic", "ordinary", "both_lanes_match", "neither_lane_matches", "cross_lane_fallback"],
+      "properties": {
+        "synthetic": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lane_id", "authority_input", "ordinary_authority", "may_infer_ordinary_record"],
+          "properties": {
+            "lane_id": {"const": "authored_synthetic"},
+            "authority_input": {"type": "string", "minLength": 1},
+            "ordinary_authority": {"type": "boolean"},
+            "may_infer_ordinary_record": {"type": "boolean"}
+          }
+        },
+        "ordinary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lane_id", "authority_input", "binding_fields", "default_when_absent", "caller_claim_allowed", "synthetic_receipt_substitution_allowed"],
+          "properties": {
+            "lane_id": {"const": "ordinary_practice"},
+            "authority_input": {"type": "string", "minLength": 1},
+            "binding_fields": {"$ref": "#/$defs/nonEmptyStringArray"},
+            "default_when_absent": {"const": "denied"},
+            "caller_claim_allowed": {"type": "boolean"},
+            "synthetic_receipt_substitution_allowed": {"type": "boolean"}
+          }
+        },
+        "both_lanes_match": {"const": "deny_lane_ambiguity"},
+        "neither_lane_matches": {"const": "deny_no_admission"},
+        "cross_lane_fallback": {"type": "boolean"}
+      }
+    },
+    "ordinary_state_machine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["absence_semantics", "states", "allowed_transitions", "forbidden_transitions", "resume_transition_present", "reactivation_requires_new_record", "activation_authority_granted"],
+      "properties": {
+        "absence_semantics": {"const": "disabled"},
+        "states": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/state"}
+        },
+        "allowed_transitions": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "forbidden_transitions": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "resume_transition_present": {"type": "boolean"},
+        "reactivation_requires_new_record": {"type": "boolean"},
+        "activation_authority_granted": {"type": "boolean"}
+      }
+    },
+    "decision_evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_model", "ordered_steps", "kill_switch_dominates_synthetic", "kill_switch_dominates_ordinary", "unknown_or_extra_state", "stale_snapshot_behavior", "multiple_current_records_behavior", "output_fields", "executes_check_in", "creates_confirmation_evidence", "changes_authentication_or_role"],
+      "properties": {
+        "snapshot_model": {"type": "string", "minLength": 1},
+        "ordered_steps": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "kill_switch_dominates_synthetic": {"type": "boolean"},
+        "kill_switch_dominates_ordinary": {"type": "boolean"},
+        "unknown_or_extra_state": {"const": "deny"},
+        "stale_snapshot_behavior": {"type": "string", "minLength": 1},
+        "multiple_current_records_behavior": {"const": "deny"},
+        "output_fields": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "executes_check_in": {"type": "boolean"},
+        "creates_confirmation_evidence": {"type": "boolean"},
+        "changes_authentication_or_role": {"type": "boolean"}
+      }
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state_change_transport", "graphql_posture", "async_event_posture", "current_manifest_changed", "current_check_in_operations", "candidate_control_operations_unmounted", "model_or_agent_write_authority", "committed_event_write_authority"],
+      "properties": {
+        "state_change_transport": {"const": "rest_openapi_only"},
+        "graphql_posture": {"const": "read_only_posture_projection_only"},
+        "async_event_posture": {"const": "observation_only_never_authority"},
+        "current_manifest_changed": {"type": "boolean"},
+        "current_check_in_operations": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "candidate_control_operations_unmounted": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "model_or_agent_write_authority": {"type": "boolean"},
+        "committed_event_write_authority": {"type": "boolean"}
+      }
+    },
+    "control_plane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_base_path", "operations", "command_requirements", "authority_git_object_pattern", "abbreviated_git_object_allowed", "unknown_commit_behavior", "concurrency_model", "human_authority_required", "receptionist_role_is_activation_authority", "model_authority_allowed"],
+      "properties": {
+        "candidate_base_path": {"type": "string", "pattern": "^/api/v1/"},
+        "operations": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/operation"}
+        },
+        "command_requirements": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "authority_git_object_pattern": {"const": "^[0-9a-f]{40}$"},
+        "abbreviated_git_object_allowed": {"type": "boolean"},
+        "unknown_commit_behavior": {"type": "string", "minLength": 1},
+        "concurrency_model": {"type": "string", "minLength": 1},
+        "human_authority_required": {"type": "boolean"},
+        "receptionist_role_is_activation_authority": {"type": "boolean"},
+        "model_authority_allowed": {"type": "boolean"}
+      }
+    },
+    "global_kill_switch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_state", "engage_transition", "clear_in_place_allowed", "engaged_effect", "monotonic_within_generation", "new_generation_required_to_clear", "automatic_clear_allowed"],
+      "properties": {
+        "default_state": {"enum": ["clear", "engaged"]},
+        "engage_transition": {"type": "string", "minLength": 1},
+        "clear_in_place_allowed": {"type": "boolean"},
+        "engaged_effect": {"const": "deny_both_lanes"},
+        "monotonic_within_generation": {"type": "boolean"},
+        "new_generation_required_to_clear": {"type": "boolean"},
+        "automatic_clear_allowed": {"type": "boolean"}
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "disable_only", "terminal_state", "restore_active_version_allowed", "retry_after_unknown_commit_allowed", "readback_required_after_unknown_commit", "audit_required"],
+      "properties": {
+        "operation_id": {"type": "string", "minLength": 1},
+        "disable_only": {"type": "boolean"},
+        "terminal_state": {"const": "withdrawn"},
+        "restore_active_version_allowed": {"type": "boolean"},
+        "retry_after_unknown_commit_allowed": {"type": "boolean"},
+        "readback_required_after_unknown_commit": {"type": "boolean"},
+        "audit_required": {"type": "boolean"}
+      }
+    },
+    "operational_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_for_active", "gates", "artifact_requirements", "authored_synthetic_substitution_allowed", "missing_invalid_stale_or_wrong_generation"],
+      "properties": {
+        "required_for_active": {"type": "boolean"},
+        "gates": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/evidenceGate"}
+        },
+        "artifact_requirements": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "authored_synthetic_substitution_allowed": {"type": "boolean"},
+        "missing_invalid_stale_or_wrong_generation": {"const": "deny"}
+      }
+    },
+    "observability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric_families", "forbidden_labels_and_values", "alerts", "raw_request_or_response_allowed", "audit_record_used_as_metric", "telemetry_feedback_to_admission", "automatic_retry_or_control_action"],
+      "properties": {
+        "metric_families": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/metric"}
+        },
+        "forbidden_labels_and_values": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "alerts": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/alert"}
+        },
+        "raw_request_or_response_allowed": {"type": "boolean"},
+        "audit_record_used_as_metric": {"type": "boolean"},
+        "telemetry_feedback_to_admission": {"type": "boolean"},
+        "automatic_retry_or_control_action": {"type": "boolean"}
+      }
+    },
+    "clockwork_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["normative_reading", "projection_model", "full_git_oid_pattern", "manual_git_abbreviation_accepted", "ariadne_deepseek_shared_clock_status", "deepseek_broker_binding", "live_clockwork_adoption_authorized", "existing_control_retirement_authorized"],
+      "properties": {
+        "normative_reading": {"type": "string", "minLength": 1},
+        "projection_model": {"type": "string", "minLength": 1},
+        "full_git_oid_pattern": {"const": "^[0-9a-f]{40}$"},
+        "manual_git_abbreviation_accepted": {"type": "boolean"},
+        "ariadne_deepseek_shared_clock_status": {"const": "accepted_shadow_only"},
+        "deepseek_broker_binding": {"type": "string", "minLength": 1},
+        "live_clockwork_adoption_authorized": {"type": "boolean"},
+        "existing_control_retirement_authorized": {"type": "boolean"}
+      }
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 16,
+      "maxProperties": 16,
+      "required": [
+        "ordinary_practice_enabled",
+        "feature_flag_changed",
+        "synthetic_allowlist_changed",
+        "product_code_changed",
+        "configuration_changed",
+        "database_changed_or_opened",
+        "openapi_or_graphql_changed",
+        "route_called",
+        "generic_status_arrived_changed",
+        "action_grammar_or_first_party_client_changed",
+        "waiting_area_moved",
+        "product_patient_or_clinical_data_used",
+        "provider_or_network_used",
+        "production_deployment_release_or_pages",
+        "protected_ref_moved",
+        "live_clockwork_adopted"
+      ],
+      "properties": {
+        "ordinary_practice_enabled": {"type": "boolean"},
+        "feature_flag_changed": {"type": "boolean"},
+        "synthetic_allowlist_changed": {"type": "boolean"},
+        "product_code_changed": {"type": "boolean"},
+        "configuration_changed": {"type": "boolean"},
+        "database_changed_or_opened": {"type": "boolean"},
+        "openapi_or_graphql_changed": {"type": "boolean"},
+        "route_called": {"type": "boolean"},
+        "generic_status_arrived_changed": {"type": "boolean"},
+        "action_grammar_or_first_party_client_changed": {"type": "boolean"},
+        "waiting_area_moved": {"type": "boolean"},
+        "product_patient_or_clinical_data_used": {"type": "boolean"},
+        "provider_or_network_used": {"type": "boolean"},
+        "production_deployment_release_or_pages": {"type": "boolean"},
+        "protected_ref_moved": {"type": "boolean"},
+        "live_clockwork_adopted": {"type": "boolean"}
+      }
+    },
+    "successor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "authorized_scope", "ordinary_enablement_authorized", "operational_evidence_gaps_closed"],
+      "properties": {
+        "operation_id": {"type": "string", "minLength": 1},
+        "authorized_scope": {"type": "string", "minLength": 1},
+        "ordinary_enablement_authorized": {"type": "boolean"},
+        "operational_evidence_gaps_closed": {"type": "boolean"}
+      }
+    }
+  },
+  "$defs": {
+    "gitObject": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "admits", "terminal"],
+      "properties": {
+        "state": {"enum": ["prepared", "active", "suspended", "withdrawn"]},
+        "admits": {"type": "boolean"},
+        "terminal": {"type": "boolean"}
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "method", "path_suffix", "from_states", "to_state", "admits_after", "authorized_now"],
+      "properties": {
+        "operation_id": {"type": "string", "minLength": 1},
+        "method": {"const": "POST"},
+        "path_suffix": {"type": "string", "pattern": "^/"},
+        "from_states": {"$ref": "#/$defs/nonEmptyStringArray"},
+        "to_state": {"type": "string", "minLength": 1},
+        "admits_after": {"type": "boolean"},
+        "authorized_now": {"type": "boolean"}
+      }
+    },
+    "evidenceGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gate_id", "classification", "required_claims"],
+      "properties": {
+        "gate_id": {"type": "string", "minLength": 1},
+        "classification": {"const": "operational_evidence_gap"},
+        "required_claims": {"$ref": "#/$defs/nonEmptyStringArray"}
+      }
+    },
+    "labelDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "values"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "values": {"$ref": "#/$defs/nonEmptyStringArray"}
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind", "label_domains"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^emr4_check_in_"},
+        "kind": {"enum": ["counter", "gauge"]},
+        "label_domains": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/labelDomain"}
+        }
+      }
+    },
+    "alert": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alert_id", "trigger", "severity", "automatic_control_action", "contains_identifier"],
+      "properties": {
+        "alert_id": {"type": "string", "minLength": 1},
+        "trigger": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["warning", "critical"]},
+        "automatic_control_action": {"type": "boolean"},
+        "contains_identifier": {"type": "boolean"}
+      }
+    }
+  }
+}

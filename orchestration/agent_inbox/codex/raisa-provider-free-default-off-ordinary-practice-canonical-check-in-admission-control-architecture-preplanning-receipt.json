@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free default-off ordinary-practice canonical check-in admission-control architecture",
+    "completed_stage": "The prerequisite transactional closeout clock and DeepSeek broker coupling are accepted as a shadow candidate at reviewed source 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0, Continuity 324 / Compass 306; live clockwork adoption remains closed.",
+    "next_executable_stage": "complete_five_source_rehydration_and_api_spine_source_pass_then_freeze_the_narrowest_default_off_admission_control_architecture_plan",
+    "operation_id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+    "resume_after_compaction": true,
+    "source_head": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+    "reason_codes": [],
+    "resolved_commit": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+    "branch_origin_aligned": false,
+    "head": "062f5fb12eb82eab6ec570abea56ad1bd9a7b304",
+    "origin_branch_commit": "f21072405a4d5877ec03e2cd1aefc7fa74d379e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 654
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness remains blocked from occupied EMR4 work until its separate provider-free stock-headless-to-custom-runner HMR boot proof passes. Architecture authority and admission semantics are not a bounded worker package, and Claude Code is not an authorized fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "The frozen admission, kill-switch, rollback and telemetry contract is a material security and API-spine boundary that benefits from one fresh independent read-only veto after deterministic admission. Gemini receives no implementation, acceptance, integration or protected-ref authority.",
+        "work_packages": [
+          "Independently review the exact clean architecture candidate for default-denial dominance, synthetic/ordinary separation, API Spine compatibility, non-PHI telemetry, rollback safety and closed operational-evidence gaps."
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the one admission-control state machine plus its safety precedence are a serial Sol architecture decision.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+    "parallel_work_packages": [
+      "Gemini may later own one independent read-only architecture veto after the provider-free deterministic candidate passes."
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "after_deterministic_candidate",
+      "pre_verifier_acceptance",
+      "closeout",
+      "before_any_future_product_implementation_or_occupied_deepseek_worker"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validate the fresh five-source preplanning receipt",
+      "freeze the exact architecture source boundary and API Spine posture",
+      "define one fail-closed admission decision algebra with dominant kill-switch and separate synthetic and ordinary lanes",
+      "define typed rollout suspend rollback and read-only posture operations without changing the live OpenAPI manifest",
+      "define patient-free metrics alert reason codes and operational-evidence gates",
+      "implement deterministic schema reviewer evidence and hostile mutation tests",
+      "admit Gemini only after the exact deterministic candidate passes"
+    ]
+  },
+  "planned_action": "freeze_and_verify_the_provider_free_default_off_ordinary_practice_canonical_check_in_admission_control_architecture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md",
+      "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial architecture semantics, provider-free deterministic artifacts, acceptance and Git. DeepSeek occupied native-Harness work remains declined pending a separate provider-free stock-headless-to-custom-runner HMR boot proof; Claude Code is not a silent fallback. Gemini 3.7 Flash/high is reserved for one later independent read-only veto after deterministic admission. Native subagents are declined because current developer policy prohibits proactive delegation and the authority state machine is a serial design decision.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is at predecessor closeout 062f5fb12eb82eab6ec570abea56ad1bd9a7b304; origin task remains f21072405a4d5877ec03e2cd1aefc7fa74d379e9. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked opening changes are the in-progress latch plus the exact live-baton and corrected incident-register transition artifacts. Existing untracked files, including docs/branding and historical evidence, remain present and preserved. This named runtime state is the first new architecture artifact before receipt generation.",
+    "live_handover_current_baton": "AGENTS.md was read completely across bounded character slices after conversation compaction. Its Current Baton accepts the unmounted check-in product adapter at 8de886c5148b3259428c8c517674f10ea92d937e, the default-off route convergence at c82c3a741053a9c8da260aa62e1a968af22bb54e, the 6/3/3 not-ready review at 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9, and the transactional clockwork shadow at 762cd8fd1a6493f4d4b82e24f97d851531b6f7f0. It names this exact default-off admission-control architecture as the dependency-satisfied next product tranche.",
+    "protected_evidence_boundaries": "Provider-free deterministic architecture and artifact review only. Freeze one explicit ordinary-practice admission state machine distinct from the unchanged authored-synthetic allowlist, dominant kill-switch and rollback operations, and non-PHI A5.1 observability while default denial remains exact. No ordinary-practice enablement, feature-flag/allowlist/product/configuration/live-route/database/API-manifest mutation, generic-status Arrived, action grammar, first-party client, waiting-area movement, product/patient/clinical data, occupied provider call, production/deployment/release/Pages, live clockwork adoption/control retirement or protected-ref movement. Preserve docs/branding and every unrelated untracked file; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
