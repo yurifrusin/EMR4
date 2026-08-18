@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 323 / Compass 305. Ordinary-practice canonical check-in admission is not ready: six dimensions pass, three blocking controls and three operational-evidence obligations remain. Yuri has deferred its product successor behind a transactional closeout-control-plane consolidation and efficacy rehearsal.
+> EMR4 is at Continuity 324 / Compass 306. The typed transactional closeout clock and DeepSeek broker coupling pass provider-free shadow efficacy, while live control replacement remains closed. The next tranche is default-off ordinary-practice canonical check-in admission-control architecture.
 
 ## North star
 
@@ -416,26 +416,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Every live pointer now advances to a no-enable read-only ordinary-practice check-in admission-readiness review. Lineage parent: `deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission`.
 200. **Decide ordinary-practice canonical check-in readiness without enabling it — Provider-free read-only ordinary-practice canonical check-in admission-readiness review**
    Not ready: six dimensions pass, three blocking controls and three operational evidence obligations remain. Lineage parent: `ariadne-post-native-harness-successor-resolution-repair`.
+201. **Prove a smaller typed closeout clock and DeepSeek broker coupling in shadow — Ariadne transactional closeout control-plane consolidation efficacy rehearsal**
+   Shadow efficacy passes; live control replacement remains closed. Lineage parent: `raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review`.
 
 ## Current position
 
-**Consolidate the closeout control plane and measure whether it reduces procedural weight — Provider-free read-only ordinary-practice canonical check-in admission-readiness review**
+**Design default-off ordinary-practice canonical check-in admission control — Ariadne transactional closeout control-plane consolidation efficacy rehearsal**
 
-**Why this proof came next:** The read-only 6/3/3 matrix at 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 is accepted, and Yuri explicitly prioritized a measured transactional replacement for hand-authored closeout ceremony.
+**Why this proof came next:** The 6/3/3 readiness review identified three blocking controls, and the prerequisite clockwork efficacy rehearsal now passes in shadow without opening live adoption.
 
-Shadow one typed closeout manifest against representative history and accept it only if retries, manual fields, wall time and maintained workflow surface fall without coverage loss.
+Freeze the narrowest provider-free architecture for explicit admission, kill-switch and rollback operations, and non-PHI observability while default denial remains exact.
 
 ### What this unlocks
 
-- Freeze one provider-free transactional closeout-control-plane consolidation and efficacy plan.
-- Measure prevention, escapes, commands, reruns, wall time, files, lines and fixture count against the current baseline.
-- Retire redundant controls only after shadow parity and explicit efficacy thresholds pass.
+- Freeze one admission-control architecture with explicit default denial.
+- Separate authored-synthetic practice allowlisting from future ordinary-practice admission.
+- Specify rollout, kill-switch, rollback and non-PHI observability without enablement.
 
 ### What it does not solve
 
 - No ordinary practice is enabled and no feature flag or allowlist changes.
-- No product/configuration source, route, database, client or waiting-area movement changes.
-- No product data, provider, runtime, deployment, release, Pages or protected integration opens.
+- No product route, status grammar, client or waiting-area movement changes.
+- No live clockwork adoption, product data, provider, runtime, deployment or protected integration opens.
 
 ## Continuity and authority
 
@@ -1007,6 +1009,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-445.md`
 - `docs/ariadne-agent-error-correction-register-revision-459.md`
 - `docs/ariadne-agent-error-correction-register-revision-487.md`
+- `docs/ariadne-agent-error-correction-register-revision-509.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1040,6 +1043,8 @@ Prerequisites:
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
 - `docs/ariadne-synaptic-event-router-protocol-plan.md`
 - `docs/ariadne-terra-gemini-comparative-rehearsal-attempt3-audit-closeout.md`
+- `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md`
+- `docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md`
 - `docs/ariadne-vertex-sydney-bounded-work-cell-authority.md`
 - `docs/ariadne-vertex-sydney-bounded-work-cell-rehearsal-closeout.md`
 - `docs/ariadne-vertex-sydney-bounded-work-cell-rehearsal-plan.md`
@@ -1526,6 +1531,7 @@ Prerequisites:
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
 - `docs/security/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-threat-model-delta.md`
 - `docs/security/ariadne-risk-weighted-workflow-reform-threat-model-delta.md`
+- `docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md`
 - `docs/security/bernie-reception-one-bureau-runtime-ui-wiring-threat-model-delta.md`
 - `docs/security/bernie-reception-one-default-off-dual-planner-runtime-threat-model-delta.md`
 - `docs/security/bernie-reception-one-extended-proposal-runtime-threat-model-delta.md`
@@ -1683,6 +1689,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
@@ -1767,6 +1774,9 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-prime-derived-harness-adaptations-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-risk-weighted-workflow-reform-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-independent-audit.md`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-adc-restored-preplan-receipt.json`
@@ -2367,6 +2377,10 @@ Prerequisites:
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-004-audit-analysis.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/gemini-provider-blocked-request-contract-diagnostic-evidence.json`
+- `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/control-plane.schema.json`
+- `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/historical-shadow-fixtures.json`
+- `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json`
+- `orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-report.md`
 - `orchestration/continuity/ariadne-vertex-sydney-gemini-25/adc-restored-closeout-residue-evidence.json`
 - `orchestration/continuity/ariadne-vertex-sydney-gemini-25/adc-restored-external-audit.json`
 - `orchestration/continuity/ariadne-vertex-sydney-gemini-25/adc-restored-independent-audit-analysis.json`
@@ -3032,6 +3046,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--ordinary-practice-canonical-check-in-admission-readiness-review.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-cancellation-programme-orientation.md`
 - `orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-19--ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3047,6 +3062,7 @@ Prerequisites:
 - `orchestration_harness/git_refs_snapshot.py`
 - `orchestration_harness/orchestrator_preflight.py`
 - `orchestration_harness/risk_weighted_workflow.py`
+- `orchestration_harness/transactional_closeout.py`
 - `review/test_diary_smoke.py`
 - `review/test_ordinary_diary_cancellation_convergence.py`
 - `review/test_reception_one_cancellation_action.py`
@@ -3069,6 +3085,7 @@ Prerequisites:
 - `scripts/ariadne_recent_work_effectiveness_and_transport_repair_continuity_update.py`
 - `scripts/ariadne_risk_weighted_workflow.py`
 - `scripts/ariadne_serial_pytest.py`
+- `scripts/ariadne_transactional_closeout_control_plane_consolidation_efficacy_rehearsal_continuity_update.py`
 - `scripts/ariadne_validation_runner.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
@@ -3174,6 +3191,8 @@ Prerequisites:
 - `tests/test_ariadne_recent_work_effectiveness_and_transport_repair_continuity.py`
 - `tests/test_ariadne_risk_weighted_workflow.py`
 - `tests/test_ariadne_serial_pytest.py`
+- `tests/test_ariadne_transactional_closeout.py`
+- `tests/test_ariadne_transactional_closeout_control_plane_consolidation_efficacy_rehearsal_continuity.py`
 - `tests/test_ariadne_validation_runner.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
@@ -3301,4 +3320,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 305; continuity graph revision 323._
+_Compass map revision 306; continuity graph revision 324._

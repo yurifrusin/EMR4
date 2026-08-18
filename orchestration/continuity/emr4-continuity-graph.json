@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 323,
+  "graph_revision": 324,
   "harvests": [],
   "nodes": [
     {
@@ -22733,9 +22733,93 @@
         "No enablement, product data, provider, runtime, deployment or protected integration is authorized.",
         "Default-off ordinary-practice admission-control architecture remains deferred, not discarded."
       ]
+    },
+    {
+      "id": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "title": "Ariadne transactional closeout control-plane consolidation efficacy rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-18T16:22:38.3870606Z",
+      "updated_at": "2026-08-18T16:22:38.3870606Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "One typed journal and reducer pass the provider-free historical shadow efficacy thresholds.",
+          "A digest-bound DeepSeek broker WorkOrder continues the same causal clock provider-free.",
+          "The result is shadow-only; no live closeout control is replaced or retired."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-shadow-transactional-closeout-clock",
+          "source": "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept measured shadow efficacy and broker-clock conformance without live adoption."
+        }
+      ],
+      "claim_scope": [
+        "Maintained comparison surface falls from six files and 1,002 lines to five files and 981 changed-or-new lines.",
+        "Manual constants fall from 72 to 54 typed leaves and publication calls from 12 to one atomic rename.",
+        "The frozen controlled retry sample falls from seven to zero without coverage loss.",
+        "Candidate timing is slower and is not an acceptance benefit."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-plan.md",
+          "docs/security/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/control-plane.schema.json",
+          "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/historical-shadow-fixtures.json",
+          "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-evidence.json",
+          "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal/provider-free-efficacy-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-509.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-19--ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_transactional_closeout_control_plane_consolidation_efficacy_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/transactional_closeout.py",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs",
+          "scripts/ariadne_transactional_closeout_control_plane_consolidation_efficacy_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live control-plane adoption or retirement requires a separate transactional migration gate.",
+        "Canonical historical evidence-file presence remains mandatory before live adoption.",
+        "DeepSeek occupied EMR4 work remains blocked by the separate native-Harness HMR boot proof.",
+        "No ordinary-practice check-in admission, product runtime, deployment or protected integration is authorized."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T13:19:10.6024156Z"
+  "updated_at": "2026-08-18T16:22:38.3870606Z"
 }

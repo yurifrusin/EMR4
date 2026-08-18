@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 506,
+  "register_revision": 509,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -23167,6 +23167,123 @@
           "tests/test_ariadne_agent_error_register.py",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "docs/ariadne-agent-error-correction-register-revision-506.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0586",
+      "attempt_id": "transactional-closeout-baton-test-discovery-011",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-powershell-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_rg",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit repository path operand must be resolved from the current inventory before execution.",
+      "observed_error": "A closeout content search named nonexistent tests/test_agents_live_handover.py beside three valid exact test paths.",
+      "detection_method": "rg returned the exact file-not-found diagnostic for that operand while completing the remaining bounded reads; no file was changed by the search.",
+      "evidence_paths": [
+        "tests/test_ariadne_compass.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-507.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve handover-test paths from the tracked inventory and use only returned literal paths in subsequent validation.",
+        "prevention_control": "The causal clock must resolve every command path into a typed manifest before dispatch and reject absent operands before process launch.",
+        "evidence_paths": [
+          "tests/test_ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-507.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0587",
+      "attempt_id": "transactional-closeout-broad-continuity-012",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-compass-current-position-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every valid Continuity/Compass advance updates its dedicated test, live baton assertions and global current-position sentinel in the same closeout change.",
+      "observed_error": "After valid Continuity 324 / Compass 306 publication, two live-baton assertions, one previous-next-tranche boundary fixture and the global Compass node sentinel still named Continuity 323 / Compass 305 and the readiness-review position.",
+      "detection_method": "The broad provider-free packet reported exactly four stale expected-value failures while all clockwork, broker, latch and dedicated Continuity tests passed.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_compass.py",
+        "orchestration/continuity/emr4-compass.json",
+        "docs/ariadne-agent-error-correction-register-revision-508.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Bind the global and live-baton fixtures to the clockwork node, Continuity 324 / Compass 306 and the default-off admission-control successor, then rerun the same packet.",
+        "prevention_control": "Every valid Compass advance must derive the dedicated node, live baton and global current-position fixtures from the prospective projection before canonical publication.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-508.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0588",
+      "attempt_id": "transactional-closeout-broad-baton-prose-013",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "emr4-current-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Live baton prose and its boundary assertions must use exact unambiguous representations after a current-position transition.",
+      "observed_error": "The corrected baton used slash-separated readiness counts where the guard expected comma-separated wording and relied on one leading no to scope a later product-code denial across commas.",
+      "detection_method": "The repeated broad packet reported exactly two prose assertion failures; all graph, Compass, clockwork, broker and other baton checks passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-509.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use comma-separated 6 satisfied, 3 blocking and 3 operational-evidence wording and give every protected boundary its own explicit no.",
+        "prevention_control": "The typed manifest must render both live baton prose and boundary assertions from canonical tokens; denials never depend on grammatical carry-over.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-509.md"
         ]
       },
       "status": "corrected"

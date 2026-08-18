@@ -56,6 +56,10 @@ CURRENT_REVIEW_NODE_ID = (
     "admission-readiness-review"
 )
 CURRENT_REVIEW_SOURCE_HEAD = "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9"
+CLOCK_NODE_ID = (
+    "ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal"
+)
+CLOCK_SOURCE_HEAD = "762cd8fd1a6493f4d4b82e24f97d851531b6f7f0"
 ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
@@ -101,20 +105,20 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 323
-    assert graph["nodes"][-1]["id"] == CURRENT_REVIEW_NODE_ID
+    assert graph["graph_revision"] == 324
+    assert graph["nodes"][-1]["id"] == CLOCK_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        CURRENT_REVIEW_SOURCE_HEAD
+        CLOCK_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": CURRENT_REPAIR_NODE_ID,
+            "node_id": CURRENT_REVIEW_NODE_ID,
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 305
-    assert compass["source_graph_revision"] == 323
-    assert compass["current_position"]["node_id"] == CURRENT_REVIEW_NODE_ID
+    assert compass["map_revision"] == 306
+    assert compass["source_graph_revision"] == 324
+    assert compass["current_position"]["node_id"] == CLOCK_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -129,10 +133,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
-    assert "Continuity 323 / Compass 305" in current
-    assert "not_ready_for_ordinary_practice_admission" in current
-    assert CURRENT_REVIEW_SOURCE_HEAD in current
-    assert ROUTE_CONVERGENCE_SOURCE_HEAD in current
+    assert "Continuity 324 / Compass 306" in current
+    assert "provider-free shadow candidate" in current
+    assert CLOCK_SOURCE_HEAD in current
     assert "6 satisfied, 3 blocking" in current.lower()
     assert "default denial remains" in current.lower()
     error_register = _table_row(
@@ -201,17 +204,16 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
     assert (
-        "ariadne-transactional-closeout-control-plane-consolidation-"
-        "efficacy-rehearsal"
+        "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-"
+        "admission-control-architecture"
     ) in next_work.lower()
-    assert "admission-readiness-review" not in next_work.lower()
-    assert "50% fewer procedural retries/reruns" in next_work.lower()
-    assert "net reduction in maintained workflow surface" in next_work.lower()
-    assert "admission-control architecture is deferred" in next_work.lower()
+    assert "explicit ordinary-practice admission gate" in next_work.lower()
+    assert "rollout/kill-switch/rollback" in next_work.lower()
+    assert "non-phi a5.1 observability/alerting" in next_work.lower()
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
     assert "no ordinary-practice enablement" in next_work.lower()
     assert "no product code/configuration or live-route change" in next_work.lower()
-    assert "general-status `arrived`" in next_work.lower()
+    assert "generic-status `arrived`" in next_work.lower()
     assert "waiting-area movement" in next_work.lower()
     assert "live provider" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
@@ -251,17 +253,18 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "transactional-closeout-control-plane-consolidation-efficacy-rehearsal",
+        "ordinary-practice-canonical-check-in-admission-control-architecture",
         "no ordinary-practice enablement",
         "no product code/configuration or live-route change",
-        "general-status `arrived`",
+        "generic-status `arrived`",
         "waiting-area movement",
-        "product/patient data",
+        "product/patient/clinical data",
         "live provider",
         "deployment",
         "protected-ref movement",
         "docs/branding/",
         "stage explicit paths only",
+        "no live clockwork adoption",
     ):
         assert phrase in next_work
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work
