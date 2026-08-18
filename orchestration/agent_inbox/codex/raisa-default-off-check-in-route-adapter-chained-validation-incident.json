@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.local_validation_incident.v1",
-  "recorded_at": "2026-08-18T13:35:00+10:00",
+  "recorded_at": "2026-08-18T13:22:34.3122671+10:00",
   "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
   "attempt_id": "check-in-route-adapter-deterministic-admission-001",
   "status": "corrected",

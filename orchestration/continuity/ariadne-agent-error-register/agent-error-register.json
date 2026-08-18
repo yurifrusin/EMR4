@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 378,
+  "register_revision": 379,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17266,6 +17266,45 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-antigravity-cli-invocation-failure.json",
           "docs/ariadne-agent-error-correction-register-revision-378.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0431",
+      "attempt_id": "check-in-route-adapter-local-evidence-timestamps-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_evidence_authoring",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every durable evidence timestamp must be copied from an immediate machine clock readback and must not claim a future local time.",
+      "observed_error": "Sol manually estimated 13:35 and 13:44 timestamps for revision 377/378 evidence while the machine clock still read 13:22:34 Australia/Brisbane. The product candidate was unchanged and no verifier/provider had launched.",
+      "detection_method": "An immediate Get-Date -Format o readback returned 2026-08-18T13:22:34.3122671+10:00 before packet authoring; Sol compared it to the four durable timestamp fields and corrected them before verifier dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-future-timestamp-incident.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-antigravity-cli-invocation-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-379.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.durable_evidence_future_manual_timestamp",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace all four manually estimated fields with the immediately machine-read Australia/Brisbane ISO-8601 timestamp before Gemini dispatch and retain the product candidate unchanged.",
+        "prevention_control": "Every durable evidence timestamp is copied from an immediately preceding machine clock readback; manual estimation is prohibited.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-future-timestamp-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-379.md"
         ]
       },
       "status": "corrected"

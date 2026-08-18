@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.local_cli_invocation_failure.v1",
-  "recorded_at": "2026-08-18T13:44:00+10:00",
+  "recorded_at": "2026-08-18T13:22:34.3122671+10:00",
   "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
   "attempt_id": "check-in-route-adapter-antigravity-help-001",
   "command_shape": "python scripts/ariadne_antigravity.py --help",

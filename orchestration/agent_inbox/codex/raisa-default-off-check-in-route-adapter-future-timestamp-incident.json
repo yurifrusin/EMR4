@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.local_evidence_timestamp_incident.v1",
+  "recorded_at": "2026-08-18T13:22:34.3122671+10:00",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+  "attempt_id": "check-in-route-adapter-local-evidence-timestamps-001",
+  "status": "corrected",
+  "observed_error": "Sol manually estimated 13:35 and 13:44 timestamps for revision 377/378 evidence even though the machine clock still read 13:22:34 Australia/Brisbane.",
+  "candidate_source_changed": false,
+  "provider_or_verifier_launched": false,
+  "correction": "All four affected timestamp fields were replaced with the machine-read ISO-8601 value before Gemini dispatch.",
+  "prevention": "Every durable evidence timestamp is copied from an immediately preceding machine clock readback; manual estimation is prohibited."
+}
