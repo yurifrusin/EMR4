@@ -101,9 +101,9 @@ def main() -> int:
         [_observation()],
         gate_result="rejected",
     )
-    _write(TOPIC / "provider-free-repair-evidence.json", bundle)
-    (TOPIC / "repair-report.md").write_text(_report(bundle), encoding="utf-8", newline="\n")
     if args.publish:
+        _write(TOPIC / "provider-free-repair-evidence.json", bundle)
+        (TOPIC / "repair-report.md").write_text(_report(bundle), encoding="utf-8", newline="\n")
         publish_private_shadow(bundle, validate_contract(load_object(TOPIC / "contract.json")), TOPIC / f"private-shadow-generation-{bundle['bundle_sha256'][:12]}")
     print(json.dumps({"status": "candidate_pass", "bundle_sha256": bundle["bundle_sha256"], "efficacy": bundle["efficacy"]}, sort_keys=True))
     return 0

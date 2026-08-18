@@ -17,9 +17,7 @@ from orchestration_harness.governance_clockwork import (
     validate_contract,
     validate_probes,
 )
-from scripts.ariadne_provider_free_clockwork_governance_projection_consolidation_repair import (
-    _observation,
-)
+from scripts.ariadne_provider_free_clockwork_governance_projection_consolidation_repair import _observation, main as runner_main
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -166,3 +164,10 @@ def test_private_publication_is_atomic_and_fail_closed(tmp_path: Path) -> None:
     assert not failed.exists() and not list(tmp_path.glob(".*.staging-*"))
     target = publish_private_shadow(bundle, contract, tmp_path / "private-shadow-success")
     assert json.loads((target / "bundle.json").read_text(encoding="utf-8")) == bundle
+
+
+def test_runner_without_publish_is_read_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    targets = [TOPIC / "provider-free-repair-evidence.json", TOPIC / "repair-report.md"]
+    before = [path.read_bytes() for path in targets]
+    monkeypatch.setattr("sys.argv", ["clockwork-repair"])
+    assert runner_main() == 0 and [path.read_bytes() for path in targets] == before

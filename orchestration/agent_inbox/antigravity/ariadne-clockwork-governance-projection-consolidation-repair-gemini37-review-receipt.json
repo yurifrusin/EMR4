@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.egress-failure-receipt.v1",
+  "status": "egress_failed_without_admitted_terminal_decision",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-governance-gemini-7b09b487",
+  "branch": "codex/review-clockwork-governance-7b09b487",
+  "head_before": "7b09b487d89985293b957978d3659c590753d6c2",
+  "head_after": "7b09b487d89985293b957978d3659c590753d6c2",
+  "dirty_after": true,
+  "worktree_identity_unchanged": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "407bd381b0219bec81918426a595d269c4049522614e518e2b9d9e26fb8cbb19",
+  "exit_code": 0,
+  "elapsed_ms": 122424,
+  "stdout": {
+    "bytes": 28891,
+    "sha256": "7d8376de696cf14956690b8dbbb77d1e560399b46e497d929fa6564ef99fb63e",
+    "empty": false
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "empty": true
+  },
+  "decision_contract": "schema_constrained_json_v1",
+  "reason_code": "read_only_worktree_postcondition_failed",
+  "terminal_decision_admitted": false,
+  "candidate_review_admitted": false,
+  "command_manifest_sha256": "3230e66ff5c5b4dc8d31f28a18b0319c0ae242abcd925626a05ee084945403ba"
+}

@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "915caec72d663242e3dce32f84095d3c9ccf30e72ed416f021d71de771685242",
+  "canonical_register_sha256": "396b60b2cb1739c471cca034ba2261800650068957afe88ae5414d25b97f2479",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
       "canonical_unchanged": 391,
-      "untrusted_partial_worktree": 135
+      "untrusted_partial_worktree": 137
     },
     "by_category": {
       "command_scope_violation": 86,
       "evidence_misreport": 67,
       "harness_failure": 54,
       "operator_error": 36,
-      "output_contract_violation": 230,
+      "output_contract_violation": 231,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 101,
+      "repository_defect": 102,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 433,
+      "agent_behavior": 434,
       "harness": 54,
       "operator": 36,
-      "repository": 101,
+      "repository": 102,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 366,
+      "low": 367,
       "material": 118,
-      "moderate": 156
+      "moderate": 157
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -39,6 +39,7 @@
       "ariadne-agent-error-register-current-literal-test::orchestrator": 1,
       "ariadne-agent-error-register-current-projection-tests::orchestrator": 2,
       "ariadne-agent-error-register-current-structural-test::orchestrator": 1,
+      "ariadne-agent-error-register-schema-admission::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-agent-error-register-update::orchestrator": 1,
       "ariadne-agent-error-register::orchestrator": 5,
@@ -118,6 +119,7 @@
       "git-cached-diff-whitespace-gate::orchestrator": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "governance-projection-incident-observation-reducer::orchestrator": 1,
+      "governance-projection-repair-runner-read-only-interface::verifier": 1,
       "live-agents-handover::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 8,
       "local-docker-desktop::orchestrator": 1,
@@ -148,12 +150,12 @@
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 536,
-      "verifier": 57
+      "orchestrator": 537,
+      "verifier": 58
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 640,
+  "incident_count": 642,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1922,7 +1924,7 @@
       ]
     }
   ],
-  "register_revision": 552,
+  "register_revision": 554,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

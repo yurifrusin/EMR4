@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free clockwork governance projection consolidation repair",
+    "completed_stage": "The provider-free private-shadow reducer passes all thirteen preserved rerun probes and nine surrounding-workflow probes, derives every governance binding without caller-authored fields, reduces maintained surfaces from ten to four within the 845-of-850-line budget, projects zero steady-state surrounding reruns and reports eleven construction reruns with two-closeout repair-only and three-closeout cumulative break-even; the full 640-incident register and continuity control suites pass.",
+    "next_executable_stage": "prepare_and_run_one_fresh_exact_candidate_gemini_37_flash_high_read_only_veto_then_close_out_without_live_adoption_or_control_retirement",
+    "operation_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+    "resume_after_compaction": true,
+    "source_head": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "7b09b487d89985293b957978d3659c590753d6c2",
+    "reason_codes": [],
+    "resolved_commit": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "7b09b487d89985293b957978d3659c590753d6c2",
+    "branch_origin_aligned": false,
+    "head": "7b09b487d89985293b957978d3659c590753d6c2",
+    "origin_branch_commit": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "This exact candidate needs no implementation worker; occupied native-Harness work remains behind the separate HMR boot proof and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high read-only veto is justified by deterministic admission, full-hash evidence binding and a clean exact-candidate worktree.",
+        "work_packages": [
+          "exact_candidate_clockwork_governance_projection_consolidation_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and no separable implementation package remains.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "closeout",
+      "before any live adoption or current-control retirement",
+      "before any occupied DeepSeek work"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validated register revision 552",
+      "clean exact candidate and non-generative manifest preflight",
+      "one no-fallback bounded Gemini veto",
+      "Sol-only acceptance and task-branch Git"
+    ]
+  },
+  "planned_action": "run_one_bounded_exact_candidate_gemini_37_flash_high_read_only_governance_projection_repair_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md",
+      "docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/repair-report.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-worktree-preflight.json",
+      "docs/ariadne-agent-error-correction-register-revision-552.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns governance semantics, deterministic admission, acceptance and task-branch Git. DeepSeek is declined because this is provider-free governance work and native Harness work remains behind the separate stock-headless-to-custom-runner HMR boot proof; Claude Code is not a fallback. Gemini 3.7 Flash/high is reserved for exactly one fresh read-only veto of candidate 7b09b487d89985293b957978d3659c590753d6c2. Native subagents remain declined under current developer policy.",
+    "git_refs_and_worktree": "Primary task branch is exact candidate 7b09b487d89985293b957978d3659c590753d6c2 while origin task remains 4ac81d4443de6f37d6baa26e390c1e8be7eaede1. Review worktree C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-7b09b487 is clean on codex/review-clockwork-governance-7b09b487 at the exact candidate. Manifest preflight passes with digest 3230e66ff5c5b4dc8d31f28a18b0319c0ae242abcd925626a05ee084945403ba. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely and records Continuity 328 / Compass 310, the predecessor revision-required rehearsal, the current bounded repair authority and protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The repair is deterministically admitted at exact candidate 7b09b487d89985293b957978d3659c590753d6c2 with evidence bound to full source ec72ca20e90a1a6f3558efee919cab4b0bb5e438.",
+    "protected_evidence_boundaries": "Exact committed provider-free private-shadow candidate 7b09b487d89985293b957978d3659c590753d6c2 only. The ten-command manifest is non-generative and the worktree preflight passes. No live adoption or control retirement, occupied DeepSeek/HMR call, Claude fallback, product/practice/data/runtime/deployment/release/Pages/protected-evidence action or protected-ref movement. Preserve docs/branding and every unrelated untracked file; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
