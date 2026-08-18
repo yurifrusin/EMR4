@@ -9,8 +9,8 @@ The provider-free four-event tick was derived and validated but was not publishe
 ## Efficacy reading
 
 - Conventional failure-induced reruns: 14
-- Candidate failure-induced reruns: 9
-- Reduction: 35.714%
+- Candidate failure-induced reruns: 13
+- Reduction: 7.143%
 - Frozen gauges covered: 14/14
 - Caller-supplied derived fields: 0
 - New mutable-current fixtures: 0
@@ -18,15 +18,15 @@ The provider-free four-event tick was derived and validated but was not publishe
 - Uncaught escapes: 0
 - Coverage loss: false
 - Raw shared line growth: 1552
-- Median clean-run overhead: 103.153 ms (diagnostic only)
+- Median clean-run overhead: 112.089 ms (diagnostic only)
 
 Every one of the fourteen comparator failures was injected as an immutable malformed prospective reading and rejected in its owning phase before publication. These rejections preserve coverage and do not count as execution reruns.
 
 ## Causal binding
 
-- Source commit: `159301c3ef84c3f274971df9ef0776312b99f7af`
-- Acknowledged tip: `d407d9e881b3d10c2dd745466b3d1e6ae9e5c6a8b994069df98332b55edfe415`
-- Authoritative generation digest: `7634d82d419901b8d071354bbde9454ac9813fb48fbe79d9af8ad163f4befb11`
+- Source commit: `a4044010e9f9319e149660ad889141a32cc8d000`
+- Acknowledged tip: `916165250796d6e07d2720e06774d575db3441b746cee82b3c3f13706cf75074`
+- Authoritative generation digest: `9bfd7edc7833dd57547d55b09f71d82c80e3253925a90b3876bc7626316b3feb`
 - Provider calls: 0
 - Published files: 0
 

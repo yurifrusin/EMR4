@@ -3,17 +3,17 @@
   "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
   "active_tranche": "Ariadne provider-free shadow clockwork and DeepSeek broker gear rehearsal",
   "objective": "Implement and evaluate only the provider-free request, lease, terminal-result and acknowledgement engine in one private shadow generation against frozen representative workflow fixtures, measuring whether shared clockwork materially reduces procedural reruns without losing coverage or opening live authority.",
-  "status": "in_progress",
-  "source_head": "159301c3ef84c3f274971df9ef0776312b99f7af",
+  "status": "blocked",
+  "source_head": "a4044010e9f9319e149660ad889141a32cc8d000",
   "authority_source": "AGENTS.md Current Baton Next implementation, the accepted architecture at f6cbd33fd3322754e06ac6dafa1503f5200e0803, its published closeout at 159301c3ef84c3f274971df9ef0776312b99f7af and Yuri's standing uninterrupted-development authority authorize only this provider-free private-shadow efficacy rehearsal.",
   "checkpoint": {
-    "completed_stage": "The accepted architecture is published at task HEAD 159301c3ef84c3f274971df9ef0776312b99f7af, fresh five-source successor rehydration is complete, protected refs remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602 and the honest conventional baseline is fourteen failure-induced reruns.",
-    "next_executable_stage": "repair_rejected_live_efficacy_test_assumptions_then_emit_the_nine_rerun_final_reading",
+    "completed_stage": "The provider-free rehearsal is factually closed at exact deterministic candidate a4044010e9f9319e149660ad889141a32cc8d000 with 14/14 gauges covered, zero provider calls and thirteen failure-induced reruns; the candidate is rejected because 7.143 percent reduction fails the frozen 50 percent gate.",
+    "next_executable_stage": "await_yuri_choice_between_one_bounded_governance_projection_repair_and_freezing_clockwork_as_research_evidence",
     "retry_counters": {
       "planning": 0,
       "implementation": 3,
       "review": 0,
-      "verification": 6
+      "verification": 10
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -24,14 +24,14 @@
     "scope_addition_behavior": "merge_then_resume",
     "replacement_requires_explicit_pause_or_redirect": true
   },
-  "resume_after_compaction": true,
+  "resume_after_compaction": false,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "The measured rehearsal failed its efficacy gate. Expanding the clock into the legacy register and command manifest is a material scope choice; alternatively the engine should be frozen and product work resumed."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "operation_evaluated_and_closed_revision_required_with_genuine_user_attention_fork"
   },
   "protected_boundaries": [
     "provider_free_private_shadow_request_lease_result_and_acknowledgement_engine_only",

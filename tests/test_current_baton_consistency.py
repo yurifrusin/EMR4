@@ -74,6 +74,10 @@ CLOCKWORK_ARCHITECTURE_NODE_ID = (
     "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture"
 )
 CLOCKWORK_ARCHITECTURE_SOURCE_HEAD = "f6cbd33fd3322754e06ac6dafa1503f5200e0803"
+CLOCKWORK_REHEARSAL_NODE_ID = (
+    "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal"
+)
+CLOCKWORK_REHEARSAL_SOURCE_HEAD = "a4044010e9f9319e149660ad889141a32cc8d000"
 ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
@@ -119,20 +123,20 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 327
-    assert graph["nodes"][-1]["id"] == CLOCKWORK_ARCHITECTURE_NODE_ID
+    assert graph["graph_revision"] == 328
+    assert graph["nodes"][-1]["id"] == CLOCKWORK_REHEARSAL_NODE_ID
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        CLOCKWORK_ARCHITECTURE_SOURCE_HEAD
+        CLOCKWORK_REHEARSAL_SOURCE_HEAD
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": ADMISSION_KERNEL_NODE_ID,
+            "node_id": CLOCKWORK_ARCHITECTURE_NODE_ID,
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 309
-    assert compass["source_graph_revision"] == 327
-    assert compass["current_position"]["node_id"] == CLOCKWORK_ARCHITECTURE_NODE_ID
+    assert compass["map_revision"] == 310
+    assert compass["source_graph_revision"] == 328
+    assert compass["current_position"]["node_id"] == CLOCKWORK_REHEARSAL_NODE_ID
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -148,11 +152,12 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
     clockwork_relation = _table_row(text, "Current shadow clockwork relation")
-    assert "Continuity 327 / Compass 309" in current
-    assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in current
-    assert "one causal lease" in current.lower()
-    assert "without replacing a live control" in current.lower()
+    assert "Continuity 328 / Compass 310" in current
+    assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in current
+    assert "thirteen reruns" in current.lower()
+    assert "revision_required" in current.lower()
     assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
+    assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
@@ -219,12 +224,13 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal" in next_work.lower()
-    assert "private shadow generation" in next_work.lower()
-    assert "at least 50% fewer reruns" in next_work.lower()
+    assert "user attention is required" in next_work.lower()
+    assert "incident-register projection" in next_work.lower()
+    assert "fresh cumulative efficacy test" in next_work.lower()
     assert "zero new mutable-current fixtures" in next_work.lower()
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
-    assert "no live adoption" in next_work.lower()
+    assert "no automatic repair" in next_work.lower()
+    assert "live adoption" in next_work.lower()
     assert "occupied deepseek/hmr or other provider call" in next_work.lower()
     assert "product/practice/git authority" in next_work.lower()
     assert "product data" in next_work.lower()
@@ -265,8 +271,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
-        "no live adoption",
+        "user attention is required",
+        "no automatic repair",
+        "live adoption",
         "current-control retirement",
         "occupied deepseek/hmr or other provider call",
         "product/practice/git authority",

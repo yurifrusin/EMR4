@@ -20,12 +20,8 @@ def _load(path: str) -> dict:
 def test_shadow_clockwork_architecture_is_current_without_live_adoption() -> None:
     graph = _load("orchestration/continuity/emr4-continuity-graph.json")
     compass = _load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 327
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 309
-    assert compass["source_graph_revision"] == 327
-    assert compass["current_position"]["node_id"] == NODE_ID
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 327
+    node = next(item for item in graph["nodes"] if item["id"] == NODE_ID)
     assert node["coordinates"]["source_head"] == SOURCE_HEAD
     assert node["relationships"] == [{"node_id": PARENT, "relation": "builds_on"}]
     assert node["authority"]["authorized_openings"] == []
@@ -37,15 +33,10 @@ def test_shadow_clockwork_architecture_is_current_without_live_adoption() -> Non
 
 def test_compass_names_provider_free_shadow_gear_rehearsal_successor() -> None:
     compass = _load("orchestration/continuity/emr4-compass.json")
-    current = compass["current_position"]
-    assert "provider-free shadow clockwork" in current["strategic_role"]
-    assert SOURCE_HEAD in current["why_now"]
-    assert "private shadow request" in current["outcome"]
-    closed = " ".join(current["does_not_solve"])
-    assert "No live control is replaced" in closed
-    assert "No native Harness starts" in closed
-    assert "No product, practice, data, Git" in closed
-    assert "Continuity 327 / Compass 309" in compass["orientation_statement"]
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+    assert "Freeze one causal clock" in journey["strategic_role"]
+    assert "Architecture accepted" in journey["outcome"]
+    assert any(path.endswith("architecture-report.md") for path in journey["evidence"])
 
 
 def test_closeout_records_have_brisbane_timestamps() -> None:

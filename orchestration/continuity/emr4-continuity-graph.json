@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 327,
+  "graph_revision": 328,
   "harvests": [],
   "nodes": [
     {
@@ -23089,9 +23089,98 @@
         "Occupied DeepSeek work remains behind the separate native-Harness HMR boot proof.",
         "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
       ]
+    },
+    {
+      "id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "title": "Ariadne provider-free shadow clockwork and DeepSeek broker gear efficacy rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-18T21:39:24.5770151Z",
+      "updated_at": "2026-08-18T21:39:24.5770151Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a4044010e9f9319e149660ad889141a32cc8d000",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The factual provider-free evaluation is accepted; the clockwork candidate is revision-required.",
+          "Thirteen reruns versus fourteen is below the frozen fifty-percent efficacy gate.",
+          "No accepted generation, provider call, live adoption or current-control retirement occurred."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "reject-shadow-clockwork-efficacy-candidate",
+          "source": "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Retain the corrected engine as negative evidence; do not adopt or expand without Yuri's choice."
+        }
+      ],
+      "claim_scope": [
+        "All fourteen frozen gauges reject before publication with zero corrected-candidate escapes.",
+        "Caller-supplied binding fields and new mutable-current fixtures are zero.",
+        "Thirteen reruns reduce the fourteen-rerun comparator by only 7.143 percent; acceptance required at least 50 percent.",
+        "Shared engine growth is 1,552 lines and clean-run median overhead is 112.089 ms, informational only.",
+        "DeepSeek, Gemini and every provider remained uncalled because deterministic admission failed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-plan.md",
+          "docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/contract.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/contract.schema.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/frozen-failure-gauges.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/provider-free-rehearsal-evidence.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rehearsal-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-543.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-rehearsal-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-shadow-clockwork-deepseek-broker-gear-rehearsal-preplanning-receipt.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-001.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-002.json",
+          "orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-003.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/shadow_clockwork.py",
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Yuri must choose between one bounded governance-projection repair and freezing the clockwork as research evidence.",
+        "No repair, live adoption or current-control retirement is implied by this factual closeout.",
+        "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
+        "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T20:08:13.6850292Z"
+  "updated_at": "2026-08-18T21:39:24.5770151Z"
 }

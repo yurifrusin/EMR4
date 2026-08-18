@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "474c3b3699b2b3b43d8e28ee18e74581801bc0f8aee7c1328979ff0512d86f2b",
+  "canonical_register_sha256": "29fe5a4224f43ecdd15bc604b518f44820042f16dcb17e083887d89b9b1f0bc0",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
       "canonical_unchanged": 391,
-      "untrusted_partial_worktree": 120
+      "untrusted_partial_worktree": 124
     },
     "by_category": {
       "command_scope_violation": 86,
       "evidence_misreport": 67,
       "harness_failure": 54,
-      "operator_error": 30,
-      "output_contract_violation": 229,
+      "operator_error": 31,
+      "output_contract_violation": 230,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 93,
+      "repository_defect": 95,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 432,
+      "agent_behavior": 433,
       "harness": 54,
-      "operator": 30,
-      "repository": 93,
+      "operator": 31,
+      "repository": 95,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 352,
+      "low": 355,
       "material": 118,
-      "moderate": 155
+      "moderate": 156
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -119,7 +119,7 @@
       "local-powershell-operator::orchestrator": 14,
       "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 3,
-      "local-rg-operator::orchestrator": 2,
+      "local-rg-operator::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
@@ -133,19 +133,22 @@
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
+      "shadow-clockwork-next-work-boundary-projection::orchestrator": 1,
       "shadow-clockwork-private-publication-engine::implementer": 1,
+      "shadow-clockwork-rehearsal-closeout-projections::orchestrator": 1,
+      "shadow-clockwork-rehearsal-continuity-updater::orchestrator": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1
     },
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 521,
+      "orchestrator": 525,
       "verifier": 57
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 625,
+  "incident_count": 629,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1623,6 +1626,30 @@
     },
     {
       "categories": [
+        "operator_error"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0619",
+        "AER-0626"
+      ],
+      "origins": [
+        "operator"
+      ],
+      "prevention_controls": [
+        "Prefer one fixed-string search per known register baseline; any required compound regular expression must be syntax-validated before repository execution.",
+        "Use one fixed-string search per known vocabulary token; compound ripgrep expressions are prohibited for the remainder of this closeout."
+      ],
+      "recurrence_signature": "operator.ripgrep_compound_regex_not_syntax_validated",
+      "resource_ids": [
+        "local-rg-operator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
         "repository_defect"
       ],
       "incident_count": 2,
@@ -1890,7 +1917,7 @@
       ]
     }
   ],
-  "register_revision": 539,
+  "register_revision": 543,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

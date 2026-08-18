@@ -2,9 +2,9 @@
   "schema_version": "ariadne.shadow_clockwork_rehearsal_evidence.v1",
   "operation_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
   "result": "revision_required_efficacy_threshold_exceeded",
-  "source_commit": "159301c3ef84c3f274971df9ef0776312b99f7af",
-  "acknowledged_tip_sha256": "d407d9e881b3d10c2dd745466b3d1e6ae9e5c6a8b994069df98332b55edfe415",
-  "authoritative_generation_sha256": "7634d82d419901b8d071354bbde9454ac9813fb48fbe79d9af8ad163f4befb11",
+  "source_commit": "a4044010e9f9319e149660ad889141a32cc8d000",
+  "acknowledged_tip_sha256": "916165250796d6e07d2720e06774d575db3441b746cee82b3c3f13706cf75074",
+  "authoritative_generation_sha256": "9bfd7edc7833dd57547d55b09f71d82c80e3253925a90b3876bc7626316b3feb",
   "contract_sha256": "b0fc0c9334fe4b6a438470ed74fb38eb5fb8fa02eb5aa4cff3648df89bb18b41",
   "failure_gauge_results": [
     {
@@ -94,8 +94,8 @@
   ],
   "efficacy": {
     "comparator_failure_induced_reruns": 14,
-    "candidate_failure_induced_reruns": 9,
-    "failure_induced_rerun_reduction_percent": 35.714,
+    "candidate_failure_induced_reruns": 13,
+    "failure_induced_rerun_reduction_percent": 7.143,
     "failure_gauges_covered": 14,
     "failure_gauges_required": 14,
     "caller_supplied_derived_fields": 0,
@@ -113,7 +113,7 @@
       "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_plan.py": 92,
       "total": 1552
     },
-    "clean_run_overhead_ms_median": 103.153,
+    "clean_run_overhead_ms_median": 112.089,
     "timing_acceptance_relevant": false,
     "accepted": false
   },

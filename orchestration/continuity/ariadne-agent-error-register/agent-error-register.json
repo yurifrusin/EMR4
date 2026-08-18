@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 539,
+  "register_revision": 543,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -24733,6 +24733,165 @@
           "orchestration_harness/shadow_clockwork.py",
           "tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal.py",
           "docs/ariadne-agent-error-correction-register-revision-539.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0626",
+      "attempt_id": "shadow-clockwork-continuity-status-search-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "operator",
+      "role": "orchestrator",
+      "resource_id": "local-rg-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_rg",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Known Continuity vocabulary inspection must use separate fixed-string searches rather than another unvalidated compound regular expression.",
+      "observed_error": "A compound ripgrep expression used to inspect Continuity status validation contained an unclosed group and exited with a parse error.",
+      "detection_method": "Ripgrep emitted the exact unclosed-group diagnostic; two replacement fixed-string searches then located the accepted-node requirement without changing repository state.",
+      "evidence_paths": [
+        "scripts/ariadne_compass.py",
+        "docs/ariadne-agent-error-correction-register-revision-540.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.ripgrep_compound_regex_not_syntax_validated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed read-only command, advance the closeout verification count, and use separate fixed-string searches for accepted and status.",
+        "prevention_control": "Use one fixed-string search per known vocabulary token; compound ripgrep expressions are prohibited for the remainder of this closeout.",
+        "evidence_paths": [
+          "scripts/ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-540.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0627",
+      "attempt_id": "shadow-clockwork-continuity-update-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "shadow-clockwork-rehearsal-continuity-updater",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_continuity_updater",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A Continuity decision must use the controlled state candidate, accepted or rejected; efficacy failure is represented by rejected rather than the latch vocabulary revision_required.",
+      "observed_error": "The first updater draft used revision_required as the Continuity decision status, so prospective Compass validation rejected the node before any canonical write.",
+      "detection_method": "The updater returned decision_status_invalid for the exact rehearsal decision; source inspection then resolved DECISION_STATES as candidate, accepted and rejected.",
+      "evidence_paths": [
+        "scripts/ariadne_continuity.py",
+        "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_continuity_update.py",
+        "docs/ariadne-agent-error-correction-register-revision-541.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.continuity_decision_used_latch_status_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed prospective validation, change only the decision status to rejected, retain revision-required in the narrative disposition, and rerun the idempotent updater.",
+        "prevention_control": "Continuity decisions derive from DECISION_STATES; latch, register and Continuity status vocabularies are distinct typed enums and may not be interchanged.",
+        "evidence_paths": [
+          "scripts/ariadne_continuity.py",
+          "scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_rehearsal_continuity_update.py",
+          "docs/ariadne-agent-error-correction-register-revision-541.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0628",
+      "attempt_id": "shadow-clockwork-final-canonical-packet-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "shadow-clockwork-rehearsal-closeout-projections",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The final packet must atomically update the compact register sentinels, direct register counts, new recurring-pattern allowlist and user-attention latch state.",
+      "observed_error": "One final packet reported four stale projections: the compact register row omitted AER-0550, the agent-origin count remained 432 instead of 433, the new compound-ripgrep recurrence was absent from the exact recurring-pattern allowlist, and complete was used for a latch that still required user attention.",
+      "detection_method": "The complete eight-file canonical packet reported four exact assertion or validator failures while all other tests passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-542.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.clockwork_closeout_four_legacy_projections_stale",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the four-failure packet as one rerun, restore the compact sentinels, update the direct count and recurrence allowlist, project the genuine user fork as blocked, and rerun the whole packet.",
+        "prevention_control": "A prospective closeout reducer must derive baton, register, recurrence and latch projections in one validation pass; until adoption, baseline-read all four before the canonical packet.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-542.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0629",
+      "attempt_id": "shadow-clockwork-final-canonical-packet-002",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "shadow-clockwork-next-work-boundary-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Any optional clockwork-repair branch must preserve the zero-new-mutable-current-fixtures boundary in the live Next implementation row.",
+      "observed_error": "The user-decision Next implementation row retained the other closed surfaces but omitted the exact zero new mutable-current fixtures boundary required by the baton consistency test.",
+      "detection_method": "The repeated complete canonical packet reported one exact missing-phrase assertion; every other selected test passed.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-agent-error-correction-register-revision-543.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.clockwork_repair_option_omitted_mutable_current_fixture_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the one-failure packet, restore the exact boundary in the user-decision row, add AER-0629 and rerun the same packet.",
+        "prevention_control": "The generated next-work projection must carry every still-applicable frozen efficacy boundary even when work is blocked on a user choice.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-543.md"
         ]
       },
       "status": "corrected"
