@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 377,
+  "register_revision": 378,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17229,6 +17229,43 @@
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-chained-validation-incident.json",
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json",
           "docs/ariadne-agent-error-correction-register-revision-377.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0430",
+      "attempt_id": "check-in-route-adapter-antigravity-help-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository package CLIs must be invoked through python -m so their package imports and admitted execution boundary are preserved, including help and read-only diagnostics.",
+      "observed_error": "Sol invoked scripts/ariadne_antigravity.py by file path for --help. The process exited 1 with ModuleNotFoundError before any verifier or provider launch; the candidate and worktree remained unchanged.",
+      "detection_method": "The direct process returned exit 1 and a package-import error. The immediately corrected python -m scripts.ariadne_antigravity --help process returned exit 0 and the supported CLI contract.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-antigravity-cli-invocation-failure.json",
+        "docs/ariadne-agent-error-correction-register-revision-378.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.repository_package_cli_file_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Rerun the help command through python -m scripts.ariadne_antigravity, require exit 0 before constructing verifier evidence and retain the exact candidate unchanged.",
+        "prevention_control": "All repository package CLIs use python -m; file-path execution is prohibited even for help or read-only diagnostics.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-antigravity-cli-invocation-failure.json",
+          "docs/ariadne-agent-error-correction-register-revision-378.md"
         ]
       },
       "status": "corrected"

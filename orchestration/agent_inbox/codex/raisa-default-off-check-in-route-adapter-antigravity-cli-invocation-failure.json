@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.local_cli_invocation_failure.v1",
+  "recorded_at": "2026-08-18T13:44:00+10:00",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+  "attempt_id": "check-in-route-adapter-antigravity-help-001",
+  "command_shape": "python scripts/ariadne_antigravity.py --help",
+  "exit_code": 1,
+  "sanitized_error": "ModuleNotFoundError: No module named scripts",
+  "provider_or_verifier_launched": false,
+  "candidate_changed": false,
+  "correction": "The package CLI was immediately rerun as python -m scripts.ariadne_antigravity --help and returned its supported command contract with exit 0.",
+  "prevention": "All repository package CLIs use python -m; file-path execution is prohibited even for help or read-only diagnostics."
+}
