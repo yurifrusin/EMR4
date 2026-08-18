@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 445
+    assert register["register_revision"] == 448
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 516)
+        f"AER-{index:04d}" for index in range(1, 519)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 370
+    assert len(agent_incidents) == 373
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 515
+    assert report["incident_count"] == 518
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,11 +3619,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 445
-    assert report["incident_count"] == 515
+    assert report["register_revision"] == 448
+    assert report["incident_count"] == 518
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 370,
+        "agent_behavior": 373,
         "harness": 53,
         "operator": 3,
         "repository": 73,
@@ -3631,10 +3631,10 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 80,
-        "evidence_misreport": 63,
+        "evidence_misreport": 65,
         "harness_failure": 53,
         "operator_error": 3,
-        "output_contract_violation": 178,
+        "output_contract_violation": 179,
         "read_only_violation": 3,
         "reasoning_claim_error": 46,
         "repository_defect": 73,
@@ -3642,8 +3642,8 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 348,
-        "untrusted_partial_worktree": 53,
+        "canonical_unchanged": 349,
+        "untrusted_partial_worktree": 55,
     }
     receipt_event_recurrence = next(
         row
@@ -7436,13 +7436,13 @@ def test_aer_0463_preserves_stale_compass_sentinel_correction() -> None:
     assert incident["status"] == "corrected"
 
 
-def test_aer_0473_through_0515_preserve_exact_tool_view_recovery_corrections() -> (
+def test_aer_0473_through_0518_preserve_exact_tool_view_and_successor_corrections() -> (
     None
 ):
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
-    assert list(incidents)[472:515] == [
-        f"AER-{index:04d}" for index in range(473, 516)
+    assert list(incidents)[472:518] == [
+        f"AER-{index:04d}" for index in range(473, 519)
     ]
     assert incidents["AER-0473"]["recurrence_signature"] == (
         "orchestrator.windows_rg_wildcard_path_operand_invalid"
@@ -7527,3 +7527,6 @@ def test_aer_0473_through_0515_preserve_exact_tool_view_recovery_corrections() -
     assert "unmounted" in incidents["AER-0514"]["correction"]["action"]
     assert incidents["AER-0515"]["stage"] == "closeout"
     assert "--output" in incidents["AER-0515"]["observed_error"]
+    assert incidents["AER-0516"]["status"] == "contained"
+    assert incidents["AER-0517"]["status"] == "corrected"
+    assert incidents["AER-0518"]["status"] == "corrected"

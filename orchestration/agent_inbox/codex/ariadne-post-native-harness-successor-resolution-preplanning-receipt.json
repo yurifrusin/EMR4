@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne post-native-Harness successor resolution repair",
+    "completed_stage": "The Harness tranche closed at 5fab227e7a0bf1d308d1373858f490419fee660e. Fresh complete rehydration then proved the named route tranche already passed at c82c3a741053a9c8da260aa62e1a968af22bb54e, while the Harness closeout and live Next implementation incorrectly direct it again. No product code changed.",
+    "next_executable_stage": "generate_a_fresh_five_source_preplanning_receipt_then_freeze_the_successor_resolution_repair_plan",
+    "operation_id": "ariadne-post-native-harness-successor-resolution-repair",
+    "resume_after_compaction": true,
+    "source_head": "5fab227e7a0bf1d308d1373858f490419fee660e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "5fab227e7a0bf1d308d1373858f490419fee660e",
+    "reason_codes": [],
+    "resolved_commit": "5fab227e7a0bf1d308d1373858f490419fee660e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5fab227e7a0bf1d308d1373858f490419fee660e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "5fab227e7a0bf1d308d1373858f490419fee660e",
+    "branch_origin_aligned": false,
+    "head": "5fab227e7a0bf1d308d1373858f490419fee660e",
+    "origin_branch_commit": "853f76d9a086c4bb263b54c761cbf8edbb65d6e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 651
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "This is a tightly coupled authority and continuity correction, while the native Harness is paused and Claude Code is not an authorized silent fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "There is no product candidate or independent conceptual fork; deterministic Git and acceptance evidence can resolve whether the named tranche is already complete.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and the correction is serial across one live baton, latch and continuity position.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-post-native-harness-successor-resolution-repair",
+    "parallel_work_packages": [
+      "No external or native lane may edit the live baton, latch or acceptance chain concurrently."
+    ],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "after_successor_resolution",
+      "pre_commit",
+      "closeout",
+      "before_any_product_candidate"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "validate the five-source receipt",
+      "freeze the exact evidence-conflict repair",
+      "register and guard the stale-successor incident",
+      "derive the narrowest uncompleted successor from accepted route and Harness evidence",
+      "verify continuity and protected refs before closeout"
+    ]
+  },
+  "planned_action": "freeze_and_execute_the_post_native_harness_successor_resolution_repair",
+  "reasons": [
+    "adapter_observation_missing:deepcode_cli",
+    "adapter_observation_missing:claude_cli_print"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "tests/test_api_spine_artifacts.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns continuity diagnosis, correction, acceptance and Git. DeepSeek native-Harness work is paused pending a separate provider-free HMR startup proof; Claude Code is not a silent fallback. Gemini has no candidate to review. Native subagents remain unavailable under current developer policy.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean at 5fab227e7a0bf1d308d1373858f490419fee660e; origin task remains 853f76d9a086c4bb263b54c761cbf8edbb65d6e9. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and all unrelated untracked files are preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after Harness closeout. Its Current Baton simultaneously records route convergence accepted at c82c3a741053a9c8da260aa62e1a968af22bb54e and incorrectly directs that same accepted tranche as Next implementation after the Harness result.",
+    "protected_evidence_boundaries": "Continuity correction and successor planning only. Preserve accepted route source c82c3a741053a9c8da260aa62e1a968af22bb54e, accepted Harness evidence 00d4f8d6065ab09b5faf5501c979edd2fa59943c, default-off A5.1, exact authored-synthetic allowlist and all API contracts. No product code, practice enablement, generic-status Arrived, grammar/client/waiting-area movement, product/patient/clinical/historical/protected data, provider/retry/credential/network, production/deployment/release/Pages/protected-ref action. Preserve docs/branding and all unrelated untracked files; stage explicit paths only."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 445,
+  "register_revision": 448,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -20475,6 +20475,126 @@
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-445.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0516",
+      "attempt_id": "ariadne-post-native-harness-successor-rehydration-001",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_five_source_rehydration",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A live next-tranche pointer must never name a tranche that the same baton and exact Git ancestry already record as accepted.",
+      "observed_error": "The committed post-Harness closeout, Sol acceptance, Yuri summary, Compass current position and live Next implementation directed the default-off check-in route convergence even though the live acceptance row and Git history prove it accepted at c82c3a741053a9c8da260aa62e1a968af22bb54e.",
+      "detection_method": "Fresh complete five-source rehydration compared the live accepted row, route closeout and Sol acceptance with git log ancestry before any product edit or dispatch.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+        "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
+        "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-446.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.live_successor_repeats_already_accepted_tranche",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Freeze a Sol-only successor-resolution repair, preserve the accepted route and Harness evidence, replace every stale pointer with a read-only ordinary-practice admission-readiness review and add a deterministic accepted-versus-next intersection guard.",
+        "prevention_control": "Every closeout derives Next implementation by subtracting all exact live accepted tranche identifiers; the baton test fails if accepted and next names intersect.",
+        "evidence_paths": [
+          "docs/ariadne-post-native-harness-successor-resolution-repair-plan.md",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-446.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0517",
+      "attempt_id": "ariadne-post-native-harness-successor-preplanning-receipt-002",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ariadne_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every preplanning runtime state must include the complete configured adapter-observation inventory even when fallback lanes are declined.",
+      "observed_error": "The first successor-resolution runtime state omitted deepcode_cli and claude_cli_print observations, so preflight returned revision_required before planning.",
+      "detection_method": "The immutable first receipt reports adapter_observation_missing for exactly deepcode_cli and claude_cli_print with worker dispatch false.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-447.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_adapter_observation_inventory_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add explicit declined observations for Deep Code and Claude CLI, preserve the failed receipt and generate a distinct corrected five-source receipt that passes with no reasons.",
+        "prevention_control": "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-447.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0518",
+      "attempt_id": "ariadne-post-native-harness-successor-source-evidence-003",
+      "observed_on": "2026-08-18",
+      "tranche": "ariadne-post-native-harness-successor-resolution-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_ariadne_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Runtime source evidence must distinguish the clean committed source checkpoint from intentional current repair changes reflected in the receipt snapshot.",
+      "observed_error": "The first runtime prose said the task branch is tracked-clean while the same receipt correctly observed tracked_worktree_clean false after the repair latch and runtime files were opened.",
+      "detection_method": "Exact readback compared source_evidence.git_refs_and_worktree with the receipt's machine-generated git_refs_snapshot before accepting the receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-448.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.runtime_source_evidence_clean_claim_conflicts_with_snapshot",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "State that source HEAD was clean before opening the named repair and explicitly distinguish current named latch/state/receipt changes; regenerate and pass a corrected receipt.",
+        "prevention_control": "Every runtime worktree sentence names both the last clean commit checkpoint and any intentional current tranche modifications so it agrees with the machine snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-448.md"
         ]
       },
       "status": "corrected"

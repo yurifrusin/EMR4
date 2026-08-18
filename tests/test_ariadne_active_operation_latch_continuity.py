@@ -64,7 +64,10 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert "AER-0424/0425" in completed
         assert "590-check admission packet" in completed
         assert "Continuity 316 / Compass 298" in completed
-    else:
+    elif latch["operation_id"] == (
+        "deepseek-native-harness-exact-tool-view-recovery-and-second-"
+        "monitored-development-admission"
+    ):
         assert latch["operation_id"] == (
             "deepseek-native-harness-exact-tool-view-recovery-and-second-"
             "monitored-development-admission"
@@ -76,6 +79,16 @@ def test_arrival_closeout_or_successor_latch_binds_transition_evidence() -> None
         assert "register revision 445" in completed
         assert "AER-0497" in completed
         assert "Continuity 321 / Compass 303" in completed
+    else:
+        assert latch["operation_id"] == (
+            "ariadne-post-native-harness-successor-resolution-repair"
+        )
+        assert latch["status"] == "in_progress"
+        assert latch["source_head"] == "5fab227e7a0bf1d308d1373858f490419fee660e"
+        completed = latch["checkpoint"]["completed_stage"]
+        assert "already passed" in completed
+        assert "c82c3a741053a9c8da260aa62e1a968af22bb54e" in completed
+        assert "No product code changed" in completed
     if latch["status"] == "in_progress":
         assert latch["resume_after_compaction"] is True
         assert latch["checkpoint"]["next_executable_stage"]
