@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.agent-error-evidence.v1",
+  "incident_id": "AER-0432",
+  "attempt_id": "check-in-route-adapter-resumption-readback-001",
+  "timestamp": "2026-08-18T13:30:01.6997279+10:00",
+  "status": "corrected",
+  "observed_error": "After resumption, Sol placed git status, four protected-ref readbacks and two exact-file metadata readbacks in one semicolon-composed PowerShell invocation. The combined process exited zero and showed the expected values, but it breached the one-readback-per-process prevention control established by AER-0429.",
+  "impact": "No product source, worktree content, ref, provider call or candidate changed. The combined output is retained as incident evidence and is not used as the verifier-admission gate.",
+  "correction": "Every verifier-admission readback is executed again as an independent process before dispatch. Remaining validation, staging, commit and readback operations use one process per gate.",
+  "candidate_head": "114fd1fbf45c06230e171b90b303e3470159d80e",
+  "protected_ref": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+}

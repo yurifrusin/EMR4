@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 379,
+  "register_revision": 380,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17305,6 +17305,43 @@
         "evidence_paths": [
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-future-timestamp-incident.json",
           "docs/ariadne-agent-error-correction-register-revision-379.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0432",
+      "attempt_id": "check-in-route-adapter-resumption-readback-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "No validation, staging, commit or readback operation may share a shell invocation with another gate; each exit must be independently captured before the next process starts.",
+      "observed_error": "After resumption, Sol combined git status, four protected-ref readbacks and two exact-file metadata readbacks in one semicolon-composed PowerShell invocation. The combined process exited zero and showed the expected values, but it repeated the readback form of the AER-0429 control breach.",
+      "detection_method": "Sol compared the first resumed command with the AER-0429 prevention control immediately after its output and rejected it as verifier-admission evidence before any provider dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-resumption-chained-readback-incident.json",
+        "docs/ariadne-agent-error-correction-register-revision-380.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain the candidate unchanged, exclude the combined output from verifier admission and rerun every dispatch-critical readback as a separate process before Gemini launch.",
+        "prevention_control": "One process per validation, staging, commit or readback gate; semicolon-composed gate invocations are prohibited even when every operation is read-only.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-resumption-chained-readback-incident.json",
+          "docs/ariadne-agent-error-correction-register-revision-380.md"
         ]
       },
       "status": "corrected"
