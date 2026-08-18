@@ -1,29 +1,29 @@
 {
-  "bundle_sha256": "433ab68165be9f03688e2e46bba6bb02e951a40d40135bad0c28e16ae29a50b0",
+  "bundle_sha256": "07d5f807deb9ad810982ef551506b38ef3d66acb23ba452970083535506acabe",
   "clock": {
-    "acknowledged_tip_sha256": "2115be7489c1093b356aa38927bdb494ac44cc70a69bcd7899007d9dbe2fdb0b",
-    "efficacy_sha256": "d3a3b75d73966b03cd1b065e5170c5c482af83c54fd9d3c969dc48138ffe1deb",
-    "latch_sha256": "d88d43680787a446268df5b24d109c787880f8d8c674aff685a9f9d8b6486fb8",
+    "acknowledged_tip_sha256": "7a780deb354d85875833db7b3211ea8b4b4bfcf04f8b2921aedfd7fa3e397c8e",
+    "efficacy_sha256": "dd1f46263b1a80db1a84cad1957e450571e9e3e3a4771e908abbc29407b34578",
+    "latch_sha256": "d46ed4457481c3d5834d60dc2b543300899656eac536c98c7f8b0905e83cb837",
     "previous_acknowledged_tip_sha256": "916165250796d6e07d2720e06774d575db3441b746cee82b3c3f13706cf75074",
-    "projections_sha256": "c3fb9929624598e3ab28b4e506d05328ed5c318465b962c291eda9c8cdd98439",
+    "projections_sha256": "609f7b2020c7b625d0eb27b50a2795af0380224c85906204320b68c8ba730655",
     "protected_refs_sha256": "e0a2dcbd4f1b996c80d3fee24b9a8bca485f5750ff9808cb7b7334bdd11acdac",
-    "source_commit": "ec72ca20e90a1a6f3558efee919cab4b0bb5e438"
+    "source_commit": "de777641a060766a12c429f4891f8d638f18e1bc"
   },
   "current_controls_retired": false,
   "efficacy": {
     "baseline_maintained_surfaces": 10,
     "caller_authored_derived_fields": 0,
     "candidate_maintained_surfaces": 4,
-    "construction_reruns": 11,
+    "construction_reruns": 13,
     "cumulative_break_even_closeouts": 3,
     "incremental_line_counts": {
       "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json": 67,
       "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json": 18,
       "orchestration_harness/governance_clockwork.py": 479,
       "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py": 113,
-      "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py": 168
+      "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py": 173
     },
-    "incremental_line_growth": 845,
+    "incremental_line_growth": 850,
     "line_budget": 850,
     "maintained_surface_reduction_percent": 60.0,
     "new_mutable_current_fixtures": 0,
@@ -98,14 +98,14 @@
   "projections": {
     "baton_projection": {
       "gate_result": "rejected",
-      "incident_count": 641,
+      "incident_count": 643,
       "inherited_boundaries": [
         "zero_new_mutable_current_fixtures",
         "no_live_adoption_or_current_control_retirement",
         "no_provider_product_runtime_or_protected_ref_effect",
         "explicit_path_staging_only"
       ],
-      "register_revision": 553
+      "register_revision": 555
     },
     "command_projection": {
       "commands": [
@@ -139,7 +139,7 @@
     },
     "compass_projection": {
       "horizon_status": "blocked",
-      "register_revision": 553
+      "register_revision": 555
     },
     "continuity_projection": {
       "decision_status": "rejected",
@@ -25619,6 +25619,85 @@
           "workflow_disposition": "revision_required"
         },
         {
+          "attempt_id": "clockwork-governance-gemini-review-001",
+          "candidate_state": "untrusted_partial_worktree",
+          "category": "repository_defect",
+          "causal_claim_level": "observation_only",
+          "correction": {
+            "action": "Count one review retry, move both evidence writes behind --publish, add a byte-equality regression test and require a fresh exact candidate, worktree, preflight and Gemini review.",
+            "evidence_paths": [
+              "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+              "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+              "docs/ariadne-agent-error-correction-register-revision-553.md"
+            ],
+            "prevention_control": "The runner defaults to a byte-preserving validation-only mode; every persistent output requires the explicit --publish flag, which remains forbidden in verifier manifests.",
+            "status": "corrected_fresh_attempt"
+          },
+          "detection_method": "The Antigravity postcondition compared the exact worktree before and after review, wrote only a digest failure receipt, and identified the changed tracked evidence path through local Git status and diff.",
+          "evidence_paths": [
+            "orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json",
+            "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+            "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+            "docs/ariadne-agent-error-correction-register-revision-553.md"
+          ],
+          "expected_invariant": "A verifier command admitted as non-generative must not modify the exact read-only candidate worktree when no publication flag is supplied.",
+          "incident_id": "AER-0641",
+          "model": "gemini-3.7-flash-high",
+          "observed_error": "The first Gemini review ran the allowlisted runner without --publish; the runner nevertheless rewrote provider-free-repair-evidence.json for the review HEAD, so the egress guard rejected the entire attempt without admitting a terminal decision.",
+          "observed_on": "2026-08-19",
+          "origin": "repository",
+          "process_severity": "moderate",
+          "reasoning_level": "high",
+          "recurrence_signature": "repository.non_publish_runner_rewrote_review_evidence",
+          "related_incident_ids": [],
+          "resource_id": "governance-projection-repair-runner-read-only-interface",
+          "role": "verifier",
+          "stage": "independent_review",
+          "status": "corrected",
+          "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+          "transport": "antigravity_new_project_bound_readonly_worktree",
+          "workflow_disposition": "review_rejected"
+        },
+        {
+          "attempt_id": "clockwork-governance-register-causal-enum-001",
+          "candidate_state": "untrusted_partial_worktree",
+          "category": "output_contract_violation",
+          "causal_claim_level": "observation_only",
+          "correction": {
+            "action": "Count a ninth verification retry, restore observation_only on AER-0641, append AER-0642 using the same closed value and rerun canonical validation.",
+            "evidence_paths": [
+              "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+              "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+              "docs/ariadne-agent-error-correction-register-revision-554.md"
+            ],
+            "prevention_control": "Incident construction resolves every enum from the committed schema before publication; descriptive evidence strength remains prose and cannot widen the closed vocabulary.",
+            "status": "corrected_fresh_attempt"
+          },
+          "detection_method": "The canonical register validator failed closed at incidents[640].causal_claim_level and reported the exact const mismatch.",
+          "evidence_paths": [
+            "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
+            "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+            "docs/ariadne-agent-error-correction-register-revision-554.md"
+          ],
+          "expected_invariant": "Every appended incident must use the register schema's exact closed causal_claim_level vocabulary without inventing a more specific label.",
+          "incident_id": "AER-0642",
+          "model": "gpt-sol",
+          "observed_error": "AER-0641 supplied direct_process_evidence although the schema intentionally permits only observation_only; validation rejected the register before pattern-report publication.",
+          "observed_on": "2026-08-19",
+          "origin": "agent_behavior",
+          "process_severity": "low",
+          "reasoning_level": "high",
+          "recurrence_signature": "orchestrator.agent_error_register_causal_claim_enum_not_schema_resolved",
+          "related_incident_ids": [],
+          "resource_id": "ariadne-agent-error-register-schema-admission",
+          "role": "orchestrator",
+          "stage": "deterministic_verification",
+          "status": "corrected",
+          "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+          "transport": "local_repository_register_validator",
+          "workflow_disposition": "revision_required"
+        },
+        {
           "attempt_id": "clock-8094ae8542b279f47a697cd5",
           "candidate_state": "untrusted_partial_worktree",
           "category": "output_contract_violation",
@@ -25638,7 +25717,7 @@
             "orchestration_harness/governance_clockwork.py"
           ],
           "expected_invariant": "One semantic closeout observation must generate every governance binding before private publication.",
-          "incident_id": "AER-0641",
+          "incident_id": "AER-0643",
           "model": "gpt-sol",
           "observed_error": "Authored-synthetic representative rejection used only to exercise the complete generated projection path.",
           "observed_on": "2026-08-19",
@@ -25656,7 +25735,7 @@
           "workflow_disposition": "revision_required"
         }
       ],
-      "register_revision": 553,
+      "register_revision": 555,
       "schema_version": "ariadne.agent-error-register.v1",
       "scope": {
         "causal_use_boundary": "Counts and recurrence signatures are workflow-improvement signals only; they do not establish that a model, provider, transport or role caused an incident unless separate evidence confirms that process cause.",
@@ -25672,7 +25751,7 @@
       }
     },
     "latch_projection": {
-      "source_commit": "ec72ca20e90a1a6f3558efee919cab4b0bb5e438",
+      "source_commit": "de777641a060766a12c429f4891f8d638f18e1bc",
       "status": "blocked",
       "user_attention_required": true
     },
@@ -25681,39 +25760,39 @@
         "candidate_state": {
           "accepted_candidate_changed": 114,
           "canonical_unchanged": 391,
-          "untrusted_partial_worktree": 136
+          "untrusted_partial_worktree": 138
         },
         "category": {
           "command_scope_violation": 86,
           "evidence_misreport": 67,
           "harness_failure": 54,
           "operator_error": 36,
-          "output_contract_violation": 231,
+          "output_contract_violation": 232,
           "read_only_violation": 4,
           "reasoning_claim_error": 46,
-          "repository_defect": 101,
+          "repository_defect": 102,
           "transport_timeout": 16
         },
         "origin": {
-          "agent_behavior": 434,
+          "agent_behavior": 435,
           "harness": 54,
           "operator": 36,
-          "repository": 101,
+          "repository": 102,
           "transport": 16
         },
         "process_severity": {
-          "low": 367,
+          "low": 368,
           "material": 118,
-          "moderate": 156
+          "moderate": 157
         },
         "role": {
           "implementer": 44,
           "integration_reviewer": 3,
-          "orchestrator": 537,
-          "verifier": 57
+          "orchestrator": 538,
+          "verifier": 58
         }
       },
-      "incident_count": 641,
+      "incident_count": 643,
       "open_incident_ids": [],
       "recurrences": [
         {
@@ -26670,14 +26749,14 @@
           ]
         }
       ],
-      "register_revision": 553,
-      "register_sha256": "56964c7d50c4c04a19de136d07c2507ac480147a1b9046311bd64d91cd0f1bd1"
+      "register_revision": 555,
+      "register_sha256": "dc116f58f6efcb0ec92fca0252082bfbfc0a395af361e8ab26afeb277981aab4"
     },
     "revision_projection": {
-      "document_path": "docs/ariadne-agent-error-correction-register-revision-553.md",
-      "incident_count": 641,
+      "document_path": "docs/ariadne-agent-error-correction-register-revision-555.md",
+      "incident_count": 643,
       "open_count": 0,
-      "revision": 553
+      "revision": 555
     }
   },
   "schema_version": "ariadne.governance_projection_bundle.v1"

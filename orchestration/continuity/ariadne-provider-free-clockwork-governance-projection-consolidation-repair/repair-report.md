@@ -10,9 +10,9 @@ One semantic observation generated the prospective register, recurrence, revisio
 
 - Rerun probes: 13/13
 - Surrounding-governance probes: 9/9
-- Construction reruns: 11
+- Construction reruns: 13
 - Steady-state surrounding reruns: 0
-- Incremental line growth: 845 / 850
+- Incremental line growth: 850 / 850
 - Maintained surfaces: 10 -> 4 (60.0% reduction)
 - Repair-only break-even: 2 closeout(s)
 - Cumulative break-even including 13 sunk reruns: 3 closeout(s)
