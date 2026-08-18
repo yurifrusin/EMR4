@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 414,
+  "register_revision": 417,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -19270,6 +19270,123 @@
         "evidence_paths": [
           "tests/test_ariadne_agent_error_register.py",
           "docs/ariadne-agent-error-correction-register-revision-414.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0485",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-predispatch-discovery-002",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "After AER-0484 correction, every subsequent shell invocation must avoid pipelines and use one executable with native filtering arguments.",
+      "observed_error": "The first post-receipt harness-file discovery command piped rg --files into a second rg process, repeating the just-corrected no-pipeline command-scope violation before occupied dispatch.",
+      "detection_method": "The orchestrator inspected the immediately preceding discovery command, identified the pipeline operator and stopped before creating a worker worktree or making a provider call.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/ariadne-agent-error-correction-register-revision-414.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Stop pre-dispatch work again, register the repeated command-scope incident, use one rg executable with native glob arguments for future discovery and rerun complete register validation.",
+        "prevention_control": "Before every shell call, reject command text containing a pipeline operator and express discovery filters through the selected executable's own arguments.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-415.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0486",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-validator-006",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_validator",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "related_incident_ids must satisfy the register's attempt-peer linkage contract rather than encode a cross-attempt recurrence relationship.",
+      "observed_error": "Revision 415 placed AER-0484 in AER-0485 related_incident_ids even though the two records have distinct attempt identities, so the canonical validator rejected the expected peer linkage as none.",
+      "detection_method": "The canonical register validator returned attempt peer linkage mismatch for AER-0485 before pattern generation or any worker dispatch.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-415.md",
+        "docs/ariadne-agent-error-correction-register-revision-416.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_cross_attempt_related_incident_link_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the invalid cross-attempt peer link, preserve recurrence through the shared recurrence signature and narrative, add AER-0486 and rerun canonical validation plus the complete register suite.",
+        "prevention_control": "Use related_incident_ids only for validator-admitted same-attempt peer relationships; express cross-attempt recurrence with recurrence_signature and explicit prose.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-416.md",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0487",
+      "attempt_id": "deepseek-native-harness-exact-tool-view-register-suite-007",
+      "observed_on": "2026-08-18",
+      "tranche": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Adding a second incident with an existing full recurrence composite must atomically add the generated recurring pattern to the complete-suite baseline.",
+      "observed_error": "Revision 416 generated the new two-incident PowerShell-pipeline recurring pattern, but the complete-suite expected recurring-pattern baseline did not yet admit and assert that exact composite.",
+      "detection_method": "The complete register suite reached its recurring-pattern equality test and failed only on the additional AER-0484/AER-0485 generated pattern.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-417.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add an exact assertion for the generated AER-0484/AER-0485 recurring pattern, exclude it from the residual equality set, add AER-0487 and rerun canonical plus complete-suite validation.",
+        "prevention_control": "Whenever a new incident repeats a full recurrence composite, inspect the generated report and advance the exact recurring-pattern baseline in the same revision before launching the complete suite.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-417.md",
           "orchestration/continuity/ariadne-agent-error-register/pattern-report.json"
         ]
       },

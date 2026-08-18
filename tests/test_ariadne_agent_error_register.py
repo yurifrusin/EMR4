@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 414
+    assert register["register_revision"] == 417
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 485)
+        f"AER-{index:04d}" for index in range(1, 488)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 347
+    assert len(agent_incidents) == 350
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 484
+    assert report["incident_count"] == 487
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,22 +3619,22 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 414
-    assert report["incident_count"] == 484
+    assert report["register_revision"] == 417
+    assert report["incident_count"] == 487
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 347,
+        "agent_behavior": 350,
         "harness": 51,
         "operator": 1,
         "repository": 69,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 75,
+        "command_scope_violation": 76,
         "evidence_misreport": 62,
         "harness_failure": 51,
         "operator_error": 1,
-        "output_contract_violation": 161,
+        "output_contract_violation": 163,
         "read_only_violation": 3,
         "reasoning_claim_error": 46,
         "repository_defect": 69,
@@ -3642,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 328,
+        "canonical_unchanged": 331,
         "untrusted_partial_worktree": 42,
     }
     receipt_event_recurrence = next(
@@ -3802,6 +3802,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         "AER-0471",
     ]
     assert register_literal_baseline_recurrence["incident_count"] == 2
+    powershell_pipeline_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "orchestrator.powershell_pipeline_used_for_read_only_projection"
+    )
+    assert powershell_pipeline_recurrence["incident_ids"] == [
+        "AER-0484",
+        "AER-0485",
+    ]
+    assert powershell_pipeline_recurrence["incident_count"] == 2
     assert [
         row
         for row in report["recurring_patterns"]
@@ -3821,6 +3832,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
             "repository.compass_current_position_literal_stale_after_valid_advance",
             "repository.agent_error_register_literal_baseline_stale_after_valid_advance",
+            "orchestrator.powershell_pipeline_used_for_read_only_projection",
         }
     ] == [
         {
@@ -7384,13 +7396,13 @@ def test_aer_0463_preserves_stale_compass_sentinel_correction() -> None:
     assert incident["status"] == "corrected"
 
 
-def test_aer_0473_through_0484_preserve_exact_tool_view_recovery_corrections() -> (
+def test_aer_0473_through_0487_preserve_exact_tool_view_recovery_corrections() -> (
     None
 ):
     incidents = {row["incident_id"]: row for row in _register()["incidents"]}
 
-    assert list(incidents)[472:484] == [
-        f"AER-{index:04d}" for index in range(473, 485)
+    assert list(incidents)[472:487] == [
+        f"AER-{index:04d}" for index in range(473, 488)
     ]
     assert incidents["AER-0473"]["recurrence_signature"] == (
         "orchestrator.windows_rg_wildcard_path_operand_invalid"
@@ -7411,7 +7423,10 @@ def test_aer_0473_through_0484_preserve_exact_tool_view_recovery_corrections() -
     assert incidents["AER-0484"]["recurrence_signature"] == (
         "orchestrator.powershell_pipeline_used_for_read_only_projection"
     )
+    assert incidents["AER-0485"]["related_incident_ids"] == []
+    assert incidents["AER-0486"]["attempt_id"].endswith("validator-006")
+    assert incidents["AER-0487"]["stage"] == "deterministic_verification"
     assert all(
         incidents[f"AER-{index:04d}"]["status"] == "corrected"
-        for index in range(473, 485)
+        for index in range(473, 488)
     )
