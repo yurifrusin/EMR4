@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.deterministic_admission.v1",
+  "recorded_at": "2026-08-18T13:35:00+10:00",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+  "candidate_head": "614852c4fad600e8969d401da132156f130cd5f8",
+  "status": "passed",
+  "independently_captured_checks": [
+    {"check": "python_compile_owned_source_and_tests", "exit_code": 0},
+    {"check": "ruff_owned_source_and_tests", "exit_code": 0},
+    {"check": "candidate_diff_check_owned_source_and_tests", "exit_code": 0},
+    {"check": "self_contained_adapter_and_route_convergence", "exit_code": 0, "passed": 103},
+    {"check": "database_backed_a5_1_runtime_excluding_stale_migration_head_baseline", "exit_code": 0, "passed": 35},
+    {"check": "api_spine_and_predecessor_plan_excluding_prior_live_latch_fixture", "exit_code": 0, "passed": 85},
+    {"check": "agent_error_register_full_suite", "exit_code": 0}
+  ],
+  "baseline_only_failures": [
+    {
+      "test": "tests/test_model_required_bureau_a5_1_check_in_runtime.py::test_migration_keeps_one_alembic_head",
+      "reason": "The historical test expects obsolete Alembic head v1w2x3y4z5b6; accepted repository history is at x3y4z5a6b7c8."
+    },
+    {
+      "test": "tests/test_api_spine_confirmation_family_idempotency_integration.py",
+      "reason": "Historical collection imports removed symbol _BERNIE_SESSION_STORE and fails unchanged from the candidate."
+    },
+    {
+      "test": "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter_extraction_rehearsal_plan.py::test_live_latch_names_the_exact_completed_operation",
+      "reason": "The predecessor acceptance fixture intentionally names its own now-completed latch; the live latch correctly names the successor operation."
+    }
+  ],
+  "authority_boundary": "Provider-free authored-synthetic deterministic evidence only. No live route, product data, provider, deployment, release, Pages or protected ref was used."
+}

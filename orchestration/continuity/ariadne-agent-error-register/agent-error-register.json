@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 376,
+  "register_revision": 377,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-18",
@@ -17190,6 +17190,45 @@
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-disposition-failure.json",
           "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-candidate-precommit-corrected-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-376.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0429",
+      "attempt_id": "check-in-route-adapter-deterministic-admission-001",
+      "observed_on": "2026-08-18",
+      "tranche": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Each validation, staging, commit and readback gate must execute as one independently captured process so a later command cannot mask an earlier nonzero exit.",
+      "observed_error": "Sol used semicolon-composed PowerShell invocations for several pre-candidate checks and one staging/commit boundary. Although the checks passed and no masked failure was observed, a later command could have hidden an earlier validation exit.",
+      "detection_method": "Sol reviewed the tranche command history against the accepted no-chained-validation prevention control, classified the recurrence before verifier dispatch and reran every candidate admission gate as a separate process.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-chained-validation-incident.json",
+        "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json",
+        "docs/ariadne-agent-error-correction-register-revision-377.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain the exact candidate unchanged and rerun compilation, Ruff, diff check, focused adapter/convergence, database-backed A5.1, API-Spine/plan and full register gates as independently captured processes before Gemini dispatch.",
+        "prevention_control": "No validation, staging, commit or readback operation may share a shell invocation with another gate; record every exit before starting the next process.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-chained-validation-incident.json",
+          "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-deterministic-admission.json",
+          "docs/ariadne-agent-error-correction-register-revision-377.md"
         ]
       },
       "status": "corrected"

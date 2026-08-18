@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "2de6c84c4b8f92640fcddf017b9207605af6c388a96858a4787f0d0d56b88aab",
+  "canonical_register_sha256": "04b3ecccef301597996bf0d70a06b3a4dc723ebcc61577d628ce542928ac167d",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 110,
+      "accepted_candidate_changed": 111,
       "canonical_unchanged": 278,
       "untrusted_partial_worktree": 40
     },
     "by_category": {
-      "command_scope_violation": 64,
+      "command_scope_violation": 65,
       "evidence_misreport": 57,
       "harness_failure": 49,
       "output_contract_violation": 131,
@@ -17,13 +17,13 @@
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 298,
+      "agent_behavior": 299,
       "harness": 49,
       "repository": 65,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 180,
+      "low": 181,
       "material": 115,
       "moderate": 133
     },
@@ -46,7 +46,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 215,
+      "codex-primary-orchestrator::orchestrator": 216,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -110,12 +110,12 @@
     "by_role": {
       "implementer": 42,
       "integration_reviewer": 3,
-      "orchestrator": 328,
+      "orchestrator": 329,
       "verifier": 55
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 428,
+  "incident_count": 429,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -123,12 +123,13 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 4,
+      "incident_count": 5,
       "incident_ids": [
         "AER-0334",
         "AER-0337",
         "AER-0372",
-        "AER-0397"
+        "AER-0397",
+        "AER-0429"
       ],
       "origins": [
         "agent_behavior"
@@ -137,6 +138,7 @@
         "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
         "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
         "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+        "No validation, staging, commit or readback operation may share a shell invocation with another gate; record every exit before starting the next process.",
         "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call."
       ],
       "recurrence_signature": "orchestrator.chained_validation_exit_masking",
@@ -1298,7 +1300,7 @@
       ]
     }
   ],
-  "register_revision": 376,
+  "register_revision": 377,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-18"
 }

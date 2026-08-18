@@ -4,16 +4,16 @@
   "active_tranche": "Provider-free default-off canonical check-in route-adapter convergence rehearsal",
   "objective": "Make the unchanged default-off A5.1 route delegate to the accepted canonical check-in product adapter while preserving the feature flag, authored-synthetic practice allowlist, exact request and response contract, default denial and every closed ordinary-product boundary.",
   "status": "in_progress",
-  "source_head": "c2bc6fae8bd99131c34613daf255fe82ce3a1690",
+  "source_head": "614852c4fad600e8969d401da132156f130cd5f8",
   "authority_source": "AGENTS.md Current Baton at Continuity 316 / Compass 298, the accepted check-in product-adapter extraction result and Yuri's standing uninterrupted-development authority direct this narrow default-off route-adapter convergence rehearsal.",
   "checkpoint": {
-    "completed_stage": "Under the explicit recovery lease, Sol implemented the frozen route/adapter/tests package. Compilation, Ruff and 103 self-contained tests passed; 35 database-backed A5.1 runtime tests passed after the frozen evidence-precedence compatibility amendment. One unrelated stale Alembic-head assertion remains baseline evidence and no migration/test change is admitted.",
-    "next_executable_stage": "generate_the_candidate_precommit_receipt_then_commit_explicit_owned_paths_and_run_exact_candidate_admission",
+    "completed_stage": "Exact candidate 614852c4fad600e8969d401da132156f130cd5f8 is deterministically admitted: compilation, Ruff, diff check, 103 focused tests, 35 database-backed A5.1 tests, 85 API-Spine/plan tests and the full register suite passed as independently captured processes. AER-0429 preserves and corrects earlier chained validation commands without changing the candidate.",
+    "next_executable_stage": "commit_the_deterministic_admission_and_aer_0429_correction_then_create_one_fresh_exact_candidate_gemini_3_7_flash_high_review_worktree",
     "retry_counters": {
       "planning": 0,
       "implementation": 2,
       "review": 0,
-      "verification": 0
+      "verification": 2
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },

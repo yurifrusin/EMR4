@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.local_validation_incident.v1",
+  "recorded_at": "2026-08-18T13:35:00+10:00",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+  "attempt_id": "check-in-route-adapter-deterministic-admission-001",
+  "status": "corrected",
+  "observed_error": "Sol placed multiple validation or admission operations in semicolon-composed PowerShell invocations, including one candidate-staging sequence in which a later command could have masked an earlier nonzero exit.",
+  "observed_masked_failure": false,
+  "candidate_source_changed_by_correction": false,
+  "correction": "Every candidate admission gate was rerun as one independently captured process at exact candidate 614852c4fad600e8969d401da132156f130cd5f8, and all required gates passed.",
+  "prevention": "No later validation, staging, commit or readback operation may share a shell invocation with an admission gate."
+}
