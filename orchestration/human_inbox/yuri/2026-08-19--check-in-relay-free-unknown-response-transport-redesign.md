@@ -31,8 +31,8 @@ allowed to run.
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`
 
 The efficiency picture is mixed but encouraging. Clockwork kept canonical
-drift and manual canonical edits at zero and prevented all twelve construction
-corrections from becoming another occupied run or model review. Those twelve
+drift and manual canonical edits at zero and prevented all thirteen construction
+and closeout corrections from becoming another occupied run or model review. Those thirteen
 corrections are itemized in the technical closeout rather than folded into the
 successful runtime count. The next tranche will measure the same four numbers:
 occupied reruns, verifier corrections, prepublication correction cycles and
@@ -42,4 +42,7 @@ No ordinary practice, product/API/config/client change, product/patient/
 clinical data, provider, production, deployment, release, Pages or protected
 ref was opened. `docs/branding/` and unrelated untracked files remain untouched.
 
-Pushover closeout: `pending_after_clockwork_publication`.
+Clockwork closeout is accepted at Continuity 335 / Compass 317, generation
+`gen-26454678fc92fe38ebdfc4464b5a325f6f7c55a9cc1fbbaad7eb7ad2be178760`,
+lease 9. The non-PHI continuing Pushover notification succeeded with request
+`8b5600fb-f514-402f-b33c-697a739de320`.

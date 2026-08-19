@@ -2,58 +2,51 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "relay-free-pre-review-static-admission",
+      "command_id": "read_only_relay_free_closeout_tick_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign",
-        "--check"
+        "scripts.ariadne_governance_clockwork_tick",
+        "--check",
+        "--intent",
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "relay-free-pre-review-focused-tests",
+      "command_id": "focused_relay_free_transport",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "pytest",
         "-q",
         "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
-        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_active_operation_latch_continuity.py",
-        "tests/test_current_baton_consistency.py",
-        "tests/test_api_spine_artifacts.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "relay-free-pre-review-ruff",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "ruff",
-        "check",
-        "orchestration_harness/governance_clockwork_tick.py",
-        "scripts/ariadne_governance_clockwork_tick.py",
-        "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_current_baton_consistency.py",
-        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
         "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "relay-free-pre-review-compile",
+      "command_id": "clockwork_checkpoint_regression",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "py_compile",
-        "orchestration_harness/governance_clockwork_tick.py",
-        "scripts/ariadne_governance_clockwork_tick.py",
-        "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py"
+        "pytest",
+        "-q",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "surrounding_latch_baton_api_spine",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

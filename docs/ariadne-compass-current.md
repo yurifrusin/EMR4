@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next prove explicit rollback and ambiguous-result recovery in a newly frozen disposable authored-synthetic transaction probe before any ordinary-practice admission decision.
+> EMR4 will next freeze a new provider-free disposable PostgreSQL rollback and unknown-response rehearsal that uses the accepted relay-free caller/result transport, with no execution before deterministic admission and a fresh five-source preexecution receipt.
 
 ## North star
 
@@ -438,26 +438,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One closed environment-manifest contract now defines exact restricted-role, opaque secret-reference, rotation-evidence and deny-only break-glass expectations without instantiating them. Lineage parent: `raisa-provider-free-clockwork-governed-check-in-successor-resolution`.
 211. **Prove the restricted ordinary check-in database identity and tenant boundary before any transaction-recovery or admission decision — Disposable PostgreSQL check-in runtime-role and tenant-isolation attestation**
    One disposable authored-synthetic PostgreSQL instance now demonstrates the exact restricted role, forced-RLS same-tenant success, cross-tenant denial and exact cleanup without product data or ordinary release. Lineage parent: `raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture`.
+212. **Remove the failed host relay and queue before resuming check-in transaction-outcome evidence — Relay-free check-in unknown-response transport redesign**
+   One provider-free no-database fixture proves attached-stdin credential input, exact terminal OCI-state outcome closure and exact cleanup without a retry. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal`.
 
 ## Current position
 
-**Prove fail-closed rollback and unknown-commit recovery against the same default-off authored-synthetic environment boundary — Disposable PostgreSQL check-in runtime-role and tenant-isolation attestation**
+**Prove rollback and ambiguous-result readback through the accepted relay-free caller boundary — Relay-free check-in unknown-response transport redesign**
 
-**Why this proof came next:** The manifest vocabulary, least-privilege role and tenant separation are proven; transaction outcome ambiguity is the remaining operational-evidence dependency before any future ordinary-admission decision.
+**Why this proof came next:** The restricted role and forced-RLS floor already pass, and the replacement credential/result transport now passes independently without a database; the failed relay no longer blocks a newly frozen transaction rehearsal.
 
-The next tranche is a provider-free disposable PostgreSQL rollback and unknown-commit recovery rehearsal with zero ordinary release and exact cleanup.
+The next tranche freezes a provider-free disposable PostgreSQL rollback and unknown-response recovery rehearsal using only the accepted relay-free transport.
 
 ### What this unlocks
 
-- Evidence that explicit rollback leaves no accepted effect.
-- Evidence that an ambiguous response cannot cause a duplicate synthetic effect or ordinary release.
-- A later fresh read-only ordinary-admission readiness decision over all three operational evidence gaps.
+- Evidence that explicit rollback leaves zero synthetic effect through the relay-free caller.
+- Evidence that an incomplete terminal response releases no success or retry and is resolved by restricted authoritative readback.
+- A later fresh ordinary-admission readiness decision over the complete operational evidence chain.
 
 ### What it does not solve
 
-- No real secret, existing database, product relation or product command is used.
-- No ordinary-practice check-in command is enabled, admitted or mounted.
-- No occupied DeepSeek HMR, production runtime, deployment, release, Pages or protected integration opens.
+- No disposable PostgreSQL execution is authorized until the successor plan and preexecution receipt pass.
+- No ordinary-practice command is enabled, admitted or mounted.
+- No product/patient/clinical data, provider, production, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1308,6 +1310,7 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
 - `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md`
+- `docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
@@ -1327,7 +1330,6 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md`
-- `docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md`
 - `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md`
@@ -1764,6 +1766,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
@@ -1995,7 +1998,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2636,6 +2639,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json`
+- `orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.schema.json`
@@ -3497,4 +3502,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 316; continuity graph revision 334._
+_Compass map revision 317; continuity graph revision 335._

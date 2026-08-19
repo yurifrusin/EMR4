@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 316,
-  "updated_at": "2026-08-19T06:42:31Z",
-  "source_graph_revision": 334,
-  "orientation_statement": "EMR4 will next prove explicit rollback and ambiguous-result recovery in a newly frozen disposable authored-synthetic transaction probe before any ordinary-practice admission decision.",
+  "map_revision": 317,
+  "updated_at": "2026-08-19T09:50:59.0478032Z",
+  "source_graph_revision": 335,
+  "orientation_statement": "EMR4 will next freeze a new provider-free disposable PostgreSQL rollback and unknown-response rehearsal that uses the accepted relay-free caller/result transport, with no execution before deterministic admission and a fresh five-source preexecution receipt.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4252,27 +4252,38 @@
         "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
         "orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+      "lineage_parent": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+      "strategic_role": "Remove the failed host relay and queue before resuming check-in transaction-outcome evidence",
+      "outcome": "One provider-free no-database fixture proves attached-stdin credential input, exact terminal OCI-state outcome closure and exact cleanup without a retry.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json",
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
-    "strategic_role": "Prove fail-closed rollback and unknown-commit recovery against the same default-off authored-synthetic environment boundary",
-    "why_now": "The manifest vocabulary, least-privilege role and tenant separation are proven; transaction outcome ambiguity is the remaining operational-evidence dependency before any future ordinary-admission decision.",
-    "outcome": "The next tranche is a provider-free disposable PostgreSQL rollback and unknown-commit recovery rehearsal with zero ordinary release and exact cleanup.",
+    "node_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "strategic_role": "Prove rollback and ambiguous-result readback through the accepted relay-free caller boundary",
+    "why_now": "The restricted role and forced-RLS floor already pass, and the replacement credential/result transport now passes independently without a database; the failed relay no longer blocks a newly frozen transaction rehearsal.",
+    "outcome": "The next tranche freezes a provider-free disposable PostgreSQL rollback and unknown-response recovery rehearsal using only the accepted relay-free transport.",
     "unlocks": [
-      "Evidence that explicit rollback leaves no accepted effect.",
-      "Evidence that an ambiguous response cannot cause a duplicate synthetic effect or ordinary release.",
-      "A later fresh read-only ordinary-admission readiness decision over all three operational evidence gaps."
+      "Evidence that explicit rollback leaves zero synthetic effect through the relay-free caller.",
+      "Evidence that an incomplete terminal response releases no success or retry and is resolved by restricted authoritative readback.",
+      "A later fresh ordinary-admission readiness decision over the complete operational evidence chain."
     ],
     "does_not_solve": [
-      "No real secret, existing database, product relation or product command is used.",
-      "No ordinary-practice check-in command is enabled, admitted or mounted.",
-      "No occupied DeepSeek HMR, production runtime, deployment, release, Pages or protected integration opens."
+      "No disposable PostgreSQL execution is authorized until the successor plan and preexecution receipt pass.",
+      "No ordinary-practice command is enabled, admitted or mounted.",
+      "No product/patient/clinical data, provider, production, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
-      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
-      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md"
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

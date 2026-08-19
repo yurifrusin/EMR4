@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 334,
+  "graph_revision": 335,
   "harvests": [],
   "nodes": [
     {
@@ -23705,9 +23705,107 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+      "title": "Relay-free check-in unknown-response transport redesign",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly selected the relay-free transport redesign after the predecessor exhausted three fail-closed attempts.",
+          "The accepted result is provider-free, authored-synthetic and no-database; it opens only a separately planned disposable PostgreSQL successor.",
+          "No ordinary practice, product/API/config/client, patient/clinical data, provider, production, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-relay-free-oci-result-channel",
+          "source": "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+          "status": "accepted",
+          "summary": "Replace the Windows host TCP relay and multiprocessing queue with attached-stdin credential input and exact terminal OCI-state outcome classification."
+        },
+        {
+          "id": "accept-one-no-database-occupied-proof",
+          "source": "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one network-disabled inert container proof with exit 42, zero database/provider/product activity, hostile-state denial and exact cleanup."
+        },
+        {
+          "id": "repair-repeat-checkpoint-idempotency",
+          "source": "scripts/ariadne_governance_clockwork_tick.py",
+          "status": "accepted",
+          "summary": "Require the exact normalized intent digest, operation and event kind for replay and regenerate the evidence/report output pair idempotently."
+        }
+      ],
+      "claim_scope": [
+        "Credential input over attached stdin is separated from a result channel derived only from exact captured identity and terminal OCI state.",
+        "The exact no-database fixture admits only stopped exit 42 without OOM, state error or restart as simulated incomplete response and releases no success or retry.",
+        "The one occupied proof leaves no attachment, captured container or matching resource and starts no database.",
+        "This result does not prove database connection, rollback, commit uncertainty, readback, exact-one effect, product readiness or ordinary admission."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+          "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.json",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/evidence.schema.json",
+          "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The relay-free transport has not connected to PostgreSQL or proved rollback, ambiguous commit readback or exact-one synthetic effect.",
+        "The next occupied database rehearsal requires its own frozen plan, deterministic admission and fresh five-source preexecution receipt.",
+        "Ordinary-practice activation, product-schema grants, live secrets, product runtime, occupied DeepSeek, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-19T09:50:59.0478032Z",
+      "updated_at": "2026-08-19T09:50:59.0478032Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a00da58c630202085a33fe8e9afdb8ace4b2a028",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-19T06:42:31Z"
+  "updated_at": "2026-08-19T09:50:59.0478032Z"
 }

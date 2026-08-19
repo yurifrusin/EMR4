@@ -13,13 +13,16 @@
   },
   "governance": {
     "clockwork_publications_before_closeout": 3,
+    "clockwork_closeout_publications": 1,
+    "final_generation": "gen-26454678fc92fe38ebdfc4464b5a325f6f7c55a9cc1fbbaad7eb7ad2be178760",
+    "final_lease_sequence": 9,
     "manual_canonical_edits": 0,
     "canonical_drift_events": 0,
     "protected_ref_movements": 0,
     "unrelated_untracked_paths_modified": 0
   },
   "construction": {
-    "corrective_cycles": 12,
+    "corrective_cycles": 13,
     "categories": {
       "receipt_or_source_binding": 3,
       "plan_or_contract_binding": 2,
@@ -27,7 +30,8 @@
       "clockwork_checkpoint_admission_or_idempotency": 2,
       "implementation_import_or_output_pairing": 2,
       "review_packet_supporting_path_label": 1,
-      "closeout_manifest_relationship_cardinality": 1
+      "closeout_manifest_relationship_cardinality": 1,
+      "clean_closeout_replay_digest_field": 1
     },
     "accepted_runtime_or_verifier_reruns_caused": 0
   },

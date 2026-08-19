@@ -2,7 +2,7 @@
 
 Date: 2026-08-19
 
-Status: **accepted pending the generic clockwork closeout publication**
+Status: **accepted at Continuity 335 / Compass 317**
 
 ## Outcome
 
@@ -64,7 +64,7 @@ The durable reading records one occupied proof, zero occupied retries, one
 Gemini review, zero Gemini corrections, zero manual canonical edits and zero
 canonical drift.
 
-Twelve prepublication corrective cycles remain attributable to caller-authored
+Thirteen construction and closeout corrective cycles remain attributable to caller-authored
 planning, receipt or gear construction:
 
 1. one invalid parallel-leverage vocabulary draft;
@@ -82,12 +82,15 @@ planning, receipt or gear construction:
     used descriptive `clockwork-decision` labels while the retained files use
     the generic `clockwork-tick` names; and
 12. one closeout-intent rejection because its graph node supplied two lineage
-    relationships where the admitted clockwork schema requires exactly one.
+    relationships where the admitted clockwork schema requires exactly one;
+    and
+13. one post-publication replay-readback correction aligning the generic CLI
+    with the clean-closeout journal's `manifest_sha256` field.
 
 The eleventh defect did not affect the exact candidate, contract, proof,
 manifest, command results or current latch, so the original packet and passing
 receipt remain immutable and no ceremonial second review was launched. None of
-the twelve corrections caused a second occupied proof or verifier call. The generic checkpoint
+the thirteen corrections caused a second occupied proof or verifier call. The generic checkpoint
 CLI now requires exact intent-digest equality for replay and recreates its JSON
 evidence and Markdown report as a pair. The remaining efficiency target is to
 derive more runtime-state/source-evidence fields instead of asking Sol to
@@ -112,4 +115,8 @@ execute until deterministic admission and a fresh five-source preexecution
 receipt pass. It must retain no-retry semantics, authoritative restricted-role
 readback, forced-RLS isolation, exact cleanup and zero ordinary release.
 
-Pushover closeout: `pending_after_clockwork_publication`.
+The clockwork closeout published generation
+`gen-26454678fc92fe38ebdfc4464b5a325f6f7c55a9cc1fbbaad7eb7ad2be178760`
+at lease sequence 9 with zero canonical drift. The non-PHI continuing
+Pushover notification succeeded with request
+`8b5600fb-f514-402f-b33c-697a739de320`.

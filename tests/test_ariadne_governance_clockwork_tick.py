@@ -83,6 +83,23 @@ def test_cli_idempotency_requires_exact_intent_digest() -> None:
         event_kind="checkpoint_transition",
         intent_sha256="sha256:" + "b" * 64,
     )
+    clean_transaction = {
+        "operation_id": REDESIGN_OPERATION_ID,
+        "event_kind": "clean_closeout",
+        "journal": [
+            {
+                "payload": {
+                    "manifest_sha256": "sha256:" + "c" * 64,
+                }
+            }
+        ],
+    }
+    assert _is_exact_published_intent(
+        clean_transaction,
+        operation_id=REDESIGN_OPERATION_ID,
+        event_kind="clean_closeout",
+        intent_sha256="sha256:" + "c" * 64,
+    )
 
 
 def test_cli_output_pair_is_written_together(tmp_path: Path) -> None:

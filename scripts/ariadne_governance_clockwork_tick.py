@@ -98,7 +98,7 @@ def _intent_identity(
     return (
         admitted["transaction_manifest"]["operation_id"],
         "clean_closeout",
-        tc.sha256(admitted),
+        tc.sha256(admitted["transaction_manifest"]),
     )
 
 
@@ -117,7 +117,10 @@ def _is_exact_published_intent(
     return any(
         isinstance(event, dict)
         and isinstance(event.get("payload"), dict)
-        and event["payload"].get("intent_sha256") == intent_sha256
+        and (
+            event["payload"].get("intent_sha256") == intent_sha256
+            or event["payload"].get("manifest_sha256") == intent_sha256
+        )
         for event in transaction.get("journal", [])
     )
 
