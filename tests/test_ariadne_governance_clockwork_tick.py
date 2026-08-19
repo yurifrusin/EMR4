@@ -32,6 +32,10 @@ from orchestration_harness.governance_live_adoption import (
     validate_contract,
     validate_live_state,
 )
+from scripts.ariadne_governance_clockwork_tick import (
+    _is_exact_published_intent,
+    _write_outputs,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,6 +57,48 @@ REDESIGN_OPERATION_ID = (
 
 def _json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def test_cli_idempotency_requires_exact_intent_digest() -> None:
+    transaction = {
+        "operation_id": REDESIGN_OPERATION_ID,
+        "event_kind": "checkpoint_transition",
+        "journal": [
+            {
+                "payload": {
+                    "intent_sha256": "sha256:" + "a" * 64,
+                }
+            }
+        ],
+    }
+    assert _is_exact_published_intent(
+        transaction,
+        operation_id=REDESIGN_OPERATION_ID,
+        event_kind="checkpoint_transition",
+        intent_sha256="sha256:" + "a" * 64,
+    )
+    assert not _is_exact_published_intent(
+        transaction,
+        operation_id=REDESIGN_OPERATION_ID,
+        event_kind="checkpoint_transition",
+        intent_sha256="sha256:" + "b" * 64,
+    )
+
+
+def test_cli_output_pair_is_written_together(tmp_path: Path) -> None:
+    result = {
+        "status": "passed",
+        "operation_id": REDESIGN_OPERATION_ID,
+        "source_commit": "a" * 40,
+        "generation_id": "gen-" + "b" * 64,
+        "previous_generation_id": "gen-" + "c" * 64,
+        "lease_sequence": 8,
+    }
+    _write_outputs(tmp_path, result, prefix="clockwork-checkpoint-tick")
+    assert (tmp_path / "clockwork-checkpoint-tick-evidence.json").is_file()
+    report = tmp_path / "clockwork-checkpoint-tick-report.md"
+    assert report.is_file()
+    assert "Lease sequence: 8" in report.read_text(encoding="utf-8")
 
 
 def _blocked_intent(worktree: Path) -> dict:

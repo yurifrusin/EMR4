@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
   "objective": "Freeze and provider-free prove a relay-free caller/result transport that eliminates the Windows host TCP relay and multiprocessing queue from the evidence path while preserving exact request identity, fail-closed no-retry semantics, authoritative readback, forced-RLS isolation and zero ordinary release; perform no disposable PostgreSQL execution until a separately admitted preexecution gate passes.",
   "status": "in_progress",
-  "source_head": "54c099b29af8b3f189c7367168e6db281ca4feaf",
+  "source_head": "31cbebc4462d2795b9d6bca84a48186901515a6a",
   "authority_source": "Yuri's explicit transport-redesign selection, the blocked predecessor's immutable negative evidence and the accepted runtime-role and tenant-isolation floor.",
   "checkpoint": {
-    "completed_stage": "The relay-free design, immutable-source contract, closed schemas, typed no-database harness, 256/256 hostile contract mutations, 96/96 hostile OCI states, exact cached-image admission and focused static tests passed at a full-Git candidate; no container or database execution occurred.",
-    "next_executable_stage": "generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_no_database_relay_free_oci_result_channel_proof_and_stop_on_any_mismatch",
+    "completed_stage": "Exactly one provider-free no-database relay-free OCI result-channel proof passed from full Git source cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76; the closed evidence is committed at 31cbebc4462d2795b9d6bca84a48186901515a6a, all deterministic gates pass, and the attachment, captured container and matching labelled resources are absent.",
+    "next_executable_stage": "generate_a_fresh_five_source_pre_verifier_receipt_then_dispatch_exactly_one_read_only_gemini_3_7_flash_high_veto_against_the_clean_exact_candidate",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

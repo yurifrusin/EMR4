@@ -22,9 +22,14 @@ from orchestration_harness.governance_clockwork_tick import (
     build_blocked_tick_generation,
     publish_tick_generation,
     rollback_tick_generation,
+    validate_blocked_tick_intent,
+    validate_checkpoint_tick_intent,
+    validate_tick_intent,
     validate_tick_live_state,
+    validate_user_decision_tick_intent,
 )
 from orchestration_harness.governance_live_adoption import validate_contract
+from orchestration_harness import transactional_closeout as tc
 
 
 CONTRACT = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
@@ -72,6 +77,51 @@ def _write_outputs(topic: Path, result: dict, *, prefix: str = "clockwork-tick")
     )
 
 
+def _intent_identity(
+    intent: dict, contract: dict
+) -> tuple[str | None, str, str]:
+    version = intent.get("schema_version")
+    if version == BLOCKED_INTENT_VERSION:
+        admitted = validate_blocked_tick_intent(intent, contract)
+        return admitted["operation_id"], "blocked_transition", tc.sha256(admitted)
+    if version == CHECKPOINT_INTENT_VERSION:
+        admitted = validate_checkpoint_tick_intent(intent, contract)
+        return admitted["operation_id"], "checkpoint_transition", tc.sha256(admitted)
+    if version == USER_DECISION_INTENT_VERSION:
+        admitted = validate_user_decision_tick_intent(intent, contract)
+        return (
+            admitted["next_operation"]["operation_id"],
+            "user_decision_transition",
+            tc.sha256(admitted),
+        )
+    admitted = validate_tick_intent(intent, contract)
+    return (
+        admitted["transaction_manifest"]["operation_id"],
+        "clean_closeout",
+        tc.sha256(admitted),
+    )
+
+
+def _is_exact_published_intent(
+    transaction: dict,
+    *,
+    operation_id: str | None,
+    event_kind: str,
+    intent_sha256: str,
+) -> bool:
+    if (
+        transaction.get("operation_id") != operation_id
+        or transaction.get("event_kind") != event_kind
+    ):
+        return False
+    return any(
+        isinstance(event, dict)
+        and isinstance(event.get("payload"), dict)
+        and event["payload"].get("intent_sha256") == intent_sha256
+        for event in transaction.get("journal", [])
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -91,24 +141,24 @@ def main(argv: list[str] | None = None) -> int:
         intent_path = _intent_path(arguments.intent)
         intent = _load(intent_path)
         transaction = _load(ROOT / contract["clockwork_root"] / "transaction.json")
-        if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
-            operation_id = intent.get("operation_id")
-            event_kind = "blocked_transition"
-        elif intent.get("schema_version") == CHECKPOINT_INTENT_VERSION:
-            operation_id = intent.get("operation_id")
-            event_kind = "checkpoint_transition"
-        elif intent.get("schema_version") == USER_DECISION_INTENT_VERSION:
-            operation_id = intent.get("next_operation", {}).get("operation_id")
-            event_kind = "user_decision_transition"
-        else:
-            operation_id = intent.get("transaction_manifest", {}).get("operation_id")
-            event_kind = "clean_closeout"
-        if (
-            arguments.check
-            and transaction.get("operation_id") == operation_id
-            and transaction.get("event_kind") == event_kind
+        operation_id, event_kind, intent_sha256 = _intent_identity(intent, contract)
+        if _is_exact_published_intent(
+            transaction,
+            operation_id=operation_id,
+            event_kind=event_kind,
+            intent_sha256=intent_sha256,
         ):
             result = validate_tick_live_state(ROOT, contract)
+            if arguments.publish:
+                _write_outputs(
+                    intent_path.parent,
+                    result,
+                    prefix=(
+                        "clockwork-checkpoint-tick"
+                        if intent.get("schema_version") == CHECKPOINT_INTENT_VERSION
+                        else "clockwork-tick"
+                    ),
+                )
         else:
             if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
                 prepared = build_blocked_tick_generation(ROOT, contract, intent)
