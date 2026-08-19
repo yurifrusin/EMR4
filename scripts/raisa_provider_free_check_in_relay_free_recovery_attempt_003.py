@@ -204,6 +204,7 @@ def _example_envelope(source_head: str) -> dict[str, object]:
 
 def static_check(*, require_empty_namespace: bool = True) -> dict[str, object]:
     source_head = _source_head()
+    terminal_namespace_empty = not any(path.exists() for path in TERMINAL_PATHS)
     exact_hashes = {
         "corrected_harness_sha256": (
             Path(accepted.__file__),
@@ -258,7 +259,7 @@ def static_check(*, require_empty_namespace: bool = True) -> dict[str, object]:
         "manifest_mutations": base["manifest_mutations"],
         "classifier_mutations": base["classifier_mutations"],
         "state_mutations": base["state_mutations"],
-        "terminal_namespace_empty": True,
+        "terminal_namespace_empty": terminal_namespace_empty,
     }
 
 
