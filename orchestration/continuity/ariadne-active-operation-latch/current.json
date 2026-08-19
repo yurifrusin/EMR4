@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
-  "active_tranche": "Ariadne provider-free clockwork live canonical adoption and retirement",
-  "objective": "Adopt the accepted repository-governance clockwork as the only canonical closeout writer, retire the four legacy writer classes without a dual-writer interval, preserve an immutable exact prior generation, prove fail-closed stale-writer denial and byte-exact rollback, and leave product, provider, deployment and protected-ref authority unchanged.",
+  "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+  "active_tranche": "Raisa provider-free clockwork-governed check-in successor resolution",
+  "objective": "Read the accepted check-in lineage and freeze the narrowest true dependency-satisfied successor without repeating an accepted route tranche or enabling ordinary practice.",
   "status": "in_progress",
-  "source_head": "d900fa04bbef3d05fee2b8d7ff0557e1d7e94d59",
-  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted single-owner mirror rehearsal at d03cc6386fdf3e2714881089514380d93824e160, Yuri's explicit 2026-08-19 choice to proceed with the recommended live canonical adoption/retirement tranche, and standing uninterrupted-development authority authorize only this repository-governance cutover.",
+  "source_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "authority_source": "Accepted check-in lineage, accepted live clockwork adoption and Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Plan, inventory, single-owner publisher, retirement guard and focused fault/rollback tests pass at exact candidate parent d900fa04bbef3d05fee2b8d7ff0557e1d7e94d59; the live pointer remains absent pending fresh independent veto.",
-    "next_executable_stage": "generate_the_pre_verifier_receipt_and_run_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_before_live_adoption",
+    "completed_stage": "Accepted ariadne-provider-free-clockwork-live-canonical-adoption-retirement at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_the_clockwork_owned_generation_and_resolve_the_exact_unrepeated_check_in_successor",
     "retry_counters": {
       "planning": 0,
-      "implementation": 7,
+      "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },

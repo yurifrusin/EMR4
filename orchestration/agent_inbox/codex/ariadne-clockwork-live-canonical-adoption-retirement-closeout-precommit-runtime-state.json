@@ -1,0 +1,100 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "explicitly_stage_and_commit_the_validated_first_live_clockwork_generation_and_its_closeout_evidence_on_the_task_branch_only",
+  "source_evidence": {
+    "live_handover_current_baton": "The clockwork-owned AGENTS.md now records Continuity 331 / Compass 313, exact reviewed source 9014e08a3fb4e3253759e0133d93c5aaf99a7ace, ten singly owned governance surfaces, four retired writer classes and the read-only successor.",
+    "current_authority_allocation": "GPT Sol owns live-state acceptance, explicit-path task-branch Git and successor rehydration. Gemini completed one read-only veto at exact candidate 9014e08a3fb4e3253759e0133d93c5aaf99a7ace. DeepSeek and native subagents are not selected for this serial closeout boundary.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+      "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/provider-free-live-adoption-evidence.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/adoption-report.md",
+      "orchestration/agent_inbox/antigravity/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-review-receipt.json",
+      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-19--clockwork-live-canonical-adoption-retirement.md",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The live clockwork is repository-governance only. Product, practice, route, schema, database, client, patient, clinical, provider, deployment, release, Pages, protected evidence and protected-ref movement remain closed. Preserve docs/branding and every unrelated untracked path; explicit-path staging only.",
+    "git_refs_and_worktree": "Task branch and HEAD remain 9014e08a3fb4e3253759e0133d93c5aaf99a7ace before the closeout commit. The pointer selects gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c with zero drift. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+    "active_tranche": "Raisa provider-free clockwork-governed check-in successor resolution",
+    "objective": "Read the accepted check-in lineage and freeze the narrowest true dependency-satisfied successor without repeating an accepted route tranche or enabling ordinary practice.",
+    "status": "in_progress",
+    "source_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "authority_source": "Accepted check-in lineage, accepted live clockwork adoption and Yuri's standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "Accepted ariadne-provider-free-clockwork-live-canonical-adoption-retirement at the machine-resolved source.",
+      "next_executable_stage": "rehydrate_the_clockwork_owned_generation_and_resolve_the_exact_unrepeated_check_in_successor",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_repository_governance_clockwork_live_adoption_and_legacy_writer_retirement_only",
+      "accepted_rehearsal_d03cc6386fdf3e2714881089514380d93824e160_is_the_semantic_and_safety_floor",
+      "one_canonical_writer_and_zero_dual_owned_surfaces_at_every_committed_state",
+      "legacy_writers_are_disabled_or_guarded_not_destructively_erased",
+      "exact_pre_adoption_generation_is_immutable_digest_bound_and_byte_recoverable",
+      "cutover_and_rollback_require_exclusive_source_and_generation_bound_leases",
+      "stale_legacy_wrong_source_abbreviated_oid_wrong_ref_and_path_escape_writes_fail_before_publication",
+      "zero_caller_authored_oids_counts_revisions_statuses_peer_links_output_paths_or_projection_bindings",
+      "all_observed_post_review_closeout_rerun_classes_remain_prevented_or_unrepresentable",
+      "no_occupied_deepseek_hmr_claude_code_fallback_or_other_provider_call_before_optional_gemini_veto",
+      "no_product_practice_route_schema_openapi_graphql_database_client_or_ordinary_practice_change",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+    "assessed_stage": "clockwork_closeout_pre_commit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The live closeout commit is a serial canonical publication boundary; the native Harness still requires its separate HMR boot proof.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "Gemini 3.7 Flash/high completed the exact-candidate read-only veto with nine zero-exit commands and an unchanged worktree.", "work_packages": ["exact_candidate_live_canonical_adoption_retirement_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Developer policy and the single-writer commit boundary require serial Sol ownership.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["one clockwork generation", "explicit-path staging", "task branch only", "protected refs fixed"],
+    "reassessment_triggers": ["after task-branch push", "before successor plan freeze"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "live clockwork closeout precommit", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Live pointer and canonical generation validate with zero drift."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected for the serial closeout boundary."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback forbidden."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Exact Gemini 3.7 Flash/high review passed and worktree remained clean."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Lane declined under developer policy and serial closeout constraints."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected and no fallback allowed."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "ariadne.governance_live_transaction.v1",
+  "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+  "transaction_id": "txn-a10b193b121c4eac0deb669c",
+  "source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "previous_source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "previous_canonical_sha256s": {
+    "continuity": "1593ebe467f55d31978e6678728a9879eb8cd4b16affa08395519bc8efd30a2f",
+    "compass": "5056d0b06de40993ec4ab06724a95196547fe471d186732fe61e3f70612d7aa1",
+    "compass_markdown": "27ba843ccb8b3ee362f6ff203c228089b154888a75442ea655e4edb7e7c3381b",
+    "active_latch": "71eed7c0fe60145236f8d954bc13eb3b5b3fa1cdd7151a378d9d5370b687907b",
+    "error_register": "92df6f2779fea4d5048e0d64d4f07748024ba162354e3ce2e4e191746546223b",
+    "pattern_report": "0f0d0a5019674a7cc158dfe0485c0ff048869e08188a613ca29c9e5017666a04",
+    "current_baton": "d5eda4ad3a0f504f920920993a6c2974de0d55c95351ad5814c472ecf43971c5"
+  },
+  "projection_sha256s": {
+    "graph": "sha256:ca569e43e60d2f7807fcf9f924eda1038e3d92cda05098364b475d8c3a89aaa1",
+    "compass": "sha256:b69fd83c79da029863c5d5ed6690dc3879bbd6dae70c50ce0a80bb305e6f831c",
+    "report": "sha256:2bb73158e6865d1554362bef283fac3972e86b81a1aed00b6df4bcc30a6cffeb",
+    "latch": "sha256:bfe26176919343390f709fbb821f25cc9461fca68b6a8923e40b1f686dde78d2",
+    "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
+  },
+  "journal": [
+    {
+      "schema_version": "ariadne.bureaucratic_clock_event.v1",
+      "journal_id": "journal-a10b193b121c4eac0deb669c",
+      "transaction_id": "txn-a10b193b121c4eac0deb669c",
+      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "sequence": 1,
+      "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "event_type": "manifest-accepted",
+      "actor": "gpt-sol",
+      "payload": {
+        "manifest_sha256": "sha256:dab298be60aa5e92ae24c437c642407812be9fd7befece40139a385131c8cd2c"
+      },
+      "event_sha256": "sha256:e48d09f8208c322ae6b2206b84703bf3c4e4fd7f03149d52ca60ca7baea04a83"
+    },
+    {
+      "schema_version": "ariadne.bureaucratic_clock_event.v1",
+      "journal_id": "journal-a10b193b121c4eac0deb669c",
+      "transaction_id": "txn-a10b193b121c4eac0deb669c",
+      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "sequence": 2,
+      "previous_event_sha256": "sha256:e48d09f8208c322ae6b2206b84703bf3c4e4fd7f03149d52ca60ca7baea04a83",
+      "event_type": "git-source-resolved",
+      "actor": "gpt-sol",
+      "payload": {
+        "source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+        "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
+      },
+      "event_sha256": "sha256:1010a213f7d21d46a9093e4b97f870e328871699737e639fb429b663f97d45a3"
+    },
+    {
+      "schema_version": "ariadne.bureaucratic_clock_event.v1",
+      "journal_id": "journal-a10b193b121c4eac0deb669c",
+      "transaction_id": "txn-a10b193b121c4eac0deb669c",
+      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "sequence": 3,
+      "previous_event_sha256": "sha256:1010a213f7d21d46a9093e4b97f870e328871699737e639fb429b663f97d45a3",
+      "event_type": "projections-reduced",
+      "actor": "gpt-sol",
+      "payload": {
+        "graph_revision": 331,
+        "map_revision": 313
+      },
+      "event_sha256": "sha256:4738acc368950fb6deabea1ee87edb17424ded1fcb5233a43e7e04bbec870cbf"
+    },
+    {
+      "schema_version": "ariadne.bureaucratic_clock_event.v1",
+      "journal_id": "journal-a10b193b121c4eac0deb669c",
+      "transaction_id": "txn-a10b193b121c4eac0deb669c",
+      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "sequence": 4,
+      "previous_event_sha256": "sha256:4738acc368950fb6deabea1ee87edb17424ded1fcb5233a43e7e04bbec870cbf",
+      "event_type": "projections-validated",
+      "actor": "gpt-sol",
+      "payload": {
+        "continuity": "passed",
+        "compass": "passed",
+        "latch": "passed"
+      },
+      "event_sha256": "sha256:b4f3c2d6e16d9261ebc082bad9cbb2d4bd7f36c18c4c0ae5e6df83f640ad74af"
+    },
+    {
+      "schema_version": "ariadne.bureaucratic_clock_event.v1",
+      "journal_id": "journal-a10b193b121c4eac0deb669c",
+      "transaction_id": "txn-a10b193b121c4eac0deb669c",
+      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "sequence": 5,
+      "previous_event_sha256": "sha256:b4f3c2d6e16d9261ebc082bad9cbb2d4bd7f36c18c4c0ae5e6df83f640ad74af",
+      "event_type": "transaction-prepared",
+      "actor": "gpt-sol",
+      "payload": {
+        "publication_mode": "shadow_directory_rename"
+      },
+      "event_sha256": "sha256:ec93ca91cf740603245a226c71d083a57d3eed8546fdb99f061a0a92d645b2ba"
+    }
+  ],
+  "publication_mode": "lease_bound_pointer_last_live_materialization",
+  "event_kind": "clean_closeout",
+  "register_bytes_preserved": true,
+  "pattern_bytes_preserved": true
+}

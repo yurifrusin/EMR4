@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free clockwork live canonical adoption and retirement",
+    "completed_stage": "The exact clean candidate 9014e08a3fb4e3253759e0133d93c5aaf99a7ace passes cross-checkout-stable dry-run generation, focused 7/7 fault/rollback/guard/drift/stability tests, the exact portable surrounding suite and the main-workspace 10/10 Compass gate; live pointer remains absent.",
+    "next_executable_stage": "run_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_then_install_the_live_pointer_only_on_pass",
+    "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+    "resume_after_compaction": true,
+    "source_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "reason_codes": [],
+    "resolved_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "branch_origin_aligned": false,
+    "head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "origin_branch_commit": "a6129d9a0c391314691cb73b28a5f21f1e834654",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 657
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The canonical ownership cutover is serial; occupied DeepSeek native-Harness use still requires the separate HMR boot proof and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high read-only veto now owns the exact-candidate adversarial review package after deterministic admission.",
+        "work_packages": [
+          "exact_candidate_live_canonical_adoption_retirement_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and canonical ownership, retirement, promotion and rollback form one inseparable serial boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after verifier decision",
+      "after live activation",
+      "at closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "deterministic admission before Gemini veto",
+      "one exact clean candidate and one fresh verifier",
+      "live pointer remains absent until one admitted pass",
+      "Sol-only acceptance adoption and task-branch Git"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_on_exact_candidate_9014e08a3fb4e3253759e0133d93c5aaf99a7ace_before_live_adoption",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+      "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns exact-candidate admission, acceptance, live clockwork adoption and task-branch Git. DeepSeek is declined because this canonical cutover is serial and its native Harness remains behind the separate HMR boot proof; Claude Code is forbidden as fallback. Gemini 3.7 Flash/high owns one fresh read-only veto only. Native subagents are declined under current developer policy and because the canonical cutover is one inseparable state transition.",
+    "git_refs_and_worktree": "The exact clean verifier candidate and task HEAD are full 9014e08a3fb4e3253759e0133d93c5aaf99a7ace; accepted floor d03cc6386fdf3e2714881089514380d93824e160 and initial authority a6129d9a0c391314691cb73b28a5f21f1e834654 are ancestors. Local/origin master and local/origin handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The main tracked tree is clean apart from intentional untracked veto artifacts and all pre-existing untracked paths, including docs/branding, remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely through line 500. Current Baton records Continuity 330 / Compass 312, accepted exact reviewed rehearsal candidate d03cc6386fdf3e2714881089514380d93824e160, exclusive mirror ownership, 23/23 fault safety, byte-exact rollback and the user-attention fork that Yuri resolved by selecting live adoption.",
+    "protected_evidence_boundaries": "Only provider-free repository-governance clockwork live adoption and legacy-writer retirement are authorized. One complete generation and one writer must exist at every accepted state; the exact prior generation remains Git-backed and byte-recoverable. No product, practice, data, runtime, deployment, release, Pages, protected-evidence or protected-ref action is authorized. Preserve docs/branding and every unrelated untracked file; use explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

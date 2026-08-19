@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_live_pointer.v1",
+  "phase": "clockwork_active",
+  "selected_generation_id": "gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
+  "selected_bundle_sha256": "f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
+  "previous_generation_id": "git-9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "previous_source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "lease_sequence": 1,
+  "writer": "clockwork"
+}

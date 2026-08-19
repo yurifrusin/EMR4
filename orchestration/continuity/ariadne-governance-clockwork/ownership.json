@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.governance_live_ownership.v1",
+  "phase": "clockwork_active",
+  "surface_owners": {
+    "continuity": "clockwork",
+    "compass": "clockwork",
+    "compass_markdown": "clockwork",
+    "active_latch": "clockwork",
+    "error_register": "clockwork",
+    "pattern_report": "clockwork",
+    "current_baton": "clockwork",
+    "command_manifest": "clockwork",
+    "transaction": "clockwork",
+    "ownership": "clockwork"
+  },
+  "legacy_writers": {
+    "bespoke_continuity_updater": "retired",
+    "manual_baton_editor": "retired",
+    "manual_latch_editor": "retired",
+    "manual_register_fixture_editor": "retired"
+  }
+}

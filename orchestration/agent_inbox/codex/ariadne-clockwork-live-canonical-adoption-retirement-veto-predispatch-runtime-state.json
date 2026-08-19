@@ -1,0 +1,101 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_on_exact_candidate_9014e08a3fb4e3253759e0133d93c5aaf99a7ace_before_live_adoption",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely through line 500. Current Baton records Continuity 330 / Compass 312, accepted exact reviewed rehearsal candidate d03cc6386fdf3e2714881089514380d93824e160, exclusive mirror ownership, 23/23 fault safety, byte-exact rollback and the user-attention fork that Yuri resolved by selecting live adoption.",
+    "current_authority_allocation": "GPT Sol owns exact-candidate admission, acceptance, live clockwork adoption and task-branch Git. DeepSeek is declined because this canonical cutover is serial and its native Harness remains behind the separate HMR boot proof; Claude Code is forbidden as fallback. Gemini 3.7 Flash/high owns one fresh read-only veto only. Native subagents are declined under current developer policy and because the canonical cutover is one inseparable state transition.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+      "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only provider-free repository-governance clockwork live adoption and legacy-writer retirement are authorized. One complete generation and one writer must exist at every accepted state; the exact prior generation remains Git-backed and byte-recoverable. No product, practice, data, runtime, deployment, release, Pages, protected-evidence or protected-ref action is authorized. Preserve docs/branding and every unrelated untracked file; use explicit-path staging only.",
+    "git_refs_and_worktree": "The exact clean verifier candidate and task HEAD are full 9014e08a3fb4e3253759e0133d93c5aaf99a7ace; accepted floor d03cc6386fdf3e2714881089514380d93824e160 and initial authority a6129d9a0c391314691cb73b28a5f21f1e834654 are ancestors. Local/origin master and local/origin handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The main tracked tree is clean apart from intentional untracked veto artifacts and all pre-existing untracked paths, including docs/branding, remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+    "active_tranche": "Ariadne provider-free clockwork live canonical adoption and retirement",
+    "objective": "Adopt the accepted repository-governance clockwork as the only canonical closeout writer, retire the four legacy writer classes without a dual-writer interval, preserve an immutable exact prior generation, prove fail-closed stale-writer denial and byte-exact rollback, and leave product, provider, deployment and protected-ref authority unchanged.",
+    "status": "in_progress",
+    "source_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "authority_source": "AGENTS.md Current Baton Next implementation, accepted rehearsal d03cc6386fdf3e2714881089514380d93824e160 and Yuri's explicit 2026-08-19 live-adoption choice.",
+    "checkpoint": {
+      "completed_stage": "The exact clean candidate 9014e08a3fb4e3253759e0133d93c5aaf99a7ace passes cross-checkout-stable dry-run generation, focused 7/7 fault/rollback/guard/drift/stability tests, the exact portable surrounding suite and the main-workspace 10/10 Compass gate; live pointer remains absent.",
+      "next_executable_stage": "run_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_then_install_the_live_pointer_only_on_pass",
+      "retry_counters": {"planning": 0, "implementation": 8, "review": 0, "verification": 3},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_repository_governance_clockwork_live_adoption_and_legacy_writer_retirement_only",
+      "one_canonical_writer_and_zero_dual_owned_surfaces_at_every_committed_state",
+      "exact_pre_adoption_generation_is_immutable_digest_bound_and_byte_recoverable",
+      "no_product_practice_route_schema_database_client_or_ordinary_practice_change",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_ref_movement",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The canonical ownership cutover is serial; occupied DeepSeek native-Harness use still requires the separate HMR boot proof and Claude Code is not a fallback.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "dispatched", "expected_leverage": "required_independence", "rationale": "One fresh Gemini 3.7 Flash/high read-only veto now owns the exact-candidate adversarial review package after deterministic admission.", "work_packages": ["exact_candidate_live_canonical_adoption_retirement_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "neutral", "rationale": "Current developer policy prohibits proactive delegation and canonical ownership, retirement, promotion and rollback form one inseparable serial boundary.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "deterministic admission before Gemini veto",
+      "one exact clean candidate and one fresh verifier",
+      "live pointer remains absent until one admitted pass",
+      "Sol-only acceptance adoption and task-branch Git"
+    ],
+    "reassessment_triggers": ["after verifier decision", "after live activation", "at closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh exact-candidate veto predispatch after deterministic admission",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Full handover and five sources were read; exact candidate and protected refs were verified."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No occupied call selected; HMR boot proof remains separate."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical transport only; fallback forbidden."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Exact Gemini 3.7 Flash/high clean-worktree preflight and nine-command manifest pass."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Lane declined under developer policy and serial cutover constraints."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude CLI is not selected and no silent fallback is allowed."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

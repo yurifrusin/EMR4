@@ -15,6 +15,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 GRAPH_PATH = REPO_ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS_PATH = REPO_ROOT / "orchestration/continuity/emr4-compass.json"
 SCHEMA_PATH = REPO_ROOT / "orchestration/continuity/ariadne-compass.schema.json"
+CLOCKWORK_POINTER = (
+    REPO_ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
+)
 
 
 def load_graph() -> dict:
@@ -50,9 +53,12 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["north_star"]["title"].startswith("A complete AI-native")
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
-    assert report["current_position"]["node_id"] == (
-        "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
+    expected_position = (
+        "ariadne-provider-free-clockwork-live-canonical-adoption-retirement"
+        if CLOCKWORK_POINTER.is_file()
+        else "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
     )
+    assert report["current_position"]["node_id"] == expected_position
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
     assert report["current_position"]["does_not_solve"]

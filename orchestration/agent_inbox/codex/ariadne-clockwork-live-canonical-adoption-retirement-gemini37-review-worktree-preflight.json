@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/clockwork-live-adoption-gemini-9014e08a",
+  "branch": "codex/review-clockwork-live-adoption-9014e08a",
+  "head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "expected_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "e1e411518cbb42900c0cea8b2517776497d14183bd9b67b959e7c550642ca9cb",
+  "command_count": 9,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/clockwork-live-adoption-gemini-9014e08a",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 330,
+  "graph_revision": 331,
   "harvests": [],
   "nodes": [
     {
@@ -23368,9 +23368,83 @@
         "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
         "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
       ]
+    },
+    {
+      "id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "title": "Clockwork live canonical adoption and retirement",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly authorized repository-governance clockwork adoption and legacy-writer retirement only.",
+          "One clockwork writer owns the canonical closeout; historical updater scripts remain preserved evidence without publication authority.",
+          "No product, provider, runtime, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-live-canonical-clockwork-adoption-retirement",
+          "source": "AGENTS.md",
+          "status": "accepted",
+          "summary": "Adopt the proven clockwork as the sole repository-governance closeout publisher with exact rollback and no dual writer."
+        }
+      ],
+      "claim_scope": [
+        "Ten governance surfaces have one clockwork owner and zero dual owners after the live task-branch cutover.",
+        "Four legacy writer classes are retired without deleting the 145 historical updater programs.",
+        "The exact previous canonical generation remains Git-bound and byte-recoverable.",
+        "The first accepted live closeout uses one validated intent, one clockwork publication and no bespoke updater."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+          "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json"
+        ],
+        "closeouts": [],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_writer_guard.py",
+          "orchestration_harness/governance_live_adoption.py",
+          "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The next three qualifying closeouts must report clockwork validation failures, rollback events, legacy-guard trips and manual derived-field edits.",
+        "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
+        "Ordinary-practice check-in activation, product runtime, deployment, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-19T03:30:00+00:00",
+      "updated_at": "2026-08-19T03:30:00+00:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-19T01:53:31.2243631Z"
+  "updated_at": "2026-08-19T03:30:00+00:00"
 }

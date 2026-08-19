@@ -1,0 +1,277 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-live-adoption-gemini-9014e08a",
+  "branch": "codex/review-clockwork-live-adoption-9014e08a",
+  "head_before": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "head_after": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "24646ab5de282ae3ae42d3b8797a027654698902cbc87e496c876aad1d37c72d",
+  "result": "# Independent Review: Clockwork Live Canonical Adoption and Retirement\n\n- **Reviewer:** Gemini 3.7 Flash/high via Antigravity\n- **Date:** 2026-08-19\n- **Timestamp:** 2026-08-19T14:03:00+10:00 (Australia/Brisbane)\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-live-adoption-gemini-9014e08a`\n- **Branch:** `codex/review-clockwork-live-adoption-9014e08a`\n- **Exact Candidate HEAD:** `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`\n- **Implementation Base:** `a6129d9a0c391314691cb73b28a5f21f1e834654`\n- **Accepted Rehearsal Floor:** `d03cc6386fdf3e2714881089514380d93824e160`\n\n---\n\n## 1. Five-Source Rehydration Receipt\n\nRehydration completed across all five authoritative sources:\n1. `live_handover_current_baton`: Read `AGENTS.md` completely. Verified Current Baton, Current result, Next implementation, and lineage descendants.\n2. `current_authority_allocation`: Conductor/Integrator is GPT Sol; Gemini 3.7 Flash/high is independent read-only veto reviewer; DeepSeek paused; protected single-track integration through `master`.\n3. `active_plan_and_acceptance`: `docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md`, `docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md`, `contract.json`, `closeout-intent.json`, `writer-inventory.json`.\n4. `protected_evidence_boundaries`: Holdouts v1-v10 sealed; historical diary material local only; provider lane paused; zero product data; protected refs `master`, `handoff/current`, `origin/master`, `origin/handoff/current` pinned to `2e34bdad732fdab32fbf778280b3d3c70d66d602`; `docs/branding/` preserved and untouched.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-live-adoption-gemini-9014e08a` verified on branch `codex/review-clockwork-live-adoption-9014e08a` at clean HEAD `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`.\n- Active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` verified: `in_progress`, operation `ariadne-provider-free-clockwork-live-canonical-adoption-retirement`, source head `d900fa04bbef3d05fee2b8d7ff0557e1d7e94d59`, checkpoint `generate_the_pre_verifier_receipt_and_run_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_before_live_adoption`.\n\n---\n\n## 2. Evaluation of Challenges and Core Invariants\n\n1. **Exact Candidate and Worktree State (Challenge 1 & 12):**\n   - Verified exact clean branch `codex/review-clockwork-live-adoption-9014e08a` at 40-character commit `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`.\n   - Exact base `a6129d9a0c391314691cb73b28a5f21f1e834654` to candidate diff contains exactly 28 allowlisted/pre-verifier files without drift.\n   - All 9 manifest commands C01-C09 passed with exit code 0; worktree remained clean before and after execution.\n\n2. **Intent Derivation and Field Protection (Challenge 2):**\n   - `validate_intent` in `orchestration_harness/governance_live_adoption.py` strictly prevents caller-authored derived keys (`source_commit`, `source_head`, `graph_revision`, `map_revision`, `register_revision`, `incident_population`, `latest_incident_id`, `transaction_id`, `generation_id`, `lease_id`, `output_path`, `bundle_sha256`).\n   - Revisions, digests, bindings and manifests are derived deterministically by `tc.prepare_transaction`, `build_compass_report`, and `build_generation`.\n\n3. **Exclusive Lease and Single Ownership (Challenge 3):**\n   - Exclusive repository-level lease `orchestration/continuity/ariadne-governance-clockwork/writer.lock` enforced via `os.O_CREAT | os.O_EXCL`.\n   - Stale source commits, uncommitted working trees, and concurrent invocations fail closed before canonical modification.\n   - `ownership.json` assigns all 10 governance surfaces to `clockwork` with 0 dual-owned surfaces.\n\n4. **Fault Injection and Pre-Pointer Recovery (Challenge 4):**\n   - All 7 canonical files are staged in temporary files first.\n   - Pre-pointer failures (`before:<key>`, `after:<key>`, `before_pointer_replace`) catch exceptions, restore pre-attempt physical bytes from memory backup, unlink metadata, remove partial pointer, and release the lock.\n   - Verified across all 15 pre-pointer fault checkpoints in `test_all_pre_pointer_faults_restore_and_disposable_rollback_is_exact`.\n\n5. **Atomic Pointer-Last Publication and Post-Pointer Classification (Challenge 5):**\n   - `current.json` pointer replacement is executed last via atomic rename.\n   - Post-pointer failure is classified `CommittedAdoption` only after `validate_live_state` confirms all 10 files and digests match on disk.\n\n6. **Git-Backed Immutable Rollback (Challenge 6):**\n   - Previous generation references `git-<source_commit>` using the exact 40-character Git object.\n   - Disposable rollback retrieves exact bytes via `git show <source_commit>:<path>`, resets ownership to `legacy_oracle`, and guarantees byte-exact recovery without relying on mutable worktree state.\n\n7. **Manual Drift and Path Traversal Denial (Challenge 7):**\n   - `validate_live_state` validates disk bytes against `generation-manifest.json` digests. Any manual edit to latch, baton, register, or graph triggers `canonical_drift` rejection.\n   - `_safe_path` enforces safe relative paths and blocks escapes into `docs/branding/` or parent paths.\n\n8. **Historical Updater Retirement Coverage (Challenges 8 & 9):**\n   - `writer-inventory.json` accounts for all 145 historical `scripts/*continuity_update.py` scripts.\n   - 137 scripts route validation through `scripts/ariadne_compass.py` which calls `refuse_retired_legacy_writer(repo_root)`.\n   - 8 older scripts explicitly include `refuse_retired_legacy_writer(ROOT)` at their `__main__` entry point.\n   - Direct execution fails with `LegacyGovernanceWriterRetired` when clockwork is active, while historical test/fixture imports remain supported. No bespoke updater is created or executed for this tranche.\n\n9. **Line Ending and Git Blob Determinism (Challenge 10):**\n   - Generated `AGENTS.md` is rendered from the immutable Git blob of the source commit, ensuring stability across platform newline normalization (CRLF/LF).\n\n10. **Ref Coordinates Distinction (Challenge 11):**\n    - The review worktree produces `gen-b1784fa61e545821b22dd4e2817ffdf094a38fc29297fc4cca580b7c112b4776` due to the machine-derived `coordinates.git_ref` coordinate naming the review branch; live canonical adoption will execute against the task branch.\n\n11. **Closed Boundaries (Challenge 13):**\n    - Zero changes to product code, FastAPI routes, PostgreSQL schemas, OpenAPI/GraphQL, client UI, patient/clinical data, cloud deployments, Pages, or protected Git refs.\n\n---\n\n## 3. Command Manifest Results\n\n| ID | Command Line | Exit Code | Result Summary |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | `## codex/review-clockwork-live-adoption-9014e08a` (clean) |\n| C02 | `git rev-parse HEAD` | 0 | `9014e08a3fb4e3253759e0133d93c5aaf99a7ace` |\n| C03 | `python -m scripts.ariadne_provider_free_clockwork_live_canonical_adoption_retirement --check` | 0 | Dry-run passed; 10 owned surfaces, 0 dual-owned, 4 retired classes |\n| C04 | `python -m scripts.ariadne_serial_pytest ... (10 test suites)` | 0 | 743 passed in serial execution with PostgreSQL schema lock |\n| C05 | `ruff check ... (17 allowlisted files)` | 0 | All checks passed cleanly |\n| C06 | `python -m py_compile ... (5 scripts)` | 0 | Successful byte-compilation |\n| C07 | `git diff --check a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace` | 0 | No whitespace errors |\n| C08 | `git diff --name-only a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace` | 0 | Exactly 28 allowlisted/pre-verifier files |\n| C09 | `git status --short --branch` | 0 | `## codex/review-clockwork-live-adoption-9014e08a` (clean) |\n\n---\n\n## 4. Conclusion\n\nThe candidate `9014e08a3fb4e3253759e0133d93c5aaf99a7ace` satisfies all acceptance criteria, invariants, fault-recovery requirements, and boundary constraints. The transition to single-owner clockwork governance is fully verified, fail-closed, and safe for live adoption on the task branch.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Review: Clockwork Live Canonical Adoption and Retirement\n\n- **Reviewer:** Gemini 3.7 Flash/high via Antigravity\n- **Date:** 2026-08-19\n- **Timestamp:** 2026-08-19T14:03:00+10:00 (Australia/Brisbane)\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-live-adoption-gemini-9014e08a`\n- **Branch:** `codex/review-clockwork-live-adoption-9014e08a`\n- **Exact Candidate HEAD:** `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`\n- **Implementation Base:** `a6129d9a0c391314691cb73b28a5f21f1e834654`\n- **Accepted Rehearsal Floor:** `d03cc6386fdf3e2714881089514380d93824e160`\n\n---\n\n## 1. Five-Source Rehydration Receipt\n\nRehydration completed across all five authoritative sources:\n1. `live_handover_current_baton`: Read `AGENTS.md` completely. Verified Current Baton, Current result, Next implementation, and lineage descendants.\n2. `current_authority_allocation`: Conductor/Integrator is GPT Sol; Gemini 3.7 Flash/high is independent read-only veto reviewer; DeepSeek paused; protected single-track integration through `master`.\n3. `active_plan_and_acceptance`: `docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md`, `docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md`, `contract.json`, `closeout-intent.json`, `writer-inventory.json`.\n4. `protected_evidence_boundaries`: Holdouts v1-v10 sealed; historical diary material local only; provider lane paused; zero product data; protected refs `master`, `handoff/current`, `origin/master`, `origin/handoff/current` pinned to `2e34bdad732fdab32fbf778280b3d3c70d66d602`; `docs/branding/` preserved and untouched.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-live-adoption-gemini-9014e08a` verified on branch `codex/review-clockwork-live-adoption-9014e08a` at clean HEAD `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`.\n- Active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` verified: `in_progress`, operation `ariadne-provider-free-clockwork-live-canonical-adoption-retirement`, source head `d900fa04bbef3d05fee2b8d7ff0557e1d7e94d59`, checkpoint `generate_the_pre_verifier_receipt_and_run_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_before_live_adoption`.\n\n---\n\n## 2. Evaluation of Challenges and Core Invariants\n\n1. **Exact Candidate and Worktree State (Challenge 1 & 12):**\n   - Verified exact clean branch `codex/review-clockwork-live-adoption-9014e08a` at 40-character commit `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`.\n   - Exact base `a6129d9a0c391314691cb73b28a5f21f1e834654` to candidate diff contains exactly 28 allowlisted/pre-verifier files without drift.\n   - All 9 manifest commands C01-C09 passed with exit code 0; worktree remained clean before and after execution.\n\n2. **Intent Derivation and Field Protection (Challenge 2):**\n   - `validate_intent` in `orchestration_harness/governance_live_adoption.py` strictly prevents caller-authored derived keys (`source_commit`, `source_head`, `graph_revision`, `map_revision`, `register_revision`, `incident_population`, `latest_incident_id`, `transaction_id`, `generation_id`, `lease_id`, `output_path`, `bundle_sha256`).\n   - Revisions, digests, bindings and manifests are derived deterministically by `tc.prepare_transaction`, `build_compass_report`, and `build_generation`.\n\n3. **Exclusive Lease and Single Ownership (Challenge 3):**\n   - Exclusive repository-level lease `orchestration/continuity/ariadne-governance-clockwork/writer.lock` enforced via `os.O_CREAT | os.O_EXCL`.\n   - Stale source commits, uncommitted working trees, and concurrent invocations fail closed before canonical modification.\n   - `ownership.json` assigns all 10 governance surfaces to `clockwork` with 0 dual-owned surfaces.\n\n4. **Fault Injection and Pre-Pointer Recovery (Challenge 4):**\n   - All 7 canonical files are staged in temporary files first.\n   - Pre-pointer failures (`before:<key>`, `after:<key>`, `before_pointer_replace`) catch exceptions, restore pre-attempt physical bytes from memory backup, unlink metadata, remove partial pointer, and release the lock.\n   - Verified across all 15 pre-pointer fault checkpoints in `test_all_pre_pointer_faults_restore_and_disposable_rollback_is_exact`.\n\n5. **Atomic Pointer-Last Publication and Post-Pointer Classification (Challenge 5):**\n   - `current.json` pointer replacement is executed last via atomic rename.\n   - Post-pointer failure is classified `CommittedAdoption` only after `validate_live_state` confirms all 10 files and digests match on disk.\n\n6. **Git-Backed Immutable Rollback (Challenge 6):**\n   - Previous generation references `git-<source_commit>` using the exact 40-character Git object.\n   - Disposable rollback retrieves exact bytes via `git show <source_commit>:<path>`, resets ownership to `legacy_oracle`, and guarantees byte-exact recovery without relying on mutable worktree state.\n\n7. **Manual Drift and Path Traversal Denial (Challenge 7):**\n   - `validate_live_state` validates disk bytes against `generation-manifest.json` digests. Any manual edit to latch, baton, register, or graph triggers `canonical_drift` rejection.\n   - `_safe_path` enforces safe relative paths and blocks escapes into `docs/branding/` or parent paths.\n\n8. **Historical Updater Retirement Coverage (Challenges 8 & 9):**\n   - `writer-inventory.json` accounts for all 145 historical `scripts/*continuity_update.py` scripts.\n   - 137 scripts route validation through `scripts/ariadne_compass.py` which calls `refuse_retired_legacy_writer(repo_root)`.\n   - 8 older scripts explicitly include `refuse_retired_legacy_writer(ROOT)` at their `__main__` entry point.\n   - Direct execution fails with `LegacyGovernanceWriterRetired` when clockwork is active, while historical test/fixture imports remain supported. No bespoke updater is created or executed for this tranche.\n\n9. **Line Ending and Git Blob Determinism (Challenge 10):**\n   - Generated `AGENTS.md` is rendered from the immutable Git blob of the source commit, ensuring stability across platform newline normalization (CRLF/LF).\n\n10. **Ref Coordinates Distinction (Challenge 11):**\n    - The review worktree produces `gen-b1784fa61e545821b22dd4e2817ffdf094a38fc29297fc4cca580b7c112b4776` due to the machine-derived `coordinates.git_ref` coordinate naming the review branch; live canonical adoption will execute against the task branch.\n\n11. **Closed Boundaries (Challenge 13):**\n    - Zero changes to product code, FastAPI routes, PostgreSQL schemas, OpenAPI/GraphQL, client UI, patient/clinical data, cloud deployments, Pages, or protected Git refs.\n\n---\n\n## 3. Command Manifest Results\n\n| ID | Command Line | Exit Code | Result Summary |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | `## codex/review-clockwork-live-adoption-9014e08a` (clean) |\n| C02 | `git rev-parse HEAD` | 0 | `9014e08a3fb4e3253759e0133d93c5aaf99a7ace` |\n| C03 | `python -m scripts.ariadne_provider_free_clockwork_live_canonical_adoption_retirement --check` | 0 | Dry-run passed; 10 owned surfaces, 0 dual-owned, 4 retired classes |\n| C04 | `python -m scripts.ariadne_serial_pytest ... (10 test suites)` | 0 | 743 passed in serial execution with PostgreSQL schema lock |\n| C05 | `ruff check ... (17 allowlisted files)` | 0 | All checks passed cleanly |\n| C06 | `python -m py_compile ... (5 scripts)` | 0 | Successful byte-compilation |\n| C07 | `git diff --check a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace` | 0 | No whitespace errors |\n| C08 | `git diff --name-only a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace` | 0 | Exactly 28 allowlisted/pre-verifier files |\n| C09 | `git status --short --branch` | 0 | `## codex/review-clockwork-live-adoption-9014e08a` (clean) |\n\n---\n\n## 4. Conclusion\n\nThe candidate `9014e08a3fb4e3253759e0133d93c5aaf99a7ace` satisfies all acceptance criteria, invariants, fault-recovery requirements, and boundary constraints. The transition to single-owner clockwork governance is fully verified, fail-closed, and safe for live adoption on the task branch.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_clockwork_live_canonical_adoption_retirement",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--timeout-seconds",
+          "300",
+          "--",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_continuity_and_refinement.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_current_baton_consistency.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-live-gemini-manifest"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/governance_live_adoption.py",
+          "orchestration_harness/governance_writer_guard.py",
+          "scripts/ariadne_compass.py",
+          "scripts/ariadne_continuity.py",
+          "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "scripts/raisa_cloud_run_api_runtime_identity_enablement_continuity_update.py",
+          "scripts/raisa_cloud_run_public_access_word_online_verification_continuity_update.py",
+          "scripts/raisa_cloud_run_public_https_dev_host_deployment_continuity_update.py",
+          "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_continuity_update.py",
+          "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview_continuity_update.py",
+          "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_continuity_update.py",
+          "scripts/raisa_shared_application_auth_clinician_role_boundary_continuity_update.py",
+          "scripts/raisa_word_online_authenticated_companion_verification_continuity_update.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_live_adoption.py",
+          "orchestration_harness/governance_writer_guard.py",
+          "scripts/ariadne_compass.py",
+          "scripts/ariadne_continuity.py",
+          "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "e1e411518cbb42900c0cea8b2517776497d14183bd9b67b959e7c550642ca9cb",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_clockwork_live_canonical_adoption_retirement",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_current_baton_consistency.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-live-gemini-manifest"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_live_adoption.py",
+        "orchestration_harness/governance_writer_guard.py",
+        "scripts/ariadne_compass.py",
+        "scripts/ariadne_continuity.py",
+        "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "scripts/raisa_cloud_run_api_runtime_identity_enablement_continuity_update.py",
+        "scripts/raisa_cloud_run_public_access_word_online_verification_continuity_update.py",
+        "scripts/raisa_cloud_run_public_https_dev_host_deployment_continuity_update.py",
+        "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_continuity_update.py",
+        "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview_continuity_update.py",
+        "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_continuity_update.py",
+        "scripts/raisa_shared_application_auth_clinician_role_boundary_continuity_update.py",
+        "scripts/raisa_word_online_authenticated_companion_verification_continuity_update.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_live_adoption.py",
+        "orchestration_harness/governance_writer_guard.py",
+        "scripts/ariadne_compass.py",
+        "scripts/ariadne_continuity.py",
+        "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

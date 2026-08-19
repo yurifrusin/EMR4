@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.governance_live_state.v1",
+  "status": "passed",
+  "head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "generation_id": "gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
+  "bundle_sha256": "f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
+  "previous_generation_id": "git-9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "previous_source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 1,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

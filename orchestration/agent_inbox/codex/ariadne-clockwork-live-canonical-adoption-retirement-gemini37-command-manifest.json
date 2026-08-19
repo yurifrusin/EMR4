@@ -1,0 +1,107 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_clockwork_live_canonical_adoption_retirement",
+        "--check"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_continuity_and_refinement.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_current_baton_consistency.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-live-gemini-manifest"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_live_adoption.py",
+        "orchestration_harness/governance_writer_guard.py",
+        "scripts/ariadne_compass.py",
+        "scripts/ariadne_continuity.py",
+        "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "scripts/raisa_cloud_run_api_runtime_identity_enablement_continuity_update.py",
+        "scripts/raisa_cloud_run_public_access_word_online_verification_continuity_update.py",
+        "scripts/raisa_cloud_run_public_https_dev_host_deployment_continuity_update.py",
+        "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_continuity_update.py",
+        "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview_continuity_update.py",
+        "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_continuity_update.py",
+        "scripts/raisa_shared_application_auth_clinician_role_boundary_continuity_update.py",
+        "scripts/raisa_word_online_authenticated_companion_verification_continuity_update.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_current_baton_consistency.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_live_adoption.py",
+        "orchestration_harness/governance_writer_guard.py",
+        "scripts/ariadne_compass.py",
+        "scripts/ariadne_continuity.py",
+        "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "a6129d9a0c391314691cb73b28a5f21f1e834654..9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

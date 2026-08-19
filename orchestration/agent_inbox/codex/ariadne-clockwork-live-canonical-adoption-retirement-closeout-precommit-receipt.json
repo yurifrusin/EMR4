@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free clockwork-governed check-in successor resolution",
+    "completed_stage": "Accepted ariadne-provider-free-clockwork-live-canonical-adoption-retirement at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_the_clockwork_owned_generation_and_resolve_the_exact_unrepeated_check_in_successor",
+    "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+    "resume_after_compaction": true,
+    "source_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "reason_codes": [],
+    "resolved_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "branch_origin_aligned": false,
+    "head": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+    "origin_branch_commit": "a6129d9a0c391314691cb73b28a5f21f1e834654",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 669
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "clockwork_closeout_pre_commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The live closeout commit is a serial canonical publication boundary; the native Harness still requires its separate HMR boot proof.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high completed the exact-candidate read-only veto with nine zero-exit commands and an unchanged worktree.",
+        "work_packages": [
+          "exact_candidate_live_canonical_adoption_retirement_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy and the single-writer commit boundary require serial Sol ownership.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after task-branch push",
+      "before successor plan freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one clockwork generation",
+      "explicit-path staging",
+      "task branch only",
+      "protected refs fixed"
+    ]
+  },
+  "planned_action": "explicitly_stage_and_commit_the_validated_first_live_clockwork_generation_and_its_closeout_evidence_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+      "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/provider-free-live-adoption-evidence.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/adoption-report.md",
+      "orchestration/agent_inbox/antigravity/ariadne-clockwork-live-canonical-adoption-retirement-gemini37-review-receipt.json",
+      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-19--clockwork-live-canonical-adoption-retirement.md",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns live-state acceptance, explicit-path task-branch Git and successor rehydration. Gemini completed one read-only veto at exact candidate 9014e08a3fb4e3253759e0133d93c5aaf99a7ace. DeepSeek and native subagents are not selected for this serial closeout boundary.",
+    "git_refs_and_worktree": "Task branch and HEAD remain 9014e08a3fb4e3253759e0133d93c5aaf99a7ace before the closeout commit. The pointer selects gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c with zero drift. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is preserved.",
+    "live_handover_current_baton": "The clockwork-owned AGENTS.md now records Continuity 331 / Compass 313, exact reviewed source 9014e08a3fb4e3253759e0133d93c5aaf99a7ace, ten singly owned governance surfaces, four retired writer classes and the read-only successor.",
+    "protected_evidence_boundaries": "The live clockwork is repository-governance only. Product, practice, route, schema, database, client, patient, clinical, provider, deployment, release, Pages, protected evidence and protected-ref movement remain closed. Preserve docs/branding and every unrelated untracked path; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

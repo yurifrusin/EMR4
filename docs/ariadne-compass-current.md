@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 330 / Compass 312. The provider-free clockwork single-owner migration and retirement rehearsal is accepted at exact candidate d03cc6386fdf3e2714881089514380d93824e160: ten surfaces have one clockwork owner, all twenty-three fault checkpoints and byte-exact rollback pass, and projected representative steady-state corrective reruns are zero. Live canonical adoption remains Yuri's explicit choice.
+> EMR4 has adopted one provider-free clockwork owner for repository-governance closeouts; the next read-only tranche resolves the true check-in successor while product and protected authorities remain closed.
 
 ## North star
 
@@ -430,25 +430,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Private-shadow repair accepted; live adoption remains a separate user-attention gate. Lineage parent: `ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal`.
 207. **Prove exclusive clockwork ownership, retirement safety and exact rollback in an isolated canonical mirror — Ariadne provider-free clockwork single-owner migration and retirement rehearsal**
    Canonical-mirror rehearsal accepted; live adoption remains an explicit user-attention fork. Lineage parent: `ariadne-provider-free-clockwork-governance-projection-consolidation-repair`.
+208. **Replace duplicate administrative writers with one live fail-closed clockwork reading — Clockwork live canonical adoption and retirement**
+   The task branch has one clockwork-owned canonical governance generation, guarded historical writers and an exact Git-backed rollback generation. Lineage parent: `ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal`.
 
 ## Current position
 
-**Choose live canonical adoption or retain shadow-only clockwork and resume product work — Ariadne provider-free clockwork single-owner migration and retirement rehearsal**
+**Operate future repository-governance closeouts through one clockwork owner — Clockwork live canonical adoption and retirement**
 
-**Why this proof came next:** Exact candidate d03cc6386fdf3e2714881089514380d93824e160 proves exclusive ownership, all twenty-three fault boundaries and byte-exact rollback with zero projected representative steady-state corrective reruns.
+**Why this proof came next:** The accepted mirror proved exclusivity and rollback, and Yuri explicitly selected live adoption for a long future sequence of closeouts.
 
-Yuri explicitly authorizes one separately frozen live adoption/retirement tranche or retains existing controls and resumes the default-off check-in route-adapter plan.
+The first live clockwork tick owns the canonical governance surfaces and historical direct publishers fail closed.
 
 ### What this unlocks
 
-- A controlled live adoption plan with no dual writer and exact rollback, if explicitly selected.
-- Otherwise, immediate product-track resumption with existing governance controls unchanged.
+- Measured clockwork use on the next dependency-satisfied repository closeouts.
+- A provider-free read-only resolution of the true next check-in product successor under the new controls.
 
 ### What it does not solve
 
-- Mirror acceptance does not activate the clockwork or retire any actual control.
-- No DeepSeek Harness reliability or HMR boot proof was tested.
-- No product, practice, data, Git, runtime, deployment or protected integration opens.
+- Clockwork adoption does not prove the native DeepSeek Harness HMR boot path.
+- No ordinary-practice admission or product behavior changes.
+- No product data, provider runtime, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1050,6 +1052,7 @@ Prerequisites:
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-closeout.md`
 - `docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md`
+- `docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md`
 - `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-closeout.md`
 - `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
@@ -1560,6 +1563,7 @@ Prerequisites:
 - `docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md`
+- `docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md`
@@ -2464,6 +2468,7 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/repair-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json`
+- `orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
@@ -3185,6 +3190,7 @@ Prerequisites:
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
 - `orchestration_harness/governance_clockwork.py`
+- `orchestration_harness/governance_live_adoption.py`
 - `orchestration_harness/governance_migration.py`
 - `orchestration_harness/orchestrator_preflight.py`
 - `orchestration_harness/risk_weighted_workflow.py`
@@ -3328,6 +3334,7 @@ Prerequisites:
 - `tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py`
 - `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`
 - `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair_continuity.py`
+- `tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py`
 - `tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`
 - `tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity.py`
 - `tests/test_ariadne_provider_free_pytest.py`
@@ -3474,4 +3481,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 312; continuity graph revision 330._
+_Compass map revision 313; continuity graph revision 331._

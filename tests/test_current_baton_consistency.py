@@ -80,6 +80,14 @@ CLOCKWORK_REHEARSAL_NODE_ID = (
     "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal"
 )
 CLOCKWORK_REHEARSAL_SOURCE_HEAD = "a4044010e9f9319e149660ad889141a32cc8d000"
+LIVE_CLOCKWORK_NODE_ID = (
+    "ariadne-provider-free-clockwork-live-canonical-adoption-retirement"
+)
+LIVE_CLOCKWORK_SOURCE_HEAD = "9014e08a3fb4e3253759e0133d93c5aaf99a7ace"
+LIVE_CLOCKWORK_PARENT_ID = (
+    "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
+)
+LIVE_CLOCKWORK_FLOOR_SOURCE_HEAD = "d03cc6386fdf3e2714881089514380d93824e160"
 ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
@@ -126,18 +134,26 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
     assert graph["graph_revision"] == compass["source_graph_revision"]
-    assert graph["nodes"][-1]["id"] == (
-        "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
-    )
-    assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        "d03cc6386fdf3e2714881089514380d93824e160"
-    )
-    assert graph["nodes"][-1]["relationships"] == [
-        {
-            "node_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
-            "relation": "builds_on",
-        }
-    ]
+    if CLOCKWORK_POINTER.is_file():
+        assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_NODE_ID
+        assert (
+            graph["nodes"][-1]["coordinates"]["source_head"]
+            == LIVE_CLOCKWORK_SOURCE_HEAD
+        )
+        assert graph["nodes"][-1]["relationships"] == [
+            {"node_id": LIVE_CLOCKWORK_PARENT_ID, "relation": "builds_on"}
+        ]
+    else:
+        assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_PARENT_ID
+        assert graph["nodes"][-1]["coordinates"]["source_head"] == (
+            LIVE_CLOCKWORK_FLOOR_SOURCE_HEAD
+        )
+        assert graph["nodes"][-1]["relationships"] == [
+            {
+                "node_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+                "relation": "builds_on",
+            }
+        ]
     assert compass["map_revision"] > 0
     assert compass["current_position"]["node_id"] == graph["nodes"][-1]["id"]
 
@@ -173,7 +189,8 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
         assert "ten repository-governance surfaces" in current.lower()
         assert "one clockwork owner" in current.lower()
         assert "previous git generation" in current.lower()
-        assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
+        assert LIVE_CLOCKWORK_SOURCE_HEAD in clockwork_relation
+        assert LIVE_CLOCKWORK_FLOOR_SOURCE_HEAD in clockwork_relation
     else:
         assert "exclusive mirror ownership" in current.lower()
         assert "23/23 fault safety" in current.lower()
