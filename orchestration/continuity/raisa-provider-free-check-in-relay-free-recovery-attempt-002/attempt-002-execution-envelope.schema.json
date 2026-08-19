@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emr4:raisa:check-in-relay-free-recovery-attempt-002:execution-envelope:v1",
+  "title": "Check-in relay-free recovery attempt 002 execution envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "attempt_id",
+    "source_head",
+    "plan_source",
+    "lifecycle_admission_repair_source",
+    "accepted_harness_sha256",
+    "predecessor_failure_sha256",
+    "predecessor_cleanup_sha256",
+    "occupied_execution_count",
+    "automatic_retry_count",
+    "ambiguous_success_released",
+    "ordinary_admission_release_count",
+    "product_record_count",
+    "terminal_artifact_kind",
+    "terminal_artifact_sha256",
+    "transaction_attestation_sha256",
+    "base_result",
+    "cleanup_status",
+    "terminal_binding_restored"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-relay-free-recovery-attempt-002.execution-envelope.v1"
+    },
+    "result": {
+      "enum": [
+        "raisa_provider_free_check_in_relay_free_recovery_attempt_002_pass",
+        "failed_closed"
+      ]
+    },
+    "attempt_id": {"const": "attempt-002"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "plan_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "lifecycle_admission_repair_source": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "accepted_harness_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "predecessor_failure_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "predecessor_cleanup_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "occupied_execution_count": {"const": 1},
+    "automatic_retry_count": {"const": 0},
+    "ambiguous_success_released": {"const": false},
+    "ordinary_admission_release_count": {"const": 0},
+    "product_record_count": {"const": 0},
+    "terminal_artifact_kind": {
+      "enum": ["rehearsal_evidence", "rehearsal_failure_evidence"]
+    },
+    "terminal_artifact_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "transaction_attestation_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "base_result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_pass",
+        "failed_closed"
+      ]
+    },
+    "cleanup_status": {
+      "enum": ["cleanup_verified", "cleanup_incomplete", "not_started"]
+    },
+    "terminal_binding_restored": {"const": true}
+  }
+}
