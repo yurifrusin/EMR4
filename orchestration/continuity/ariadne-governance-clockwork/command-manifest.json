@@ -2,7 +2,19 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "native-hmr-checkpoint-provider-free-tests",
+      "command_id": "read_only_native_hmr_closeout_tick_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.ariadne_governance_clockwork_tick",
+        "--check",
+        "--intent",
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/closeout/closeout-intent.json"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "admitted_native_hmr_and_governance_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -20,7 +32,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native-hmr-checkpoint-contract",
+      "command_id": "native_hmr_contract_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -29,7 +41,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native-hmr-checkpoint-ruff",
+      "command_id": "native_hmr_closeout_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -41,7 +53,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native-hmr-checkpoint-compile",
+      "command_id": "native_hmr_closeout_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",

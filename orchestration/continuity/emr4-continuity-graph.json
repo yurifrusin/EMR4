@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 338,
+  "graph_revision": 339,
   "harvests": [],
   "nodes": [
     {
@@ -24130,9 +24130,112 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+      "title": "Provider-free native Harness stock-headless-to-custom-runner HMR boot proof",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri granted standing uninterrupted-development authority through this proof and dependency-satisfied successors.",
+          "The result opens only planning for a separately named one-run relay-free recovery attempt 004.",
+          "No model/provider call, occupied worker, product/practice authority, deployment, Pages or protected-ref authority opens automatically."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-prelaunch-source-predicate-rejection",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/prelaunch-source-predicate-rejection.json",
+          "status": "accepted",
+          "summary": "Retain the fail-closed static predicate rejection with zero native boot processes and complete cleanup."
+        },
+        {
+          "id": "accept-native-hmr-boot-attempt-001",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one exact rc.7 stock-headless boot reaching the HMR-applied local custom runner with exit 0 and zero provider boundary counts."
+        },
+        {
+          "id": "accept-independent-gemini-veto",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh Gemini 3.7 Flash/high exact-candidate pass with ten zero-exit commands and no P0-P2 finding."
+        }
+      ],
+      "claim_scope": [
+        "The exact @deepseek-ai/dsh@0.1.0-rc.7 package boots through its documented stock headless launcher with Node --expose-internals.",
+        "The initial patch disables the stock model runner, code runtime and telemetry; only a post-readiness watched patch adds the local custom runner.",
+        "The real HMR config registry contains both stock patch registrations before mutation, the four lifecycle events are exact and the custom runner owns exit 0.",
+        "Network, model, broker, provider and agent-session counts are zero and process/root cleanup is complete.",
+        "The focused 39-test selection and fresh independent ten-command veto pass at the exact clean candidate."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/prelaunch-source-predicate-rejection.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-hmr-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/evidence.schema.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-review-worktree-preflight.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/pre-closeout/checkpoint-intent.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/pre-closeout/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/pre-closeout/clockwork-checkpoint-tick-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The proof does not establish DeepSeek model quality, provider reliability, occupied-worker completion or production isolation.",
+        "Any DeepSeek model call or occupied worker requires a separately frozen WorkOrder, exact provider-free admission and one-run authority.",
+        "Relay-free recovery attempt 004 requires a fresh plan, collision-free namespace and full preexecution admission before Docker or PostgreSQL execution.",
+        "No ordinary-practice activation, product/data change, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T02:33:29.0250603+10:00",
+      "updated_at": "2026-08-20T02:33:29.0250603+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "5ff79d68f6df25d8bebdba78a6d504afb64de2ab",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T01:45:06.9565729+10:00"
+  "updated_at": "2026-08-20T02:33:29.0250603+10:00"
 }
