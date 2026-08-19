@@ -28,6 +28,8 @@ The deterministic proof tried 337 hostile changes and none escaped. Gemini indep
 
 Three current-state test assertions still named older clockwork generations. They were replaced with readings from the selected transaction and active latch, then the full material suite passed. One duplicate failing run occurred because the first ongoing test-session handle was not retained; it changed no state. This is recorded as workflow cost rather than hidden in the successful product result.
 
+One manually typed closeout object in the pre-push receipt draft was also caught before the receipt ran. I removed that authored value entirely: the receipt now records the exact 40-character branch head only from Git. This is precisely the kind of peripheral manual binding the clockwork should continue absorbing.
+
 The next step is a disposable local PostgreSQL rehearsal that proves the restricted role and exact tenant isolation using only authored-synthetic identifiers, then removes the instance and role completely. It does not enable ordinary check-in or open live secrets, product data, deployment, Pages or protected refs.
 
 The usual non-PHI continuing Pushover notification succeeded with request `0b6402ec-152d-454c-8024-a80b1dfcb887`.

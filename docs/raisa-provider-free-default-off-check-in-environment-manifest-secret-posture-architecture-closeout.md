@@ -42,6 +42,7 @@ One deliberately broad local run exposed four stale assertions: one historical r
 - Caller-authored derived fields, bespoke updater executions and canonical republications: 0/0/0.
 - Post-publication validation attempts: 4. Two equivalent full runs encountered the same three generation-stale current-state assertions; one was duplicated because its ongoing session handle was not retained. A focused generation-awareness repair then passed, followed by the complete material suite.
 - Post-publication canonical repairs or republications: 0. The only changed surrounding control was `tests/test_current_baton_consistency.py`, which now reads the selected transaction and active latch rather than enumerating operation names.
+- Pre-push receipt draft corrections: 1. A manually typed closeout object was detected before preflight and removed from the authored evidence; the receipt now takes the exact 40-character branch head only from the Git resolver.
 
 ## Boundaries and next tranche
 
