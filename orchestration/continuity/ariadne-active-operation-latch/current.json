@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 003",
   "objective": "Freeze and, only after deterministic and five-source preexecution admission, consume exactly one newly named disposable authored-synthetic PostgreSQL relay-free execution proving explicit rollback zero effect and incomplete-response no-success/no-retry resolution by restricted authoritative readback, followed by exact cleanup.",
   "status": "in_progress",
-  "source_head": "159615440812bf57a5f91d021a0469f84c60dad3",
+  "source_head": "5c4ad3eb328192ed9729298beccb0ad3904426f5",
   "authority_source": "Accepted relay-free transport, restricted runtime-role and forced-RLS floor, immutable attempts 001 and 002, this accepted Created-state predicate repair and Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "The attempt-003 one-run plan, threat-model delta, five plan-boundary tests and fresh five-source preplanning receipt are frozen at exact full Git source 159615440812bf57a5f91d021a0469f84c60dad3. No Docker object, credential, PostgreSQL process, SQL or database attempt was created or executed.",
-    "next_executable_stage": "implement_the_fixed_attempt_003_adapter_closed_envelope_schema_and_deterministic_tests_without_docker_or_database_execution",
+    "completed_stage": "The frozen plan, fixed adapter, closed envelope schema and fresh five-source preexecution receipt are committed at exact full Git source 5c4ad3eb328192ed9729298beccb0ad3904426f5. The corrected harness is byte-exact; all hostile gates, focused tests, Ruff, compilation, Docker/image readback and zero matching residue pass. No attempt-003 Docker object or database execution has occurred.",
+    "next_executable_stage": "execute_exactly_one_attempt_003_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
