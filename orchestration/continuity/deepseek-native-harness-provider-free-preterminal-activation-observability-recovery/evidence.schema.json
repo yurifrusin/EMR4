@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.deepseek_native_harness_preterminal_observability_recovery_evidence.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "result", "immutable_attempt", "diagnosis", "corrected_design", "scenario_matrix", "offline_probe", "provider_boundary", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_preterminal_observability_recovery_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "pass"},
+    "immutable_attempt": {"type": "object"},
+    "diagnosis": {"type": "object"},
+    "corrected_design": {"type": "object"},
+    "scenario_matrix": {"type": "array", "minItems": 10},
+    "offline_probe": {"type": "object"},
+    "provider_boundary": {"type": "object"},
+    "cleanup": {"type": "object"}
+  }
+}
