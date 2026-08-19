@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "373ee17d54bc7c553c844142a6c4ba0fbf8a421a",
+  "source_commit": "373ee17d54bc7c553c844142a6c4ba0fbf8a421a",
+  "generation_id": "gen-efa912e13045849040d0169729b5edf539ecbb2f68bbc4d30341428f5f8ee173",
+  "bundle_sha256": "efa912e13045849040d0169729b5edf539ecbb2f68bbc4d30341428f5f8ee173",
+  "previous_generation_id": "gen-ad5d942ff52e19a3eefb028be45db4a7748a330a36fbfac7dd2813cb687861dd",
+  "previous_source_commit": "373ee17d54bc7c553c844142a6c4ba0fbf8a421a",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 25,
+  "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+  "event_kind": "checkpoint_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair",
   "objective": "Freeze and complete a provider-free deterministic repair that passes the captured network name at both real relay-free container-profile call sites, proves their invocation contracts, and guarantees exact captured-object cleanup for every post-create pre-registry exception, without Docker or database execution.",
   "status": "in_progress",
-  "source_head": "244a35761d67628576d72093634afa1f2b823c07",
+  "source_head": "373ee17d54bc7c553c844142a6c4ba0fbf8a421a",
   "authority_source": "Yuri's explicit standing authority to continue under Sol's recommended course through this tranche and dependency-satisfied successors, the immutable consumed attempt-003 failure/envelope/cleanup evidence, and the accepted Created-state representation and corrected profile semantics.",
   "checkpoint": {
-    "completed_stage": "Attempt 003 is closed blocked with one consumed execution, zero retry, zero credential delivery, zero PostgreSQL or SQL execution, exact recovered cleanup and zero labelled residue. Yuri's standing authority selects the narrow deterministic call-site and pre-registry cleanup repair.",
-    "next_executable_stage": "freeze_the_narrow_provider_free_call_site_and_pre_registry_cleanup_conformance_repair_plan_without_docker_or_database_execution",
+    "completed_stage": "The provider-free two-call-site and pre-registry cleanup conformance repair plan, threat-model delta, four plan-boundary tests and fresh five-source preplanning receipt are frozen at exact full Git source 373ee17d54bc7c553c844142a6c4ba0fbf8a421a. No Docker object, credential, process, PostgreSQL, SQL or database execution occurred.",
+    "next_executable_stage": "implement_the_two_exact_network_name_call_site_bindings_shared_pre_registry_cleanup_helper_and_deterministic_fault_injection_tests_without_docker_execution",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
