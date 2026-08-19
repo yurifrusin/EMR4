@@ -314,6 +314,14 @@ def _source_bytes(
 def _canonical_paths_match_source(
     repo_root: Path, contract: dict[str, Any], source: str
 ) -> bool:
+    return _paths_match_source(
+        repo_root, source, list(contract["canonical_paths"].values())
+    )
+
+
+def _paths_match_source(
+    repo_root: Path, source: str, paths: list[str]
+) -> bool:
     result = subprocess.run(
         [
             "git",
@@ -321,7 +329,7 @@ def _canonical_paths_match_source(
             "--quiet",
             source,
             "--",
-            *contract["canonical_paths"].values(),
+            *paths,
         ],
         cwd=repo_root,
         capture_output=True,
@@ -746,9 +754,27 @@ def validate_live_state(
         or not HEX40.fullmatch(pointer["previous_source_commit"])
     ):
         _reject("live_pointer")
-    canonical = _canonical_bytes(repo_root, contract)
+    head = _assert_git_state(repo_root, contract)
+    canonical = (
+        _source_bytes(repo_root, contract, head)
+        if _canonical_paths_match_source(repo_root, contract, head)
+        else _canonical_bytes(repo_root, contract)
+    )
     canonical_sha256s = {key: _hash_bytes(value) for key, value in canonical.items()}
+    metadata_paths = {
+        name: f"{contract['clockwork_root']}/{name}" for name in METADATA_NAMES
+    }
     metadata = {name: (root / name).read_bytes() for name in METADATA_NAMES}
+    if _paths_match_source(repo_root, head, list(metadata_paths.values())):
+        try:
+            metadata = {
+                name: _git_bytes(repo_root, head, relative)
+                for name, relative in metadata_paths.items()
+            }
+        except AdoptionRejection:
+            # A first-adoption replay creates these files after its source commit.
+            # In that state the live materialized bytes are the only candidate.
+            pass
     metadata_sha256s = {key: _hash_bytes(value) for key, value in metadata.items()}
     if (
         canonical_sha256s != generation["canonical_sha256s"]
@@ -770,7 +796,6 @@ def validate_live_state(
         or set(ownership["legacy_writers"].values()) != {"retired"}
     ):
         _reject("live_ownership")
-    head = _assert_git_state(repo_root, contract)
     _git(repo_root, "merge-base", "--is-ancestor", generation["source_commit"], head)
     return {
         "schema_version": "ariadne.governance_live_state.v1",

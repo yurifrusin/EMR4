@@ -1,0 +1,42 @@
+{
+  "active_operation": {},
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_plan",
+  "git_object_resolution": {},
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "c11038545838f685cdabf81aea004470dafd02c6",
+    "branch_origin_aligned": true,
+    "head": "c11038545838f685cdabf81aea004470dafd02c6",
+    "origin_branch_commit": "c11038545838f685cdabf81aea004470dafd02c6",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {},
+  "planned_action": "freeze_the_narrowest_provider_free_read_only_check_in_successor_resolution_and_repair_only_the_missing_generic_clockwork_tick_needed_to_close_it",
+  "reasons": [
+    "continuation_event_missing_or_unapproved"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {},
+  "status": "revision_required",
+  "terminal_handback_permitted": null,
+  "worker_dispatch_permitted": false
+}

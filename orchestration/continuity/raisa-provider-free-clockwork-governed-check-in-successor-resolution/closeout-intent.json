@@ -1,0 +1,197 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+    "title": "Raisa provider-free clockwork-governed check-in successor resolution",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-19T04:26:41+00:00",
+    "node": {
+      "id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+      "title": "Clockwork-governed check-in successor resolution",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised controlled live clockwork adoption and uninterrupted dependency-satisfied development.",
+          "This resolution opens only a later default-off architecture tranche and the generic repository-governance tick needed to close this operation.",
+          "No ordinary practice, product behavior, provider, data, runtime, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-environment-manifest-secret-posture-architecture-first",
+          "source": "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+          "status": "accepted",
+          "summary": "Define the non-secret environment, runtime-role and operational secret-reference posture before role attestation or unknown-commit drills."
+        },
+        {
+          "id": "repair-generic-clockwork-second-tick",
+          "source": "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+          "status": "accepted",
+          "summary": "Extend the single clockwork owner with a generic pointer-last tick rather than restoring manual or bespoke closeout writers."
+        }
+      ],
+      "claim_scope": [
+        "The accepted route, readiness, admission architecture and unmounted kernel are not repeated.",
+        "The next product tranche is an architecture-only environment-manifest and secret/key-reference posture predecessor to the two remaining operational-evidence drills.",
+        "The live clockwork can publish a second operation with exact predecessor recovery and operation-specific successor boundaries.",
+        "No product source, configuration, database, provider, ordinary-practice or protected-ref authority is opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+          "docs/security/raisa-provider-free-clockwork-governed-check-in-successor-resolution-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md"
+        ],
+        "closeouts": [],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-clockwork-governed-check-in-successor-resolution-preplanning-v2-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The next architecture tranche must freeze non-secret environment and role-reference posture without product configuration or secret values.",
+        "Tenant-isolation/runtime-role attestation remains a later operational-evidence gate.",
+        "Atomic rollback and unknown-commit recovery remain a later operational-evidence gate.",
+        "Ordinary-practice activation, occupied DeepSeek HMR, product runtime, deployment, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Select the first remaining check-in admission dependency and make live clockwork operation repeatable",
+      "outcome": "The accepted check-in lineage has one unrepeated architecture successor and the live clockwork has a bounded generic second-tick path.",
+      "evidence": [
+        "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+        "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Freeze the non-secret ordinary check-in environment boundary before operational drills",
+      "why_now": "Route, admission architecture and unmounted kernel work are accepted; remaining admission gates need one exact environment and runtime-role vocabulary before evidence can be representative.",
+      "outcome": "The next tranche is architecture-only environment-manifest and operational secret-reference posture, with ordinary practice and runtime still denied.",
+      "unlocks": [
+        "A later ordinary runtime-role and tenant-isolation attestation against a frozen identifier.",
+        "A later rollback and unknown-commit drill against the same frozen environment boundary.",
+        "Measured use of the generic clockwork on subsequent closeouts."
+      ],
+      "does_not_solve": [
+        "No secret, key, database role or selected-practice environment is created or accessed.",
+        "No ordinary-practice check-in command is enabled or mounted.",
+        "No provider, product data, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+        "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md",
+        "orchestration_harness/governance_clockwork_tick.py"
+      ],
+      "orientation_statement": "EMR4 will next freeze a default-off, non-secret environment-manifest and operational secret-reference architecture before attempting runtime-role attestation or unknown-commit recovery evidence."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+      "active_tranche": "Raisa provider-free default-off ordinary-practice check-in environment-manifest and operational secret posture architecture",
+      "objective": "Freeze non-secret environment, ordinary runtime-role, secret/key-reference, rotation-evidence and break-glass-denial contracts without creating secrets, connecting a database, changing product configuration or enabling a practice.",
+      "authority_source": "Accepted check-in readiness and admission-control lineage, this dependency resolution and Yuri's standing uninterrupted-development authority.",
+      "next_stage": "rehydrate_and_freeze_the_provider_free_default_off_environment_manifest_and_operational_secret_posture_contract"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "read_only_generic_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "focused_generic_tick",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "surrounding_clockwork_governance",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Raisa provider-free clockwork-governed check-in successor resolution acceptance",
+    "paths": [
+      "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+      "docs/security/raisa-provider-free-clockwork-governed-check-in-successor-resolution-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md",
+      "orchestration_harness/governance_clockwork_tick.py",
+      "scripts/ariadne_governance_clockwork_tick.py",
+      "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json",
+      "tests/test_ariadne_governance_clockwork_tick.py",
+      "orchestration/agent_inbox/antigravity/raisa-clockwork-governed-check-in-successor-resolution-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-clockwork-governed-check-in-successor-resolution-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-19--clockwork-governed-check-in-successor-resolution.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_repository_static_architecture_only",
+    "accepted_check_in_route_readiness_admission_architecture_and_unmounted_kernel_are_the_floor",
+    "environment_and_runtime_role_identifiers_and_evidence_references_only_no_secret_values",
+    "no_database_connection_role_creation_practice_selection_or_runtime_attestation",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_occupied_deepseek_hmr_claude_code_fallback_or_other_provider_call_before_optional_gemini_veto",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
