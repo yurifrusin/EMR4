@@ -3,15 +3,15 @@
 Date: 2026-08-20
 
 Perform one fresh read-only veto of exact candidate
-`836f6ef09b1502bba75a33e21c1d5dba1deae2d9` against accepted base
+`b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` against accepted base
 `13d73085eadaa14531c1fb08101332ca575aa3a0`.
 
 ## Exact candidate and authority
 
 - Worktree:
-  `C:\Users\sarashera\EMR4-worktrees\preterminal-observability-gemini-836f6ef0`
-- Branch: `codex/review-preterminal-observability-836f6ef0`
-- HEAD: `836f6ef09b1502bba75a33e21c1d5dba1deae2d9`
+  `C:\Users\sarashera\EMR4-worktrees\preterminal-observability-gemini-b5f0bc0d`
+- Branch: `codex/review-preterminal-observability-b5f0bc0d`
+- HEAD: `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`
 - Required model/effort: `gemini-3.7-flash-high` / `high`
 
 Read `AGENTS.md` completely and name all five rehydration sources. Validate the
@@ -56,7 +56,8 @@ closeout/acceptance, plus the accepted guard and HMR proof. Do not inspect
 9. Confirm historical attempts 004/005 remain closed and no product/API/config/
    client/flag/grammar/waiting-area, ordinary-practice, data, Docker/database,
    production, deployment, Pages or protected-ref authority opened.
-10. Execute exactly the ten-command manifest. C03 must pass 137 tests. Do not
+10. Execute exactly the ten-command manifest. C03 must pass 85 tests (12 + 13 +
+    21 + 13 + 8 + 8 + 10 across the seven explicitly named modules). Do not
     run `--publish`, Node, npm, the native Harness, broker, Docker, PostgreSQL,
     DeepSeek or any other provider. Every command must return zero and leave
     the review worktree unchanged.

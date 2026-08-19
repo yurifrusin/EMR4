@@ -10,7 +10,7 @@
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
-        "C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-836f6ef0",
+        "C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-b5f0bc0d",
         "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
@@ -53,8 +53,8 @@
       ]
     },
     {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
-    {"id": "C08", "argv": ["git", "diff", "--check", "13d73085eadaa14531c1fb08101332ca575aa3a0..836f6ef09b1502bba75a33e21c1d5dba1deae2d9"]},
-    {"id": "C09", "argv": ["git", "diff", "--name-only", "13d73085eadaa14531c1fb08101332ca575aa3a0..836f6ef09b1502bba75a33e21c1d5dba1deae2d9"]},
+    {"id": "C08", "argv": ["git", "diff", "--check", "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"]},
     {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.verifier-transport-disposition.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery",
+  "candidate_commit": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "model": "gemini-3.7-flash-high",
+  "attempts": [
+    {
+      "attempt_id": "corrected-review-transport-001",
+      "receipt_sha256": "764e471a25abbb58bfb3da74a5b0cf822c1638962e8a00227f2e173e878e051b",
+      "elapsed_ms": 7677,
+      "exit_code": 1,
+      "candidate_review_admitted": false
+    },
+    {
+      "attempt_id": "corrected-review-transport-002",
+      "receipt_sha256": "09c1e3f887d45b4d1a99abfa1cf3541e5c431e2567abd7d9535cc2f991b478d5",
+      "elapsed_ms": 13342,
+      "exit_code": 1,
+      "candidate_review_admitted": false
+    },
+    {
+      "attempt_id": "corrected-review-transport-003",
+      "receipt_sha256": "263c5c00a50e162dd1488d872d2b5f8fe2f624679ebcc4f573a4fae0e24523c6",
+      "elapsed_ms": 14659,
+      "exit_code": 1,
+      "candidate_review_admitted": false
+    }
+  ],
+  "safe_local_diagnosis": {
+    "source": "Antigravity CLI local log",
+    "terminal_error": "calling model: PERMISSION_DENIED (code 403): The caller does not have permission",
+    "raw_log_retained_by_operation": false,
+    "agy_models_liveness_check_exit_code": 0,
+    "worktree_identity_unchanged": true
+  },
+  "disposition": "corrected_independent_veto_pending_external_authorisation_recovery",
+  "automatic_retry_disposition": "stopped_after_three_consecutive_predecision_transport_failures",
+  "candidate_change_required": false,
+  "authority_boundary": "no_fallback_model_no_silent_acceptance_no_product_change"
+}

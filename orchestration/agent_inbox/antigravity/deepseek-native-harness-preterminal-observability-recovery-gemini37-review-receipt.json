@@ -1,0 +1,253 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d",
+  "branch": "codex/review-preterminal-observability-b5f0bc0d",
+  "head_before": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "head_after": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "023773a7f99e5d2befbd7eeb3d0476e720838251c6f642579b403fce7270e950",
+  "result": "# Gemini 3.7 Flash/high Independent Review & Veto\n\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d`\n- **Branch:** `codex/review-preterminal-observability-b5f0bc0d`\n- **Candidate Commit:** `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`\n- **Base Commit:** `13d73085eadaa14531c1fb08101332ca575aa3a0`\n- **Operation:** `deepseek-native-harness-provider-free-preterminal-activation-observability-recovery`\n\n---\n\n## 1. Mandatory Rehydration & Dispositions\n\n1. **Rehydration Sources Verified:**\n   - `live_handover_current_baton`: Verified PR 74/75 merge state at `2e34bdad732fdab32fbf778280b3d3c70d66d602`, locked single-track master, task branch lineage.\n   - `current_authority_allocation`: Conductor GPT Sol, Independent Reviewer Gemini 3.7 Flash/high, DeepSeek Harness paused from occupied EMR4 work.\n   - `active_plan_and_acceptance`: Recovery plan, threat-model delta, contract, evidence schemas, failed attempt artifacts, accepted guard and HMR proofs.\n   - `protected_evidence_boundaries`: Holdouts, PHI, attempts 004/005, product routes, ordinary-practice flags, DB/Docker, Pages, and protected refs remain closed.\n   - `git_refs_and_worktree`: Clean tracked review worktree at HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`.\n\n2. **Active Operation Latch:**\n   - Validated `orchestration/continuity/ariadne-active-operation-latch/current.json`: `status: \"in_progress\"`, `operation_id: \"deepseek-native-harness-provider-free-preterminal-activation-observability-recovery\"`.\n\n3. **Explicit Parallelism Dispositions:**\n   - **DeepSeek:** Declined; native Harness / failed attempt is the subject of evidence; model and provider dispatches are strictly closed.\n   - **Gemini:** Dispatched for this fresh isolated read-only candidate veto.\n   - **Native Subagents:** Declined under current policy and serial evidence/cleanup lease.\n\n---\n\n## 2. Assessment of Mandatory Challenges\n\n1. **Exact Candidate and Clean Tracked Worktree:**\n   - Verified worktree identity at `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d` on branch `codex/review-preterminal-observability-b5f0bc0d`.\n   - C01, C02, C07, and C10 confirmed exact HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` and zero dirty/untracked files.\n\n2. **Immutable Failed Attempt Binding:**\n   - `native-composition-attempt-001` is byte-bound by `contract.json` to source commit `296f35ff696361c63a4e018e5ae9317c79cb6213` and exact SHA-256 digests for evidence (`06cc45...`), controller (`b8a623...`), and contract (`95acde...`).\n   - The diagnosis verifies the retained attempt failed with `NATIVE_COMPOSITION_EXECUTION_FAILED`, retained only `[\"sentinel_activated\", \"stock_headless_hmr_ready\"]`, had `terminal: None`, `duration_ms: 0`, and classifies causally as `indeterminate_preterminal_failure`.\n   - Zero prohibited counts and full cleanup are preserved without retry, resume, or reclassification.\n\n3. **Absence of Unsupported Root-Cause Claims:**\n   - Verified `permitted_root_cause_claims: []`. No speculative or unsupported claims regarding Harness internals, DeepSeek, loader, service injection, event parsing, controller, or guard failures are admitted.\n\n4. **Corrected Future-Runner Architecture:**\n   - `corrected_runner_source()` enforces that `activation(config, \"BOOTSTRAP_APPLY_ENTERED\")` occurs before any dynamic import.\n   - Top-level imports are strictly Node built-ins (`node:fs`, `node:path`).\n   - Imports of `@deepseek-ai/dsh-scope` and `./effective-tool-guard.mjs` are dynamic, caught, and mapped to closed coordinates.\n   - Separate single writers exist for sentinel readiness (`events.jsonl`) and runner activation (`activation.jsonl`).\n   - Terminal writing uses exclusive open mode (`openSync(..., \"wx\")`).\n\n5. **Finite Activation Vocabulary and Safe Sanitization:**\n   - Closed 14-element activation coordinate set partitions all 10 preterminal scenarios (`missing_hmr`, `missing_app_exit`, `missing_services`, `module_import_rejected`, `scope_creation_rejected`, `guard_failure`, `terminal_write_rejected`, `scope_disposal_rejected`, `success`, `unknown_exception`).\n   - No exception messages, stack traces, file paths, environment variables, prompts, payloads, or credentials are leaked or retained.\n\n6. **Guard Vocabulary and Boundary Preservation:**\n   - Guard terminal parsing uses `sanitizeEffectiveToolTerminal` and retains `stage: \"preterminal_activation\"`, cleanly separated from `pre_provider_tool_composition`.\n   - Tool composition boundary (`edit`, `glob`, `read`), broker allowlist, and authorization boundaries remain strictly intact.\n\n7. **Published Probe Execution and Attribution:**\n   - Published probe performed exactly 1 offline materialisation from npm cache and 1 non-Harness Node module-import probe.\n   - Proved exit code 0, 0 network attempts, 0 native Harness processes, and complete disposable root cleanup.\n   - Probe is correctly attributed as module import verification and is not overclaimed as native composition or model execution.\n\n8. **Future Controller Timing and Envelope Design:**\n   - The future controller envelope design guarantees that `launch_duration_ms = round((monotonic() - started_at) * 1000)` is captured in a `finally` block before process termination and cleanup.\n   - This tranche does not execute or modify the consumed controller script.\n\n9. **Closed Protected Surfaces:**\n   - Historical attempts 004/005 remain closed.\n   - No product routes, configuration, database/Docker, ordinary-practice flags, production, deployment, Pages, or protected ref movements occurred.\n   - `docs/branding/` and untracked files remain preserved.\n\n10. **Bound Command Manifest Execution:**\n    - All 10 bound commands (C01 through C10) executed cleanly and returned exit code 0.\n    - C03 pytest suite passed 100% across all 7 targeted test modules without database access or network calls.\n\n---\n\n## 3. Findings Summary\n\n- **P0 Findings:** 0\n- **P1 Findings:** 0\n- **P2 Findings:** 0\n\nThe recovery is exact, fully attributable, fail-closed, and compliant with all EMR4 repository governance boundaries.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Review & Veto\n\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d`\n- **Branch:** `codex/review-preterminal-observability-b5f0bc0d`\n- **Candidate Commit:** `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`\n- **Base Commit:** `13d73085eadaa14531c1fb08101332ca575aa3a0`\n- **Operation:** `deepseek-native-harness-provider-free-preterminal-activation-observability-recovery`\n\n---\n\n## 1. Mandatory Rehydration & Dispositions\n\n1. **Rehydration Sources Verified:**\n   - `live_handover_current_baton`: Verified PR 74/75 merge state at `2e34bdad732fdab32fbf778280b3d3c70d66d602`, locked single-track master, task branch lineage.\n   - `current_authority_allocation`: Conductor GPT Sol, Independent Reviewer Gemini 3.7 Flash/high, DeepSeek Harness paused from occupied EMR4 work.\n   - `active_plan_and_acceptance`: Recovery plan, threat-model delta, contract, evidence schemas, failed attempt artifacts, accepted guard and HMR proofs.\n   - `protected_evidence_boundaries`: Holdouts, PHI, attempts 004/005, product routes, ordinary-practice flags, DB/Docker, Pages, and protected refs remain closed.\n   - `git_refs_and_worktree`: Clean tracked review worktree at HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`.\n\n2. **Active Operation Latch:**\n   - Validated `orchestration/continuity/ariadne-active-operation-latch/current.json`: `status: \"in_progress\"`, `operation_id: \"deepseek-native-harness-provider-free-preterminal-activation-observability-recovery\"`.\n\n3. **Explicit Parallelism Dispositions:**\n   - **DeepSeek:** Declined; native Harness / failed attempt is the subject of evidence; model and provider dispatches are strictly closed.\n   - **Gemini:** Dispatched for this fresh isolated read-only candidate veto.\n   - **Native Subagents:** Declined under current policy and serial evidence/cleanup lease.\n\n---\n\n## 2. Assessment of Mandatory Challenges\n\n1. **Exact Candidate and Clean Tracked Worktree:**\n   - Verified worktree identity at `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d` on branch `codex/review-preterminal-observability-b5f0bc0d`.\n   - C01, C02, C07, and C10 confirmed exact HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` and zero dirty/untracked files.\n\n2. **Immutable Failed Attempt Binding:**\n   - `native-composition-attempt-001` is byte-bound by `contract.json` to source commit `296f35ff696361c63a4e018e5ae9317c79cb6213` and exact SHA-256 digests for evidence (`06cc45...`), controller (`b8a623...`), and contract (`95acde...`).\n   - The diagnosis verifies the retained attempt failed with `NATIVE_COMPOSITION_EXECUTION_FAILED`, retained only `[\"sentinel_activated\", \"stock_headless_hmr_ready\"]`, had `terminal: None`, `duration_ms: 0`, and classifies causally as `indeterminate_preterminal_failure`.\n   - Zero prohibited counts and full cleanup are preserved without retry, resume, or reclassification.\n\n3. **Absence of Unsupported Root-Cause Claims:**\n   - Verified `permitted_root_cause_claims: []`. No speculative or unsupported claims regarding Harness internals, DeepSeek, loader, service injection, event parsing, controller, or guard failures are admitted.\n\n4. **Corrected Future-Runner Architecture:**\n   - `corrected_runner_source()` enforces that `activation(config, \"BOOTSTRAP_APPLY_ENTERED\")` occurs before any dynamic import.\n   - Top-level imports are strictly Node built-ins (`node:fs`, `node:path`).\n   - Imports of `@deepseek-ai/dsh-scope` and `./effective-tool-guard.mjs` are dynamic, caught, and mapped to closed coordinates.\n   - Separate single writers exist for sentinel readiness (`events.jsonl`) and runner activation (`activation.jsonl`).\n   - Terminal writing uses exclusive open mode (`openSync(..., \"wx\")`).\n\n5. **Finite Activation Vocabulary and Safe Sanitization:**\n   - Closed 14-element activation coordinate set partitions all 10 preterminal scenarios (`missing_hmr`, `missing_app_exit`, `missing_services`, `module_import_rejected`, `scope_creation_rejected`, `guard_failure`, `terminal_write_rejected`, `scope_disposal_rejected`, `success`, `unknown_exception`).\n   - No exception messages, stack traces, file paths, environment variables, prompts, payloads, or credentials are leaked or retained.\n\n6. **Guard Vocabulary and Boundary Preservation:**\n   - Guard terminal parsing uses `sanitizeEffectiveToolTerminal` and retains `stage: \"preterminal_activation\"`, cleanly separated from `pre_provider_tool_composition`.\n   - Tool composition boundary (`edit`, `glob`, `read`), broker allowlist, and authorization boundaries remain strictly intact.\n\n7. **Published Probe Execution and Attribution:**\n   - Published probe performed exactly 1 offline materialisation from npm cache and 1 non-Harness Node module-import probe.\n   - Proved exit code 0, 0 network attempts, 0 native Harness processes, and complete disposable root cleanup.\n   - Probe is correctly attributed as module import verification and is not overclaimed as native composition or model execution.\n\n8. **Future Controller Timing and Envelope Design:**\n   - The future controller envelope design guarantees that `launch_duration_ms = round((monotonic() - started_at) * 1000)` is captured in a `finally` block before process termination and cleanup.\n   - This tranche does not execute or modify the consumed controller script.\n\n9. **Closed Protected Surfaces:**\n   - Historical attempts 004/005 remain closed.\n   - No product routes, configuration, database/Docker, ordinary-practice flags, production, deployment, Pages, or protected ref movements occurred.\n   - `docs/branding/` and untracked files remain preserved.\n\n10. **Bound Command Manifest Execution:**\n    - All 10 bound commands (C01 through C10) executed cleanly and returned exit code 0.\n    - C03 pytest suite passed 100% across all 7 targeted test modules without database access or network calls.\n\n---\n\n## 3. Findings Summary\n\n- **P0 Findings:** 0\n- **P1 Findings:** 0\n- **P2 Findings:** 0\n\nThe recovery is exact, fully attributable, fail-closed, and compliant with all EMR4 repository governance boundaries.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-b5f0bc0d",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_preterminal_observability_recovery",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "e8d49e410124d8843be23dcc9e2b978eb6d3d940795bb4ad4ca5d3344ad78627",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-b5f0bc0d",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_preterminal_observability_recovery",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.transport-failure-receipt.v1",
+  "status": "transport_failed_without_terminal_decision",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d",
+  "branch": "codex/review-preterminal-observability-b5f0bc0d",
+  "head_before": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "head_after": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "dirty_after": false,
+  "worktree_identity_unchanged": true,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "023773a7f99e5d2befbd7eeb3d0476e720838251c6f642579b403fce7270e950",
+  "exit_code": 1,
+  "elapsed_ms": 13342,
+  "print_timeout_seconds": 2700,
+  "print_timeout_boundary_reached": false,
+  "stdout": {
+    "bytes": 949,
+    "sha256": "5bf5210df64b49066d9249389cd631f0f142ded16de6569c84a98d7705856f66",
+    "empty": false
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "empty": true
+  },
+  "terminal_decision_returned": false,
+  "candidate_review_admitted": false,
+  "command_manifest_sha256": "e8d49e410124d8843be23dcc9e2b978eb6d3d940795bb4ad4ca5d3344ad78627"
+}

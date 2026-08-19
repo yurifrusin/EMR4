@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.verifier-postreview-disposition.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery",
+  "attempt_id": "gemini37-review-attempt-001",
+  "candidate_commit": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "receipt_path": "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-receipt.json",
+  "receipt_sha256": "87187e32fff9141a34b3a906eadbbd7becdd47ebece80e5bb3c2672fd2afd493",
+  "provider_decision": "pass",
+  "orchestrator_disposition": "revision_required",
+  "reason": "The frozen packet incorrectly required C03 to pass 137 tests. The exact seven-module candidate suite contains 85 tests (12 + 13 + 21 + 13 + 8 + 8 + 10), yet the review returned pass without challenging the false count.",
+  "candidate_change_required": false,
+  "corrective_action": "Preserve the first receipt, correct only the packet count, rerun the clean-worktree preflight, and obtain a fresh Gemini 3.7 Flash/high veto against the unchanged candidate.",
+  "authority_boundary": "review_evidence_only_no_product_or_candidate_change"
+}
