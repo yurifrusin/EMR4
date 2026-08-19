@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
+  "outcome": "blocked_with_cleanup_verified",
+  "occupied_execution_count": 1,
+  "automatic_retry_count": 0,
+  "database_process_start_count": 0,
+  "credential_delivery_count": 0,
+  "sql_execution_count": 0,
+  "provider_call_count": 0,
+  "clockwork_publication_count": 3,
+  "manual_canonical_governance_edit_count": 0,
+  "canonical_drift_count": 0,
+  "authoring_or_packaging_correction_cycles": [
+    "plan_test_line_wrap_assertion_normalized_before_commit",
+    "caller_authored_false_full_git_id_replaced_by_machine_resolved_head_before_clockwork_publication",
+    "first_cleanup_profile_check_replaced_abbreviated_docker_listing_id_with_inspected_full_id_before_removal"
+  ],
+  "redundant_deterministic_suite_count": 1,
+  "redundant_deterministic_suite_reason": "A second suite was started after the first yielded execution session was not retained in the caller-visible result; both passed and neither touched Docker.",
+  "root_cause": "The corrected profile predicate required network_name, but the server and sidecar creation call sites did not pass it and direct predicate tests did not exercise their invocation contract.",
+  "effective_controls": [
+    "one-run latch prevented evidence laundering by retry",
+    "closed envelope preserved the exact failed source and predecessor bindings",
+    "ownership-checked recovery removed only the exact Created-state container",
+    "clockwork caught the false full Git transcription before publication",
+    "protected refs and unrelated untracked files remained untouched"
+  ],
+  "next_direct_controls": [
+    "spy-signature tests must exercise both real profile predicate call sites",
+    "every post-create pre-registry exception must perform exact local cleanup before propagation",
+    "machine-resolved Git IDs must be injected or compared mechanically rather than typed",
+    "yielded deterministic suites must retain and poll the original session rather than start a duplicate"
+  ],
+  "clockwork_lease_sequence": 23,
+  "pushover_request": "d7d99f92-0897-4520-91bd-42332a00523e"
+}
