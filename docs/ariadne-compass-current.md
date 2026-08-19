@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next prove the accepted tool-composition guard in exactly one provider-free native rc.7 boot before considering any occupied DeepSeek worker.
+> EMR4 will repair the native Harness preterminal reading deterministically, without another native process, before deciding on any separately frozen recovery execution.
 
 ## North star
 
@@ -452,26 +452,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The deterministic repair and independent veto pass, while the first native-Harness worker exposes a separate pre-provider effective-tool composition gap. Lineage parent: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof`.
 218. **Give Ariadne a deterministic pre-provider reading of the rc.7 worker tool plane and a stable terminal coordinate before any occupied DeepSeek work — DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard**
    The exact guard and independent veto pass with zero native or DeepSeek execution; local construction reruns remain honestly visible. Lineage parent: `raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair`.
+219. **Test the accepted deterministic tool-composition guard once inside the real provider-free rc.7 native lifecycle — DeepSeek native Harness provider-free effective-tool composition native-boot proof**
+   The process reached stock HMR readiness but no guard terminal was retained; the intended proof failed closed with zero prohibited calls and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard`.
 
 ## Current position
 
-**Prove the accepted deterministic guard inside one real provider-free native rc.7 composition boot — DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard**
+**Preserve the failed native attempt exactly and repair the missing preterminal causal reading — DeepSeek native Harness provider-free effective-tool composition native-boot proof**
 
-**Why this proof came next:** Static package/source bindings and hostile projections pass, but a native Harness process has not yet exercised the exact helper and terminal coordinate.
+**Why this proof came next:** The attempt is safely contained but its generic failure coordinate and zero duration cannot distinguish loader, service, event-parser or guard activation failure.
 
-One offline, network-denied native boot reaches the guard, observes the exact effective tool view, emits one safe terminal coordinate, exits cleanly and leaves no process or filesystem residue.
+native-composition-attempt-001 retained sentinel activation and HMR readiness, no effective-tool terminal, zero prohibited calls and complete cleanup; native composition remains unproved.
 
 ### What this unlocks
 
-- Native runtime evidence that the rc.7 preset and guard compose exactly as the deterministic contract predicts.
-- A traceable pre-provider terminal suitable for a later separately planned occupied worker.
-- A fresh decision on whether another bounded DeepSeek development package has positive leverage.
+- A deterministic inventory of every post-readiness path that can avoid the guard terminal.
+- Specific safe preterminal coordinates and reliable elapsed-time evidence before another native process can be considered.
+- A defensible later decision whether the native Harness merits a separately named recovery execution.
 
 ### What it does not solve
 
-- No agent session, broker/model/provider request or occupied worker is authorised.
-- No attempt 005, ordinary-practice command or product change is authorised.
-- No data, production, deployment, release, Pages or protected integration opens.
+- No native effective-tool result, occupied worker or DeepSeek model-quality conclusion is accepted.
+- No same-attempt retry, resume, reclassification or automatic successor process is authorised.
+- No product, ordinary-practice, data, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1210,7 +1212,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
-- `docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-closeout.md`
+- `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1923,7 +1925,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md`
@@ -2571,6 +2573,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
@@ -3531,4 +3535,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 323; continuity graph revision 341._
+_Compass map revision 324; continuity graph revision 342._

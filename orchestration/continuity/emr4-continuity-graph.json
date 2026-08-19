@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 341,
+  "graph_revision": 342,
   "harvests": [],
   "nodes": [
     {
@@ -24457,9 +24457,115 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof",
+      "title": "DeepSeek native Harness provider-free effective-tool composition native-boot proof",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted exactly one offline provider-free native composition attempt with no retry.",
+          "The attempt is accepted only as immutable fail-closed and cleanup evidence; the native effective-tool composition proof is rejected.",
+          "The successor is deterministic and provider-free first and authorizes no native Harness process, agent, broker, model, provider, product, data, deployment, Pages or protected-ref movement."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-fail-closed-native-attempt",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one consumed native process, exact offline identities, zero prohibited calls and complete owned cleanup as immutable evidence."
+        },
+        {
+          "id": "reject-native-effective-tool-composition-proof",
+          "source": "docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md",
+          "status": "rejected",
+          "summary": "Reject the intended composition proof because no guard-start or terminal coordinate was retained and the edit/glob/read view was not observed."
+        },
+        {
+          "id": "accept-deterministic-preterminal-observability-recovery",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a no-native-process successor that replaces the generic preterminal failure and unreliable duration with exact bounded coordinates before any separately frozen recovery execution."
+        }
+      ],
+      "claim_scope": [
+        "The exact rc.7 package materialised offline and six required installed packages matched 0.1.0-rc.7.",
+        "The single native process retained sentinel activation and stock headless HMR readiness before failing closed.",
+        "No effective-tool terminal or edit/glob/read view was retained, so native composition remains unproved.",
+        "Network, agent-session, turn, broker, model, provider, occupied-worker, Docker and database counts are zero.",
+        "The controller waited for process absence and removed its exact disposable root.",
+        "The generic failure coordinate and zero duration are insufficient for causal attribution to the Harness, loader, services, event parser or guard."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/evidence.schema.json",
+          "scripts/deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-preexecution-runtime-state.json",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-effective-tool-composition-native-boot-proof.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The native effective-tool composition proof did not pass and no occupied worker is eligible.",
+        "The exact post-readiness preterminal rejection is unclassified by retained evidence.",
+        "The consumed attempt cannot be retried, resumed or reclassified.",
+        "A later native process requires a separately frozen successor after deterministic observability recovery acceptance.",
+        "No product, data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T05:47:54.6367968+10:00",
+      "updated_at": "2026-08-20T05:47:54.6367968+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a28b7626f249635da256497857a2a48258fe2632",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T05:00:08.3025395+10:00"
+  "updated_at": "2026-08-20T05:47:54.6367968+10:00"
 }
