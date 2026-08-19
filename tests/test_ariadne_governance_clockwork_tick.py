@@ -8,12 +8,15 @@ from pathlib import Path
 import pytest
 
 from orchestration_harness.governance_clockwork_tick import (
+    BLOCKED_INTENT_VERSION,
     CommittedClockworkTick,
     ClockworkTickRejection,
     PREDECESSOR_METADATA_NAMES,
+    build_blocked_tick_generation,
     build_tick_generation,
     publish_tick_generation,
     rollback_tick_generation,
+    validate_blocked_tick_intent,
     validate_tick_intent,
     validate_tick_live_state,
 )
@@ -34,6 +37,22 @@ REPLAY_FIXTURE_SOURCE = "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
 
 def _json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _blocked_intent(worktree: Path) -> dict:
+    latch = _json(
+        worktree
+        / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    )
+    commands = _json(worktree / INTENT_PATH.relative_to(ROOT))["command_manifest"]
+    return {
+        "schema_version": BLOCKED_INTENT_VERSION,
+        "operation_id": latch["operation_id"],
+        "completed_stage": "Bounded recovery exhausted with exact cleanup.",
+        "user_attention_reason": "Choose a new recovery design or defer the gap.",
+        "terminal_reason": "bounded_recovery_exhausted",
+        "command_manifest": commands,
+    }
 
 
 @contextmanager
@@ -121,6 +140,24 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
         validate_tick_intent(underbounded, contract)
 
 
+def test_blocked_intent_is_closed_and_rejects_hostile_fields() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    baseline = _blocked_intent(ROOT)
+    assert validate_blocked_tick_intent(baseline, contract) == baseline
+    derived = json.loads(json.dumps(baseline))
+    derived["source_commit"] = "a" * 40
+    with pytest.raises(ClockworkTickRejection, match="blocked_tick_intent_keys"):
+        validate_blocked_tick_intent(derived, contract)
+    wrong_operation = json.loads(json.dumps(baseline))
+    wrong_operation["operation_id"] = "INVALID"
+    with pytest.raises(ClockworkTickRejection, match="blocked_tick_operation_id"):
+        validate_blocked_tick_intent(wrong_operation, contract)
+    blank_reason = json.loads(json.dumps(baseline))
+    blank_reason["user_attention_reason"] = ""
+    with pytest.raises(ClockworkTickRejection, match="blocked_tick_attention_reason"):
+        validate_blocked_tick_intent(blank_reason, contract)
+
+
 def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
     with _worktree(tmp_path / "selected-or-prepared") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
@@ -138,6 +175,82 @@ def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
         assert latch["operation_id"] == "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
         assert latch["protected_boundaries"] == prepared["intent"]["next_operation_protected_boundaries"]
         assert prepared["generation_manifest"]["source_commit"] == REPLAY_FIXTURE_SOURCE
+
+
+def test_blocked_tick_preserves_every_non_latch_surface_and_rolls_back(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "blocked-transition") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _blocked_intent(worktree)
+        canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
+        before_canonical = {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        }
+        before_metadata = {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        }
+        before_pointer = pointer_path.read_bytes()
+        prepared = build_blocked_tick_generation(worktree, contract, intent)
+        latch = json.loads(
+            prepared["canonical"]["active_latch"].decode("utf-8")
+        )
+        assert latch["status"] == "blocked"
+        assert latch["source_head"] == _json(
+            worktree
+            / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+        )["source_head"]
+        assert latch["checkpoint"]["next_executable_stage"] is None
+        assert latch["user_attention"]["required"] is True
+        assert latch["terminal_response"]["permitted"] is True
+        assert {
+            key
+            for key in CANONICAL_KEYS
+            if prepared["canonical"][key] != before_canonical[key]
+        } == {"active_latch"}
+        with pytest.raises(OSError, match="injected_tick_precommit_failure"):
+            publish_tick_generation(
+                worktree,
+                prepared,
+                writer_id="clockwork",
+                fail_at="before_pointer_replace",
+            )
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
+        assert pointer_path.read_bytes() == before_pointer
+        active = publish_tick_generation(
+            worktree, prepared, writer_id="clockwork"
+        )
+        assert active["event_kind"] == "blocked_transition"
+        assert active["operation_id"] == intent["operation_id"]
+        assert publish_tick_generation(
+            worktree, prepared, writer_id="clockwork"
+        )["generation_id"] == active["generation_id"]
+        rolled_back = rollback_tick_generation(
+            worktree, contract, writer_id="clockwork"
+        )
+        assert rolled_back["byte_exact"] is True
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
+        restored_pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
+        original_pointer = json.loads(before_pointer.decode("utf-8"))
+        assert restored_pointer["selected_generation_id"] == original_pointer[
+            "selected_generation_id"
+        ]
+        assert restored_pointer["selected_bundle_sha256"] == original_pointer[
+            "selected_bundle_sha256"
+        ]
+        assert restored_pointer["lease_sequence"] == (
+            original_pointer["lease_sequence"] + 2
+        )
 
 
 def test_git_clean_line_ending_variation_does_not_change_tick(tmp_path: Path) -> None:

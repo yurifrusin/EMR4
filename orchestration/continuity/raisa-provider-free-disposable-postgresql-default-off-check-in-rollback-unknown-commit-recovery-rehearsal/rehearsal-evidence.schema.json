@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schema/check-in-rollback-unknown-response-rehearsal-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "evidence_label", "source_head", "accepted_runtime_role_source", "contract_sha256", "source_hashes", "manifest_sha256", "attestation_artifact", "attestation_sha256", "hostile_mutations", "environment", "lifecycle", "cleanup", "closed_boundaries", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-rollback-unknown-response-rehearsal-evidence.v1"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_default_off_check_in_rollback_unknown_commit_recovery_rehearsal_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_check_in_rollback_unknown_terminal_response_recovery"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_runtime_role_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "contract_sha256": {"$ref": "#/$defs/digest"},
+    "source_hashes": {"type": "object", "minProperties": 17, "maxProperties": 17, "additionalProperties": {"$ref": "#/$defs/digest"}},
+    "manifest_sha256": {"$ref": "#/$defs/digest"},
+    "attestation_artifact": {"const": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/transaction-attestation.json"},
+    "attestation_sha256": {"$ref": "#/$defs/digest"},
+    "hostile_mutations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_attempted", "contract_rejected", "manifest_attempted", "manifest_rejected", "classifier_attempted", "classifier_rejected", "escapes"],
+      "properties": {
+        "contract_attempted": {"type": "integer", "minimum": 256},
+        "contract_rejected": {"type": "integer", "minimum": 256},
+        "manifest_attempted": {"type": "integer", "minimum": 96},
+        "manifest_rejected": {"type": "integer", "minimum": 96},
+        "classifier_attempted": {"type": "integer", "minimum": 24},
+        "classifier_rejected": {"type": "integer", "minimum": 24},
+        "escapes": {"const": 0}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["postgresql_major", "image_reference", "image_id_sha256", "network_internal", "published_ports", "storage", "host_transport", "provider_calls", "product_rows", "live_secrets", "automatic_retries"],
+      "properties": {
+        "postgresql_major": {"const": 16},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "image_id_sha256": {"$ref": "#/$defs/digest"},
+        "network_internal": {"const": true},
+        "published_ports": {"const": false},
+        "storage": {"const": "container_local_tmpfs"},
+        "host_transport": {"const": "fixed_in_process_ipv4_loopback_relay"},
+        "provider_calls": {"const": 0},
+        "product_rows": {"const": 0},
+        "live_secrets": {"const": 0},
+        "automatic_retries": {"const": 0}
+      }
+    },
+    "lifecycle": {"type": "array", "minItems": 12, "items": {"type": "string", "minLength": 3}},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "container", "network", "container_id_sha256", "network_id_sha256", "role_absent_before_teardown"],
+      "properties": {
+        "status": {"const": "cleanup_verified"},
+        "container": {"const": "container_absent"},
+        "network": {"const": "network_absent"},
+        "container_id_sha256": {"$ref": "#/$defs/digest"},
+        "network_id_sha256": {"$ref": "#/$defs/digest"},
+        "role_absent_before_teardown": {"const": true}
+      }
+    },
+    "closed_boundaries": {"type": "object", "minProperties": 13, "additionalProperties": {"const": false}},
+    "claim_boundary": {"type": "string", "minLength": 80}
+  },
+  "$defs": {"digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

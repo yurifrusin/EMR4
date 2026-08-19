@@ -11,7 +11,7 @@
     "user_attention_required": false
   },
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
-  "continuation_event": "post_compaction",
+  "continuation_event": "pre_commit",
   "git_object_resolution": {
     "observed_head": "26402cb8667c2dbf62e86c6eb4c0b000d274559e",
     "reason_codes": [],
@@ -43,55 +43,50 @@
     "schema_version": "ariadne.git_refs_snapshot.v1",
     "status": "passed",
     "tracked_worktree_clean": false,
-    "untracked_path_count": 659
+    "untracked_path_count": 678
   },
   "parallelism_assessment": {
-    "assessed_stage": "post_compaction_frozen_plan_construction",
+    "assessed_stage": "blocked_transition_candidate_precommit",
     "lanes": [
       {
         "disposition": "declined",
         "expected_leverage": "negative",
         "lane_id": "deepseek_flash",
-        "rationale": "Occupied DeepSeek HMR is latch-forbidden until a separate boot proof, Claude Code is no fallback and this database lifecycle is serial.",
+        "rationale": "Occupied DeepSeek HMR is forbidden pending a separate boot proof, Claude Code is no fallback and bounded recovery is exhausted.",
         "work_packages": []
       },
       {
-        "disposition": "reserved",
-        "expected_leverage": "required_independence",
+        "disposition": "declined",
+        "expected_leverage": "negative",
         "lane_id": "gemini_verifier",
-        "rationale": "One fresh exact-candidate read-only veto remains reserved after deterministic rollback, readback, redaction and cleanup admission.",
-        "work_packages": [
-          "rollback_unknown_commit_exact_candidate_veto"
-        ]
+        "rationale": "Deterministic database acceptance failed, so an external veto is ineligible and cannot repair the local terminal transport.",
+        "work_packages": []
       },
       {
         "disposition": "declined",
         "expected_leverage": "negative",
         "lane_id": "native_subagents",
-        "rationale": "Current developer policy prohibits proactive delegation and the single mutable disposable PostgreSQL lifecycle is indivisible.",
+        "rationale": "Current developer policy forbids proactive delegation and one pointer-last canonical transition is serial.",
         "work_packages": []
       }
     ],
     "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
     "parallel_work_packages": [],
     "reassessment_triggers": [
-      "after static candidate validation",
-      "after disposable PostgreSQL cleanup",
-      "before verifier acceptance",
-      "at closeout"
+      "after candidate commit",
+      "before clockwork publication",
+      "at blocked closeout"
     ],
     "schema_version": "ariadne.parallelism_assessment.v1",
     "serial_constraints": [
-      "frozen source and schema admission before Docker action",
-      "one uniquely named disposable PostgreSQL lifecycle",
-      "rollback zero effect before ambiguous-response scenario",
-      "no retry before authoritative readback",
-      "exact cleanup before deterministic admission",
-      "deterministic admission before Gemini veto",
-      "Sol-only acceptance clockwork and task-branch closeout"
+      "commit noncanonical implementation and immutable evidence first",
+      "derive the blocked generation from the committed full Git source",
+      "publish only through the one clockwork writer",
+      "preserve all non-latch canonical surfaces byte-for-byte",
+      "perform no fourth database execution"
     ]
   },
-  "planned_action": "continue_frozen_provider_free_disposable_postgresql_check_in_rollback_unknown_commit_recovery_rehearsal_construction",
+  "planned_action": "commit_explicit_blocked_transition_candidate_without_canonical_publication",
   "reasons": [],
   "rehydrated_from_receipt": true,
   "rehydration_sources": [
@@ -109,14 +104,13 @@
       "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
       "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
       "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
-      "orchestration/api_spine_adr.md",
-      "orchestration/api_spine_programme.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/closeout-intent.json",
       "orchestration/continuity/ariadne-active-operation-latch/current.json"
     ],
-    "current_authority_allocation": "GPT Sol owns the frozen plan, serial disposable PostgreSQL lifecycle, deterministic recovery and task-branch closeout. DeepSeek is declined because occupied native-Harness HMR remains forbidden pending the separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one exact-candidate read-only veto. Native subagents are declined under current developer policy and the indivisible database lifecycle.",
-    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam and its origin are exact 26402cb8667c2dbf62e86c6eb4c0b000d274559e. The tracked tree contains this receipt/runtime refresh; 659 untracked paths are preserved, including docs/branding and the newly authored tranche files. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
-    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction: 96144 characters, 504 lines, SHA-256 fef4cd8c74a405e29ea934710e4473de8b2a749b15ffe703f6a827f4b7c94f0d. Its Current Baton fixes Continuity 334 / Compass 316, accepted runtime-role source 6a2832575e9b4df5c40a13984db7281e79814a94 and this rollback/unknown-response successor.",
-    "protected_evidence_boundaries": "One uniquely named disposable local PostgreSQL 16 instance may use only ephemeral authored-synthetic manifest, practice, physical role and credentials. Explicit rollback must leave zero rows. Lost complete terminal response must release no success, permit no retry and resolve only by fresh exact restricted-role readback; partial, duplicate or mismatched packets deny. Exact role, relay, container and network cleanup is mandatory. No local .env, live secret, cloud or existing/product database, product/config/API/OpenAPI/GraphQL/client/schema change, ordinary-practice activation, generic-status Arrived, grammar, waiting-area movement, data, occupied DeepSeek HMR, production, deployment, release, Pages, protected evidence or protected-ref movement is permitted. Preserve docs/branding and every unrelated untracked path; explicit-path staging only."
+    "current_authority_allocation": "GPT Sol owns the serial fail-closed recovery and the narrow clockwork self-correction. DeepSeek is declined because occupied native-Harness HMR remains forbidden and Claude Code is no fallback. Gemini is declined because deterministic database acceptance failed. Native subagents are declined by current developer policy and the serial governance transition.",
+    "git_refs_and_worktree": "Task branch and origin task are exact 26402cb8667c2dbf62e86c6eb4c0b000d274559e. The dirty tree contains only the explicit tranche, negative evidence, receipts and blocked-transition self-correction among preserved unrelated untracked material. Local/origin master and local/origin handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction: 96144 characters and 504 lines. The Current Baton fixes Continuity 334 / Compass 316, the live single-owner clockwork and the rollback/unknown-response operation.",
+    "protected_evidence_boundaries": "Three immutable failed-closed attempts and exact cleanup are the full database evidence. No fourth execution, worker, provider or Gemini call is authorised. The blocked-transition candidate may change only the latch after pointer-last publication; all other canonical surfaces must remain byte-identical. No product, ordinary practice, data, production, deployment, release, Pages, protected evidence or protected refs. Preserve docs/branding and unrelated untracked files; explicit staging only."
   },
   "status": "passed",
   "terminal_handback_permitted": false,

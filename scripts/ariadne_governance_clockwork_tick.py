@@ -13,7 +13,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from orchestration_harness.governance_clockwork_tick import (
+    BLOCKED_INTENT_VERSION,
     build_tick_generation,
+    build_blocked_tick_generation,
     publish_tick_generation,
     rollback_tick_generation,
     validate_tick_live_state,
@@ -82,11 +84,17 @@ def main(argv: list[str] | None = None) -> int:
         intent_path = _intent_path(arguments.intent)
         intent = _load(intent_path)
         transaction = _load(ROOT / contract["clockwork_root"] / "transaction.json")
-        operation_id = intent.get("transaction_manifest", {}).get("operation_id")
+        if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
+            operation_id = intent.get("operation_id")
+        else:
+            operation_id = intent.get("transaction_manifest", {}).get("operation_id")
         if arguments.check and transaction.get("operation_id") == operation_id:
             result = validate_tick_live_state(ROOT, contract)
         else:
-            prepared = build_tick_generation(ROOT, contract, intent)
+            if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
+                prepared = build_blocked_tick_generation(ROOT, contract, intent)
+            else:
+                prepared = build_tick_generation(ROOT, contract, intent)
             if arguments.check:
                 result = {
                     "schema_version": "ariadne.governance_live_tick_dry_run.v1",

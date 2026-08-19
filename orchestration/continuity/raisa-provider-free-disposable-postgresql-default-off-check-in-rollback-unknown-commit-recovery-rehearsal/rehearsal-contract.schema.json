@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schema/check-in-rollback-unknown-response-rehearsal-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "accepted_runtime_role_source",
+    "result",
+    "evidence_label",
+    "source_bindings",
+    "containment_profile",
+    "role_profile",
+    "database_profile",
+    "transaction_profile",
+    "scenarios",
+    "hostile_thresholds",
+    "evidence_profile",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-rollback-unknown-response-rehearsal-contract.v1"},
+    "source_head": {"const": "26402cb8667c2dbf62e86c6eb4c0b000d274559e"},
+    "accepted_runtime_role_source": {"const": "6a2832575e9b4df5c40a13984db7281e79814a94"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_default_off_check_in_rollback_unknown_commit_recovery_rehearsal_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_check_in_rollback_unknown_terminal_response_recovery"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 17,
+      "maxItems": 17,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "containment_profile": {"$ref": "#/$defs/containment"},
+    "role_profile": {"$ref": "#/$defs/role"},
+    "database_profile": {"$ref": "#/$defs/database"},
+    "transaction_profile": {"$ref": "#/$defs/transaction"},
+    "scenarios": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "expected"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^RUC-S(0[1-9]|1[0-2])$"},
+          "kind": {"type": "string", "minLength": 1},
+          "expected": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "hostile_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "manifest", "classifier", "escapes"],
+      "properties": {
+        "contract": {"const": 256},
+        "manifest": {"const": 96},
+        "classifier": {"const": 24},
+        "escapes": {"const": 0}
+      }
+    },
+    "evidence_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transaction_attestation_schema",
+        "parent_evidence_schema",
+        "raw_sql_allowed",
+        "raw_output_allowed",
+        "raw_exception_allowed",
+        "backend_pid_allowed",
+        "container_or_network_name_allowed",
+        "credential_or_dsn_allowed",
+        "product_or_phi_allowed"
+      ],
+      "properties": {
+        "transaction_attestation_schema": {"const": "emr4.check-in-rollback-unknown-response-transaction-attestation.v1"},
+        "parent_evidence_schema": {"const": "emr4.check-in-rollback-unknown-response-rehearsal-evidence.v1"},
+        "raw_sql_allowed": {"const": false},
+        "raw_output_allowed": {"const": false},
+        "raw_exception_allowed": {"const": false},
+        "backend_pid_allowed": {"const": false},
+        "container_or_network_name_allowed": {"const": false},
+        "credential_or_dsn_allowed": {"const": false},
+        "product_or_phi_allowed": {"const": false}
+      }
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordinary_practice_enabled",
+        "feature_flag_or_allowlist_changed",
+        "ordinary_admission_record_created",
+        "ordinary_admission_released",
+        "product_relation_used",
+        "product_or_configuration_changed",
+        "api_openapi_graphql_async_or_client_changed",
+        "live_secret_or_rotation_proved",
+        "existing_or_hosted_database_used",
+        "container_or_database_restart_used",
+        "literal_in_commit_crash_proved",
+        "provider_or_external_network_used",
+        "production_deployment_release_or_pages",
+        "protected_evidence_or_ref_movement"
+      ],
+      "properties": {
+        "ordinary_practice_enabled": {"const": false},
+        "feature_flag_or_allowlist_changed": {"const": false},
+        "ordinary_admission_record_created": {"const": false},
+        "ordinary_admission_released": {"const": false},
+        "product_relation_used": {"const": false},
+        "product_or_configuration_changed": {"const": false},
+        "api_openapi_graphql_async_or_client_changed": {"const": false},
+        "live_secret_or_rotation_proved": {"const": false},
+        "existing_or_hosted_database_used": {"const": false},
+        "container_or_database_restart_used": {"const": false},
+        "literal_in_commit_crash_proved": {"const": false},
+        "provider_or_external_network_used": {"const": false},
+        "production_deployment_release_or_pages": {"const": false},
+        "protected_evidence_or_ref_movement": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "containment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable", "image_reference", "pull_policy", "network_internal",
+        "network_name_prefix", "container_name_prefix", "harness_label",
+        "published_ports", "relay_host_ip", "relay_dynamic_host_port",
+        "relay_container_executable", "relay_container_command",
+        "postgres_container_port", "sqlalchemy_driver", "data_destination",
+        "tmpfs_options", "memory_bytes", "nano_cpus", "pids_limit",
+        "restart_policy", "postgres_user", "postgres_database", "pgdata",
+        "admin_password_source", "runtime_password_source",
+        "startup_timeout_seconds", "command_timeout_seconds",
+        "post_commit_hold_seconds", "wait_observation_timeout_seconds",
+        "worker_join_timeout_seconds", "total_timeout_seconds",
+        "readiness_observations"
+      ],
+      "properties": {
+        "executable": {"const": "docker.exe"},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "pull_policy": {"const": "never"},
+        "network_internal": {"const": true},
+        "network_name_prefix": {"const": "emr4-checkin-recovery-net-"},
+        "container_name_prefix": {"const": "emr4-checkin-recovery-pg16-"},
+        "harness_label": {"const": "check-in-rollback-unknown-response-pg16-v1"},
+        "published_ports": {"const": false},
+        "relay_host_ip": {"const": "127.0.0.1"},
+        "relay_dynamic_host_port": {"const": true},
+        "relay_container_executable": {"const": "bash"},
+        "relay_container_command": {"type": "string", "minLength": 1},
+        "postgres_container_port": {"const": 5432},
+        "sqlalchemy_driver": {"const": "psycopg2"},
+        "data_destination": {"const": "/var/lib/postgresql/data"},
+        "tmpfs_options": {"const": "rw,noexec,nosuid,size=268435456"},
+        "memory_bytes": {"const": 536870912},
+        "nano_cpus": {"const": 1000000000},
+        "pids_limit": {"const": 128},
+        "restart_policy": {"const": "no"},
+        "postgres_user": {"const": "emr4_checkin_recovery_admin"},
+        "postgres_database": {"const": "check_in_recovery_rehearsal"},
+        "pgdata": {"const": "/var/lib/postgresql/data/pgdata"},
+        "admin_password_source": {"const": "process_memory_random_32_bytes"},
+        "runtime_password_source": {"const": "process_memory_random_32_bytes"},
+        "startup_timeout_seconds": {"const": 90},
+        "command_timeout_seconds": {"const": 30},
+        "post_commit_hold_seconds": {"const": 30},
+        "wait_observation_timeout_seconds": {"const": 15},
+        "worker_join_timeout_seconds": {"const": 20},
+        "total_timeout_seconds": {"const": 300},
+        "readiness_observations": {"const": 3}
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logical_role_id", "physical_role_pattern", "login", "superuser", "create_database", "create_role", "inherit", "replication", "bypass_rls", "memberships", "owned_objects", "product_privileges", "probe_privileges"],
+      "properties": {
+        "logical_role_id": {"const": "appointment_check_in_ordinary_runtime_v1"},
+        "physical_role_pattern": {"const": "^emr4_checkin_ruc_[0-9a-f]{16}$"},
+        "login": {"const": true},
+        "superuser": {"const": false},
+        "create_database": {"const": false},
+        "create_role": {"const": false},
+        "inherit": {"const": false},
+        "replication": {"const": false},
+        "bypass_rls": {"const": false},
+        "memberships": {"const": 0},
+        "owned_objects": {"const": 0},
+        "product_privileges": {"const": 0},
+        "probe_privileges": {"const": ["INSERT", "SELECT"]}
+      }
+    },
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "relations", "owner", "rls_enabled", "rls_forced", "policy_count", "policy_setting", "packet_members", "expected_committed_counts", "expected_rolled_back_counts"],
+      "properties": {
+        "schema": {"const": "check_in_recovery_probe"},
+        "relations": {"const": ["command_effect", "command_receipt", "command_audit"]},
+        "owner": {"const": "admin"},
+        "rls_enabled": {"const": true},
+        "rls_forced": {"const": true},
+        "policy_count": {"const": 3},
+        "policy_setting": {"const": "app.current_practice_id"},
+        "packet_members": {"const": ["effect", "receipt", "audit"]},
+        "expected_committed_counts": {"$ref": "#/$defs/countOne"},
+        "expected_rolled_back_counts": {"$ref": "#/$defs/countZero"}
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest_schema_version", "environment_identifier", "practice_scope_reference", "practice_id", "rollback", "ambiguous_response", "complete_terminal_response_required_for_success", "connection_loss_outcome", "success_released_on_connection_loss", "automatic_retry_allowed", "readback_identity", "classifier_inputs", "classifier_forbidden_inputs", "classifications", "ordinary_admission_release_count"],
+      "properties": {
+        "manifest_schema_version": {"const": "emr4.check-in-rollback-unknown-response-transaction-manifest.v1"},
+        "environment_identifier": {"const": "env:authored-synthetic-check-in-recovery"},
+        "practice_scope_reference": {"const": "practice-ref:authored-synthetic/check-in-recovery"},
+        "practice_id": {"type": "string", "format": "uuid"},
+        "rollback": {"$ref": "#/$defs/command"},
+        "ambiguous_response": {"$ref": "#/$defs/command"},
+        "complete_terminal_response_required_for_success": {"const": true},
+        "connection_loss_outcome": {"const": "unknown_requires_readback"},
+        "success_released_on_connection_loss": {"const": false},
+        "automatic_retry_allowed": {"const": false},
+        "readback_identity": {"const": "server_command_id_and_idempotency_identity"},
+        "classifier_inputs": {"const": ["closed_relation_packet", "expected_request_sha256"]},
+        "classifier_forbidden_inputs": {"const": ["scenario_id", "cutpoint", "elapsed_time", "backend_pid", "client_output", "raw_exception", "server_log", "wal"]},
+        "classifications": {"const": ["rolled_back_zero_effect", "committed_exactly_once", "unresolved_denied"]},
+        "ordinary_admission_release_count": {"const": 0}
+      }
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command_id", "effect_id", "audit_id", "idempotency_identity", "request_sha256"],
+      "properties": {
+        "command_id": {"type": "string", "format": "uuid"},
+        "effect_id": {"type": "string", "format": "uuid"},
+        "audit_id": {"type": "string", "format": "uuid"},
+        "idempotency_identity": {"type": "string", "minLength": 8},
+        "request_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "countOne": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect", "receipt", "audit"],
+      "properties": {"effect": {"const": 1}, "receipt": {"const": 1}, "audit": {"const": 1}}
+    },
+    "countZero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect", "receipt", "audit"],
+      "properties": {"effect": {"const": 0}, "receipt": {"const": 0}, "audit": {"const": 0}}
+    }
+  }
+}

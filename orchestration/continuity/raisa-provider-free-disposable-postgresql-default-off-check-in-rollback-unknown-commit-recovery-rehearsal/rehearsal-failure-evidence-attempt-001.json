@@ -1,0 +1,39 @@
+{
+  "claim_boundary": "One authored-synthetic pre-commit rollback and one caller-level lost complete terminal response resolved by exact restricted-role PostgreSQL readback only; no literal in-COMMIT crash, retry, ordinary release, product runtime or production claim.",
+  "cleanup": {
+    "container": "container_absent",
+    "container_id_sha256": "b78349eeb0b370fbc45d23bb8957b9321f0a2596cfd15f166f2b422b2886aa89",
+    "network": "network_absent",
+    "network_id_sha256": "463e4e12d24b0faad42a4eb3f49e18474f28f1b6caf119eb30235850c26ce9d0",
+    "role_absent_before_teardown": true,
+    "status": "cleanup_verified"
+  },
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_check_in_rollback_unknown_terminal_response_recovery",
+  "failure": {
+    "code": "worker_join_timeout",
+    "detail_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stage": "ambiguous_response"
+  },
+  "lifecycle": [
+    "contract_sources_and_hostile_mutations_verified",
+    "closed_transaction_manifest_and_mutations_verified",
+    "cached_postgresql_16_image_verified",
+    "owned_internal_network_verified",
+    "owned_tmpfs_container_verified",
+    "postgresql_16_readiness_verified",
+    "fixed_loopback_relay_started",
+    "admin_owned_three_relation_forced_rls_probe_installed",
+    "restricted_role_relation_and_policy_catalogue_verified",
+    "rollback_three_member_packet_staged_then_explicitly_rolled_back",
+    "fresh_restricted_role_rollback_zero_effect_readback_verified",
+    "exact_post_commit_timeout_pgsleep_session_observed",
+    "failed_ambiguous_response_worker_join_timeout",
+    "failure_path_worker_terminated",
+    "failure_path_physical_role_absent",
+    "fixed_loopback_relay_stopped",
+    "captured_container_and_network_absent"
+  ],
+  "result": "rehearsal_failed",
+  "schema_version": "emr4.check-in-rollback-unknown-response-rehearsal-failure.v1",
+  "source_head": "26402cb8667c2dbf62e86c6eb4c0b000d274559e"
+}

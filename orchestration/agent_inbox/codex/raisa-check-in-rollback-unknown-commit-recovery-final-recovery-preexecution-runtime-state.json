@@ -1,0 +1,102 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_final_local_eof_propagating_relay_recovery_in_a_fresh_owned_disposable_postgresql_16_instance_then_exact_cleanup_or_require_user_attention",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction at SHA-256 fef4cd8c74a405e29ea934710e4473de8b2a749b15ffe703f6a827f4b7c94f0d. It binds Continuity 334 / Compass 316, accepted runtime-role source 6a2832575e9b4df5c40a13984db7281e79814a94 and this rollback/unknown-response successor.",
+    "current_authority_allocation": "GPT Sol owns the final single disposable recovery and exact cleanup. DeepSeek remains declined because occupied native-Harness HMR is forbidden pending its separate boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for a passing exact candidate only. Native subagents remain declined under developer policy and the indivisible database lifecycle.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-001.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-002.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-contract.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Attempts 001 e357e3a2dec7f0d0740a2ea6f518cb695dc2a5cbf88b9c321dbcd61d6e7bd1c1 and 002 bea605006bf36996d439876a4976ec5b733ddc4bb841d5942aae1057c5f514ed are immutable, released no success or retry and both cleaned exactly. The final addendum permits one fresh no-argument run only after local EOF propagation and immutable-attempt tests pass. The shared relay is unchanged. Database, classifier, no-retry, evidence and cleanup semantics are unchanged. No fourth run, product/config/API/client, ordinary enablement, live secret, provider, data, production, deployment, Pages, protected evidence or protected refs are permitted. Preserve docs/branding and unrelated untracked paths; explicit staging only.",
+    "git_refs_and_worktree": "Task HEAD and origin task remain exact 26402cb8667c2dbf62e86c6eb4c0b000d274559e before candidate commit. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only tranche-owned untracked files coexist with preserved unrelated untracked material including docs/branding."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
+    "objective": "Prove with one newly frozen authored-synthetic disposable PostgreSQL transaction probe that explicit rollback leaves no effect and an ambiguous response is resolved fail-closed without duplicate effect or ordinary release, followed by exact cleanup.",
+    "status": "in_progress",
+    "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "authority_source": "Accepted runtime-role and tenant-isolation attestation plus Yuri's standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "Two disposable executions failed closed after exact post-commit wait observation: queue order was corrected, then missing relay EOF was diagnosed. Both released no success or retry and both cleaned exactly. A final local EOF-propagation and immutable-attempt recovery addendum is frozen.",
+      "next_executable_stage": "statically_prove_local_relay_eof_propagation_and_immutable_failure_attempts_then_run_one_final_recovery_execution_or_require_user_attention",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 4},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_uniquely_named_disposable_local_postgresql_only",
+      "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
+      "ephemeral_authored_synthetic_transaction_manifest_practice_role_and_credentials_only",
+      "rollback_and_unknown_commit_recovery_evidence_only",
+      "explicit_rollback_must_leave_zero_effect",
+      "ambiguous_outcome_must_fail_closed_and_resolve_by_authoritative_readback",
+      "no_duplicate_probe_effect_and_zero_ordinary_admission_release_required",
+      "exact_role_container_network_and_relay_cleanup_required",
+      "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_hmr_claude_code_fallback_or_provider_call_before_optional_gemini_veto",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "assessed_stage": "final_recovery_preexecution_after_full_static_admission",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "Occupied DeepSeek HMR remains forbidden pending a separate boot proof, Claude Code is no fallback and the final recovery is one serial database lifecycle.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "One fresh exact-candidate veto remains reserved only if the final execution and cleanup pass.", "work_packages": ["final_recovered_rollback_unknown_commit_exact_candidate_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current developer policy prohibits proactive delegation and no separable work exists inside the final database lifecycle.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["one final invocation only", "local EOF half-close enabled", "no command retry", "fresh readback before classification", "exact cleanup before verifier", "failure requires user attention"],
+    "reassessment_triggers": ["after final cleanup", "before verifier acceptance", "at closeout or user-attention stop"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "fresh final-recovery five-source preexecution reading", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns the statically admitted one-shot final recovery and cleanup."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No occupied dispatch; separate boot proof remains prerequisite."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical lineage only; no fallback selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Reserved only for a passing final exact candidate."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined under developer policy and serial runtime boundary."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected; no silent fallback is permitted."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

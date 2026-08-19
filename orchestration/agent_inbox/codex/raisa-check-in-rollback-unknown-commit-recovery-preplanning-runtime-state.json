@@ -1,21 +1,24 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "post_compaction",
-  "planned_action": "continue_frozen_provider_free_disposable_postgresql_check_in_rollback_unknown_commit_recovery_rehearsal_construction",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_fail_closed_provider_free_disposable_postgresql_check_in_rollback_unknown_commit_recovery_rehearsal_plan",
   "source_evidence": {
-    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction: 96144 characters, 504 lines, SHA-256 fef4cd8c74a405e29ea934710e4473de8b2a749b15ffe703f6a827f4b7c94f0d. Its Current Baton fixes Continuity 334 / Compass 316, accepted runtime-role source 6a2832575e9b4df5c40a13984db7281e79814a94 and this rollback/unknown-response successor.",
-    "current_authority_allocation": "GPT Sol owns the frozen plan, serial disposable PostgreSQL lifecycle, deterministic recovery and task-branch closeout. DeepSeek is declined because occupied native-Harness HMR remains forbidden pending the separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one exact-candidate read-only veto. Native subagents are declined under current developer policy and the indivisible database lifecycle.",
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely at SHA-256 fef4cd8c74a405e29ea934710e4473de8b2a749b15ffe703f6a827f4b7c94f0d. It records Continuity 334 / Compass 316, accepted runtime-role and tenant-isolation source 6a2832575e9b4df5c40a13984db7281e79814a94 and only the provider-free disposable rollback/unknown-commit recovery successor while ordinary enablement, product change, production, Pages and protected refs remain closed.",
+    "current_authority_allocation": "GPT Sol owns Extra-High plan freezing and the serial disposable PostgreSQL lifecycle, deterministic acceptance, recovery and task-branch Git. DeepSeek is declined because occupied native-Harness HMR is forbidden until its separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one exact-candidate read-only veto after deterministic database and cleanup admission. Native subagents are declined under current developer policy and because one mutable database lifecycle is indivisible.",
     "active_plan_and_acceptance": [
-      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-plan.md",
-      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
       "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
       "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
       "orchestration/api_spine_adr.md",
       "orchestration/api_spine_programme.md",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
       "orchestration/continuity/ariadne-active-operation-latch/current.json"
     ],
-    "protected_evidence_boundaries": "One uniquely named disposable local PostgreSQL 16 instance may use only ephemeral authored-synthetic manifest, practice, physical role and credentials. Explicit rollback must leave zero rows. Lost complete terminal response must release no success, permit no retry and resolve only by fresh exact restricted-role readback; partial, duplicate or mismatched packets deny. Exact role, relay, container and network cleanup is mandatory. No local .env, live secret, cloud or existing/product database, product/config/API/OpenAPI/GraphQL/client/schema change, ordinary-practice activation, generic-status Arrived, grammar, waiting-area movement, data, occupied DeepSeek HMR, production, deployment, release, Pages, protected evidence or protected-ref movement is permitted. Preserve docs/branding and every unrelated untracked path; explicit-path staging only.",
-    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam and its origin are exact 26402cb8667c2dbf62e86c6eb4c0b000d274559e. The tracked tree contains this receipt/runtime refresh; 659 untracked paths are preserved, including docs/branding and the newly authored tranche files. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+    "protected_evidence_boundaries": "Only one uniquely named disposable local PostgreSQL instance, ephemeral authored-synthetic transaction manifest/practice/role/credentials, explicit rollback zero effect, ambiguous-outcome fail-closed authoritative readback, zero duplicate probe effect, zero ordinary release and exact captured-ID role/container/network/relay cleanup are permitted. The transaction manifest remains declarative and cannot confer command or activation authority. No local .env, live secret, cloud/hosted/existing/product database, product/configuration/API/OpenAPI/GraphQL/schema/client/waiting-area change, ordinary-practice enablement, generic-status Arrived, action grammar, product/patient/appointment/clinical/historical/protected data, occupied DeepSeek HMR, production runtime, deployment, release, Pages, protected evidence or protected-ref movement is permitted. Preserve docs/branding and every unrelated untracked path; explicit-path staging only.",
+    "git_refs_and_worktree": "The task branch and origin task align at exact published closeout HEAD 26402cb8667c2dbf62e86c6eb4c0b000d274559e. The tracked tree is clean and 652 pre-existing untracked paths remain preserved, including docs/branding. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Clockwork generation gen-503aa76307da93745abbca25f209a6841118660d02cb171ea576f4eaede5c7f5 records lease sequence 4."
   },
   "active_operation": {
     "schema_version": "ariadne.active_operation_latch.v1",
@@ -77,20 +80,20 @@
   "parallelism_assessment": {
     "schema_version": "ariadne.parallelism_assessment.v1",
     "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
-    "assessed_stage": "post_compaction_frozen_plan_construction",
+    "assessed_stage": "pre_sprint_planning",
     "lanes": [
       {
         "lane_id": "deepseek_flash",
         "disposition": "declined",
         "expected_leverage": "negative",
-        "rationale": "Occupied DeepSeek HMR is latch-forbidden until a separate boot proof, Claude Code is no fallback and this database lifecycle is serial.",
+        "rationale": "The active latch forbids occupied DeepSeek HMR; the native Harness still lacks its separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. The database transaction probe is also serial and stateful.",
         "work_packages": []
       },
       {
         "lane_id": "gemini_verifier",
         "disposition": "reserved",
         "expected_leverage": "required_independence",
-        "rationale": "One fresh exact-candidate read-only veto remains reserved after deterministic rollback, readback, redaction and cleanup admission.",
+        "rationale": "Reserve one fresh exact-candidate read-only veto after deterministic rollback, authoritative-readback, no-duplicate-effect, redaction and captured-ID cleanup admission.",
         "work_packages": [
           "rollback_unknown_commit_exact_candidate_veto"
         ]
@@ -99,32 +102,35 @@
         "lane_id": "native_subagents",
         "disposition": "declined",
         "expected_leverage": "negative",
-        "rationale": "Current developer policy prohibits proactive delegation and the single mutable disposable PostgreSQL lifecycle is indivisible.",
+        "rationale": "Current developer policy prohibits proactive delegation and the single mutable disposable PostgreSQL lifecycle is serial.",
         "work_packages": []
       }
     ],
     "parallel_work_packages": [],
     "serial_constraints": [
-      "frozen source and schema admission before Docker action",
-      "one uniquely named disposable PostgreSQL lifecycle",
-      "rollback zero effect before ambiguous-response scenario",
-      "no retry before authoritative readback",
-      "exact cleanup before deterministic admission",
-      "deterministic admission before Gemini veto",
-      "Sol-only acceptance clockwork and task-branch closeout"
+      "fresh five-source receipt before plan freeze",
+      "frozen plan and exact source hashes before Docker action",
+      "one uniquely named disposable local PostgreSQL lifecycle",
+      "explicit rollback zero effect before ambiguous-outcome scenario",
+      "ambiguous response cannot be retried before authoritative readback",
+      "authoritative readback and stable operation identity must prevent duplicate effect",
+      "exact role container network and relay cleanup before deterministic admission",
+      "deterministic admission before independent veto",
+      "Sol-only acceptance clockwork closeout and task-branch Git"
     ],
     "reassessment_triggers": [
       "after static candidate validation",
       "after disposable PostgreSQL cleanup",
       "before verifier acceptance",
-      "at closeout"
+      "at closeout",
+      "before any later DeepSeek Harness boot proof"
     ]
   },
   "context_health": {
     "agent_contexts": [
       {
         "agent_id": "orchestrator",
-        "measurement_source": "fresh full post-compaction five-source rehydration",
+        "measurement_source": "fresh rollback and unknown-commit recovery preplanning five-source rehydration",
         "rehydrated_from_receipt": true,
         "rehydration_sources": [
           "live_handover_current_baton",
@@ -142,7 +148,7 @@
       "method": "codex_session_observation",
       "reachability": "reachable",
       "evidence": [
-        "The complete handover, active plan, accepted predecessor, API Spine boundary, latch, protected boundaries and exact Git state were freshly verified."
+        "The complete live handover, active acceptance, API Spine manifest boundary, protected boundaries, exact refs, active latch and current clockwork were freshly verified before planning."
       ]
     },
     {
@@ -150,7 +156,7 @@
       "method": "synthetic_fixture",
       "reachability": "unknown",
       "evidence": [
-        "No dispatch; separate stock-headless-to-custom-runner boot proof remains prerequisite and occupied HMR is forbidden."
+        "No occupied dispatch; the separate stock-headless-to-custom-runner HMR boot proof remains prerequisite and the active tranche forbids occupied HMR."
       ]
     },
     {
@@ -190,7 +196,7 @@
       "method": "synthetic_fixture",
       "reachability": "unknown",
       "evidence": [
-        "Not selected; no silent fallback is permitted."
+        "Not selected and no silent fallback is allowed."
       ]
     }
   ],

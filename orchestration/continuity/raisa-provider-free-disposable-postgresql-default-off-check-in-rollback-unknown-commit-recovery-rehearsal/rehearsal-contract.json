@@ -1,0 +1,249 @@
+{
+  "schema_version": "emr4.check-in-rollback-unknown-response-rehearsal-contract.v1",
+  "source_head": "26402cb8667c2dbf62e86c6eb4c0b000d274559e",
+  "accepted_runtime_role_source": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "result": "raisa_provider_free_disposable_postgresql_default_off_check_in_rollback_unknown_commit_recovery_rehearsal_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_check_in_rollback_unknown_terminal_response_recovery",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+      "sha256": "857d4d6e54b8f5e20f0c59340585be095ffb8d2efece87e1a665275ceeb4095f"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "sha256": "94ac2239a81f06e1404fa6c3fe7a02c9e9df2c0b4cea6b633347a987171a1712"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.schema.json",
+      "sha256": "826749d9ffa9f6ae6bb00bfd82212d3d6b5ca579c1367de685d933b0c4a1afea"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "sha256": "1d0e6bfa7224a1f8b57465b44bb6b1df14f997032e7537827b8acb373a777c8a"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "sha256": "14c215a44037252a3346025149d8031a87b05094611e49c9f7c7337de92025e4"
+    },
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "sha256": "ee2d0d7b2560a627fdf82f429d061787db75b055de5d38a31ac7910d1c76f90c"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
+      "sha256": "5346bd3c88b0db1ef63890af62ce303cde87b9482def68b724e10583a309240a"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json",
+      "sha256": "e9aab3504520d955a0ce2c94c32a5f9a6ae25d7bbf129c7f2bd21951201c34d8"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
+      "sha256": "786cab3b19231c391d281cf36568b4206fe5f11b2a2ac51469f0996c3e718e88"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+      "sha256": "505120968572362a7df8d67ab1d95947ed1cd467df0fbc520aca73a704755ba9"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json",
+      "sha256": "d2ad88328ae235d5eb5b059087c7bf896b37d93f66f8ed379677c7a5ba1c1511"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "orchestration/api_spine_programme.md",
+      "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"
+    },
+    {
+      "path": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+      "sha256": "395cb2d8a56deadb839d3df7db6995f4863316aac146343360379c1207ea2041"
+    },
+    {
+      "path": "scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py",
+      "sha256": "875afd5bdfcac9e8cdbc5deb000645c638b68d1eb2239d3cd55f130366c08bd9"
+    },
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-durability-restart-unknown-commit-rehearsal-stop-closeout.md",
+      "sha256": "2598a6258a1ca06efc1ee3de10daf074478307cc5dacd8236eaaf8f092116d10"
+    },
+    {
+      "path": "docs/raisa-context-fabric-durability-restart-unknown-commit-recovery-descendant-stop-closeout.md",
+      "sha256": "2157ef208c0aa0ca29a237973faddaecfee3c0b35100f3b2ffecd136a33f58e3"
+    }
+  ],
+  "containment_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "network_internal": true,
+    "network_name_prefix": "emr4-checkin-recovery-net-",
+    "container_name_prefix": "emr4-checkin-recovery-pg16-",
+    "harness_label": "check-in-rollback-unknown-response-pg16-v1",
+    "published_ports": false,
+    "relay_host_ip": "127.0.0.1",
+    "relay_dynamic_host_port": true,
+    "relay_container_executable": "bash",
+    "relay_container_command": "exec 3<>/dev/tcp/127.0.0.1/5432; cat <&3 & cat >&3; wait",
+    "postgres_container_port": 5432,
+    "sqlalchemy_driver": "psycopg2",
+    "data_destination": "/var/lib/postgresql/data",
+    "tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "memory_bytes": 536870912,
+    "nano_cpus": 1000000000,
+    "pids_limit": 128,
+    "restart_policy": "no",
+    "postgres_user": "emr4_checkin_recovery_admin",
+    "postgres_database": "check_in_recovery_rehearsal",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "admin_password_source": "process_memory_random_32_bytes",
+    "runtime_password_source": "process_memory_random_32_bytes",
+    "startup_timeout_seconds": 90,
+    "command_timeout_seconds": 30,
+    "post_commit_hold_seconds": 30,
+    "wait_observation_timeout_seconds": 15,
+    "worker_join_timeout_seconds": 20,
+    "total_timeout_seconds": 300,
+    "readiness_observations": 3
+  },
+  "role_profile": {
+    "logical_role_id": "appointment_check_in_ordinary_runtime_v1",
+    "physical_role_pattern": "^emr4_checkin_ruc_[0-9a-f]{16}$",
+    "login": true,
+    "superuser": false,
+    "create_database": false,
+    "create_role": false,
+    "inherit": false,
+    "replication": false,
+    "bypass_rls": false,
+    "memberships": 0,
+    "owned_objects": 0,
+    "product_privileges": 0,
+    "probe_privileges": [
+      "INSERT",
+      "SELECT"
+    ]
+  },
+  "database_profile": {
+    "schema": "check_in_recovery_probe",
+    "relations": [
+      "command_effect",
+      "command_receipt",
+      "command_audit"
+    ],
+    "owner": "admin",
+    "rls_enabled": true,
+    "rls_forced": true,
+    "policy_count": 3,
+    "policy_setting": "app.current_practice_id",
+    "packet_members": [
+      "effect",
+      "receipt",
+      "audit"
+    ],
+    "expected_committed_counts": {
+      "effect": 1,
+      "receipt": 1,
+      "audit": 1
+    },
+    "expected_rolled_back_counts": {
+      "effect": 0,
+      "receipt": 0,
+      "audit": 0
+    }
+  },
+  "transaction_profile": {
+    "manifest_schema_version": "emr4.check-in-rollback-unknown-response-transaction-manifest.v1",
+    "environment_identifier": "env:authored-synthetic-check-in-recovery",
+    "practice_scope_reference": "practice-ref:authored-synthetic/check-in-recovery",
+    "practice_id": "33333333-3333-4333-8333-333333333333",
+    "rollback": {
+      "command_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa10",
+      "effect_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa11",
+      "audit_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa12",
+      "idempotency_identity": "idem:authored-synthetic/check-in-explicit-rollback-v1",
+      "request_sha256": "97d5c34efeaa47da5ef09b6e6d5e8480060ebcd465e83ac30cd18a31b87b8696"
+    },
+    "ambiguous_response": {
+      "command_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbb20",
+      "effect_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbb21",
+      "audit_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbb22",
+      "idempotency_identity": "idem:authored-synthetic/check-in-ambiguous-response-v1",
+      "request_sha256": "88ac70cf6f8d19d247cb4eb676e1bac0dbdaaee42e8ae3332b98e4c619b802e8"
+    },
+    "complete_terminal_response_required_for_success": true,
+    "connection_loss_outcome": "unknown_requires_readback",
+    "success_released_on_connection_loss": false,
+    "automatic_retry_allowed": false,
+    "readback_identity": "server_command_id_and_idempotency_identity",
+    "classifier_inputs": [
+      "closed_relation_packet",
+      "expected_request_sha256"
+    ],
+    "classifier_forbidden_inputs": [
+      "scenario_id",
+      "cutpoint",
+      "elapsed_time",
+      "backend_pid",
+      "client_output",
+      "raw_exception",
+      "server_log",
+      "wal"
+    ],
+    "classifications": [
+      "rolled_back_zero_effect",
+      "committed_exactly_once",
+      "unresolved_denied"
+    ],
+    "ordinary_admission_release_count": 0
+  },
+  "scenarios": [
+    {"id": "RUC-S01", "kind": "source_contract", "expected": "exact_full_git_and_hash_bindings"},
+    {"id": "RUC-S02", "kind": "transaction_manifest", "expected": "closed_role_and_command_bindings"},
+    {"id": "RUC-S03", "kind": "role_relation_catalogue", "expected": "restricted_admin_owned_forced_rls"},
+    {"id": "RUC-S04", "kind": "rollback_staged", "expected": "three_members_visible_in_transaction"},
+    {"id": "RUC-S05", "kind": "rollback_readback", "expected": "rolled_back_zero_effect"},
+    {"id": "RUC-S06", "kind": "post_commit_hold", "expected": "exact_timeout_pgsleep_observed"},
+    {"id": "RUC-S07", "kind": "terminal_response", "expected": "unknown_no_success_no_retry"},
+    {"id": "RUC-S08", "kind": "authoritative_readback", "expected": "one_complete_packet"},
+    {"id": "RUC-S09", "kind": "readback_classification", "expected": "committed_exactly_once"},
+    {"id": "RUC-S10", "kind": "hostile_classifier", "expected": "all_unresolved_denied"},
+    {"id": "RUC-S11", "kind": "ordinary_release", "expected": "zero"},
+    {"id": "RUC-S12", "kind": "cleanup", "expected": "role_relay_container_network_absent"}
+  ],
+  "hostile_thresholds": {
+    "contract": 256,
+    "manifest": 96,
+    "classifier": 24,
+    "escapes": 0
+  },
+  "evidence_profile": {
+    "transaction_attestation_schema": "emr4.check-in-rollback-unknown-response-transaction-attestation.v1",
+    "parent_evidence_schema": "emr4.check-in-rollback-unknown-response-rehearsal-evidence.v1",
+    "raw_sql_allowed": false,
+    "raw_output_allowed": false,
+    "raw_exception_allowed": false,
+    "backend_pid_allowed": false,
+    "container_or_network_name_allowed": false,
+    "credential_or_dsn_allowed": false,
+    "product_or_phi_allowed": false
+  },
+  "closed_boundaries": {
+    "ordinary_practice_enabled": false,
+    "feature_flag_or_allowlist_changed": false,
+    "ordinary_admission_record_created": false,
+    "ordinary_admission_released": false,
+    "product_relation_used": false,
+    "product_or_configuration_changed": false,
+    "api_openapi_graphql_async_or_client_changed": false,
+    "live_secret_or_rotation_proved": false,
+    "existing_or_hosted_database_used": false,
+    "container_or_database_restart_used": false,
+    "literal_in_commit_crash_proved": false,
+    "provider_or_external_network_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_evidence_or_ref_movement": false
+  }
+}
