@@ -134,6 +134,24 @@ def test_main_state_is_preparable_or_active() -> None:
         assert len(json.loads(prepared["metadata"]["ownership.json"])["surface_owners"]) == 10
 
 
+def test_generation_is_stable_across_git_clean_line_endings(tmp_path: Path) -> None:
+    with _worktree(tmp_path / "line-endings") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _json(worktree / INTENT_PATH.relative_to(ROOT))
+        expected = build_generation(worktree, contract, intent)
+        baton = worktree / contract["canonical_paths"]["current_baton"]
+        normalized = baton.read_bytes().replace(b"\r\n", b"\n")
+        baton.write_bytes(normalized.replace(b"\n", b"\r\n"))
+        clean = subprocess.run(
+            ["git", "diff", "--quiet", "HEAD", "--", str(baton)],
+            cwd=worktree,
+        )
+        assert clean.returncode == 0
+        observed = build_generation(worktree, contract, intent)
+        assert observed["generation_manifest"] == expected["generation_manifest"]
+        assert observed["canonical"] == expected["canonical"]
+
+
 def test_all_pre_pointer_faults_restore_and_disposable_rollback_is_exact(
     tmp_path: Path,
 ) -> None:

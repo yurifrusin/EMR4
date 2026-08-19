@@ -427,7 +427,7 @@ def build_generation(
         "error_register": current["error_register"],
         "pattern_report": current["pattern_report"],
         "current_baton": _render_agents(
-            current["current_baton"].decode("utf-8"),
+            previous["current_baton"].decode("utf-8"),
             contract,
             manifest,
             prepared["projections"]["graph"],
