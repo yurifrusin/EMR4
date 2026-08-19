@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair",
+    "completed_stage": "The sole DeepSeek native-Harness launch failed closed before any provider request, model step, tool call or file change and was cleaned exactly. Sol repaired the two authorised paths directly. The focused provider-free suite passes 19/19 and descendant-compatible relay-free regressions pass 53/53; Ruff, AST parsing, JSON parsing and diff checks pass.",
+    "next_executable_stage": "generate_and_validate_a_fresh_five_source_pre_verifier_receipt_then_dispatch_one_gemini_37_flash_high_isolated_read_only_veto_over_exact_candidate_a1c3ce585233672084820f200693efe5bb269769",
+    "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "a1c3ce585233672084820f200693efe5bb269769",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "a1c3ce585233672084820f200693efe5bb269769",
+    "reason_codes": [],
+    "resolved_commit": "a1c3ce585233672084820f200693efe5bb269769",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a1c3ce585233672084820f200693efe5bb269769"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "a1c3ce585233672084820f200693efe5bb269769",
+    "branch_origin_aligned": true,
+    "head": "a1c3ce585233672084820f200693efe5bb269769",
+    "origin_branch_commit": "a1c3ce585233672084820f200693efe5bb269769",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one admitted native-Harness launch is consumed failed closed before any provider request because the custom runner restricted scope-local preset tools as global tools; it owns only immutable negative transport evidence and receives no retry or resume.",
+        "work_packages": [
+          "consumed_native_harness_pre_provider_composition_failure_evidence"
+        ]
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact deterministic candidate is now clean, so one fresh Gemini 3.7 Flash/high isolated read-only veto provides materially independent lifecycle, cleanup, diagnostic-sanitization and authority-boundary review.",
+        "work_packages": [
+          "exact_candidate_attachment_observability_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the candidate has one serial lifecycle/cleanup invariant with no non-overlapping native work package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier_terminal",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the consumed DeepSeek session is never retried resumed or reclassified",
+      "Gemini receives only the exact committed candidate and read-only review authority",
+      "Sol alone may correct accept commit publish clockwork or choose a successor",
+      "no Docker database attempt-004 retry or attempt-005 execution occurs",
+      "clockwork check and publication remain separate commands"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_37_flash_high_read_only_veto_over_exact_deterministic_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/checkpoint-intent.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority admits completion without ceremonial pauses. GPT Sol owns authority, deterministic repair, tests, cleanup, acceptance and Git. The single DeepSeek native-Harness lane is consumed failed closed before any provider request; Gemini 3.7 Flash/high now owns one fresh exact-candidate read-only veto; native subagents remain declined.",
+    "git_refs_and_worktree": "The main task branch and origin are exact a1c3ce585233672084820f200693efe5bb269769 with a clean tracked index on codex/ariadne-bernie-davida-parallel-seam. Candidate implementation source is cfc7eb472aaaa4fdf7ffef35b07a65a2729073c5 and sanitized worker evidence is committed at the current head. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and every unrelated untracked file remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction as the current 112721-byte source with SHA-256 ab93d44efc1711d5a20cd16466641987a888e5d85b1daf1e02238cad164698d9. The current baton and in-progress latch select this provider-free attachment-lifetime and post-readiness observability repair.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed and historical Diary PHI remains local and ignored. Attempts 001-004 are immutable; attempt 004 and the consumed DeepSeek worker receive no retry, resume or reclassification. No Docker, PostgreSQL, SQL, product/API/configuration/client/flag/allowlist/grammar/waiting-area change, ordinary-practice enablement, patient/appointment/clinical/protected data, production, deployment, release, Pages or protected-ref movement is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

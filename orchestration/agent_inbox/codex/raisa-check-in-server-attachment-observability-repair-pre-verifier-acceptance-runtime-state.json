@@ -1,0 +1,200 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_37_flash_high_read_only_veto_over_exact_deterministic_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction as the current 112721-byte source with SHA-256 ab93d44efc1711d5a20cd16466641987a888e5d85b1daf1e02238cad164698d9. The current baton and in-progress latch select this provider-free attachment-lifetime and post-readiness observability repair.",
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority admits completion without ceremonial pauses. GPT Sol owns authority, deterministic repair, tests, cleanup, acceptance and Git. The single DeepSeek native-Harness lane is consumed failed closed before any provider request; Gemini 3.7 Flash/high now owns one fresh exact-candidate read-only veto; native subagents remain declined.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/checkpoint-intent.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed and historical Diary PHI remains local and ignored. Attempts 001-004 are immutable; attempt 004 and the consumed DeepSeek worker receive no retry, resume or reclassification. No Docker, PostgreSQL, SQL, product/API/configuration/client/flag/allowlist/grammar/waiting-area change, ordinary-practice enablement, patient/appointment/clinical/protected data, production, deployment, release, Pages or protected-ref movement is admitted.",
+    "git_refs_and_worktree": "The main task branch and origin are exact a1c3ce585233672084820f200693efe5bb269769 with a clean tracked index on codex/ariadne-bernie-davida-parallel-seam. Candidate implementation source is cfc7eb472aaaa4fdf7ffef35b07a65a2729073c5 and sanitized worker evidence is committed at the current head. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding and every unrelated untracked file remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair",
+    "objective": "Freeze and complete a provider-free deterministic repair that keeps the relay-free PostgreSQL server attachment under one cleanup owner until final teardown, separates post-readiness running-state failure from exact identity-predicate failure, preserves sanitized failed-predicate evidence and proves the lifecycle with fakes, without Docker or database execution.",
+    "status": "in_progress",
+    "source_head": "a1c3ce585233672084820f200693efe5bb269769",
+    "authority_source": "Yuri's explicit standing uninterrupted-development authority, immutable attempt-004 failure and envelope evidence, its blocked clockwork closeout at lease 32, and the accepted relay-free transport, runtime-role and cleanup controls.",
+    "checkpoint": {
+      "completed_stage": "The sole DeepSeek native-Harness launch failed closed before any provider request, model step, tool call or file change and was cleaned exactly. Sol repaired the two authorised paths directly. The focused provider-free suite passes 19/19 and descendant-compatible relay-free regressions pass 53/53; Ruff, AST parsing, JSON parsing and diff checks pass.",
+      "next_executable_stage": "generate_and_validate_a_fresh_five_source_pre_verifier_receipt_then_dispatch_one_gemini_37_flash_high_isolated_read_only_veto_over_exact_candidate_a1c3ce585233672084820f200693efe5bb269769",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_deterministic_relay_free_server_attachment_lifetime_and_post_readiness_observability_repair_only",
+      "attempt_004_failure_envelope_execution_count_source_and_cleanup_result_are_immutable_and_never_overwritten",
+      "attempts_001_002_003_and_all_accepted_repairs_remain_immutable",
+      "no_retry_reclassification_or_second_execution_of_attempt_004",
+      "only_the_relay_free_harness_attachment_lifetime_combined_running_identity_guard_failure_evidence_and_exact_tests_may_change",
+      "server_attachment_remains_owned_until_final_cleanup_unless_deterministic_evidence_proves_an_equally_safe_earlier_release",
+      "running_state_and_identity_predicate_failures_are_distinct_and_sanitized_failed_predicate_names_are_preserved",
+      "provider_free_fake_process_and_inspect_sequence_tests_required",
+      "no_docker_object_container_start_attach_stdin_credential_postgresql_sql_transaction_or_database_execution",
+      "no_deepseek_model_call_or_occupied_worker_without_a_separately_bound_v2_work_order_provider_free_no_database_admission_and_one_run_latch",
+      "no_claude_code_fallback",
+      "gemini_only_after_an_exact_deterministic_candidate",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "rationale": "The one admitted native-Harness launch is consumed failed closed before any provider request because the custom runner restricted scope-local preset tools as global tools; it owns only immutable negative transport evidence and receives no retry or resume.",
+        "work_packages": [
+          "consumed_native_harness_pre_provider_composition_failure_evidence"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "rationale": "The exact deterministic candidate is now clean, so one fresh Gemini 3.7 Flash/high isolated read-only veto provides materially independent lifecycle, cleanup, diagnostic-sanitization and authority-boundary review.",
+        "work_packages": [
+          "exact_candidate_attachment_observability_read_only_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the candidate has one serial lifecycle/cleanup invariant with no non-overlapping native work package.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "the consumed DeepSeek session is never retried resumed or reclassified",
+      "Gemini receives only the exact committed candidate and read-only review authority",
+      "Sol alone may correct accept commit publish clockwork or choose a successor",
+      "no Docker database attempt-004 retry or attempt-005 execution occurs",
+      "clockwork check and publication remain separate commands"
+    ],
+    "reassessment_triggers": [
+      "verifier_terminal",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete AGENTS reread in four non-overlapping character windows; active plan and threat reread; exact latch, checkpoint, Git refs, clean main tracked state and clean sparse worker state verified immediately before predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol inspected the complete repair and failed-worker evidence and ran the exact provider-free deterministic gates."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical Claude Code transport is not selected and no fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.7 Flash/high is selected for one fresh isolated exact-candidate read-only veto after this receipt passes."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native subagents were assessed and declined; no native subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Anthropic transport is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
