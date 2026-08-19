@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-relay-free-rollback-unknown-response-rehearsal-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "source_head",
+    "plan_source",
+    "accepted_relay_free_transport_source",
+    "accepted_runtime_role_source",
+    "protected_source",
+    "contract_sha256",
+    "source_binding_count",
+    "manifest_sha256",
+    "attestation_sha256",
+    "hostile_mutations",
+    "scenarios",
+    "containment",
+    "transport",
+    "cleanup",
+    "elapsed_seconds",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-relay-free-rollback-unknown-response-rehearsal-evidence.v1"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_check_in_relay_free_rollback_unknown_terminal_response_recovery"},
+    "source_head": {"$ref": "#/$defs/git"},
+    "plan_source": {"$ref": "#/$defs/git"},
+    "accepted_relay_free_transport_source": {"$ref": "#/$defs/git"},
+    "accepted_runtime_role_source": {"$ref": "#/$defs/git"},
+    "protected_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "contract_sha256": {"$ref": "#/$defs/sha256"},
+    "source_binding_count": {"const": 15},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "attestation_sha256": {"$ref": "#/$defs/sha256"},
+    "hostile_mutations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_attempted", "contract_rejected", "state_attempted", "state_rejected", "classifier_attempted", "classifier_rejected", "escapes"],
+      "properties": {
+        "contract_attempted": {"type": "integer", "minimum": 256},
+        "contract_rejected": {"type": "integer", "minimum": 256},
+        "state_attempted": {"type": "integer", "minimum": 96},
+        "state_rejected": {"type": "integer", "minimum": 96},
+        "classifier_attempted": {"type": "integer", "minimum": 24},
+        "classifier_rejected": {"type": "integer", "minimum": 24},
+        "escapes": {"const": 0}
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "observed"],
+        "properties": {"id": {"type": "string", "pattern": "^RFR-S(0[1-9]|1[0-2])$"}, "status": {"const": "passed"}, "observed": {"type": ["string", "integer", "boolean"]}}
+      }
+    },
+    "containment": {"$ref": "#/$defs/closed"},
+    "transport": {"$ref": "#/$defs/closed"},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role_absent_before_teardown", "attachments_absent", "sidecars_absent", "server_absent", "network_absent", "matching_owned_resources", "status"],
+      "properties": {"role_absent_before_teardown": {"const": true}, "attachments_absent": {"const": true}, "sidecars_absent": {"const": true}, "server_absent": {"const": true}, "network_absent": {"const": true}, "matching_owned_resources": {"const": 0}, "status": {"const": "cleanup_verified"}}
+    },
+    "elapsed_seconds": {"type": "number", "minimum": 0, "maximum": 300},
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"const": false}
+    }
+  },
+  "$defs": {
+    "git": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "closed": {"type": "object", "minProperties": 1}
+  }
+}

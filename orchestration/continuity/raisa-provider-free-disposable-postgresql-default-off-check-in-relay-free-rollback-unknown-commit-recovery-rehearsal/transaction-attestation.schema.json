@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-relay-free-rollback-unknown-response-transaction-attestation.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_reference",
+    "source_head",
+    "plan_source",
+    "contract_sha256",
+    "manifest_sha256",
+    "role_catalogue",
+    "relation_catalogue",
+    "explicit_rollback",
+    "ambiguous_response",
+    "authoritative_readback",
+    "hostile_classifier",
+    "ordinary_admission_release_count",
+    "product_record_count",
+    "redaction"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-relay-free-rollback-unknown-response-transaction-attestation.v1"},
+    "evidence_reference": {"const": "evidence-ref:authored-synthetic/check-in-relay-free-rollback-unknown-response-transaction-attestation"},
+    "source_head": {"$ref": "#/$defs/git"},
+    "plan_source": {"$ref": "#/$defs/git"},
+    "contract_sha256": {"$ref": "#/$defs/sha256"},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "role_catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["login", "superuser", "create_database", "create_role", "inherit", "replication", "bypass_rls", "memberships", "owned_objects", "product_privileges"],
+      "properties": {
+        "login": {"const": true},
+        "superuser": {"const": false},
+        "create_database": {"const": false},
+        "create_role": {"const": false},
+        "inherit": {"const": false},
+        "replication": {"const": false},
+        "bypass_rls": {"const": false},
+        "memberships": {"const": 0},
+        "owned_objects": {"const": 0},
+        "product_privileges": {"const": 0}
+      }
+    },
+    "relation_catalogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_count", "admin_owned_count", "rls_enabled_count", "rls_forced_count", "policy_count", "constraint_count", "grants_exact"],
+      "properties": {
+        "relation_count": {"const": 3},
+        "admin_owned_count": {"const": 3},
+        "rls_enabled_count": {"const": 3},
+        "rls_forced_count": {"const": 3},
+        "policy_count": {"const": 3},
+        "constraint_count": {"const": 21},
+        "grants_exact": {"const": true}
+      }
+    },
+    "explicit_rollback": {"$ref": "#/$defs/rollback"},
+    "ambiguous_response": {"$ref": "#/$defs/ambiguous"},
+    "authoritative_readback": {"$ref": "#/$defs/readback"},
+    "hostile_classifier": {"$ref": "#/$defs/hostile"},
+    "ordinary_admission_release_count": {"const": 0},
+    "product_record_count": {"const": 0},
+    "redaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forbidden_fields", "forbidden_values", "status"],
+      "properties": {
+        "forbidden_fields": {"const": 0},
+        "forbidden_values": {"const": 0},
+        "status": {"const": "passed"}
+      }
+    }
+  },
+  "$defs": {
+    "git": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "countsZero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect", "receipt", "audit"],
+      "properties": {"effect": {"const": 0}, "receipt": {"const": 0}, "audit": {"const": 0}}
+    },
+    "countsOne": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect", "receipt", "audit"],
+      "properties": {"effect": {"const": 1}, "receipt": {"const": 1}, "audit": {"const": 1}}
+    },
+    "state0": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stopped", "exit_code", "oom_killed", "state_error_empty", "restart_count"],
+      "properties": {"stopped": {"const": true}, "exit_code": {"const": 0}, "oom_killed": {"const": false}, "state_error_empty": {"const": true}, "restart_count": {"const": 0}}
+    },
+    "state42": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stopped", "exit_code", "oom_killed", "state_error_empty", "restart_count"],
+      "properties": {"stopped": {"const": true}, "exit_code": {"const": 42}, "oom_killed": {"const": false}, "state_error_empty": {"const": true}, "restart_count": {"const": 0}}
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action_state", "staged_counts", "readback_state", "readback_counts", "classification"],
+      "properties": {"action_state": {"$ref": "#/$defs/state0"}, "staged_counts": {"$ref": "#/$defs/countsOne"}, "readback_state": {"$ref": "#/$defs/state0"}, "readback_counts": {"$ref": "#/$defs/countsZero"}, "classification": {"const": "rolled_back_zero_effect"}}
+    },
+    "ambiguous": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observer_state", "exact_backend_observed", "exact_backend_terminated", "caller_state", "classification", "complete_terminal_response", "success_released", "retry_count"],
+      "properties": {"observer_state": {"$ref": "#/$defs/state0"}, "exact_backend_observed": {"const": true}, "exact_backend_terminated": {"const": true}, "caller_state": {"$ref": "#/$defs/state42"}, "classification": {"const": "connection_lost_without_complete_terminal_response"}, "complete_terminal_response": {"const": false}, "success_released": {"const": false}, "retry_count": {"const": 0}}
+    },
+    "readback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "counts", "classification", "other_practice_visible_count", "duplicate_effect_count"],
+      "properties": {"state": {"$ref": "#/$defs/state0"}, "counts": {"$ref": "#/$defs/countsOne"}, "classification": {"const": "committed_exactly_once"}, "other_practice_visible_count": {"const": 0}, "duplicate_effect_count": {"const": 0}}
+    },
+    "hostile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "rejected", "escapes"],
+      "properties": {"attempted": {"type": "integer", "minimum": 24}, "rejected": {"type": "integer", "minimum": 24}, "escapes": {"const": 0}}
+    }
+  }
+}

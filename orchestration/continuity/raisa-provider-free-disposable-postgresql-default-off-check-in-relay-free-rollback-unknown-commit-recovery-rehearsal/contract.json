@@ -1,0 +1,253 @@
+{
+  "schema_version": "emr4.check-in-relay-free-rollback-unknown-response-rehearsal-contract.v1",
+  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
+  "plan_source": "eb568174debd6dba2a32d1dea94be7f6b9fd3ddc",
+  "accepted_relay_free_transport_source": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+  "accepted_runtime_role_source": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "result": "raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_pass",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_check_in_relay_free_rollback_unknown_terminal_response_recovery",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "sha256": "f3c353f500835a3e098caf82e138b819e63326944acc1bd57818b169fd46d5eb"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
+      "sha256": "39252fdeba08dae5d785e232bb77bd336c6f3fcd70206cd994e23277f9459c25"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "sha256": "3b88e96110a33437895a993dfca7e44164e7a342c420c53cc7f366851f424f1b"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+      "sha256": "bff78c40b52330e63bcc0775ca7d7c6939c1281d113ac96ca2b4b4a0fc8d9fbe"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.json",
+      "sha256": "f384dcacf517f24e5f694f9175e225458d850a5f5464303e87cca741792ec5ce"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+      "sha256": "0b5a5a0c6e9d95e87907d6f4f0db264640dd1be35eb4c82a4b55841d0e92ebd0"
+    },
+    {
+      "path": "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+      "sha256": "eb03366764483a84e9139f85f0a47b0c124cbb36cb085157507a0c92b7983059"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "sha256": "94ac2239a81f06e1404fa6c3fe7a02c9e9df2c0b4cea6b633347a987171a1712"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "sha256": "1d0e6bfa7224a1f8b57465b44bb6b1df14f997032e7537827b8acb373a777c8a"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "sha256": "14c215a44037252a3346025149d8031a87b05094611e49c9f7c7337de92025e4"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-001.json",
+      "sha256": "e357e3a2dec7f0d0740a2ea6f518cb695dc2a5cbf88b9c321dbcd61d6e7bd1c1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-002.json",
+      "sha256": "bea605006bf36996d439876a4976ec5b733ddc4bb841d5942aae1057c5f514ed"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-003.json",
+      "sha256": "15cebad64c7bfbddb83878e75cf8f3a0d137a7834075e063c92aead8b603e219"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "orchestration/api_spine_programme.md",
+      "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"
+    }
+  ],
+  "containment_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "pull_policy": "never",
+    "network_name_prefix": "emr4-checkin-rfr-net-",
+    "server_name_prefix": "emr4-checkin-rfr-pg16-",
+    "sidecar_name_prefix": "emr4-checkin-rfr-action-",
+    "server_alias": "check-in-rfr-postgres",
+    "harness_label_key": "emr4.harness",
+    "harness_label_value": "check-in-relay-free-recovery-v1",
+    "nonce_label_key": "emr4.owner-nonce",
+    "network_internal": true,
+    "published_ports": false,
+    "bind_mounts": false,
+    "volumes": false,
+    "log_driver": "none",
+    "server_tmpfs_destination": "/var/lib/postgresql/data",
+    "server_tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "sidecar_tmpfs_destination": "/run/emr4",
+    "sidecar_tmpfs_options": "rw,noexec,nosuid,size=1048576",
+    "server_memory_bytes": 536870912,
+    "server_nano_cpus": 1000000000,
+    "server_pids_limit": 128,
+    "sidecar_memory_bytes": 67108864,
+    "sidecar_nano_cpus": 250000000,
+    "sidecar_pids_limit": 32,
+    "restart_policy": "no",
+    "read_only_sidecars": true,
+    "no_new_privileges": true,
+    "sidecar_cap_drop": "ALL",
+    "startup_timeout_seconds": 90,
+    "action_timeout_seconds": 30,
+    "post_commit_hold_seconds": 30,
+    "observer_timeout_seconds": 15,
+    "total_timeout_seconds": 300
+  },
+  "credential_profile": {
+    "shape": "random_lower_hex_64",
+    "delivery": "captured_id_post_inspection_attached_stdin",
+    "docker_config_contains_secret": false,
+    "argument_contains_secret": false,
+    "file_contains_secret": false,
+    "log_contains_secret": false,
+    "evidence_contains_secret_or_hash": false
+  },
+  "server_profile": {
+    "postgres_user": "emr4_checkin_rfr_admin",
+    "postgres_database": "check_in_rfr_rehearsal",
+    "pgdata": "/var/lib/postgresql/data/pgdata",
+    "port": 5432,
+    "host_auth": "scram-sha-256"
+  },
+  "role_profile": {
+    "logical_role_id": "appointment_check_in_ordinary_runtime_v1",
+    "physical_role_pattern": "^emr4_checkin_rfr_[0-9a-f]{16}$",
+    "login": true,
+    "superuser": false,
+    "create_database": false,
+    "create_role": false,
+    "inherit": false,
+    "replication": false,
+    "bypass_rls": false,
+    "memberships": 0,
+    "owned_objects": 0,
+    "product_privileges": 0,
+    "probe_privileges": [
+      "INSERT",
+      "SELECT"
+    ]
+  },
+  "database_profile": {
+    "schema": "check_in_relay_free_recovery_probe",
+    "relations": [
+      "command_effect",
+      "command_receipt",
+      "command_audit"
+    ],
+    "owner": "admin",
+    "rls_enabled": true,
+    "rls_forced": true,
+    "policy_setting": "app.current_practice_id",
+    "expected_committed_counts": {
+      "effect": 1,
+      "receipt": 1,
+      "audit": 1
+    },
+    "expected_rolled_back_counts": {
+      "effect": 0,
+      "receipt": 0,
+      "audit": 0
+    }
+  },
+  "transaction_profile": {
+    "manifest_schema_version": "emr4.check-in-relay-free-rollback-unknown-response-transaction-manifest.v1",
+    "environment_identifier": "env:authored-synthetic-check-in-relay-free-recovery",
+    "practice_scope_reference": "practice-ref:authored-synthetic/check-in-relay-free-recovery",
+    "practice_id": "33333333-3333-4333-8333-333333333333",
+    "other_practice_id": "44444444-4444-4444-8444-444444444444",
+    "rollback": {
+      "command_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa10",
+      "effect_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa11",
+      "audit_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa12",
+      "idempotency_identity": "idem:authored-synthetic/check-in-explicit-rollback-v1",
+      "request_sha256": "97d5c34efeaa47da5ef09b6e6d5e8480060ebcd465e83ac30cd18a31b87b8696"
+    },
+    "ambiguous_response": {
+      "command_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbb20",
+      "effect_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbb21",
+      "audit_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbb22",
+      "idempotency_identity": "idem:authored-synthetic/check-in-ambiguous-response-v1",
+      "request_sha256": "88ac70cf6f8d19d247cb4eb676e1bac0dbdaaee42e8ae3332b98e4c619b802e8"
+    },
+    "application_name_prefix": "emr4_checkin_rfr_",
+    "caller_unknown_exit_code": 42,
+    "wrapper_denial_exit_code": 43,
+    "complete_terminal_response_exit_code": 0,
+    "connection_loss_outcome": "connection_lost_without_complete_terminal_response",
+    "success_released_on_connection_loss": false,
+    "automatic_retry_count": 0,
+    "readback_identity": "server_command_id_and_idempotency_identity",
+    "classifications": [
+      "rolled_back_zero_effect",
+      "committed_exactly_once",
+      "unresolved_denied"
+    ],
+    "ordinary_admission_release_count": 0,
+    "product_record_count": 0
+  },
+  "action_classes": [
+    "readiness",
+    "setup_and_catalogue",
+    "explicit_rollback",
+    "rollback_readback",
+    "ambiguous_caller",
+    "observer_terminator",
+    "authoritative_readback",
+    "role_cleanup"
+  ],
+  "program_sha256": {
+    "server_wrapper": "2482aea4db08e745ec2402e357159f75fe8ee1e1047c2a6dda6b37b19ad0f64c",
+    "readiness_wrapper": "2970f3f823d7a88692b1e4c72ec99af63d383214f34efa6eb4a6bc5716c4858c",
+    "action_wrapper": "e5340018dec1d7622834017f52dc3523f0a8722dc865c5beef3b4fa35376f990",
+    "setup_wrapper": "02021208c2c781679781d96cf47c91761714ba8e7d66dc0c55f362243d03d80e",
+    "setup_sql": "fa65a41714c71133a7fda1653b7173d62f9ad25b282f29482d90e4c7ca23c8d5",
+    "rollback_sql": "cbfc062eef4960c196f16a243c1dd0ae638f56701a72e14c9d7dc3e04c6eaa53",
+    "rollback_readback_sql": "d76e517c3cbad9c13a06dddbbdc0f7cfd50ecffd706879f1b281c20ae16cda7b",
+    "ambiguous_sql": "903f8f985e203f5500b63f5fc2a108e44a0136b621346e8d0ea543b7f3a43f36",
+    "observer_sql": "bd8c9356cc4928ed2a2016b017d9466ae72dd159bcddd268592c24890711a2c2",
+    "authoritative_readback_sql": "f1c3ba7eb340ffc584287bc648b2f5384dbcc3ad24835013ac221ecf573dc199",
+    "role_cleanup_sql": "3decbc37c8006440f1a779a8ca19029969a0416d293c2ca43021e2f3d82c6159"
+  },
+  "hostile_thresholds": {
+    "contract": 256,
+    "manifest_and_evidence_state": 96,
+    "classifier": 24,
+    "escapes": 0
+  },
+  "evidence_profile": {
+    "transaction_attestation_schema": "emr4.check-in-relay-free-rollback-unknown-response-transaction-attestation.v1",
+    "parent_evidence_schema": "emr4.check-in-relay-free-rollback-unknown-response-rehearsal-evidence.v1",
+    "raw_sql_allowed": false,
+    "raw_output_allowed": false,
+    "raw_exception_allowed": false,
+    "backend_pid_allowed": false,
+    "docker_identity_allowed": false,
+    "credential_or_hash_allowed": false,
+    "product_or_phi_allowed": false
+  },
+  "closed_boundaries": {
+    "host_listener_forwarder_relay_exec_bridge_process_or_queue_used": false,
+    "ordinary_practice_enabled": false,
+    "feature_flag_or_allowlist_changed": false,
+    "ordinary_admission_released": false,
+    "product_relation_record_or_configuration_changed": false,
+    "api_openapi_graphql_async_or_client_changed": false,
+    "live_secret_existing_hosted_or_product_database_used": false,
+    "provider_or_external_network_used": false,
+    "production_runtime_deployment_release_or_pages": false,
+    "protected_evidence_or_ref_movement": false
+  }
+}

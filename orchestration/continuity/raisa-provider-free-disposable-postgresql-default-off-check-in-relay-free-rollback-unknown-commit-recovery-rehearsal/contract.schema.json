@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-relay-free-rollback-unknown-response-rehearsal-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "plan_source",
+    "accepted_relay_free_transport_source",
+    "accepted_runtime_role_source",
+    "protected_source",
+    "result",
+    "evidence_label",
+    "source_bindings",
+    "containment_profile",
+    "credential_profile",
+    "server_profile",
+    "role_profile",
+    "database_profile",
+    "transaction_profile",
+    "action_classes",
+    "program_sha256",
+    "hostile_thresholds",
+    "evidence_profile",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-relay-free-rollback-unknown-response-rehearsal-contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal"},
+    "plan_source": {"$ref": "#/$defs/git"},
+    "accepted_relay_free_transport_source": {"$ref": "#/$defs/git"},
+    "accepted_runtime_role_source": {"$ref": "#/$defs/git"},
+    "protected_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "result": {"type": "string", "pattern": "^[a-z0-9_]{20,160}$"},
+    "evidence_label": {"type": "string", "pattern": "^[a-z0-9_]{20,180}$"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "pattern": "^[A-Za-z0-9_./-]+$"},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "containment_profile": {"$ref": "#/$defs/closedObject"},
+    "credential_profile": {"$ref": "#/$defs/closedObject"},
+    "server_profile": {"$ref": "#/$defs/closedObject"},
+    "role_profile": {"$ref": "#/$defs/closedObject"},
+    "database_profile": {"$ref": "#/$defs/closedObject"},
+    "transaction_profile": {"$ref": "#/$defs/closedObject"},
+    "action_classes": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z_]+$"}
+    },
+    "program_sha256": {
+      "type": "object",
+      "minProperties": 11,
+      "maxProperties": 11,
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "hostile_thresholds": {"$ref": "#/$defs/closedObject"},
+    "evidence_profile": {"$ref": "#/$defs/closedObject"},
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"const": false}
+    }
+  },
+  "$defs": {
+    "git": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "closedObject": {"type": "object", "minProperties": 1}
+  }
+}
