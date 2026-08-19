@@ -1,0 +1,253 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d",
+  "branch": "codex/review-preterminal-observability-b5f0bc0d",
+  "head_before": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "head_after": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "1451b784d12a60bfc9e2daf430aa35c63c0f9d634a3dfe94c063f111bbb579d1",
+  "result": "# Gemini 3.7 Flash/high Veto: DeepSeek Native Harness Provider-Free Preterminal Activation Observability Recovery\n\n## 1. Rehydration and Authority Verification\n- **Authority Sources Rehydrated**:\n  1. `live_handover_current_baton`: Verified Baton ref `handoff/current`, protected integration status, and current development worktree baseline.\n  2. `current_authority_allocation`: Conductor/integrator GPT Sol; independent reviewer Gemini 3.7 Flash/high; DeepSeek native Harness paused/closed.\n  3. `active_plan_and_acceptance`: Read and verified `docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md`, `docs/security/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-threat-model-delta.md`, contract, schema, evidence, report, and preceding accepted proof lineage.\n  4. `protected_evidence_boundaries`: Verified holdout rules, immutable failure attempt boundaries, and exclusion of `docs/branding/` and unrelated untracked files.\n  5. `git_refs_and_worktree`: Confirmed HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`, worktree `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d` on branch `codex/review-preterminal-observability-b5f0bc0d`, with local/origin `master` and `handoff/current` preserved at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n- **Active Operation Latch Validation**:\n  - `orchestration/continuity/ariadne-active-operation-latch/current.json` is validated in state `in_progress` for `deepseek-native-harness-provider-free-preterminal-activation-observability-recovery`.\n- **Tranche Dispositions**:\n  - DeepSeek lane: `declined` (evidence subject of failed native attempt; model and provider dispatch are closed).\n  - Gemini lane: `dispatched` for this exact-candidate isolated read-only veto.\n  - Native subagents: `declined` (proactive delegation prohibited; serial evidence, deterministic probe cleanup, and review boundary).\n\n---\n\n## 2. Mandatory Challenges Evaluation\n\n### Challenge 1: Identity and Clean Tracked Tree\n- Candidate commit: `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`.\n- Worktree root: `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d`.\n- Branch: `codex/review-preterminal-observability-b5f0bc0d`.\n- Tracked tree: Confirmed completely clean via C01, C07, and C10 with zero diffs and zero untracked tracked-file modifications.\n\n### Challenge 2: Immutable Failed Attempt Binding\n- `native-composition-attempt-001` is byte-bound in `contract.json` to:\n  - Source commit: `296f35ff696361c63a4e018e5ae9317c79cb6213` (40 hex chars)\n  - Evidence SHA256: `06cc451446325e516959d715f7de4e4e861a014b4de5bccd692298c676b71e43`\n  - Controller SHA256: `b8a6231c4bdac8d986b3c76967ddafac29ecda93b258fece988ab628d8d8bef4`\n  - Contract SHA256: `95acde52d8c14dcebff9eba95fd4584423f35687f89e59eabc488f2495c063a4`\n- The diagnosis function `diagnose_failed_attempt()` verifies all hashes match the immutable disk artifacts. The attempt remains failed (`NATIVE_COMPOSITION_EXECUTION_FAILED`, events `[\"sentinel_activated\", \"stock_headless_hmr_ready\"]`, duration `0 ms`), is causally classified as `indeterminate_preterminal_failure`, and is neither retried, resumed, nor reclassified.\n\n### Challenge 3: Root-Cause Claim Discipline\n- The diagnosis enforces `permitted_root_cause_claims: []`.\n- No unsupported claims are admitted regarding Cordis loader, DeepSeek Harness, service injection, event-ledger parsing, controller, or guard root cause, as retained attempt evidence halted after sentinel HMR readiness without guard execution evidence.\n\n### Challenge 4: Corrected Runner Architecture\n- Top-level imports in `corrected_runner_source()` contain solely Node built-ins (`node:fs`, `node:path`). No `@deepseek-ai/*` or custom modules are imported at the top level.\n- Inside `apply(ctx, config)`: `activation(config, \"BOOTSTRAP_APPLY_ENTERED\")` executes immediately before any runtime imports or context resolution.\n- `@deepseek-ai/dsh-scope` and `./effective-tool-guard.mjs` imports are dynamic and caught inside a `try/catch` block that emits `RUNTIME_MODULE_IMPORT_FAILED` on rejection.\n- Single writers: Sentinel writes readiness to `eventPath`; the runner exclusively writes activation records via `appendFileSync(config.activationPath)` and terminal records via `openSync(config.terminalPath, \"wx\")` (exclusive atomic file creation).\n\n### Challenge 5: Finite Activation Vocabulary and Sanitization\n- Activation coordinates strictly partition all 10 scenarios:\n  `BOOTSTRAP_APPLY_ENTERED`, `HMR_UNAVAILABLE`, `APP_EXIT_UNAVAILABLE`, `SERVICES_UNAVAILABLE`, `RUNTIME_MODULE_IMPORT_FAILED`, `RUNTIME_MODULES_IMPORTED`, `SCOPE_CREATION_FAILED`, `SCOPE_CREATED`, `GUARD_ENTRY_REACHED`, `GUARD_TERMINAL_REACHED`, `TERMINAL_WRITE_FAILED`, `SCOPE_DISPOSAL_FAILED`, `SCOPE_DISPOSED`, `EXIT_REQUESTED`.\n- Zero raw exception strings, stack traces, file system paths, environment variables, prompt content, payloads, or credentials are retained in activation or terminal ledgers.\n\n### Challenge 6: Guard Vocabulary Distinguishability and Boundary Preservation\n- Guard error codes remain preserved and sanitized through `sanitizeEffectiveToolTerminal()`.\n- Terminal records identify stage `preterminal_activation`, cleanly distinguishing runner lifecycle coordinates from guard assertion outcomes.\n- The 3-tool allowlist (`edit`, `glob`, `read`), broker contracts, and outer authorization boundary remain unchanged and verified.\n\n### Challenge 7: Published Offline Probe Verification\n- `provider-free-preterminal-observability-recovery-evidence.json` confirms:\n  - Offline materialisations: 1 (114765 ms, exit code 0)\n  - Non-Harness Node import probes: 1 (118 ms, exit code 0)\n  - Native Harness processes: 0\n  - Network attempts: 0\n  - Agent sessions / broker requests / model requests / provider calls: 0\n  - Disposable temporary root: Confirmed absent and fully cleaned up.\n- The report explicitly characterizes the probe as non-Harness module import observability evidence, avoiding any overclaim of native composition or model execution.\n\n### Challenge 8: Future Controller Timing Design\n- The future controller envelope design (`future_controller_envelope_source()`) places `launch_duration_ms = round((monotonic() - started_at) * 1000)` inside the `finally:` block immediately following native process startup and preceding process termination and root removal.\n- The consumed controller script `scripts/deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py` was neither executed nor modified in this tranche.\n\n### Challenge 9: Unchanged Closed Boundaries\n- Historical attempts 004/005 and native attempt 001 remain closed.\n- No changes to product source (`app/`), Diary (`docs/diary/`), API Spine OpenAPI specs, schemas, ordinary-practice admission, or database migrations.\n- Zero database invocations, Docker containers, deployment, release, Pages rebuilds, or protected ref movement. Local/origin `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 10: Verifier Manifest Execution\n- All 10 commands (C01\u2013C10) executed successfully with return code 0:\n  - C01: Clean branch status (`exit_code: 0`).\n  - C02: Confirmed HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` (`exit_code: 0`).\n  - C03: Provider-free pytest passed 85 tests (12 + 13 + 21 + 13 + 8 + 8 + 10) across all 7 modules (`exit_code: 0`).\n  - C04: Ruff lint passed on script and test targets (`exit_code: 0`).\n  - C05: Py_compile passed on script and test targets (`exit_code: 0`).\n  - C06: Deterministic recovery check passed with 10 scenarios (`exit_code: 0`).\n  - C07: Git diff against HEAD confirmed clean (`exit_code: 0`).\n  - C08: Git diff check against base `13d73085eadaa14531c1fb08101332ca575aa3a0` confirmed zero whitespace or format issues (`exit_code: 0`).\n  - C09: Git diff name-only confirmed exact expected 15 changed files (`exit_code: 0`).\n  - C10: Post-run Git status confirmed review worktree remains clean and unmodified (`exit_code: 0`).\n\n---\n\n## 3. Review Conclusion\nThe recovery candidate `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` is exact, attributable, fail-closed, adheres strictly to all protected evidence boundaries, and has zero P0\u2013P2 findings.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Veto: DeepSeek Native Harness Provider-Free Preterminal Activation Observability Recovery\n\n## 1. Rehydration and Authority Verification\n- **Authority Sources Rehydrated**:\n  1. `live_handover_current_baton`: Verified Baton ref `handoff/current`, protected integration status, and current development worktree baseline.\n  2. `current_authority_allocation`: Conductor/integrator GPT Sol; independent reviewer Gemini 3.7 Flash/high; DeepSeek native Harness paused/closed.\n  3. `active_plan_and_acceptance`: Read and verified `docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md`, `docs/security/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-threat-model-delta.md`, contract, schema, evidence, report, and preceding accepted proof lineage.\n  4. `protected_evidence_boundaries`: Verified holdout rules, immutable failure attempt boundaries, and exclusion of `docs/branding/` and unrelated untracked files.\n  5. `git_refs_and_worktree`: Confirmed HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`, worktree `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d` on branch `codex/review-preterminal-observability-b5f0bc0d`, with local/origin `master` and `handoff/current` preserved at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n- **Active Operation Latch Validation**:\n  - `orchestration/continuity/ariadne-active-operation-latch/current.json` is validated in state `in_progress` for `deepseek-native-harness-provider-free-preterminal-activation-observability-recovery`.\n- **Tranche Dispositions**:\n  - DeepSeek lane: `declined` (evidence subject of failed native attempt; model and provider dispatch are closed).\n  - Gemini lane: `dispatched` for this exact-candidate isolated read-only veto.\n  - Native subagents: `declined` (proactive delegation prohibited; serial evidence, deterministic probe cleanup, and review boundary).\n\n---\n\n## 2. Mandatory Challenges Evaluation\n\n### Challenge 1: Identity and Clean Tracked Tree\n- Candidate commit: `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`.\n- Worktree root: `C:\\Users\\sarashera\\EMR4-worktrees\\preterminal-observability-gemini-b5f0bc0d`.\n- Branch: `codex/review-preterminal-observability-b5f0bc0d`.\n- Tracked tree: Confirmed completely clean via C01, C07, and C10 with zero diffs and zero untracked tracked-file modifications.\n\n### Challenge 2: Immutable Failed Attempt Binding\n- `native-composition-attempt-001` is byte-bound in `contract.json` to:\n  - Source commit: `296f35ff696361c63a4e018e5ae9317c79cb6213` (40 hex chars)\n  - Evidence SHA256: `06cc451446325e516959d715f7de4e4e861a014b4de5bccd692298c676b71e43`\n  - Controller SHA256: `b8a6231c4bdac8d986b3c76967ddafac29ecda93b258fece988ab628d8d8bef4`\n  - Contract SHA256: `95acde52d8c14dcebff9eba95fd4584423f35687f89e59eabc488f2495c063a4`\n- The diagnosis function `diagnose_failed_attempt()` verifies all hashes match the immutable disk artifacts. The attempt remains failed (`NATIVE_COMPOSITION_EXECUTION_FAILED`, events `[\"sentinel_activated\", \"stock_headless_hmr_ready\"]`, duration `0 ms`), is causally classified as `indeterminate_preterminal_failure`, and is neither retried, resumed, nor reclassified.\n\n### Challenge 3: Root-Cause Claim Discipline\n- The diagnosis enforces `permitted_root_cause_claims: []`.\n- No unsupported claims are admitted regarding Cordis loader, DeepSeek Harness, service injection, event-ledger parsing, controller, or guard root cause, as retained attempt evidence halted after sentinel HMR readiness without guard execution evidence.\n\n### Challenge 4: Corrected Runner Architecture\n- Top-level imports in `corrected_runner_source()` contain solely Node built-ins (`node:fs`, `node:path`). No `@deepseek-ai/*` or custom modules are imported at the top level.\n- Inside `apply(ctx, config)`: `activation(config, \"BOOTSTRAP_APPLY_ENTERED\")` executes immediately before any runtime imports or context resolution.\n- `@deepseek-ai/dsh-scope` and `./effective-tool-guard.mjs` imports are dynamic and caught inside a `try/catch` block that emits `RUNTIME_MODULE_IMPORT_FAILED` on rejection.\n- Single writers: Sentinel writes readiness to `eventPath`; the runner exclusively writes activation records via `appendFileSync(config.activationPath)` and terminal records via `openSync(config.terminalPath, \"wx\")` (exclusive atomic file creation).\n\n### Challenge 5: Finite Activation Vocabulary and Sanitization\n- Activation coordinates strictly partition all 10 scenarios:\n  `BOOTSTRAP_APPLY_ENTERED`, `HMR_UNAVAILABLE`, `APP_EXIT_UNAVAILABLE`, `SERVICES_UNAVAILABLE`, `RUNTIME_MODULE_IMPORT_FAILED`, `RUNTIME_MODULES_IMPORTED`, `SCOPE_CREATION_FAILED`, `SCOPE_CREATED`, `GUARD_ENTRY_REACHED`, `GUARD_TERMINAL_REACHED`, `TERMINAL_WRITE_FAILED`, `SCOPE_DISPOSAL_FAILED`, `SCOPE_DISPOSED`, `EXIT_REQUESTED`.\n- Zero raw exception strings, stack traces, file system paths, environment variables, prompt content, payloads, or credentials are retained in activation or terminal ledgers.\n\n### Challenge 6: Guard Vocabulary Distinguishability and Boundary Preservation\n- Guard error codes remain preserved and sanitized through `sanitizeEffectiveToolTerminal()`.\n- Terminal records identify stage `preterminal_activation`, cleanly distinguishing runner lifecycle coordinates from guard assertion outcomes.\n- The 3-tool allowlist (`edit`, `glob`, `read`), broker contracts, and outer authorization boundary remain unchanged and verified.\n\n### Challenge 7: Published Offline Probe Verification\n- `provider-free-preterminal-observability-recovery-evidence.json` confirms:\n  - Offline materialisations: 1 (114765 ms, exit code 0)\n  - Non-Harness Node import probes: 1 (118 ms, exit code 0)\n  - Native Harness processes: 0\n  - Network attempts: 0\n  - Agent sessions / broker requests / model requests / provider calls: 0\n  - Disposable temporary root: Confirmed absent and fully cleaned up.\n- The report explicitly characterizes the probe as non-Harness module import observability evidence, avoiding any overclaim of native composition or model execution.\n\n### Challenge 8: Future Controller Timing Design\n- The future controller envelope design (`future_controller_envelope_source()`) places `launch_duration_ms = round((monotonic() - started_at) * 1000)` inside the `finally:` block immediately following native process startup and preceding process termination and root removal.\n- The consumed controller script `scripts/deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py` was neither executed nor modified in this tranche.\n\n### Challenge 9: Unchanged Closed Boundaries\n- Historical attempts 004/005 and native attempt 001 remain closed.\n- No changes to product source (`app/`), Diary (`docs/diary/`), API Spine OpenAPI specs, schemas, ordinary-practice admission, or database migrations.\n- Zero database invocations, Docker containers, deployment, release, Pages rebuilds, or protected ref movement. Local/origin `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 10: Verifier Manifest Execution\n- All 10 commands (C01\u2013C10) executed successfully with return code 0:\n  - C01: Clean branch status (`exit_code: 0`).\n  - C02: Confirmed HEAD `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` (`exit_code: 0`).\n  - C03: Provider-free pytest passed 85 tests (12 + 13 + 21 + 13 + 8 + 8 + 10) across all 7 modules (`exit_code: 0`).\n  - C04: Ruff lint passed on script and test targets (`exit_code: 0`).\n  - C05: Py_compile passed on script and test targets (`exit_code: 0`).\n  - C06: Deterministic recovery check passed with 10 scenarios (`exit_code: 0`).\n  - C07: Git diff against HEAD confirmed clean (`exit_code: 0`).\n  - C08: Git diff check against base `13d73085eadaa14531c1fb08101332ca575aa3a0` confirmed zero whitespace or format issues (`exit_code: 0`).\n  - C09: Git diff name-only confirmed exact expected 15 changed files (`exit_code: 0`).\n  - C10: Post-run Git status confirmed review worktree remains clean and unmodified (`exit_code: 0`).\n\n---\n\n## 3. Review Conclusion\nThe recovery candidate `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab` is exact, attributable, fail-closed, adheres strictly to all protected evidence boundaries, and has zero P0\u2013P2 findings.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-b5f0bc0d",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_preterminal_observability_recovery",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "e8d49e410124d8843be23dcc9e2b978eb6d3d940795bb4ad4ca5d3344ad78627",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-b5f0bc0d",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_preterminal_observability_recovery",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "13d73085eadaa14531c1fb08101332ca575aa3a0..b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

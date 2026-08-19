@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.verifier_authentication_recovery_disposition.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+  "candidate_commit": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+  "pre_auth_transport_receipt_sha256": "8d50e7793236d97348a4f2361f72ae080fec2668f94b6583d162a1acaeab4354",
+  "pre_auth_transport_disposition": "not_admitted_no_model_or_terminal_decision",
+  "safe_local_diagnosis": "Antigravity CLI reported not authenticated and silent auth failed before model execution.",
+  "interactive_recovery": "Yuri completed a fresh Google OAuth flow directly; agy models then succeeded without Codex submitting or retaining an authorization code.",
+  "authorization_code_retained": false,
+  "post_auth_review_receipt_sha256": "8d5a5f0665eb03948ee912b5fdaed5a211cb5eaddd083f580d0a21055a3a3a91",
+  "post_auth_decision": "pass",
+  "post_auth_command_count": 10,
+  "post_auth_test_count": 85,
+  "candidate_unchanged": true,
+  "worktree_clean": true
+}

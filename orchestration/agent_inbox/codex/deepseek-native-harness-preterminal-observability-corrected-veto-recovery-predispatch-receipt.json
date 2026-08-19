@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preterminal observability corrected-veto recovery",
+    "completed_stage": "The predecessor deterministic candidate passes locally and closed blocked only because corrected Gemini inference returned three predecision HTTP 403 failures; Yuri has now restored or reauthorised the agy CLI session.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_one_clean_corrected_gemini37_high_veto_against_unchanged_candidate",
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "resume_after_compaction": true,
+    "source_head": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "dabcaf5590753fb5381b7242e7514810669c558b",
+    "reason_codes": [],
+    "resolved_commit": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "dabcaf5590753fb5381b7242e7514810669c558b",
+    "branch_origin_aligned": false,
+    "head": "dabcaf5590753fb5381b7242e7514810669c558b",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "exact-candidate corrected verifier pre-dispatch after reauthorisation",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The candidate is frozen and native/DeepSeek execution is expressly closed; implementation work would violate the review-only boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Yuri restored the selected Antigravity session; one fresh Gemini 3.7 Flash/high read-only corrected veto is the only acceptance dependency.",
+        "work_packages": [
+          "review exact b5f0bc0d candidate, acknowledge exact 85-test C03 count, execute the ten-command manifest and return one structured decision"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the external verifier transport plus exact worktree postflight is one serial evidence chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "verifier return",
+      "repeated 403 transport failure",
+      "revision_required decision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh receipt and worktree preflight precede Gemini",
+      "Gemini receives no implementation or acceptance authority",
+      "exact candidate and command manifest remain unchanged",
+      "one post-reauthorisation attempt only",
+      "Sol alone reconciles the terminal decision"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_corrected_gemini_37_flash_high_veto_after_reauthorisation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-blocked-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-attempt-001-disposition.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-corrected-review-transport-disposition.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri restored or reauthorised the agy CLI session and retained standing uninterrupted-development authority. GPT Sol owns rehydration, dispatch admission, receipt reconciliation, acceptance, clockwork and Git. Gemini 3.7 Flash/high owns exactly one fresh read-only corrected veto. DeepSeek receives no work package and no native Harness process is authorised. Native subagents are declined by developer policy and the serial exact-worktree evidence chain.",
+    "git_refs_and_worktree": "Main task HEAD is dabcaf5590753fb5381b7242e7514810669c558b on codex/ariadne-bernie-davida-parallel-seam with a clean tracked/staged worktree; origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The review worktree C:/Users/sarashera/EMR4-worktrees/preterminal-observability-gemini-b5f0bc0d is clean on codex/review-preterminal-observability-b5f0bc0d at exact candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab. There are 654 preserved unrelated untracked entries including five docs/branding entries.",
+    "live_handover_current_baton": "AGENTS.md was read completely in overlapping bounded ranges and verified as the current 121676-byte source with SHA-256 1072c58c60c1db4b39f46e6b2c0a5bb40c7311fdf54c0f3ba8aa6583b1793958. At Continuity 342 / Compass 324 its Current result remains the accepted failed native boot closeout, while Next implementation and the clockwork relation select this corrected-veto recovery from exact source f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1 without changing product acceptance.",
+    "protected_evidence_boundaries": "The corrected veto may inspect only exact clean candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab through the corrected packet and ten-command manifest. The rejected pass, three 403 transports, native-composition-attempt-001 and every predecessor artifact remain immutable. The user authorization code is not retained, printed, logged, written or submitted. No candidate/product/test change, native Harness, DeepSeek, broker, fallback model, Docker/database, protected evidence, product/patient/clinical data, production, deployment, release, Pages or protected-ref movement is authorised. All unrelated untracked files and docs/branding remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
