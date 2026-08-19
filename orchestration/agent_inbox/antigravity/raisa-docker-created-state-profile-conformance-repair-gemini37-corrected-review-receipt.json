@@ -1,0 +1,251 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\docker-created-state-gemini-r2-260eeda9",
+  "branch": "codex/review-docker-created-state-r2-260eeda9",
+  "head_before": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+  "head_after": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "7843fdde311cdb0533996394eb905c653a0d6859d08cbb6996aa31fdca3b0087",
+  "result": "# Gemini 3.7 Flash/high Corrected Independent Veto \u2014 Docker Created-State Profile Conformance Repair\n\n## 1. Rehydration and Authority Allocation\n\nThe mandatory five authority sources were read, verified, and validated in full:\n1. `live_handover_current_baton`: Authoritative baton on `handoff/current` with protected single-track integration through `master` at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. `current_authority_allocation`: Conductor/integrator Sol; independent read-only reviewer Gemini 3.7 Flash/high via fresh Antigravity project.\n3. `active_plan_and_acceptance`: `docs/raisa-provider-free-docker-created-state-profile-conformance-repair-plan.md` and `docs/security/raisa-provider-free-docker-created-state-profile-conformance-repair-threat-model-delta.md`.\n4. `protected_evidence_boundaries`: Authored-synthetic, provider-free, no-credential, no-database, no product/ordinary admission, no protected ref movement, and preserved `docs/branding/`.\n5. `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\docker-created-state-gemini-r2-260eeda9` on branch `codex/review-docker-created-state-r2-260eeda9`, candidate HEAD `260eeda97a3204a39b0f639d216fd7a53c0d2014`, review base `d20a8eb2d41423c7c3746f70894c8c82ba512792`.\n\n### Active Operation Latch Validation\n- Path: `orchestration/continuity/ariadne-active-operation-latch/current.json`\n- `schema_version`: `ariadne.active_operation_latch.v1`\n- `operation_id`: `raisa-provider-free-docker-created-state-profile-conformance-repair`\n- `status`: `in_progress`\n- `source_head`: `a12b30e320707e3306700be14b5fab854bcd4545`\n- `user_attention.required`: `false`\n\n### Explicit Parallelism-Efficacy Dispositions\n- **DeepSeek:** Declined; pinned native DeepSeek harness remains paused from occupied EMR4 work pending separate stock-headless-to-custom-runner boot proof. Claude Code is not a transport fallback.\n- **Gemini:** Active/reserved for this fresh Gemini 3.7 Flash/high read-only independent review of the corrected manifest and candidate.\n- **Native subagents:** Declined under current orchestrator policy; single-orchestrator ownership of Docker resource IDs and cleanup.\n\n---\n\n## 2. Challenge Verifications\n\n1. **Candidate, Branch, and Clean State:**\n   Verified candidate HEAD `260eeda97a3204a39b0f639d216fd7a53c0d2014` on branch `codex/review-docker-created-state-r2-260eeda9`. C01 and C10 verified a clean working directory before and after all checks.\n\n2. **One-Shot Created-State Lifecycle:**\n   `scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py` executed exactly one network creation, one container creation, inspection, and guarded cleanup. The container remained `created` and `Running=false`, was never started or attached, no stdin was delivered, no credentials were generated or passed, and PostgreSQL was never started.\n\n3. **Sanitized Representation Reading:**\n   `created-state-representation-evidence.json` establishes closed relations:\n   - `network_cardinality`: 1\n   - `network_key_relation`: `captured_network_name`\n   - `network_mode_relation`: `captured_network_id`\n   - `endpoint_network_id_relation`: `empty`\n   No raw inspect dictionaries, container IDs, network IDs, secrets, or host paths are exposed.\n\n4. **Corrected Profile Predicates:**\n   In `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, container validation requires:\n   - `captured_network_name_key`: exact match against captured network name\n   - `captured_network_mode`: exact match against captured network ID\n   - `endpoint_network_id_lifecycle_state`: strictly in `(\"\", network_id)`\n   Every ambiguous, missing, or foreign value denies.\n\n5. **Credential and Nonce Separation:**\n   Ownership nonce and credentials are distinct:\n   - Nonce is mandatory at `emr4.owner-nonce` label and verified absent outside that label via defensive copy scanning (`nonce_absent_outside_label`).\n   - Credential scanning evaluates actual credentials (`credentials_absent`) without nonce collision.\n   - Evidence redaction continues to redact both canaries and nonce.\n\n6. **Schema Validation and SHA-256 Bindings:**\n   - C07 confirmed Draft202012Validator schema conformance for both `evidence.schema.json` and `repair-attestation.schema.json`.\n   - Attestation assertions confirmed:\n     - `source_head`: `02a1fbfaa517a0d2a2dff66f31fabe482653c430`\n     - `representation_evidence_sha256`: `9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b`\n     - `corrected_harness_sha256`: `6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b`\n     - `historical_harness_sha256`: `5c60e6e4b0d554b3c323a932e8aa5a96943705e30a4d09afb2d6b8794a1503f4`\n     - `database_execution_authorized`: `false`\n\n7. **Attempt-002 Immutability and Rerun Prohibition:**\n   Attempt-002 failure evidence and envelope remain unchanged. The historical harness digest is bound to historical commit `fc772085a02d7db790b938fb845ef4546156d31e`. `test_consumed_attempt_binds_historical_harness_and_denies_reuse_after_repair` proved that running attempt 002 against the repaired harness fails closed with `accepted_harness_digest_mismatch`.\n\n8. **Hostile Mutations and Docker Command Surface:**\n   - 128/128 hostile contract mutations were attempted and rejected in static check (C03).\n   - Docker command allowlist permits only safe inspect, version, ps, create, rm, network create/rm/ls commands; start, exec, attach, logs, run, and port publishing are strictly forbidden.\n\n9. **Guarded Cleanup:**\n   Cleanup performs ownership reinspection by captured ID and nonce before removal. Released evidence verifies `container_absent=true`, `network_absent=true`, and `matching_labelled_resources=0` (`cleanup_verified`).\n\n10. **Claim Discipline:**\n    Claims are strictly bounded to Docker 29.5.3 Created-state representation and the two corrected containment predicates. No claims are made regarding database execution, transaction recovery, runtime behavior, product routes, or ordinary admission.\n\n11. **Command Manifest Execution:**\n    All 10 manifest commands (C01\u2013C10) completed synchronously in exact sequence with exit code 0.\n\n12. **Scope Discipline:**\n    Diff inspection (C08, C09) confirms zero modification to product APIs, database migrations, configuration, client code, feature flags, or protected references.\n\n---\n\n## 3. Review Conclusion\n\nThe fail-closed review-control correction in manifest command C07 (`representation_evidence_sha256`) is verified correct. All 12 challenges and 10 manifest commands passed with exit code 0 and no P0\u2013P2 findings remain.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Corrected Independent Veto \u2014 Docker Created-State Profile Conformance Repair\n\n## 1. Rehydration and Authority Allocation\n\nThe mandatory five authority sources were read, verified, and validated in full:\n1. `live_handover_current_baton`: Authoritative baton on `handoff/current` with protected single-track integration through `master` at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. `current_authority_allocation`: Conductor/integrator Sol; independent read-only reviewer Gemini 3.7 Flash/high via fresh Antigravity project.\n3. `active_plan_and_acceptance`: `docs/raisa-provider-free-docker-created-state-profile-conformance-repair-plan.md` and `docs/security/raisa-provider-free-docker-created-state-profile-conformance-repair-threat-model-delta.md`.\n4. `protected_evidence_boundaries`: Authored-synthetic, provider-free, no-credential, no-database, no product/ordinary admission, no protected ref movement, and preserved `docs/branding/`.\n5. `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\docker-created-state-gemini-r2-260eeda9` on branch `codex/review-docker-created-state-r2-260eeda9`, candidate HEAD `260eeda97a3204a39b0f639d216fd7a53c0d2014`, review base `d20a8eb2d41423c7c3746f70894c8c82ba512792`.\n\n### Active Operation Latch Validation\n- Path: `orchestration/continuity/ariadne-active-operation-latch/current.json`\n- `schema_version`: `ariadne.active_operation_latch.v1`\n- `operation_id`: `raisa-provider-free-docker-created-state-profile-conformance-repair`\n- `status`: `in_progress`\n- `source_head`: `a12b30e320707e3306700be14b5fab854bcd4545`\n- `user_attention.required`: `false`\n\n### Explicit Parallelism-Efficacy Dispositions\n- **DeepSeek:** Declined; pinned native DeepSeek harness remains paused from occupied EMR4 work pending separate stock-headless-to-custom-runner boot proof. Claude Code is not a transport fallback.\n- **Gemini:** Active/reserved for this fresh Gemini 3.7 Flash/high read-only independent review of the corrected manifest and candidate.\n- **Native subagents:** Declined under current orchestrator policy; single-orchestrator ownership of Docker resource IDs and cleanup.\n\n---\n\n## 2. Challenge Verifications\n\n1. **Candidate, Branch, and Clean State:**\n   Verified candidate HEAD `260eeda97a3204a39b0f639d216fd7a53c0d2014` on branch `codex/review-docker-created-state-r2-260eeda9`. C01 and C10 verified a clean working directory before and after all checks.\n\n2. **One-Shot Created-State Lifecycle:**\n   `scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py` executed exactly one network creation, one container creation, inspection, and guarded cleanup. The container remained `created` and `Running=false`, was never started or attached, no stdin was delivered, no credentials were generated or passed, and PostgreSQL was never started.\n\n3. **Sanitized Representation Reading:**\n   `created-state-representation-evidence.json` establishes closed relations:\n   - `network_cardinality`: 1\n   - `network_key_relation`: `captured_network_name`\n   - `network_mode_relation`: `captured_network_id`\n   - `endpoint_network_id_relation`: `empty`\n   No raw inspect dictionaries, container IDs, network IDs, secrets, or host paths are exposed.\n\n4. **Corrected Profile Predicates:**\n   In `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, container validation requires:\n   - `captured_network_name_key`: exact match against captured network name\n   - `captured_network_mode`: exact match against captured network ID\n   - `endpoint_network_id_lifecycle_state`: strictly in `(\"\", network_id)`\n   Every ambiguous, missing, or foreign value denies.\n\n5. **Credential and Nonce Separation:**\n   Ownership nonce and credentials are distinct:\n   - Nonce is mandatory at `emr4.owner-nonce` label and verified absent outside that label via defensive copy scanning (`nonce_absent_outside_label`).\n   - Credential scanning evaluates actual credentials (`credentials_absent`) without nonce collision.\n   - Evidence redaction continues to redact both canaries and nonce.\n\n6. **Schema Validation and SHA-256 Bindings:**\n   - C07 confirmed Draft202012Validator schema conformance for both `evidence.schema.json` and `repair-attestation.schema.json`.\n   - Attestation assertions confirmed:\n     - `source_head`: `02a1fbfaa517a0d2a2dff66f31fabe482653c430`\n     - `representation_evidence_sha256`: `9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b`\n     - `corrected_harness_sha256`: `6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b`\n     - `historical_harness_sha256`: `5c60e6e4b0d554b3c323a932e8aa5a96943705e30a4d09afb2d6b8794a1503f4`\n     - `database_execution_authorized`: `false`\n\n7. **Attempt-002 Immutability and Rerun Prohibition:**\n   Attempt-002 failure evidence and envelope remain unchanged. The historical harness digest is bound to historical commit `fc772085a02d7db790b938fb845ef4546156d31e`. `test_consumed_attempt_binds_historical_harness_and_denies_reuse_after_repair` proved that running attempt 002 against the repaired harness fails closed with `accepted_harness_digest_mismatch`.\n\n8. **Hostile Mutations and Docker Command Surface:**\n   - 128/128 hostile contract mutations were attempted and rejected in static check (C03).\n   - Docker command allowlist permits only safe inspect, version, ps, create, rm, network create/rm/ls commands; start, exec, attach, logs, run, and port publishing are strictly forbidden.\n\n9. **Guarded Cleanup:**\n   Cleanup performs ownership reinspection by captured ID and nonce before removal. Released evidence verifies `container_absent=true`, `network_absent=true`, and `matching_labelled_resources=0` (`cleanup_verified`).\n\n10. **Claim Discipline:**\n    Claims are strictly bounded to Docker 29.5.3 Created-state representation and the two corrected containment predicates. No claims are made regarding database execution, transaction recovery, runtime behavior, product routes, or ordinary admission.\n\n11. **Command Manifest Execution:**\n    All 10 manifest commands (C01\u2013C10) completed synchronously in exact sequence with exit code 0.\n\n12. **Scope Discipline:**\n    Diff inspection (C08, C09) confirms zero modification to product APIs, database migrations, configuration, client code, feature flags, or protected references.\n\n---\n\n## 3. Review Conclusion\n\nThe fail-closed review-control correction in manifest command C07 (`representation_evidence_sha256`) is verified correct. All 12 challenges and 10 manifest commands passed with exit code 0 and no P0\u2013P2 findings remain.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_docker_created_state_profile_conformance_repair",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/docker-created-state-gemini-r2-260eeda9",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair'); e=json.loads((b/'created-state-representation-evidence.json').read_text(encoding='utf-8')); es=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); a=json.loads((b/'repair-attestation.json').read_text(encoding='utf-8')); ars=json.loads((b/'repair-attestation.schema.json').read_text(encoding='utf-8')); Draft202012Validator(es).validate(e); Draft202012Validator(ars).validate(a); assert a['source_head']=='02a1fbfaa517a0d2a2dff66f31fabe482653c430'; assert a['representation_evidence_sha256']=='9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b'; assert a['corrected_harness_sha256']=='6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b'; assert a['database_execution_authorized'] is False"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "d20a8eb2d41423c7c3746f70894c8c82ba512792..260eeda97a3204a39b0f639d216fd7a53c0d2014"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "d20a8eb2d41423c7c3746f70894c8c82ba512792..260eeda97a3204a39b0f639d216fd7a53c0d2014"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "548b706001199bd756e3783951566794bc30fd2f23d2b60dbb45e05a40235dd8",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_docker_created_state_profile_conformance_repair",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/docker-created-state-gemini-r2-260eeda9",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair'); e=json.loads((b/'created-state-representation-evidence.json').read_text(encoding='utf-8')); es=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); a=json.loads((b/'repair-attestation.json').read_text(encoding='utf-8')); ars=json.loads((b/'repair-attestation.schema.json').read_text(encoding='utf-8')); Draft202012Validator(es).validate(e); Draft202012Validator(ars).validate(a); assert a['source_head']=='02a1fbfaa517a0d2a2dff66f31fabe482653c430'; assert a['representation_evidence_sha256']=='9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b'; assert a['corrected_harness_sha256']=='6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b'; assert a['database_execution_authorized'] is False"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d20a8eb2d41423c7c3746f70894c8c82ba512792..260eeda97a3204a39b0f639d216fd7a53c0d2014"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "d20a8eb2d41423c7c3746f70894c8c82ba512792..260eeda97a3204a39b0f639d216fd7a53c0d2014"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

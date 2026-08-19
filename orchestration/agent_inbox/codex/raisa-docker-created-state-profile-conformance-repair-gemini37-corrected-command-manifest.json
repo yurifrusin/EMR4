@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.raisa_provider_free_docker_created_state_profile_conformance_repair", "--check"]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/docker-created-state-gemini-r2-260eeda9",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check",
+        "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "py_compile",
+        "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair'); e=json.loads((b/'created-state-representation-evidence.json').read_text(encoding='utf-8')); es=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); a=json.loads((b/'repair-attestation.json').read_text(encoding='utf-8')); ars=json.loads((b/'repair-attestation.schema.json').read_text(encoding='utf-8')); Draft202012Validator(es).validate(e); Draft202012Validator(ars).validate(a); assert a['source_head']=='02a1fbfaa517a0d2a2dff66f31fabe482653c430'; assert a['representation_evidence_sha256']=='9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b'; assert a['corrected_harness_sha256']=='6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b'; assert a['database_execution_authorized'] is False"
+      ]
+    },
+    {"id": "C08", "argv": ["git", "diff", "--check", "d20a8eb2d41423c7c3746f70894c8c82ba512792..260eeda97a3204a39b0f639d216fd7a53c0d2014"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "d20a8eb2d41423c7c3746f70894c8c82ba512792..260eeda97a3204a39b0f639d216fd7a53c0d2014"]},
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

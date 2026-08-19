@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/docker-created-state-gemini-r2-260eeda9",
+  "branch": "codex/review-docker-created-state-r2-260eeda9",
+  "head": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+  "expected_head": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "548b706001199bd756e3783951566794bc30fd2f23d2b60dbb45e05a40235dd8",
+  "command_count": 10,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/docker-created-state-gemini-r2-260eeda9",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

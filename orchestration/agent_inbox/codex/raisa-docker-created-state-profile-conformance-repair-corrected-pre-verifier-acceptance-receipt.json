@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free Docker Created-state profile conformance repair",
+    "completed_stage": "At exact full Git source a12b30e320707e3306700be14b5fab854bcd4545, the fresh five-source receipt passes; contract, schemas and no-credential harness pass 128/128 hostile mutations, 104 focused regressions, Ruff, compilation and diff checks. Docker 29.5.3, the exact cached image, zero labelled residue, unchanged historical harness bytes and empty terminal paths are read back. No Docker object or database process was created.",
+    "next_executable_stage": "execute_exactly_one_no_credential_created_state_run_then_stop_without_retry_preserve_its_sanitized_terminal_evidence_and_do_not_start_or_attach_the_container",
+    "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "a12b30e320707e3306700be14b5fab854bcd4545",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+    "reason_codes": [],
+    "resolved_commit": "a12b30e320707e3306700be14b5fab854bcd4545",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a12b30e320707e3306700be14b5fab854bcd4545"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+    "branch_origin_aligned": false,
+    "head": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 663
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The new DeepSeek native Harness remains promising but still needs a separate stock-headless-to-custom-runner boot proof before EMR4 worker authority. This single mutable Docker lifecycle is already complete and cannot be safely split, and Claude Code is not an authorized fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The first Gemini receipt found no candidate defect and failed closed solely on an orchestrator-authored C07 attestation-field mismatch. One fresh Gemini 3.7 Flash/high veto is dispatched in a new clean worktree with a separately named corrected ten-command manifest; the occupied run is not repeated.",
+        "work_packages": [
+          "fresh_unchanged_candidate_read_only_docker_created_state_profile_conformance_veto_with_corrected_exact_ten_command_manifest"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and no user or skill instruction authorizes a native subagent for this tranche.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+    "parallel_work_packages": [
+      "Gemini independently reviews the exact admitted candidate while Sol retains decision and closeout ownership"
+    ],
+    "reassessment_triggers": [
+      "verifier_result",
+      "pre_closeout",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "DeepSeek is not admitted until its separate native-Harness boot proof passes",
+      "Gemini receives one exact clean candidate only after deterministic and occupied admission",
+      "Gemini may execute only the exact read-only packet and ten-command manifest",
+      "Sol alone owns decision admission, recovery, acceptance, continuity and Git"
+    ]
+  },
+  "planned_action": "launch_one_fresh_read_only_gemini_3_7_flash_high_veto_against_the_unchanged_candidate_with_the_corrected_attestation_field_manifest",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-docker-created-state-profile-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/contract.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json",
+      "orchestration/agent_inbox/antigravity/raisa-docker-created-state-profile-conformance-repair-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-gemini37-corrected-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-gemini37-corrected-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-gemini37-corrected-review-worktree-preflight.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns orchestration, deterministic admission, recovery, decision admission, continuity and Git under Yuri's standing uninterrupted-development authority through the tranche aim and onward. DeepSeek is declined until its separate native-Harness stock-headless-to-custom-runner boot proof passes, with no Claude Code fallback. Gemini 3.7 Flash/high owns one fresh exact-candidate read-only veto. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task and unchanged clean review candidate are exact 260eeda97a3204a39b0f639d216fd7a53c0d2014. Fresh review branch codex/review-docker-created-state-r2-260eeda9 is bound to C:/Users/sarashera/EMR4-worktrees/docker-created-state-gemini-r2-260eeda9. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected-ref movement is authorized.",
+    "live_handover_current_baton": "AGENTS.md Current Baton directs the in-progress provider-free Docker Created-state profile conformance repair as the prerequisite to a separately named relay-free recovery descendant while protected integration remains closed.",
+    "protected_evidence_boundaries": "Only authored-synthetic, provider-free, no-credential Docker Created-state structure and deterministic correction evidence are admitted. Review cannot invoke Docker or repeat the occupied run. No PostgreSQL execution, credential delivery, SQL, database retry, product/API/config/client change, ordinary-practice admission, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, live provider, production, deployment, release, Pages or protected-ref movement. Attempt-002 failure evidence is immutable. docs/branding and unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
