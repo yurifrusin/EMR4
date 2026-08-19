@@ -38,10 +38,10 @@ def test_register_is_valid_after_durability_schema_recovery() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 566
+    assert register["register_revision"] == 569
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 657)
+        f"AER-{index:04d}" for index in range(1, 660)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 442
+    assert len(agent_incidents) == 445
     assert len(transport_incidents) == 16
     assert [row["incident_id"] for row in transport_incidents] == [
         "AER-0007",
@@ -2582,7 +2582,7 @@ def test_aer_0264_preserves_expired_legacy_readiness_gate() -> None:
 def test_pattern_report_detects_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 656
+    assert report["incident_count"] == 659
 
 
 def test_aer_0292_records_protected_filename_metadata_scope_breach() -> None:
@@ -3619,18 +3619,18 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     assert "cf_arg_" in incident["correction"]["action"]
 
     report = build_pattern_report()
-    assert report["register_revision"] == 566
-    assert report["incident_count"] == 656
+    assert report["register_revision"] == 569
+    assert report["incident_count"] == 659
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 442,
+        "agent_behavior": 445,
         "harness": 54,
         "operator": 36,
         "repository": 108,
         "transport": 16,
     }
     assert report["counts"]["by_category"] == {
-        "command_scope_violation": 88,
+        "command_scope_violation": 91,
         "evidence_misreport": 67,
         "harness_failure": 54,
         "operator_error": 36,
@@ -3642,7 +3642,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 114,
-        "canonical_unchanged": 399,
+        "canonical_unchanged": 402,
         "untrusted_partial_worktree": 143,
     }
     receipt_event_recurrence = next(
@@ -4011,6 +4011,17 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     )
     assert yielded_session_recurrence["incident_ids"] == ["AER-0651", "AER-0654"]
     assert yielded_session_recurrence["incident_count"] == 2
+    no_database_runner_recurrence = next(
+        row
+        for row in report["recurring_patterns"]
+        if row["recurrence_signature"]
+        == "orchestrator.no_database_tranche_selected_database_backed_test_suite"
+    )
+    assert no_database_runner_recurrence["incident_ids"] == [
+        "AER-0658",
+        "AER-0659",
+    ]
+    assert no_database_runner_recurrence["incident_count"] == 2
     assert [
         row
         for row in report["recurring_patterns"]
@@ -4049,6 +4060,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
             "operator.ripgrep_compound_regex_not_syntax_validated",
             "orchestrator.yielded_verification_session_id_not_exposed",
+            "orchestrator.no_database_tranche_selected_database_backed_test_suite",
         }
     ] == [
         {
@@ -8068,7 +8080,7 @@ def test_aer_0565_advances_source_cutoff_after_date_rollover() -> None:
     incident = incidents["AER-0565"]
 
     assert list(incidents)[564:565] == ["AER-0565"]
-    assert register["scope"]["source_cutoff_on"] == "2026-08-19"
+    assert register["scope"]["source_cutoff_on"] == "2026-08-20"
     assert incident["origin"] == "agent_behavior"
     assert incident["category"] == "output_contract_violation"
     assert "source cutoff" in incident["detection_method"]
@@ -9205,3 +9217,41 @@ def test_aer_0656_preserves_repeated_value_patch_recurrence() -> None:
     )
     assert "AER-0556" in incident["observed_error"]
     assert incident["status"] == "corrected"
+
+
+def test_aer_0657_preserves_provider_free_manifest_fixture_mismatch() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0657"
+    ]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.provider_free_verifier_manifest_included_conftest_database_suite"
+    )
+    assert "--noconftest" in incident["expected_invariant"]
+    assert "36 setup errors" in incident["observed_error"]
+    assert incident["workflow_disposition"] == "review_rejected"
+    assert incident["status"] == "corrected"
+
+
+def test_aer_0658_contains_out_of_scope_database_backed_verification() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0658"
+    ]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.no_database_tranche_selected_database_backed_test_suite"
+    )
+    assert "shared PostgreSQL schema" in incident["observed_error"]
+    assert incident["related_incident_ids"] == []
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "contained"
+
+
+def test_aer_0659_contains_immediate_database_runner_recurrence() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}[
+        "AER-0659"
+    ]
+    assert incident["recurrence_signature"] == (
+        "orchestrator.no_database_tranche_selected_database_backed_test_suite"
+    )
+    assert "immediately following" in incident["observed_error"]
+    assert "engine-enforced" in incident["correction"]["prevention_control"]
+    assert incident["status"] == "contained"

@@ -1,13 +1,13 @@
 {
-  "canonical_register_sha256": "5fa0a3629d570a64abf4909b344f23c07b2256ecc1e33affb98b8b65a5d7a4a4",
+  "canonical_register_sha256": "774c0a1e6f45c42282bd7f6b5341402af54265a42aa6ca730fb2632d9ceb31b1",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 399,
+      "canonical_unchanged": 402,
       "untrusted_partial_worktree": 143
     },
     "by_category": {
-      "command_scope_violation": 88,
+      "command_scope_violation": 91,
       "evidence_misreport": 67,
       "harness_failure": 54,
       "operator_error": 36,
@@ -18,7 +18,7 @@
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 442,
+      "agent_behavior": 445,
       "harness": 54,
       "operator": 36,
       "repository": 108,
@@ -27,7 +27,7 @@
     "by_process_severity": {
       "low": 378,
       "material": 118,
-      "moderate": 160
+      "moderate": 163
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -142,6 +142,8 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
+      "provider-free-gemini-verifier-command-manifest::orchestrator": 1,
+      "repository-conftest-shared-postgresql-schema::orchestrator": 2,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
@@ -155,12 +157,12 @@
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 551,
+      "orchestrator": 554,
       "verifier": 58
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 656,
+  "incident_count": 659,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -447,6 +449,30 @@
       "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
       "resource_ids": [
         "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "command_scope_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0658",
+        "AER-0659"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Before executing a no-database tranche manifest, classify the complete fixture graph and require the provider-free runner itself to collect the exact file list; standard pytest is inadmissible for any selected suite unless the frozen plan expressly permits its conftest side effects.",
+        "The rest of this tranche has a literal command-level provider-free runner allowlist; any ordinary pytest argv is inadmissible. A future workflow repair must make this an engine-enforced manifest property rather than an orchestrator memory requirement."
+      ],
+      "recurrence_signature": "orchestrator.no_database_tranche_selected_database_backed_test_suite",
+      "resource_ids": [
+        "repository-conftest-shared-postgresql-schema"
       ],
       "roles": [
         "orchestrator"
@@ -1961,7 +1987,7 @@
       ]
     }
   ],
-  "register_revision": 566,
+  "register_revision": 569,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-19"
+  "source_cutoff_on": "2026-08-20"
 }

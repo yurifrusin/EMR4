@@ -22,14 +22,18 @@
     "cleanup_uncertainty_dominates": true
   },
   "deterministic_verification": {
-    "selected_tests_passed": 163,
+    "admitted_provider_free_tests_passed": 146,
+    "initial_broad_tests_passed_but_not_admitted": 163,
     "relay_free_hostile_mutations_attempted": 582,
     "relay_free_hostile_mutations_rejected": 582,
     "ruff_passed": true,
     "python_compilation_passed": true,
     "diff_check_passed": true,
     "real_docker_invocations": 0,
-    "database_invocations": 0,
+    "admitted_provider_free_database_invocations": 0,
+    "out_of_scope_database_backed_suite_executions": 1,
+    "additional_out_of_scope_database_schema_acquisitions": 1,
+    "out_of_scope_database_operation_count": "not_claimed",
     "provider_invocations": 0
   },
   "immutable_attempt_003": {

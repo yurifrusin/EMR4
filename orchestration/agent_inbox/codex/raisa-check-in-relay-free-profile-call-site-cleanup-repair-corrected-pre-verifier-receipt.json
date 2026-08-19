@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair",
+    "completed_stage": "The two exact network-name predicate call-site bindings, shared ownership-checked Created-state pre-registry cleanup helper and deterministic fault-injection suite pass at full source 95d456a1e3861ae463cf3643f347fa666c75fa48. Selected verification is 163/163 with 582/582 hostile relay-free mutations rejected and zero Docker, database or provider invocation.",
+    "next_executable_stage": "prepare_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto_after_clean_review_worktree_preflight",
+    "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "95d456a1e3861ae463cf3643f347fa666c75fa48",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "8bda88069daeb314998341fc961b9aa061d496e5",
+    "reason_codes": [],
+    "resolved_commit": "95d456a1e3861ae463cf3643f347fa666c75fa48",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "95d456a1e3861ae463cf3643f347fa666c75fa48"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "8bda88069daeb314998341fc961b9aa061d496e5",
+    "branch_origin_aligned": false,
+    "head": "8bda88069daeb314998341fc961b9aa061d496e5",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 666
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "corrected_pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness remains outside occupied EMR4 work until its separately frozen boot proof passes; Claude Code is no fallback, and implementation is already deterministic and committed.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The first veto found only a mechanical review-manifest runner mismatch and no candidate defect; exactly one fresh corrected Gemini 3.7 Flash/high read-only veto is justified under the bounded same-lane correction rule.",
+        "work_packages": [
+          "unchanged_exact_candidate_corrected_manifest_profile_cleanup_repair_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and no separable implementation or review package has positive leverage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "corrected Gemini terminal decision",
+      "closeout",
+      "before separately frozen attempt 004"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve first revision_required receipt and unchanged candidate",
+      "corrected provider-free manifest command passes locally before dispatch",
+      "one fresh corrected no-fallback Gemini terminal decision",
+      "Sol-only acceptance, clockwork closeout and task-branch Git"
+    ]
+  },
+  "planned_action": "run_one_fresh_corrected_gemini_37_flash_high_exact_unchanged_candidate_read_only_veto_after_manifest_runner_scope_repair",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-cleanup-recovery.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-worktree-preflight.json"
+    ],
+    "current_authority_allocation": "GPT Sol retains deterministic acceptance and task-branch Git. The first Gemini review is immutable revision_required for one manifest-only runner mismatch and found no candidate defect. The Flash mechanical-correction rule permits exactly one fresh corrected Gemini 3.7 Flash/high veto of unchanged candidate 8bda88069daeb314998341fc961b9aa061d496e5. DeepSeek remains declined pending its native Harness boot proof; Claude Code is no fallback; native subagents remain declined by developer policy and no separable positive-leverage package.",
+    "git_refs_and_worktree": "Primary task HEAD remains 8bda88069daeb314998341fc961b9aa061d496e5 and origin task remains b5afa75bfc759efa689d35cd06c5b330e4b7ed05. The same review worktree remains clean at the unchanged exact candidate. Corrected manifest preflight passed with SHA-256 fa0469f55c0806655a69f6f16b5bca69cfbbc61bac4d7f728b7fad0d3c5659ef and corrected provider-free C03 passed locally. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after clockwork lease 26. It names the active provider-free profile call-site and pre-registry cleanup repair, preserves Continuity 336 / Compass 318, and keeps local/origin master plus handoff/current fixed at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "protected_evidence_boundaries": "Unchanged exact committed provider-free candidate 8bda88069daeb314998341fc961b9aa061d496e5 only. Preserve the first revision_required receipt. The corrected ten-command manifest removes the database-backed conftest-dependent A5.1 runtime suite and substitutes only provider-free route-convergence source/continuity tests; its exact C03 passes locally. No candidate, Docker, database, credential, product behavior, provider other than the exact corrected Gemini review, production, deployment, release, Pages or protected-ref authority. Preserve docs/branding and unrelated untracked files; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

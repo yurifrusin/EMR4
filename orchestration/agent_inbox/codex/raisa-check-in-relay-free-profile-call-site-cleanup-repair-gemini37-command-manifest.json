@@ -1,0 +1,60 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); topic=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair'; e=json.loads((topic/'repair-evidence.json').read_text(encoding='utf-8')); assert e['source_head']=='95d456a1e3861ae463cf3643f347fa666c75fa48'; assert e['repaired_harness_sha256']=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; assert e['deterministic_verification']['relay_free_hostile_mutations_rejected']==582; assert e['deterministic_verification']['real_docker_invocations']==0; p=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003'; expected={'rehearsal-failure-evidence.json':'e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b','attempt-003-execution-envelope.json':'91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75','attempt-003-cleanup-recovery.json':'048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71'}; assert all(hashlib.sha256((p/n).read_bytes()).hexdigest()==h for n,h in expected.items())"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C08", "argv": ["git", "diff", "--check", "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"]},
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

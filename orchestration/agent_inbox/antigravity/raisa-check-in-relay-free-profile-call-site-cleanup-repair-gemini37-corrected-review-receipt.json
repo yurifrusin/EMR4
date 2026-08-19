@@ -1,0 +1,255 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806",
+  "branch": "codex/review-checkin-relay-cleanup-8bda8806",
+  "head_before": "8bda88069daeb314998341fc961b9aa061d496e5",
+  "head_after": "8bda88069daeb314998341fc961b9aa061d496e5",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "2000307d07824f1baa3e951acdf00fab4516421b910ae6cd1bb6d696c1f26f35",
+  "result": "### Gemini 3.7 Flash/high Corrected Independent Review & Veto Report\n\n**Operation:** Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair\n**Candidate HEAD:** `8bda88069daeb314998341fc961b9aa061d496e5`\n**Review Base:** `373ee17d54bc7c553c844142a6c4ba0fbf8a421a`\n**Implementation Source:** `95d456a1e3861ae463cf3643f347fa666c75fa48`\n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806`\n**Branch:** `codex/review-checkin-relay-cleanup-8bda8806`\n**Model / Effort:** Gemini 3.7 Flash / high\n\n---\n\n### 1. Mandatory Rehydration & Authority Verification\n\n1. **Rehydration Sources Named & Verified:**\n   - `live_handover_current_baton`: `handoff/current` at `2e34bdad732fdab32fbf778280b3d3c70d66d602` aligned with `origin/master` and `master`; single-track integration.\n   - `current_authority_allocation`: Conductor/Integrator: GPT Sol; Implementation/Test worker: GPT Sol holding the provider-free shadow Ariadne/DeepSeek broker clockwork gear architecture lease; Independent reviewer: Gemini 3.7 Flash/high in fresh context.\n   - `active_plan_and_acceptance`: `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md`, `repair-evidence.json`, and `repair-report.md`.\n   - `protected_evidence_boundaries`: Holdouts v1-v10 sealed; T3 provider experimentation lane paused; historical diary PHI local/ignored; no Docker daemon or disposable PostgreSQL execution; no patient, clinical, appointment or protected data; no command mounting, feature flags, or ordinary-practice enablement; no protected ref movement.\n   - `git_refs_and_worktree`: Bound worktree root `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806` on branch `codex/review-checkin-relay-cleanup-8bda8806` at clean HEAD `8bda88069daeb314998341fc961b9aa061d496e5`.\n\n2. **Active Operation Latch:**\n   - File: `orchestration/continuity/ariadne-active-operation-latch/current.json`\n   - Status: `in_progress`\n   - Operation ID: `raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair`\n   - Resumption Checkpoint: Validated.\n   - User Attention: `required: false`.\n\n3. **Parallelism-Efficacy Dispositions:**\n   - DeepSeek: declined pending native harness boot proof and no separable work package.\n   - Gemini: reserved for one fresh exact candidate read-only veto.\n   - Native subagents: declined by developer policy and no positive leverage package.\n\n---\n\n### 2. Command Manifest Execution (Corrected C01\u2013C10)\n\nAll 10 commands of the corrected manifest were executed in exact order in the bound worktree and exited with code 0:\n- **C01 (`git status --short --branch`):** Exited 0 (`## codex/review-checkin-relay-cleanup-8bda8806`, clean).\n- **C02 (`git rev-parse HEAD`):** Exited 0 (`8bda88069daeb314998341fc961b9aa061d496e5`).\n- **C03 (`ariadne_provider_free_pytest` on 11 suites):** Exited 0. 146 passed tests without conftest-dependence, Docker, database, or provider invocation.\n- **C04 (`ruff check`):** Exited 0 (`All checks passed!`).\n- **C05 (`py_compile`):** Exited 0.\n- **C06 (Hash & evidence assertion script):** Exited 0. Verified source HEAD, repaired harness SHA256 (`eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b`), 582 rejected hostile mutations, 0 real Docker invocations, and exact attempt-003 hashes.\n- **C07 (`git diff --exit-code HEAD --`):** Exited 0 (worktree clean).\n- **C08 (`git diff --check`):** Exited 0 (no whitespace or conflict marker defects).\n- **C09 (`git diff --name-only`):** Exited 0 (exact expected file set modified).\n- **C10 (`git status --short --branch`):** Exited 0 (clean postcondition).\n\n---\n\n### 3. Substantive Audit & Challenge Findings\n\n1. **Resolution of Prior Review-Control Manifest P1:**\n   - The first review identified that manifest C03 incorrectly included `tests/test_model_required_bureau_a5_1_check_in_runtime.py` (which requires `tests/conftest.py`).\n   - The corrected manifest substituted provider-free pure route-adapter convergence and continuity tests (`test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py` and its continuity counterpart).\n   - Corrected C03 runs cleanly via `scripts.ariadne_provider_free_pytest` without fixture errors.\n\n2. **Network Name Bindings at Both Call Sites:**\n   - In `_create_server`, `network_name=network_name` is passed to `_container_profile_predicates` (removing `del network_name`).\n   - In `_create_sidecar`, `network_name=network_name` is passed to `_container_profile_predicates` (removing `del network_name`).\n\n3. **Pre-Registry Container Cleanup and Ownership Validation:**\n   - `_cleanup_pre_registry_created_container` inspects the candidate (by full 64-char ID or generated name).\n   - Validates exactly one row, verifies resolved ID is 64 hex characters, enforces candidate/resolved equality when full ID was supplied, checks basic container ownership (image ID, image reference, harness label, nonce label, and exact generated container name).\n   - Enforces `State.Status == 'created'` and `State.Running is False`.\n   - Issues `docker rm --force <resolved_full_id>` only on exact ownership match, followed by mandatory inspect readback verifying non-zero exit code (container absence).\n   - Returns boolean `False` on any failure or exception.\n\n4. **Exception Handling & Cleanup Uncertainty Dominance:**\n   - Both `_create_server` and `_create_sidecar` wrap post-creation inspection and predicate evaluation in a `try...except` handling `RehearsalFailure` and general `Exception`.\n   - If cleanup is unverified (`False`), the primary error is dominated and replaced with `(\"cleanup\", \"server_pre_registry_cleanup_unverified\")` or `(\"cleanup\", \"sidecar_pre_registry_cleanup_unverified\")`.\n   - Cleaned controller errors raise explicit fail-closed coordinates `(\"environment\", \"server_pre_registry_controller_failure_cleaned\")` or `(\"sidecar\", \"sidecar_pre_registry_controller_failure_cleaned\")`.\n\n5. **Attempt-003 Immutability and Protected Boundaries:**\n   - Attempt-003 failure evidence, envelope, and cleanup recovery hashes are exactly preserved and byte-identical.\n   - Zero Docker, database, provider, or clinical data access occurred.\n   - Protected refs remain untouched at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n### 4. Conclusion & Decision\n\nThe candidate `8bda88069daeb314998341fc961b9aa061d496e5` satisfies all substantive challenges, adheres to all protected boundaries, and passes the corrected ten-command manifest with zero findings across P0\u2013P2. All verifications pass deterministically.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Gemini 3.7 Flash/high Corrected Independent Review & Veto Report\n\n**Operation:** Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair\n**Candidate HEAD:** `8bda88069daeb314998341fc961b9aa061d496e5`\n**Review Base:** `373ee17d54bc7c553c844142a6c4ba0fbf8a421a`\n**Implementation Source:** `95d456a1e3861ae463cf3643f347fa666c75fa48`\n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806`\n**Branch:** `codex/review-checkin-relay-cleanup-8bda8806`\n**Model / Effort:** Gemini 3.7 Flash / high\n\n---\n\n### 1. Mandatory Rehydration & Authority Verification\n\n1. **Rehydration Sources Named & Verified:**\n   - `live_handover_current_baton`: `handoff/current` at `2e34bdad732fdab32fbf778280b3d3c70d66d602` aligned with `origin/master` and `master`; single-track integration.\n   - `current_authority_allocation`: Conductor/Integrator: GPT Sol; Implementation/Test worker: GPT Sol holding the provider-free shadow Ariadne/DeepSeek broker clockwork gear architecture lease; Independent reviewer: Gemini 3.7 Flash/high in fresh context.\n   - `active_plan_and_acceptance`: `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md`, `repair-evidence.json`, and `repair-report.md`.\n   - `protected_evidence_boundaries`: Holdouts v1-v10 sealed; T3 provider experimentation lane paused; historical diary PHI local/ignored; no Docker daemon or disposable PostgreSQL execution; no patient, clinical, appointment or protected data; no command mounting, feature flags, or ordinary-practice enablement; no protected ref movement.\n   - `git_refs_and_worktree`: Bound worktree root `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806` on branch `codex/review-checkin-relay-cleanup-8bda8806` at clean HEAD `8bda88069daeb314998341fc961b9aa061d496e5`.\n\n2. **Active Operation Latch:**\n   - File: `orchestration/continuity/ariadne-active-operation-latch/current.json`\n   - Status: `in_progress`\n   - Operation ID: `raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair`\n   - Resumption Checkpoint: Validated.\n   - User Attention: `required: false`.\n\n3. **Parallelism-Efficacy Dispositions:**\n   - DeepSeek: declined pending native harness boot proof and no separable work package.\n   - Gemini: reserved for one fresh exact candidate read-only veto.\n   - Native subagents: declined by developer policy and no positive leverage package.\n\n---\n\n### 2. Command Manifest Execution (Corrected C01\u2013C10)\n\nAll 10 commands of the corrected manifest were executed in exact order in the bound worktree and exited with code 0:\n- **C01 (`git status --short --branch`):** Exited 0 (`## codex/review-checkin-relay-cleanup-8bda8806`, clean).\n- **C02 (`git rev-parse HEAD`):** Exited 0 (`8bda88069daeb314998341fc961b9aa061d496e5`).\n- **C03 (`ariadne_provider_free_pytest` on 11 suites):** Exited 0. 146 passed tests without conftest-dependence, Docker, database, or provider invocation.\n- **C04 (`ruff check`):** Exited 0 (`All checks passed!`).\n- **C05 (`py_compile`):** Exited 0.\n- **C06 (Hash & evidence assertion script):** Exited 0. Verified source HEAD, repaired harness SHA256 (`eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b`), 582 rejected hostile mutations, 0 real Docker invocations, and exact attempt-003 hashes.\n- **C07 (`git diff --exit-code HEAD --`):** Exited 0 (worktree clean).\n- **C08 (`git diff --check`):** Exited 0 (no whitespace or conflict marker defects).\n- **C09 (`git diff --name-only`):** Exited 0 (exact expected file set modified).\n- **C10 (`git status --short --branch`):** Exited 0 (clean postcondition).\n\n---\n\n### 3. Substantive Audit & Challenge Findings\n\n1. **Resolution of Prior Review-Control Manifest P1:**\n   - The first review identified that manifest C03 incorrectly included `tests/test_model_required_bureau_a5_1_check_in_runtime.py` (which requires `tests/conftest.py`).\n   - The corrected manifest substituted provider-free pure route-adapter convergence and continuity tests (`test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py` and its continuity counterpart).\n   - Corrected C03 runs cleanly via `scripts.ariadne_provider_free_pytest` without fixture errors.\n\n2. **Network Name Bindings at Both Call Sites:**\n   - In `_create_server`, `network_name=network_name` is passed to `_container_profile_predicates` (removing `del network_name`).\n   - In `_create_sidecar`, `network_name=network_name` is passed to `_container_profile_predicates` (removing `del network_name`).\n\n3. **Pre-Registry Container Cleanup and Ownership Validation:**\n   - `_cleanup_pre_registry_created_container` inspects the candidate (by full 64-char ID or generated name).\n   - Validates exactly one row, verifies resolved ID is 64 hex characters, enforces candidate/resolved equality when full ID was supplied, checks basic container ownership (image ID, image reference, harness label, nonce label, and exact generated container name).\n   - Enforces `State.Status == 'created'` and `State.Running is False`.\n   - Issues `docker rm --force <resolved_full_id>` only on exact ownership match, followed by mandatory inspect readback verifying non-zero exit code (container absence).\n   - Returns boolean `False` on any failure or exception.\n\n4. **Exception Handling & Cleanup Uncertainty Dominance:**\n   - Both `_create_server` and `_create_sidecar` wrap post-creation inspection and predicate evaluation in a `try...except` handling `RehearsalFailure` and general `Exception`.\n   - If cleanup is unverified (`False`), the primary error is dominated and replaced with `(\"cleanup\", \"server_pre_registry_cleanup_unverified\")` or `(\"cleanup\", \"sidecar_pre_registry_cleanup_unverified\")`.\n   - Cleaned controller errors raise explicit fail-closed coordinates `(\"environment\", \"server_pre_registry_controller_failure_cleaned\")` or `(\"sidecar\", \"sidecar_pre_registry_controller_failure_cleaned\")`.\n\n5. **Attempt-003 Immutability and Protected Boundaries:**\n   - Attempt-003 failure evidence, envelope, and cleanup recovery hashes are exactly preserved and byte-identical.\n   - Zero Docker, database, provider, or clinical data access occurred.\n   - Protected refs remain untouched at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n### 4. Conclusion & Decision\n\nThe candidate `8bda88069daeb314998341fc961b9aa061d496e5` satisfies all substantive challenges, adheres to all protected boundaries, and passes the corrected ten-command manifest with zero findings across P0\u2013P2. All verifications pass deterministically.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); topic=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair'; e=json.loads((topic/'repair-evidence.json').read_text(encoding='utf-8')); assert e['source_head']=='95d456a1e3861ae463cf3643f347fa666c75fa48'; assert e['repaired_harness_sha256']=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; assert e['deterministic_verification']['relay_free_hostile_mutations_rejected']==582; assert e['deterministic_verification']['real_docker_invocations']==0; p=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003'; expected={'rehearsal-failure-evidence.json':'e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b','attempt-003-execution-envelope.json':'91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75','attempt-003-cleanup-recovery.json':'048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71'}; assert all(hashlib.sha256((p/n).read_bytes()).hexdigest()==h for n,h in expected.items())"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "fa0469f55c0806655a69f6f16b5bca69cfbbc61bac4d7f728b7fad0d3c5659ef",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); topic=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair'; e=json.loads((topic/'repair-evidence.json').read_text(encoding='utf-8')); assert e['source_head']=='95d456a1e3861ae463cf3643f347fa666c75fa48'; assert e['repaired_harness_sha256']=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; assert e['deterministic_verification']['relay_free_hostile_mutations_rejected']==582; assert e['deterministic_verification']['real_docker_invocations']==0; p=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003'; expected={'rehearsal-failure-evidence.json':'e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b','attempt-003-execution-envelope.json':'91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75','attempt-003-cleanup-recovery.json':'048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71'}; assert all(hashlib.sha256((p/n).read_bytes()).hexdigest()==h for n,h in expected.items())"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

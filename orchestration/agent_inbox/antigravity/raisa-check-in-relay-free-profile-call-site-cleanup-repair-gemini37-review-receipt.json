@@ -1,0 +1,253 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806",
+  "branch": "codex/review-checkin-relay-cleanup-8bda8806",
+  "head_before": "8bda88069daeb314998341fc961b9aa061d496e5",
+  "head_after": "8bda88069daeb314998341fc961b9aa061d496e5",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "0b24ece87890889cd3b1032a9a1febc64ae924270c89dd39808cebe25ee40511",
+  "result": "# Gemini 3.7 Flash/high Veto Assessment \u2014 Check-in Relay-Free Call-Site and Pre-Registry Cleanup Repair\n\n## 1. Mandatory Rehydration and Authority Verification\nRehydration is verified against all five authoritative sources:\n- `live_handover_current_baton`: Operating under risk-weighted parallel-capable Ariadne workflow with single-track protected integration. Baton ref is `handoff/current`. Local and origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No protected ref movement is authorised.\n- `current_authority_allocation`: Conductor/integrator is GPT Sol. Independent reviewer is Gemini 3.7 Flash/high.\n- `active_plan_and_acceptance`: `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md` (planning HEAD `78e0202343b4a925a0674e58486d8616df7f7599`), `docs/security/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-threat-model-delta.md`, `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-blocked-closeout.md`, and `orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-003-sol-blocked-assessment.md`.\n- `protected_evidence_boundaries`: Immutable attempt-003 failure (`e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b`), envelope (`91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75`), cleanup recovery (`048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71`), created-state representation (`9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b`), repair attestation (`49c5a3673d388fc84b2f046a993a8f4c747f9887252ef4cdd2dfcc59e9a11410`), and pre-repair harness SHA-256 (`6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b`) remain byte-exact and unmodified.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806` on branch `codex/review-checkin-relay-cleanup-8bda8806` at HEAD `8bda88069daeb314998341fc961b9aa061d496e5` with base `373ee17d54bc7c553c844142a6c4ba0fbf8a421a` and implementation source `95d456a1e3861ae463cf3643f347fa666c75fa48`.\n\n### Continuity and Latch Validation\n- `orchestration/continuity/ariadne-active-operation-latch/current.json`: Validated in-progress active latch for operation `raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair` at source HEAD `95d456a1e3861ae463cf3643f347fa666c75fa48` with next executable stage `prepare_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto_after_clean_review_worktree_preflight`.\n- Parallelism assessment restored:\n  - DeepSeek: declined pending native harness boot proof and no separable work package.\n  - Gemini: reserved for one fresh post-deterministic exact-candidate read-only veto.\n  - Native subagents: declined by developer policy and no positive leverage package.\n\n---\n\n## 2. Findings and Non-Conformance Report\n\n### Finding F01 (P1 \u2014 Test Runner / Fixture Invocation Mismatch in Command Manifest C03)\n- **Allowlisted Path:** `tests/test_model_required_bureau_a5_1_check_in_runtime.py` and `scripts/ariadne_provider_free_pytest.py`\n- **Evidence:** \n  In the bound command manifest, command `C03` runs:\n  `python -m scripts.ariadne_provider_free_pytest --repo-root C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806 tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py tests/test_model_required_bureau_a5_1_check_in_runtime.py tests/test_ariadne_active_operation_latch.py tests/test_ariadne_active_operation_latch_continuity.py tests/test_ariadne_governance_clockwork_tick.py tests/test_current_baton_consistency.py`\n  \n  `scripts.ariadne_provider_free_pytest` is explicitly designed for tranches whose authority closes database access: line 73 forces `--noconftest` and strips database environment variables.\n  However, `tests/test_model_required_bureau_a5_1_check_in_runtime.py` defines `@pytest.fixture(autouse=True) def _a5_runtime(monkeypatch, practice):` (lines 49-50), which depends directly on the `practice` fixture from `tests/conftest.py`.\n  Under `--noconftest`, all 36 test cases in `test_model_required_bureau_a5_1_check_in_runtime.py` fail at setup with `fixture 'practice' not found`, causing command `C03` to terminate with exit code `1`.\n  \n  In the underlying checkpoint transition intent (`orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/checkpoint-intent.json` lines 6\u201338), the tests were partitioned into two commands:\n  1. Provider-free implementation tests via standard pytest (`tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair*.py` etc.)\n  2. Governance and runtime tests via standard pytest (`test_model_required_bureau_a5_1_check_in_runtime.py` etc.)\n  \n  Running `test_model_required_bureau_a5_1_check_in_runtime.py` inside `scripts.ariadne_provider_free_pytest` violates the runner's literal contract and causes deterministic verifier command `C03` to fail with exit code 1. Under Challenge 11 and the Decision Rule, all commands in the manifest must return zero without error.\n\n---\n\n## 3. Detailed Challenge Audit\n\n### Challenge 1 \u2014 Exact Candidate, Branch, Clean Worktree, and Protected Refs\n- Candidate HEAD `8bda88069daeb314998341fc961b9aa061d496e5` on `codex/review-checkin-relay-cleanup-8bda8806` verified (C01, C02).\n- Worktree clean before and after evaluation (C01, C07, C10).\n- Protected refs `master` and `handoff/current` remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 2 \u2014 Real `_container_profile_predicates` Call Sites\n- In `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, `_create_server` (lines 1533-1543) and `_create_sidecar` (lines 1635-1645) both correctly supply `network_name=network_name`, `network_id=network_id`, `container_id=container_id`, `container_name=name`, `nonce=nonce`, `contract=contract`, `kind=...`, and `forbidden_values=forbidden_values`. Obsolete `del network_name` statements are confirmed removed.\n\n### Challenge 3 \u2014 Pre-Registry Interval and Exception Routing\n- Both `_create_server` and `_create_sidecar` enclose the complete post-creation / pre-registry interval within `try / except`.\n- On `RehearsalFailure` (known failure), `_cleanup_pre_registry_created_container` is executed; upon successful cleanup, the known failure re-raises.\n- On generic `Exception` (unknown controller failure), `_cleanup_pre_registry_created_container` is executed; upon successful cleanup, it fails closed with `server_pre_registry_controller_failure_cleaned` or `sidecar_pre_registry_controller_failure_cleaned`.\n\n### Challenge 4 \u2014 Cleanup Helper Ownership Invariants\n- `_cleanup_pre_registry_created_container` (lines 1239\u20131293) correctly determines `candidate_is_full` using full 64-hex regex `CONTAINER_ID`. If not full, inspects by exact generated `container_name`.\n- Requires exactly 1 inspected row, verifies `resolved_id` is a valid 64-hex container ID, and requires `resolved_id == candidate_id` when candidate is full.\n- Verifies full ownership via `_basic_container_owned`: ID, name (`\"/\" + container_name`), image ID, image reference, harness label, and nonce label.\n\n### Challenge 5 \u2014 Created State and Forced Removal Readback\n- Enforces `State.Status == \"created\"` and `State.Running is False`.\n- Removes only the validated `resolved_id` via `_docker(executable, \"rm\", \"--force\", resolved_id)`.\n- Enforces post-removal absence by requiring inspect on `resolved_id` to return non-zero.\n\n### Challenge 6 \u2014 Uncertainty Dominance\n- Any failure in inspect multiplicity, ID shape, ownership fields, state, running flag, removal code, or absence readback returns `False`, which immediately triggers `server_pre_registry_cleanup_unverified` or `sidecar_pre_registry_cleanup_unverified`, dominating both known and unknown primary errors.\n\n### Challenge 7 \u2014 Containment and Zero-Provider Isolation\n- All tests in `tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py` mock Docker calls (`_docker`, `_inspect_container`, `_container_profile_predicates`).\n- No processes started, no credentials delivered, no PostgreSQL database accessed, and no product behavior executed.\n\n### Challenge 8 \u2014 Test Reproduction & Mutation Rejection\n- When executed in the provider-free runner without conftest-dependent tests, all 127 provider-free unit tests pass, and all 582 hostile relay-free mutations are rejected.\n- However, combining `tests/test_model_required_bureau_a5_1_check_in_runtime.py` into `scripts.ariadne_provider_free_pytest` fails as recorded in Finding F01.\n\n### Challenge 9 \u2014 Attempt-003 Evidence Immutability\n- Hashes for `rehearsal-failure-evidence.json` (`e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b`), `attempt-003-execution-envelope.json` (`91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75`), and `attempt-003-cleanup-recovery.json` (`048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71`) verified byte-exact (C06).\n- Occupied execution count (1), automatic retries (0), and ambiguous success released (False) preserved.\n\n### Challenge 10 \u2014 Closed Scope Preservation\n- Diff inspection (C08, C09) confirms only allowlisted runtime, plan, and continuity files changed. No OpenAPI, GraphQL, database schema, client, feature flag, or protected ref changed.\n\n### Challenge 11 \u2014 Bound Command Manifest Execution\n- Manifest commands C01, C02, C04, C05, C06, C07, C08, C09, and C10 exited with code 0.\n- Command C03 exited with code 1 due to Finding F01.\n\n---\n\n## 4. Summary Verdict\nBecause command `C03` exited with code 1 due to running `test_model_required_bureau_a5_1_check_in_runtime.py` (which requires conftest fixture loading) under `scripts.ariadne_provider_free_pytest` (which enforces `--noconftest`), the candidate does not pass the deterministic zero-exit manifest gate. The required decision is `revision_required`.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Gemini 3.7 Flash/high Veto Assessment \u2014 Check-in Relay-Free Call-Site and Pre-Registry Cleanup Repair\n\n## 1. Mandatory Rehydration and Authority Verification\nRehydration is verified against all five authoritative sources:\n- `live_handover_current_baton`: Operating under risk-weighted parallel-capable Ariadne workflow with single-track protected integration. Baton ref is `handoff/current`. Local and origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No protected ref movement is authorised.\n- `current_authority_allocation`: Conductor/integrator is GPT Sol. Independent reviewer is Gemini 3.7 Flash/high.\n- `active_plan_and_acceptance`: `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md` (planning HEAD `78e0202343b4a925a0674e58486d8616df7f7599`), `docs/security/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-threat-model-delta.md`, `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-blocked-closeout.md`, and `orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-003-sol-blocked-assessment.md`.\n- `protected_evidence_boundaries`: Immutable attempt-003 failure (`e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b`), envelope (`91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75`), cleanup recovery (`048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71`), created-state representation (`9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b`), repair attestation (`49c5a3673d388fc84b2f046a993a8f4c747f9887252ef4cdd2dfcc59e9a11410`), and pre-repair harness SHA-256 (`6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b`) remain byte-exact and unmodified.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-relay-cleanup-gemini-8bda8806` on branch `codex/review-checkin-relay-cleanup-8bda8806` at HEAD `8bda88069daeb314998341fc961b9aa061d496e5` with base `373ee17d54bc7c553c844142a6c4ba0fbf8a421a` and implementation source `95d456a1e3861ae463cf3643f347fa666c75fa48`.\n\n### Continuity and Latch Validation\n- `orchestration/continuity/ariadne-active-operation-latch/current.json`: Validated in-progress active latch for operation `raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair` at source HEAD `95d456a1e3861ae463cf3643f347fa666c75fa48` with next executable stage `prepare_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto_after_clean_review_worktree_preflight`.\n- Parallelism assessment restored:\n  - DeepSeek: declined pending native harness boot proof and no separable work package.\n  - Gemini: reserved for one fresh post-deterministic exact-candidate read-only veto.\n  - Native subagents: declined by developer policy and no positive leverage package.\n\n---\n\n## 2. Findings and Non-Conformance Report\n\n### Finding F01 (P1 \u2014 Test Runner / Fixture Invocation Mismatch in Command Manifest C03)\n- **Allowlisted Path:** `tests/test_model_required_bureau_a5_1_check_in_runtime.py` and `scripts/ariadne_provider_free_pytest.py`\n- **Evidence:** \n  In the bound command manifest, command `C03` runs:\n  `python -m scripts.ariadne_provider_free_pytest --repo-root C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806 tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py tests/test_model_required_bureau_a5_1_check_in_runtime.py tests/test_ariadne_active_operation_latch.py tests/test_ariadne_active_operation_latch_continuity.py tests/test_ariadne_governance_clockwork_tick.py tests/test_current_baton_consistency.py`\n  \n  `scripts.ariadne_provider_free_pytest` is explicitly designed for tranches whose authority closes database access: line 73 forces `--noconftest` and strips database environment variables.\n  However, `tests/test_model_required_bureau_a5_1_check_in_runtime.py` defines `@pytest.fixture(autouse=True) def _a5_runtime(monkeypatch, practice):` (lines 49-50), which depends directly on the `practice` fixture from `tests/conftest.py`.\n  Under `--noconftest`, all 36 test cases in `test_model_required_bureau_a5_1_check_in_runtime.py` fail at setup with `fixture 'practice' not found`, causing command `C03` to terminate with exit code `1`.\n  \n  In the underlying checkpoint transition intent (`orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/checkpoint-intent.json` lines 6\u201338), the tests were partitioned into two commands:\n  1. Provider-free implementation tests via standard pytest (`tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair*.py` etc.)\n  2. Governance and runtime tests via standard pytest (`test_model_required_bureau_a5_1_check_in_runtime.py` etc.)\n  \n  Running `test_model_required_bureau_a5_1_check_in_runtime.py` inside `scripts.ariadne_provider_free_pytest` violates the runner's literal contract and causes deterministic verifier command `C03` to fail with exit code 1. Under Challenge 11 and the Decision Rule, all commands in the manifest must return zero without error.\n\n---\n\n## 3. Detailed Challenge Audit\n\n### Challenge 1 \u2014 Exact Candidate, Branch, Clean Worktree, and Protected Refs\n- Candidate HEAD `8bda88069daeb314998341fc961b9aa061d496e5` on `codex/review-checkin-relay-cleanup-8bda8806` verified (C01, C02).\n- Worktree clean before and after evaluation (C01, C07, C10).\n- Protected refs `master` and `handoff/current` remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 2 \u2014 Real `_container_profile_predicates` Call Sites\n- In `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, `_create_server` (lines 1533-1543) and `_create_sidecar` (lines 1635-1645) both correctly supply `network_name=network_name`, `network_id=network_id`, `container_id=container_id`, `container_name=name`, `nonce=nonce`, `contract=contract`, `kind=...`, and `forbidden_values=forbidden_values`. Obsolete `del network_name` statements are confirmed removed.\n\n### Challenge 3 \u2014 Pre-Registry Interval and Exception Routing\n- Both `_create_server` and `_create_sidecar` enclose the complete post-creation / pre-registry interval within `try / except`.\n- On `RehearsalFailure` (known failure), `_cleanup_pre_registry_created_container` is executed; upon successful cleanup, the known failure re-raises.\n- On generic `Exception` (unknown controller failure), `_cleanup_pre_registry_created_container` is executed; upon successful cleanup, it fails closed with `server_pre_registry_controller_failure_cleaned` or `sidecar_pre_registry_controller_failure_cleaned`.\n\n### Challenge 4 \u2014 Cleanup Helper Ownership Invariants\n- `_cleanup_pre_registry_created_container` (lines 1239\u20131293) correctly determines `candidate_is_full` using full 64-hex regex `CONTAINER_ID`. If not full, inspects by exact generated `container_name`.\n- Requires exactly 1 inspected row, verifies `resolved_id` is a valid 64-hex container ID, and requires `resolved_id == candidate_id` when candidate is full.\n- Verifies full ownership via `_basic_container_owned`: ID, name (`\"/\" + container_name`), image ID, image reference, harness label, and nonce label.\n\n### Challenge 5 \u2014 Created State and Forced Removal Readback\n- Enforces `State.Status == \"created\"` and `State.Running is False`.\n- Removes only the validated `resolved_id` via `_docker(executable, \"rm\", \"--force\", resolved_id)`.\n- Enforces post-removal absence by requiring inspect on `resolved_id` to return non-zero.\n\n### Challenge 6 \u2014 Uncertainty Dominance\n- Any failure in inspect multiplicity, ID shape, ownership fields, state, running flag, removal code, or absence readback returns `False`, which immediately triggers `server_pre_registry_cleanup_unverified` or `sidecar_pre_registry_cleanup_unverified`, dominating both known and unknown primary errors.\n\n### Challenge 7 \u2014 Containment and Zero-Provider Isolation\n- All tests in `tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py` mock Docker calls (`_docker`, `_inspect_container`, `_container_profile_predicates`).\n- No processes started, no credentials delivered, no PostgreSQL database accessed, and no product behavior executed.\n\n### Challenge 8 \u2014 Test Reproduction & Mutation Rejection\n- When executed in the provider-free runner without conftest-dependent tests, all 127 provider-free unit tests pass, and all 582 hostile relay-free mutations are rejected.\n- However, combining `tests/test_model_required_bureau_a5_1_check_in_runtime.py` into `scripts.ariadne_provider_free_pytest` fails as recorded in Finding F01.\n\n### Challenge 9 \u2014 Attempt-003 Evidence Immutability\n- Hashes for `rehearsal-failure-evidence.json` (`e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b`), `attempt-003-execution-envelope.json` (`91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75`), and `attempt-003-cleanup-recovery.json` (`048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71`) verified byte-exact (C06).\n- Occupied execution count (1), automatic retries (0), and ambiguous success released (False) preserved.\n\n### Challenge 10 \u2014 Closed Scope Preservation\n- Diff inspection (C08, C09) confirms only allowlisted runtime, plan, and continuity files changed. No OpenAPI, GraphQL, database schema, client, feature flag, or protected ref changed.\n\n### Challenge 11 \u2014 Bound Command Manifest Execution\n- Manifest commands C01, C02, C04, C05, C06, C07, C08, C09, and C10 exited with code 0.\n- Command C03 exited with code 1 due to Finding F01.\n\n---\n\n## 4. Summary Verdict\nBecause command `C03` exited with code 1 due to running `test_model_required_bureau_a5_1_check_in_runtime.py` (which requires conftest fixture loading) under `scripts.ariadne_provider_free_pytest` (which enforces `--noconftest`), the candidate does not pass the deterministic zero-exit manifest gate. The required decision is `revision_required`.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); topic=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair'; e=json.loads((topic/'repair-evidence.json').read_text(encoding='utf-8')); assert e['source_head']=='95d456a1e3861ae463cf3643f347fa666c75fa48'; assert e['repaired_harness_sha256']=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; assert e['deterministic_verification']['relay_free_hostile_mutations_rejected']==582; assert e['deterministic_verification']['real_docker_invocations']==0; p=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003'; expected={'rehearsal-failure-evidence.json':'e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b','attempt-003-execution-envelope.json':'91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75','attempt-003-cleanup-recovery.json':'048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71'}; assert all(hashlib.sha256((p/n).read_bytes()).hexdigest()==h for n,h in expected.items())"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "b55a2f4c266dbf621f4c088fa63bfec546c4ddc1adb93a28d32d51ac80b3c20f",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); topic=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair'; e=json.loads((topic/'repair-evidence.json').read_text(encoding='utf-8')); assert e['source_head']=='95d456a1e3861ae463cf3643f347fa666c75fa48'; assert e['repaired_harness_sha256']=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; assert e['deterministic_verification']['relay_free_hostile_mutations_rejected']==582; assert e['deterministic_verification']['real_docker_invocations']==0; p=root/'orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003'; expected={'rehearsal-failure-evidence.json':'e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b','attempt-003-execution-envelope.json':'91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75','attempt-003-cleanup-recovery.json':'048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71'}; assert all(hashlib.sha256((p/n).read_bytes()).hexdigest()==h for n,h in expected.items())"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "373ee17d54bc7c553c844142a6c4ba0fbf8a421a..8bda88069daeb314998341fc961b9aa061d496e5"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "run_one_fresh_gemini_37_flash_high_exact_candidate_read_only_profile_call_site_and_pre_registry_cleanup_repair_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after clockwork lease 26. It names the active provider-free profile call-site and pre-registry cleanup repair, preserves Continuity 336 / Compass 318, and keeps local/origin master plus handoff/current fixed at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "current_authority_allocation": "GPT Sol owns deterministic implementation, recovery, acceptance, continuity and task-branch Git under Yuri's standing uninterrupted-development authority. DeepSeek is declined because the native Harness remains behind its separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high owns exactly one fresh read-only veto of candidate 8bda88069daeb314998341fc961b9aa061d496e5. Native subagents are declined by developer policy and no separable positive-leverage package remains.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-cleanup-recovery.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Exact committed provider-free candidate 8bda88069daeb314998341fc961b9aa061d496e5 only. The ten-command manifest is non-generative and preflight passes. Attempt 003 and Created-state evidence remain immutable. No Docker, PostgreSQL, credential, product/API/config/client/feature-flag/Arrived/grammar/waiting-area, ordinary-practice admission, patient/clinical/protected data, production, deployment, release, Pages or protected-ref authority. Preserve docs/branding and all unrelated untracked files; explicit-path staging only.",
+    "git_refs_and_worktree": "Primary task branch HEAD is 8bda88069daeb314998341fc961b9aa061d496e5 and origin task remains b5afa75bfc759efa689d35cd06c5b330e4b7ed05. Review worktree C:/Users/sarashera/EMR4-worktrees/checkin-relay-cleanup-gemini-8bda8806 is clean on codex/review-checkin-relay-cleanup-8bda8806 at exact candidate 8bda88069daeb314998341fc961b9aa061d496e5; its ten-command manifest preflight passed with SHA-256 b55a2f4c266dbf621f4c088fa63bfec546c4ddc1adb93a28d32d51ac80b3c20f. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Primary tracked state is clean apart from the intentional uncommitted pre-dispatch packet/manifest/preflight/runtime evidence; unrelated untracked files remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair",
+    "objective": "Freeze and complete a provider-free deterministic repair that passes the captured network name at both real relay-free container-profile call sites, proves their invocation contracts, and guarantees exact captured-object cleanup for every post-create pre-registry exception, without Docker or database execution.",
+    "status": "in_progress",
+    "source_head": "95d456a1e3861ae463cf3643f347fa666c75fa48",
+    "authority_source": "Yuri's explicit standing authority to continue under Sol's recommended course through this tranche and dependency-satisfied successors, the immutable consumed attempt-003 failure/envelope/cleanup evidence, and the accepted Created-state representation and corrected profile semantics.",
+    "checkpoint": {
+      "completed_stage": "The two exact network-name predicate call-site bindings, shared ownership-checked Created-state pre-registry cleanup helper and deterministic fault-injection suite pass at full source 95d456a1e3861ae463cf3643f347fa666c75fa48. Selected verification is 163/163 with 582/582 hostile relay-free mutations rejected and zero Docker, database or provider invocation.",
+      "next_executable_stage": "prepare_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto_after_clean_review_worktree_preflight",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_deterministic_relay_free_harness_call_site_and_cleanup_repair_only",
+      "attempt_003_failure_envelope_cleanup_execution_count_and_source_are_immutable_and_never_overwritten",
+      "attempts_001_and_002_and_created_state_representation_evidence_remain_immutable",
+      "corrected_network_name_network_mode_endpoint_lifecycle_credential_and_nonce_semantics_remain_exact",
+      "only_both_profile_predicate_call_sites_and_post_create_pre_registry_cleanup_control_may_change",
+      "real_server_and_sidecar_call_site_signature_tests_and_fault_injection_cleanup_tests_required",
+      "no_docker_object_container_start_attach_stdin_credential_postgresql_sql_transaction_or_database_execution",
+      "no_retry_or_reclassification_of_attempt_003",
+      "no_local_env_live_secret_cloud_hosted_existing_product_or_disposable_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_before_separate_native_harness_boot_proof_no_claude_code_fallback_and_gemini_only_after_deterministic_exact_candidate",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native DeepSeek Harness remains outside occupied EMR4 work until its separately frozen boot proof passes; Claude Code is no fallback, and implementation is already deterministic and committed.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only containment-lifecycle veto is warranted after all deterministic gates and clean-worktree preflight passed.",
+        "work_packages": [
+          "exact_candidate_profile_call_site_and_pre_registry_cleanup_repair_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive delegation and no separable implementation or review package has positive leverage.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "deterministic candidate and immutable attempt-003 bindings before review",
+      "one exact no-fallback Gemini terminal decision",
+      "unchanged clean review worktree",
+      "Sol-only acceptance, clockwork closeout and task-branch Git"
+    ],
+    "reassessment_triggers": [
+      "Gemini terminal decision",
+      "closeout",
+      "before separately frozen attempt 004"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete updated AGENTS reread, active plan/threat/evidence/latch, exact refs, clean review worktree and verifier-manifest preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol deterministically admitted and committed the exact candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Occupied work remains paused pending the separate boot proof."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport is not selected and no fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Exact clean Gemini worktree and ten-command manifest preflight passed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane was declined and no subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-native-harness-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
