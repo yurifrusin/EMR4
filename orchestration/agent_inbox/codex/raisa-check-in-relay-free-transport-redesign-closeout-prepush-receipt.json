@@ -1,0 +1,119 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback and unknown-commit recovery rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_narrowest_relay_free_disposable_postgresql_rollback_unknown_commit_recovery_plan_without_execution",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "a00da58c630202085a33fe8e9afdb8ace4b2a028",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "f7b03f2fc8e6073b2af851f7f65e9d01239ba728",
+    "reason_codes": [],
+    "resolved_commit": "a00da58c630202085a33fe8e9afdb8ace4b2a028",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a00da58c630202085a33fe8e9afdb8ace4b2a028"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f7b03f2fc8e6073b2af851f7f65e9d01239ba728",
+    "branch_origin_aligned": false,
+    "head": "f7b03f2fc8e6073b2af851f7f65e9d01239ba728",
+    "origin_branch_commit": "1f6009943fcc2e8478511b95c85bf50388e3a634",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_push",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "Task-branch publication is a serial Git action, and occupied DeepSeek remains closed pending its separate native-Harness boot proof.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high completed the exact-candidate veto with pass and an unchanged clean worktree; no further verifier call is required for publication.",
+        "work_packages": [
+          "completed_exact_candidate_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and task-branch push is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post_push",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "push only codex/ariadne-bernie-davida-parallel-seam by explicit refspec",
+      "read back task and all four protected refs",
+      "begin successor planning only after a fresh five-source receipt"
+    ]
+  },
+  "planned_action": "push_only_the_completed_relay_free_transport_closeout_to_the_non_protected_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/closeout/clockwork-tick-evidence.json",
+      "orchestration/human_inbox/yuri/2026-08-19--check-in-relay-free-unknown-response-transport-redesign.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns only exact non-protected task-branch publication and successor rehydration. Gemini completed its single exact-candidate read-only veto with pass. DeepSeek remains declined pending the separate native-Harness boot proof, Claude Code is no fallback and native subagents remain policy-declined.",
+    "git_refs_and_worktree": "Task HEAD is exact f7b03f2fc8e6073b2af851f7f65e9d01239ba728 and origin task branch is exact 1f6009943fcc2e8478511b95c85bf50388e3a634. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean and five docs/branding files remain untracked and preserved.",
+    "live_handover_current_baton": "AGENTS.md Current Baton accepts the relay-free transport redesign at Continuity 335 / Compass 317 and advances the in-progress relay-free disposable PostgreSQL rollback/unknown-commit planning latch.",
+    "protected_evidence_boundaries": "Only a fast-forward push of codex/ariadne-bernie-davida-parallel-seam is authorized. No protected ref, Pages, deployment, release, product/API/config/client, database, provider, patient/clinical/protected data or ordinary-practice surface may move. docs/branding and all unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
