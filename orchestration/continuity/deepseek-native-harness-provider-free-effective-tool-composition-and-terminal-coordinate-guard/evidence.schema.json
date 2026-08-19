@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/orchestration/deepseek-native-harness-effective-tool-guard-evidence.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "recorded_at",
+    "planning_source",
+    "result",
+    "package_checks",
+    "source_semantic_checks",
+    "profile_check",
+    "generated_guard",
+    "scenario_matrix",
+    "zero_counts",
+    "retention",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_effective_tool_guard_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard"},
+    "recorded_at": {"type": "string", "minLength": 20},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "passed_provider_free_deterministic_guard"},
+    "package_checks": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "version", "registry_identity_passed", "member_count", "members_passed"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "version": {"const": "0.1.0-rc.7"},
+          "registry_identity_passed": {"const": true},
+          "member_count": {"type": "integer", "minimum": 1},
+          "members_passed": {"const": true}
+        }
+      }
+    },
+    "source_semantic_checks": {
+      "type": "object",
+      "minProperties": 7,
+      "maxProperties": 7,
+      "additionalProperties": {"const": true}
+    },
+    "profile_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path_sha256_passed", "selected_profile", "selected_tools"],
+      "properties": {
+        "path_sha256_passed": {"const": true},
+        "selected_profile": {"const": "emr4-bounded-worker"},
+        "selected_tools": {"const": ["edit", "glob", "read"]}
+      }
+    },
+    "generated_guard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes", "mount_count", "view_count", "restriction_count", "schema_projection_count", "forbidden_generic_present"],
+      "properties": {
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "mount_count": {"const": 1},
+        "view_count": {"const": 1},
+        "restriction_count": {"const": 1},
+        "schema_projection_count": {"const": 1},
+        "forbidden_generic_present": {"const": false}
+      }
+    },
+    "scenario_matrix": {
+      "type": "array",
+      "minItems": 9,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario", "coordinate", "detail"],
+        "properties": {
+          "scenario": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "coordinate": {"type": "string", "pattern": "^EFFECTIVE_TOOL_COMPOSITION_[A-Z_]+$"},
+          "detail": {"type": ["string", "null"], "pattern": "^[a-z_]+(?:,[a-z_]+)*$"}
+        }
+      }
+    },
+    "zero_counts": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"const": 0}
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package_source", "prompt", "reasoning", "response", "tool_payload", "exception_text", "stack", "credential", "environment_values"],
+      "properties": {
+        "package_source": {"const": false},
+        "prompt": {"const": false},
+        "reasoning": {"const": false},
+        "response": {"const": false},
+        "tool_payload": {"const": false},
+        "exception_text": {"const": false},
+        "stack": {"const": false},
+        "credential": {"const": false},
+        "environment_values": {"const": false}
+      }
+    },
+    "claim_boundary": {"const": "deterministic_guard_construction_only_not_native_boot_agent_session_model_or_provider_evidence"}
+  }
+}

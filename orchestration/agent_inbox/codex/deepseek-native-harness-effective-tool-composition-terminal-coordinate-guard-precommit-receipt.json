@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard",
+    "completed_stage": "Accepted raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_effective_tool_composition_guard_plan",
+    "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+    "resume_after_compaction": true,
+    "source_head": "d3bfde7af3ae2f07dd351aa157f9f8748b0f255a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4",
+    "reason_codes": [],
+    "resolved_commit": "d3bfde7af3ae2f07dd351aa157f9f8748b0f255a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "d3bfde7af3ae2f07dd351aa157f9f8748b0f255a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4",
+    "branch_origin_aligned": true,
+    "head": "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4",
+    "origin_branch_commit": "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 666
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness and exact rc.7 composition path are the provider-free subject under inspection. Invoking DeepSeek would cross the provider boundary the guard must precede and would repeat the unguarded failure class.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is reserved after every deterministic provider-free acceptance check passes; it receives no implementation or acceptance authority.",
+        "work_packages": [
+          "future_exact_candidate_read_only_effective_tool_composition_guard_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the exact registry-composition predicate, terminal-coordinate sanitizer and focused tests form one small serial implementation boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate_committed",
+      "pre_verifier",
+      "verifier_terminal",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact plan and effective-tool semantics before implementation",
+      "the guard must execute and fail closed before any future provider dispatch",
+      "zero DeepSeek provider calls and zero occupied native worker launches are permitted",
+      "Sol implements and deterministically verifies the single composition-and-coordinate boundary",
+      "Gemini is eligible only after an exact clean deterministic candidate",
+      "clockwork validation and publication remain separate commands"
+    ]
+  },
+  "planned_action": "commit_exact_provider_free_effective_tool_composition_guard_candidate_after_deterministic_acceptance_for_fresh_gemini_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-report.md",
+      "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+      "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+      "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority selects this dependency-satisfied provider-free guard. GPT Sol owns plan, implementation, deterministic acceptance, recovery, clockwork and Git. DeepSeek receives no work package because the native Harness is the provider-free subject under inspection and provider dispatch is forbidden. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate independent veto. Native subagents are declined by current developer policy and because registry composition, terminal-coordinate projection and their tests form one small serial boundary.",
+    "git_refs_and_worktree": "Task HEAD, local task branch and origin task branch are exact 80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree remains clean before candidate staging; 665 untracked entries include the bounded guard candidate plus all preserved unrelated files, and docs/branding remains present.",
+    "live_handover_current_baton": "AGENTS.md was read completely as the current 116035-byte, 510-line UTF-8 source with SHA-256 2b0a68bb2ba163572ff7d8980717060f2a6eda7a5998be80f1f846ca71374178. Its Current result accepts the attachment-lifetime and observability repair at full reviewed source d3bfde7af3ae2f07dd351aa157f9f8748b0f255a, and Next implementation plus the active latch select deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed and historical diary PHI remains local and ignored. Attempt 004 and the consumed native worker attempt 001 remain immutable and cannot be retried, resumed, reclassified or used to infer DeepSeek model quality. This operation is limited to a provider-free deterministic guard that assembles the exact rc.7 bounded preset, distinguishes inherited-global from scope-local tools, proves the effective tool set is exactly read/glob/edit, and emits stable sanitized pre-provider terminal coordinates. It authorises zero provider calls and no occupied worker; no Docker, process attachment, credential, PostgreSQL, SQL or database execution; no product/API/OpenAPI/GraphQL/config/client/flag/allowlist/grammar/waiting-area change; no product, patient, appointment, clinical, historical or protected data; no production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

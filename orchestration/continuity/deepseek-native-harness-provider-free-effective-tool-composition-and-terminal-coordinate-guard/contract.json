@@ -1,0 +1,134 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_effective_tool_guard_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+  "planning_source": "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4",
+  "packages": [
+    {
+      "name": "@deepseek-ai/dsh",
+      "version": "0.1.0-rc.7",
+      "registry_shasum": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+      "registry_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+      "members": [
+        {
+          "path": "package.json",
+          "bytes": 4298,
+          "sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361"
+        }
+      ]
+    },
+    {
+      "name": "@deepseek-ai/dsh-tools",
+      "version": "0.1.0-rc.7",
+      "registry_shasum": "7f136df593731078ec5a8a25a0cad12f5e61f8cf",
+      "registry_integrity": "sha512-7Kq3EEv354aNcxbS0NRfxxyJiZhCsvFV/03a3MdkYO/gG2eM9+E4xQum0N2FL5bw7JiGlgw8jdLMkcNGmavEaA==",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 33757,
+          "sha256": "695e1f49dc4929133a5bca9da0d1f96601027a2643159efff5b82fb2709aa90d"
+        },
+        {
+          "path": "lib/index.js",
+          "bytes": 150646,
+          "sha256": "47de95d14493dbd22d1a3ade14890fc99d7232db4e363f2190c9063b030dd029"
+        },
+        {
+          "path": "lib/types/index.js",
+          "bytes": 64767,
+          "sha256": "4f5094252285c11ca2fd7f3ab642023fa780d6f49ce2acc359a0c628e5d88b61"
+        }
+      ]
+    },
+    {
+      "name": "@deepseek-ai/dsh-agent-presets",
+      "version": "0.1.0-rc.7",
+      "registry_shasum": "ae24e460d8731855f9b4e01f3116bee333a59be8",
+      "registry_integrity": "sha512-T/VcMV7lrXCFmRKrtoMTAz5DAdUmku6hz95wbikRvRc0WizIwQ3R04ke9KIeDiQcxK8xkE8cx+IYqEWa9C5gPg==",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 21606,
+          "sha256": "c9fdecbd3d6047f171f0e0a6208b31fe38891685e9fdee86a46d5d7effcd7733"
+        },
+        {
+          "path": "lib/index.js",
+          "bytes": 52188,
+          "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039"
+        }
+      ]
+    },
+    {
+      "name": "@deepseek-ai/dsh-scope",
+      "version": "0.1.0-rc.7",
+      "registry_shasum": "537c04c16a829902d6f5b0139fc275c1933934e6",
+      "registry_integrity": "sha512-8gn+sANXhpv+9egbNwq49/uI3XhbmB33obo9yMyzyzruan3zFoxeH4UV54jTC2hjbu8gFNPsyNam9AAtRV8/Cg==",
+      "members": [
+        {
+          "path": "README.md",
+          "bytes": 7494,
+          "sha256": "980ea939829418bac59f397c52b0f6152001834262b7ba1e46b764dcbc3bc702"
+        },
+        {
+          "path": "lib/index.js",
+          "bytes": 12151,
+          "sha256": "2829df71d76e08941457d4dd173eac60783e55354921137c8b75e8b5c0d2ecca"
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "path": "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+    "sha256": "628ab8e6a073d06d2cd7c898bde93597f02054956bc3bc2a86af2fd1d510d8a1",
+    "selected_profile": "emr4-bounded-worker",
+    "selected_tools": [
+      "edit",
+      "glob",
+      "read"
+    ]
+  },
+  "semantic_checks": [
+    "tools_restrict_reads_restrictable_names",
+    "tools_restrict_rejects_unknown_names",
+    "tools_view_filters_inherited_layers",
+    "tools_view_preserves_own_layer_registrations",
+    "preset_mount_awaits_standing_generation",
+    "preset_mount_binds_agent_scope_to_standing_parent",
+    "scope_parent_binding_is_single_owner"
+  ],
+  "guard": {
+    "preset_id": "emr4-bounded-worker",
+    "selected_tools": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "success_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "failure_coordinates": [
+      "EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID",
+      "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+      "EFFECTIVE_TOOL_COMPOSITION_SCOPE_MISSING",
+      "EFFECTIVE_TOOL_COMPOSITION_SCOPE_LOCAL_TOOL_PRESENT",
+      "EFFECTIVE_TOOL_COMPOSITION_EXPECTED_TOOL_NOT_INHERITED",
+      "EFFECTIVE_TOOL_COMPOSITION_RESTRICTION_FAILED",
+      "EFFECTIVE_TOOL_COMPOSITION_SCHEMA_VIEW_INVALID",
+      "EFFECTIVE_TOOL_COMPOSITION_EFFECTIVE_VIEW_MISMATCH",
+      "EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED"
+    ],
+    "safe_tool_name_pattern": "^[a-z_]+$",
+    "forbidden_terminal_coordinate": "CUSTOM_RUNNER_FAILURE",
+    "restriction_call_count": 1,
+    "provider_dispatch_count": 0
+  },
+  "required_zero_counts": [
+    "node_processes",
+    "native_harness_boots",
+    "occupied_workers",
+    "agent_sessions",
+    "broker_requests",
+    "model_requests",
+    "provider_calls",
+    "network_attempts",
+    "docker_invocations",
+    "database_invocations"
+  ]
+}
