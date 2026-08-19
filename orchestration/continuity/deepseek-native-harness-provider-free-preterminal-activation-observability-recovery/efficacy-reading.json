@@ -43,6 +43,9 @@
     "native_attempt_retry_count": 0,
     "review_packet_corrections": 1,
     "verifier_transport_retries_after_correction": 2,
+    "clockwork_blocked_publication_corrections": 1,
+    "clockwork_rollback_count": 1,
+    "clockwork_correction_reason": "The first blocked-transition command manifest selected two inherited global tests that assume the live latch can only be in_progress or complete; post-publication they rejected the clockwork-supported blocked state. Clockwork rolled back byte-exactly and the corrected manifest excludes only those incompatible tests.",
     "further_automatic_verifier_retries_stopped": true,
     "conclusion": "The observability mechanism is technically promising and locally complete, but acceptance must remain closed until a corrected clean Gemini 3.7 Flash/high veto is obtained."
   },

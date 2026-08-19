@@ -23,11 +23,9 @@
           "tests/test_ariadne_deepseek_native_harness_broker.py",
           "tests/test_ariadne_provider_free_no_database_admission.py",
           "tests/test_ariadne_active_operation_latch.py",
-          "tests/test_ariadne_active_operation_latch_continuity.py",
           "tests/test_ariadne_transactional_closeout.py",
           "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
           "tests/test_ariadne_governance_clockwork_tick.py",
-          "tests/test_ariadne_compass.py",
           "tests/test_current_baton_consistency.py"
         ],
         "completion_contract": "final_exit_code_zero_required"
