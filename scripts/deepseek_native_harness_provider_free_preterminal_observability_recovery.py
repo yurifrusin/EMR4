@@ -37,6 +37,7 @@ OPERATION_ROOT = REPO_ROOT / "orchestration" / "continuity" / OPERATION_ID
 CONTRACT_PATH = OPERATION_ROOT / "contract.json"
 EVIDENCE_PATH = OPERATION_ROOT / "provider-free-preterminal-observability-recovery-evidence.json"
 REPORT_PATH = OPERATION_ROOT / "provider-free-preterminal-observability-recovery-report.md"
+TIMING_EVIDENCE_PATH = OPERATION_ROOT / "future-controller-timing-design-evidence.json"
 FAILED_OPERATION_ROOT = (
     REPO_ROOT
     / "orchestration"
@@ -243,12 +244,49 @@ def scenario_matrix() -> list[dict[str, Any]]:
     return rows
 
 
+def future_controller_envelope_source() -> bytes:
+    """Return the frozen future lifecycle skeleton; it is never executed here."""
+    return b'''started_at = None
+process = None
+launch_duration_ms = None
+try:
+    started_at = monotonic()
+    process = launch_exact_native_process()
+    observe_bounded_terminal(process)
+finally:
+    if started_at is not None:
+        launch_duration_ms = round((monotonic() - started_at) * 1000)
+    terminate_and_wait_exact_process(process)
+    remove_exact_disposable_root()
+'''
+
+
+def validate_future_controller_envelope(payload: bytes) -> dict[str, Any]:
+    source = payload.decode()
+    checks = {
+        "single_process_launch": source.count("launch_exact_native_process()") == 1,
+        "duration_initialized_unknown": "launch_duration_ms = None" in source,
+        "duration_assignment_in_finally": source.index("finally:")
+        < source.index("launch_duration_ms = round("),
+        "termination_after_duration": source.index("launch_duration_ms = round(")
+        < source.index("terminate_and_wait_exact_process(process)"),
+        "cleanup_after_termination": source.index("terminate_and_wait_exact_process(process)")
+        < source.index("remove_exact_disposable_root()"),
+    }
+    if not all(checks.values()):
+        raise RecoveryError("future_controller_envelope_invalid")
+    return {"sha256": sha256_bytes(payload), "bytes": len(payload), "checks": checks}
+
+
 def deterministic_projection() -> dict[str, Any]:
     contract = load_contract()
     return {
         "contract": contract,
         "diagnosis": diagnose_failed_attempt(contract),
         "runner": validate_corrected_runner(corrected_runner_source()),
+        "controller_envelope": validate_future_controller_envelope(
+            future_controller_envelope_source()
+        ),
         "scenario_matrix": scenario_matrix(),
     }
 
@@ -400,15 +438,29 @@ def main() -> int:
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--check", action="store_true")
     action.add_argument("--publish", action="store_true")
+    action.add_argument("--publish-timing", action="store_true")
     parser.add_argument("--cache-root", type=Path)
     args = parser.parse_args()
     try:
         if args.check:
             projection = deterministic_projection()
-            print(json.dumps({"result": "pass", "scenario_count": len(projection["scenario_matrix"]), "runner_sha256": projection["runner"]["sha256"]}))
-        else:
+            print(json.dumps({"result": "pass", "scenario_count": len(projection["scenario_matrix"]), "runner_sha256": projection["runner"]["sha256"], "controller_envelope_sha256": projection["controller_envelope"]["sha256"]}))
+        elif args.publish:
             evidence = execute_offline_probe(args.cache_root)
             print(json.dumps({"result": evidence["result"], "native_harness_process_count": 0}))
+        else:
+            if TIMING_EVIDENCE_PATH.exists():
+                raise RecoveryError("timing_evidence_already_exists")
+            projection = deterministic_projection()["controller_envelope"]
+            payload = {
+                "schema_version": "ariadne.deepseek_native_harness_future_controller_timing_design.v1",
+                "operation_id": OPERATION_ID,
+                "result": "pass",
+                "native_harness_process_count": 0,
+                "controller_envelope": projection,
+            }
+            TIMING_EVIDENCE_PATH.write_bytes(canonical_json_bytes(payload))
+            print(json.dumps({"result": "pass", "native_harness_process_count": 0, "controller_envelope_sha256": projection["sha256"]}))
     except RecoveryError as error:
         print(json.dumps({"result": "fail", "error": str(error)}))
         return 1

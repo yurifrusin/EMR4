@@ -11,9 +11,11 @@ from scripts.deepseek_native_harness_provider_free_preterminal_observability_rec
     corrected_runner_source,
     deterministic_projection,
     diagnose_failed_attempt,
+    future_controller_envelope_source,
     load_contract,
     scenario_matrix,
     validate_corrected_runner,
+    validate_future_controller_envelope,
 )
 
 
@@ -126,6 +128,18 @@ def test_deterministic_projection_starts_no_process() -> None:
     assert projection["diagnosis"]["retained_duration_reliable"] is False
     assert len(projection["scenario_matrix"]) == 10
     assert projection["runner"]["sha256"]
+    assert all(projection["controller_envelope"]["checks"].values())
+
+
+def test_future_controller_records_duration_in_finally_before_cleanup() -> None:
+    source = future_controller_envelope_source().decode()
+    projection = validate_future_controller_envelope(source.encode())
+
+    assert source.index("finally:") < source.index("launch_duration_ms = round(")
+    assert source.index("launch_duration_ms = round(") < source.index(
+        "terminate_and_wait_exact_process(process)"
+    )
+    assert all(projection["checks"].values())
 
 
 def test_plan_and_threat_delta_keep_native_and_product_surfaces_closed() -> None:
