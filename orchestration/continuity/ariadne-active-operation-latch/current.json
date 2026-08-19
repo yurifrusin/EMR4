@@ -4,10 +4,10 @@
   "active_tranche": "DeepSeek native Harness provider-free stock-headless-to-custom-runner HMR boot proof",
   "objective": "Freeze and execute the narrowest provider-free proof that the pinned native DeepSeek Harness can boot through its documented stock headless path and reach the custom runner under HMR, with exact readiness, terminal-state and cleanup evidence and no provider I/O.",
   "status": "in_progress",
-  "source_head": "86af0a015c38a0be04b9c3dc5197612f2e390d20",
+  "source_head": "f8dd18396814bb117f1c4b3d9b33d66647bebb25",
   "authority_source": "Yuri's standing uninterrupted-development authority, the accepted no-database WorkOrder/broker interlock and the historical rc.7 pre-provider HMR startup terminal.",
   "checkpoint": {
-    "completed_stage": "Frozen provider-free rc.7 HMR boot-proof contract and deterministic controller passed 37 focused Harness/broker/profile/admission tests at exact candidate 86af0a015c38a0be04b9c3dc5197612f2e390d20.",
+    "completed_stage": "Rejected one prelaunch source-predicate draft with zero native boot processes, repaired the exact documented headless marker and passed 38 focused Harness/broker/profile/admission tests at exact candidate f8dd18396814bb117f1c4b3d9b33d66647bebb25; native attempt-001 remains unconsumed.",
     "next_executable_stage": "execute_exactly_one_provider_free_native_harness_hmr_boot_proof_attempt_001_and_preserve_its_terminal",
     "retry_counters": {
       "planning": 0,
