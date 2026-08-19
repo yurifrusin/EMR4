@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76",
+  "branch": "codex/review-no-db-admission-corrected-60ce7b76",
+  "head": "60ce7b7603331d4e69d551db92eb592c7fef1ea3",
+  "expected_head": "60ce7b7603331d4e69d551db92eb592c7fef1ea3",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "6b4a6f8ed2390479915004b71f99b338590c7f9958d991855a9e1641e01c76d8",
+  "command_count": 11,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76/scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+    "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json",
+    "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76/orchestration_harness/provider_free_no_database_admission.py",
+    "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76/orchestration_harness/transactional_closeout.py",
+    "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76/scripts/ariadne_deepseek_native_harness_broker.mjs"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-corrected-60ce7b76",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
