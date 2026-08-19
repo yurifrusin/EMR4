@@ -1,0 +1,124 @@
+{
+  "schema_version": "emr4.relay-free-oci-transport-contract.v1",
+  "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+  "decision_transition_source": "44c1c8efa2357d9ebdc9ec895fd31e5758bc66d4",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "accepted_runtime_role_source": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "result": "raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_pass",
+  "evidence_label": "authored_synthetic_provider_free_no_database_relay_free_oci_result_transport",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "sha256": "03e469ad26080bdaa9c8bc62c130f90afd1712e4e85041612c05111686607dd9"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md",
+      "sha256": "60f93e73f2e452e62a2cbda436a7738ad53d3c61e0b795c8ec05943823609275"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+      "sha256": "bff78c40b52330e63bcc0775ca7d7c6939c1281d113ac96ca2b4b4a0fc8d9fbe"
+    },
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "sha256": "0f66b6cb067479c57d419d8aa6bf92e99251946e828f454f24a2bc9e490baa8e"
+    },
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-blocked-closeout.md",
+      "sha256": "85bf13e548ffd5f4497c29b96b16120488bdc8bf4bb78861aa2f229850a9c182"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-rollback-unknown-commit-recovery-sol-blocked-assessment.md",
+      "sha256": "34489e42e16defcaf47132ff04f16204dd528b7d7d454d245f281c318b432e57"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-001.json",
+      "sha256": "e357e3a2dec7f0d0740a2ea6f518cb695dc2a5cbf88b9c321dbcd61d6e7bd1c1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-002.json",
+      "sha256": "bea605006bf36996d439876a4976ec5b733ddc4bb841d5942aae1057c5f514ed"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-003.json",
+      "sha256": "15cebad64c7bfbddb83878e75cf8f3a0d137a7834075e063c92aead8b603e219"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "sha256": "94ac2239a81f06e1404fa6c3fe7a02c9e9df2c0b4cea6b633347a987171a1712"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "sha256": "d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e"
+    },
+    {
+      "path": "orchestration/api_spine_programme.md",
+      "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "sha256": "7e04a7dc823a79f579eb3251536d2bb7b536e07b1b48c19295fb891cdcfee0dd"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-governance-clockwork/transaction.json",
+      "sha256": "63494f9f0960057e4bf8b95fa0e54de8748485c975f991392c033ea79814fb30"
+    }
+  ],
+  "containment_profile": {
+    "executable": "docker.exe",
+    "image_reference": "postgres:16-bookworm",
+    "image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "image_digest": "postgres@sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "pull_policy": "never",
+    "network_mode": "none",
+    "container_name_prefix": "emr4-checkin-relay-free-",
+    "harness_label_key": "emr4.harness",
+    "harness_label_value": "check-in-relay-free-transport-v1",
+    "nonce_label_key": "emr4.owner-nonce",
+    "published_ports": false,
+    "bind_mounts": false,
+    "volumes": false,
+    "tmpfs_destination": "/run/emr4",
+    "tmpfs_options": "rw,noexec,nosuid,size=1048576",
+    "memory_bytes": 67108864,
+    "nano_cpus": 250000000,
+    "pids_limit": 32,
+    "restart_policy": "no",
+    "log_driver": "none",
+    "read_only_rootfs": true,
+    "security_opt": "no-new-privileges",
+    "cap_drop": "ALL",
+    "state_timeout_seconds": 15,
+    "wrapper_sha256": "0e64f1db722a8905f5793d4561a99abb67ac0cd321d05299355da0c20af0e5a9"
+  },
+  "outcome_profile": {
+    "credential_input": "attached_stdin_process_memory_only",
+    "outcome_source": "captured_container_oci_state",
+    "attachment_is_outcome_evidence": false,
+    "admitted_exit_code": 42,
+    "denied_exit_codes": [0, 43],
+    "admitted_classification": "simulated_connection_lost_without_complete_terminal_response",
+    "denied_classification": "unresolved_denied",
+    "complete_terminal_response": false,
+    "success_released": false,
+    "automatic_retries": 0
+  },
+  "hostile_thresholds": {
+    "contract": 256,
+    "evidence_state": 96,
+    "escapes": 0
+  },
+  "closed_boundaries": {
+    "database_process_started": false,
+    "database_connection_used": false,
+    "transaction_or_sql_used": false,
+    "ordinary_practice_enabled": false,
+    "feature_flag_or_allowlist_changed": false,
+    "ordinary_admission_released": false,
+    "product_relation_or_configuration_changed": false,
+    "api_openapi_graphql_async_or_client_changed": false,
+    "provider_or_external_network_used": false,
+    "production_runtime_deployment_release_or_pages": false,
+    "protected_evidence_or_ref_movement": false
+  }
+}

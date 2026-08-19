@@ -156,7 +156,7 @@ After static admission, run exactly one newly named fixture container:
 
 - exact cached image ID
   `sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8`;
-- `--pull never`, `--network none`, no published port, no mount or volume;
+- `--pull never`, `--network none`, no published port, bind mount or volume;
 - entrypoint overridden to the fixed wrapper; no `postgres` process starts;
 - random 32-byte token delivered only over attached stdin after exact
   configuration inspection;
@@ -175,8 +175,8 @@ without claiming a database connection, transaction, commit or readback.
 2. `RFT-S02` — contract and schemas reject caller-authored source, image ID,
    container identity, exit state, generation, lease or evidence digest;
 3. `RFT-S03` — the cached exact image is admitted without pull;
-4. `RFT-S04` — exact no-network/no-port/no-mount/no-volume/no-log containment
-   is verified before start;
+4. `RFT-S04` — exact no-network/no-port/no-bind/no-volume/no-log containment
+   plus the one allowlisted tmpfs is verified before start;
 5. `RFT-S05` — token is absent from Docker config, command and labels before
    attached-stdin delivery;
 6. `RFT-S06` — attachment delivers the bounded token but is excluded from
@@ -233,7 +233,8 @@ Pass requires:
 5. source inspection proves there is no host listener, TCP forwarder,
    Docker-exec byte bridge, multiprocessing process or queue in the new path;
 6. the one no-database fixture uses only the exact cached image and frozen
-   containment, with no pull, network, port, mount, volume or log driver;
+   containment, with no pull, network, port, bind mount, volume or log driver
+   and only the one exact tmpfs;
 7. token delivery is attached-stdin only and the token is absent from every
    admitted Docker configuration and released value;
 8. exact OCI state independently classifies only exit `42` as the fixture's

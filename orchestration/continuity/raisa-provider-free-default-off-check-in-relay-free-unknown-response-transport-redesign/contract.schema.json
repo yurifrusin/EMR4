@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/relay-free-oci-transport-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "decision_transition_source",
+    "protected_source",
+    "accepted_runtime_role_source",
+    "result",
+    "evidence_label",
+    "source_bindings",
+    "containment_profile",
+    "outcome_profile",
+    "hostile_thresholds",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.relay-free-oci-transport-contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign"},
+    "decision_transition_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "protected_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_runtime_role_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_no_database_relay_free_oci_result_transport"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1, "maxLength": 500, "pattern": "^[^\\\\*?\u0000]+$"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "containment_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable", "image_reference", "image_id", "image_digest",
+        "pull_policy", "network_mode", "container_name_prefix",
+        "harness_label_key", "harness_label_value", "nonce_label_key",
+        "published_ports", "bind_mounts", "volumes", "tmpfs_destination",
+        "tmpfs_options", "memory_bytes", "nano_cpus", "pids_limit",
+        "restart_policy", "log_driver", "read_only_rootfs", "security_opt",
+        "cap_drop", "state_timeout_seconds", "wrapper_sha256"
+      ],
+      "properties": {
+        "executable": {"const": "docker.exe"},
+        "image_reference": {"const": "postgres:16-bookworm"},
+        "image_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "image_digest": {"type": "string", "pattern": "^postgres@sha256:[0-9a-f]{64}$"},
+        "pull_policy": {"const": "never"},
+        "network_mode": {"const": "none"},
+        "container_name_prefix": {"const": "emr4-checkin-relay-free-"},
+        "harness_label_key": {"const": "emr4.harness"},
+        "harness_label_value": {"const": "check-in-relay-free-transport-v1"},
+        "nonce_label_key": {"const": "emr4.owner-nonce"},
+        "published_ports": {"const": false},
+        "bind_mounts": {"const": false},
+        "volumes": {"const": false},
+        "tmpfs_destination": {"const": "/run/emr4"},
+        "tmpfs_options": {"const": "rw,noexec,nosuid,size=1048576"},
+        "memory_bytes": {"const": 67108864},
+        "nano_cpus": {"const": 250000000},
+        "pids_limit": {"const": 32},
+        "restart_policy": {"const": "no"},
+        "log_driver": {"const": "none"},
+        "read_only_rootfs": {"const": true},
+        "security_opt": {"const": "no-new-privileges"},
+        "cap_drop": {"const": "ALL"},
+        "state_timeout_seconds": {"type": "integer", "minimum": 5, "maximum": 30},
+        "wrapper_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "outcome_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credential_input", "outcome_source", "attachment_is_outcome_evidence",
+        "admitted_exit_code", "denied_exit_codes", "admitted_classification",
+        "denied_classification", "complete_terminal_response",
+        "success_released", "automatic_retries"
+      ],
+      "properties": {
+        "credential_input": {"const": "attached_stdin_process_memory_only"},
+        "outcome_source": {"const": "captured_container_oci_state"},
+        "attachment_is_outcome_evidence": {"const": false},
+        "admitted_exit_code": {"const": 42},
+        "denied_exit_codes": {"const": [0, 43]},
+        "admitted_classification": {"const": "simulated_connection_lost_without_complete_terminal_response"},
+        "denied_classification": {"const": "unresolved_denied"},
+        "complete_terminal_response": {"const": false},
+        "success_released": {"const": false},
+        "automatic_retries": {"const": 0}
+      }
+    },
+    "hostile_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "evidence_state", "escapes"],
+      "properties": {
+        "contract": {"const": 256},
+        "evidence_state": {"const": 96},
+        "escapes": {"const": 0}
+      }
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 11,
+      "maxProperties": 11,
+      "patternProperties": {"^[a-z][a-z0-9_]+$": {"const": false}}
+    }
+  }
+}
