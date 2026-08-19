@@ -2,28 +2,18 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "read_only_native_hmr_closeout_tick_check",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_governance_clockwork_tick",
-        "--check",
-        "--intent",
-        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/closeout/closeout-intent.json"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "admitted_native_hmr_and_governance_tests",
+      "command_id": "attempt-004-preexecution-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
-        "tests/test_ariadne_deepseek_native_harness_broker.py",
-        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
         "tests/test_ariadne_provider_free_no_database_admission.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
@@ -32,34 +22,37 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_hmr_contract_check",
+      "command_id": "attempt-004-static-admission",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_hmr_boot_proof"
+        "scripts.raisa_provider_free_check_in_relay_free_recovery_attempt_004",
+        "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_hmr_closeout_ruff",
+      "command_id": "attempt-004-preexecution-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_hmr_closeout_compile",
+      "command_id": "attempt-004-preexecution-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

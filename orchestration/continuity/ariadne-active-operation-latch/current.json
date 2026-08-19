@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 004",
   "objective": "Freeze and, only after exact deterministic and preexecution admission, execute exactly one separately named provider-free disposable PostgreSQL relay-free rollback/unknown-commit recovery attempt using the accepted corrected harness, with immutable predecessor evidence, zero retry and exact cleanup.",
   "status": "in_progress",
-  "source_head": "5ff79d68f6df25d8bebdba78a6d504afb64de2ab",
+  "source_head": "00714269c97deca32019779287ebca77f46cdc50",
   "authority_source": "Yuri's standing uninterrupted-development authority, the immutable attempts 001-003, accepted call-site/pre-registry cleanup repair, accepted no-database WorkOrder/broker interlock and accepted native-Harness HMR boot proof.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_exact_relay_free_recovery_attempt_004_plan_before_any_docker_database_or_model_execution",
+    "completed_stage": "Attempt-004 plan 7bbc0eb6466811c323006ddb6bcc80a3a6fcb679, adapter/schema 2b1b0be12ff4e370f54c0ef12a8b89d26666da6e and passed preexecution receipt 7f37b2ff56bf6e729cf22823e1a9f93822ca621e are committed. All 582 hostile mutations and 137 provider-free tests pass; Ruff and compile pass. Docker 29.5.3 and the exact cached image are readable; matching containers and networks are zero. No attempt-004 Docker object, credential, PostgreSQL process, SQL or database execution occurred.",
+    "next_executable_stage": "execute_exactly_one_attempt_004_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
