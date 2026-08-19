@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 319,
-  "updated_at": "2026-08-20T00:41:43.7639055+10:00",
-  "source_graph_revision": 337,
-  "orientation_statement": "EMR4 will next enforce provider-free no-database status at manifest admission and test-fixture selection; attempt 004 remains closed.",
+  "map_revision": 320,
+  "updated_at": "2026-08-20T01:45:06.9565729+10:00",
+  "source_graph_revision": 338,
+  "orientation_statement": "EMR4 will next test only the pinned native Harness startup gear provider-free; occupied DeepSeek and attempt-004 remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4285,27 +4285,38 @@
         "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json",
         "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+      "lineage_parent": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+      "strategic_role": "Replace a recurring provider-free test-selection memory rule with a deterministic pre-execution gear shared by the clockwork and DeepSeek broker",
+      "outcome": "Provider-free manifests now fail closed on ordinary pytest and shared-PostgreSQL fixture reachability before any command can run.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json",
+        "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md",
+        "orchestration/agent_inbox/antigravity/ariadne-no-database-admission-repair-gemini37-corrected-review-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
-    "strategic_role": "Turn the provider-free no-database boundary from an orchestrator memory rule into a pre-execution interlock",
-    "why_now": "The repair itself is accepted, but the retained verifier-manifest rejection and two local fixture contacts demonstrate that argv-shape checks do not prove fixture-graph portability and the same error recurred immediately.",
-    "outcome": "The next tranche rejects ordinary pytest and shared-PostgreSQL fixture reachability before any provider-free command can run.",
+    "node_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+    "strategic_role": "Prove the pinned native Harness can reach the custom runner through its real headless HMR startup path before entrusting it with another occupied EMR4 work order",
+    "why_now": "The manifest and broker interlock is accepted, while the historical rc.7 occupied terminal still requires the exact startup mechanism to be proved provider-free before another model call.",
+    "outcome": "The next tranche takes a traceable provider-free boot reading with no model call and either accepts the startup path or preserves a bounded terminal result.",
     "unlocks": [
-      "A mechanically evidenced no-database property for future provider-free verifier manifests.",
-      "A safer separately frozen attempt-004 plan after the interlock is accepted.",
-      "A reusable clockwork gear for DeepSeek broker work orders that share the same command boundary."
+      "Evidence that the pinned Harness can start through its documented stock headless path and transition to the custom runner under HMR.",
+      "A reliable readiness, terminal-state and cleanup envelope for a later separately frozen occupied worker attempt.",
+      "A basis for deciding whether attempt-004 planning is dependency-satisfied."
     ],
     "does_not_solve": [
-      "No attempt-004 execution or retry is authorized.",
-      "No ordinary-practice command is enabled, admitted or mounted.",
-      "No product, data, occupied provider, production, deployment, release, Pages or protected integration opens."
+      "No DeepSeek model call or occupied worker execution is authorized.",
+      "No attempt-004 plan or execution is authorized by the boot proof itself.",
+      "No product, data, ordinary-practice, production, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
-      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json"
+      "docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-sol-acceptance.md",
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md"
     ]
   },
   "decision_horizon": [

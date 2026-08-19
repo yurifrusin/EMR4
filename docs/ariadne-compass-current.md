@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next enforce provider-free no-database status at manifest admission and test-fixture selection; attempt 004 remains closed.
+> EMR4 will next test only the pinned native Harness startup gear provider-free; occupied DeepSeek and attempt-004 remain closed.
 
 ## North star
 
@@ -444,26 +444,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One no-credential Created-state proof now binds exact network and nonce semantics without starting PostgreSQL or repeating attempt 002. Lineage parent: `raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign`.
 214. **Repair the exact relay-free call-site and pre-registry lifecycle defects without consuming another occupied database attempt — Check-in relay-free profile call-site and pre-registry cleanup conformance repair**
    The mechanism passes independently, while two excluded test-selection lapses expose the remaining no-database admission-control gap. Lineage parent: `raisa-provider-free-docker-created-state-profile-conformance-repair`.
+215. **Replace a recurring provider-free test-selection memory rule with a deterministic pre-execution gear shared by the clockwork and DeepSeek broker — Provider-free no-database manifest and runner admission repair**
+   Provider-free manifests now fail closed on ordinary pytest and shared-PostgreSQL fixture reachability before any command can run. Lineage parent: `raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair`.
 
 ## Current position
 
-**Turn the provider-free no-database boundary from an orchestrator memory rule into a pre-execution interlock — Check-in relay-free profile call-site and pre-registry cleanup conformance repair**
+**Prove the pinned native Harness can reach the custom runner through its real headless HMR startup path before entrusting it with another occupied EMR4 work order — Provider-free no-database manifest and runner admission repair**
 
-**Why this proof came next:** The repair itself is accepted, but the retained verifier-manifest rejection and two local fixture contacts demonstrate that argv-shape checks do not prove fixture-graph portability and the same error recurred immediately.
+**Why this proof came next:** The manifest and broker interlock is accepted, while the historical rc.7 occupied terminal still requires the exact startup mechanism to be proved provider-free before another model call.
 
-The next tranche rejects ordinary pytest and shared-PostgreSQL fixture reachability before any provider-free command can run.
+The next tranche takes a traceable provider-free boot reading with no model call and either accepts the startup path or preserves a bounded terminal result.
 
 ### What this unlocks
 
-- A mechanically evidenced no-database property for future provider-free verifier manifests.
-- A safer separately frozen attempt-004 plan after the interlock is accepted.
-- A reusable clockwork gear for DeepSeek broker work orders that share the same command boundary.
+- Evidence that the pinned Harness can start through its documented stock headless path and transition to the custom runner under HMR.
+- A reliable readiness, terminal-state and cleanup envelope for a later separately frozen occupied worker attempt.
+- A basis for deciding whether attempt-004 planning is dependency-satisfied.
 
 ### What it does not solve
 
-- No attempt-004 execution or retry is authorized.
-- No ordinary-practice command is enabled, admitted or mounted.
-- No product, data, occupied provider, production, deployment, release, Pages or protected integration opens.
+- No DeepSeek model call or occupied worker execution is authorized.
+- No attempt-004 plan or execution is authorized by the boot proof itself.
+- No product, data, ordinary-practice, production, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1070,6 +1072,7 @@ Prerequisites:
 - `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
+- `docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-closeout.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md`
@@ -1305,7 +1308,6 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
-- `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -1748,6 +1750,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-no-database-admission-repair-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-receipt.json`
@@ -1857,6 +1860,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-diagnosis-exact-manifest-validation-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-transport-repair-validation-v2-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
+- `orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-corrected-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-post-native-harness-successor-resolution-preplanning-runtime-state.json`
@@ -2004,7 +2008,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2493,6 +2496,8 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
+- `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`
+- `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/architecture-report.md`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.schema.json`
@@ -3512,4 +3517,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 319; continuity graph revision 337._
+_Compass map revision 320; continuity graph revision 338._

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 337,
+  "graph_revision": 338,
   "harvests": [],
   "nodes": [
     {
@@ -24015,9 +24015,124 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+      "title": "Provider-free no-database manifest and runner admission repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri granted standing uninterrupted-development authority through this repair and dependency-satisfied successors.",
+          "The accepted interlock opens only a separate provider-free native-Harness stock-headless-to-custom-runner HMR boot proof.",
+          "No model call, credential, product data, attempt-004, ordinary practice, production, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-static-no-database-admission",
+          "source": "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one pure fail-closed static reading that denies ordinary pytest and unresolved or shared-conftest fixture reachability before subprocess creation."
+        },
+        {
+          "id": "accept-work-order-v2-broker-binding",
+          "source": "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json",
+          "status": "accepted",
+          "summary": "Accept exact command-manifest and no-database-admission artifact bindings at the WorkOrder and broker-ready boundary."
+        },
+        {
+          "id": "retain-first-portability-rejection",
+          "source": "orchestration/agent_inbox/antigravity/ariadne-no-database-admission-repair-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Retain the first revision-required receipt as evidence that absolute synthetic operands made evidence worktree-dependent."
+        },
+        {
+          "id": "accept-corrected-independent-veto",
+          "source": "orchestration/agent_inbox/antigravity/ariadne-no-database-admission-repair-gemini37-corrected-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh Gemini 3.7 Flash/high pass over the repository-relative exact corrected candidate."
+        }
+      ],
+      "claim_scope": [
+        "Provider-free manifest preflight and runner launch derive and compare the same canonical static no-database admission artifact.",
+        "Ordinary pytest, shared conftest reachability, unknown or ambiguous fixtures, unsupported dynamic grammar and unsafe selections deny before subprocess creation.",
+        "DeepSeek WorkOrder v2 binds the exact command manifest and admission artifacts and the broker validates both bodies before readiness or simulated upstream I/O.",
+        "The focused 48-test suite, wider 527-function admitted clockwork selection and 128 hostile mutations pass without prohibited deterministic invocation.",
+        "The corrected evidence is location-neutral across the main and isolated verifier worktrees."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-plan.md",
+          "docs/security/ariadne-provider-free-no-database-manifest-runner-admission-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json",
+          "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-no-database-manifest-runner-admission-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-no-database-admission-repair-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-no-database-admission-repair-gemini37-corrected-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/provider_free_no_database_admission.py",
+          "orchestration_harness/transactional_closeout.py",
+          "scripts/ariadne_provider_free_pytest.py",
+          "scripts/ariadne_validation_runner.py",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs",
+          "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+          "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.schema.json",
+          "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-gemini37-corrected-command-manifest.json",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-gemini37-corrected-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-gemini37-corrected-review-worktree-preflight.json",
+          "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The pinned native Harness still requires a separately frozen provider-free stock-headless-to-custom-runner HMR boot proof.",
+        "Attempt-004 requires that boot proof and a separately frozen one-run plan before any execution authority can open.",
+        "No DeepSeek model call, credential, ordinary-practice activation, product change, live data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T01:45:06.9565729+10:00",
+      "updated_at": "2026-08-20T01:45:06.9565729+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "958ae762e7c6a065b5926f47eb1a2b63115212c7",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T00:41:43.7639055+10:00"
+  "updated_at": "2026-08-20T01:45:06.9565729+10:00"
 }

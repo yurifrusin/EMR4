@@ -4,7 +4,7 @@ Date: 2026-08-20
 
 Timestamp: 2026-08-20T01:45:06.9565729+10:00 (Australia/Brisbane)
 
-Status: **accepted**
+Status: **accepted at Continuity 338 / Compass 320**
 
 ## Outcome
 
@@ -28,6 +28,8 @@ remain test-only behind an explicit compatibility switch.
 - First reviewed candidate: `91ee5ee06b7f1fb698b0240208295b226c4b87ff`
 - Corrected independently reviewed candidate:
   `60ce7b7603331d4e69d551db92eb592c7fef1ea3`
+- Clockwork-accepted closeout source:
+  `958ae762e7c6a065b5926f47eb1a2b63115212c7`
 - Command-manifest SHA-256:
   `sha256:5a2c760132aad87d3c05b46ac2aeb65e2bd5e4d8dd6ca9fcbbaf7d685e872b99`
 - Aggregate admission SHA-256:
@@ -110,3 +112,11 @@ Harness can boot through its documented stock headless path and reach the
 custom runner under HMR with traceable readiness, terminal state and cleanup.
 It authorises no DeepSeek model call, credentials, product data, attempt-004,
 development edit, production or protected-ref movement.
+
+Clockwork published generation
+`gen-aae82ddacd795d56e443e6d5b4c3ebdda690f1210628c77c508ff44b340dbaa4`
+at lease sequence 28 with zero canonical drift, zero caller-authored derived
+fields and zero bespoke updater executions. The post-publication admitted
+suite and deterministic evidence check passed. The non-PHI continuing
+Pushover notification succeeded with request
+`dbce6052-ee2a-4656-9a04-daa541096a9f`.

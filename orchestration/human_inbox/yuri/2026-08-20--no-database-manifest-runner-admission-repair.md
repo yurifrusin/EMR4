@@ -47,3 +47,11 @@ narrow provider-free boot proof: start the pinned Harness through its documented
 stock headless path, prove it reaches the custom runner under HMR, capture its
 readiness/terminal/cleanup trace, and make no model call. Yuri's attention is
 not required; standing authority covers this dependency-satisfied successor.
+
+## Closeout publication
+
+Clockwork accepted source `958ae762e7c6a065b5926f47eb1a2b63115212c7`
+at Continuity 338 / Compass 320 and lease sequence 28, with zero canonical
+drift or bespoke updater execution. The post-publication admitted suite passed.
+The usual non-PHI continuing notification succeeded with request
+`dbce6052-ee2a-4656-9a04-daa541096a9f`.
