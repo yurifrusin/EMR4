@@ -323,6 +323,7 @@ def test_failed_server_acquisition_cleans_exact_owned_id_before_raising(
 ) -> None:
     container_id = "c" * 64
     calls: list[tuple[str, ...]] = []
+    removed = False
 
     def fake_docker(
         executable: str,
@@ -330,18 +331,26 @@ def test_failed_server_acquisition_cleans_exact_owned_id_before_raising(
         check: bool = True,
         timeout: int = 30,
     ) -> object:
+        nonlocal removed
         del executable, check, timeout
         calls.append(arguments)
         if arguments[0] == "create":
             return type("Result", (), {"stdout": container_id, "returncode": 0})()
         if arguments[:2] == ("container", "inspect"):
-            return type("Result", (), {"stdout": "", "returncode": 1})()
+            if removed:
+                return type("Result", (), {"stdout": "", "returncode": 1})()
+            return type(
+                "Result", (), {"stdout": json.dumps([row]), "returncode": 0}
+            )()
+        if arguments[:2] == ("rm", "--force"):
+            removed = True
         return type("Result", (), {"stdout": "", "returncode": 0})()
 
     row = {
         "Id": container_id,
         "Name": "/emr4-checkin-rfr-pg16-0123456789abcdef",
         "Image": contract["containment_profile"]["image_id"],
+        "State": {"Status": "created", "Running": False},
         "Config": {
             "Image": contract["containment_profile"]["image_reference"],
             "Labels": {

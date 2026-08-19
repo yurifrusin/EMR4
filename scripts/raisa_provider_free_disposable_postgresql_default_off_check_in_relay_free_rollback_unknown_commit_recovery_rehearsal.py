@@ -1236,6 +1236,62 @@ def _basic_container_owned(
     )
 
 
+def _cleanup_pre_registry_created_container(
+    executable: str,
+    contract: dict[str, Any],
+    *,
+    container_name: str,
+    candidate_id: str,
+    nonce: str,
+) -> bool:
+    """Remove only this harness's exact never-started container."""
+    candidate_is_full = bool(
+        isinstance(candidate_id, str) and CONTAINER_ID.fullmatch(candidate_id)
+    )
+    inspect_target = candidate_id if candidate_is_full else container_name
+    try:
+        rows = _docker_json(executable, "container", "inspect", inspect_target)
+        if len(rows) != 1:
+            return False
+        row = rows[0]
+        resolved_id = row.get("Id")
+        if (
+            not isinstance(resolved_id, str)
+            or CONTAINER_ID.fullmatch(resolved_id) is None
+        ):
+            return False
+        if candidate_is_full and resolved_id != candidate_id:
+            return False
+        if not _basic_container_owned(
+            row,
+            container_id=resolved_id,
+            container_name=container_name,
+            nonce=nonce,
+            contract=contract,
+        ):
+            return False
+        state = row.get("State")
+        if not isinstance(state, dict):
+            return False
+        if state.get("Status") != "created" or state.get("Running") is not False:
+            return False
+        removed = _docker(executable, "rm", "--force", resolved_id, check=False)
+        if removed.returncode != 0:
+            return False
+        return (
+            _docker(
+                executable,
+                "container",
+                "inspect",
+                resolved_id,
+                check=False,
+            ).returncode
+            != 0
+        )
+    except Exception:
+        return False
+
+
 def _container_profile_predicates(
     row: dict[str, Any],
     *,
@@ -1431,7 +1487,6 @@ def _create_server(
     forbidden_values: tuple[str, ...],
 ) -> tuple[str, str]:
     profile = contract["containment_profile"]
-    del network_name
     name = profile["server_name_prefix"] + secrets.token_hex(8)
     completed = _docker(
         executable,
@@ -1469,44 +1524,48 @@ def _create_server(
         "-c",
         _server_wrapper(contract),
     )
-    container_id = completed.stdout.strip()
-    if CONTAINER_ID.fullmatch(container_id) is None:
-        _fail("environment", "server_id_invalid")
-    row = _inspect_container(executable, container_id)
-    predicates = _container_profile_predicates(
-        row,
-        container_id=container_id,
-        container_name=name,
-        network_id=network_id,
-        nonce=nonce,
-        contract=contract,
-        kind="server",
-        forbidden_values=forbidden_values,
-    )
-    if not all(predicates.values()):
-        failed = ",".join(sorted(key for key, passed in predicates.items() if not passed))
-        cleaned = False
-        if _basic_container_owned(
+    container_id = ""
+    try:
+        container_id = completed.stdout.strip()
+        if CONTAINER_ID.fullmatch(container_id) is None:
+            _fail("environment", "server_id_invalid")
+        row = _inspect_container(executable, container_id)
+        predicates = _container_profile_predicates(
             row,
             container_id=container_id,
             container_name=name,
+            network_name=network_name,
+            network_id=network_id,
             nonce=nonce,
             contract=contract,
-        ):
-            _docker(executable, "rm", "--force", container_id, check=False)
-            cleaned = (
-                _docker(
-                    executable, "container", "inspect", container_id, check=False
-                ).returncode
-                != 0
-            )
-        _fail(
-            "environment",
-            "server_profile_mismatch_cleaned"
-            if cleaned
-            else "server_profile_mismatch_cleanup_unverified",
-            failed,
+            kind="server",
+            forbidden_values=forbidden_values,
         )
+        if not all(predicates.values()):
+            failed = ",".join(
+                sorted(key for key, passed in predicates.items() if not passed)
+            )
+            _fail("environment", "server_profile_mismatch_cleaned", failed)
+    except RehearsalFailure:
+        if not _cleanup_pre_registry_created_container(
+            executable,
+            contract,
+            container_name=name,
+            candidate_id=container_id,
+            nonce=nonce,
+        ):
+            _fail("cleanup", "server_pre_registry_cleanup_unverified")
+        raise
+    except Exception:
+        if not _cleanup_pre_registry_created_container(
+            executable,
+            contract,
+            container_name=name,
+            candidate_id=container_id,
+            nonce=nonce,
+        ):
+            _fail("cleanup", "server_pre_registry_cleanup_unverified")
+        _fail("environment", "server_pre_registry_controller_failure_cleaned")
     return container_id, name
 
 
@@ -1523,7 +1582,6 @@ def _create_sidecar(
     forbidden_values: tuple[str, ...],
 ) -> tuple[str, str]:
     profile = contract["containment_profile"]
-    del network_name
     if action not in contract["action_classes"]:
         _fail("sidecar", "action_not_allowlisted")
     name = profile["sidecar_name_prefix"] + secrets.token_hex(8)
@@ -1568,44 +1626,48 @@ def _create_sidecar(
         "sh",
         *arguments,
     )
-    container_id = completed.stdout.strip()
-    if CONTAINER_ID.fullmatch(container_id) is None:
-        _fail("sidecar", "container_id_invalid")
-    row = _inspect_container(executable, container_id)
-    predicates = _container_profile_predicates(
-        row,
-        container_id=container_id,
-        container_name=name,
-        network_id=network_id,
-        nonce=nonce,
-        contract=contract,
-        kind=action,
-        forbidden_values=forbidden_values,
-    )
-    if not all(predicates.values()):
-        failed = ",".join(sorted(key for key, passed in predicates.items() if not passed))
-        cleaned = False
-        if _basic_container_owned(
+    container_id = ""
+    try:
+        container_id = completed.stdout.strip()
+        if CONTAINER_ID.fullmatch(container_id) is None:
+            _fail("sidecar", "container_id_invalid")
+        row = _inspect_container(executable, container_id)
+        predicates = _container_profile_predicates(
             row,
             container_id=container_id,
             container_name=name,
+            network_name=network_name,
+            network_id=network_id,
             nonce=nonce,
             contract=contract,
-        ):
-            _docker(executable, "rm", "--force", container_id, check=False)
-            cleaned = (
-                _docker(
-                    executable, "container", "inspect", container_id, check=False
-                ).returncode
-                != 0
-            )
-        _fail(
-            "sidecar",
-            "container_profile_mismatch_cleaned"
-            if cleaned
-            else "container_profile_mismatch_cleanup_unverified",
-            failed,
+            kind=action,
+            forbidden_values=forbidden_values,
         )
+        if not all(predicates.values()):
+            failed = ",".join(
+                sorted(key for key, passed in predicates.items() if not passed)
+            )
+            _fail("sidecar", "container_profile_mismatch_cleaned", failed)
+    except RehearsalFailure:
+        if not _cleanup_pre_registry_created_container(
+            executable,
+            contract,
+            container_name=name,
+            candidate_id=container_id,
+            nonce=nonce,
+        ):
+            _fail("cleanup", "sidecar_pre_registry_cleanup_unverified")
+        raise
+    except Exception:
+        if not _cleanup_pre_registry_created_container(
+            executable,
+            contract,
+            container_name=name,
+            candidate_id=container_id,
+            nonce=nonce,
+        ):
+            _fail("cleanup", "sidecar_pre_registry_cleanup_unverified")
+        _fail("sidecar", "sidecar_pre_registry_controller_failure_cleaned")
     return container_id, name
 
 
