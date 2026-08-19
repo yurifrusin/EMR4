@@ -1,32 +1,63 @@
 {
   "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
   "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
-  "completed_stage": "The provider-free two-call-site and pre-registry cleanup conformance repair plan, threat-model delta, four plan-boundary tests and fresh five-source preplanning receipt are frozen at exact full Git source 373ee17d54bc7c553c844142a6c4ba0fbf8a421a. No Docker object, credential, process, PostgreSQL, SQL or database execution occurred.",
-  "next_executable_stage": "implement_the_two_exact_network_name_call_site_bindings_shared_pre_registry_cleanup_helper_and_deterministic_fault_injection_tests_without_docker_execution",
+  "completed_stage": "The two exact network-name predicate call-site bindings, shared ownership-checked Created-state pre-registry cleanup helper and deterministic fault-injection suite pass at full source 95d456a1e3861ae463cf3643f347fa666c75fa48. Selected verification is 163/163 with 582/582 hostile relay-free mutations rejected and zero Docker, database or provider invocation.",
+  "next_executable_stage": "prepare_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto_after_clean_review_worktree_preflight",
   "command_manifest": {
     "schema_version": "ariadne.governance_command_manifest.v1",
     "commands": [
       {
-        "command_id": "profile-call-site-cleanup-plan-checkpoint-tests",
+        "command_id": "profile-call-site-cleanup-implementation-tests",
         "executable": ".venv/Scripts/python.exe",
         "arguments": [
           "-m",
           "pytest",
           "-q",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
           "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "profile-call-site-cleanup-governance-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
           "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
           "tests/test_current_baton_consistency.py"
         ],
         "completion_contract": "final_exit_code_zero_required"
       },
       {
-        "command_id": "profile-call-site-cleanup-plan-checkpoint-ruff",
+        "command_id": "profile-call-site-cleanup-implementation-ruff",
         "executable": ".venv/Scripts/python.exe",
         "arguments": [
           "-m",
           "ruff",
           "check",
-          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py"
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "profile-call-site-cleanup-implementation-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py"
         ],
         "completion_contract": "final_exit_code_zero_required"
       }

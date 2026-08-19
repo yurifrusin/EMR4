@@ -1,0 +1,54 @@
+{
+  "schema_version": "emr4.check-in-relay-free-profile-call-site-pre-registry-cleanup-repair-evidence.v1",
+  "result": "raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_pass",
+  "source_head": "95d456a1e3861ae463cf3643f347fa666c75fa48",
+  "plan_source": "373ee17d54bc7c553c844142a6c4ba0fbf8a421a",
+  "attempt_003_execution_source": "19e4414fec067fcbb6af12818e432953432878be",
+  "repaired_harness_sha256": "eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b",
+  "pre_repair_harness_sha256": "6965328b6dce6ecf939e86456bfcd99f1bdee7d32202e276f37454796e012b6b",
+  "controls": {
+    "server_network_name_bound": true,
+    "sidecar_network_name_bound": true,
+    "shared_pre_registry_cleanup_helper": true,
+    "full_resolved_id_required": true,
+    "candidate_id_relation_required_when_full": true,
+    "exact_name_image_label_nonce_required": true,
+    "created_state_required": true,
+    "running_false_required": true,
+    "resolved_full_id_only_removal": true,
+    "post_removal_absence_required": true,
+    "unknown_server_controller_failure_closed": true,
+    "unknown_sidecar_controller_failure_closed": true,
+    "cleanup_uncertainty_dominates": true
+  },
+  "deterministic_verification": {
+    "selected_tests_passed": 163,
+    "relay_free_hostile_mutations_attempted": 582,
+    "relay_free_hostile_mutations_rejected": 582,
+    "ruff_passed": true,
+    "python_compilation_passed": true,
+    "diff_check_passed": true,
+    "real_docker_invocations": 0,
+    "database_invocations": 0,
+    "provider_invocations": 0
+  },
+  "immutable_attempt_003": {
+    "failure_sha256": "e8bf62e86fd3dbcfbcd7a0d68628e0d736b06617f4ef1a023a9a8928344fe96b",
+    "envelope_sha256": "91e12b3268283fc3be48df583f7a0650a5a30bdaee40b1f74297d8185af91c75",
+    "cleanup_recovery_sha256": "048cd946166fabb8b2ce3400e31c85ee2fe410e6a3c07d5d26cbc79141250b71",
+    "occupied_execution_count": 1,
+    "automatic_retry_count": 0,
+    "ambiguous_success_released": false
+  },
+  "parallelism": {
+    "deepseek": "declined_pending_native_harness_boot_proof_and_no_separable_work_package",
+    "gemini": "reserved_for_one_fresh_exact_candidate_read_only_veto",
+    "native_subagents": "declined_by_developer_policy_and_no_positive_leverage_package"
+  },
+  "authority": {
+    "docker_or_database_execution_authorized": false,
+    "ordinary_practice_enablement_authorized": false,
+    "product_change_authorized": false,
+    "protected_ref_movement_authorized": false
+  }
+}

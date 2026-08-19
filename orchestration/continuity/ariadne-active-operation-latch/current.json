@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair",
   "objective": "Freeze and complete a provider-free deterministic repair that passes the captured network name at both real relay-free container-profile call sites, proves their invocation contracts, and guarantees exact captured-object cleanup for every post-create pre-registry exception, without Docker or database execution.",
   "status": "in_progress",
-  "source_head": "373ee17d54bc7c553c844142a6c4ba0fbf8a421a",
+  "source_head": "95d456a1e3861ae463cf3643f347fa666c75fa48",
   "authority_source": "Yuri's explicit standing authority to continue under Sol's recommended course through this tranche and dependency-satisfied successors, the immutable consumed attempt-003 failure/envelope/cleanup evidence, and the accepted Created-state representation and corrected profile semantics.",
   "checkpoint": {
-    "completed_stage": "The provider-free two-call-site and pre-registry cleanup conformance repair plan, threat-model delta, four plan-boundary tests and fresh five-source preplanning receipt are frozen at exact full Git source 373ee17d54bc7c553c844142a6c4ba0fbf8a421a. No Docker object, credential, process, PostgreSQL, SQL or database execution occurred.",
-    "next_executable_stage": "implement_the_two_exact_network_name_call_site_bindings_shared_pre_registry_cleanup_helper_and_deterministic_fault_injection_tests_without_docker_execution",
+    "completed_stage": "The two exact network-name predicate call-site bindings, shared ownership-checked Created-state pre-registry cleanup helper and deterministic fault-injection suite pass at full source 95d456a1e3861ae463cf3643f347fa666c75fa48. Selected verification is 163/163 with 582/582 hostile relay-free mutations rejected and zero Docker, database or provider invocation.",
+    "next_executable_stage": "prepare_one_fresh_gemini_37_flash_high_exact_candidate_read_only_veto_after_clean_review_worktree_preflight",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
