@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schema/check-in-role-tenant-attestation-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_head", "accepted_environment_architecture_source", "result", "evidence_label", "source_bindings", "containment_profile", "manifest_profile", "role_contract", "probe_contract", "scenarios", "cleanup", "closed_boundaries", "claim_boundary", "successor"],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-runtime-role-tenant-isolation-attestation-contract.v1"},
+    "source_head": {"$ref": "#/$defs/gitObject"},
+    "accepted_environment_architecture_source": {"$ref": "#/$defs/gitObject"},
+    "result": {"const": "raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_pass"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_role_tenant_attestation"},
+    "source_bindings": {"type": "array", "minItems": 11, "maxItems": 11, "items": {"$ref": "#/$defs/sourceBinding"}},
+    "containment_profile": {"type": "object", "additionalProperties": false, "required": ["executable", "image_reference", "pull_policy", "network_internal", "network_name_prefix", "container_name_prefix", "harness_label", "published_ports", "relay_host_ip", "relay_dynamic_host_port", "relay_container_executable", "relay_container_command", "postgres_container_port", "sqlalchemy_driver", "data_destination", "tmpfs_options", "memory_bytes", "nano_cpus", "pids_limit", "restart_policy", "postgres_user", "postgres_database", "pgdata", "admin_password_source", "runtime_password_source", "startup_timeout_seconds", "command_timeout_seconds", "total_timeout_seconds", "readiness_observations"], "properties": {
+      "executable": {"const": "docker.exe"}, "image_reference": {"const": "postgres:16-bookworm"}, "pull_policy": {"const": "never"}, "network_internal": {"const": true}, "network_name_prefix": {"type": "string", "minLength": 8}, "container_name_prefix": {"type": "string", "minLength": 8}, "harness_label": {"type": "string", "minLength": 8}, "published_ports": {"const": false}, "relay_host_ip": {"const": "127.0.0.1"}, "relay_dynamic_host_port": {"const": true}, "relay_container_executable": {"const": "bash"}, "relay_container_command": {"type": "string", "minLength": 16}, "postgres_container_port": {"const": 5432}, "sqlalchemy_driver": {"const": "psycopg2"}, "data_destination": {"const": "/var/lib/postgresql/data"}, "tmpfs_options": {"const": "rw,noexec,nosuid,size=268435456"}, "memory_bytes": {"const": 536870912}, "nano_cpus": {"const": 1000000000}, "pids_limit": {"const": 128}, "restart_policy": {"const": "no"}, "postgres_user": {"const": "emr4_checkin_attest_admin"}, "postgres_database": {"const": "check_in_role_attestation"}, "pgdata": {"const": "/var/lib/postgresql/data/pgdata"}, "admin_password_source": {"const": "process_memory_random_32_bytes"}, "runtime_password_source": {"const": "process_memory_random_32_bytes"}, "startup_timeout_seconds": {"const": 90}, "command_timeout_seconds": {"const": 30}, "total_timeout_seconds": {"const": 300}, "readiness_observations": {"const": 3}
+    }},
+    "manifest_profile": {"type": "object", "additionalProperties": false, "required": ["schema_version", "environment_class", "environment_identifier", "practice_scope_reference", "admission_snapshot_generation", "authority_git_object", "logical_role_id", "rotation_records_are_shape_only", "ordinary_admission_release_allowed"], "properties": {
+      "schema_version": {"const": "emr4.check-in-ordinary-environment-manifest.v1"}, "environment_class": {"const": "test"}, "environment_identifier": {"const": "env:authored-synthetic-check-in-role-attestation"}, "practice_scope_reference": {"const": "practice-ref:authored-synthetic/check-in-tenant-a"}, "admission_snapshot_generation": {"const": 1}, "authority_git_object": {"$ref": "#/$defs/gitObject"}, "logical_role_id": {"const": "appointment_check_in_ordinary_runtime_v1"}, "rotation_records_are_shape_only": {"const": true}, "ordinary_admission_release_allowed": {"const": false}
+    }},
+    "role_contract": {"type": "object", "additionalProperties": false, "required": ["physical_role_prefix", "login", "superuser", "create_database", "create_role", "inherit", "replication", "bypass_rls", "memberships", "owned_databases", "owned_schemas", "owned_relations", "owned_functions", "policy_role_bindings", "product_relation_privileges", "admin_set_role_allowed"], "properties": {
+      "physical_role_prefix": {"const": "emr4_checkin_ord_"}, "login": {"const": true}, "superuser": {"const": false}, "create_database": {"const": false}, "create_role": {"const": false}, "inherit": {"const": false}, "replication": {"const": false}, "bypass_rls": {"const": false}, "memberships": {"const": 0}, "owned_databases": {"const": 0}, "owned_schemas": {"const": 0}, "owned_relations": {"const": 0}, "owned_functions": {"const": 0}, "policy_role_bindings": {"const": 0}, "product_relation_privileges": {"const": 0}, "admin_set_role_allowed": {"const": false}
+    }},
+    "probe_contract": {"type": "object", "additionalProperties": false, "required": ["schema", "table", "owner", "rls_enabled", "rls_forced", "tenant_setting", "tenant_setting_transaction_local", "policy", "grants", "same_tenant_success_required", "cross_tenant_insert_sqlstate", "admin_set_role_sqlstate"], "properties": {
+      "schema": {"const": "check_in_role_probe"}, "table": {"const": "tenant_probe"}, "owner": {"const": "emr4_checkin_attest_admin"}, "rls_enabled": {"const": true}, "rls_forced": {"const": true}, "tenant_setting": {"const": "app.current_practice_id"}, "tenant_setting_transaction_local": {"const": true}, "policy": {"const": "check_in_role_probe_tenant"}, "grants": {"const": ["SELECT", "INSERT", "UPDATE", "DELETE"]}, "same_tenant_success_required": {"const": true}, "cross_tenant_insert_sqlstate": {"const": "42501"}, "admin_set_role_sqlstate": {"const": "42501"}
+    }},
+    "scenarios": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"$ref": "#/$defs/scenario"}},
+    "cleanup": {"type": "object", "additionalProperties": false, "required": ["role_absent_before_teardown_required", "container_target", "network_target", "post_remove_exact_id_absence_required"], "properties": {"role_absent_before_teardown_required": {"const": true}, "container_target": {"const": "captured_container_id_only"}, "network_target": {"const": "captured_network_id_only_after_empty_reverification"}, "post_remove_exact_id_absence_required": {"const": true}}},
+    "closed_boundaries": {"type": "object", "minProperties": 11, "additionalProperties": {"const": false}},
+    "claim_boundary": {"type": "string", "minLength": 80},
+    "successor": {"type": "object", "additionalProperties": false, "required": ["operation_id", "authorized_now"], "properties": {"operation_id": {"const": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal"}, "authorized_now": {"const": false}}}
+  },
+  "$defs": {
+    "gitObject": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sourceBinding": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 3}, "sha256": {"$ref": "#/$defs/sha256"}}},
+    "scenario": {"type": "object", "additionalProperties": false, "required": ["id", "kind", "expected"], "properties": {"id": {"pattern": "^RTA-S(0[1-9]|1[0-2])$"}, "kind": {"type": "string", "minLength": 3}, "expected": {"type": "string", "minLength": 3}}}
+  }
+}

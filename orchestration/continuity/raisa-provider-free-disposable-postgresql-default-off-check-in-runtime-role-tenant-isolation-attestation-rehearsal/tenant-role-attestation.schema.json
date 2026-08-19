@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schema/check-in-tenant-role-attestation-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evidence_reference", "evidence_label", "authority_git_object", "environment_identifier", "practice_scope_reference", "admission_snapshot_generation", "manifest_sha256", "logical_role_id", "physical_role_identifier", "role_catalogue", "probe_catalogue", "scenarios", "role_absent_before_teardown", "ordinary_admission_release_count", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-tenant-role-attestation.v1"},
+    "evidence_reference": {"const": "evidence-ref:authored-synthetic/check-in-role-tenant-attestation"},
+    "evidence_label": {"const": "authored_synthetic_provider_free_disposable_postgresql_role_tenant_attestation"},
+    "authority_git_object": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "environment_identifier": {"const": "env:authored-synthetic-check-in-role-attestation"},
+    "practice_scope_reference": {"const": "practice-ref:authored-synthetic/check-in-tenant-a"},
+    "admission_snapshot_generation": {"const": 1},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "logical_role_id": {"const": "appointment_check_in_ordinary_runtime_v1"},
+    "physical_role_identifier": {"type": "string", "pattern": "^emr4_checkin_ord_[0-9a-f]{16}$"},
+    "role_catalogue": {"type": "object", "additionalProperties": false, "required": ["login", "superuser", "create_database", "create_role", "inherit", "replication", "bypass_rls", "memberships", "owned_databases", "owned_schemas", "owned_relations", "owned_functions", "policy_role_bindings", "product_relation_privileges", "probe_grants"], "properties": {"login": {"const": true}, "superuser": {"const": false}, "create_database": {"const": false}, "create_role": {"const": false}, "inherit": {"const": false}, "replication": {"const": false}, "bypass_rls": {"const": false}, "memberships": {"const": 0}, "owned_databases": {"const": 0}, "owned_schemas": {"const": 0}, "owned_relations": {"const": 0}, "owned_functions": {"const": 0}, "policy_role_bindings": {"const": 0}, "product_relation_privileges": {"const": 0}, "probe_grants": {"const": ["DELETE", "INSERT", "SELECT", "UPDATE"]}}},
+    "probe_catalogue": {"type": "object", "additionalProperties": false, "required": ["admin_owned", "rls_enabled", "rls_forced", "policy_count", "policy_expression_sha256", "policy_with_check_matches"], "properties": {"admin_owned": {"const": true}, "rls_enabled": {"const": true}, "rls_forced": {"const": true}, "policy_count": {"const": 1}, "policy_expression_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "policy_with_check_matches": {"const": true}}},
+    "scenarios": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "object", "additionalProperties": false, "required": ["id", "status", "observed"], "properties": {"id": {"pattern": "^RTA-S(0[1-9]|1[0-2])$"}, "status": {"const": "passed"}, "observed": {"type": ["string", "integer", "boolean"]}}}},
+    "role_absent_before_teardown": {"const": true},
+    "ordinary_admission_release_count": {"const": 0},
+    "claim_boundary": {"type": "string", "minLength": 80}
+  }
+}

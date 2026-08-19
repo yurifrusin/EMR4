@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in runtime-role and tenant-isolation attestation rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_runtime_role_tenant_isolation_attestation_plan",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "reason_codes": [],
+    "resolved_commit": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a1f309a6d52d01f9866432f7e9abb8095788d023"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "branch_origin_aligned": true,
+    "head": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "origin_branch_commit": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_plan",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The latch expressly forbids occupied DeepSeek HMR for this tranche, the native Harness remains behind its separate boot proof and Claude Code is no fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Reserve one fresh exact-candidate read-only veto after the role and tenant-isolation database-security evidence passes every deterministic gate and cleanup check.",
+        "work_packages": [
+          "runtime_role_tenant_isolation_exact_candidate_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and one mutable disposable PostgreSQL lifecycle cannot be safely split across workers.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after plan freeze",
+      "after disposable PostgreSQL cleanup",
+      "before verifier acceptance",
+      "at closeout",
+      "before any later unknown-commit rehearsal"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "five-source receipt before plan freeze",
+      "one uniquely named disposable local PostgreSQL lifecycle",
+      "no database action before exact plan freeze",
+      "exact role attributes and tenant-denial proof before acceptance",
+      "exact process port database role and directory cleanup",
+      "deterministic admission before independent veto",
+      "Sol-only acceptance clockwork closeout and task-branch Git"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_disposable_postgresql_check_in_runtime_role_and_tenant_isolation_attestation_plan_before_any_database_action",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-plan.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+      "docs/security/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/architecture-report.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns planning, the single disposable runtime, deterministic acceptance, recovery and task-branch Git. DeepSeek is declined because the active latch expressly keeps occupied native-Harness HMR behind its separate boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one exact-candidate read-only veto if the frozen database-security tranche reaches deterministic admission. Native subagents are declined under current developer policy and because one mutable disposable PostgreSQL instance is serial.",
+    "git_refs_and_worktree": "The task branch and origin task align at exact 455e41b8b9038813b290e67c43ce0b3190120988 with a clean tracked tree. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. 652 pre-existing untracked paths including docs/branding remain preserved. Live clockwork generation gen-a7b3f1fc6696f535ef4f7d5e0d5b99c89f19bdc87546e5b4cf242b3b7483e88d validates with zero drift and lease sequence 3.",
+    "live_handover_current_baton": "AGENTS.md was reread completely as the live handover. It records Continuity 333 / Compass 315, accepted environment-manifest and secret-posture architecture source a1f309a6d52d01f9866432f7e9abb8095788d023, the disposable PostgreSQL role/isolation successor and the standing closure of ordinary enablement, live secrets, production, Pages and protected refs.",
+    "protected_evidence_boundaries": "Only a uniquely named disposable local PostgreSQL instance, ephemeral authored-synthetic manifest/practice/role/credential-provider identifiers, the exact non-owner NOBYPASSRLS role expectation, exact cross-tenant denial and exact cleanup may be planned. No local .env, live secret, cloud/hosted/existing database, persistent role, product source/configuration/API/schema/client change, ordinary-practice enablement, generic-status Arrived or waiting-area change, product/patient/appointment/clinical/protected data, occupied DeepSeek HMR, production runtime, deployment, release, Pages, protected evidence or protected-ref movement is permitted. Preserve docs/branding and every unrelated untracked path; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

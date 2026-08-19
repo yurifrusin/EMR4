@@ -1,0 +1,81 @@
+{
+  "accepted_environment_architecture_source": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+  "attestation_artifact": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+  "attestation_sha256": "1d0e6bfa7224a1f8b57465b44bb6b1df14f997032e7537827b8acb373a777c8a",
+  "claim_boundary": "Exact authored-synthetic runtime-role attributes and tenant isolation in one captured disposable PostgreSQL 16 instance only; no product relation, ordinary enablement, live secret, rotation, rollback, unknown-commit, production or deployment claim.",
+  "cleanup": {
+    "container": "container_absent",
+    "container_id_sha256": "e1b1b4b7c4db52ff697a65955671dd0e83c95f17ca4d2e5e20ac33c10fc2d5b7",
+    "network": "network_absent",
+    "network_id_sha256": "2ac6ab8fa8127e3db58820c1de0cf0e261b022deebee9fe517aedeafcbd2c20f",
+    "role_absent_before_teardown": true,
+    "status": "cleanup_verified"
+  },
+  "closed_boundaries": {
+    "existing_or_hosted_database_used": false,
+    "live_secret_used": false,
+    "ordinary_admission_record_created": false,
+    "ordinary_admission_released": false,
+    "ordinary_practice_enabled": false,
+    "product_or_configuration_changed": false,
+    "product_relation_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_evidence_or_ref_movement": false,
+    "provider_or_external_network_used": false,
+    "rollback_or_unknown_commit_proved": false,
+    "rotation_or_secret_custody_proved": false
+  },
+  "contract_sha256": "94ac2239a81f06e1404fa6c3fe7a02c9e9df2c0b4cea6b633347a987171a1712",
+  "environment": {
+    "host_transport": "fixed_in_process_ipv4_loopback_relay",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "image_reference": "postgres:16-bookworm",
+    "live_secrets": 0,
+    "network_internal": true,
+    "postgresql_major": 16,
+    "product_rows": 0,
+    "provider_calls": 0,
+    "published_ports": false,
+    "storage": "container_local_tmpfs"
+  },
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_role_tenant_attestation",
+  "hostile_mutations": {
+    "contract_attempted": 302,
+    "contract_rejected": 302,
+    "escapes": 0,
+    "manifest_attempted": 159,
+    "manifest_rejected": 159
+  },
+  "lifecycle": [
+    "contract_sources_and_hostile_mutations_verified",
+    "closed_ephemeral_manifest_and_mutations_verified",
+    "cached_postgresql_16_image_verified",
+    "owned_internal_network_verified",
+    "owned_tmpfs_container_verified",
+    "postgresql_16_readiness_verified",
+    "fixed_loopback_relay_started",
+    "admin_owned_forced_rls_probe_and_role_installed",
+    "restricted_role_and_forced_rls_catalogue_verified",
+    "same_tenant_success_and_cross_tenant_denials_verified",
+    "physical_role_absent_before_teardown",
+    "fixed_loopback_relay_stopped",
+    "captured_container_and_network_absent"
+  ],
+  "manifest_sha256": "968b4ad806a0f78322c2b1bb6dfd43de2d96eda53f97344057cdae2a5062a73a",
+  "result": "raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_pass",
+  "schema_version": "emr4.check-in-runtime-role-tenant-isolation-attestation-evidence.v1",
+  "source_hashes": {
+    "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md": "0858486ff6cd173a6b3b397585e7b1ff74c578b341a8e34b8425e114e0520b5e",
+    "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-plan.md": "07e80eb431f664a1f0f2bcd9ac978e6071c7dbd0d004f684001a2a6e80e41e11",
+    "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md": "13a7b267df199e85d841ee927bb6ce06dcdc6bfff202d32a346d965c3099f2a3",
+    "docs/security/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-threat-model-delta.md": "3e4d9b9e5ed19d624cfed2a3643ca1b75dab8ce5f30a2434eeb98baf78207c94",
+    "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md": "ecac18824503953828d876eda863f40c419af5d5b92b0ef1fd180730452570ea",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/architecture-report.md": "35f09c1118734d6b40ae267732a168343e2b76ebd9dd00fd901a7d891a831018",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json": "e9aab3504520d955a0ce2c94c32a5f9a6ae25d7bbf129c7f2bd21951201c34d8",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json": "786cab3b19231c391d281cf36568b4206fe5f11b2a2ac51469f0996c3e718e88",
+    "orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal/rehearsal-contract.json": "dcacab90f9d785229604e0cd3eab6f185430d4e5c1cd146fc4144858d3aa3540",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_behavior_transaction_rehearsal.py": "875afd5bdfcac9e8cdbc5deb000645c638b68d1eb2239d3cd55f130366c08bd9",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_scaffold_parse_catalogue_rehearsal.py": "9dbc172af43d1f858335d747def4c520643790b89646e2bfeef1a15124ab600d"
+  },
+  "source_head": "455e41b8b9038813b290e67c43ce0b3190120988"
+}

@@ -1,0 +1,107 @@
+{
+  "admission_snapshot_generation": 1,
+  "authority_git_object": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+  "claim_boundary": "Exact authored-synthetic runtime-role attributes and tenant isolation in one captured disposable PostgreSQL 16 instance only; no product relation, ordinary enablement, live secret, rotation, rollback, unknown-commit, production or deployment claim.",
+  "environment_identifier": "env:authored-synthetic-check-in-role-attestation",
+  "evidence_label": "authored_synthetic_provider_free_disposable_postgresql_role_tenant_attestation",
+  "evidence_reference": "evidence-ref:authored-synthetic/check-in-role-tenant-attestation",
+  "logical_role_id": "appointment_check_in_ordinary_runtime_v1",
+  "manifest_sha256": "968b4ad806a0f78322c2b1bb6dfd43de2d96eda53f97344057cdae2a5062a73a",
+  "ordinary_admission_release_count": 0,
+  "physical_role_identifier": "emr4_checkin_ord_080ba425690a11e1",
+  "practice_scope_reference": "practice-ref:authored-synthetic/check-in-tenant-a",
+  "probe_catalogue": {
+    "admin_owned": true,
+    "policy_count": 1,
+    "policy_expression_sha256": "0a45ab21bc7f6ecbaccb72abfa7f60d63691ed05519ff00f9dc6d3c4de2a5150",
+    "policy_with_check_matches": true,
+    "rls_enabled": true,
+    "rls_forced": true
+  },
+  "role_absent_before_teardown": true,
+  "role_catalogue": {
+    "bypass_rls": false,
+    "create_database": false,
+    "create_role": false,
+    "inherit": false,
+    "login": true,
+    "memberships": 0,
+    "owned_databases": 0,
+    "owned_functions": 0,
+    "owned_relations": 0,
+    "owned_schemas": 0,
+    "policy_role_bindings": 0,
+    "probe_grants": [
+      "DELETE",
+      "INSERT",
+      "SELECT",
+      "UPDATE"
+    ],
+    "product_relation_privileges": 0,
+    "replication": false,
+    "superuser": false
+  },
+  "scenarios": [
+    {
+      "id": "RTA-S01",
+      "observed": "968b4ad806a0f78322c2b1bb6dfd43de2d96eda53f97344057cdae2a5062a73a",
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S02",
+      "observed": true,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S03",
+      "observed": true,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S04",
+      "observed": 1,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S05",
+      "observed": 1,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S06",
+      "observed": 0,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S07",
+      "observed": "42501",
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S08",
+      "observed": 0,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S09",
+      "observed": 0,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S10",
+      "observed": true,
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S11",
+      "observed": "42501",
+      "status": "passed"
+    },
+    {
+      "id": "RTA-S12",
+      "observed": true,
+      "status": "passed"
+    }
+  ],
+  "schema_version": "emr4.check-in-tenant-role-attestation.v1"
+}

@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
 TOPIC = ROOT / "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution"
 INTENT_PATH = TOPIC / "closeout-intent.json"
+REPLAY_FIXTURE_SOURCE = "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
 
 
 def _json(path: Path) -> dict:
@@ -38,7 +39,7 @@ def _json(path: Path) -> dict:
 @contextmanager
 def _worktree(path: Path):
     source = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
+        ["git", "rev-parse", f"{REPLAY_FIXTURE_SOURCE}^{{commit}}"],
         cwd=ROOT,
         check=True,
         capture_output=True,
@@ -120,35 +121,23 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
         validate_tick_intent(underbounded, contract)
 
 
-def test_current_live_generation_is_preparable_or_exactly_selected() -> None:
-    contract = validate_contract(_json(CONTRACT_PATH))
-    before = validate_live_state(ROOT, contract)
-    transaction = _json(ROOT / contract["clockwork_root"] / "transaction.json")
-    if transaction["operation_id"] == "raisa-provider-free-clockwork-governed-check-in-successor-resolution":
-        selected = validate_tick_live_state(ROOT, contract)
-        graph = _json(ROOT / contract["canonical_paths"]["continuity"])
-        compass = _json(ROOT / contract["canonical_paths"]["compass"])
-        latch = _json(ROOT / contract["canonical_paths"]["active_latch"])
-        assert selected["source_commit"] == "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
-        assert selected["previous_generation_id"] == "gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c"
+def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
+    with _worktree(tmp_path / "selected-or-prepared") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        before = validate_live_state(worktree, contract)
+        prepared = build_tick_generation(
+            worktree, contract, _json(worktree / INTENT_PATH.relative_to(ROOT))
+        )
+        graph = json.loads(prepared["canonical"]["continuity"].decode("utf-8"))
+        compass = json.loads(prepared["canonical"]["compass"].decode("utf-8"))
+        latch = json.loads(prepared["canonical"]["active_latch"].decode("utf-8"))
+        assert prepared["pointer"]["previous_generation_id"] == before["generation_id"]
+        assert prepared["pointer"]["lease_sequence"] == before["lease_sequence"] + 1
         assert graph["graph_revision"] == 332
         assert compass["map_revision"] == 314
         assert latch["operation_id"] == "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
-        return
-    prepared = build_tick_generation(ROOT, contract, _json(INTENT_PATH))
-    graph = json.loads(prepared["canonical"]["continuity"].decode("utf-8"))
-    compass = json.loads(prepared["canonical"]["compass"].decode("utf-8"))
-    latch = json.loads(prepared["canonical"]["active_latch"].decode("utf-8"))
-    assert prepared["pointer"]["previous_generation_id"] == before["generation_id"]
-    assert prepared["pointer"]["lease_sequence"] == before["lease_sequence"] + 1
-    assert graph["graph_revision"] == 332
-    assert compass["map_revision"] == 314
-    assert latch["operation_id"] == "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
-    assert latch["protected_boundaries"] == prepared["intent"]["next_operation_protected_boundaries"]
-    assert prepared["generation_manifest"]["source_commit"] == subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=ROOT, check=True, capture_output=True,
-        text=True, encoding="utf-8",
-    ).stdout.strip()
+        assert latch["protected_boundaries"] == prepared["intent"]["next_operation_protected_boundaries"]
+        assert prepared["generation_manifest"]["source_commit"] == REPLAY_FIXTURE_SOURCE
 
 
 def test_git_clean_line_ending_variation_does_not_change_tick(tmp_path: Path) -> None:

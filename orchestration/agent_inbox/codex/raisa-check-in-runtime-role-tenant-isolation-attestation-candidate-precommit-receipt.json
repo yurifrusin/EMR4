@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in runtime-role and tenant-isolation attestation rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_runtime_role_tenant_isolation_attestation_plan",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "reason_codes": [],
+    "resolved_commit": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a1f309a6d52d01f9866432f7e9abb8095788d023"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "branch_origin_aligned": true,
+    "head": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "origin_branch_commit": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 669
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "candidate_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied native-Harness HMR is forbidden pending its separate boot proof; Claude Code is not a fallback and the candidate is already deterministically complete.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh exact-candidate Gemini 3.7 Flash/high read-only veto is required after this explicit candidate commit.",
+        "work_packages": [
+          "runtime_role_tenant_isolation_exact_candidate_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy forbids proactive delegation and no separable work remains before the independent veto.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "before verifier acceptance",
+      "at closeout",
+      "before any later DeepSeek Harness boot proof"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicit-path candidate staging and commit",
+      "fresh read-only review worktree at the exact candidate",
+      "deterministic admission before Gemini dispatch",
+      "unchanged clean worktree after one terminal Gemini decision",
+      "Sol-only acceptance clockwork closeout and task-branch Git"
+    ]
+  },
+  "planned_action": "commit_only_the_deterministically_admitted_runtime_role_tenant_isolation_candidate_and_its_sanitized_disposable_postgresql_evidence_with_explicit_path_staging",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial candidate, verification, recovery and task-branch Git. DeepSeek remains declined because occupied native-Harness HMR is forbidden pending its separate boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for the fresh read-only veto after this commit. Native subagents remain declined by developer policy and serial-runtime economics.",
+    "git_refs_and_worktree": "HEAD and origin task are exact 455e41b8b9038813b290e67c43ce0b3190120988 before candidate commit. The sole intentional tracked modification is tests/test_ariadne_governance_clockwork_tick.py, which pins historical fault replay to the exact reviewed full-Git fixture; all other candidate artifacts are the named untracked files beside 669 total preserved untracked paths. All four local/origin master and handoff/current refs remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding remains present. Clockwork generation gen-a7b3f1fc6696f535ef4f7d5e0d5b99c89f19bdc87546e5b4cf242b3b7483e88d has zero drift.",
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction. The live Baton keeps the current runtime-role/tenant-isolation attestation operation in progress and preserves every product, data, provider, production, Pages and protected-ref closure.",
+    "protected_evidence_boundaries": "The candidate contains only one provider-free authored-synthetic disposable PostgreSQL role/RLS attestation and sanitized evidence. It opens no live secret, existing database, product relation, ordinary practice, feature/allowlist/config/API/client surface, provider call, occupied DeepSeek HMR, production runtime, deployment, release, Pages, protected evidence or protected ref. Exact captured-ID cleanup passed; docs/branding and all unrelated untracked paths remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

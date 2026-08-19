@@ -1,0 +1,104 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_deterministically_admitted_runtime_role_tenant_isolation_candidate_and_its_sanitized_disposable_postgresql_evidence_with_explicit_path_staging",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction. The live Baton keeps the current runtime-role/tenant-isolation attestation operation in progress and preserves every product, data, provider, production, Pages and protected-ref closure.",
+    "current_authority_allocation": "GPT Sol owns the serial candidate, verification, recovery and task-branch Git. DeepSeek remains declined because occupied native-Harness HMR is forbidden pending its separate boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for the fresh read-only veto after this commit. Native subagents remain declined by developer policy and serial-runtime economics.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json"
+    ],
+    "protected_evidence_boundaries": "The candidate contains only one provider-free authored-synthetic disposable PostgreSQL role/RLS attestation and sanitized evidence. It opens no live secret, existing database, product relation, ordinary practice, feature/allowlist/config/API/client surface, provider call, occupied DeepSeek HMR, production runtime, deployment, release, Pages, protected evidence or protected ref. Exact captured-ID cleanup passed; docs/branding and all unrelated untracked paths remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "HEAD and origin task are exact 455e41b8b9038813b290e67c43ce0b3190120988 before candidate commit. The sole intentional tracked modification is tests/test_ariadne_governance_clockwork_tick.py, which pins historical fault replay to the exact reviewed full-Git fixture; all other candidate artifacts are the named untracked files beside 669 total preserved untracked paths. All four local/origin master and handoff/current refs remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding remains present. Clockwork generation gen-a7b3f1fc6696f535ef4f7d5e0d5b99c89f19bdc87546e5b4cf242b3b7483e88d has zero drift."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in runtime-role and tenant-isolation attestation rehearsal",
+    "objective": "Prove in a uniquely named disposable local PostgreSQL instance that an ephemeral authored-synthetic manifest binds the exact non-owner NOBYPASSRLS ordinary runtime role and denies cross-tenant access, then prove exact cleanup without using real secrets, existing databases or product data.",
+    "status": "in_progress",
+    "source_head": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+    "authority_source": "Accepted check-in environment-manifest and secret-posture architecture plus Yuri's standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture at the machine-resolved source.",
+      "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_runtime_role_tenant_isolation_attestation_plan",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_uniquely_named_disposable_local_postgresql_only",
+      "accepted_environment_manifest_secret_posture_architecture_a1f309a6d52d01f9866432f7e9abb8095788d023_is_the_floor",
+      "ephemeral_authored_synthetic_manifest_practice_role_and_credential_provider_only",
+      "no_local_env_live_secret_cloud_or_hosted_database_existing_database_or_persistent_role",
+      "runtime_role_must_be_non_owner_nobypassrls_and_own_no_product_relation",
+      "exact_cross_tenant_denial_and_exact_cleanup_required",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_hmr_claude_code_fallback_or_other_provider_call_before_optional_gemini_veto",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "assessed_stage": "candidate_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "Occupied native-Harness HMR is forbidden pending its separate boot proof; Claude Code is not a fallback and the candidate is already deterministically complete.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "One fresh exact-candidate Gemini 3.7 Flash/high read-only veto is required after this explicit candidate commit.", "work_packages": ["runtime_role_tenant_isolation_exact_candidate_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy forbids proactive delegation and no separable work remains before the independent veto.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "explicit-path candidate staging and commit",
+      "fresh read-only review worktree at the exact candidate",
+      "deterministic admission before Gemini dispatch",
+      "unchanged clean worktree after one terminal Gemini decision",
+      "Sol-only acceptance clockwork closeout and task-branch Git"
+    ],
+    "reassessment_triggers": ["before verifier acceptance", "at closeout", "before any later DeepSeek Harness boot proof"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "candidate precommit five-source verification after disposable PostgreSQL cleanup", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["The exact candidate, released sanitized evidence, cleanup, refs and protected boundaries are locally verified."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No occupied dispatch; separate boot proof remains prerequisite."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical only; fallback forbidden."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Reserved for the exact-candidate read-only veto after commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined under developer policy."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected and no fallback allowed."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
