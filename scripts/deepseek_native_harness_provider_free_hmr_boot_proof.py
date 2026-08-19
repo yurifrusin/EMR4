@@ -364,7 +364,9 @@ def _verify_installed_source(package_root: Path, contract: dict[str, Any]) -> di
     hmr_text = hmr_source.read_text(encoding="utf-8")
     boot_text = boot_source.read_text(encoding="utf-8")
     checks = {
-        "documented_headless_profile_flag": '--profile <name>' in bin_text and '"headless"' in bin_text,
+        "documented_headless_profile_flag": (
+            '--profile <name>' in bin_text and 'dsh --profile headless' in bin_text
+        ),
         "headless_hmr_row_disabled": "- id: hmr" in headless_text and "disabled: true" in headless_text,
         "headless_runner_declared": "- id: headless-runner" in headless_text,
         "hmr_expose_internals_required": "--expose-internals is required for HMR service" in hmr_text,
@@ -372,8 +374,9 @@ def _verify_installed_source(package_root: Path, contract: dict[str, Any]) -> di
         "profile_boot_creates_watch_only_hmr": 'config: { root: [] }' in boot_text,
         "profile_boot_watches_user_patches_twice": boot_text.count("await watchUserPatches(ctx") == 2,
     }
-    if not all(checks.values()):
-        raise ProofError("installed_source_contract_mismatch")
+    failed_checks = sorted(name for name, passed in checks.items() if not passed)
+    if failed_checks:
+        raise ProofError("installed_source_contract_mismatch:" + ",".join(failed_checks))
     return {
         "checks": checks,
         "source_sha256": {
@@ -584,7 +587,7 @@ def execute_proof(tarball: Path, output: Path = EVIDENCE_PATH) -> dict[str, Any]
         "schema_version": EVIDENCE_SCHEMA,
         "operation_id": OPERATION_ID,
         "planning_source": contract["planning_source"],
-        "attempt_id": "attempt-001",
+        "attempt_id": "native-attempt-001",
         "result": result,
         "failure_classification": failure,
         "package": {

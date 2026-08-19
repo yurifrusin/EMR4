@@ -12,6 +12,7 @@ from scripts.deepseek_native_harness_provider_free_hmr_boot_proof import (
     CONTRACT_PATH,
     EXPECTED_EVENTS,
     ProofError,
+    _verify_installed_source,
     build_child_environment,
     build_patch_pair,
     custom_runner_source,
@@ -64,6 +65,43 @@ def test_wrong_tarball_rejects_before_materialisation(tmp_path: Path) -> None:
 
     with pytest.raises(ProofError, match="package_tarball_sha1_mismatch"):
         verify_tarball(tarball, load_contract())
+
+
+def test_installed_source_check_accepts_exact_documented_headless_marker(tmp_path: Path) -> None:
+    scope = tmp_path / "node_modules" / "@deepseek-ai"
+    package = scope / "dsh"
+    (package / "lib").mkdir(parents=True)
+    (scope / "dsh-headless").mkdir()
+    (scope / "cordis-plugin-hmr" / "lib").mkdir(parents=True)
+    (package / "package.json").write_text(
+        json.dumps(
+            {
+                "name": "@deepseek-ai/dsh",
+                "version": "0.1.0-rc.7",
+                "bin": {"dsh": "lib/bin.js"},
+            }
+        ),
+        encoding="utf-8",
+    )
+    (package / "lib" / "bin.js").write_text(
+        'option("--profile <name>"); // dsh --profile headless', encoding="utf-8"
+    )
+    (scope / "dsh-headless" / "cordis.patch.yml").write_text(
+        "- id: hmr\n  disabled: true\n- id: headless-runner\n", encoding="utf-8"
+    )
+    (scope / "cordis-plugin-hmr" / "lib" / "index.js").write_text(
+        'throw new Error("--expose-internals is required for HMR service");\n'
+        "async registerConfig() {}\n",
+        encoding="utf-8",
+    )
+    (package / "lib" / "profile-boot-exact.js").write_text(
+        "config: { root: [] };\nawait watchUserPatches(ctx);\nawait watchUserPatches(ctx);\n",
+        encoding="utf-8",
+    )
+
+    projection = _verify_installed_source(package, load_contract())
+
+    assert all(projection["checks"].values())
 
 
 def test_patch_transition_adds_only_hmr_bound_custom_runner(tmp_path: Path) -> None:
