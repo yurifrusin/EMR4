@@ -1,0 +1,17 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_raisa_provider_free_check_in_server_attachment_lifetime_and_post_readiness_observability_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "id": "PF_ATTACHMENT_REPAIR"
+    }
+  ],
+  "schema_version": "ariadne.verifier-command-manifest.v1"
+}

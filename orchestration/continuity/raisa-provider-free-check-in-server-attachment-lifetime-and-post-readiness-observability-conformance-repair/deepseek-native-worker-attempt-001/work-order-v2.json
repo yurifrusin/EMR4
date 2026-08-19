@@ -1,0 +1,23 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "authority_sha256": "sha256:6d885725819012c8d1c9671148599938337b774f14a5a6a1f3be4b4059fd23b3",
+  "branch": "codex/deepseek-check-in-attachment-observability-worker-001",
+  "command_manifest_sha256": "sha256:ea392f18151cbddff93072f4bb57b116b3741fa23b241565c36617d0cadc54ca",
+  "forbidden_surfaces_sha256": "sha256:6203959dc6c5e08047feff2be7f3f90fae23c00f1d649a733e6bcc965be28503",
+  "journal_id": "journal-9b8d17fe53bd5b5953ad2795",
+  "lease_id": "lease-34",
+  "next_sequence": 6,
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "posture": "provider_free_shadow",
+  "previous_event_sha256": "sha256:2e4c2edaa8d9167fa95a28131622f9ef10c84e91349077108d16d2b19b01f7f1",
+  "provider_free_no_database_admission_sha256": "sha256:9e67d7c2d0f4305a6d0cfbe7385189bf5b2e194699b47590a1dfc7e2fd30a9c4",
+  "schema_version": "ariadne.deepseek_work_order.v2",
+  "source_commit": "b91733b11cbe28d0d22ae4d46308bdc706ea2897",
+  "transaction_id": "txn-9b8d17fe53bd5b5953ad2795",
+  "work_order_id": "wo-checkin-attachment-observability-001",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-worker-001"
+}

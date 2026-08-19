@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.deepseek_native_worker_runner_terminal.v1",
+  "status": "failed",
+  "failure_code": "CUSTOM_RUNNER_FAILURE",
+  "request_count": 0,
+  "ordered_tool_metadata": [],
+  "model_usage_steps": [],
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ]
+}

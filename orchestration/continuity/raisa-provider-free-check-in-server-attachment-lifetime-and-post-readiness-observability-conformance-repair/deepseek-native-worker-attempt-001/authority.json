@@ -1,0 +1,22 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "attempt_id": "deepseek-native-checkin-attachment-001",
+  "automatic_retries": 0,
+  "fallbacks": [],
+  "maximum_output_tokens": 4096,
+  "maximum_parallel_tool_calls": 1,
+  "model": "deepseek-official/deepseek-v4-flash",
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "owned_paths": [
+    "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+    "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+  ],
+  "reasoning_effort": "high",
+  "source_commit": "b91733b11cbe28d0d22ae4d46308bdc706ea2897",
+  "test_executor": "gpt_sol_outside_model_session",
+  "wall_clock_seconds": 900
+}

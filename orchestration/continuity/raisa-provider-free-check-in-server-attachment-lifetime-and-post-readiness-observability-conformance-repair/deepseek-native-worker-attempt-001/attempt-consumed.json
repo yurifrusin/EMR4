@@ -1,0 +1,10 @@
+{
+  "attempt_id": "deepseek-native-checkin-attachment-001",
+  "automatic_retries": 0,
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "resume_permitted": false,
+  "schema_version": "ariadne.deepseek_native_worker_one_run_latch.v1",
+  "source_commit": "b91733b11cbe28d0d22ae4d46308bdc706ea2897",
+  "started_at_utc": "2026-08-19T18:01:15Z",
+  "state": "consumed"
+}

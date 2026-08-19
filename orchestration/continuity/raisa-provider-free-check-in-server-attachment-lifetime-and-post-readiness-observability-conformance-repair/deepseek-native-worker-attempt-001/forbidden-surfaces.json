@@ -1,0 +1,22 @@
+{
+  "forbidden_surfaces": [
+    "shell",
+    "test_execution",
+    "docker",
+    "database",
+    "git",
+    "network_except_local_broker",
+    "web",
+    "subagents",
+    "workflows",
+    "skills",
+    "telemetry",
+    "session_title_model",
+    "compaction_model",
+    "product_api_configuration_clients_flags_allowlists_grammar_waiting_area",
+    "ordinary_practice_enablement",
+    "product_patient_appointment_clinical_historical_protected_data",
+    "production_deployment_release_pages_protected_refs",
+    "attempt_004_retry_resume_overwrite_reclassification"
+  ]
+}

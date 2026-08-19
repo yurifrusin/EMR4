@@ -1,0 +1,21 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "attempt_id": "deepseek-native-checkin-attachment-001",
+  "authority_sha256": "sha256:6d885725819012c8d1c9671148599938337b774f14a5a6a1f3be4b4059fd23b3",
+  "command_manifest_sha256": "sha256:ea392f18151cbddff93072f4bb57b116b3741fa23b241565c36617d0cadc54ca",
+  "docker_or_database_execution_count": 0,
+  "forbidden_surfaces_sha256": "sha256:6203959dc6c5e08047feff2be7f3f90fae23c00f1d649a733e6bcc965be28503",
+  "model_request_count": 0,
+  "one_run_marker_absent": true,
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "provider_free_no_database_admission_sha256": "sha256:9e67d7c2d0f4305a6d0cfbe7385189bf5b2e194699b47590a1dfc7e2fd30a9c4",
+  "provider_request_count": 0,
+  "schema_version": "ariadne.deepseek_native_worker_prepare_evidence.v1",
+  "source_commit": "b91733b11cbe28d0d22ae4d46308bdc706ea2897",
+  "status": "passed",
+  "work_order_sha256": "sha256:58550f66e250549145a189a75543669446440c3ac6f50164c667a5a1f9cca8c1"
+}

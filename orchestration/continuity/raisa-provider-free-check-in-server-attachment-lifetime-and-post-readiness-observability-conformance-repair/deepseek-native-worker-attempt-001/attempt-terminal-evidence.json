@@ -1,0 +1,73 @@
+{
+  "attempt_id": "deepseek-native-checkin-attachment-001",
+  "automatic_retry_count": 0,
+  "broker": {
+    "last_event_sha256": "sha256:ac40ecea6cd199d7dd6887eeba2860a02a47e1261d01caf99b3d354431a50ead",
+    "provider_call_completed": 0,
+    "provider_call_failed": 0,
+    "provider_call_started": 0,
+    "ready": true,
+    "request_rejected": 0
+  },
+  "cleanup": {
+    "harness_home_absent": true,
+    "provider_key_present_in_worker_environment": false,
+    "raw_logs_retained": false,
+    "raw_session_retained": false
+  },
+  "failure_code": "native_harness_terminal_failure",
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7"
+  },
+  "process": {
+    "broker_absent": true,
+    "broker_stderr_bytes": 0,
+    "broker_stderr_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harness_absent": true,
+    "harness_exit_code": 1,
+    "stderr_bytes": 0,
+    "stderr_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 0,
+    "stdout_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wall_clock_ms": 3414
+  },
+  "profile": {
+    "changed_patch_sha256": "sha256:f0d6969ac3b47452590880d219f51ae1469b303596464f884f99004115393dbd",
+    "hmr_mutated_after_readiness": true,
+    "initial_patch_sha256": "sha256:b306d7838135e0bfe9321b1b97df052bccb1f85bbfcf0d1ff7b7a1a0d14a2406",
+    "name": "emr4-bounded-worker",
+    "preset_sha256": "sha256:939adb5cbd845b52115f54ba1d0affbb0ab0abaaee30608f3f5e9ab5913cbc00"
+  },
+  "result": "failed",
+  "resume_permitted": false,
+  "runner": {
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "failure_code": "CUSTOM_RUNNER_FAILURE",
+    "model_usage_steps": [],
+    "ordered_tool_metadata": [],
+    "request_count": 0,
+    "schema_version": "ariadne.deepseek_native_worker_runner_terminal.v1",
+    "status": "failed"
+  },
+  "schema_version": "ariadne.deepseek_native_worker_terminal_evidence.v1",
+  "source_commit": "b91733b11cbe28d0d22ae4d46308bdc706ea2897",
+  "work_order_sha256": "sha256:58550f66e250549145a189a75543669446440c3ac6f50164c667a5a1f9cca8c1",
+  "worker": {
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "branch": "codex/deepseek-check-in-attachment-observability-worker-001",
+    "changed_paths": [],
+    "focused_tests_executed_by_model": 0,
+    "out_of_scope_paths": [],
+    "worktree": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-worker-001"
+  }
+}
