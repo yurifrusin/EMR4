@@ -1,0 +1,231 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-incident-intake-gemini-7c7ce52a",
+  "branch": "codex/review-clockwork-incident-intake-7c7ce52a",
+  "head_before": "7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f",
+  "head_after": "7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "282aaf95c9a597118fa7297f3c50b23d939521249d1d868775045dd55e71f53f",
+  "result": "# Independent Veto Review: Clockwork Incident-Intake Recovery\n\n**Date:** 2026-08-20  \n**Evaluator Binding:** `gemini-3.7-flash-high` (effort: high; no fallback)  \n**Worktree:** `C:/Users/sarashera/EMR4-worktrees/clockwork-incident-intake-gemini-7c7ce52a`  \n**Branch:** `codex/review-clockwork-incident-intake-7c7ce52a`  \n**Candidate Commit:** `7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f`  \n**Base Commit:** `de96a7e4d75b53f1dd38495b5bdda16fd8f326f6`\n\n---\n\n### Verification and Evaluation of Challenge Requirements\n\n1. **Intent v1 and Non-Closeout Transition Byte-Compatibility:**\n   - Intent v1 schema (`TICK_INTENT_VERSION = \"ariadne.governance_live_tick_intent.v1\"`) continues to be accepted with identical keys, preserving non-incident tick projection byte-for-byte.\n   - Non-closeout transition schemas (`BLOCKED_INTENT_VERSION`, `USER_DECISION_INTENT_VERSION`, and `CHECKPOINT_INTENT_VERSION`) maintain their exact semantics, validation, and active latch transitions with zero regressions.\n\n2. **Rejection of Caller-Authored Incident Properties in Intent v2:**\n   - `validate_tick_intent` and `_validate_incident_observations` strictly enforce exact key allowlists.\n   - Caller-authored `incident_id`, `register_revision`, `attempt_id`, `origin`, `related_incident_ids`, `status`, aggregate counters, and sensitive/unbounded path fields are rejected with `ClockworkTickRejection`.\n\n3. **Deterministic Clockwork Projection of Incident Register & Pattern Report:**\n   - `_project_incident_register` computes the next sequential incident identifier (`AER-XXXX`) from the existing register base.\n   - Category-to-origin mapping (`EXPECTED_ORIGIN_BY_CATEGORY`), stable attempt identity hashing (`attempt_id`), peer links across shared attempt IDs, register revision increment, source cutoff expansion, and pattern report derivation via `build_pattern_report_from_payload` are all calculated deterministically from a single prospective register structure.\n\n4. **Pointer-Last Atomic Generation Binding:**\n   - All canonical surfaces (`continuity`, `compass`, `compass_markdown`, `active_latch`, `error_register`, `pattern_report`, `current_baton`) and metadata manifests are compiled into one atomic generation.\n   - The pointer update (`current.json`) executes strictly last after all generation artifacts are verified.\n\n5. **Atomic Rollback & Recovery Invariance:**\n   - Injected pre-pointer failures (such as `after:error_register`) cleanly roll back all staged canonical and metadata writes, leaving repository state byte-identical to pre-tick state.\n   - `rollback_tick_generation` guarantees exact pre-generation byte recovery for completed publications.\n\n6. **Rigorous Aggregate Recomputation in Tests:**\n   - `tests/test_ariadne_agent_error_register.py` recomputes summary aggregates dynamically via `Counter` over all incidents while preserving exact checks across all 656 historical incident cases.\n   - No schema validation, ordering, origin/category mapping, peer link, or sensitive-path invariant is weakened.\n\n7. **Strict Confinement to Provider-Free Shadow Execution:**\n   - The implementation introduces no manual canonical writer, product/provider runtime, protected evidence modification, database execution, deployment, or protected ref movement.\n   - Protected refs (`master`, `handoff/current`) remain fixed and aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n8. **Test Suite Execution (C03):**\n   - Command C03 executed provider-free pytest across the 4 specified test modules and passed exactly 480 tests (449 + 16 + 7 + 8) with zero failures.\n\n9. **Structured Command Sequence & Hygiene (C01\u2013C09):**\n   - All commands C01 through C09 exited with code 0.\n   - The candidate commit diff contains exactly the eight committed files.\n   - Preflight and postflight worktree status remain pristine.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Veto Review: Clockwork Incident-Intake Recovery\n\n**Date:** 2026-08-20  \n**Evaluator Binding:** `gemini-3.7-flash-high` (effort: high; no fallback)  \n**Worktree:** `C:/Users/sarashera/EMR4-worktrees/clockwork-incident-intake-gemini-7c7ce52a`  \n**Branch:** `codex/review-clockwork-incident-intake-7c7ce52a`  \n**Candidate Commit:** `7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f`  \n**Base Commit:** `de96a7e4d75b53f1dd38495b5bdda16fd8f326f6`\n\n---\n\n### Verification and Evaluation of Challenge Requirements\n\n1. **Intent v1 and Non-Closeout Transition Byte-Compatibility:**\n   - Intent v1 schema (`TICK_INTENT_VERSION = \"ariadne.governance_live_tick_intent.v1\"`) continues to be accepted with identical keys, preserving non-incident tick projection byte-for-byte.\n   - Non-closeout transition schemas (`BLOCKED_INTENT_VERSION`, `USER_DECISION_INTENT_VERSION`, and `CHECKPOINT_INTENT_VERSION`) maintain their exact semantics, validation, and active latch transitions with zero regressions.\n\n2. **Rejection of Caller-Authored Incident Properties in Intent v2:**\n   - `validate_tick_intent` and `_validate_incident_observations` strictly enforce exact key allowlists.\n   - Caller-authored `incident_id`, `register_revision`, `attempt_id`, `origin`, `related_incident_ids`, `status`, aggregate counters, and sensitive/unbounded path fields are rejected with `ClockworkTickRejection`.\n\n3. **Deterministic Clockwork Projection of Incident Register & Pattern Report:**\n   - `_project_incident_register` computes the next sequential incident identifier (`AER-XXXX`) from the existing register base.\n   - Category-to-origin mapping (`EXPECTED_ORIGIN_BY_CATEGORY`), stable attempt identity hashing (`attempt_id`), peer links across shared attempt IDs, register revision increment, source cutoff expansion, and pattern report derivation via `build_pattern_report_from_payload` are all calculated deterministically from a single prospective register structure.\n\n4. **Pointer-Last Atomic Generation Binding:**\n   - All canonical surfaces (`continuity`, `compass`, `compass_markdown`, `active_latch`, `error_register`, `pattern_report`, `current_baton`) and metadata manifests are compiled into one atomic generation.\n   - The pointer update (`current.json`) executes strictly last after all generation artifacts are verified.\n\n5. **Atomic Rollback & Recovery Invariance:**\n   - Injected pre-pointer failures (such as `after:error_register`) cleanly roll back all staged canonical and metadata writes, leaving repository state byte-identical to pre-tick state.\n   - `rollback_tick_generation` guarantees exact pre-generation byte recovery for completed publications.\n\n6. **Rigorous Aggregate Recomputation in Tests:**\n   - `tests/test_ariadne_agent_error_register.py` recomputes summary aggregates dynamically via `Counter` over all incidents while preserving exact checks across all 656 historical incident cases.\n   - No schema validation, ordering, origin/category mapping, peer link, or sensitive-path invariant is weakened.\n\n7. **Strict Confinement to Provider-Free Shadow Execution:**\n   - The implementation introduces no manual canonical writer, product/provider runtime, protected evidence modification, database execution, deployment, or protected ref movement.\n   - Protected refs (`master`, `handoff/current`) remain fixed and aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n8. **Test Suite Execution (C03):**\n   - Command C03 executed provider-free pytest across the 4 specified test modules and passed exactly 480 tests (449 + 16 + 7 + 8) with zero failures.\n\n9. **Structured Command Sequence & Hygiene (C01\u2013C09):**\n   - All commands C01 through C09 exited with code 0.\n   - The candidate commit diff contains exactly the eight committed files.\n   - Preflight and postflight worktree status remain pristine.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-incident-intake-gemini-7c7ce52a",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_agent_error_register.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_agent_error_register.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "de96a7e4d75b53f1dd38495b5bdda16fd8f326f6..7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "de96a7e4d75b53f1dd38495b5bdda16fd8f326f6..7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "dc5d17fac127a9bbf25752d064c39a5c4456f763cf43aeb80bb89a3256e07954",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-incident-intake-gemini-7c7ce52a",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_transactional_closeout.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "de96a7e4d75b53f1dd38495b5bdda16fd8f326f6..7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "de96a7e4d75b53f1dd38495b5bdda16fd8f326f6..7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

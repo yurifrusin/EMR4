@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.tranche_efficacy_reading.v1",
   "operation_id": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery",
-  "status": "blocked_pending_corrected_independent_veto",
+  "status": "accepted_after_corrected_independent_veto_and_clockwork_incident_intake",
   "deterministic_candidate": {
     "commit": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
     "result": "pass",
@@ -34,9 +34,13 @@
     "first_disposition_reason": "The packet asserted 137 tests although the exact seven-module manifest contained 85, and the reviewer did not challenge the false count.",
     "corrected_packet_test_count": 85,
     "corrected_transport_attempt_count": 3,
-    "corrected_candidate_review_admitted_count": 0,
+    "corrected_candidate_review_admitted_count": 1,
     "corrected_transport_terminal_error": "PERMISSION_DENIED (code 403): The caller does not have permission",
-    "corrected_veto": "pending_external_antigravity_authorisation_recovery",
+    "corrected_veto": "pass_after_fresh_interactive_authentication",
+    "corrected_veto_receipt_sha256": "8d5a5f0665eb03948ee912b5fdaed5a211cb5eaddd083f580d0a21055a3a3a91",
+    "corrected_veto_command_count": 10,
+    "corrected_veto_test_count": 85,
+    "pre_authentication_failure_disposition": "not_admitted_no_model_or_terminal_decision",
     "fallback_model_used": false
   },
   "rerun_assessment": {
@@ -48,7 +52,18 @@
     "clockwork_rollback_count": 1,
     "clockwork_correction_reason": "The first blocked-transition command manifest selected two inherited global tests that assume the live latch can only be in_progress or complete; post-publication they rejected the clockwork-supported blocked state. Clockwork rolled back byte-exactly and the corrected manifest excludes only those incompatible tests.",
     "further_automatic_verifier_retries_stopped": true,
-    "conclusion": "The observability mechanism is technically promising and locally complete, but acceptance must remain closed until a corrected clean Gemini 3.7 Flash/high veto is obtained."
+    "conclusion": "The observability mechanism is accepted. The exact candidate remained unchanged, the corrected clean Gemini 3.7 Flash/high veto passed all ten commands with the exact 85-test count, and no native attempt was retried."
+  },
+  "clockwork_incident_intake": {
+    "reason": "The first rejected review qualified for the closed error register, but the live clockwork had no admitted register-changing closeout intent.",
+    "reviewed_candidate": "7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f",
+    "review_receipt_sha256": "32022df8a6c232ae9902c02910f18ebdd01ba546302e70e8aef43b27532fecb9",
+    "review_decision": "pass",
+    "review_test_count": 480,
+    "caller_authored_incident_identity_fields": 0,
+    "atomic_register_pattern_generation": true,
+    "pre_pointer_failure_byte_exact_restore": true,
+    "legacy_intent_compatibility_preserved": true
   },
   "protected_boundaries_preserved": true
 }
