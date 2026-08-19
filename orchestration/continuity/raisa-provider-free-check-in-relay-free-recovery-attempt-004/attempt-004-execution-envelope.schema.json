@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emr4:raisa:check-in-relay-free-recovery-attempt-004:execution-envelope:v1",
+  "title": "Check-in relay-free recovery attempt 004 execution envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "attempt_id",
+    "source_head",
+    "plan_source",
+    "attempt_003_execution_source",
+    "attempt_003_evidence_source",
+    "call_site_repair_source",
+    "call_site_reviewed_candidate",
+    "no_database_source",
+    "native_hmr_source",
+    "relay_free_transport_source",
+    "runtime_role_source",
+    "corrected_harness_sha256",
+    "contract_sha256",
+    "transaction_attestation_schema_sha256",
+    "created_state_evidence_sha256",
+    "repair_attestation_sha256",
+    "predecessor_001_failure_sha256",
+    "predecessor_001_cleanup_sha256",
+    "predecessor_002_failure_sha256",
+    "predecessor_002_envelope_sha256",
+    "predecessor_003_failure_sha256",
+    "predecessor_003_envelope_sha256",
+    "predecessor_003_cleanup_sha256",
+    "no_database_evidence_sha256",
+    "native_hmr_evidence_sha256",
+    "occupied_execution_count",
+    "automatic_retry_count",
+    "ambiguous_success_released",
+    "ordinary_admission_release_count",
+    "product_record_count",
+    "terminal_artifact_kind",
+    "terminal_artifact_sha256",
+    "transaction_attestation_sha256",
+    "base_result",
+    "cleanup_status",
+    "terminal_binding_restored"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-relay-free-recovery-attempt-004.execution-envelope.v1"
+    },
+    "result": {
+      "enum": [
+        "raisa_provider_free_check_in_relay_free_recovery_attempt_004_pass",
+        "failed_closed"
+      ]
+    },
+    "attempt_id": {"const": "attempt-004"},
+    "source_head": {"$ref": "#/$defs/git_commit"},
+    "plan_source": {"$ref": "#/$defs/git_commit"},
+    "attempt_003_execution_source": {"$ref": "#/$defs/git_commit"},
+    "attempt_003_evidence_source": {"$ref": "#/$defs/git_commit"},
+    "call_site_repair_source": {"$ref": "#/$defs/git_commit"},
+    "call_site_reviewed_candidate": {"$ref": "#/$defs/git_commit"},
+    "no_database_source": {"$ref": "#/$defs/git_commit"},
+    "native_hmr_source": {"$ref": "#/$defs/git_commit"},
+    "relay_free_transport_source": {"$ref": "#/$defs/git_commit"},
+    "runtime_role_source": {"$ref": "#/$defs/git_commit"},
+    "corrected_harness_sha256": {"$ref": "#/$defs/sha256"},
+    "contract_sha256": {"$ref": "#/$defs/sha256"},
+    "transaction_attestation_schema_sha256": {"$ref": "#/$defs/sha256"},
+    "created_state_evidence_sha256": {"$ref": "#/$defs/sha256"},
+    "repair_attestation_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_001_failure_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_001_cleanup_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_002_failure_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_002_envelope_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_003_failure_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_003_envelope_sha256": {"$ref": "#/$defs/sha256"},
+    "predecessor_003_cleanup_sha256": {"$ref": "#/$defs/sha256"},
+    "no_database_evidence_sha256": {"$ref": "#/$defs/sha256"},
+    "native_hmr_evidence_sha256": {"$ref": "#/$defs/sha256"},
+    "occupied_execution_count": {"const": 1},
+    "automatic_retry_count": {"const": 0},
+    "ambiguous_success_released": {"const": false},
+    "ordinary_admission_release_count": {"const": 0},
+    "product_record_count": {"const": 0},
+    "terminal_artifact_kind": {
+      "enum": ["rehearsal_evidence", "rehearsal_failure_evidence"]
+    },
+    "terminal_artifact_sha256": {"$ref": "#/$defs/sha256"},
+    "transaction_attestation_sha256": {
+      "anyOf": [
+        {"$ref": "#/$defs/sha256"},
+        {"type": "null"}
+      ]
+    },
+    "base_result": {
+      "enum": [
+        "raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_pass",
+        "failed_closed"
+      ]
+    },
+    "cleanup_status": {
+      "enum": ["cleanup_verified", "cleanup_incomplete", "not_started"]
+    },
+    "terminal_binding_restored": {"const": true}
+  },
+  "$defs": {
+    "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
