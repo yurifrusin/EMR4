@@ -1,0 +1,235 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-governance-gemini-a0bb86b7",
+  "branch": "codex/review-clockwork-governance-a0bb86b7",
+  "head_before": "a0bb86b78bfc011066142740c82d5c25cab7b9c8",
+  "head_after": "a0bb86b78bfc011066142740c82d5c25cab7b9c8",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "3e19ce2ee39f077857ae1522ebcd6130760c731d924461c680bdc289fbcdf478",
+  "result": "# Ariadne Independent Review Receipt: Governance Clockwork Projection Consolidation Repair (Fresh Retry Veto)\n\n**Reviewer:** Gemini 3.7 Flash (High reasoning)  \n**Date:** 2026-08-19  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-governance-gemini-a0bb86b7`  \n**Branch:** `codex/review-clockwork-governance-a0bb86b7`  \n**HEAD:** `a0bb86b78bfc011066142740c82d5c25cab7b9c8`  \n**Base:** `4ac81d4443de6f37d6baa26e390c1e8be7eaede1`  \n**Deterministic Source bound by Evidence:** `de777641a060766a12c429f4891f8d638f18e1bc`  \n**Protected Alignment:** `master` and `handoff/current` at `2e34bdad732fdab32fbf778280b3d3c70d66d602`\n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\n1. **`live_handover_current_baton`**:\n   - Rehydrated from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/AGENTS.md).\n   - Preserves all historical Git relations including PR 74/75 integration, accepted provider-free shadow clockwork broker gear architecture (`f6cbd33fd3322754e06ac6dafa1503f5200e0803`), and rejected rehearsal candidate (`a4044010e9f9319e149660ad889141a32cc8d000`).\n   - Conductor/integrator: GPT Sol. Independent reviewer: Gemini 3.7 Flash/high. Active product track remains Reception One.\n\n2. **`current_authority_allocation`**:\n   - Decision owner: GPT Sol.\n   - Reviewer role: One genuinely fresh Tier-2 independent read-only veto after correction and deterministic readmission.\n   - Scope: Strictly provider-free private-shadow governance projection repair; no live clockwork adoption, no control retirement, no occupied DeepSeek/HMR work, no Claude Code fallback, no provider calls, and no protected-ref movements.\n\n3. **`active_plan_and_acceptance`**:\n   - Controlling plan: [`docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md).\n   - Threat model delta: [`docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md).\n   - Historical closeout: [`docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-closeout.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-closeout.md).\n   - Error register: Revision 554 ([`docs/ariadne-agent-error-correction-register-revision-554.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/ariadne-agent-error-correction-register-revision-554.md)) with 642 incidents, all corrected/contained and none open.\n   - Latch evidence: [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-active-operation-latch/current.json) (`in_progress`, operation `ariadne-provider-free-clockwork-governance-projection-consolidation-repair`).\n\n4. **`protected_evidence_boundaries`**:\n   - Provider-free private-shadow governance projection repair only.\n   - Zero caller-authored derived fields, zero new mutable-current fixtures, zero partial publications, zero uncaught escapes.\n   - Maintained surfaces fall from 10 to 4 (60.0% reduction, satisfying the >=50.0% threshold).\n   - Incremental line budget <= 850 lines (measured exact 850 physical lines across the 5 owned implementation files).\n   - 13/13 rerun probes (4 clock_core + 9 surrounding_governance) covered and fail before publication.\n   - Unamortised cost accounting: 13 construction reruns, 0 projected steady-state surrounding reruns, 2-closeout repair-only break-even, and 3-closeout cumulative break-even including 13 predecessor sunk reruns.\n   - Untracked files and [`docs/branding/`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/branding/) preserved; no product/practice/clinical data accessed.\n\n5. **`git_refs_and_worktree`**:\n   - Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-governance-gemini-a0bb86b7`\n   - Branch: `codex/review-clockwork-governance-a0bb86b7`\n   - HEAD: `a0bb86b78bfc011066142740c82d5c25cab7b9c8`\n   - Clean worktree verified before and after all review steps. Protected refs verified at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Challenge Verification Analysis\n\n### Challenge 1: Branch, 40-character HEAD, Worktree Cleanliness, Protected Refs, and Diff Allowlist\n- C01 confirmed branch `codex/review-clockwork-governance-a0bb86b7` with clean status.\n- C02 confirmed exact 40-character commit `a0bb86b78bfc011066142740c82d5c25cab7b9c8`.\n- C07 confirmed zero diff against HEAD (`git diff --exit-code HEAD --`).\n- C08 confirmed zero whitespace/conflict errors across `4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8`.\n- C09 confirmed that all changed files fall strictly within the allowlisted scope.\n- C10 confirmed the worktree remained pristine and clean after all test and runner executions.\n\n### Challenge 2: Rejection of Attempt 1, Root Cause Fix, and Byte-Preserving Execution\n- [`orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json) confirms the first attempt failed closed with `reason_code: read_only_worktree_postcondition_failed` because the script unconditionally wrote to disk during verification.\n- In this descendant, [`scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py) guards all file writes behind `if args.publish:`. Default execution performs validation purely in-memory and outputs JSON to stdout.\n- Verified both by C06/C07 and by unit test `test_runner_without_publish_is_read_only` in [`tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py).\n\n### Challenge 3: Single-Tick Derivation of Governance Bindings\n- [`orchestration_harness/governance_clockwork.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration_harness/governance_clockwork.py) implements `build_bundle`, which derives:\n  1. Incident register updates (automatic sequential ID `AER-0643`, attempt IDs, related peer IDs, category/origin pairs).\n  2. Pattern recurrence report (counts, open IDs, recurrence composites).\n  3. Revision document mappings (`docs/ariadne-agent-error-correction-register-revision-555.md`).\n  4. Typed command array (executable, arguments, required outputs, no wildcards or shell wrappers).\n  5. Continuity node/decision mappings (`node_status: rejected`, `decision_status: rejected`).\n  6. Compass horizon mappings (`horizon_status: blocked`).\n  7. Baton readings (`register_revision: 555`, `incident_count: 643`, `gate_result: rejected`, inherited boundaries).\n  8. Latch transition (`status: blocked`, `user_attention_required: true`, source commit).\n- The caller observation is strictly constrained to `OBSERVATION_KEYS`; supplying any derived OID, count, or status raises a `GovernanceRejection`.\n\n### Challenge 4: Reproduction of 13 Preserved Rerun Probes and 9 Surrounding Probes\n- [`orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json) codifies all 13 rerun probes (AER-0616 through AER-0629), comprising 4 clock_core probes and 9 surrounding_governance probes.\n- `test_all_thirteen_preserved_reruns_have_hostile_replay` systematically mutates the generated bundle for each control owner and verifies `validate_bundle` rejects the candidate before publication.\n- `publish_private_shadow` uses atomic directory staging (`.staging-<uuid>`) and fail-closed cleanup, guaranteeing zero partial publications on write failure.\n\n### Challenge 5: Hostile Schema and Invariant Enforcement\n- `governance_clockwork.py` validates exact dictionary keys (`_exact`), strict SHA-256 and 40-character hex formatting, Git commit ancestry (`git merge-base --is-ancestor`), 4-way protected ref alignment, closed failure classes and gate mappings, attempt resource uniqueness, peer integrity, and matching counts across all projections.\n\n### Challenge 6: Isolation, Immutability, and Deep-Copy Guarantees\n- The reducer operates on `copy.deepcopy` structures throughout.\n- Caller-owned derived fields are rejected at ingestion.\n- Output paths outside the designated private-shadow directory are rejected (`\"private-shadow\" not in target.name` check).\n- Zero mutable-current fixtures or symlink escapes exist.\n\n### Challenge 7: Digest-Bound Generation Binding\n- Exactly one private generation exists: [`orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/private-shadow-generation-07d5f807deb9/`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/private-shadow-generation-07d5f807deb9/).\n- Its `bundle.json`, `commands.json`, and `register.json` are cryptographically bound to deterministic source commit `de777641a060766a12c429f4891f8d638f18e1bc` and bundle digest `07d5f807deb9ad810982ef551506b38ef3d66acb23ba452970083535506acabe`.\n\n### Challenge 8: Unamortised Cost and Efficacy Accounting\n- Construction reruns: Exactly 13 (planning: 2, implementation: 1, review: 1, verification: 9; sum = 13).\n- Projected steady-state surrounding reruns: 0.\n- Sunk predecessor reruns: 13.\n- Baseline surrounding reruns: 9.\n- Measured steady-state savings: 9 reruns per closeout.\n- Repair-only break-even: `ceil(13 / 9) = 2` closeouts.\n- Cumulative break-even: `ceil((13 + 13) / 9) = ceil(26 / 9) = 3` closeouts.\n- Construction and historical sunk costs are explicitly reported without amortisation.\n\n### Challenge 9: Maintained Surface Reduction and Line Budget Conformance\n- Maintained surfaces reduce from 10 baseline surfaces to 4 candidate surfaces: `(10 - 4) / 10 = 60.0%` reduction (exceeding the >=50.0% requirement).\n- Incremental line count across the 5 owned files:\n  - `contract.json`: 67 lines\n  - `rerun-probes.json`: 18 lines\n  - `governance_clockwork.py`: 479 lines\n  - `ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`: 113 lines\n  - `test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`: 173 lines\n  - Total: exactly 850 lines, matching the 850-line ceiling without line budget violations or hidden engine bloat.\n\n### Challenge 10: Evidence Readiness vs. Live Adoption Distinction\n- [`orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json) records `retirement_ready: true`, but explicitly sets `live_adoption: false` and `current_controls_retired: false`.\n- Existing governance files and controls remain canonical and authoritative pending a future independent adoption gate.\n\n### Challenge 11: Absolute Provider and Runtime Absence\n- Provider calls: 0.\n- DeepSeek native Harness: Declined / inactive.\n- Claude Code fallback: Absent.\n- Product, practice, database, UI, patient, and clinical data: Untouched.\n- Protected refs and Pages deployments: Untouched.\n\n### Challenge 12: Bound Command Manifest Execution\n- All 10 commands C01 through C10 executed sequentially and succeeded with exit code 0:\n  - C01: `git status --short --branch` -> Exit 0\n  - C02: `git rev-parse HEAD` -> Exit 0 (`a0bb86b78bfc011066142740c82d5c25cab7b9c8`)\n  - C03: `ariadne_provider_free_pytest` -> Exit 0 (8/8 tests passed)\n  - C04: `ruff check` -> Exit 0 (All checks passed)\n  - C05: `py_compile` -> Exit 0 (Clean compilation)\n  - C06: Repair runner -> Exit 0 (`candidate_pass` output)\n  - C07: `git diff --exit-code HEAD --` -> Exit 0 (Worktree byte-clean)\n  - C08: `git diff --check` -> Exit 0 (Clean whitespace)\n  - C09: `git diff --name-only` -> Exit 0 (Strict allowlist match)\n  - C10: `git status --short --branch` -> Exit 0 (Worktree clean postcondition verified)\n\n---\n\n## 3. Summary of Findings\n\n- **P0/P1/P2 Findings:** 0\n- **Authority Widening:** None\n- **False Claims:** None\n- **Worktree Postcondition:** Clean and unchanged\n- **Conclusion:** The candidate is a coherent, fail-closed, provider-free private-shadow repair that satisfies all 12 required challenges, catches all 13 preserved rerun probes, achieves 60.0% surface reduction within the 850-line ceiling, and defaults to byte-preserving validation.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Ariadne Independent Review Receipt: Governance Clockwork Projection Consolidation Repair (Fresh Retry Veto)\n\n**Reviewer:** Gemini 3.7 Flash (High reasoning)  \n**Date:** 2026-08-19  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-governance-gemini-a0bb86b7`  \n**Branch:** `codex/review-clockwork-governance-a0bb86b7`  \n**HEAD:** `a0bb86b78bfc011066142740c82d5c25cab7b9c8`  \n**Base:** `4ac81d4443de6f37d6baa26e390c1e8be7eaede1`  \n**Deterministic Source bound by Evidence:** `de777641a060766a12c429f4891f8d638f18e1bc`  \n**Protected Alignment:** `master` and `handoff/current` at `2e34bdad732fdab32fbf778280b3d3c70d66d602`\n\n---\n\n## 1. Mandatory Five-Source Rehydration\n\n1. **`live_handover_current_baton`**:\n   - Rehydrated from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/AGENTS.md).\n   - Preserves all historical Git relations including PR 74/75 integration, accepted provider-free shadow clockwork broker gear architecture (`f6cbd33fd3322754e06ac6dafa1503f5200e0803`), and rejected rehearsal candidate (`a4044010e9f9319e149660ad889141a32cc8d000`).\n   - Conductor/integrator: GPT Sol. Independent reviewer: Gemini 3.7 Flash/high. Active product track remains Reception One.\n\n2. **`current_authority_allocation`**:\n   - Decision owner: GPT Sol.\n   - Reviewer role: One genuinely fresh Tier-2 independent read-only veto after correction and deterministic readmission.\n   - Scope: Strictly provider-free private-shadow governance projection repair; no live clockwork adoption, no control retirement, no occupied DeepSeek/HMR work, no Claude Code fallback, no provider calls, and no protected-ref movements.\n\n3. **`active_plan_and_acceptance`**:\n   - Controlling plan: [`docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md).\n   - Threat model delta: [`docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md).\n   - Historical closeout: [`docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-closeout.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-closeout.md).\n   - Error register: Revision 554 ([`docs/ariadne-agent-error-correction-register-revision-554.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/ariadne-agent-error-correction-register-revision-554.md)) with 642 incidents, all corrected/contained and none open.\n   - Latch evidence: [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-active-operation-latch/current.json) (`in_progress`, operation `ariadne-provider-free-clockwork-governance-projection-consolidation-repair`).\n\n4. **`protected_evidence_boundaries`**:\n   - Provider-free private-shadow governance projection repair only.\n   - Zero caller-authored derived fields, zero new mutable-current fixtures, zero partial publications, zero uncaught escapes.\n   - Maintained surfaces fall from 10 to 4 (60.0% reduction, satisfying the >=50.0% threshold).\n   - Incremental line budget <= 850 lines (measured exact 850 physical lines across the 5 owned implementation files).\n   - 13/13 rerun probes (4 clock_core + 9 surrounding_governance) covered and fail before publication.\n   - Unamortised cost accounting: 13 construction reruns, 0 projected steady-state surrounding reruns, 2-closeout repair-only break-even, and 3-closeout cumulative break-even including 13 predecessor sunk reruns.\n   - Untracked files and [`docs/branding/`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/docs/branding/) preserved; no product/practice/clinical data accessed.\n\n5. **`git_refs_and_worktree`**:\n   - Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-governance-gemini-a0bb86b7`\n   - Branch: `codex/review-clockwork-governance-a0bb86b7`\n   - HEAD: `a0bb86b78bfc011066142740c82d5c25cab7b9c8`\n   - Clean worktree verified before and after all review steps. Protected refs verified at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Challenge Verification Analysis\n\n### Challenge 1: Branch, 40-character HEAD, Worktree Cleanliness, Protected Refs, and Diff Allowlist\n- C01 confirmed branch `codex/review-clockwork-governance-a0bb86b7` with clean status.\n- C02 confirmed exact 40-character commit `a0bb86b78bfc011066142740c82d5c25cab7b9c8`.\n- C07 confirmed zero diff against HEAD (`git diff --exit-code HEAD --`).\n- C08 confirmed zero whitespace/conflict errors across `4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8`.\n- C09 confirmed that all changed files fall strictly within the allowlisted scope.\n- C10 confirmed the worktree remained pristine and clean after all test and runner executions.\n\n### Challenge 2: Rejection of Attempt 1, Root Cause Fix, and Byte-Preserving Execution\n- [`orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json) confirms the first attempt failed closed with `reason_code: read_only_worktree_postcondition_failed` because the script unconditionally wrote to disk during verification.\n- In this descendant, [`scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py) guards all file writes behind `if args.publish:`. Default execution performs validation purely in-memory and outputs JSON to stdout.\n- Verified both by C06/C07 and by unit test `test_runner_without_publish_is_read_only` in [`tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py).\n\n### Challenge 3: Single-Tick Derivation of Governance Bindings\n- [`orchestration_harness/governance_clockwork.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration_harness/governance_clockwork.py) implements `build_bundle`, which derives:\n  1. Incident register updates (automatic sequential ID `AER-0643`, attempt IDs, related peer IDs, category/origin pairs).\n  2. Pattern recurrence report (counts, open IDs, recurrence composites).\n  3. Revision document mappings (`docs/ariadne-agent-error-correction-register-revision-555.md`).\n  4. Typed command array (executable, arguments, required outputs, no wildcards or shell wrappers).\n  5. Continuity node/decision mappings (`node_status: rejected`, `decision_status: rejected`).\n  6. Compass horizon mappings (`horizon_status: blocked`).\n  7. Baton readings (`register_revision: 555`, `incident_count: 643`, `gate_result: rejected`, inherited boundaries).\n  8. Latch transition (`status: blocked`, `user_attention_required: true`, source commit).\n- The caller observation is strictly constrained to `OBSERVATION_KEYS`; supplying any derived OID, count, or status raises a `GovernanceRejection`.\n\n### Challenge 4: Reproduction of 13 Preserved Rerun Probes and 9 Surrounding Probes\n- [`orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json) codifies all 13 rerun probes (AER-0616 through AER-0629), comprising 4 clock_core probes and 9 surrounding_governance probes.\n- `test_all_thirteen_preserved_reruns_have_hostile_replay` systematically mutates the generated bundle for each control owner and verifies `validate_bundle` rejects the candidate before publication.\n- `publish_private_shadow` uses atomic directory staging (`.staging-<uuid>`) and fail-closed cleanup, guaranteeing zero partial publications on write failure.\n\n### Challenge 5: Hostile Schema and Invariant Enforcement\n- `governance_clockwork.py` validates exact dictionary keys (`_exact`), strict SHA-256 and 40-character hex formatting, Git commit ancestry (`git merge-base --is-ancestor`), 4-way protected ref alignment, closed failure classes and gate mappings, attempt resource uniqueness, peer integrity, and matching counts across all projections.\n\n### Challenge 6: Isolation, Immutability, and Deep-Copy Guarantees\n- The reducer operates on `copy.deepcopy` structures throughout.\n- Caller-owned derived fields are rejected at ingestion.\n- Output paths outside the designated private-shadow directory are rejected (`\"private-shadow\" not in target.name` check).\n- Zero mutable-current fixtures or symlink escapes exist.\n\n### Challenge 7: Digest-Bound Generation Binding\n- Exactly one private generation exists: [`orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/private-shadow-generation-07d5f807deb9/`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/private-shadow-generation-07d5f807deb9/).\n- Its `bundle.json`, `commands.json`, and `register.json` are cryptographically bound to deterministic source commit `de777641a060766a12c429f4891f8d638f18e1bc` and bundle digest `07d5f807deb9ad810982ef551506b38ef3d66acb23ba452970083535506acabe`.\n\n### Challenge 8: Unamortised Cost and Efficacy Accounting\n- Construction reruns: Exactly 13 (planning: 2, implementation: 1, review: 1, verification: 9; sum = 13).\n- Projected steady-state surrounding reruns: 0.\n- Sunk predecessor reruns: 13.\n- Baseline surrounding reruns: 9.\n- Measured steady-state savings: 9 reruns per closeout.\n- Repair-only break-even: `ceil(13 / 9) = 2` closeouts.\n- Cumulative break-even: `ceil((13 + 13) / 9) = ceil(26 / 9) = 3` closeouts.\n- Construction and historical sunk costs are explicitly reported without amortisation.\n\n### Challenge 9: Maintained Surface Reduction and Line Budget Conformance\n- Maintained surfaces reduce from 10 baseline surfaces to 4 candidate surfaces: `(10 - 4) / 10 = 60.0%` reduction (exceeding the >=50.0% requirement).\n- Incremental line count across the 5 owned files:\n  - `contract.json`: 67 lines\n  - `rerun-probes.json`: 18 lines\n  - `governance_clockwork.py`: 479 lines\n  - `ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`: 113 lines\n  - `test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`: 173 lines\n  - Total: exactly 850 lines, matching the 850-line ceiling without line budget violations or hidden engine bloat.\n\n### Challenge 10: Evidence Readiness vs. Live Adoption Distinction\n- [`orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7/orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json) records `retirement_ready: true`, but explicitly sets `live_adoption: false` and `current_controls_retired: false`.\n- Existing governance files and controls remain canonical and authoritative pending a future independent adoption gate.\n\n### Challenge 11: Absolute Provider and Runtime Absence\n- Provider calls: 0.\n- DeepSeek native Harness: Declined / inactive.\n- Claude Code fallback: Absent.\n- Product, practice, database, UI, patient, and clinical data: Untouched.\n- Protected refs and Pages deployments: Untouched.\n\n### Challenge 12: Bound Command Manifest Execution\n- All 10 commands C01 through C10 executed sequentially and succeeded with exit code 0:\n  - C01: `git status --short --branch` -> Exit 0\n  - C02: `git rev-parse HEAD` -> Exit 0 (`a0bb86b78bfc011066142740c82d5c25cab7b9c8`)\n  - C03: `ariadne_provider_free_pytest` -> Exit 0 (8/8 tests passed)\n  - C04: `ruff check` -> Exit 0 (All checks passed)\n  - C05: `py_compile` -> Exit 0 (Clean compilation)\n  - C06: Repair runner -> Exit 0 (`candidate_pass` output)\n  - C07: `git diff --exit-code HEAD --` -> Exit 0 (Worktree byte-clean)\n  - C08: `git diff --check` -> Exit 0 (Clean whitespace)\n  - C09: `git diff --name-only` -> Exit 0 (Strict allowlist match)\n  - C10: `git status --short --branch` -> Exit 0 (Worktree clean postcondition verified)\n\n---\n\n## 3. Summary of Findings\n\n- **P0/P1/P2 Findings:** 0\n- **Authority Widening:** None\n- **False Claims:** None\n- **Worktree Postcondition:** Clean and unchanged\n- **Conclusion:** The candidate is a coherent, fail-closed, provider-free private-shadow repair that satisfies all 12 required challenges, catches all 13 preserved rerun probes, achieves 60.0% surface reduction within the 850-line ceiling, and defaults to byte-preserving validation.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/governance_clockwork.py",
+          "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork.py",
+          "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_clockwork_governance_projection_consolidation_repair"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "1dd4b497187c9d303b8b7b0f98b4cf134bfde2b3c1abf9f3f1d03ffe52df6707",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_clockwork.py",
+        "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork.py",
+        "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_clockwork_governance_projection_consolidation_repair"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,51 +1,53 @@
 {
-  "canonical_register_sha256": "396b60b2cb1739c471cca034ba2261800650068957afe88ae5414d25b97f2479",
+  "canonical_register_sha256": "66174a906e8fdd85ce9e19b1405656995fb9fc9631052cdea6be36bb1ecaf747",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 391,
-      "untrusted_partial_worktree": 137
+      "canonical_unchanged": 394,
+      "untrusted_partial_worktree": 143
     },
     "by_category": {
-      "command_scope_violation": 86,
+      "command_scope_violation": 87,
       "evidence_misreport": 67,
       "harness_failure": 54,
       "operator_error": 36,
-      "output_contract_violation": 231,
+      "output_contract_violation": 233,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 102,
+      "repository_defect": 108,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 434,
+      "agent_behavior": 437,
       "harness": 54,
       "operator": 36,
-      "repository": 102,
+      "repository": 108,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 367,
+      "low": 375,
       "material": 118,
-      "moderate": 157
+      "moderate": 158
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 2,
       "api-spine-historical-regression-suite::orchestrator": 2,
+      "ariadne-active-operation-latch-closeout::orchestrator": 1,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
       "ariadne-active-operation-latch::orchestrator": 1,
       "ariadne-agent-error-register-current-literal-test::orchestrator": 1,
       "ariadne-agent-error-register-current-projection-tests::orchestrator": 2,
       "ariadne-agent-error-register-current-structural-test::orchestrator": 1,
       "ariadne-agent-error-register-schema-admission::orchestrator": 1,
+      "ariadne-agent-error-register-targeted-tests::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-agent-error-register-update::orchestrator": 1,
       "ariadne-agent-error-register::orchestrator": 5,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
-      "ariadne-compass-current-position-test::orchestrator": 6,
+      "ariadne-compass-current-position-test::orchestrator": 7,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
@@ -59,7 +61,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 334,
+      "codex-primary-orchestrator::orchestrator": 335,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -84,7 +86,7 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
-      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 16,
+      "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
       "emr4-arrival-check-in-convergence-prose-fixtures::orchestrator": 1,
       "emr4-behavior-evidence-schema::orchestrator": 1,
       "emr4-behavior-plan-parent-binding-test::orchestrator": 1,
@@ -119,13 +121,14 @@
       "git-cached-diff-whitespace-gate::orchestrator": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "governance-projection-incident-observation-reducer::orchestrator": 1,
+      "governance-projection-repair-focused-tests::orchestrator": 2,
       "governance-projection-repair-runner-read-only-interface::verifier": 1,
       "live-agents-handover::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 8,
       "local-docker-desktop::orchestrator": 1,
       "local-powershell-operator::orchestrator": 16,
       "local-powershell-python-operator::orchestrator": 1,
-      "local-python-operator::orchestrator": 4,
+      "local-python-operator::orchestrator": 5,
       "local-rg-operator::orchestrator": 3,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
@@ -150,12 +153,12 @@
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 537,
+      "orchestrator": 546,
       "verifier": 58
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 642,
+  "incident_count": 651,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -1738,7 +1741,7 @@
       "categories": [
         "repository_defect"
       ],
-      "incident_count": 8,
+      "incident_count": 10,
       "incident_ids": [
         "AER-0175",
         "AER-0179",
@@ -1747,7 +1750,9 @@
         "AER-0395",
         "AER-0543",
         "AER-0545",
-        "AER-0546"
+        "AER-0546",
+        "AER-0648",
+        "AER-0649"
       ],
       "origins": [
         "repository"
@@ -1758,7 +1763,9 @@
         "Before assigning a known recurrence signature, read the canonical report row and copy its resource_id as part of the recurrence identity.",
         "Before regenerating the report after any future register edit, search the whole exact register test for every revision, ID-range, seed, origin, category, candidate-state and total-count literal; then run the entire register file as the only acceptance packet.",
         "Before the next register run, derive and compare every direct origin length, whole report aggregate, ordered ID range and recurring-pattern member list from the regenerated pattern report rather than relying only on literal mapping searches.",
+        "Compare the complete generated counts object and every affected recurring-pattern row against all exact test literals as one atomic register-fixture update.",
         "Compare the complete generated counts object and every affected recurring-pattern row against its test literal as one atomic fixture update.",
+        "Compare the complete generated counts object and every standalone origin/category literal against the test file as one atomic register-fixture update.",
         "Every register edit must run the whole exact register test file after regenerating pattern-report.json; partial node selection cannot serve as final register acceptance."
       ],
       "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
@@ -1924,7 +1931,7 @@
       ]
     }
   ],
-  "register_revision": 554,
+  "register_revision": 561,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

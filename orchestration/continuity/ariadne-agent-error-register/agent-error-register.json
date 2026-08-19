@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 554,
+  "register_revision": 561,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -25386,6 +25386,355 @@
           "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json",
           "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
           "docs/ariadne-agent-error-correction-register-revision-554.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0643",
+      "attempt_id": "clockwork-governance-closeout-latch-validation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch-closeout",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The live latch checkpoint summary must remain non-empty and no longer than the schema's 500-character bound.",
+      "observed_error": "The first closeout suite rejected the new completed_stage because the detailed acceptance sentence exceeded 500 characters.",
+      "detection_method": "Both JSON Schema and the pure latch validator reported the exact bounded-text violation before closeout admission.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-555.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.active_operation_completed_stage_exceeded_schema_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count one post-review closeout verification retry and replace the summary with a bounded factual sentence under 500 characters.",
+        "prevention_control": "Closeout latch prose is schema-validated before the combined Continuity suite; detailed metrics remain in closeout evidence rather than the bounded checkpoint.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_ariadne_active_operation_latch.py",
+          "docs/ariadne-agent-error-correction-register-revision-555.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0644",
+      "attempt_id": "clockwork-governance-closeout-compass-validation-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "ariadne-compass-current-position-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "After an accepted Continuity/Compass advance, the global navigation test must name the new exact current node rather than the predecessor.",
+      "observed_error": "The same first closeout suite found that the Compass report was valid at revision 311 but one global test still expected the revision-310 predecessor node.",
+      "detection_method": "The Compass test reported the exact predecessor-versus-successor node ID mismatch while semantic Compass validation itself passed.",
+      "evidence_paths": [
+        "orchestration/continuity/emr4-compass.json",
+        "tests/test_ariadne_compass.py",
+        "docs/ariadne-agent-error-correction-register-revision-555.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.compass_current_position_fixture_stale_after_accepted_advance",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use the same post-review closeout retry to advance the global test to the exact accepted repair node and rerun the combined suite.",
+        "prevention_control": "The Continuity updater's prospective current_position becomes the single source for closeout navigation fixtures before canonical writes.",
+        "evidence_paths": [
+          "orchestration/continuity/emr4-compass.json",
+          "tests/test_ariadne_compass.py",
+          "docs/ariadne-agent-error-correction-register-revision-555.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0645",
+      "attempt_id": "clockwork-governance-terminal-latch-replay-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "governance-projection-repair-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Historical construction replay must not depend on the mutable live latch after closeout, while the real runner must reject a blocked terminal latch without writing.",
+      "observed_error": "The post-closeout focused suite produced six active_latch denials because its bundle helper still used blocked current.json as if it were the immutable in-progress construction input.",
+      "detection_method": "Focused pytest showed the same deliberate build_bundle active_latch rejection across every construction replay and the default runner.",
+      "evidence_paths": [
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-preplanning-runtime-state.json",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-556.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.historical_replay_coupled_to_terminal_live_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count an eleventh verification retry, replay construction against the immutable preplanning active_operation and separately assert that the real runner denies the blocked latch without byte changes.",
+        "prevention_control": "Historical replay consumes immutable operation evidence; mutable current.json is used only for live-lifecycle assertions and must fail closed after terminal transition.",
+        "evidence_paths": [
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-preplanning-runtime-state.json",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-556.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0646",
+      "attempt_id": "clockwork-governance-line-budget-replay-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "governance-projection-repair-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The immutable-latch replay correction must preserve the frozen 850-line implementation and test ceiling.",
+      "observed_error": "The first replay-decoupled focused suite was rejected by efficacy_cost_or_surface because the test-only correction had expanded the five measured files to 851 lines.",
+      "detection_method": "Focused pytest failed closed in validate_bundle, and an exact five-path line reading identified 851 total lines rather than an incident-register or cost-input defect.",
+      "evidence_paths": [
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json",
+        "docs/ariadne-agent-error-correction-register-revision-557.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.test_only_replay_correction_exceeded_frozen_line_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a twelfth verification retry and simplify the replay helper without changing behavior, reducing the five measured files to 849 lines.",
+        "prevention_control": "Every edit to a budgeted file is followed by an exact configured-path line reading before the next focused suite.",
+        "evidence_paths": [
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json",
+          "docs/ariadne-agent-error-correction-register-revision-557.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0647",
+      "attempt_id": "clockwork-governance-register-targeted-tests-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-targeted-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every manually selected pytest node must be resolved from the current repository before invocation.",
+      "observed_error": "The targeted register command named two obsolete test functions; pytest rejected both selectors before running them, while the exact AER-0646 selector was valid.",
+      "detection_method": "Pytest returned both unmatched nodes inline, and an exact scoped symbol search identified the current schema, pattern-report and AER-0646 test names.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-558.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.exact_pytest_node_name_unverified",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a thirteenth verification retry, resolve current symbols with rg and run the exact current nodes before the complete register suite.",
+        "prevention_control": "Resolve every manually selected pytest node with a scoped repository search before invocation; prefer the whole exact test file when selection precision has no material benefit.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-558.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0648",
+      "attempt_id": "clockwork-governance-register-full-suite-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A register append must update every exact origin-count literal before the complete acceptance suite runs.",
+      "observed_error": "The complete revision-558 register suite found that the seed-separation test still expected 434 agent-behaviour incidents after AER-0647 raised the generated and aggregate total to 435.",
+      "detection_method": "The complete 647-incident pytest suite finished with one exact 435-versus-434 assertion failure and no other failures.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-559.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a fourteenth verification retry, update the seed-separation count to 435, refresh all revision-559 aggregates and rerun the complete suite.",
+        "prevention_control": "Compare the complete generated counts object and every standalone origin/category literal against the test file as one atomic register-fixture update.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-559.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0649",
+      "attempt_id": "clockwork-governance-register-full-suite-002",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "emr4-ariadne-agent-error-register-acceptance",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A register append must update both aggregate counts and every affected exact recurrence-membership literal before the complete suite runs.",
+      "observed_error": "The next complete suite found the exact-count recurrence fixture omitted AER-0648 even though the regenerated report correctly included it.",
+      "detection_method": "The complete 648-incident pytest suite finished with one exact recurrence-membership failure and no other failures.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "docs/ariadne-agent-error-correction-register-revision-560.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a fifteenth verification retry and update the exact recurrence membership to include both AER-0648 and this correction AER-0649.",
+        "prevention_control": "Compare the complete generated counts object and every affected recurring-pattern row against all exact test literals as one atomic register-fixture update.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "docs/ariadne-agent-error-correction-register-revision-560.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0650",
+      "attempt_id": "clockwork-governance-pattern-report-diagnostic-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "local-python-operator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A diagnostic query must inspect the current pattern-report row shape before selecting an exact field.",
+      "observed_error": "A read-only diagnostic assumed recurring-pattern rows exposed composite and raised KeyError; the adjacent committed test already provided the exact recurrence signature and expected membership shape.",
+      "detection_method": "The one-line Python diagnostic returned KeyError: composite without changing repository state.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-560.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pattern_report_row_shape_assumed_without_inspection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a sixteenth verification retry and use the already inspected exact test fixture rather than inventing a report field.",
+        "prevention_control": "Inspect one current row or use the repository's existing accessor before composing an ad hoc structured-data query.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-560.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0651",
+      "attempt_id": "clockwork-governance-final-focused-session-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A yielded verification command must expose its session identifier and final exit code before it can contribute acceptance evidence.",
+      "observed_error": "The combined closeout command yielded during the final focused suite, but the orchestration wrapper emitted neither the returned session identifier nor a final exit code; the process later ended with only partial dots retained.",
+      "detection_method": "The tool result reported an undefined exit and no exposed session handle; a later process inventory found no surviving pytest process, so the final outcome could not be recovered.",
+      "evidence_paths": [
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "docs/ariadne-agent-error-correction-register-revision-561.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_verification_session_id_not_exposed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a seventeenth verification retry and rerun the exact focused file in a dedicated bounded command that must return a final exit code.",
+        "prevention_control": "Every potentially yielding exec wrapper must emit session_id as well as output and exit_code, or run the bounded test as a dedicated command.",
+        "evidence_paths": [
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "docs/ariadne-agent-error-correction-register-revision-561.md"
         ]
       },
       "status": "corrected"

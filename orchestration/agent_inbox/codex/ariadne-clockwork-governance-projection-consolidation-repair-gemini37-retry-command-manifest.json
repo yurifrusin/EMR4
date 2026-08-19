@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-governance-gemini-a0bb86b7",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_clockwork.py",
+        "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork.py",
+        "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_clockwork_governance_projection_consolidation_repair"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {
+      "id": "C08",
+      "argv": ["git", "diff", "--check", "4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8"]
+    },
+    {
+      "id": "C09",
+      "argv": ["git", "diff", "--name-only", "4ac81d4443de6f37d6baa26e390c1e8be7eaede1..a0bb86b78bfc011066142740c82d5c25cab7b9c8"]
+    },
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

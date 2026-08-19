@@ -4,18 +4,14 @@ import copy
 import json
 import re
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
 from orchestration_harness.governance_clockwork import (
-    GovernanceRejection,
-    build_bundle,
-    digest,
-    load_object,
-    publish_private_shadow,
-    validate_bundle,
-    validate_contract,
-    validate_probes,
+    GovernanceRejection, build_bundle, digest,
+    load_object, publish_private_shadow, validate_bundle,
+    validate_contract, validate_probes,
 )
 from scripts.ariadne_provider_free_clockwork_governance_projection_consolidation_repair import _observation, main as runner_main
 
@@ -27,12 +23,14 @@ PROBES = TOPIC / "rerun-probes.json"
 REGISTER = ROOT / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
 SCHEMA = REGISTER.with_name("agent-error-register.schema.json")
 LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+PREPLAN = ROOT / "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-preplanning-runtime-state.json"
 
 
 def _bundle(observations: list[object] | None = None) -> tuple[dict[str, object], dict[str, object]]:
     contract = validate_contract(load_object(CONTRACT))
-    return (
-        build_bundle(
+    construction_latch = load_object(PREPLAN)["active_operation"]
+    with patch("orchestration_harness.governance_clockwork.load_object", side_effect=lambda path: construction_latch if path == LATCH else load_object(path)):
+        bundle = build_bundle(
             ROOT,
             CONTRACT,
             PROBES,
@@ -41,9 +39,8 @@ def _bundle(observations: list[object] | None = None) -> tuple[dict[str, object]
             LATCH,
             observations or [_observation()],
             gate_result="rejected",
-        ),
-        contract,
-    )
+        )
+    return bundle, contract
 
 
 def _reseal(bundle: dict[str, object]) -> None:
@@ -72,8 +69,8 @@ def test_plan_receipt_latch_and_boundaries_are_frozen() -> None:
         "git_refs_and_worktree",
     }
     assert latch["operation_id"] == receipt["active_operation"]["operation_id"]
-    assert latch["status"] == "in_progress"
-    assert not latch["terminal_response"]["permitted"]
+    assert latch["status"] in {"in_progress", "blocked"}
+    assert latch["terminal_response"]["permitted"] == (latch["status"] == "blocked")
     for lane in ("deepseek_flash", "gemini_verifier", "native_subagents"):
         assert lane in {row["lane_id"] for row in receipt["parallelism_assessment"]["lanes"]}
 
@@ -170,4 +167,6 @@ def test_runner_without_publish_is_read_only(monkeypatch: pytest.MonkeyPatch) ->
     targets = [TOPIC / "provider-free-repair-evidence.json", TOPIC / "repair-report.md"]
     before = [path.read_bytes() for path in targets]
     monkeypatch.setattr("sys.argv", ["clockwork-repair"])
-    assert runner_main() == 0 and [path.read_bytes() for path in targets] == before
+    with pytest.raises(GovernanceRejection, match="active_latch"):
+        runner_main()
+    assert [path.read_bytes() for path in targets] == before

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 328,
+  "graph_revision": 329,
   "harvests": [],
   "nodes": [
     {
@@ -23178,9 +23178,101 @@
         "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
         "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
       ]
+    },
+    {
+      "id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+      "title": "Ariadne provider-free clockwork governance projection consolidation repair",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-18T23:49:44.1443944Z",
+      "updated_at": "2026-08-18T23:49:44.1443944Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a0bb86b78bfc011066142740c82d5c25cab7b9c8",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The provider-free private-shadow repair is accepted; live adoption remains closed.",
+          "Current governance controls remain authoritative pending a separate migration-and-retirement decision.",
+          "No product, provider, runtime, deployment or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-clockwork-governance-projection-consolidation-repair",
+          "source": "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the measured private-shadow mechanism and keep live adoption behind Yuri's separate choice."
+        }
+      ],
+      "claim_scope": [
+        "All thirteen preserved rerun probes and nine surrounding-workflow probes reject before publication.",
+        "Maintained governance surfaces reduce from ten to four, a sixty-percent reduction.",
+        "The exact reviewed five-file implementation occupied 850 lines; final closeout occupies 849 against the frozen 850-line ceiling.",
+        "Twenty-one end-to-end reruns yield three-closeout repair-only and four-closeout cumulative break-even.",
+        "Default runner execution is byte-preserving; all persistent outputs require explicit publish authority.",
+        "Fresh Gemini 3.7 Flash/high review passes at exact clean candidate a0bb86b78bfc011066142740c82d5c25cab7b9c8."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md",
+          "docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/repair-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-561.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-19--clockwork-governance-projection-consolidation-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-retry-command-manifest.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-retry-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-retry-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-retry-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork.py",
+          "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Yuri must choose whether to authorize a separately frozen live migration-and-retirement rehearsal or retain shadow-only use.",
+        "No current control may be retired and no dual live control plane may be created without that choice.",
+        "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
+        "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T21:39:24.5770151Z"
+  "updated_at": "2026-08-18T23:49:44.1443944Z"
 }

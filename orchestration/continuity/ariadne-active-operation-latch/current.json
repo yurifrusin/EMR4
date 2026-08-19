@@ -3,17 +3,17 @@
   "operation_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
   "active_tranche": "Ariadne provider-free clockwork governance projection consolidation repair",
   "objective": "Implement and evaluate one provider-free private-shadow governance reducer that derives the incident register, recurrence report, revision/count readings, typed command manifest, Continuity/Compass deltas, Current Baton fields and latch transition from one acknowledged clock tick, while replaying the preserved failure probes and measuring construction cost, steady-state reruns, maintained surface and break-even before any live adoption or control retirement.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
   "authority_source": "AGENTS.md Current Baton Next implementation, the rejected rehearsal at a4044010e9f9319e149660ad889141a32cc8d000, Yuri's explicit 2026-08-19 choice of the bounded repair and standing uninterrupted-development authority authorize only this provider-free private-shadow governance projection consolidation repair.",
   "checkpoint": {
-    "completed_stage": "The provider-free private-shadow reducer passes all thirteen preserved rerun probes and nine surrounding-workflow probes, derives every governance binding without caller-authored fields, reduces maintained surfaces from ten to four within the 845-of-850-line budget, projects zero steady-state surrounding reruns and reports eleven construction reruns with two-closeout repair-only and three-closeout cumulative break-even; the full 640-incident register and continuity control suites pass.",
-    "next_executable_stage": "prepare_and_run_one_fresh_exact_candidate_gemini_37_flash_high_read_only_veto_then_close_out_without_live_adoption_or_control_retirement",
+    "completed_stage": "The private-shadow reducer covers 13 preserved and 9 surrounding probes, defaults to byte-preserving validation, reduces maintained surfaces 10 to 4 at 849/850 lines, reports 21 end-to-end reruns with three/four-closeout payback, passes register revision 561 and received a fresh Gemini 3.7 Flash/high pass at exact candidate a0bb86b78bfc011066142740c82d5c25cab7b9c8.",
+    "next_executable_stage": "await_yuri_choice_between_a_separately_frozen_live_migration_and_retirement_rehearsal_or_retaining_private_shadow_and_resuming_product_work",
     "retry_counters": {
       "planning": 2,
       "implementation": 1,
       "review": 1,
-      "verification": 9
+      "verification": 17
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "Private-shadow repair is accepted, but live adoption and current-control retirement require Yuri's separate authority choice."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "accepted_private_shadow_closeout_reached_genuine_live_adoption_authority_fork"
   },
   "protected_boundaries": [
     "provider_free_private_shadow_governance_projection_repair_only",
