@@ -288,6 +288,12 @@ def test_user_decision_intent_is_closed_and_rejects_derived_or_underbounded_inpu
     contract = validate_contract(_json(CONTRACT_PATH))
     baseline = _json(DECISION_INTENT_PATH)
     assert validate_user_decision_tick_intent(baseline, contract) == baseline
+    generic_descendant = json.loads(json.dumps(baseline))
+    generic_descendant["selected_outcome"] = "replace_with_newly_frozen_descendant"
+    assert (
+        validate_user_decision_tick_intent(generic_descendant, contract)
+        == generic_descendant
+    )
     derived = json.loads(json.dumps(baseline))
     derived["source_head"] = "a" * 40
     with pytest.raises(

@@ -41,6 +41,12 @@ BLOCKED_INTENT_VERSION = "ariadne.governance_live_blocked_transition_intent.v1"
 USER_DECISION_INTENT_VERSION = (
     "ariadne.governance_live_user_decision_transition_intent.v1"
 )
+USER_DECISION_SELECTED_OUTCOMES = frozenset(
+    {
+        "replace_with_newly_frozen_descendant",
+        "replace_with_newly_frozen_transport_redesign",
+    }
+)
 CHECKPOINT_INTENT_VERSION = "ariadne.governance_live_checkpoint_transition_intent.v1"
 PREPARED_VERSION = "ariadne.governance_live_tick_prepared_generation.v1"
 GENERATION_VERSION = "ariadne.governance_live_tick_generation.v1"
@@ -305,7 +311,7 @@ def validate_user_decision_tick_intent(
     )
     if IDENTIFIER.fullmatch(blocked_operation_id) is None:
         _reject("user_decision_blocked_operation_id")
-    if row["selected_outcome"] != "replace_with_newly_frozen_transport_redesign":
+    if row["selected_outcome"] not in USER_DECISION_SELECTED_OUTCOMES:
         _reject("user_decision_selected_outcome")
     next_operation = _exact(
         row["next_operation"],
@@ -645,7 +651,7 @@ def _render_user_decision_baton(
 
     next_operation = intent["next_operation"]
     next_value = (
-        "Proceed under Yuri's explicit transport-redesign selection with "
+        "Proceed under Yuri's explicit user-selected replacement with "
         f"`{next_operation['operation_id']}`: {next_operation['objective']} "
         "The active latch is the exact authority boundary. Protected refs remain closed; "
         "preserve `docs/branding/` and stage explicit paths only."
