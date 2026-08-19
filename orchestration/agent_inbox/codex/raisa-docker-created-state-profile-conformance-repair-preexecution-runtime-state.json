@@ -1,0 +1,214 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_provider_free_no_credential_docker_created_state_representation_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and is clockwork-projected through lease 17. Its Next implementation row and the live latch name raisa-provider-free-docker-created-state-profile-conformance-repair; the active checkpoint admits implementation but requires a fresh receipt and exact checkpoint before the single no-credential execution.",
+    "current_authority_allocation": "Yuri explicitly accepted Sol's recommended no-credential prerequisite and granted standing authority through this tranche's aim and the next dependency-satisfied tranche. GPT Sol is the sole owner of the one mutable Docker Created-state lifecycle, captured IDs, exact cleanup, predicate correction and acceptance. DeepSeek is declined because its native Harness still requires a separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for a fresh post-success exact-candidate veto. Native subagents are declined by developer policy and the one-cleanup-owner constraint.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-docker-created-state-profile-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/contract.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/failure.schema.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.schema.json",
+      "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+      "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+      "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/checkpoint-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Exactly one no-credential Docker Created-state execution is proposed after a clockwork checkpoint. It may create one exact internal network and one never-started container, inspect them in controller memory, retain closed relation enums only and clean both by captured ID. The attempt-002 failure/envelope and historical harness digest remain immutable. Docker start/attach/exec/logs, stdin, credentials, PostgreSQL, SQL, database retry, product/API/OpenAPI/GraphQL/config/client change, ordinary-practice enablement, feature flag or allowlist change, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, DeepSeek/Gemini call, production, deployment, release, Pages and protected-ref movement are forbidden. docs/branding and unrelated untracked files remain excluded; explicit-path staging only.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact a12b30e320707e3306700be14b5fab854bcd4545; origin task branch remains b5afa75bfc759efa689d35cd06c5b330e4b7ed05 and local is twenty-three commits ahead. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean, 650 unrelated untracked paths remain preserved and docs/branding remains untracked."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+    "active_tranche": "Raisa provider-free Docker Created-state profile conformance repair",
+    "objective": "Freeze and complete one provider-free no-credential Docker Created-state representation rehearsal: create one exact internal network and one exact never-started container, retain only sanitized structural evidence, clean both exactly, then correct and bind the relay-free harness's network-identity and credential-versus-ownership-nonce predicates without starting PostgreSQL or repeating a database attempt.",
+    "status": "in_progress",
+    "source_head": "df5950e2309ca5a912b797fcaca61df7371be9b1",
+    "authority_source": "Yuri explicitly accepted Sol's recommended prerequisite and granted standing authority through this tranche's aim and onward under his usual uninterrupted-development authority; immutable attempt-002 failure and cleanup evidence remain the causal floor.",
+    "checkpoint": {
+      "completed_stage": "The no-credential Docker Created-state representation and predicate-correction plan, threat-model delta and four plan-boundary tests are frozen at exact full Git source df5950e2309ca5a912b797fcaca61df7371be9b1. No Docker object, credential, container process, PostgreSQL process, SQL or database attempt was created or executed.",
+      "next_executable_stage": "implement_the_closed_contract_schemas_no_credential_created_state_harness_and_deterministic_tests_without_docker_execution",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_no_credential_docker_created_state_representation_only",
+      "attempt_002_failure_envelope_and_cleanup_evidence_are_immutable_and_never_overwritten",
+      "accepted_relay_free_transport_and_runtime_role_tenant_isolation_floor_remain_immutable_except_the_two_evidence_proven_profile_predicates",
+      "exactly_one_newly_named_internal_network_and_one_created_never_started_container_after_frozen_plan_and_preexecution_admission",
+      "container_start_attach_stdin_credential_delivery_postgresql_process_sql_transaction_and_database_retry_forbidden",
+      "sanitized_closed_structural_evidence_only_no_raw_docker_inspect_output_object_id_name_nonce_path_or_secret",
+      "credential_absence_and_ownership_nonce_presence_are_distinct_noncontradictory_predicates",
+      "network_identity_predicate_must_be_derived_only_from_observed_created_state_docker_29_5_3_representation",
+      "captured_id_only_cleanup_after_exact_ownership_reinspection_and_zero_labelled_residue",
+      "no_local_env_live_secret_cloud_hosted_existing_product_or_disposable_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_before_separate_native_harness_boot_proof_no_claude_code_fallback_and_no_provider_call_before_optional_gemini_veto",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The native DeepSeek Harness is not admitted for occupied EMR4 work until its separate boot proof passes; Claude Code is no fallback and this single mutable Created-state lifecycle is not separable.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "A fresh Gemini 3.7 Flash/high exact-candidate veto is reserved only if the one Created-state execution, cleanup, predicate correction and deterministic packet all pass.",
+        "work_packages": [
+          "future_exact_candidate_read_only_created_state_profile_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Developer policy prohibits proactive native delegation and the Docker lifecycle has one captured-ID cleanup owner.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol invokes the fixed no-credential harness exactly once",
+      "one mutable Docker lifecycle has one captured-ID cleanup owner",
+      "no second execution follows any process or evidence result",
+      "source correction follows only passing sanitized evidence and cleanup",
+      "Gemini is eligible only after deterministic occupied success and correction"
+    ],
+    "reassessment_triggers": [
+      "occupied_terminal_evidence",
+      "pre_verifier_acceptance",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete AGENTS and active-plan rehydration, exact plan/contract/source gates, lease-17 latch and exact Git/Docker readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol owns the one fixed local Created-state invocation, captured IDs and exact cleanup."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Native Harness occupied use remains paused pending its separate boot proof."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport is not selected and no fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Verifier remains reserved; no provider call precedes occupied success."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane declined and no native subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Real-TTY fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

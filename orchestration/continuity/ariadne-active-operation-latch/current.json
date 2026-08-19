@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free Docker Created-state profile conformance repair",
   "objective": "Freeze and complete one provider-free no-credential Docker Created-state representation rehearsal: create one exact internal network and one exact never-started container, retain only sanitized structural evidence, clean both exactly, then correct and bind the relay-free harness's network-identity and credential-versus-ownership-nonce predicates without starting PostgreSQL or repeating a database attempt.",
   "status": "in_progress",
-  "source_head": "df5950e2309ca5a912b797fcaca61df7371be9b1",
+  "source_head": "a12b30e320707e3306700be14b5fab854bcd4545",
   "authority_source": "Yuri explicitly accepted Sol's recommended prerequisite and granted standing authority through this tranche's aim and onward under his usual uninterrupted-development authority; immutable attempt-002 failure and cleanup evidence remain the causal floor.",
   "checkpoint": {
-    "completed_stage": "The no-credential Docker Created-state representation and predicate-correction plan, threat-model delta and four plan-boundary tests are frozen at exact full Git source df5950e2309ca5a912b797fcaca61df7371be9b1. No Docker object, credential, container process, PostgreSQL process, SQL or database attempt was created or executed.",
-    "next_executable_stage": "implement_the_closed_contract_schemas_no_credential_created_state_harness_and_deterministic_tests_without_docker_execution",
+    "completed_stage": "At exact full Git source a12b30e320707e3306700be14b5fab854bcd4545, the fresh five-source receipt passes; contract, schemas and no-credential harness pass 128/128 hostile mutations, 104 focused regressions, Ruff, compilation and diff checks. Docker 29.5.3, the exact cached image, zero labelled residue, unchanged historical harness bytes and empty terminal paths are read back. No Docker object or database process was created.",
+    "next_executable_stage": "execute_exactly_one_no_credential_created_state_run_then_stop_without_retry_preserve_its_sanitized_terminal_evidence_and_do_not_start_or_attach_the_container",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
