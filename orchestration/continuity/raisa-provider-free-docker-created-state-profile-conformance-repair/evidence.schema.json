@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "plan_source",
+    "evidence_label",
+    "execution_count",
+    "retry_count",
+    "docker_engine_version",
+    "image_id",
+    "object_profile",
+    "representation",
+    "separation_profile",
+    "cleanup",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.docker-created-state-profile-conformance-evidence.v1"},
+    "result": {"const": "raisa_provider_free_docker_created_state_profile_conformance_repair_pass"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "plan_source": {"const": "df5950e2309ca5a912b797fcaca61df7371be9b1"},
+    "evidence_label": {"const": "provider_free_no_credential_docker_created_state_profile_conformance"},
+    "execution_count": {"const": 1},
+    "retry_count": {"const": 0},
+    "docker_engine_version": {"const": "29.5.3"},
+    "image_id": {"const": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8"},
+    "object_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["network_owned", "container_owned", "created", "running", "never_started", "never_attached"],
+      "properties": {
+        "network_owned": {"const": true},
+        "container_owned": {"const": true},
+        "created": {"const": true},
+        "running": {"const": false},
+        "never_started": {"const": true},
+        "never_attached": {"const": true}
+      }
+    },
+    "representation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["network_cardinality", "network_key_relation", "network_mode_relation", "endpoint_network_id_relation"],
+      "properties": {
+        "network_cardinality": {"const": 1},
+        "network_key_relation": {"const": "captured_network_name"},
+        "network_mode_relation": {"enum": ["captured_network_name", "captured_network_id"]},
+        "endpoint_network_id_relation": {"enum": ["empty", "captured_network_id"]}
+      }
+    },
+    "separation_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["credential_canaries_absent", "credential_keys_absent", "nonce_exact_label", "nonce_absent_outside_label"],
+      "properties": {
+        "credential_canaries_absent": {"const": true},
+        "credential_keys_absent": {"const": true},
+        "nonce_exact_label": {"const": true},
+        "nonce_absent_outside_label": {"const": true}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["container_absent", "network_absent", "matching_labelled_resources", "status"],
+      "properties": {
+        "container_absent": {"const": true},
+        "network_absent": {"const": true},
+        "matching_labelled_resources": {"const": 0},
+        "status": {"const": "cleanup_verified"}
+      }
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["container_started_or_attached", "credential_created_or_delivered", "postgresql_process_sql_or_database_attempt", "provider_or_external_network_used", "ordinary_practice_enabled_or_released", "product_or_protected_data_used"],
+      "properties": {
+        "container_started_or_attached": {"const": false},
+        "credential_created_or_delivered": {"const": false},
+        "postgresql_process_sql_or_database_attempt": {"const": false},
+        "provider_or_external_network_used": {"const": false},
+        "ordinary_practice_enabled_or_released": {"const": false},
+        "product_or_protected_data_used": {"const": false}
+      }
+    }
+  }
+}

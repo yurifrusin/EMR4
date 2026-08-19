@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "stage", "code", "execution_count", "retry_count", "success_released", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "emr4.docker-created-state-profile-conformance-failure.v1"},
+    "result": {"const": "failed_closed"},
+    "stage": {"enum": ["static", "environment", "representation", "cleanup", "evidence"]},
+    "code": {"type": "string", "pattern": "^[a-z0-9_]{1,96}$"},
+    "execution_count": {"const": 1},
+    "retry_count": {"const": 0},
+    "success_released": {"const": false},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["container_absent", "network_absent", "matching_labelled_resources", "status"],
+      "properties": {
+        "container_absent": {"type": "boolean"},
+        "network_absent": {"type": "boolean"},
+        "matching_labelled_resources": {"type": "integer", "minimum": -1},
+        "status": {"enum": ["cleanup_verified", "cleanup_unverified", "not_started"]}
+      }
+    }
+  }
+}

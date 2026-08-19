@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "plan_source",
+    "protected_source",
+    "result",
+    "evidence_label",
+    "source_bindings",
+    "historical_harness",
+    "docker_profile",
+    "representation_profile",
+    "correction_profile",
+    "hostile_threshold",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.docker-created-state-profile-conformance-repair-contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-docker-created-state-profile-conformance-repair"},
+    "plan_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "protected_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "result": {"const": "raisa_provider_free_docker_created_state_profile_conformance_repair_pass"},
+    "evidence_label": {"const": "provider_free_no_credential_docker_created_state_profile_conformance"},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "historical_harness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "source_commit", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "docker_profile": {"type": "object", "minProperties": 1},
+    "representation_profile": {"type": "object", "minProperties": 1},
+    "correction_profile": {"type": "object", "minProperties": 1},
+    "hostile_threshold": {"const": 128},
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 8,
+      "additionalProperties": {"const": false}
+    }
+  }
+}

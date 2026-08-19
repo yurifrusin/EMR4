@@ -1,0 +1,127 @@
+{
+  "schema_version": "emr4.docker-created-state-profile-conformance-repair-contract.v1",
+  "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+  "plan_source": "df5950e2309ca5a912b797fcaca61df7371be9b1",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "result": "raisa_provider_free_docker_created_state_profile_conformance_repair_pass",
+  "evidence_label": "provider_free_no_credential_docker_created_state_profile_conformance",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-plan.md",
+      "sha256": "020f7ad76c03d97636e724990f8b18eb8edd29f114404153976f4045ba5a46f2"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-docker-created-state-profile-conformance-repair-threat-model-delta.md",
+      "sha256": "38853b72562e180e04e8455d0451d64e0006de4430e210cfe37f2e01ccbebcf4"
+    },
+    {
+      "path": "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-002-blocked-closeout.md",
+      "sha256": "fe9ff969e21e8ee90126c2f58475aaea11b0ddb4a979035a51fc84eeac5b493f"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-002-sol-blocked-assessment.md",
+      "sha256": "9ad525f1e2d004ac1a8b7c1f5b93ce1a7b0866d138b597ac4ffa9319d1f8a673"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/rehearsal-failure-evidence.json",
+      "sha256": "7efb9853beee9723dbb01fac1f03c4392216bfcc15e9f490f4cb0baae08920ff"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/attempt-002-execution-envelope.json",
+      "sha256": "6418ecf2e2356b6c875a70106136cdc65d6e545ead5fceeb2c793db45ebe2e40"
+    },
+    {
+      "path": "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+      "sha256": "a12694cb898fc9e8ed48641bc94569e4367c77851ba587bf78fc6d59428e10a5"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+      "sha256": "bed2a89a3814ba9e9ac006d0fdb0c68d204fec53d8c21b6128190605b6ad9ec2"
+    }
+  ],
+  "historical_harness": {
+    "path": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+    "source_commit": "fc772085a02d7db790b938fb845ef4546156d31e",
+    "sha256": "5c60e6e4b0d554b3c323a932e8aa5a96943705e30a4d09afb2d6b8794a1503f4"
+  },
+  "docker_profile": {
+    "executable": "docker.exe",
+    "engine_version": "29.5.3",
+    "image_reference": "postgres:16-bookworm",
+    "image_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "pull_policy": "never",
+    "network_name_prefix": "emr4-checkin-cspr-net-",
+    "container_name_prefix": "emr4-checkin-cspr-container-",
+    "network_alias": "check-in-rfr-postgres",
+    "harness_label_key": "emr4.harness",
+    "harness_label_value": "check-in-relay-free-recovery-v1",
+    "nonce_label_key": "emr4.owner-nonce",
+    "conformance_label_key": "emr4.conformance",
+    "conformance_label_value": "check-in-created-state-profile-v1",
+    "server_tmpfs_destination": "/var/lib/postgresql/data",
+    "server_tmpfs_options": "rw,noexec,nosuid,size=268435456",
+    "server_memory_bytes": 536870912,
+    "server_nano_cpus": 1000000000,
+    "server_pids_limit": 128
+  },
+  "representation_profile": {
+    "container_status": "created",
+    "running": false,
+    "network_cardinality": 1,
+    "network_key_relations": [
+      "captured_network_name",
+      "captured_network_id",
+      "other",
+      "missing"
+    ],
+    "network_mode_relations": [
+      "captured_network_name",
+      "captured_network_id",
+      "other",
+      "missing"
+    ],
+    "endpoint_network_id_relations": [
+      "captured_network_id",
+      "empty",
+      "other",
+      "missing"
+    ],
+    "admitted_network_key_relations": [
+      "captured_network_name"
+    ],
+    "admitted_network_mode_relations": [
+      "captured_network_name",
+      "captured_network_id"
+    ],
+    "admitted_endpoint_network_id_relations": [
+      "empty",
+      "captured_network_id"
+    ]
+  },
+  "correction_profile": {
+    "corrected_predicates": [
+      "one_network",
+      "captured_network_name_key",
+      "captured_network_mode",
+      "endpoint_network_id_lifecycle_state",
+      "credentials_absent",
+      "nonce_label",
+      "nonce_absent_outside_label"
+    ],
+    "credential_scan_includes_nonce": false,
+    "artifact_redaction_includes_nonce": true,
+    "endpoint_created_state": "empty",
+    "endpoint_attached_state": "captured_network_id"
+  },
+  "hostile_threshold": 128,
+  "closed_boundaries": {
+    "container_started_or_attached": false,
+    "credential_created_or_delivered": false,
+    "postgresql_process_sql_or_database_attempt": false,
+    "provider_or_external_network_used": false,
+    "ordinary_practice_enabled_or_released": false,
+    "product_or_protected_data_used": false,
+    "product_api_schema_configuration_or_client_changed": false,
+    "production_deployment_release_pages_or_protected_ref": false
+  }
+}

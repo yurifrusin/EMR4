@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "source_head", "representation_evidence_sha256", "historical_harness_source", "historical_harness_sha256", "corrected_harness_sha256", "corrected_predicates", "database_execution_authorized"],
+  "properties": {
+    "schema_version": {"const": "emr4.docker-created-state-profile-conformance-repair-attestation.v1"},
+    "result": {"const": "profile_predicates_corrected_and_bound"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "representation_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "historical_harness_source": {"const": "fc772085a02d7db790b938fb845ef4546156d31e"},
+    "historical_harness_sha256": {"const": "5c60e6e4b0d554b3c323a932e8aa5a96943705e30a4d09afb2d6b8794a1503f4"},
+    "corrected_harness_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "corrected_predicates": {
+      "const": ["one_network", "captured_network_name_key", "captured_network_mode", "endpoint_network_id_lifecycle_state", "credentials_absent", "nonce_label", "nonce_absent_outside_label"]
+    },
+    "database_execution_authorized": {"const": false}
+  }
+}
