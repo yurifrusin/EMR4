@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 570,
+  "register_revision": 571,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -26083,6 +26083,43 @@
         "evidence_paths": [
           "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/closeout-intent.json",
           "docs/ariadne-agent-error-correction-register-revision-570.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0661",
+      "attempt_id": "checkin-relay-cleanup-closeout-clockwork-check-002",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "clockwork-governance-command-manifest",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork governance command must invoke the exact admitted Python executable with a nonempty -m module argument vector.",
+      "observed_error": "The second closeout intent used .venv/Scripts/ruff.exe directly for its lint command; command-contract validation accepts only .venv/Scripts/python.exe -m module shapes and rejected the intent before publication with tick_command_contract.",
+      "detection_method": "The separate read-only clockwork --check passed transaction-manifest validation, then raised tick_command_contract and made no canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_command_manifest_used_direct_tool_executable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the second rejected check, count the authoring correction, replace the direct Ruff executable with .venv/Scripts/python.exe -m ruff, and rerun the read-only check before publish.",
+        "prevention_control": "Render clockwork command manifests through the command-contract executable template; tools such as Ruff are always admitted as Python modules rather than direct executables.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
         ]
       },
       "status": "corrected"

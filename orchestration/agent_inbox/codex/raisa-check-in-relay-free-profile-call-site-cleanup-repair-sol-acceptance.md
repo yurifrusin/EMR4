@@ -35,6 +35,10 @@ incident identifiers used the human-facing uppercase AER form. AER-0660
 retains that pre-publication correction; it changes no candidate or accepted
 claim.
 
+The next check separately rejected the direct Ruff executable outside the
+clockwork Python-module command shape. AER-0661 retains that correction and the
+fresh intent uses `.venv/Scripts/python.exe -m ruff`.
+
 Attempt 003 remains immutable at one occupied execution and zero retry. This
 acceptance opens only the provider-free no-database manifest/runner admission
 repair. It opens no attempt 004, product change, ordinary-practice command,

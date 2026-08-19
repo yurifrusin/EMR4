@@ -48,6 +48,12 @@
       "error": "human-facing uppercase AER labels were copied into lowercase machine incident identifiers",
       "effect": "the separate read-only check rejected the transaction manifest before publication",
       "correction": "register AER-0660, use lowercase incident and peer identifiers, and rerun check before publish"
+    },
+    {
+      "stage": "clockwork_closeout_check_corrected",
+      "error": "the Ruff command used a direct executable outside the admitted Python-module command shape",
+      "effect": "the separate read-only check rejected the command manifest before publication",
+      "correction": "register AER-0661, invoke Ruff through .venv/Scripts/python.exe -m ruff, and rerun check before publish"
     }
   ],
   "efficacy_assessment": {

@@ -135,7 +135,7 @@
       "evidence": [
         "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
         "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
-        "docs/ariadne-agent-error-correction-register-revision-570.md"
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
       ],
       "orientation_statement": "EMR4 will next enforce provider-free no-database status at manifest admission and test-fixture selection; attempt 004 remains closed."
     },
@@ -185,6 +185,11 @@
         "incident_id": "clockwork-incident-identifier-case",
         "source_id": "profile-call-site-cleanup-closeout-check-attempt-001",
         "peers": []
+      },
+      {
+        "incident_id": "clockwork-direct-tool-executable",
+        "source_id": "profile-call-site-cleanup-closeout-check-attempt-002",
+        "peers": []
       }
     ],
     "broker": {
@@ -232,8 +237,10 @@
       },
       {
         "command_id": "profile_cleanup_closeout_ruff",
-        "executable": ".venv/Scripts/ruff.exe",
+        "executable": ".venv/Scripts/python.exe",
         "arguments": [
+          "-m",
+          "ruff",
           "check",
           "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
           "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
@@ -290,6 +297,7 @@
       "docs/ariadne-agent-error-correction-register-revision-568.md",
       "docs/ariadne-agent-error-correction-register-revision-569.md",
       "docs/ariadne-agent-error-correction-register-revision-570.md",
+      "docs/ariadne-agent-error-correction-register-revision-571.md",
       "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
       "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
       "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-profile-call-site-cleanup-repair.md",

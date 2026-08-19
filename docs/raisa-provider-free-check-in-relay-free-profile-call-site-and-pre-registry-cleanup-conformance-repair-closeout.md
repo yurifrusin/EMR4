@@ -76,6 +76,11 @@ machine identifier fields before publication. AER-0660 retains that bounded
 authoring correction; lowercase schema-valid identifiers are used in the fresh
 check.
 
+The next check then rejected a direct Ruff executable outside clockwork's
+Python-module command shape. AER-0661 retains that second pre-publication
+correction; the manifest now invokes Ruff through the admitted Python
+executable and `-m` module form.
+
 The direct successor is therefore an engine-level admission repair. It will
 make provider-free/no-database status a validated property of the command and
 selected test graph, rejecting ordinary pytest and shared-PostgreSQL fixture
