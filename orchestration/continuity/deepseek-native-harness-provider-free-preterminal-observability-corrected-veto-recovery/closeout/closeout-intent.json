@@ -175,6 +175,11 @@
         "incident_id": "manually-expanded-source-hash-commentary-misstatement",
         "source_id": "prepublication-clockwork-check-commentary",
         "peers": []
+      },
+      {
+        "incident_id": "remaining-register-current-reading-literal-fixtures",
+        "source_id": "incident-intake-second-postpublication-suite",
+        "peers": []
       }
     ],
     "broker": {
@@ -357,7 +362,7 @@
       "observed_on": "2026-08-20",
       "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
       "role": "orchestrator",
-      "resource_id": "ariadne-agent-error-register-source-cutoff-test",
+      "resource_id": "ariadne-agent-error-register-current-reading-tests",
       "model": null,
       "reasoning_level": "high",
       "transport": "local_repository_pytest",
@@ -374,7 +379,7 @@
       ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
-      "recurrence_signature": "repository.agent_error_register_source_cutoff_literal_not_incident_derived",
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_added",
@@ -423,6 +428,42 @@
         ]
       },
       "baton_summary": "preserves the prepublication commentary hash misstatement and the machine-copy-only full-object-ID control."
+    },
+    {
+      "attempt_key": "clockwork-incident-intake-current-reading-fixtures-attempt-002",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-reading-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Current register revision, population and origin readings must be validated from their canonical sources or recomputed population and must not depend on historical arithmetic constants.",
+      "observed_error": "The second incident-intake publication passed its deterministic tick but the post-publication suite exposed two more historical formulas: revision equalled incident count minus 90, and agent-origin count equalled 442 plus one selected recurrence.",
+      "detection_method": "The exact serial post-publication suite failed the two assertions while all other selected checks continued; the clockwork rolled the complete generation back byte-exactly before correction.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/clockwork-tick-attempt-002-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the revision arithmetic with existence of the canonical current revision document and replace the agent-origin base formula with direct origin-separation assertions over the validated population.",
+        "prevention_control": "Current-state tests validate authoritative bindings and population properties directly; no revision, population, origin or cutoff assertion encodes an expected next-update arithmetic literal.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "baton_summary": "preserves the second rolled-back current-reading formula failures and their population-derived correction."
     }
   ]
 }

@@ -15,8 +15,8 @@ the exact worktree clean after 480 tests.
 
 This correction closes the sole-writer gap that otherwise made the rejected
 review impossible to register without a forbidden manual canonical edit. It
-also replaces the one remaining literal cutoff-date fixture exposed by the
-first rolled-back publication. It does not broaden the parent tranche or any
-product/provider authority. AER-0659 additionally preserves the corrected
-prepublication commentary hash misstatement and the machine-copy-only full-ID
-reporting control.
+also replaces the literal current-reading fixtures exposed by the first two
+rolled-back publications. It does not broaden the parent tranche or any
+product/provider authority. AER-0659 preserves the corrected prepublication
+commentary hash misstatement and the machine-copy-only full-ID reporting
+control; AER-0660 preserves the second rollback and its two formula repairs.

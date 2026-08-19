@@ -28,8 +28,13 @@ remain intact.
 The first live incident-intake generation was rolled back byte-exactly when a
 post-publication compatibility run found one remaining fixed source-cutoff date
 assertion. The corrected assertion derives the maximum incident date. AER-0658
-preserves that repository-fixture defect; the corrected generation is the only
-accepted publication.
+preserves that repository-fixture defect.
+
+The second live generation was also rolled back byte-exactly when the same
+post-publication suite found two remaining historical formulas for current
+revision and agent-origin population. AER-0660 preserves that recurrence and
+the corrected tests now validate canonical or population-derived readings
+directly. Only the final fully compatible generation is accepted.
 
 Before that corrected publication, Sol also caught and corrected one manually
 expanded Git ID in conversational commentary. AER-0659 preserves the mismatch;

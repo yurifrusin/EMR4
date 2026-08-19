@@ -31,8 +31,14 @@ The repository and dry run already held the correct machine-resolved full ID,
 the user-facing correction was immediate, and no canonical artifact contained
 the false value.
 
-The clockwork now derives AER-0657, AER-0658, AER-0659 and all aggregate updates from
-semantic observations in the closeout intent. The register contains 659
+The second incident-intake publication then exposed AER-0660: two more
+historical tests encoded current revision and agent-origin population as fixed
+arithmetic formulas. That generation was also rolled back byte-exactly. The
+tests now validate the canonical current revision document and direct
+population properties without forecasting the next update.
+
+The clockwork now derives AER-0657 through AER-0660 and all aggregate updates
+from semantic observations in the closeout intent. The register contains 660
 incidents, all corrected or contained and none open.
 
 ## Prevention
