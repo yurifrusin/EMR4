@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 343,
+  "graph_revision": 344,
   "harvests": [],
   "nodes": [
     {
@@ -24679,9 +24679,119 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+      "title": "DeepSeek native Harness provider-free preterminal-observable composition recovery boot",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted exactly one new offline provider-free native composition recovery boot with no retry.",
+          "The attempt is accepted only as immutable fail-closed service-availability and cleanup evidence; the native effective-tool composition proof is rejected.",
+          "The successor is deterministic and provider-free and authorizes no native Harness process, agent, broker, model, provider, product, data, deployment, Pages or protected-ref movement."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-service-unavailable-native-attempt",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one consumed new native process, exact SERVICES_UNAVAILABLE terminal, reliable duration, zero prohibited calls and complete owned cleanup as immutable evidence."
+        },
+        {
+          "id": "reject-native-effective-tool-composition-recovery-proof",
+          "source": "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
+          "status": "rejected",
+          "summary": "Reject the intended composition proof because the required agentPresets or tools service was unavailable before scope creation and guard entry."
+        },
+        {
+          "id": "accept-deterministic-required-service-injection-successor",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a no-native-process successor that binds exact rc.7 service-injection semantics and constructs the required hmr, agentPresets and tools declaration before any separately frozen future execution."
+        }
+      ],
+      "claim_scope": [
+        "The exact rc.7 package materialised offline and six required installed packages matched 0.1.0-rc.7.",
+        "The single new native process retained exact sentinel/HMR readiness and entered the corrected runner.",
+        "The runner emitted the exact SERVICES_UNAVAILABLE terminal and EXIT_REQUESTED coordinate before exiting 2.",
+        "The finally-path native duration is reliably retained as 10025 ms.",
+        "No scope creation, guard entry, effective-tool terminal or edit/glob/read view occurred, so native composition remains unproved.",
+        "Network, agent-session, turn, broker, model, provider, occupied-worker, Docker and database counts are zero.",
+        "The controller waited for process absence and removed its exact disposable root."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/evidence.schema.json",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preexecution-runtime-state.json",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-preterminal-observable-composition-recovery-boot.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The native effective-tool composition proof did not pass and no occupied worker is eligible.",
+        "The exact unavailable service and rc.7 binding rule require deterministic resolution.",
+        "Both consumed native attempts are immutable and cannot be retried, resumed or reclassified.",
+        "A later native process requires a separately frozen successor after deterministic service-injection recovery acceptance.",
+        "No product, data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T08:51:16.4963085+10:00",
+      "updated_at": "2026-08-20T08:51:16.4963085+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "8155a941a28b3d22a7dbb4132c4b0ada8558482e",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T07:22:35.5977084+10:00"
+  "updated_at": "2026-08-20T08:51:16.4963085+10:00"
 }

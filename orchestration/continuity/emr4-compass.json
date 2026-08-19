@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 325,
-  "updated_at": "2026-08-20T07:22:35.5977084+10:00",
-  "source_graph_revision": 343,
-  "orientation_statement": "EMR4 will run exactly one separately named provider-free recovery boot with the accepted preterminal clockwork before considering any model-backed DeepSeek worker.",
+  "map_revision": 326,
+  "updated_at": "2026-08-20T08:51:16.4963085+10:00",
+  "source_graph_revision": 344,
+  "orientation_statement": "EMR4 will resolve the rc.7 required-service injection contract deterministically, without another native process, before considering any separately frozen recovery execution.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4350,27 +4350,38 @@
         "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json",
         "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+      "lineage_parent": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "strategic_role": "Test the accepted preterminal observability design once inside the real provider-free rc.7 native lifecycle",
+      "outcome": "The new process reached the corrected runner and failed closed at exact SERVICES_UNAVAILABLE with reliable timing, zero prohibited calls and complete cleanup; native tool composition remains unproved.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
-    "strategic_role": "Run one new provider-free recovery boot with exact activation coordinates and no model/provider",
-    "why_now": "The deterministic observability design, corrected independent veto and atomic incident-intake control now pass without changing the consumed attempt.",
-    "outcome": "Preterminal activation observability is accepted; the original native composition attempt remains failed and immutable, while one separately named recovery boot is now eligible for exact planning.",
+    "node_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+    "strategic_role": "Preserve the exact service-availability terminal and resolve rc.7 required-service injection deterministically",
+    "why_now": "The observability repair worked: the retained coordinate proves the runner entered but agentPresets or tools was unavailable before scope creation, so service binding can be investigated without another native process.",
+    "outcome": "The consumed new attempt retained exact readiness, SERVICES_UNAVAILABLE, reliable 10025 ms duration, zero prohibited calls and complete cleanup; native composition remains unproved.",
     "unlocks": [
-      "One new native process can distinguish bootstrap, runtime import, scope, guard, disposal and exit coordinates.",
-      "A reliable elapsed duration can be retained before cleanup.",
-      "The next result can be closed in the same bureaucratic time as the Harness evidence."
+      "Exact offline inspection of rc.7 plugin and service-injection semantics.",
+      "A future runner/patch declaration that requires exactly hmr, agentPresets and tools.",
+      "A defensible later decision whether one separately named provider-free native execution is warranted."
     ],
     "does_not_solve": [
-      "No native composition success or DeepSeek worker reliability is yet proved.",
-      "No retry, resume or reinterpretation of native-composition-attempt-001 is permitted.",
-      "No product, data, provider, deployment, release, Pages or protected integration opens."
+      "No native effective-tool result, occupied worker or DeepSeek model-quality conclusion is accepted.",
+      "No same-attempt retry, resume, reclassification or automatic successor process is authorised.",
+      "No product, ordinary-practice, data, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-closeout.md",
-      "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
-      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-preterminal-observability-recovery-accepted.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+      "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
