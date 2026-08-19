@@ -1,0 +1,297 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "title": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T04:21:22.8905530+10:00",
+    "node": {
+      "id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+      "title": "Check-in server-attachment lifetime and post-readiness observability conformance repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri granted standing uninterrupted-development authority through this repair and dependency-satisfied successors.",
+          "The accepted result changes only the provider-free rehearsal attachment lifetime, post-readiness diagnostic split and exact fake-based tests.",
+          "No attempt 005, Docker, database, product, ordinary-practice, data, production, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-attachment-lifetime-and-observability-repair",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the final-teardown attachment ownership and distinct sanitized post-readiness running and identity failure coordinates at the exact reviewed candidate."
+        },
+        {
+          "id": "retain-consumed-native-harness-pre-provider-failure",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+          "status": "accepted",
+          "summary": "Retain the single rc.7 worker launch as consumed fail-closed control-plane evidence with zero provider calls, requests, model steps, tools, file changes and retries."
+        },
+        {
+          "id": "accept-native-harness-composition-diagnosis",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+          "status": "accepted",
+          "summary": "Accept the scope-local versus inherited-global tool restriction mismatch and generic terminal coordinate as the bounded cause and next control gap, not as DeepSeek model-performance evidence."
+        },
+        {
+          "id": "accept-independent-gemini-veto",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-server-attachment-observability-repair-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh clean-worktree Gemini 3.7 Flash/high pass over the exact candidate with eleven zero-exit commands and zero P0-P2 findings."
+        }
+      ],
+      "claim_scope": [
+        "The captured server attachment remains owned and live through post-readiness observation and all admitted sidecar stages until final teardown.",
+        "A non-exact running state and an identity mismatch now produce distinct fail-closed coordinates with no unsafe diagnostic values.",
+        "The focused and descendant-compatible provider-free matrix passes 72 tests with zero Docker or database invocation.",
+        "The DeepSeek native-Harness attempt made zero provider calls and provides only pre-provider composition and cleanup evidence.",
+        "Attempt 004 and historical source pins remain immutable and are not weakened or rerun."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-server-attachment-observability-repair-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/checkpoint-intent.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/work-order-v2.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/provider-free-no-database-admission.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/broker-events.jsonl",
+          "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-gemini37-review-packet.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The rc.7 effective tool view is not yet proven before occupied provider dispatch.",
+        "The custom runner does not yet retain a stable sanitized pre-provider composition coordinate when an exception lacks a code.",
+        "No attempt 005, ordinary-practice activation, product change, data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make the relay-free recovery harness retain its server attachment through the complete owned lifecycle and expose the exact post-readiness failure branch",
+      "outcome": "The deterministic repair and independent veto pass, while the first native-Harness worker exposes a separate pre-provider effective-tool composition gap.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-server-attachment-observability-repair-gemini37-review-receipt.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Close the native Harness effective-tool composition and terminal-coordinate gap before another occupied DeepSeek worker",
+      "why_now": "The WorkOrder, latch, broker and cleanup gears worked, but the exact rc.7 preset failed before a provider request because scope-local tools were treated as inherited global tools and the terminal coordinate was generic.",
+      "outcome": "A provider-free guard assembles the exact bounded preset, proves the effective tool view and stable safe terminal coordinates, and rejects any mismatch before provider dispatch.",
+      "unlocks": [
+        "A traceable pre-provider proof that the DeepSeek worker can see exactly read, glob and edit.",
+        "A stable sanitized failure coordinate for future Harness composition defects.",
+        "A separately planned occupied worker only after the guard is independently accepted."
+      ],
+      "does_not_solve": [
+        "No occupied DeepSeek request or attempt 005 is authorized.",
+        "No ordinary-practice command, product route, client, flag, grammar or waiting-area behavior is enabled.",
+        "No product, patient, appointment, clinical, protected, production, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-sol-acceptance.md",
+        "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+        "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json"
+      ],
+      "orientation_statement": "EMR4 will next prove the exact provider-free rc.7 effective tool composition and stable terminal coordinates before any further occupied DeepSeek worker."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+      "active_tranche": "DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard",
+      "objective": "Freeze and implement the narrowest provider-free deterministic guard that assembles the exact rc.7 bounded worker preset, proves the effective tool view is exactly read, glob and edit without misusing the inherited-global restriction surface, and emits stable sanitized pre-provider terminal coordinates, with zero provider calls and no occupied worker.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, the accepted clockwork-to-broker gear architecture, the consumed failed-closed worker evidence and this accepted repair closeout.",
+      "next_stage": "fresh_five_source_rehydration_and_freeze_effective_tool_composition_guard_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "native-harness-scope-local-tool-restriction",
+        "source_id": "deepseek-native-checkin-attachment-001",
+        "peers": []
+      },
+      {
+        "incident_id": "native-harness-generic-terminal-coordinate",
+        "source_id": "deepseek-native-checkin-attachment-001-terminal",
+        "peers": []
+      },
+      {
+        "incident_id": "sparse-evidence-dependency-closure",
+        "source_id": "attachment-observability-worker-verification",
+        "peers": []
+      },
+      {
+        "incident_id": "exact-provider-free-test-path-resolution",
+        "source_id": "attachment-observability-test-command",
+        "peers": []
+      },
+      {
+        "incident_id": "verification-terminal-result-unrecoverable",
+        "source_id": "attachment-observability-provider-free-test-terminal",
+        "peers": []
+      },
+      {
+        "incident_id": "historical-source-pin-regression-misclassification",
+        "source_id": "attachment-observability-neighbour-regression",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "read_only_attachment_observability_closeout_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "admitted_provider_free_attachment_observability_and_governance_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attachment_observability_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attachment_observability_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair acceptance",
+    "paths": [
+      "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/checkpoint-intent.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/pre-dispatch/clockwork-checkpoint-tick-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-predispatch-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-pre-verifier-acceptance-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-gemini37-review-worktree-preflight.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-server-attachment-observability-repair-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-server-attachment-observability-repair.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/closeout/closeout-intent.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_deepseek_native_harness_effective_tool_composition_and_terminal_coordinate_guard_only",
+    "exact_rc7_preset_must_assemble_effective_read_glob_edit_tool_view_before_any_provider_dispatch",
+    "scope_local_tools_must_not_be_named_to_an_inherited_global_only_restriction_surface",
+    "stable_sanitized_pre_provider_failure_coordinates_required_without_stack_prompt_payload_or_secret_retention",
+    "zero_provider_calls_and_no_occupied_deepseek_worker",
+    "no_attempt_004_retry_resume_reclassification_or_attempt_005_execution",
+    "no_docker_container_network_process_credential_postgresql_sql_transaction_or_database_execution",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

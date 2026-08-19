@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "recorded_at": "2026-08-20T04:21:22.8905530+10:00",
+  "outcome": "accepted_with_native_harness_pre_provider_composition_failure",
+  "useful_product_changes": 2,
+  "occupied_deepseek_launches": 1,
+  "deepseek_provider_calls": 0,
+  "deepseek_useful_patches": 0,
+  "gemini_reviews": 1,
+  "gemini_review_retries": 0,
+  "deterministic_acceptance_tests": 72,
+  "orchestration_repair_events": [
+    {
+      "id": "sparse-checkout-unsupported-option",
+      "effect": "command rejected before test execution",
+      "correction": "use the supported sparse-checkout add form"
+    },
+    {
+      "id": "provider-free-wrapper-missing-conftest-surface",
+      "effect": "admission rejected before pytest",
+      "correction": "materialize the exact shared conftest path required by the wrapper guard"
+    },
+    {
+      "id": "verification-terminal-not-retained",
+      "effect": "first bounded pytest verdict could not be recovered",
+      "correction": "check process state and rerun once with directly observable output"
+    },
+    {
+      "id": "provider-free-wrapper-wrong-working-directory",
+      "effect": "module resolution failed before pytest",
+      "correction": "invoke the main wrapper from the main repository with the worker repo-root"
+    },
+    {
+      "id": "plan-test-filename-abbreviation",
+      "effect": "nonexistent shortened filename rejected before pytest",
+      "correction": "use the exact repository filename including attachment lifetime"
+    },
+    {
+      "id": "sparse-evidence-dependency-closure-incomplete",
+      "effect": "eight tests passed while fourteen setup errors and two missing-input failures occurred",
+      "correction": "materialize exact contract and immutable attempt evidence paths"
+    },
+    {
+      "id": "candidate-lint-unused-readiness-result",
+      "effect": "Ruff rejected one obsolete assignment",
+      "correction": "remove the behavior-neutral assignment and rerun lint"
+    },
+    {
+      "id": "historical-source-pins-misclassified-as-descendant-regressions",
+      "effect": "seventy-seven tests passed and three immutable source pins correctly rejected descendant bytes",
+      "correction": "classify source-specific historical checks separately from descendant-compatible regressions"
+    },
+    {
+      "id": "clockwork-projection-predecessor-derived-semantically",
+      "effect": "the first read-only closeout check rejected a semantic attempt parent that was not the exact current graph tail",
+      "correction": "read the current graph and Compass predecessor and bind the closeout relationship to that exact clockwork node"
+    },
+    {
+      "id": "powershell-command-chain-did-not-stop-after-diff-check",
+      "effect": "the local closeout commit ran after git diff --cached --check reported one trailing blank line",
+      "correction": "correct and recheck the file, amend the unpushed commit, and use explicit exit-code branching rather than sequential PowerShell statements for future commit gates"
+    }
+  ],
+  "harness_control_reading": {
+    "work_order_binding": "effective",
+    "one_run_latch": "effective",
+    "zero_retry": "effective",
+    "no_database_admission": "effective",
+    "broker_traceability": "effective_through_ready_event",
+    "pre_provider_effective_tool_composition_guard": "missing",
+    "terminal_failure_coordinate": "too_generic",
+    "conclusion": "The clockwork-to-broker gears constrained scope and prevented provider/database waste, but they did not yet prove the exact rc.7 effective tool composition. The next guard must close that gap before another occupied DeepSeek launch."
+  },
+  "efficiency_judgment": "promising_but_not_yet_ready_for_another_occupied_worker",
+  "next_measurement": {
+    "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+    "success_threshold": "exact preset assembles read, glob and edit; no unknown global restriction; stable sanitized failure coordinates; zero provider calls; zero occupied launch",
+    "failure_threshold": "any provider call, effective tool outside the allowlist, generic-only terminal coordinate, or manual repair required after published guard acceptance"
+  }
+}

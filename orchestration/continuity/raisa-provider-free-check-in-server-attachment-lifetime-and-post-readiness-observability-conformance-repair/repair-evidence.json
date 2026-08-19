@@ -1,0 +1,100 @@
+{
+  "schema_version": "raisa.check_in_server_attachment_observability_repair_evidence.v1",
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "status": "accepted",
+  "recorded_at": "2026-08-20T04:21:22.8905530+10:00",
+  "exact_sources": {
+    "planning_source": "b91733b11cbe28d0d22ae4d46308bdc706ea2897",
+    "worker_dispatch_source": "553aef4efd3e23a516ebf32af9abb0f95d1ed284",
+    "implementation_source": "cfc7eb472aaaa4fdf7ffef35b07a65a2729073c5",
+    "reviewed_candidate": "9f9984e0575beb7b300035fdb74433f5bef32028",
+    "verifier_acceptance_source": "d3bfde7af3ae2f07dd351aa157f9f8748b0f255a"
+  },
+  "immutable_bindings": {
+    "base_harness_sha256": "eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b",
+    "repaired_harness_sha256": "62a18d9ce2a29eb417f491c8ce341416f03183375f042f8c41bcb1f4674df77c",
+    "attempt_004_failure_sha256": "1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3",
+    "attempt_004_envelope_sha256": "415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5",
+    "gemini_receipt_sha256": "dd2285836f4c265d6d3e476645eca3909d9fd46769480134d713505c091c838d"
+  },
+  "implementation": {
+    "attachment_early_stop_removed": true,
+    "attachment_handle_retained_until_finally": true,
+    "post_readiness_inspection_count": 1,
+    "running_failure": {
+      "stage": "environment",
+      "code": "server_not_running_after_readiness",
+      "detail": null
+    },
+    "identity_failure": {
+      "stage": "environment",
+      "code": "server_identity_mismatch_after_readiness",
+      "detail": "sorted_safe_predicate_names_or_inspect_shape"
+    },
+    "readiness_event_after_running_and_identity_pass": true,
+    "final_cleanup_sole_teardown_owner": true,
+    "api_or_product_change": false
+  },
+  "deepseek_native_worker": {
+    "attempt_id": "deepseek-native-checkin-attachment-001",
+    "package": "@deepseek-ai/dsh@0.1.0-rc.7",
+    "result": "failed_closed_pre_provider",
+    "automatic_retry_count": 0,
+    "provider_call_started": 0,
+    "provider_call_completed": 0,
+    "provider_call_failed": 0,
+    "request_count": 0,
+    "model_steps": 0,
+    "tool_calls": 0,
+    "changed_paths": [],
+    "cleanup_complete": true,
+    "diagnosis": "scope_local_preset_tool_names_passed_to_global_tool_restriction_surface",
+    "model_quality_inference_permitted": false
+  },
+  "deterministic_verification": {
+    "focused_provider_free_tests": {
+      "passed": 19,
+      "failed": 0
+    },
+    "descendant_compatible_relay_free_tests": {
+      "passed": 53,
+      "failed": 0
+    },
+    "gemini_manifest_tests": {
+      "passed": 72,
+      "failed": 0
+    },
+    "gemini_commands": {
+      "passed": 11,
+      "failed": 0
+    },
+    "ruff": "passed",
+    "python_compile_or_ast": "passed",
+    "json_parse": "passed",
+    "git_diff_check": "passed",
+    "docker_invocations": 0,
+    "database_invocations": 0
+  },
+  "source_specific_historical_checks": {
+    "classification": "immutable_source_pins_not_descendant_regressions",
+    "rejected_descendant_harness_bytes": 3,
+    "weakened_or_rewritten": false
+  },
+  "independent_review": {
+    "model": "gemini-3.7-flash-high",
+    "reasoning_effort": "high",
+    "decision": "pass",
+    "p0_p2_findings": 0,
+    "head_before": "9f9984e0575beb7b300035fdb74433f5bef32028",
+    "head_after": "9f9984e0575beb7b300035fdb74433f5bef32028",
+    "dirty_after": false
+  },
+  "protected_refs": {
+    "expected": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "local_master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin_master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "local_handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin_handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "next_operation": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard"
+}

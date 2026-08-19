@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze, then conditionally run, exactly one separately named provider-free relay-free recovery attempt 004; prior terminals remain immutable and no execution is inherited implicitly.
+> EMR4 will next prove the exact provider-free rc.7 effective tool composition and stable terminal coordinates before any further occupied DeepSeek worker.
 
 ## North star
 
@@ -448,26 +448,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Provider-free manifests now fail closed on ordinary pytest and shared-PostgreSQL fixture reachability before any command can run. Lineage parent: `raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair`.
 216. **Replace an opaque pre-session native-Harness failure with attributable stock-launcher/HMR lifecycle evidence — Provider-free native Harness stock-headless-to-custom-runner HMR boot proof**
    The pinned native Harness reaches the local custom runner through its real watched headless profile path without a model or provider call. Lineage parent: `ariadne-provider-free-no-database-manifest-runner-admission-repair`.
+217. **Make the relay-free recovery harness retain its server attachment through the complete owned lifecycle and expose the exact post-readiness failure branch — Check-in server-attachment lifetime and post-readiness observability conformance repair**
+   The deterministic repair and independent veto pass, while the first native-Harness worker exposes a separate pre-provider effective-tool composition gap. Lineage parent: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof`.
 
 ## Current position
 
-**Freeze the fourth uniquely named relay-free recovery run only after all deterministic caller, cleanup, no-database and Harness prerequisites are accepted — Provider-free native Harness stock-headless-to-custom-runner HMR boot proof**
+**Close the native Harness effective-tool composition and terminal-coordinate gap before another occupied DeepSeek worker — Check-in server-attachment lifetime and post-readiness observability conformance repair**
 
-**Why this proof came next:** Attempts 001-003 remain immutable; the call-site/pre-registry cleanup repair, no-database broker interlock and native-Harness HMR startup proof now all pass.
+**Why this proof came next:** The WorkOrder, latch, broker and cleanup gears worked, but the exact rc.7 preset failed before a provider request because scope-local tools were treated as inherited global tools and the terminal coordinate was generic.
 
-The next tranche first freezes an exact one-run attempt-004 plan and may execute only after full deterministic, Docker/image, collision and latch admission.
+A provider-free guard assembles the exact bounded preset, proves the effective tool view and stable safe terminal coordinates, and rejects any mismatch before provider dispatch.
 
 ### What this unlocks
 
-- A separately named collision-free attempt-004 namespace and envelope.
-- One bounded provider-free disposable PostgreSQL recovery execution after exact preflight.
-- A fresh post-success independent veto if the occupied local execution passes.
+- A traceable pre-provider proof that the DeepSeek worker can see exactly read, glob and edit.
+- A stable sanitized failure coordinate for future Harness composition defects.
+- A separately planned occupied worker only after the guard is independently accepted.
 
 ### What it does not solve
 
-- No automatic retry or reclassification of attempts 001-003.
-- No unplanned Docker, PostgreSQL or DeepSeek model execution.
-- No product, ordinary-practice, data, production, deployment, Pages or protected integration authority.
+- No occupied DeepSeek request or attempt 005 is authorized.
+- No ordinary-practice command, product route, client, flag, grammar or waiting-area behavior is enabled.
+- No product, patient, appointment, clinical, protected, production, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1206,7 +1208,6 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
-- `docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1310,8 +1311,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
-- `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md`
-- `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-plan.md`
+- `docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -1781,6 +1781,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-server-attachment-observability-repair-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
@@ -2012,6 +2013,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2652,6 +2654,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md`
+- `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
@@ -3522,4 +3527,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 321; continuity graph revision 339._
+_Compass map revision 322; continuity graph revision 340._

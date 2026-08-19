@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 321,
-  "updated_at": "2026-08-20T02:33:29.0250603+10:00",
-  "source_graph_revision": 339,
-  "orientation_statement": "EMR4 will next freeze, then conditionally run, exactly one separately named provider-free relay-free recovery attempt 004; prior terminals remain immutable and no execution is inherited implicitly.",
+  "map_revision": 322,
+  "updated_at": "2026-08-20T04:21:22.8905530+10:00",
+  "source_graph_revision": 340,
+  "orientation_statement": "EMR4 will next prove the exact provider-free rc.7 effective tool composition and stable terminal coordinates before any further occupied DeepSeek worker.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4306,27 +4306,39 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
         "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+      "lineage_parent": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+      "strategic_role": "Make the relay-free recovery harness retain its server attachment through the complete owned lifecycle and expose the exact post-readiness failure branch",
+      "outcome": "The deterministic repair and independent veto pass, while the first native-Harness worker exposes a separate pre-provider effective-tool composition gap.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-server-attachment-observability-repair-gemini37-review-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
-    "strategic_role": "Freeze the fourth uniquely named relay-free recovery run only after all deterministic caller, cleanup, no-database and Harness prerequisites are accepted",
-    "why_now": "Attempts 001-003 remain immutable; the call-site/pre-registry cleanup repair, no-database broker interlock and native-Harness HMR startup proof now all pass.",
-    "outcome": "The next tranche first freezes an exact one-run attempt-004 plan and may execute only after full deterministic, Docker/image, collision and latch admission.",
+    "node_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "strategic_role": "Close the native Harness effective-tool composition and terminal-coordinate gap before another occupied DeepSeek worker",
+    "why_now": "The WorkOrder, latch, broker and cleanup gears worked, but the exact rc.7 preset failed before a provider request because scope-local tools were treated as inherited global tools and the terminal coordinate was generic.",
+    "outcome": "A provider-free guard assembles the exact bounded preset, proves the effective tool view and stable safe terminal coordinates, and rejects any mismatch before provider dispatch.",
     "unlocks": [
-      "A separately named collision-free attempt-004 namespace and envelope.",
-      "One bounded provider-free disposable PostgreSQL recovery execution after exact preflight.",
-      "A fresh post-success independent veto if the occupied local execution passes."
+      "A traceable pre-provider proof that the DeepSeek worker can see exactly read, glob and edit.",
+      "A stable sanitized failure coordinate for future Harness composition defects.",
+      "A separately planned occupied worker only after the guard is independently accepted."
     ],
     "does_not_solve": [
-      "No automatic retry or reclassification of attempts 001-003.",
-      "No unplanned Docker, PostgreSQL or DeepSeek model execution.",
-      "No product, ordinary-practice, data, production, deployment, Pages or protected integration authority."
+      "No occupied DeepSeek request or attempt 005 is authorized.",
+      "No ordinary-practice command, product route, client, flag, grammar or waiting-area behavior is enabled.",
+      "No product, patient, appointment, clinical, protected, production, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-plan.md",
-      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
-      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md"
+      "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json"
     ]
   },
   "decision_horizon": [
