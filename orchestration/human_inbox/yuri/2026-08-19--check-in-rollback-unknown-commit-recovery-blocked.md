@@ -47,6 +47,9 @@ change, generic-status `Arrived`, waiting-area movement, data, provider,
 production, deployment, release, Pages or protected-ref movement occurred.
 `docs/branding/` and unrelated untracked files are preserved.
 
+The non-PHI paused Pushover notification succeeded with request
+`674f08c4-6aa9-44c7-9357-9749eb5ff93c`.
+
 ## Decision needed
 
 Please choose one of these two outcomes:
