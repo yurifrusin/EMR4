@@ -163,11 +163,16 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
             assert graph["nodes"][-1]["relationships"] == [
                 {"node_id": graph["nodes"][-2]["id"], "relation": "builds_on"}
             ]
-        else:
+        elif selected_transaction["event_kind"] == "blocked_transition":
             latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
-            assert selected_transaction["event_kind"] == "blocked_transition"
             assert latch["operation_id"] == selected_transaction["operation_id"]
             assert latch["status"] == "blocked"
+            assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
+        else:
+            latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+            assert selected_transaction["event_kind"] == "user_decision_transition"
+            assert latch["operation_id"] == selected_transaction["operation_id"]
+            assert latch["status"] == "in_progress"
             assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
     else:
         assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_PARENT_ID
@@ -217,11 +222,16 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
         assert "accepted at exact reviewed source" in current.lower()
         if selected_transaction["event_kind"] == "clean_closeout":
             assert selected_transaction["source_commit"] in clockwork_relation
-        else:
-            assert selected_transaction["event_kind"] == "blocked_transition"
+        elif selected_transaction["event_kind"] == "blocked_transition":
             assert latch["status"] == "blocked"
             assert latch["user_attention"]["required"] is True
             assert latch["terminal_response"]["permitted"] is True
+        else:
+            assert selected_transaction["event_kind"] == "user_decision_transition"
+            assert selected_transaction["source_commit"] in clockwork_relation
+            assert latch["status"] == "in_progress"
+            assert latch["user_attention"]["required"] is False
+            assert latch["terminal_response"]["permitted"] is False
         assert "one clockwork writer owns all ten surfaces" in clockwork_relation.lower()
         assert "immediately previous generation" in clockwork_relation.lower()
         assert latch["operation_id"] in next_work

@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.governance_live_user_decision_transition_intent.v1",
+  "blocked_operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+  "selected_outcome": "replace_with_newly_frozen_transport_redesign",
+  "next_operation": {
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+    "objective": "Freeze and provider-free prove a relay-free caller/result transport that eliminates the Windows host TCP relay and multiprocessing queue from the evidence path while preserving exact request identity, fail-closed no-retry semantics, authoritative readback, forced-RLS isolation and zero ordinary release; perform no disposable PostgreSQL execution until a separately admitted preexecution gate passes.",
+    "authority_source": "Yuri's explicit transport-redesign selection, the blocked predecessor's immutable negative evidence and the accepted runtime-role and tenant-isolation floor.",
+    "completed_stage": "Yuri selected a newly frozen transport redesign after the predecessor exhausted three fail-closed host-relay attempts; no fourth execution or prior transport replay is inherited.",
+    "next_executable_stage": "inspect_cached_container_local_transport_capabilities_and_freeze_the_relay_free_contract_without_database_execution"
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_local_transport_design_and_authored_synthetic_fixture_only",
+    "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
+    "three_predecessor_failed_attempts_remain_immutable_negative_transport_evidence",
+    "windows_host_tcp_relay_and_multiprocessing_queue_excluded_from_the_new_evidence_path",
+    "no_disposable_postgresql_execution_before_new_plan_deterministic_admission_and_fresh_preexecution_receipt",
+    "exact_request_command_idempotency_digest_and_audit_identity_must_be_preserved",
+    "ambiguous_outcome_must_release_no_success_forbid_retry_and_require_authoritative_readback",
+    "forced_rls_tenant_isolation_and_zero_ordinary_admission_release_remain_required",
+    "exact_container_network_role_and_any_local_test_process_cleanup_required",
+    "declarative_manifest_is_fixture_only_and_never_command_or_policy_authority",
+    "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_occupied_deepseek_hmr_claude_code_fallback_or_provider_call_before_optional_gemini_veto",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "user-decision-transition-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "user-decision-transition-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "user-decision-transition-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

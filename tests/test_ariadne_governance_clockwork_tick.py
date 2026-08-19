@@ -9,16 +9,19 @@ import pytest
 
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
+    USER_DECISION_INTENT_VERSION,
     CommittedClockworkTick,
     ClockworkTickRejection,
     PREDECESSOR_METADATA_NAMES,
     build_blocked_tick_generation,
     build_tick_generation,
+    build_user_decision_tick_generation,
     publish_tick_generation,
     rollback_tick_generation,
     validate_blocked_tick_intent,
     validate_tick_intent,
     validate_tick_live_state,
+    validate_user_decision_tick_intent,
 )
 from orchestration_harness.governance_live_adoption import (
     CANONICAL_KEYS,
@@ -33,6 +36,11 @@ CONTRACT_PATH = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork
 TOPIC = ROOT / "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution"
 INTENT_PATH = TOPIC / "closeout-intent.json"
 REPLAY_FIXTURE_SOURCE = "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+BLOCKED_REPLAY_FIXTURE_SOURCE = "1f6009943fcc2e8478511b95c85bf50388e3a634"
+REDESIGN_OPERATION_ID = (
+    "raisa-provider-free-default-off-check-in-relay-free-unknown-response-"
+    "transport-redesign"
+)
 
 
 def _json(path: Path) -> dict:
@@ -55,10 +63,39 @@ def _blocked_intent(worktree: Path) -> dict:
     }
 
 
+def _user_decision_intent(worktree: Path) -> dict:
+    latch = _json(
+        worktree
+        / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    )
+    commands = _json(
+        worktree
+        / "orchestration/continuity/ariadne-governance-clockwork/command-manifest.json"
+    )
+    return {
+        "schema_version": USER_DECISION_INTENT_VERSION,
+        "blocked_operation_id": latch["operation_id"],
+        "selected_outcome": "replace_with_newly_frozen_transport_redesign",
+        "next_operation": {
+            "operation_id": REDESIGN_OPERATION_ID,
+            "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+            "objective": "Freeze and provider-free prove a relay-free caller/result transport without a disposable PostgreSQL execution.",
+            "authority_source": "Yuri's explicit transport-redesign selection and the blocked predecessor's immutable negative evidence.",
+            "completed_stage": "Yuri selected transport redesign after the predecessor exhausted three fail-closed attempts.",
+            "next_executable_stage": "freeze_relay_free_contract_without_database_execution",
+        },
+        "next_operation_protected_boundaries": [
+            *latch["protected_boundaries"],
+            "no_disposable_postgresql_execution_before_new_plan_and_preexecution_receipt",
+        ],
+        "command_manifest": commands,
+    }
+
+
 @contextmanager
-def _worktree(path: Path):
+def _worktree(path: Path, source_ref: str = REPLAY_FIXTURE_SOURCE):
     source = subprocess.run(
-        ["git", "rev-parse", f"{REPLAY_FIXTURE_SOURCE}^{{commit}}"],
+        ["git", "rev-parse", f"{source_ref}^{{commit}}"],
         cwd=ROOT,
         check=True,
         capture_output=True,
@@ -158,6 +195,32 @@ def test_blocked_intent_is_closed_and_rejects_hostile_fields() -> None:
         validate_blocked_tick_intent(blank_reason, contract)
 
 
+def test_user_decision_intent_is_closed_and_rejects_derived_or_underbounded_input() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    baseline = _user_decision_intent(ROOT)
+    assert validate_user_decision_tick_intent(baseline, contract) == baseline
+    derived = json.loads(json.dumps(baseline))
+    derived["source_head"] = "a" * 40
+    with pytest.raises(
+        ClockworkTickRejection, match="user_decision_tick_intent_keys"
+    ):
+        validate_user_decision_tick_intent(derived, contract)
+    wrong_outcome = json.loads(json.dumps(baseline))
+    wrong_outcome["selected_outcome"] = "repeat_blocked_transport"
+    with pytest.raises(
+        ClockworkTickRejection, match="user_decision_selected_outcome"
+    ):
+        validate_user_decision_tick_intent(wrong_outcome, contract)
+    underbounded = json.loads(json.dumps(baseline))
+    underbounded["next_operation_protected_boundaries"].remove(
+        "explicit_path_staging_only"
+    )
+    with pytest.raises(
+        ClockworkTickRejection, match="user_decision_next_boundaries_floor"
+    ):
+        validate_user_decision_tick_intent(underbounded, contract)
+
+
 def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
     with _worktree(tmp_path / "selected-or-prepared") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
@@ -251,6 +314,74 @@ def test_blocked_tick_preserves_every_non_latch_surface_and_rolls_back(
         assert restored_pointer["lease_sequence"] == (
             original_pointer["lease_sequence"] + 2
         )
+
+
+def test_user_decision_tick_replaces_blocked_latch_and_only_updates_baton(
+    tmp_path: Path,
+) -> None:
+    with _worktree(
+        tmp_path / "user-decision-transition", BLOCKED_REPLAY_FIXTURE_SOURCE
+    ) as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _user_decision_intent(worktree)
+        canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
+        before_canonical = {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        }
+        before_metadata = {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        }
+        before_pointer = pointer_path.read_bytes()
+        prepared = build_user_decision_tick_generation(worktree, contract, intent)
+        latch = json.loads(prepared["canonical"]["active_latch"].decode("utf-8"))
+        baton = prepared["canonical"]["current_baton"].decode("utf-8")
+        assert latch["operation_id"] == REDESIGN_OPERATION_ID
+        assert latch["status"] == "in_progress"
+        assert latch["source_head"] == BLOCKED_REPLAY_FIXTURE_SOURCE
+        assert latch["user_attention"] == {"required": False, "reason": None}
+        assert latch["terminal_response"] == {
+            "permitted": False,
+            "reason": "unfinished_authorized_operation",
+        }
+        assert REDESIGN_OPERATION_ID in baton
+        assert "user-decision transition" in baton
+        assert {
+            key
+            for key in CANONICAL_KEYS
+            if prepared["canonical"][key] != before_canonical[key]
+        } == {"active_latch", "current_baton"}
+        with pytest.raises(OSError, match="injected_tick_precommit_failure"):
+            publish_tick_generation(
+                worktree,
+                prepared,
+                writer_id="clockwork",
+                fail_at="before_pointer_replace",
+            )
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
+        assert pointer_path.read_bytes() == before_pointer
+        active = publish_tick_generation(
+            worktree, prepared, writer_id="clockwork"
+        )
+        assert active["event_kind"] == "user_decision_transition"
+        assert active["operation_id"] == REDESIGN_OPERATION_ID
+        assert publish_tick_generation(
+            worktree, prepared, writer_id="clockwork"
+        )["generation_id"] == active["generation_id"]
+        rolled_back = rollback_tick_generation(
+            worktree, contract, writer_id="clockwork"
+        )
+        assert rolled_back["byte_exact"] is True
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
 
 
 def test_git_clean_line_ending_variation_does_not_change_tick(tmp_path: Path) -> None:

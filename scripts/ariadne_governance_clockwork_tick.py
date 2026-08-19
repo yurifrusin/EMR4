@@ -14,6 +14,8 @@ if str(ROOT) not in sys.path:
 
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
+    USER_DECISION_INTENT_VERSION,
+    build_user_decision_tick_generation,
     build_tick_generation,
     build_blocked_tick_generation,
     publish_tick_generation,
@@ -86,6 +88,8 @@ def main(argv: list[str] | None = None) -> int:
         transaction = _load(ROOT / contract["clockwork_root"] / "transaction.json")
         if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
             operation_id = intent.get("operation_id")
+        elif intent.get("schema_version") == USER_DECISION_INTENT_VERSION:
+            operation_id = intent.get("next_operation", {}).get("operation_id")
         else:
             operation_id = intent.get("transaction_manifest", {}).get("operation_id")
         if arguments.check and transaction.get("operation_id") == operation_id:
@@ -93,6 +97,10 @@ def main(argv: list[str] | None = None) -> int:
         else:
             if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
                 prepared = build_blocked_tick_generation(ROOT, contract, intent)
+            elif intent.get("schema_version") == USER_DECISION_INTENT_VERSION:
+                prepared = build_user_decision_tick_generation(
+                    ROOT, contract, intent
+                )
             else:
                 prepared = build_tick_generation(ROOT, contract, intent)
             if arguments.check:

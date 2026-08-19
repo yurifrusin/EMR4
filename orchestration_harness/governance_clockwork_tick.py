@@ -38,6 +38,9 @@ from scripts import ariadne_compass
 
 TICK_INTENT_VERSION = "ariadne.governance_live_tick_intent.v1"
 BLOCKED_INTENT_VERSION = "ariadne.governance_live_blocked_transition_intent.v1"
+USER_DECISION_INTENT_VERSION = (
+    "ariadne.governance_live_user_decision_transition_intent.v1"
+)
 PREPARED_VERSION = "ariadne.governance_live_tick_prepared_generation.v1"
 GENERATION_VERSION = "ariadne.governance_live_tick_generation.v1"
 TRANSACTION_VERSION = "ariadne.governance_live_tick_transaction.v1"
@@ -271,6 +274,99 @@ def validate_blocked_tick_intent(
     }
 
 
+def validate_user_decision_tick_intent(
+    value: object, contract_value: object
+) -> dict[str, Any]:
+    """Validate a blocked-operation replacement chosen by the user."""
+
+    validate_contract(contract_value)
+    try:
+        row = _exact(
+            value,
+            {
+                "schema_version",
+                "blocked_operation_id",
+                "selected_outcome",
+                "next_operation",
+                "next_operation_protected_boundaries",
+                "command_manifest",
+            },
+            "user_decision_tick_intent_keys",
+        )
+    except AdoptionRejection as error:
+        raise ClockworkTickRejection("user_decision_tick_intent_keys") from error
+    if row["schema_version"] != USER_DECISION_INTENT_VERSION:
+        _reject("user_decision_tick_intent_version")
+    if _all_keys(row) & DERIVED_INPUT_KEYS:
+        _reject("caller_authored_derived_binding")
+    blocked_operation_id = _text(
+        row["blocked_operation_id"], "user_decision_blocked_operation_id", 128
+    )
+    if IDENTIFIER.fullmatch(blocked_operation_id) is None:
+        _reject("user_decision_blocked_operation_id")
+    if row["selected_outcome"] != "replace_with_newly_frozen_transport_redesign":
+        _reject("user_decision_selected_outcome")
+    next_operation = _exact(
+        row["next_operation"],
+        {
+            "operation_id",
+            "active_tranche",
+            "objective",
+            "authority_source",
+            "completed_stage",
+            "next_executable_stage",
+        },
+        "user_decision_next_operation_keys",
+    )
+    operation_id = _text(
+        next_operation["operation_id"], "user_decision_next_operation_id", 128
+    )
+    if (
+        IDENTIFIER.fullmatch(operation_id) is None
+        or operation_id == blocked_operation_id
+    ):
+        _reject("user_decision_next_operation_id")
+    boundaries = _strings(
+        row["next_operation_protected_boundaries"],
+        "user_decision_next_boundaries",
+    )
+    if not REQUIRED_NEXT_BOUNDARIES.issubset(boundaries):
+        _reject("user_decision_next_boundaries_floor")
+    return {
+        "schema_version": USER_DECISION_INTENT_VERSION,
+        "blocked_operation_id": blocked_operation_id,
+        "selected_outcome": row["selected_outcome"],
+        "next_operation": {
+            "operation_id": operation_id,
+            "active_tranche": _text(
+                next_operation["active_tranche"],
+                "user_decision_active_tranche",
+                240,
+            ),
+            "objective": _text(
+                next_operation["objective"], "user_decision_objective", 1000
+            ),
+            "authority_source": _text(
+                next_operation["authority_source"],
+                "user_decision_authority_source",
+                500,
+            ),
+            "completed_stage": _text(
+                next_operation["completed_stage"],
+                "user_decision_completed_stage",
+                500,
+            ),
+            "next_executable_stage": _text(
+                next_operation["next_executable_stage"],
+                "user_decision_next_executable_stage",
+                500,
+            ),
+        },
+        "next_operation_protected_boundaries": boundaries,
+        "command_manifest": _validate_commands(row["command_manifest"]),
+    }
+
+
 def _validate_any_intent(
     value: object, contract: dict[str, Any]
 ) -> dict[str, Any]:
@@ -280,13 +376,17 @@ def _validate_any_intent(
         return validate_tick_intent(value, contract)
     if value.get("schema_version") == BLOCKED_INTENT_VERSION:
         return validate_blocked_tick_intent(value, contract)
+    if value.get("schema_version") == USER_DECISION_INTENT_VERSION:
+        return validate_user_decision_tick_intent(value, contract)
     _reject("tick_intent_version")
 
 
 def _intent_operation_id(intent: dict[str, Any]) -> str:
     if intent["schema_version"] == TICK_INTENT_VERSION:
         return intent["transaction_manifest"]["operation_id"]
-    return intent["operation_id"]
+    if intent["schema_version"] == BLOCKED_INTENT_VERSION:
+        return intent["operation_id"]
+    return intent["next_operation"]["operation_id"]
 
 
 def _derive_blocked_latch(
@@ -306,6 +406,50 @@ def _derive_blocked_latch(
     result["terminal_response"] = {
         "permitted": True,
         "reason": intent["terminal_reason"],
+    }
+    return validate_active_operation(result)
+
+
+def _derive_user_decision_latch(
+    latch: dict[str, Any], intent: dict[str, Any], source: str
+) -> dict[str, Any]:
+    if (
+        latch["status"] != "blocked"
+        or latch["operation_id"] != intent["blocked_operation_id"]
+        or not latch["user_attention"]["required"]
+        or not latch["terminal_response"]["permitted"]
+    ):
+        _reject("user_decision_active_operation")
+    next_operation = intent["next_operation"]
+    result = {
+        "schema_version": latch["schema_version"],
+        "operation_id": next_operation["operation_id"],
+        "active_tranche": next_operation["active_tranche"],
+        "objective": next_operation["objective"],
+        "status": "in_progress",
+        "source_head": source,
+        "authority_source": next_operation["authority_source"],
+        "checkpoint": {
+            "completed_stage": next_operation["completed_stage"],
+            "next_executable_stage": next_operation["next_executable_stage"],
+            "retry_counters": {
+                "planning": 0,
+                "implementation": 0,
+                "review": 0,
+                "verification": 0,
+            },
+            "settings_fingerprint": latch["checkpoint"]["settings_fingerprint"],
+        },
+        "interruption_policy": copy.deepcopy(latch["interruption_policy"]),
+        "resume_after_compaction": True,
+        "user_attention": {"required": False, "reason": None},
+        "terminal_response": {
+            "permitted": False,
+            "reason": "unfinished_authorized_operation",
+        },
+        "protected_boundaries": list(
+            intent["next_operation_protected_boundaries"]
+        ),
     }
     return validate_active_operation(result)
 
@@ -416,6 +560,41 @@ def _render_baton(
     return current
 
 
+def _render_user_decision_baton(
+    current: str,
+    *,
+    intent: dict[str, Any],
+    graph: dict[str, Any],
+    compass: dict[str, Any],
+    source: str,
+) -> str:
+    def replace_row(text: str, label: str, value: str) -> str:
+        prefix = f"| {label} |"
+        matches = [line for line in text.splitlines() if line.startswith(prefix)]
+        if len(matches) != 1:
+            _reject("user_decision_baton_row")
+        return text.replace(matches[0], f"| {label} | {value} |", 1)
+
+    next_operation = intent["next_operation"]
+    next_value = (
+        "Proceed under Yuri's explicit transport-redesign selection with "
+        f"`{next_operation['operation_id']}`: {next_operation['objective']} "
+        "The active latch is the exact authority boundary. Protected refs remain closed; "
+        "preserve `docs/branding/` and stage explicit paths only."
+    )
+    relation = (
+        "The live repository-governance clockwork last published a user-decision "
+        f"transition from exact full Git source `{source}` while Continuity "
+        f"{graph['graph_revision']} / Compass {compass['map_revision']} and the last "
+        "accepted product result remained unchanged. One clockwork writer owns all ten "
+        "surfaces, historical direct writers remain retired, and the immediately previous "
+        "generation is full-Git-bound and byte-recoverable. This opens no protected-ref, "
+        "deployment, release or Pages authority."
+    )
+    current = replace_row(current, "Next implementation", next_value)
+    return replace_row(current, "Current clockwork relation", relation)
+
+
 def build_tick_generation(
     repo_root: Path, contract_value: object, intent_value: object
 ) -> dict[str, Any]:
@@ -523,6 +702,191 @@ def build_tick_generation(
         key: _hash_bytes(value) for key, value in canonical.items()
     }
     metadata_sha256s = {key: _hash_bytes(value) for key, value in metadata.items()}
+    bundle_sha256 = _hash_json(
+        {"canonical": canonical_sha256s, "metadata": metadata_sha256s}
+    )
+    generation = {
+        "schema_version": GENERATION_VERSION,
+        "generation_id": "gen-" + bundle_sha256,
+        "bundle_sha256": bundle_sha256,
+        "source_commit": source,
+        "previous_generation": {
+            "generation_id": base_pointer["selected_generation_id"],
+            "source_commit": source,
+            "bundle_sha256": base_pointer["selected_bundle_sha256"],
+            "canonical_sha256s": {
+                key: _hash_bytes(value) for key, value in current.items()
+            },
+            "metadata_sha256s": {
+                key: _hash_bytes(value) for key, value in prior_metadata.items()
+            },
+            "pointer_sha256": _hash_bytes(
+                _git_bytes(
+                    repo_root,
+                    source,
+                    f"{contract['clockwork_root']}/{POINTER_NAME}",
+                )
+            ),
+        },
+        "canonical_sha256s": canonical_sha256s,
+        "metadata_sha256s": metadata_sha256s,
+    }
+    pointer = {
+        "schema_version": base_pointer["schema_version"],
+        "phase": "clockwork_active",
+        "selected_generation_id": generation["generation_id"],
+        "selected_bundle_sha256": generation["bundle_sha256"],
+        "previous_generation_id": base_pointer["selected_generation_id"],
+        "previous_source_commit": source,
+        "lease_sequence": base_pointer["lease_sequence"] + 1,
+        "writer": WRITER,
+    }
+    prepared = {
+        "schema_version": PREPARED_VERSION,
+        "contract": contract,
+        "intent": intent,
+        "source_commit": source,
+        "base_pointer": base_pointer,
+        "canonical": canonical,
+        "metadata": metadata,
+        "generation_manifest": generation,
+        "pointer": pointer,
+    }
+    validate_prepared_tick(repo_root, prepared)
+    return prepared
+
+
+def build_user_decision_tick_generation(
+    repo_root: Path, contract_value: object, intent_value: object
+) -> dict[str, Any]:
+    """Replace one blocked latch after an explicit user-selected outcome."""
+
+    contract = validate_contract(contract_value)
+    intent = validate_user_decision_tick_intent(intent_value, contract)
+    live = validate_live_state(repo_root, contract)
+    source = _assert_git_state(repo_root, contract)
+    current, prior_metadata, base_pointer = _assert_clean_predecessor(
+        repo_root, contract, source
+    )
+    prior_generation = json.loads(prior_metadata[GENERATION_NAME].decode("utf-8"))
+    if (
+        base_pointer.get("phase") != "clockwork_active"
+        or base_pointer.get("writer") != WRITER
+        or base_pointer.get("selected_generation_id") != live["generation_id"]
+        or base_pointer.get("selected_bundle_sha256") != live["bundle_sha256"]
+        or prior_generation.get("generation_id") != live["generation_id"]
+    ):
+        _reject("tick_predecessor_identity")
+
+    source_latch = validate_active_operation(
+        json.loads(current["active_latch"].decode("utf-8"))
+    )
+    next_latch = _derive_user_decision_latch(source_latch, intent, source)
+    graph = json.loads(current["continuity"].decode("utf-8"))
+    compass = json.loads(current["compass"].decode("utf-8"))
+    baton = _render_user_decision_baton(
+        current["current_baton"].decode("utf-8"),
+        intent=intent,
+        graph=graph,
+        compass=compass,
+        source=source,
+    )
+    canonical = dict(current)
+    canonical["active_latch"] = _json_text(next_latch).encode("utf-8")
+    canonical["current_baton"] = baton.encode("utf-8")
+
+    intent_sha256 = tc.sha256(intent)
+    transaction_id = "txn-" + tc.sha256(
+        {"user_decision_intent": intent_sha256, "head": source}
+    )[7:31]
+    journal_id = "journal-" + transaction_id[4:]
+    events: list[dict[str, Any]] = []
+    previous = tc.ZERO_DIGEST
+    for event_type, payload in (
+        (
+            "user-decision-intent-accepted",
+            {
+                "intent_sha256": intent_sha256,
+                "previous_operation_id": source_latch["operation_id"],
+                "selected_outcome": intent["selected_outcome"],
+            },
+        ),
+        ("git-source-resolved", {"source_commit": source}),
+        (
+            "active-operation-replaced",
+            {
+                "previous_operation_id": source_latch["operation_id"],
+                "next_operation_id": next_latch["operation_id"],
+            },
+        ),
+        (
+            "replacement-latch-validated",
+            {
+                "status": "in_progress",
+                "user_attention_required": False,
+                "terminal_response_permitted": False,
+            },
+        ),
+        (
+            "transaction-prepared",
+            {"publication_mode": "lease_bound_pointer_last_live_tick"},
+        ),
+    ):
+        event = tc._event(
+            journal_id=journal_id,
+            transaction_id=transaction_id,
+            operation_id=next_latch["operation_id"],
+            sequence=len(events) + 1,
+            previous=previous,
+            event_type=event_type,
+            payload=payload,
+        )
+        events.append(event)
+        previous = event["event_sha256"]
+    tc.validate_event_chain(events)
+
+    projection_sha256s = {
+        "latch": tc.sha256(next_latch),
+        "current_baton": tc.sha256(baton),
+    }
+    transaction = {
+        "schema_version": TRANSACTION_VERSION,
+        "operation_id": next_latch["operation_id"],
+        "transaction_id": transaction_id,
+        "source_commit": source,
+        "previous_source_commit": source,
+        "previous_generation_id": base_pointer["selected_generation_id"],
+        "previous_bundle_sha256": base_pointer["selected_bundle_sha256"],
+        "previous_canonical_sha256s": {
+            key: _hash_bytes(value) for key, value in current.items()
+        },
+        "previous_metadata_sha256s": {
+            key: _hash_bytes(value) for key, value in prior_metadata.items()
+        },
+        "projection_sha256s": projection_sha256s,
+        "journal": events,
+        "publication_mode": "lease_bound_pointer_last_live_tick",
+        "event_kind": "user_decision_transition",
+        "next_boundaries_sha256": tc.sha256(
+            next_latch["protected_boundaries"]
+        ),
+        "register_bytes_preserved": True,
+        "pattern_bytes_preserved": True,
+    }
+    ownership = json.loads(prior_metadata["ownership.json"].decode("utf-8"))
+    metadata = {
+        "command-manifest.json": _json_text(intent["command_manifest"]).encode(
+            "utf-8"
+        ),
+        "transaction.json": _json_text(transaction).encode("utf-8"),
+        "ownership.json": _json_text(ownership).encode("utf-8"),
+    }
+    canonical_sha256s = {
+        key: _hash_bytes(value) for key, value in canonical.items()
+    }
+    metadata_sha256s = {
+        key: _hash_bytes(value) for key, value in metadata.items()
+    }
     bundle_sha256 = _hash_json(
         {"canonical": canonical_sha256s, "metadata": metadata_sha256s}
     )
@@ -867,7 +1231,7 @@ def validate_prepared_tick(
             != tc.sha256(intent["next_operation_protected_boundaries"])
         ):
             _reject("tick_prepared_semantics")
-    else:
+    elif intent["schema_version"] == BLOCKED_INTENT_VERSION:
         source_latch = validate_active_operation(
             json.loads(source_canonical["active_latch"].decode("utf-8"))
         )
@@ -888,6 +1252,35 @@ def validate_prepared_tick(
             or not transaction["pattern_bytes_preserved"]
         ):
             _reject("blocked_tick_prepared_semantics")
+    else:
+        source_latch = validate_active_operation(
+            json.loads(source_canonical["active_latch"].decode("utf-8"))
+        )
+        expected_latch = _derive_user_decision_latch(source_latch, intent, source)
+        expected_baton = _render_user_decision_baton(
+            source_canonical["current_baton"].decode("utf-8"),
+            intent=intent,
+            graph=json.loads(source_canonical["continuity"].decode("utf-8")),
+            compass=json.loads(source_canonical["compass"].decode("utf-8")),
+            source=source,
+        ).encode("utf-8")
+        preserved = set(CANONICAL_KEYS) - {"active_latch", "current_baton"}
+        expected_projection_sha256s = {
+            "latch": tc.sha256(expected_latch),
+            "current_baton": tc.sha256(expected_baton.decode("utf-8")),
+        }
+        if (
+            any(row["canonical"][key] != source_canonical[key] for key in preserved)
+            or latch != expected_latch
+            or row["canonical"]["current_baton"] != expected_baton
+            or transaction["event_kind"] != "user_decision_transition"
+            or transaction["projection_sha256s"] != expected_projection_sha256s
+            or transaction["next_boundaries_sha256"]
+            != tc.sha256(expected_latch["protected_boundaries"])
+            or not transaction["register_bytes_preserved"]
+            or not transaction["pattern_bytes_preserved"]
+        ):
+            _reject("user_decision_tick_prepared_semantics")
     if (
         row["canonical"]["error_register"] != source_canonical["error_register"]
         or row["canonical"]["pattern_report"] != source_canonical["pattern_report"]
@@ -937,6 +1330,20 @@ def validate_tick_live_state(
             != {"latch": tc.sha256(latch)}
         ):
             _reject("tick_live_blocked_operation")
+    elif event_kind == "user_decision_transition":
+        if (
+            transaction.get("operation_id") != latch["operation_id"]
+            or latch["status"] != "in_progress"
+            or transaction.get("projection_sha256s")
+            != {
+                "latch": tc.sha256(latch),
+                "current_baton": tc.sha256(
+                    (repo_root / contract["canonical_paths"]["current_baton"])
+                    .read_text(encoding="utf-8")
+                ),
+            }
+        ):
+            _reject("tick_live_user_decision_operation")
     else:
         _reject("tick_live_event_kind")
     prior = generation.get("previous_generation")
@@ -981,6 +1388,29 @@ def validate_tick_live_state(
             )
         ):
             _reject("tick_live_blocked_preservation")
+    elif event_kind == "user_decision_transition":
+        source_latch = validate_active_operation(
+            json.loads(source_canonical["active_latch"].decode("utf-8"))
+        )
+        preserved = set(CANONICAL_KEYS) - {"active_latch", "current_baton"}
+        journal = transaction.get("journal")
+        first_payload = (
+            journal[0].get("payload", {})
+            if isinstance(journal, list) and journal
+            else {}
+        )
+        if (
+            source_latch["status"] != "blocked"
+            or source_latch["operation_id"]
+            != first_payload.get("previous_operation_id")
+            or source_latch["operation_id"] == latch["operation_id"]
+            or any(
+                (repo_root / contract["canonical_paths"][key]).read_bytes()
+                != source_canonical[key]
+                for key in preserved
+            )
+        ):
+            _reject("tick_live_user_decision_preservation")
     return {
         **base,
         "schema_version": "ariadne.governance_live_tick_state.v1",
