@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair",
   "objective": "Freeze and complete a provider-free deterministic repair that keeps the relay-free PostgreSQL server attachment under one cleanup owner until final teardown, separates post-readiness running-state failure from exact identity-predicate failure, preserves sanitized failed-predicate evidence and proves the lifecycle with fakes, without Docker or database execution.",
   "status": "in_progress",
-  "source_head": "36c1a31da8cb680a0ad278a93e7fa51b0dbfa73e",
+  "source_head": "01447ab962d4d6a65ed37932bd5954372d4b937d",
   "authority_source": "Yuri's explicit standing uninterrupted-development authority, immutable attempt-004 failure and envelope evidence, its blocked clockwork closeout at lease 32, and the accepted relay-free transport, runtime-role and cleanup controls.",
   "checkpoint": {
-    "completed_stage": "Attempt 004 is closed blocked at a6a292e36978aa95e439fa398242c67816b6d4cc after one consumed execution, zero retry, no released effect, exact cleanup and zero residue. Yuri's standing authority selects the narrow no-Docker server-attachment lifetime and post-readiness observability repair.",
-    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_the_provider_free_server_attachment_lifetime_and_post_readiness_observability_repair_plan_without_docker_database_or_model_execution",
+    "completed_stage": "Fresh five-source rehydration passed; the repair plan and threat delta are frozen at full source b91733b11cbe28d0d22ae4d46308bdc706ea2897; the sparse worker packet is clean at that exact source; pinned rc.7 materialized offline; and 48 provider-free plan, harness, broker, HMR and no-database tests pass with zero Docker, PostgreSQL or model execution.",
+    "next_executable_stage": "machine_generate_and_validate_one_v2_work_order_exact_no_database_command_binding_custom_hmr_runner_and_fresh_five_source_predispatch_receipt_then_launch_exactly_one_deepseek_native_harness_worker_session",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
