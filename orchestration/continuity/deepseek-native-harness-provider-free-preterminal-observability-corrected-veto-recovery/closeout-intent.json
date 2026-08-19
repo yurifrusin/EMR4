@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.governance_live_user_decision_transition_intent.v1",
+  "blocked_operation_id": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery",
+  "selected_outcome": "replace_with_newly_frozen_descendant",
+  "next_operation": {
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free preterminal observability corrected-veto recovery",
+    "objective": "Obtain one fresh corrected Gemini 3.7 Flash/high independent veto against unchanged candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab after restored Antigravity inference authority, then reconcile the blocked predecessor without changing its candidate or rerunning any native attempt.",
+    "authority_source": "Yuri's restored or reauthorised Antigravity session, his standing uninterrupted-development authority, and the predecessor's immutable blocked clockwork evidence; no pasted authorization code is retained or required.",
+    "completed_stage": "The predecessor deterministic candidate passes locally and closed blocked only because corrected Gemini inference returned three predecision HTTP 403 failures; Yuri has now restored or reauthorised the agy CLI session.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_one_clean_corrected_gemini37_high_veto_against_unchanged_candidate"
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_preterminal_observability_corrected_independent_veto_only",
+    "unchanged_candidate_b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab_and_exact_ten_command_manifest",
+    "rejected_first_pass_and_three_corrected_transport_failure_receipts_remain_immutable",
+    "no_user_authorization_code_retention_printing_logging_repository_write_or_provider_submission_unless_cli_explicitly_requests_it",
+    "one_post_reauthorisation_gemini_3_7_flash_high_attempt_then_fail_closed_on_repeated_403",
+    "no_fallback_model_or_silent_acceptance",
+    "no_native_harness_deepseek_agent_session_turn_broker_or_occupied_worker",
+    "native_composition_attempt_001_immutable_no_retry_resume_or_reclassification",
+    "no_candidate_implementation_test_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_docker_container_credential_postgresql_sql_transaction_or_database_execution",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "corrected-veto-transition-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "corrected-veto-transition-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "corrected-veto-transition-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
