@@ -3,17 +3,17 @@
   "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
   "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 004",
   "objective": "Freeze and, only after exact deterministic and preexecution admission, execute exactly one separately named provider-free disposable PostgreSQL relay-free rollback/unknown-commit recovery attempt using the accepted corrected harness, with immutable predecessor evidence, zero retry and exact cleanup.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "00714269c97deca32019779287ebca77f46cdc50",
   "authority_source": "Yuri's standing uninterrupted-development authority, the immutable attempts 001-003, accepted call-site/pre-registry cleanup repair, accepted no-database WorkOrder/broker interlock and accepted native-Harness HMR boot proof.",
   "checkpoint": {
-    "completed_stage": "Attempt-004 plan 7bbc0eb6466811c323006ddb6bcc80a3a6fcb679, adapter/schema 2b1b0be12ff4e370f54c0ef12a8b89d26666da6e and passed preexecution receipt 7f37b2ff56bf6e729cf22823e1a9f93822ca621e are committed. All 582 hostile mutations and 137 provider-free tests pass; Ruff and compile pass. Docker 29.5.3 and the exact cached image are readable; matching containers and networks are zero. No attempt-004 Docker object, credential, PostgreSQL process, SQL or database execution occurred.",
-    "next_executable_stage": "execute_exactly_one_attempt_004_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
+    "completed_stage": "Attempt 004 is consumed once at 932ae6ce02e0e973a22dfe999601087295001d1b and failed closed after readiness with zero retry or released effect. Failure and envelope are immutable at 4908bf53265e1356a9c5dac84a05b05702ad6d34; cleanup and zero residue are verified. The honest blocked closeout, Sol assessment, efficacy reading and paired Yuri summary are committed at 7c7d3708fe10c563bd61356966a7a287d383a5b2.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "Attempt 004 cannot be rerun. Yuri's standing uninterrupted-development authority already selects the separately named provider-free server-attachment lifetime and post-readiness observability conformance repair; a separate user-decision clockwork transition will consume that standing authority without a ceremonial pause."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "The intended rollback and unknown-response transaction proof was not achieved. The retained evidence localizes failure to the combined running/identity guard after readiness and attachment release but cannot distinguish its two branches, so attempt 004 closes blocked with exact cleanup and no retry."
   },
   "protected_boundaries": [
     "provider_free_disposable_postgresql_relay_free_recovery_attempt_004_plan_and_exactly_one_execution_only",
