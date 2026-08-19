@@ -80,16 +80,20 @@ def test_plan_records_all_three_parallelism_lanes() -> None:
     assert "claude code is not a fallback" in text
 
 
-def test_active_latch_names_only_this_in_progress_tranche() -> None:
+def test_active_latch_records_the_bounded_recovery_block() -> None:
     latch = json.loads(LATCH.read_text(encoding="utf-8"))
 
     assert latch["operation_id"] == (
         "raisa-provider-free-disposable-postgresql-default-off-check-in-"
         "rollback-unknown-commit-recovery-rehearsal"
     )
-    assert latch["status"] == "in_progress"
-    assert latch["terminal_response"]["permitted"] is False
-    assert latch["user_attention"]["required"] is False
+    assert latch["status"] == "blocked"
+    assert latch["checkpoint"]["next_executable_stage"] is None
+    assert latch["terminal_response"]["permitted"] is True
+    assert latch["user_attention"]["required"] is True
+    assert "Three authorised disposable PostgreSQL executions failed closed" in latch[
+        "checkpoint"
+    ]["completed_stage"]
     assert "explicit_path_staging_only" in latch["protected_boundaries"]
 
 

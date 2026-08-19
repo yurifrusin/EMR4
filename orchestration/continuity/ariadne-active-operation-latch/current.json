@@ -3,17 +3,17 @@
   "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
   "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
   "objective": "Prove with one newly frozen authored-synthetic disposable PostgreSQL transaction probe that explicit rollback leaves no effect and an ambiguous response is resolved fail-closed without duplicate effect or ordinary release, followed by exact cleanup.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
   "authority_source": "Accepted runtime-role and tenant-isolation attestation plus Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_rollback_unknown_commit_recovery_plan",
+    "completed_stage": "Three authorised disposable PostgreSQL executions failed closed after exact rollback-zero and post-commit wait observations. No complete worker outcome, success release or automatic retry occurred; every physical role, relay, container and network cleaned exactly. Bounded recovery is exhausted.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "Choose whether to authorise a newly frozen transport redesign for the unresolved caller-outcome path or defer the rollback and unknown-response operational-evidence gap. No fourth execution is authorised by the current plan."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "bounded_recovery_exhausted_and_clockwork_blocked_transition_published"
   },
   "protected_boundaries": [
     "provider_free_uniquely_named_disposable_local_postgresql_only",

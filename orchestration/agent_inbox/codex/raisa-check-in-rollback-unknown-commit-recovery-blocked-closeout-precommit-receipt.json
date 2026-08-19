@@ -1,0 +1,117 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
+    "completed_stage": "Three authorised disposable PostgreSQL executions failed closed after exact rollback-zero and post-commit wait observations. No complete worker outcome, success release or automatic retry occurred; every physical role, relay, container and network cleaned exactly. Bounded recovery is exhausted.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "2e814b2c3f8b687adb499d6f61a64d316dc016df",
+    "reason_codes": [],
+    "resolved_commit": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "6a2832575e9b4df5c40a13984db7281e79814a94"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2e814b2c3f8b687adb499d6f61a64d316dc016df",
+    "branch_origin_aligned": false,
+    "head": "2e814b2c3f8b687adb499d6f61a64d316dc016df",
+    "origin_branch_commit": "26402cb8667c2dbf62e86c6eb4c0b000d274559e",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "blocked_closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Occupied DeepSeek HMR remains forbidden, no fallback is permitted and bounded recovery is exhausted.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "Deterministic database acceptance failed before veto eligibility; no model review can supply the missing runtime outcome.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy forbids proactive delegation and the remaining task-branch closeout is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after Yuri chooses transport redesign or deferral"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve immutable negative evidence",
+      "commit only explicit closeout and clockwork paths",
+      "push task branch only",
+      "send one non-PHI pause notification",
+      "wait for Yuri's transport-redesign-or-defer decision"
+    ]
+  },
+  "planned_action": "commit_and_publish_the_clockwork_governed_blocked_closeout_without_protected_ref_movement",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-rollback-unknown-commit-recovery-sol-blocked-assessment.md",
+      "orchestration/human_inbox/yuri/2026-08-19--check-in-rollback-unknown-commit-recovery-blocked.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the blocked assessment and task-branch publication. DeepSeek is declined because occupied native-Harness HMR remains forbidden and bounded recovery is exhausted. Gemini is declined because deterministic database acceptance failed. Native subagents are declined by current developer policy and because the closeout is serial.",
+    "git_refs_and_worktree": "Candidate source is full Git commit 2e814b2c3f8b687adb499d6f61a64d316dc016df. Clockwork generation gen-6f758043be53b4ce1d14e9e9fab01649c0aa2d91fb90ac649f9db314c216b811 is active at lease 5 with zero canonical drift. Local/origin master and local/origin handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; unrelated untracked material including docs/branding is preserved.",
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely after compaction at 96144 characters and 504 lines. The accepted Current result remains Continuity 334 / Compass 316; the clockwork-owned active latch now truthfully blocks the rollback/unknown-response operation without advancing either map.",
+    "protected_evidence_boundaries": "Three immutable failed-closed attempts and exact cleanup are the complete database evidence. No fourth execution, worker, provider, Gemini veto, acceptance or inferred successor is authorised. No product, ordinary-practice, data, production, deployment, release, Pages, protected evidence or protected ref changed. Preserve docs/branding and all unrelated untracked paths; explicit staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}

@@ -154,14 +154,21 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     assert graph["graph_revision"] == compass["source_graph_revision"]
     selected_transaction = _selected_clockwork_transaction()
     if selected_transaction is not None:
-        assert graph["nodes"][-1]["id"] == selected_transaction["operation_id"]
-        assert (
-            graph["nodes"][-1]["coordinates"]["source_head"]
-            == selected_transaction["source_commit"]
-        )
-        assert graph["nodes"][-1]["relationships"] == [
-            {"node_id": graph["nodes"][-2]["id"], "relation": "builds_on"}
-        ]
+        if selected_transaction["event_kind"] == "clean_closeout":
+            assert graph["nodes"][-1]["id"] == selected_transaction["operation_id"]
+            assert (
+                graph["nodes"][-1]["coordinates"]["source_head"]
+                == selected_transaction["source_commit"]
+            )
+            assert graph["nodes"][-1]["relationships"] == [
+                {"node_id": graph["nodes"][-2]["id"], "relation": "builds_on"}
+            ]
+        else:
+            latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+            assert selected_transaction["event_kind"] == "blocked_transition"
+            assert latch["operation_id"] == selected_transaction["operation_id"]
+            assert latch["status"] == "blocked"
+            assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
     else:
         assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_PARENT_ID
         assert graph["nodes"][-1]["coordinates"]["source_head"] == (
@@ -208,7 +215,13 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     if selected_transaction is not None:
         latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
         assert "accepted at exact reviewed source" in current.lower()
-        assert selected_transaction["source_commit"] in clockwork_relation
+        if selected_transaction["event_kind"] == "clean_closeout":
+            assert selected_transaction["source_commit"] in clockwork_relation
+        else:
+            assert selected_transaction["event_kind"] == "blocked_transition"
+            assert latch["status"] == "blocked"
+            assert latch["user_attention"]["required"] is True
+            assert latch["terminal_response"]["permitted"] is True
         assert "one clockwork writer owns all ten surfaces" in clockwork_relation.lower()
         assert "immediately previous generation" in clockwork_relation.lower()
         assert latch["operation_id"] in next_work

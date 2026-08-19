@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "2e814b2c3f8b687adb499d6f61a64d316dc016df",
+  "source_commit": "2e814b2c3f8b687adb499d6f61a64d316dc016df",
+  "generation_id": "gen-6f758043be53b4ce1d14e9e9fab01649c0aa2d91fb90ac649f9db314c216b811",
+  "bundle_sha256": "6f758043be53b4ce1d14e9e9fab01649c0aa2d91fb90ac649f9db314c216b811",
+  "previous_generation_id": "gen-503aa76307da93745abbca25f209a6841118660d02cb171ea576f4eaede5c7f5",
+  "previous_source_commit": "2e814b2c3f8b687adb499d6f61a64d316dc016df",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 5,
+  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+  "event_kind": "blocked_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}
