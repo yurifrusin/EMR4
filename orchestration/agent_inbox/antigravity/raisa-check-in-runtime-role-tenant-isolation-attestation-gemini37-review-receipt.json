@@ -1,0 +1,301 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-role-tenant-gemini-6a283257",
+  "branch": "codex/review-check-in-role-tenant-6a283257",
+  "head_before": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "head_after": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "ed06c7e2189a06d0b699e66642000461304cce8bb1d5ba6d44f46308df25b0e0",
+  "result": "# Independent Tier-2 Read-Only Veto Review: Check-In Runtime Role and Tenant Isolation\n\n**Reviewer Model:** Gemini 3.7 Flash (High)  \n**Date:** 2026-08-19  \n**Decision Owner:** GPT Sol  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-role-tenant-gemini-6a283257`  \n**Candidate Branch:** `codex/review-check-in-role-tenant-6a283257`  \n**Candidate HEAD:** `6a2832575e9b4df5c40a13984db7281e79814a94`  \n**Base:** `455e41b8b9038813b290e67c43ce0b3190120988`  \n**Accepted Environment Architecture Source:** `a1f309a6d52d01f9866432f7e9abb8095788d023`  \n**Evidence Class:** `authored_synthetic_provider_free_disposable_postgresql_role_tenant_attestation`\n\n---\n\n## 1. Five-Source Rehydration Receipt\n\nThe five mandatory rehydration sources from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/AGENTS.md) were read and verified:\n\n1. **`live_handover_current_baton`**: [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/AGENTS.md) Section 3 was read in full. The Baton confirms the current active product track for Reception One authority kernel and default-off check-in adapter. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. **`current_authority_allocation`**: GPT Sol holds conductor/implementation/task-branch authority. Native DeepSeek Harness is paused pending its separate boot proof. Gemini 3.7 Flash/high holds the independent read-only veto authority on this candidate. Native subagents remain declined.\n3. **`active_plan_and_acceptance`**:\n   - [docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md)\n   - [docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md)\n   - [orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json)\n   - [orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json)\n   - [orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json)\n   - [docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md)\n   - [orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md)\n   - [orchestration/continuity/ariadne-active-operation-latch/current.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/ariadne-active-operation-latch/current.json)\n   - [orchestration/continuity/ariadne-governance-clockwork/current.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/ariadne-governance-clockwork/current.json)\n4. **`protected_evidence_boundaries`**: No live secret, hosted database, production runtime, deployment, release, Pages rebuild, or protected-ref movement. Untracked `docs/branding/` and all unrelated files remain preserved.\n5. **`git_refs_and_worktree`**: Verified `HEAD` is `6a2832575e9b4df5c40a13984db7281e79814a94`, branch is `codex/review-check-in-role-tenant-6a283257`, worktree is completely clean.\n\n---\n\n## 2. Evaluation of Required Challenges\n\n### Challenge 1: Git Invariants and Base-to-Candidate File Scope\n- Preflight (C01, C02) and postflight (C10) confirm exact 40-character `HEAD` `6a2832575e9b4df5c40a13984db7281e79814a94` on branch `codex/review-check-in-role-tenant-6a283257` in a clean worktree.\n- `git diff --name-only` between base `455e41b8b9038813b290e67c43ce0b3190120988` and candidate `6a2832575e9b4df5c40a13984db7281e79814a94` (C09) confirms exactly the 18 candidate files within allowlisted paths.\n\n### Challenge 2: Source Bindings and Normalized Schema Validation\n- All 11 exact source bindings in `rehearsal-contract.json` match their canonical SHA-256 digests.\n- Normalized environment manifest schema `emr4.check-in-ordinary-environment-manifest.v1` validates cleanly against Draft 2020-12.\n\n### Challenge 3: Credential Containment and Redaction\n- Manifest retains references (`secret-ref:`) and shape-only rotation records, not credentials.\n- The 32-byte generated passwords existed only in process memory during execution.\n- No DSN, raw output, exception, container/network name, local path, or secret digest is leaked in either `tenant-role-attestation.json` or `rehearsal-evidence.json`.\n\n### Challenge 4: Restricted Physical Role Catalogue\n- Physical role format `emr4_checkin_ord_[0-9a-f]{16}` was catalogue-verified with `login=True`, `superuser=False`, `create_database=False`, `create_role=False`, `inherit=False`, `replication=False`, `bypass_rls=False`.\n- Memberships, owned databases, owned schemas, owned relations, owned functions, policy bindings, and product privileges are all strictly 0.\n\n### Challenge 5: Minimal Privileges and Probe-Only Scope\n- Dynamic role possesses only `CONNECT` on disposable database, `USAGE` on `check_in_role_probe`, and `SELECT, INSERT, UPDATE, DELETE` on `check_in_role_probe.tenant_probe`.\n- Public schema privileges are revoked; product relation privileges are 0.\n\n### Challenge 6: Admin-Owned Forced RLS and Policy Parity\n- Probe table is owned by `emr4_checkin_attest_admin`.\n- Catalogue confirms `relrowsecurity=True` (enabled) and `relforcerowsecurity=True` (forced).\n- `USING` and `WITH CHECK` clauses match identically: `practice_id = nullif(current_setting('app.current_practice_id', true), '')::uuid`.\n\n### Challenges 7 & 8: Same-Tenant Success and Cross-Tenant Denial Scenarios\n- **Same-Tenant:** Tenant A reads, inserts, and updates probe row successfully (RTA-S04); Tenant B reads Tenant B row (RTA-S05).\n- **Cross-Tenant:** Cross-tenant reads, updates, and deletes yield 0 rows affected (RTA-S06, RTA-S08). Cross-tenant insert fails with exact SQLSTATE `42501` (RTA-S07).\n- **Session Isolation:** Absent setting yields 0 rows (RTA-S09); setting resets after transaction (RTA-S10); admin role escalation (`SET ROLE`) fails with SQLSTATE `42501` (RTA-S11).\n\n### Challenge 9: Teardown, Absence Verification, and Clean Lifecycle\n- Physical role was dropped and verified absent prior to container teardown (RTA-S12).\n- Loopback relay stopped; captured-ID container and network were verified absent.\n- Evidence contains only closed statuses and hashes (`container_id_sha256`, `network_id_sha256`).\n\n### Challenge 10: Hostile Mutation Gates and Digest Binding\n- Contract hostile mutations: 302 attempted, 302 rejected (0 escapes).\n- Manifest hostile mutations: 159 attempted, 159 rejected (0 escapes).\n- Parent `rehearsal-evidence.json` strictly binds `attestation_sha256` matching the SHA-256 of `tenant-role-attestation.json`.\n\n### Challenge 11: Zero Ordinary Admission and Scope Invariance\n- `ordinary_admission_release_count` is 0. No product, config, API, client, feature flag, allowlist, status grammar, or waiting-area code was modified.\n\n### Challenge 12: Exclusion of Stale Historical Mutable-Current Assertions\n- The 5 documented historical assertions (readiness plan latch literal and 4 generation-stale graph revision checks) were cleanly deselected in surrounding test invocation without altering canonical repository state.\n\n### Challenge 13: Clockwork Test Fixture Correction\n- [tests/test_ariadne_governance_clockwork_tick.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/tests/test_ariadne_governance_clockwork_tick.py) now creates replay worktrees explicitly from full-Git commit `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` instead of mutable `HEAD`.\n- All 18 pre-pointer fault injection checkpoints, rollback byte-exactness, and live zero-drift checks pass cleanly. Live validation is not weakened.\n\n### Challenges 14 & 15: Command Manifest Execution and Boundary Closure\n- All 10 structured manifest commands (C01 through C10) were executed in exact order and exited with code 0:\n  - C01: `git status --short --branch` -> 0\n  - C02: `git rev-parse HEAD` -> 0\n  - C03: focused serial pytest (19 tests) -> 0\n  - C04: surrounding serial pytest (145 tests) -> 0\n  - C05: clockwork tick serial pytest (6 tests) -> 0\n  - C06: ruff check -> 0\n  - C07: py_compile -> 0\n  - C08: git diff --check -> 0\n  - C09: git diff --name-only -> 0\n  - C10: git status --short --branch -> 0\n- Review worktree remains completely clean.\n- No ordinary practice enablement, live secrets, occupied DeepSeek HMR, deployment, release, Pages rebuild, or protected-ref movement occurred.\n\n---\n\n## 3. Review Questions and Verdict\n\n1. **Logical runtime role and tenant isolation:** The candidate successfully proves the frozen logical runtime role in one contained, sanitized disposable PostgreSQL attestation (`non_owner`, `NOBYPASSRLS`, zero memberships/product privileges, admin-owned forced RLS, same-tenant success, exact cross-tenant denial with SQLSTATE `42501`, and complete captured-ID cleanup).\n2. **Clockwork replay fixture pinning:** The narrow clockwork-test correction correctly pins historical fault replay to exact immutable source `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` without weakening live clockwork validation.\n\nNo P0-P2 findings, secret leaks, or boundary violations exist. The candidate is fully verified.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Tier-2 Read-Only Veto Review: Check-In Runtime Role and Tenant Isolation\n\n**Reviewer Model:** Gemini 3.7 Flash (High)  \n**Date:** 2026-08-19  \n**Decision Owner:** GPT Sol  \n**Candidate Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-role-tenant-gemini-6a283257`  \n**Candidate Branch:** `codex/review-check-in-role-tenant-6a283257`  \n**Candidate HEAD:** `6a2832575e9b4df5c40a13984db7281e79814a94`  \n**Base:** `455e41b8b9038813b290e67c43ce0b3190120988`  \n**Accepted Environment Architecture Source:** `a1f309a6d52d01f9866432f7e9abb8095788d023`  \n**Evidence Class:** `authored_synthetic_provider_free_disposable_postgresql_role_tenant_attestation`\n\n---\n\n## 1. Five-Source Rehydration Receipt\n\nThe five mandatory rehydration sources from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/AGENTS.md) were read and verified:\n\n1. **`live_handover_current_baton`**: [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/AGENTS.md) Section 3 was read in full. The Baton confirms the current active product track for Reception One authority kernel and default-off check-in adapter. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. **`current_authority_allocation`**: GPT Sol holds conductor/implementation/task-branch authority. Native DeepSeek Harness is paused pending its separate boot proof. Gemini 3.7 Flash/high holds the independent read-only veto authority on this candidate. Native subagents remain declined.\n3. **`active_plan_and_acceptance`**:\n   - [docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md)\n   - [docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md)\n   - [orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json)\n   - [orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json)\n   - [orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json)\n   - [docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md)\n   - [orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md)\n   - [orchestration/continuity/ariadne-active-operation-latch/current.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/ariadne-active-operation-latch/current.json)\n   - [orchestration/continuity/ariadne-governance-clockwork/current.json](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/orchestration/continuity/ariadne-governance-clockwork/current.json)\n4. **`protected_evidence_boundaries`**: No live secret, hosted database, production runtime, deployment, release, Pages rebuild, or protected-ref movement. Untracked `docs/branding/` and all unrelated files remain preserved.\n5. **`git_refs_and_worktree`**: Verified `HEAD` is `6a2832575e9b4df5c40a13984db7281e79814a94`, branch is `codex/review-check-in-role-tenant-6a283257`, worktree is completely clean.\n\n---\n\n## 2. Evaluation of Required Challenges\n\n### Challenge 1: Git Invariants and Base-to-Candidate File Scope\n- Preflight (C01, C02) and postflight (C10) confirm exact 40-character `HEAD` `6a2832575e9b4df5c40a13984db7281e79814a94` on branch `codex/review-check-in-role-tenant-6a283257` in a clean worktree.\n- `git diff --name-only` between base `455e41b8b9038813b290e67c43ce0b3190120988` and candidate `6a2832575e9b4df5c40a13984db7281e79814a94` (C09) confirms exactly the 18 candidate files within allowlisted paths.\n\n### Challenge 2: Source Bindings and Normalized Schema Validation\n- All 11 exact source bindings in `rehearsal-contract.json` match their canonical SHA-256 digests.\n- Normalized environment manifest schema `emr4.check-in-ordinary-environment-manifest.v1` validates cleanly against Draft 2020-12.\n\n### Challenge 3: Credential Containment and Redaction\n- Manifest retains references (`secret-ref:`) and shape-only rotation records, not credentials.\n- The 32-byte generated passwords existed only in process memory during execution.\n- No DSN, raw output, exception, container/network name, local path, or secret digest is leaked in either `tenant-role-attestation.json` or `rehearsal-evidence.json`.\n\n### Challenge 4: Restricted Physical Role Catalogue\n- Physical role format `emr4_checkin_ord_[0-9a-f]{16}` was catalogue-verified with `login=True`, `superuser=False`, `create_database=False`, `create_role=False`, `inherit=False`, `replication=False`, `bypass_rls=False`.\n- Memberships, owned databases, owned schemas, owned relations, owned functions, policy bindings, and product privileges are all strictly 0.\n\n### Challenge 5: Minimal Privileges and Probe-Only Scope\n- Dynamic role possesses only `CONNECT` on disposable database, `USAGE` on `check_in_role_probe`, and `SELECT, INSERT, UPDATE, DELETE` on `check_in_role_probe.tenant_probe`.\n- Public schema privileges are revoked; product relation privileges are 0.\n\n### Challenge 6: Admin-Owned Forced RLS and Policy Parity\n- Probe table is owned by `emr4_checkin_attest_admin`.\n- Catalogue confirms `relrowsecurity=True` (enabled) and `relforcerowsecurity=True` (forced).\n- `USING` and `WITH CHECK` clauses match identically: `practice_id = nullif(current_setting('app.current_practice_id', true), '')::uuid`.\n\n### Challenges 7 & 8: Same-Tenant Success and Cross-Tenant Denial Scenarios\n- **Same-Tenant:** Tenant A reads, inserts, and updates probe row successfully (RTA-S04); Tenant B reads Tenant B row (RTA-S05).\n- **Cross-Tenant:** Cross-tenant reads, updates, and deletes yield 0 rows affected (RTA-S06, RTA-S08). Cross-tenant insert fails with exact SQLSTATE `42501` (RTA-S07).\n- **Session Isolation:** Absent setting yields 0 rows (RTA-S09); setting resets after transaction (RTA-S10); admin role escalation (`SET ROLE`) fails with SQLSTATE `42501` (RTA-S11).\n\n### Challenge 9: Teardown, Absence Verification, and Clean Lifecycle\n- Physical role was dropped and verified absent prior to container teardown (RTA-S12).\n- Loopback relay stopped; captured-ID container and network were verified absent.\n- Evidence contains only closed statuses and hashes (`container_id_sha256`, `network_id_sha256`).\n\n### Challenge 10: Hostile Mutation Gates and Digest Binding\n- Contract hostile mutations: 302 attempted, 302 rejected (0 escapes).\n- Manifest hostile mutations: 159 attempted, 159 rejected (0 escapes).\n- Parent `rehearsal-evidence.json` strictly binds `attestation_sha256` matching the SHA-256 of `tenant-role-attestation.json`.\n\n### Challenge 11: Zero Ordinary Admission and Scope Invariance\n- `ordinary_admission_release_count` is 0. No product, config, API, client, feature flag, allowlist, status grammar, or waiting-area code was modified.\n\n### Challenge 12: Exclusion of Stale Historical Mutable-Current Assertions\n- The 5 documented historical assertions (readiness plan latch literal and 4 generation-stale graph revision checks) were cleanly deselected in surrounding test invocation without altering canonical repository state.\n\n### Challenge 13: Clockwork Test Fixture Correction\n- [tests/test_ariadne_governance_clockwork_tick.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257/tests/test_ariadne_governance_clockwork_tick.py) now creates replay worktrees explicitly from full-Git commit `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` instead of mutable `HEAD`.\n- All 18 pre-pointer fault injection checkpoints, rollback byte-exactness, and live zero-drift checks pass cleanly. Live validation is not weakened.\n\n### Challenges 14 & 15: Command Manifest Execution and Boundary Closure\n- All 10 structured manifest commands (C01 through C10) were executed in exact order and exited with code 0:\n  - C01: `git status --short --branch` -> 0\n  - C02: `git rev-parse HEAD` -> 0\n  - C03: focused serial pytest (19 tests) -> 0\n  - C04: surrounding serial pytest (145 tests) -> 0\n  - C05: clockwork tick serial pytest (6 tests) -> 0\n  - C06: ruff check -> 0\n  - C07: py_compile -> 0\n  - C08: git diff --check -> 0\n  - C09: git diff --name-only -> 0\n  - C10: git status --short --branch -> 0\n- Review worktree remains completely clean.\n- No ordinary practice enablement, live secrets, occupied DeepSeek HMR, deployment, release, Pages rebuild, or protected-ref movement occurred.\n\n---\n\n## 3. Review Questions and Verdict\n\n1. **Logical runtime role and tenant isolation:** The candidate successfully proves the frozen logical runtime role in one contained, sanitized disposable PostgreSQL attestation (`non_owner`, `NOBYPASSRLS`, zero memberships/product privileges, admin-owned forced RLS, same-tenant success, exact cross-tenant denial with SQLSTATE `42501`, and complete captured-ID cleanup).\n2. **Clockwork replay fixture pinning:** The narrow clockwork-test correction correctly pins historical fault replay to exact immutable source `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` without weakening live clockwork validation.\n\nNo P0-P2 findings, secret leaks, or boundary violations exist. The candidate is fully verified.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--timeout-seconds",
+          "300",
+          "--",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-focused"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--timeout-seconds",
+          "300",
+          "--",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py",
+          "--deselect",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py::test_current_latch_and_five_source_receipt_are_exact",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-surrounding"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--timeout-seconds",
+          "300",
+          "--",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-clockwork"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "455e41b8b9038813b290e67c43ce0b3190120988..6a2832575e9b4df5c40a13984db7281e79814a94"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "455e41b8b9038813b290e67c43ce0b3190120988..6a2832575e9b4df5c40a13984db7281e79814a94"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "bf5310d1c495ae9a3bf36b38bb199585a2c8bfa857572f6e9d87566b2ff892e1",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-focused"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py",
+        "--deselect",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py::test_current_latch_and_five_source_receipt_are_exact",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-surrounding"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-clockwork"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "455e41b8b9038813b290e67c43ce0b3190120988..6a2832575e9b4df5c40a13984db7281e79814a94"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "455e41b8b9038813b290e67c43ce0b3190120988..6a2832575e9b4df5c40a13984db7281e79814a94"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

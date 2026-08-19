@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "source_commit": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "generation_id": "gen-503aa76307da93745abbca25f209a6841118660d02cb171ea576f4eaede5c7f5",
+  "bundle_sha256": "503aa76307da93745abbca25f209a6841118660d02cb171ea576f4eaede5c7f5",
+  "previous_generation_id": "gen-a7b3f1fc6696f535ef4f7d5e0d5b99c89f19bdc87546e5b4cf242b3b7483e88d",
+  "previous_source_commit": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 4,
+  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

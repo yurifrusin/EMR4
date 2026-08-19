@@ -1,0 +1,118 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-focused"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py",
+        "--deselect",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py::test_current_latch_and_five_source_receipt_are_exact",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-surrounding"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-check-in-role-tenant-gemini-clockwork"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "455e41b8b9038813b290e67c43ce0b3190120988..6a2832575e9b4df5c40a13984db7281e79814a94"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "455e41b8b9038813b290e67c43ce0b3190120988..6a2832575e9b4df5c40a13984db7281e79814a94"
+      ]
+    },
+    {
+      "id": "C10",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

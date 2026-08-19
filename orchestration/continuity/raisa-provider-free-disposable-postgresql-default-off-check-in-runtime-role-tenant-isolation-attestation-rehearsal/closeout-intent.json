@@ -1,0 +1,250 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+    "title": "Raisa provider-free disposable PostgreSQL default-off check-in runtime-role and tenant-isolation attestation rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-19T06:42:31Z",
+    "node": {
+      "id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+      "title": "Disposable PostgreSQL check-in runtime-role and tenant-isolation attestation",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers the dependency-satisfied provider-free authored-synthetic rehearsal.",
+          "The accepted environment manifest is a declarative binding only; PostgreSQL catalogue and forced-RLS behavior supply the attestation.",
+          "No ordinary practice, live secret, existing database, product relation, provider, production runtime, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-disposable-restricted-runtime-role-attestation",
+          "source": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+          "status": "accepted",
+          "summary": "Accept one ephemeral non-owner NOBYPASSRLS login role with zero memberships, ownership and product privileges plus only the exact synthetic probe grants."
+        },
+        {
+          "id": "accept-forced-rls-same-tenant-success-and-cross-tenant-denial",
+          "source": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+          "status": "accepted",
+          "summary": "Accept same-tenant positive controls, zero cross-tenant read/update/delete, exact 42501 insert and escalation denials, tenant-setting reset and exact cleanup."
+        },
+        {
+          "id": "pin-clockwork-fault-replay-to-reviewed-full-git-fixture",
+          "source": "tests/test_ariadne_governance_clockwork_tick.py",
+          "status": "accepted",
+          "summary": "Replay historical clockwork faults from exact source f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e instead of mutable HEAD while retaining separate live zero-drift validation."
+        }
+      ],
+      "claim_scope": [
+        "The frozen logical ordinary runtime role and forced-RLS tenant boundary are physically representable in one disposable authored-synthetic PostgreSQL instance.",
+        "Same-tenant read/write succeeds and cross-tenant read/write/update/delete paths fail closed with the exact observed row counts and SQLSTATEs.",
+        "The ephemeral physical role is absent before teardown and the captured container and network IDs are absent afterward.",
+        "Ordinary admission releases remain zero; this evidence does not prove secret custody, rotation, rollback, unknown-commit, product grants or production readiness."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-corrected-veto-predispatch-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.schema.json",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.schema.json",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Live secret custody and rotation remain unproved and no real environment manifest exists.",
+        "Explicit rollback and unknown-commit recovery remain the next operational-evidence gate.",
+        "Ordinary-practice activation, product-schema grants, occupied DeepSeek HMR, production runtime, deployment, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Prove the restricted ordinary check-in database identity and tenant boundary before any transaction-recovery or admission decision",
+      "outcome": "One disposable authored-synthetic PostgreSQL instance now demonstrates the exact restricted role, forced-RLS same-tenant success, cross-tenant denial and exact cleanup without product data or ordinary release.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove fail-closed rollback and unknown-commit recovery against the same default-off authored-synthetic environment boundary",
+      "why_now": "The manifest vocabulary, least-privilege role and tenant separation are proven; transaction outcome ambiguity is the remaining operational-evidence dependency before any future ordinary-admission decision.",
+      "outcome": "The next tranche is a provider-free disposable PostgreSQL rollback and unknown-commit recovery rehearsal with zero ordinary release and exact cleanup.",
+      "unlocks": [
+        "Evidence that explicit rollback leaves no accepted effect.",
+        "Evidence that an ambiguous response cannot cause a duplicate synthetic effect or ordinary release.",
+        "A later fresh read-only ordinary-admission readiness decision over all three operational evidence gaps."
+      ],
+      "does_not_solve": [
+        "No real secret, existing database, product relation or product command is used.",
+        "No ordinary-practice check-in command is enabled, admitted or mounted.",
+        "No occupied DeepSeek HMR, production runtime, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md"
+      ],
+      "orientation_statement": "EMR4 will next prove explicit rollback and ambiguous-result recovery in a newly frozen disposable authored-synthetic transaction probe before any ordinary-practice admission decision."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+      "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
+      "objective": "Prove with one newly frozen authored-synthetic disposable PostgreSQL transaction probe that explicit rollback leaves no effect and an ambiguous response is resolved fail-closed without duplicate effect or ordinary release, followed by exact cleanup.",
+      "authority_source": "Accepted runtime-role and tenant-isolation attestation plus Yuri's standing uninterrupted-development authority.",
+      "next_stage": "rehydrate_and_freeze_the_disposable_postgresql_rollback_unknown_commit_recovery_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "read_only_clockwork_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "focused_role_tenant_attestation",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "material_check_in_surrounding",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py",
+          "--deselect",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py::test_current_latch_and_five_source_receipt_are_exact"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork_fault_replay",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Raisa provider-free disposable PostgreSQL check-in runtime-role and tenant-isolation attestation acceptance",
+    "paths": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py",
+      "tests/test_ariadne_governance_clockwork_tick.py",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/closeout-intent.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-candidate-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-corrected-veto-predispatch-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-19--check-in-runtime-role-tenant-isolation-attestation.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_uniquely_named_disposable_local_postgresql_only",
+    "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
+    "ephemeral_authored_synthetic_transaction_manifest_practice_role_and_credentials_only",
+    "rollback_and_unknown_commit_recovery_evidence_only",
+    "explicit_rollback_must_leave_zero_effect",
+    "ambiguous_outcome_must_fail_closed_and_resolve_by_authoritative_readback",
+    "no_duplicate_probe_effect_and_zero_ordinary_admission_release_required",
+    "exact_role_container_network_and_relay_cleanup_required",
+    "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_occupied_deepseek_hmr_claude_code_fallback_or_provider_call_before_optional_gemini_veto",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

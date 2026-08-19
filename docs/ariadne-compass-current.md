@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next prove the frozen restricted ordinary check-in role and exact tenant isolation in a uniquely named disposable local PostgreSQL rehearsal before any unknown-commit drill or ordinary-practice admission.
+> EMR4 will next prove explicit rollback and ambiguous-result recovery in a newly frozen disposable authored-synthetic transaction probe before any ordinary-practice admission decision.
 
 ## North star
 
@@ -436,26 +436,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The accepted check-in lineage has one unrepeated architecture successor and the live clockwork has a bounded generic second-tick path. Lineage parent: `ariadne-provider-free-clockwork-live-canonical-adoption-retirement`.
 210. **Freeze the non-secret environment and credential-custody vocabulary needed for representative operational evidence — Default-off check-in environment-manifest and secret-posture architecture**
    One closed environment-manifest contract now defines exact restricted-role, opaque secret-reference, rotation-evidence and deny-only break-glass expectations without instantiating them. Lineage parent: `raisa-provider-free-clockwork-governed-check-in-successor-resolution`.
+211. **Prove the restricted ordinary check-in database identity and tenant boundary before any transaction-recovery or admission decision — Disposable PostgreSQL check-in runtime-role and tenant-isolation attestation**
+   One disposable authored-synthetic PostgreSQL instance now demonstrates the exact restricted role, forced-RLS same-tenant success, cross-tenant denial and exact cleanup without product data or ordinary release. Lineage parent: `raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture`.
 
 ## Current position
 
-**Prove the frozen ordinary runtime role and tenant-isolation properties in a disposable authored-synthetic database — Default-off check-in environment-manifest and secret-posture architecture**
+**Prove fail-closed rollback and unknown-commit recovery against the same default-off authored-synthetic environment boundary — Disposable PostgreSQL check-in runtime-role and tenant-isolation attestation**
 
-**Why this proof came next:** The environment, role and reference vocabulary is frozen; the first remaining operational-evidence dependency is whether the restricted role is physically representable with exact cross-tenant denial.
+**Why this proof came next:** The manifest vocabulary, least-privilege role and tenant separation are proven; transaction outcome ambiguity is the remaining operational-evidence dependency before any future ordinary-admission decision.
 
-The next tranche is a provider-free uniquely named disposable PostgreSQL attestation with ephemeral authored-synthetic identifiers and exact cleanup.
+The next tranche is a provider-free disposable PostgreSQL rollback and unknown-commit recovery rehearsal with zero ordinary release and exact cleanup.
 
 ### What this unlocks
 
-- Representative non-owner and NOBYPASSRLS role evidence for the ordinary check-in environment gate.
-- Exact cross-tenant denial evidence under the same frozen manifest vocabulary.
-- A later rollback and unknown-commit rehearsal against the same environment boundary.
+- Evidence that explicit rollback leaves no accepted effect.
+- Evidence that an ambiguous response cannot cause a duplicate synthetic effect or ordinary release.
+- A later fresh read-only ordinary-admission readiness decision over all three operational evidence gaps.
 
 ### What it does not solve
 
-- No real secret, existing database, product data or persistent database role is used.
-- No ordinary-practice check-in command is enabled or mounted.
-- No provider, production runtime, deployment, release, Pages or protected integration opens.
+- No real secret, existing database, product relation or product command is used.
+- No ordinary-practice check-in command is enabled, admitted or mounted.
+- No occupied DeepSeek HMR, production runtime, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1325,6 +1327,7 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-design.md`
 - `docs/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal-plan.md`
+- `docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-authority-counter-recovery-addendum.md`
 - `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal-plan.md`
@@ -1761,7 +1764,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json`
-- `orchestration/agent_inbox/antigravity/raisa-check-in-environment-manifest-secret-posture-architecture-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
@@ -1992,6 +1995,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2631,7 +2635,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json`
-- `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json`
 - `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json`
@@ -2652,6 +2655,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/provider-free-parse-catalogue-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-cf-d2-event-cue-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json`
+- `orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-delete-confirm-behavior-transaction-rehearsal/provider-free-behavior-transaction-failure-evidence.json`
@@ -3492,4 +3497,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 315; continuity graph revision 333._
+_Compass map revision 316; continuity graph revision 334._

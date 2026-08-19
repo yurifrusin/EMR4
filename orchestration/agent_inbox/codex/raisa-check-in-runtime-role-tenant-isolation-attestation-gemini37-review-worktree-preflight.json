@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257",
+  "branch": "codex/review-check-in-role-tenant-6a283257",
+  "head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "expected_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "bf5310d1c495ae9a3bf36b38bb199585a2c8bfa857572f6e9d87566b2ff892e1",
+  "command_count": 10,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/check-in-role-tenant-gemini-6a283257",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

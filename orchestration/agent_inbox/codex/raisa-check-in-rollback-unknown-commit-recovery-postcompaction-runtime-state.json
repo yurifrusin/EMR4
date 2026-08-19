@@ -1,0 +1,216 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "finish_the_clockwork_governed_runtime_role_tenant_isolation_closeout_then_freeze_the_narrowest_provider_free_disposable_postgresql_rollback_unknown_commit_recovery_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at SHA-256 fef4cd8c74a405e29ea934710e4473de8b2a749b15ffe703f6a827f4b7c94f0d. It records Continuity 334 / Compass 316, accepted runtime-role and tenant-isolation source 6a2832575e9b4df5c40a13984db7281e79814a94 and the rollback/unknown-commit recovery successor while ordinary enablement, product change, production, Pages and protected refs remain closed.",
+    "current_authority_allocation": "GPT Sol owns the serial closeout, successor plan, disposable PostgreSQL lifecycle, recovery, deterministic acceptance and task-branch Git. DeepSeek is declined because the latch forbids occupied native-Harness HMR, the separate stock-headless-to-custom-runner boot proof remains unmet and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one exact-candidate read-only veto only after deterministic database and cleanup admission. Native subagents are declined under current developer policy and because the mutable database lifecycle is indivisible.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only one uniquely named disposable local PostgreSQL instance, ephemeral authored-synthetic transaction manifest/practice/role/credentials, explicit rollback zero effect, ambiguous-outcome fail-closed authoritative readback, zero duplicate probe effect, zero ordinary release and exact captured-ID role/container/network/relay cleanup are permitted. No local .env, live secret, cloud/hosted/existing/product database, product/configuration/API/OpenAPI/GraphQL/schema/client/waiting-area change, ordinary-practice enablement, generic-status Arrived, action grammar, product/patient/appointment/clinical/historical/protected data, occupied DeepSeek HMR, production runtime, deployment, release, Pages, protected evidence or protected-ref movement is permitted. Preserve docs/branding and every unrelated untracked path; explicit-path staging only.",
+    "git_refs_and_worktree": "The task branch HEAD is exact accepted candidate 6a2832575e9b4df5c40a13984db7281e79814a94 and origin task remains exact predecessor 455e41b8b9038813b290e67c43ce0b3190120988. Nine tracked clockwork-owned closeout surfaces are modified and the named closeout/review artifacts are untracked alongside preserved pre-existing untracked material; docs/branding remains present. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Clockwork generation gen-503aa76307da93745abbca25f209a6841118660d02cb171ea576f4eaede5c7f5 records lease sequence 4."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
+    "objective": "Prove with one newly frozen authored-synthetic disposable PostgreSQL transaction probe that explicit rollback leaves no effect and an ambiguous response is resolved fail-closed without duplicate effect or ordinary release, followed by exact cleanup.",
+    "status": "in_progress",
+    "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "authority_source": "Accepted runtime-role and tenant-isolation attestation plus Yuri's standing uninterrupted-development authority.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_rollback_unknown_commit_recovery_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_uniquely_named_disposable_local_postgresql_only",
+      "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
+      "ephemeral_authored_synthetic_transaction_manifest_practice_role_and_credentials_only",
+      "rollback_and_unknown_commit_recovery_evidence_only",
+      "explicit_rollback_must_leave_zero_effect",
+      "ambiguous_outcome_must_fail_closed_and_resolve_by_authoritative_readback",
+      "no_duplicate_probe_effect_and_zero_ordinary_admission_release_required",
+      "exact_role_container_network_and_relay_cleanup_required",
+      "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_hmr_claude_code_fallback_or_provider_call_before_optional_gemini_veto",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "assessed_stage": "post_compaction_closeout_and_successor_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The active latch forbids occupied DeepSeek HMR; the native Harness still lacks its separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "Reserve one fresh exact-candidate read-only veto after deterministic rollback, authoritative-readback, no-duplicate-effect and captured-ID cleanup admission.",
+        "work_packages": [
+          "rollback_unknown_commit_exact_candidate_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive delegation and the single mutable disposable PostgreSQL lifecycle is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "fresh post-compaction five-source receipt before resumption",
+      "exact prior-tranche closeout publication before successor plan freeze",
+      "frozen successor plan and source hashes before Docker action",
+      "one uniquely named disposable local PostgreSQL lifecycle",
+      "explicit rollback and ambiguous-outcome authoritative readback before evidence release",
+      "exact role container network and relay cleanup before deterministic admission",
+      "deterministic admission before independent veto",
+      "Sol-only acceptance clockwork closeout and task-branch Git"
+    ],
+    "reassessment_triggers": [
+      "after prior-tranche task-branch publication",
+      "after successor static candidate validation",
+      "after disposable PostgreSQL cleanup",
+      "before verifier acceptance",
+      "at closeout",
+      "before any later DeepSeek Harness boot proof"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "post-compaction rollback and unknown-commit recovery five-source rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The complete live handover, active acceptance, protected boundaries, exact refs, active latch and current clockwork were freshly verified after compaction."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No occupied dispatch; the separate stock-headless-to-custom-runner HMR boot proof remains prerequisite and the active tranche forbids occupied HMR."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical lineage only; no fallback selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Reserved for one exact-candidate Gemini 3.7 Flash/high veto after deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Declined under developer policy and the serial disposable-runtime boundary."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected and no silent fallback is allowed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

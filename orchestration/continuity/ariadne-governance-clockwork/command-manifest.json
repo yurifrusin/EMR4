@@ -9,18 +9,19 @@
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "focused_environment_architecture",
+      "command_id": "focused_role_tenant_attestation",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "pytest",
         "-q",
-        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py"
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_runtime_role_tenant_isolation_attestation_rehearsal_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
@@ -31,12 +32,28 @@
         "-m",
         "pytest",
         "-q",
+        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
         "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
-        "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py",
         "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal_plan.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_active_operation_latch_continuity.py",
-        "tests/test_current_baton_consistency.py"
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py",
+        "--deselect",
+        "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review_plan.py::test_current_latch_and_five_source_receipt_are_exact"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "clockwork_fault_replay",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ariadne_governance_clockwork_tick.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

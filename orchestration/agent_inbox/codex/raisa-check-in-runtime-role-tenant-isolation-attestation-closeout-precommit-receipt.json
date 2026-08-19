@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_rollback_unknown_commit_recovery_plan",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "reason_codes": [],
+    "resolved_commit": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "6a2832575e9b4df5c40a13984db7281e79814a94"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "branch_origin_aligned": false,
+    "head": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "origin_branch_commit": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 668
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "prior_tranche_closeout_commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The closeout is serial and occupied native-Harness EMR4 work remains behind the separate HMR boot proof; Claude Code is no fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high completed the runtime-role and tenant-isolation exact-candidate veto with ten zero-exit commands and an unchanged clean worktree.",
+        "work_packages": [
+          "completed_runtime_role_tenant_isolation_exact_candidate_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the closeout commit is a serial single-owner boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after closeout commit",
+      "before task branch push",
+      "before rollback unknown-commit plan freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one clockwork generation and one closeout commit",
+      "explicit path staging only",
+      "task branch push only",
+      "protected refs remain exact",
+      "rehydrate the rollback unknown-commit successor before planning"
+    ]
+  },
+  "planned_action": "commit_the_accepted_runtime_role_tenant_isolation_attestation_clockwork_closeout_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the explicit-path closeout commit and task-branch push. Gemini completed the exact-candidate veto. DeepSeek has no occupied work package pending its separate native-Harness HMR boot proof; Claude Code is no fallback. Native subagents have no serial closeout work package.",
+    "git_refs_and_worktree": "The task branch is at exact reviewed candidate 6a2832575e9b4df5c40a13984db7281e79814a94 with one uncommitted clockwork generation and named closeout artifacts. Origin task is 455e41b8b9038813b290e67c43ce0b3190120988. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding and unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "The freshly reread clockwork-owned Baton records Continuity 334 / Compass 316, exact reviewed source 6a2832575e9b4df5c40a13984db7281e79814a94 and the disposable PostgreSQL rollback/unknown-commit recovery successor.",
+    "protected_evidence_boundaries": "The active successor permits only one uniquely named disposable local PostgreSQL rollback/unknown-commit recovery rehearsal with ephemeral authored-synthetic identifiers, fail-closed authoritative readback, zero duplicate probe effect, zero ordinary release and exact cleanup. No live secret, existing/product database, product source/configuration/API/schema/client change, ordinary-practice enablement, patient/product/clinical data, occupied DeepSeek HMR, deployment, Pages or protected-ref movement is authorised. Preserve docs/branding and stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
