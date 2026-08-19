@@ -1,18 +1,29 @@
 {
   "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
   "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
-  "completed_stage": "The narrowest relay-free rollback and unknown-commit recovery plan, threat boundary and plan assertions are frozen at exact full-Git source eb568174debd6dba2a32d1dea94be7f6b9fd3ddc; no Docker object, database, provider or product runtime was opened.",
-  "next_executable_stage": "implement_the_frozen_contract_schemas_relay_free_harness_and_focused_deterministic_tests_without_environment_execution",
+  "completed_stage": "The frozen contract, five closed schemas, relay-free sidecar harness and focused deterministic tests pass at exact full-Git source 5adbf56b886cb1107dc8c18723c791e4e566c2fd with 366/366 hostile contract mutations, 96/96 manifest mutations, 96/96 OCI states and 24/24 classifier packets denied; no Docker object or database was opened.",
+  "next_executable_stage": "verify_the_exact_cached_image_and_zero_owned_residue_generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_disposable_postgresql_proof_and_stop_on_any_mismatch",
   "command_manifest": {
     "schema_version": "ariadne.governance_command_manifest.v1",
     "commands": [
       {
-        "command_id": "relay-free-recovery-plan-tests",
+        "command_id": "relay-free-recovery-static-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "relay-free-recovery-focused-tests",
         "executable": ".venv/Scripts/python.exe",
         "arguments": [
           "-m",
           "pytest",
           "-q",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
           "tests/test_ariadne_active_operation_latch.py",
           "tests/test_current_baton_consistency.py"
@@ -20,13 +31,25 @@
         "completion_contract": "final_exit_code_zero_required"
       },
       {
-        "command_id": "relay-free-recovery-plan-ruff",
+        "command_id": "relay-free-recovery-ruff",
         "executable": ".venv/Scripts/python.exe",
         "arguments": [
           "-m",
           "ruff",
           "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
           "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "relay-free-recovery-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
         ],
         "completion_contract": "final_exit_code_zero_required"
       }
