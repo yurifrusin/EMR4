@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 002",
+    "completed_stage": "The corrected frozen plan, fixed attempt adapter and closed envelope schema are committed. The accepted harness remains byte-exact. Static admission passed 366/366 contract, 96/96 manifest, 96/96 OCI-state and 24/24 classifier mutations; focused harness, API Spine, A5.1, latch, Baton and clockwork tests, Ruff and compilation pass at c216409f0fc9470117d6cf8dfef938f941f3b64e. The attempt-002 terminal namespace is empty and no Docker object has been created.",
+    "next_executable_stage": "after_one_fresh_five_source_pre_worker_dispatch_receipt_execute_exactly_one_attempt_002_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+    "resume_after_compaction": true,
+    "source_head": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "229a5d837d0e0020506cfe72d14491a753e8d78c",
+    "reason_codes": [],
+    "resolved_commit": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c216409f0fc9470117d6cf8dfef938f941f3b64e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "229a5d837d0e0020506cfe72d14491a753e8d78c",
+    "branch_origin_aligned": false,
+    "head": "229a5d837d0e0020506cfe72d14491a753e8d78c",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness is not admitted for occupied EMR4 work until its separate boot proof passes; Claude Code is no fallback, and the single mutable database lifecycle is not separable.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh Gemini 3.7 Flash/high exact-candidate veto is reserved only if the one occupied attempt produces a deterministic pass packet.",
+        "work_packages": [
+          "future_exact_candidate_read_only_attempt_002_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive native delegation and the database lifecycle has one cleanup owner.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_terminal_evidence",
+      "verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol invokes the fixed wrapper exactly once",
+      "one mutable disposable PostgreSQL lifecycle has one cleanup owner",
+      "no second execution follows any process or evidence result",
+      "Gemini is eligible only after deterministic occupied success"
+    ]
+  },
+  "planned_action": "execute_exactly_one_fixed_attempt_002_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-002-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-002-threat-model-delta.md",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/attempt-002-execution-envelope.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/checkpoint-intent.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri explicitly confirmed one new attempt. GPT Sol is the sole owner of the one mutable Docker/PostgreSQL lifecycle, exact cleanup, evidence readback and acceptance. DeepSeek is declined because its native Harness still requires a separate stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved only for a fresh post-success exact-candidate veto. Native subagents are declined by developer policy and the one-cleanup-owner constraint.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact 229a5d837d0e0020506cfe72d14491a753e8d78c; origin task branch remains b5afa75bfc759efa689d35cd06c5b330e4b7ed05 and local is fourteen commits ahead. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean and docs/branding remains preserved and untracked.",
+    "live_handover_current_baton": "AGENTS.md was read completely and is now clockwork-projected through lease 14. Its Next implementation row names raisa-provider-free-check-in-relay-free-recovery-attempt-002, and the live latch is the exact authority boundary for one occupied execution.",
+    "protected_evidence_boundaries": "Exactly one fixed attempt-002 wrapper execution is admitted. Attempt-001 artifacts remain immutable. The accepted harness stays byte-exact, the output namespace is fixed, automatic/manual retry is forbidden and one owner performs cleanup. No host relay/queue, live secret, existing/cloud/product database, app/API/OpenAPI/GraphQL/config/client change, ordinary-practice enablement, feature-flag/allowlist change, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, DeepSeek/Gemini call, production, deployment, release, Pages or protected-ref movement is authorised. docs/branding and unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
