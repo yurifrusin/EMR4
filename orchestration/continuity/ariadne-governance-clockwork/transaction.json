@@ -1,107 +1,105 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
   "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
-  "transaction_id": "txn-f75846135075dccae707aa78",
-  "source_commit": "5c4ad3eb328192ed9729298beccb0ad3904426f5",
-  "previous_source_commit": "5c4ad3eb328192ed9729298beccb0ad3904426f5",
-  "previous_generation_id": "gen-9d33bd45c8928b4c4c2b7c126254b0e5e539dadf8a01aabd729972fc1d0e262c",
-  "previous_bundle_sha256": "9d33bd45c8928b4c4c2b7c126254b0e5e539dadf8a01aabd729972fc1d0e262c",
+  "transaction_id": "txn-cf461acec0280a1fd916b4a6",
+  "source_commit": "3141d7435c625871eb58cab53e2f5a880642361b",
+  "previous_source_commit": "3141d7435c625871eb58cab53e2f5a880642361b",
+  "previous_generation_id": "gen-173a752f265bba9d2d7c3359354fa75179e63a52b2a4504c60bbc310cf747a38",
+  "previous_bundle_sha256": "173a752f265bba9d2d7c3359354fa75179e63a52b2a4504c60bbc310cf747a38",
   "previous_canonical_sha256s": {
     "continuity": "7ddd3b0a44507806ca8b4ce6cd88b8b71decf45dacb294f84d4711e3c364dac4",
     "compass": "4a01773382ccfc0be4930665ff67803d744188ff01eefdcd6c4263500a1c41a0",
     "compass_markdown": "934a63fd806a2a766df8e72e820c419a2e31e3572418e3585918f4d56c8bdc77",
-    "active_latch": "5c1f22f413a4c2888e9cc037b4c2f78d65de3374e9b4fd1845d67cc1ca7d7efa",
+    "active_latch": "086801770926fefd89c5b3f7aca8c52210c7aeb8c5278d768da06ffffbfe45a1",
     "error_register": "92df6f2779fea4d5048e0d64d4f07748024ba162354e3ce2e4e191746546223b",
     "pattern_report": "0f0d0a5019674a7cc158dfe0485c0ff048869e08188a613ca29c9e5017666a04",
-    "current_baton": "e6a266aa268c6c6d417eb4e9a83d436aefeee7ad16f77ff570a07aff8d1a0a3f"
+    "current_baton": "4b6595f54b3935f2e9d546e86ef7c70e90d9c23f5e4443d07188c1aaae317ebc"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "67eb4a315a9b2d825b14769ca55aa5ec23289ee201b978b614edf34d7b371d74",
-    "transaction.json": "66c54523cbcee6da3eaf5f749baf7ada130050dc7715b258c73133106f9993ba",
+    "command-manifest.json": "3f030295c25999ae7e53257790150ea4a19f8bdcedbf56d50dcde26d3377f928",
+    "transaction.json": "e87e0d9971ec3ed88bcac5d4352cd767026f265732c5f2d9433192ab645fc833",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "e9f1eeac5c5027a91cd1108ea327865ecb60b2ca3668171b96149675bdca8ae5"
+    "generation-manifest.json": "cf6c5edb838182d47a78510b66cf23907a2820f6888bc0f85ddcbc42b2f072d0"
   },
   "projection_sha256s": {
-    "latch": "sha256:f428c3d8ef990096e7013149fde3b646ff7a6481a79513b7318a8f3774046394",
-    "current_baton": "sha256:fd0fc902eaf210ae165ca67d92f8c70f7f7c07153dfe56d3a3c24b2cfa96cf3a"
+    "latch": "sha256:b79bc5a62594225c54221a55841f55c7d4246c71d76768dba0d9a203cbe5e921"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f75846135075dccae707aa78",
-      "transaction_id": "txn-f75846135075dccae707aa78",
+      "journal_id": "journal-cf461acec0280a1fd916b4a6",
+      "transaction_id": "txn-cf461acec0280a1fd916b4a6",
       "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-      "event_type": "checkpoint-intent-accepted",
+      "event_type": "blocked-transition-intent-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "intent_sha256": "sha256:e6a6a9b74567ac278ef8060d812bf5de33330916e30f62c48bf3d9f212f01e60",
-        "previous_next_executable_stage": "implement_the_fixed_attempt_003_adapter_closed_envelope_schema_and_deterministic_tests_without_docker_or_database_execution"
+        "intent_sha256": "sha256:3598325c08a069b3dce4f021bc6e35eca1a9f379657046c4f90e861ccf3824bd"
       },
-      "event_sha256": "sha256:7065675a43d5574ea3c7857df8e8268493eb114c97e4c43418385bebb1f03796"
+      "event_sha256": "sha256:1f3d29155c8a8d0adc0a160428eb89c26fe9c38529105ac5a691057358b88ae6"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f75846135075dccae707aa78",
-      "transaction_id": "txn-f75846135075dccae707aa78",
+      "journal_id": "journal-cf461acec0280a1fd916b4a6",
+      "transaction_id": "txn-cf461acec0280a1fd916b4a6",
       "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
       "sequence": 2,
-      "previous_event_sha256": "sha256:7065675a43d5574ea3c7857df8e8268493eb114c97e4c43418385bebb1f03796",
+      "previous_event_sha256": "sha256:1f3d29155c8a8d0adc0a160428eb89c26fe9c38529105ac5a691057358b88ae6",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "5c4ad3eb328192ed9729298beccb0ad3904426f5"
+        "source_commit": "3141d7435c625871eb58cab53e2f5a880642361b"
       },
-      "event_sha256": "sha256:131f3d208e6440da68ec02ef4291231fb780022d309c17caa6c281dc06059065"
+      "event_sha256": "sha256:805738151dcd0b7aae817c67316478e41e72f617b5ed7829c1d4812bb1a318ef"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f75846135075dccae707aa78",
-      "transaction_id": "txn-f75846135075dccae707aa78",
+      "journal_id": "journal-cf461acec0280a1fd916b4a6",
+      "transaction_id": "txn-cf461acec0280a1fd916b4a6",
       "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
       "sequence": 3,
-      "previous_event_sha256": "sha256:131f3d208e6440da68ec02ef4291231fb780022d309c17caa6c281dc06059065",
-      "event_type": "active-operation-checkpoint-advanced",
+      "previous_event_sha256": "sha256:805738151dcd0b7aae817c67316478e41e72f617b5ed7829c1d4812bb1a318ef",
+      "event_type": "blocked-latch-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
-        "next_executable_stage": "execute_exactly_one_attempt_003_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence"
+        "status": "blocked",
+        "verification_counter": 1
       },
-      "event_sha256": "sha256:d9292906040dc052c2aca07e2a6f6da64fae0928ba2558f98dff9892f9c03bbe"
+      "event_sha256": "sha256:a355e8a5d089aded969b67a80a00b86c15b6820fbeff19198ce1c5c2504f0388"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f75846135075dccae707aa78",
-      "transaction_id": "txn-f75846135075dccae707aa78",
+      "journal_id": "journal-cf461acec0280a1fd916b4a6",
+      "transaction_id": "txn-cf461acec0280a1fd916b4a6",
       "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
       "sequence": 4,
-      "previous_event_sha256": "sha256:d9292906040dc052c2aca07e2a6f6da64fae0928ba2558f98dff9892f9c03bbe",
-      "event_type": "checkpoint-latch-validated",
+      "previous_event_sha256": "sha256:a355e8a5d089aded969b67a80a00b86c15b6820fbeff19198ce1c5c2504f0388",
+      "event_type": "blocked-latch-validated",
       "actor": "gpt-sol",
       "payload": {
-        "status": "in_progress",
-        "terminal_response_permitted": false
+        "user_attention_required": true,
+        "terminal_response_permitted": true
       },
-      "event_sha256": "sha256:a2176f94561ddedb54b49b20fbfbcbef3ef5fb700567dd13387f96e84e913a1b"
+      "event_sha256": "sha256:76de78d2b47b8a23e9d75f20f585fac34d30974e761be161dbb297de8b91bc82"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f75846135075dccae707aa78",
-      "transaction_id": "txn-f75846135075dccae707aa78",
+      "journal_id": "journal-cf461acec0280a1fd916b4a6",
+      "transaction_id": "txn-cf461acec0280a1fd916b4a6",
       "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
       "sequence": 5,
-      "previous_event_sha256": "sha256:a2176f94561ddedb54b49b20fbfbcbef3ef5fb700567dd13387f96e84e913a1b",
+      "previous_event_sha256": "sha256:76de78d2b47b8a23e9d75f20f585fac34d30974e761be161dbb297de8b91bc82",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "lease_bound_pointer_last_live_tick"
       },
-      "event_sha256": "sha256:08ea004f663e24fa94f7b8907247b170c3e0de8af62a64e52dbdb44b234eb6ac"
+      "event_sha256": "sha256:f0daff7675e2a4a1a1b646097ef767dcde58c4be02ff927dbbd9dc6767ab310f"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
-  "event_kind": "checkpoint_transition",
+  "event_kind": "blocked_transition",
   "next_boundaries_sha256": "sha256:cae955053acf4d95b90859c18b31815a7cc7f484e34255e80feef61bd464d738",
   "register_bytes_preserved": true,
   "pattern_bytes_preserved": true
