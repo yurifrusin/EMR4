@@ -2,7 +2,8 @@
   "schema_version": "ariadne.orchestrator_communication_correction.v1",
   "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
   "observed_on": "2026-08-20",
-  "stage": "prepublication_clockwork_check",
+  "stage": "closeout",
+  "checkpoint": "prepublication_clockwork_check",
   "incorrect_commentary_value": "835ee7afddc2ed145eb2183554021d47251dc546",
   "machine_resolved_value": "835ee7afd6889560add45aaa4260ba1562bd3d3d",
   "machine_verification": {

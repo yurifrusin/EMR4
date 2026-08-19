@@ -397,7 +397,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "codex_primary_session",
-      "stage": "prepublication_clockwork_check",
+      "stage": "closeout",
       "category": "evidence_misreport",
       "process_severity": "low",
       "expected_invariant": "Every reported full Git object ID must be copied from a machine-resolved 40-character command or receipt value and must never be manually expanded from an abbreviation.",
