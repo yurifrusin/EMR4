@@ -1,0 +1,65 @@
+{
+  "schema_version": "ariadne.governance_migration_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+    "title": "Ariadne provider-free clockwork single-owner migration and retirement rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-19T19:30:00+10:00",
+    "node": {
+      "id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "title": "Clockwork single-owner migration and retirement rehearsal",
+      "kind": "maintenance",
+      "relationships": [{"node_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair", "relation": "builds_on"}],
+      "authority": {
+        "authorized_openings": [],
+        "notes": ["Existing canonical controls remain read-only authoritative oracles; actual adoption and deletion remain closed."]
+      },
+      "decisions": [{
+        "id": "accept-single-owner-canonical-mirror-rehearsal",
+        "source": "AGENTS.md",
+        "status": "accepted",
+        "summary": "Prove exclusive clockwork ownership, atomic promotion and byte-exact rollback before any live adoption."
+      }],
+      "claim_scope": [
+        "One isolated canonical mirror moves from legacy oracle comparison to exclusive clockwork ownership.",
+        "The rehearsal proves fail-closed publication and rollback without mutating canonical controls."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": ["docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md", "docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md"],
+        "findings": [],
+        "closeouts": [],
+        "acceptances": ["orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md"],
+        "receipts": ["orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json"],
+        "tests": ["tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"],
+        "artifacts": ["orchestration_harness/governance_migration.py", "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"]
+      },
+      "unresolved_gates": ["Actual canonical adoption and historical-control deletion require a separate explicit decision after this rehearsal."]
+    },
+    "journey": {
+      "strategic_role": "Replace repetitive closeout bookkeeping with one exclusive deterministic reading",
+      "outcome": "A complete generation is atomically promoted, old writers are retired in the mirror and rollback remains exact.",
+      "evidence": ["docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md", "orchestration_harness/governance_migration.py", "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"]
+    },
+    "current_position": {
+      "strategic_role": "Decide whether the proven mirror mechanism should own future canonical closeouts",
+      "why_now": "The accepted shadow reducer is useful only if sole ownership can replace duplicate manual derivation safely.",
+      "outcome": "Use measured exclusivity and rollback evidence for a separately explicit live-adoption decision.",
+      "unlocks": ["A bounded live canonical-adoption gate if the rehearsal passes."],
+      "does_not_solve": ["No product, practice, provider, runtime, deployment, release or protected-ref authority is opened."],
+      "evidence": ["docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md", "docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md"],
+      "orientation_statement": "EMR4 is measuring one reversible single-owner governance cutover in an isolated canonical mirror; canonical adoption remains a separate decision."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-gate",
+      "active_tranche": "Ariadne provider-free clockwork live canonical-adoption gate",
+      "objective": "Use the accepted single-owner rehearsal evidence to accept or reject one bounded live canonical closeout adoption without a dual writer.",
+      "authority_source": "Accepted migration/retirement rehearsal plus Yuri's separately explicit live-adoption decision.",
+      "next_stage": "await_or_record_the_separate_live_canonical_adoption_decision"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_ids": ["read_only_rehearsal", "focused_migration", "surrounding_governance"]
+}

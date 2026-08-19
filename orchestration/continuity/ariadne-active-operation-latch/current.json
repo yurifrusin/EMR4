@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
-  "active_tranche": "Ariadne provider-free clockwork governance projection consolidation repair",
-  "objective": "Implement and evaluate one provider-free private-shadow governance reducer that derives the incident register, recurrence report, revision/count readings, typed command manifest, Continuity/Compass deltas, Current Baton fields and latch transition from one acknowledged clock tick, while replaying the preserved failure probes and measuring construction cost, steady-state reruns, maintained surface and break-even before any live adoption or control retirement.",
-  "status": "blocked",
-  "source_head": "4ac81d4443de6f37d6baa26e390c1e8be7eaede1",
-  "authority_source": "AGENTS.md Current Baton Next implementation, the rejected rehearsal at a4044010e9f9319e149660ad889141a32cc8d000, Yuri's explicit 2026-08-19 choice of the bounded repair and standing uninterrupted-development authority authorize only this provider-free private-shadow governance projection consolidation repair.",
+  "operation_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+  "active_tranche": "Ariadne provider-free clockwork single-owner migration and retirement rehearsal",
+  "objective": "Prove or reject a reversible single-owner migration of repository-local governance closeout projections by replaying one accepted representative closeout into an isolated canonical mirror, atomically cutting that mirror from legacy-oracle comparison to exclusive clockwork ownership, rejecting legacy or stale writers, fault-testing every publication step and proving byte-exact rollback before any canonical control retirement or live adoption.",
+  "status": "in_progress",
+  "source_head": "14e968de92300ff9e0fd103b4a0489448fde1587",
+  "authority_source": "AGENTS.md Current Baton Next implementation, the accepted private-shadow reducer at a0bb86b78bfc011066142740c82d5c25cab7b9c8, Yuri's explicit 2026-08-19 choice to tighten the workflow by doing the recommended migration/retirement rehearsal, and standing uninterrupted-development authority authorize only this bounded provider-free canonical-mirror rehearsal.",
   "checkpoint": {
-    "completed_stage": "The private-shadow reducer covers 13 preserved and 9 surrounding probes, defaults to byte-preserving validation, reduces maintained surfaces 10 to 4 at 849/850 lines, reports 21 end-to-end reruns with three/four-closeout payback, passes register revision 561 and received a fresh Gemini 3.7 Flash/high pass at exact candidate a0bb86b78bfc011066142740c82d5c25cab7b9c8.",
-    "next_executable_stage": "await_yuri_choice_between_a_separately_frozen_live_migration_and_retirement_rehearsal_or_retaining_private_shadow_and_resuming_product_work",
+    "completed_stage": "The five-source receipt and frozen plan pass; the 893/950-line candidate gives all ten mirror surfaces one clockwork owner, retires four legacy writers in the mirror, passes 23 fault points, exact rollback, 13 predecessor and 9 surrounding probes, and reports eight construction reruns separately from projected zero steady-state corrective reruns.",
+    "next_executable_stage": "freeze_the_exact_clean_candidate_then_publish_its_isolated_mirror_evidence_and_run_deterministic_preverifier_admission",
     "retry_counters": {
-      "planning": 2,
-      "implementation": 1,
-      "review": 1,
-      "verification": 17
+      "planning": 0,
+      "implementation": 3,
+      "review": 0,
+      "verification": 5
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,24 +26,26 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "Private-shadow repair is accepted, but live adoption and current-control retirement require Yuri's separate authority choice."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "accepted_private_shadow_closeout_reached_genuine_live_adoption_authority_fork"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_private_shadow_governance_projection_repair_only",
-    "accepted_clockwork_and_live_governance_controls_remain_authoritative_until_separate_adoption",
+    "provider_free_single_owner_canonical_mirror_migration_and_retirement_rehearsal_only",
+    "accepted_repository_controls_remain_the_authoritative_oracle_and_are_not_mutated_by_the_rehearsal_engine",
+    "clockwork_must_be_the_only_writer_after_mirror_cutover_and_legacy_writer_attempts_must_fail_closed",
+    "no_long_term_dual_control_plane_or_two_accepted_writers",
+    "exact_previous_mirror_generation_and_ownership_state_must_be_byte_recoverable_before_retirement_is_credited",
     "all_thirteen_predecessor_failures_retained_as_immutable_probes_and_nine_surrounding_reruns_classified_separately",
     "zero_caller_authored_oids_counts_statuses_peer_links_output_paths_or_projection_revisions",
     "zero_new_mutable_current_fixtures_zero_partial_publications_zero_uncaught_escapes_and_no_coverage_loss",
-    "candidate_steady_state_surrounding_reruns_at_most_one_per_representative_closeout",
-    "repair_construction_cost_steady_state_cost_and_break_even_reported_without_amortisation",
-    "incremental_shared_engine_runner_contract_fixture_and_test_growth_has_an_explicit_budget",
-    "shadow_maintained_governance_surface_must_shrink_and_no_long_term_dual_control_plane_may_be_accepted",
-    "no_live_clockwork_adoption_or_current_control_retirement",
+    "representative_fault_free_closeout_requires_zero_manual_derived_field_edits_and_zero_corrective_reruns",
+    "migration_construction_cost_and_projected_steady_state_cost_reported_separately_without_amortisation",
+    "all_observed_post_review_closeout_rerun_classes_must_be_prevented_or_made_unrepresentable",
+    "no_actual_canonical_control_retirement_deletion_or_live_adoption_in_this_rehearsal",
     "no_occupied_deepseek_hmr_claude_code_fallback_or_other_provider_call",
     "no_product_practice_git_or_ordinary_practice_authority",
     "no_product_configuration_openapi_graphql_route_database_or_client_change",

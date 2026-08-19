@@ -57,7 +57,8 @@ def test_plan_receipt_latch_and_boundaries_are_frozen() -> None:
     plan = (ROOT / "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md").read_text(encoding="utf-8")
     threat = (ROOT / "docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md").read_text(encoding="utf-8")
     receipt = load_object(ROOT / "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-preplanning-receipt.json")
-    latch = load_object(LATCH)
+    historical_latch = load_object(PREPLAN)["active_operation"]
+    live_latch = load_object(LATCH)
     assert "Timestamp:" in plan and "Australia/Brisbane" in plan
     assert "Timestamp:" in threat and "Australia/Brisbane" in threat
     assert receipt["status"] == "passed"
@@ -68,9 +69,9 @@ def test_plan_receipt_latch_and_boundaries_are_frozen() -> None:
         "protected_evidence_boundaries",
         "git_refs_and_worktree",
     }
-    assert latch["operation_id"] == receipt["active_operation"]["operation_id"]
-    assert latch["status"] in {"in_progress", "blocked"}
-    assert latch["terminal_response"]["permitted"] == (latch["status"] == "blocked")
+    assert historical_latch["operation_id"] == receipt["active_operation"]["operation_id"]
+    assert historical_latch["source_head"] == receipt["active_operation"]["source_head"]
+    assert live_latch["status"] == "in_progress" and not live_latch["terminal_response"]["permitted"]
     for lane in ("deepseek_flash", "gemini_verifier", "native_subagents"):
         assert lane in {row["lane_id"] for row in receipt["parallelism_assessment"]["lanes"]}
 

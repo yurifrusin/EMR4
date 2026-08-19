@@ -7,6 +7,7 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
+ERROR_REGISTER = ROOT / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
 NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review"
 SOURCE_HEAD = "da03039f637d3808c8785a6d6fc95309650044d9"
 HTTP_NODE_ID = "raisa-provider-free-delete-confirm-http-route-convergence"
@@ -123,20 +124,21 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
-    assert graph["graph_revision"] == 328
-    assert graph["nodes"][-1]["id"] == CLOCKWORK_REHEARSAL_NODE_ID
+    assert graph["graph_revision"] == compass["source_graph_revision"]
+    assert graph["nodes"][-1]["id"] == (
+        "ariadne-provider-free-clockwork-governance-projection-consolidation-repair"
+    )
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        CLOCKWORK_REHEARSAL_SOURCE_HEAD
+        "a0bb86b78bfc011066142740c82d5c25cab7b9c8"
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": CLOCKWORK_ARCHITECTURE_NODE_ID,
+            "node_id": CLOCKWORK_REHEARSAL_NODE_ID,
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 310
-    assert compass["source_graph_revision"] == 328
-    assert compass["current_position"]["node_id"] == CLOCKWORK_REHEARSAL_NODE_ID
+    assert compass["map_revision"] > 0
+    assert compass["current_position"]["node_id"] == graph["nodes"][-1]["id"]
 
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
@@ -152,19 +154,24 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
     clockwork_relation = _table_row(text, "Current shadow clockwork relation")
-    assert "Continuity 328 / Compass 310" in current
-    assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in current
+    graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    compass = json.loads(COMPASS.read_text(encoding="utf-8"))
+    assert f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}" in current
+    assert graph["nodes"][-1]["coordinates"]["source_head"] in current
     assert "thirteen reruns" in current.lower()
-    assert "revision_required" in current.lower()
+    assert "twenty-one" in current.lower()
+    assert "selected the recommended bounded migration" in current.lower()
     assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
     assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
+    register = json.loads(ERROR_REGISTER.read_text(encoding="utf-8"))
     assert "revision " in error_register
     assert "bounded incidents" in error_register
-    assert "aer-0530" in error_register
-    assert "aer-0550" in error_register
+    assert f"revision {register['register_revision']}" in error_register
+    assert f"{len(register['incidents'])} bounded incidents" in error_register
+    assert register["incidents"][-1]["incident_id"].lower() in error_register
     assert RISK_REFORM_SOURCE_HEAD in reform_relation
     assert BEHAVIOR_SOURCE_HEAD in reform_relation
     assert ARCHITECTURE_SOURCE_HEAD in relation
@@ -224,16 +231,16 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "user attention is required" in next_work.lower()
-    assert "incident-register projection" in next_work.lower()
-    assert "fresh cumulative efficacy test" in next_work.lower()
-    assert "zero new mutable-current fixtures" in next_work.lower()
+    assert "single-owner-migration-retirement-rehearsal" in next_work.lower()
+    assert "read-only authoritative oracles" in next_work.lower()
+    assert "exclusive clockwork ownership" in next_work.lower()
+    assert "legacy/stale-writer rejection" in next_work.lower()
+    assert "byte-exact rollback" in next_work.lower()
     assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
-    assert "no automatic repair" in next_work.lower()
-    assert "live adoption" in next_work.lower()
+    assert "no actual canonical adoption or control deletion" in next_work.lower()
+    assert "dual live plane" in next_work.lower()
     assert "occupied deepseek/hmr or other provider call" in next_work.lower()
-    assert "product/practice/git authority" in next_work.lower()
-    assert "product data" in next_work.lower()
+    assert "product/practice/data/runtime" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
@@ -271,13 +278,15 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "user attention is required",
-        "no automatic repair",
-        "live adoption",
-        "current-control retirement",
+        "single-owner-migration-retirement-rehearsal",
+        "read-only authoritative oracles",
+        "exclusive clockwork ownership",
+        "legacy/stale-writer rejection",
+        "byte-exact rollback",
+        "no actual canonical adoption or control deletion",
+        "dual live plane",
         "occupied deepseek/hmr or other provider call",
-        "product/practice/git authority",
-        "product data",
+        "product/practice/data/runtime",
         "deployment",
         "protected-ref movement",
         "docs/branding/",

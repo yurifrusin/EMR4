@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free clockwork single-owner migration and retirement rehearsal",
+    "completed_stage": "The accepted private-shadow reducer covers 13 preserved and 9 surrounding probes, reduces maintained surfaces from 10 to 4, reports the full 21-rerun construction cost, and Yuri has now selected the separately frozen migration-and-retirement rehearsal.",
+    "next_executable_stage": "generate_and_validate_the_fresh_five_source_preplanning_receipt_then_freeze_the_single_owner_canonical_mirror_plan",
+    "operation_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "14e968de92300ff9e0fd103b4a0489448fde1587",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "14e968de92300ff9e0fd103b4a0489448fde1587",
+    "reason_codes": [],
+    "resolved_commit": "14e968de92300ff9e0fd103b4a0489448fde1587",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "14e968de92300ff9e0fd103b4a0489448fde1587"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "14e968de92300ff9e0fd103b4a0489448fde1587",
+    "branch_origin_aligned": true,
+    "head": "14e968de92300ff9e0fd103b4a0489448fde1587",
+    "origin_branch_commit": "14e968de92300ff9e0fd103b4a0489448fde1587",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 653
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "This provider-free control-plane migration is serial; occupied DeepSeek native-Harness use still requires the separate HMR boot proof and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Reserve one fresh Gemini 3.7 Flash/high read-only veto after the exact candidate passes parity, exclusivity, fault-injection, rollback, efficacy and clean-worktree admission.",
+        "work_packages": [
+          "exact_candidate_single_owner_migration_retirement_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and ownership cutover, lease enforcement, atomic promotion and rollback are one serial transaction boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after plan freeze",
+      "after exact-parity comparison",
+      "after mirror cutover and rollback",
+      "before verifier acceptance",
+      "at closeout",
+      "before any future live canonical adoption"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh five-source receipt before plan freeze",
+      "freeze ownership and rollback contract before implementation",
+      "existing controls remain read-only oracle during comparison",
+      "exact parity before exclusive mirror cutover",
+      "one lease one generation and one writer after cutover",
+      "fault injection and byte-exact rollback before retirement credit",
+      "deterministic admission before Gemini veto",
+      "Sol-only acceptance and task-branch Git"
+    ]
+  },
+  "planned_action": "freeze_and_execute_only_the_provider_free_single_owner_canonical_mirror_migration_and_retirement_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md",
+      "docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json",
+      "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/repair-report.md",
+      "docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-19--clockwork-governance-projection-consolidation-repair.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freeze, single-owner migration semantics, implementation, deterministic admission, acceptance and task-branch Git. DeepSeek is declined because this provider-free control-plane migration is serial and native Harness use remains behind the stock-headless-to-custom-runner HMR boot proof; Claude Code is forbidden as fallback. Gemini is reserved for one fresh Gemini 3.7 Flash/high read-only veto after deterministic admission. Native subagents are declined under current developer policy and because lease, generation, rollback and retirement ownership form one serial transaction boundary.",
+    "git_refs_and_worktree": "Local/origin task refs align at 14e968de92300ff9e0fd103b4a0489448fde1587 before intentional successor latch and receipt changes. Local/origin master and local/origin handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree was clean and the large pre-existing untracked set, including docs/branding, remains preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely. It records Continuity 329 / Compass 311, accepted private-shadow clockwork candidate a0bb86b78bfc011066142740c82d5c25cab7b9c8, its full 21-rerun construction cost and the genuine user choice between a separately frozen migration/retirement rehearsal and retaining shadow-only status. Yuri selected the recommended rehearsal on 2026-08-19.",
+    "protected_evidence_boundaries": "Only a provider-free single-owner migration/retirement rehearsal in an isolated canonical mirror is authorized. Existing repository controls are read-only oracles throughout; the new reducer may become the sole mirror writer only after exact parity, exclusive-lease, stale/legacy-writer rejection, atomicity and rollback gates pass. No actual canonical control removal or live adoption, provider call, product/practice/data/runtime/deployment/release/Pages/protected-evidence/protected-ref action is authorized. Preserve docs/branding and every unrelated untracked file; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

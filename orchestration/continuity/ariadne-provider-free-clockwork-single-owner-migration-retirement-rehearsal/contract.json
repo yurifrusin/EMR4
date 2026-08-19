@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.governance_migration_contract.v1",
+  "operation_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+  "required_ancestor": "14e968de92300ff9e0fd103b4a0489448fde1587",
+  "protected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "oracle_paths": {
+    "continuity": "orchestration/continuity/emr4-continuity-graph.json",
+    "compass": "orchestration/continuity/emr4-compass.json",
+    "compass_markdown": "docs/ariadne-compass-current.md",
+    "latch": "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "register": "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+    "pattern": "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+    "baton_source": "AGENTS.md"
+  },
+  "mirror_root": "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror",
+  "commands": [
+    {
+      "command_id": "read_only_rehearsal",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": ["-m", "scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal"],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "focused_migration",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": ["-m", "pytest", "-q", "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "surrounding_governance",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": ["-m", "pytest", "-q", "tests/test_ariadne_transactional_closeout.py", "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_compass.py", "tests/test_current_baton_consistency.py"],
+      "completion_contract": "final_exit_code_zero_required"
+    }
+  ],
+  "selected_command_ids": ["read_only_rehearsal", "focused_migration", "surrounding_governance"],
+  "surfaces": ["continuity", "compass", "compass_markdown", "active_latch", "error_register", "pattern_report", "current_baton", "command_manifest", "transaction", "ownership"],
+  "legacy_writers": ["bespoke_continuity_updater", "manual_baton_editor", "manual_latch_editor", "manual_register_fixture_editor"],
+  "line_budget": 950,
+  "line_budget_files": [
+    "orchestration_harness/governance_migration.py",
+    "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json",
+    "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+  ],
+  "governance_contract": "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/contract.json",
+  "rerun_probes": "orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json",
+  "observed_incident_ids": ["AER-0643", "AER-0644", "AER-0645", "AER-0646", "AER-0647", "AER-0648", "AER-0649", "AER-0650", "AER-0651"]
+}
