@@ -76,20 +76,25 @@ inadmissible.
 
 ## Narrow implementation
 
-The accepted harness remains the transaction and Docker authority. The only
-permitted implementation delta is a fixed fail-closed attempt adapter:
+The accepted harness remains the transaction and Docker authority and must
+remain byte-for-byte unchanged because its digest is bound by the immutable
+contract. The only permitted implementation delta is a fixed fail-closed
+attempt adapter:
 
-- add the exact attempt-002 Continuity directory to a closed output-topic
-  allowlist; no caller-supplied or arbitrary filesystem output path is allowed;
-- make the existing rehearsal runner select terminal paths from that admitted
-  topic while retaining the historical topic as its unchanged default;
-- add one attempt-002 wrapper with only `--check` and `--execute`; its execute
-  mode always selects the fixed attempt-002 topic;
+- add one attempt-002 wrapper with only `--check` and `--execute`; it exposes no
+  caller-supplied or arbitrary filesystem output path;
+- run the accepted harness's complete static admission before changing any
+  process-local binding;
+- for the single runner call, bind only its three terminal-path module globals
+  to the exact attempt-002 Continuity directory, then restore all three in a
+  `finally` block; the accepted file and its historical defaults remain
+  unchanged;
 - add a closed attempt-002 execution envelope and schema binding the resolved
   full plan commit, lifecycle repair source, exact current source, one occupied
   execution, zero retry, terminal-artifact digest and cleanup disposition; and
-- add focused tests proving topic rejection, collision denial, historical
-  default preservation, exact attempt-002 routing and sanitized envelope shape.
+- add focused tests proving no path argument, collision denial, byte-exact
+  accepted-harness preservation, exact attempt-002 routing, unconditional
+  binding restoration and sanitized envelope shape.
 
 The exact owned attempt-002 terminal filenames are:
 

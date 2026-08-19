@@ -51,12 +51,14 @@ def test_plan_binds_immutable_attempt_001_and_transition_evidence() -> None:
 def test_plan_freezes_output_collision_and_no_arbitrary_path() -> None:
     plan = " ".join(PLAN.read_text(encoding="utf-8").lower().split())
     for phrase in (
-        "no caller-supplied or arbitrary filesystem output path",
+        "caller-supplied or arbitrary filesystem output path",
         "attempt-002-execution-envelope.json",
         "refuse any pre-existing terminal file",
         "no automatic or manual retry",
         "no host tcp listener",
         "exact terminal oci state",
+        "remain byte-for-byte unchanged",
+        "restore all three in a `finally` block",
     ):
         assert phrase in plan
 
