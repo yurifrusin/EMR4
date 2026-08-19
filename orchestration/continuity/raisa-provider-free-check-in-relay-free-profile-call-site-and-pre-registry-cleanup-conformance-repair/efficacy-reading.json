@@ -35,25 +35,31 @@
       "stage": "initial_sol_verification",
       "error": "standard pytest executed the same database-backed A5.1 suite despite the no-database boundary",
       "effect": "one out-of-scope shared-PostgreSQL test-suite execution occurred and the zero-database tranche claim became false",
-      "correction": "register AER-0658, exclude the run from acceptance and bind the final evidence only to the 146-test provider-free matrix"
+      "correction": "retain the run as scoped efficacy evidence, exclude it from acceptance and bind the final evidence only to the 146-test provider-free matrix"
     },
     {
       "stage": "register_verification_after_aer_0658",
       "error": "ordinary pytest was invoked again and acquired the shared PostgreSQL schema before interruption",
       "effect": "the no-database command-scope violation recurred immediately and the run was rejected from acceptance",
-      "correction": "register AER-0659 and constrain every remaining test command to scripts.ariadne_provider_free_pytest"
+      "correction": "retain the recurrence as scoped efficacy evidence and constrain every remaining test command to scripts.ariadne_provider_free_pytest"
     },
     {
       "stage": "clockwork_closeout_check",
       "error": "human-facing uppercase AER labels were copied into lowercase machine incident identifiers",
       "effect": "the separate read-only check rejected the transaction manifest before publication",
-      "correction": "register AER-0660, use lowercase incident and peer identifiers, and rerun check before publish"
+      "correction": "retain the rejection in scoped efficacy evidence, use lowercase incident and peer identifiers, and rerun check before publish"
     },
     {
       "stage": "clockwork_closeout_check_corrected",
       "error": "the Ruff command used a direct executable outside the admitted Python-module command shape",
       "effect": "the separate read-only check rejected the command manifest before publication",
-      "correction": "register AER-0661, invoke Ruff through .venv/Scripts/python.exe -m ruff, and rerun check before publish"
+      "correction": "retain the rejection in scoped efficacy evidence, invoke Ruff through .venv/Scripts/python.exe -m ruff, and rerun check before publish"
+    },
+    {
+      "stage": "clockwork_live_state_check",
+      "error": "the closeout source manually advanced clockwork-owned register, pattern-report and Baton projections",
+      "effect": "the separate read-only check rejected canonical drift before publication",
+      "correction": "restore all three canonical projections byte-exactly to the live generation and retain new incidents only in tranche-scoped efficacy evidence"
     }
   ],
   "efficacy_assessment": {

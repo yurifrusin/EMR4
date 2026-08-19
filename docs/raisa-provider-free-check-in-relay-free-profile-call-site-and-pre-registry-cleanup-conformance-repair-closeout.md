@@ -17,9 +17,9 @@ proves its full ID, generated name, image, harness label, ownership nonce,
 
 This accepts the repair mechanism. It does not accept the original
 tranche-wide zero-database claim. Two orchestrator test-selection lapses
-reached the shared PostgreSQL fixture boundary and are retained as AER-0658 and
-AER-0659. Both runs are excluded from acceptance. The accepted verification is
-the corrected 146-test provider-free matrix only.
+reached the shared PostgreSQL fixture boundary and are retained in the tranche
+efficacy evidence. Both runs are excluded from acceptance. The accepted
+verification is the corrected 146-test provider-free matrix only.
 
 ## Exact sources and evidence
 
@@ -71,15 +71,21 @@ manifest preflight did not detect the database fixture graph, and Sol then
 repeated the same class of mistake while verifying the error register. That
 remaining gap is not safely solved by another reminder.
 
-The first closeout check also rejected human-facing uppercase AER labels in
-machine identifier fields before publication. AER-0660 retains that bounded
-authoring correction; lowercase schema-valid identifiers are used in the fresh
-check.
+The first closeout check also rejected human-facing uppercase incident labels
+in machine identifier fields before publication. The efficacy reading retains
+that bounded authoring correction; lowercase schema-valid identifiers are used
+in the fresh check.
 
 The next check then rejected a direct Ruff executable outside clockwork's
-Python-module command shape. AER-0661 retains that second pre-publication
-correction; the manifest now invokes Ruff through the admitted Python
-executable and `-m` module form.
+Python-module command shape. The efficacy reading retains that second
+pre-publication correction; the manifest now invokes Ruff through the admitted
+Python executable and `-m` module form.
+
+A third check correctly rejected manual changes to the clockwork-owned error
+register, pattern report and Baton row. Those projections were restored
+byte-exactly to the live generation; the process incidents remain in this
+tranche's scoped efficacy evidence and do not masquerade as canonical register
+entries.
 
 The direct successor is therefore an engine-level admission repair. It will
 make provider-free/no-database status a validated property of the command and

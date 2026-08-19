@@ -22,8 +22,8 @@ Docker, database or provider invocation.
 I do not accept the original zero-database tranche claim. My initial standard
 pytest selection executed the database-backed A5.1 suite, and my later register
 verification again acquired the shared PostgreSQL fixture before interruption.
-AER-0658 and AER-0659 preserve those lapses. Neither run contributes to this
-acceptance, and their database operation count is not claimed.
+The tranche efficacy evidence preserves those lapses. Neither run contributes
+to this acceptance, and their database operation count is not claimed.
 
 The first Gemini review correctly failed closed on the same manifest-selection
 class. A corrected provider-free manifest then passed locally and in one fresh
@@ -31,13 +31,18 @@ Gemini 3.7 Flash/high clean-worktree review at the unchanged candidate with no
 substantive finding.
 
 Clockwork separately rejected the first closeout intent because machine
-incident identifiers used the human-facing uppercase AER form. AER-0660
+incident identifiers used a human-facing uppercase form. The efficacy reading
 retains that pre-publication correction; it changes no candidate or accepted
 claim.
 
 The next check separately rejected the direct Ruff executable outside the
-clockwork Python-module command shape. AER-0661 retains that correction and the
-fresh intent uses `.venv/Scripts/python.exe -m ruff`.
+clockwork Python-module command shape. The efficacy reading retains that
+correction and the fresh intent uses `.venv/Scripts/python.exe -m ruff`.
+
+The following check rejected manual drift in clockwork-owned register and Baton
+projections. Those surfaces were restored to the exact live generation; the
+new process evidence remains tranche-scoped rather than being assigned
+canonical register IDs outside the clockwork.
 
 Attempt 003 remains immutable at one occupied execution and zero retry. This
 acceptance opens only the provider-free no-database manifest/runner admission

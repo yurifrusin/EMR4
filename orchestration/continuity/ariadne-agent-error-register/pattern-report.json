@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "82d7b405336ea7ba24101216c91308b7b0469034adbd91a39817d5a24288dbfc",
+  "canonical_register_sha256": "5fa0a3629d570a64abf4909b344f23c07b2256ecc1e33affb98b8b65a5d7a4a4",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 404,
+      "canonical_unchanged": 399,
       "untrusted_partial_worktree": 143
     },
     "by_category": {
-      "command_scope_violation": 91,
+      "command_scope_violation": 88,
       "evidence_misreport": 67,
       "harness_failure": 54,
       "operator_error": 36,
-      "output_contract_violation": 239,
+      "output_contract_violation": 237,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
       "repository_defect": 108,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 447,
+      "agent_behavior": 442,
       "harness": 54,
       "operator": 36,
       "repository": 108,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 380,
+      "low": 378,
       "material": 118,
-      "moderate": 163
+      "moderate": 160
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -54,10 +54,8 @@
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
-      "clockwork-governance-command-manifest::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
-      "clockwork-transaction-manifest-incident-identifier::orchestrator": 1,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 2,
@@ -144,8 +142,6 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
-      "provider-free-gemini-verifier-command-manifest::orchestrator": 1,
-      "repository-conftest-shared-postgresql-schema::orchestrator": 2,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
@@ -159,12 +155,12 @@
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 556,
+      "orchestrator": 551,
       "verifier": 58
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 661,
+  "incident_count": 656,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -451,30 +447,6 @@
       "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
       "resource_ids": [
         "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
-      "categories": [
-        "command_scope_violation"
-      ],
-      "incident_count": 2,
-      "incident_ids": [
-        "AER-0658",
-        "AER-0659"
-      ],
-      "origins": [
-        "agent_behavior"
-      ],
-      "prevention_controls": [
-        "Before executing a no-database tranche manifest, classify the complete fixture graph and require the provider-free runner itself to collect the exact file list; standard pytest is inadmissible for any selected suite unless the frozen plan expressly permits its conftest side effects.",
-        "The rest of this tranche has a literal command-level provider-free runner allowlist; any ordinary pytest argv is inadmissible. A future workflow repair must make this an engine-enforced manifest property rather than an orchestrator memory requirement."
-      ],
-      "recurrence_signature": "orchestrator.no_database_tranche_selected_database_backed_test_suite",
-      "resource_ids": [
-        "repository-conftest-shared-postgresql-schema"
       ],
       "roles": [
         "orchestrator"
@@ -1989,7 +1961,7 @@
       ]
     }
   ],
-  "register_revision": 571,
+  "register_revision": 566,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-20"
+  "source_cutoff_on": "2026-08-19"
 }

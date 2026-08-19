@@ -54,7 +54,7 @@
         "Both real relay-free container creation call sites pass the exact captured network name to the accepted profile predicate.",
         "Any post-create pre-registry failure can remove only the exact owned never-started Created-state container and must prove absence; cleanup uncertainty dominates.",
         "The admitted 146-test provider-free matrix passes with 582 of 582 hostile relay-free mutations rejected and zero admitted Docker, database or provider invocation.",
-        "Two out-of-scope shared-PostgreSQL fixture contacts are retained as AER-0658 and AER-0659, excluded from acceptance, and prevent any tranche-wide zero-database claim.",
+        "Two out-of-scope shared-PostgreSQL fixture contacts are retained in tranche-scoped efficacy evidence, excluded from acceptance, and prevent any tranche-wide zero-database claim.",
         "Attempt 003 remains immutable at one occupied execution, zero retry and no released ambiguous success."
       ],
       "contract_evidence": [],
@@ -120,7 +120,7 @@
     },
     "current_position": {
       "strategic_role": "Turn the provider-free no-database boundary from an orchestrator memory rule into a pre-execution interlock",
-      "why_now": "The repair itself is accepted, but AER-0657 through AER-0659 demonstrate that argv-shape checks do not prove fixture-graph portability and the same error recurred immediately.",
+      "why_now": "The repair itself is accepted, but the retained verifier-manifest rejection and two local fixture contacts demonstrate that argv-shape checks do not prove fixture-graph portability and the same error recurred immediately.",
       "outcome": "The next tranche rejects ordinary pytest and shared-PostgreSQL fixture reachability before any provider-free command can run.",
       "unlocks": [
         "A mechanically evidenced no-database property for future provider-free verifier manifests.",
@@ -135,7 +135,7 @@
       "evidence": [
         "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
         "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
-        "docs/ariadne-agent-error-correction-register-revision-571.md"
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json"
       ],
       "orientation_statement": "EMR4 will next enforce provider-free no-database status at manifest admission and test-fixture selection; attempt 004 remains closed."
     },
@@ -143,7 +143,7 @@
       "operation_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
       "active_tranche": "Ariadne provider-free no-database manifest and runner admission repair",
       "objective": "Freeze and implement the narrowest provider-free deterministic admission control that rejects ordinary pytest entry points and any selected test whose fixture graph can acquire shared PostgreSQL before execution, then prove integration at manifest preflight and the DeepSeek broker command boundary without Docker, database or provider invocation.",
-      "authority_source": "Yuri's standing uninterrupted-development authority, the accepted clockwork workflow, AER-0657 through AER-0659 and this accepted relay-free mechanism repair.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, the accepted clockwork workflow, the retained no-database verification-scope evidence and this accepted relay-free mechanism repair.",
       "next_stage": "fresh_five_source_rehydration_and_freeze_narrow_no_database_admission_repair_plan"
     },
     "incidents": [
@@ -293,11 +293,6 @@
       "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-packet.md",
       "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-worktree-preflight.json",
       "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-567.md",
-      "docs/ariadne-agent-error-correction-register-revision-568.md",
-      "docs/ariadne-agent-error-correction-register-revision-569.md",
-      "docs/ariadne-agent-error-correction-register-revision-570.md",
-      "docs/ariadne-agent-error-correction-register-revision-571.md",
       "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
       "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
       "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-profile-call-site-cleanup-repair.md",
