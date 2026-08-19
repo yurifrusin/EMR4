@@ -36,6 +36,7 @@ This delta covers one provider-free canonical-mirror migration from read-only le
 | Path escape or canonical-file targeting | All output paths are engine-owned relative names under the exact isolated mirror root; resolved containment is checked before every write. |
 | Rehearsal mutates current controls | Publisher rejects repository canonical paths and tests byte-snapshot them before and after every successful/failing run. |
 | Efficiency claim hides build cost | Construction reruns and projected steady-state reruns are separate immutable evidence fields; no amortised pass condition. |
+| Rehearsal evidence duplicates canonical files | Full generations exist only in disposable storage; the retained receipt contains exact file digests, pointer state, ownership and rollback results rather than copied canonical bytes. |
 
 ## Security acceptance
 

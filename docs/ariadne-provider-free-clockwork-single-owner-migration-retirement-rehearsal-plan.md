@@ -90,7 +90,7 @@ The existing engines remain pure libraries and cease to be publication writers i
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json`
 - `tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`
 - compatibility retirement assertions in `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py` and `tests/test_current_baton_consistency.py`;
-- deterministic evidence, report and one inspectable canonical-mirror generation under the same topic root;
+- deterministic evidence, report and one compact canonical-mirror receipt under the same topic root; duplicated generation bytes are exercised in disposable storage and are not persisted in Git;
 - plan, threat-model delta, closeout, Sol acceptance, paired Yuri summary, Continuity updater and its focused test.
 
 The combined implementation, runner, contract, intent and focused rehearsal test must remain at or below **950 physical lines** before generated evidence. Any overage is `revision_required`, not a budget waiver. Existing accepted reducers must be composed rather than copied.

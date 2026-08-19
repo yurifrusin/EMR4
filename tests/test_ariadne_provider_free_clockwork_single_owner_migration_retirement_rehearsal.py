@@ -155,12 +155,11 @@ def test_complete_efficacy_packet_passes_all_observed_controls_and_faults() -> N
 
 
 def test_runner_defaults_to_read_only(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
-    targets = [TOPIC / "provider-free-migration-evidence.json", TOPIC / "migration-report.md", TOPIC / "canonical-mirror"]
-    assert not any(path.exists() for path in targets)
+    before = {path.relative_to(TOPIC): path.read_bytes() for path in TOPIC.rglob("*") if path.is_file()}
     monkeypatch.setattr("sys.argv", ["migration-rehearsal"])
     assert runner_main() == 0
     assert json.loads(capsys.readouterr().out)["status"] == "passed"
-    assert not any(path.exists() for path in targets)
+    assert before == {path.relative_to(TOPIC): path.read_bytes() for path in TOPIC.rglob("*") if path.is_file()}
 
 
 def test_frozen_implementation_line_budget_is_exact() -> None:

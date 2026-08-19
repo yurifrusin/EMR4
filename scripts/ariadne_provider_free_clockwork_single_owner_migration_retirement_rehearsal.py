@@ -7,8 +7,7 @@ import json
 from pathlib import Path
 
 from orchestration_harness.governance_migration import (
-    WRITER, assess_rehearsal, build_clockwork_generation, initialize_mirror,
-    publish_generation, validate_contract, validate_intent, _load,
+    assess_rehearsal,
 )
 
 
@@ -40,13 +39,8 @@ def main() -> int:
     args = parser.parse_args()
     evidence = assess_rehearsal(ROOT, CONTRACT, INTENT, construction_reruns=args.construction_reruns)
     if args.publish:
-        contract = validate_contract(_load(CONTRACT))
-        intent = validate_intent(_load(INTENT), contract)
-        mirror = ROOT / contract["mirror_root"]
-        initialized = initialize_mirror(ROOT, mirror, contract)
-        generation = build_clockwork_generation(ROOT, contract, intent, initialized["oracle"]["generation_id"])
-        publish_generation(ROOT, mirror, contract, generation, writer_id=WRITER)
         (TOPIC / "provider-free-migration-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8", newline="\n")
+        (TOPIC / "canonical-mirror-receipt.json").write_text(json.dumps(evidence["canonical_mirror_receipt"], indent=2) + "\n", encoding="utf-8", newline="\n")
         (TOPIC / "migration-report.md").write_text(_report(evidence), encoding="utf-8", newline="\n")
     print(json.dumps(evidence, sort_keys=True))
     return 0 if evidence["status"] == "passed" else 1

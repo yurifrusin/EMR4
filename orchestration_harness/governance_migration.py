@@ -538,6 +538,13 @@ def assess_rehearsal(
         "oracle_generation_id": initialized["oracle"]["generation_id"],
         "clockwork_generation_id": generation["generation_id"],
         "bundle_sha256": generation["bundle_sha256"],
+        "canonical_mirror_receipt": {
+            "schema_version": "ariadne.governance_migration_compact_receipt.v1",
+            "active_pointer": active,
+            "oracle_generation": {"generation_id": initialized["oracle"]["generation_id"], "bundle_sha256": initialized["oracle"]["bundle_sha256"], "file_sha256s": initialized["oracle"]["file_sha256s"]},
+            "clockwork_generation": {"generation_id": generation["generation_id"], "bundle_sha256": generation["bundle_sha256"], "source_commit": generation["source_commit"], "file_sha256s": generation["file_sha256s"]},
+            "clockwork_ownership": json.loads(generation["files"]["ownership.json"]),
+        },
         "ownership": {"maintained_surfaces": len(SURFACE_FILES), "clockwork_owned_after_cutover": len(SURFACE_FILES), "dual_owned": 0, "legacy_writers_retired_in_mirror": len(contract["legacy_writers"])},
         "rollback": {"byte_exact_generation_selected": True, "restored_clockwork_generation": restored["selected_generation_id"] == generation["generation_id"]},
         "fault_injection": {"checkpoints": len(fault_results), "passed": sum(item["passed"] for item in fault_results), "results": fault_results},

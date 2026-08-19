@@ -1,0 +1,254 @@
+{
+  "schema_version": "ariadne.governance_migration_evidence.v1",
+  "status": "passed",
+  "source_commit": "b4b31cec8ce7922b9b9b8b5eedad6686e19c8ca2",
+  "oracle_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+  "clockwork_generation_id": "gen-59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+  "bundle_sha256": "59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+  "canonical_mirror_receipt": {
+    "schema_version": "ariadne.governance_migration_compact_receipt.v1",
+    "active_pointer": {
+      "schema_version": "ariadne.governance_migration_pointer.v1",
+      "phase": "clockwork_active",
+      "selected_generation_id": "gen-59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+      "selected_bundle_sha256": "59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+      "previous_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+      "lease_sequence": 1,
+      "writer": "clockwork"
+    },
+    "oracle_generation": {
+      "generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+      "bundle_sha256": "f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+      "file_sha256s": {
+        "continuity.json": "1e5742ef8e26133eda6034350a4b2520d6072de8dc1fa252bde4c31cbf452b89",
+        "compass.json": "0f9d74b436866463e735c7a2dff799aad1dc8eddec1adddba1be8fc336d3a959",
+        "compass.md": "b304a3f5d76d6dd7d98e35906b7d54080a8d7758d5c1752456d2f237e42c6774",
+        "latch.json": "57c0d7e716e542a150789bb79de9520910cdf17df4e0df90f2c03af53b074241",
+        "error-register.json": "3e0f4cf0fdfb3f947df7a1e5a37d4e93faa44ff2c33408f154d29e9043152280",
+        "pattern-report.json": "e10f3309c3e11f7861ff0f2bd461fbe359e9f2eaa33a12fc9265dfd32541f940",
+        "current-baton.json": "a018152cce56c1efeff0c238a6c199c7ec0fa0485bb1b1684174595ecebf603b",
+        "command-manifest.json": "bd365936c983fbe3b57dd9fbeb5d539a0acf99fe1cc3112a58a91a78561b2539",
+        "transaction.json": "b139f164f5abdf2433d8797092c20fdce882d04d052291c5cd616e67288b71d1",
+        "ownership.json": "24be036e847cd5d83192fed81fa46f5f63a1fa3869fd0cf1372aac78b5e05505"
+      }
+    },
+    "clockwork_generation": {
+      "generation_id": "gen-59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+      "bundle_sha256": "59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+      "source_commit": "b4b31cec8ce7922b9b9b8b5eedad6686e19c8ca2",
+      "file_sha256s": {
+        "continuity.json": "1a91672289c233cc1d2b357b0ba95f27a6883e35f1f1b6b161ec238993ff1d5e",
+        "compass.json": "ea1a2587615425331a3a7dd654ec96e50c3d9f0ed9c692bbaf75d5d355d05d00",
+        "compass.md": "8aa0c9a91205c9abac4dfd3d53d6f8f42551af4ab5cd84412155f9d2f7b81d20",
+        "latch.json": "1442d52a7e145b9c593fe80ce8db4924ece7657ecf1582ccd5c3fc85d00f7eeb",
+        "error-register.json": "3e0f4cf0fdfb3f947df7a1e5a37d4e93faa44ff2c33408f154d29e9043152280",
+        "pattern-report.json": "e10f3309c3e11f7861ff0f2bd461fbe359e9f2eaa33a12fc9265dfd32541f940",
+        "current-baton.json": "432a9f3057aa1a941b0c7e496a0920c9ef7a15d7ac23f5fd2b363873679c9e4b",
+        "command-manifest.json": "bd365936c983fbe3b57dd9fbeb5d539a0acf99fe1cc3112a58a91a78561b2539",
+        "transaction.json": "e647f338fdbc148ac87215d4bf5f520a2982ffa499d1f99b7f8e3ddb42130724",
+        "ownership.json": "3dc984abbd50d03a4a24325808aed5757ec6752c9dccb0d12f4cbad009f4356f"
+      }
+    },
+    "clockwork_ownership": {
+      "schema_version": "ariadne.governance_migration_ownership.v1",
+      "phase": "clockwork_active",
+      "surface_owners": {
+        "continuity": "clockwork",
+        "compass": "clockwork",
+        "compass_markdown": "clockwork",
+        "active_latch": "clockwork",
+        "error_register": "clockwork",
+        "pattern_report": "clockwork",
+        "current_baton": "clockwork",
+        "command_manifest": "clockwork",
+        "transaction": "clockwork",
+        "ownership": "clockwork"
+      },
+      "legacy_writers": {
+        "bespoke_continuity_updater": "retired_in_mirror",
+        "manual_baton_editor": "retired_in_mirror",
+        "manual_latch_editor": "retired_in_mirror",
+        "manual_register_fixture_editor": "retired_in_mirror"
+      }
+    }
+  },
+  "ownership": {
+    "maintained_surfaces": 10,
+    "clockwork_owned_after_cutover": 10,
+    "dual_owned": 0,
+    "legacy_writers_retired_in_mirror": 4
+  },
+  "rollback": {
+    "byte_exact_generation_selected": true,
+    "restored_clockwork_generation": true
+  },
+  "fault_injection": {
+    "checkpoints": 23,
+    "passed": 23,
+    "results": [
+      {
+        "checkpoint": "before:command-manifest.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:command-manifest.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:compass.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:compass.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:compass.md",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:compass.md",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:continuity.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:continuity.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:current-baton.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:current-baton.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:error-register.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:error-register.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:latch.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:latch.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:ownership.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:ownership.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:pattern-report.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:pattern-report.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before:transaction.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after:transaction.json",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after_generation_rename",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "before_pointer_replace",
+        "outcome": "previous_complete",
+        "selected_generation_id": "gen-f3e1476908264b6a689328dbe526c22ce9a7f6a6a9802c4ab275c059ea2d844c",
+        "passed": true
+      },
+      {
+        "checkpoint": "after_pointer_replace",
+        "outcome": "committed_complete",
+        "selected_generation_id": "gen-59715e3dcbb7bf46f6dc2f893df77c417c3e0774c3261d1e7aaf7e0d1aca6052",
+        "passed": true
+      }
+    ]
+  },
+  "probe_coverage": {
+    "predecessor": 13,
+    "surrounding": 9
+  },
+  "post_review_controls": {
+    "AER-0643": "bounded_latch_validation",
+    "AER-0644": "compass_current_position_derived",
+    "AER-0645": "immutable_oracle_generation",
+    "AER-0646": "exact_line_budget_reading",
+    "AER-0647": "whole_named_suite_manifest",
+    "AER-0648": "register_aggregate_byte_preservation",
+    "AER-0649": "pattern_membership_byte_preservation",
+    "AER-0650": "typed_projection_accessors",
+    "AER-0651": "final_exit_code_required"
+  },
+  "canonical_oracles_unchanged": true,
+  "caller_authored_derived_fields": 0,
+  "projected_steady_state_corrective_reruns": 0,
+  "construction_reruns": 11,
+  "line_budget": {
+    "actual": 893,
+    "limit": 950
+  },
+  "live_canonical_adoption": false,
+  "actual_controls_retired": false
+}

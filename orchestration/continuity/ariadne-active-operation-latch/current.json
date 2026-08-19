@@ -7,13 +7,13 @@
   "source_head": "14e968de92300ff9e0fd103b4a0489448fde1587",
   "authority_source": "AGENTS.md Current Baton Next implementation, the accepted private-shadow reducer at a0bb86b78bfc011066142740c82d5c25cab7b9c8, Yuri's explicit 2026-08-19 choice to tighten the workflow by doing the recommended migration/retirement rehearsal, and standing uninterrupted-development authority authorize only this bounded provider-free canonical-mirror rehearsal.",
   "checkpoint": {
-    "completed_stage": "The five-source receipt and frozen plan pass; the 893/950-line candidate gives all ten mirror surfaces one clockwork owner, retires four legacy writers in the mirror, passes 23 fault points, exact rollback, 13 predecessor and 9 surrounding probes, and reports eight construction reruns separately from projected zero steady-state corrective reruns.",
+    "completed_stage": "The five-source receipt and frozen plan pass; the bounded candidate gives all ten mirror surfaces one clockwork owner, retires four legacy writers in the mirror, passes 23 fault points, exact rollback, 13 predecessor and 9 surrounding probes, and reports eleven construction reruns separately from projected zero steady-state corrective reruns.",
     "next_executable_stage": "freeze_the_exact_clean_candidate_then_publish_its_isolated_mirror_evidence_and_run_deterministic_preverifier_admission",
     "retry_counters": {
       "planning": 0,
       "implementation": 3,
       "review": 0,
-      "verification": 5
+      "verification": 8
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
