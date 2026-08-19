@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.deepseek_native_harness_effective_tool_native_boot_contract.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "accepted_sources",
+    "predecessor_bytes", "package", "required_installed_packages", "preset",
+    "launch", "expected_events", "terminal", "required_zero_counts"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_effective_tool_native_boot_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {"type": "object"},
+    "predecessor_bytes": {"type": "object"},
+    "package": {"type": "object"},
+    "required_installed_packages": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true},
+    "preset": {"type": "object"},
+    "launch": {"type": "object"},
+    "expected_events": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true},
+    "terminal": {"type": "object"},
+    "required_zero_counts": {"type": "array", "minItems": 9, "maxItems": 9, "uniqueItems": true}
+  }
+}
