@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-incident-intake-gemini-7c7ce52a",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_transactional_closeout.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {"id": "C06", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C07", "argv": ["git", "diff", "--check", "de96a7e4d75b53f1dd38495b5bdda16fd8f326f6..7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f"]},
+    {"id": "C08", "argv": ["git", "diff", "--name-only", "de96a7e4d75b53f1dd38495b5bdda16fd8f326f6..7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f"]},
+    {"id": "C09", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}
