@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free effective-tool composition native-boot proof",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_one_run_provider_free_native_composition_boot_plan",
+    "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof",
+    "resume_after_compaction": true,
+    "source_head": "dc167c20f5b54b783a57fccb7843f434136c8ca8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "b8331387120ade3634e73ba799f4a9fb48389f5b",
+    "reason_codes": [],
+    "resolved_commit": "dc167c20f5b54b783a57fccb7843f434136c8ca8",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "dc167c20f5b54b783a57fccb7843f434136c8ca8"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "b8331387120ade3634e73ba799f4a9fb48389f5b",
+    "branch_origin_aligned": false,
+    "head": "b8331387120ade3634e73ba799f4a9fb48389f5b",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_native_execution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The exact rc.7 native Harness is the provider-free subject. A DeepSeek provider call or occupied worker would violate this proof, and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high isolated read-only veto remains reserved until the deterministic candidate, single native terminal and cleanup pass.",
+        "work_packages": [
+          "future_exact_candidate_provider_free_effective_tool_native_boot_proof_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and launch, terminal, disposal and cleanup remain one serial evidence lease.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "native_terminal",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "candidate b8331387120ade3634e73ba799f4a9fb48389f5b is immutable during native execution",
+      "all deterministic and neighbouring checks passed before the single native process",
+      "native-composition-attempt-001 may start once with zero retry or resume",
+      "no agent broker model provider or occupied-worker surface may start",
+      "cleanup and retained evidence complete before verifier eligibility",
+      "Gemini is eligible only after one passing exact clean candidate",
+      "clockwork check and publication remain separate commands"
+    ]
+  },
+  "planned_action": "consume_exactly_one_offline_network_denied_rc7_native_harness_composition_boot_after_exact_candidate_admission",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority selects this exact one-run proof. GPT Sol owns its serial native-process lifecycle, evidence, cleanup, recovery, clockwork and task-branch Git. DeepSeek receives no model/provider work package because its rc.7 Harness is the provider-free subject. Gemini 3.7 Flash/high remains reserved for one fresh exact-candidate read-only veto only after a passing native terminal. Native subagents are declined by current developer policy and the serial lifecycle.",
+    "git_refs_and_worktree": "Exact deterministic execution candidate is b8331387120ade3634e73ba799f4a9fb48389f5b on codex/ariadne-bernie-davida-parallel-seam; its origin remains at the already published 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked/staged worktree is clean; all 654 unrelated untracked entries including five docs/branding files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was rehydrated completely from the verified current 119295-byte, 511-line source and its accepted Current Baton. Continuity 341 / Compass 323 accepts the deterministic effective-tool guard at full source dc167c20f5b54b783a57fccb7843f434136c8ca8; the active latch and Next implementation require this still-unconsumed provider-free native composition proof.",
+    "protected_evidence_boundaries": "Exactly one offline, network-denied rc.7 native Harness process may start and consumes native-composition-attempt-001; no retry, resume or reclassification. The process may create one key-agnostic scope and mount the authored-synthetic two-row filesystem preset, but may create no agent, session, turn, broker request, model request, provider call or occupied worker. No attempt 004 or attempt 005; no credential, external network, Docker, database, product/API/config/client/flag/allowlist/grammar/waiting-area or ordinary-practice change; no product, patient, appointment, clinical, historical or protected data; no production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
