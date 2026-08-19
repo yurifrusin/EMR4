@@ -1,0 +1,142 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 004",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_exact_relay_free_recovery_attempt_004_plan_before_any_docker_database_or_model_execution",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
+    "resume_after_compaction": true,
+    "source_head": "5ff79d68f6df25d8bebdba78a6d504afb64de2ab",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "2b1b0be12ff4e370f54c0ef12a8b89d26666da6e",
+    "reason_codes": [],
+    "resolved_commit": "5ff79d68f6df25d8bebdba78a6d504afb64de2ab",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5ff79d68f6df25d8bebdba78a6d504afb64de2ab"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2b1b0be12ff4e370f54c0ef12a8b89d26666da6e",
+    "branch_origin_aligned": false,
+    "head": "2b1b0be12ff4e370f54c0ef12a8b89d26666da6e",
+    "origin_branch_commit": "1ddfb4819b161e64731f73ecf80b540ac4e5a9fd",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness boot prerequisite now passes, but attempt 004 is itself a provider-free serial database proof with no model role. Combining the first occupied DeepSeek worker with this one-cleanup-owner execution would broaden the claim and require a separate v2 WorkOrder, no-database admission and one-run latch; Claude Code is no fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is reserved only if exactly one occupied attempt-004 execution succeeds and its deterministic packet passes; no verifier call occurs before that success.",
+        "work_packages": [
+          "future_exact_candidate_read_only_attempt_004_veto_after_success"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the database lifecycle, terminal envelope and cleanup lease form one inseparable stateful package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_terminal_evidence",
+      "verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol invokes the attempt-004 wrapper exactly once",
+      "one mutable disposable PostgreSQL lifecycle has one cleanup owner",
+      "no second execution follows any process result or terminal evidence result",
+      "no DeepSeek model call is part of the provider-free attempt-004 claim",
+      "Gemini is eligible only after deterministic occupied success",
+      "clockwork validation and publication remain separate commands"
+    ]
+  },
+  "planned_action": "execute_exactly_one_attempt_004_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-004-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-004-threat-model-delta.md",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-004/attempt-004-execution-envelope.schema.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-004-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-004-preplanning-receipt.json",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-003-sol-blocked-assessment.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-cleanup-recovery.json",
+      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+      "docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-sol-acceptance.md",
+      "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json",
+      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri gave standing authority to continue through this tranche and dependency-satisfied successors without further permission absent a truly extraordinary fork. GPT Sol is the sole owner of this exactly-one mutable Docker/PostgreSQL lifecycle, cleanup, evidence readback, acceptance, clockwork and Git. DeepSeek is declined for this provider-free tranche: its accepted native boot proof establishes the future transport path, but this serial database proof has no model role and any occupied worker requires a separate v2 WorkOrder, provider-free no-database admission and one-run latch; Claude Code is no fallback. Gemini 3.7 Flash/high is reserved only for one fresh post-success exact-candidate read-only veto. Native subagents are declined by current developer policy and the single cleanup-owner constraint.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact 2b1b0be12ff4e370f54c0ef12a8b89d26666da6e; origin task branch remains 1ddfb4819b161e64731f73ecf80b540ac4e5a9fd. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree was clean before this runtime-state artifact; docs/branding remains present and all 654 unrelated untracked entries remain preserved. Docker server is exact 29.5.3, cached postgres:16-bookworm is exact sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8, and matching relay-free harness containers and networks by both exact label and name prefix are zero.",
+    "live_handover_current_baton": "AGENTS.md was read completely as the 112504-byte UTF-8 live handover source. At Continuity 339 / Compass 321 its Current result accepts the native-Harness provider-free HMR boot proof at exact clockwork source 5ff79d68f6df25d8bebdba78a6d504afb64de2ab, and Next implementation plus the active latch name raisa-provider-free-check-in-relay-free-recovery-attempt-004. The attempt-004 plan is frozen at exact full Git source 7bbc0eb6466811c323006ddb6bcc80a3a6fcb679 and the distinct fail-closed adapter plus closed-envelope schema are committed at exact candidate 2b1b0be12ff4e370f54c0ef12a8b89d26666da6e.",
+    "protected_evidence_boundaries": "Exactly one attempt-004 wrapper execution becomes eligible only after this receipt passes and the clockwork advances. Attempts 001-003 and every failure, envelope, cleanup, execution count, retry count and historical harness binding remain immutable. The corrected base harness remains byte-exact at SHA-256 eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b; the attempt-004 namespace is distinct and empty; retry is forbidden; one owner performs cleanup. No host relay/queue, live secret, existing/cloud/product database, product/API/OpenAPI/GraphQL/config/client change, ordinary-practice enablement, feature-flag/allowlist change, generic-status Arrived, grammar, waiting-area movement, product/patient/appointment/clinical/protected data, DeepSeek call, Gemini call before success, production, deployment, release, Pages or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
